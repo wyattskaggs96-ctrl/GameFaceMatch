@@ -25,6 +25,7 @@ Web tests should also include:
 - Duplicate stable-ID rejection
 - Required five-angle completion
 - Browser-safe image metadata validation
+- Local face-landmark provider provenance, failure, timeout, zero-face, one-face, and multiple-face states
 - Duplicate upload detection where practical
 - Browser capability state mapping
 - Session deletion, saved-build deletion, and delete-all-local-data

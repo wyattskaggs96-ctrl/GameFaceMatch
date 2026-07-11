@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run mediapipe:assets && next dev",
     "start": "next start",
-    "build": "next build && npm run build:guard",
+    "build": "npm run mediapipe:assets && next build && npm run build:guard",
+    "mediapipe:assets": "node scripts/copy-mediapipe-assets.mjs",
     "build:guard": "node scripts/production-bundle-guard.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "node scripts/lint.mjs",
@@ -22,6 +23,7 @@
     "check": "npm run typecheck && npm run lint && npm run test && npm run catalog:validate && npm run integrity && npm run build:guard"
   },
   "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.35",
     "next": "^16.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

@@ -14,6 +14,7 @@
 - Browser capture uses RGB images only.
 - Selected images may exist as in-memory `File` objects or temporary object URLs during the active session.
 - Raw face images must not be written to localStorage.
+- Local face-landmark extraction may run in the browser through `FaceLandmarkProvider`; it does not upload images, identify people, generate identity embeddings, or infer sensitive traits.
 - Saved builds should contain derived settings and catalog metadata only, not raw face images.
 - No facial images are uploaded in the initial web prototype.
 - Manual upload fallback must follow the same deletion and non-retention expectations as camera capture.
@@ -50,3 +51,4 @@ Future product-improvement and model-training participation remain unavailable u
 - Browser camera permission is separate from app consent. The app consent flow explains intended use; the browser still controls camera access.
 - No service worker is registered, so there is no intentional offline cache of capture media.
 - The hardened MVP does not include a network upload surface for face images. Any future upload or sync feature requires a separate architecture and consent decision.
+- MediaPipe Face Landmarker is lazy-loaded only for local capture analysis. If the reviewed local model asset is unavailable, the app reports landmarks as unavailable instead of fabricating results.

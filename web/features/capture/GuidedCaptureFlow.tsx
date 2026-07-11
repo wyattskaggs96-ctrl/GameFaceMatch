@@ -18,7 +18,8 @@ import {
 } from "@/lib/capture/capture-session";
 import { applyManualConfirmationToReport, createBrowserImageQualityService, createCaptureReviewReport } from "@/lib/capture/image-quality-service";
 import { createTemporaryImageReference, isHeicOrHeif, prepareImageForAnalysis, validateImageFile } from "@/lib/capture/image-validation";
-import type { CapturedAngle, CapturedAngleID, CaptureSource } from "@/types/domain";
+import { createLocalFaceLandmarkProvider } from "@/lib/face-landmarks/face-landmark-worker-client";
+import type { CapturedAngle, CapturedAngleID, CaptureSource, FaceLandmarkReport } from "@/types/domain";
 
 export function GuidedCaptureFlow({
   session,
@@ -44,6 +45,7 @@ export function GuidedCaptureFlow({
   const [isOffline, setIsOffline] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const qualityService = useMemo(() => createBrowserImageQualityService(), []);
+  const faceLandmarkProvider = useMemo(() => createLocalFaceLandmarkProvider(), []);
   const currentAngle = getCurrentAngle(session);
   const reviewReport = createCaptureReviewReport(session.angles);
   const completedAngles = getCompletedAngleCount(session.angles);
@@ -57,6 +59,12 @@ export function GuidedCaptureFlow({
       }
     };
   }, [cameraService, stream]);
+
+  useEffect(() => {
+    return () => {
+      void faceLandmarkProvider.dispose();
+    };
+  }, [faceLandmarkProvider]);
 
   useEffect(() => {
     if (videoRef.current && stream) {
@@ -269,12 +277,24 @@ export function GuidedCaptureFlow({
       existingAngles: session.angles.filter((item) => item.id !== angleID),
       manualConfirmation: existingAngle?.manualConfirmation
     });
+    const faceLandmarkReport = await faceLandmarkProvider.detect(
+      {
+        image: imageElement,
+        width: dimensions.width,
+        height: dimensions.height,
+        angleID
+      },
+      {
+        detectionTimeoutMs: 6_000
+      }
+    );
     const mutation = setAngleCapture(
       session,
       angleID,
       image,
       source,
-      imageQualityReport
+      imageQualityReport,
+      faceLandmarkReport
     );
     revokeObjectUrls(mutation.objectUrlsToRevoke);
     onSessionChange(mutation.session);
@@ -463,8 +483,8 @@ export function GuidedCaptureFlow({
           <p className="eyebrow">Capture review</p>
           <h2>Resolve blocking issues, then confirm what the browser cannot detect</h2>
           <p className="supporting">
-            Brightness, exposure, blur, dimensions, file size, and exact duplicates are browser-side checks. Face centering, head pose, expression neutrality,
-            and one-person visibility are manual confirmations in this build.
+            Brightness, exposure, blur, dimensions, file size, exact duplicates, and local face-landmark availability are browser-side checks. Identity
+            recognition and sensitive-trait inference are not performed. If local landmarks are unavailable, use the manual confirmations below.
           </p>
         </div>
         <div className="review-grid" aria-label="Per-angle image quality review">
@@ -517,7 +537,51 @@ export function GuidedCaptureFlow({
                     <dt>Duplicate</dt>
                     <dd>{report.duplicateImage.value ? "Yes" : "No"}</dd>
                   </div>
+                  <div>
+                    <dt>Faces</dt>
+                    <dd>{formatFaceCount(angle.faceLandmarkReport)}</dd>
+                  </div>
+                  <div>
+                    <dt>Landmarks</dt>
+                    <dd>{angle.faceLandmarkReport?.availabilityState ?? "not requested"}</dd>
+                  </div>
                 </dl>
+                {angle.faceLandmarkReport ? (
+                  <div className="metadata-list capability-list" aria-label={`${angle.label} local landmark summary`}>
+                    <div>
+                      <span>Provider</span>
+                      <strong>{angle.faceLandmarkReport.provider.providerName}</strong>
+                    </div>
+                    <div>
+                      <span>Head pose</span>
+                      <strong>{formatHeadPose(angle.faceLandmarkReport)}</strong>
+                    </div>
+                    <div>
+                      <span>Expression signals</span>
+                      <strong>{formatExpression(angle.faceLandmarkReport)}</strong>
+                    </div>
+                  </div>
+                ) : null}
+                {angle.faceLandmarkReport?.blockingMessages.length ? (
+                  <div>
+                    <p className="message-title">Face detection blocking</p>
+                    <ul className="message-list blocking-list">
+                      {angle.faceLandmarkReport.blockingMessages.map((message) => (
+                        <li key={message}>{message}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+                {angle.faceLandmarkReport?.advisoryMessages.length ? (
+                  <div>
+                    <p className="message-title">Landmark advisory</p>
+                    <ul className="message-list advisory-list">
+                      {angle.faceLandmarkReport.advisoryMessages.map((message) => (
+                        <li key={message}>{message}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
                 {report.blockingMessages.length > 0 ? (
                   <div>
                     <p className="message-title">Blocking</p>
@@ -633,4 +697,31 @@ function formatBytes(value: number) {
 
 function formatMetric(value: number | null) {
   return value === null ? "Not measured" : String(value);
+}
+
+function formatFaceCount(report?: FaceLandmarkReport) {
+  if (!report) return "Not checked";
+  if (report.faceCount === "zero") return "Zero";
+  if (report.faceCount === "one") return "One";
+  if (report.faceCount === "multiple") return `${report.detectedFaceCount ?? "Multiple"}`;
+  if (report.faceCount === "error") return "Error";
+  return "Unavailable";
+}
+
+function formatHeadPose(report: FaceLandmarkReport) {
+  const pose = report.faces[0]?.approximateHeadPose;
+  if (!pose || pose.availabilityState !== "available") return "Unavailable";
+  return `Yaw ${pose.yawDegrees ?? "N/A"} / Pitch ${pose.pitchDegrees ?? "N/A"} / Roll ${pose.rollDegrees ?? "N/A"}`;
+}
+
+function formatExpression(report: FaceLandmarkReport) {
+  const expression = report.faces[0]?.expression;
+  if (!expression || expression.availabilityState !== "available") return "Unavailable";
+  const parts = [
+    expression.leftEyeOpenness === null ? null : `L eye ${expression.leftEyeOpenness}`,
+    expression.rightEyeOpenness === null ? null : `R eye ${expression.rightEyeOpenness}`,
+    expression.mouthOpenness === null ? null : `Mouth ${expression.mouthOpenness}`,
+    expression.smileLikelihood === null ? null : `Smile ${expression.smileLikelihood}`
+  ].filter(Boolean);
+  return parts.length > 0 ? parts.join(" / ") : "Unavailable";
 }

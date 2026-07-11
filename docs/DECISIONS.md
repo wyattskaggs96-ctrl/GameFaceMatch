@@ -47,3 +47,7 @@ Reason: The production catalog is empty, recommendation value still needs valida
 ## D-012 — Dedicated app subdomain recommended for launch
 Status: Recommended
 Reason: The owner has an existing Squarespace marketing site, but the GameFace Match app needs a secure HTTPS app origin for browser camera behavior, CSP control, future payment redirects, and possible webhook/server endpoints. Keep marketing in Squarespace and host the app on a dedicated subdomain unless owner-supplied account details prove another approach is safer.
+
+## D-013 — Local MediaPipe Face Landmarker provider
+Status: Accepted
+Reason: Google MediaPipe Face Landmarker is an official, actively maintained, browser-compatible local landmark implementation with an Apache-2.0 runtime. It stays behind `FaceLandmarkProvider`, lazy-loads during capture analysis, uses a worker when practical, and must return unavailable/error states rather than fabricated landmarks when the reviewed local model asset is absent or fails.

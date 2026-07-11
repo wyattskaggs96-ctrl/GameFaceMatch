@@ -35,6 +35,7 @@ data/catalog/production/*.generated.json
 # Web local dependencies and build output
 web/node_modules/
 web/.next/
+web/public/mediapipe/
 web/tsconfig.tsbuildinfo
 web/test-results/
 web/playwright-report/

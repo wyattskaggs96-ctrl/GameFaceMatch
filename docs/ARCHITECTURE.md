@@ -5,6 +5,7 @@
 - Responsive web application in TypeScript, React, and Next.js under `web/`
 - Browser RGB image capture behind a camera-service abstraction
 - Manual upload fallback for every required capture angle
+- Local browser face-landmark extraction behind `FaceLandmarkProvider`; MediaPipe is dynamically loaded only when capture needs it
 - Local-only browser state for the initial prototype
 - No backend, authentication provider, database, analytics SDK, subscription service, cloud media storage, or external AI service in the initial web MVP
 - Production catalog records remain platform-independent and shared through `data/catalog/production/`
@@ -56,6 +57,7 @@ The web app includes an empty bundled production manifest for browser runtime us
 - Browser camera capture requires HTTPS or localhost. Manual upload fallback remains the supported path for insecure contexts, unsupported camera APIs, denied permission, or missing camera devices.
 - Object URLs for capture and screenshot sessions are revoked on retake, removal, cancellation, deletion, and session reset paths.
 - No network upload path exists in the web MVP; image bytes remain in memory/object URLs only for the active session.
+- Face landmark extraction uses the local browser provider documented in `docs/FACE_LANDMARK_PROVIDER.md`. It does not identify people, produce identity embeddings, infer sensitive traits, upload media, or claim TrueDepth/ARKit equivalence.
 
 ## Commerce readiness boundaries
 

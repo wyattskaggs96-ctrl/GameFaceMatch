@@ -1,4 +1,12 @@
-import type { CapturedAngle, CapturedAngleID, CaptureQualityReport, CaptureSource, ImageQualityReport, TemporaryImageReference } from "@/types/domain";
+import type {
+  CapturedAngle,
+  CapturedAngleID,
+  CaptureQualityReport,
+  CaptureSource,
+  FaceLandmarkReport,
+  ImageQualityReport,
+  TemporaryImageReference
+} from "@/types/domain";
 
 export interface ActiveCaptureSession {
   id: string;
@@ -90,7 +98,8 @@ export function setAngleCapture(
   angleID: CapturedAngleID,
   image: TemporaryImageReference,
   source: CaptureSource,
-  qualityReport?: ImageQualityReport
+  qualityReport?: ImageQualityReport,
+  faceLandmarkReport?: FaceLandmarkReport
 ): CaptureSessionMutation {
   const objectUrlsToRevoke = getObjectUrlsForAngle(session, angleID);
   const nextAngles = session.angles.map((angle) =>
@@ -102,6 +111,7 @@ export function setAngleCapture(
           validationStatus: "valid" as const,
           validationErrors: [],
           qualityReport,
+          faceLandmarkReport,
           image
         }
       : angle
@@ -129,6 +139,7 @@ export function setAngleError(session: ActiveCaptureSession, angleID: CapturedAn
             validationStatus: "invalid",
             validationErrors,
             qualityReport: undefined,
+            faceLandmarkReport: undefined,
             image: undefined
           }
         : angle
@@ -225,6 +236,7 @@ function clearAngle(session: ActiveCaptureSession, angleID: CapturedAngleID, cur
               source: undefined,
               validationStatus: "notStarted",
               qualityReport: undefined,
+              faceLandmarkReport: undefined,
               validationErrors: [],
               image: undefined
             }

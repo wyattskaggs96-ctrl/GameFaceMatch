@@ -43,6 +43,8 @@ export type CaptureSource = "camera" | "upload";
 export type CaptureValidationStatus = "notStarted" | "valid" | "invalid";
 export type QualityEvidenceKind = "measured" | "estimated" | "notYetImplemented" | "userConfirmed";
 export type ImageQualityState = "ready" | "needsReview" | "blocked";
+export type FaceLandmarkAvailabilityState = "available" | "unavailable" | "error" | "timeout" | "notRequested";
+export type FaceDetectionCount = "zero" | "one" | "multiple" | "unavailable" | "error";
 export type MeasurementAvailabilityState = "available" | "unavailable" | "pending";
 export type MeasurementSource = "browserRgbImage" | "iPhoneTrueDepth" | "userConfirmed" | "notMeasured";
 export type StandardFacialMeasurementID =
@@ -145,12 +147,88 @@ export interface CapturedAngle {
   validationStatus: CaptureValidationStatus;
   image?: TemporaryImageReference;
   qualityReport?: ImageQualityReport;
+  faceLandmarkReport?: FaceLandmarkReport;
   manualConfirmation: {
     requestedAngle: boolean;
     neutralExpression: boolean;
     onePerson: boolean;
   };
   validationErrors: string[];
+}
+
+export interface FaceLandmarkProviderMetadata {
+  providerName: string;
+  packageName: string;
+  packageVersion: string;
+  modelName: string;
+  modelVersion: string;
+  modelSource: string;
+  modelPath: string;
+  license: string;
+  integrityStrategy: string;
+  updateStrategy: string;
+  localOnly: boolean;
+}
+
+export interface FaceLandmarkConfidence {
+  score: number | null;
+  label: "low" | "medium" | "high" | "unavailable";
+  evidence: QualityEvidenceKind;
+}
+
+export interface FaceLandmarkPoint {
+  label: string;
+  sourceIndex: number;
+  x: number;
+  y: number;
+  z: number | null;
+  confidence: FaceLandmarkConfidence;
+}
+
+export interface FaceBoundingBox {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  confidence: FaceLandmarkConfidence;
+}
+
+export interface FaceHeadPoseEstimate {
+  yawDegrees: number | null;
+  pitchDegrees: number | null;
+  rollDegrees: number | null;
+  confidence: FaceLandmarkConfidence;
+  availabilityState: FaceLandmarkAvailabilityState;
+}
+
+export interface FaceExpressionEstimate {
+  leftEyeOpenness: number | null;
+  rightEyeOpenness: number | null;
+  mouthOpenness: number | null;
+  smileLikelihood: number | null;
+  strongExpressionLikelihood: number | null;
+  confidence: FaceLandmarkConfidence;
+  availabilityState: FaceLandmarkAvailabilityState;
+}
+
+export interface DetectedFaceLandmarks {
+  boundingBox: FaceBoundingBox;
+  coreLandmarks: FaceLandmarkPoint[];
+  approximateHeadPose: FaceHeadPoseEstimate;
+  expression: FaceExpressionEstimate;
+  confidence: FaceLandmarkConfidence;
+}
+
+export interface FaceLandmarkReport {
+  availabilityState: FaceLandmarkAvailabilityState;
+  faceCount: FaceDetectionCount;
+  detectedFaceCount: number | null;
+  faces: DetectedFaceLandmarks[];
+  provider: FaceLandmarkProviderMetadata;
+  confidence: FaceLandmarkConfidence;
+  advisoryMessages: string[];
+  blockingMessages: string[];
+  createdAt: ISODateString;
 }
 
 export interface TemporaryImageReference {

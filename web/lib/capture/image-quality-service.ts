@@ -115,7 +115,9 @@ export function createImageQualityReport(input: ImageQualityInput): ImageQuality
   if (!manualConfirmation.onePerson) advisoryMessages.push("Confirm that only one person is visible.");
   if (!manualConfirmation.neutralExpression) advisoryMessages.push("Confirm neutral expression and gently closed lips.");
   if (!manualConfirmation.requestedAngle) advisoryMessages.push("Confirm that the requested angle was followed.");
-  advisoryMessages.push("Face centering, landmark accuracy, head-pose accuracy, expression neutrality detection, and one-person detection are not yet implemented.");
+  advisoryMessages.push(
+    "Face-landmark extraction is attempted locally when the reviewed model asset is available. Face centering, expression neutrality, and one-person confirmation still require user review."
+  );
 
   return {
     decodedSuccessfully: metric(input.decodedSuccessfully, "measured", input.decodedSuccessfully ? "Decoded" : "Not decoded"),
@@ -153,8 +155,10 @@ export function createCaptureReviewReport(angles: CapturedAngle[]): CaptureRevie
     ])
   ) as Record<CapturedAngleID, ImageQualityReport>;
   const reports = Object.values(angleReports);
-  const blockingMessages = reports.flatMap((report) => report.blockingMessages);
-  const advisoryMessages = reports.flatMap((report) => report.advisoryMessages);
+  const landmarkBlockingMessages = angles.flatMap((angle) => angle.faceLandmarkReport?.blockingMessages ?? []);
+  const landmarkAdvisoryMessages = angles.flatMap((angle) => angle.faceLandmarkReport?.advisoryMessages ?? []);
+  const blockingMessages = [...reports.flatMap((report) => report.blockingMessages), ...landmarkBlockingMessages];
+  const advisoryMessages = [...reports.flatMap((report) => report.advisoryMessages), ...landmarkAdvisoryMessages];
   return {
     angleReports,
     blockingMessages,

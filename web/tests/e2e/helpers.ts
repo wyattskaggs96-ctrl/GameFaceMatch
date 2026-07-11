@@ -48,13 +48,16 @@ export async function navigateToCapture(page: Page) {
 export async function uploadFiveSyntheticAngles(page: Page) {
   const files = requiredAngleLabels.map((label, index) => syntheticPng(`${toSlug(label)}-${index}.png`, 640, 640, index + 1));
   for (let index = 0; index < requiredAngleLabels.length; index += 1) {
-    await uploadFallbackForAngle(page, requiredAngleLabels[index], files[index]);
+    await uploadFallbackForAngle(page, requiredAngleLabels[index], files[index], { waitForAccepted: true });
   }
   await expect(page.getByRole("heading", { name: "5 of 5 angles completed" })).toBeVisible();
 }
 
-export async function uploadFallbackForAngle(page: Page, label: string, file: SyntheticImageFile) {
+export async function uploadFallbackForAngle(page: Page, label: string, file: SyntheticImageFile, options: { waitForAccepted?: boolean } = {}) {
   await page.getByLabel(`Upload fallback for ${label.toLowerCase()}`).setInputFiles(file);
+  if (options.waitForAccepted) {
+    await expect(page.getByText(`${file.name} |`, { exact: false })).toBeVisible();
+  }
 }
 
 export async function confirmStandardAttributes(page: Page) {

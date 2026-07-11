@@ -37,7 +37,13 @@ describe("security headers and production debugging posture", () => {
       .filter((file) => /\.(ts|tsx)$/.test(file))
       .map((file) => fs.readFileSync(file, "utf8"))
       .join("\n");
-    expect(sourceText).not.toMatch(/\bfetch\s*\(/);
+    const fetchCalls = sourceText.match(/\bfetch\s*\([^\n]+/g) ?? [];
+    expect(fetchCalls.every((call) => call.includes("modelPath"))).toBe(true);
+    expect(sourceText).toContain('method: "HEAD"');
+    expect(sourceText).not.toMatch(/method:\s*["']POST["']/i);
+    expect(sourceText).not.toMatch(/method:\s*["']PUT["']/i);
+    expect(sourceText).not.toMatch(/method:\s*["']PATCH["']/i);
+    expect(fetchCalls.join("\n")).not.toMatch(/https?:\/\//i);
     expect(sourceText).not.toMatch(/\bXMLHttpRequest\b/);
     expect(sourceText).not.toMatch(/\bsendBeacon\b/);
     expect(sourceText).not.toMatch(/\bWebSocket\s*\(/);

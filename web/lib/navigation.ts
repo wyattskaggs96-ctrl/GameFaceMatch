@@ -44,6 +44,7 @@ export const APP_SCREENS = [
   "pricing",
   "audit",
   "matching-lab",
+  "mobile-qa",
   "privacy-center",
   "settings"
 ] as const;

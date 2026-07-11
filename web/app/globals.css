@@ -31,6 +31,10 @@
   --space-10: 40px;
   --content: 1180px;
   --narrow: 760px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
   color-scheme: light;
 }
 
@@ -162,7 +166,11 @@ p {
   grid-template-columns: minmax(180px, 0.8fr) minmax(320px, 1.4fr) minmax(190px, 0.55fr);
   align-items: center;
   gap: var(--space-4);
-  padding: var(--space-3) clamp(var(--space-4), 4vw, var(--space-10));
+  padding:
+    calc(var(--space-3) + var(--safe-top))
+    max(clamp(var(--space-4), 4vw, var(--space-10)), var(--safe-right))
+    var(--space-3)
+    max(clamp(var(--space-4), 4vw, var(--space-10)), var(--safe-left));
   background: rgba(16, 37, 29, 0.97);
   color: var(--chalk);
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
@@ -240,7 +248,11 @@ p {
 .page {
   width: min(var(--content), 100%);
   margin: 0 auto;
-  padding: clamp(var(--space-5), 4vw, 48px) clamp(var(--space-4), 4vw, var(--space-10)) 96px;
+  padding:
+    clamp(var(--space-5), 4vw, 48px)
+    max(clamp(var(--space-4), 4vw, var(--space-10)), var(--safe-right))
+    calc(96px + var(--safe-bottom))
+    max(clamp(var(--space-4), 4vw, var(--space-10)), var(--safe-left));
 }
 
 .page:focus {
@@ -314,7 +326,7 @@ p {
 }
 
 .button {
-  min-height: 44px;
+  min-height: 48px;
   border-radius: var(--radius);
   padding: 12px var(--space-4);
   font-weight: 900;
@@ -502,6 +514,9 @@ p {
   height: 100%;
   min-height: 320px;
   object-fit: cover;
+}
+
+.camera-preview[data-mirrored="true"] video {
   transform: scaleX(-1);
 }
 
@@ -776,7 +791,7 @@ p {
 }
 
 .compact-buttons .button {
-  min-height: 44px;
+  min-height: 48px;
   padding: 9px var(--space-3);
   font-size: 0.88rem;
 }
@@ -882,7 +897,7 @@ p {
 
 .form-field select,
 .form-field input {
-  min-height: 44px;
+  min-height: 48px;
   width: 100%;
   border: 1px solid #b9cbb5;
   border-radius: var(--radius);
@@ -1031,9 +1046,9 @@ p {
 
 .mobile-nav {
   position: fixed;
-  left: var(--space-3);
-  right: var(--space-3);
-  bottom: var(--space-3);
+  left: max(var(--space-3), var(--safe-left));
+  right: max(var(--space-3), var(--safe-right));
+  bottom: max(var(--space-3), var(--safe-bottom));
   z-index: 30;
   display: none;
   grid-template-columns: repeat(4, 1fr);
@@ -1046,7 +1061,7 @@ p {
 }
 
 .mobile-nav button {
-  min-height: 44px;
+  min-height: 48px;
   padding: var(--space-2);
   font-size: 0.82rem;
 }

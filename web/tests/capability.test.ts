@@ -59,4 +59,45 @@ describe("browser capability states", () => {
     });
     await expect(service.getCapabilityStatus()).resolves.toBe("permissionDenied");
   });
+
+  it("lists front and rear cameras without requiring a real device", async () => {
+    const service = createBrowserCameraService({
+      isSecureContext: true,
+      navigator: {
+        mediaDevices: {
+          getUserMedia: vi.fn(),
+          enumerateDevices: vi.fn().mockResolvedValue([
+            { kind: "videoinput", label: "Front Camera", deviceId: "front" },
+            { kind: "videoinput", label: "Back Camera", deviceId: "back" }
+          ])
+        }
+      } as unknown as Navigator
+    });
+    await expect(service.getCameraDevices()).resolves.toEqual([
+      { deviceId: "front", label: "Front Camera", facingMode: "user", isFrontFacing: true, isRearFacing: false },
+      { deviceId: "back", label: "Back Camera", facingMode: "environment", isFrontFacing: false, isRearFacing: true }
+    ]);
+  });
+
+  it("requests an exact camera device when a device ID is selected", async () => {
+    const getUserMedia = vi.fn().mockResolvedValue({ getTracks: () => [] });
+    const service = createBrowserCameraService({
+      isSecureContext: true,
+      navigator: {
+        mediaDevices: {
+          getUserMedia,
+          enumerateDevices: vi.fn().mockResolvedValue([])
+        }
+      } as unknown as Navigator
+    });
+    await service.requestCameraPreview({ deviceId: "front-camera" });
+    expect(getUserMedia).toHaveBeenCalledWith({
+      video: {
+        deviceId: { exact: "front-camera" },
+        width: { ideal: 1280 },
+        height: { ideal: 720 }
+      },
+      audio: false
+    });
+  });
 });

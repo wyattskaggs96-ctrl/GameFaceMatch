@@ -7,13 +7,30 @@ export interface BrowserCapabilityReport {
   device: CaptureCapabilityStatus;
   fallback: "fileUploadFallbackAvailable";
   summary: CaptureCapabilityStatus;
+  availableCameras: CameraDeviceOption[];
   messages: string[];
+}
+
+export type CameraFacingMode = "user" | "environment";
+
+export interface CameraDeviceOption {
+  deviceId: string;
+  label: string;
+  facingMode: CameraFacingMode | "unknown";
+  isFrontFacing: boolean;
+  isRearFacing: boolean;
+}
+
+export interface CameraPreviewRequest {
+  deviceId?: string;
+  facingMode?: CameraFacingMode;
 }
 
 export interface BrowserCameraService {
   getCapabilityReport(): Promise<BrowserCapabilityReport>;
   getCapabilityStatus(): Promise<CaptureCapabilityStatus>;
-  requestCameraPreview(): Promise<MediaStream>;
+  getCameraDevices(): Promise<CameraDeviceOption[]>;
+  requestCameraPreview(request?: CameraPreviewRequest): Promise<MediaStream>;
   stopCameraPreview(stream: MediaStream): void;
 }
 
@@ -42,7 +59,8 @@ export function createBrowserCameraService(globalObject: BrowserGlobal = globalT
       const mediaDevices = globalObject.navigator?.mediaDevices;
       const cameraApi: CaptureCapabilityStatus = mediaDevices ? "cameraApiSupported" : "cameraApiUnsupported";
       const permission = await getCameraPermissionStatus(globalObject.navigator);
-      const device = await getCameraDeviceStatus(mediaDevices);
+      const availableCameras = await getCameraDevices(mediaDevices);
+      const device = getCameraDeviceStatus(mediaDevices, availableCameras);
       const summary = summarizeCapability({ secureContext, cameraApi, permission, device });
       return {
         secureContext,
@@ -50,6 +68,7 @@ export function createBrowserCameraService(globalObject: BrowserGlobal = globalT
         permission,
         device,
         fallback: "fileUploadFallbackAvailable",
+        availableCameras,
         summary,
         messages: createCapabilityMessages({ secureContext, cameraApi, permission, device, summary })
       };
@@ -58,7 +77,10 @@ export function createBrowserCameraService(globalObject: BrowserGlobal = globalT
       const report = await this.getCapabilityReport();
       return report.summary;
     },
-    async requestCameraPreview() {
+    async getCameraDevices() {
+      return getCameraDevices(globalObject.navigator?.mediaDevices);
+    },
+    async requestCameraPreview(request = {}) {
       const mediaDevices = globalObject.navigator?.mediaDevices;
       if (!globalObject.isSecureContext) {
         throw new CameraAccessError("permissionBlocked", "Camera APIs require HTTPS or localhost.");
@@ -67,12 +89,19 @@ export function createBrowserCameraService(globalObject: BrowserGlobal = globalT
         throw new CameraAccessError("cameraApiUnsupported", "Camera APIs are not supported in this browser.");
       }
       try {
+        const videoConstraints: MediaTrackConstraints = request.deviceId
+          ? {
+              deviceId: { exact: request.deviceId },
+              width: { ideal: 1280 },
+              height: { ideal: 720 }
+            }
+          : {
+              facingMode: { ideal: request.facingMode ?? "user" },
+              width: { ideal: 1280 },
+              height: { ideal: 720 }
+            };
         return await mediaDevices.getUserMedia({
-          video: {
-            facingMode: { ideal: "user" },
-            width: { ideal: 1280 },
-            height: { ideal: 720 }
-          },
+          video: videoConstraints,
           audio: false
         });
       } catch (error) {
@@ -100,18 +129,34 @@ async function getCameraPermissionStatus(navigatorObject: Navigator | undefined)
   }
 }
 
-async function getCameraDeviceStatus(mediaDevices: MediaDevices | undefined): Promise<CaptureCapabilityStatus> {
-  if (!mediaDevices) return "cameraApiUnsupported";
-  if (!mediaDevices.enumerateDevices) return "cameraUnavailable";
+async function getCameraDevices(mediaDevices: MediaDevices | undefined): Promise<CameraDeviceOption[]> {
+  if (!mediaDevices?.enumerateDevices) return [];
   try {
     const devices = await mediaDevices.enumerateDevices();
-    const videoInputs = devices.filter((device) => device.kind === "videoinput");
-    if (videoInputs.length === 0) return "cameraUnavailable";
-    const hasFrontFacingHint = videoInputs.some((device) => /front|user|face/i.test(device.label));
-    return hasFrontFacingHint || videoInputs.some((device) => !device.label) ? "permissionNotRequested" : "noMatchingCameraDevice";
+    return devices.filter((device) => device.kind === "videoinput").map(toCameraDeviceOption);
   } catch {
-    return "unknownError";
+    return [];
   }
+}
+
+function getCameraDeviceStatus(mediaDevices: MediaDevices | undefined, videoInputs: CameraDeviceOption[]): CaptureCapabilityStatus {
+  if (!mediaDevices) return "cameraApiUnsupported";
+  if (!mediaDevices.enumerateDevices) return "cameraUnavailable";
+  if (videoInputs.length === 0) return "cameraUnavailable";
+  return videoInputs.some((device) => device.isFrontFacing || device.label === "") ? "permissionNotRequested" : "noMatchingCameraDevice";
+}
+
+function toCameraDeviceOption(device: MediaDeviceInfo): CameraDeviceOption {
+  const label = (device.label ?? "").trim();
+  const isFrontFacing = /front|user|face|selfie/i.test(label);
+  const isRearFacing = /back|rear|environment|world/i.test(label);
+  return {
+    deviceId: device.deviceId ?? "",
+    label,
+    facingMode: isFrontFacing ? "user" : isRearFacing ? "environment" : "unknown",
+    isFrontFacing,
+    isRearFacing
+  };
 }
 
 function summarizeCapability({

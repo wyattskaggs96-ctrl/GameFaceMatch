@@ -160,6 +160,11 @@ export interface TemporaryImageReference {
   fileSizeBytes: number;
   width: number;
   height: number;
+  originalWidth?: number;
+  originalHeight?: number;
+  originalFileSizeBytes?: number;
+  processingNotes?: string[];
+  wasDownscaled?: boolean;
   signature: string;
   source: CaptureSource;
   orientation: "portrait" | "landscape" | "square";

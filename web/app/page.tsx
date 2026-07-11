@@ -58,6 +58,14 @@ const DevelopmentMatchingLab =
         loading: () => <LoadingState label="Loading matching laboratory" />
       });
 
+const DevelopmentMobileQAStatus =
+  process.env.NODE_ENV === "production"
+    ? null
+    : dynamic(() => import("@/features/qa/MobileQAStatus").then((module) => module.MobileQAStatus), {
+        ssr: false,
+        loading: () => <LoadingState label="Loading mobile QA status" />
+      });
+
 export default function HomePage() {
   const [screen, setScreen] = useState<AppScreen>("welcome");
   const [session, setSession] = useState(() => createInitialCaptureSession());
@@ -77,7 +85,8 @@ export default function HomePage() {
         ...PRIMARY_NAV_ITEMS,
         { id: "pricing" as const, label: "Pricing" },
         { id: "audit" as const, label: "Audit" },
-        { id: "matching-lab" as const, label: "Matching Lab" }
+        { id: "matching-lab" as const, label: "Matching Lab" },
+        { id: "mobile-qa" as const, label: "Mobile QA" }
       ]
     : PRIMARY_NAV_ITEMS;
   const stepFlowProgress = getStepFlowProgress(screen);
@@ -421,6 +430,8 @@ export default function HomePage() {
         return isDevelopment && DevelopmentCatalogAuditInspector ? <DevelopmentCatalogAuditInspector manifest={productionCatalogManifest} /> : <GameCatalogStatus />;
       case "matching-lab":
         return isDevelopment && DevelopmentMatchingLab ? <DevelopmentMatchingLab /> : <GameCatalogStatus />;
+      case "mobile-qa":
+        return isDevelopment && DevelopmentMobileQAStatus ? <DevelopmentMobileQAStatus /> : <GameCatalogStatus />;
       case "saved":
         return <SavedBuildsEmpty savedBuilds={savedBuilds} onDeleteSavedBuild={deleteSavedBuild} />;
       case "refinement":

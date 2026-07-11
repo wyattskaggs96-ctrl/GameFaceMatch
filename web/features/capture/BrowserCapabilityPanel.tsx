@@ -11,6 +11,7 @@ const initialReport: BrowserCapabilityReport = {
   device: "cameraUnavailable",
   fallback: "fileUploadFallbackAvailable",
   summary: "permissionNotRequested",
+  availableCameras: [],
   messages: ["Camera status has not been checked yet.", "File-upload fallback available."]
 };
 
@@ -64,7 +65,17 @@ export function BrowserCapabilityPanel({
           <span>Fallback</span>
           <strong>{report.fallback}</strong>
         </div>
+        <div>
+          <span>Camera count</span>
+          <strong>{report.availableCameras.length}</strong>
+        </div>
       </div>
+      {report.summary === "permissionDenied" || report.summary === "permissionBlocked" ? (
+        <Alert title="Permission recovery" tone="warning">
+          On iPhone Safari, open Settings, Safari, Camera, then allow or reset camera access for this site. On Android Chrome, use the lock icon in the address
+          bar, Site settings, Camera, then allow or reset the permission.
+        </Alert>
+      ) : null}
       <div className="button-row">
         <Button variant="secondary" onClick={checkCapability}>
           Check again

@@ -8,7 +8,14 @@ import {
   retakeAngle,
   setAngleCapture
 } from "@/lib/capture/capture-session";
-import { createBasicDuplicateSignature, createTemporaryImageReference, validateImageMetadata } from "@/lib/capture/image-validation";
+import {
+  createBasicDuplicateSignature,
+  createTemporaryImageReference,
+  getDownscaledDimensions,
+  isHeicOrHeif,
+  shouldDownscaleImage,
+  validateImageMetadata
+} from "@/lib/capture/image-validation";
 import type { CapturedAngleID, TemporaryImageReference } from "@/types/domain";
 
 describe("capture session", () => {
@@ -75,6 +82,26 @@ describe("image metadata validation", () => {
     expect(result.errors).toContain("Use a JPEG, PNG, or WebP image.");
     expect(result.errors).toContain("The image file is empty or unreadable.");
     expect(result.errors).toContain("Use an image at least 480 pixels wide and tall.");
+  });
+
+  it("rejects HEIC and HEIF with an honest unsupported state", () => {
+    expect(isHeicOrHeif("camera-roll.heic", "")).toBe(true);
+    expect(isHeicOrHeif("camera-roll.jpg", "image/jpeg")).toBe(false);
+    const result = validateImageMetadata({
+      fileName: "camera-roll.heic",
+      fileType: "image/heic",
+      fileSizeBytes: 2_000_000,
+      width: 1200,
+      height: 1600,
+      associatedAngleID: "straightOn"
+    });
+    expect(result.errors).toContain("HEIC/HEIF images are not supported in this web MVP. Export or upload JPEG, PNG, or WebP instead.");
+  });
+
+  it("calculates large-image downscaling dimensions before browser analysis", () => {
+    expect(shouldDownscaleImage(4032, 3024)).toBe(true);
+    expect(getDownscaledDimensions(4032, 3024)).toEqual({ width: 1600, height: 1200, scale: 1600 / 4032 });
+    expect(getDownscaledDimensions(1200, 900)).toEqual({ width: 1200, height: 900, scale: 1 });
   });
 
   it("rejects supported MIME types with unsafe image extensions", () => {

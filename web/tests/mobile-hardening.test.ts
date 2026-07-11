@@ -71,8 +71,9 @@ describe("PWA and mobile browser testing posture", () => {
     expect(css).toContain("@media (max-width: 720px)");
     expect(css).toContain("@media (max-width: 720px) and (orientation: landscape)");
     expect(css).toContain("@media (prefers-reduced-motion: reduce)");
+    expect(css).toContain("env(safe-area-inset-bottom");
     expect(css).toContain(".skip-link");
-    expect(css).toContain("min-height: 44px");
+    expect(css).toContain("min-height: 48px");
     expect(css).toContain("overflow-wrap: anywhere");
   });
 });

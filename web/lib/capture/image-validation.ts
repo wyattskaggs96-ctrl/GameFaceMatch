@@ -1,9 +1,12 @@
 import type { CapturedAngle, CapturedAngleID, CaptureSource, TemporaryImageReference } from "@/types/domain";
 
 const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+const heicTypes = new Set(["image/heic", "image/heif"]);
 const allowedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+const heicExtensions = [".heic", ".heif"];
 const maxFileSizeBytes = 12 * 1024 * 1024;
 const minDimension = 480;
+const maxAnalysisDimension = 1600;
 
 export interface ImageMetadataInput {
   fileName: string;
@@ -11,6 +14,11 @@ export interface ImageMetadataInput {
   fileSizeBytes: number;
   width: number;
   height: number;
+  originalWidth?: number;
+  originalHeight?: number;
+  originalFileSizeBytes?: number;
+  processingNotes?: string[];
+  wasDownscaled?: boolean;
   source?: CaptureSource;
   associatedAngleID?: CapturedAngleID;
   objectUrl?: string;
@@ -20,6 +28,9 @@ export interface ImageMetadataInput {
 
 export function validateImageMetadata(input: ImageMetadataInput, existingAngles: CapturedAngle[] = []) {
   const errors: string[] = [];
+  if (isHeicOrHeif(input.fileName, input.fileType)) {
+    errors.push("HEIC/HEIF images are not supported in this web MVP. Export or upload JPEG, PNG, or WebP instead.");
+  }
   if (!allowedTypes.has(input.fileType)) {
     errors.push("Use a JPEG, PNG, or WebP image.");
   }
@@ -69,6 +80,11 @@ export function createTemporaryImageReference(input: ImageMetadataInput, signatu
     fileSizeBytes: input.fileSizeBytes,
     width: input.width,
     height: input.height,
+    originalWidth: input.originalWidth,
+    originalHeight: input.originalHeight,
+    originalFileSizeBytes: input.originalFileSizeBytes,
+    processingNotes: input.processingNotes,
+    wasDownscaled: input.wasDownscaled,
     signature,
     source: input.source ?? "upload",
     orientation: getImageOrientation(input.width, input.height),
@@ -79,6 +95,115 @@ export function createTemporaryImageReference(input: ImageMetadataInput, signatu
 
 export function createImageSignature(input: ImageMetadataInput): string {
   return `${input.fileName}:${input.fileType}:${input.fileSizeBytes}:${input.width}x${input.height}`;
+}
+
+export function isHeicOrHeif(fileName: string, fileType: string) {
+  const normalizedType = fileType.trim().toLowerCase();
+  const normalizedName = fileName.trim().toLowerCase();
+  return heicTypes.has(normalizedType) || heicExtensions.some((extension) => normalizedName.endsWith(extension));
+}
+
+export function shouldDownscaleImage(width: number, height: number, maxDimension = maxAnalysisDimension) {
+  return Math.max(width, height) > maxDimension;
+}
+
+export function getDownscaledDimensions(width: number, height: number, maxDimension = maxAnalysisDimension) {
+  if (!shouldDownscaleImage(width, height, maxDimension)) {
+    return { width, height, scale: 1 };
+  }
+  const scale = maxDimension / Math.max(width, height);
+  return {
+    width: Math.max(1, Math.round(width * scale)),
+    height: Math.max(1, Math.round(height * scale)),
+    scale
+  };
+}
+
+export async function prepareImageForAnalysis(input: {
+  file: File;
+  objectUrl: string;
+  imageElement: HTMLImageElement;
+  maxDimension?: number;
+}): Promise<{
+  file: File;
+  objectUrl: string;
+  imageElement: HTMLImageElement;
+  originalObjectUrl: string | null;
+  originalWidth: number;
+  originalHeight: number;
+  originalFileSizeBytes: number;
+  wasDownscaled: boolean;
+  processingNotes: string[];
+}> {
+  const originalWidth = input.imageElement.naturalWidth;
+  const originalHeight = input.imageElement.naturalHeight;
+  const originalFileSizeBytes = input.file.size;
+  const nextDimensions = getDownscaledDimensions(originalWidth, originalHeight, input.maxDimension);
+  if (nextDimensions.scale === 1) {
+    return {
+      file: input.file,
+      objectUrl: input.objectUrl,
+      imageElement: input.imageElement,
+      originalObjectUrl: null,
+      originalWidth,
+      originalHeight,
+      originalFileSizeBytes,
+      wasDownscaled: false,
+      processingNotes: ["Browser decoded image dimensions after EXIF orientation where supported."]
+    };
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.width = nextDimensions.width;
+  canvas.height = nextDimensions.height;
+  const context = canvas.getContext("2d", { alpha: false });
+  if (!context) {
+    return {
+      file: input.file,
+      objectUrl: input.objectUrl,
+      imageElement: input.imageElement,
+      originalObjectUrl: null,
+      originalWidth,
+      originalHeight,
+      originalFileSizeBytes,
+      wasDownscaled: false,
+      processingNotes: ["Large image downscaling was skipped because canvas was unavailable."]
+    };
+  }
+
+  context.drawImage(input.imageElement, 0, 0, nextDimensions.width, nextDimensions.height);
+  const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.9));
+  if (!blob) {
+    return {
+      file: input.file,
+      objectUrl: input.objectUrl,
+      imageElement: input.imageElement,
+      originalObjectUrl: null,
+      originalWidth,
+      originalHeight,
+      originalFileSizeBytes,
+      wasDownscaled: false,
+      processingNotes: ["Large image downscaling was skipped because the browser could not create a JPEG."]
+    };
+  }
+
+  const file = new File([blob], replaceImageExtension(input.file.name), { type: "image/jpeg" });
+  const objectUrl = URL.createObjectURL(file);
+  const imageElement = await readImageElement(objectUrl);
+  return {
+    file,
+    objectUrl,
+    imageElement,
+    originalObjectUrl: input.objectUrl,
+    originalWidth,
+    originalHeight,
+    originalFileSizeBytes,
+    wasDownscaled: true,
+    processingNotes: [
+      `Large image was downscaled from ${originalWidth}x${originalHeight} to ${nextDimensions.width}x${nextDimensions.height} before analysis.`,
+      "Browser decoded image dimensions after EXIF orientation where supported."
+    ]
+  };
 }
 
 export async function createBasicDuplicateSignature(file: Blob & { name?: string; type?: string; size: number }) {
@@ -118,6 +243,21 @@ export async function validateImageFile(
 function getImageOrientation(width: number, height: number) {
   if (width === height) return "square";
   return width > height ? "landscape" : "portrait";
+}
+
+function replaceImageExtension(fileName: string) {
+  const trimmed = fileName.trim();
+  const baseName = trimmed.replace(/\.[^.]+$/, "");
+  return `${baseName || "capture"}-analysis.jpg`;
+}
+
+function readImageElement(objectUrl: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error("Unreadable image"));
+    image.src = objectUrl;
+  });
 }
 
 function toHex(bytes: Uint8Array) {

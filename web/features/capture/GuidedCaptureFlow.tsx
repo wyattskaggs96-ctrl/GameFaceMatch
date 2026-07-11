@@ -3,7 +3,7 @@
 import type { ChangeEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Button, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
-import { CameraAccessError, type BrowserCameraService } from "@/lib/capture/browser-camera-service";
+import { CameraAccessError, type BrowserCameraService, type CameraDeviceOption, type CameraFacingMode } from "@/lib/capture/browser-camera-service";
 import {
   cancelCaptureSession,
   getCompletedAngleCount,
@@ -17,7 +17,7 @@ import {
   type ActiveCaptureSession
 } from "@/lib/capture/capture-session";
 import { applyManualConfirmationToReport, createBrowserImageQualityService, createCaptureReviewReport } from "@/lib/capture/image-quality-service";
-import { createTemporaryImageReference, validateImageFile } from "@/lib/capture/image-validation";
+import { createTemporaryImageReference, isHeicOrHeif, prepareImageForAnalysis, validateImageFile } from "@/lib/capture/image-validation";
 import type { CapturedAngle, CapturedAngleID, CaptureSource } from "@/types/domain";
 
 export function GuidedCaptureFlow({
@@ -37,11 +37,18 @@ export function GuidedCaptureFlow({
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [isStartingCamera, setIsStartingCamera] = useState(false);
   const [captureMode, setCaptureMode] = useState<"camera" | "upload">("camera");
+  const [cameraDevices, setCameraDevices] = useState<CameraDeviceOption[]>([]);
+  const [selectedDeviceId, setSelectedDeviceId] = useState<string>("");
+  const [selectedFacingMode, setSelectedFacingMode] = useState<CameraFacingMode>("user");
+  const [lifecycleNotice, setLifecycleNotice] = useState<string | null>(null);
+  const [isOffline, setIsOffline] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const qualityService = useMemo(() => createBrowserImageQualityService(), []);
   const currentAngle = getCurrentAngle(session);
   const reviewReport = createCaptureReviewReport(session.angles);
   const completedAngles = getCompletedAngleCount(session.angles);
+  const hasActiveCaptureData = completedAngles > 0 || Boolean(stream);
+  const previewIsMirrored = selectedFacingMode === "user";
 
   useEffect(() => {
     return () => {
@@ -57,12 +64,72 @@ export function GuidedCaptureFlow({
     }
   }, [stream]);
 
+  useEffect(() => {
+    setIsOffline(typeof navigator !== "undefined" ? !navigator.onLine : false);
+    function handleVisibilityChange() {
+      if (document.visibilityState === "hidden") {
+        stopCamera();
+        setLifecycleNotice("Camera preview paused because the page was backgrounded, locked, or interrupted. Restart camera before capturing the next still.");
+      }
+      if (document.visibilityState === "visible" && hasActiveCaptureData) {
+        setLifecycleNotice("Capture session restored. Review completed angles and restart the camera if you want to continue live capture.");
+      }
+    }
+    function handlePageHide() {
+      stopCamera();
+      setLifecycleNotice("Camera tracks were stopped while the page was hidden.");
+    }
+    function handlePageShow(event: PageTransitionEvent) {
+      if (event.persisted || hasActiveCaptureData) {
+        setLifecycleNotice("Page restored. Temporary image references may need review on low-memory mobile browsers.");
+      }
+    }
+    function handleBeforeUnload(event: BeforeUnloadEvent) {
+      if (!hasActiveCaptureData) return;
+      event.preventDefault();
+      event.returnValue = "An active GameFace Match capture session is in progress.";
+    }
+    function handleOffline() {
+      setIsOffline(true);
+      setLifecycleNotice("Browser is offline. The current MVP stays local, but camera permissions and reload behavior can vary by browser.");
+    }
+    function handleOnline() {
+      setIsOffline(false);
+      setLifecycleNotice("Browser is online again. No capture images were uploaded.");
+    }
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("pagehide", handlePageHide);
+    window.addEventListener("pageshow", handlePageShow);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("offline", handleOffline);
+    window.addEventListener("online", handleOnline);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("pagehide", handlePageHide);
+      window.removeEventListener("pageshow", handlePageShow);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("offline", handleOffline);
+      window.removeEventListener("online", handleOnline);
+    };
+  }, [hasActiveCaptureData, stream]);
+
   async function startCamera() {
     setCameraError(null);
+    setLifecycleNotice(null);
     setIsStartingCamera(true);
     try {
-      const nextStream = await cameraService.requestCameraPreview();
+      stopCamera();
+      const nextStream = await cameraService.requestCameraPreview({
+        deviceId: selectedDeviceId || undefined,
+        facingMode: selectedDeviceId ? undefined : selectedFacingMode
+      });
       setStream(nextStream);
+      const nextDevices = await cameraService.getCameraDevices();
+      setCameraDevices(nextDevices);
+      const trackSettings = nextStream.getVideoTracks()[0]?.getSettings();
+      const activeDevice = nextDevices.find((device) => device.deviceId === trackSettings?.deviceId);
+      if (activeDevice?.deviceId) setSelectedDeviceId(activeDevice.deviceId);
+      if (activeDevice?.facingMode === "user" || activeDevice?.facingMode === "environment") setSelectedFacingMode(activeDevice.facingMode);
       setCaptureMode("camera");
     } catch (error) {
       setCameraError(error instanceof CameraAccessError ? error.message : "Camera could not be started. Upload fallback remains available.");
@@ -70,6 +137,25 @@ export function GuidedCaptureFlow({
     } finally {
       setIsStartingCamera(false);
     }
+  }
+
+  async function switchCamera() {
+    const availableDevices = cameraDevices.length > 0 ? cameraDevices : await cameraService.getCameraDevices();
+    setCameraDevices(availableDevices);
+    if (availableDevices.length > 1) {
+      const currentIndex = Math.max(
+        availableDevices.findIndex((device) => device.deviceId === selectedDeviceId),
+        0
+      );
+      const nextDevice = availableDevices[(currentIndex + 1) % availableDevices.length];
+      setSelectedDeviceId(nextDevice.deviceId);
+      if (nextDevice.facingMode === "user" || nextDevice.facingMode === "environment") setSelectedFacingMode(nextDevice.facingMode);
+    } else {
+      setSelectedDeviceId("");
+      setSelectedFacingMode((mode) => (mode === "user" ? "environment" : "user"));
+    }
+    setLifecycleNotice("Camera selection changed. Start camera again to use the new selection.");
+    stopCamera();
   }
 
   function stopCamera() {
@@ -93,6 +179,10 @@ export function GuidedCaptureFlow({
       onSessionChange(setAngleError(session, currentAngle.id, ["The browser could not capture a still frame."]));
       return;
     }
+    if (previewIsMirrored) {
+      context.translate(canvas.width, 0);
+      context.scale(-1, 1);
+    }
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.92));
     if (!blob) {
@@ -115,10 +205,21 @@ export function GuidedCaptureFlow({
     if (!file) {
       return;
     }
+    if (isHeicOrHeif(file.name, file.type)) {
+      onSessionChange(
+        setAngleError(session, angle.id, [
+          "HEIC/HEIF images are not supported in this web MVP. Export or upload JPEG, PNG, or WebP instead."
+        ])
+      );
+      event.currentTarget.value = "";
+      return;
+    }
     const objectUrl = URL.createObjectURL(file);
     try {
       const imageElement = await readImageElement(objectUrl);
-      await processFileForAngle(angle.id, file, objectUrl, "upload", imageElement);
+      const prepared = await prepareImageForAnalysis({ file, objectUrl, imageElement });
+      if (prepared.originalObjectUrl) URL.revokeObjectURL(prepared.originalObjectUrl);
+      await processFileForAngle(angle.id, prepared.file, prepared.objectUrl, "upload", prepared.imageElement, prepared);
     } catch {
       URL.revokeObjectURL(objectUrl);
       onSessionChange(setAngleError(session, angle.id, ["The image could not be read."]));
@@ -132,7 +233,8 @@ export function GuidedCaptureFlow({
     file: File,
     objectUrl: string,
     source: CaptureSource,
-    imageElement: HTMLImageElement
+    imageElement: HTMLImageElement,
+    processing?: Awaited<ReturnType<typeof prepareImageForAnalysis>>
   ) {
     const dimensions = { width: imageElement.naturalWidth, height: imageElement.naturalHeight };
     const validation = await validateImageFile(file, dimensions, session.angles.filter((item) => item.id !== angleID), angleID, source, objectUrl);
@@ -149,6 +251,11 @@ export function GuidedCaptureFlow({
         fileSizeBytes: file.size,
         width: dimensions.width,
         height: dimensions.height,
+        originalWidth: processing?.originalWidth,
+        originalHeight: processing?.originalHeight,
+        originalFileSizeBytes: processing?.originalFileSizeBytes,
+        processingNotes: processing?.processingNotes,
+        wasDownscaled: processing?.wasDownscaled,
         source,
         associatedAngleID: angleID,
         objectUrl,
@@ -226,7 +333,21 @@ export function GuidedCaptureFlow({
             </StatusBadge>
           </div>
           <p>{currentAngle.instruction}</p>
-          <div className="camera-preview" data-active={Boolean(stream)}>
+          <Alert title="Mobile capture guidance" tone="info">
+            Use portrait orientation when possible. The front-camera preview is mirrored like a selfie view, but captured still images are stored unmirrored for
+            review. Browser RGB capture is not TrueDepth.
+          </Alert>
+          {isOffline ? (
+            <Alert title="Offline" tone="warning">
+              The app is offline. Capture images remain local; no upload service exists.
+            </Alert>
+          ) : null}
+          {lifecycleNotice ? (
+            <Alert title="Mobile session notice" tone="warning" role="status">
+              {lifecycleNotice}
+            </Alert>
+          ) : null}
+          <div className="camera-preview" data-active={Boolean(stream)} data-mirrored={previewIsMirrored}>
             {stream ? (
               <video ref={videoRef} autoPlay playsInline muted aria-label={`${currentAngle.label} camera preview`} />
             ) : (
@@ -248,6 +369,9 @@ export function GuidedCaptureFlow({
             <Button variant="secondary" onClick={stopCamera} disabled={!stream}>
               Stop camera
             </Button>
+            <Button variant="secondary" onClick={() => void switchCamera()}>
+              Switch camera
+            </Button>
             <Button variant="secondary" onClick={() => void captureStillFrame()} disabled={!stream}>
               Capture still frame
             </Button>
@@ -261,11 +385,30 @@ export function GuidedCaptureFlow({
               <input
                 className="file-input"
                 type="file"
-                accept="image/jpeg,image/png,image/webp"
+                accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
                 capture="user"
                 onChange={(event) => void handleFile(currentAngle, event)}
               />
             </label>
+          ) : null}
+          <div className="metadata-list capability-list" aria-label="Camera selection details">
+            <div>
+              <span>Preferred camera</span>
+              <strong>{selectedFacingMode === "user" ? "Front/selfie" : "Rear/environment"}</strong>
+            </div>
+            <div>
+              <span>Preview mirror</span>
+              <strong>{previewIsMirrored ? "Mirrored preview, unmirrored capture" : "Unmirrored preview and capture"}</strong>
+            </div>
+            <div>
+              <span>Available cameras</span>
+              <strong>{cameraDevices.length}</strong>
+            </div>
+          </div>
+          {cameraError ? (
+            <Alert title="Permission reset help" tone="info">
+              iPhone Safari: Settings, Safari, Camera, then allow or reset this site. Android Chrome: lock icon, Site settings, Camera, then allow or reset.
+            </Alert>
           ) : null}
         </Card>
         <div className="angle-list" aria-label="Required capture angles">
@@ -295,7 +438,7 @@ export function GuidedCaptureFlow({
                 <input
                   className="file-input"
                   type="file"
-                  accept="image/jpeg,image/png,image/webp"
+                  accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
                   capture="user"
                   onChange={(event) => void handleFile(angle, event)}
                 />
@@ -367,6 +510,10 @@ export function GuidedCaptureFlow({
                     <dd>{report.orientation.value}</dd>
                   </div>
                   <div>
+                    <dt>Processing</dt>
+                    <dd>{angle.image?.wasDownscaled ? "Downscaled" : "Original size"}</dd>
+                  </div>
+                  <div>
                     <dt>Duplicate</dt>
                     <dd>{report.duplicateImage.value ? "Yes" : "No"}</dd>
                   </div>
@@ -420,11 +567,11 @@ export function GuidedCaptureFlow({
                 </fieldset>
                 <label className="form-field">
                   <span className="small-text">Replace upload for {angle.label.toLowerCase()}</span>
-                  <input
-                    className="file-input"
-                    type="file"
-                    accept="image/jpeg,image/png,image/webp"
-                    capture="user"
+                <input
+                  className="file-input"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                  capture="user"
                     onChange={(event) => void handleFile(angle, event)}
                   />
                 </label>

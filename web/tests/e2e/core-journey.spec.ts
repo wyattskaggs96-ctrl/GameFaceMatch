@@ -1,0 +1,79 @@
+import { expect, test } from "@playwright/test";
+import {
+  acceptRequiredConsent,
+  completeOnboarding,
+  confirmStandardAttributes,
+  expectNoRawImagePersistence,
+  navigateToCapture,
+  uploadFiveSyntheticAngles
+} from "./helpers";
+import { syntheticPng } from "./synthetic-images";
+
+test.describe("GameFace Match production-representative journey", () => {
+  test("completes the web MVP path with upload fallback and honest catalog-unavailable results", async ({ page }) => {
+    await completeOnboarding(page);
+    await acceptRequiredConsent(page);
+    await navigateToCapture(page);
+
+    await page.getByRole("button", { name: "Skip to file upload" }).click();
+    await uploadFiveSyntheticAngles(page);
+    await expect(page.getByText("Blocking checks resolved")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Continue to attribute confirmation" })).toBeEnabled();
+    await page.getByRole("button", { name: "Continue to attribute confirmation" }).click();
+
+    await expect(page.getByRole("heading", { name: "Confirm standardized profile attributes" })).toBeVisible();
+    await confirmStandardAttributes(page);
+
+    await expect(page.getByRole("heading", { name: "Standardized profile foundation" })).toBeVisible();
+    await expect(page.getByText("Guided browser RGB")).toBeVisible();
+    await expect(page.getByText("Depth supported")).toBeVisible();
+    await expect(page.getByText("No", { exact: true })).toBeVisible();
+    await expect(page.getByText("Not yet measured")).toBeVisible();
+    await expect(page.getByText("Geometry remains unavailable rather than guessed.")).toBeVisible();
+    await page.getByRole("button", { name: "Continue to processing" }).click();
+
+    await expect(page.getByRole("heading", { name: "Processing" })).toBeVisible();
+    await page.getByRole("button", { name: "Continue when ready" }).click();
+
+    await expect(page.locator("#results-title")).toHaveText("Verified College Football 27 catalog not loaded.");
+    await expect(page.getByText("No production top-three results, labels, sliders, hairstyles, facial-hair options, or menu paths are displayed")).toBeVisible();
+    await expect(page.getByText("empty-production")).toBeVisible();
+    await expectNoRawImagePersistence(page);
+  });
+
+  test("covers saved-build empty state, screenshot-refinement intake, privacy inventory, and deletion flows", async ({ page }) => {
+    await completeOnboarding(page);
+    await acceptRequiredConsent(page);
+    await navigateToCapture(page);
+    await uploadFiveSyntheticAngles(page);
+
+    await page.getByRole("button", { name: "Home" }).click();
+    await page.getByRole("heading", { name: "Saved builds" }).locator("xpath=ancestor::div[contains(@class, 'action-card')]").getByRole("button", { name: "Open" }).click();
+    await expect(page.getByRole("heading", { name: "Nothing saved" })).toBeVisible();
+    await expect(page.getByText("No saved builds on this browser.")).toBeVisible();
+
+    await page.getByRole("button", { name: "Home" }).click();
+    await page.getByRole("heading", { name: "Screenshot refinement" }).locator("xpath=ancestor::div[contains(@class, 'action-card')]").getByRole("button", { name: "Open" }).click();
+    await expect(page.getByRole("heading", { name: "Refinement scaffold" })).toBeVisible();
+    await page.getByLabel("Upload screenshot").first().setInputFiles(syntheticPng("created-player-front.png", 800, 800, 20));
+    await expect(page.getByText("created-player-front.png | 800x800")).toBeVisible();
+    await page.getByRole("button", { name: "Delete screenshot session data" }).click();
+    await expect(page.getByText("No screenshot selected").first()).toBeVisible();
+
+    await page.getByRole("button", { name: "Privacy" }).click();
+    await expect(page.getByRole("heading", { name: "Local data controls" })).toBeVisible();
+    await expect(page.getByText("No face images, screenshots, profiles, or builds have been uploaded.")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Temporary Blob URLs" })).toBeVisible();
+
+    await page.getByRole("button", { name: "Delete capture-session metadata" }).click();
+    await expect(page.getByRole("alertdialog", { name: "Delete active capture session?" })).toBeVisible();
+    await page.getByRole("button", { name: "Confirm deletion" }).click();
+    await expect(page.getByText("Deletion completion recorded.")).toBeVisible();
+
+    await page.getByRole("button", { name: "Delete everything local" }).click();
+    await expect(page.getByRole("alertdialog")).toBeVisible();
+    await page.getByRole("button", { name: "Confirm deletion" }).click();
+    await expect(page.getByText("Deletion records do not contain face images.")).toBeVisible();
+    await expectNoRawImagePersistence(page);
+  });
+});

@@ -58,3 +58,48 @@ Commerce tests should include:
 - No credential-like payment secrets in client source
 - No fake purchase state
 - Catalog unavailable prevents paid recommendation claims
+
+## Browser end-to-end coverage
+
+The active web MVP uses Playwright for production-representative browser coverage under `web/tests/e2e/`.
+
+Run locally from `web/`:
+
+```bash
+npm run build
+npm run test:e2e
+```
+
+Run the CI-oriented command from `web/`:
+
+```bash
+npm run test:e2e:ci
+```
+
+The Playwright suite runs against `next start`, not `next dev`, and covers:
+
+- Welcome, product explanation, disclaimer, privacy summary, and consent progression
+- Rejection when required consent is missing
+- Camera permission denial with upload fallback still available
+- Guided five-angle RGB upload using generated geometric PNG images only
+- Unsupported-image and small-image quality rejection
+- Duplicate-image rejection and selective retake
+- Attribute confirmation and honest profile review with unavailable geometry
+- Empty production catalog and results-unavailable state
+- Saved-build empty state
+- Screenshot-refinement intake and deletion
+- Privacy-center inventory, active-session deletion, and delete-all local data
+- Keyboard navigation through the main journey
+- Reduced-motion usability
+
+No real face photographs are used. Test images are generated in memory by `web/tests/e2e/synthetic-images.ts`, are not committed as media assets, and are never loaded by production code.
+
+Configured Playwright projects:
+
+- `desktop-chromium`: 1440 x 900 desktop smoke coverage
+- `iphone-safari-size`: 393 x 852 mobile viewport with an iPhone Safari user agent
+- `android-mobile-size`: 412 x 915 common Android viewport
+
+Reduced-motion behavior is covered by emulating `prefers-reduced-motion: reduce` inside the dedicated Playwright scenario.
+
+Failure artifacts are retained only on failure through Playwright traces, screenshots, and videos. Local artifact directories are ignored by Git.

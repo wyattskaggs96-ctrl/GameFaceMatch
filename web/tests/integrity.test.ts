@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { generatedProductionCatalogManifest } from "@/lib/catalog/generated-production-manifest";
 import { KEY_NAVIGATION_FLOW } from "@/lib/navigation";
 
 describe("production bundle boundaries", () => {
@@ -8,6 +9,12 @@ describe("production bundle boundaries", () => {
     const publicDir = path.join(process.cwd(), "public");
     const files = fs.existsSync(publicDir) ? listFiles(publicDir) : [];
     expect(files.some((file) => file.includes("test-only") || file.includes(`${path.sep}fixtures${path.sep}`))).toBe(false);
+  });
+
+  it("keeps the generated web production manifest in sync with shared catalog data", () => {
+    const sharedManifestPath = path.resolve(process.cwd(), "../data/catalog/production/catalog_manifest.json");
+    const sharedManifest = JSON.parse(fs.readFileSync(sharedManifestPath, "utf8"));
+    expect(generatedProductionCatalogManifest).toEqual(sharedManifest);
   });
 });
 

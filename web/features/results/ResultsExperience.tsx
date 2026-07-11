@@ -18,7 +18,10 @@ export function ResultsExperience({
   onSaveBuild,
   onDeleteResult,
   catalogVersionID = "empty-production",
-  catalogVerificationDate = null
+  catalogVerificationDate = null,
+  catalogRecordCount = 0,
+  catalogStatusMessage = "Catalog status unavailable.",
+  catalogStalenessMessage = null
 }: {
   profile: StandardFaceProfile | null;
   catalogIsEmpty: boolean;
@@ -31,6 +34,9 @@ export function ResultsExperience({
   onDeleteResult?: () => void;
   catalogVersionID?: string;
   catalogVerificationDate?: string | null;
+  catalogRecordCount?: number;
+  catalogStatusMessage?: string;
+  catalogStalenessMessage?: string | null;
 }) {
   const [selectedMatchID, setSelectedMatchID] = useState<string | null>(null);
   const [resultDeleted, setResultDeleted] = useState(false);
@@ -63,6 +69,9 @@ export function ResultsExperience({
           captureSummary={summarizeCaptureQuality(profile)}
           catalogVersionID={catalogVersionID}
           catalogVerificationDate={catalogVerificationDate}
+          catalogRecordCount={catalogRecordCount}
+          catalogStatusMessage={catalogStatusMessage}
+          catalogStalenessMessage={catalogStalenessMessage}
           onStartOver={onStartOver}
         />
       ) : null}
@@ -115,11 +124,17 @@ function CatalogUnavailableState({
   captureSummary,
   catalogVersionID,
   catalogVerificationDate,
+  catalogRecordCount,
+  catalogStatusMessage,
+  catalogStalenessMessage,
   onStartOver
 }: {
   captureSummary: string;
   catalogVersionID: string;
   catalogVerificationDate: string | null;
+  catalogRecordCount: number;
+  catalogStatusMessage: string;
+  catalogStalenessMessage: string | null;
   onStartOver: () => void;
 }) {
   return (
@@ -153,6 +168,18 @@ function CatalogUnavailableState({
             <div>
               <span>Catalog verified</span>
               <strong>{catalogVerificationDate ?? "Not verified"}</strong>
+            </div>
+            <div>
+              <span>Verified records loaded</span>
+              <strong>{catalogRecordCount}</strong>
+            </div>
+            <div>
+              <span>Runtime status</span>
+              <strong>{catalogStatusMessage}</strong>
+            </div>
+            <div>
+              <span>Staleness</span>
+              <strong>{catalogStalenessMessage ?? "No verified catalog date"}</strong>
             </div>
           </dl>
         </Card>

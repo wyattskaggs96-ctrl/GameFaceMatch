@@ -19,6 +19,7 @@ import { ScreenshotRefinementEntry } from "@/features/refinement/ScreenshotRefin
 import { SettingsPanel } from "@/features/settings/SettingsPanel";
 import { createInitialCaptureSession } from "@/lib/capture/capture-session";
 import { createBrowserCameraService } from "@/lib/capture/browser-camera-service";
+import { createBundledCatalogRepository, type CatalogRuntimeStatus } from "@/lib/catalog/catalog-repository";
 import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
 import {
   canEnterHome,
@@ -75,6 +76,8 @@ export default function HomePage() {
   const [consentState, setConsentState] = useState<ConsentState>(() => createInitialConsentState());
   const [screenshotSession, setScreenshotSession] = useState(() => createInitialScreenshotRefinementSession());
   const [privacyRevision, setPrivacyRevision] = useState(0);
+  const [catalogRuntimeStatus, setCatalogRuntimeStatus] = useState<CatalogRuntimeStatus | null>(null);
+  const [catalogRuntimeError, setCatalogRuntimeError] = useState<string | null>(null);
   const cameraService = useMemo(() => createBrowserCameraService(), []);
   const privacyStore = useMemo(() => createMemoryPrivacyStore(), []);
   const catalogIsEmpty = isProductionCatalogEmpty(productionCatalogManifest);
@@ -118,6 +121,19 @@ export default function HomePage() {
       return;
     }
     window.history.replaceState({ screen: "welcome" }, "", toScreenHash("welcome"));
+  }, []);
+
+  useEffect(() => {
+    const repository = createBundledCatalogRepository();
+    void repository
+      .loadRuntimeStatus()
+      .then((status) => {
+        setCatalogRuntimeStatus(status);
+        setCatalogRuntimeError(null);
+      })
+      .catch((error: unknown) => {
+        setCatalogRuntimeError(error instanceof Error ? error.message : "Catalog runtime validation failed closed.");
+      });
   }, []);
 
   useEffect(() => {
@@ -404,8 +420,12 @@ export default function HomePage() {
           <ResultsExperience
             profile={standardProfile}
             catalogIsEmpty={catalogIsEmpty}
+            errorMessage={catalogRuntimeError}
             catalogVersionID={productionCatalogManifest.catalogVersion.identifier}
             catalogVerificationDate={productionCatalogManifest.catalogVersion.verifiedAt}
+            catalogRecordCount={catalogRuntimeStatus?.manifest.items.length ?? productionCatalogManifest.items.length}
+            catalogStatusMessage={catalogRuntimeError ?? catalogRuntimeStatus?.integrity.message ?? "Catalog status pending."}
+            catalogStalenessMessage={catalogRuntimeStatus?.staleness.message}
             onStartOver={startOver}
             canSaveBuild={isConsentGranted(consentState, "saveCompletedBuild")}
             onSaveBuild={(match) =>

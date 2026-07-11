@@ -2,8 +2,10 @@ import { describe, expect, it } from "vitest";
 import { CollegeFootball27Adapter } from "@/lib/adapters/college-football-27-adapter";
 import { GameAdapterError } from "@/lib/adapters/game-appearance-adapter";
 import { CatalogValidationError } from "@/lib/catalog/catalog-errors";
+import { assessCatalogStaleness, checkCatalogCompatibility, verifyManifestIntegrity } from "@/lib/catalog/catalog-integrity";
 import { createBundledCatalogRepository } from "@/lib/catalog/catalog-repository";
 import { validateProductionCatalog } from "@/lib/catalog/catalog-validator";
+import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
 import { createInitialCaptureSession } from "@/lib/capture/capture-session";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
 import { createInitialAttributeConfirmation } from "@/lib/profile/attribute-confirmation";
@@ -34,6 +36,52 @@ describe("catalog validation", () => {
     const item = validItem("unverified");
     item.verificationState = "unverified";
     expect(() => validateProductionCatalog(manifest([item]))).toThrow(/Unverified production record/);
+  });
+});
+
+describe("production catalog runtime loading", () => {
+  it("loads the repository production manifest and remains empty when no audited package exists", async () => {
+    const repository = createBundledCatalogRepository(productionCatalogManifest);
+    const status = await repository.loadRuntimeStatus();
+    expect(status.manifest.catalogVersion.identifier).toBe("empty-production");
+    expect(status.manifest.items).toHaveLength(0);
+    expect(status.integrity.state).toBe("emptyCatalogUnsigned");
+    expect(status.compatibility.compatible).toBe(true);
+    expect(status.staleness.state).toBe("unverified");
+  });
+
+  it("fails closed for non-empty production catalogs without checksums", async () => {
+    const repository = createBundledCatalogRepository(manifest([validItem("missing-checksum")]));
+    await expect(repository.loadProductionManifest()).rejects.toThrow(/missing packageChecksum/i);
+    expect(repository.getRuntimeErrors()[0]).toMatchObject({
+      code: "missingChecksum",
+      catalogVersionID: "unit-test-only"
+    });
+  });
+
+  it("verifies deterministic checksums before exposing records", async () => {
+    const catalog = manifest([validItem("checksum-ok")]);
+    const firstReport = await verifyManifestIntegrity(catalog);
+    catalog.packageChecksum = firstReport.actualChecksum;
+    const secondReport = await verifyManifestIntegrity(catalog);
+    expect(secondReport.state).toBe("verified");
+    expect(secondReport.ok).toBe(true);
+  });
+
+  it("blocks incompatible platform or game version selections", () => {
+    const report = checkCatalogCompatibility(manifest([validItem("compatibility")]), {
+      supportedPlatforms: ["different-platform"],
+      supportedGameVersions: ["unit-test-version"]
+    });
+    expect(report.compatible).toBe(false);
+  });
+
+  it("warns when verified catalog data is stale", () => {
+    const catalog = manifest([validItem("stale")]);
+    catalog.catalogVersion.verifiedAt = "2026-07-10T00:00:00.000Z";
+    const report = assessCatalogStaleness(catalog, new Date("2026-09-01T00:00:00.000Z"), 30);
+    expect(report.state).toBe("stale");
+    expect(report.message).toMatch(/re-audited/i);
   });
 });
 

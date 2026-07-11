@@ -1,13 +1,4 @@
 import type { GameCatalogManifest } from "@/types/domain";
+import { generatedProductionCatalogManifest } from "./generated-production-manifest";
 
-export const productionCatalogManifest: GameCatalogManifest = {
-  catalogVersion: {
-    identifier: "empty-production",
-    gameVersion: "",
-    platform: "",
-    verifiedAt: null
-  },
-  generatedAt: "2026-07-10T00:00:00.000Z",
-  isProduction: true,
-  items: []
-};
+export const productionCatalogManifest: GameCatalogManifest = generatedProductionCatalogManifest;

@@ -4,6 +4,7 @@ NOT PRODUCTION DATA
 NOT A VERIFIED GAME RECORD
 
 - Reviewer: `REPLACE_WITH_REVIEWER_NAME`
+- Review stage: `REPLACE_WITH_FIRST_OR_SECOND_REVIEW`
 - Record ID: `REPLACE_WITH_STABLE_INTERNAL_ID`
 - Review date: `REPLACE_WITH_REVIEW_DATE_YYYY_MM_DD`
 
@@ -17,6 +18,7 @@ NOT A VERIFIED GAME RECORD
 - [ ] Confirm measurements are finite and confidence values are valid.
 - [ ] Confirm no placeholder tokens remain.
 - [ ] Confirm this is not a fixture or template.
+- [ ] If this is second review, confirm reviewer is different from first review.
 
 ## Review Decision
 

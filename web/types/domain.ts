@@ -368,6 +368,7 @@ export interface GameCatalogItem {
   stableInternalID: string;
   game: string;
   gameVersion: string;
+  patchVersion?: string;
   platform: string;
   gameMode: string;
   creationPath: string;
@@ -380,6 +381,19 @@ export interface GameCatalogItem {
   requiredAngles?: Record<CapturedAngleID, string>;
   geometryMeasurements: Record<string, number | CatalogFacialMeasurement>;
   humanAnnotations: Record<string, string>;
+  captureConditions?: {
+    display?: string;
+    camera?: string;
+    lighting?: string;
+    notes?: string;
+  };
+  auditTrail?: {
+    auditSessionID?: string;
+    firstReviewID?: string;
+    secondReviewID?: string;
+    menuInstructionVerified?: boolean;
+    retiredReason?: string;
+  };
   navigationInstructions?: NavigationInstruction[];
   catalogVersion: GameCatalogVersion;
   isTestFixture: boolean;

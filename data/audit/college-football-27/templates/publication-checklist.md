@@ -18,6 +18,8 @@ NOT A VERIFIED GAME RECORD
 - [ ] Manifest item count matches records.
 - [ ] Package checksum matches deterministic checksum.
 - [ ] Review records approve every item.
+- [ ] Every item has first and second review from different reviewers.
+- [ ] Menu instructions have evidence and are verified.
 - [ ] Publication record documents source package and reviewer.
 - [ ] Production manifest remains immutable after publication.
 

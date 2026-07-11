@@ -7,11 +7,12 @@ This folder is for manually collecting evidence before a catalog item can ever b
 
 ## Start Here
 
-1. Copy the relevant template from `templates/`.
+1. Create an audit session from `templates/audit-session-template.json`.
 2. Replace every `REPLACE_WITH_...` token with evidence from the live game audit.
-3. Capture the required image angles and name assets with the asset naming guide.
-4. Complete the reviewer checklist with a second reviewer.
-5. Run local catalog validation before moving any record toward `data/catalog/production/`.
+3. Record platform, game version, patch/build, Road to Glory creation path, and discovered categories.
+4. Capture the required image angles and name assets with the asset naming guide.
+5. Complete first review and second review with different reviewers.
+6. Run local catalog validation before moving any record toward `data/catalog/production/`.
 
 ## Hard Rules
 
@@ -20,3 +21,5 @@ This folder is for manually collecting evidence before a catalog item can ever b
 - Do not move test fixtures or audit templates into production.
 - Production can remain empty until real, reviewed game evidence exists.
 - Use explicit placeholder tokens in draft files so validators can reject unfinished records.
+- CSV import creates unverified draft records only; it never verifies records.
+- Screenshots remain local audit evidence and are not automatically public web assets.

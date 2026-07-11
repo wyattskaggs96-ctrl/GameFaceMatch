@@ -8,6 +8,8 @@ NOT A VERIFIED GAME RECORD
 - Visible game label or index: `REPLACE_WITH_VERIFIED_GAME_LABEL`
 - Platform: `REPLACE_WITH_VERIFIED_PLATFORM`
 - Game version: `REPLACE_WITH_VERIFIED_GAME_VERSION`
+- Patch/build identifier: `REPLACE_WITH_PATCH_OR_BUILD_IDENTIFIER`
+- Road to Glory creation path: `REPLACE_WITH_VERIFIED_ROAD_TO_GLORY_CREATION_PATH`
 - Capture date: `REPLACE_WITH_CAPTURE_DATE_YYYY_MM_DD`
 
 ## Required Angles
@@ -25,6 +27,13 @@ NOT A VERIFIED GAME RECORD
 - [ ] Same lighting/menu environment.
 - [ ] Same default hair/facial hair when relevant.
 - [ ] No image editing beyond approved crop/normalization notes.
+
+## Capture Conditions
+
+- Display/TV: `REPLACE_WITH_DISPLAY_NOTES`
+- Capture device/camera: `REPLACE_WITH_CAMERA_NOTES`
+- Lighting: `REPLACE_WITH_LIGHTING_NOTES`
+- Menu state: `REPLACE_WITH_MENU_STATE_NOTES`
 
 ## Notes
 

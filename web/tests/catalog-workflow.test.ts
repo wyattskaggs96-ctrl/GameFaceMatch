@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 // @ts-expect-error Root catalog CLI is plain ESM JavaScript and is exercised here as the command source of truth.
-import { calculateDeterministicChecksum, detectDuplicateIDsInManifest, formatReport, validatePackage, validateProductionDirectory, validateRecord } from "../../scripts/catalog-tools.mjs";
+import { calculateDeterministicChecksum, compareCatalogVersions, createAuditSession, createPatchReauditPlan, detectDuplicateIDsInManifest, detectFixtureLeakageInPath, exportCatalogItemsToCsv, formatReport, importCatalogItemsFromCsv, publishPackage, validateAuditRecord, validatePackage, validateProductionDirectory, validateRecord } from "../../scripts/catalog-tools.mjs";
 
 describe("catalog audit workflow validator", () => {
   it("accepts empty production with an explicit recommendation warning", () => {
@@ -23,7 +23,7 @@ describe("catalog audit workflow validator", () => {
     expect(errorCodes(detectDuplicateIDsInManifest({ items: [validItem("duplicate"), validItem("duplicate")] }))).toContain("duplicateStableID");
   });
 
-  it("rejects placeholders, missing metadata, and invalid dates", () => {
+  it("rejects invalid labels, placeholders, missing metadata, and invalid dates", () => {
     const item = {
       ...validItem(),
       platform: "",
@@ -32,6 +32,7 @@ describe("catalog audit workflow validator", () => {
     };
     const codes = errorCodes(validateRecord(item));
     expect(codes).toContain("placeholderToken");
+    expect(codes).toContain("invalidVisibleLabel");
     expect(codes).toContain("missing-platform");
     expect(codes).toContain("invalidDate");
   });
@@ -52,6 +53,22 @@ describe("catalog audit workflow validator", () => {
     const noAngle = validItem();
     noAngle.requiredAngles.leftProfile = "";
     expect(errorCodes(validateRecord(noAngle))).toContain("missingRequiredAngle");
+  });
+
+  it("rejects missing evidence, invalid screenshot names, and missing second review", () => {
+    const badPackage = withChecksums(validPackage());
+    badPackage.assets[0].relativePath = "assets/front.png";
+    badPackage.reviews = badPackage.reviews.filter((review) => review.stage !== "second");
+    const codes = errorCodes(validatePackage(badPackage));
+    expect(codes).toContain("invalidScreenshotName");
+    expect(codes).toContain("missingSecondReview");
+  });
+
+  it("rejects patch mismatch between item and package manifest", () => {
+    const catalogPackage = withChecksums(validPackage());
+    catalogPackage.items[0].gameVersion = "different-test-only-version";
+    const codes = errorCodes(validatePackage(catalogPackage));
+    expect(codes).toContain("patchMismatch");
   });
 
   it("rejects incorrect manifest item counts and checksum mismatches", () => {
@@ -88,6 +105,52 @@ describe("catalog audit workflow validator", () => {
     expect(formatReport(report)).toContain("FAIL record");
     expect(formatReport(report)).toContain("error unverifiedRecord");
   });
+
+  it("creates draft audit sessions and never auto-verifies audit records", () => {
+    const session = createAuditSession({ platform: "test-only-platform", gameVersion: "test-only-version", createdAt: "2026-07-10T00:00:00.000Z" });
+    expect(session).toMatchObject({
+      game: "EA SPORTS College Football 27",
+      platform: "test-only-platform",
+      notes: "NOT PRODUCTION DATA - NOT A VERIFIED GAME RECORD"
+    });
+    expect(errorCodes(validateAuditRecord(validItem()))).toContain("autoVerificationBlocked");
+  });
+
+  it("imports and exports draft CSV records without creating verified production data", () => {
+    const csv = [
+      "stableInternalID,platform,gameVersion,patchVersion,gameMode,creationPath,category,visibleGameLabelOrIndex,straightOn,left45,right45,leftProfile,rightProfile,navigationInstruction,navigationEvidenceAssetID,captureConditions,humanAnnotation",
+      "cfb27-test-csv,test-only-platform,test-only-version,test-only-patch,Road to Glory,test-only-path,test-only-category,test-only-label,asset-front,asset-left45,asset-right45,asset-left-profile,asset-right-profile,test-only navigation,asset-front,test-only conditions,test-only note"
+    ].join("\n");
+    const [item] = importCatalogItemsFromCsv(csv, { capturedDate: "2026-07-10T00:00:00.000Z" });
+    expect(item.verificationState).toBe("unverified");
+    expect(item.requiredAngles.leftProfile).toBe("asset-left-profile");
+    const exported = exportCatalogItemsToCsv([item]);
+    expect(exported).toContain("cfb27-test-csv");
+    expect(exported).toContain("test-only navigation");
+  });
+
+  it("detects reordered options, retired options, and patch re-audit needs", () => {
+    const previous = { catalogVersion: { identifier: "previous" }, items: [validItem("one"), validItem("two")] };
+    const nextItem = validItem("one");
+    nextItem.deprecated = true;
+    nextItem.deprecatedContext = "test-only retired";
+    const next = { catalogVersion: { identifier: "next" }, items: [validItem("two"), nextItem, validItem("three")] };
+    const comparison = compareCatalogVersions(previous, next);
+    expect(comparison.added).toContain("three");
+    expect(comparison.reorderedOptions).toContain("one");
+    expect(comparison.retiredOptions).toContain("one");
+    const plan = createPatchReauditPlan(previous, "test-only-next-version");
+    expect(plan.totalRecordsToCheck).toBe(2);
+  });
+
+  it("publishes only validated packages and keeps fixture contamination detectable", () => {
+    const catalogPackage = withChecksums(validPackage());
+    const publication = publishPackage(catalogPackage);
+    expect(publication.ok).toBe(true);
+    expect(publication.manifest.isProduction).toBe(true);
+    const fixtureReport = detectFixtureLeakageInPath("../data/fixtures/test-only");
+    expect(errorCodes(fixtureReport)).toContain("fixtureLeakage");
+  });
 });
 
 function errorCodes(report: { errors: Array<{ code: string }> }) {
@@ -118,7 +181,7 @@ function validPackage() {
     assets: Object.entries(item.requiredAngles).map(([angle, assetID]) => ({
       assetID,
       angle,
-      relativePath: `assets/${assetID}.png`,
+      relativePath: `assets/cfb27__test-only-platform__test-only-version__${item.stableInternalID}__${angle}__20260710.png`,
       sha256: "a".repeat(64),
       capturedAt: "2026-07-10T00:00:00.000Z"
     })),
@@ -127,6 +190,20 @@ function validPackage() {
         reviewID: "review-test-only",
         stableInternalID: item.stableInternalID,
         reviewer: "test-only-reviewer",
+        stage: "first",
+        reviewedAt: "2026-07-10T00:00:00.000Z",
+        decision: "approved",
+        checks: {
+          labelsMatched: true,
+          navigationVerified: true
+        },
+        notes: "test-only"
+      },
+      {
+        reviewID: "review-test-only-second",
+        stableInternalID: item.stableInternalID,
+        reviewer: "test-only-second-reviewer",
+        stage: "second",
         reviewedAt: "2026-07-10T00:00:00.000Z",
         decision: "approved",
         checks: {

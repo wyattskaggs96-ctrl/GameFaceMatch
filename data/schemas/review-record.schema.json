@@ -9,6 +9,7 @@
     "reviewID": { "type": "string", "minLength": 1 },
     "stableInternalID": { "type": "string", "minLength": 1 },
     "reviewer": { "type": "string", "minLength": 1 },
+    "stage": { "enum": ["first", "second", "publication"] },
     "reviewedAt": { "type": "string", "format": "date-time" },
     "decision": { "enum": ["approved", "rejected"] },
     "checks": {

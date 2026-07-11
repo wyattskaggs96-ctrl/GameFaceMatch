@@ -783,6 +783,13 @@ p {
   list-style: none;
 }
 
+.compact-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding-left: 1.25rem;
+}
+
 .review-list li {
   display: flex;
   justify-content: space-between;

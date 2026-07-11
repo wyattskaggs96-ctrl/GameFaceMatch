@@ -1,0 +1,15 @@
+{
+  "templateNotice": "NOT PRODUCTION DATA - NOT A VERIFIED GAME RECORD",
+  "sessionID": "REPLACE_WITH_AUDIT_SESSION_ID",
+  "game": "EA SPORTS College Football 27",
+  "platform": "REPLACE_WITH_VERIFIED_PLATFORM",
+  "gameVersion": "REPLACE_WITH_VERIFIED_GAME_VERSION",
+  "patchVersion": "REPLACE_WITH_PATCH_OR_BUILD_IDENTIFIER",
+  "gameMode": "Road to Glory",
+  "creationPath": "REPLACE_WITH_VERIFIED_ROAD_TO_GLORY_CREATION_PATH",
+  "auditor": "REPLACE_WITH_AUDITOR_NAME",
+  "createdAt": "REPLACE_WITH_CREATED_AT_ISO",
+  "categories": [],
+  "records": [],
+  "notes": "REPLACE_WITH_AUDIT_SESSION_NOTES"
+}

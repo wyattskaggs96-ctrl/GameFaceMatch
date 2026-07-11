@@ -27,6 +27,7 @@
     "stableInternalID": { "type": "string", "minLength": 1 },
     "game": { "type": "string", "const": "EA SPORTS College Football 27" },
     "gameVersion": { "type": "string", "minLength": 1 },
+    "patchVersion": { "type": "string" },
     "platform": { "type": "string", "minLength": 1 },
     "gameMode": { "type": "string", "minLength": 1 },
     "creationPath": { "type": "string", "minLength": 1 },
@@ -52,6 +53,25 @@
       "additionalProperties": { "$ref": "facial-measurement.schema.json" }
     },
     "humanAnnotations": { "type": "object" },
+    "captureConditions": {
+      "type": "object",
+      "properties": {
+        "display": { "type": "string" },
+        "camera": { "type": "string" },
+        "lighting": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "auditTrail": {
+      "type": "object",
+      "properties": {
+        "auditSessionID": { "type": "string" },
+        "firstReviewID": { "type": "string" },
+        "secondReviewID": { "type": "string" },
+        "menuInstructionVerified": { "type": "boolean" },
+        "retiredReason": { "type": "string" }
+      }
+    },
     "navigationInstructions": { "type": "array", "items": { "$ref": "navigation-instruction.schema.json" } },
     "catalogVersion": {
       "type": "object",

@@ -3,6 +3,7 @@
   "stableInternalID": "REPLACE_WITH_STABLE_INTERNAL_ID",
   "game": "EA SPORTS College Football 27",
   "gameVersion": "REPLACE_WITH_VERIFIED_GAME_VERSION",
+  "patchVersion": "REPLACE_WITH_PATCH_OR_BUILD_IDENTIFIER",
   "platform": "REPLACE_WITH_VERIFIED_PLATFORM",
   "gameMode": "REPLACE_WITH_VERIFIED_GAME_MODE",
   "creationPath": "REPLACE_WITH_VERIFIED_CREATION_PATH",
@@ -39,6 +40,19 @@
   },
   "humanAnnotations": {
     "reviewNote": "REPLACE_WITH_HUMAN_ANNOTATION"
+  },
+  "captureConditions": {
+    "display": "REPLACE_WITH_DISPLAY_NOTES",
+    "camera": "REPLACE_WITH_CAMERA_NOTES",
+    "lighting": "REPLACE_WITH_LIGHTING_NOTES",
+    "notes": "REPLACE_WITH_CAPTURE_CONDITION_NOTES"
+  },
+  "auditTrail": {
+    "auditSessionID": "REPLACE_WITH_AUDIT_SESSION_ID",
+    "firstReviewID": "REPLACE_WITH_FIRST_REVIEW_ID",
+    "secondReviewID": "REPLACE_WITH_SECOND_REVIEW_ID",
+    "menuInstructionVerified": false,
+    "retiredReason": ""
   },
   "navigationInstructions": [
     {

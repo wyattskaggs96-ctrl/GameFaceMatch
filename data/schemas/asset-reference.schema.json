@@ -8,7 +8,11 @@
   "properties": {
     "assetID": { "type": "string", "minLength": 1 },
     "angle": { "enum": ["straightOn", "left45", "right45", "leftProfile", "rightProfile", "elevatedFront", "loweredFront", "navigationEvidence"] },
-    "relativePath": { "type": "string", "minLength": 1 },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Use cfb27__platform__game-version__stable-id__angle__YYYYMMDD.ext naming. Audit assets are local evidence and are not automatically public web assets."
+    },
     "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
     "capturedAt": { "type": "string", "format": "date-time" },
     "source": { "type": "string" }

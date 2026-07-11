@@ -6,8 +6,28 @@ import { fileURLToPath } from "node:url";
 
 export const requiredAngles = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"];
 export const placeholderPattern = /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK)\b/i;
+export const screenshotNamePattern = /^cfb27__[a-z0-9-]+__[a-z0-9.-]+__[a-z0-9-]+__(straightOn|left45|right45|leftProfile|rightProfile|navigationEvidence)__\d{8}\.(png|jpg|jpeg|webp)$/i;
 const validVerificationStates = new Set(["verified", "unverified", "rejected", "archived"]);
 const allowedTransitions = new Set(["draft->verified", "unverified->verified", "reviewed->verified", "reviewed->archived"]);
+const csvColumns = [
+  "stableInternalID",
+  "platform",
+  "gameVersion",
+  "patchVersion",
+  "gameMode",
+  "creationPath",
+  "category",
+  "visibleGameLabelOrIndex",
+  "straightOn",
+  "left45",
+  "right45",
+  "leftProfile",
+  "rightProfile",
+  "navigationInstruction",
+  "navigationEvidenceAssetID",
+  "captureConditions",
+  "humanAnnotation"
+];
 
 export function validateRecord(record, options = {}) {
   const report = createReport("record");
@@ -24,6 +44,9 @@ export function validateRecord(record, options = {}) {
   }
   if (!validVerificationStates.has(record?.verificationState)) {
     addError(report, "invalidVerificationState", `${id || "Record"} has an invalid verification state.`);
+  }
+  if (!isValidVisibleLabel(record?.visibleGameLabelOrIndex)) {
+    addError(report, "invalidVisibleLabel", `${id || "Record"} is missing an exact visible game label or index from evidence.`);
   }
   if ((options.requireVerified ?? true) && record?.verificationState !== "verified") {
     addError(report, "unverifiedRecord", `${id || "Record"} is not verified.`);
@@ -59,6 +82,22 @@ export function validateRecord(record, options = {}) {
       if (instruction?.evidenceAssetID && !options.availableAssetIDs.has(instruction.evidenceAssetID)) {
         addError(report, "missingAsset", `${id || "Record"} navigation evidence asset is unavailable: ${instruction.evidenceAssetID}.`);
       }
+    }
+  }
+
+  const navigationInstructions = Array.isArray(record?.navigationInstructions) ? record.navigationInstructions : [];
+  if (navigationInstructions.length === 0) {
+    addError(report, "missingNavigationInstruction", `${id || "Record"} is missing menu navigation instructions.`);
+  }
+  for (const instruction of navigationInstructions) {
+    if (!Number.isInteger(instruction?.sequenceNumber) || instruction.sequenceNumber < 1 || !stringValue(instruction?.instruction)) {
+      addError(report, "invalidNavigationInstruction", `${id || "Record"} has an invalid navigation instruction.`);
+    }
+    if (containsPlaceholder(instruction)) {
+      addError(report, "placeholderToken", `${id || "Record"} navigation instruction contains a placeholder token.`);
+    }
+    if (!stringValue(instruction?.evidenceAssetID)) {
+      addError(report, "missingNavigationEvidence", `${id || "Record"} navigation instruction is missing evidence asset ID.`);
     }
   }
 
@@ -100,11 +139,23 @@ export function validatePackage(catalogPackage, options = {}) {
     const id = stringValue(item?.stableInternalID);
     if (id && seen.has(id)) addError(report, "duplicateStableID", `Duplicate stable ID: ${id}`);
     if (id) seen.add(id);
+    if (
+      catalogPackage.manifest?.catalogVersion?.gameVersion &&
+      item?.gameVersion &&
+      catalogPackage.manifest.catalogVersion.gameVersion !== item.gameVersion
+    ) {
+      addError(report, "patchMismatch", `${id || "Record"} game version does not match the package manifest.`);
+    }
+    if (catalogPackage.manifest?.catalogVersion?.platform && item?.platform && catalogPackage.manifest.catalogVersion.platform !== item.platform) {
+      addError(report, "platformMismatch", `${id || "Record"} platform does not match the package manifest.`);
+    }
     mergeReport(report, validateRecord(item, { availableAssetIDs, requireVerified: options.requireVerified ?? true }));
+    validateRequiredReviews(catalogPackage, item, report);
   }
 
   for (const asset of catalogPackage.assets ?? []) {
     validateDateField(report, asset?.capturedAt, "asset.capturedAt", asset?.assetID);
+    validateScreenshotName(asset, report);
     if (options.packageDirectory && asset?.relativePath) {
       const assetPath = path.resolve(options.packageDirectory, asset.relativePath);
       if (!fs.existsSync(assetPath)) {
@@ -137,6 +188,175 @@ export function validatePackage(catalogPackage, options = {}) {
   }
   report.checksum = checksum;
   return finalizeReport(report);
+}
+
+export function createAuditSession(input = {}) {
+  const now = input.createdAt ?? new Date().toISOString();
+  return {
+    sessionID: input.sessionID ?? `audit-${now.slice(0, 10).replaceAll("-", "")}-${crypto.randomUUID().slice(0, 8)}`,
+    game: "EA SPORTS College Football 27",
+    platform: input.platform ?? "REPLACE_WITH_VERIFIED_PLATFORM",
+    gameVersion: input.gameVersion ?? "REPLACE_WITH_VERIFIED_GAME_VERSION",
+    patchVersion: input.patchVersion ?? "REPLACE_WITH_PATCH_OR_BUILD_IDENTIFIER",
+    gameMode: input.gameMode ?? "Road to Glory",
+    creationPath: input.creationPath ?? "REPLACE_WITH_VERIFIED_ROAD_TO_GLORY_CREATION_PATH",
+    auditor: input.auditor ?? "REPLACE_WITH_AUDITOR_NAME",
+    createdAt: now,
+    categories: [],
+    records: [],
+    notes: "NOT PRODUCTION DATA - NOT A VERIFIED GAME RECORD"
+  };
+}
+
+export function validateAuditRecord(record, options = {}) {
+  const report = validateRecord(record, { ...options, requireVerified: false });
+  if (record?.verificationState === "verified") {
+    addError(report, "autoVerificationBlocked", `${record?.stableInternalID || "Record"} cannot be marked verified during audit entry.`);
+  }
+  const missingAngles = requiredAngles.filter((angle) => !stringValue(record?.requiredAngles?.[angle]));
+  if (missingAngles.length > 0) report.nextActions = [`Capture missing standard screenshots: ${missingAngles.join(", ")}`];
+  else report.nextActions = ["Complete first reviewer checklist, then second reviewer checklist."];
+  report.progress = auditProgress([record]);
+  return finalizeReport(report);
+}
+
+export function importCatalogItemsFromCsv(csvText, defaults = {}) {
+  const rows = parseCSV(csvText);
+  return rows.map((row) => {
+    const requiredAnglesMap = Object.fromEntries(requiredAngles.map((angle) => [angle, row[angle] ?? ""]));
+    const sourceImageReferences = requiredAngles.map((angle) => row[angle]).filter((value) => stringValue(value));
+    const navigationInstruction = row.navigationInstruction ?? "";
+    const navigationEvidenceAssetID = row.navigationEvidenceAssetID ?? "";
+    return {
+      stableInternalID: row.stableInternalID ?? "",
+      game: "EA SPORTS College Football 27",
+      gameVersion: row.gameVersion ?? defaults.gameVersion ?? "",
+      patchVersion: row.patchVersion ?? defaults.patchVersion ?? "",
+      platform: row.platform ?? defaults.platform ?? "",
+      gameMode: row.gameMode ?? defaults.gameMode ?? "Road to Glory",
+      creationPath: row.creationPath ?? defaults.creationPath ?? "",
+      category: row.category ?? "",
+      visibleGameLabelOrIndex: row.visibleGameLabelOrIndex ?? "",
+      verificationState: "unverified",
+      capturedDate: defaults.capturedDate ?? new Date().toISOString(),
+      verifiedDate: null,
+      sourceImageReferences,
+      requiredAngles: requiredAnglesMap,
+      geometryMeasurements: {},
+      humanAnnotations: {
+        captureConditions: row.captureConditions ?? "",
+        note: row.humanAnnotation ?? ""
+      },
+      navigationInstructions: navigationInstruction
+        ? [
+            {
+              sequenceNumber: 1,
+              instruction: navigationInstruction,
+              evidenceAssetID: navigationEvidenceAssetID
+            }
+          ]
+        : [],
+      catalogVersion: {
+        identifier: defaults.catalogVersionID ?? "audit-draft",
+        gameVersion: row.gameVersion ?? defaults.gameVersion ?? "",
+        platform: row.platform ?? defaults.platform ?? "",
+        verifiedAt: null
+      },
+      isTestFixture: false,
+      deprecated: false,
+      deprecatedContext: null
+    };
+  });
+}
+
+export function exportCatalogItemsToCsv(items) {
+  const rows = items.map((item) => ({
+    stableInternalID: item.stableInternalID,
+    platform: item.platform,
+    gameVersion: item.gameVersion,
+    patchVersion: item.patchVersion ?? "",
+    gameMode: item.gameMode,
+    creationPath: item.creationPath,
+    category: item.category,
+    visibleGameLabelOrIndex: item.visibleGameLabelOrIndex,
+    ...Object.fromEntries(requiredAngles.map((angle) => [angle, item.requiredAngles?.[angle] ?? ""])),
+    navigationInstruction: item.navigationInstructions?.[0]?.instruction ?? "",
+    navigationEvidenceAssetID: item.navigationInstructions?.[0]?.evidenceAssetID ?? "",
+    captureConditions: item.humanAnnotations?.captureConditions ?? "",
+    humanAnnotation: item.humanAnnotations?.note ?? item.humanAnnotations?.reviewNote ?? ""
+  }));
+  return serializeCSV(rows, csvColumns);
+}
+
+export function compareCatalogVersions(previousManifest, nextManifest) {
+  const previousItems = new Map((previousManifest?.items ?? []).map((item, index) => [item.stableInternalID, { item, index }]));
+  const nextItems = new Map((nextManifest?.items ?? []).map((item, index) => [item.stableInternalID, { item, index }]));
+  const added = [];
+  const removed = [];
+  const changedLabels = [];
+  const reorderedOptions = [];
+  const retiredOptions = [];
+  for (const [id, next] of nextItems) {
+    const previous = previousItems.get(id);
+    if (!previous) {
+      added.push(id);
+      continue;
+    }
+    if (previous.item.visibleGameLabelOrIndex !== next.item.visibleGameLabelOrIndex) changedLabels.push(id);
+    if (previous.item.category === next.item.category && previous.index !== next.index) reorderedOptions.push(id);
+    if (next.item.deprecated) retiredOptions.push(id);
+  }
+  for (const [id, previous] of previousItems) {
+    if (!nextItems.has(id)) removed.push(id);
+    if (previous.item.deprecated) retiredOptions.push(id);
+  }
+  return { added, removed, changedLabels, reorderedOptions, retiredOptions };
+}
+
+export function createPatchReauditPlan(previousManifest, nextGameVersion) {
+  const items = previousManifest?.items ?? [];
+  const categories = Array.from(new Set(items.map((item) => item.category).filter(Boolean))).sort();
+  return {
+    fromCatalogVersion: previousManifest?.catalogVersion?.identifier ?? "unknown",
+    nextGameVersion,
+    totalRecordsToCheck: items.length,
+    categories,
+    requiredActions: [
+      "Reconfirm platform, game version, and patch/build identifier.",
+      "Walk Road to Glory creation path from the start.",
+      "Check every known category for added, removed, renamed, or reordered options.",
+      "Recapture changed records and route them through first and second review."
+    ]
+  };
+}
+
+export function publishPackage(catalogPackage) {
+  const report = validatePackage(catalogPackage, { requireVerified: true });
+  if (!report.ok) return { ok: false, report, manifest: null };
+  return {
+    ok: true,
+    report,
+    manifest: {
+      ...catalogPackage.manifest,
+      isProduction: true,
+      items: catalogPackage.items
+    }
+  };
+}
+
+export function rollbackPackage(currentManifest, targetManifest, reason = "") {
+  return {
+    ok: Boolean(targetManifest?.catalogVersion),
+    rollbackFrom: currentManifest?.catalogVersion?.identifier ?? "unknown",
+    rollbackTo: targetManifest?.catalogVersion?.identifier ?? "unknown",
+    reason,
+    nextActions: [
+      "Record rollback reason in publication log.",
+      "Restore the prior immutable manifest package.",
+      "Run production validation, placeholder detection, fixture detection, and duplicate detection.",
+      "Confirm the app still fails closed if the restored catalog is empty."
+    ]
+  };
 }
 
 export function validateProductionDirectory(directoryPath) {
@@ -202,6 +422,12 @@ export function formatReport(report) {
   const lines = [`${report.ok ? "OK" : "FAIL"} ${report.scope}`];
   for (const warning of report.warnings) lines.push(`warning: ${warning}`);
   for (const error of report.errors) lines.push(`error ${error.code}: ${error.message}`);
+  for (const action of report.nextActions ?? []) lines.push(`next: ${action}`);
+  if (report.progress) {
+    lines.push(`progress: ${report.progress.totalRecords} records`);
+    for (const [state, count] of Object.entries(report.progress.byVerificationState ?? {})) lines.push(`progress state ${state}: ${count}`);
+    for (const [category, count] of Object.entries(report.progress.byCategory ?? {})) lines.push(`progress category ${category}: ${count}`);
+  }
   if (report.checksum) lines.push(`checksum: ${report.checksum}`);
   return lines.join("\n");
 }
@@ -223,6 +449,29 @@ function validatePublication(catalogPackage, report) {
   }
 }
 
+function validateRequiredReviews(catalogPackage, item, report) {
+  const id = stringValue(item?.stableInternalID);
+  if (!id) return;
+  const approvedReviews = (catalogPackage.reviews ?? []).filter((review) => review.stableInternalID === id && review.decision === "approved");
+  const firstReviews = approvedReviews.filter((review) => !review.stage || review.stage === "first");
+  const secondReviews = approvedReviews.filter((review) => review.stage === "second");
+  const distinctReviewers = new Set(approvedReviews.map((review) => stringValue(review.reviewer)).filter(Boolean));
+  if (firstReviews.length === 0) addError(report, "missingFirstReview", `${id} is missing first approved review.`);
+  if (secondReviews.length === 0) addError(report, "missingSecondReview", `${id} is missing second approved review.`);
+  if (approvedReviews.length < 2 || distinctReviewers.size < 2) {
+    addError(report, "missingSecondReview", `${id} requires two approved reviews from distinct reviewers.`);
+  }
+}
+
+function validateScreenshotName(asset, report) {
+  const relativePath = stringValue(asset?.relativePath);
+  if (!relativePath) return;
+  const fileName = path.basename(relativePath);
+  if (!screenshotNamePattern.test(fileName)) {
+    addError(report, "invalidScreenshotName", `${asset?.assetID || "Asset"} does not follow the standard screenshot naming pattern.`);
+  }
+}
+
 function validateMeasurement(report, measurementID, measurement, recordID) {
   if (typeof measurement === "number") {
     if (!Number.isFinite(measurement) || measurement < 0) addError(report, "malformedMeasurement", `${recordID || "Record"} measurement ${measurementID} is malformed.`);
@@ -239,6 +488,10 @@ function validateMeasurement(report, measurementID, measurement, recordID) {
   if (!Number.isFinite(measurement.variance) || measurement.variance < 0) {
     addError(report, "negativeVariance", `${recordID || "Record"} measurement ${measurementID} variance is invalid.`);
   }
+}
+
+function isValidVisibleLabel(label) {
+  return stringValue(label).length > 0 && !placeholderPattern.test(label);
 }
 
 function validateDateField(report, value, field, owner, options = {}) {
@@ -315,23 +568,128 @@ function stableStringify(value) {
     .join(",")}}`;
 }
 
+function auditProgress(records) {
+  const byVerificationState = {};
+  const byCategory = {};
+  for (const record of records) {
+    const state = record?.verificationState ?? "unknown";
+    const category = record?.category ?? "uncategorized";
+    byVerificationState[state] = (byVerificationState[state] ?? 0) + 1;
+    byCategory[category] = (byCategory[category] ?? 0) + 1;
+  }
+  return {
+    totalRecords: records.length,
+    byVerificationState,
+    byCategory
+  };
+}
+
+function parseCSV(csvText) {
+  const rows = [];
+  const table = [];
+  let current = "";
+  let row = [];
+  let quoted = false;
+  for (let index = 0; index < csvText.length; index += 1) {
+    const char = csvText[index];
+    const next = csvText[index + 1];
+    if (char === '"' && quoted && next === '"') {
+      current += '"';
+      index += 1;
+    } else if (char === '"') {
+      quoted = !quoted;
+    } else if (char === "," && !quoted) {
+      row.push(current);
+      current = "";
+    } else if ((char === "\n" || char === "\r") && !quoted) {
+      if (char === "\r" && next === "\n") index += 1;
+      row.push(current);
+      table.push(row);
+      current = "";
+      row = [];
+    } else {
+      current += char;
+    }
+  }
+  if (current.length > 0 || row.length > 0) {
+    row.push(current);
+    table.push(row);
+  }
+  const [headers = [], ...dataRows] = table.filter((cells) => cells.some((cell) => cell.trim().length > 0));
+  for (const cells of dataRows) {
+    rows.push(Object.fromEntries(headers.map((header, index) => [header.trim(), cells[index]?.trim() ?? ""])));
+  }
+  return rows;
+}
+
+function serializeCSV(rows, columns) {
+  const lines = [columns.join(",")];
+  for (const row of rows) {
+    lines.push(columns.map((column) => csvEscape(row[column] ?? "")).join(","));
+  }
+  return `${lines.join("\n")}\n`;
+}
+
+function csvEscape(value) {
+  const text = String(value);
+  return /[",\n\r]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+}
+
 function runCLI(argv) {
   const [command, target = "data/catalog/production"] = argv;
   let report;
   if (command === "validate-record") report = validateRecord(readJSON(target));
+  else if (command === "validate-audit-record") report = validateAuditRecord(readJSON(target));
   else if (command === "validate-package") report = validatePackage(readJSON(target), { packageDirectory: path.dirname(target) });
   else if (command === "validate-production") report = validateProductionDirectory(target);
   else if (command === "verify-assets") report = validatePackage(readJSON(target), { packageDirectory: path.dirname(target), requireVerified: true });
   else if (command === "detect-placeholders") report = detectPlaceholdersInPath(target);
   else if (command === "detect-fixtures") report = detectFixtureLeakageInPath(target);
   else if (command === "detect-duplicates") report = detectDuplicateIDsInManifest(readJSON(target));
+  else if (command === "create-audit-session") {
+    console.log(JSON.stringify(createAuditSession(), null, 2));
+    return 0;
+  } else if (command === "import-csv") {
+    const items = importCatalogItemsFromCsv(fs.readFileSync(target, "utf8"));
+    console.log(JSON.stringify(items, null, 2));
+    return 0;
+  } else if (command === "export-csv") {
+    const input = readJSON(target);
+    console.log(exportCatalogItemsToCsv(Array.isArray(input) ? input : input.items ?? []));
+    return 0;
+  } else if (command === "compare-versions") {
+    const next = argv[2];
+    if (!next) {
+      console.error("compare-versions requires <previous-manifest.json> <next-manifest.json>");
+      return 1;
+    }
+    console.log(JSON.stringify(compareCatalogVersions(readJSON(target), readJSON(next)), null, 2));
+    return 0;
+  } else if (command === "patch-reaudit") {
+    const nextGameVersion = argv[2] ?? "REPLACE_WITH_NEXT_GAME_VERSION";
+    console.log(JSON.stringify(createPatchReauditPlan(readJSON(target), nextGameVersion), null, 2));
+    return 0;
+  } else if (command === "publish-package") {
+    const result = publishPackage(readJSON(target));
+    console.log(formatReport(result.report));
+    if (result.ok) console.log(JSON.stringify(result.manifest, null, 2));
+    return result.ok ? 0 : 1;
+  } else if (command === "rollback-package") {
+    const previous = argv[2];
+    if (!previous) {
+      console.error("rollback-package requires <current-manifest.json> <target-manifest.json>");
+      return 1;
+    }
+    console.log(JSON.stringify(rollbackPackage(readJSON(target), readJSON(previous), argv[3] ?? ""), null, 2));
+    return 0;
+  }
   else if (command === "checksum") {
     const checksum = calculateDeterministicChecksum(readJSON(target));
     console.log(checksum);
     return 0;
   } else if (command === "report") report = validateProductionDirectory(target);
   else {
-    console.error("Usage: node scripts/catalog-tools.mjs <validate-record|validate-package|validate-production|verify-assets|detect-placeholders|detect-fixtures|detect-duplicates|checksum|report> <path>");
+    console.error("Usage: node scripts/catalog-tools.mjs <create-audit-session|validate-audit-record|validate-record|validate-package|validate-production|verify-assets|detect-placeholders|detect-fixtures|detect-duplicates|import-csv|export-csv|compare-versions|patch-reaudit|publish-package|rollback-package|checksum|report> <path>");
     return 1;
   }
   console.log(formatReport(report));

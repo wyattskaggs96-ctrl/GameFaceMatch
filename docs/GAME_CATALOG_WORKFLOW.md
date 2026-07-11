@@ -26,24 +26,37 @@ The verified catalog is platform-independent product data shared by the active w
 
 Manual audit work starts under `data/audit/college-football-27/`.
 
+- Use `templates/audit-session-template.json` before entering records.
 - Use `templates/menu-audit-checklist.md` to inventory visible categories exactly as shown.
 - Use `templates/platform-audit-template.md` and `templates/game-version-template.md` before recording options.
 - Use `templates/capture-session-template.md` and `templates/asset-naming-guide.md` for required angle evidence.
+- Use `templates/category-discovery-template.md`, `templates/annotation-workflow-template.md`, and `templates/patch-reaudit-template.md` while sitting beside the console.
 - Use `templates/catalog-item-template.json` and `templates/catalog-manifest-template.json` only as drafts.
+- Use `templates/rollback-template.md` when backing out a bad package.
 - Every draft template is marked `NOT PRODUCTION DATA` and `NOT A VERIFIED GAME RECORD`.
 - Placeholder tokens such as `REPLACE_WITH_VERIFIED_GAME_LABEL` must be replaced from actual game evidence before review.
+- CSV imports create unverified draft records only. They never auto-verify production data.
+- Screenshots are retained as local audit evidence and are not automatically public web assets.
 
 ## Local validation commands
 
 Run from the repository root unless noted:
 
 - `node scripts/catalog-tools.mjs validate-record <record.json>`
+- `node scripts/catalog-tools.mjs validate-audit-record <record.json>`
 - `node scripts/catalog-tools.mjs validate-package <package.json>`
 - `node scripts/catalog-tools.mjs validate-production data/catalog/production`
 - `node scripts/catalog-tools.mjs verify-assets <package.json>`
 - `node scripts/catalog-tools.mjs detect-placeholders data/catalog/production`
 - `node scripts/catalog-tools.mjs detect-fixtures data/catalog/production`
 - `node scripts/catalog-tools.mjs detect-duplicates data/catalog/production/catalog_manifest.json`
+- `node scripts/catalog-tools.mjs create-audit-session`
+- `node scripts/catalog-tools.mjs import-csv <audit.csv>`
+- `node scripts/catalog-tools.mjs export-csv <package-or-items.json>`
+- `node scripts/catalog-tools.mjs compare-versions <previous-manifest.json> <next-manifest.json>`
+- `node scripts/catalog-tools.mjs patch-reaudit <previous-manifest.json> <next-game-version>`
+- `node scripts/catalog-tools.mjs publish-package <package.json>`
+- `node scripts/catalog-tools.mjs rollback-package <current-manifest.json> <target-manifest.json> "reason"`
 - `node scripts/catalog-tools.mjs checksum <package.json>`
 - `node scripts/catalog-tools.mjs report data/catalog/production`
 
@@ -66,3 +79,7 @@ A production publication requires:
 - Deterministic checksum match.
 - Valid verification-state transition from review to verified or archived.
 - Deprecated records to include explicit context.
+- First and second approved reviews from different reviewers.
+- Standard screenshot naming for every asset.
+- Menu navigation instructions with evidence assets.
+- No patch/platform mismatch between package manifest and item records.

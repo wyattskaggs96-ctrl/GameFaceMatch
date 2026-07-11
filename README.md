@@ -1,13 +1,14 @@
 # GameFace Match
 
-GameFace Match is an independent iPhone companion application that guides a user through a face scan and recommends the closest verified College Football 27 Road to Glory appearance settings.
+GameFace Match is an independent web-first companion application that guides a user through multi-angle face capture and recommends the closest verified College Football 27 Road to Glory appearance settings.
 
 The app does not import a face into the game, identify people, control a console, or invent game options.
 
 ## Repository layout
 
 - `docs/` — product requirements and engineering documentation
-- `ios/` — SwiftUI application and tests
+- `web/` — active responsive TypeScript/React/Next.js MVP client
+- `ios/` — preserved SwiftUI future native premium-capture client and tests
 - `data/` — schemas, verified production catalogs, and isolated test fixtures
 - `admin/` — future catalog review and annotation tools
 - `scripts/` — validation and export utilities
@@ -16,9 +17,77 @@ The app does not import a face into the game, identify people, control a console
 
 Read `00_START_HERE.md` and `docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md` before building.
 
-## iPhone application foundation
+## Active web MVP
 
-The initial native iPhone app lives at `ios/GameFaceMatch.xcodeproj`.
+The active customer-facing implementation lives at `web/`.
+
+Install dependencies:
+
+```sh
+cd web
+npm install
+```
+
+Start local development:
+
+```sh
+npm run dev
+```
+
+Local URL:
+
+```text
+http://localhost:3000
+```
+
+Build and checks:
+
+```sh
+npm run typecheck
+npm run lint
+npm run test
+npm run build
+npm run catalog:validate
+npm run integrity
+```
+
+The web MVP uses guided RGB browser images only: straight-on, left 45 degrees, right 45 degrees, left profile, and right profile. It does not claim browser capture is equivalent to native TrueDepth. Raw face images are not stored in localStorage and are not uploaded.
+
+The verified game catalog is shared across clients through `data/catalog/production/`. The current production catalog is intentionally empty, so the app displays: “Verified College Football 27 catalog not loaded.” No fake production presets, labels, option numbers, sliders, hairstyles, facial-hair options, or menu paths are included.
+
+Commercial planning lives in:
+
+- `docs/MONETIZATION_DECISION.md`
+- `docs/PAYMENT_INTEGRATION_REQUIREMENTS.md`
+- `docs/ENTITLEMENT_ARCHITECTURE.md`
+- `docs/REFUND_AND_SUPPORT_CHECKLIST.md`
+- `docs/DEPLOYMENT_READINESS.md`
+- `docs/SQUARESPACE_INTEGRATION_OPTIONS.md`
+- `docs/DOMAIN_AND_DNS_REQUIREMENTS.md`
+- `docs/PAYMENT_PROVIDER_HANDOFF.md`
+- `docs/ENVIRONMENT_VARIABLES.md`
+- `docs/LAUNCH_CHECKLIST.md`
+
+The current recommendation is a free beta before payment. No payment provider is selected or connected.
+
+## Mobile browser testing and PWA readiness
+
+The web MVP now includes a basic web app manifest and app icon for installability experiments. It intentionally does not include a service worker and does not claim offline support. Treat the app as online/local-dev only; browser cache behavior is not a supported offline mode.
+
+Camera access requires a secure origin in modern browsers. `localhost` works for local development; device testing should use HTTPS or a trusted local network setup. If camera access is unavailable, insecure, denied, blocked, or unsupported, every required angle can still use the manual image-upload fallback.
+
+Current browser expectations:
+
+- iOS Safari: manual device testing required; camera permission prompts, memory pressure, and file-picker behavior must be verified on actual hardware.
+- Chrome for Android: expected to support camera preview on secure origins; upload fallback remains available.
+- Desktop Chrome, Edge, Safari, and Firefox: camera behavior depends on secure origin, permission state, and available devices; upload fallback remains available.
+- Unsupported or insecure browsers: use upload fallback only.
+
+Production browser source maps are disabled in `web/next.config.ts` for the hardened local MVP. Re-enable only with a documented debugging need.
+
+## Future iPhone application foundation
+
+The native iPhone app lives at `ios/GameFaceMatch.xcodeproj` and is preserved as a future premium TrueDepth capture path.
 
 Open it with Xcode 26.6 or newer stable Xcode:
 

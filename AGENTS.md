@@ -17,3 +17,10 @@ Codex and all contributors must read `docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md` be
 11. Secrets must never be committed.
 12. No remote push, publishing, App Store submission, paid cloud resource, or destructive command without explicit approval.
 13. Report the exact commands run and do not claim a build or test passed unless it actually passed.
+
+## Current implementation focus
+
+- The active MVP client is the responsive web application under `web/`.
+- Preserve `ios/` as the future native premium-capture client; do not delete or rewrite it during web tasks.
+- Browser capture uses guided RGB images only and must never be described as equivalent to native TrueDepth capture.
+- The verified College Football 27 catalog remains shared platform-independent data under `data/`.

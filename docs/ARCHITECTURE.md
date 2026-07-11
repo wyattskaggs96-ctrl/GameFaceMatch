@@ -1,6 +1,16 @@
 # Architecture
 
-## Initial approach
+## Active web-first approach
+
+- Responsive web application in TypeScript, React, and Next.js under `web/`
+- Browser RGB image capture behind a camera-service abstraction
+- Manual upload fallback for every required capture angle
+- Local-only browser state for the initial prototype
+- No backend, authentication provider, database, analytics SDK, subscription service, cloud media storage, or external AI service in the initial web MVP
+- Production catalog records remain platform-independent and shared through `data/catalog/production/`
+- The app must clearly communicate that browser RGB capture is not equivalent to native iPhone TrueDepth capture
+
+## Preserved native approach
 
 - Native iPhone app in Swift and SwiftUI
 - Apple frameworks first: AVFoundation, ARKit, Vision, Core Image, Core ML where justified
@@ -14,6 +24,47 @@
 `Features -> Core protocols/domain -> concrete local services`
 
 Game-specific code may depend on generic domain models. Generic capture and face-profile code must not depend on College Football 27.
+
+The same adapter rule applies on web: generic browser capture, image validation, profile, privacy storage, and catalog repository code must not depend directly on College Football 27.
+
+## Web project
+
+- Project: `web/`
+- Framework: Next.js with TypeScript and React
+- App shell: `web/app/`
+- Components: `web/components/`
+- Feature panels: `web/features/`
+- Platform-independent logic: `web/lib/`
+- Domain types: `web/types/` with public re-exports from `web/domain/`
+- Browser services: `web/services/` re-exporting typed camera, capture-session, and image-validation abstractions
+- Local storage boundaries: `web/storage/` re-exporting privacy-safe local storage interfaces and implementations
+- Game adapters: `web/game-adapters/` re-exporting the adapter interface and College Football 27 fail-closed scaffold
+- Catalog access: `web/catalog/` re-exporting repository, validation, and production-manifest entry points
+- Styling: `web/app/globals.css`, with `web/styles/` reserved for reusable style modules as the design system grows
+- Public assets: `web/public/`; test fixtures must not be copied here
+- Tests: `web/tests/`
+- Scripts: `web/scripts/`
+
+The web app includes an empty bundled production manifest for browser runtime use and validates the shared top-level manifest at `data/catalog/production/catalog_manifest.json`.
+
+## Web hardening posture
+
+- Security headers are configured in `web/next.config.ts`, including CSP, frame blocking, `nosniff`, no referrer, and a restrictive permissions policy that allows camera only for the app origin.
+- Production browser source maps are disabled for the local MVP hardening pass.
+- Development-only audit and matching-lab screens are excluded from production navigation and must not load production user-facing fixture records.
+- The app ships a web manifest and icon for installability experiments, but no service worker. Offline behavior is not a supported feature.
+- Browser camera capture requires HTTPS or localhost. Manual upload fallback remains the supported path for insecure contexts, unsupported camera APIs, denied permission, or missing camera devices.
+- Object URLs for capture and screenshot sessions are revoked on retake, removal, cancellation, deletion, and session reset paths.
+- No network upload path exists in the web MVP; image bytes remain in memory/object URLs only for the active session.
+
+## Commerce readiness boundaries
+
+- Payment and entitlement types live behind provider-independent interfaces.
+- No live payment provider, checkout session, webhook endpoint, backend, or account system is connected.
+- Basic free match access is the default entitlement and does not require an account.
+- Paid capabilities such as top-three results, detailed build guides, screenshot refinement, saved profiles, and multi-game access remain future entitlements.
+- The pricing scaffold is disabled and must not claim paid recommendation value while the production catalog is empty.
+- Payment providers must never receive raw face images.
 
 ## Initial iOS project
 

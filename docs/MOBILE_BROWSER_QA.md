@@ -10,6 +10,7 @@ GameFace Match is a responsive web MVP. Mobile browser QA must validate guided R
 - Permission-denied behavior is covered in Playwright without a real camera.
 - Upload fallback is covered for all five required angles using generated geometric PNG images.
 - Unsupported image format, undersized image, duplicate image, and selective retake are covered.
+- Local landmark guidance thresholds are unit-tested with synthetic landmark sequences for face not found, multiple faces, distance, centering, required pose, head direction, blink, mouth open, strong expression, motion, lighting, blur, regular hold timing, and extended hold timing.
 - HEIC/HEIF receives an explicit unsupported-state validation message.
 - Large-image downscale dimensions are unit-tested before analysis.
 - Object URL cleanup paths are covered by capture and deletion tests.
@@ -30,18 +31,22 @@ Use a real iPhone first, then Android Chrome.
 6. Tap Switch camera and confirm the browser switches cameras or provides a recoverable state.
 7. Confirm front-camera preview is mirrored like a selfie view.
 8. Capture a still and confirm the captured preview is not mirrored.
-9. Rotate between portrait and landscape and confirm portrait guidance remains visible.
-10. Lock the phone, unlock it, and confirm the session shows recovery guidance and camera can restart.
-11. Background the browser, return to it, and confirm camera tracks stop and restart cleanly.
-12. Use browser back during capture and confirm no camera stream remains active.
-13. Refresh during active capture and confirm the browser warns about the active session.
-14. Upload JPEG, PNG, WebP, HEIC, and HEIF from camera roll.
-15. Confirm HEIC/HEIF is rejected honestly unless the browser converts it before upload.
-16. Upload a large camera-roll image and confirm the UI remains responsive.
-17. Open the keyboard on attribute fields and confirm the visual viewport does not hide active controls.
-18. Toggle reduced motion at the OS level and confirm the UI remains usable.
-19. Toggle airplane mode or lose network and confirm the offline notice appears without upload claims.
-20. Delete active session and delete all local data from Privacy Center.
+9. With the reviewed local MediaPipe model installed, confirm live guidance appears after camera start and stays local.
+10. Confirm guidance detects face not found, multiple faces, too close, too far, off-center, wrong head direction, blink, mouth open, strong expression, excessive motion, poor lighting, severe blur, pose reached, and pose held long enough.
+11. Confirm the extended steady-hold option increases the hold time without blocking upload fallback.
+12. Confirm guidance warnings do not prevent a user from using manual capture or upload fallback when safe.
+13. Rotate between portrait and landscape and confirm portrait guidance remains visible.
+14. Lock the phone, unlock it, and confirm the session shows recovery guidance and camera can restart.
+15. Background the browser, return to it, and confirm camera tracks stop and restart cleanly.
+16. Use browser back during capture and confirm no camera stream remains active.
+17. Refresh during active capture and confirm the browser warns about the active session.
+18. Upload JPEG, PNG, WebP, HEIC, and HEIF from camera roll.
+19. Confirm HEIC/HEIF is rejected honestly unless the browser converts it before upload.
+20. Upload a large camera-roll image and confirm the UI remains responsive.
+21. Open the keyboard on attribute fields and confirm the visual viewport does not hide active controls.
+22. Toggle reduced motion at the OS level and confirm the UI remains usable.
+23. Toggle airplane mode or lose network and confirm the offline notice appears without upload claims.
+24. Delete active session and delete all local data from Privacy Center.
 
 ## HTTPS Preview Required
 
@@ -61,6 +66,7 @@ Use a temporary HTTPS preview deployment or a trusted local HTTPS tunnel only af
 - Safari lock-screen interruption behavior.
 - Camera permission reset from iOS Settings.
 - Camera-roll HEIC behavior from actual device photos.
+- MediaPipe live landmark performance, real-world pose accuracy, and steady-hold behavior across actual cameras.
 - Low-memory tab discard and restoration.
 - Hardware safe-area behavior across notches and Dynamic Island shapes.
 - Thermal throttling or long camera-session stability.
@@ -79,4 +85,3 @@ In development builds, open the `Mobile QA` navigation item. It displays only no
 - Max touch points.
 
 The page does not display uploaded images, face measurements, profile attributes, catalog fixtures, or saved builds.
-

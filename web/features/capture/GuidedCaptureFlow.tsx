@@ -5,6 +5,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Button, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { CameraAccessError, type BrowserCameraService, type CameraDeviceOption, type CameraFacingMode } from "@/lib/capture/browser-camera-service";
 import {
+  createCaptureGuidanceSession,
+  evaluateCaptureGuidanceFrame
+} from "@/lib/capture/capture-guidance-service";
+import {
   cancelCaptureSession,
   getCompletedAngleCount,
   getCurrentAngle,
@@ -16,10 +20,15 @@ import {
   setCurrentAngle,
   type ActiveCaptureSession
 } from "@/lib/capture/capture-session";
-import { applyManualConfirmationToReport, createBrowserImageQualityService, createCaptureReviewReport } from "@/lib/capture/image-quality-service";
+import {
+  applyManualConfirmationToReport,
+  calculateImageMeasurements,
+  createBrowserImageQualityService,
+  createCaptureReviewReport
+} from "@/lib/capture/image-quality-service";
 import { createTemporaryImageReference, isHeicOrHeif, prepareImageForAnalysis, validateImageFile } from "@/lib/capture/image-validation";
 import { createLocalFaceLandmarkProvider } from "@/lib/face-landmarks/face-landmark-worker-client";
-import type { CapturedAngle, CapturedAngleID, CaptureSource, FaceLandmarkReport } from "@/types/domain";
+import type { CapturedAngle, CapturedAngleID, CaptureGuidanceReport, CaptureSource, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
 
 export function GuidedCaptureFlow({
   session,
@@ -43,9 +52,13 @@ export function GuidedCaptureFlow({
   const [selectedFacingMode, setSelectedFacingMode] = useState<CameraFacingMode>("user");
   const [lifecycleNotice, setLifecycleNotice] = useState<string | null>(null);
   const [isOffline, setIsOffline] = useState(false);
+  const [liveGuidance, setLiveGuidance] = useState<CaptureGuidanceReport | null>(null);
+  const [isAnalyzingGuidance, setIsAnalyzingGuidance] = useState(false);
+  const [useExtendedHold, setUseExtendedHold] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const qualityService = useMemo(() => createBrowserImageQualityService(), []);
   const faceLandmarkProvider = useMemo(() => createLocalFaceLandmarkProvider(), []);
+  const guidanceSession = useMemo(() => createCaptureGuidanceSession(), []);
   const currentAngle = getCurrentAngle(session);
   const reviewReport = createCaptureReviewReport(session.angles);
   const completedAngles = getCompletedAngleCount(session.angles);
@@ -71,6 +84,68 @@ export function GuidedCaptureFlow({
       videoRef.current.srcObject = stream;
     }
   }, [stream]);
+
+  useEffect(() => {
+    guidanceSession.reset();
+    setLiveGuidance(null);
+  }, [currentAngle.id, guidanceSession]);
+
+  useEffect(() => {
+    if (!stream) {
+      guidanceSession.reset();
+      setLiveGuidance(null);
+      setIsAnalyzingGuidance(false);
+      return;
+    }
+
+    let cancelled = false;
+    let timeout: ReturnType<typeof setTimeout> | null = null;
+
+    async function analyzeFrame() {
+      const video = videoRef.current;
+      if (cancelled || !video || video.videoWidth === 0 || video.videoHeight === 0) {
+        timeout = setTimeout(() => void analyzeFrame(), 500);
+        return;
+      }
+      setIsAnalyzingGuidance(true);
+      try {
+        const previewQuality = createPreviewQualityReport(video);
+        const faceLandmarkReport = await faceLandmarkProvider.detect(
+          {
+            image: video,
+            width: video.videoWidth,
+            height: video.videoHeight,
+            angleID: currentAngle.id
+          },
+          {
+            detectionTimeoutMs: 1_200
+          }
+        );
+        if (!cancelled) {
+          setLiveGuidance(
+            guidanceSession.evaluate({
+              angleID: currentAngle.id,
+              faceLandmarkReport,
+              imageQualityReport: previewQuality,
+              timestampMs: performance.now(),
+              useExtendedHold
+            })
+          );
+        }
+      } finally {
+        if (!cancelled) {
+          setIsAnalyzingGuidance(false);
+          timeout = setTimeout(() => void analyzeFrame(), 550);
+        }
+      }
+    }
+
+    timeout = setTimeout(() => void analyzeFrame(), 250);
+    return () => {
+      cancelled = true;
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [currentAngle.id, faceLandmarkProvider, guidanceSession, stream, useExtendedHold]);
 
   useEffect(() => {
     setIsOffline(typeof navigator !== "undefined" ? !navigator.onLine : false);
@@ -288,13 +363,21 @@ export function GuidedCaptureFlow({
         detectionTimeoutMs: 6_000
       }
     );
+    const captureGuidanceReport = evaluateCaptureGuidanceFrame({
+      angleID,
+      faceLandmarkReport,
+      imageQualityReport,
+      timestampMs: Date.now(),
+      useExtendedHold
+    });
     const mutation = setAngleCapture(
       session,
       angleID,
       image,
       source,
       imageQualityReport,
-      faceLandmarkReport
+      faceLandmarkReport,
+      captureGuidanceReport
     );
     revokeObjectUrls(mutation.objectUrlsToRevoke);
     onSessionChange(mutation.session);
@@ -377,6 +460,7 @@ export function GuidedCaptureFlow({
               </div>
             )}
           </div>
+          <LiveGuidancePanel guidance={liveGuidance} isAnalyzing={isAnalyzingGuidance} isCameraActive={Boolean(stream)} />
           {cameraError ? (
             <Alert title="Camera unavailable" tone="warning" role="alert">
               {cameraError}
@@ -425,6 +509,10 @@ export function GuidedCaptureFlow({
               <strong>{cameraDevices.length}</strong>
             </div>
           </div>
+          <label className="checkbox-field">
+            <input type="checkbox" checked={useExtendedHold} onChange={(event) => setUseExtendedHold(event.currentTarget.checked)} />
+            <span>Use extended steady-hold timing</span>
+          </label>
           {cameraError ? (
             <Alert title="Permission reset help" tone="info">
               iPhone Safari: Settings, Safari, Camera, then allow or reset this site. Android Chrome: lock icon, Site settings, Camera, then allow or reset.
@@ -582,6 +670,7 @@ export function GuidedCaptureFlow({
                     </ul>
                   </div>
                 ) : null}
+                {angle.captureGuidanceReport ? <GuidanceIssueList guidance={angle.captureGuidanceReport} title="Pose guidance" /> : null}
                 {report.blockingMessages.length > 0 ? (
                   <div>
                     <p className="message-title">Blocking</p>
@@ -676,6 +765,73 @@ export function GuidedCaptureFlow({
   );
 }
 
+function LiveGuidancePanel({
+  guidance,
+  isAnalyzing,
+  isCameraActive
+}: {
+  guidance: CaptureGuidanceReport | null;
+  isAnalyzing: boolean;
+  isCameraActive: boolean;
+}) {
+  if (!isCameraActive) {
+    return (
+      <div className="live-guidance-card" aria-live="polite">
+        <div className="status-row">
+          <strong>Live guidance</strong>
+          <StatusBadge tone="neutral">inactive</StatusBadge>
+        </div>
+        <p className="supporting">Start the camera for local pose, distance, expression, lighting, blur, and hold guidance. Upload fallback stays available.</p>
+      </div>
+    );
+  }
+  const tone = guidance?.canCapture ? "success" : guidance?.blockingIssues.length ? "danger" : "warning";
+  const status = guidance?.canCapture ? "ready" : guidance?.blockingIssues.length ? "adjust" : isAnalyzing ? "checking" : "review";
+  return (
+    <div className="live-guidance-card" aria-live="polite">
+      <div className="status-row">
+        <strong>Live local guidance</strong>
+        <StatusBadge tone={tone}>{status}</StatusBadge>
+      </div>
+      <p className="supporting">
+        {guidance
+          ? `Protocol ${guidance.protocolVersion}. Browser RGB guidance only; not TrueDepth or identity recognition.`
+          : "Analyzing locally in this browser. Manual capture remains available."}
+      </p>
+      {guidance ? (
+        <>
+          <ProgressBar value={Math.min(guidance.holdDurationMs, guidance.holdTargetMs)} max={guidance.holdTargetMs} label="Steady hold" />
+          <GuidanceIssueList guidance={guidance} title="Live guidance" />
+        </>
+      ) : null}
+      <div className="sr-only" role="status">
+        {guidance ? guidance.readyMessages[0]?.message ?? guidance.blockingIssues[0]?.message ?? guidance.advisoryWarnings[0]?.message : "Live guidance pending."}
+      </div>
+    </div>
+  );
+}
+
+function GuidanceIssueList({ guidance, title }: { guidance: CaptureGuidanceReport; title: string }) {
+  const messages = [
+    ...guidance.blockingIssues.map((issue) => ({ ...issue, className: "blocking-list" })),
+    ...guidance.advisoryWarnings.map((issue) => ({ ...issue, className: "advisory-list" })),
+    ...guidance.readyMessages.map((issue) => ({ ...issue, className: "ready-list" }))
+  ];
+  if (messages.length === 0) return null;
+  return (
+    <div>
+      <p className="message-title">{title}</p>
+      <ul className="message-list">
+        {messages.map((issue) => (
+          <li className={issue.className} key={`${issue.code}-${issue.message}`}>
+            {issue.message}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function readImageElement(objectUrl: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const image = new Image();
@@ -697,6 +853,38 @@ function formatBytes(value: number) {
 
 function formatMetric(value: number | null) {
   return value === null ? "Not measured" : String(value);
+}
+
+function createPreviewQualityReport(video: HTMLVideoElement): Pick<ImageQualityReport, "brightnessEstimate" | "sharpnessEstimate"> | undefined {
+  const width = video.videoWidth;
+  const height = video.videoHeight;
+  if (width === 0 || height === 0) return undefined;
+  const sampleWidth = Math.min(width, 240);
+  const sampleHeight = Math.max(1, Math.round((height / width) * sampleWidth));
+  const canvas = document.createElement("canvas");
+  canvas.width = sampleWidth;
+  canvas.height = sampleHeight;
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+  if (!context) return undefined;
+  context.drawImage(video, 0, 0, sampleWidth, sampleHeight);
+  const imageData = context.getImageData(0, 0, sampleWidth, sampleHeight);
+  const measurements = calculateImageMeasurements({
+    width: sampleWidth,
+    height: sampleHeight,
+    rgba: imageData.data
+  });
+  return {
+    brightnessEstimate: {
+      value: measurements.brightness,
+      evidence: "estimated",
+      label: "Live brightness estimate"
+    },
+    sharpnessEstimate: {
+      value: measurements.sharpness,
+      evidence: "estimated",
+      label: "Live sharpness estimate"
+    }
+  };
 }
 
 function formatFaceCount(report?: FaceLandmarkReport) {

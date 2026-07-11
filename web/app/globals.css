@@ -531,6 +531,15 @@ p {
   color: rgba(251, 252, 247, 0.76);
 }
 
+.live-guidance-card {
+  display: grid;
+  gap: var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  background: #fbfdf9;
+}
+
 .angle-list {
   display: grid;
   gap: var(--space-3);
@@ -634,6 +643,10 @@ p {
 
 .blocking-list {
   color: var(--danger);
+}
+
+.ready-list {
+  color: var(--success);
 }
 
 .confirmation-list {

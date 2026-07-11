@@ -157,8 +157,14 @@ export function createCaptureReviewReport(angles: CapturedAngle[]): CaptureRevie
   const reports = Object.values(angleReports);
   const landmarkBlockingMessages = angles.flatMap((angle) => angle.faceLandmarkReport?.blockingMessages ?? []);
   const landmarkAdvisoryMessages = angles.flatMap((angle) => angle.faceLandmarkReport?.advisoryMessages ?? []);
-  const blockingMessages = [...reports.flatMap((report) => report.blockingMessages), ...landmarkBlockingMessages];
-  const advisoryMessages = [...reports.flatMap((report) => report.advisoryMessages), ...landmarkAdvisoryMessages];
+  const guidanceBlockingMessages = angles.flatMap((angle) => angle.captureGuidanceReport?.blockingIssues.map((issue) => `${angle.label}: ${issue.message}`) ?? []);
+  const guidanceAdvisoryMessages = angles.flatMap((angle) => angle.captureGuidanceReport?.advisoryWarnings.map((issue) => `${angle.label}: ${issue.message}`) ?? []);
+  const blockingMessages = [...reports.flatMap((report) => report.blockingMessages), ...landmarkBlockingMessages, ...guidanceBlockingMessages];
+  const advisoryMessages = [
+    ...reports.flatMap((report) => report.advisoryMessages),
+    ...landmarkAdvisoryMessages,
+    ...guidanceAdvisoryMessages
+  ];
   return {
     angleReports,
     blockingMessages,

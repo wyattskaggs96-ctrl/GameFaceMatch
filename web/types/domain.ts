@@ -45,6 +45,24 @@ export type QualityEvidenceKind = "measured" | "estimated" | "notYetImplemented"
 export type ImageQualityState = "ready" | "needsReview" | "blocked";
 export type FaceLandmarkAvailabilityState = "available" | "unavailable" | "error" | "timeout" | "notRequested";
 export type FaceDetectionCount = "zero" | "one" | "multiple" | "unavailable" | "error";
+export type CaptureGuidanceSeverity = "blocking" | "advisory" | "ready";
+export type CaptureGuidanceIssueCode =
+  | "faceNotFound"
+  | "multipleFaces"
+  | "faceTooClose"
+  | "faceTooFar"
+  | "faceOffCenter"
+  | "incorrectHeadDirection"
+  | "blink"
+  | "mouthOpen"
+  | "strongExpression"
+  | "excessiveMotion"
+  | "poorLighting"
+  | "severeBlur"
+  | "poseReached"
+  | "poseHoldPending"
+  | "poseHeld"
+  | "landmarksUnavailable";
 export type MeasurementAvailabilityState = "available" | "unavailable" | "pending";
 export type MeasurementSource = "browserRgbImage" | "iPhoneTrueDepth" | "userConfirmed" | "notMeasured";
 export type StandardFacialMeasurementID =
@@ -148,12 +166,36 @@ export interface CapturedAngle {
   image?: TemporaryImageReference;
   qualityReport?: ImageQualityReport;
   faceLandmarkReport?: FaceLandmarkReport;
+  captureGuidanceReport?: CaptureGuidanceReport;
   manualConfirmation: {
     requestedAngle: boolean;
     neutralExpression: boolean;
     onePerson: boolean;
   };
   validationErrors: string[];
+}
+
+export interface CaptureGuidanceIssue {
+  code: CaptureGuidanceIssueCode;
+  severity: CaptureGuidanceSeverity;
+  message: string;
+  canContinueWithLimitations: boolean;
+}
+
+export interface CaptureGuidanceReport {
+  protocolVersion: string;
+  thresholdVersion: string;
+  angleID: CapturedAngleID;
+  requiredPoseReached: boolean;
+  poseHeldLongEnough: boolean;
+  holdDurationMs: number;
+  holdTargetMs: number;
+  canCapture: boolean;
+  canContinueWithLimitations: boolean;
+  blockingIssues: CaptureGuidanceIssue[];
+  advisoryWarnings: CaptureGuidanceIssue[];
+  readyMessages: CaptureGuidanceIssue[];
+  createdAt: ISODateString;
 }
 
 export interface FaceLandmarkProviderMetadata {

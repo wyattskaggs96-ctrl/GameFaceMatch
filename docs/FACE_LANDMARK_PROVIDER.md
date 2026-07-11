@@ -59,6 +59,19 @@ When the reviewed model asset is available and the browser can run the provider,
 
 These are quality and matching-input signals, not identity recognition.
 
+## Live capture guidance protocol
+
+The guided capture flow consumes local landmark reports through a versioned browser RGB protocol:
+
+- Protocol version: `web-rgb-guidance-1.0.0`
+- Threshold version: `web-rgb-thresholds-2026-07-11`
+- Required poses: straight-on, left 45 degrees, right 45 degrees, left profile, right profile
+- Optional elevated and lowered views are not active in the current UX.
+
+The guidance layer distinguishes blocking capture-readiness issues from advisory warnings. Face not found, multiple faces, too close, too far, off-center, incorrect head direction, excessive motion, poor lighting, and severe blur can block the current angle from being considered ready. Blink, mouth open, and strong expression are advisory so users with accessibility or facial-difference considerations can continue with documented limitations.
+
+The app supports normal and extended steady-hold timing. Manual capture and upload fallback remain available; guidance should help the user, not trap them.
+
 ## Explicit non-goals
 
 The web MVP does not:
@@ -69,4 +82,3 @@ The web MVP does not:
 - Infer ethnicity, health, personality, attractiveness, criminality, age, or other sensitive traits
 - Claim TrueDepth, ARKit, depth geometry, 3D reconstruction, or native iPhone accuracy
 - Create College Football 27 production recommendations without a verified production catalog
-

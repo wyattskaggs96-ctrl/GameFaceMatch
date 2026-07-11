@@ -13,20 +13,14 @@ import type {
 } from "@/types/domain";
 import type { AttributeConfirmationState } from "./attribute-confirmation";
 import { createAppearanceAttributes } from "./attribute-confirmation";
+import {
+  createRgbLandmarkGeometryProfile,
+  rgbLandmarkGeometryAlgorithmVersion,
+  webRgbGeometryMeasurementIDs
+} from "./rgb-landmark-geometry";
 
 export const standardFaceProfileVersion = "web-mvp-profile-v1";
-export const unavailableWebMeasurementIDs: StandardFacialMeasurementID[] = [
-  "faceWidthRatio",
-  "faceLengthRatio",
-  "foreheadWidthRatio",
-  "jawWidthRatio",
-  "chinWidthRatio",
-  "eyeSpacingRatio",
-  "noseWidthRatio",
-  "noseLengthRatio",
-  "mouthWidthRatio",
-  "lowerFaceRatio"
-];
+export const unavailableWebMeasurementIDs: StandardFacialMeasurementID[] = webRgbGeometryMeasurementIDs;
 
 export function createStandardFaceProfile(input: {
   session: ActiveCaptureSession;
@@ -42,7 +36,7 @@ export function createStandardFaceProfile(input: {
     createdAt,
     capture: createCaptureMetadata(input.session, createdAt, input.userAgent),
     qualityReport: createCaptureQualitySummary(input.session),
-    geometry: createUnavailableGeometryProfile(),
+    geometry: createRgbLandmarkGeometryProfile(input.session),
     appearance: createAppearanceProfile(input.attributes),
     sourceAngleAvailability: createSourceAngleAvailability(input.session)
   };
@@ -50,22 +44,26 @@ export function createStandardFaceProfile(input: {
 
 export function createUnavailableGeometryProfile(): GeometryProfile {
   return {
-    modelVersion: "web-rgb-unavailable-geometry-v1",
+    modelVersion: rgbLandmarkGeometryAlgorithmVersion,
     measurements: Object.fromEntries(unavailableWebMeasurementIDs.map((id) => [id, createUnavailableMeasurement()])) as GeometryProfile["measurements"],
     unavailableMeasurements: unavailableWebMeasurementIDs
   };
 }
 
-export function createUnavailableMeasurement(): FacialMeasurement {
+export function createUnavailableMeasurement(_reason?: string): FacialMeasurement {
   return {
     value: null,
     confidence: unavailableConfidence(),
     supportingFrameCount: 0,
+    supportingPoses: [],
     variance: null,
     depthSupported: false,
+    profileEvidenceExists: false,
+    occlusionImpact: "unknown",
     occlusionStatus: "unknown",
     measurementSource: "notMeasured",
-    availabilityState: "unavailable"
+    availabilityState: "unavailable",
+    algorithmVersion: rgbLandmarkGeometryAlgorithmVersion
   };
 }
 

@@ -72,10 +72,16 @@ export type StandardFacialMeasurementID =
   | "jawWidthRatio"
   | "chinWidthRatio"
   | "eyeSpacingRatio"
+  | "meanEyeWidthRatio"
   | "noseWidthRatio"
   | "noseLengthRatio"
   | "mouthWidthRatio"
-  | "lowerFaceRatio";
+  | "lowerFaceRatio"
+  | "eyeTilt"
+  | "browPosition"
+  | "jawAngle"
+  | "noseProjection"
+  | "chinProjection";
 export type UserConfirmedAttributeCategory =
   | "hairColorFamily"
   | "hairTextureFamily"
@@ -311,11 +317,15 @@ export interface FacialMeasurement {
   value: number | null;
   confidence: MeasurementConfidence;
   supportingFrameCount: number;
+  supportingPoses: CapturedAngleID[];
   variance: number | null;
   depthSupported: boolean;
+  profileEvidenceExists: boolean;
+  occlusionImpact: "none" | "minor" | "moderate" | "significant" | "unknown";
   occlusionStatus: "none" | "partial" | "significant" | "unknown";
   measurementSource: MeasurementSource;
   availabilityState: MeasurementAvailabilityState;
+  algorithmVersion: string;
 }
 
 export interface MeasurementConfidence {

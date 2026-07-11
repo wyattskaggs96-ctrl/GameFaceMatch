@@ -28,8 +28,11 @@ test.describe("GameFace Match production-representative journey", () => {
     await expect(page.getByText("Guided browser RGB")).toBeVisible();
     await expect(page.getByText("Depth supported")).toBeVisible();
     await expect(page.getByText("No", { exact: true })).toBeVisible();
-    await expect(page.getByText("Not yet measured")).toBeVisible();
-    await expect(page.getByText("Geometry remains unavailable rather than guessed.")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Geometry status" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Measured" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Approximate" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Unavailable" })).toBeVisible();
+    await expect(page.getByText("depth-supported is always no for the web flow")).toBeVisible();
     await page.getByRole("button", { name: "Continue to processing" }).click();
 
     await expect(page.getByRole("heading", { name: "Processing" })).toBeVisible();

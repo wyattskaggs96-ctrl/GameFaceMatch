@@ -140,11 +140,15 @@ function measurement(value: number): FacialMeasurement {
       label: "high"
     },
     supportingFrameCount: 5,
+    supportingPoses: ["straightOn", "left45", "right45", "leftProfile", "rightProfile"],
     variance: 0.01,
     depthSupported: false,
+    profileEvidenceExists: false,
+    occlusionImpact: "none",
     occlusionStatus: "none",
     measurementSource: "browserRgbImage",
-    availabilityState: "available"
+    availabilityState: "available",
+    algorithmVersion: "synthetic-test-geometry"
   };
 }
 

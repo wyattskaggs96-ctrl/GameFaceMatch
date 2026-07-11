@@ -24,7 +24,7 @@ export function ProfileReview({
 
   const sourceAngles = Object.values(profile.sourceAngleAvailability);
   const capturedAngles = sourceAngles.filter((angle) => angle.available);
-  const unavailableMeasurements = profile.geometry.unavailableMeasurements;
+  const geometryGroups = groupGeometryMeasurements(profile);
 
   return (
     <section className="screen-stack" aria-labelledby="profile-review-title">
@@ -80,20 +80,16 @@ export function ProfileReview({
         </Card>
         <Card className="profile-section">
           <div className="status-row">
-            <h2>Not yet measured</h2>
-            <StatusBadge tone="warning">{unavailableMeasurements.length} unavailable</StatusBadge>
+            <h2>Geometry status</h2>
+            <StatusBadge tone={geometryGroups.unavailable.length > 0 ? "warning" : "success"}>{geometryGroups.unavailable.length} unavailable</StatusBadge>
           </div>
           <p className="supporting">
-            The web MVP has no TrueDepth data, face landmarks, head-pose model, or facial-analysis model. Geometry remains unavailable rather than guessed.
+            Browser RGB landmarks can support some normalized geometry ratios. Approximate measurements are marked separately, unavailable measurements remain
+            unavailable, and depth-supported is always no for the web flow.
           </p>
-          <ul className="review-list">
-            {unavailableMeasurements.map((measurement) => (
-              <li key={measurement}>
-                <span>{measurement}</span>
-                <strong>Unavailable</strong>
-              </li>
-            ))}
-          </ul>
+          <GeometryStatusList title="Measured" measurements={geometryGroups.measured} />
+          <GeometryStatusList title="Approximate" measurements={geometryGroups.approximate} />
+          <GeometryStatusList title="Unavailable" measurements={geometryGroups.unavailable} />
         </Card>
       </div>
       <Alert title={CATALOG_UNAVAILABLE_MESSAGE} tone="warning">
@@ -110,6 +106,51 @@ export function ProfileReview({
   );
 }
 
+function GeometryStatusList({ title, measurements }: { title: string; measurements: string[] }) {
+  return (
+    <div>
+      <div className="status-row">
+        <h3>{title}</h3>
+        <StatusBadge tone={measurements.length > 0 ? (title === "Measured" ? "success" : title === "Approximate" ? "warning" : "neutral") : "neutral"}>
+          {measurements.length}
+        </StatusBadge>
+      </div>
+      {measurements.length > 0 ? (
+        <ul className="review-list">
+          {measurements.map((measurement) => (
+            <li key={measurement}>
+              <span>{formatMeasurement(measurement)}</span>
+              <strong>{title}</strong>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="supporting">None</p>
+      )}
+    </div>
+  );
+}
+
+function groupGeometryMeasurements(profile: StandardFaceProfile) {
+  const measured: string[] = [];
+  const approximate: string[] = [];
+  const unavailable: string[] = [];
+  for (const [id, measurement] of Object.entries(profile.geometry.measurements)) {
+    if (!measurement || measurement.availabilityState !== "available") {
+      unavailable.push(id);
+    } else if (measurement.confidence.score >= 0.68 && !measurement.profileEvidenceExists) {
+      measured.push(id);
+    } else {
+      approximate.push(id);
+    }
+  }
+  return {
+    measured: measured.sort(),
+    approximate: approximate.sort(),
+    unavailable: unavailable.sort()
+  };
+}
+
 function formatAngle(angleID: string) {
   const labels: Record<string, string> = {
     straightOn: "Straight-on",
@@ -119,6 +160,28 @@ function formatAngle(angleID: string) {
     rightProfile: "Right profile"
   };
   return labels[angleID] ?? angleID;
+}
+
+function formatMeasurement(measurementID: string) {
+  const labels: Record<string, string> = {
+    faceWidthRatio: "Face width-to-length ratio",
+    faceLengthRatio: "Standalone face length ratio",
+    foreheadWidthRatio: "Forehead width ratio",
+    jawWidthRatio: "Jaw width ratio",
+    chinWidthRatio: "Chin width ratio",
+    eyeSpacingRatio: "Eye spacing ratio",
+    meanEyeWidthRatio: "Mean eye width ratio",
+    noseWidthRatio: "Nose width ratio",
+    noseLengthRatio: "Nose length ratio",
+    mouthWidthRatio: "Mouth width ratio",
+    lowerFaceRatio: "Lower-face ratio",
+    eyeTilt: "Eye tilt",
+    browPosition: "Brow position",
+    jawAngle: "Approximate jaw angle",
+    noseProjection: "Approximate nose projection",
+    chinProjection: "Approximate chin projection"
+  };
+  return labels[measurementID] ?? measurementID;
 }
 
 function formatAttributeValue(value: string | number | boolean | null) {

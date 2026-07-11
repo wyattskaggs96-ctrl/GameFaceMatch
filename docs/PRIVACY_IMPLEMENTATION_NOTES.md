@@ -15,6 +15,7 @@
 - Selected images may exist as in-memory `File` objects or temporary object URLs during the active session.
 - Raw face images must not be written to localStorage.
 - Local face-landmark extraction may run in the browser through `FaceLandmarkProvider`; it does not upload images, identify people, generate identity embeddings, or infer sensitive traits.
+- Derived `StandardFaceProfile` geometry stores normalized ratios and provenance only. It must not serialize raw frames, object URLs, or landmark coordinate arrays.
 - Saved builds should contain derived settings and catalog metadata only, not raw face images.
 - No facial images are uploaded in the initial web prototype.
 - Manual upload fallback must follow the same deletion and non-retention expectations as camera capture.

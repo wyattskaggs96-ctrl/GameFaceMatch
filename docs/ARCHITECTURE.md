@@ -6,6 +6,7 @@
 - Browser RGB image capture behind a camera-service abstraction
 - Manual upload fallback for every required capture angle
 - Local browser face-landmark extraction behind `FaceLandmarkProvider`; MediaPipe is dynamically loaded only when capture needs it
+- `StandardFaceProfile` geometry uses `web-rgb-landmark-geometry-v1` to store normalized ratios only; raw frames and landmark coordinates are not serialized into profiles
 - Local-only browser state for the initial prototype
 - No backend, authentication provider, database, analytics SDK, subscription service, cloud media storage, or external AI service in the initial web MVP
 - Production catalog records remain platform-independent and shared through `data/catalog/production/`

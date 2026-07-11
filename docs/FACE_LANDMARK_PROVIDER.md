@@ -72,6 +72,16 @@ The guidance layer distinguishes blocking capture-readiness issues from advisory
 
 The app supports normal and extended steady-hold timing. Manual capture and upload fallback remain available; guidance should help the user, not trap them.
 
+## StandardFaceProfile RGB geometry pipeline
+
+The first web geometry profile pipeline is `web-rgb-landmark-geometry-v1`.
+
+It calculates normalized landmark ratios only when technically defensible from the available RGB landmark views. Current outputs may include face width-to-length ratio, forehead width ratio, jaw width ratio, chin width ratio, eye spacing ratio, mean eye width ratio, nose width ratio, nose length ratio, mouth width ratio, lower-face ratio, eye tilt, brow position, approximate jaw angle, approximate nose projection, and approximate chin projection.
+
+The web flow does not calculate standalone face length as a stable measurement because apparent face length depends on camera distance. It remains unavailable rather than guessed.
+
+Every profile measurement records confidence, supporting frame count, supporting poses, variance, occlusion impact, profile-view evidence, `depthSupported: false`, and the algorithm version. Raw frames and landmark coordinates are not stored in the serialized `StandardFaceProfile`.
+
 ## Explicit non-goals
 
 The web MVP does not:

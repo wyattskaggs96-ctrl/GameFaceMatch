@@ -32,8 +32,19 @@ export interface MediaPipeFaceLandmarkerResultLike {
 }
 
 const coreLandmarkIndexes: Array<{ label: string; index: number }> = [
+  { label: "forehead top", index: 10 },
   { label: "nose tip", index: 1 },
+  { label: "nose bridge", index: 6 },
+  { label: "nose base", index: 2 },
+  { label: "left nose wing", index: 98 },
+  { label: "right nose wing", index: 327 },
   { label: "chin", index: 152 },
+  { label: "left face edge", index: 234 },
+  { label: "right face edge", index: 454 },
+  { label: "left jaw", index: 172 },
+  { label: "right jaw", index: 397 },
+  { label: "left chin edge", index: 140 },
+  { label: "right chin edge", index: 369 },
   { label: "left eye outer corner", index: 33 },
   { label: "left eye inner corner", index: 133 },
   { label: "right eye inner corner", index: 362 },

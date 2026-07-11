@@ -2,6 +2,7 @@ import type { CatalogRepository } from "@/lib/catalog/catalog-repository";
 import { validateProductionCatalog } from "@/lib/catalog/catalog-validator";
 import { createRuleBasedMatchingEngine, type MatchingEngine, type MatchingPreferences } from "@/lib/matching/matching-engine";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
+import { createBuildInstructions } from "@/lib/results/results-experience";
 import type { BuildInstruction, GameAppearanceMatch, GameCatalogManifest, RefinementResult, StandardFaceProfile } from "@/types/domain";
 import { GameAdapterError, type GameAppearanceAdapter } from "./game-appearance-adapter";
 
@@ -32,8 +33,15 @@ export class CollegeFootball27Adapter implements GameAppearanceAdapter {
     return matches;
   }
 
-  buildInstructions(_match: GameAppearanceMatch): BuildInstruction[] {
-    throw new GameAdapterError("catalogUnavailable", CATALOG_UNAVAILABLE_MESSAGE);
+  buildInstructions(match: GameAppearanceMatch): BuildInstruction[] {
+    if (match.catalogItem.verificationState !== "verified" || match.catalogItem.isTestFixture) {
+      throw new GameAdapterError("catalogUnavailable", CATALOG_UNAVAILABLE_MESSAGE);
+    }
+    const instructions = createBuildInstructions(match);
+    if (instructions.length === 0) {
+      throw new GameAdapterError("catalogUnavailable", "Verified menu instructions are unavailable for this catalog match.");
+    }
+    return instructions;
   }
 
   async refine(_originalProfile: StandardFaceProfile, _createdPlayerImages: File[]): Promise<RefinementResult> {

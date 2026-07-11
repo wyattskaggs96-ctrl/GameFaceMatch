@@ -37,7 +37,7 @@ export interface MatchingPreferences {
 
 export interface MatchingFeatureConfig {
   id: StandardFacialMeasurementID;
-  group: "faceAndJawShape" | "eyesAndEyebrows" | "nose" | "mouth";
+  group: "faceAndJawShape" | "eyesAndEyebrows" | "nose" | "mouth" | "profileProjection";
   weight: number;
   maxDistance: number;
 }
@@ -46,16 +46,22 @@ const scoreLabel = "Match score based on the game’s available appearance optio
 const lowConfidenceThreshold = 0.25;
 
 export const defaultGeometryFeatureConfig: MatchingFeatureConfig[] = [
-  { id: "faceWidthRatio", group: "faceAndJawShape", weight: 0.16, maxDistance: 0.35 },
-  { id: "faceLengthRatio", group: "faceAndJawShape", weight: 0.1, maxDistance: 0.35 },
-  { id: "foreheadWidthRatio", group: "faceAndJawShape", weight: 0.08, maxDistance: 0.3 },
-  { id: "jawWidthRatio", group: "faceAndJawShape", weight: 0.15, maxDistance: 0.3 },
-  { id: "chinWidthRatio", group: "faceAndJawShape", weight: 0.08, maxDistance: 0.3 },
-  { id: "eyeSpacingRatio", group: "eyesAndEyebrows", weight: 0.12, maxDistance: 0.22 },
-  { id: "noseWidthRatio", group: "nose", weight: 0.12, maxDistance: 0.22 },
-  { id: "noseLengthRatio", group: "nose", weight: 0.08, maxDistance: 0.24 },
-  { id: "mouthWidthRatio", group: "mouth", weight: 0.07, maxDistance: 0.26 },
-  { id: "lowerFaceRatio", group: "faceAndJawShape", weight: 0.04, maxDistance: 0.22 }
+  { id: "faceWidthRatio", group: "faceAndJawShape", weight: 0.12, maxDistance: 0.35 },
+  { id: "faceLengthRatio", group: "faceAndJawShape", weight: 0.05, maxDistance: 0.35 },
+  { id: "foreheadWidthRatio", group: "faceAndJawShape", weight: 0.07, maxDistance: 0.3 },
+  { id: "jawWidthRatio", group: "faceAndJawShape", weight: 0.11, maxDistance: 0.3 },
+  { id: "chinWidthRatio", group: "faceAndJawShape", weight: 0.07, maxDistance: 0.3 },
+  { id: "lowerFaceRatio", group: "faceAndJawShape", weight: 0.05, maxDistance: 0.22 },
+  { id: "jawAngle", group: "faceAndJawShape", weight: 0.04, maxDistance: 0.22 },
+  { id: "eyeSpacingRatio", group: "eyesAndEyebrows", weight: 0.09, maxDistance: 0.22 },
+  { id: "meanEyeWidthRatio", group: "eyesAndEyebrows", weight: 0.05, maxDistance: 0.18 },
+  { id: "eyeTilt", group: "eyesAndEyebrows", weight: 0.03, maxDistance: 0.12 },
+  { id: "browPosition", group: "eyesAndEyebrows", weight: 0.04, maxDistance: 0.16 },
+  { id: "noseWidthRatio", group: "nose", weight: 0.09, maxDistance: 0.22 },
+  { id: "noseLengthRatio", group: "nose", weight: 0.07, maxDistance: 0.24 },
+  { id: "noseProjection", group: "profileProjection", weight: 0.05, maxDistance: 0.2 },
+  { id: "chinProjection", group: "profileProjection", weight: 0.04, maxDistance: 0.2 },
+  { id: "mouthWidthRatio", group: "mouth", weight: 0.07, maxDistance: 0.26 }
 ];
 
 const appearanceConfigs: Array<{
@@ -74,10 +80,11 @@ const appearanceConfigs: Array<{
 
 export function createRuleBasedMatchingEngine(config: MatchingFeatureConfig[] = defaultGeometryFeatureConfig): MatchingEngine {
   return {
-    modelVersion: "rule-based-web-mvp-v1",
+    modelVersion: "rule-based-web-mvp-v2-rgb-geometry",
     matchTopThree(input) {
       const candidates = input.catalog.items
         .filter((item) => item.verificationState === "verified" && (input.allowTestFixtures || !item.isTestFixture))
+        .filter((item) => hasVerifiedMenuInstructions(item, input.allowTestFixtures ?? false))
         .map((item) => scoreCatalogItem({ profile: input.profile, item, catalog: input.catalog, config, preferences: input.preferences, modelVersion: this.modelVersion }))
         .sort(compareMatches);
       return assignRanksAndTies(candidates).slice(0, input.limit ?? 3);
@@ -99,7 +106,6 @@ function scoreCatalogItem(input: {
   ];
   const included = contributions.filter((contribution) => contribution.included && contribution.effectiveWeight > 0);
   const effectiveWeightTotal = included.reduce((total, contribution) => total + contribution.effectiveWeight, 0);
-  const availableWeightTotal = contributions.reduce((total, contribution) => total + contribution.effectiveWeight, 0);
   const weightedDistance =
     effectiveWeightTotal > 0 ? included.reduce((total, contribution) => total + contribution.normalizedDistance * contribution.effectiveWeight, 0) / effectiveWeightTotal : 1;
   const evidenceCoverage = calculateEvidenceCoverage(contributions, input.preferences);
@@ -115,7 +121,7 @@ function scoreCatalogItem(input: {
     score,
     scoreLabel,
     confidence: confidenceFromScore(confidenceScore),
-    explanation: buildExplanation(input.item, score, contributions, evidenceCoverage),
+    explanation: buildExplanation(input.item, score, contributions, evidenceCoverage, averageReliability),
     catalogVersion: input.item.catalogVersion ?? input.catalog.catalogVersion,
     modelVersion: input.modelVersion,
     featureContributions: contributions
@@ -222,8 +228,10 @@ function baseIntendedWeight(contribution: MatchFeatureContribution, preferences?
   return appearanceConfig ? appearanceConfig.weight * preferenceForGroup(appearanceConfig.group, preferences) : 0;
 }
 
-function buildExplanation(item: GameCatalogItem, score: number, contributions: MatchFeatureContribution[], evidenceCoverage: number) {
+function buildExplanation(item: GameCatalogItem, score: number, contributions: MatchFeatureContribution[], evidenceCoverage: number, averageReliability: number) {
   const included = contributions.filter((contribution) => contribution.included);
+  const geometryIncluded = included.filter((contribution) => contribution.group === "geometry").length;
+  const appearanceIncluded = included.filter((contribution) => contribution.group === "appearance").length;
   const strongestSimilarities = included
     .filter((contribution) => contribution.normalizedDistance <= 0.25)
     .sort((first, second) => second.effectiveWeight - first.effectiveWeight)
@@ -236,12 +244,14 @@ function buildExplanation(item: GameCatalogItem, score: number, contributions: M
     .map((contribution) => `${String(contribution.featureID)} differs from the catalog record.`);
   const uncertaintyNotes = contributions
     .filter((contribution) => !contribution.included)
-    .slice(0, 4)
     .map((contribution) => `${String(contribution.featureID)} was not used: ${contribution.reason}`);
   if (evidenceCoverage < 0.75) uncertaintyNotes.push("Overall confidence is reduced because reliable feature evidence is incomplete.");
+  if (averageReliability < 0.75) uncertaintyNotes.push("Overall confidence is reduced because profile or catalog measurement confidence is incomplete.");
+  if (geometryIncluded === 0) uncertaintyNotes.push("No reliable geometry measurements were available for this catalog option.");
+  if (appearanceIncluded === 0) uncertaintyNotes.push("Appearance selection was not used because catalog annotations or user-confirmed attributes were incomplete.");
 
   return {
-    summary: `${scoreLabel} ${item.stableInternalID} scored ${score}/100.`,
+    summary: `${scoreLabel} ${item.stableInternalID} scored ${score}/100. This is not an identity probability.`,
     strongestSimilarities: strongestSimilarities.length > 0 ? strongestSimilarities : ["No strong similarity feature crossed the current threshold."],
     largestDifferences: largestDifferences.length > 0 ? largestDifferences : ["No large feature differences crossed the current threshold."],
     uncertaintyNotes
@@ -276,7 +286,7 @@ function compareMatches(first: GameAppearanceMatch, second: GameAppearanceMatch)
 
 function getGeometryMissingReason(profileValue: number | null, catalogValue: number | null, reliability: number) {
   if (profileValue === null) return "Profile measurement unavailable.";
-  if (catalogValue === null) return "Catalog measurement unavailable.";
+  if (catalogValue === null) return "Catalog measurement unavailable or not yet annotated.";
   if (reliability < lowConfidenceThreshold) return "Feature confidence below matching threshold.";
   return null;
 }
@@ -291,6 +301,15 @@ function readCatalogMeasurementConfidence(measurement: number | CatalogFacialMea
   return measurement?.availabilityState === "available" ? measurement.confidence : 0;
 }
 
+function hasVerifiedMenuInstructions(item: GameCatalogItem, allowTestFixtures: boolean) {
+  return (
+    item.verificationState === "verified" &&
+    (allowTestFixtures || !item.isTestFixture) &&
+    (item.navigationInstructions ?? []).length > 0 &&
+    (item.navigationInstructions ?? []).every((instruction) => instruction.instruction.trim().length > 0 && instruction.evidenceAssetID.trim().length > 0)
+  );
+}
+
 function findAttribute(attributes: AppearanceAttribute[], category: UserConfirmedAttributeCategory) {
   return attributes.find((attribute) => attribute.category === category);
 }
@@ -298,7 +317,9 @@ function findAttribute(attributes: AppearanceAttribute[], category: UserConfirme
 function preferenceForGroup(group: MatchingFeatureConfig["group"] | "hair" | "facialHair" | "desiredAthletePhysique", preferences?: MatchingPreferences) {
   const overall = preferences?.overallResemblance ?? 1;
   const specific =
-    group === "faceAndJawShape"
+    group === "profileProjection"
+      ? preferences?.faceAndJawShape
+      : group === "faceAndJawShape"
       ? preferences?.faceAndJawShape
       : group === "eyesAndEyebrows"
         ? preferences?.eyesAndEyebrows

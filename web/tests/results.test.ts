@@ -66,6 +66,7 @@ describe("results experience state", () => {
     expect(instruction.verifiedGameLabel).toBe("synthetic-label-alpha");
     expect(instruction.platform).toBe("synthetic-test-platform");
     expect(instruction.gameVersion).toBe("synthetic-test-version");
+    expect(instruction.patchVersion).toBe("synthetic-test-patch");
     expect(instruction.mode).toBe("synthetic-test-mode");
     expect(instruction.creationPath).toBe("synthetic-test-path");
     expect(instruction.verificationDate).toBe("2026-07-10T00:00:00.000Z");

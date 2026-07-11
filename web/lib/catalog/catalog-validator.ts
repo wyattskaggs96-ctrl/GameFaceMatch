@@ -24,12 +24,18 @@ export function validateProductionCatalog(manifest: GameCatalogManifest, availab
     if (!id) {
       throw new CatalogValidationError("missingStableID", "Production catalog item is missing a stable internal ID.");
     }
+    if (item.game !== "EA SPORTS College Football 27") {
+      throw new CatalogValidationError("invalidGame", `Invalid game for ${id}.`);
+    }
     if (seen.has(id)) {
       throw new CatalogValidationError("duplicateStableID", `Duplicate stable ID: ${id}`);
     }
     seen.add(id);
     if (!item.gameVersion?.trim()) {
       throw new CatalogValidationError("missingGameVersion", `Missing game version for ${id}.`);
+    }
+    if (!item.patchVersion?.trim()) {
+      throw new CatalogValidationError("missingPatchVersion", `Missing patch version for ${id}.`);
     }
     if (!item.platform?.trim()) {
       throw new CatalogValidationError("missingPlatform", `Missing platform for ${id}.`);
@@ -39,6 +45,9 @@ export function validateProductionCatalog(manifest: GameCatalogManifest, availab
     }
     if (!item.creationPath?.trim()) {
       throw new CatalogValidationError("missingCreationPath", `Missing creation path for ${id}.`);
+    }
+    if (!item.category?.trim()) {
+      throw new CatalogValidationError("missingCategory", `Missing category for ${id}.`);
     }
     if (item.verificationState !== "verified") {
       throw new CatalogValidationError("unverifiedProductionRecord", `Unverified production record: ${id}.`);
@@ -90,6 +99,17 @@ export function validateProductionCatalog(manifest: GameCatalogManifest, availab
     for (const reference of item.sourceImageReferences ?? []) {
       if (availableAssetIDs.size > 0 && !availableAssetIDs.has(reference)) {
         throw new CatalogValidationError("unavailableAssetReference", `Unavailable asset reference ${reference} for ${id}.`);
+      }
+    }
+    if ((item.navigationInstructions ?? []).length === 0) {
+      throw new CatalogValidationError("missingNavigationInstruction", `Missing verified navigation instructions for ${id}.`);
+    }
+    for (const instruction of item.navigationInstructions ?? []) {
+      if (!instruction.instruction?.trim()) {
+        throw new CatalogValidationError("missingNavigationInstruction", `Missing verified navigation instruction text for ${id}.`);
+      }
+      if (!instruction.evidenceAssetID?.trim()) {
+        throw new CatalogValidationError("missingNavigationEvidence", `Missing navigation evidence asset for ${id}.`);
       }
     }
   }

@@ -92,22 +92,26 @@ export function hasMinimumProfileEvidence(profile: StandardFaceProfile) {
 }
 
 export function createBuildInstructions(match: GameAppearanceMatch): BuildInstruction[] {
-  return (match.catalogItem.navigationInstructions ?? []).map((instruction) => ({
-    id: `${match.catalogItem.stableInternalID}-step-${instruction.sequenceNumber}`,
-    sequenceNumber: instruction.sequenceNumber,
-    title: `${match.catalogItem.category} step ${instruction.sequenceNumber}`,
-    detail: instruction.instruction,
-    menuCategory: match.catalogItem.category,
-    verifiedGameLabel: match.catalogItem.visibleGameLabelOrIndex,
-    navigationPath: splitNavigationPath(instruction.instruction),
-    platform: match.catalogItem.platform,
-    gameVersion: match.catalogItem.gameVersion,
-    mode: match.catalogItem.gameMode,
-    creationPath: match.catalogItem.creationPath,
-    notes: [`Evidence asset: ${instruction.evidenceAssetID}`],
-    verificationDate: match.catalogItem.verifiedDate,
-    relatedCatalogItemID: match.catalogItem.stableInternalID
-  }));
+  if (match.catalogItem.verificationState !== "verified") return [];
+  return (match.catalogItem.navigationInstructions ?? [])
+    .filter((instruction) => instruction.instruction.trim().length > 0 && instruction.evidenceAssetID.trim().length > 0)
+    .map((instruction) => ({
+      id: `${match.catalogItem.stableInternalID}-step-${instruction.sequenceNumber}`,
+      sequenceNumber: instruction.sequenceNumber,
+      title: `${match.catalogItem.category} step ${instruction.sequenceNumber}`,
+      detail: instruction.instruction,
+      menuCategory: match.catalogItem.category,
+      verifiedGameLabel: match.catalogItem.visibleGameLabelOrIndex,
+      navigationPath: splitNavigationPath(instruction.instruction),
+      platform: match.catalogItem.platform,
+      gameVersion: match.catalogItem.gameVersion,
+      patchVersion: match.catalogItem.patchVersion ?? null,
+      mode: match.catalogItem.gameMode,
+      creationPath: match.catalogItem.creationPath,
+      notes: [`Evidence asset: ${instruction.evidenceAssetID}`],
+      verificationDate: match.catalogItem.verifiedDate,
+      relatedCatalogItemID: match.catalogItem.stableInternalID
+    }));
 }
 
 export function getTieGroups(matches: GameAppearanceMatch[]) {

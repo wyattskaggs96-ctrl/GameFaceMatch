@@ -287,7 +287,7 @@ function TopThreeResults({
                 </strong>
                 <span>{instruction.navigationPath.length > 0 ? instruction.navigationPath.join(" > ") : instruction.detail}</span>
                 <small>
-                  {instruction.platform} | {instruction.gameVersion} | {instruction.mode} | {instruction.creationPath} | Verified{" "}
+                  {instruction.platform} | {instruction.gameVersion} | Patch {instruction.patchVersion ?? "not provided"} | {instruction.mode} | {instruction.creationPath} | Verified{" "}
                   {instruction.verificationDate ?? "not provided"}
                 </small>
               </li>

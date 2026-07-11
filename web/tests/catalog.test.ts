@@ -37,6 +37,16 @@ describe("catalog validation", () => {
     item.verificationState = "unverified";
     expect(() => validateProductionCatalog(manifest([item]))).toThrow(/Unverified production record/);
   });
+
+  it("rejects records with missing patch version or wrong game identity", () => {
+    const missingPatch = validItem("missing-patch");
+    missingPatch.patchVersion = "";
+    expect(() => validateProductionCatalog(manifest([missingPatch]))).toThrow(/Missing patch version/);
+
+    const wrongGame = validItem("wrong-game");
+    wrongGame.game = "Unit Test Game";
+    expect(() => validateProductionCatalog(manifest([wrongGame]))).toThrow(/Invalid game/);
+  });
 });
 
 describe("production catalog runtime loading", () => {
@@ -111,6 +121,7 @@ function validItem(id: string): GameCatalogItem {
     stableInternalID: id,
     game: "EA SPORTS College Football 27",
     gameVersion: "unit-test-version",
+    patchVersion: "unit-test-patch",
     platform: "unit-test-platform",
     gameMode: "unit-test-mode",
     creationPath: "unit-test-path",

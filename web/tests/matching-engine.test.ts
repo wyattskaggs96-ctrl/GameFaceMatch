@@ -3,6 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { CollegeFootball27Adapter } from "@/lib/adapters/college-football-27-adapter";
 import { GameAdapterError } from "@/lib/adapters/game-appearance-adapter";
+import { verifyManifestIntegrity } from "@/lib/catalog/catalog-integrity";
 import { createBundledCatalogRepository } from "@/lib/catalog/catalog-repository";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
@@ -96,11 +97,30 @@ describe("rule-based matching engine", () => {
     expect(match.explanation.summary).not.toMatch(/identical/i);
     expect(match.explanation.strongestSimilarities.length).toBeGreaterThan(0);
     expect(match.catalogVersion.identifier).toBe("synthetic-test-catalog-v1");
-    expect(match.modelVersion).toBe("rule-based-web-mvp-v1");
+    expect(match.modelVersion).toBe("rule-based-web-mvp-v2-rgb-geometry");
+    expect(match.explanation.summary).toMatch(/not an identity probability/i);
   });
 
   it("excludes test fixtures unless explicitly allowed", () => {
     expect(engine().matchTopThree({ profile: syntheticProfile(), catalog: fixtureCatalog })).toEqual([]);
+  });
+
+  it("reduces confidence when catalog measurements are incompletely annotated", () => {
+    const complete = engine().matchTopThree({ profile: syntheticProfile(), catalog: fixtureCatalog, allowTestFixtures: true })[0];
+    const incompleteCatalog = {
+      ...fixtureCatalog,
+      items: [
+        {
+          ...fixtureCatalog.items[0],
+          geometryMeasurements: {
+            faceWidthRatio: fixtureCatalog.items[0].geometryMeasurements.faceWidthRatio
+          }
+        }
+      ]
+    };
+    const incomplete = engine().matchTopThree({ profile: syntheticProfile(), catalog: incompleteCatalog, allowTestFixtures: true })[0];
+    expect(incomplete.confidence.score).toBeLessThan(complete.confidence.score);
+    expect(incomplete.explanation.uncertaintyNotes.join(" ")).toMatch(/Catalog measurement unavailable or not yet annotated/);
   });
 });
 
@@ -123,8 +143,27 @@ describe("CollegeFootball27Adapter matching boundary", () => {
   });
 
   it("does not allow fixture catalog records through the production adapter", async () => {
-    const adapter = new CollegeFootball27Adapter(createBundledCatalogRepository({ ...fixtureCatalog, isProduction: true }));
+    const catalog = productionStyleCatalog();
+    const adapter = new CollegeFootball27Adapter(createBundledCatalogRepository({ ...catalog, items: catalog.items.map((item) => ({ ...item, isTestFixture: true })) }));
     await expect(adapter.match(syntheticProfile())).rejects.toMatchObject({ code: "fixtureRecordInProduction" });
+  });
+
+  it("returns verified candidates and patch-aware build instructions from a checksum-verified catalog", async () => {
+    const catalog = await checksumCatalog(productionStyleCatalog());
+    const adapter = new CollegeFootball27Adapter(createBundledCatalogRepository(catalog));
+    const matches = await adapter.match(syntheticProfile());
+    expect(matches).toHaveLength(3);
+    expect(matches.every((match) => match.catalogItem.verificationState === "verified")).toBe(true);
+    expect(matches[0].catalogVersion.identifier).toBe("unit-test-production-catalog-v1");
+    expect(matches[0].modelVersion).toBe("rule-based-web-mvp-v2-rgb-geometry");
+    const instructions = adapter.buildInstructions(matches[0]);
+    expect(instructions[0]).toMatchObject({
+      platform: "unit-test-platform",
+      gameVersion: "unit-test-version",
+      patchVersion: "unit-test-patch",
+      creationPath: "unit-test-road-to-glory-path",
+      verifiedGameLabel: matches[0].catalogItem.visibleGameLabelOrIndex
+    });
   });
 });
 
@@ -157,9 +196,19 @@ function syntheticProfile(): StandardFaceProfile {
       unavailableMeasurements: [],
       measurements: {
         faceWidthRatio: measurement(0.7, 0.96),
+        foreheadWidthRatio: measurement(0.58, 0.96),
         jawWidthRatio: measurement(0.61, 0.96),
+        chinWidthRatio: measurement(0.36, 0.96),
         eyeSpacingRatio: measurement(0.32, 0.96),
+        meanEyeWidthRatio: measurement(0.16, 0.96),
         noseWidthRatio: measurement(0.22, 0.96),
+        noseLengthRatio: measurement(0.31, 0.96),
+        lowerFaceRatio: measurement(0.43, 0.96),
+        eyeTilt: measurement(0.03, 0.8),
+        browPosition: measurement(0.14, 0.8),
+        jawAngle: measurement(0.44, 0.8),
+        noseProjection: measurement(0.18, 0.74),
+        chinProjection: measurement(0.1, 0.74),
         mouthWidthRatio: measurement(0.43, 0.96)
       }
     },
@@ -178,6 +227,46 @@ function syntheticProfile(): StandardFaceProfile {
       leftProfile: { angleID: "leftProfile", available: true },
       rightProfile: { angleID: "rightProfile", available: true }
     }
+  };
+}
+
+async function checksumCatalog(catalog: GameCatalogManifest): Promise<GameCatalogManifest> {
+  const report = await verifyManifestIntegrity(catalog);
+  return {
+    ...catalog,
+    packageChecksum: report.actualChecksum
+  };
+}
+
+function productionStyleCatalog(): GameCatalogManifest {
+  const items = fixtureCatalog.items.map((item, index) => ({
+    ...item,
+    stableInternalID: `unit-test-production-${index + 1}`,
+    game: "EA SPORTS College Football 27",
+    patchVersion: "unit-test-patch",
+    platform: "unit-test-platform",
+    gameVersion: "unit-test-version",
+    gameMode: "Road to Glory",
+    creationPath: "unit-test-road-to-glory-path",
+    isTestFixture: false,
+    catalogVersion: {
+      identifier: "unit-test-production-catalog-v1",
+      gameVersion: "unit-test-version",
+      platform: "unit-test-platform",
+      verifiedAt: "2026-07-10T00:00:00.000Z"
+    }
+  }));
+  return {
+    catalogVersion: {
+      identifier: "unit-test-production-catalog-v1",
+      gameVersion: "unit-test-version",
+      platform: "unit-test-platform",
+      verifiedAt: "2026-07-10T00:00:00.000Z"
+    },
+    generatedAt: "2026-07-10T00:00:00.000Z",
+    isProduction: true,
+    declaredItemCount: items.length,
+    items
   };
 }
 

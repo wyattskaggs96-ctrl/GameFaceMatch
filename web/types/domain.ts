@@ -468,6 +468,7 @@ export interface BuildInstruction {
   navigationPath: string[];
   platform: string;
   gameVersion: string;
+  patchVersion?: string | null;
   mode: string;
   creationPath: string;
   notes: string[];

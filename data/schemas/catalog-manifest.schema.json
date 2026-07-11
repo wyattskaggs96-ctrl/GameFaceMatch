@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/catalog-manifest.schema.json",
+  "title": "GameCatalogManifest",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["catalogVersion", "generatedAt", "isProduction", "items"],
+  "properties": {
+    "catalogVersion": {
+      "type": "object",
+      "required": ["identifier", "gameVersion", "platform", "verifiedAt"],
+      "properties": {
+        "identifier": { "type": "string" },
+        "gameVersion": { "type": "string" },
+        "platform": { "type": "string" },
+        "verifiedAt": { "type": ["string", "null"], "format": "date-time" }
+      }
+    },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "isProduction": { "type": "boolean" },
+    "declaredItemCount": { "type": "integer", "minimum": 0 },
+    "packageChecksum": { "type": "string" },
+    "items": { "type": "array", "items": { "$ref": "catalog-item.schema.json" } }
+  }
+}

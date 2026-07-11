@@ -1,0 +1,124 @@
+{
+  "fixtureNotice": "TEST-ONLY SYNTHETIC MATCHING FIXTURE - NOT PRODUCTION DATA - NOT A VERIFIED GAME RECORD",
+  "catalogVersion": {
+    "identifier": "synthetic-test-catalog-v1",
+    "gameVersion": "synthetic-test-version",
+    "platform": "synthetic-test-platform",
+    "verifiedAt": "2026-07-10T00:00:00.000Z"
+  },
+  "generatedAt": "2026-07-10T00:00:00.000Z",
+  "isProduction": false,
+  "items": [
+    {
+      "stableInternalID": "synthetic-match-alpha",
+      "game": "SYNTHETIC_TEST_GAME_DO_NOT_USE",
+      "gameVersion": "synthetic-test-version",
+      "platform": "synthetic-test-platform",
+      "gameMode": "synthetic-test-mode",
+      "creationPath": "synthetic-test-path",
+      "category": "synthetic-test-category",
+      "visibleGameLabelOrIndex": "synthetic-label-alpha",
+      "verificationState": "verified",
+      "capturedDate": "2026-07-10T00:00:00.000Z",
+      "verifiedDate": "2026-07-10T00:00:00.000Z",
+      "sourceImageReferences": ["synthetic-alpha-front", "synthetic-alpha-left45", "synthetic-alpha-right45", "synthetic-alpha-left-profile", "synthetic-alpha-right-profile"],
+      "requiredAngles": {
+        "straightOn": "synthetic-alpha-front",
+        "left45": "synthetic-alpha-left45",
+        "right45": "synthetic-alpha-right45",
+        "leftProfile": "synthetic-alpha-left-profile",
+        "rightProfile": "synthetic-alpha-right-profile"
+      },
+      "geometryMeasurements": {
+        "faceWidthRatio": { "value": 0.7, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "jawWidthRatio": { "value": 0.61, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "eyeSpacingRatio": { "value": 0.32, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "noseWidthRatio": { "value": 0.22, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "mouthWidthRatio": { "value": 0.43, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" }
+      },
+      "humanAnnotations": {
+        "hairColorFamily": "brown",
+        "facialHairPresence": "yes",
+        "preferredBodyType": "balanced",
+        "skinPresentation": "synthetic-skin-value-ignored-by-geometry"
+      },
+      "navigationInstructions": [{ "sequenceNumber": 1, "instruction": "synthetic-test-navigation", "evidenceAssetID": "synthetic-alpha-front" }],
+      "catalogVersion": { "identifier": "synthetic-test-catalog-v1", "gameVersion": "synthetic-test-version", "platform": "synthetic-test-platform", "verifiedAt": "2026-07-10T00:00:00.000Z" },
+      "isTestFixture": true
+    },
+    {
+      "stableInternalID": "synthetic-match-beta",
+      "game": "SYNTHETIC_TEST_GAME_DO_NOT_USE",
+      "gameVersion": "synthetic-test-version",
+      "platform": "synthetic-test-platform",
+      "gameMode": "synthetic-test-mode",
+      "creationPath": "synthetic-test-path",
+      "category": "synthetic-test-category",
+      "visibleGameLabelOrIndex": "synthetic-label-beta",
+      "verificationState": "verified",
+      "capturedDate": "2026-07-10T00:00:00.000Z",
+      "verifiedDate": "2026-07-10T00:00:00.000Z",
+      "sourceImageReferences": ["synthetic-beta-front", "synthetic-beta-left45", "synthetic-beta-right45", "synthetic-beta-left-profile", "synthetic-beta-right-profile"],
+      "requiredAngles": {
+        "straightOn": "synthetic-beta-front",
+        "left45": "synthetic-beta-left45",
+        "right45": "synthetic-beta-right45",
+        "leftProfile": "synthetic-beta-left-profile",
+        "rightProfile": "synthetic-beta-right-profile"
+      },
+      "geometryMeasurements": {
+        "faceWidthRatio": { "value": 0.76, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "jawWidthRatio": { "value": 0.7, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "eyeSpacingRatio": { "value": 0.34, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "noseWidthRatio": { "value": 0.27, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "mouthWidthRatio": { "value": 0.48, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" }
+      },
+      "humanAnnotations": {
+        "hairColorFamily": "black",
+        "facialHairPresence": "none",
+        "preferredBodyType": "muscular",
+        "skinPresentation": "different-synthetic-skin-value-ignored-by-geometry"
+      },
+      "navigationInstructions": [{ "sequenceNumber": 1, "instruction": "synthetic-test-navigation", "evidenceAssetID": "synthetic-beta-front" }],
+      "catalogVersion": { "identifier": "synthetic-test-catalog-v1", "gameVersion": "synthetic-test-version", "platform": "synthetic-test-platform", "verifiedAt": "2026-07-10T00:00:00.000Z" },
+      "isTestFixture": true
+    },
+    {
+      "stableInternalID": "synthetic-match-gamma",
+      "game": "SYNTHETIC_TEST_GAME_DO_NOT_USE",
+      "gameVersion": "synthetic-test-version",
+      "platform": "synthetic-test-platform",
+      "gameMode": "synthetic-test-mode",
+      "creationPath": "synthetic-test-path",
+      "category": "synthetic-test-category",
+      "visibleGameLabelOrIndex": "synthetic-label-gamma",
+      "verificationState": "verified",
+      "capturedDate": "2026-07-10T00:00:00.000Z",
+      "verifiedDate": "2026-07-10T00:00:00.000Z",
+      "sourceImageReferences": ["synthetic-gamma-front", "synthetic-gamma-left45", "synthetic-gamma-right45", "synthetic-gamma-left-profile", "synthetic-gamma-right-profile"],
+      "requiredAngles": {
+        "straightOn": "synthetic-gamma-front",
+        "left45": "synthetic-gamma-left45",
+        "right45": "synthetic-gamma-right45",
+        "leftProfile": "synthetic-gamma-left-profile",
+        "rightProfile": "synthetic-gamma-right-profile"
+      },
+      "geometryMeasurements": {
+        "faceWidthRatio": { "value": 0.64, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "jawWidthRatio": { "value": 0.52, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "eyeSpacingRatio": { "value": 0.27, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "noseWidthRatio": { "value": 0.18, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" },
+        "mouthWidthRatio": { "value": 0.38, "confidence": 0.95, "supportingFrameCount": 5, "variance": 0.01, "depthSupported": false, "occlusionStatus": "none", "measurementSource": "synthetic-fixture", "availabilityState": "available" }
+      },
+      "humanAnnotations": {
+        "hairColorFamily": "brown",
+        "facialHairPresence": "yes",
+        "preferredBodyType": "lean",
+        "skinPresentation": "third-synthetic-skin-value-ignored-by-geometry"
+      },
+      "navigationInstructions": [{ "sequenceNumber": 1, "instruction": "synthetic-test-navigation", "evidenceAssetID": "synthetic-gamma-front" }],
+      "catalogVersion": { "identifier": "synthetic-test-catalog-v1", "gameVersion": "synthetic-test-version", "platform": "synthetic-test-platform", "verifiedAt": "2026-07-10T00:00:00.000Z" },
+      "isTestFixture": true
+    }
+  ]
+}

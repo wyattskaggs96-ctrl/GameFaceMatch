@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/publication-record.schema.json",
+  "title": "PublicationRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["publicationID", "catalogVersionID", "publishedAt", "publisher", "sourcePackageChecksum", "stateTransition"],
+  "properties": {
+    "publicationID": { "type": "string", "minLength": 1 },
+    "catalogVersionID": { "type": "string", "minLength": 1 },
+    "publishedAt": { "type": "string", "format": "date-time" },
+    "publisher": { "type": "string", "minLength": 1 },
+    "sourcePackageChecksum": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "stateTransition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "approvedByReviewID"],
+      "properties": {
+        "from": { "enum": ["draft", "unverified", "reviewed"] },
+        "to": { "enum": ["verified", "archived"] },
+        "approvedByReviewID": { "type": "string", "minLength": 1 }
+      }
+    },
+    "notes": { "type": "string" }
+  }
+}

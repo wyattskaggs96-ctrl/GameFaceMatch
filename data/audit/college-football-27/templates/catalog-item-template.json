@@ -1,0 +1,59 @@
+{
+  "templateNotice": "NOT PRODUCTION DATA - NOT A VERIFIED GAME RECORD",
+  "stableInternalID": "REPLACE_WITH_STABLE_INTERNAL_ID",
+  "game": "EA SPORTS College Football 27",
+  "gameVersion": "REPLACE_WITH_VERIFIED_GAME_VERSION",
+  "platform": "REPLACE_WITH_VERIFIED_PLATFORM",
+  "gameMode": "REPLACE_WITH_VERIFIED_GAME_MODE",
+  "creationPath": "REPLACE_WITH_VERIFIED_CREATION_PATH",
+  "category": "REPLACE_WITH_VERIFIED_CATEGORY",
+  "visibleGameLabelOrIndex": "REPLACE_WITH_VERIFIED_GAME_LABEL",
+  "verificationState": "unverified",
+  "capturedDate": "REPLACE_WITH_CAPTURED_DATE_ISO",
+  "verifiedDate": null,
+  "sourceImageReferences": [
+    "REPLACE_WITH_STRAIGHT_ON_ASSET_ID",
+    "REPLACE_WITH_LEFT_45_ASSET_ID",
+    "REPLACE_WITH_RIGHT_45_ASSET_ID",
+    "REPLACE_WITH_LEFT_PROFILE_ASSET_ID",
+    "REPLACE_WITH_RIGHT_PROFILE_ASSET_ID"
+  ],
+  "requiredAngles": {
+    "straightOn": "REPLACE_WITH_STRAIGHT_ON_ASSET_ID",
+    "left45": "REPLACE_WITH_LEFT_45_ASSET_ID",
+    "right45": "REPLACE_WITH_RIGHT_45_ASSET_ID",
+    "leftProfile": "REPLACE_WITH_LEFT_PROFILE_ASSET_ID",
+    "rightProfile": "REPLACE_WITH_RIGHT_PROFILE_ASSET_ID"
+  },
+  "geometryMeasurements": {
+    "faceWidthRatio": {
+      "value": 0,
+      "confidence": 0,
+      "supportingFrameCount": 0,
+      "variance": 0,
+      "depthSupported": false,
+      "occlusionStatus": "unknown",
+      "measurementSource": "REPLACE_WITH_MEASUREMENT_SOURCE",
+      "availabilityState": "pending"
+    }
+  },
+  "humanAnnotations": {
+    "reviewNote": "REPLACE_WITH_HUMAN_ANNOTATION"
+  },
+  "navigationInstructions": [
+    {
+      "sequenceNumber": 1,
+      "instruction": "REPLACE_WITH_VERIFIED_NAVIGATION_INSTRUCTION",
+      "evidenceAssetID": "REPLACE_WITH_NAVIGATION_EVIDENCE_ASSET_ID"
+    }
+  ],
+  "catalogVersion": {
+    "identifier": "REPLACE_WITH_CATALOG_VERSION_ID",
+    "gameVersion": "REPLACE_WITH_VERIFIED_GAME_VERSION",
+    "platform": "REPLACE_WITH_VERIFIED_PLATFORM",
+    "verifiedAt": "REPLACE_WITH_VERIFIED_AT_ISO_DATE"
+  },
+  "isTestFixture": false,
+  "deprecated": false,
+  "deprecatedContext": null
+}

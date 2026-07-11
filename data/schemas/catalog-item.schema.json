@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/catalog-item.schema.json",
+  "title": "GameCatalogItem",
+  "type": "object",
+  "required": [
+    "stableInternalID",
+    "game",
+    "gameVersion",
+    "platform",
+    "gameMode",
+    "creationPath",
+    "category",
+    "visibleGameLabelOrIndex",
+    "verificationState",
+    "capturedDate",
+    "verifiedDate",
+    "sourceImageReferences",
+    "requiredAngles",
+    "geometryMeasurements",
+    "humanAnnotations",
+    "navigationInstructions",
+    "catalogVersion",
+    "isTestFixture"
+  ],
+  "properties": {
+    "stableInternalID": { "type": "string", "minLength": 1 },
+    "game": { "type": "string", "const": "EA SPORTS College Football 27" },
+    "gameVersion": { "type": "string", "minLength": 1 },
+    "platform": { "type": "string", "minLength": 1 },
+    "gameMode": { "type": "string", "minLength": 1 },
+    "creationPath": { "type": "string", "minLength": 1 },
+    "category": { "type": "string", "minLength": 1 },
+    "visibleGameLabelOrIndex": { "type": "string", "minLength": 1 },
+    "verificationState": { "enum": ["verified", "unverified", "rejected", "archived"] },
+    "capturedDate": { "type": "string", "format": "date-time" },
+    "verifiedDate": { "type": ["string", "null"], "format": "date-time" },
+    "sourceImageReferences": { "type": "array", "items": { "type": "string" } },
+    "requiredAngles": {
+      "type": "object",
+      "required": ["straightOn", "left45", "right45", "leftProfile", "rightProfile"],
+      "properties": {
+        "straightOn": { "type": "string" },
+        "left45": { "type": "string" },
+        "right45": { "type": "string" },
+        "leftProfile": { "type": "string" },
+        "rightProfile": { "type": "string" }
+      }
+    },
+    "geometryMeasurements": {
+      "type": "object",
+      "additionalProperties": { "$ref": "facial-measurement.schema.json" }
+    },
+    "humanAnnotations": { "type": "object" },
+    "navigationInstructions": { "type": "array", "items": { "$ref": "navigation-instruction.schema.json" } },
+    "catalogVersion": {
+      "type": "object",
+      "required": ["identifier", "gameVersion", "platform", "verifiedAt"]
+    },
+    "isTestFixture": { "type": "boolean" },
+    "deprecated": { "type": "boolean" },
+    "deprecatedContext": { "type": ["string", "null"] }
+  }
+}

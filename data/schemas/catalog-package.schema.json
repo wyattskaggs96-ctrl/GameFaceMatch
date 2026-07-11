@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/catalog-package.schema.json",
+  "title": "CatalogPackage",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["packageID", "packageVersion", "manifest", "items", "assets", "reviews", "publication"],
+  "properties": {
+    "packageID": { "type": "string", "minLength": 1 },
+    "packageVersion": { "type": "string", "minLength": 1 },
+    "manifest": { "$ref": "catalog-manifest.schema.json" },
+    "items": { "type": "array", "items": { "$ref": "catalog-item.schema.json" } },
+    "assets": { "type": "array", "items": { "$ref": "asset-reference.schema.json" } },
+    "reviews": { "type": "array", "items": { "$ref": "review-record.schema.json" } },
+    "publication": { "$ref": "publication-record.schema.json" }
+  }
+}

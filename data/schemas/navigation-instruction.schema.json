@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/navigation-instruction.schema.json",
+  "title": "NavigationInstruction",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sequenceNumber", "instruction", "evidenceAssetID"],
+  "properties": {
+    "sequenceNumber": { "type": "integer", "minimum": 1 },
+    "instruction": { "type": "string", "minLength": 1 },
+    "evidenceAssetID": { "type": "string", "minLength": 1 }
+  }
+}

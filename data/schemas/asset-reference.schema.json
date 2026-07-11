@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/asset-reference.schema.json",
+  "title": "AssetReference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["assetID", "angle", "relativePath", "sha256", "capturedAt"],
+  "properties": {
+    "assetID": { "type": "string", "minLength": 1 },
+    "angle": { "enum": ["straightOn", "left45", "right45", "leftProfile", "rightProfile", "elevatedFront", "loweredFront", "navigationEvidence"] },
+    "relativePath": { "type": "string", "minLength": 1 },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "capturedAt": { "type": "string", "format": "date-time" },
+    "source": { "type": "string" }
+  }
+}

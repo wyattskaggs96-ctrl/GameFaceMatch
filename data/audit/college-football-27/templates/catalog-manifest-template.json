@@ -1,0 +1,14 @@
+{
+  "templateNotice": "NOT PRODUCTION DATA - NOT A VERIFIED GAME RECORD",
+  "catalogVersion": {
+    "identifier": "REPLACE_WITH_CATALOG_VERSION_ID",
+    "gameVersion": "REPLACE_WITH_VERIFIED_GAME_VERSION",
+    "platform": "REPLACE_WITH_VERIFIED_PLATFORM",
+    "verifiedAt": "REPLACE_WITH_VERIFIED_AT_ISO_DATE"
+  },
+  "generatedAt": "REPLACE_WITH_GENERATED_AT_ISO_DATE",
+  "isProduction": false,
+  "declaredItemCount": 0,
+  "packageChecksum": "REPLACE_WITH_DETERMINISTIC_CHECKSUM",
+  "items": []
+}

@@ -1,0 +1,32 @@
+{
+  "name": "gameface-match-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "typecheck": "tsc --noEmit",
+    "lint": "node scripts/lint.mjs",
+    "test": "vitest run",
+    "integrity": "node scripts/integrity-check.mjs",
+    "catalog:validate": "node scripts/validate-catalog.mjs ../data/catalog/production",
+    "catalog:validate-record": "node ../scripts/catalog-tools.mjs validate-record",
+    "catalog:validate-package": "node ../scripts/catalog-tools.mjs validate-package",
+    "catalog:verify-assets": "node ../scripts/catalog-tools.mjs verify-assets",
+    "catalog:placeholders": "node ../scripts/catalog-tools.mjs detect-placeholders ../data/catalog/production",
+    "catalog:fixtures": "node ../scripts/catalog-tools.mjs detect-fixtures ../data/catalog/production",
+    "check": "npm run typecheck && npm run lint && npm run test && npm run catalog:validate && npm run integrity"
+  },
+  "dependencies": {
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.0.0"
+  }
+}

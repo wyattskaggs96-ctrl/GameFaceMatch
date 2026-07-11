@@ -1,0 +1,410 @@
+export type ISODateString = string;
+
+export type CurrencyCode = "USD" | "CAD" | "GBP" | "EUR" | "AUD" | "unknown";
+export type PurchaseType = "free" | "oneTime" | "subscription" | "consumable" | "creatorPackage";
+export type PaymentStatus = "notStarted" | "providerUnavailable" | "pending" | "paid" | "failed" | "cancelled";
+export type RefundStatus = "notRequested" | "requested" | "approved" | "rejected" | "processed" | "unavailable";
+export type CustomerAccessStatus = "anonymous" | "freeAccess" | "entitled" | "expired" | "revoked";
+export type EntitlementAccess =
+  | "basicFreeMatch"
+  | "topThreeResults"
+  | "detailedBuildGuide"
+  | "screenshotRefinement"
+  | "savedProfiles"
+  | "multiGameAccess";
+
+export type CaptureMode =
+  | "webRgbGuided"
+  | "webManualUpload"
+  | "iPhoneTrueDepthAssisted"
+  | "iPhoneTrueDepthSelfScan"
+  | "standardCamera"
+  | "screenshotRefinement"
+  | "unknown";
+
+export type CaptureCapabilityStatus =
+  | "secureContextAvailable"
+  | "insecureContext"
+  | "cameraApiSupported"
+  | "cameraApiUnsupported"
+  | "permissionNotRequested"
+  | "permissionGranted"
+  | "permissionDenied"
+  | "permissionBlocked"
+  | "cameraUnavailable"
+  | "noMatchingCameraDevice"
+  | "fileUploadFallbackAvailable"
+  | "unknownError";
+
+export type CatalogVerificationStatus = "verified" | "unverified" | "rejected" | "archived";
+
+export type CapturedAngleID = "straightOn" | "left45" | "right45" | "leftProfile" | "rightProfile";
+export type CaptureSource = "camera" | "upload";
+export type CaptureValidationStatus = "notStarted" | "valid" | "invalid";
+export type QualityEvidenceKind = "measured" | "estimated" | "notYetImplemented" | "userConfirmed";
+export type ImageQualityState = "ready" | "needsReview" | "blocked";
+export type MeasurementAvailabilityState = "available" | "unavailable" | "pending";
+export type MeasurementSource = "browserRgbImage" | "iPhoneTrueDepth" | "userConfirmed" | "notMeasured";
+export type StandardFacialMeasurementID =
+  | "faceWidthRatio"
+  | "faceLengthRatio"
+  | "foreheadWidthRatio"
+  | "jawWidthRatio"
+  | "chinWidthRatio"
+  | "eyeSpacingRatio"
+  | "noseWidthRatio"
+  | "noseLengthRatio"
+  | "mouthWidthRatio"
+  | "lowerFaceRatio";
+export type UserConfirmedAttributeCategory =
+  | "hairColorFamily"
+  | "hairTextureFamily"
+  | "hairstyleFamily"
+  | "facialHairPresence"
+  | "facialHairStyleFamily"
+  | "facialHairColorFamily"
+  | "eyebrowThickness"
+  | "visibleMarks"
+  | "desiredInGameHeight"
+  | "desiredInGameWeight"
+  | "preferredBodyType"
+  | "resemblancePhysiquePreference";
+export type UserConfirmedAttributeValue = string | number | boolean | null;
+
+export interface QualityMetric<T> {
+  value: T;
+  evidence: QualityEvidenceKind;
+  label: string;
+}
+
+export interface ImageQualityReport {
+  decodedSuccessfully: QualityMetric<boolean>;
+  width: QualityMetric<number>;
+  height: QualityMetric<number>;
+  aspectRatio: QualityMetric<number>;
+  fileSizeBytes: QualityMetric<number>;
+  brightnessEstimate: QualityMetric<number | null>;
+  highlightClippingEstimate: QualityMetric<number | null>;
+  shadowClippingEstimate: QualityMetric<number | null>;
+  sharpnessEstimate: QualityMetric<number | null>;
+  orientation: QualityMetric<"portrait" | "landscape" | "square" | "unknown">;
+  duplicateImage: QualityMetric<boolean>;
+  requiredAnglePresent: QualityMetric<boolean>;
+  userConfirmedRequestedAngle: QualityMetric<boolean>;
+  userConfirmedNeutralExpression: QualityMetric<boolean>;
+  userConfirmedOnePerson: QualityMetric<boolean>;
+  advisoryMessages: string[];
+  blockingMessages: string[];
+  overallState: ImageQualityState;
+}
+
+export interface CaptureReviewReport {
+  angleReports: Record<CapturedAngleID, ImageQualityReport>;
+  blockingMessages: string[];
+  advisoryMessages: string[];
+  canContinue: boolean;
+}
+
+export interface StandardFaceProfile {
+  id: string;
+  profileVersion: string;
+  createdAt: ISODateString;
+  capture: CaptureMetadata;
+  qualityReport: CaptureQualityReport;
+  geometry: GeometryProfile;
+  appearance: AppearanceProfile;
+  sourceAngleAvailability: Record<CapturedAngleID, SourceAngleAvailability>;
+}
+
+export interface SourceAngleAvailability {
+  angleID: CapturedAngleID;
+  available: boolean;
+  source?: CaptureSource;
+  qualityState?: ImageQualityState;
+  width?: number;
+  height?: number;
+}
+
+export interface CaptureMetadata {
+  mode: CaptureMode;
+  deviceModel: string;
+  capturedAt: ISODateString;
+  overallQuality: number;
+  operatingSystemVersion: string;
+  appVersion: string;
+  browserName?: string;
+  browserRgbOnly: boolean;
+}
+
+export interface CapturedAngle {
+  id: CapturedAngleID;
+  label: string;
+  instruction: string;
+  status: "empty" | "capturing" | "complete" | "error";
+  source?: CaptureSource;
+  validationStatus: CaptureValidationStatus;
+  image?: TemporaryImageReference;
+  qualityReport?: ImageQualityReport;
+  manualConfirmation: {
+    requestedAngle: boolean;
+    neutralExpression: boolean;
+    onePerson: boolean;
+  };
+  validationErrors: string[];
+}
+
+export interface TemporaryImageReference {
+  objectUrl: string;
+  fileName: string;
+  fileType: string;
+  fileSizeBytes: number;
+  width: number;
+  height: number;
+  signature: string;
+  source: CaptureSource;
+  orientation: "portrait" | "landscape" | "square";
+  associatedAngleID: CapturedAngleID;
+  createdAt: ISODateString;
+}
+
+export interface CaptureQualityReport {
+  overallScore: number;
+  issues: CaptureQualityIssue[];
+  isUsableForPrototype: boolean;
+  requiredAnglesComplete: boolean;
+  blockingIssueCount?: number;
+  advisoryIssueCount?: number;
+}
+
+export interface CaptureQualityIssue {
+  id: string;
+  severity: "advisory" | "blocking";
+  message: string;
+}
+
+export interface FacialMeasurement {
+  value: number | null;
+  confidence: MeasurementConfidence;
+  supportingFrameCount: number;
+  variance: number | null;
+  depthSupported: boolean;
+  occlusionStatus: "none" | "partial" | "significant" | "unknown";
+  measurementSource: MeasurementSource;
+  availabilityState: MeasurementAvailabilityState;
+}
+
+export interface MeasurementConfidence {
+  score: number;
+  label: "low" | "medium" | "high" | "unavailable";
+}
+
+export interface GeometryProfile {
+  measurements: Partial<Record<StandardFacialMeasurementID, FacialMeasurement>>;
+  unavailableMeasurements: StandardFacialMeasurementID[];
+  modelVersion: string;
+}
+
+export interface AppearanceProfile {
+  attributes: AppearanceAttribute[];
+  modelVersion: string;
+}
+
+export interface AppearanceAttribute {
+  id: string;
+  category: UserConfirmedAttributeCategory;
+  label: string;
+  value: UserConfirmedAttributeValue;
+  confidence: MeasurementConfidence;
+  userConfirmed: boolean;
+  source: "userConfirmed";
+  required: boolean;
+}
+
+export interface GameCatalogManifest {
+  catalogVersion: GameCatalogVersion;
+  generatedAt: ISODateString;
+  isProduction: boolean;
+  declaredItemCount?: number;
+  packageChecksum?: string;
+  items: GameCatalogItem[];
+}
+
+export interface GameCatalogItem {
+  stableInternalID: string;
+  game: string;
+  gameVersion: string;
+  platform: string;
+  gameMode: string;
+  creationPath: string;
+  category: string;
+  visibleGameLabelOrIndex: string;
+  verificationState: CatalogVerificationStatus;
+  capturedDate: ISODateString;
+  verifiedDate: ISODateString | null;
+  sourceImageReferences: string[];
+  requiredAngles?: Record<CapturedAngleID, string>;
+  geometryMeasurements: Record<string, number | CatalogFacialMeasurement>;
+  humanAnnotations: Record<string, string>;
+  navigationInstructions?: NavigationInstruction[];
+  catalogVersion: GameCatalogVersion;
+  isTestFixture: boolean;
+  deprecated?: boolean;
+  deprecatedContext?: string | null;
+}
+
+export interface CatalogFacialMeasurement {
+  value: number;
+  confidence: number;
+  supportingFrameCount: number;
+  variance: number;
+  depthSupported: boolean;
+  occlusionStatus: "none" | "partial" | "significant" | "unknown";
+  measurementSource: string;
+  availabilityState: "available" | "pending" | "unavailable";
+}
+
+export interface NavigationInstruction {
+  sequenceNumber: number;
+  instruction: string;
+  evidenceAssetID: string;
+}
+
+export interface GameCatalogVersion {
+  identifier: string;
+  gameVersion: string;
+  platform: string;
+  verifiedAt: ISODateString | null;
+}
+
+export interface GameAppearanceMatch {
+  id: string;
+  rank: number;
+  catalogItem: GameCatalogItem;
+  score: number;
+  scoreLabel: string;
+  confidence: MeasurementConfidence;
+  explanation: MatchExplanation;
+  catalogVersion: GameCatalogVersion;
+  modelVersion: string;
+  tieGroup?: number;
+  featureContributions: MatchFeatureContribution[];
+}
+
+export interface MatchExplanation {
+  summary: string;
+  strongestSimilarities: string[];
+  largestDifferences: string[];
+  uncertaintyNotes: string[];
+}
+
+export interface MatchFeatureContribution {
+  featureID: StandardFacialMeasurementID | UserConfirmedAttributeCategory;
+  group: "geometry" | "appearance" | "preference";
+  profileValue: number | string | boolean | null;
+  catalogValue: number | string | boolean | null;
+  normalizedDistance: number;
+  effectiveWeight: number;
+  reliability: number;
+  included: boolean;
+  reason: string;
+}
+
+export interface BuildInstruction {
+  id: string;
+  sequenceNumber: number;
+  title: string;
+  detail: string;
+  menuCategory: string;
+  verifiedGameLabel: string;
+  navigationPath: string[];
+  platform: string;
+  gameVersion: string;
+  mode: string;
+  creationPath: string;
+  notes: string[];
+  verificationDate: ISODateString | null;
+  relatedCatalogItemID?: string;
+}
+
+export interface RefinementResult {
+  status: "unavailable" | "keepCurrent" | "tryAlternative" | "invalidScreenshot";
+  message: string;
+  suggestedMatches: GameAppearanceMatch[];
+}
+
+export interface SavedBuild {
+  id: string;
+  createdAt: ISODateString;
+  profileVersion: string;
+  match?: GameAppearanceMatch;
+  buildInstructions: BuildInstruction[];
+  catalogVersion?: GameCatalogVersion;
+}
+
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  purchaseType: PurchaseType;
+  entitlementIDs: EntitlementAccess[];
+  active: boolean;
+  providerProductID?: string;
+}
+
+export interface Price {
+  id: string;
+  productID: string;
+  currency: CurrencyCode;
+  amountMinor: number;
+  displayAmount: string;
+  purchaseType: PurchaseType;
+  active: boolean;
+  providerPriceID?: string;
+}
+
+export interface Entitlement {
+  id: EntitlementAccess;
+  label: string;
+  description: string;
+  includedByDefault: boolean;
+}
+
+export interface CustomerAccess {
+  customerID?: string;
+  status: CustomerAccessStatus;
+  entitlementIDs: EntitlementAccess[];
+  receiptReferences: ReceiptReference[];
+}
+
+export interface CheckoutRequest {
+  productID: string;
+  priceID: string;
+  successUrl: string;
+  cancelUrl: string;
+  customerReference?: string;
+}
+
+export interface CheckoutResult {
+  status: PaymentStatus;
+  checkoutUrl?: string;
+  providerReference?: string;
+  message: string;
+}
+
+export interface WebhookEvent {
+  id: string;
+  provider: string;
+  eventType: string;
+  receivedAt: ISODateString;
+  rawPayloadReference?: string;
+}
+
+export interface ReceiptReference {
+  id: string;
+  provider: string;
+  productID: string;
+  priceID: string;
+  paymentStatus: PaymentStatus;
+  refundStatus: RefundStatus;
+  purchasedAt?: ISODateString;
+}

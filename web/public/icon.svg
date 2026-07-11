@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">GameFace Match icon</title>
+  <desc id="desc">A football-field inspired shield with the letters GF.</desc>
+  <rect width="512" height="512" rx="96" fill="#10251d"/>
+  <path d="M256 70 408 130v110c0 92-60 160-152 202-92-42-152-110-152-202V130L256 70Z" fill="#1f563b"/>
+  <path d="M136 185h240M136 256h240M136 327h240" stroke="#edf6e8" stroke-width="14" stroke-linecap="round" opacity=".55"/>
+  <path d="M256 104v304" stroke="#c9a227" stroke-width="16" stroke-linecap="round"/>
+  <text x="256" y="287" fill="#fbfcf7" font-family="Arial, Helvetica, sans-serif" font-size="122" font-weight="800" text-anchor="middle" letter-spacing="0">GF</text>
+</svg>

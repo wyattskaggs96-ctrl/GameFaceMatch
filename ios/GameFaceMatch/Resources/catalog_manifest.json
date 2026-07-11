@@ -1,0 +1,13 @@
+{
+  "catalogVersion" : {
+    "gameVersion" : "",
+    "identifier" : "empty-production",
+    "platform" : "",
+    "verifiedAt" : null
+  },
+  "generatedAt" : "2026-07-10T00:00:00Z",
+  "isProduction" : true,
+  "items" : [
+
+  ]
+}

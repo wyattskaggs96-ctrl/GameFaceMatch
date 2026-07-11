@@ -1,0 +1,695 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		100000000000000000000101 /* GameFaceMatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000001 /* GameFaceMatchApp.swift */; };
+		100000000000000000000102 /* AppRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000002 /* AppRoute.swift */; };
+		100000000000000000000103 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000003 /* RootViewModel.swift */; };
+		100000000000000000000104 /* RootNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000004 /* RootNavigationView.swift */; };
+		100000000000000000000105 /* GameFaceComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000005 /* GameFaceComponents.swift */; };
+		100000000000000000000106 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000006 /* WelcomeView.swift */; };
+		100000000000000000000107 /* IndependentAppDisclaimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000007 /* IndependentAppDisclaimerView.swift */; };
+		100000000000000000000108 /* PrivacySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000008 /* PrivacySummaryView.swift */; };
+		100000000000000000000109 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000009 /* HomeView.swift */; };
+		10000000000000000000010A /* BeginScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000A /* BeginScanView.swift */; };
+		10000000000000000000010B /* CapturePreparationChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000B /* CapturePreparationChecklistView.swift */; };
+		10000000000000000000010C /* DeviceCapabilityStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000C /* DeviceCapabilityStatusView.swift */; };
+		10000000000000000000010D /* GameCatalogStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000D /* GameCatalogStatusView.swift */; };
+		10000000000000000000010E /* ResultsUnavailableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000E /* ResultsUnavailableView.swift */; };
+		10000000000000000000010F /* SavedBuildsEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000F /* SavedBuildsEmptyView.swift */; };
+		100000000000000000000110 /* PrivacyCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000010 /* PrivacyCenterView.swift */; };
+		100000000000000000000111 /* DeleteLocalDataConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000011 /* DeleteLocalDataConfirmationView.swift */; };
+		100000000000000000000112 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000012 /* SettingsView.swift */; };
+		100000000000000000000113 /* FaceProfileModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000013 /* FaceProfileModels.swift */; };
+		100000000000000000000114 /* CatalogModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000014 /* CatalogModels.swift */; };
+		100000000000000000000115 /* GameAppearanceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000015 /* GameAppearanceAdapter.swift */; };
+		100000000000000000000116 /* CollegeFootball27Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000016 /* CollegeFootball27Adapter.swift */; };
+		100000000000000000000117 /* CatalogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000017 /* CatalogRepository.swift */; };
+		100000000000000000000118 /* CatalogValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000018 /* CatalogValidator.swift */; };
+		100000000000000000000119 /* LocalPrivacyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000019 /* LocalPrivacyStorage.swift */; };
+		10000000000000000000011A /* AppleCaptureCapabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000001A /* AppleCaptureCapabilityService.swift */; };
+		10000000000000000000011B /* catalog_manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000001B /* catalog_manifest.json */; };
+		10000000000000000000011C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000001C /* Assets.xcassets */; };
+		10000000000000000000011D /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10000000000000000000004A /* ARKit.framework */; };
+		10000000000000000000011E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10000000000000000000004B /* AVFoundation.framework */; };
+		100000000000000000000201 /* FacialMeasurementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000021 /* FacialMeasurementTests.swift */; };
+		100000000000000000000202 /* CatalogValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000022 /* CatalogValidatorTests.swift */; };
+		100000000000000000000203 /* CollegeFootball27AdapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000023 /* CollegeFootball27AdapterTests.swift */; };
+		100000000000000000000204 /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000024 /* LocalStorageTests.swift */; };
+		100000000000000000000205 /* RootViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000025 /* RootViewModelTests.swift */; };
+		100000000000000000000301 /* GameFaceMatchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000031 /* GameFaceMatchUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		100000000000000000000401 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100000000000000000000900 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 100000000000000000000701;
+			remoteInfo = GameFaceMatch;
+		};
+		100000000000000000000402 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100000000000000000000900 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 100000000000000000000701;
+			remoteInfo = GameFaceMatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		100000000000000000000001 /* GameFaceMatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/GameFaceMatchApp.swift; sourceTree = "<group>"; };
+		100000000000000000000002 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/AppRoute.swift; sourceTree = "<group>"; };
+		100000000000000000000003 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/RootViewModel.swift; sourceTree = "<group>"; };
+		100000000000000000000004 /* RootNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/RootNavigationView.swift; sourceTree = "<group>"; };
+		100000000000000000000005 /* GameFaceComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/Components/GameFaceComponents.swift; sourceTree = "<group>"; };
+		100000000000000000000006 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/Welcome/WelcomeView.swift; sourceTree = "<group>"; };
+		100000000000000000000007 /* IndependentAppDisclaimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/ConsentAndPrivacy/IndependentAppDisclaimerView.swift; sourceTree = "<group>"; };
+		100000000000000000000008 /* PrivacySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/ConsentAndPrivacy/PrivacySummaryView.swift; sourceTree = "<group>"; };
+		100000000000000000000009 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/Welcome/HomeView.swift; sourceTree = "<group>"; };
+		10000000000000000000000A /* BeginScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/Capture/BeginScanView.swift; sourceTree = "<group>"; };
+		10000000000000000000000B /* CapturePreparationChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/CapturePreparation/CapturePreparationChecklistView.swift; sourceTree = "<group>"; };
+		10000000000000000000000C /* DeviceCapabilityStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/CaptureCapability/DeviceCapabilityStatusView.swift; sourceTree = "<group>"; };
+		10000000000000000000000D /* GameCatalogStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/BuildGuide/GameCatalogStatusView.swift; sourceTree = "<group>"; };
+		10000000000000000000000E /* ResultsUnavailableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/Results/ResultsUnavailableView.swift; sourceTree = "<group>"; };
+		10000000000000000000000F /* SavedBuildsEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/SavedBuilds/SavedBuildsEmptyView.swift; sourceTree = "<group>"; };
+		100000000000000000000010 /* PrivacyCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/PrivacyCenter/PrivacyCenterView.swift; sourceTree = "<group>"; };
+		100000000000000000000011 /* DeleteLocalDataConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/PrivacyCenter/DeleteLocalDataConfirmationView.swift; sourceTree = "<group>"; };
+		100000000000000000000012 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Features/Settings/SettingsView.swift; sourceTree = "<group>"; };
+		100000000000000000000013 /* FaceProfileModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core/Domain/FaceProfileModels.swift; sourceTree = "<group>"; };
+		100000000000000000000014 /* CatalogModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core/Domain/CatalogModels.swift; sourceTree = "<group>"; };
+		100000000000000000000015 /* GameAppearanceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core/Matching/GameAppearanceAdapter.swift; sourceTree = "<group>"; };
+		100000000000000000000016 /* CollegeFootball27Adapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core/GameAdapters/CollegeFootball27/CollegeFootball27Adapter.swift; sourceTree = "<group>"; };
+		100000000000000000000017 /* CatalogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core/GameCatalog/CatalogRepository.swift; sourceTree = "<group>"; };
+		100000000000000000000018 /* CatalogValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core/GameCatalog/CatalogValidator.swift; sourceTree = "<group>"; };
+		100000000000000000000019 /* LocalPrivacyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core/Storage/LocalPrivacyStorage.swift; sourceTree = "<group>"; };
+		10000000000000000000001A /* AppleCaptureCapabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core/Services/AppleCaptureCapabilityService.swift; sourceTree = "<group>"; };
+		10000000000000000000001B /* catalog_manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Resources/catalog_manifest.json; sourceTree = "<group>"; };
+		10000000000000000000001C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
+		100000000000000000000021 /* FacialMeasurementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain/FacialMeasurementTests.swift; sourceTree = "<group>"; };
+		100000000000000000000022 /* CatalogValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog/CatalogValidatorTests.swift; sourceTree = "<group>"; };
+		100000000000000000000023 /* CollegeFootball27AdapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matching/CollegeFootball27AdapterTests.swift; sourceTree = "<group>"; };
+		100000000000000000000024 /* LocalStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Privacy/LocalStorageTests.swift; sourceTree = "<group>"; };
+		100000000000000000000025 /* RootViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/RootViewModelTests.swift; sourceTree = "<group>"; };
+		100000000000000000000031 /* GameFaceMatchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFaceMatchUITests.swift; sourceTree = "<group>"; };
+		100000000000000000000041 /* GameFaceMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameFaceMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		100000000000000000000042 /* GameFaceMatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameFaceMatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		100000000000000000000043 /* GameFaceMatchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameFaceMatchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		10000000000000000000004A /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
+		10000000000000000000004B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		100000000000000000000501 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10000000000000000000011D /* ARKit.framework in Frameworks */,
+				10000000000000000000011E /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000502 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000503 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		100000000000000000000601 = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000602 /* GameFaceMatch */,
+				100000000000000000000603 /* GameFaceMatchTests */,
+				100000000000000000000604 /* GameFaceMatchUITests */,
+				100000000000000000000605 /* Frameworks */,
+				100000000000000000000606 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		100000000000000000000602 /* GameFaceMatch */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000001 /* GameFaceMatchApp.swift */,
+				100000000000000000000002 /* AppRoute.swift */,
+				100000000000000000000003 /* RootViewModel.swift */,
+				100000000000000000000004 /* RootNavigationView.swift */,
+				100000000000000000000005 /* GameFaceComponents.swift */,
+				100000000000000000000006 /* WelcomeView.swift */,
+				100000000000000000000007 /* IndependentAppDisclaimerView.swift */,
+				100000000000000000000008 /* PrivacySummaryView.swift */,
+				100000000000000000000009 /* HomeView.swift */,
+				10000000000000000000000A /* BeginScanView.swift */,
+				10000000000000000000000B /* CapturePreparationChecklistView.swift */,
+				10000000000000000000000C /* DeviceCapabilityStatusView.swift */,
+				10000000000000000000000D /* GameCatalogStatusView.swift */,
+				10000000000000000000000E /* ResultsUnavailableView.swift */,
+				10000000000000000000000F /* SavedBuildsEmptyView.swift */,
+				100000000000000000000010 /* PrivacyCenterView.swift */,
+				100000000000000000000011 /* DeleteLocalDataConfirmationView.swift */,
+				100000000000000000000012 /* SettingsView.swift */,
+				100000000000000000000013 /* FaceProfileModels.swift */,
+				100000000000000000000014 /* CatalogModels.swift */,
+				100000000000000000000015 /* GameAppearanceAdapter.swift */,
+				100000000000000000000016 /* CollegeFootball27Adapter.swift */,
+				100000000000000000000017 /* CatalogRepository.swift */,
+				100000000000000000000018 /* CatalogValidator.swift */,
+				100000000000000000000019 /* LocalPrivacyStorage.swift */,
+				10000000000000000000001A /* AppleCaptureCapabilityService.swift */,
+				10000000000000000000001B /* catalog_manifest.json */,
+				10000000000000000000001C /* Assets.xcassets */,
+			);
+			path = GameFaceMatch;
+			sourceTree = "<group>";
+		};
+		100000000000000000000603 /* GameFaceMatchTests */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000021 /* FacialMeasurementTests.swift */,
+				100000000000000000000022 /* CatalogValidatorTests.swift */,
+				100000000000000000000023 /* CollegeFootball27AdapterTests.swift */,
+				100000000000000000000024 /* LocalStorageTests.swift */,
+				100000000000000000000025 /* RootViewModelTests.swift */,
+			);
+			path = GameFaceMatchTests;
+			sourceTree = "<group>";
+		};
+		100000000000000000000604 /* GameFaceMatchUITests */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000031 /* GameFaceMatchUITests.swift */,
+			);
+			path = GameFaceMatchUITests;
+			sourceTree = "<group>";
+		};
+		100000000000000000000605 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10000000000000000000004A /* ARKit.framework */,
+				10000000000000000000004B /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		100000000000000000000606 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000041 /* GameFaceMatch.app */,
+				100000000000000000000042 /* GameFaceMatchTests.xctest */,
+				100000000000000000000043 /* GameFaceMatchUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		100000000000000000000701 /* GameFaceMatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 100000000000000000000801 /* Build configuration list for PBXNativeTarget "GameFaceMatch" */;
+			buildPhases = (
+				100000000000000000000511 /* Sources */,
+				100000000000000000000501 /* Frameworks */,
+				100000000000000000000521 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GameFaceMatch;
+			productName = GameFaceMatch;
+			productReference = 100000000000000000000041 /* GameFaceMatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		100000000000000000000702 /* GameFaceMatchTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 100000000000000000000802 /* Build configuration list for PBXNativeTarget "GameFaceMatchTests" */;
+			buildPhases = (
+				100000000000000000000512 /* Sources */,
+				100000000000000000000502 /* Frameworks */,
+				100000000000000000000522 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				100000000000000000000411 /* PBXTargetDependency */,
+			);
+			name = GameFaceMatchTests;
+			productName = GameFaceMatchTests;
+			productReference = 100000000000000000000042 /* GameFaceMatchTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		100000000000000000000703 /* GameFaceMatchUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 100000000000000000000803 /* Build configuration list for PBXNativeTarget "GameFaceMatchUITests" */;
+			buildPhases = (
+				100000000000000000000513 /* Sources */,
+				100000000000000000000503 /* Frameworks */,
+				100000000000000000000523 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				100000000000000000000412 /* PBXTargetDependency */,
+			);
+			name = GameFaceMatchUITests;
+			productName = GameFaceMatchUITests;
+			productReference = 100000000000000000000043 /* GameFaceMatchUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		100000000000000000000900 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					100000000000000000000701 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					100000000000000000000702 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 100000000000000000000701;
+					};
+					100000000000000000000703 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 100000000000000000000701;
+					};
+				};
+			};
+			buildConfigurationList = 100000000000000000000800 /* Build configuration list for PBXProject "GameFaceMatch" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 100000000000000000000601;
+			productRefGroup = 100000000000000000000606 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				100000000000000000000701 /* GameFaceMatch */,
+				100000000000000000000702 /* GameFaceMatchTests */,
+				100000000000000000000703 /* GameFaceMatchUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		100000000000000000000521 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10000000000000000000011B /* catalog_manifest.json in Resources */,
+				10000000000000000000011C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000522 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000523 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		100000000000000000000511 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000101 /* GameFaceMatchApp.swift in Sources */,
+				100000000000000000000102 /* AppRoute.swift in Sources */,
+				100000000000000000000103 /* RootViewModel.swift in Sources */,
+				100000000000000000000104 /* RootNavigationView.swift in Sources */,
+				100000000000000000000105 /* GameFaceComponents.swift in Sources */,
+				100000000000000000000106 /* WelcomeView.swift in Sources */,
+				100000000000000000000107 /* IndependentAppDisclaimerView.swift in Sources */,
+				100000000000000000000108 /* PrivacySummaryView.swift in Sources */,
+				100000000000000000000109 /* HomeView.swift in Sources */,
+				10000000000000000000010A /* BeginScanView.swift in Sources */,
+				10000000000000000000010B /* CapturePreparationChecklistView.swift in Sources */,
+				10000000000000000000010C /* DeviceCapabilityStatusView.swift in Sources */,
+				10000000000000000000010D /* GameCatalogStatusView.swift in Sources */,
+				10000000000000000000010E /* ResultsUnavailableView.swift in Sources */,
+				10000000000000000000010F /* SavedBuildsEmptyView.swift in Sources */,
+				100000000000000000000110 /* PrivacyCenterView.swift in Sources */,
+				100000000000000000000111 /* DeleteLocalDataConfirmationView.swift in Sources */,
+				100000000000000000000112 /* SettingsView.swift in Sources */,
+				100000000000000000000113 /* FaceProfileModels.swift in Sources */,
+				100000000000000000000114 /* CatalogModels.swift in Sources */,
+				100000000000000000000115 /* GameAppearanceAdapter.swift in Sources */,
+				100000000000000000000116 /* CollegeFootball27Adapter.swift in Sources */,
+				100000000000000000000117 /* CatalogRepository.swift in Sources */,
+				100000000000000000000118 /* CatalogValidator.swift in Sources */,
+				100000000000000000000119 /* LocalPrivacyStorage.swift in Sources */,
+				10000000000000000000011A /* AppleCaptureCapabilityService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000512 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000201 /* FacialMeasurementTests.swift in Sources */,
+				100000000000000000000202 /* CatalogValidatorTests.swift in Sources */,
+				100000000000000000000203 /* CollegeFootball27AdapterTests.swift in Sources */,
+				100000000000000000000204 /* LocalStorageTests.swift in Sources */,
+				100000000000000000000205 /* RootViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		100000000000000000000513 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000301 /* GameFaceMatchUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		100000000000000000000411 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 100000000000000000000701 /* GameFaceMatch */;
+			targetProxy = 100000000000000000000401 /* PBXContainerItemProxy */;
+		};
+		100000000000000000000412 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 100000000000000000000701 /* GameFaceMatch */;
+			targetProxy = 100000000000000000000402 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		100000000000000000000811 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		100000000000000000000812 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		100000000000000000000821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "GameFace Match needs camera access only when you choose to start a future capture flow.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gamefacematch.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		100000000000000000000822 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "GameFace Match needs camera access only when you choose to start a future capture flow.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gamefacematch.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		100000000000000000000831 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gamefacematch.ios.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GameFaceMatch.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GameFaceMatch";
+			};
+			name = Debug;
+		};
+		100000000000000000000832 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gamefacematch.ios.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GameFaceMatch.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GameFaceMatch";
+			};
+			name = Release;
+		};
+		100000000000000000000841 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gamefacematch.ios.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = GameFaceMatch;
+			};
+			name = Debug;
+		};
+		100000000000000000000842 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gamefacematch.ios.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = GameFaceMatch;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		100000000000000000000800 /* Build configuration list for PBXProject "GameFaceMatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				100000000000000000000811 /* Debug */,
+				100000000000000000000812 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		100000000000000000000801 /* Build configuration list for PBXNativeTarget "GameFaceMatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				100000000000000000000821 /* Debug */,
+				100000000000000000000822 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		100000000000000000000802 /* Build configuration list for PBXNativeTarget "GameFaceMatchTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				100000000000000000000831 /* Debug */,
+				100000000000000000000832 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		100000000000000000000803 /* Build configuration list for PBXNativeTarget "GameFaceMatchUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				100000000000000000000841 /* Debug */,
+				100000000000000000000842 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 100000000000000000000900 /* Project object */;
+}

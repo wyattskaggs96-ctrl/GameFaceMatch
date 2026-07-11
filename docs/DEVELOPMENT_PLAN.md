@@ -14,3 +14,23 @@ Accept clean created-player screenshots, validate them, compare normalized facia
 
 ## Phase 4 — Private beta
 TestFlight, diverse testers, privacy controls, accessibility, repeatability, and weight tuning.
+
+## Current foundation status
+
+Completed for the initial app foundation:
+
+- Native SwiftUI iPhone Xcode project under `ios/`
+- App, unit-test, and UI-test targets
+- Navigation shell and required placeholder/empty-state screens
+- Domain model foundation for capture, profiles, measurements, catalog records, matching results, refinement, and saved builds
+- College Football 27 adapter scaffold that returns catalog-unavailable until verified production records exist
+- Production catalog repository and validator with an empty valid production manifest
+- Privacy-safe local storage and deletion protocols with local file-backed implementation
+- Device capability status scaffold using Apple frameworks
+- Initial unit and UI tests that do not require physical camera hardware
+
+Recommended next task:
+
+1. Expand the catalog schema documentation and validation fixtures under `data/fixtures/test-only/`.
+2. Add script-level catalog validation for `data/catalog/production/`.
+3. Keep the production catalog empty until records are captured and verified from the shipping game.

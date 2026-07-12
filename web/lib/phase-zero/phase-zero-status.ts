@@ -89,6 +89,7 @@ const requiredSchemas = [
   "data/schemas/manual-matching-study.schema.json",
   "data/schemas/audit-environment.schema.json",
   "data/schemas/creation-path.schema.json",
+  "data/schemas/creation-path-workspace.schema.json",
   "data/schemas/menu-map.schema.json",
   "data/schemas/head-preset.schema.json",
   "data/schemas/hairstyle.schema.json",

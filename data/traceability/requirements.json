@@ -528,6 +528,29 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-015",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Creation-path audit workspace",
+      "summary": "Provide a workspace for investigating every possible player-creation or appearance-editing path with candidate and supplemental paths, reproducible steps, button/input sequences, account and online requirements, restrictions, available appearance categories, identifier consistency, position/archetype/body dependencies, later editability, per-step evidence, canonical-path scoring, and justification while keeping proposed Road to Glory paths provisional until direct evidence confirms them.",
+      "owningModule": "Phase 0 creation-path audit",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-creation-path-workspace.ts",
+        "web/features/phase-zero/CreationPathAuditWorkspace.tsx",
+        "data/schemas/creation-path-workspace.schema.json",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-creation-path-workspace.test.ts",
+        "web/tests/phase-zero-audit-store.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The internal workspace creates research-draft candidate paths, tracks reproducible steps and input sequences, requirements, restrictions, dependencies, appearance coverage, identifier consistency, editability, scoring, and supplemental paths. Tests verify non-production drafts, Road to Glory provisional blocking, missing per-step evidence blocking, canonical scoring/export, supplemental path status, and schema coverage.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

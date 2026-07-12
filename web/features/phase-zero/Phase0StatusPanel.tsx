@@ -3,6 +3,7 @@
 import { Alert, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { createPhase0AuditDashboardReport, type Phase0AuditDashboardReport } from "@/lib/phase-zero/phase-zero-audit-dashboard";
 import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusReport } from "@/lib/phase-zero/phase-zero-status";
+import { CreationPathAuditWorkspace } from "./CreationPathAuditWorkspace";
 import { EnvironmentManifestWizard } from "./EnvironmentManifestWizard";
 
 const statusTone = {
@@ -33,6 +34,7 @@ export function Phase0StatusPanel({
         {report.overall.totalChecks} evidence checks. Production records loaded: {report.productionRecordCount}.
       </Alert>
       <EnvironmentManifestWizard />
+      <CreationPathAuditWorkspace />
       <Phase0AuditDashboard dashboard={dashboard} />
       <div className="card-grid">
         <Card>

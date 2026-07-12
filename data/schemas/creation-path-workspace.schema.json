@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/creation-path-workspace.schema.json",
+  "title": "Phase0CreationPathWorkspace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "updatedAt", "candidates"],
+  "properties": {
+    "schemaVersion": { "const": "phase0-creation-path-workspace-v1" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "schemaVersion",
+          "updatedAt",
+          "sourceType",
+          "candidateKind",
+          "confirmationState",
+          "gameID",
+          "displayName",
+          "gameMode",
+          "exactPath",
+          "platformIDs",
+          "observedPatchIDs",
+          "menuItemIDs",
+          "accountRequirement",
+          "accountRequirementNotes",
+          "onlineRequirement",
+          "onlineRequirementNotes",
+          "restrictions",
+          "appearanceCategoriesAvailable",
+          "identifierConsistency",
+          "identifierConsistencyNotes",
+          "dependencies",
+          "laterEditability",
+          "laterEditabilityNotes",
+          "steps",
+          "canonicalScoreInput",
+          "canonicalJustification",
+          "supplementalPathIDs",
+          "notes"
+        ],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "schemaVersion": { "const": "phase0-creation-path-workspace-v1" },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "sourceType": { "const": "researchDraft" },
+          "candidateKind": { "enum": ["primaryCandidate", "supplemental"] },
+          "confirmationState": { "enum": ["draft", "provisional", "evidenceBacked", "rejected"] },
+          "gameID": { "type": "string", "minLength": 1 },
+          "displayName": { "type": "string" },
+          "gameMode": { "type": "string" },
+          "exactPath": { "type": "string" },
+          "platformIDs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "observedPatchIDs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "menuItemIDs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "accountRequirement": { "enum": ["unknown", "required", "notRequired"] },
+          "accountRequirementNotes": { "type": "string" },
+          "onlineRequirement": { "enum": ["unknown", "required", "notRequired"] },
+          "onlineRequirementNotes": { "type": "string" },
+          "restrictions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "appearanceCategoriesAvailable": {
+            "type": "array",
+            "items": { "enum": ["head", "hairstyle", "facialHair", "additionalAttribute"] }
+          },
+          "identifierConsistency": { "enum": ["unknown", "consistent", "inconsistent"] },
+          "identifierConsistencyNotes": { "type": "string" },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "kind", "description", "evidenceFileIDs"],
+              "properties": {
+                "id": { "type": "string", "minLength": 1 },
+                "kind": { "enum": ["position", "archetype", "bodyType", "account", "online", "other"] },
+                "description": { "type": "string", "minLength": 1 },
+                "evidenceFileIDs": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+              }
+            }
+          },
+          "laterEditability": { "enum": ["unknown", "editable", "partiallyEditable", "lockedAfterCreation"] },
+          "laterEditabilityNotes": { "type": "string" },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["stepNumber", "instruction", "expectedResult", "buttonInputSequence", "evidenceFileIDs"],
+              "properties": {
+                "stepNumber": { "type": "integer", "minimum": 1 },
+                "instruction": { "type": "string" },
+                "expectedResult": { "type": "string" },
+                "buttonInputSequence": { "type": "string" },
+                "evidenceFileIDs": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+              }
+            }
+          },
+          "canonicalScoreInput": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["evidenceCompleteness", "reproducibility", "appearanceCoverage", "dependencyClarity", "laterEditabilityConfidence"],
+            "properties": {
+              "evidenceCompleteness": { "type": "number", "minimum": 0, "maximum": 100 },
+              "reproducibility": { "type": "number", "minimum": 0, "maximum": 100 },
+              "appearanceCoverage": { "type": "number", "minimum": 0, "maximum": 100 },
+              "dependencyClarity": { "type": "number", "minimum": 0, "maximum": 100 },
+              "laterEditabilityConfidence": { "type": "number", "minimum": 0, "maximum": 100 }
+            }
+          },
+          "canonicalJustification": { "type": "string" },
+          "supplementalPathIDs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}

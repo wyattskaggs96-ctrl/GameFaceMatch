@@ -1,6 +1,7 @@
 import type { GameCatalogManifest } from "@/types/domain";
 
 export const generatedProductionCatalogManifest = {
+  "sourceType": "production",
   "catalogVersion": {
     "identifier": "empty-production",
     "gameVersion": "",

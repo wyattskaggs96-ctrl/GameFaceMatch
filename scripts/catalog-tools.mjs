@@ -7,9 +7,13 @@ import { fileURLToPath } from "node:url";
 export const requiredAngles = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"];
 export const placeholderPattern = /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK)\b/i;
 export const screenshotNamePattern = /^cfb27__[a-z0-9-]+__[a-z0-9.-]+__[a-z0-9-]+__(straightOn|left45|right45|leftProfile|rightProfile|navigationEvidence)__\d{8}\.(png|jpg|jpeg|webp)$/i;
+export const sourceTypes = ["production", "researchDraft", "testFixture", "demoData", "localDeveloperSample"];
+const sourceTypeSet = new Set(sourceTypes);
+const productionBlockedSourceTypes = new Set(["researchDraft", "testFixture", "demoData", "localDeveloperSample"]);
 const validVerificationStates = new Set(["verified", "unverified", "rejected", "archived"]);
 const allowedTransitions = new Set(["draft->verified", "unverified->verified", "reviewed->verified", "reviewed->archived"]);
 const csvColumns = [
+  "sourceType",
   "stableInternalID",
   "platform",
   "gameVersion",
@@ -51,6 +55,7 @@ export function validateRecord(record, options = {}) {
   if ((options.requireVerified ?? true) && record?.verificationState !== "verified") {
     addError(report, "unverifiedRecord", `${id || "Record"} is not verified.`);
   }
+  validateSourceType(report, record, id || "Record", options);
   if (record?.isTestFixture) addError(report, "fixtureFlag", `${id || "Record"} is marked as a fixture.`);
   validateDateField(report, record?.capturedDate, "capturedDate", id);
   if (record?.verificationState === "verified") validateDateField(report, record?.verifiedDate, "verifiedDate", id);
@@ -111,6 +116,7 @@ export function validateManifest(manifest, options = {}) {
     return finalizeReport(report);
   }
   if (containsPlaceholder(manifest)) addError(report, "placeholderToken", "Manifest contains a placeholder token.");
+  validateSourceType(report, manifest, "Manifest", options);
   validateDateField(report, manifest.generatedAt, "generatedAt", "manifest");
   validateDateField(report, manifest.catalogVersion.verifiedAt, "catalogVersion.verifiedAt", "manifest", { allowNull: true });
   if (Number.isInteger(manifest.declaredItemCount) && manifest.declaredItemCount !== manifest.items.length) {
@@ -129,7 +135,7 @@ export function validatePackage(catalogPackage, options = {}) {
     addError(report, "malformedPackage", "Catalog package is malformed.");
     return finalizeReport(report);
   }
-  mergeReport(report, validateManifest(catalogPackage.manifest, { packageItems: catalogPackage.items }));
+  mergeReport(report, validateManifest(catalogPackage.manifest, { packageItems: catalogPackage.items, requireProductionSource: options.requireProductionSource ?? options.requireVerified ?? true }));
   if (containsPlaceholder(catalogPackage)) addError(report, "placeholderToken", "Catalog package contains a placeholder token.");
 
   const assetMap = new Map((catalogPackage.assets ?? []).map((asset) => [asset.assetID, asset]));
@@ -149,7 +155,7 @@ export function validatePackage(catalogPackage, options = {}) {
     if (catalogPackage.manifest?.catalogVersion?.platform && item?.platform && catalogPackage.manifest.catalogVersion.platform !== item.platform) {
       addError(report, "platformMismatch", `${id || "Record"} platform does not match the package manifest.`);
     }
-    mergeReport(report, validateRecord(item, { availableAssetIDs, requireVerified: options.requireVerified ?? true }));
+    mergeReport(report, validateRecord(item, { availableAssetIDs, requireVerified: options.requireVerified ?? true, requireProductionSource: options.requireProductionSource ?? options.requireVerified ?? true }));
     validateRequiredReviews(catalogPackage, item, report);
   }
 
@@ -194,6 +200,7 @@ export function createAuditSession(input = {}) {
   const now = input.createdAt ?? new Date().toISOString();
   return {
     sessionID: input.sessionID ?? `audit-${now.slice(0, 10).replaceAll("-", "")}-${crypto.randomUUID().slice(0, 8)}`,
+    sourceType: "researchDraft",
     game: "EA SPORTS College Football 27",
     platform: input.platform ?? "REPLACE_WITH_VERIFIED_PLATFORM",
     gameVersion: input.gameVersion ?? "REPLACE_WITH_VERIFIED_GAME_VERSION",
@@ -210,6 +217,9 @@ export function createAuditSession(input = {}) {
 
 export function validateAuditRecord(record, options = {}) {
   const report = validateRecord(record, { ...options, requireVerified: false });
+  if (record?.sourceType !== "researchDraft") {
+    addError(report, "invalidAuditSourceType", `${record?.stableInternalID || "Record"} audit records must use sourceType researchDraft.`);
+  }
   if (record?.verificationState === "verified") {
     addError(report, "autoVerificationBlocked", `${record?.stableInternalID || "Record"} cannot be marked verified during audit entry.`);
   }
@@ -229,6 +239,7 @@ export function importCatalogItemsFromCsv(csvText, defaults = {}) {
     const navigationEvidenceAssetID = row.navigationEvidenceAssetID ?? "";
     return {
       stableInternalID: row.stableInternalID ?? "",
+      sourceType: "researchDraft",
       game: "EA SPORTS College Football 27",
       gameVersion: row.gameVersion ?? defaults.gameVersion ?? "",
       patchVersion: row.patchVersion ?? defaults.patchVersion ?? "",
@@ -271,6 +282,7 @@ export function importCatalogItemsFromCsv(csvText, defaults = {}) {
 
 export function exportCatalogItemsToCsv(items) {
   const rows = items.map((item) => ({
+    sourceType: item.sourceType,
     stableInternalID: item.stableInternalID,
     platform: item.platform,
     gameVersion: item.gameVersion,
@@ -331,15 +343,16 @@ export function createPatchReauditPlan(previousManifest, nextGameVersion) {
 }
 
 export function publishPackage(catalogPackage) {
-  const report = validatePackage(catalogPackage, { requireVerified: true });
+  const report = validatePackage(catalogPackage, { requireVerified: true, requireProductionSource: true });
   if (!report.ok) return { ok: false, report, manifest: null };
   return {
     ok: true,
     report,
     manifest: {
       ...catalogPackage.manifest,
+      sourceType: "production",
       isProduction: true,
-      items: catalogPackage.items
+      items: catalogPackage.items.map((item) => ({ ...item, sourceType: "production" }))
     }
   };
 }
@@ -367,13 +380,13 @@ export function validateProductionDirectory(directoryPath) {
     return finalizeReport(report);
   }
   const manifest = readJSON(manifestPath);
-  mergeReport(report, validateManifest(manifest));
+  mergeReport(report, validateManifest(manifest, { requireProductionSource: true }));
   const seen = new Set();
   for (const item of manifest.items ?? []) {
     const id = stringValue(item?.stableInternalID);
     if (id && seen.has(id)) addError(report, "duplicateStableID", `Duplicate stable ID: ${id}`);
     if (id) seen.add(id);
-    mergeReport(report, validateRecord(item, { requireVerified: true }));
+    mergeReport(report, validateRecord(item, { requireVerified: true, requireProductionSource: true }));
   }
   if ((manifest.items ?? []).length === 0) {
     report.warnings.push("Production catalog is empty. No recommendations can be produced.");
@@ -393,7 +406,9 @@ export function detectFixtureLeakageInPath(targetPath) {
   const report = createReport("fixtures");
   for (const file of listDataFiles(targetPath)) {
     const text = fs.readFileSync(file, "utf8");
-    if (/isTestFixture"\s*:\s*true|test-only|fixture/i.test(text)) addError(report, "fixtureLeakage", `Fixture marker found in ${file}.`);
+    if (/isTestFixture"\s*:\s*true|test-only|fixture|"sourceType"\s*:\s*"(researchDraft|testFixture|demoData|localDeveloperSample)"/i.test(text)) {
+      addError(report, "fixtureLeakage", `Non-production data marker found in ${file}.`);
+    }
   }
   return finalizeReport(report);
 }
@@ -487,6 +502,20 @@ function validateMeasurement(report, measurementID, measurement, recordID) {
   }
   if (!Number.isFinite(measurement.variance) || measurement.variance < 0) {
     addError(report, "negativeVariance", `${recordID || "Record"} measurement ${measurementID} variance is invalid.`);
+  }
+}
+
+function validateSourceType(report, value, owner, options = {}) {
+  const sourceType = value?.sourceType;
+  if (!sourceTypeSet.has(sourceType)) {
+    addError(report, "invalidSourceType", `${owner} is missing a valid sourceType.`);
+    return;
+  }
+  if (options.requireProductionSource && sourceType !== "production") {
+    addError(report, "nonProductionSourceInProduction", `${owner} uses non-production sourceType ${sourceType}.`);
+  }
+  if (options.requireProductionSource && productionBlockedSourceTypes.has(sourceType)) {
+    addError(report, "fixtureLeakage", `${owner} cannot be imported into production from ${sourceType}.`);
   }
 }
 

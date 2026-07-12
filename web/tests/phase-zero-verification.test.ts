@@ -233,6 +233,7 @@ function validPackageWithVerificationState(verificationState: "verified" | "unve
     packageID: "test-only-package",
     packageVersion: "test-only-version",
     manifest: {
+      sourceType: "production",
       catalogVersion: item.catalogVersion,
       generatedAt: "2026-07-12T00:00:00.000Z",
       isProduction: true,
@@ -270,6 +271,7 @@ function validPackageWithVerificationState(verificationState: "verified" | "unve
 
 function validItem(verificationState: "verified" | "unverified") {
   return {
+    sourceType: "production",
     stableInternalID: "cfb27-test-only-unverified-record",
     game: "EA SPORTS College Football 27",
     gameVersion: "test-only-version",

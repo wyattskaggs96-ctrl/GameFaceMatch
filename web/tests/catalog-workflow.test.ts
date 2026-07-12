@@ -113,7 +113,7 @@ describe("catalog audit workflow validator", () => {
       platform: "test-only-platform",
       notes: "NOT PRODUCTION DATA - NOT A VERIFIED GAME RECORD"
     });
-    expect(errorCodes(validateAuditRecord(validItem()))).toContain("autoVerificationBlocked");
+    expect(errorCodes(validateAuditRecord({ ...validItem(), sourceType: "researchDraft" }))).toContain("autoVerificationBlocked");
   });
 
   it("imports and exports draft CSV records without creating verified production data", () => {
@@ -151,6 +151,19 @@ describe("catalog audit workflow validator", () => {
     const fixtureReport = detectFixtureLeakageInPath("../data/fixtures/test-only");
     expect(errorCodes(fixtureReport)).toContain("fixtureLeakage");
   });
+
+  it("rejects attempts to promote fixture data into production", () => {
+    const catalogPackage = validPackage();
+    catalogPackage.manifest.sourceType = "testFixture";
+    catalogPackage.items = catalogPackage.items.map((item) => ({
+      ...item,
+      sourceType: "testFixture",
+      isTestFixture: true
+    }));
+    catalogPackage.manifest.items = catalogPackage.items;
+    const report = publishPackage(withChecksums(catalogPackage)).report;
+    expect(errorCodes(report)).toEqual(expect.arrayContaining(["nonProductionSourceInProduction", "fixtureLeakage", "fixtureFlag"]));
+  });
 });
 
 function errorCodes(report: { errors: Array<{ code: string }> }) {
@@ -170,6 +183,7 @@ function validPackage() {
     packageID: "test-only-package",
     packageVersion: "test-only-version",
     manifest: {
+      sourceType: "production",
       catalogVersion: item.catalogVersion,
       generatedAt: "2026-07-10T00:00:00.000Z",
       isProduction: true,
@@ -231,6 +245,7 @@ function validPackage() {
 
 function validItem(id = "cfb27-test-only-record") {
   return {
+    sourceType: "production",
     stableInternalID: id,
     game: "EA SPORTS College Football 27",
     gameVersion: "test-only-version",

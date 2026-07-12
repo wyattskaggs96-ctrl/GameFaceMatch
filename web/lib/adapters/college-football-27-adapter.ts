@@ -43,7 +43,7 @@ export class CollegeFootball27Adapter implements GameAppearanceAdapter {
   }
 
   buildInstructions(match: GameAppearanceMatch): BuildInstruction[] {
-    if (match.catalogItem.verificationState !== "verified" || match.catalogItem.isTestFixture) {
+    if (match.catalogItem.verificationState !== "verified" || match.catalogItem.sourceType !== "production" || match.catalogItem.isTestFixture) {
       throw new GameAdapterError("catalogUnavailable", CATALOG_UNAVAILABLE_MESSAGE);
     }
     const instructions = createBuildInstructions(match);

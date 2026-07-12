@@ -12,6 +12,8 @@ export class CatalogValidationError extends Error {
       | "placeholderLabel"
       | "unverifiedProductionRecord"
       | "fixtureRecordInProduction"
+      | "invalidSourceType"
+      | "nonProductionSourceInProduction"
       | "malformedMeasurement"
       | "unavailableAssetReference"
       | "placeholderToken"

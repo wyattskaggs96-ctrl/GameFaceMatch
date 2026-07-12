@@ -1,4 +1,5 @@
 import type { GameCatalogManifest } from "@/types/domain";
+import { isDataSourceType, isProductionBlockedSource, isProductionSource } from "@/lib/data/source-types";
 import { CatalogValidationError } from "./catalog-errors";
 
 const requiredAngles = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"] as const;
@@ -14,8 +15,14 @@ export function validateProductionCatalog(manifest: GameCatalogManifest, availab
   if (!isValidISODate(manifest.generatedAt)) {
     throw new CatalogValidationError("invalidDate", "Catalog manifest has invalid generatedAt date.");
   }
+  if (!isDataSourceType(manifest.sourceType)) {
+    throw new CatalogValidationError("invalidSourceType", "Catalog manifest is missing a valid sourceType.");
+  }
   if (!manifest.isProduction) {
     return manifest;
+  }
+  if (!isProductionSource(manifest.sourceType)) {
+    throw new CatalogValidationError("nonProductionSourceInProduction", `Production catalog cannot use sourceType ${manifest.sourceType}.`);
   }
 
   const seen = new Set<string>();
@@ -26,6 +33,12 @@ export function validateProductionCatalog(manifest: GameCatalogManifest, availab
     }
     if (item.game !== "EA SPORTS College Football 27") {
       throw new CatalogValidationError("invalidGame", `Invalid game for ${id}.`);
+    }
+    if (!isDataSourceType(item.sourceType)) {
+      throw new CatalogValidationError("invalidSourceType", `Invalid sourceType for ${id}.`);
+    }
+    if (isProductionBlockedSource(item.sourceType)) {
+      throw new CatalogValidationError("nonProductionSourceInProduction", `Production catalog cannot include ${item.sourceType} record: ${id}.`);
     }
     if (seen.has(id)) {
       throw new CatalogValidationError("duplicateStableID", `Duplicate stable ID: ${id}`);

@@ -31,6 +31,7 @@ const files = listFiles(root).filter((file) => !file.includes(`${path.sep}node_m
 const publicFiles = fs.existsSync(publicDir) ? listFiles(publicDir) : [];
 
 validateSourceGovernance();
+validateDataClassSeparation();
 
 const bundledFixture = publicFiles.find((file) => file.includes(`${path.sep}fixtures${path.sep}`) || file.includes("test-only"));
 if (bundledFixture) {
@@ -72,6 +73,27 @@ function validateSourceGovernance() {
   }
 }
 
+function validateDataClassSeparation() {
+  const productionDir = path.join(repositoryRoot, "data", "catalog", "production");
+  for (const file of listFiles(productionDir).filter((candidate) => candidate.endsWith(".json"))) {
+    const json = readJSON(file);
+    if (json.sourceType !== "production") {
+      fail(`Production data file must use sourceType production: ${file}`);
+    }
+    if (/testFixture|researchDraft|demoData|localDeveloperSample|fixture|test-only/i.test(JSON.stringify(json))) {
+      fail(`Production data file contains non-production markers: ${file}`);
+    }
+  }
+
+  const fixtureDir = path.join(repositoryRoot, "data", "fixtures", "test-only");
+  for (const file of listFiles(fixtureDir).filter((candidate) => candidate.endsWith(".json"))) {
+    const json = readJSON(file);
+    if (json.sourceType !== "testFixture") {
+      fail(`Fixture data file must use sourceType testFixture: ${file}`);
+    }
+  }
+}
+
 function listFiles(directory) {
   if (!fs.existsSync(directory)) return [];
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -87,6 +109,14 @@ function safeRead(file) {
     return fs.readFileSync(file, "utf8");
   } catch {
     return "";
+  }
+}
+
+function readJSON(file) {
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf8"));
+  } catch {
+    fail(`Invalid JSON data file: ${file}`);
   }
 }
 

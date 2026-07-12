@@ -128,6 +128,7 @@ describe("CollegeFootball27Adapter matching boundary", () => {
   it("keeps empty production catalog failing closed", async () => {
     const adapter = new CollegeFootball27Adapter(
       createBundledCatalogRepository({
+        sourceType: "production",
         catalogVersion: {
           identifier: "empty-production",
           gameVersion: "",
@@ -241,6 +242,7 @@ async function checksumCatalog(catalog: GameCatalogManifest): Promise<GameCatalo
 function productionStyleCatalog(): GameCatalogManifest {
   const items = fixtureCatalog.items.map((item, index) => ({
     ...item,
+    sourceType: "production" as const,
     stableInternalID: `unit-test-production-${index + 1}`,
     game: "EA SPORTS College Football 27",
     patchVersion: "unit-test-patch",
@@ -257,6 +259,7 @@ function productionStyleCatalog(): GameCatalogManifest {
     }
   }));
   return {
+    sourceType: "production",
     catalogVersion: {
       identifier: "unit-test-production-catalog-v1",
       gameVersion: "unit-test-version",

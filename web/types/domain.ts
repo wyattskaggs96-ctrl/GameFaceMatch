@@ -37,6 +37,7 @@ export type CaptureCapabilityStatus =
   | "unknownError";
 
 export type CatalogVerificationStatus = "verified" | "unverified" | "rejected" | "archived";
+export type DataSourceType = "production" | "researchDraft" | "testFixture" | "demoData" | "localDeveloperSample";
 
 export type CapturedAngleID = "straightOn" | "left45" | "right45" | "leftProfile" | "rightProfile";
 export type CaptureSource = "camera" | "upload";
@@ -356,6 +357,7 @@ export interface AppearanceAttribute {
 }
 
 export interface GameCatalogManifest {
+  sourceType: DataSourceType;
   catalogVersion: GameCatalogVersion;
   generatedAt: ISODateString;
   isProduction: boolean;
@@ -365,6 +367,7 @@ export interface GameCatalogManifest {
 }
 
 export interface GameCatalogItem {
+  sourceType: DataSourceType;
   stableInternalID: string;
   game: string;
   gameVersion: string;

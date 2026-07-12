@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "phase0-manual-matching-study-v1",
+  "sourceType": "testFixture",
+  "studyVersion": "synthetic-study-protocol-v1",
+  "studyID": "synthetic-study-001",
+  "resultID": "synthetic-study-result-001",
+  "consentRecord": {
+    "consentRecordID": "synthetic-consent-001",
+    "consentVersion": "synthetic-consent-v1",
+    "acknowledgedAt": "2026-07-12T00:00:00.000Z",
+    "allowsManualReviewerEvaluation": true,
+    "allowsTemporaryRawMediaProcessing": true,
+    "allowsDerivedProfileUse": true,
+    "withdrawalRequestedAt": null
+  },
+  "subjectPseudonymousID": "synthetic-subject-001",
+  "captureMode": "webRgbGuided",
+  "referenceViewCompleteness": {
+    "straightOn": true,
+    "left45": true,
+    "right45": true,
+    "leftProfile": true,
+    "rightProfile": true
+  },
+  "humanReviewerIDs": ["synthetic-reviewer-a", "synthetic-reviewer-b"],
+  "rankedHeadChoices": [
+    {
+      "rank": 1,
+      "catalogItemID": "synthetic-head-choice-001",
+      "catalogStableInternalID": "CF27_TESTONLY_HEAD_001",
+      "reviewerID": "synthetic-reviewer-a",
+      "reason": "Synthetic reviewer chose this fixture as closest among synthetic options."
+    },
+    {
+      "rank": 2,
+      "catalogItemID": "synthetic-head-choice-002",
+      "catalogStableInternalID": "CF27_TESTONLY_HEAD_002",
+      "reviewerID": "synthetic-reviewer-a",
+      "reason": "Synthetic reviewer chose this fixture as the second closest option."
+    },
+    {
+      "rank": 3,
+      "catalogItemID": "synthetic-head-choice-003",
+      "catalogStableInternalID": "CF27_TESTONLY_HEAD_003",
+      "reviewerID": "synthetic-reviewer-b",
+      "reason": "Synthetic reviewer chose this fixture as the third closest option."
+    }
+  ],
+  "hairChoice": {
+    "catalogItemID": "synthetic-hair-choice-001",
+    "catalogStableInternalID": "CF27_TESTONLY_HAIR_001",
+    "reviewerID": "synthetic-reviewer-b",
+    "reason": "Synthetic hair choice for fixture-only validation."
+  },
+  "facialHairChoice": {
+    "catalogItemID": null,
+    "catalogStableInternalID": null,
+    "reviewerID": "synthetic-reviewer-b",
+    "reason": "Synthetic subject fixture has no selected facial-hair option."
+  },
+  "subjectPreferredResult": {
+    "selectedCatalogItemID": "synthetic-head-choice-002",
+    "selectedStableInternalID": "CF27_TESTONLY_HEAD_002",
+    "notes": "Synthetic subject preference selected the second ranked fixture option."
+  },
+  "rankSelected": 2,
+  "mainMismatchReasons": ["jawMismatch", "catalogCoverageGap"],
+  "reviewerAgreement": {
+    "reviewerIDs": ["synthetic-reviewer-a", "synthetic-reviewer-b"],
+    "agreedTopChoice": false,
+    "agreedTopThreeSet": true,
+    "agreementNotes": "Synthetic reviewers agreed on the fixture top-three set but not the top choice."
+  },
+  "rawMediaDeletionState": {
+    "status": "deleted",
+    "requestedAt": "2026-07-12T01:00:00.000Z",
+    "completedAt": "2026-07-12T01:05:00.000Z",
+    "verifiedBy": "synthetic-privacy-reviewer",
+    "retentionConsentRecordID": null
+  },
+  "catalogVersion": {
+    "catalogVersionID": "synthetic-catalog-version",
+    "game": "EA SPORTS College Football 27",
+    "platform": "test-only-platform",
+    "gameVersion": "test-only-version",
+    "patchVersion": "test-only-patch",
+    "verifiedAt": null
+  },
+  "status": "complete",
+  "resultTimestamps": {
+    "capturedAt": "2026-07-12T00:10:00.000Z",
+    "reviewedAt": "2026-07-12T00:30:00.000Z",
+    "subjectSelectedAt": "2026-07-12T00:45:00.000Z",
+    "finalizedAt": "2026-07-12T01:05:00.000Z"
+  },
+  "notes": "Synthetic fixture-only manual matching study result.",
+  "isTestFixture": true
+}

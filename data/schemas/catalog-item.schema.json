@@ -4,6 +4,7 @@
   "title": "GameCatalogItem",
   "type": "object",
   "required": [
+    "sourceType",
     "stableInternalID",
     "game",
     "gameVersion",
@@ -24,6 +25,7 @@
     "isTestFixture"
   ],
   "properties": {
+    "sourceType": { "$ref": "#/$defs/sourceType" },
     "stableInternalID": { "type": "string", "minLength": 1 },
     "game": { "type": "string", "const": "EA SPORTS College Football 27" },
     "gameVersion": { "type": "string", "minLength": 1 },
@@ -80,5 +82,10 @@
     "isTestFixture": { "type": "boolean" },
     "deprecated": { "type": "boolean" },
     "deprecatedContext": { "type": ["string", "null"] }
+  },
+  "$defs": {
+    "sourceType": {
+      "enum": ["production", "researchDraft", "testFixture", "demoData", "localDeveloperSample"]
+    }
   }
 }

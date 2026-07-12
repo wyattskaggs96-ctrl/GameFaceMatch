@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { generatedProductionCatalogManifest } from "@/lib/catalog/generated-production-manifest";
+import { dataSourceTypeLabels, dataSourceTypes } from "@/lib/data/source-types";
 import { KEY_NAVIGATION_FLOW } from "@/lib/navigation";
 
 describe("production bundle boundaries", () => {
@@ -15,6 +16,37 @@ describe("production bundle boundaries", () => {
     const sharedManifestPath = path.resolve(process.cwd(), "../data/catalog/production/catalog_manifest.json");
     const sharedManifest = JSON.parse(fs.readFileSync(sharedManifestPath, "utf8"));
     expect(generatedProductionCatalogManifest).toEqual(sharedManifest);
+  });
+});
+
+describe("data source separation", () => {
+  it("keeps production, research, fixture, demo, and local sample namespaces explicit", () => {
+    expect(dataSourceTypes).toEqual(["production", "researchDraft", "testFixture", "demoData", "localDeveloperSample"]);
+    for (const sourceType of dataSourceTypes) {
+      expect(dataSourceTypeLabels[sourceType]).toBeTruthy();
+    }
+    for (const relativePath of ["../data/catalog/production", "../data/audit/college-football-27", "../data/fixtures/test-only", "../data/demo", "../data/local-samples"]) {
+      expect(fs.existsSync(path.resolve(process.cwd(), relativePath)), relativePath).toBe(true);
+    }
+  });
+
+  it("requires production JSON files to use production source type only", () => {
+    const productionDir = path.resolve(process.cwd(), "../data/catalog/production");
+    for (const file of listFiles(productionDir).filter((candidate) => candidate.endsWith(".json"))) {
+      const json = JSON.parse(fs.readFileSync(file, "utf8")) as { sourceType?: string };
+      expect(json.sourceType, file).toBe("production");
+      expect(JSON.stringify(json), file).not.toMatch(/testFixture|researchDraft|demoData|localDeveloperSample|test-only|fixture/i);
+    }
+  });
+
+  it("keeps test fixtures under the fixture namespace with fixture source type", () => {
+    const fixtureDir = path.resolve(process.cwd(), "../data/fixtures/test-only");
+    const fixtureFiles = listFiles(fixtureDir).filter((candidate) => candidate.endsWith(".json"));
+    expect(fixtureFiles.length).toBeGreaterThan(0);
+    for (const file of fixtureFiles) {
+      const json = JSON.parse(fs.readFileSync(file, "utf8")) as { sourceType?: string };
+      expect(json.sourceType, file).toBe("testFixture");
+    }
   });
 });
 

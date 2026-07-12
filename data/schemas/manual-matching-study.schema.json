@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/manual-matching-study.schema.json",
+  "title": "Phase0ManualMatchingStudyResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sourceType",
+    "studyVersion",
+    "studyID",
+    "resultID",
+    "consentRecord",
+    "subjectPseudonymousID",
+    "captureMode",
+    "referenceViewCompleteness",
+    "humanReviewerIDs",
+    "rankedHeadChoices",
+    "hairChoice",
+    "facialHairChoice",
+    "subjectPreferredResult",
+    "rankSelected",
+    "mainMismatchReasons",
+    "reviewerAgreement",
+    "rawMediaDeletionState",
+    "catalogVersion",
+    "status",
+    "resultTimestamps",
+    "notes",
+    "isTestFixture"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-manual-matching-study-v1" },
+    "sourceType": { "$ref": "#/$defs/sourceType" },
+    "studyVersion": { "$ref": "#/$defs/text" },
+    "studyID": { "$ref": "#/$defs/id" },
+    "resultID": { "$ref": "#/$defs/id" },
+    "consentRecord": { "$ref": "#/$defs/consentRecord" },
+    "subjectPseudonymousID": { "$ref": "#/$defs/text" },
+    "captureMode": {
+      "enum": [
+        "webRgbGuided",
+        "webManualUpload",
+        "iPhoneTrueDepthAssisted",
+        "iPhoneTrueDepthSelfScan",
+        "standardCamera",
+        "screenshotRefinement",
+        "unknown"
+      ]
+    },
+    "referenceViewCompleteness": { "$ref": "#/$defs/referenceViewCompleteness" },
+    "humanReviewerIDs": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/text" } },
+    "rankedHeadChoices": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/rankedHeadChoice" }
+    },
+    "hairChoice": { "anyOf": [{ "$ref": "#/$defs/appearanceChoice" }, { "type": "null" }] },
+    "facialHairChoice": { "anyOf": [{ "$ref": "#/$defs/appearanceChoice" }, { "type": "null" }] },
+    "subjectPreferredResult": { "anyOf": [{ "$ref": "#/$defs/subjectPreferredResult" }, { "type": "null" }] },
+    "rankSelected": { "type": ["integer", "null"], "minimum": 1, "maximum": 3 },
+    "mainMismatchReasons": { "type": "array", "items": { "$ref": "#/$defs/mismatchReason" } },
+    "reviewerAgreement": { "$ref": "#/$defs/reviewerAgreement" },
+    "rawMediaDeletionState": { "$ref": "#/$defs/rawMediaDeletionState" },
+    "catalogVersion": { "$ref": "#/$defs/catalogVersion" },
+    "status": { "enum": ["planned", "inReview", "complete", "withdrawn", "blocked"] },
+    "resultTimestamps": { "$ref": "#/$defs/resultTimestamps" },
+    "notes": { "$ref": "#/$defs/text" },
+    "isTestFixture": { "type": "boolean" }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "text": { "type": "string", "minLength": 1 },
+    "sourceType": { "enum": ["production", "researchDraft", "testFixture", "demoData", "localDeveloperSample"] },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "nullableTimestamp": { "type": ["string", "null"], "format": "date-time" },
+    "capturedAngle": { "enum": ["straightOn", "left45", "right45", "leftProfile", "rightProfile"] },
+    "consentRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "consentRecordID",
+        "consentVersion",
+        "acknowledgedAt",
+        "allowsManualReviewerEvaluation",
+        "allowsTemporaryRawMediaProcessing",
+        "allowsDerivedProfileUse",
+        "withdrawalRequestedAt"
+      ],
+      "properties": {
+        "consentRecordID": { "$ref": "#/$defs/id" },
+        "consentVersion": { "$ref": "#/$defs/text" },
+        "acknowledgedAt": { "$ref": "#/$defs/timestamp" },
+        "allowsManualReviewerEvaluation": { "type": "boolean" },
+        "allowsTemporaryRawMediaProcessing": { "type": "boolean" },
+        "allowsDerivedProfileUse": { "type": "boolean" },
+        "withdrawalRequestedAt": { "$ref": "#/$defs/nullableTimestamp" }
+      }
+    },
+    "referenceViewCompleteness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["straightOn", "left45", "right45", "leftProfile", "rightProfile"],
+      "properties": {
+        "straightOn": { "type": "boolean" },
+        "left45": { "type": "boolean" },
+        "right45": { "type": "boolean" },
+        "leftProfile": { "type": "boolean" },
+        "rightProfile": { "type": "boolean" }
+      }
+    },
+    "rankedHeadChoice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rank", "catalogItemID", "catalogStableInternalID", "reviewerID", "reason"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "catalogItemID": { "$ref": "#/$defs/id" },
+        "catalogStableInternalID": { "$ref": "#/$defs/text" },
+        "reviewerID": { "$ref": "#/$defs/text" },
+        "reason": { "$ref": "#/$defs/text" }
+      }
+    },
+    "appearanceChoice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalogItemID", "catalogStableInternalID", "reviewerID", "reason"],
+      "properties": {
+        "catalogItemID": { "type": ["string", "null"] },
+        "catalogStableInternalID": { "type": ["string", "null"] },
+        "reviewerID": { "$ref": "#/$defs/text" },
+        "reason": { "$ref": "#/$defs/text" }
+      }
+    },
+    "subjectPreferredResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selectedCatalogItemID", "selectedStableInternalID", "notes"],
+      "properties": {
+        "selectedCatalogItemID": { "type": ["string", "null"] },
+        "selectedStableInternalID": { "type": ["string", "null"] },
+        "notes": { "$ref": "#/$defs/text" }
+      }
+    },
+    "mismatchReason": {
+      "enum": [
+        "headShapeMismatch",
+        "jawMismatch",
+        "eyeMismatch",
+        "noseMismatch",
+        "mouthMismatch",
+        "hairMismatch",
+        "facialHairMismatch",
+        "bodyPreferenceMismatch",
+        "catalogCoverageGap",
+        "captureQuality",
+        "uncertain"
+      ]
+    },
+    "reviewerAgreement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewerIDs", "agreedTopChoice", "agreedTopThreeSet", "agreementNotes"],
+      "properties": {
+        "reviewerIDs": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/text" } },
+        "agreedTopChoice": { "type": ["boolean", "null"] },
+        "agreedTopThreeSet": { "type": ["boolean", "null"] },
+        "agreementNotes": { "$ref": "#/$defs/text" }
+      }
+    },
+    "rawMediaDeletionState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "requestedAt", "completedAt", "verifiedBy", "retentionConsentRecordID"],
+      "properties": {
+        "status": { "enum": ["notCaptured", "pendingDeletion", "deleted", "retainedWithExplicitConsent"] },
+        "requestedAt": { "$ref": "#/$defs/nullableTimestamp" },
+        "completedAt": { "$ref": "#/$defs/nullableTimestamp" },
+        "verifiedBy": { "type": ["string", "null"] },
+        "retentionConsentRecordID": { "type": ["string", "null"] }
+      }
+    },
+    "catalogVersion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalogVersionID", "game", "platform", "gameVersion", "patchVersion", "verifiedAt"],
+      "properties": {
+        "catalogVersionID": { "$ref": "#/$defs/text" },
+        "game": { "$ref": "#/$defs/text" },
+        "platform": { "$ref": "#/$defs/text" },
+        "gameVersion": { "$ref": "#/$defs/text" },
+        "patchVersion": { "$ref": "#/$defs/text" },
+        "verifiedAt": { "$ref": "#/$defs/nullableTimestamp" }
+      }
+    },
+    "resultTimestamps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capturedAt", "reviewedAt", "subjectSelectedAt", "finalizedAt"],
+      "properties": {
+        "capturedAt": { "$ref": "#/$defs/nullableTimestamp" },
+        "reviewedAt": { "$ref": "#/$defs/nullableTimestamp" },
+        "subjectSelectedAt": { "$ref": "#/$defs/nullableTimestamp" },
+        "finalizedAt": { "$ref": "#/$defs/nullableTimestamp" }
+      }
+    }
+  }
+}

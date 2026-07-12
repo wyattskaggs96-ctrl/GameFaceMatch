@@ -5,6 +5,8 @@ NOT A VERIFIED GAME RECORD
 
 This folder is for manually collecting evidence before a catalog item can ever be published. Nothing in this workspace is user-facing production catalog data.
 
+Audit-session records and draft catalog entries in this namespace must use `sourceType: "researchDraft"` until they pass the full production publication workflow.
+
 ## Start Here
 
 1. Create an audit session from `templates/audit-session-template.json`.

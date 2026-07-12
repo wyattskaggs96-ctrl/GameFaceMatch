@@ -4,8 +4,9 @@
   "title": "GameCatalogManifest",
   "type": "object",
   "additionalProperties": true,
-  "required": ["catalogVersion", "generatedAt", "isProduction", "items"],
+  "required": ["sourceType", "catalogVersion", "generatedAt", "isProduction", "items"],
   "properties": {
+    "sourceType": { "$ref": "#/$defs/sourceType" },
     "catalogVersion": {
       "type": "object",
       "required": ["identifier", "gameVersion", "platform", "verifiedAt"],
@@ -21,5 +22,10 @@
     "declaredItemCount": { "type": "integer", "minimum": 0 },
     "packageChecksum": { "type": "string" },
     "items": { "type": "array", "items": { "$ref": "catalog-item.schema.json" } }
+  },
+  "$defs": {
+    "sourceType": {
+      "enum": ["production", "researchDraft", "testFixture", "demoData", "localDeveloperSample"]
+    }
   }
 }

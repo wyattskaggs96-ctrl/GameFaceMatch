@@ -83,7 +83,7 @@ export function createRuleBasedMatchingEngine(config: MatchingFeatureConfig[] = 
     modelVersion: "rule-based-web-mvp-v2-rgb-geometry",
     matchTopThree(input) {
       const candidates = input.catalog.items
-        .filter((item) => item.verificationState === "verified" && (input.allowTestFixtures || !item.isTestFixture))
+        .filter((item) => item.verificationState === "verified" && hasAllowedSourceType(item, input.allowTestFixtures ?? false))
         .filter((item) => hasVerifiedMenuInstructions(item, input.allowTestFixtures ?? false))
         .map((item) => scoreCatalogItem({ profile: input.profile, item, catalog: input.catalog, config, preferences: input.preferences, modelVersion: this.modelVersion }))
         .sort(compareMatches);
@@ -304,10 +304,15 @@ function readCatalogMeasurementConfidence(measurement: number | CatalogFacialMea
 function hasVerifiedMenuInstructions(item: GameCatalogItem, allowTestFixtures: boolean) {
   return (
     item.verificationState === "verified" &&
-    (allowTestFixtures || !item.isTestFixture) &&
+    hasAllowedSourceType(item, allowTestFixtures) &&
     (item.navigationInstructions ?? []).length > 0 &&
     (item.navigationInstructions ?? []).every((instruction) => instruction.instruction.trim().length > 0 && instruction.evidenceAssetID.trim().length > 0)
   );
+}
+
+function hasAllowedSourceType(item: GameCatalogItem, allowTestFixtures: boolean) {
+  if (allowTestFixtures) return item.sourceType === "testFixture" && item.isTestFixture;
+  return item.sourceType === "production" && !item.isTestFixture;
 }
 
 function findAttribute(attributes: AppearanceAttribute[], category: UserConfirmedAttributeCategory) {

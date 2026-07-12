@@ -27,6 +27,16 @@ describe("catalog validation", () => {
     expect(() => validateProductionCatalog(manifest([item]))).toThrow(/Fixture record/);
   });
 
+  it("rejects non-production source types in production", () => {
+    const catalog = manifest([validItem("source-type")]);
+    catalog.sourceType = "researchDraft";
+    expect(() => validateProductionCatalog(catalog)).toThrow(/sourceType researchDraft/);
+
+    const item = validItem("fixture-source-type");
+    item.sourceType = "testFixture";
+    expect(() => validateProductionCatalog(manifest([item]))).toThrow(/testFixture record/);
+  });
+
   it("rejects duplicate catalog IDs", () => {
     const item = validItem("duplicate");
     expect(() => validateProductionCatalog(manifest([item, item]))).toThrow(/Duplicate stable ID/);
@@ -104,6 +114,7 @@ describe("CollegeFootball27Adapter", () => {
 
 function manifest(items: GameCatalogItem[]): GameCatalogManifest {
   return {
+    sourceType: "production",
     catalogVersion: {
       identifier: "unit-test-only",
       gameVersion: "unit-test-version",
@@ -118,6 +129,7 @@ function manifest(items: GameCatalogItem[]): GameCatalogManifest {
 
 function validItem(id: string): GameCatalogItem {
   return {
+    sourceType: "production",
     stableInternalID: id,
     game: "EA SPORTS College Football 27",
     gameVersion: "unit-test-version",

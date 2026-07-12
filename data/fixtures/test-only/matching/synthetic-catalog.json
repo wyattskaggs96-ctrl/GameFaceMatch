@@ -1,4 +1,5 @@
 {
+  "sourceType": "testFixture",
   "fixtureNotice": "TEST-ONLY SYNTHETIC MATCHING FIXTURE - NOT PRODUCTION DATA - NOT A VERIFIED GAME RECORD",
   "catalogVersion": {
     "identifier": "synthetic-test-catalog-v1",
@@ -10,6 +11,7 @@
   "isProduction": false,
   "items": [
     {
+      "sourceType": "testFixture",
       "stableInternalID": "synthetic-match-alpha",
       "game": "SYNTHETIC_TEST_GAME_DO_NOT_USE",
       "gameVersion": "synthetic-test-version",
@@ -48,6 +50,7 @@
       "isTestFixture": true
     },
     {
+      "sourceType": "testFixture",
       "stableInternalID": "synthetic-match-beta",
       "game": "SYNTHETIC_TEST_GAME_DO_NOT_USE",
       "gameVersion": "synthetic-test-version",
@@ -86,6 +89,7 @@
       "isTestFixture": true
     },
     {
+      "sourceType": "testFixture",
       "stableInternalID": "synthetic-match-gamma",
       "game": "SYNTHETIC_TEST_GAME_DO_NOT_USE",
       "gameVersion": "synthetic-test-version",

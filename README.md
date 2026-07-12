@@ -9,7 +9,7 @@ The app does not import a face into the game, identify people, control a console
 - `docs/` — product requirements and engineering documentation
 - `web/` — active responsive TypeScript/React/Next.js MVP client
 - `ios/` — preserved SwiftUI future native premium-capture client and tests
-- `data/` — schemas, verified production catalogs, and isolated test fixtures
+- `data/` — schemas plus separated `production`, `researchDraft`, `testFixture`, `demoData`, and `localDeveloperSample` namespaces
 - `admin/` — future catalog review and annotation tools
 - `scripts/` — validation and export utilities
 - `legal/` — draft privacy, terms, and trademark-review materials

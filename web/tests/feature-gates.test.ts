@@ -5,10 +5,10 @@ import type { GameCatalogItem, GameCatalogManifest } from "@/types/domain";
 
 describe("feature and capability gates", () => {
   it("keeps fixture records from enabling production recommendations", async () => {
-    const catalog = await approvedStyleCatalog({ itemOverrides: { isTestFixture: true } });
+    const catalog = await approvedStyleCatalog({ itemOverrides: { sourceType: "testFixture", isTestFixture: true } });
     const gates = await gatesFor(catalog);
     expect(gates.recommendationsEnabled.enabled).toBe(false);
-    expect(gates.catalogVerified.reason).toMatch(/Fixture record/i);
+    expect(gates.catalogVerified.reason).toMatch(/fixture/i);
   });
 
   it("keeps an unverified catalog from enabling recommendations", async () => {
@@ -97,6 +97,7 @@ async function approvedStyleCatalog(options: { itemOverrides?: Partial<GameCatal
     ...options.itemOverrides
   };
   const catalog: GameCatalogManifest = {
+    sourceType: "production",
     catalogVersion: {
       identifier: "unit-test-approved-release-v1",
       gameVersion: "unit-test-version",
@@ -114,6 +115,7 @@ async function approvedStyleCatalog(options: { itemOverrides?: Partial<GameCatal
 
 function validItem(id: string): GameCatalogItem {
   return {
+    sourceType: "production",
     stableInternalID: id,
     game: "EA SPORTS College Football 27",
     gameVersion: "unit-test-version",

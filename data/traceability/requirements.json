@@ -190,15 +190,49 @@
       "owningModule": "Catalog validation",
       "implementationFiles": [
         "data/catalog/production/catalog_manifest.json",
+        "data/README.md",
+        "web/lib/data/source-types.ts",
         "web/lib/catalog/catalog-validator.ts",
         "scripts/catalog-tools.mjs"
       ],
       "testFiles": [
         "web/tests/catalog.test.ts",
-        "web/tests/catalog-workflow.test.ts"
+        "web/tests/catalog-workflow.test.ts",
+        "web/tests/integrity.test.ts"
       ],
       "status": "VERIFIED",
-      "evidence": "Empty production catalog validates; unverified, fixture, placeholder, missing metadata, malformed measurement, duplicate ID, and unavailable asset cases are tested.",
+      "evidence": "Empty production catalog validates; unverified, fixture, non-production sourceType, placeholder, missing metadata, malformed measurement, duplicate ID, and unavailable asset cases are tested.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-CAT-005",
+      "source": "AGENTS.md",
+      "section": "Permanent rules and Prompt 16 data separation",
+      "summary": "Enforce separate production catalog, research draft, test fixture, demo data, and local developer sample namespaces with explicit sourceType markers, UI data-class labels, build-time validation, and fixture promotion rejection.",
+      "owningModule": "Catalog and data integrity",
+      "implementationFiles": [
+        "data/README.md",
+        "data/catalog/production/catalog_manifest.json",
+        "data/audit/college-football-27/",
+        "data/fixtures/test-only/",
+        "data/demo/",
+        "data/local-samples/",
+        "web/lib/data/source-types.ts",
+        "web/lib/catalog/catalog-validator.ts",
+        "web/features/catalog/GameCatalogStatus.tsx",
+        "web/scripts/integrity-check.mjs",
+        "scripts/catalog-tools.mjs"
+      ],
+      "testFiles": [
+        "web/tests/catalog.test.ts",
+        "web/tests/catalog-workflow.test.ts",
+        "web/tests/integrity.test.ts",
+        "web/tests/feature-gates.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Catalog-like production, research, fixture, demo, and local sample namespaces are documented and sourceType-marked. Runtime validation, catalog CLI publication, integrity checks, feature gates, and unit tests reject fixture/non-production data in production and include an intentional fixture-promotion rejection test.",
       "blocker": "",
       "owner": "Catalog systems architect",
       "lastCheckedDate": "2026-07-12"
@@ -423,6 +457,29 @@
       ],
       "status": "VERIFIED",
       "evidence": "Second-person verification and discrepancy-resolution schemas include the approved final dispositions, primary and verifier observations, scope, evidence/front-view/secondary-angle checks, randomization method, discrepancy type, resolution action, resolution evidence, both-party acknowledgments, and final disposition. Tests verify schema status enums, required fields, publishable verified records, blocked non-verified dispositions, missing evidence and acknowledgments, discrepancy resolution evidence, and catalog publish blocking for unverified records.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-P0-012",
+      "source": "GameFace Match Phase Zero Readiness Review",
+      "section": "Manual top-three feasibility study",
+      "summary": "Define the future 10-20-person manual matching study schema with consent records, pseudonymous subject IDs, capture mode, reference-view completeness, human reviewers, ranked head choices, hair and facial-hair choices, subject preference, selected rank, mismatch reasons, reviewer agreement, raw-media deletion state, catalog version, and result timestamps.",
+      "owningModule": "Phase 0 manual matching study",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-manual-matching-study.ts",
+        "data/schemas/manual-matching-study.schema.json",
+        "data/fixtures/test-only/manual-matching-study/synthetic-study-result.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-manual-matching-study.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The manual study schema and validator track the requested study, consent, pseudonymous subject, capture, reference-view, reviewer, ranked-choice, subject-preference, mismatch, agreement, deletion, catalog-version, and timestamp fields. Tests verify the required schema fields, fixture-only synthetic record, missing reference-view warnings, consent rejection, two-reviewer agreement, ranked top-three integrity, selected-rank validation, raw-media retention consent, and fixture-only namespace enforcement.",
       "blocker": "",
       "owner": "Catalog systems architect",
       "lastCheckedDate": "2026-07-12"

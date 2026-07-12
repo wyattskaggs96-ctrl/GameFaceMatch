@@ -1,4 +1,4 @@
-import type { GameCatalogManifest, GameCatalogVersion } from "@/types/domain";
+import type { DataSourceType, GameCatalogManifest, GameCatalogVersion } from "@/types/domain";
 import {
   assessCatalogStaleness,
   checkCatalogCompatibility,
@@ -18,6 +18,7 @@ export interface CatalogRepository {
   getRuntimeErrors(): CatalogRuntimeErrorRecord[];
   getCatalogStatus(): Promise<{
     isEmpty: boolean;
+    sourceType: DataSourceType;
     version: GameCatalogVersion;
     verifiedAt: string | null;
     integrity: CatalogIntegrityReport;
@@ -79,6 +80,7 @@ export function createBundledCatalogRepository(
       const validManifest = status.manifest;
       return {
         isEmpty: validManifest.items.length === 0,
+        sourceType: validManifest.sourceType,
         version: validManifest.catalogVersion,
         verifiedAt: validManifest.catalogVersion.verifiedAt,
         integrity: status.integrity,

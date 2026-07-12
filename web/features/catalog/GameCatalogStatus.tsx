@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Alert, Card, LoadingState, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { createBundledCatalogRepository, type CatalogRuntimeStatus } from "@/lib/catalog/catalog-repository";
+import { getDataSourceTypeLabel } from "@/lib/data/source-types";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
 
 export function GameCatalogStatus() {
@@ -38,6 +39,10 @@ export function GameCatalogStatus() {
             <div>
               <span>Manifest</span>
               <strong>{manifest.catalogVersion.identifier}</strong>
+            </div>
+            <div>
+              <span>Data class</span>
+              <strong>{getDataSourceTypeLabel(manifest.sourceType)}</strong>
             </div>
             <div>
               <span>UI records</span>

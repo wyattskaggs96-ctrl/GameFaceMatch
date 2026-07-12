@@ -668,6 +668,30 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-021",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Additional attributes workspace",
+      "summary": "Provide a generic workspace for all other resemblance-related controls supporting presets, carousels, numbered options, named options, sliders, colors, and toggles while tracking count or range, default, minimum, maximum, step, geometry/texture/color/presentation-only effects, reset-on-head-change behavior, later visibility, recommendation suitability, stable identifier availability, boundary evidence, representative evidence, dependencies, and verification state without pre-populating categories as confirmed.",
+      "owningModule": "Phase 0 additional attributes audit",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-additional-attributes-workspace.ts",
+        "web/features/phase-zero/AdditionalAttributesWorkspace.tsx",
+        "data/schemas/additional-attributes-workspace.schema.json",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-additional-attributes-workspace.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The dev-only additional attributes workspace starts blank, supports generic control mechanics for presets, carousels, numbered options, named options, sliders, colors, and toggles, records count/range/default/min/max/step, effect classifications, reset-on-head-change behavior, later visibility, recommendation suitability, stable identifier availability, boundary and representative evidence, dependencies, verification state, and catalog-manager disposition. Validation blocks production completion when evidence, ranges, effects, stable ID, dependency, recommendation, or verification gates are incomplete.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

@@ -3,6 +3,7 @@
 import { Alert, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { createPhase0AuditDashboardReport, type Phase0AuditDashboardReport } from "@/lib/phase-zero/phase-zero-audit-dashboard";
 import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusReport } from "@/lib/phase-zero/phase-zero-status";
+import { AdditionalAttributesWorkspace } from "./AdditionalAttributesWorkspace";
 import { CaptureConfigurationEditor } from "./CaptureConfigurationEditor";
 import { CreationPathAuditWorkspace } from "./CreationPathAuditWorkspace";
 import { EnvironmentManifestWizard } from "./EnvironmentManifestWizard";
@@ -45,6 +46,7 @@ export function Phase0StatusPanel({
       <HeadCaptureWorkspace />
       <HairstyleCaptureWorkspace />
       <FacialHairCaptureWorkspace />
+      <AdditionalAttributesWorkspace />
       <Phase0AuditDashboard dashboard={dashboard} />
       <div className="card-grid">
         <Card>

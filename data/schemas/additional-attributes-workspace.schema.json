@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/additional-attributes-workspace.schema.json",
+  "title": "Phase0AdditionalAttributesWorkspace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "workspaceID",
+    "createdAt",
+    "updatedAt",
+    "gameID",
+    "platformCode",
+    "modeCode",
+    "gameVersionID",
+    "patchID",
+    "creationPathID",
+    "menuMapID",
+    "entries"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-additional-attributes-workspace-v1" },
+    "workspaceID": { "$ref": "#/$defs/id" },
+    "createdAt": { "$ref": "#/$defs/timestamp" },
+    "updatedAt": { "$ref": "#/$defs/timestamp" },
+    "gameID": { "$ref": "#/$defs/id" },
+    "platformCode": { "$ref": "#/$defs/code" },
+    "modeCode": { "$ref": "#/$defs/code" },
+    "gameVersionID": { "$ref": "#/$defs/id" },
+    "patchID": { "$ref": "#/$defs/id" },
+    "creationPathID": { "$ref": "#/$defs/id" },
+    "menuMapID": { "$ref": "#/$defs/id" },
+    "entries": { "type": "array", "items": { "$ref": "#/$defs/entry" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "code": { "type": "string", "pattern": "^[A-Z0-9]+$" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "controlType": { "enum": ["preset", "carousel", "numberedOptions", "namedOptions", "slider", "color", "toggle"] },
+    "effectState": { "enum": ["unknown", "none", "minor", "major"] },
+    "laterVisibility": { "enum": ["unknown", "visibleLater", "hiddenLater", "lockedLater", "notApplicable"] },
+    "recommendationSuitability": { "enum": ["unknown", "suitable", "supportingOnly", "notSuitable", "blockedByEvidence"] },
+    "stableIdentifierAvailability": { "enum": ["unknown", "available", "derivedFromNativeOrder", "notAvailable", "requiresVerification"] },
+    "verificationState": { "enum": ["draft", "firstReviewPending", "firstReviewApproved", "secondReviewPending", "verified", "rejected", "retired"] },
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "defaultValue", "minimum", "maximum", "step"],
+      "properties": {
+        "count": { "type": ["integer", "null"], "minimum": 0 },
+        "defaultValue": { "type": ["string", "number", "boolean", "null"] },
+        "minimum": { "type": ["number", "null"] },
+        "maximum": { "type": ["number", "null"] },
+        "step": { "type": ["number", "null"] }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["geometryEffect", "textureEffect", "colorEffect", "presentationOnlyEffect"],
+      "properties": {
+        "geometryEffect": { "$ref": "#/$defs/effectState" },
+        "textureEffect": { "$ref": "#/$defs/effectState" },
+        "colorEffect": { "$ref": "#/$defs/effectState" },
+        "presentationOnlyEffect": { "$ref": "#/$defs/effectState" }
+      }
+    },
+    "evidenceSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["boundaryEvidenceIDs", "representativeEvidenceIDs", "notes"],
+      "properties": {
+        "boundaryEvidenceIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "representativeEvidenceIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "notes": { "type": "string" }
+      }
+    },
+    "dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dependencyID", "condition", "dependsOnStableID", "dependsOnMenuID", "evidenceFileIDs", "notes"],
+      "properties": {
+        "dependencyID": { "$ref": "#/$defs/id" },
+        "condition": { "type": "string", "minLength": 1 },
+        "dependsOnStableID": { "type": ["string", "null"] },
+        "dependsOnMenuID": { "type": ["string", "null"] },
+        "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entryID",
+        "stableInternalID",
+        "nativeCategoryLabel",
+        "nativeControlLabel",
+        "nativeOrder",
+        "controlType",
+        "range",
+        "effects",
+        "resetOnHeadChange",
+        "laterVisibility",
+        "recommendationSuitability",
+        "stableIdentifierAvailability",
+        "evidence",
+        "dependencies",
+        "verificationStatus",
+        "catalogManagerDisposition",
+        "notes"
+      ],
+      "properties": {
+        "entryID": { "$ref": "#/$defs/id" },
+        "stableInternalID": { "type": ["string", "null"], "pattern": "^CF27_[A-Z0-9]+_[A-Z0-9]+_[A-Z0-9]+_[0-9]{3}$" },
+        "nativeCategoryLabel": { "type": "string", "minLength": 1 },
+        "nativeControlLabel": { "type": "string", "minLength": 1 },
+        "nativeOrder": { "type": "integer", "minimum": 1 },
+        "controlType": { "$ref": "#/$defs/controlType" },
+        "range": { "$ref": "#/$defs/range" },
+        "effects": { "$ref": "#/$defs/effects" },
+        "resetOnHeadChange": { "type": ["boolean", "null"] },
+        "laterVisibility": { "$ref": "#/$defs/laterVisibility" },
+        "recommendationSuitability": { "$ref": "#/$defs/recommendationSuitability" },
+        "stableIdentifierAvailability": { "$ref": "#/$defs/stableIdentifierAvailability" },
+        "evidence": { "$ref": "#/$defs/evidenceSet" },
+        "dependencies": { "type": "array", "items": { "$ref": "#/$defs/dependency" } },
+        "verificationStatus": { "$ref": "#/$defs/verificationState" },
+        "catalogManagerDisposition": { "enum": ["notReady", "readyForReview", "accepted", "rejected", "deferred"] },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

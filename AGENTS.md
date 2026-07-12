@@ -1,6 +1,7 @@
 # Codex Engineering Rules
 
 Codex and all contributors must read `docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md` before changing the project.
+Before changing catalog, matching, capture, privacy, or verification behavior, contributors must also consult `docs/governance/SOURCE_REGISTRY.md` to confirm which source documents are binding, advisory, superseded, or unrelated.
 
 ## Permanent rules
 

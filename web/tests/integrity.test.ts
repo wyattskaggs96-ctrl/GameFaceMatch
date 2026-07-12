@@ -18,6 +18,24 @@ describe("production bundle boundaries", () => {
   });
 });
 
+describe("source governance", () => {
+  it("keeps a registry that classifies binding and unrelated sources", () => {
+    const registryPath = path.resolve(process.cwd(), "../docs/governance/SOURCE_REGISTRY.md");
+    const registry = fs.readFileSync(registryPath, "utf8");
+    expect(registry).toContain("docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md");
+    expect(registry).toContain("EA Sports College Football 27");
+    expect(registry).toContain("Skaggs Systems First Customer Autopilot source");
+    expect(registry).toContain("Unrelated");
+    expect(registry).toContain("Excluded");
+  });
+
+  it("requires contributors to consult the source registry", () => {
+    const agentsPath = path.resolve(process.cwd(), "../AGENTS.md");
+    const agents = fs.readFileSync(agentsPath, "utf8");
+    expect(agents).toContain("docs/governance/SOURCE_REGISTRY.md");
+  });
+});
+
 describe("key navigation flow", () => {
   it("contains the expected customer-facing sequence", () => {
     expect(KEY_NAVIGATION_FLOW).toEqual([

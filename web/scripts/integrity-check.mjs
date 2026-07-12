@@ -2,7 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+const repositoryRoot = path.resolve(root, "..");
 const publicDir = path.join(root, "public");
+const sourceRegistryPath = path.join(repositoryRoot, "docs", "governance", "SOURCE_REGISTRY.md");
+const agentsPath = path.join(repositoryRoot, "AGENTS.md");
 const suspiciousPatterns = [
   new RegExp("api[_-]?key\\s*[:=]", "i"),
   new RegExp("client[_-]?secret\\s*[:=]", "i"),
@@ -27,6 +30,8 @@ const fakeGameDataPatterns = [
 const files = listFiles(root).filter((file) => !file.includes(`${path.sep}node_modules${path.sep}`) && !file.includes(`${path.sep}.next${path.sep}`));
 const publicFiles = fs.existsSync(publicDir) ? listFiles(publicDir) : [];
 
+validateSourceGovernance();
+
 const bundledFixture = publicFiles.find((file) => file.includes(`${path.sep}fixtures${path.sep}`) || file.includes("test-only"));
 if (bundledFixture) {
   fail(`Test fixture appears in production bundle surface: ${bundledFixture}`);
@@ -49,6 +54,23 @@ for (const file of files.filter((file) => file.includes(`${path.sep}public${path
 }
 
 console.log("Integrity OK");
+
+function validateSourceGovernance() {
+  if (!fs.existsSync(sourceRegistryPath)) {
+    fail(`Source governance registry is missing: ${sourceRegistryPath}`);
+  }
+  const registry = safeRead(sourceRegistryPath);
+  if (!registry.includes("Skaggs Systems First Customer Autopilot source") || !registry.includes("Unrelated") || !registry.includes("Excluded")) {
+    fail("Source governance registry must explicitly classify the Skaggs Systems source as unrelated and excluded.");
+  }
+  if (!registry.includes("docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md") || !registry.includes("EA Sports College Football 27")) {
+    fail("Source governance registry must include GameFace Match binding source documents.");
+  }
+  const agents = safeRead(agentsPath);
+  if (!agents.includes("docs/governance/SOURCE_REGISTRY.md")) {
+    fail("AGENTS.md must require contributors to consult the source registry.");
+  }
+}
 
 function listFiles(directory) {
   if (!fs.existsSync(directory)) return [];

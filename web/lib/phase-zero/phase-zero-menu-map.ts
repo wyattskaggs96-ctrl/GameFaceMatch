@@ -9,6 +9,21 @@ export type Phase0MenuVisibleLabelState = "visible" | "hidden" | "conditional" |
 export type Phase0MenuResetBehavior = "resetsToDefault" | "persists" | "resetsToPrevious" | "unknown";
 export type Phase0MenuLaterEditability = "editableLater" | "lockedAfterCreation" | "conditional" | "unknown";
 
+export const PHASE0_MENU_CONTROL_TYPES: Phase0MenuControlType[] = ["menu", "submenu", "list", "carousel", "slider", "toggle", "text", "colorPicker", "numericStepper", "unknown"];
+export const PHASE0_MENU_WRAP_BEHAVIORS: Phase0MenuWrapBehavior[] = ["wraps", "clamps", "none", "unknown"];
+export const PHASE0_MENU_VISIBLE_LABEL_STATES: Phase0MenuVisibleLabelState[] = ["visible", "hidden", "conditional", "unknown"];
+export const PHASE0_MENU_RESET_BEHAVIORS: Phase0MenuResetBehavior[] = ["resetsToDefault", "persists", "resetsToPrevious", "unknown"];
+export const PHASE0_MENU_LATER_EDITABILITY_STATES: Phase0MenuLaterEditability[] = ["editableLater", "lockedAfterCreation", "conditional", "unknown"];
+export const PHASE0_MENU_VERIFICATION_STATES: Phase0VerificationState[] = [
+  "draft",
+  "firstReviewPending",
+  "firstReviewApproved",
+  "secondReviewPending",
+  "verified",
+  "rejected",
+  "retired"
+];
+
 export interface Phase0MenuEvidenceReference {
   evidenceFileID: Phase0EntityID;
   description: string;
@@ -62,6 +77,7 @@ export interface Phase0MenuMapItem {
   totalValues: number | null;
   wrapBehavior: Phase0MenuWrapBehavior;
   visibleLabelState: Phase0MenuVisibleLabelState;
+  advancedControl: boolean;
   resetBehavior: Phase0MenuResetBehavior;
   laterEditability: Phase0MenuLaterEditability;
   dependencies: Phase0MenuDependency[];
@@ -100,6 +116,106 @@ export interface Phase0MenuMapValidationReport {
   warnings: Phase0MenuMapValidationIssue[];
 }
 
+export interface Phase0MenuTreeNode {
+  item: Phase0MenuMapItem;
+  children: Phase0MenuTreeNode[];
+}
+
+export type Phase0MenuMapItemInput = Partial<Phase0MenuMapItem> & Pick<Phase0MenuMapItem, "stableMenuID" | "parentMenuID" | "displayLabel" | "nativeLabel" | "nativeOrder" | "controlType" | "environmentID" | "captureResearcher">;
+
+export function createEmptyPhase0MenuMap({
+  mapID,
+  gameID,
+  creationPathID,
+  nowISO
+}: {
+  mapID: Phase0EntityID;
+  gameID: Phase0EntityID;
+  creationPathID: Phase0EntityID;
+  nowISO: ISODateString;
+}): Phase0MenuMap {
+  return {
+    schemaVersion: PHASE0_MENU_MAP_SCHEMA_VERSION,
+    mapID,
+    createdAt: nowISO,
+    updatedAt: nowISO,
+    gameID,
+    creationPathID,
+    catalogVersionID: null,
+    items: []
+  };
+}
+
+export function createPhase0MenuMapItem(input: Phase0MenuMapItemInput): Phase0MenuMapItem {
+  return {
+    minimum: null,
+    maximum: null,
+    step: null,
+    defaultValue: null,
+    totalValues: null,
+    wrapBehavior: "unknown",
+    visibleLabelState: "unknown",
+    advancedControl: false,
+    resetBehavior: "unknown",
+    laterEditability: "unknown",
+    dependencies: [],
+    locks: [],
+    warnings: [],
+    defects: [],
+    evidence: [],
+    scrollingContinuationEvidence: [],
+    verifier: null,
+    verificationStatus: "draft",
+    notes: "Research draft awaiting direct evidence.",
+    ...input
+  };
+}
+
+export function addPhase0MenuMapItem(menuMap: Phase0MenuMap, item: Phase0MenuMapItem, updatedAt: ISODateString): Phase0MenuMap {
+  return {
+    ...menuMap,
+    updatedAt,
+    items: [...menuMap.items, item]
+  };
+}
+
+export function reorderPhase0MenuSiblings(menuMap: Phase0MenuMap, parentMenuID: Phase0EntityID | null, orderedMenuIDs: Phase0EntityID[], updatedAt: ISODateString): Phase0MenuMap {
+  const orderLookup = new Map(orderedMenuIDs.map((menuID, index) => [menuID, index + 1]));
+  return {
+    ...menuMap,
+    updatedAt,
+    items: menuMap.items.map((item) => {
+      if (item.parentMenuID !== parentMenuID) return item;
+      const nextOrder = orderLookup.get(item.stableMenuID);
+      return nextOrder ? { ...item, nativeOrder: nextOrder } : item;
+    })
+  };
+}
+
+export function buildPhase0MenuTree(menuMap: Phase0MenuMap): Phase0MenuTreeNode[] {
+  function build(parentMenuID: Phase0EntityID | null): Phase0MenuTreeNode[] {
+    return getPhase0MenuChildren(menuMap, parentMenuID).map((item) => ({
+      item,
+      children: build(item.stableMenuID)
+    }));
+  }
+  return build(null);
+}
+
+export function exportReadablePhase0MenuTree(menuMap: Phase0MenuMap): string {
+  const lines = [
+    `Menu map: ${menuMap.mapID}`,
+    `Game: ${menuMap.gameID}`,
+    `Creation path: ${menuMap.creationPathID}`,
+    `Catalog version: ${menuMap.catalogVersionID ?? "not assigned"}`,
+    ""
+  ];
+  for (const node of buildPhase0MenuTree(menuMap)) {
+    appendMenuTreeLines(node, 0, lines);
+  }
+  return lines.join("\n").trimEnd();
+}
+
 export function validatePhase0MenuMap(menuMap: Phase0MenuMap): Phase0MenuMapValidationReport {
   const errors: Phase0MenuMapValidationIssue[] = [];
   const warnings: Phase0MenuMapValidationIssue[] = [];
@@ -136,6 +252,8 @@ export function validatePhase0MenuMap(menuMap: Phase0MenuMap): Phase0MenuMapVali
   for (const cycleID of findParentCycles(menuMap.items)) {
     errors.push({ code: "invalidParentCycle", message: `${cycleID} participates in a parent cycle.`, menuID: cycleID });
   }
+  warnings.push(...findSiblingOrderWarnings(menuMap.items));
+  warnings.push(...findDuplicateSiblingLabelWarnings(menuMap.items));
   return { ok: errors.length === 0, errors, warnings };
 }
 
@@ -178,6 +296,12 @@ function validateMenuItem(item: Phase0MenuMapItem, errors: Phase0MenuMapValidati
   if (item.verificationStatus === "verified" && !hasUsableText(item.verifier ?? "")) {
     errors.push({ code: "missingVerifier", message: `${item.stableMenuID} cannot be verified without a verifier.`, menuID: item.stableMenuID });
   }
+  if (item.visibleLabelState === "hidden" && item.evidence.length === 0) {
+    errors.push({ code: "missingEvidence", message: `${item.stableMenuID} hidden control state requires evidence.`, menuID: item.stableMenuID });
+  }
+  if (item.advancedControl && item.evidence.length === 0) {
+    errors.push({ code: "missingEvidence", message: `${item.stableMenuID} advanced-control marking requires evidence.`, menuID: item.stableMenuID });
+  }
   validateControlRange(item, errors);
 }
 
@@ -216,6 +340,91 @@ function findParentCycles(items: Phase0MenuMapItem[]) {
     }
   }
   return Array.from(cycleIDs).sort();
+}
+
+function findSiblingOrderWarnings(items: Phase0MenuMapItem[]): Phase0MenuMapValidationIssue[] {
+  const warnings: Phase0MenuMapValidationIssue[] = [];
+  for (const [parentID, siblings] of groupByParent(items)) {
+    const orders = siblings.map((item) => item.nativeOrder);
+    const duplicateOrders = orders.filter((order, index) => orders.indexOf(order) !== index);
+    for (const duplicateOrder of Array.from(new Set(duplicateOrders)).sort((a, b) => a - b)) {
+      warnings.push({
+        code: "duplicateNativeOrder",
+        message: `Menu siblings under ${parentID ?? "root"} reuse native order ${duplicateOrder}. Confirm whether this reflects the shipping game.`,
+        menuID: siblings.find((item) => item.nativeOrder === duplicateOrder)?.stableMenuID
+      });
+    }
+    const uniqueOrders = Array.from(new Set(orders)).sort((a, b) => a - b);
+    for (let expectedOrder = 1; expectedOrder <= uniqueOrders.length; expectedOrder += 1) {
+      if (!uniqueOrders.includes(expectedOrder)) {
+        warnings.push({
+          code: "missingNativeOrderIndex",
+          message: `Menu siblings under ${parentID ?? "root"} skip native order ${expectedOrder}. Record scroll evidence or reorder after audit.`,
+          menuID: siblings[0]?.stableMenuID
+        });
+      }
+    }
+  }
+  return warnings;
+}
+
+function findDuplicateSiblingLabelWarnings(items: Phase0MenuMapItem[]): Phase0MenuMapValidationIssue[] {
+  const warnings: Phase0MenuMapValidationIssue[] = [];
+  for (const [parentID, siblings] of groupByParent(items)) {
+    for (const labelType of ["displayLabel", "nativeLabel"] as const) {
+      const byLabel = siblings.reduce((map, item) => {
+        const normalizedLabel = item[labelType].trim().toLowerCase();
+        if (!normalizedLabel) return map;
+        map.set(normalizedLabel, [...(map.get(normalizedLabel) ?? []), item]);
+        return map;
+      }, new Map<string, Phase0MenuMapItem[]>());
+      for (const [label, duplicates] of byLabel) {
+        if (duplicates.length > 1) {
+          warnings.push({
+            code: "duplicateSiblingLabel",
+            message: `Menu siblings under ${parentID ?? "root"} share ${labelType} "${label}". This may be legitimate; attach evidence or notes.`,
+            menuID: duplicates[0].stableMenuID
+          });
+        }
+      }
+    }
+  }
+  return warnings;
+}
+
+function groupByParent(items: Phase0MenuMapItem[]) {
+  return items.reduce((groups, item) => {
+    const siblings = groups.get(item.parentMenuID) ?? [];
+    groups.set(item.parentMenuID, [...siblings, item]);
+    return groups;
+  }, new Map<Phase0EntityID | null, Phase0MenuMapItem[]>());
+}
+
+function appendMenuTreeLines(node: Phase0MenuTreeNode, depth: number, lines: string[]) {
+  const prefix = "  ".repeat(depth);
+  const hiddenLabel = node.item.visibleLabelState === "hidden" ? " hidden" : "";
+  const advancedLabel = node.item.advancedControl ? " advanced" : "";
+  const rangeLabel = formatRangeLabel(node.item);
+  lines.push(
+    `${prefix}${node.item.nativeOrder}. ${node.item.displayLabel} [${node.item.stableMenuID}] (${node.item.controlType}${hiddenLabel}${advancedLabel})${rangeLabel}`
+  );
+  if (node.item.dependencies.length > 0) {
+    lines.push(`${prefix}   dependencies: ${node.item.dependencies.map((dependency) => dependency.condition).join("; ")}`);
+  }
+  if (node.item.locks.length > 0) {
+    lines.push(`${prefix}   locks: ${node.item.locks.map((lock) => lock.reason).join("; ")}`);
+  }
+  if (node.item.defects.length > 0) {
+    lines.push(`${prefix}   defects: ${node.item.defects.map((defect) => `${defect.severity}: ${defect.description}`).join("; ")}`);
+  }
+  for (const child of node.children) {
+    appendMenuTreeLines(child, depth + 1, lines);
+  }
+}
+
+function formatRangeLabel(item: Phase0MenuMapItem) {
+  if (item.minimum === null && item.maximum === null && item.step === null && item.defaultValue === null && item.totalValues === null) return "";
+  return ` range[min=${item.minimum ?? "n/a"}, max=${item.maximum ?? "n/a"}, step=${item.step ?? "n/a"}, default=${String(item.defaultValue ?? "n/a")}, total=${item.totalValues ?? "n/a"}]`;
 }
 
 function isISODate(value: string) {

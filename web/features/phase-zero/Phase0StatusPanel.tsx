@@ -6,6 +6,7 @@ import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusRepor
 import { CaptureConfigurationEditor } from "./CaptureConfigurationEditor";
 import { CreationPathAuditWorkspace } from "./CreationPathAuditWorkspace";
 import { EnvironmentManifestWizard } from "./EnvironmentManifestWizard";
+import { MenuMapEditor } from "./MenuMapEditor";
 
 const statusTone = {
   NOT_STARTED: "neutral",
@@ -36,6 +37,7 @@ export function Phase0StatusPanel({
       </Alert>
       <EnvironmentManifestWizard />
       <CreationPathAuditWorkspace />
+      <MenuMapEditor />
       <CaptureConfigurationEditor />
       <Phase0AuditDashboard dashboard={dashboard} />
       <div className="card-grid">

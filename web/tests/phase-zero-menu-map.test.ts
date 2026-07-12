@@ -1,7 +1,18 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { getPhase0MenuChildren, PHASE0_MENU_MAP_SCHEMA_VERSION, validatePhase0MenuMap, type Phase0MenuMap, type Phase0MenuMapItem } from "@/lib/phase-zero/phase-zero-menu-map";
+import {
+  addPhase0MenuMapItem,
+  createEmptyPhase0MenuMap,
+  createPhase0MenuMapItem,
+  exportReadablePhase0MenuTree,
+  getPhase0MenuChildren,
+  PHASE0_MENU_MAP_SCHEMA_VERSION,
+  reorderPhase0MenuSiblings,
+  validatePhase0MenuMap,
+  type Phase0MenuMap,
+  type Phase0MenuMapItem
+} from "@/lib/phase-zero/phase-zero-menu-map";
 
 const now = "2026-07-12T00:00:00.000Z";
 
@@ -24,6 +35,7 @@ describe("Phase 0 menu-map schema", () => {
       "totalValues",
       "wrapBehavior",
       "visibleLabelState",
+      "advancedControl",
       "resetBehavior",
       "laterEditability",
       "dependencies",
@@ -85,6 +97,89 @@ describe("Phase 0 menu-map schema", () => {
     menuMap.items[0].verificationStatus = "verified";
     menuMap.items[0].verifier = null;
     expect(validatePhase0MenuMap(menuMap).errors.map((error) => error.code)).toContain("missingVerifier");
+  });
+
+  it("adds parent and child menu items without assuming game categories", () => {
+    let menuMap = createEmptyPhase0MenuMap({
+      mapID: "menu-map-editor-synthetic",
+      gameID: "game-synthetic",
+      creationPathID: "creation-path-synthetic",
+      nowISO: now
+    });
+    menuMap = addPhase0MenuMapItem(
+      menuMap,
+      createPhase0MenuMapItem({
+        stableMenuID: "menu-operator-entered-root",
+        parentMenuID: null,
+        displayLabel: "operator-entered-root",
+        nativeLabel: "operator-entered-root",
+        nativeOrder: 1,
+        controlType: "menu",
+        environmentID: "environment-synthetic",
+        captureResearcher: "synthetic-researcher",
+        evidence: [{ evidenceFileID: "evidence-root", description: "Synthetic full-screen root evidence." }],
+        notes: "Operator-entered synthetic root."
+      }),
+      now
+    );
+    menuMap = addPhase0MenuMapItem(
+      menuMap,
+      createPhase0MenuMapItem({
+        stableMenuID: "menu-operator-entered-child",
+        parentMenuID: "menu-operator-entered-root",
+        displayLabel: "operator-entered-child",
+        nativeLabel: "operator-entered-child",
+        nativeOrder: 1,
+        controlType: "submenu",
+        environmentID: "environment-synthetic",
+        captureResearcher: "synthetic-researcher",
+        evidence: [{ evidenceFileID: "evidence-child", description: "Synthetic full-screen child evidence." }],
+        notes: "Operator-entered synthetic child."
+      }),
+      now
+    );
+
+    expect(validatePhase0MenuMap(menuMap).ok).toBe(true);
+    expect(exportReadablePhase0MenuTree(menuMap)).toContain("operator-entered-child");
+  });
+
+  it("warns about missing native order indices and duplicate sibling labels", () => {
+    const menuMap = validMenuMap();
+    menuMap.items.push(menuItem({
+      stableMenuID: "menu-duplicate-label",
+      parentMenuID: "menu-appearance",
+      displayLabel: "synthetic-head",
+      nativeLabel: "synthetic-head",
+      nativeOrder: 3,
+      controlType: "list"
+    }));
+
+    const warningCodes = validatePhase0MenuMap(menuMap).warnings.map((warning) => warning.code);
+    expect(warningCodes).toContain("missingNativeOrderIndex");
+    expect(warningCodes).toContain("duplicateSiblingLabel");
+  });
+
+  it("reorders siblings by native order and exports advanced hidden controls", () => {
+    const menuMap = validMenuMap();
+    menuMap.items.push(menuItem({
+      stableMenuID: "menu-advanced-hidden",
+      parentMenuID: "menu-appearance",
+      displayLabel: "synthetic-advanced-hidden",
+      nativeLabel: "synthetic-advanced-hidden",
+      nativeOrder: 2,
+      controlType: "toggle",
+      visibleLabelState: "hidden",
+      advancedControl: true
+    }));
+
+    const reordered = reorderPhase0MenuSiblings(menuMap, "menu-appearance", ["menu-advanced-hidden", "menu-head"], now);
+    expect(getPhase0MenuChildren(reordered, "menu-appearance").map((item) => `${item.stableMenuID}:${item.nativeOrder}`)).toEqual([
+      "menu-advanced-hidden:1",
+      "menu-head:2"
+    ]);
+    const tree = exportReadablePhase0MenuTree(reordered);
+    expect(tree).toContain("menu-advanced-hidden");
+    expect(tree).toContain("hidden advanced");
   });
 });
 
@@ -157,6 +252,7 @@ function menuItem(input: Partial<Phase0MenuMapItem> & Pick<Phase0MenuMapItem, "s
     totalValues: null,
     wrapBehavior: "none",
     visibleLabelState: "visible",
+    advancedControl: false,
     resetBehavior: "resetsToDefault",
     laterEditability: "editableLater",
     dependencies: [],

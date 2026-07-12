@@ -574,6 +574,29 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-017",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Menu-map editor",
+      "summary": "Provide a hierarchical menu-map editor for adding parent and child menus, sorting by native order, recording control metadata, ranges, defaults, steps, wrap behavior, dependencies, locks, full-screen and scroll-continuation evidence, hidden and advanced controls, defects, verification status, missing-order diagnostics, duplicate-label warnings, and readable tree export without assuming source-document categories.",
+      "owningModule": "Phase 0 menu map",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-menu-map.ts",
+        "web/features/phase-zero/MenuMapEditor.tsx",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "data/schemas/menu-map.schema.json",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-menu-map.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The dev-only menu-map editor starts blank, lets operators add parent/child menu items, records control ranges and evidence metadata, marks hidden and advanced controls, captures dependencies, locks, defects, and verification state, reports missing native-order indices and duplicate sibling labels as warnings, normalizes sibling order, and exports a readable menu tree. Tests cover the editor-facing helpers and diagnostics with synthetic-only records.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

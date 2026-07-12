@@ -81,7 +81,8 @@ const requiredSchemas = [
   "data/schemas/asset-reference.schema.json",
   "data/schemas/review-record.schema.json",
   "data/schemas/navigation-instruction.schema.json",
-  "data/schemas/publication-record.schema.json"
+  "data/schemas/publication-record.schema.json",
+  "data/schemas/phase-zero-domain.schema.json"
 ];
 
 export const CURRENT_PHASE0_REPOSITORY_STATE: Phase0RepositoryState = {

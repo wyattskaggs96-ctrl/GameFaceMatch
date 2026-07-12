@@ -1,0 +1,517 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/phase-zero-domain.schema.json",
+  "title": "PhaseZeroDomainSnapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "generatedAt",
+    "games",
+    "platforms",
+    "gameVersions",
+    "patches",
+    "auditEnvironments",
+    "creationPaths",
+    "menuItems",
+    "captureConfigurations",
+    "catalogItems",
+    "dependencyTests",
+    "evidenceFiles",
+    "captureEvents",
+    "issues",
+    "recaptureRequests",
+    "verificationRecords",
+    "discrepancies",
+    "catalogReleases",
+    "importValidationRuns",
+    "manualMatchingStudies",
+    "subjectResults"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-domain-v1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "games": { "type": "array", "items": { "$ref": "#/$defs/game" } },
+    "platforms": { "type": "array", "items": { "$ref": "#/$defs/platform" } },
+    "gameVersions": { "type": "array", "items": { "$ref": "#/$defs/gameVersion" } },
+    "patches": { "type": "array", "items": { "$ref": "#/$defs/patch" } },
+    "auditEnvironments": { "type": "array", "items": { "$ref": "#/$defs/auditEnvironment" } },
+    "creationPaths": { "type": "array", "items": { "$ref": "#/$defs/creationPath" } },
+    "menuItems": { "type": "array", "items": { "$ref": "#/$defs/menuItem" } },
+    "captureConfigurations": { "type": "array", "items": { "$ref": "#/$defs/captureConfiguration" } },
+    "catalogItems": { "type": "array", "items": { "$ref": "#/$defs/catalogItem" } },
+    "dependencyTests": { "type": "array", "items": { "$ref": "#/$defs/dependencyTest" } },
+    "evidenceFiles": { "type": "array", "items": { "$ref": "#/$defs/evidenceFile" } },
+    "captureEvents": { "type": "array", "items": { "$ref": "#/$defs/captureEvent" } },
+    "issues": { "type": "array", "items": { "$ref": "#/$defs/issue" } },
+    "recaptureRequests": { "type": "array", "items": { "$ref": "#/$defs/recaptureRequest" } },
+    "verificationRecords": { "type": "array", "items": { "$ref": "#/$defs/verificationRecord" } },
+    "discrepancies": { "type": "array", "items": { "$ref": "#/$defs/discrepancy" } },
+    "catalogReleases": { "type": "array", "items": { "$ref": "#/$defs/catalogRelease" } },
+    "importValidationRuns": { "type": "array", "items": { "$ref": "#/$defs/importValidationRun" } },
+    "manualMatchingStudies": { "type": "array", "items": { "$ref": "#/$defs/manualMatchingStudy" } },
+    "subjectResults": { "type": "array", "items": { "$ref": "#/$defs/subjectResult" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "nullableTimestamp": { "type": ["string", "null"], "format": "date-time" },
+    "base": {
+      "type": "object",
+      "required": ["id", "schemaVersion", "createdAt", "updatedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "schemaVersion": { "const": "phase0-domain-v1" },
+        "createdAt": { "$ref": "#/$defs/timestamp" },
+        "updatedAt": { "$ref": "#/$defs/timestamp" }
+      }
+    },
+    "supportStatus": { "enum": ["unknown", "planned", "inAudit", "supported", "unsupported", "retired"] },
+    "verificationState": { "enum": ["draft", "firstReviewPending", "firstReviewApproved", "secondReviewPending", "verified", "rejected", "retired"] },
+    "angle": { "enum": ["straightOn", "left45", "right45", "leftProfile", "rightProfile"] },
+    "angleOrNavigation": { "enum": ["straightOn", "left45", "right45", "leftProfile", "rightProfile", "navigationEvidence"] },
+    "game": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["title", "publisher", "releaseYear", "status"],
+          "properties": {
+            "title": { "type": "string", "minLength": 1 },
+            "publisher": { "type": "string", "minLength": 1 },
+            "releaseYear": { "type": "integer", "minimum": 1970 },
+            "status": { "$ref": "#/$defs/supportStatus" },
+            "notes": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "platform": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["gameID", "name", "family", "status"],
+          "properties": {
+            "gameID": { "$ref": "#/$defs/id" },
+            "name": { "type": "string", "minLength": 1 },
+            "family": { "enum": ["playstation", "xbox", "pc", "unknown"] },
+            "generation": { "type": "string" },
+            "status": { "$ref": "#/$defs/supportStatus" }
+          }
+        }
+      ]
+    },
+    "gameVersion": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["gameID", "versionLabel", "releaseDate", "sourceEvidenceFileIDs", "status"],
+          "properties": {
+            "gameID": { "$ref": "#/$defs/id" },
+            "versionLabel": { "type": "string", "minLength": 1 },
+            "releaseDate": { "$ref": "#/$defs/nullableTimestamp" },
+            "sourceEvidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "status": { "$ref": "#/$defs/supportStatus" }
+          }
+        }
+      ]
+    },
+    "patch": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["gameVersionID", "patchLabel", "platformIDs", "observedAt", "sourceEvidenceFileIDs", "status"],
+          "properties": {
+            "gameVersionID": { "$ref": "#/$defs/id" },
+            "patchLabel": { "type": "string", "minLength": 1 },
+            "platformIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "observedAt": { "$ref": "#/$defs/nullableTimestamp" },
+            "sourceEvidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "status": { "$ref": "#/$defs/supportStatus" }
+          }
+        }
+      ]
+    },
+    "auditEnvironment": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["kind", "platformID", "gameVersionID", "patchID", "auditorID"],
+          "properties": {
+            "kind": { "enum": ["consoleCapture", "browserCapture", "manualReview", "unknown"] },
+            "platformID": { "$ref": "#/$defs/id" },
+            "gameVersionID": { "$ref": "#/$defs/id" },
+            "patchID": { "$ref": "#/$defs/id" },
+            "consoleDevice": { "type": "string" },
+            "display": { "type": "string" },
+            "captureDevice": { "type": "string" },
+            "lightingDescription": { "type": "string" },
+            "networkState": { "enum": ["online", "offline", "unknown"] },
+            "auditorID": { "type": "string", "minLength": 1 },
+            "notes": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "creationPath": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["gameID", "gameMode", "displayName", "platformIDs", "observedPatchIDs", "menuItemIDs", "status"],
+          "properties": {
+            "gameID": { "$ref": "#/$defs/id" },
+            "gameMode": { "type": "string", "minLength": 1 },
+            "displayName": { "type": "string", "minLength": 1 },
+            "platformIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "observedPatchIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "menuItemIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "status": { "$ref": "#/$defs/supportStatus" }
+          }
+        }
+      ]
+    },
+    "menuItem": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["gameID", "creationPathID", "parentMenuItemID", "kind", "exactVisibleLabelOrIndex", "ordinal", "navigationInstructionIDs", "evidenceFileIDs", "verificationState"],
+          "properties": {
+            "gameID": { "$ref": "#/$defs/id" },
+            "creationPathID": { "$ref": "#/$defs/id" },
+            "parentMenuItemID": { "type": ["string", "null"] },
+            "kind": { "enum": ["root", "category", "subcategory", "option", "navigationStep"] },
+            "exactVisibleLabelOrIndex": { "type": "string", "minLength": 1 },
+            "ordinal": { "type": ["integer", "null"], "minimum": 1 },
+            "navigationInstructionIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "verificationState": { "$ref": "#/$defs/verificationState" }
+          }
+        }
+      ]
+    },
+    "captureConfiguration": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["name", "version", "requiredAngles", "fileNamingPattern", "requiredEvidenceKinds"],
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "version": { "$ref": "#/$defs/version" },
+            "requiredAngles": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["angleID", "required", "instruction", "minimumWidth", "minimumHeight"],
+                "properties": {
+                  "angleID": { "$ref": "#/$defs/angle" },
+                  "required": { "type": "boolean" },
+                  "instruction": { "type": "string", "minLength": 1 },
+                  "minimumWidth": { "type": "integer", "minimum": 1 },
+                  "minimumHeight": { "type": "integer", "minimum": 1 }
+                }
+              }
+            },
+            "fileNamingPattern": { "type": "string", "minLength": 1 },
+            "requiredEvidenceKinds": { "type": "array", "items": { "enum": ["screenshot", "video", "photo", "export", "notes", "checksumManifest"] } }
+          }
+        }
+      ]
+    },
+    "catalogItem": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": [
+            "stableInternalID",
+            "kind",
+            "gameID",
+            "platformID",
+            "gameVersionID",
+            "patchID",
+            "creationPathID",
+            "menuItemID",
+            "categoryLabel",
+            "exactVisibleLabelOrIndex",
+            "verificationState",
+            "evidenceFileIDs",
+            "captureEventIDs",
+            "verificationRecordIDs",
+            "issueIDs",
+            "isTestFixture",
+            "isProductionCandidate",
+            "catalogVersionID"
+          ],
+          "properties": {
+            "stableInternalID": { "$ref": "#/$defs/id" },
+            "kind": { "enum": ["head", "hairstyle", "facialHair", "additionalAttribute"] },
+            "gameID": { "$ref": "#/$defs/id" },
+            "platformID": { "$ref": "#/$defs/id" },
+            "gameVersionID": { "$ref": "#/$defs/id" },
+            "patchID": { "$ref": "#/$defs/id" },
+            "creationPathID": { "$ref": "#/$defs/id" },
+            "menuItemID": { "$ref": "#/$defs/id" },
+            "categoryLabel": { "type": "string", "minLength": 1 },
+            "exactVisibleLabelOrIndex": { "type": "string", "minLength": 1 },
+            "verificationState": { "$ref": "#/$defs/verificationState" },
+            "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "captureEventIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "verificationRecordIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "issueIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "isTestFixture": { "type": "boolean" },
+            "isProductionCandidate": { "type": "boolean" },
+            "catalogVersionID": { "type": ["string", "null"] },
+            "supportedMeasurementIDs": { "type": "array", "items": { "type": "string" } },
+            "geometryAnnotationStatus": { "enum": ["notStarted", "partial", "complete"] },
+            "standardizedHairLength": { "enum": ["unknown", "short", "medium", "long"] },
+            "obscuresForehead": { "type": ["boolean", "null"] },
+            "obscuresEars": { "type": ["boolean", "null"] },
+            "standardizedCoverage": { "enum": ["unknown", "none", "mustache", "goatee", "beard", "mixed"] },
+            "attributeFamily": { "enum": ["eyebrow", "visibleMark", "body", "height", "weight", "other"] },
+            "valueType": { "enum": ["label", "index", "numeric", "boolean"] }
+          }
+        }
+      ]
+    },
+    "dependencyTest": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["kind", "gameID", "platformIDs", "gameVersionIDs", "patchIDs", "catalogItemIDs", "hypothesis", "result", "evidenceFileIDs"],
+          "properties": {
+            "kind": { "enum": ["categoryDependency", "platformDifference", "patchDifference", "creationPathDifference", "appearanceInteraction"] },
+            "gameID": { "$ref": "#/$defs/id" },
+            "platformIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "gameVersionIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "patchIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "catalogItemIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "hypothesis": { "type": "string", "minLength": 1 },
+            "result": { "enum": ["planned", "running", "passed", "failed", "inconclusive"] },
+            "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } }
+          }
+        }
+      ]
+    },
+    "evidenceFile": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["kind", "relativePath", "sha256", "storageScope", "containsRawFaceMedia", "approvedForProductionCatalog", "capturedAt", "capturedAngleID", "fileSizeBytes", "width", "height"],
+          "properties": {
+            "kind": { "enum": ["screenshot", "video", "photo", "export", "notes", "checksumManifest"] },
+            "relativePath": { "type": "string", "minLength": 1 },
+            "sha256": { "type": ["string", "null"] },
+            "storageScope": { "enum": ["localAuditOnly", "testFixture", "productionReference"] },
+            "containsRawFaceMedia": { "type": "boolean" },
+            "approvedForProductionCatalog": { "type": "boolean" },
+            "capturedAt": { "$ref": "#/$defs/nullableTimestamp" },
+            "capturedAngleID": { "oneOf": [{ "$ref": "#/$defs/angleOrNavigation" }, { "type": "null" }] },
+            "fileSizeBytes": { "type": ["integer", "null"], "minimum": 0 },
+            "width": { "type": ["integer", "null"], "minimum": 1 },
+            "height": { "type": ["integer", "null"], "minimum": 1 },
+            "notes": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "captureEvent": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["kind", "auditEnvironmentID", "captureConfigurationID", "catalogItemID", "angleID", "evidenceFileID", "capturedAt", "operatorID", "qualityState"],
+          "properties": {
+            "kind": { "enum": ["standardAngle", "navigationEvidence", "recapture", "manualAnnotation"] },
+            "auditEnvironmentID": { "$ref": "#/$defs/id" },
+            "captureConfigurationID": { "$ref": "#/$defs/id" },
+            "catalogItemID": { "type": ["string", "null"] },
+            "angleID": { "$ref": "#/$defs/angleOrNavigation" },
+            "evidenceFileID": { "$ref": "#/$defs/id" },
+            "capturedAt": { "$ref": "#/$defs/timestamp" },
+            "operatorID": { "type": "string", "minLength": 1 },
+            "qualityState": { "enum": ["accepted", "needsReview", "rejected"] },
+            "notes": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "issue": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["relatedEntityID", "severity", "status", "title", "description", "openedBy", "resolvedAt"],
+          "properties": {
+            "relatedEntityID": { "$ref": "#/$defs/id" },
+            "severity": { "enum": ["info", "warning", "blocking"] },
+            "status": { "enum": ["open", "inReview", "resolved", "wontFix"] },
+            "title": { "type": "string", "minLength": 1 },
+            "description": { "type": "string", "minLength": 1 },
+            "openedBy": { "type": "string", "minLength": 1 },
+            "resolvedAt": { "$ref": "#/$defs/nullableTimestamp" }
+          }
+        }
+      ]
+    },
+    "recaptureRequest": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["catalogItemID", "requestedAngleIDs", "reason", "issueID", "requestedBy", "status", "completedCaptureEventIDs"],
+          "properties": {
+            "catalogItemID": { "$ref": "#/$defs/id" },
+            "requestedAngleIDs": { "type": "array", "items": { "$ref": "#/$defs/angleOrNavigation" } },
+            "reason": { "type": "string", "minLength": 1 },
+            "issueID": { "type": ["string", "null"] },
+            "requestedBy": { "type": "string", "minLength": 1 },
+            "status": { "enum": ["open", "completed", "cancelled"] },
+            "completedCaptureEventIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } }
+          }
+        }
+      ]
+    },
+    "verificationRecord": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["targetEntityID", "targetEntityType", "stage", "verifierID", "decision", "reviewedAt", "checklistVersion", "evidenceFileIDs", "discrepancyIDs"],
+          "properties": {
+            "targetEntityID": { "$ref": "#/$defs/id" },
+            "targetEntityType": { "enum": ["menuItem", "catalogItem", "catalogRelease", "evidenceFile"] },
+            "stage": { "enum": ["first", "second", "publication"] },
+            "verifierID": { "type": "string", "minLength": 1 },
+            "decision": { "enum": ["approved", "rejected", "needsChanges"] },
+            "reviewedAt": { "$ref": "#/$defs/timestamp" },
+            "checklistVersion": { "$ref": "#/$defs/version" },
+            "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "discrepancyIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "notes": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "discrepancy": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["kind", "relatedEntityIDs", "description", "evidenceFileIDs", "severity", "status"],
+          "properties": {
+            "kind": { "enum": ["labelMismatch", "missingEvidence", "navigationMismatch", "patchMismatch", "reorderedOption", "retiredOption", "measurementConflict", "other"] },
+            "relatedEntityIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "description": { "type": "string", "minLength": 1 },
+            "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "severity": { "enum": ["info", "warning", "blocking"] },
+            "status": { "enum": ["open", "inReview", "resolved", "wontFix"] }
+          }
+        }
+      ]
+    },
+    "catalogRelease": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["releaseID", "catalogVersionID", "gameID", "platformID", "gameVersionID", "patchID", "status", "itemIDs", "manifestRelativePath", "deterministicChecksum", "approvedVerificationRecordIDs", "publishedAt", "rolledBackAt"],
+          "properties": {
+            "releaseID": { "$ref": "#/$defs/id" },
+            "catalogVersionID": { "$ref": "#/$defs/version" },
+            "gameID": { "$ref": "#/$defs/id" },
+            "platformID": { "$ref": "#/$defs/id" },
+            "gameVersionID": { "$ref": "#/$defs/id" },
+            "patchID": { "$ref": "#/$defs/id" },
+            "status": { "enum": ["draft", "candidate", "approved", "published", "rolledBack", "retired"] },
+            "itemIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "manifestRelativePath": { "type": "string", "minLength": 1 },
+            "deterministicChecksum": { "type": ["string", "null"] },
+            "approvedVerificationRecordIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "publishedAt": { "$ref": "#/$defs/nullableTimestamp" },
+            "rolledBackAt": { "$ref": "#/$defs/nullableTimestamp" }
+          }
+        }
+      ]
+    },
+    "importValidationRun": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["runID", "inputRelativePath", "startedAt", "completedAt", "status", "checkedRecordCount", "errorCount", "warningCount", "issueIDs", "reportRelativePath"],
+          "properties": {
+            "runID": { "$ref": "#/$defs/id" },
+            "inputRelativePath": { "type": "string", "minLength": 1 },
+            "startedAt": { "$ref": "#/$defs/timestamp" },
+            "completedAt": { "$ref": "#/$defs/nullableTimestamp" },
+            "status": { "enum": ["passed", "failed", "passedWithWarnings"] },
+            "checkedRecordCount": { "type": "integer", "minimum": 0 },
+            "errorCount": { "type": "integer", "minimum": 0 },
+            "warningCount": { "type": "integer", "minimum": 0 },
+            "issueIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "reportRelativePath": { "type": ["string", "null"] }
+          }
+        }
+      ]
+    },
+    "manualMatchingStudy": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["studyID", "protocolVersion", "catalogReleaseID", "status", "startedAt", "completedAt", "subjectResultIDs", "targetMetrics"],
+          "properties": {
+            "studyID": { "$ref": "#/$defs/id" },
+            "protocolVersion": { "$ref": "#/$defs/version" },
+            "catalogReleaseID": { "type": ["string", "null"] },
+            "status": { "enum": ["planned", "running", "complete", "blocked"] },
+            "startedAt": { "$ref": "#/$defs/timestamp" },
+            "completedAt": { "$ref": "#/$defs/nullableTimestamp" },
+            "subjectResultIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "targetMetrics": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["topOneAcceptanceTarget", "topThreeUsefulnessTarget", "repeatabilityTarget"],
+              "properties": {
+                "topOneAcceptanceTarget": { "type": "number", "minimum": 0, "maximum": 1 },
+                "topThreeUsefulnessTarget": { "type": "number", "minimum": 0, "maximum": 1 },
+                "repeatabilityTarget": { "type": "number", "minimum": 0, "maximum": 1 }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "subjectResult": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "required": ["subjectResultID", "studyID", "anonymizedSubjectID", "profileID", "matchedCatalogItemIDs", "selectedTopCandidateID", "topThreeUseful", "resemblanceRating", "status"],
+          "properties": {
+            "subjectResultID": { "$ref": "#/$defs/id" },
+            "studyID": { "$ref": "#/$defs/id" },
+            "anonymizedSubjectID": { "type": "string", "minLength": 1 },
+            "profileID": { "type": ["string", "null"] },
+            "matchedCatalogItemIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "selectedTopCandidateID": { "type": ["string", "null"] },
+            "topThreeUseful": { "type": ["boolean", "null"] },
+            "resemblanceRating": { "type": ["number", "null"], "minimum": 0, "maximum": 5 },
+            "status": { "enum": ["complete", "incomplete", "withdrawn"] },
+            "notes": { "type": "string" }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -289,6 +289,27 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-006",
+      "source": "GameFace Match Phase Zero Readiness Review",
+      "section": "Phase 0 domain model",
+      "summary": "Define the complete Phase 0 audit domain model with stable identifiers, enums, timestamps, and version fields without populating real game option records.",
+      "owningModule": "Phase 0 domain",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-domain.ts",
+        "data/schemas/phase-zero-domain.schema.json",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-domain.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The Phase 0 domain model covers game, platform, version, patch, audit environment, creation paths, menu items, capture configuration, catalog candidate item kinds, evidence, capture events, issues, recapture, verification, discrepancies, releases, imports, manual matching studies, and subject results. Tests use synthetic-only data and verify publication gates.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

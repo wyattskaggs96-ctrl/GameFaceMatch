@@ -382,6 +382,29 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-010",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Evidence and capture-log schemas",
+      "summary": "Define evidence-file and capture-log schemas that track stable evidence IDs, relative paths, master/derivative state, file roles, checksum and media metadata, platform/version/patch/mode/context, capture metadata, reviewer metadata, supersession, chronological actions, setting snapshots, generated evidence, issues, retakes, and operator identity.",
+      "owningModule": "Phase 0 evidence and capture logs",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-evidence.ts",
+        "data/schemas/evidence-file.schema.json",
+        "data/schemas/capture-log.schema.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-evidence.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Evidence and capture-log schemas require source/audit metadata, SHA-256, size, MIME type, platform/version/patch/mode/creation-path/environment/catalog-item context, capture method/device/time, researcher, verifier, verification status, supersession notes, chronological actions, setting snapshots, generated evidence, issues, retakes, and operator identity. Tests verify required fields, relative-path rejection for absolute paths, URLs, and traversal, invalid checksum/media metadata, verifier gating, chronological order, missing snapshot references, retake references, and retake count matching.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

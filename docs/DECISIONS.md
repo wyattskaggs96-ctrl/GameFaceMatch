@@ -51,3 +51,7 @@ Reason: The owner has an existing Squarespace marketing site, but the GameFace M
 ## D-013 — Local MediaPipe Face Landmarker provider
 Status: Accepted
 Reason: Google MediaPipe Face Landmarker is an official, actively maintained, browser-compatible local landmark implementation with an Apache-2.0 runtime. It stays behind `FaceLandmarkProvider`, lazy-loads during capture analysis, uses a worker when practical, and must return unavailable/error states rather than fabricated landmarks when the reviewed local model asset is absent or fails.
+
+## Architecture Decision Records
+
+Detailed ADRs live under `docs/adr/` and clarify the current architecture without replacing this concise decision log. Where an ADR documents a gap, treat it as a follow-up implementation or validation task rather than silent permission to work around permanent rules.

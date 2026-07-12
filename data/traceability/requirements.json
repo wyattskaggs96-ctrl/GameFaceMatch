@@ -79,6 +79,26 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-004",
+      "source": "docs/adr/",
+      "section": "Architecture Decision Records",
+      "summary": "Document current architectural decisions and known gaps without risky rewrites.",
+      "owningModule": "Architecture governance",
+      "implementationFiles": [
+        "docs/adr/",
+        "docs/DECISIONS.md",
+        "docs/governance/SOURCE_REGISTRY.md"
+      ],
+      "testFiles": [
+        "web/tests/integrity.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "ADRs cover web MVP, iOS preservation, local facial processing, adapter boundaries, catalog separation, evidence paths, immutable releases, raw media, recommendation gates, catalog manager boundaries, second review, and patch handling.",
+      "blocker": "",
+      "owner": "Lead engineer",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-CAP-001",
       "source": "docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md",
       "section": "8.2 Capture flow",

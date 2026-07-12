@@ -36,6 +36,35 @@ describe("source governance", () => {
   });
 });
 
+describe("architecture decision records", () => {
+  it("documents the current architecture decisions and known gaps", () => {
+    const adrDir = path.resolve(process.cwd(), "../docs/adr");
+    const adrIndex = fs.readFileSync(path.join(adrDir, "README.md"), "utf8");
+    const adrFiles = fs.readdirSync(adrDir).filter((file) => /^ADR-\d{4}-.+\.md$/.test(file));
+    expect(adrFiles.length).toBeGreaterThanOrEqual(12);
+    for (const required of [
+      "ADR-0001-responsive-web-mvp.md",
+      "ADR-0002-native-ios-foundation-status.md",
+      "ADR-0003-on-device-first-facial-processing.md",
+      "ADR-0004-game-specific-adapter-architecture.md",
+      "ADR-0005-production-catalog-versus-fixtures.md",
+      "ADR-0006-evidence-storage-relative-paths.md",
+      "ADR-0007-immutable-catalog-releases.md",
+      "ADR-0008-local-first-raw-media-handling.md",
+      "ADR-0009-user-facing-recommendation-gate.md",
+      "ADR-0010-admin-catalog-manager-boundaries.md",
+      "ADR-0011-second-verifier-workflow.md",
+      "ADR-0012-patch-version-handling.md"
+    ]) {
+      expect(adrFiles).toContain(required);
+      expect(adrIndex).toContain(required);
+      const text = fs.readFileSync(path.join(adrDir, required), "utf8");
+      expect(text).toContain("Status: Accepted");
+      expect(text).toContain("## Current Gaps");
+    }
+  });
+});
+
 describe("repository hygiene tooling", () => {
   it("documents and ships the safe repository status script", () => {
     const scriptPath = path.resolve(process.cwd(), "../scripts/repository-status.mjs");

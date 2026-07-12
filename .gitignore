@@ -32,6 +32,18 @@ build-artifacts/*
 !build-artifacts/.gitkeep
 data/catalog/production/*.generated.json
 
+# Local evidence and raw media are private by default
+local-evidence/
+evidence-masters/
+raw-captures/
+captured-media/
+face-captures/
+game-videos/
+data/audit/**/evidence-masters/
+data/audit/**/raw-media/
+data/audit/**/raw-videos/
+data/audit/**/local-evidence/
+
 # Web local dependencies and build output
 web/node_modules/
 web/.next/

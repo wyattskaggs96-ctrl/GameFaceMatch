@@ -2,6 +2,13 @@
 
 Local catalog workflow utilities live here.
 
+## Repository Hygiene
+
+- `node scripts/repository-status.mjs`
+- `node scripts/repository-status.mjs --strict`
+
+The repository status script reports staged, modified, untracked, ignored, and oversized files. It also warns about potential secrets, fixture-like content in production catalog directories, possible raw facial media, raw game videos, and local evidence masters.
+
 ## Catalog Commands
 
 - `node scripts/catalog-tools.mjs validate-record <record.json>`

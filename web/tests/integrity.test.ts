@@ -36,6 +36,21 @@ describe("source governance", () => {
   });
 });
 
+describe("repository hygiene tooling", () => {
+  it("documents and ships the safe repository status script", () => {
+    const scriptPath = path.resolve(process.cwd(), "../scripts/repository-status.mjs");
+    const workflowPath = path.resolve(process.cwd(), "../docs/development/GIT_WORKFLOW.md");
+    const script = fs.readFileSync(scriptPath, "utf8");
+    const workflow = fs.readFileSync(workflowPath, "utf8");
+    expect(script).toContain("getGitStatusEntries");
+    expect(script).toContain("findProductionFixtureWarnings");
+    expect(script).toContain("findRawMediaWarnings");
+    expect(script).toContain("--strict");
+    expect(workflow).toContain("node scripts/repository-status.mjs");
+    expect(workflow).toContain("Do not run `git reset --hard`");
+  });
+});
+
 describe("key navigation flow", () => {
   it("contains the expected customer-facing sequence", () => {
     expect(KEY_NAVIGATION_FLOW).toEqual([

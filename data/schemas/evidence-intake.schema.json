@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/evidence-intake.schema.json",
+  "title": "Phase0EvidenceIntakeBatch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "batchID", "createdAt", "updatedAt", "items", "finalizedRecords"],
+  "properties": {
+    "schemaVersion": { "const": "phase0-evidence-intake-v1" },
+    "batchID": { "$ref": "#/$defs/id" },
+    "createdAt": { "$ref": "#/$defs/timestamp" },
+    "updatedAt": { "$ref": "#/$defs/timestamp" },
+    "items": { "type": "array", "items": { "$ref": "#/$defs/item" } },
+    "finalizedRecords": { "type": "array", "items": { "$ref": "#/$defs/finalizedRecord" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "source": { "enum": ["dragDrop", "filePicker", "folderPicker"] },
+    "classification": { "enum": ["", "environment", "catalogItem", "menuNavigation", "standardAngle", "review", "other"] },
+    "status": { "enum": ["pending", "readyForFinalization", "finalized", "removed"] },
+    "derivativeState": { "enum": ["", "master", "derivative"] },
+    "fileRole": { "enum": ["", "standardAngle", "navigationEvidence", "menuState", "environment", "review", "checksumManifest", "notes", "other"] },
+    "view": { "enum": ["", "straightOn", "left45", "right45", "leftProfile", "rightProfile", "navigationEvidence", "menuOverview", "environment", "notApplicable"] },
+    "severity": { "enum": ["warning", "error"] },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "catalogItemID", "environmentID", "derivativeState", "fileRole", "view", "notes"],
+      "properties": {
+        "classification": { "$ref": "#/$defs/classification" },
+        "catalogItemID": { "type": ["string", "null"] },
+        "environmentID": { "type": ["string", "null"] },
+        "derivativeState": { "$ref": "#/$defs/derivativeState" },
+        "fileRole": { "$ref": "#/$defs/fileRole" },
+        "view": { "$ref": "#/$defs/view" },
+        "notes": { "type": "string" }
+      }
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "message", "intakeID"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "severity": { "$ref": "#/$defs/severity" },
+        "message": { "type": "string", "minLength": 1 },
+        "intakeID": { "$ref": "#/$defs/id" }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intakeID",
+        "originalFilename",
+        "relativeSourcePath",
+        "sizeBytes",
+        "mimeType",
+        "lastModified",
+        "source",
+        "addedAt",
+        "status",
+        "metadata",
+        "warnings"
+      ],
+      "properties": {
+        "intakeID": { "$ref": "#/$defs/id" },
+        "originalFilename": { "type": "string", "minLength": 1 },
+        "relativeSourcePath": { "type": "string", "minLength": 1 },
+        "sizeBytes": { "type": "integer", "minimum": 0 },
+        "mimeType": { "type": "string", "minLength": 1 },
+        "lastModified": { "type": "integer", "minimum": 0 },
+        "source": { "$ref": "#/$defs/source" },
+        "addedAt": { "$ref": "#/$defs/timestamp" },
+        "status": { "$ref": "#/$defs/status" },
+        "metadata": { "$ref": "#/$defs/metadata" },
+        "warnings": { "type": "array", "items": { "$ref": "#/$defs/warning" } }
+      }
+    },
+    "finalizedRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intakeID",
+        "originalFilename",
+        "relativeSourcePath",
+        "sizeBytes",
+        "mimeType",
+        "lastModified",
+        "source",
+        "finalizedAt",
+        "metadata",
+        "preservationNote"
+      ],
+      "properties": {
+        "intakeID": { "$ref": "#/$defs/id" },
+        "originalFilename": { "type": "string", "minLength": 1 },
+        "relativeSourcePath": { "type": "string", "minLength": 1 },
+        "sizeBytes": { "type": "integer", "minimum": 0 },
+        "mimeType": { "type": "string", "minLength": 1 },
+        "lastModified": { "type": "integer", "minimum": 0 },
+        "source": { "$ref": "#/$defs/source" },
+        "finalizedAt": { "$ref": "#/$defs/timestamp" },
+        "metadata": { "$ref": "#/$defs/metadata" },
+        "preservationNote": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

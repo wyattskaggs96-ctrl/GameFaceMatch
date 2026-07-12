@@ -85,6 +85,7 @@ const requiredSchemas = [
   "data/schemas/navigation-instruction.schema.json",
   "data/schemas/publication-record.schema.json",
   "data/schemas/evidence-file.schema.json",
+  "data/schemas/evidence-intake.schema.json",
   "data/schemas/capture-log.schema.json",
   "data/schemas/manual-matching-study.schema.json",
   "data/schemas/audit-environment.schema.json",

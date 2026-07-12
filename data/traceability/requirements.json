@@ -742,6 +742,30 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-024",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Evidence upload and intake manager",
+      "summary": "Provide a local-first evidence intake manager with drag-and-drop upload, folder selection where supported, evidence classification, catalog-item and environment association, master-versus-derivative designation, view selection, duplicate filename, invalid file type, oversized file, and missing metadata warnings, safe local storage, removal before finalization, no automatic external upload, and original-file preservation.",
+      "owningModule": "Phase 0 evidence intake",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-evidence-intake.ts",
+        "web/features/phase-zero/EvidenceIntakeManager.tsx",
+        "data/schemas/evidence-intake.schema.json",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-evidence-intake.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The dev-only evidence intake manager supports drag/drop, file and folder source tracking, classification, catalog and environment metadata, master/derivative designation, view and role selection, duplicate filename, invalid type, oversized file, and missing metadata warnings, pre-finalization removal, metadata-only localStorage finalization, and preservation notes confirming files are not modified, serialized, or uploaded.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

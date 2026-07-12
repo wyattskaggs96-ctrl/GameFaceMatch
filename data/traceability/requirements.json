@@ -692,6 +692,30 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-022",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Dependency test runner",
+      "summary": "Provide a structured dependency-test runner for platform, mode, custom versus Legends base, position, archetype, height, weight, body type, skin presentation, head, hairstyle, online/offline state, EA account state, edition, entitlements, and patch; each run must capture baseline, changed variable, expected and observed behavior, count/order/geometry/label changes, evidence, result, and remaining uncertainty.",
+      "owningModule": "Phase 0 dependency testing",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-dependency-test-runner.ts",
+        "web/features/phase-zero/DependencyTestRunner.tsx",
+        "data/schemas/dependency-test-runner.schema.json",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-dependency-test-runner.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The dev-only dependency test runner starts blank, enumerates every required dependency variable, records one-variable test runs with baseline context, expected and observed behavior, count/order/geometry/label observations, evidence, result, verification state, and remaining uncertainty. Validation blocks production completion until every required variable has a verified resolved run with baseline and changed-variable evidence.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

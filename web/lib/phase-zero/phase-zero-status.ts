@@ -100,6 +100,7 @@ const requiredSchemas = [
   "data/schemas/facial-hair-capture-workspace.schema.json",
   "data/schemas/additional-face-attribute.schema.json",
   "data/schemas/additional-attributes-workspace.schema.json",
+  "data/schemas/dependency-test-runner.schema.json",
   "data/schemas/phase-zero-domain.schema.json"
 ];
 

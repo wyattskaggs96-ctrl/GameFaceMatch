@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/dependency-test-runner.schema.json",
+  "title": "Phase0DependencyTestRunnerWorkspace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "workspaceID",
+    "createdAt",
+    "updatedAt",
+    "gameID",
+    "gameVersionID",
+    "creationPathID",
+    "menuMapID",
+    "runs"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-dependency-test-runner-v1" },
+    "workspaceID": { "$ref": "#/$defs/id" },
+    "createdAt": { "$ref": "#/$defs/timestamp" },
+    "updatedAt": { "$ref": "#/$defs/timestamp" },
+    "gameID": { "$ref": "#/$defs/id" },
+    "gameVersionID": { "$ref": "#/$defs/id" },
+    "creationPathID": { "$ref": "#/$defs/id" },
+    "menuMapID": { "$ref": "#/$defs/id" },
+    "runs": { "type": "array", "items": { "$ref": "#/$defs/run" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "dependencyVariable": {
+      "enum": [
+        "platform",
+        "mode",
+        "baseType",
+        "position",
+        "archetype",
+        "height",
+        "weight",
+        "bodyType",
+        "skinTone",
+        "head",
+        "hairstyle",
+        "onlineState",
+        "eaAccountState",
+        "edition",
+        "entitlements",
+        "patch"
+      ]
+    },
+    "baseType": { "enum": ["unknown", "custom", "legends"] },
+    "onlineState": { "enum": ["unknown", "online", "offline"] },
+    "eaAccountState": { "enum": ["signedIn", "signedOut", "notRequired", "unknown"] },
+    "testResult": { "enum": ["notRun", "matchesExpected", "differsFromExpected", "inconclusive", "blocked"] },
+    "runStatus": { "enum": ["draft", "readyForReview", "verified", "blocked", "retestRequired"] },
+    "verificationState": { "enum": ["draft", "firstReviewPending", "firstReviewApproved", "secondReviewPending", "verified", "rejected", "retired"] },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baselineID",
+        "platform",
+        "mode",
+        "baseType",
+        "position",
+        "archetype",
+        "height",
+        "weight",
+        "bodyType",
+        "skinTone",
+        "headStableID",
+        "hairstyleStableID",
+        "onlineState",
+        "eaAccountState",
+        "edition",
+        "entitlements",
+        "patchID",
+        "evidenceFileIDs",
+        "notes"
+      ],
+      "properties": {
+        "baselineID": { "$ref": "#/$defs/id" },
+        "platform": { "type": "string", "minLength": 1 },
+        "mode": { "type": "string", "minLength": 1 },
+        "baseType": { "$ref": "#/$defs/baseType" },
+        "position": { "type": "string", "minLength": 1 },
+        "archetype": { "type": "string", "minLength": 1 },
+        "height": { "type": "string", "minLength": 1 },
+        "weight": { "type": "string", "minLength": 1 },
+        "bodyType": { "type": "string", "minLength": 1 },
+        "skinTone": { "type": "string", "minLength": 1 },
+        "headStableID": { "type": ["string", "null"] },
+        "hairstyleStableID": { "type": ["string", "null"] },
+        "onlineState": { "$ref": "#/$defs/onlineState" },
+        "eaAccountState": { "$ref": "#/$defs/eaAccountState" },
+        "edition": { "type": "string", "minLength": 1 },
+        "entitlements": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "patchID": { "$ref": "#/$defs/id" },
+        "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "changedVariable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variable", "fromValue", "toValue"],
+      "properties": {
+        "variable": { "$ref": "#/$defs/dependencyVariable" },
+        "fromValue": { "type": "string", "minLength": 1 },
+        "toValue": { "type": "string", "minLength": 1 }
+      }
+    },
+    "observedChanges": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["countChanges", "orderChanges", "geometryChanges", "labelChanges"],
+      "properties": {
+        "countChanges": { "type": "string", "minLength": 1 },
+        "orderChanges": { "type": "string", "minLength": 1 },
+        "geometryChanges": { "type": "string", "minLength": 1 },
+        "labelChanges": { "type": "string", "minLength": 1 }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runID",
+        "runNumber",
+        "createdAt",
+        "updatedAt",
+        "baseline",
+        "changedVariable",
+        "expectedBehavior",
+        "observedBehavior",
+        "observedChanges",
+        "evidenceFileIDs",
+        "result",
+        "remainingUncertainty",
+        "runStatus",
+        "verificationStatus",
+        "notes"
+      ],
+      "properties": {
+        "runID": { "$ref": "#/$defs/id" },
+        "runNumber": { "type": "integer", "minimum": 1 },
+        "createdAt": { "$ref": "#/$defs/timestamp" },
+        "updatedAt": { "$ref": "#/$defs/timestamp" },
+        "baseline": { "$ref": "#/$defs/baseline" },
+        "changedVariable": { "$ref": "#/$defs/changedVariable" },
+        "expectedBehavior": { "type": "string", "minLength": 1 },
+        "observedBehavior": { "type": "string", "minLength": 1 },
+        "observedChanges": { "$ref": "#/$defs/observedChanges" },
+        "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "result": { "$ref": "#/$defs/testResult" },
+        "remainingUncertainty": { "type": "string", "minLength": 1 },
+        "runStatus": { "$ref": "#/$defs/runStatus" },
+        "verificationStatus": { "$ref": "#/$defs/verificationState" },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

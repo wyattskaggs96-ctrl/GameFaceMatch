@@ -1,5 +1,6 @@
 import type { CatalogRepository } from "@/lib/catalog/catalog-repository";
 import { validateProductionCatalog } from "@/lib/catalog/catalog-validator";
+import { approveCatalogRelease } from "@/lib/gates/feature-gates";
 import { createRuleBasedMatchingEngine, type MatchingEngine, type MatchingPreferences } from "@/lib/matching/matching-engine";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
 import { createBuildInstructions } from "@/lib/results/results-experience";
@@ -21,8 +22,16 @@ export class CollegeFootball27Adapter implements GameAppearanceAdapter {
   }
 
   async match(profile: StandardFaceProfile, preferences?: MatchingPreferences): Promise<GameAppearanceMatch[]> {
-    const manifest = await this.catalogRepository.loadProductionManifest();
-    this.validateCatalog(manifest);
+    const status = await this.catalogRepository.loadRuntimeStatus();
+    const manifest = status.manifest;
+    const approval = approveCatalogRelease({
+      manifest,
+      integrity: status.integrity,
+      compatibility: status.compatibility
+    });
+    if (!approval.approvedRelease) {
+      throw new GameAdapterError("catalogUnavailable", CATALOG_UNAVAILABLE_MESSAGE);
+    }
     if (manifest.items.length === 0) {
       throw new GameAdapterError("catalogUnavailable", CATALOG_UNAVAILABLE_MESSAGE);
     }

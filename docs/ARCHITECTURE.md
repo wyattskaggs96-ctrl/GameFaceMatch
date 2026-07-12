@@ -54,6 +54,7 @@ The web app includes an empty bundled production manifest for browser runtime us
 - Security headers are configured in `web/next.config.ts`, including CSP, frame blocking, `nosniff`, no referrer, and a restrictive permissions policy that allows camera only for the app origin.
 - Production browser source maps are disabled for the local MVP hardening pass.
 - Development-only audit and matching-lab screens are excluded from production navigation and must not load production user-facing fixture records.
+- Feature and capability gates are centralized in `web/lib/gates/feature-gates.ts`. Production recommendations require an approved catalog release: production manifest, non-empty verified records, deterministic checksum verification, compatible platform/game version, catalog verification date, and no fixture records. Environment flags alone cannot enable recommendations.
 - The app ships a web manifest and icon for installability experiments, but no service worker. Offline behavior is not a supported feature.
 - Browser camera capture requires HTTPS or localhost. Manual upload fallback remains the supported path for insecure contexts, unsupported camera APIs, denied permission, or missing camera devices.
 - Object URLs for capture and screenshot sessions are revoked on retake, removal, cancellation, deletion, and session reset paths.

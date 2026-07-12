@@ -247,6 +247,26 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-CAT-004",
+      "source": "docs/adr/ADR-0009-user-facing-recommendation-gate.md",
+      "section": "Decision",
+      "summary": "Centralize feature and capability gates so production recommendations require an approved catalog release and cannot be enabled by environment flags alone.",
+      "owningModule": "Feature gates",
+      "implementationFiles": [
+        "web/lib/gates/feature-gates.ts",
+        "web/lib/adapters/college-football-27-adapter.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/feature-gates.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Unit tests prove fixtures, unverified catalogs, and version mismatches block recommendations; approved releases enable recommendations only through the checksum-verified catalog path.",
+      "blocker": "",
+      "owner": "Lead engineer",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

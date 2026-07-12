@@ -85,6 +85,10 @@ const requiredSchemas = [
   "data/schemas/audit-environment.schema.json",
   "data/schemas/creation-path.schema.json",
   "data/schemas/menu-map.schema.json",
+  "data/schemas/head-preset.schema.json",
+  "data/schemas/hairstyle.schema.json",
+  "data/schemas/facial-hair-option.schema.json",
+  "data/schemas/additional-face-attribute.schema.json",
   "data/schemas/phase-zero-domain.schema.json"
 ];
 

@@ -357,6 +357,31 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-009",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Catalog item schemas",
+      "summary": "Define typed schemas for head presets, hairstyles, facial-hair options, and additional face-matching attributes with source fields, native ordering, evidence references, dependencies, canonical settings, verification state, deprecation and supersession state, last-checked date, and required stable ID conventions.",
+      "owningModule": "Phase 0 typed catalog item schemas",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-catalog-item-schemas.ts",
+        "data/schemas/head-preset.schema.json",
+        "data/schemas/hairstyle.schema.json",
+        "data/schemas/facial-hair-option.schema.json",
+        "data/schemas/additional-face-attribute.schema.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-catalog-item-schemas.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Typed catalog item schemas and validators require source/audit fields, native order, evidence, dependencies, canonical settings, verification metadata, deprecation/supersession metadata, and YYYY-MM-DD last-checked dates. Tests verify required schema fields, CF27 stable ID conventions for synthetic records, missing evidence rejection, second-review gating, deprecation context, and skin-presentation separation from geometry similarity.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/canonical-capture-configuration.schema.json",
+  "title": "PhaseZeroCanonicalCaptureConfiguration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "label",
+    "lockState",
+    "settings",
+    "settingsHash",
+    "lockedAt",
+    "lockedBy",
+    "notes",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-capture-configuration-v1" },
+    "id": { "type": "string", "minLength": 1 },
+    "label": { "type": "string", "minLength": 1 },
+    "lockState": { "const": "locked" },
+    "settings": { "$ref": "#/$defs/settings" },
+    "settingsHash": {
+      "type": "string",
+      "pattern": "^gfm-capture-v1-[0-9a-f]{8}$"
+    },
+    "lockedAt": { "type": "string", "format": "date-time" },
+    "lockedBy": { "type": "string", "minLength": 1 },
+    "notes": { "type": "string" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "requiredText": { "type": "string", "minLength": 1 },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "position",
+        "archetype",
+        "height",
+        "weight",
+        "bodyType",
+        "skinTone",
+        "complexion",
+        "eyeColor",
+        "hairColor",
+        "facialHairColor",
+        "clothing",
+        "equipment",
+        "lighting",
+        "background",
+        "cameraDistance",
+        "cameraAngle",
+        "zoom",
+        "resolution",
+        "hdr",
+        "brightness",
+        "captureHardware",
+        "fileFormat"
+      ],
+      "properties": {
+        "mode": { "$ref": "#/$defs/requiredText" },
+        "position": { "$ref": "#/$defs/requiredText" },
+        "archetype": { "$ref": "#/$defs/requiredText" },
+        "height": { "$ref": "#/$defs/requiredText" },
+        "weight": { "$ref": "#/$defs/requiredText" },
+        "bodyType": { "$ref": "#/$defs/requiredText" },
+        "skinTone": { "$ref": "#/$defs/requiredText" },
+        "complexion": { "$ref": "#/$defs/requiredText" },
+        "eyeColor": { "$ref": "#/$defs/requiredText" },
+        "hairColor": { "$ref": "#/$defs/requiredText" },
+        "facialHairColor": { "$ref": "#/$defs/requiredText" },
+        "clothing": { "$ref": "#/$defs/requiredText" },
+        "equipment": { "$ref": "#/$defs/requiredText" },
+        "lighting": { "$ref": "#/$defs/requiredText" },
+        "background": { "$ref": "#/$defs/requiredText" },
+        "cameraDistance": { "$ref": "#/$defs/requiredText" },
+        "cameraAngle": { "$ref": "#/$defs/requiredText" },
+        "zoom": { "$ref": "#/$defs/requiredText" },
+        "resolution": { "$ref": "#/$defs/requiredText" },
+        "hdr": { "$ref": "#/$defs/requiredText" },
+        "brightness": { "$ref": "#/$defs/requiredText" },
+        "captureHardware": { "$ref": "#/$defs/requiredText" },
+        "fileFormat": { "$ref": "#/$defs/requiredText" }
+      }
+    }
+  }
+}

@@ -551,6 +551,29 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-016",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Canonical capture configuration",
+      "summary": "Provide a canonical capture-configuration editor and lock mechanism covering player context, appearance controls, scene controls, camera controls, and file output; generate a stable settings hash; and warn when capture sessions deviate from the approved configuration.",
+      "owningModule": "Phase 0 capture configuration",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-capture-configuration.ts",
+        "web/features/phase-zero/CaptureConfigurationEditor.tsx",
+        "data/schemas/canonical-capture-configuration.schema.json",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-capture-configuration.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The internal editor requires all canonical setup fields before locking, creates a stable deterministic settings hash, marks appearance controls as non-geometry inputs, and compares observed session settings against the locked configuration with deviation warnings.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

@@ -90,6 +90,7 @@ const requiredSchemas = [
   "data/schemas/audit-environment.schema.json",
   "data/schemas/creation-path.schema.json",
   "data/schemas/creation-path-workspace.schema.json",
+  "data/schemas/canonical-capture-configuration.schema.json",
   "data/schemas/menu-map.schema.json",
   "data/schemas/head-preset.schema.json",
   "data/schemas/hairstyle.schema.json",

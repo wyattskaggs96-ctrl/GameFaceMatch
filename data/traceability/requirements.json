@@ -597,6 +597,29 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-018",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Head capture workspace",
+      "summary": "Provide a complete head-catalog capture workspace supporting double-count runs, native order preservation, stable ID assignment, selector wrap recording, locked and entitlement-dependent status, forced attributes, canonical settings confirmation, full-screen menu evidence, seven required head views, source-video timestamps, duplicate observations, capture completion, verification status, catalog-manager disposition, and production blocking when required evidence is missing.",
+      "owningModule": "Phase 0 head catalog capture",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-head-capture-workspace.ts",
+        "web/features/phase-zero/HeadCaptureWorkspace.tsx",
+        "data/schemas/head-capture-workspace.schema.json",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-head-capture-workspace.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The dev-only head-capture workspace assigns stable IDs from platform/mode/native order, records double-count runs, selector wrap behavior, lock/entitlement and forced-attribute metadata, canonical settings confirmation, full-screen menu evidence, all seven required head views, source video timestamps, duplicate observations, completion state, verification state, and catalog-manager disposition. Validation blocks production completion when double-counts, menu evidence, required views, canonical settings, or verification/disposition gates are incomplete.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

@@ -93,6 +93,7 @@ const requiredSchemas = [
   "data/schemas/canonical-capture-configuration.schema.json",
   "data/schemas/menu-map.schema.json",
   "data/schemas/head-preset.schema.json",
+  "data/schemas/head-capture-workspace.schema.json",
   "data/schemas/hairstyle.schema.json",
   "data/schemas/facial-hair-option.schema.json",
   "data/schemas/additional-face-attribute.schema.json",

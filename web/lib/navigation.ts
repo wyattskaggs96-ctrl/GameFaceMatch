@@ -43,6 +43,7 @@ export const APP_SCREENS = [
   "refinement",
   "pricing",
   "audit",
+  "phase-0",
   "matching-lab",
   "mobile-qa",
   "privacy-center",

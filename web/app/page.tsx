@@ -67,6 +67,14 @@ const DevelopmentMobileQAStatus =
         loading: () => <LoadingState label="Loading mobile QA status" />
       });
 
+const DevelopmentPhase0Status =
+  process.env.NODE_ENV === "production"
+    ? null
+    : dynamic(() => import("@/features/phase-zero/Phase0StatusPanel").then((module) => module.Phase0StatusPanel), {
+        ssr: false,
+        loading: () => <LoadingState label="Loading Phase 0 status" />
+      });
+
 export default function HomePage() {
   const [screen, setScreen] = useState<AppScreen>("welcome");
   const [session, setSession] = useState(() => createInitialCaptureSession());
@@ -88,6 +96,7 @@ export default function HomePage() {
         ...PRIMARY_NAV_ITEMS,
         { id: "pricing" as const, label: "Pricing" },
         { id: "audit" as const, label: "Audit" },
+        { id: "phase-0" as const, label: "Phase 0" },
         { id: "matching-lab" as const, label: "Matching Lab" },
         { id: "mobile-qa" as const, label: "Mobile QA" }
       ]
@@ -448,6 +457,8 @@ export default function HomePage() {
         return <GameCatalogStatus />;
       case "audit":
         return isDevelopment && DevelopmentCatalogAuditInspector ? <DevelopmentCatalogAuditInspector manifest={productionCatalogManifest} /> : <GameCatalogStatus />;
+      case "phase-0":
+        return isDevelopment && DevelopmentPhase0Status ? <DevelopmentPhase0Status /> : <GameCatalogStatus />;
       case "matching-lab":
         return isDevelopment && DevelopmentMatchingLab ? <DevelopmentMatchingLab /> : <GameCatalogStatus />;
       case "mobile-qa":

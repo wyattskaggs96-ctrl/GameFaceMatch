@@ -267,6 +267,28 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-005",
+      "source": "GameFace Match Phase Zero Readiness Review",
+      "section": "Phase 0 readiness gates",
+      "summary": "Calculate Phase 0 readiness from actual repository and catalog state without inflated percentages.",
+      "owningModule": "Phase 0 status",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "web/app/page.tsx",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-status.test.ts",
+        "web/tests/ui-flow.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The status service reports all required Phase 0 areas and keeps shipping-game, catalog, second-review, and manual matching work blocked while the production catalog is empty.",
+      "blocker": "",
+      "owner": "QA lead",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

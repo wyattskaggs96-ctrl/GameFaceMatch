@@ -335,6 +335,28 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-008",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Menu-map schema",
+      "summary": "Define a production-grade menu-map schema with stable menu IDs, nested hierarchy, control metadata, evidence, scrolling continuation evidence, verification metadata, and validation for duplicate IDs and invalid parent relationships.",
+      "owningModule": "Phase 0 menu map",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-menu-map.ts",
+        "data/schemas/menu-map.schema.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-menu-map.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The menu-map schema requires stable IDs, parent IDs, labels, native ordering, control metadata, dependencies, locks, warnings, defects, environment and evidence references, scrolling continuation evidence, researcher and verifier metadata, status, and notes. The validator rejects duplicate IDs, missing or cyclic parent relationships, invalid numeric controls, missing evidence, and verified items without verifiers.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

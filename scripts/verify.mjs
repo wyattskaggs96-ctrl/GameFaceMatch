@@ -18,6 +18,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Requirement traceability check",
+    command: "node",
+    args: ["scripts/generate-traceability-report.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Web type-check",
     command: "npm",
     args: ["run", "typecheck"],

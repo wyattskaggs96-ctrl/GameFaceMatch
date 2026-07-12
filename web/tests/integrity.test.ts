@@ -63,11 +63,32 @@ describe("unified verification command", () => {
     const workflow = fs.readFileSync(workflowPath, "utf8");
     expect(rootPackage.scripts.verify).toBe("node scripts/verify.mjs");
     expect(verifyScript).toContain("Web type-check");
+    expect(verifyScript).toContain("Requirement traceability check");
     expect(verifyScript).toContain("Production catalog fixture separation check");
     expect(verifyScript).toContain("Web local smoke and end-to-end tests");
     expect(verifyScript).toContain("Native iOS unit tests");
     expect(readme).toContain("npm run verify");
     expect(workflow).toContain("Unified Verification Command");
+  });
+});
+
+describe("requirement traceability", () => {
+  it("keeps a machine-readable matrix and generated report in sync", () => {
+    const matrixPath = path.resolve(process.cwd(), "../data/traceability/requirements.json");
+    const reportPath = path.resolve(process.cwd(), "../docs/status/REQUIREMENT_TRACEABILITY.md");
+    const generatorPath = path.resolve(process.cwd(), "../scripts/generate-traceability-report.mjs");
+    const matrix = JSON.parse(fs.readFileSync(matrixPath, "utf8"));
+    const report = fs.readFileSync(reportPath, "utf8");
+    const generator = fs.readFileSync(generatorPath, "utf8");
+    expect(matrix.metadata.generatedReport).toBe("docs/status/REQUIREMENT_TRACEABILITY.md");
+    expect(matrix.requirements.length).toBeGreaterThanOrEqual(20);
+    expect(matrix.requirements.map((requirement: { id: string }) => requirement.id)).toContain("GFM-CAP-001");
+    expect(matrix.requirements.map((requirement: { id: string }) => requirement.id)).toContain("GFM-MATCH-001");
+    expect(matrix.requirements.map((requirement: { id: string }) => requirement.id)).toContain("GFM-PRIV-001");
+    expect(report).toContain("Requirement Traceability Matrix");
+    expect(report).toContain("GFM-P0-001");
+    expect(report).toContain("BLOCKED_BY_GAME_ACCESS");
+    expect(generator).toContain("--check");
   });
 });
 

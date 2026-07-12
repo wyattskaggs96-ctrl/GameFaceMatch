@@ -1,0 +1,494 @@
+{
+  "metadata": {
+    "name": "GameFace Match Requirement Traceability Matrix",
+    "version": "2026-07-12",
+    "lastCheckedDate": "2026-07-12",
+    "generatedReport": "docs/status/REQUIREMENT_TRACEABILITY.md",
+    "statusValues": [
+      "NOT_STARTED",
+      "IN_PROGRESS",
+      "IMPLEMENTED",
+      "IMPLEMENTED_WITH_LIMITATION",
+      "BLOCKED_BY_GAME_ACCESS",
+      "VERIFICATION_REQUIRED",
+      "VERIFIED"
+    ]
+  },
+  "requirements": [
+    {
+      "id": "GFM-P0-001",
+      "source": "AGENTS.md",
+      "section": "Permanent rules",
+      "summary": "Never invent College Football 27 options, labels, menu paths, presets, sliders, hairstyles, facial-hair options, or platform differences.",
+      "owningModule": "Catalog governance",
+      "implementationFiles": [
+        "web/lib/catalog/catalog-validator.ts",
+        "web/lib/adapters/college-football-27-adapter.ts",
+        "scripts/catalog-tools.mjs"
+      ],
+      "testFiles": [
+        "web/tests/catalog.test.ts",
+        "web/tests/catalog-workflow.test.ts",
+        "web/tests/integrity.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Production catalog is empty; catalog validation, placeholder checks, fixture checks, duplicate checks, and production bundle guard pass.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-P0-002",
+      "source": "docs/governance/SOURCE_REGISTRY.md",
+      "section": "Precedence Rules",
+      "summary": "Classify binding, advisory, superseded, and unrelated source documents before changing catalog, matching, capture, privacy, or verification behavior.",
+      "owningModule": "Source governance",
+      "implementationFiles": [
+        "docs/governance/SOURCE_REGISTRY.md",
+        "AGENTS.md",
+        "web/scripts/integrity-check.mjs"
+      ],
+      "testFiles": [
+        "web/tests/integrity.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Integrity checks assert the source registry exists, includes GameFace Match binding sources, and excludes the unrelated Skaggs Systems source.",
+      "blocker": "",
+      "owner": "Build custodian",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-P0-003",
+      "source": "docs/DECISIONS.md",
+      "section": "D-008 - Web-first MVP",
+      "summary": "Use the responsive web application as the active MVP while preserving native iOS for future premium TrueDepth capture.",
+      "owningModule": "Application architecture",
+      "implementationFiles": [
+        "web/app/page.tsx",
+        "ios/GameFaceMatch.xcodeproj/project.pbxproj",
+        "README.md"
+      ],
+      "testFiles": [
+        "web/tests/e2e/core-journey.spec.ts",
+        "ios/GameFaceMatchUITests/GameFaceMatchUITests.swift"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Web E2E tests pass and iOS build/UI tests pass; documentation identifies web as active MVP and iOS as preserved future path.",
+      "blocker": "",
+      "owner": "Lead engineer",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-CAP-001",
+      "source": "docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md",
+      "section": "8.2 Capture flow",
+      "summary": "Guide the user through standardized multi-angle face capture and allow retake of failed sections.",
+      "owningModule": "Web capture",
+      "implementationFiles": [
+        "web/features/capture/GuidedCaptureFlow.tsx",
+        "web/lib/capture/capture-session.ts"
+      ],
+      "testFiles": [
+        "web/tests/capture.test.ts",
+        "web/tests/e2e/core-journey.spec.ts"
+      ],
+      "status": "IMPLEMENTED_WITH_LIMITATION",
+      "evidence": "Five required RGB angles, upload fallback, retake, removal, review, and cancellation flows are implemented and tested.",
+      "blocker": "Real mobile camera behavior still requires physical-device QA.",
+      "owner": "Capture lead",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-CAP-002",
+      "source": "docs/MOBILE_BROWSER_QA.md",
+      "section": "Manual checks",
+      "summary": "Validate iPhone Safari and Android Chrome camera behavior, interruption recovery, permission reset, and mobile viewport behavior on real devices.",
+      "owningModule": "Mobile QA",
+      "implementationFiles": [
+        "web/features/capture/GuidedCaptureFlow.tsx",
+        "web/lib/capture/browser-camera-service.ts",
+        "docs/MOBILE_BROWSER_QA.md",
+        "docs/REAL_DEVICE_TEST_MATRIX.md"
+      ],
+      "testFiles": [
+        "web/tests/mobile-hardening.test.ts",
+        "web/tests/e2e/edge-flows.spec.ts"
+      ],
+      "status": "VERIFICATION_REQUIRED",
+      "evidence": "Automated viewport and fallback checks pass; real-device HTTPS testing remains documented but incomplete.",
+      "blocker": "Requires physical iPhone/Android devices and HTTPS test origin.",
+      "owner": "QA lead",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-CAP-003",
+      "source": "docs/FACE_LANDMARK_PROVIDER.md",
+      "section": "Provider metadata",
+      "summary": "Use local browser face landmark processing behind a provider interface without uploads, identity recognition, or fabricated landmarks.",
+      "owningModule": "Face landmark provider",
+      "implementationFiles": [
+        "web/lib/face-landmarks/face-landmark-provider.ts",
+        "web/lib/face-landmarks/mediapipe-face-landmarker-provider.ts",
+        "web/lib/face-landmarks/face-landmark-worker-client.ts"
+      ],
+      "testFiles": [
+        "web/tests/face-landmarks.test.ts",
+        "web/tests/capture-guidance.test.ts"
+      ],
+      "status": "IMPLEMENTED_WITH_LIMITATION",
+      "evidence": "Provider interface, MediaPipe runtime integration, worker boundary, unavailable/error states, and tests exist.",
+      "blocker": "Reviewed local MediaPipe model asset is not present at web/public/models/mediapipe/face_landmarker.task.",
+      "owner": "Capture lead",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-CAP-004",
+      "source": "docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md",
+      "section": "18 Face profile data model",
+      "summary": "Generate a standardized face profile that separates geometry and appearance without raw frame persistence.",
+      "owningModule": "Profile generation",
+      "implementationFiles": [
+        "web/lib/profile/standard-face-profile.ts",
+        "web/lib/profile/rgb-landmark-geometry.ts",
+        "web/types/domain.ts"
+      ],
+      "testFiles": [
+        "web/tests/profile.test.ts",
+        "web/tests/profile-geometry.test.ts"
+      ],
+      "status": "IMPLEMENTED_WITH_LIMITATION",
+      "evidence": "Profile serialization, unavailable measurement states, depthSupported false, source angle availability, and synthetic geometry tests pass.",
+      "blocker": "Real landmark model and real-device repeatability are not verified.",
+      "owner": "Profile systems lead",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-CAT-001",
+      "source": "docs/GAME_CATALOG_WORKFLOW.md",
+      "section": "Production catalog workflow",
+      "summary": "Keep production College Football 27 catalog data separate from fixtures and reject unverified records.",
+      "owningModule": "Catalog validation",
+      "implementationFiles": [
+        "data/catalog/production/catalog_manifest.json",
+        "web/lib/catalog/catalog-validator.ts",
+        "scripts/catalog-tools.mjs"
+      ],
+      "testFiles": [
+        "web/tests/catalog.test.ts",
+        "web/tests/catalog-workflow.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Empty production catalog validates; unverified, fixture, placeholder, missing metadata, malformed measurement, duplicate ID, and unavailable asset cases are tested.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-CAT-002",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Manual evidence and two-reviewer verification",
+      "summary": "Do not publish College Football 27 options without shipping-game evidence and required review.",
+      "owningModule": "Catalog audit",
+      "implementationFiles": [
+        "data/audit/college-football-27/",
+        "scripts/catalog-tools.mjs",
+        "docs/CATALOG_REVIEW_GUIDE.md",
+        "docs/CATALOG_PUBLISHING_RUNBOOK.md"
+      ],
+      "testFiles": [
+        "web/tests/catalog-workflow.test.ts"
+      ],
+      "status": "BLOCKED_BY_GAME_ACCESS",
+      "evidence": "Audit templates, CSV import/export, review validation, package validation, publication and rollback tooling exist.",
+      "blocker": "No owner-supplied shipping-game evidence package is present; production catalog has zero verified records.",
+      "owner": "Wyatt / Catalog auditor",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-CAT-003",
+      "source": "docs/DECISIONS.md",
+      "section": "D-007 - Empty production catalog fails closed",
+      "summary": "Empty production catalog is valid but must not produce recommendations.",
+      "owningModule": "Catalog runtime",
+      "implementationFiles": [
+        "web/lib/catalog/catalog-repository.ts",
+        "web/lib/adapters/college-football-27-adapter.ts",
+        "web/features/results/ResultsExperience.tsx"
+      ],
+      "testFiles": [
+        "web/tests/results.test.ts",
+        "web/tests/matching-engine.test.ts",
+        "web/tests/e2e/core-journey.spec.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Adapter and results tests confirm catalog-unavailable behavior; E2E path reaches honest catalog-unavailable results.",
+      "blocker": "",
+      "owner": "Lead engineer",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-MATCH-001",
+      "source": "docs/MATCHING_ENGINE_SPEC.md",
+      "section": "Rule-based top-three matching engine",
+      "summary": "Implement explainable weighted-distance matching with confidence-aware weighting, missing-feature handling, tie behavior, and traceability.",
+      "owningModule": "Matching engine",
+      "implementationFiles": [
+        "web/lib/matching/matching-engine.ts"
+      ],
+      "testFiles": [
+        "web/tests/matching-engine.test.ts"
+      ],
+      "status": "IMPLEMENTED_WITH_LIMITATION",
+      "evidence": "Synthetic tests cover ordering, missing features, low confidence, redistribution, ties, explanations, deterministic output, catalog version, and empty-catalog fail-closed behavior.",
+      "blocker": "Real production matching cannot be verified until verified catalog records exist.",
+      "owner": "Matching lead",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-MATCH-002",
+      "source": "docs/MATCHING_ENGINE_SPEC.md",
+      "section": "Sensitive attributes and geometry separation",
+      "summary": "Keep skin tone and user appearance selections separate from geometric similarity and avoid identity probability language.",
+      "owningModule": "Matching engine",
+      "implementationFiles": [
+        "web/lib/matching/matching-engine.ts",
+        "web/lib/product-copy.ts",
+        "web/features/results/ResultsExperience.tsx"
+      ],
+      "testFiles": [
+        "web/tests/matching-engine.test.ts",
+        "web/tests/results.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Tests cover geometry separated from skin presentation and score language says match score is based on available game options, not identity probability.",
+      "blocker": "",
+      "owner": "Privacy engineer",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-RESULT-001",
+      "source": "docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md",
+      "section": "6 MVP Goals",
+      "summary": "Return top three in-game recommendations and explain how to reproduce settings manually.",
+      "owningModule": "Results and build guide",
+      "implementationFiles": [
+        "web/lib/results/results-experience.ts",
+        "web/features/results/ResultsExperience.tsx"
+      ],
+      "testFiles": [
+        "web/tests/results.test.ts"
+      ],
+      "status": "BLOCKED_BY_GAME_ACCESS",
+      "evidence": "Results states and build instruction format exist, but no production records or verified menu instructions are loaded.",
+      "blocker": "Verified College Football 27 production catalog and menu evidence are required.",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-REFINE-001",
+      "source": "docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md",
+      "section": "6 MVP Goals",
+      "summary": "Allow screenshot upload for future created-player refinement without pretending comparison logic exists.",
+      "owningModule": "Screenshot refinement",
+      "implementationFiles": [
+        "web/lib/refinement/screenshot-refinement.ts",
+        "web/features/refinement/ScreenshotRefinementEntry.tsx"
+      ],
+      "testFiles": [
+        "web/tests/refinement.test.ts",
+        "web/tests/e2e/core-journey.spec.ts"
+      ],
+      "status": "IMPLEMENTED_WITH_LIMITATION",
+      "evidence": "Screenshot intake, validation, deletion, and unavailable result are implemented and tested.",
+      "blocker": "Real cross-domain comparison and verified catalog data are not available.",
+      "owner": "Matching lead",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-PRIV-001",
+      "source": "docs/PRIVACY_IMPLEMENTATION_NOTES.md",
+      "section": "Local-only storage foundation",
+      "summary": "Do not upload face images and do not persist raw face images in localStorage.",
+      "owningModule": "Privacy storage",
+      "implementationFiles": [
+        "web/lib/privacy/local-privacy-store.ts",
+        "web/lib/privacy/data-lifecycle.ts",
+        "web/features/privacy/PrivacyCenter.tsx"
+      ],
+      "testFiles": [
+        "web/tests/privacy.test.ts",
+        "web/tests/e2e/core-journey.spec.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Privacy tests cover local-only behavior, raw images absent from localStorage, no network upload behavior, inventory accuracy, and deletion flows.",
+      "blocker": "",
+      "owner": "Privacy engineer",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-PRIV-002",
+      "source": "docs/PRIVACY_IMPLEMENTATION_NOTES.md",
+      "section": "Consent architecture",
+      "summary": "Use separate consent acknowledgments for camera use, face analysis, temporary processing, saving derived profiles, saving builds, screenshots, and future participation.",
+      "owningModule": "Consent",
+      "implementationFiles": [
+        "web/lib/privacy/consent.ts",
+        "web/features/privacy/ConsentPanel.tsx"
+      ],
+      "testFiles": [
+        "web/tests/privacy.test.ts",
+        "web/tests/e2e/edge-flows.spec.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Tests cover consent versioning, separate consent controls, missing required consent rejection, and disabled future participation controls.",
+      "blocker": "",
+      "owner": "Privacy engineer",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-DEL-001",
+      "source": "docs/PRIVACY_IMPLEMENTATION_NOTES.md",
+      "section": "Deletion lifecycle",
+      "summary": "Support deletion of active capture session, temporary images, derived profiles, saved builds, screenshots, all local data, and deletion records.",
+      "owningModule": "Data lifecycle",
+      "implementationFiles": [
+        "web/app/page.tsx",
+        "web/lib/privacy/data-lifecycle.ts",
+        "web/lib/privacy/local-privacy-store.ts"
+      ],
+      "testFiles": [
+        "web/tests/privacy.test.ts",
+        "web/tests/e2e/core-journey.spec.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Unit and E2E tests cover session cleanup, object URL cleanup, profile deletion, saved build deletion, screenshot deletion, delete-all behavior, and deletion confirmation.",
+      "blocker": "",
+      "owner": "Privacy engineer",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-SEC-001",
+      "source": "docs/ARCHITECTURE.md",
+      "section": "Web hardening posture",
+      "summary": "Configure web security headers, avoid production source maps, exclude dev-only routes from production navigation, and prevent fixture leakage.",
+      "owningModule": "Web security",
+      "implementationFiles": [
+        "web/next.config.ts",
+        "web/app/page.tsx",
+        "web/scripts/production-bundle-guard.mjs",
+        "web/scripts/integrity-check.mjs"
+      ],
+      "testFiles": [
+        "web/tests/mobile-hardening.test.ts",
+        "web/tests/integrity.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Security header, source-map, fixture exclusion, development navigation exclusion, integrity, and production bundle guard tests pass.",
+      "blocker": "",
+      "owner": "Security lead",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-VERIFY-001",
+      "source": "docs/TEST_PLAN.md",
+      "section": "Web MVP automated coverage",
+      "summary": "Maintain automated coverage for catalog validation, capture, privacy, matching, refinement, fixture exclusion, navigation, and production gates.",
+      "owningModule": "Verification",
+      "implementationFiles": [
+        "web/tests/",
+        "scripts/verify.mjs",
+        "web/package.json"
+      ],
+      "testFiles": [
+        "web/tests/integrity.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "`npm run verify` passed end-to-end with web tests, Playwright tests, catalog checks, production build, and iOS build/unit/UI tests.",
+      "blocker": "",
+      "owner": "QA lead",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-VERIFY-002",
+      "source": "docs/development/GIT_WORKFLOW.md",
+      "section": "Repository Status Script",
+      "summary": "Provide safe Git/worktree hygiene checks for staged, modified, untracked, ignored, oversized, fixture, secret, and media-risk files.",
+      "owningModule": "Build custody",
+      "implementationFiles": [
+        "scripts/repository-status.mjs",
+        ".gitignore",
+        "docs/development/GIT_WORKFLOW.md"
+      ],
+      "testFiles": [
+        "web/tests/integrity.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "`node scripts/repository-status.mjs --strict` reports current Git state and exits successfully with zero warnings.",
+      "blocker": "",
+      "owner": "Build custodian",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-BETA-001",
+      "source": "docs/PRIVATE_BETA_READINESS.md",
+      "section": "Measurable Beta Gates",
+      "summary": "Do not label the product ready for private beta until capture completion, quality pass, repeatability, acceptance, crash-free, deletion, processing time, and catalog-error gates are met.",
+      "owningModule": "Beta readiness",
+      "implementationFiles": [
+        "docs/PRIVATE_BETA_READINESS.md",
+        "docs/REPEATABILITY_TEST_PROTOCOL.md"
+      ],
+      "testFiles": [
+        "web/tests/e2e/core-journey.spec.ts",
+        "web/tests/profile-geometry.test.ts"
+      ],
+      "status": "VERIFICATION_REQUIRED",
+      "evidence": "Beta gates are documented and automated dry-run coverage exists, but real tester metrics have not been collected.",
+      "blocker": "Requires verified catalog, local model asset, HTTPS device testing, and real tester sessions.",
+      "owner": "QA lead",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-DEPLOY-001",
+      "source": "docs/DEPLOYMENT_READINESS.md",
+      "section": "Deployment readiness",
+      "summary": "Do not deploy or connect external services until owner supplies hosting, domain, legal, support, and payment-provider decisions.",
+      "owningModule": "Deployment readiness",
+      "implementationFiles": [
+        "docs/DEPLOYMENT_READINESS.md",
+        "docs/PAYMENT_PROVIDER_HANDOFF.md",
+        "docs/ENVIRONMENT_VARIABLES.md",
+        "web/lib/config/environment.ts"
+      ],
+      "testFiles": [
+        "web/tests/environment.test.ts",
+        "web/tests/commerce.test.ts"
+      ],
+      "status": "VERIFICATION_REQUIRED",
+      "evidence": "Environment validation and provider-independent payment scaffolds exist; no deployment or payment provider is connected.",
+      "blocker": "Owner decisions and verified product value are required before deployment/payments.",
+      "owner": "Wyatt / Lead engineer",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-IOS-001",
+      "source": "docs/DECISIONS.md",
+      "section": "D-008 - Web-first MVP",
+      "summary": "Preserve the native iOS foundation without expanding it during web MVP work.",
+      "owningModule": "iOS foundation",
+      "implementationFiles": [
+        "ios/GameFaceMatch.xcodeproj/project.pbxproj",
+        "ios/GameFaceMatch/"
+      ],
+      "testFiles": [
+        "ios/GameFaceMatchTests/",
+        "ios/GameFaceMatchUITests/"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Native iOS build, unit tests, and UI tests pass under the unified verification command.",
+      "blocker": "",
+      "owner": "Lead engineer",
+      "lastCheckedDate": "2026-07-12"
+    }
+  ]
+}

@@ -112,6 +112,7 @@ npm run verify
 The command stops on the first failed stage and prints the stage name before returning a nonzero exit code. It runs:
 
 - Repository status and documentation safety checks.
+- Requirement traceability report freshness checks.
 - Web type-checking.
 - Web linting.
 - Web unit and integration tests.
@@ -130,6 +131,27 @@ GAMEFACE_VERIFY_SKIP_IOS=1 npm run verify
 ```
 
 Do not use skip flags to claim complete verification.
+
+## Requirement Traceability
+
+The living requirement matrix is stored in:
+
+```sh
+data/traceability/requirements.json
+```
+
+The human-readable report is generated at:
+
+```sh
+docs/status/REQUIREMENT_TRACEABILITY.md
+```
+
+When changing catalog, matching, capture, privacy, deletion, verification, production gates, or beta-readiness behavior, update the JSON matrix and regenerate the report:
+
+```sh
+node scripts/generate-traceability-report.mjs
+node scripts/generate-traceability-report.mjs --check
+```
 
 ## Approved Temporary Or Generated Areas
 

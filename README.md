@@ -28,9 +28,18 @@ cd web
 npm install
 ```
 
+Run the full repository verification command from the repository root:
+
+```sh
+npm run verify
+```
+
+This orchestrates repository hygiene checks, web type-checking, linting, tests, catalog validation, fixture/production separation checks, production build gates, Playwright local smoke tests, and native iOS build/tests when Xcode is available.
+
 Start local development:
 
 ```sh
+cd web
 npm run dev
 ```
 
@@ -43,6 +52,13 @@ http://localhost:3000
 Build and checks:
 
 ```sh
+npm run verify
+```
+
+Individual web checks can still be run from `web/`:
+
+```sh
+cd web
 npm run typecheck
 npm run lint
 npm run test

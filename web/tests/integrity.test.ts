@@ -51,6 +51,26 @@ describe("repository hygiene tooling", () => {
   });
 });
 
+describe("unified verification command", () => {
+  it("documents and exposes the root verify command", () => {
+    const rootPackagePath = path.resolve(process.cwd(), "../package.json");
+    const verifyScriptPath = path.resolve(process.cwd(), "../scripts/verify.mjs");
+    const readmePath = path.resolve(process.cwd(), "../README.md");
+    const workflowPath = path.resolve(process.cwd(), "../docs/development/GIT_WORKFLOW.md");
+    const rootPackage = JSON.parse(fs.readFileSync(rootPackagePath, "utf8"));
+    const verifyScript = fs.readFileSync(verifyScriptPath, "utf8");
+    const readme = fs.readFileSync(readmePath, "utf8");
+    const workflow = fs.readFileSync(workflowPath, "utf8");
+    expect(rootPackage.scripts.verify).toBe("node scripts/verify.mjs");
+    expect(verifyScript).toContain("Web type-check");
+    expect(verifyScript).toContain("Production catalog fixture separation check");
+    expect(verifyScript).toContain("Web local smoke and end-to-end tests");
+    expect(verifyScript).toContain("Native iOS unit tests");
+    expect(readme).toContain("npm run verify");
+    expect(workflow).toContain("Unified Verification Command");
+  });
+});
+
 describe("key navigation flow", () => {
   it("contains the expected customer-facing sequence", () => {
     expect(KEY_NAVIGATION_FLOW).toEqual([

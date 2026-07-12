@@ -1,0 +1,9 @@
+{
+  "name": "gameface-match",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "verify": "node scripts/verify.mjs",
+    "quality": "npm run verify"
+  }
+}

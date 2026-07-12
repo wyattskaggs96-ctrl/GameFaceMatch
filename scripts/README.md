@@ -6,8 +6,11 @@ Local catalog workflow utilities live here.
 
 - `node scripts/repository-status.mjs`
 - `node scripts/repository-status.mjs --strict`
+- `npm run verify` from the repository root
 
 The repository status script reports staged, modified, untracked, ignored, and oversized files. It also warns about potential secrets, fixture-like content in production catalog directories, possible raw facial media, raw game videos, and local evidence masters.
+
+`npm run verify` orchestrates the full repository quality suite and stops at the first failed stage.
 
 ## Catalog Commands
 

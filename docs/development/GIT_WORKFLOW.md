@@ -27,6 +27,12 @@ This workflow is for queued Codex work and human contributors on GameFace Match.
 4. If unrelated user work exists, leave it untouched and stage only files changed for the task.
 5. Implement the smallest complete change.
 6. Run focused tests first, then broader checks appropriate to the change.
+   For the full repository verification suite, run from the repository root:
+
+   ```sh
+   npm run verify
+   ```
+
 7. Review the final diff:
 
    ```sh
@@ -94,6 +100,36 @@ The default oversized-file threshold is 25 MB. To change it for a local audit:
 ```sh
 REPO_STATUS_SIZE_LIMIT_MB=10 node scripts/repository-status.mjs
 ```
+
+## Unified Verification Command
+
+Run from the repository root:
+
+```sh
+npm run verify
+```
+
+The command stops on the first failed stage and prints the stage name before returning a nonzero exit code. It runs:
+
+- Repository status and documentation safety checks.
+- Web type-checking.
+- Web linting.
+- Web unit and integration tests.
+- Production catalog schema validation.
+- Production catalog placeholder, fixture, and duplicate checks.
+- Web integrity and documentation checks.
+- Web production build and production gates.
+- Playwright local smoke/end-to-end tests.
+- Native iOS build, unit tests, and UI tests when Xcode is available.
+
+For machines that cannot run local browser or simulator checks, these escape hatches are available for local troubleshooting only:
+
+```sh
+GAMEFACE_VERIFY_SKIP_E2E=1 npm run verify
+GAMEFACE_VERIFY_SKIP_IOS=1 npm run verify
+```
+
+Do not use skip flags to claim complete verification.
 
 ## Approved Temporary Or Generated Areas
 

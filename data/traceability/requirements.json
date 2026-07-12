@@ -790,6 +790,31 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-026",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "SHA-256 and evidence manifest generation",
+      "summary": "Generate local evidence manifests from approved directories with relative path, SHA-256, size, MIME type, file role, master/derivative state, environment and catalog associations, view, capture metadata, and changed, missing, and unexpected file detection between scans without external upload.",
+      "owningModule": "Phase 0 evidence manifest",
+      "implementationFiles": [
+        "scripts/evidence-manifest.mjs",
+        "data/schemas/evidence-manifest.schema.json",
+        "scripts/README.md",
+        "package.json",
+        "web/package.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-evidence-manifest.test.ts",
+        "data/fixtures/test-only/evidence-manifest/"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The local evidence manifest script scans approved evidence directories only, calculates SHA-256 checksums, file sizes, MIME types, metadata fields, local-only upload policy, and changed/missing/unexpected file comparisons with focused test-only fixture coverage.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

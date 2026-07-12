@@ -27,6 +27,7 @@
     "catalog:patch-reaudit": "node ../scripts/catalog-tools.mjs patch-reaudit",
     "catalog:publish-package": "node ../scripts/catalog-tools.mjs publish-package",
     "catalog:rollback-package": "node ../scripts/catalog-tools.mjs rollback-package",
+    "evidence:manifest": "node ../scripts/evidence-manifest.mjs",
     "catalog:placeholders": "node ../scripts/catalog-tools.mjs detect-placeholders ../data/catalog/production",
     "catalog:fixtures": "node ../scripts/catalog-tools.mjs detect-fixtures ../data/catalog/production",
     "check": "npm run typecheck && npm run lint && npm run test && npm run catalog:validate && npm run integrity && npm run build:guard"

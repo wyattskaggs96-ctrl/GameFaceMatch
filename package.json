@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "verify": "node scripts/verify.mjs",
-    "quality": "npm run verify"
+    "quality": "npm run verify",
+    "evidence:manifest": "node scripts/evidence-manifest.mjs"
   }
 }

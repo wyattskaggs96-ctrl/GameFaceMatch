@@ -1,0 +1,43 @@
+{
+  "sourceType": "testFixture",
+  "files": {
+    "data/fixtures/test-only/evidence-manifest/approved/CF27_PS5_RTG_HEAD_001_front_1.0.0_patch-test_20260712.txt": {
+      "fileRole": "standardAngle",
+      "derivativeState": "master",
+      "environmentID": "environment-test-only",
+      "catalogItemID": "CF27_PS5_RTG_HEAD_001",
+      "view": "straightOn",
+      "captureMetadata": {
+        "platformID": "platform-test-only",
+        "gameVersionID": "version-test-only",
+        "patchID": "patch-test-only",
+        "mode": "Road to Glory",
+        "creationPathID": "creation-path-test-only",
+        "captureMethod": "manualEntry",
+        "captureDevice": "synthetic-test-only-device",
+        "capturedAt": "2026-07-12T00:00:00.000Z",
+        "researcherID": "researcher-test-only",
+        "notes": "Test-only synthetic evidence metadata."
+      }
+    },
+    "data/fixtures/test-only/evidence-manifest/approved/CF27_PS5_RTG_HEAD_001_leftProfile_1.0.0_patch-test_20260712.json": {
+      "fileRole": "standardAngle",
+      "derivativeState": "derivative",
+      "environmentID": "environment-test-only",
+      "catalogItemID": "CF27_PS5_RTG_HEAD_001",
+      "view": "leftProfile",
+      "captureMetadata": {
+        "platformID": "platform-test-only",
+        "gameVersionID": "version-test-only",
+        "patchID": "patch-test-only",
+        "mode": "Road to Glory",
+        "creationPathID": "creation-path-test-only",
+        "captureMethod": "manualEntry",
+        "captureDevice": "synthetic-test-only-device",
+        "capturedAt": "2026-07-12T00:00:00.000Z",
+        "researcherID": "researcher-test-only",
+        "notes": "Test-only synthetic evidence metadata."
+      }
+    }
+  }
+}

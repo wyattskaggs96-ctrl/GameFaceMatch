@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/evidence-manifest.schema.json",
+  "title": "Phase0EvidenceManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "generatedAt",
+    "approvedDirectories",
+    "entries",
+    "comparison",
+    "warnings",
+    "uploadPolicy"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-evidence-manifest-v1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "approvedDirectories": { "type": "array", "items": { "$ref": "#/$defs/relativePath" } },
+    "entries": { "type": "array", "items": { "$ref": "#/$defs/entry" } },
+    "comparison": { "$ref": "#/$defs/comparison" },
+    "warnings": { "type": "array", "items": { "$ref": "#/$defs/warning" } },
+    "uploadPolicy": { "const": "local-only; no external upload performed" }
+  },
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?![a-zA-Z][a-zA-Z0-9+.-]*://)(?!.*(?:^|/)\\.\\.(?:/|$)).+"
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "relativePath",
+        "sha256",
+        "sizeBytes",
+        "mimeType",
+        "fileRole",
+        "derivativeState",
+        "environmentID",
+        "catalogItemID",
+        "view",
+        "captureMetadata"
+      ],
+      "properties": {
+        "relativePath": { "$ref": "#/$defs/relativePath" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "sizeBytes": { "type": "integer", "minimum": 0 },
+        "mimeType": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.+-]*/[a-z0-9][a-z0-9.+-]*$" },
+        "fileRole": { "enum": ["standardAngle", "navigationEvidence", "menuState", "environment", "review", "checksumManifest", "notes", "other"] },
+        "derivativeState": { "enum": ["master", "derivative"] },
+        "environmentID": { "type": ["string", "null"] },
+        "catalogItemID": { "type": ["string", "null"] },
+        "view": {
+          "enum": [
+            "straightOn",
+            "left45",
+            "right45",
+            "leftProfile",
+            "rightProfile",
+            "front",
+            "leftThreeQuarter",
+            "rightThreeQuarter",
+            "elevated",
+            "lowered",
+            "rear",
+            "fullScreenMenu",
+            "navigationEvidence",
+            "menuOverview",
+            "environment",
+            "review",
+            "notApplicable"
+          ]
+        },
+        "captureMetadata": { "$ref": "#/$defs/captureMetadata" }
+      }
+    },
+    "captureMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "platformID",
+        "gameVersionID",
+        "patchID",
+        "mode",
+        "creationPathID",
+        "captureMethod",
+        "captureDevice",
+        "capturedAt",
+        "researcherID",
+        "notes"
+      ],
+      "properties": {
+        "platformID": { "type": "string", "minLength": 1 },
+        "gameVersionID": { "type": "string", "minLength": 1 },
+        "patchID": { "type": "string", "minLength": 1 },
+        "mode": { "type": "string", "minLength": 1 },
+        "creationPathID": { "type": "string", "minLength": 1 },
+        "captureMethod": { "enum": ["consoleScreenshot", "captureCard", "phonePhoto", "screenRecording", "manualEntry", "export", "unknown"] },
+        "captureDevice": { "type": "string", "minLength": 1 },
+        "capturedAt": { "type": ["string", "null"], "format": "date-time" },
+        "researcherID": { "type": ["string", "null"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["changed", "missing", "unexpected"],
+      "properties": {
+        "changed": { "type": "array", "items": { "$ref": "#/$defs/relativePath" } },
+        "missing": { "type": "array", "items": { "$ref": "#/$defs/relativePath" } },
+        "unexpected": { "type": "array", "items": { "$ref": "#/$defs/relativePath" } }
+      }
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

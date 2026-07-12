@@ -29,3 +29,10 @@ The traceability generator reads `data/traceability/requirements.json` and write
 - `node scripts/catalog-tools.mjs report data/catalog/production`
 
 The empty production catalog is valid and produces an explicit warning that no recommendations can be produced.
+
+## Evidence Manifest Commands
+
+- `npm run evidence:manifest -- data/audit/college-football-27/evidence --metadata path/to/metadata.json --output path/to/manifest.json`
+- `node scripts/evidence-manifest.mjs data/audit/college-football-27/evidence --previous path/to/previous-manifest.json`
+
+The evidence manifest generator scans only approved local evidence directories, calculates SHA-256 checksums, records file size and MIME type, merges supplied metadata, and reports changed, missing, and unexpected files between scans. It does not upload, rename, transform, or modify evidence files.

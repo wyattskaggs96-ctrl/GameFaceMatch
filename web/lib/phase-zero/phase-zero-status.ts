@@ -95,6 +95,7 @@ const requiredSchemas = [
   "data/schemas/head-preset.schema.json",
   "data/schemas/head-capture-workspace.schema.json",
   "data/schemas/hairstyle.schema.json",
+  "data/schemas/hairstyle-capture-workspace.schema.json",
   "data/schemas/facial-hair-option.schema.json",
   "data/schemas/additional-face-attribute.schema.json",
   "data/schemas/phase-zero-domain.schema.json"

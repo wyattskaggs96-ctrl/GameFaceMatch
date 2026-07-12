@@ -620,6 +620,30 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-019",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Hairstyle capture workspace",
+      "summary": "Provide a hairstyle catalog workspace supporting double counts, native order, stable IDs, canonical head confirmation, canonical hair color, front/left three-quarter/left profile/rear/right profile/right three-quarter evidence, full-screen menu evidence, head/mode/body/position/archetype/account/platform/skin-tone/unlock dependencies, researcher-applied visual metadata separate from native labels, missing-view detection, and recapture detection.",
+      "owningModule": "Phase 0 hairstyle catalog capture",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-hairstyle-capture-workspace.ts",
+        "web/features/phase-zero/HairstyleCaptureWorkspace.tsx",
+        "data/schemas/hairstyle-capture-workspace.schema.json",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-hairstyle-capture-workspace.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The dev-only hairstyle-capture workspace assigns stable HAIR IDs from platform/mode/native order, records double counts, canonical head confirmation, canonical hair color, full-screen menu evidence, six required views including rear, source video timestamps, required dependency evidence, separate researcher visual metadata, open recapture requests, completion state, verification state, and catalog-manager disposition. Validation blocks production completion while count, evidence, dependency, canonical setup, recapture, or verification gates are incomplete.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

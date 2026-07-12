@@ -12,6 +12,11 @@ export type Phase0MenuItemKind = "root" | "category" | "subcategory" | "option" 
 export type Phase0CatalogItemKind = "head" | "hairstyle" | "facialHair" | "additionalAttribute";
 export type Phase0EvidenceFileKind = "screenshot" | "video" | "photo" | "export" | "notes" | "checksumManifest";
 export type Phase0EvidenceStorageScope = "localAuditOnly" | "testFixture" | "productionReference";
+export type Phase0CopyType = "disc" | "digital" | "subscription" | "trial" | "unknown";
+export type Phase0LatestUpdateState = "latestInstalled" | "updateAvailable" | "offlineUnknown" | "unknown";
+export type Phase0EAAccountState = "signedIn" | "signedOut" | "notRequired" | "unknown";
+export type Phase0HDRState = "enabled" | "disabled" | "unsupported" | "unknown";
+export type Phase0Handedness = "left" | "right" | "ambidextrous" | "notApplicable" | "unknown";
 export type Phase0CaptureEventKind = "standardAngle" | "navigationEvidence" | "recapture" | "manualAnnotation";
 export type Phase0IssueSeverity = "info" | "warning" | "blocking";
 export type Phase0IssueStatus = "open" | "inReview" | "resolved" | "wontFix";
@@ -68,24 +73,98 @@ export interface Phase0Patch extends Phase0BaseEntity {
 export interface Phase0AuditEnvironment extends Phase0BaseEntity {
   kind: Phase0AuditEnvironmentKind;
   platformID: Phase0EntityID;
+  platformName: string;
   gameVersionID: Phase0EntityID;
   patchID: Phase0EntityID;
+  consoleModel: string;
+  consoleOSVersion: string;
+  edition: string;
+  region: string;
+  storefront: string;
+  copyType: Phase0CopyType;
+  gameExecutableVersion: string;
+  patchLabel: string;
+  latestUpdateState: Phase0LatestUpdateState;
+  observedAt: ISODateString;
+  onlineState: "online" | "offline" | "unknown";
+  eaAccountState: Phase0EAAccountState;
+  resolution: string;
+  hdrState: Phase0HDRState;
+  displayModel: string;
+  captureHardware: string;
+  captureFormat: string;
+  mode: string;
+  exactPath: string;
+  position: string;
+  archetype: string;
+  handedness: Phase0Handedness;
+  height: string;
+  weight: string;
+  bodyType: string;
+  entitlements: string[];
+  evidenceFileIDs: Phase0EntityID[];
+  auditorID: string;
   consoleDevice?: string;
   display?: string;
   captureDevice?: string;
   lightingDescription?: string;
   networkState?: "online" | "offline" | "unknown";
-  auditorID: string;
   notes?: string;
+}
+
+export interface Phase0CreationPathStep {
+  stepNumber: number;
+  instruction: string;
+  expectedResult: string;
+  menuItemID: Phase0EntityID | null;
+  evidenceFileIDs: Phase0EntityID[];
+}
+
+export interface Phase0CreationPathRequirement {
+  id: Phase0EntityID;
+  description: string;
+  required: boolean;
+  evidenceFileIDs: Phase0EntityID[];
+}
+
+export interface Phase0CreationPathRestriction {
+  id: Phase0EntityID;
+  description: string;
+  severity: "info" | "blocking";
+  evidenceFileIDs: Phase0EntityID[];
+}
+
+export interface Phase0CreationPathAppearanceRelevance {
+  affectsAppearance: boolean;
+  affectedCatalogKinds: Phase0CatalogItemKind[];
+  affectedAttributeFamilies: string[];
+  notes: string;
+}
+
+export interface Phase0CreationPathDependency {
+  id: Phase0EntityID;
+  description: string;
+  dependencyTestID: Phase0EntityID | null;
+  requiredCreationPathID: Phase0EntityID | null;
+  evidenceFileIDs: Phase0EntityID[];
 }
 
 export interface Phase0CreationPath extends Phase0BaseEntity {
   gameID: Phase0EntityID;
   gameMode: string;
   displayName: string;
+  exactPath: string;
   platformIDs: Phase0EntityID[];
   observedPatchIDs: Phase0EntityID[];
   menuItemIDs: Phase0EntityID[];
+  reproducibleSteps: Phase0CreationPathStep[];
+  requirements: Phase0CreationPathRequirement[];
+  restrictions: Phase0CreationPathRestriction[];
+  appearanceRelevance: Phase0CreationPathAppearanceRelevance;
+  dependencies: Phase0CreationPathDependency[];
+  verificationState: Phase0VerificationState;
+  verificationRecordIDs: Phase0EntityID[];
+  evidenceFileIDs: Phase0EntityID[];
   status: Phase0SupportStatus;
 }
 
@@ -418,6 +497,15 @@ export function validatePhase0DomainSnapshot(snapshot: Phase0DomainSnapshot): Ph
     }
   }
 
+  for (const environment of snapshot.auditEnvironments) {
+    validateAuditEnvironment(environment, errors);
+  }
+
+  for (const creationPath of snapshot.creationPaths) {
+    validateCreationPath(creationPath, errors);
+    if (creationPath.verificationState === "verified") validateCreationPathVerificationGate(creationPath, snapshot.verificationRecords, errors);
+  }
+
   for (const release of snapshot.catalogReleases) {
     if (release.status === "published") {
       if (!release.deterministicChecksum) errors.push({ code: "missingReleaseChecksum", message: `${release.id} is missing a deterministic checksum.`, entityID: release.id });
@@ -432,6 +520,100 @@ export function validatePhase0DomainSnapshot(snapshot: Phase0DomainSnapshot): Ph
   }
 
   return { ok: errors.length === 0, errors, warnings };
+}
+
+export function validatePhase0AuditEnvironment(environment: Phase0AuditEnvironment): Phase0DomainValidationReport {
+  const errors: Phase0DomainValidationIssue[] = [];
+  validateBaseEntity(environment, "auditEnvironment", errors);
+  validateAuditEnvironment(environment, errors);
+  return { ok: errors.length === 0, errors, warnings: [] };
+}
+
+export function validatePhase0CreationPath(creationPath: Phase0CreationPath): Phase0DomainValidationReport {
+  const errors: Phase0DomainValidationIssue[] = [];
+  validateBaseEntity(creationPath, "creationPath", errors);
+  validateCreationPath(creationPath, errors);
+  return { ok: errors.length === 0, errors, warnings: [] };
+}
+
+function validateAuditEnvironment(environment: Phase0AuditEnvironment, errors: Phase0DomainValidationIssue[]) {
+  for (const field of [
+    "platformName",
+    "consoleModel",
+    "consoleOSVersion",
+    "edition",
+    "region",
+    "storefront",
+    "gameExecutableVersion",
+    "patchLabel",
+    "resolution",
+    "displayModel",
+    "captureHardware",
+    "captureFormat",
+    "mode",
+    "exactPath",
+    "position",
+    "archetype",
+    "height",
+    "weight",
+    "bodyType",
+    "auditorID"
+  ] as const) {
+    if (!hasUsableText(environment[field])) {
+      errors.push({ code: "missingAuditEnvironmentField", message: `${environment.id} is missing ${field}.`, entityID: environment.id });
+    }
+  }
+  if (!isISODate(environment.observedAt)) {
+    errors.push({ code: "invalidTimestamp", message: `${environment.id} has invalid observedAt.`, entityID: environment.id });
+  }
+  if (environment.evidenceFileIDs.length === 0) {
+    errors.push({ code: "missingEvidenceReference", message: `${environment.id} must reference environment evidence.`, entityID: environment.id });
+  }
+}
+
+function validateCreationPath(creationPath: Phase0CreationPath, errors: Phase0DomainValidationIssue[]) {
+  for (const field of ["gameMode", "displayName", "exactPath"] as const) {
+    if (!hasUsableText(creationPath[field])) {
+      errors.push({ code: "missingCreationPathField", message: `${creationPath.id} is missing ${field}.`, entityID: creationPath.id });
+    }
+  }
+  if (creationPath.reproducibleSteps.length === 0) {
+    errors.push({ code: "missingCreationPathSteps", message: `${creationPath.id} requires reproducible steps.`, entityID: creationPath.id });
+  }
+  const expectedSteps = creationPath.reproducibleSteps.map((step) => step.stepNumber).sort((a, b) => a - b);
+  for (let index = 0; index < expectedSteps.length; index += 1) {
+    if (expectedSteps[index] !== index + 1) {
+      errors.push({ code: "invalidCreationPathStepSequence", message: `${creationPath.id} step numbers must be contiguous from 1.`, entityID: creationPath.id });
+      break;
+    }
+  }
+  for (const step of creationPath.reproducibleSteps) {
+    if (!hasUsableText(step.instruction) || !hasUsableText(step.expectedResult)) {
+      errors.push({ code: "invalidCreationPathStep", message: `${creationPath.id} has an incomplete reproducible step.`, entityID: creationPath.id });
+    }
+    if (step.evidenceFileIDs.length === 0) {
+      errors.push({ code: "missingEvidenceReference", message: `${creationPath.id} step ${step.stepNumber} requires evidence.`, entityID: creationPath.id });
+    }
+  }
+  if (creationPath.evidenceFileIDs.length === 0) {
+    errors.push({ code: "missingEvidenceReference", message: `${creationPath.id} must reference creation-path evidence.`, entityID: creationPath.id });
+  }
+}
+
+function validateCreationPathVerificationGate(creationPath: Phase0CreationPath, records: Phase0VerificationRecord[], errors: Phase0DomainValidationIssue[]) {
+  const approvals = records.filter(
+    (record) =>
+      creationPath.verificationRecordIDs.includes(record.id) &&
+      record.targetEntityID === creationPath.id &&
+      record.targetEntityType === "menuItem" &&
+      record.decision === "approved"
+  );
+  const first = approvals.some((record) => record.stage === "first");
+  const second = approvals.some((record) => record.stage === "second");
+  const reviewers = new Set(approvals.map((record) => record.verifierID).filter(Boolean));
+  if (!first || !second || reviewers.size < 2) {
+    errors.push({ code: "missingSecondReview", message: `${creationPath.id} requires first and second approved creation-path reviews from different verifiers.`, entityID: creationPath.id });
+  }
 }
 
 function validateSecondReviewGate(item: Phase0CatalogItem, records: Phase0VerificationRecord[], errors: Phase0DomainValidationIssue[]) {
@@ -469,10 +651,24 @@ function getCollections(snapshot: Phase0DomainSnapshot): Record<string, Phase0Ba
   };
 }
 
+function validateBaseEntity(entity: Phase0BaseEntity, collectionName: string, errors: Phase0DomainValidationIssue[]) {
+  if (!entity.id.trim()) errors.push({ code: "missingStableID", message: `${collectionName} entity is missing a stable ID.` });
+  if (entity.schemaVersion !== PHASE0_DOMAIN_SCHEMA_VERSION) {
+    errors.push({ code: "invalidSchemaVersion", message: `${entity.id} has an invalid schema version.`, entityID: entity.id });
+  }
+  if (!isISODate(entity.createdAt) || !isISODate(entity.updatedAt)) {
+    errors.push({ code: "invalidTimestamp", message: `${entity.id} has invalid createdAt or updatedAt.`, entityID: entity.id });
+  }
+}
+
 function isISODate(value: string | null | undefined) {
   return typeof value === "string" && value.trim().length > 0 && !Number.isNaN(Date.parse(value));
 }
 
 function containsPlaceholder(value: string) {
   return /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK)\b/i.test(value);
+}
+
+function hasUsableText(value: string) {
+  return value.trim().length > 0 && !containsPlaceholder(value);
 }

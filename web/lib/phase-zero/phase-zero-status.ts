@@ -82,6 +82,8 @@ const requiredSchemas = [
   "data/schemas/review-record.schema.json",
   "data/schemas/navigation-instruction.schema.json",
   "data/schemas/publication-record.schema.json",
+  "data/schemas/audit-environment.schema.json",
+  "data/schemas/creation-path.schema.json",
   "data/schemas/phase-zero-domain.schema.json"
 ];
 

@@ -79,6 +79,15 @@ describe("Phase 0 domain model", () => {
     expect(report.ok).toBe(false);
     expect(report.errors.map((error) => error.code)).toContain("rawFaceMediaInProductionReference");
   });
+
+  it("validates source-required audit environment and reproducible creation path fields", () => {
+    const snapshot = syntheticSnapshot();
+    snapshot.auditEnvironments[0].consoleModel = "";
+    snapshot.creationPaths[0].reproducibleSteps[0].evidenceFileIDs = [];
+    const codes = validatePhase0DomainSnapshot(snapshot).errors.map((error) => error.code);
+    expect(codes).toContain("missingAuditEnvironmentField");
+    expect(codes).toContain("missingEvidenceReference");
+  });
 });
 
 function syntheticSnapshot(): Phase0DomainSnapshot {
@@ -118,8 +127,36 @@ function syntheticSnapshot(): Phase0DomainSnapshot {
     ...base("environment-synthetic"),
     kind: "consoleCapture",
     platformID: "platform-synthetic",
+    platformName: "synthetic-platform",
     gameVersionID: "version-synthetic",
     patchID: "patch-synthetic",
+    consoleModel: "synthetic-console-model",
+    consoleOSVersion: "synthetic-console-os",
+    edition: "synthetic-edition",
+    region: "synthetic-region",
+    storefront: "synthetic-storefront",
+    copyType: "digital",
+    gameExecutableVersion: "synthetic-executable-version",
+    patchLabel: "synthetic-patch",
+    latestUpdateState: "latestInstalled",
+    observedAt: now,
+    onlineState: "online",
+    eaAccountState: "signedOut",
+    resolution: "synthetic-resolution",
+    hdrState: "disabled",
+    displayModel: "synthetic-display-model",
+    captureHardware: "synthetic-capture-hardware",
+    captureFormat: "synthetic-capture-format",
+    mode: "synthetic-mode",
+    exactPath: "synthetic-creation-path",
+    position: "synthetic-position",
+    archetype: "synthetic-archetype",
+    handedness: "right",
+    height: "synthetic-height",
+    weight: "synthetic-weight",
+    bodyType: "synthetic-body-type",
+    entitlements: ["synthetic-entitlement"],
+    evidenceFileIDs: ["evidence-synthetic"],
     auditorID: "synthetic-auditor",
     networkState: "unknown"
   });
@@ -128,9 +165,53 @@ function syntheticSnapshot(): Phase0DomainSnapshot {
     gameID: "game-synthetic",
     gameMode: "synthetic-mode",
     displayName: "synthetic-creation-path",
+    exactPath: "synthetic-mode > synthetic-creation-path",
     platformIDs: ["platform-synthetic"],
     observedPatchIDs: ["patch-synthetic"],
     menuItemIDs: ["menu-synthetic"],
+    reproducibleSteps: [
+      {
+        stepNumber: 1,
+        instruction: "Select synthetic mode.",
+        expectedResult: "Synthetic creation path is visible.",
+        menuItemID: "menu-synthetic",
+        evidenceFileIDs: ["evidence-synthetic"]
+      }
+    ],
+    requirements: [
+      {
+        id: "requirement-synthetic",
+        description: "Synthetic requirement.",
+        required: true,
+        evidenceFileIDs: ["evidence-synthetic"]
+      }
+    ],
+    restrictions: [
+      {
+        id: "restriction-synthetic",
+        description: "Synthetic restriction.",
+        severity: "info",
+        evidenceFileIDs: ["evidence-synthetic"]
+      }
+    ],
+    appearanceRelevance: {
+      affectsAppearance: true,
+      affectedCatalogKinds: ["head", "hairstyle", "facialHair", "additionalAttribute"],
+      affectedAttributeFamilies: ["synthetic-attribute-family"],
+      notes: "Synthetic appearance relevance."
+    },
+    dependencies: [
+      {
+        id: "dependency-link-synthetic",
+        description: "Synthetic dependency link.",
+        dependencyTestID: "dependency-synthetic",
+        requiredCreationPathID: null,
+        evidenceFileIDs: ["evidence-synthetic"]
+      }
+    ],
+    verificationState: "firstReviewPending",
+    verificationRecordIDs: [],
+    evidenceFileIDs: ["evidence-synthetic"],
     status: "inAudit"
   });
   snapshot.menuItems.push({

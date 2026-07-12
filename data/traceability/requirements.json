@@ -310,6 +310,31 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-007",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Environment and creation-path schemas",
+      "summary": "Validate and persist audit environments and creation paths with source-required console, game, capture, player-context, evidence, reproducible-step, dependency, and verification metadata.",
+      "owningModule": "Phase 0 audit metadata",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-domain.ts",
+        "web/lib/phase-zero/phase-zero-audit-store.ts",
+        "data/schemas/audit-environment.schema.json",
+        "data/schemas/creation-path.schema.json",
+        "data/schemas/phase-zero-domain.schema.json",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-audit-store.test.ts",
+        "web/tests/phase-zero-domain.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Audit environment and creation-path schemas require platform, console, game update, online/account, display/capture, player-context, entitlement, evidence, reproducible-step, requirement, restriction, appearance-relevance, dependency, and verification fields. The audit store validates before saving and migrates unversioned local snapshots.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

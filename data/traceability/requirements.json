@@ -405,6 +405,29 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-011",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Second-person verification and disagreement resolution",
+      "summary": "Define second-person verification and discrepancy-resolution schemas using only approved verification statuses, evidence-existence checks, angle-sample checks, randomized review context, discrepancy type, resolution action, resolution evidence, both-party acknowledgment, and final disposition.",
+      "owningModule": "Phase 0 verification",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-verification.ts",
+        "data/schemas/second-person-verification.schema.json",
+        "data/schemas/discrepancy-resolution.schema.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-verification.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Second-person verification and discrepancy-resolution schemas include the approved final dispositions, primary and verifier observations, scope, evidence/front-view/secondary-angle checks, randomization method, discrepancy type, resolution action, resolution evidence, both-party acknowledgments, and final disposition. Tests verify schema status enums, required fields, publishable verified records, blocked non-verified dispositions, missing evidence and acknowledgments, discrepancy resolution evidence, and catalog publish blocking for unverified records.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

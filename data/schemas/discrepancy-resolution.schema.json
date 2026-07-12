@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/discrepancy-resolution.schema.json",
+  "title": "Phase0DiscrepancyResolutionRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "discrepancyID",
+    "verificationID",
+    "targetStableID",
+    "verificationScope",
+    "primaryObservation",
+    "verifierObservation",
+    "discrepancyType",
+    "randomizationMethod",
+    "resolutionAction",
+    "resolutionEvidenceIDs",
+    "primaryAcknowledgedAt",
+    "verifierAcknowledgedAt",
+    "finalDisposition",
+    "notes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-discrepancy-resolution-v1" },
+    "discrepancyID": { "$ref": "#/$defs/id" },
+    "verificationID": { "$ref": "#/$defs/id" },
+    "targetStableID": { "$ref": "#/$defs/text" },
+    "verificationScope": { "$ref": "#/$defs/verificationScope" },
+    "primaryObservation": { "$ref": "#/$defs/observation" },
+    "verifierObservation": { "$ref": "#/$defs/observation" },
+    "discrepancyType": { "$ref": "#/$defs/discrepancyType" },
+    "randomizationMethod": { "$ref": "#/$defs/text" },
+    "resolutionAction": { "$ref": "#/$defs/resolutionAction" },
+    "resolutionEvidenceIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+    "primaryAcknowledgedAt": { "type": ["string", "null"], "format": "date-time" },
+    "verifierAcknowledgedAt": { "type": ["string", "null"], "format": "date-time" },
+    "finalDisposition": { "$ref": "#/$defs/approvedVerificationStatus" },
+    "notes": { "$ref": "#/$defs/text" }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "text": { "type": "string", "minLength": 1 },
+    "approvedVerificationStatus": {
+      "enum": [
+        "VERIFIED",
+        "VERIFIED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "VERSION_MISMATCH",
+        "MISSING_EVIDENCE",
+        "COUNT_MISMATCH",
+        "ORDER_MISMATCH",
+        "DEPENDENCY_UNRESOLVED",
+        "NOT_VERIFIED"
+      ]
+    },
+    "verificationScope": { "enum": ["catalogItem", "menuMap", "evidenceFile", "captureLog", "catalogPackage"] },
+    "discrepancyType": {
+      "enum": [
+        "none",
+        "labelMismatch",
+        "versionMismatch",
+        "missingEvidence",
+        "countMismatch",
+        "orderMismatch",
+        "dependencyUnresolved",
+        "captureQuality",
+        "menuNavigationMismatch",
+        "other"
+      ]
+    },
+    "resolutionAction": {
+      "enum": [
+        "acceptPrimaryObservation",
+        "acceptVerifierObservation",
+        "recaptureEvidence",
+        "splitByVersion",
+        "correctDraftRecord",
+        "markNotVerified",
+        "holdForResearch",
+        "retireRecord"
+      ]
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observerID", "observedAt", "summary", "evidenceIDs"],
+      "properties": {
+        "observerID": { "$ref": "#/$defs/text" },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "summary": { "$ref": "#/$defs/text" },
+        "evidenceIDs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } }
+      }
+    }
+  }
+}

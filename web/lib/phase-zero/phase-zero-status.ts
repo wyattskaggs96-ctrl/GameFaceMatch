@@ -80,6 +80,8 @@ const requiredSchemas = [
   "data/schemas/catalog-item.schema.json",
   "data/schemas/asset-reference.schema.json",
   "data/schemas/review-record.schema.json",
+  "data/schemas/second-person-verification.schema.json",
+  "data/schemas/discrepancy-resolution.schema.json",
   "data/schemas/navigation-instruction.schema.json",
   "data/schemas/publication-record.schema.json",
   "data/schemas/evidence-file.schema.json",

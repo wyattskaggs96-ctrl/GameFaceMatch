@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/evidence-naming.schema.json",
+  "title": "Phase0EvidenceRenamePlan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "intakeID",
+    "currentRelativePath",
+    "generatedFilename",
+    "targetRelativePath",
+    "status",
+    "issues",
+    "previewOnly",
+    "destructiveRenameAllowed",
+    "createdAt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-evidence-naming-v1" },
+    "intakeID": { "$ref": "#/$defs/id" },
+    "currentRelativePath": { "$ref": "#/$defs/path" },
+    "generatedFilename": { "type": ["string", "null"] },
+    "targetRelativePath": { "type": ["string", "null"] },
+    "status": { "enum": ["ready", "blocked"] },
+    "issues": { "type": "array", "items": { "$ref": "#/$defs/issue" } },
+    "previewOnly": { "const": true },
+    "destructiveRenameAllowed": { "const": false },
+    "createdAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?![a-zA-Z][a-zA-Z0-9+.-]*://)(?!.*(?:^|/)\\.\\.(?:/|$)).+"
+    },
+    "field": {
+      "enum": ["catalogID", "view", "gameVersion", "patch", "date", "extension", "targetDirectory", "targetPath"]
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 },
+        "field": { "$ref": "#/$defs/field" }
+      }
+    }
+  }
+}

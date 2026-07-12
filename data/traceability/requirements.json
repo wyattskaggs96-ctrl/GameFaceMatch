@@ -766,6 +766,30 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-025",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "File and folder name generator",
+      "summary": "Generate and validate local evidence file names using catalog ID, approved view label, game version, patch, date, and extension; detect duplicate paths, unsafe characters, missing fields, and invalid metadata; provide a rename-plan preview without destructive master-file renaming.",
+      "owningModule": "Phase 0 evidence naming",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-evidence-naming.ts",
+        "web/features/phase-zero/EvidenceIntakeManager.tsx",
+        "data/schemas/evidence-naming.schema.json",
+        "data/audit/college-football-27/templates/asset-naming-guide.md",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-evidence-naming.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The evidence naming service generates safe deterministic names in the required token order, validates catalog ID, approved view labels, version, patch, YYYYMMDD date, approved extension, duplicate paths, unsafe characters, and missing fields, and returns preview-only rename plans with destructive renames disabled.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

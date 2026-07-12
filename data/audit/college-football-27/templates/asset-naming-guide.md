@@ -7,15 +7,35 @@ Use deterministic names so assets can be reviewed and verified locally.
 
 ## Pattern
 
-`cfb27__REPLACE_WITH_PLATFORM_SLUG__REPLACE_WITH_GAME_VERSION_SLUG__REPLACE_WITH_STABLE_INTERNAL_ID__REPLACE_WITH_ANGLE_ID__REPLACE_WITH_CAPTURE_DATE_YYYYMMDD.png`
+Use this token order:
 
-## Required Angle IDs
+`[REPLACE_WITH_CATALOG_ID]_[REPLACE_WITH_VIEW]_[REPLACE_WITH_GAME_VERSION]_[REPLACE_WITH_PATCH]_[REPLACE_WITH_CAPTURE_DATE_YYYYMMDD].[REPLACE_WITH_EXTENSION]`
+
+The local tooling generates the tokens with safe underscore separators:
+
+`[REPLACE_WITH_CATALOG_ID]_[REPLACE_WITH_VIEW]_[REPLACE_WITH_GAME_VERSION]_[REPLACE_WITH_PATCH]_[REPLACE_WITH_CAPTURE_DATE_YYYYMMDD].png`
+
+Do not use literal `*` characters in stored filenames. They are unsafe on common filesystems.
+
+## Approved View Labels
 
 - `straightOn`
 - `left45`
 - `right45`
 - `leftProfile`
 - `rightProfile`
+- `front`
+- `leftThreeQuarter`
+- `rightThreeQuarter`
+- `elevated`
+- `lowered`
+- `rear`
+- `fullScreenMenu`
+- `navigationEvidence`
+- `menuOverview`
+- `environment`
+- `review`
+- `notApplicable`
 
 ## Rules
 
@@ -23,3 +43,4 @@ Use deterministic names so assets can be reviewed and verified locally.
 - Do not include guessed game labels.
 - Do not overwrite older evidence.
 - Keep original evidence under local audit storage until publication review is complete.
+- Use rename-plan preview first. Do not destructively rename master evidence without explicit operator confirmation.

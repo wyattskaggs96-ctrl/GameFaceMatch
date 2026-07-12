@@ -13,6 +13,11 @@ import {
   type Phase0EvidenceClassification,
   type Phase0EvidenceIntakeBatch
 } from "@/lib/phase-zero/phase-zero-evidence-intake";
+import {
+  createEvidenceRenamePlans,
+  extensionFromFilename,
+  type Phase0EvidenceRenamePlan
+} from "@/lib/phase-zero/phase-zero-evidence-naming";
 import type { Phase0EvidenceDerivativeState, Phase0EvidenceFileRole, Phase0EvidenceView } from "@/lib/phase-zero/phase-zero-evidence";
 
 type DirectoryInputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -33,9 +38,31 @@ export function EvidenceIntakeManager() {
     })
   );
   const [savedMetadataCount, setSavedMetadataCount] = useState(0);
+  const [namingContext, setNamingContext] = useState({
+    gameVersion: "",
+    patch: "",
+    date: new Date().toISOString().slice(0, 10).replaceAll("-", ""),
+    targetDirectory: "data/audit/college-football-27/local-evidence"
+  });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const folderInputRef = useRef<HTMLInputElement>(null);
   const report = useMemo(() => validateEvidenceIntakeBatch(batch), [batch]);
+  const renamePlans = useMemo(() => {
+    const activeItems = batch.items.filter((item) => item.status !== "removed");
+    return createEvidenceRenamePlans(activeItems.map((item) => ({
+      intakeID: item.intakeID,
+      currentRelativePath: item.relativeSourcePath,
+      targetDirectory: namingContext.targetDirectory,
+      existingRelativePaths: activeItems.map((candidate) => candidate.relativeSourcePath),
+      catalogID: item.metadata.catalogItemID ?? "",
+      view: item.metadata.view,
+      gameVersion: namingContext.gameVersion,
+      patch: namingContext.patch,
+      date: namingContext.date,
+      extension: extensionFromFilename(item.originalFilename)
+    })), new Date().toISOString());
+  }, [batch.items, namingContext]);
+  const renamePlanByIntakeID = useMemo(() => new Map(renamePlans.map((plan) => [plan.intakeID, plan])), [renamePlans]);
 
   function handleFiles(files: FileList | File[], source: "dragDrop" | "filePicker" | "folderPicker") {
     const fileArray = Array.from(files);
@@ -111,6 +138,26 @@ export function EvidenceIntakeManager() {
       <Alert title="Local-only storage" tone="info">
         Finalization stores metadata only in browser localStorage. It does not serialize, transform, compress, rename, or upload the selected files.
       </Alert>
+      <Card>
+        <div className="status-row">
+          <div>
+            <h3>Rename-plan preview</h3>
+            <p className="supporting">
+              Generated names follow the approved token order with safe separators: catalog ID, view, game version, patch, date, and extension. This
+              tool previews names only and never renames master files.
+            </p>
+          </div>
+          <StatusBadge tone={renamePlans.every((plan) => plan.status === "ready") && renamePlans.length > 0 ? "success" : "warning"}>
+            preview only
+          </StatusBadge>
+        </div>
+        <div className="card-grid">
+          <TextField label="Game version token" value={namingContext.gameVersion} onChange={(event) => updateNamingContext("gameVersion", event.currentTarget.value)} />
+          <TextField label="Patch token" value={namingContext.patch} onChange={(event) => updateNamingContext("patch", event.currentTarget.value)} />
+          <TextField label="Capture date YYYYMMDD" value={namingContext.date} onChange={(event) => updateNamingContext("date", event.currentTarget.value)} />
+          <TextField label="Target relative folder" value={namingContext.targetDirectory} onChange={(event) => updateNamingContext("targetDirectory", event.currentTarget.value)} />
+        </div>
+      </Card>
       <div className="card-grid">
         <Card>
           <h3>Intake totals</h3>
@@ -149,7 +196,7 @@ export function EvidenceIntakeManager() {
       </div>
       <div className="result-grid">
         {batch.items.filter((item) => item.status !== "removed").map((item) => (
-          <Card key={item.intakeID} tone={item.warnings.some((warning) => warning.severity === "error") ? "warning" : "neutral"}>
+          <Card key={item.intakeID} tone={item.warnings.some((warning) => warning.severity === "error") || renamePlanByIntakeID.get(item.intakeID)?.status === "blocked" ? "warning" : "neutral"}>
             <div className="status-row">
               <h3>{item.originalFilename}</h3>
               <StatusBadge tone={item.status === "finalized" ? "success" : item.warnings.length > 0 ? "warning" : "info"}>{item.status}</StatusBadge>
@@ -172,6 +219,7 @@ export function EvidenceIntakeManager() {
                 <dd>{item.source}</dd>
               </div>
             </dl>
+            <RenamePlanPreview plan={renamePlanByIntakeID.get(item.intakeID)} />
             <div className="form-stack">
               <SelectField label="Classification" value={item.metadata.classification} onChange={(event) => updateItem(item.intakeID, { classification: event.currentTarget.value as Phase0EvidenceClassification | "" })}>
                 {classifications.map((value) => <option key={value || "blank"} value={value}>{value || "Select classification"}</option>)}
@@ -201,4 +249,37 @@ export function EvidenceIntakeManager() {
   function updateItem(intakeID: string, metadata: Parameters<typeof updateEvidenceIntakeMetadata>[2]) {
     setBatch((currentBatch) => updateEvidenceIntakeMetadata(currentBatch, intakeID, metadata, new Date().toISOString()));
   }
+
+  function updateNamingContext(field: keyof typeof namingContext, value: string) {
+    setNamingContext((currentContext) => ({ ...currentContext, [field]: value }));
+  }
+}
+
+function RenamePlanPreview({ plan }: { plan: Phase0EvidenceRenamePlan | undefined }) {
+  if (!plan) return null;
+  return (
+    <div className="card card-info">
+      <div className="status-row">
+        <h4>Generated name preview</h4>
+        <StatusBadge tone={plan.status === "ready" ? "success" : "warning"}>{plan.status}</StatusBadge>
+      </div>
+      <dl className="metadata-list">
+        <div>
+          <dt>Filename</dt>
+          <dd>{plan.generatedFilename ?? "Required fields missing"}</dd>
+        </div>
+        <div>
+          <dt>Target path</dt>
+          <dd>{plan.targetRelativePath ?? "Unavailable until naming fields pass validation"}</dd>
+        </div>
+      </dl>
+      {plan.issues.length > 0 ? (
+        <ul className="compact-list">
+          {plan.issues.map((issue, index) => <li key={`${plan.intakeID}-${issue.code}-${issue.field ?? "plan"}-${index}`}>{issue.message}</li>)}
+        </ul>
+      ) : (
+        <p className="supporting">Preview is ready. Explicit operator confirmation would still be required before any future rename action.</p>
+      )}
+    </div>
+  );
 }

@@ -6,6 +6,7 @@ import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusRepor
 import { CaptureConfigurationEditor } from "./CaptureConfigurationEditor";
 import { CreationPathAuditWorkspace } from "./CreationPathAuditWorkspace";
 import { EnvironmentManifestWizard } from "./EnvironmentManifestWizard";
+import { FacialHairCaptureWorkspace } from "./FacialHairCaptureWorkspace";
 import { HairstyleCaptureWorkspace } from "./HairstyleCaptureWorkspace";
 import { HeadCaptureWorkspace } from "./HeadCaptureWorkspace";
 import { MenuMapEditor } from "./MenuMapEditor";
@@ -43,6 +44,7 @@ export function Phase0StatusPanel({
       <CaptureConfigurationEditor />
       <HeadCaptureWorkspace />
       <HairstyleCaptureWorkspace />
+      <FacialHairCaptureWorkspace />
       <Phase0AuditDashboard dashboard={dashboard} />
       <div className="card-grid">
         <Card>

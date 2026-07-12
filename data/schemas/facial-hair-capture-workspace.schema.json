@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/facial-hair-capture-workspace.schema.json",
+  "title": "Phase0FacialHairCaptureWorkspace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "workspaceID",
+    "createdAt",
+    "updatedAt",
+    "gameID",
+    "platformCode",
+    "modeCode",
+    "gameVersionID",
+    "patchID",
+    "creationPathID",
+    "menuMapID",
+    "canonicalCaptureConfigurationHash",
+    "doubleCountRuns",
+    "entries"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-facial-hair-capture-workspace-v1" },
+    "workspaceID": { "$ref": "#/$defs/id" },
+    "createdAt": { "$ref": "#/$defs/timestamp" },
+    "updatedAt": { "$ref": "#/$defs/timestamp" },
+    "gameID": { "$ref": "#/$defs/id" },
+    "platformCode": { "$ref": "#/$defs/code" },
+    "modeCode": { "$ref": "#/$defs/code" },
+    "gameVersionID": { "$ref": "#/$defs/id" },
+    "patchID": { "$ref": "#/$defs/id" },
+    "creationPathID": { "$ref": "#/$defs/id" },
+    "menuMapID": { "$ref": "#/$defs/id" },
+    "canonicalCaptureConfigurationHash": { "type": ["string", "null"] },
+    "doubleCountRuns": { "type": "array", "items": { "$ref": "#/$defs/doubleCountRun" } },
+    "entries": { "type": "array", "items": { "$ref": "#/$defs/facialHairEntry" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "code": { "type": "string", "pattern": "^[A-Z0-9]+$" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "viewID": { "enum": ["front", "leftThreeQuarter", "leftProfile", "rightThreeQuarter", "rightProfile", "fullScreenMenu"] },
+    "dependencyKind": { "enum": ["head", "hairstyle", "mode", "body", "position", "archetype", "account", "platform", "skinTone", "unlock"] },
+    "observationKind": { "enum": ["mustache", "beard", "sideburn", "stubble", "density", "length", "colorControl"] },
+    "verificationState": { "enum": ["draft", "firstReviewPending", "firstReviewApproved", "secondReviewPending", "verified", "rejected", "retired"] },
+    "doubleCountRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runID", "runNumber", "observedCount", "startedAt", "completedAt", "sourceVideoEvidenceID", "notes"],
+      "properties": {
+        "runID": { "$ref": "#/$defs/id" },
+        "runNumber": { "type": "integer", "minimum": 1 },
+        "observedCount": { "type": ["integer", "null"], "minimum": 0 },
+        "startedAt": { "$ref": "#/$defs/timestamp" },
+        "completedAt": { "type": ["string", "null"], "format": "date-time" },
+        "sourceVideoEvidenceID": { "type": ["string", "null"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceFileID", "viewID", "sourceVideoID", "sourceVideoTimestamp", "notes"],
+      "properties": {
+        "evidenceFileID": { "$ref": "#/$defs/id" },
+        "viewID": { "$ref": "#/$defs/viewID" },
+        "sourceVideoID": { "type": ["string", "null"] },
+        "sourceVideoTimestamp": { "type": ["string", "null"] },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dependencyID", "kind", "observedValue", "evidenceFileIDs", "notes"],
+      "properties": {
+        "dependencyID": { "$ref": "#/$defs/id" },
+        "kind": { "$ref": "#/$defs/dependencyKind" },
+        "observedValue": { "type": "string", "minLength": 1 },
+        "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observationID", "kind", "observedState", "evidenceFileIDs", "notes"],
+      "properties": {
+        "observationID": { "$ref": "#/$defs/id" },
+        "kind": { "$ref": "#/$defs/observationKind" },
+        "observedState": { "type": "string", "minLength": 1 },
+        "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "coverageMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metadataID", "standardizedCoverage", "obscuresJawline", "obscuresMouth", "coverageNotes"],
+      "properties": {
+        "metadataID": { "$ref": "#/$defs/id" },
+        "standardizedCoverage": { "enum": ["unknown", "none", "mustache", "goatee", "beard", "mixed"] },
+        "obscuresJawline": { "type": ["boolean", "null"] },
+        "obscuresMouth": { "type": ["boolean", "null"] },
+        "coverageNotes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "recaptureRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requestID", "viewID", "reason", "status", "evidenceFileIDs", "notes"],
+      "properties": {
+        "requestID": { "$ref": "#/$defs/id" },
+        "viewID": { "enum": ["front", "leftThreeQuarter", "leftProfile", "rightThreeQuarter", "rightProfile", "fullScreenMenu", "dependency", "observation", "canonicalSetup"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["open", "resolved", "waived"] },
+        "evidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "notes": { "type": "string" }
+      }
+    },
+    "facialHairEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entryID",
+        "stableInternalID",
+        "nativeOrder",
+        "nativeCategoryLabel",
+        "visibleGameLabelOrIndex",
+        "isNoneOption",
+        "canonicalHeadStableID",
+        "canonicalHeadConfirmed",
+        "canonicalHairstyleStableID",
+        "canonicalHairstyleConfirmed",
+        "facialHairColor",
+        "fullScreenMenuEvidenceIDs",
+        "viewEvidence",
+        "dependencies",
+        "coverageMetadata",
+        "observations",
+        "recaptureRequests",
+        "captureCompletionStatus",
+        "verificationStatus",
+        "catalogManagerDisposition",
+        "notes"
+      ],
+      "properties": {
+        "entryID": { "$ref": "#/$defs/id" },
+        "stableInternalID": { "type": "string", "pattern": "^CF27_[A-Z0-9]+_[A-Z0-9]+_FACIALHAIR_[0-9]{3}$" },
+        "nativeOrder": { "type": "integer", "minimum": 1 },
+        "nativeCategoryLabel": { "type": "string", "minLength": 1 },
+        "visibleGameLabelOrIndex": { "type": "string", "minLength": 1 },
+        "isNoneOption": { "type": "boolean" },
+        "canonicalHeadStableID": { "type": "string", "minLength": 1 },
+        "canonicalHeadConfirmed": { "type": "boolean" },
+        "canonicalHairstyleStableID": { "type": "string", "minLength": 1 },
+        "canonicalHairstyleConfirmed": { "type": "boolean" },
+        "facialHairColor": { "type": ["string", "null"] },
+        "fullScreenMenuEvidenceIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "viewEvidence": { "type": "array", "items": { "$ref": "#/$defs/evidence" } },
+        "dependencies": { "type": "array", "items": { "$ref": "#/$defs/dependency" } },
+        "coverageMetadata": { "$ref": "#/$defs/coverageMetadata" },
+        "observations": { "type": "array", "items": { "$ref": "#/$defs/observation" } },
+        "recaptureRequests": { "type": "array", "items": { "$ref": "#/$defs/recaptureRequest" } },
+        "captureCompletionStatus": { "enum": ["notStarted", "inProgress", "complete", "blocked"] },
+        "verificationStatus": { "$ref": "#/$defs/verificationState" },
+        "catalogManagerDisposition": { "enum": ["notReady", "readyForReview", "accepted", "rejected", "deferred"] },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

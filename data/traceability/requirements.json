@@ -644,6 +644,30 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-020",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Facial-hair capture workspace",
+      "summary": "Provide a facial-hair catalog workspace supporting inclusion of None, double counts, native ordering, stable IDs, canonical head and hairstyle confirmation, facial-hair color, front/left three-quarter/left profile/right three-quarter/right profile evidence, full-screen menu evidence, coverage metadata, mustache/beard/sideburn/stubble/density/length/color-control observations, dependency testing, and missing-evidence production blocks.",
+      "owningModule": "Phase 0 facial-hair catalog capture",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-facial-hair-capture-workspace.ts",
+        "web/features/phase-zero/FacialHairCaptureWorkspace.tsx",
+        "data/schemas/facial-hair-capture-workspace.schema.json",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-facial-hair-capture-workspace.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The dev-only facial-hair capture workspace assigns stable FACIALHAIR IDs from platform/mode/native order, treats None as a first-class audited entry, records canonical head and hairstyle confirmation, facial-hair color, full-screen menu evidence, five required views, source video timestamps, coverage metadata, mustache/beard/sideburn/stubble/density/length/color-control observations, required dependency evidence, open recapture requests, completion state, verification state, and catalog-manager disposition. Validation blocks production completion while None, count, evidence, observation, dependency, canonical setup, recapture, or verification gates are incomplete.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

@@ -506,6 +506,28 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-014",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Environment capture",
+      "summary": "Provide an environment-manifest wizard that records the exact shipping-game platform, version/build, patch, mode, creation path, and required title/version/console/mode/workflow evidence slots; generate an environment ID from confirmed values; allow incomplete non-production drafts; and block completion when critical environment data is missing.",
+      "owningModule": "Phase 0 environment capture",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-environment-wizard.ts",
+        "web/features/phase-zero/EnvironmentManifestWizard.tsx",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-environment-wizard.test.ts",
+        "web/tests/phase-zero-audit-store.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The wizard creates clearly marked research drafts, records all source-required environment fields and five evidence slots, generates deterministic environment IDs from confirmed values, blocks completion when platform/version/patch/mode/path or required evidence is missing, and builds validated audit-environment metadata without storing file bytes.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

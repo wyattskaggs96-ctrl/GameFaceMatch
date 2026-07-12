@@ -1,7 +1,9 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { Alert, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { createPhase0AuditDashboardReport, type Phase0AuditDashboardReport } from "@/lib/phase-zero/phase-zero-audit-dashboard";
+import { createEmptyIssueRegister } from "@/lib/phase-zero/phase-zero-issue-management";
 import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusReport } from "@/lib/phase-zero/phase-zero-status";
 import { AdditionalAttributesWorkspace } from "./AdditionalAttributesWorkspace";
 import { CaptureConfigurationEditor } from "./CaptureConfigurationEditor";
@@ -11,6 +13,7 @@ import { EnvironmentManifestWizard } from "./EnvironmentManifestWizard";
 import { FacialHairCaptureWorkspace } from "./FacialHairCaptureWorkspace";
 import { HairstyleCaptureWorkspace } from "./HairstyleCaptureWorkspace";
 import { HeadCaptureWorkspace } from "./HeadCaptureWorkspace";
+import { IssueManagementWorkspace } from "./IssueManagementWorkspace";
 import { MenuMapEditor } from "./MenuMapEditor";
 
 const statusTone = {
@@ -23,11 +26,26 @@ const statusTone = {
 
 export function Phase0StatusPanel({
   report = createPhase0StatusReport(),
-  dashboard = createPhase0AuditDashboardReport({ phase0Report: report, productionMode: process.env.NODE_ENV === "production" })
+  dashboard
 }: {
   report?: Phase0StatusReport;
   dashboard?: Phase0AuditDashboardReport;
 }) {
+  const [issueRegister, setIssueRegister] = useState(() =>
+    createEmptyIssueRegister({
+      registerID: "phase-zero-local-issue-register",
+      nowISO: new Date().toISOString()
+    })
+  );
+  const activeDashboard = useMemo(
+    () => dashboard ?? createPhase0AuditDashboardReport({
+      phase0Report: report,
+      productionMode: process.env.NODE_ENV === "production",
+      issueRegister
+    }),
+    [dashboard, issueRegister, report]
+  );
+
   return (
     <section className="screen-stack" aria-labelledby="phase-zero-title">
       <ScreenHeader eyebrow="Development-only status" title="Phase 0 readiness" id="phase-zero-title">
@@ -49,7 +67,8 @@ export function Phase0StatusPanel({
       <FacialHairCaptureWorkspace />
       <AdditionalAttributesWorkspace />
       <DependencyTestRunner />
-      <Phase0AuditDashboard dashboard={dashboard} />
+      <IssueManagementWorkspace issueRegister={issueRegister} onIssueRegisterChange={setIssueRegister} />
+      <Phase0AuditDashboard dashboard={activeDashboard} />
       <div className="card-grid">
         <Card>
           <h2>Catalog state</h2>
@@ -200,6 +219,18 @@ function Phase0AuditDashboard({ dashboard }: { dashboard: Phase0AuditDashboardRe
             <div>
               <dt>Dependency tests pending</dt>
               <dd>{dashboard.progress.dependencyTestsPending}</dd>
+            </div>
+            <div>
+              <dt>Open audit issues</dt>
+              <dd>{dashboard.progress.openIssues}</dd>
+            </div>
+            <div>
+              <dt>Unresolved blockers</dt>
+              <dd>{dashboard.progress.unresolvedBlockingIssues}</dd>
+            </div>
+            <div>
+              <dt>Recapture queue</dt>
+              <dd>{dashboard.progress.recaptureQueueCount}</dd>
             </div>
           </dl>
         </Card>

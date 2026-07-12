@@ -2,6 +2,7 @@ import { approveCatalogRelease } from "@/lib/gates/feature-gates";
 import { getDataSourceTypeLabel, isProductionSource } from "@/lib/data/source-types";
 import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
 import type { CapturedAngleID, DataSourceType, GameCatalogItem, GameCatalogManifest } from "@/types/domain";
+import { createEmptyIssueRegister, summarizeIssueRegister, type Phase0IssueRegister, type Phase0IssueSummary } from "./phase-zero-issue-management";
 import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusReport } from "./phase-zero-status";
 
 export type Phase0AuditDashboardStatus = "ready" | "inProgress" | "blocked" | "notStarted";
@@ -37,6 +38,9 @@ export interface Phase0AuditProgressSummary {
   missingEvidence: number;
   recaptureRequests: number;
   dependencyTestsPending: number;
+  openIssues: number;
+  unresolvedBlockingIssues: number;
+  recaptureQueueCount: number;
 }
 
 export interface Phase0AuditDashboardReport {
@@ -63,6 +67,7 @@ export interface Phase0AuditDashboardReport {
     status: Phase0AuditDashboardStatus;
   };
   manualStudyReadiness: Phase0AreaStatus;
+  issueSummary: Phase0IssueSummary;
   productionGateState: {
     status: Phase0AuditDashboardStatus;
     reasons: string[];
@@ -77,10 +82,16 @@ export function createPhase0AuditDashboardReport(input: {
   manifest?: GameCatalogManifest;
   phase0Report?: Phase0StatusReport;
   productionMode?: boolean;
+  issueRegister?: Phase0IssueRegister;
 } = {}): Phase0AuditDashboardReport {
   const manifest = input.manifest ?? productionCatalogManifest;
   const phase0Report = input.phase0Report ?? createPhase0StatusReport();
   const productionMode = input.productionMode ?? true;
+  const issueRegister = input.issueRegister ?? createEmptyIssueRegister({
+    registerID: "phase-zero-empty-issue-register",
+    nowISO: phase0Report.generatedAt
+  });
+  const issueSummary = summarizeIssueRegister(issueRegister);
   const productionRecords = productionEligibleItems(manifest);
   const verifiedRecords = productionRecords.filter((item) => item.verificationState === "verified");
   const ignoredNonProductionRecordCount = manifest.items.length - productionRecords.length;
@@ -92,7 +103,10 @@ export function createPhase0AuditDashboardReport(input: {
     missingViews: sum(categoryProgress.map((category) => category.missingViewCount)),
     missingEvidence: sum(categoryProgress.map((category) => category.missingEvidenceCount)),
     recaptureRequests: productionRecords.filter((item) => item.verificationState === "rejected").length,
-    dependencyTestsPending: productionRecords.length === 0 ? 0 : productionRecords.filter((item) => !hasDependencyAnnotations(item)).length
+    dependencyTestsPending: productionRecords.length === 0 ? 0 : productionRecords.filter((item) => !hasDependencyAnnotations(item)).length,
+    openIssues: issueSummary.unresolvedIssues,
+    unresolvedBlockingIssues: issueSummary.unresolvedBlockingIssues,
+    recaptureQueueCount: issueSummary.recaptureQueueCount
   };
   const secondVerifierCompleted = productionRecords.filter((item) => Boolean(item.auditTrail?.secondReviewID)).length;
   const secondVerifierTotal = productionRecords.length;
@@ -101,6 +115,7 @@ export function createPhase0AuditDashboardReport(input: {
     productionRecords,
     ignoredNonProductionRecordCount,
     progress,
+    issueSummary,
     releaseApprovalReasons: productionGateReasons,
     categoryProgress
   });
@@ -129,6 +144,7 @@ export function createPhase0AuditDashboardReport(input: {
       status: secondVerifierTotal === 0 ? "blocked" : secondVerifierCompleted === secondVerifierTotal ? "ready" : "blocked"
     },
     manualStudyReadiness: requireArea(phase0Report, "manualMatchingFeasibility"),
+    issueSummary,
     productionGateState: {
       status: releaseApproval.approvedRelease ? "ready" : "blocked",
       reasons: productionGateReasons
@@ -206,6 +222,7 @@ function buildBlockedStates(input: {
   productionRecords: GameCatalogItem[];
   ignoredNonProductionRecordCount: number;
   progress: Phase0AuditProgressSummary;
+  issueSummary: Phase0IssueSummary;
   releaseApprovalReasons: string[];
   categoryProgress: Phase0AuditCategoryProgress[];
 }) {
@@ -215,6 +232,9 @@ function buildBlockedStates(input: {
   if (input.progress.missingViews > 0) blockers.push(`${input.progress.missingViews} required views are missing from production records.`);
   if (input.progress.missingEvidence > 0) blockers.push(`${input.progress.missingEvidence} production records are missing source evidence.`);
   if (input.progress.recaptureRequests > 0) blockers.push(`${input.progress.recaptureRequests} records require recapture or rejection resolution.`);
+  if (input.issueSummary.unresolvedBlockingIssues > 0) blockers.push(`${input.issueSummary.unresolvedBlockingIssues} unresolved blocking audit issues require resolution.`);
+  if (input.issueSummary.recaptureQueueCount > 0) blockers.push(`${input.issueSummary.recaptureQueueCount} audit issues are queued for recapture.`);
+  blockers.push(...input.issueSummary.blockers);
   blockers.push(...input.categoryProgress.flatMap((category) => (category.blocker ? [category.blocker] : [])));
   blockers.push(...input.releaseApprovalReasons.filter((reason) => !/approved catalog release/i.test(reason)));
   return unique(blockers);
@@ -226,6 +246,8 @@ function chooseHighestPriorityNextAction(input: {
   categoryProgress: Phase0AuditCategoryProgress[];
   releaseApprovalReasons: string[];
 }) {
+  if (input.progress.recaptureQueueCount > 0) return "Complete queued recaptures and attach replacement evidence.";
+  if (input.progress.unresolvedBlockingIssues > 0) return "Resolve blocking audit issues before catalog review can continue.";
   if (input.productionRecords.length === 0) return "Create a real College Football 27 audit session, record the environment, then capture the first evidence-backed category record.";
   if (input.progress.missingEvidence > 0) return "Attach required source evidence before review.";
   if (input.progress.missingViews > 0) return "Capture or recapture the missing required views.";

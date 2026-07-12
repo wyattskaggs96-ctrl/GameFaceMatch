@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createPhase0AuditDashboardReport } from "@/lib/phase-zero/phase-zero-audit-dashboard";
+import { addAuditIssue, createAuditIssue, createEmptyIssueRegister } from "@/lib/phase-zero/phase-zero-issue-management";
 import type { CapturedAngleID, GameCatalogItem, GameCatalogManifest } from "@/types/domain";
 
 describe("Phase 0 audit dashboard", () => {
@@ -75,6 +76,47 @@ describe("Phase 0 audit dashboard", () => {
       missingEvidenceCount: 1,
       status: "blocked"
     });
+  });
+
+  it("surfaces unresolved blocking issues and recapture queue items on the dashboard", () => {
+    let issueRegister = createEmptyIssueRegister({
+      registerID: "issue-register-synthetic",
+      nowISO: "2026-07-12T00:00:00.000Z"
+    });
+    issueRegister = addAuditIssue(issueRegister, createAuditIssue({
+      issueID: "issue-synthetic-blocking",
+      kind: "recaptureRequired",
+      title: "Synthetic recapture blocker",
+      description: "Synthetic blocking issue for dashboard coverage.",
+      owner: "owner-synthetic",
+      severity: "blocking",
+      status: "recaptureQueued",
+      affectedRecordIDs: ["record-synthetic-dashboard"],
+      affectedEvidenceFileIDs: ["evidence-synthetic-dashboard"],
+      resolutionNotes: "",
+      recaptureRequest: {
+        required: true,
+        queueStatus: "queued",
+        requestedAngles: ["straightOn"],
+        requestedEvidenceKinds: ["full-screen-menu"],
+        owner: "owner-synthetic",
+        priority: "blocking",
+        notes: "Synthetic recapture queue item."
+      },
+      nowISO: "2026-07-12T00:00:00.000Z"
+    }), "2026-07-12T00:00:00.000Z");
+
+    const report = createPhase0AuditDashboardReport({ issueRegister });
+
+    expect(report.progress.openIssues).toBe(1);
+    expect(report.progress.unresolvedBlockingIssues).toBe(1);
+    expect(report.progress.recaptureQueueCount).toBe(1);
+    expect(report.issueSummary.blockers[0]).toMatch(/Synthetic recapture blocker/);
+    expect(report.blockedStates).toEqual(expect.arrayContaining([
+      "1 unresolved blocking audit issues require resolution.",
+      "1 audit issues are queued for recapture."
+    ]));
+    expect(report.highestPriorityNextAction).toBe("Complete queued recaptures and attach replacement evidence.");
   });
 });
 

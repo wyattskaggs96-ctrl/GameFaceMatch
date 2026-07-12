@@ -716,6 +716,32 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-023",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Issue, exception, and recapture system",
+      "summary": "Provide an issue-management workflow for audit defects including missing evidence, wrong option association, count/order mismatch, inconsistent framing or lighting, wrong canonical hair or facial hair, version/platform mismatch, dependency uncertainty, duplicate ambiguity, corrupt files, unresolved paths, and recapture-required states with owner, severity, status, affected records, evidence, resolution notes, and recapture queue visibility.",
+      "owningModule": "Phase 0 issue management",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-issue-management.ts",
+        "web/features/phase-zero/IssueManagementWorkspace.tsx",
+        "data/schemas/issue-register.schema.json",
+        "web/lib/phase-zero/phase-zero-audit-dashboard.ts",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-issue-management.test.ts",
+        "web/tests/phase-zero-audit-dashboard.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "The dev-only issue register supports every required audit defect kind, owner, severity, status, affected records, evidence references, resolution notes, and recapture request metadata. Validation blocks unresolved blocking issues and pending recaptures, and the Phase 0 dashboard reports open issues, unresolved blockers, recapture queue counts, and blocker messages.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

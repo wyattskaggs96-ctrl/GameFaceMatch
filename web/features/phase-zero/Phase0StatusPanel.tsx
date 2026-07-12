@@ -1,6 +1,7 @@
 "use client";
 
 import { Alert, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
+import { createPhase0AuditDashboardReport, type Phase0AuditDashboardReport } from "@/lib/phase-zero/phase-zero-audit-dashboard";
 import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusReport } from "@/lib/phase-zero/phase-zero-status";
 
 const statusTone = {
@@ -11,7 +12,13 @@ const statusTone = {
   COMPLETE: "success"
 } as const;
 
-export function Phase0StatusPanel({ report = createPhase0StatusReport() }: { report?: Phase0StatusReport }) {
+export function Phase0StatusPanel({
+  report = createPhase0StatusReport(),
+  dashboard = createPhase0AuditDashboardReport({ phase0Report: report, productionMode: process.env.NODE_ENV === "production" })
+}: {
+  report?: Phase0StatusReport;
+  dashboard?: Phase0AuditDashboardReport;
+}) {
   return (
     <section className="screen-stack" aria-labelledby="phase-zero-title">
       <ScreenHeader eyebrow="Development-only status" title="Phase 0 readiness" id="phase-zero-title">
@@ -24,6 +31,7 @@ export function Phase0StatusPanel({ report = createPhase0StatusReport() }: { rep
         {report.overall.status.replaceAll("_", " ")} · {report.overall.percentComplete}% from {report.overall.completedChecks}/
         {report.overall.totalChecks} evidence checks. Production records loaded: {report.productionRecordCount}.
       </Alert>
+      <Phase0AuditDashboard dashboard={dashboard} />
       <div className="card-grid">
         <Card>
           <h2>Catalog state</h2>
@@ -69,6 +77,191 @@ export function Phase0StatusPanel({ report = createPhase0StatusReport() }: { rep
         ))}
       </div>
     </section>
+  );
+}
+
+function Phase0AuditDashboard({ dashboard }: { dashboard: Phase0AuditDashboardReport }) {
+  return (
+    <>
+      <Alert title="Audit dashboard" tone={dashboard.productionGateState.status === "ready" ? "success" : "danger"} role="alert">
+        {dashboard.highestPriorityNextAction}
+      </Alert>
+      <div className="card-grid">
+        <Card tone={dashboard.currentEnvironment.state === "blocked" ? "danger" : "info"}>
+          <div className="status-row">
+            <h2>Current environment</h2>
+            <StatusBadge tone={dashboard.currentEnvironment.state === "blocked" ? "danger" : "info"}>{dashboard.currentEnvironment.state}</StatusBadge>
+          </div>
+          <p className="supporting">{dashboard.currentEnvironment.label}</p>
+          <dl className="metadata-list">
+            <div>
+              <dt>Platform</dt>
+              <dd>{dashboard.currentEnvironment.platform}</dd>
+            </div>
+            <div>
+              <dt>Game version</dt>
+              <dd>{dashboard.currentEnvironment.gameVersion}</dd>
+            </div>
+            <div>
+              <dt>Patch</dt>
+              <dd>{dashboard.currentEnvironment.patchVersion}</dd>
+            </div>
+            <div>
+              <dt>Mode</dt>
+              <dd>{dashboard.currentEnvironment.gameMode}</dd>
+            </div>
+            <div>
+              <dt>Creation path</dt>
+              <dd>{dashboard.currentEnvironment.creationPath}</dd>
+            </div>
+          </dl>
+        </Card>
+        <Card>
+          <h2>Catalog release</h2>
+          <dl className="metadata-list">
+            <div>
+              <dt>Data class</dt>
+              <dd>{dashboard.dataClassLabel}</dd>
+            </div>
+            <div>
+              <dt>Catalog version</dt>
+              <dd>{dashboard.catalogVersion.identifier}</dd>
+            </div>
+            <div>
+              <dt>Verified at</dt>
+              <dd>{dashboard.catalogVersion.verifiedAt ?? "Not verified"}</dd>
+            </div>
+            <div>
+              <dt>Production records</dt>
+              <dd>{dashboard.catalogVersion.itemCount}</dd>
+            </div>
+            <div>
+              <dt>Ignored non-production records</dt>
+              <dd>{dashboard.ignoredNonProductionRecordCount}</dd>
+            </div>
+          </dl>
+        </Card>
+        <Card tone={dashboard.productionGateState.status === "ready" ? "success" : "danger"}>
+          <div className="status-row">
+            <h2>Production gate</h2>
+            <StatusBadge tone={dashboard.productionGateState.status === "ready" ? "success" : "danger"}>
+              {dashboard.productionGateState.status}
+            </StatusBadge>
+          </div>
+          <ul className="compact-list">
+            {dashboard.productionGateState.reasons.slice(0, 4).map((reason) => (
+              <li key={reason}>{reason}</li>
+            ))}
+          </ul>
+        </Card>
+      </div>
+      <div className="card-grid">
+        <Card>
+          <h2>Audit totals</h2>
+          <dl className="metadata-list">
+            <div>
+              <dt>Counts captured</dt>
+              <dd>{dashboard.progress.totalCaptured}</dd>
+            </div>
+            <div>
+              <dt>Counts verified</dt>
+              <dd>{dashboard.progress.totalVerified}</dd>
+            </div>
+            <div>
+              <dt>Missing views</dt>
+              <dd>{dashboard.progress.missingViews}</dd>
+            </div>
+            <div>
+              <dt>Missing evidence</dt>
+              <dd>{dashboard.progress.missingEvidence}</dd>
+            </div>
+            <div>
+              <dt>Recapture requests</dt>
+              <dd>{dashboard.progress.recaptureRequests}</dd>
+            </div>
+            <div>
+              <dt>Dependency tests pending</dt>
+              <dd>{dashboard.progress.dependencyTestsPending}</dd>
+            </div>
+          </dl>
+        </Card>
+        <Card tone={dashboard.secondVerifierProgress.status === "ready" ? "success" : "danger"}>
+          <div className="status-row">
+            <h2>Second-verifier progress</h2>
+            <StatusBadge tone={dashboard.secondVerifierProgress.status === "ready" ? "success" : "danger"}>
+              {dashboard.secondVerifierProgress.status}
+            </StatusBadge>
+          </div>
+          <ProgressBar
+            value={dashboard.secondVerifierProgress.completed}
+            max={dashboard.secondVerifierProgress.total}
+            label="Second-verifier completion"
+          />
+          <p className="supporting">{dashboard.secondVerifierProgress.percentComplete}% of production records include second review.</p>
+        </Card>
+        <Card tone={statusTone[dashboard.manualStudyReadiness.status]}>
+          <div className="status-row">
+            <h2>Manual study readiness</h2>
+            <StatusBadge tone={statusTone[dashboard.manualStudyReadiness.status]}>
+              {dashboard.manualStudyReadiness.status.replaceAll("_", " ")}
+            </StatusBadge>
+          </div>
+          <p className="supporting">{dashboard.manualStudyReadiness.percentComplete}% from repository/catalog evidence.</p>
+        </Card>
+      </div>
+      <div className="result-grid">
+        {dashboard.categoryProgress.map((category) => (
+          <Card key={category.id} tone={category.status === "blocked" ? "danger" : "success"}>
+            <div className="status-row">
+              <h2>{category.label}</h2>
+              <StatusBadge tone={category.status === "blocked" ? "danger" : "success"}>{category.status}</StatusBadge>
+            </div>
+            <ProgressBar value={category.verifiedCount} max={Math.max(category.capturedCount, 1)} label={`${category.label} verified`} />
+            <dl className="metadata-list">
+              <div>
+                <dt>Captured</dt>
+                <dd>{category.capturedCount}</dd>
+              </div>
+              <div>
+                <dt>Verified</dt>
+                <dd>{category.verifiedCount}</dd>
+              </div>
+              <div>
+                <dt>Missing views</dt>
+                <dd>{category.missingViewCount}</dd>
+              </div>
+              <div>
+                <dt>Missing evidence</dt>
+                <dd>{category.missingEvidenceCount}</dd>
+              </div>
+            </dl>
+            {category.blocker ? (
+              <Alert title="Blocked" tone="warning">
+                {category.blocker}
+              </Alert>
+            ) : null}
+            <p className="supporting">{category.nextAction}</p>
+          </Card>
+        ))}
+      </div>
+      <Card tone={dashboard.blockedStates.length > 0 ? "danger" : "success"}>
+        <div className="status-row">
+          <h2>Blocked states</h2>
+          <StatusBadge tone={dashboard.blockedStates.length > 0 ? "danger" : "success"}>
+            {dashboard.blockedStates.length > 0 ? `${dashboard.blockedStates.length} blocked` : "clear"}
+          </StatusBadge>
+        </div>
+        {dashboard.blockedStates.length === 0 ? (
+          <p className="supporting">No blocked states detected.</p>
+        ) : (
+          <ul className="compact-list">
+            {dashboard.blockedStates.slice(0, 8).map((blocker) => (
+              <li key={blocker}>{blocker}</li>
+            ))}
+          </ul>
+        )}
+      </Card>
+    </>
   );
 }
 

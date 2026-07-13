@@ -32,8 +32,8 @@ export function AttributeConfirmation({
         </p>
       </ScreenHeader>
       <Alert title="User-confirmed only" tone="info">
-        GameFace Match does not infer sensitive traits, identify people, estimate age, or judge attractiveness. Leave optional marks blank if they are not
-        useful for your build.
+        GameFace Match does not infer sensitive traits, identify people, estimate age, or judge attractiveness. These values stay separate from model
+        estimates, and skin presentation is never used for geometric similarity. Leave optional marks blank if they are not useful for your build.
       </Alert>
       <Card className="form-card">
         <div className="form-grid">
@@ -138,6 +138,20 @@ export function AttributeConfirmation({
             <option value="medium">Medium</option>
             <option value="thick">Thick</option>
             <option value="covered">Covered or not visible</option>
+          </SelectField>
+          <SelectField
+            label={attributeLabels.skinPresentation}
+            value={value.skinPresentation}
+            onChange={(event) => update("skinPresentation", event.currentTarget.value)}
+            note={fieldNote("skinPresentation", validation) ?? "User-confirmed visual presentation only. Not used for geometry similarity."}
+          >
+            <option value="unspecified">Choose a general presentation</option>
+            <option value="veryLight">Very light</option>
+            <option value="light">Light</option>
+            <option value="medium">Medium</option>
+            <option value="deep">Deep</option>
+            <option value="veryDeep">Very deep</option>
+            <option value="notSure">Not sure</option>
           </SelectField>
           <TextField
             label={attributeLabels.visibleMarks}

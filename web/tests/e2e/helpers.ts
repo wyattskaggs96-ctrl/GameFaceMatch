@@ -74,6 +74,7 @@ export async function confirmStandardAttributes(page: Page) {
   await page.locator("#field-hairstyle-family").selectOption("short");
   await page.locator("#field-facial-hair-presence").selectOption("none");
   await page.locator("#field-eyebrow-thickness").selectOption("medium");
+  await page.locator("#field-skin-presentation-used-by-the-game").selectOption("medium");
   await page.locator("#field-desired-in-game-height").fill("72");
   await page.locator("#field-desired-in-game-weight").fill("205");
   await page.locator("#field-preferred-body-type").selectOption("balanced");

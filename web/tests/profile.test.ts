@@ -30,6 +30,7 @@ describe("attribute confirmation", () => {
     const initial = createInitialAttributeConfirmation();
     const invalid = validateAttributeConfirmation(initial);
     expect(invalid.isValid).toBe(false);
+    expect(invalid.errors.skinPresentation).toBe("Required for the standardized profile.");
     expect(invalid.errors.visibleMarks).toBeUndefined();
 
     const valid = validateAttributeConfirmation(validAttributes());
@@ -60,7 +61,20 @@ describe("attribute confirmation", () => {
     const attributes = createAppearanceAttributes(validAttributes());
     expect(attributes.every((attribute) => attribute.userConfirmed)).toBe(true);
     expect(attributes.every((attribute) => attribute.source === "userConfirmed")).toBe(true);
+    expect(attributes.find((attribute) => attribute.category === "skinPresentation")?.value).toBe("medium");
     expect(attributes.find((attribute) => attribute.category === "desiredInGameHeight")?.value).toBe(72);
+  });
+
+  it("keeps skin presentation distinct from geometry inputs", () => {
+    const attributes = createAppearanceAttributes(validAttributes());
+    const skinPresentation = attributes.find((attribute) => attribute.category === "skinPresentation");
+    expect(skinPresentation).toMatchObject({
+      label: "Skin presentation used by the game",
+      userConfirmed: true,
+      source: "userConfirmed",
+      required: true
+    });
+    expect(unavailableWebMeasurementIDs).not.toContain("skinPresentation");
   });
 
   it("does not define sensitive-trait fields", () => {
@@ -225,6 +239,7 @@ function validAttributes(): AttributeConfirmationState {
     facialHairStyleFamily: "beard",
     facialHairColorFamily: "brown",
     eyebrowThickness: "medium",
+    skinPresentation: "medium",
     visibleMarks: "small cheek mark",
     desiredInGameHeight: "72",
     desiredInGameWeight: "205",

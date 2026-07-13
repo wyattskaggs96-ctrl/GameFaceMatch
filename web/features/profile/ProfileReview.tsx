@@ -69,11 +69,15 @@ export function ProfileReview({
         </Card>
         <Card className="profile-section">
           <h2>User-confirmed attributes</h2>
+          <p className="supporting">These fields came from the confirmation form, not from model estimates or College Football 27 catalog labels.</p>
           <dl className="metadata-list">
-            {profile.appearance.attributes.map((attribute) => (
+            {profile.userConfirmedAttributes.map((attribute) => (
               <div key={attribute.id}>
                 <dt>{attribute.label}</dt>
-                <dd>{formatAttributeValue(attribute.value)}</dd>
+                <dd>
+                  {formatAttributeValue(attribute.value)}
+                  <span className="sr-only">, source user confirmed</span>
+                </dd>
               </div>
             ))}
           </dl>

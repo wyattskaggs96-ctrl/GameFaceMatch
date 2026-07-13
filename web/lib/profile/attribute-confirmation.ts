@@ -8,6 +8,7 @@ export interface AttributeConfirmationState {
   facialHairStyleFamily: string;
   facialHairColorFamily: string;
   eyebrowThickness: string;
+  skinPresentation: string;
   visibleMarks: string;
   desiredInGameHeight: string;
   desiredInGameWeight: string;
@@ -28,6 +29,7 @@ export const attributeLabels: Record<keyof AttributeConfirmationState, string> =
   facialHairStyleFamily: "Facial-hair style family",
   facialHairColorFamily: "Facial-hair color family",
   eyebrowThickness: "Eyebrow thickness",
+  skinPresentation: "Skin presentation used by the game",
   visibleMarks: "Freckles or visible marks",
   desiredInGameHeight: "Desired in-game height",
   desiredInGameWeight: "Desired in-game weight",
@@ -41,6 +43,7 @@ export const requiredAttributeKeys = [
   "hairstyleFamily",
   "facialHairPresence",
   "eyebrowThickness",
+  "skinPresentation",
   "desiredInGameHeight",
   "desiredInGameWeight",
   "preferredBodyType",
@@ -65,6 +68,7 @@ export function createInitialAttributeConfirmation(): AttributeConfirmationState
     facialHairStyleFamily: "unspecified",
     facialHairColorFamily: "unspecified",
     eyebrowThickness: "unspecified",
+    skinPresentation: "unspecified",
     visibleMarks: "",
     desiredInGameHeight: "",
     desiredInGameWeight: "",
@@ -106,9 +110,10 @@ export function createAppearanceAttributes(state: AttributeConfirmationState): A
     attribute("hairTextureFamily", "Hair texture family", state.hairTextureFamily, true),
     attribute("hairstyleFamily", "Hairstyle family", state.hairstyleFamily, true),
     attribute("facialHairPresence", "Facial-hair presence", state.facialHairPresence, true),
-    attribute("facialHairStyleFamily", "Facial-hair style family", state.facialHairPresence === "yes" ? state.facialHairStyleFamily : "none", false),
-    attribute("facialHairColorFamily", "Facial-hair color family", state.facialHairPresence === "yes" ? state.facialHairColorFamily : "none", false),
+    attribute("facialHairStyleFamily", "Facial-hair style family", state.facialHairPresence === "yes" ? state.facialHairStyleFamily : "none", state.facialHairPresence === "yes"),
+    attribute("facialHairColorFamily", "Facial-hair color family", state.facialHairPresence === "yes" ? state.facialHairColorFamily : "none", state.facialHairPresence === "yes"),
     attribute("eyebrowThickness", "Eyebrow thickness", state.eyebrowThickness, true),
+    attribute("skinPresentation", "Skin presentation used by the game", state.skinPresentation, true),
     attribute("visibleMarks", "Freckles or visible marks", state.visibleMarks.trim() === "" ? null : state.visibleMarks.trim(), false),
     attribute("desiredInGameHeight", "Desired in-game height", parseMeasurementNumber(state.desiredInGameHeight), true),
     attribute("desiredInGameWeight", "Desired in-game weight", parseMeasurementNumber(state.desiredInGameWeight), true),

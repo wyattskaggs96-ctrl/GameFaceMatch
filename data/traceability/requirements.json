@@ -177,16 +177,20 @@
       "owningModule": "Profile generation",
       "implementationFiles": [
         "data/fixtures/test-only/standard-face-profile/legacy-web-mvp-profile-v1.json",
+        "web/features/attributes/AttributeConfirmation.tsx",
+        "web/features/profile/ProfileReview.tsx",
+        "web/lib/profile/attribute-confirmation.ts",
         "web/lib/profile/standard-face-profile.ts",
         "web/lib/profile/rgb-landmark-geometry.ts",
         "web/types/domain.ts"
       ],
       "testFiles": [
+        "web/tests/e2e/core-journey.spec.ts",
         "web/tests/profile.test.ts",
         "web/tests/profile-geometry.test.ts"
       ],
       "status": "IMPLEMENTED_WITH_LIMITATION",
-      "evidence": "The versioned StandardFaceProfile contract separates capture metadata, normalized geometry, appearance, confidence, supporting-frame data, user-confirmed attributes, model versions, profile version, and deletion state. Serialization, validation, legacy migration, unavailable measurement states, depthSupported false, source angle availability, and fixture-backed tests pass.",
+      "evidence": "The versioned StandardFaceProfile contract separates capture metadata, normalized geometry, appearance, confidence, supporting-frame data, user-confirmed attributes, model versions, profile version, and deletion state. The attribute-confirmation flow lets users provide hair, facial-hair, eyebrow, skin-presentation, marks, height, weight, body-type, and resemblance-versus-physique preferences as user-confirmed fields distinct from model estimates. Serialization, validation, legacy migration, unavailable measurement states, depthSupported false, source angle availability, and fixture-backed tests pass.",
       "blocker": "Real landmark model and real-device repeatability are not verified.",
       "owner": "Profile systems lead",
       "lastCheckedDate": "2026-07-13"

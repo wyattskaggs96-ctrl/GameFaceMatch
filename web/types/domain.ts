@@ -116,6 +116,7 @@ export type UserConfirmedAttributeCategory =
   | "facialHairStyleFamily"
   | "facialHairColorFamily"
   | "eyebrowThickness"
+  | "skinPresentation"
   | "visibleMarks"
   | "desiredInGameHeight"
   | "desiredInGameWeight"

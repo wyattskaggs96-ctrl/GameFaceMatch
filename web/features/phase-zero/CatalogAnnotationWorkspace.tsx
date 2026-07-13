@@ -295,8 +295,8 @@ export function CatalogAnnotationWorkspace() {
         <Card tone={validation.errors.length === 0 ? "success" : "danger"}>
           <h2>Readiness blockers</h2>
           <ul className="compact-list">
-            {[...validation.errors, ...validation.warnings].map((item) => (
-              <li key={`${item.code}-${item.path ?? item.message}`}>{item.message}</li>
+            {[...validation.errors, ...validation.warnings].map((item, index) => (
+              <li key={`${item.code}-${item.path ?? item.message}-${index}`}>{item.message}</li>
             ))}
           </ul>
         </Card>

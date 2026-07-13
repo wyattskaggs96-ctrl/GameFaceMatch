@@ -411,7 +411,7 @@ export function SecondVerifierWorkspace() {
             <p className="supporting">Second-verifier workspace is structurally valid.</p>
           ) : (
             <ul className="compact-list">
-              {validation.errors.slice(0, 8).map((error) => <li key={`${error.code}-${error.entityID ?? error.message}`}>{error.message}</li>)}
+              {validation.errors.slice(0, 8).map((error, index) => <li key={`${error.code}-${error.entityID ?? error.message}-${index}`}>{error.message}</li>)}
             </ul>
           )}
         </Card>

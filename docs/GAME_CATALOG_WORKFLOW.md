@@ -33,6 +33,7 @@ Manual audit work starts under `data/audit/college-football-27/`.
 - Use `templates/category-discovery-template.md`, `templates/annotation-workflow-template.md`, and `templates/patch-reaudit-template.md` while sitting beside the console.
 - Use `templates/catalog-item-template.json` and `templates/catalog-manifest-template.json` only as drafts.
 - Use `templates/rollback-template.md` when backing out a bad package.
+- Use `docs/AUDIT_OPERATOR_RUNBOOK.md` as the beside-the-console operating checklist for setup, capture, backup, issue logging, recapture, and reviewer handoff.
 - Every draft template is marked `NOT PRODUCTION DATA` and `NOT A VERIFIED GAME RECORD`.
 - Placeholder tokens such as `REPLACE_WITH_VERIFIED_GAME_LABEL` must be replaced from actual game evidence before review.
 - CSV imports create unverified draft records only. They never auto-verify production data.

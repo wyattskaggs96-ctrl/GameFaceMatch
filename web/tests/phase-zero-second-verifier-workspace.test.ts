@@ -1,18 +1,25 @@
 import { describe, expect, it } from "vitest";
 import {
   addSecondVerifierRecordCheck,
+  acknowledgeDiscrepancyResolution,
   applySecondaryAngleSampleToWorkspace,
   createDeterministicSecondaryAngleSample,
   createEmptySecondVerifierWorkspace,
   createSecondVerifierCountCheck,
   createSecondVerifierRecordCheck,
+  exportDiscrepancyResolutionRecords,
   exportSecondPersonVerificationRecords,
   getAllowedSecondVerifierStatuses,
+  linkDiscrepancyResolutionEvidence,
+  openDiscrepancyResolutionWorkflow,
+  recordDiscrepancyFinalResolution,
   signOffSecondVerifierWorkspace,
+  upsertDiscrepancyResolutionWorkflow,
+  validateDiscrepancyResolutionWorkflow,
   validateSecondVerifierWorkspace,
   type Phase0SecondVerifierWorkspace
 } from "@/lib/phase-zero/phase-zero-second-verifier-workspace";
-import { approvedPhase0VerificationStatuses, validatePhase0SecondPersonVerification } from "@/lib/phase-zero/phase-zero-verification";
+import { approvedPhase0VerificationStatuses, validatePhase0DiscrepancyResolution, validatePhase0SecondPersonVerification } from "@/lib/phase-zero/phase-zero-verification";
 
 const now = "2026-07-12T00:00:00.000Z";
 
@@ -221,6 +228,114 @@ describe("Phase 0 second-verifier workspace", () => {
     expect(workspace.secondaryAngleSample?.selectedRecords.every((record) => record.hashInput.includes(record.stableInternalID))).toBe(true);
     expect(workspace.signedOffAt).toBeNull();
   });
+
+  it("opens a discrepancy workflow from a mismatch while preserving both observations", () => {
+    const mismatchedWorkspace = addSecondVerifierRecordCheck(
+      validWorkspace(),
+      validRecordCheck({
+        primarySummary: "Primary counted the synthetic record as option one.",
+        verifierSummary: "Verifier counted the same synthetic record as option two.",
+        statuses: { recordFieldsStatus: "mismatch" },
+        finalDisposition: "NOT_VERIFIED"
+      }),
+      now
+    );
+    const workflowWorkspace = openDiscrepancyResolutionWorkflow({
+      workspace: mismatchedWorkspace,
+      mismatchID: "record-check-test-only-recordFieldsStatus-mismatch",
+      openedBy: "catalog-manager-test-only",
+      openedAt: now
+    });
+    const workflow = workflowWorkspace.discrepancyWorkflows[0];
+
+    expect(workflow.affectedRecordIDs).toEqual(["record-check-test-only"]);
+    expect(workflow.affectedStableInternalIDs).toEqual(["CF27_TESTONLY_SECOND_VERIFIER_HEAD_001"]);
+    expect(workflow.primaryObservation.summary).toBe("Primary counted the synthetic record as option one.");
+    expect(workflow.verifierObservation.summary).toBe("Verifier counted the same synthetic record as option two.");
+    expect(workflow.auditHistory.map((event) => event.kind)).toContain("discrepancyOpened");
+  });
+
+  it("blocks unresolved discrepancies until new direct evidence, recaptures, resolution, and both acknowledgments exist", () => {
+    const workflowWorkspace = openDiscrepancyResolutionWorkflow({
+      workspace: mismatchWorkspace(),
+      mismatchID: "record-check-test-only-recordFieldsStatus-mismatch",
+      openedBy: "catalog-manager-test-only",
+      openedAt: now
+    });
+
+    const workflowReport = validateDiscrepancyResolutionWorkflow(workflowWorkspace.discrepancyWorkflows[0]);
+    const workspaceReport = validateSecondVerifierWorkspace(workflowWorkspace);
+
+    expect(workflowReport.ok).toBe(false);
+    expect(workflowReport.errors.map((error) => error.code)).toEqual(expect.arrayContaining([
+      "missingNewDirectEvidence",
+      "missingRecaptureEvidence",
+      "missingResolutionAction",
+      "missingFinalResolution",
+      "missingDiscrepancyAcknowledgment",
+      "missingAuditEvent"
+    ]));
+    expect(workspaceReport.signOffReady).toBe(false);
+    expect(workspaceReport.summary.unresolvedDiscrepancyWorkflows).toBe(1);
+  });
+
+  it("resolves a discrepancy with new evidence, recapture links, state update, acknowledgments, and immutable history", () => {
+    const workspace = resolveMismatchWorkspace();
+    const workflow = workspace.discrepancyWorkflows[0];
+    const report = validateSecondVerifierWorkspace(workspace);
+
+    expect(validateDiscrepancyResolutionWorkflow(workflow).ok).toBe(true);
+    expect(report.errors).toEqual([]);
+    expect(report.ok).toBe(true);
+    expect(report.signOffReady).toBe(true);
+    expect(report.summary.blockingMismatchReports).toBe(0);
+    expect(report.summary.unresolvedDiscrepancyWorkflows).toBe(0);
+    expect(workflow.auditHistory.map((event) => event.kind)).toEqual([
+      "discrepancyOpened",
+      "directEvidenceLinked",
+      "recaptureLinked",
+      "supersededEvidencePreserved",
+      "resolutionRecorded",
+      "verificationStateUpdated",
+      "primaryAcknowledged",
+      "verifierAcknowledged"
+    ]);
+    expect(workflow.primaryObservation.summary).toBe("Primary mismatch observation.");
+    expect(workflow.verifierObservation.summary).toBe("Verifier mismatch observation.");
+  });
+
+  it("exports a validated discrepancy-resolution record after both parties acknowledge", () => {
+    const workspace = resolveMismatchWorkspace();
+    const exported = exportDiscrepancyResolutionRecords(workspace);
+
+    expect(exported).toHaveLength(1);
+    expect(exported[0]).toMatchObject({
+      targetStableID: "CF27_TESTONLY_SECOND_VERIFIER_HEAD_001",
+      discrepancyType: "other",
+      resolutionAction: "recaptureEvidence",
+      finalDisposition: "VERIFIED_WITH_NOTES"
+    });
+    expect(validatePhase0DiscrepancyResolution(exported[0]).publishable).toBe(true);
+  });
+
+  it("detects non-chronological or duplicated discrepancy audit history", () => {
+    const workspace = resolveMismatchWorkspace();
+    const workflow = workspace.discrepancyWorkflows[0];
+    const brokenWorkflow = {
+      ...workflow,
+      auditHistory: [
+        workflow.auditHistory[1],
+        { ...workflow.auditHistory[1], occurredAt: now }
+      ]
+    };
+    const report = validateDiscrepancyResolutionWorkflow(brokenWorkflow);
+
+    expect(report.ok).toBe(false);
+    expect(report.errors.map((error) => error.code)).toEqual(expect.arrayContaining([
+      "duplicateAuditEvent",
+      "auditHistoryNotChronological"
+    ]));
+  });
 });
 
 function validWorkspace(): Phase0SecondVerifierWorkspace {
@@ -273,6 +388,72 @@ function validRecordCheck(overrides: Partial<Parameters<typeof createSecondVerif
     verifierAcknowledgedAt: now,
     ...overrides
   });
+}
+
+function mismatchWorkspace() {
+  return addSecondVerifierRecordCheck(
+    validWorkspace(),
+    validRecordCheck({
+      primarySummary: "Primary mismatch observation.",
+      verifierSummary: "Verifier mismatch observation.",
+      statuses: {
+        nativeOrderStatus: "confirmed",
+        recordFieldsStatus: "mismatch",
+        evidenceFilesStatus: "confirmed",
+        frontViewStatus: "confirmed",
+        secondaryAngleStatus: "confirmed",
+        dependencyStatus: "notApplicable",
+        exceptionStatus: "notApplicable"
+      },
+      finalDisposition: "NOT_VERIFIED"
+    }),
+    now
+  );
+}
+
+function resolveMismatchWorkspace() {
+  let workspace = openDiscrepancyResolutionWorkflow({
+    workspace: mismatchWorkspace(),
+    mismatchID: "record-check-test-only-recordFieldsStatus-mismatch",
+    openedBy: "catalog-manager-test-only",
+    openedAt: now
+  });
+  let workflow = workspace.discrepancyWorkflows[0];
+  workflow = linkDiscrepancyResolutionEvidence({
+    workflow,
+    actorID: "catalog-manager-test-only",
+    occurredAt: "2026-07-12T00:01:00.000Z",
+    directEvidenceIDs: ["new-direct-evidence-test-only"],
+    recaptureFileIDs: ["recapture-front-test-only"],
+    supersededEvidenceFileIDs: ["superseded-front-test-only"]
+  });
+  workflow = recordDiscrepancyFinalResolution({
+    workflow,
+    actorID: "catalog-manager-test-only",
+    occurredAt: "2026-07-12T00:02:00.000Z",
+    resolutionAction: "recaptureEvidence",
+    finalResolution: "New synthetic evidence resolved the discrepancy without averaging observations.",
+    finalDisposition: "VERIFIED_WITH_NOTES",
+    verificationState: "verified"
+  });
+  workflow = acknowledgeDiscrepancyResolution({
+    workflow,
+    party: "primary",
+    actorID: "primary-reviewer-test-only",
+    occurredAt: "2026-07-12T00:03:00.000Z"
+  });
+  workflow = acknowledgeDiscrepancyResolution({
+    workflow,
+    party: "verifier",
+    actorID: "second-reviewer-test-only",
+    occurredAt: "2026-07-12T00:04:00.000Z"
+  });
+  workspace = upsertDiscrepancyResolutionWorkflow({
+    workspace,
+    workflow,
+    updatedAt: "2026-07-12T00:04:00.000Z"
+  });
+  return workspace;
 }
 
 function codes(reportIssues: Array<{ code: string }>) {

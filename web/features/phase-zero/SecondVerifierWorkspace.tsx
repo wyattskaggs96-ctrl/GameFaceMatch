@@ -4,18 +4,26 @@ import { useMemo, useState } from "react";
 import { Alert, Button, Card, SelectField, StatusBadge, TextField } from "@/components/design-system";
 import {
   addSecondVerifierRecordCheck,
+  acknowledgeDiscrepancyResolution,
   applySecondaryAngleSampleToWorkspace,
   createDeterministicSecondaryAngleSample,
   createEmptySecondVerifierWorkspace,
   createSecondVerifierCountCheck,
   createSecondVerifierRecordCheck,
+  exportDiscrepancyResolutionRecords,
   exportSecondPersonVerificationRecords,
   getAllowedSecondVerifierStatuses,
+  linkDiscrepancyResolutionEvidence,
+  openDiscrepancyResolutionWorkflow,
+  recordDiscrepancyFinalResolution,
   signOffSecondVerifierWorkspace,
+  upsertDiscrepancyResolutionWorkflow,
   validateSecondVerifierWorkspace,
+  type Phase0DiscrepancyResolutionWorkflow,
   type Phase0VerifierCheckStatus
 } from "@/lib/phase-zero/phase-zero-second-verifier-workspace";
-import type { Phase0ApprovedVerificationStatus } from "@/lib/phase-zero/phase-zero-verification";
+import type { Phase0ApprovedVerificationStatus, Phase0ResolutionAction } from "@/lib/phase-zero/phase-zero-verification";
+import type { Phase0VerificationState } from "@/lib/phase-zero/phase-zero-domain";
 
 interface RecordDraft {
   recordID: string;
@@ -90,8 +98,16 @@ export function SecondVerifierWorkspace() {
   const [catalogVersion, setCatalogVersion] = useState("catalog-version-synthetic");
   const [eligibleCatalogIDs, setEligibleCatalogIDs] = useState(defaultEligibleCatalogIDs);
   const [signOffNotes, setSignOffNotes] = useState("");
+  const [directEvidenceIDs, setDirectEvidenceIDs] = useState("new-direct-evidence-synthetic");
+  const [recaptureFileIDs, setRecaptureFileIDs] = useState("recapture-front-synthetic");
+  const [supersededEvidenceIDs, setSupersededEvidenceIDs] = useState("superseded-original-evidence-synthetic");
+  const [finalResolution, setFinalResolution] = useState("Document how new direct evidence resolved the disagreement without averaging observations.");
+  const [resolutionAction, setResolutionAction] = useState<Phase0ResolutionAction>("recaptureEvidence");
+  const [resolutionDisposition, setResolutionDisposition] = useState<Phase0ApprovedVerificationStatus>("VERIFIED_WITH_NOTES");
+  const [resolutionState, setResolutionState] = useState<Phase0VerificationState>("verified");
   const validation = useMemo(() => validateSecondVerifierWorkspace(workspace), [workspace]);
   const exportedRecords = useMemo(() => exportSecondPersonVerificationRecords(workspace), [workspace]);
+  const exportedDiscrepancies = useMemo(() => exportDiscrepancyResolutionRecords(workspace), [workspace]);
 
   function updateDraft<Key extends keyof RecordDraft>(key: Key, value: RecordDraft[Key]) {
     setDraft((currentDraft) => ({ ...currentDraft, [key]: value }));
@@ -197,6 +213,58 @@ export function SecondVerifierWorkspace() {
         signedOffAt: timestamp
       })
     );
+  }
+
+  function openFirstMismatchDiscrepancy() {
+    const mismatch = workspace.mismatchReports[0];
+    if (!mismatch) return;
+    const timestamp = now();
+    setWorkspace((currentWorkspace) => openDiscrepancyResolutionWorkflow({
+      workspace: currentWorkspace,
+      mismatchID: mismatch.mismatchID,
+      openedBy: currentWorkspace.environment.verifierID || "catalog-manager-synthetic",
+      openedAt: timestamp
+    }));
+  }
+
+  function updateWorkflow(workflow: Phase0DiscrepancyResolutionWorkflow) {
+    setWorkspace((currentWorkspace) => upsertDiscrepancyResolutionWorkflow({
+      workspace: currentWorkspace,
+      workflow,
+      updatedAt: now()
+    }));
+  }
+
+  function attachEvidence(workflow: Phase0DiscrepancyResolutionWorkflow) {
+    updateWorkflow(linkDiscrepancyResolutionEvidence({
+      workflow,
+      actorID: workspace.environment.verifierID || "catalog-manager-synthetic",
+      occurredAt: now(),
+      directEvidenceIDs: splitList(directEvidenceIDs),
+      recaptureFileIDs: splitList(recaptureFileIDs),
+      supersededEvidenceFileIDs: splitList(supersededEvidenceIDs)
+    }));
+  }
+
+  function recordResolution(workflow: Phase0DiscrepancyResolutionWorkflow) {
+    updateWorkflow(recordDiscrepancyFinalResolution({
+      workflow,
+      actorID: workspace.environment.verifierID || "catalog-manager-synthetic",
+      occurredAt: now(),
+      resolutionAction,
+      finalResolution,
+      finalDisposition: resolutionDisposition,
+      verificationState: resolutionState
+    }));
+  }
+
+  function acknowledge(workflow: Phase0DiscrepancyResolutionWorkflow, party: "primary" | "verifier") {
+    updateWorkflow(acknowledgeDiscrepancyResolution({
+      workflow,
+      party,
+      actorID: party === "primary" ? workflow.primaryObservation.observerID : workflow.verifierObservation.observerID,
+      occurredAt: now()
+    }));
   }
 
   return (
@@ -360,6 +428,72 @@ export function SecondVerifierWorkspace() {
           )}
         </Card>
       </div>
+
+      <Card tone={workspace.discrepancyWorkflows.length > 0 ? "warning" : "neutral"}>
+        <h3>Discrepancy resolution</h3>
+        <p className="supporting">
+          Disagreements keep both observations intact, require new direct evidence and recapture links, preserve superseded evidence, and need both-party acknowledgment.
+        </p>
+        <Button variant="secondary" onClick={openFirstMismatchDiscrepancy} disabled={workspace.mismatchReports.length === 0}>
+          Open first mismatch discrepancy
+        </Button>
+        <div className="form-grid">
+          <TextField label="New direct evidence IDs" value={directEvidenceIDs} onChange={(event) => setDirectEvidenceIDs(event.currentTarget.value)} />
+          <TextField label="Recapture file IDs" value={recaptureFileIDs} onChange={(event) => setRecaptureFileIDs(event.currentTarget.value)} />
+          <TextField label="Superseded evidence IDs" value={supersededEvidenceIDs} onChange={(event) => setSupersededEvidenceIDs(event.currentTarget.value)} />
+          <SelectField label="Resolution action" value={resolutionAction} onChange={(event) => setResolutionAction(event.currentTarget.value as Phase0ResolutionAction)}>
+            {["acceptPrimaryObservation", "acceptVerifierObservation", "recaptureEvidence", "splitByVersion", "correctDraftRecord", "markNotVerified", "holdForResearch", "retireRecord"].map((action) => (
+              <option key={action} value={action}>{action}</option>
+            ))}
+          </SelectField>
+          <SelectField label="Final disposition" value={resolutionDisposition} onChange={(event) => setResolutionDisposition(event.currentTarget.value as Phase0ApprovedVerificationStatus)}>
+            {allowedStatuses.map((status) => <option key={status} value={status}>{status}</option>)}
+          </SelectField>
+          <SelectField label="Verification state" value={resolutionState} onChange={(event) => setResolutionState(event.currentTarget.value as Phase0VerificationState)}>
+            {["secondReviewPending", "verified", "rejected", "retired"].map((state) => <option key={state} value={state}>{state}</option>)}
+          </SelectField>
+        </div>
+        <label className="form-field" htmlFor="second-verifier-final-resolution">
+          <span>Final resolution</span>
+          <textarea id="second-verifier-final-resolution" rows={3} value={finalResolution} onChange={(event) => setFinalResolution(event.currentTarget.value)} />
+        </label>
+        {workspace.discrepancyWorkflows.length === 0 ? (
+          <p className="supporting">No discrepancy workflows have been opened from mismatch reports.</p>
+        ) : (
+          <div className="stack">
+            {workspace.discrepancyWorkflows.map((workflow) => (
+              <Card key={workflow.workflowID} tone={workflow.status === "acknowledged" ? "success" : "warning"}>
+                <h4>{workflow.affectedStableInternalIDs.join(", ")}</h4>
+                <dl className="metadata-list">
+                  <div><dt>Status</dt><dd>{workflow.status}</dd></div>
+                  <div><dt>Type</dt><dd>{workflow.discrepancyType}</dd></div>
+                  <div><dt>New evidence</dt><dd>{workflow.requiredDirectEvidenceIDs.length}</dd></div>
+                  <div><dt>Recaptures</dt><dd>{workflow.linkedRecaptureFileIDs.length}</dd></div>
+                  <div><dt>Superseded evidence</dt><dd>{workflow.supersededEvidenceFileIDs.length}</dd></div>
+                  <div><dt>Audit events</dt><dd>{workflow.auditHistory.length}</dd></div>
+                </dl>
+                <div className="verifier-comparison-grid">
+                  <div className="verifier-observation verifier-observation-primary">
+                    <h5>Primary observation</h5>
+                    <p>{workflow.primaryObservation.summary}</p>
+                  </div>
+                  <div className="verifier-observation verifier-observation-second">
+                    <h5>Verifier observation</h5>
+                    <p>{workflow.verifierObservation.summary}</p>
+                  </div>
+                </div>
+                <div className="button-row">
+                  <Button variant="secondary" onClick={() => attachEvidence(workflow)}>Link evidence</Button>
+                  <Button variant="secondary" onClick={() => recordResolution(workflow)}>Record resolution</Button>
+                  <Button variant="secondary" onClick={() => acknowledge(workflow, "primary")}>Primary acknowledge</Button>
+                  <Button variant="secondary" onClick={() => acknowledge(workflow, "verifier")}>Verifier acknowledge</Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        )}
+        <p className="supporting">Exported discrepancy-resolution records: {exportedDiscrepancies.length}.</p>
+      </Card>
 
       <Card tone={validation.signOffReady ? "success" : "warning"}>
         <h3>Sign-off and export</h3>

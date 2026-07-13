@@ -1081,6 +1081,27 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-038",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Discrepancy resolution workflow",
+      "summary": "Build the full disagreement-resolution workflow that preserves primary and verifier observations, opens discrepancies, identifies affected records, requires new direct evidence and recapture links, preserves superseded evidence, records final resolution and verification-state updates, requires both-party acknowledgment, maintains immutable audit history, and never averages conflicting observations.",
+      "owningModule": "Second-person verification",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-second-verifier-workspace.ts",
+        "web/features/phase-zero/SecondVerifierWorkspace.tsx",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_CATALOG_WORKFLOW.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-second-verifier-workspace.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Second-verifier workspace tests verify discrepancy workflow opening from mismatch reports, preservation of primary and verifier observations, affected-record tracking, blocking while evidence/resolution/acknowledgments are missing, new direct evidence and recapture links, superseded evidence preservation, final resolution and verification-state update, both-party acknowledgment, chronological audit-history validation, and export to validated discrepancy-resolution records.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

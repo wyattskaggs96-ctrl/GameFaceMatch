@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   canSubmitScreenshotRefinement,
@@ -12,8 +14,15 @@ import {
 } from "@/lib/refinement/screenshot-refinement";
 import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { analyzeScreenshotQualityAndAlignment } from "@/lib/refinement/screenshot-quality-alignment";
+import { createScreenshotRefinementEngine, evaluateRefinementCatalogReadiness } from "@/lib/refinement/refinement-engine";
+import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
+import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
 import { MEDIAPIPE_FACE_LANDMARKER_METADATA, unavailableFaceLandmarkReport } from "@/lib/face-landmarks/face-landmark-provider";
-import type { FaceLandmarkReport, FaceLandmarkPoint, StandardFaceProfile } from "@/types/domain";
+import type { AppearanceAttribute, FaceLandmarkReport, FaceLandmarkPoint, FacialMeasurement, GameCatalogManifest, StandardFaceProfile } from "@/types/domain";
+
+const fixtureCatalog = JSON.parse(
+  fs.readFileSync(path.join(process.cwd(), "..", "data", "fixtures", "test-only", "matching", "synthetic-catalog.json"), "utf8")
+) as GameCatalogManifest;
 
 describe("screenshot refinement scaffold", () => {
   it("requires a front screenshot and supports optional three-quarter screenshots", () => {
@@ -213,6 +222,105 @@ describe("screenshot refinement scaffold", () => {
     expect(report.occlusionCheck.missingCoreRegions).toContain("chin");
     expect(report.retakeInstructions.map((instruction) => instruction.code)).toContain("removeObstruction");
   });
+
+  it("keeps production refinement unavailable when the approved production catalog is empty", () => {
+    const result = createScreenshotRefinementEngine().refine({
+      profile: syntheticProfile(),
+      session: readySession(),
+      catalogManifest: productionCatalogManifest,
+      runtimeEnvironment: "production"
+    });
+
+    expect(result.status).toBe("unavailable");
+    expect(result.suggestedMatches).toEqual([]);
+    expect(result.actions).toBeUndefined();
+    expect(result.unavailableReasons?.join(" ")).toMatch(/approved production catalog|no verified records|recommendations/i);
+  });
+
+  it("accepts synthetic fixture catalog data only in non-production tests", () => {
+    const matches = createRuleBasedMatchingEngine().matchTopThree({
+      profile: syntheticProfile(),
+      catalog: fixtureCatalog,
+      allowTestFixtures: true
+    });
+    const result = createScreenshotRefinementEngine().refine({
+      profile: syntheticProfile(),
+      session: readySession(),
+      catalogManifest: fixtureCatalog,
+      rankedMatches: matches,
+      allowTestFixtures: true,
+      runtimeEnvironment: "test"
+    });
+
+    expect(result.status).toBe("tryAlternative");
+    expect(result.suggestedMatches.map((match) => match.catalogItem.stableInternalID)).toEqual([
+      "synthetic-match-alpha",
+      "synthetic-match-gamma",
+      "synthetic-match-beta"
+    ]);
+    expect(result.actions?.map((action) => action.type)).toEqual([
+      "keepCurrentRecommendation",
+      "tryRankTwo",
+      "tryRankThree",
+      "changeVerifiedHairstyle",
+      "changeVerifiedFacialHair",
+      "changeVerifiedControl"
+    ]);
+    expect(result.actions?.every((action) => action.requiresVerifiedCatalog)).toBe(true);
+    expect(result.message).toMatch(/tests only/i);
+  });
+
+  it("blocks fixture catalog refinement in production even when explicitly requested", () => {
+    const readiness = evaluateRefinementCatalogReadiness({
+      catalogManifest: fixtureCatalog,
+      allowTestFixtures: true,
+      runtimeEnvironment: "production",
+      profile: syntheticProfile(),
+      session: readySession()
+    });
+
+    expect(readiness.allowed).toBe(false);
+    expect(readiness.reasons.join(" ")).toMatch(/fixtures cannot enable/i);
+  });
+
+  it("records refinement feedback only when separate feedback consent is present", () => {
+    const matches = createRuleBasedMatchingEngine().matchTopThree({
+      profile: syntheticProfile(),
+      catalog: fixtureCatalog,
+      allowTestFixtures: true
+    });
+    const engine = createScreenshotRefinementEngine();
+    const withoutConsent = engine.refine({
+      profile: syntheticProfile(),
+      session: readySession(),
+      catalogManifest: fixtureCatalog,
+      rankedMatches: matches,
+      allowTestFixtures: true,
+      runtimeEnvironment: "test",
+      userFeedback: { rating: "rankTwoBetter", notes: "Synthetic test note" },
+      now: "2026-07-10T00:00:00.000Z"
+    });
+    const withConsent = engine.refine({
+      profile: syntheticProfile(),
+      session: readySession(),
+      catalogManifest: fixtureCatalog,
+      rankedMatches: matches,
+      allowTestFixtures: true,
+      runtimeEnvironment: "test",
+      userFeedback: { rating: "rankTwoBetter", notes: " Synthetic test note " },
+      feedbackConsent: { consented: true, consentVersion: "test-consent-v1" },
+      now: "2026-07-10T00:00:00.000Z"
+    });
+
+    expect(withoutConsent.feedbackRecord).toBeUndefined();
+    expect(withConsent.feedbackRecord).toMatchObject({
+      consentVersion: "test-consent-v1",
+      rating: "rankTwoBetter",
+      notes: "Synthetic test note",
+      profileID: "synthetic-refinement-profile",
+      catalogVersionID: "synthetic-test-catalog-v1"
+    });
+  });
 });
 
 function validScreenshot(viewID: "front" | "left45" | "right45", objectUrl: string) {
@@ -226,6 +334,15 @@ function validScreenshot(viewID: "front" | "left45" | "right45", objectUrl: stri
     objectUrl,
     createdAt: "2026-07-10T00:00:00.000Z"
   };
+}
+
+function readySession() {
+  let session = createInitialScreenshotRefinementSession(new Date("2026-07-10T00:00:00.000Z"));
+  session = setScreenshot(session, validScreenshot("front", "blob:front")).session;
+  for (const item of SCREENSHOT_REFINEMENT_CHECKLIST) {
+    session = setScreenshotChecklistItem(session, item.id, true);
+  }
+  return session;
 }
 
 function goodMeasurements() {
@@ -337,4 +454,89 @@ function placeholderProfile(): StandardFaceProfile {
       rightProfile: { angleID: "rightProfile", available: false }
     }
   });
+}
+
+function syntheticProfile(): StandardFaceProfile {
+  return migrateStandardFaceProfile({
+    id: "synthetic-refinement-profile",
+    profileVersion: "synthetic-test-profile",
+    createdAt: "2026-07-10T00:00:00.000Z",
+    capture: {
+      mode: "webRgbGuided",
+      deviceModel: "synthetic-test-browser",
+      capturedAt: "2026-07-10T00:00:00.000Z",
+      overallQuality: 1,
+      operatingSystemVersion: "synthetic-test-os",
+      appVersion: "synthetic-test-app",
+      browserRgbOnly: true
+    },
+    qualityReport: {
+      overallScore: 1,
+      issues: [],
+      isUsableForPrototype: true,
+      requiredAnglesComplete: true
+    },
+    geometry: {
+      modelVersion: "synthetic-test-geometry",
+      unavailableMeasurements: [],
+      measurements: {
+        faceWidthRatio: measurement(0.7),
+        jawWidthRatio: measurement(0.61),
+        eyeSpacingRatio: measurement(0.32),
+        noseWidthRatio: measurement(0.22),
+        mouthWidthRatio: measurement(0.43)
+      }
+    },
+    appearance: {
+      modelVersion: "synthetic-user-confirmed",
+      attributes: [
+        attribute("hairColorFamily", "brown"),
+        attribute("facialHairPresence", "yes"),
+        attribute("preferredBodyType", "muscular")
+      ]
+    },
+    sourceAngleAvailability: {
+      straightOn: { angleID: "straightOn", available: true },
+      left45: { angleID: "left45", available: true },
+      right45: { angleID: "right45", available: true },
+      leftProfile: { angleID: "leftProfile", available: true },
+      rightProfile: { angleID: "rightProfile", available: true }
+    }
+  });
+}
+
+function measurement(value: number): FacialMeasurement {
+  return {
+    value,
+    confidence: {
+      score: 0.96,
+      label: "high"
+    },
+    supportingFrameCount: 5,
+    supportingPoses: ["straightOn", "left45", "right45", "leftProfile", "rightProfile"],
+    variance: 0.01,
+    depthSupported: false,
+    profileEvidenceExists: false,
+    occlusionImpact: "none",
+    occlusionStatus: "none",
+    measurementSource: "browserRgbImage",
+    availabilityState: "available",
+    algorithmVersion: "synthetic-test-geometry"
+  };
+}
+
+function attribute(category: AppearanceAttribute["category"], value: string): AppearanceAttribute {
+  return {
+    id: category,
+    category,
+    label: category,
+    value,
+    confidence: {
+      score: 1,
+      label: "high"
+    },
+    userConfirmed: true,
+    source: "userConfirmed",
+    required: true
+  };
 }

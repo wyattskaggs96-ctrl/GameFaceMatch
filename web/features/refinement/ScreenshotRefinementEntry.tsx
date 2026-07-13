@@ -7,7 +7,6 @@ import {
   canSubmitScreenshotRefinement,
   getScreenshotRefinementReadiness,
   SCREENSHOT_REFINEMENT_CHECKLIST,
-  createUnavailableScreenshotRefinementProcessor,
   deleteScreenshotRefinementSession,
   setScreenshot,
   setScreenshotAnalysisReport,
@@ -18,6 +17,7 @@ import {
   type ScreenshotSlotState,
   type ScreenshotViewID
 } from "@/lib/refinement/screenshot-refinement";
+import { createScreenshotRefinementEngine } from "@/lib/refinement/refinement-engine";
 import {
   analyzeScreenshotQualityAndAlignment,
   type ScreenshotQualityAlignmentReport
@@ -25,6 +25,7 @@ import {
 import { calculateImageMeasurements, type PixelSample } from "@/lib/capture/image-quality-service";
 import { createLocalFaceLandmarkProvider } from "@/lib/face-landmarks/face-landmark-worker-client";
 import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
+import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
 import type { RefinementResult } from "@/types/domain";
 
 export function ScreenshotRefinementEntry({
@@ -39,7 +40,7 @@ export function ScreenshotRefinementEntry({
   const [result, setResult] = useState<RefinementResult | null>(null);
   const [analysisPendingViewID, setAnalysisPendingViewID] = useState<ScreenshotViewID | null>(null);
   const latestSessionRef = useRef(session);
-  const processor = useMemo(() => createUnavailableScreenshotRefinementProcessor(), []);
+  const refinementEngine = useMemo(() => createScreenshotRefinementEngine(), []);
   const faceLandmarkProvider = useMemo(() => createLocalFaceLandmarkProvider(), []);
   const canSubmit = canSubmitScreenshotRefinement(session) && analysisPendingViewID === null;
   const readiness = getScreenshotRefinementReadiness(session);
@@ -144,9 +145,11 @@ export function ScreenshotRefinementEntry({
   }
 
   async function requestRefinement() {
-    const unavailable = await processor.refine({
-      originalProfile: createPlaceholderProfile(),
-      screenshots: session.slots.flatMap((slot) => (slot.screenshot ? [slot.screenshot] : []))
+    const unavailable = refinementEngine.refine({
+      profile: createPlaceholderProfile(),
+      session,
+      catalogManifest: productionCatalogManifest,
+      runtimeEnvironment: process.env.NODE_ENV
     });
     setResult(unavailable);
   }
@@ -227,7 +230,14 @@ export function ScreenshotRefinementEntry({
       </Card>
       {result ? (
         <Alert title="Refinement result" tone="info" role="status">
-          {result.message}
+          <p>{result.message}</p>
+          {result.unavailableReasons && result.unavailableReasons.length > 0 ? (
+            <ul className="message-list">
+              {result.unavailableReasons.map((reason) => (
+                <li key={reason}>{reason}</li>
+              ))}
+            </ul>
+          ) : null}
         </Alert>
       ) : null}
       <div className="button-row">

@@ -609,6 +609,42 @@ export interface RefinementResult {
   status: "unavailable" | "keepCurrent" | "tryAlternative" | "invalidScreenshot";
   message: string;
   suggestedMatches: GameAppearanceMatch[];
+  engineVersion?: string;
+  catalogVersion?: GameCatalogVersion;
+  actions?: RefinementAction[];
+  feedbackRecord?: RefinementFeedbackRecord;
+  unavailableReasons?: string[];
+}
+
+export type RefinementActionType =
+  | "keepCurrentRecommendation"
+  | "tryRankTwo"
+  | "tryRankThree"
+  | "changeVerifiedHairstyle"
+  | "changeVerifiedFacialHair"
+  | "changeVerifiedControl";
+
+export interface RefinementAction {
+  id: string;
+  type: RefinementActionType;
+  label: string;
+  description: string;
+  targetMatch?: GameAppearanceMatch;
+  relatedCatalogItemID?: string;
+  requiresVerifiedCatalog: true;
+  confidence: MeasurementConfidence;
+  reasons: string[];
+}
+
+export interface RefinementFeedbackRecord {
+  id: string;
+  createdAt: ISODateString;
+  consentVersion: string;
+  rating: "currentBetter" | "rankTwoBetter" | "rankThreeBetter" | "unsure" | "notProvided";
+  notes: string | null;
+  screenshotSessionID: string;
+  profileID: string | null;
+  catalogVersionID: string | null;
 }
 
 export interface SavedBuild {

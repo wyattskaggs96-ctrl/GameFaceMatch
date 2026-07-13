@@ -109,6 +109,8 @@ Source-video intake is local-only. `inspect` preserves original video files and 
 
 Technical media inspection uses `scripts/cf27-media-inspect.mjs`. It preserves source masters, calculates SHA-256, writes ffprobe metadata JSON, duration/resolution/frame-rate reports, scene-change indices, candidate menu-transition timestamps, candidate stable-frame timestamps, contact-sheet provenance, and processing error reports. Outputs are deterministic and checksum-addressed. Unchanged inspections are skipped; checksum changes create a new inspection package. MP4, MOV, and extensionless valid video files are accepted when ffprobe reports a supported video container and stream. Corrupt or unsupported media fails without creating catalog records.
 
+For large video batches, use `docs/catalog/MEDIA_PROCESSING_PERFORMANCE.md`. The media inspector supports sequential `inspect-batch` processing, checksum caching, partial-artifact reuse after interruption, progress callbacks for local callers, cancellation-file checks between expensive stages, and contact-sheet tuning flags. These hardening features improve local audit operations only; they do not verify catalog records or enable production recommendations.
+
 ## Research evidence staging
 
 Current Xbox screen-recording evidence is staged under `data/research/cf27/` before it becomes any kind of catalog package.

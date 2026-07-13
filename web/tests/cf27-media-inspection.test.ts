@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 // @ts-expect-error Root media-inspection CLI is plain ESM JavaScript and is exercised here as the command source of truth.
-import { inspectEvidenceVideo, sha256FileStream } from "../../scripts/cf27-media-inspect.mjs";
+import { inspectEvidenceVideo, inspectEvidenceVideoBatch, sha256FileStream } from "../../scripts/cf27-media-inspect.mjs";
 
 const now = "2026-07-13T10:00:00.000Z";
 
@@ -50,6 +50,41 @@ describe("CF27 media inspection pipeline", () => {
     expect(second.status).toBe("skipped");
     expect(second.skipReason).toBe("alreadyProcessedUnchanged");
     expect(second.inspectionID).toBe(first.inspectionID);
+    expect(second.performance.checksumCacheHit).toBe(true);
+    expect(fs.existsSync(path.join(fixture.root, "manifests/media-inspection/checksum-cache.json"))).toBe(true);
+  });
+
+  it("resumes from valid partial artifacts without rerunning unchanged contact-sheet and scene outputs", async () => {
+    const fixture = createFixtureWorkspace();
+    writeGeneratedVideo(fixture.root, "synthetic-menu.mp4", "video-fixture-v1");
+    const first = await inspectEvidenceVideo("synthetic-menu.mp4", fixture.options);
+    fs.unlinkSync(path.join(fixture.root, first.outputs.mediaReportJson));
+
+    const resumed = await inspectEvidenceVideo("synthetic-menu.mp4", fixture.options);
+
+    expect(resumed.status).toBe("processed");
+    expect(resumed.inspectionID).toBe(first.inspectionID);
+    expect(resumed.performance.reusedArtifacts).toEqual(expect.arrayContaining(["ffprobeMetadataJson", "sceneChangeIndexJson", "contactSheet"]));
+    expect(resumed.performance.largeFileStrategy).toBe("streamed-checksum-ffmpeg-subprocess-no-full-video-buffer");
+  });
+
+  it("reports progress events and supports cancellation before expensive ffmpeg work", async () => {
+    const fixture = createFixtureWorkspace();
+    const cancellationFile = path.join(fixture.root, "cancel.flag");
+    writeGeneratedVideo(fixture.root, "synthetic-menu.mp4", "video-fixture-v1");
+    fs.writeFileSync(cancellationFile, "cancel");
+    const stages: string[] = [];
+
+    const report = await inspectEvidenceVideo("synthetic-menu.mp4", {
+      ...fixture.options,
+      cancellationFile,
+      onProgress: (event: { stage: string }) => stages.push(event.stage)
+    });
+
+    expect(report.status).toBe("cancelled");
+    expect(report.errors.map((error: { code: string }) => error.code)).toContain("processingCancelled");
+    expect(stages).toEqual(expect.arrayContaining(["checksum:start", "checksum:complete"]));
+    expect(fs.existsSync(path.join(fixture.root, report.outputs.processingErrorReportJson))).toBe(true);
   });
 
   it("reprocesses changed files by producing a new checksum-addressed inspection ID", async () => {
@@ -87,6 +122,23 @@ describe("CF27 media inspection pipeline", () => {
     expect(report.errors.map((error: { code: string }) => error.code)).toContain("ffprobeFailed");
     const errorReportPath = path.join(fixture.root, report.outputs.processingErrorReportJson);
     expect(JSON.parse(fs.readFileSync(errorReportPath, "utf8")).errors[0].code).toBe("ffprobeFailed");
+  });
+
+  it("processes multiple large-video candidates sequentially and skips unchanged files on rerun", async () => {
+    const fixture = createFixtureWorkspace();
+    writeGeneratedVideo(fixture.root, "a-synthetic-menu.mp4", "video-fixture-a");
+    writeGeneratedVideo(fixture.root, "b-extensionless-video", "video-fixture-b");
+    const events: Array<{ stage: string; inputPath?: string }> = [];
+
+    const first = await inspectEvidenceVideoBatch(["a-synthetic-menu.mp4", "b-extensionless-video"], {
+      ...fixture.options,
+      onProgress: (event: { stage: string; inputPath?: string }) => events.push(event)
+    });
+    const second = await inspectEvidenceVideoBatch(["a-synthetic-menu.mp4", "b-extensionless-video"], fixture.options);
+
+    expect(first).toMatchObject({ ok: true, status: "completed", totalInputs: 2, processed: 2, skipped: 0 });
+    expect(second).toMatchObject({ ok: true, status: "completed", totalInputs: 2, processed: 0, skipped: 2 });
+    expect(events.filter((event) => event.stage === "batch:item:start").map((event) => event.inputPath)).toEqual(["a-synthetic-menu.mp4", "b-extensionless-video"]);
   });
 });
 

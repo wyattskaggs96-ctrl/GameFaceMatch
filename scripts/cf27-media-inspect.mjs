@@ -11,15 +11,19 @@ const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url))
 const defaultManifestRoot = "data/research/cf27/manifests/media-inspection";
 const defaultGeneratedRoot = "data/research/cf27/generated/media-inspections";
 const supportedContainers = new Set(["mp4", "mov", "m4v", "quicktime", "matroska,webm"]);
+const checksumCacheFilename = "checksum-cache.json";
 
 export async function inspectEvidenceVideo(inputPath, options = {}) {
   const root = path.resolve(options.root ?? repositoryRoot);
   const manifestRoot = path.resolve(root, options.manifestRoot ?? defaultManifestRoot);
   const generatedRoot = path.resolve(root, options.generatedRoot ?? defaultGeneratedRoot);
   const nowISO = options.nowISO ?? new Date().toISOString();
+  const startedAtMs = Date.now();
+  const startedRss = process.memoryUsage().rss;
   const absoluteInputPath = path.resolve(root, inputPath);
   const inputLabel = normalizeRelativePath(path.relative(root, absoluteInputPath));
   const portableRelativeEvidencePath = options.portableRelativeEvidencePath ?? portablePathForInput(absoluteInputPath, root, options.evidenceRootToken);
+  const progress = createProgressReporter(options);
 
   if (!fs.existsSync(absoluteInputPath)) {
     return failureReport({
@@ -50,11 +54,31 @@ export async function inspectEvidenceVideo(inputPath, options = {}) {
     });
   }
 
-  const sha256 = await sha256FileStream(absoluteInputPath);
+  const checksum = await checksumForFile(absoluteInputPath, { root, manifestRoot, nowISO, force: options.force, progress });
+  const sha256 = checksum.sha256;
   const inspectionID = inspectionIdFor(absoluteInputPath, root, sha256);
   const paths = inspectionPaths({ root, manifestRoot, generatedRoot, inspectionID });
+  const basePerformance = {
+    startedAt: nowISO,
+    sourceSizeBytes: stat.size,
+    checksumCacheHit: checksum.cacheHit,
+    checksumDurationMs: checksum.durationMs,
+    reusedArtifacts: [],
+    generatedArtifacts: [],
+    skippedArtifacts: [],
+    cancellationChecks: 0,
+    memoryRssStartBytes: startedRss
+  };
+  const cancellation = createCancellationChecker(options, paths, root, startedAtMs);
+  const initialCancellation = cancellation.check("before-existing-report-check", basePerformance);
+  if (initialCancellation) return initialCancellation;
   const existing = readJsonIfExists(paths.report);
   if (!options.force && existing?.sourceVideo?.sha256 === sha256 && outputsComplete(paths)) {
+    progress("skipped", {
+      inputPath,
+      inspectionID,
+      reason: "alreadyProcessedUnchanged"
+    });
     return {
       ok: true,
       status: "skipped",
@@ -62,7 +86,11 @@ export async function inspectEvidenceVideo(inputPath, options = {}) {
       inspectionID,
       sourceVideo: existing.sourceVideo,
       outputs: existing.outputs,
-      skipReason: "alreadyProcessedUnchanged"
+      skipReason: "alreadyProcessedUnchanged",
+      performance: finalizePerformance({
+        ...basePerformance,
+        reusedArtifacts: ["ffprobeMetadataJson", "mediaReportJson", "sceneChangeIndexJson", "stableFrameIndexJson", "processingErrorReportJson", "contactSheet"]
+      }, startedAtMs)
     };
   }
 
@@ -105,7 +133,12 @@ export async function inspectEvidenceVideo(inputPath, options = {}) {
     });
   }
 
-  const ffprobe = runFfprobe(tools.ffprobe, absoluteInputPath);
+  const ffprobeCancellation = cancellation.check("before-ffprobe", basePerformance);
+  if (ffprobeCancellation) return ffprobeCancellation;
+  progress("ffprobe:start", { inputPath, inspectionID });
+  const ffprobe = existingFileUsable(paths.ffprobe, options.force)
+    ? { ok: true, metadata: readJsonIfExists(paths.ffprobe), reused: true }
+    : runFfprobe(tools.ffprobe, absoluteInputPath);
   if (!ffprobe.ok) {
     return failureReport({
       root,
@@ -122,6 +155,8 @@ export async function inspectEvidenceVideo(inputPath, options = {}) {
       message: ffprobe.error
     });
   }
+  if (ffprobe.reused) basePerformance.reusedArtifacts.push("ffprobeMetadataJson");
+  else basePerformance.generatedArtifacts.push("ffprobeMetadataJson");
 
   const parsedMetadata = parseFfprobe(ffprobe.metadata);
   if (!parsedMetadata.videoStream) {
@@ -157,22 +192,40 @@ export async function inspectEvidenceVideo(inputPath, options = {}) {
     });
   }
 
-  fs.writeFileSync(paths.ffprobe, `${JSON.stringify(ffprobe.metadata, null, 2)}\n`);
+  if (!ffprobe.reused) fs.writeFileSync(paths.ffprobe, `${JSON.stringify(ffprobe.metadata, null, 2)}\n`);
 
-  const sceneIndex = runSceneDetection(tools.ffmpeg, absoluteInputPath, parsedMetadata.durationSeconds, options.sceneThreshold ?? 0.3);
+  const sceneCancellation = cancellation.check("before-scene-detection", basePerformance);
+  if (sceneCancellation) return sceneCancellation;
+  progress("scene-detection:start", { inputPath, inspectionID });
+  const sceneIndex = reusableSceneIndex(paths.sceneIndex, options.force) ?? runSceneDetection(tools.ffmpeg, absoluteInputPath, parsedMetadata.durationSeconds, options.sceneThreshold ?? 0.3);
   if (!sceneIndex.ok) {
     errors.push({
       code: "sceneDetectionFailed",
       message: sceneIndex.error
     });
   }
-  const contactSheet = runContactSheet(tools.ffmpeg, absoluteInputPath, paths.contactSheet, parsedMetadata.durationSeconds, options.contactSheetColumns ?? 5);
+  if (sceneIndex.reused) basePerformance.reusedArtifacts.push("sceneChangeIndexJson");
+  else basePerformance.generatedArtifacts.push("sceneChangeIndexJson");
+
+  const contactSheetCancellation = cancellation.check("before-contact-sheet", basePerformance);
+  if (contactSheetCancellation) return contactSheetCancellation;
+  progress("contact-sheet:start", { inputPath, inspectionID });
+  const contactSheet = existingFileUsable(paths.contactSheet, options.force)
+    ? { ok: true, reused: true }
+    : runContactSheet(tools.ffmpeg, absoluteInputPath, paths.contactSheet, parsedMetadata.durationSeconds, {
+      columns: options.contactSheetColumns ?? 5,
+      rows: options.contactSheetRows ?? 2,
+      thumbnailWidth: options.contactSheetThumbnailWidth ?? 320,
+      threads: options.ffmpegThreads ?? 1
+    });
   if (!contactSheet.ok) {
     errors.push({
       code: "contactSheetFailed",
       message: contactSheet.error
     });
   }
+  if (contactSheet.reused) basePerformance.reusedArtifacts.push("contactSheet");
+  else basePerformance.generatedArtifacts.push("contactSheet");
 
   const sceneChanges = sceneIndex.ok ? sceneIndex.timestamps : [];
   const stableFrames = candidateStableFrames(parsedMetadata.durationSeconds, sceneChanges);
@@ -224,6 +277,7 @@ export async function inspectEvidenceVideo(inputPath, options = {}) {
     candidateMenuTransitionCount: menuTransitions.length,
     candidateStableFrameCount: stableFrames.length,
     outputs,
+    performance: finalizePerformance(basePerformance, startedAtMs),
     warnings,
     preservationNote: "Master video was read only. Contact sheets and indices are derivatives for research review."
   };
@@ -236,13 +290,15 @@ export async function inspectEvidenceVideo(inputPath, options = {}) {
     warnings
   };
 
-  fs.writeFileSync(paths.sceneIndex, `${JSON.stringify({
-    schemaVersion: CF27_MEDIA_INSPECTION_SCHEMA_VERSION,
-    inspectionID,
-    sceneThreshold: options.sceneThreshold ?? 0.3,
-    candidateMenuTransitions: menuTransitions,
-    rawSceneChangeTimestampsSeconds: sceneChanges
-  }, null, 2)}\n`);
+  if (!sceneIndex.reused) {
+    fs.writeFileSync(paths.sceneIndex, `${JSON.stringify({
+      schemaVersion: CF27_MEDIA_INSPECTION_SCHEMA_VERSION,
+      inspectionID,
+      sceneThreshold: options.sceneThreshold ?? 0.3,
+      candidateMenuTransitions: menuTransitions,
+      rawSceneChangeTimestampsSeconds: sceneChanges
+    }, null, 2)}\n`);
+  }
   fs.writeFileSync(paths.stableIndex, `${JSON.stringify({
     schemaVersion: CF27_MEDIA_INSPECTION_SCHEMA_VERSION,
     inspectionID,
@@ -250,8 +306,197 @@ export async function inspectEvidenceVideo(inputPath, options = {}) {
   }, null, 2)}\n`);
   fs.writeFileSync(paths.errors, `${JSON.stringify(errorReport, null, 2)}\n`);
   fs.writeFileSync(paths.report, `${JSON.stringify(report, null, 2)}\n`);
+  progress("complete", { inputPath, inspectionID, status: report.status, ok: report.ok });
 
   return report;
+}
+
+export async function inspectEvidenceVideoBatch(inputPaths, options = {}) {
+  const root = path.resolve(options.root ?? repositoryRoot);
+  const paths = Array.isArray(inputPaths) ? inputPaths : scanVideoInputs(path.resolve(root, inputPaths), root);
+  const nowISO = options.nowISO ?? new Date().toISOString();
+  const startedAtMs = Date.now();
+  const results = [];
+  const progress = createProgressReporter(options);
+  progress("batch:start", { totalInputs: paths.length });
+  for (let index = 0; index < paths.length; index += 1) {
+    const inputPath = paths[index];
+    progress("batch:item:start", { inputPath, index: index + 1, totalInputs: paths.length });
+    const report = await inspectEvidenceVideo(inputPath, {
+      ...options,
+      root,
+      nowISO,
+      onProgress: options.onProgress
+    });
+    results.push(report);
+    progress("batch:item:complete", {
+      inputPath,
+      index: index + 1,
+      totalInputs: paths.length,
+      status: report.status,
+      ok: report.ok
+    });
+    if (report.status === "cancelled") break;
+  }
+  const summary = {
+    ok: results.every((result) => result.ok || result.status === "skipped"),
+    status: results.some((result) => result.status === "cancelled") ? "cancelled" : "completed",
+    schemaVersion: CF27_MEDIA_INSPECTION_SCHEMA_VERSION,
+    generatedAt: nowISO,
+    totalInputs: paths.length,
+    processed: results.filter((result) => result.status === "processed" || result.status === "processedWithErrors").length,
+    skipped: results.filter((result) => result.status === "skipped").length,
+    failed: results.filter((result) => result.status === "failed").length,
+    cancelled: results.filter((result) => result.status === "cancelled").length,
+    durationMs: Date.now() - startedAtMs,
+    results
+  };
+  progress("batch:complete", summary);
+  return summary;
+}
+
+async function checksumForFile(filePath, { root, manifestRoot, nowISO, force, progress }) {
+  const startedAtMs = Date.now();
+  const stat = fs.statSync(filePath);
+  const cachePath = path.join(manifestRoot, checksumCacheFilename);
+  const cache = readJsonIfExists(cachePath) ?? {
+    schemaVersion: `${CF27_MEDIA_INSPECTION_SCHEMA_VERSION}-checksum-cache-v1`,
+    updatedAt: nowISO,
+    entries: {}
+  };
+  const cacheKey = normalizeRelativePath(path.relative(root, filePath));
+  const cached = cache.entries?.[cacheKey];
+  if (!force && cached && cached.sizeBytes === stat.size && cached.mtimeMs === stat.mtimeMs && typeof cached.sha256 === "string") {
+    progress("checksum:cache-hit", { inputPath: cacheKey, sha256: cached.sha256 });
+    return {
+      sha256: cached.sha256,
+      cacheHit: true,
+      durationMs: Date.now() - startedAtMs
+    };
+  }
+
+  progress("checksum:start", { inputPath: cacheKey, sizeBytes: stat.size });
+  const sha256 = await sha256FileStream(filePath);
+  fs.mkdirSync(manifestRoot, { recursive: true });
+  const nextCache = {
+    ...cache,
+    updatedAt: nowISO,
+    entries: {
+      ...(cache.entries ?? {}),
+      [cacheKey]: {
+        sha256,
+        sizeBytes: stat.size,
+        mtimeMs: stat.mtimeMs,
+        cachedAt: nowISO
+      }
+    }
+  };
+  fs.writeFileSync(cachePath, `${JSON.stringify(nextCache, null, 2)}\n`);
+  progress("checksum:complete", { inputPath: cacheKey, sha256 });
+  return {
+    sha256,
+    cacheHit: false,
+    durationMs: Date.now() - startedAtMs
+  };
+}
+
+function createProgressReporter(options) {
+  return (stage, details = {}) => {
+    if (typeof options.onProgress === "function") {
+      options.onProgress({
+        schemaVersion: CF27_MEDIA_INSPECTION_SCHEMA_VERSION,
+        stage,
+        at: options.nowISO ?? new Date().toISOString(),
+        ...details
+      });
+    }
+  };
+}
+
+function createCancellationChecker(options, paths, root, startedAtMs) {
+  return {
+    check(stage, performance) {
+      performance.cancellationChecks += 1;
+      const cancellationFile = options.cancellationFile ? path.resolve(options.cancellationFile) : null;
+      const signalCancelled = Boolean(options.signal?.aborted);
+      const fileCancelled = Boolean(cancellationFile && fs.existsSync(cancellationFile));
+      if (!signalCancelled && !fileCancelled) return null;
+      const reason = signalCancelled ? "signalAborted" : "cancellationFilePresent";
+      const report = {
+        ok: false,
+        status: "cancelled",
+        schemaVersion: CF27_MEDIA_INSPECTION_SCHEMA_VERSION,
+        inspectionID: path.basename(paths.manifestDir),
+        cancelledAtStage: stage,
+        cancellationReason: reason,
+        outputs: {
+          manifestDirectory: normalizeRelativePath(path.relative(root, paths.manifestDir)),
+          processingErrorReportJson: normalizeRelativePath(path.relative(root, paths.errors))
+        },
+        performance: finalizePerformance(performance, startedAtMs),
+        errors: [{ code: "processingCancelled", message: `Processing cancelled at ${stage}: ${reason}.` }],
+        preservationNote: "Master video was not modified. Partial derivative artifacts may be reused on resume."
+      };
+      fs.mkdirSync(paths.manifestDir, { recursive: true });
+      fs.writeFileSync(paths.errors, `${JSON.stringify({
+        schemaVersion: CF27_MEDIA_INSPECTION_SCHEMA_VERSION,
+        inspectionID: report.inspectionID,
+        generatedAt: options.nowISO ?? new Date().toISOString(),
+        ok: false,
+        errors: report.errors,
+        warnings: []
+      }, null, 2)}\n`);
+      return report;
+    }
+  };
+}
+
+function existingFileUsable(filePath, force) {
+  return !force && fs.existsSync(filePath) && fs.statSync(filePath).size > 0;
+}
+
+function reusableSceneIndex(sceneIndexPath, force) {
+  if (!existingFileUsable(sceneIndexPath, force)) return null;
+  const existing = readJsonIfExists(sceneIndexPath);
+  if (!existing || !Array.isArray(existing.rawSceneChangeTimestampsSeconds)) return null;
+  return {
+    ok: true,
+    reused: true,
+    timestamps: existing.rawSceneChangeTimestampsSeconds
+  };
+}
+
+function finalizePerformance(performance, startedAtMs) {
+  const currentRss = process.memoryUsage().rss;
+  return {
+    ...performance,
+    durationMs: Math.max(0, Date.now() - startedAtMs),
+    memoryRssEndBytes: currentRss,
+    memoryRssDeltaBytes: currentRss - performance.memoryRssStartBytes,
+    largeFileStrategy: "streamed-checksum-ffmpeg-subprocess-no-full-video-buffer",
+    resumability: "checksum-addressed outputs are reused when complete and partial ffprobe/scene/contact artifacts are reused when valid"
+  };
+}
+
+function scanVideoInputs(absoluteDirectory, root) {
+  if (!fs.existsSync(absoluteDirectory)) return [];
+  return listFiles(absoluteDirectory)
+    .filter((absolutePath) => {
+      const extension = path.extname(absolutePath).toLowerCase();
+      if (path.basename(absolutePath).startsWith(".")) return false;
+      return extension === "" || [".mp4", ".mov", ".m4v", ".webm"].includes(extension);
+    })
+    .map((absolutePath) => normalizeRelativePath(path.relative(root, absolutePath)))
+    .sort((left, right) => left.localeCompare(right));
+}
+
+function listFiles(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const absolutePath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return listFiles(absolutePath);
+    if (!entry.isFile()) return [];
+    return [absolutePath];
+  });
 }
 
 function failureReport({
@@ -358,15 +603,19 @@ function runSceneDetection(ffmpegPath, videoPath, durationSeconds, threshold) {
   };
 }
 
-function runContactSheet(ffmpegPath, videoPath, outputPath, durationSeconds, columns) {
-  const interval = Math.max(0.25, Math.round((durationSeconds / Math.max(columns * 2, 1)) * 100) / 100);
+function runContactSheet(ffmpegPath, videoPath, outputPath, durationSeconds, { columns, rows, thumbnailWidth, threads }) {
+  const interval = Math.max(0.25, Math.round((durationSeconds / Math.max(columns * rows, 1)) * 100) / 100);
   const result = spawnSync(ffmpegPath, [
     "-hide_banner",
     "-y",
+    "-threads",
+    String(threads),
     "-i",
     videoPath,
+    "-an",
+    "-sn",
     "-vf",
-    `fps=1/${interval},scale=320:-1,tile=${columns}x2`,
+    `fps=1/${interval},scale=${thumbnailWidth}:-1,tile=${columns}x${rows}`,
     "-frames:v",
     "1",
     outputPath
@@ -526,7 +775,8 @@ export function sha256FileStream(filePath, { highWaterMark = 1024 * 1024 } = {})
 function printHelp() {
   console.log([
     "Usage:",
-    "  node scripts/cf27-media-inspect.mjs inspect <video> [--manifest-root <dir>] [--generated-root <dir>] [--force]",
+    "  node scripts/cf27-media-inspect.mjs inspect <video> [--manifest-root <dir>] [--generated-root <dir>] [--cancel-file <path>] [--force]",
+    "  node scripts/cf27-media-inspect.mjs inspect-batch <directory> [--manifest-root <dir>] [--generated-root <dir>] [--cancel-file <path>] [--force]",
     "",
     "Environment overrides:",
     "  CF27_FFPROBE_PATH=/path/to/ffprobe",
@@ -541,25 +791,54 @@ function readFlag(args, name) {
   return index >= 0 ? args[index + 1] : undefined;
 }
 
+function readIntegerFlag(args, name) {
+  const value = readFlag(args, name);
+  if (value === undefined) return undefined;
+  const parsed = Number.parseInt(value, 10);
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : undefined;
+}
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const [command, inputPath, ...args] = process.argv.slice(2);
   if (!command || command === "--help") {
     printHelp();
     process.exit(0);
   }
-  if (command !== "inspect" || !inputPath) {
-    printHelp();
-    process.exit(1);
+  if (command === "inspect" && inputPath) {
+    const report = await inspectEvidenceVideo(inputPath, {
+      manifestRoot: readFlag(args, "--manifest-root"),
+      generatedRoot: readFlag(args, "--generated-root"),
+      portableRelativeEvidencePath: readFlag(args, "--portable-path"),
+      evidenceRootToken: readFlag(args, "--evidence-root-token"),
+      ffprobePath: readFlag(args, "--ffprobe"),
+      ffmpegPath: readFlag(args, "--ffmpeg"),
+      cancellationFile: readFlag(args, "--cancel-file"),
+      contactSheetColumns: readIntegerFlag(args, "--contact-sheet-columns"),
+      contactSheetRows: readIntegerFlag(args, "--contact-sheet-rows"),
+      contactSheetThumbnailWidth: readIntegerFlag(args, "--contact-sheet-width"),
+      ffmpegThreads: readIntegerFlag(args, "--ffmpeg-threads"),
+      force: args.includes("--force")
+    });
+    console.log(JSON.stringify(report, null, 2));
+    process.exit(report.ok ? 0 : 1);
   }
-  const report = await inspectEvidenceVideo(inputPath, {
-    manifestRoot: readFlag(args, "--manifest-root"),
-    generatedRoot: readFlag(args, "--generated-root"),
-    portableRelativeEvidencePath: readFlag(args, "--portable-path"),
-    evidenceRootToken: readFlag(args, "--evidence-root-token"),
-    ffprobePath: readFlag(args, "--ffprobe"),
-    ffmpegPath: readFlag(args, "--ffmpeg"),
-    force: args.includes("--force")
-  });
-  console.log(JSON.stringify(report, null, 2));
-  process.exit(report.ok ? 0 : 1);
+  if (command === "inspect-batch" && inputPath) {
+    const report = await inspectEvidenceVideoBatch(inputPath, {
+      manifestRoot: readFlag(args, "--manifest-root"),
+      generatedRoot: readFlag(args, "--generated-root"),
+      evidenceRootToken: readFlag(args, "--evidence-root-token"),
+      ffprobePath: readFlag(args, "--ffprobe"),
+      ffmpegPath: readFlag(args, "--ffmpeg"),
+      cancellationFile: readFlag(args, "--cancel-file"),
+      contactSheetColumns: readIntegerFlag(args, "--contact-sheet-columns"),
+      contactSheetRows: readIntegerFlag(args, "--contact-sheet-rows"),
+      contactSheetThumbnailWidth: readIntegerFlag(args, "--contact-sheet-width"),
+      ffmpegThreads: readIntegerFlag(args, "--ffmpeg-threads"),
+      force: args.includes("--force")
+    });
+    console.log(JSON.stringify(report, null, 2));
+    process.exit(report.ok ? 0 : 1);
+  }
+  printHelp();
+  process.exit(1);
 }

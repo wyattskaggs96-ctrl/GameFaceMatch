@@ -6,6 +6,7 @@ import { createPhase0AuditDashboardReport, type Phase0AuditDashboardReport } fro
 import { createEmptyIssueRegister } from "@/lib/phase-zero/phase-zero-issue-management";
 import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusReport } from "@/lib/phase-zero/phase-zero-status";
 import { AdditionalAttributesWorkspace } from "./AdditionalAttributesWorkspace";
+import { CatalogAnnotationWorkspace } from "./CatalogAnnotationWorkspace";
 import { CatalogManagerReviewConsole } from "./CatalogManagerReviewConsole";
 import { CaptureConfigurationEditor } from "./CaptureConfigurationEditor";
 import { CaptureConsistencyQA } from "./CaptureConsistencyQA";
@@ -74,6 +75,7 @@ export function Phase0StatusPanel({
       <CaptureConsistencyQA />
       <RequiredViewCompletenessChecker />
       <DuplicateReviewTool />
+      <CatalogAnnotationWorkspace />
       <CatalogManagerReviewConsole />
       <SecondVerifierWorkspace />
       <MenuMapEditor />

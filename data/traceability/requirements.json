@@ -1218,6 +1218,28 @@
       "lastCheckedDate": "2026-07-13"
     },
     {
+      "id": "GFM-P0-044",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Catalog annotation workspace",
+      "summary": "Build a development-only annotation workspace for verified catalog images with multi-view display, landmark or measurement overlays, controlled taxonomy values, reviewer notes, confidence, supporting views, inter-reviewer comparison, missing-view warnings, versioning, and audit trail while blocking production readiness until the underlying catalog record is verified.",
+      "owningModule": "Catalog annotation governance",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-catalog-annotation-workspace.ts",
+        "web/features/phase-zero/CatalogAnnotationWorkspace.tsx",
+        "data/schemas/catalog-annotation-workspace.schema.json",
+        "docs/GAME_CATALOG_WORKFLOW.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-catalog-annotation-workspace.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Annotation workspace tests cover schema fields, multi-view evidence, overlays, reviewer confidence/supporting views/versioning, audit trail creation, inter-reviewer comparison, missing required view warnings, invalid annotation rejection, and production-readiness blocking until the underlying catalog record is verified.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-13"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

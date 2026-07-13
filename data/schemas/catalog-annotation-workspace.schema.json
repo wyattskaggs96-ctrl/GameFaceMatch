@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/catalog-annotation-workspace.schema.json",
+  "title": "Phase0CatalogAnnotationWorkspace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "workspaceID",
+    "catalogStableID",
+    "catalogVersionID",
+    "underlyingRecordVerificationState",
+    "nativeGameLabel",
+    "createdAt",
+    "updatedAt",
+    "imageViews",
+    "reviewerAnnotations",
+    "auditTrail"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-catalog-annotation-workspace-v1" },
+    "workspaceID": { "type": "string", "minLength": 1 },
+    "catalogStableID": { "type": "string", "minLength": 1 },
+    "catalogVersionID": { "type": "string", "minLength": 1 },
+    "underlyingRecordVerificationState": { "enum": ["draft", "firstReviewPending", "firstReviewApproved", "secondReviewPending", "verified", "rejected", "retired"] },
+    "nativeGameLabel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nativeCategoryLabel", "visibleGameLabelOrIndex", "nativeOrder", "menuItemID"],
+      "properties": {
+        "nativeCategoryLabel": { "type": "string", "minLength": 1 },
+        "visibleGameLabelOrIndex": { "type": "string", "minLength": 1 },
+        "nativeOrder": { "type": "integer", "minimum": 1 },
+        "menuItemID": { "type": "string", "minLength": 1 }
+      }
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "imageViews": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/imageView" }
+    },
+    "reviewerAnnotations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/reviewerAnnotation" }
+    },
+    "auditTrail": { "$ref": "admin-audit-log.schema.json" }
+  },
+  "$defs": {
+    "viewID": { "enum": ["straightOn", "left45", "right45", "leftProfile", "rightProfile", "rear", "elevated", "lowered", "menuEvidence"] },
+    "overlayKind": { "enum": ["landmark", "measurement", "guide"] },
+    "reviewerRole": { "enum": ["primaryResearcher", "secondVerifier", "catalogManager"] },
+    "annotationSource": { "enum": ["measured", "researcherReviewed", "userConfirmed", "unavailable"] },
+    "imageView": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["viewID", "evidenceFileID", "imageRelativePath", "width", "height", "capturedAt", "overlays"],
+      "properties": {
+        "viewID": { "$ref": "#/$defs/viewID" },
+        "evidenceFileID": { "type": "string", "minLength": 1 },
+        "imageRelativePath": { "type": "string", "minLength": 1 },
+        "width": { "type": "number", "exclusiveMinimum": 0 },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
+        "capturedAt": { "type": "string", "format": "date-time" },
+        "overlays": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/overlay" }
+        }
+      }
+    },
+    "overlay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overlayID", "kind", "label", "featureGroup", "confidence", "points", "measurementValue", "source"],
+      "properties": {
+        "overlayID": { "type": "string", "minLength": 1 },
+        "kind": { "$ref": "#/$defs/overlayKind" },
+        "label": { "type": "string", "minLength": 1 },
+        "featureGroup": {
+          "enum": ["face", "forehead", "temples", "cheekbones", "jaw", "chin", "eyes", "brows", "nose", "mouth", "ears", "symmetry", "hairline", "facialHairCoverage"]
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["x", "y"],
+            "properties": {
+              "x": { "type": "number" },
+              "y": { "type": "number" }
+            }
+          }
+        },
+        "measurementValue": { "type": ["number", "null"] },
+        "source": { "$ref": "#/$defs/annotationSource" }
+      }
+    },
+    "reviewerAnnotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["annotationVersionID", "reviewerID", "reviewerRole", "createdAt", "notes", "confidence", "supportingViews", "annotationSet"],
+      "properties": {
+        "annotationVersionID": { "type": "string", "minLength": 1 },
+        "reviewerID": { "type": "string", "minLength": 1 },
+        "reviewerRole": { "$ref": "#/$defs/reviewerRole" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string", "minLength": 1 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "supportingViews": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/viewID" },
+          "minItems": 1
+        },
+        "annotationSet": { "$ref": "facial-feature-taxonomy.schema.json" }
+      }
+    }
+  }
+}

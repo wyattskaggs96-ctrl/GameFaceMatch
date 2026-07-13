@@ -6,6 +6,7 @@ import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
 import { createBuildInstructions, createRecommendationExplanationReport, createResultsState, getTieGroups } from "@/lib/results/results-experience";
 import { createSafeShareCard } from "@/lib/share/share-card";
+import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import type { AppearanceAttribute, FacialMeasurement, GameCatalogManifest, StandardFaceProfile } from "@/types/domain";
 
 const fixtureCatalog = JSON.parse(
@@ -142,7 +143,7 @@ describe("results experience state", () => {
 });
 
 function syntheticProfile(): StandardFaceProfile {
-  return {
+  return migrateStandardFaceProfile({
     id: "synthetic-results-profile",
     profileVersion: "synthetic-test-profile",
     createdAt: "2026-07-10T00:00:00.000Z",
@@ -187,7 +188,7 @@ function syntheticProfile(): StandardFaceProfile {
       leftProfile: { angleID: "leftProfile", available: true },
       rightProfile: { angleID: "rightProfile", available: true }
     }
-  };
+  });
 }
 
 function measurement(value: number): FacialMeasurement {

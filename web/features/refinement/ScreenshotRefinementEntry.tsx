@@ -12,6 +12,7 @@ import {
   type ScreenshotSlotState,
   type ScreenshotViewID
 } from "@/lib/refinement/screenshot-refinement";
+import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import type { RefinementResult } from "@/types/domain";
 
 export function ScreenshotRefinementEntry({
@@ -184,7 +185,7 @@ function revokeObjectUrls(objectUrls: string[]) {
 }
 
 function createPlaceholderProfile() {
-  return {
+  return migrateStandardFaceProfile({
     id: "refinement-placeholder-profile",
     profileVersion: "web-refinement-scaffold",
     createdAt: new Date().toISOString(),
@@ -219,5 +220,5 @@ function createPlaceholderProfile() {
       leftProfile: { angleID: "leftProfile" as const, available: false },
       rightProfile: { angleID: "rightProfile" as const, available: false }
     }
-  };
+  });
 }

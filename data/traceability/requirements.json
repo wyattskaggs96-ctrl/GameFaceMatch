@@ -176,6 +176,7 @@
       "summary": "Generate a standardized face profile that separates geometry and appearance without raw frame persistence.",
       "owningModule": "Profile generation",
       "implementationFiles": [
+        "data/fixtures/test-only/standard-face-profile/legacy-web-mvp-profile-v1.json",
         "web/lib/profile/standard-face-profile.ts",
         "web/lib/profile/rgb-landmark-geometry.ts",
         "web/types/domain.ts"
@@ -185,10 +186,10 @@
         "web/tests/profile-geometry.test.ts"
       ],
       "status": "IMPLEMENTED_WITH_LIMITATION",
-      "evidence": "Profile serialization, unavailable measurement states, depthSupported false, source angle availability, and synthetic geometry tests pass.",
+      "evidence": "The versioned StandardFaceProfile contract separates capture metadata, normalized geometry, appearance, confidence, supporting-frame data, user-confirmed attributes, model versions, profile version, and deletion state. Serialization, validation, legacy migration, unavailable measurement states, depthSupported false, source angle availability, and fixture-backed tests pass.",
       "blocker": "Real landmark model and real-device repeatability are not verified.",
       "owner": "Profile systems lead",
-      "lastCheckedDate": "2026-07-12"
+      "lastCheckedDate": "2026-07-13"
     },
     {
       "id": "GFM-CAT-001",

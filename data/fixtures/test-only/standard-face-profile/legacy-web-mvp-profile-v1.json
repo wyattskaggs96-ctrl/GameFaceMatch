@@ -1,0 +1,71 @@
+{
+  "sourceType": "testFixture",
+  "id": "legacy-web-mvp-profile-test-only",
+  "profileVersion": "web-mvp-profile-v1",
+  "createdAt": "2026-07-10T00:00:00.000Z",
+  "capture": {
+    "mode": "webRgbGuided",
+    "deviceModel": "browser",
+    "capturedAt": "2026-07-10T00:00:00.000Z",
+    "overallQuality": 0,
+    "operatingSystemVersion": "browser",
+    "appVersion": "web-mvp-profile-v1",
+    "browserName": "fixture-test-browser",
+    "browserRgbOnly": true
+  },
+  "qualityReport": {
+    "overallScore": 0,
+    "issues": [],
+    "isUsableForPrototype": false,
+    "requiredAnglesComplete": false
+  },
+  "geometry": {
+    "modelVersion": "web-rgb-landmark-geometry-v1",
+    "measurements": {
+      "faceWidthRatio": {
+        "value": null,
+        "confidence": {
+          "score": 0,
+          "label": "unavailable"
+        },
+        "supportingFrameCount": 0,
+        "supportingPoses": [],
+        "variance": null,
+        "depthSupported": false,
+        "profileEvidenceExists": false,
+        "occlusionImpact": "unknown",
+        "occlusionStatus": "unknown",
+        "measurementSource": "notMeasured",
+        "availabilityState": "unavailable",
+        "algorithmVersion": "web-rgb-landmark-geometry-v1"
+      }
+    },
+    "unavailableMeasurements": ["faceWidthRatio"]
+  },
+  "appearance": {
+    "modelVersion": "user-confirmed-appearance-v1",
+    "attributes": []
+  },
+  "sourceAngleAvailability": {
+    "straightOn": {
+      "angleID": "straightOn",
+      "available": false
+    },
+    "left45": {
+      "angleID": "left45",
+      "available": false
+    },
+    "right45": {
+      "angleID": "right45",
+      "available": false
+    },
+    "leftProfile": {
+      "angleID": "leftProfile",
+      "available": false
+    },
+    "rightProfile": {
+      "angleID": "rightProfile",
+      "available": false
+    }
+  }
+}

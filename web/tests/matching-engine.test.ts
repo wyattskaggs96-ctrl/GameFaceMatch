@@ -8,6 +8,7 @@ import { createBundledCatalogRepository } from "@/lib/catalog/catalog-repository
 import { PRODUCTION_PUBLISH_GATE_VERSION, requiredProductionPublishGateChecks, type ProductionPublishGateReport } from "@/lib/catalog/production-publish-gate";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
 import { createRuleBasedMatchingEngine, type MatchingFeatureConfig } from "@/lib/matching/matching-engine";
+import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import type { AppearanceAttribute, FacialMeasurement, GameCatalogManifest, StandardFaceProfile, StandardFacialMeasurementID } from "@/types/domain";
 
 const fixtureCatalog = JSON.parse(
@@ -354,7 +355,7 @@ function engine() {
 }
 
 function syntheticProfile(): StandardFaceProfile {
-  return {
+  return migrateStandardFaceProfile({
     id: "synthetic-profile",
     profileVersion: "synthetic-test-profile",
     createdAt: "2026-07-10T00:00:00.000Z",
@@ -409,7 +410,7 @@ function syntheticProfile(): StandardFaceProfile {
       leftProfile: { angleID: "leftProfile", available: true },
       rightProfile: { angleID: "rightProfile", available: true }
     }
-  };
+  });
 }
 
 async function checksumCatalog(catalog: GameCatalogManifest): Promise<GameCatalogManifest> {

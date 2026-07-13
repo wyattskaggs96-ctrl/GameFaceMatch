@@ -7,6 +7,7 @@ import {
   setScreenshot,
   validateScreenshotMetadata
 } from "@/lib/refinement/screenshot-refinement";
+import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import type { StandardFaceProfile } from "@/types/domain";
 
 describe("screenshot refinement scaffold", () => {
@@ -90,7 +91,7 @@ function validScreenshot(viewID: "front" | "left45" | "right45", objectUrl: stri
 }
 
 function placeholderProfile(): StandardFaceProfile {
-  return {
+  return migrateStandardFaceProfile({
     id: "refinement-test-profile",
     profileVersion: "test",
     createdAt: "2026-07-10T00:00:00.000Z",
@@ -125,5 +126,5 @@ function placeholderProfile(): StandardFaceProfile {
       leftProfile: { angleID: "leftProfile", available: false },
       rightProfile: { angleID: "rightProfile", available: false }
     }
-  };
+  });
 }

@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { createInitialCaptureSession, setAngleCapture } from "@/lib/capture/capture-session";
 import { createImageQualityReport } from "@/lib/capture/image-quality-service";
@@ -13,8 +15,12 @@ import {
 import {
   createStandardFaceProfile,
   deserializeProfile,
+  markStandardFaceProfileDeleted,
   serializeProfile,
-  unavailableWebMeasurementIDs
+  standardFaceProfileContractVersion,
+  standardFaceProfileVersion,
+  unavailableWebMeasurementIDs,
+  validateStandardFaceProfile
 } from "@/lib/profile/standard-face-profile";
 import type { ActiveCaptureSession } from "@/lib/capture/capture-session";
 import type { CapturedAngleID, TemporaryImageReference } from "@/types/domain";
@@ -65,6 +71,26 @@ describe("attribute confirmation", () => {
 });
 
 describe("standard face profile foundation", () => {
+  it("creates a versioned contract with separated metadata, confidence, support, attributes, models, and deletion state", () => {
+    const profile = createStandardFaceProfile({
+      session: completeSession(),
+      attributes: validAttributes(),
+      now: new Date("2026-07-10T00:00:00.000Z"),
+      userAgent: "unit-test-browser"
+    });
+
+    expect(profile.profileContractVersion).toBe(standardFaceProfileContractVersion);
+    expect(profile.profileVersion).toBe(standardFaceProfileVersion);
+    expect(profile.capture.browserRgbOnly).toBe(true);
+    expect(profile.geometry.modelVersion).toBe(profile.modelVersions.geometry);
+    expect(profile.appearance.modelVersion).toBe(profile.modelVersions.appearance);
+    expect(profile.confidence).toHaveProperty("overall");
+    expect(profile.supportingFrames.requiredAngleCount).toBe(5);
+    expect(profile.supportingFrames.depthFrameCount).toBe(0);
+    expect(profile.userConfirmedAttributes).toHaveLength(profile.appearance.attributes.length);
+    expect(profile.deletionState.status).toBe("active");
+  });
+
   it("serializes a profile without raw image references", () => {
     const profile = createStandardFaceProfile({
       session: completeSession(),
@@ -76,6 +102,7 @@ describe("standard face profile foundation", () => {
     const serialized = serializeProfile(profile);
     const deserialized = deserializeProfile(serialized);
     expect(deserialized.profileVersion).toBe(profile.profileVersion);
+    expect(validateStandardFaceProfile(deserialized).ok).toBe(true);
     expect(serialized).not.toContain("blob:");
     expect(serialized).not.toContain(".jpg");
   });
@@ -120,6 +147,58 @@ describe("standard face profile foundation", () => {
     expect(profile.sourceAngleAvailability.straightOn.available).toBe(true);
     expect(profile.sourceAngleAvailability.straightOn.width).toBe(900);
     expect("objectUrl" in profile.sourceAngleAvailability.straightOn).toBe(false);
+  });
+
+  it("rejects unnormalized measurements and accidental web depth support", () => {
+    const profile = createStandardFaceProfile({
+      session: completeSession(),
+      attributes: validAttributes(),
+      now: new Date("2026-07-10T00:00:00.000Z")
+    });
+    profile.geometry.measurements.faceWidthRatio = {
+      ...profile.geometry.measurements.faceWidthRatio!,
+      value: 1.5,
+      depthSupported: true,
+      availabilityState: "available",
+      supportingFrameCount: 1
+    };
+    const report = validateStandardFaceProfile(profile);
+    expect(report.ok).toBe(false);
+    expect(report.errors.map((error) => error.code)).toEqual(expect.arrayContaining(["measurementNotNormalized", "webMeasurementDepthUnsupported"]));
+  });
+
+  it("migrates legacy web MVP profile fixtures into the current contract", () => {
+    const legacy = fs.readFileSync(
+      path.join(process.cwd(), "..", "data", "fixtures", "test-only", "standard-face-profile", "legacy-web-mvp-profile-v1.json"),
+      "utf8"
+    );
+    const migrated = deserializeProfile(legacy);
+    expect(migrated.id).toBe("legacy-web-mvp-profile-test-only");
+    expect(migrated.profileContractVersion).toBe(standardFaceProfileContractVersion);
+    expect(migrated.profileVersion).toBe(standardFaceProfileVersion);
+    expect(migrated.supportingFrames.totalFrameCount).toBe(0);
+    expect(migrated.modelVersions.profileContract).toBe(standardFaceProfileContractVersion);
+    expect(validateStandardFaceProfile(migrated).ok).toBe(true);
+  });
+
+  it("records deletion state without retaining raw media", () => {
+    const profile = createStandardFaceProfile({
+      session: completeSession(),
+      attributes: validAttributes(),
+      now: new Date("2026-07-10T00:00:00.000Z")
+    });
+    const deleted = markStandardFaceProfileDeleted(profile, {
+      deletedAt: new Date("2026-07-11T00:00:00.000Z"),
+      deletionRecordID: "deletion-record-test-only",
+      reason: "unit test deletion"
+    });
+    expect(deleted.deletionState).toEqual({
+      status: "deleted",
+      deletedAt: "2026-07-11T00:00:00.000Z",
+      deletionRecordID: "deletion-record-test-only",
+      reason: "unit test deletion"
+    });
+    expect(serializeProfile(deleted)).not.toContain("blob:");
   });
 
   it("deletes derived profile state through local all-data deletion", () => {

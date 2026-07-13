@@ -160,13 +160,63 @@ export interface CaptureReviewReport {
 
 export interface StandardFaceProfile {
   id: string;
+  profileContractVersion: string;
   profileVersion: string;
   createdAt: ISODateString;
   capture: CaptureMetadata;
   qualityReport: CaptureQualityReport;
   geometry: GeometryProfile;
   appearance: AppearanceProfile;
+  confidence: StandardFaceProfileConfidence;
+  supportingFrames: StandardFaceProfileSupportingFrames;
+  userConfirmedAttributes: AppearanceAttribute[];
+  modelVersions: StandardFaceProfileModelVersions;
+  deletionState: StandardFaceProfileDeletionState;
   sourceAngleAvailability: Record<CapturedAngleID, SourceAngleAvailability>;
+}
+
+export interface StandardFaceProfileModelVersions {
+  profileContract: string;
+  profileBuilder: string;
+  geometry: string;
+  appearance: string;
+  captureQuality: string;
+  measurementAlgorithm: string;
+  landmarkProvider: string;
+}
+
+export interface StandardFaceProfileConfidence {
+  overall: MeasurementConfidence;
+  captureQuality: MeasurementConfidence;
+  geometry: MeasurementConfidence;
+  appearance: MeasurementConfidence;
+  evidenceCompleteness: MeasurementConfidence;
+}
+
+export interface StandardFaceProfileSupportingFrames {
+  totalFrameCount: number;
+  availableAngleIDs: CapturedAngleID[];
+  requiredAngleCount: number;
+  profileAngleCount: number;
+  depthFrameCount: number;
+  byAngle: Record<CapturedAngleID, StandardFaceProfileAngleSupport>;
+}
+
+export interface StandardFaceProfileAngleSupport {
+  angleID: CapturedAngleID;
+  available: boolean;
+  source?: CaptureSource;
+  frameCount: number;
+  width?: number;
+  height?: number;
+  qualityState?: ImageQualityState;
+}
+
+export interface StandardFaceProfileDeletionState {
+  status: "active" | "deleted";
+  deletedAt: ISODateString | null;
+  deletionRecordID: string | null;
+  reason: string | null;
 }
 
 export interface SourceAngleAvailability {

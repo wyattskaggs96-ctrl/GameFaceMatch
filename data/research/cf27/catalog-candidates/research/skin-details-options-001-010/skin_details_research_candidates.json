@@ -1,0 +1,1109 @@
+{
+  "schemaVersion": "cf27-skin-details-research-candidates-v1",
+  "createdAt": "2026-07-13T12:12:36.961Z",
+  "updatedAt": "2026-07-13T12:12:36.961Z",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "sourceType": "researchCandidate",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "PRIMARY_RESEARCH_ONLY_NOT_SECOND_VERIFIED",
+  "verificationStateForAllRecords": "NOT_VERIFIED",
+  "scope": {
+    "category": "Skin Details",
+    "directlySelectedRecordCount": 10,
+    "directlySelectedNativeLabels": [
+      "None",
+      "Freckles 2",
+      "Scar 3",
+      "Scar 2",
+      "Scar 1",
+      "Acne Scar 1",
+      "Redness 3",
+      "Redness 2",
+      "Redness 1",
+      "Freckles 1"
+    ],
+    "nativeOrderRangeObserved": "10 visible Skin Details tiles directly selected",
+    "completeCategoryCountClaimed": false,
+    "excludedLabels": [
+      "unselected or unseen Skin Details values, if any"
+    ],
+    "reasonCompletenessIsNotClaimed": "The recording shows ten visible selected tiles, but does not prove wrap behavior or a hard final selector boundary."
+  },
+  "context": {
+    "platformCode": "XBOXUNKNOWN",
+    "modeCode": "RTG",
+    "gameVersion": "UNKNOWN",
+    "patchVersion": "UNKNOWN",
+    "creationPath": "Road to Glory / Create Player / Player / Appearance / Head & Skin / Skin Details",
+    "sourceVideoID": "video-005",
+    "duplicateProvenanceVideoID": "video-011",
+    "duplicateProvenancePolicy": "video-011 is an exact duplicate of video-005 and is retained as duplicate provenance only, not an independent evidence source."
+  },
+  "selectorObservations": {
+    "gridStructure": "4-column grid with 10 visible tiles",
+    "nativeOrderBasis": "visible tile position in the Skin Details grid",
+    "selectionSequenceBasis": "direct selected labels in the recording",
+    "firstObservedSelectedValue": "None",
+    "finalObservedSelectedValue": "Freckles 1",
+    "selectorAppearsComplete": false,
+    "selectorCompletenessExplanation": "All ten visible tiles are selected during the recording, but final boundary and wrap behavior are not shown.",
+    "wrapObserved": false,
+    "skinDetailsChangeVisibleCharacterTexture": "limited_observable_change",
+    "otherVisibleSettingsChangedWhenChoosingSkinDetails": false,
+    "characterRotationAvailable": true,
+    "selectedHeadRemainsConstant": true,
+    "eyeBlackPresent": true,
+    "eyeBlackEvaluationImpact": "Eye black obstructs cheek-area skin detail evaluation on representative character frames."
+  },
+  "observationPolicy": {
+    "nativeLabelsPreserved": true,
+    "normalizedResearchCategoriesAreDerivedFromReadableNativeLabels": true,
+    "noRaceOrEthnicityLabels": true,
+    "noSensitiveTraitInference": true,
+    "skinDetailsExcludedFromGeometrySimilarity": true,
+    "productionUseAllowed": false,
+    "sourceMasterPreserved": true,
+    "derivativesAreLocalAndGitIgnored": true
+  },
+  "sourceVideos": [
+    {
+      "videoID": "video-005",
+      "workingFilename": "05_Skin_Details.mp4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/04_Appearance_Skin_Details.MP4",
+      "sha256": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+      "durationSeconds": 31.72,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "identifiedContent": "Skin Details menu and options"
+    }
+  ],
+  "nativeOrder": [
+    {
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001",
+      "nativeLabelOriginalText": "None",
+      "readableNativeCategory": "None",
+      "nativeRow": 1,
+      "nativeColumn": 1
+    },
+    {
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002",
+      "nativeLabelOriginalText": "Freckles 2",
+      "readableNativeCategory": "Freckles",
+      "nativeRow": 1,
+      "nativeColumn": 2
+    },
+    {
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003",
+      "nativeLabelOriginalText": "Scar 3",
+      "readableNativeCategory": "Scar",
+      "nativeRow": 1,
+      "nativeColumn": 3
+    },
+    {
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004",
+      "nativeLabelOriginalText": "Scar 2",
+      "readableNativeCategory": "Scar",
+      "nativeRow": 1,
+      "nativeColumn": 4
+    },
+    {
+      "nativeOrder": 5,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005",
+      "nativeLabelOriginalText": "Scar 1",
+      "readableNativeCategory": "Scar",
+      "nativeRow": 2,
+      "nativeColumn": 1
+    },
+    {
+      "nativeOrder": 6,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006",
+      "nativeLabelOriginalText": "Acne Scar 1",
+      "readableNativeCategory": "Acne Scar",
+      "nativeRow": 2,
+      "nativeColumn": 2
+    },
+    {
+      "nativeOrder": 7,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007",
+      "nativeLabelOriginalText": "Redness 3",
+      "readableNativeCategory": "Redness",
+      "nativeRow": 2,
+      "nativeColumn": 3
+    },
+    {
+      "nativeOrder": 8,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008",
+      "nativeLabelOriginalText": "Redness 2",
+      "readableNativeCategory": "Redness",
+      "nativeRow": 2,
+      "nativeColumn": 4
+    },
+    {
+      "nativeOrder": 9,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009",
+      "nativeLabelOriginalText": "Redness 1",
+      "readableNativeCategory": "Redness",
+      "nativeRow": 3,
+      "nativeColumn": 1
+    },
+    {
+      "nativeOrder": 10,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010",
+      "nativeLabelOriginalText": "Freckles 1",
+      "readableNativeCategory": "Freckles",
+      "nativeRow": 3,
+      "nativeColumn": 2
+    }
+  ],
+  "selectionSequence": [
+    {
+      "sequenceOrder": 1,
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001",
+      "nativeLabelOriginalText": "None",
+      "timestampRangeSeconds": "7.0-8.0",
+      "stableTimestampSeconds": 8,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 2,
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002",
+      "nativeLabelOriginalText": "Freckles 2",
+      "timestampRangeSeconds": "9.0-11.0",
+      "stableTimestampSeconds": 10,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 3,
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003",
+      "nativeLabelOriginalText": "Scar 3",
+      "timestampRangeSeconds": "12.0-14.0",
+      "stableTimestampSeconds": 13,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 4,
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004",
+      "nativeLabelOriginalText": "Scar 2",
+      "timestampRangeSeconds": "15.0-16.0",
+      "stableTimestampSeconds": 15.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 5,
+      "nativeOrder": 8,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008",
+      "nativeLabelOriginalText": "Redness 2",
+      "timestampRangeSeconds": "17.0-18.0",
+      "stableTimestampSeconds": 18,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 6,
+      "nativeOrder": 7,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007",
+      "nativeLabelOriginalText": "Redness 3",
+      "timestampRangeSeconds": "19.0-20.0",
+      "stableTimestampSeconds": 20,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 7,
+      "nativeOrder": 6,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006",
+      "nativeLabelOriginalText": "Acne Scar 1",
+      "timestampRangeSeconds": "21.0-22.0",
+      "stableTimestampSeconds": 22,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 8,
+      "nativeOrder": 5,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005",
+      "nativeLabelOriginalText": "Scar 1",
+      "timestampRangeSeconds": "23.0-24.0",
+      "stableTimestampSeconds": 24,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 9,
+      "nativeOrder": 9,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009",
+      "nativeLabelOriginalText": "Redness 1",
+      "timestampRangeSeconds": "25.0-26.0",
+      "stableTimestampSeconds": 26,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 10,
+      "nativeOrder": 10,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010",
+      "nativeLabelOriginalText": "Freckles 1",
+      "timestampRangeSeconds": "27.0-31.72",
+      "stableTimestampSeconds": 29,
+      "selectionType": "deliberately_selected"
+    }
+  ],
+  "labelsRequiringManualTextConfirmation": [],
+  "manualTextConfirmationNotes": "All ten selected native Skin Details labels were readable in direct frame inspection. Reconfirm during second-person verification before production.",
+  "records": [
+    {
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001",
+      "nativeLabelOriginalText": "None",
+      "visibleGameLabelOrIndex": "None",
+      "category": "Skin Details",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinDetails",
+      "readableNativeCategory": "None",
+      "nativeLabelNormalizedForResearch": "None",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-005",
+          "timestampRangeSeconds": "7.0-8.0",
+          "stableTimestampSeconds": 8,
+          "basis": "direct selected Skin Details label visible in the Skin Details grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_001-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001_MENU_video-005_8p00s.png",
+          "outputSha256": "7c15b44b022de8209eb8de659a64ceba3bb14efdaf9502cdecceb98c19f86278",
+          "sourceTimestampSeconds": 8
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_001-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001_CHARACTER_STABLE_video-005_8p00s.png",
+          "outputSha256": "7c15b44b022de8209eb8de659a64ceba3bb14efdaf9502cdecceb98c19f86278",
+          "sourceTimestampSeconds": 8
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 1,
+        "basis": "selected tile position visible in the Skin Details grid; native text is stored separately and unchanged"
+      },
+      "detailVisibility": {
+        "detailClearlyVisible": "not_applicable",
+        "detailVisibilityState": "baseline_none",
+        "visibleInSelectedMenuThumbnail": true,
+        "visibleInRepresentativeCharacterFrame": false,
+        "notes": "The selected native label is None, so no skin detail should be visible."
+      },
+      "representativeFrameQA": {
+        "eyeBlackObstructsEvaluation": false,
+        "eyeBlackObstructionNotes": "Baseline option. Eye black is still present on the character, but no skin detail is expected.",
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front or slight three-quarter view",
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Texture visibility is limited by screen-recording compression and lighting.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "representativeFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "None",
+        "readableNativeCategory": "None",
+        "textureUse": "research_candidate_texture_attribute",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "sensitiveTraitPolicy": "Native game label only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No texture measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Skin Details are treated as appearance/texture attributes, not geometry."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002",
+      "nativeLabelOriginalText": "Freckles 2",
+      "visibleGameLabelOrIndex": "Freckles 2",
+      "category": "Skin Details",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinDetails",
+      "readableNativeCategory": "Freckles",
+      "nativeLabelNormalizedForResearch": "Freckles",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-005",
+          "timestampRangeSeconds": "9.0-11.0",
+          "stableTimestampSeconds": 10,
+          "basis": "direct selected Skin Details label visible in the Skin Details grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_002-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002_MENU_video-005_10p00s.png",
+          "outputSha256": "6f344155a804d0e05743144c8091b6bd1536001841a4baa714318d6b629fb2ec",
+          "sourceTimestampSeconds": 10
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_002-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002_CHARACTER_STABLE_video-005_10p00s.png",
+          "outputSha256": "6f344155a804d0e05743144c8091b6bd1536001841a4baa714318d6b629fb2ec",
+          "sourceTimestampSeconds": 10
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 2,
+        "basis": "selected tile position visible in the Skin Details grid; native text is stored separately and unchanged"
+      },
+      "detailVisibility": {
+        "detailClearlyVisible": "limited",
+        "detailVisibilityState": "limited_on_representative_frame_visible_in_menu_thumbnail",
+        "visibleInSelectedMenuThumbnail": true,
+        "visibleInRepresentativeCharacterFrame": "limited",
+        "notes": "The selected menu thumbnail shows the texture cue more clearly than the representative character frame. Eye black and compression limit character-frame evaluation."
+      },
+      "representativeFrameQA": {
+        "eyeBlackObstructsEvaluation": true,
+        "eyeBlackObstructionNotes": "Black cheek eye paint covers part of the cheek area and limits evaluation of nearby skin texture details.",
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front or slight three-quarter view",
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Texture visibility is limited by screen-recording compression and lighting.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "representativeFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Freckles 2",
+        "readableNativeCategory": "Freckles",
+        "textureUse": "research_candidate_texture_attribute",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "sensitiveTraitPolicy": "Native game label only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No texture measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Skin Details are treated as appearance/texture attributes, not geometry."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003",
+      "nativeLabelOriginalText": "Scar 3",
+      "visibleGameLabelOrIndex": "Scar 3",
+      "category": "Skin Details",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinDetails",
+      "readableNativeCategory": "Scar",
+      "nativeLabelNormalizedForResearch": "Scar",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-005",
+          "timestampRangeSeconds": "12.0-14.0",
+          "stableTimestampSeconds": 13,
+          "basis": "direct selected Skin Details label visible in the Skin Details grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_003-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003_MENU_video-005_13p00s.png",
+          "outputSha256": "10ca0e3680a730321aefeeec831cfe866acef89988eddfad27287ff4128de46f",
+          "sourceTimestampSeconds": 13
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_003-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003_CHARACTER_STABLE_video-005_13p00s.png",
+          "outputSha256": "10ca0e3680a730321aefeeec831cfe866acef89988eddfad27287ff4128de46f",
+          "sourceTimestampSeconds": 13
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 3,
+        "basis": "selected tile position visible in the Skin Details grid; native text is stored separately and unchanged"
+      },
+      "detailVisibility": {
+        "detailClearlyVisible": "limited",
+        "detailVisibilityState": "limited_on_representative_frame_visible_in_menu_thumbnail",
+        "visibleInSelectedMenuThumbnail": true,
+        "visibleInRepresentativeCharacterFrame": "limited",
+        "notes": "The selected menu thumbnail shows the texture cue more clearly than the representative character frame. Eye black and compression limit character-frame evaluation."
+      },
+      "representativeFrameQA": {
+        "eyeBlackObstructsEvaluation": true,
+        "eyeBlackObstructionNotes": "Black cheek eye paint covers part of the cheek area and limits evaluation of nearby skin texture details.",
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front or slight three-quarter view",
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Texture visibility is limited by screen-recording compression and lighting.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "representativeFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Scar 3",
+        "readableNativeCategory": "Scar",
+        "textureUse": "research_candidate_texture_attribute",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "sensitiveTraitPolicy": "Native game label only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No texture measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Skin Details are treated as appearance/texture attributes, not geometry."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004",
+      "nativeLabelOriginalText": "Scar 2",
+      "visibleGameLabelOrIndex": "Scar 2",
+      "category": "Skin Details",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinDetails",
+      "readableNativeCategory": "Scar",
+      "nativeLabelNormalizedForResearch": "Scar",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-005",
+          "timestampRangeSeconds": "15.0-16.0",
+          "stableTimestampSeconds": 15.5,
+          "basis": "direct selected Skin Details label visible in the Skin Details grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_004-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004_MENU_video-005_15p50s.png",
+          "outputSha256": "f389b2a66617594496967c38dbcfe285116c55d76aa249e89b192bfa24519ae4",
+          "sourceTimestampSeconds": 15.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_004-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004_CHARACTER_STABLE_video-005_15p50s.png",
+          "outputSha256": "f389b2a66617594496967c38dbcfe285116c55d76aa249e89b192bfa24519ae4",
+          "sourceTimestampSeconds": 15.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 4,
+        "basis": "selected tile position visible in the Skin Details grid; native text is stored separately and unchanged"
+      },
+      "detailVisibility": {
+        "detailClearlyVisible": "limited",
+        "detailVisibilityState": "limited_on_representative_frame_visible_in_menu_thumbnail",
+        "visibleInSelectedMenuThumbnail": true,
+        "visibleInRepresentativeCharacterFrame": "limited",
+        "notes": "The selected menu thumbnail shows the texture cue more clearly than the representative character frame. Eye black and compression limit character-frame evaluation."
+      },
+      "representativeFrameQA": {
+        "eyeBlackObstructsEvaluation": true,
+        "eyeBlackObstructionNotes": "Black cheek eye paint covers part of the cheek area and limits evaluation of nearby skin texture details.",
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front or slight three-quarter view",
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Texture visibility is limited by screen-recording compression and lighting.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "representativeFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Scar 2",
+        "readableNativeCategory": "Scar",
+        "textureUse": "research_candidate_texture_attribute",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "sensitiveTraitPolicy": "Native game label only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No texture measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Skin Details are treated as appearance/texture attributes, not geometry."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 5,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005",
+      "nativeLabelOriginalText": "Scar 1",
+      "visibleGameLabelOrIndex": "Scar 1",
+      "category": "Skin Details",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinDetails",
+      "readableNativeCategory": "Scar",
+      "nativeLabelNormalizedForResearch": "Scar",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-005",
+          "timestampRangeSeconds": "23.0-24.0",
+          "stableTimestampSeconds": 24,
+          "basis": "direct selected Skin Details label visible in the Skin Details grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_005-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005_MENU_video-005_24p00s.png",
+          "outputSha256": "3428a87e3a4ae4e94b8af5f2e72069b8c76a733ce1f686dac261c64316d07a8c",
+          "sourceTimestampSeconds": 24
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_005-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005_CHARACTER_STABLE_video-005_24p00s.png",
+          "outputSha256": "3428a87e3a4ae4e94b8af5f2e72069b8c76a733ce1f686dac261c64316d07a8c",
+          "sourceTimestampSeconds": 24
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 1,
+        "basis": "selected tile position visible in the Skin Details grid; native text is stored separately and unchanged"
+      },
+      "detailVisibility": {
+        "detailClearlyVisible": "limited",
+        "detailVisibilityState": "limited_on_representative_frame_visible_in_menu_thumbnail",
+        "visibleInSelectedMenuThumbnail": true,
+        "visibleInRepresentativeCharacterFrame": "limited",
+        "notes": "The selected menu thumbnail shows the texture cue more clearly than the representative character frame. Eye black and compression limit character-frame evaluation."
+      },
+      "representativeFrameQA": {
+        "eyeBlackObstructsEvaluation": true,
+        "eyeBlackObstructionNotes": "Black cheek eye paint covers part of the cheek area and limits evaluation of nearby skin texture details.",
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front or slight three-quarter view",
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Texture visibility is limited by screen-recording compression and lighting.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "representativeFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Scar 1",
+        "readableNativeCategory": "Scar",
+        "textureUse": "research_candidate_texture_attribute",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "sensitiveTraitPolicy": "Native game label only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No texture measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Skin Details are treated as appearance/texture attributes, not geometry."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 6,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006",
+      "nativeLabelOriginalText": "Acne Scar 1",
+      "visibleGameLabelOrIndex": "Acne Scar 1",
+      "category": "Skin Details",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinDetails",
+      "readableNativeCategory": "Acne Scar",
+      "nativeLabelNormalizedForResearch": "Acne Scar",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-005",
+          "timestampRangeSeconds": "21.0-22.0",
+          "stableTimestampSeconds": 22,
+          "basis": "direct selected Skin Details label visible in the Skin Details grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_006-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006_MENU_video-005_22p00s.png",
+          "outputSha256": "adc62dbcc6186c5d98ee2e93fcbbc32187c2a1d4af837e713552e306e1237c3d",
+          "sourceTimestampSeconds": 22
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_006-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006_CHARACTER_STABLE_video-005_22p00s.png",
+          "outputSha256": "adc62dbcc6186c5d98ee2e93fcbbc32187c2a1d4af837e713552e306e1237c3d",
+          "sourceTimestampSeconds": 22
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 2,
+        "basis": "selected tile position visible in the Skin Details grid; native text is stored separately and unchanged"
+      },
+      "detailVisibility": {
+        "detailClearlyVisible": "limited",
+        "detailVisibilityState": "limited_on_representative_frame_visible_in_menu_thumbnail",
+        "visibleInSelectedMenuThumbnail": true,
+        "visibleInRepresentativeCharacterFrame": "limited",
+        "notes": "The selected menu thumbnail shows the texture cue more clearly than the representative character frame. Eye black and compression limit character-frame evaluation."
+      },
+      "representativeFrameQA": {
+        "eyeBlackObstructsEvaluation": true,
+        "eyeBlackObstructionNotes": "Black cheek eye paint covers part of the cheek area and limits evaluation of nearby skin texture details.",
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front or slight three-quarter view",
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Texture visibility is limited by screen-recording compression and lighting.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "representativeFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Acne Scar 1",
+        "readableNativeCategory": "Acne Scar",
+        "textureUse": "research_candidate_texture_attribute",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "sensitiveTraitPolicy": "Native game label only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No texture measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Skin Details are treated as appearance/texture attributes, not geometry."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 7,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007",
+      "nativeLabelOriginalText": "Redness 3",
+      "visibleGameLabelOrIndex": "Redness 3",
+      "category": "Skin Details",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinDetails",
+      "readableNativeCategory": "Redness",
+      "nativeLabelNormalizedForResearch": "Redness",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-005",
+          "timestampRangeSeconds": "19.0-20.0",
+          "stableTimestampSeconds": 20,
+          "basis": "direct selected Skin Details label visible in the Skin Details grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_007-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007_MENU_video-005_20p00s.png",
+          "outputSha256": "8ff9550a97891310dca6fab20891761c0a352318198622a9307a83f0916ff8e1",
+          "sourceTimestampSeconds": 20
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_007-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007_CHARACTER_STABLE_video-005_20p00s.png",
+          "outputSha256": "8ff9550a97891310dca6fab20891761c0a352318198622a9307a83f0916ff8e1",
+          "sourceTimestampSeconds": 20
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 3,
+        "basis": "selected tile position visible in the Skin Details grid; native text is stored separately and unchanged"
+      },
+      "detailVisibility": {
+        "detailClearlyVisible": "limited",
+        "detailVisibilityState": "limited_on_representative_frame_visible_in_menu_thumbnail",
+        "visibleInSelectedMenuThumbnail": true,
+        "visibleInRepresentativeCharacterFrame": "limited",
+        "notes": "The selected menu thumbnail shows the texture cue more clearly than the representative character frame. Eye black and compression limit character-frame evaluation."
+      },
+      "representativeFrameQA": {
+        "eyeBlackObstructsEvaluation": true,
+        "eyeBlackObstructionNotes": "Black cheek eye paint covers part of the cheek area and limits evaluation of nearby skin texture details.",
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front or slight three-quarter view",
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Texture visibility is limited by screen-recording compression and lighting.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "representativeFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Redness 3",
+        "readableNativeCategory": "Redness",
+        "textureUse": "research_candidate_texture_attribute",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "sensitiveTraitPolicy": "Native game label only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No texture measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Skin Details are treated as appearance/texture attributes, not geometry."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 8,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008",
+      "nativeLabelOriginalText": "Redness 2",
+      "visibleGameLabelOrIndex": "Redness 2",
+      "category": "Skin Details",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinDetails",
+      "readableNativeCategory": "Redness",
+      "nativeLabelNormalizedForResearch": "Redness",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-005",
+          "timestampRangeSeconds": "17.0-18.0",
+          "stableTimestampSeconds": 18,
+          "basis": "direct selected Skin Details label visible in the Skin Details grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_008-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008_MENU_video-005_18p00s.png",
+          "outputSha256": "bbfc2ba7f18336bdb59939f3c4be3bf6d2dea56531841573f8cdd9427898be6a",
+          "sourceTimestampSeconds": 18
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_008-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008_CHARACTER_STABLE_video-005_18p00s.png",
+          "outputSha256": "bbfc2ba7f18336bdb59939f3c4be3bf6d2dea56531841573f8cdd9427898be6a",
+          "sourceTimestampSeconds": 18
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 4,
+        "basis": "selected tile position visible in the Skin Details grid; native text is stored separately and unchanged"
+      },
+      "detailVisibility": {
+        "detailClearlyVisible": "limited",
+        "detailVisibilityState": "limited_on_representative_frame_visible_in_menu_thumbnail",
+        "visibleInSelectedMenuThumbnail": true,
+        "visibleInRepresentativeCharacterFrame": "limited",
+        "notes": "The selected menu thumbnail shows the texture cue more clearly than the representative character frame. Eye black and compression limit character-frame evaluation."
+      },
+      "representativeFrameQA": {
+        "eyeBlackObstructsEvaluation": true,
+        "eyeBlackObstructionNotes": "Black cheek eye paint covers part of the cheek area and limits evaluation of nearby skin texture details.",
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front or slight three-quarter view",
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Texture visibility is limited by screen-recording compression and lighting.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "representativeFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Redness 2",
+        "readableNativeCategory": "Redness",
+        "textureUse": "research_candidate_texture_attribute",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "sensitiveTraitPolicy": "Native game label only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No texture measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Skin Details are treated as appearance/texture attributes, not geometry."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 9,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009",
+      "nativeLabelOriginalText": "Redness 1",
+      "visibleGameLabelOrIndex": "Redness 1",
+      "category": "Skin Details",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinDetails",
+      "readableNativeCategory": "Redness",
+      "nativeLabelNormalizedForResearch": "Redness",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-005",
+          "timestampRangeSeconds": "25.0-26.0",
+          "stableTimestampSeconds": 26,
+          "basis": "direct selected Skin Details label visible in the Skin Details grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_009-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009_MENU_video-005_26p00s.png",
+          "outputSha256": "dafc00930bc01fea10c680ec70e8b6fa2c6a946c767017ab14eba471e1a5ea14",
+          "sourceTimestampSeconds": 26
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_009-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009_CHARACTER_STABLE_video-005_26p00s.png",
+          "outputSha256": "dafc00930bc01fea10c680ec70e8b6fa2c6a946c767017ab14eba471e1a5ea14",
+          "sourceTimestampSeconds": 26
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 3,
+        "nativeColumn": 1,
+        "basis": "selected tile position visible in the Skin Details grid; native text is stored separately and unchanged"
+      },
+      "detailVisibility": {
+        "detailClearlyVisible": "limited",
+        "detailVisibilityState": "limited_on_representative_frame_visible_in_menu_thumbnail",
+        "visibleInSelectedMenuThumbnail": true,
+        "visibleInRepresentativeCharacterFrame": "limited",
+        "notes": "The selected menu thumbnail shows the texture cue more clearly than the representative character frame. Eye black and compression limit character-frame evaluation."
+      },
+      "representativeFrameQA": {
+        "eyeBlackObstructsEvaluation": true,
+        "eyeBlackObstructionNotes": "Black cheek eye paint covers part of the cheek area and limits evaluation of nearby skin texture details.",
+        "characterFaceFrameAvailable": true,
+        "characterPose": "rotated three-quarter/profile-leaning view",
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Texture visibility is limited by screen-recording compression and lighting.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "representativeFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Redness 1",
+        "readableNativeCategory": "Redness",
+        "textureUse": "research_candidate_texture_attribute",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "sensitiveTraitPolicy": "Native game label only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No texture measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Skin Details are treated as appearance/texture attributes, not geometry."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 10,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010",
+      "nativeLabelOriginalText": "Freckles 1",
+      "visibleGameLabelOrIndex": "Freckles 1",
+      "category": "Skin Details",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinDetails",
+      "readableNativeCategory": "Freckles",
+      "nativeLabelNormalizedForResearch": "Freckles",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-005",
+          "timestampRangeSeconds": "27.0-31.72",
+          "stableTimestampSeconds": 29,
+          "basis": "direct selected Skin Details label visible in the Skin Details grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_010-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010_MENU_video-005_29p00s.png",
+          "outputSha256": "254d86eb2ae21cd08150dab39d8d577c101a09acfbe0e6d940b91093f5bbf396",
+          "sourceTimestampSeconds": 29
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skindetails_010-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010_CHARACTER_STABLE_video-005_29p00s.png",
+          "outputSha256": "254d86eb2ae21cd08150dab39d8d577c101a09acfbe0e6d940b91093f5bbf396",
+          "sourceTimestampSeconds": 29
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 3,
+        "nativeColumn": 2,
+        "basis": "selected tile position visible in the Skin Details grid; native text is stored separately and unchanged"
+      },
+      "detailVisibility": {
+        "detailClearlyVisible": "limited",
+        "detailVisibilityState": "limited_on_representative_frame_visible_in_menu_thumbnail",
+        "visibleInSelectedMenuThumbnail": true,
+        "visibleInRepresentativeCharacterFrame": "limited",
+        "notes": "The selected menu thumbnail shows the texture cue more clearly than the representative character frame. Eye black and compression limit character-frame evaluation."
+      },
+      "representativeFrameQA": {
+        "eyeBlackObstructsEvaluation": true,
+        "eyeBlackObstructionNotes": "Black cheek eye paint covers part of the cheek area and limits evaluation of nearby skin texture details.",
+        "characterFaceFrameAvailable": true,
+        "characterPose": "rotated three-quarter/profile-leaning view",
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Texture visibility is limited by screen-recording compression and lighting.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "representativeFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Freckles 1",
+        "readableNativeCategory": "Freckles",
+        "textureUse": "research_candidate_texture_attribute",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "sensitiveTraitPolicy": "Native game label only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No texture measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Skin Details are treated as appearance/texture attributes, not geometry."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    }
+  ],
+  "productionBlocks": [
+    "Records are primary research only and not second-person verified.",
+    "Game version, patch, and exact platform are still unknown.",
+    "Selector wrap and final category boundary are not proven.",
+    "Eye black obstructs evaluation of cheek-area details in representative character frames.",
+    "Production catalog remains empty until verified evidence is reviewed and published."
+  ]
+}

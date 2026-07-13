@@ -53,6 +53,7 @@ data/research/cf27/imports/**/*.[mM][pP]4
 data/research/cf27/imports/**/*.[mM][oO][vV]
 data/research/cf27/imports/**/*.[mM]4[vV]
 data/research/cf27/imports/**/*.[wW][eE][bB][mM]
+data/research/cf27/imports/**/classification/sample-frames/*
 data/research/cf27/generated/contact-sheets/*
 !data/research/cf27/generated/contact-sheets/.gitkeep
 !data/research/cf27/generated/contact-sheets/README.md

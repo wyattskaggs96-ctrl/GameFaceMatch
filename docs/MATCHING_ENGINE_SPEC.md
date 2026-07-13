@@ -19,6 +19,8 @@ Required behavior:
 - Geometry and appearance feature weights are configurable through the rule-based engine configuration; default weights are documented below and must remain visible.
 - Missing or low-confidence measurement weight is redistributed only through the weighted-distance denominator across included reliable features.
 - Overall confidence is reduced when profile evidence or catalog annotation coverage is incomplete.
+- Every feature contribution records profile and catalog evidence metadata: value, confidence, supporting frame count, variance, depth availability, profile availability, and occlusion state.
+- Missing side-view evidence, significant occlusion, unavailable profile measurements, unavailable catalog measurements, and low-confidence measurements are excluded from weighting and explained as uncertainty.
 - Skin tone and skin presentation are not geometry features.
 - The generic production matcher returns no matches unless the manifest is production-class, contains verified records, has an `approvedRelease` lifecycle state, has a catalog verification date, and includes a package checksum. The College Football 27 adapter also requires the full runtime catalog approval gate and definitive production publish-gate report.
 

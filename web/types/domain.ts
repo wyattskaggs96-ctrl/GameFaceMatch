@@ -478,11 +478,24 @@ export interface MatchFeatureContribution {
   group: "geometry" | "appearance" | "preference";
   profileValue: number | string | boolean | null;
   catalogValue: number | string | boolean | null;
+  profileAvailability: MeasurementAvailabilityState | "notApplicable";
+  profileEvidence: MatchFeatureEvidence;
+  catalogEvidence: MatchFeatureEvidence;
   normalizedDistance: number;
   effectiveWeight: number;
   reliability: number;
   included: boolean;
   reason: string;
+}
+
+export interface MatchFeatureEvidence {
+  value: number | string | boolean | null;
+  confidence: MeasurementConfidence;
+  supportingFrameCount: number;
+  variance: number | null;
+  depthSupported: boolean;
+  availabilityState: MeasurementAvailabilityState | "notApplicable";
+  occlusionState: "none" | "partial" | "significant" | "unknown" | "notApplicable";
 }
 
 export interface BuildInstruction {

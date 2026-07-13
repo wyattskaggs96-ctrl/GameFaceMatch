@@ -1,10 +1,12 @@
 import type {
   AppearanceAttribute,
   CatalogFacialMeasurement,
+  FacialMeasurement,
   GameAppearanceMatch,
   GameCatalogItem,
   GameCatalogManifest,
   MatchFeatureContribution,
+  MatchFeatureEvidence,
   MeasurementConfidence,
   StandardFaceProfile,
   StandardFacialMeasurementID,
@@ -169,18 +171,29 @@ function scoreGeometryFeature(
 ): MatchFeatureContribution {
   const profileMeasurement = profile.geometry.measurements[feature.id];
   const catalogMeasurement = item.geometryMeasurements[feature.id];
-  const catalogValue = readCatalogMeasurementValue(catalogMeasurement);
-  const profileValue = profileMeasurement?.value ?? null;
-  const reliability = Math.min(profileMeasurement?.confidence.score ?? 0, readCatalogMeasurementConfidence(catalogMeasurement));
+  const profileEvidence = profileMeasurementEvidence(profileMeasurement);
+  const catalogEvidence = catalogMeasurementEvidence(catalogMeasurement);
+  const profileValue = profileEvidence.value === null ? null : Number(profileEvidence.value);
+  const catalogValue = catalogEvidence.value === null ? null : Number(catalogEvidence.value);
+  const reliability = adjustedGeometryReliability(profileMeasurement, catalogMeasurement, Math.min(profileEvidence.confidence.score, catalogEvidence.confidence.score));
   const preferenceMultiplier = preferenceForGroup(feature.group, preferences);
   const effectiveWeight = feature.weight * preferenceMultiplier * Math.max(reliability, 0);
-  const missingReason = getGeometryMissingReason(profileValue, catalogValue, reliability);
+  const missingReason = getGeometryMissingReason({
+    feature,
+    profileEvidence,
+    catalogEvidence,
+    profileMeasurement,
+    reliability
+  });
   if (missingReason) {
     return {
       featureID: feature.id,
       group: "geometry",
       profileValue,
       catalogValue,
+      profileAvailability: profileEvidence.availabilityState === "notApplicable" ? "unavailable" : profileEvidence.availabilityState,
+      profileEvidence,
+      catalogEvidence,
       normalizedDistance: 1,
       effectiveWeight: 0,
       reliability,
@@ -196,6 +209,9 @@ function scoreGeometryFeature(
     normalizedDistance: clamp(round(Math.abs(Number(profileValue) - Number(catalogValue)) / feature.maxDistance), 0, 1),
     effectiveWeight,
     reliability,
+    profileAvailability: profileEvidence.availabilityState === "notApplicable" ? "unavailable" : profileEvidence.availabilityState,
+    profileEvidence,
+    catalogEvidence,
     included: true,
     reason: "Reliable geometry feature included."
   };
@@ -210,6 +226,8 @@ function scoreAppearanceFeature(
   const profileAttribute = findAttribute(profile.appearance.attributes, feature.category);
   const catalogValue = feature.annotationKeys.map((key) => item.humanAnnotations[key]).find((value) => value !== undefined) ?? null;
   const profileValue = profileAttribute?.value ?? null;
+  const profileEvidence = appearanceProfileEvidence(profileAttribute);
+  const catalogEvidence = appearanceCatalogEvidence(catalogValue);
   const reliability = profileAttribute?.userConfirmed ? 1 : 0;
   const preferenceMultiplier = preferenceForGroup(feature.group, preferences);
   if (profileValue === null || profileValue === "" || profileValue === "unspecified" || catalogValue === null) {
@@ -218,6 +236,9 @@ function scoreAppearanceFeature(
       group: "appearance",
       profileValue,
       catalogValue,
+      profileAvailability: profileEvidence.availabilityState === "notApplicable" ? "unavailable" : profileEvidence.availabilityState,
+      profileEvidence,
+      catalogEvidence,
       normalizedDistance: 1,
       effectiveWeight: 0,
       reliability,
@@ -234,6 +255,9 @@ function scoreAppearanceFeature(
     normalizedDistance,
     effectiveWeight: feature.weight * preferenceMultiplier * reliability,
     reliability,
+    profileAvailability: profileEvidence.availabilityState === "notApplicable" ? "unavailable" : profileEvidence.availabilityState,
+    profileEvidence,
+    catalogEvidence,
     included: true,
     reason: "User-confirmed appearance feature included separately from geometry."
   };
@@ -329,21 +353,127 @@ function compareMatches(first: GameAppearanceMatch, second: GameAppearanceMatch)
   return first.catalogItem.stableInternalID.localeCompare(second.catalogItem.stableInternalID);
 }
 
-function getGeometryMissingReason(profileValue: number | null, catalogValue: number | null, reliability: number) {
-  if (profileValue === null) return "Profile measurement unavailable.";
-  if (catalogValue === null) return "Catalog measurement unavailable or not yet annotated.";
-  if (reliability < lowConfidenceThreshold) return "Feature confidence below matching threshold.";
+function getGeometryMissingReason(input: {
+  feature: MatchingFeatureConfig;
+  profileEvidence: MatchFeatureEvidence;
+  catalogEvidence: MatchFeatureEvidence;
+  profileMeasurement: StandardFaceProfile["geometry"]["measurements"][StandardFacialMeasurementID] | undefined;
+  reliability: number;
+}) {
+  if (input.profileEvidence.availabilityState === "pending") return "Profile measurement pending; feature was not used.";
+  if (input.profileEvidence.availabilityState !== "available" || input.profileEvidence.value === null) return "Profile measurement unavailable.";
+  if (input.profileEvidence.supportingFrameCount <= 0) return "Profile measurement has no supporting frames.";
+  if (input.profileEvidence.occlusionState === "significant") return "Profile measurement blocked by significant occlusion.";
+  if (input.feature.group === "profileProjection" && !hasProfilePoseEvidence(input.profileMeasurement)) {
+    return "Profile side-view evidence unavailable for this projection feature.";
+  }
+  if (input.catalogEvidence.availabilityState === "pending") return "Catalog measurement pending; feature was not used.";
+  if (input.catalogEvidence.availabilityState !== "available" || input.catalogEvidence.value === null) return "Catalog measurement unavailable or not yet annotated.";
+  if (input.catalogEvidence.supportingFrameCount <= 0) return "Catalog measurement has no supporting frames.";
+  if (input.catalogEvidence.occlusionState === "significant") return "Catalog measurement blocked by significant occlusion.";
+  if (input.reliability < lowConfidenceThreshold) return "Feature confidence below matching threshold.";
   return null;
 }
 
-function readCatalogMeasurementValue(measurement: number | CatalogFacialMeasurement | undefined) {
-  if (typeof measurement === "number") return measurement;
-  return measurement?.availabilityState === "available" ? measurement.value : null;
+function profileMeasurementEvidence(measurement: StandardFaceProfile["geometry"]["measurements"][StandardFacialMeasurementID] | undefined): MatchFeatureEvidence {
+  return {
+    value: measurement?.availabilityState === "available" ? measurement.value : null,
+    confidence: measurement?.confidence ?? confidenceFromScore(0),
+    supportingFrameCount: measurement?.supportingFrameCount ?? 0,
+    variance: measurement?.variance ?? null,
+    depthSupported: measurement?.depthSupported ?? false,
+    availabilityState: measurement?.availabilityState ?? "unavailable",
+    occlusionState: measurement?.occlusionStatus ?? "unknown"
+  };
 }
 
-function readCatalogMeasurementConfidence(measurement: number | CatalogFacialMeasurement | undefined) {
+function catalogMeasurementEvidence(measurement: number | CatalogFacialMeasurement | undefined): MatchFeatureEvidence {
+  if (typeof measurement === "number") {
+    return {
+      value: measurement,
+      confidence: confidenceFromScore(1),
+      supportingFrameCount: 1,
+      variance: null,
+      depthSupported: false,
+      availabilityState: "available",
+      occlusionState: "unknown"
+    };
+  }
+  return {
+    value: measurement?.availabilityState === "available" ? measurement.value : null,
+    confidence: confidenceFromScore(measurement?.availabilityState === "available" ? measurement.confidence : 0),
+    supportingFrameCount: measurement?.supportingFrameCount ?? 0,
+    variance: measurement?.variance ?? null,
+    depthSupported: measurement?.depthSupported ?? false,
+    availabilityState: measurement?.availabilityState ?? "unavailable",
+    occlusionState: measurement?.occlusionStatus ?? "unknown"
+  };
+}
+
+function appearanceProfileEvidence(attribute: AppearanceAttribute | undefined): MatchFeatureEvidence {
+  const available = Boolean(attribute && attribute.value !== null && attribute.value !== "" && attribute.value !== "unspecified");
+  return {
+    value: attribute?.value ?? null,
+    confidence: attribute?.confidence ?? confidenceFromScore(0),
+    supportingFrameCount: available && attribute?.userConfirmed ? 1 : 0,
+    variance: null,
+    depthSupported: false,
+    availabilityState: available ? "available" : "unavailable",
+    occlusionState: "notApplicable"
+  };
+}
+
+function appearanceCatalogEvidence(value: string | null): MatchFeatureEvidence {
+  const available = value !== null && value !== "";
+  return {
+    value,
+    confidence: confidenceFromScore(available ? 1 : 0),
+    supportingFrameCount: available ? 1 : 0,
+    variance: null,
+    depthSupported: false,
+    availabilityState: available ? "available" : "unavailable",
+    occlusionState: "notApplicable"
+  };
+}
+
+function adjustedGeometryReliability(
+  profileMeasurement: StandardFaceProfile["geometry"]["measurements"][StandardFacialMeasurementID] | undefined,
+  catalogMeasurement: number | CatalogFacialMeasurement | undefined,
+  baseReliability: number
+) {
+  return round(baseReliability * profileMeasurementQualityMultiplier(profileMeasurement) * catalogMeasurementQualityMultiplier(catalogMeasurement));
+}
+
+function profileMeasurementQualityMultiplier(measurement: StandardFaceProfile["geometry"]["measurements"][StandardFacialMeasurementID] | undefined) {
+  if (!measurement) return 0;
+  return occlusionMultiplier(measurement.occlusionStatus, measurement.occlusionImpact) * varianceMultiplier(measurement.variance);
+}
+
+function catalogMeasurementQualityMultiplier(measurement: number | CatalogFacialMeasurement | undefined) {
   if (typeof measurement === "number") return 1;
-  return measurement?.availabilityState === "available" ? measurement.confidence : 0;
+  if (!measurement) return 0;
+  return occlusionMultiplier(measurement.occlusionStatus, undefined) * varianceMultiplier(measurement.variance);
+}
+
+function occlusionMultiplier(
+  occlusionStatus: MatchFeatureEvidence["occlusionState"],
+  occlusionImpact?: FacialMeasurement["occlusionImpact"]
+) {
+  if (occlusionStatus === "significant" || occlusionImpact === "significant") return 0;
+  if (occlusionStatus === "partial" || occlusionImpact === "moderate") return 0.6;
+  if (occlusionStatus === "unknown" || occlusionImpact === "unknown") return 0.85;
+  return 1;
+}
+
+function varianceMultiplier(variance: number | null | undefined) {
+  if (variance === null || variance === undefined) return 1;
+  if (variance <= 0.02) return 1;
+  if (variance <= 0.06) return 0.85;
+  return 0.65;
+}
+
+function hasProfilePoseEvidence(measurement: StandardFaceProfile["geometry"]["measurements"][StandardFacialMeasurementID] | undefined) {
+  return Boolean(measurement?.supportingPoses.some((pose) => pose === "leftProfile" || pose === "rightProfile"));
 }
 
 function hasVerifiedMenuInstructions(item: GameCatalogItem, allowTestFixtures: boolean) {

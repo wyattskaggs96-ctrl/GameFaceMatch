@@ -152,6 +152,146 @@ describe("rule-based matching engine", () => {
     expect(incomplete.confidence.score).toBeLessThan(complete.confidence.score);
     expect(incomplete.explanation.uncertaintyNotes.join(" ")).toMatch(/Catalog measurement unavailable or not yet annotated/);
   });
+
+  it("records explicit evidence metadata for included and missing features", () => {
+    const profile = syntheticProfile();
+    delete profile.geometry.measurements.mouthWidthRatio;
+    const match = engine().matchTopThree({ profile, catalog: fixtureCatalog, allowTestFixtures: true })[0];
+    const includedFaceWidth = match.featureContributions.find((feature) => feature.featureID === "faceWidthRatio");
+    const missingMouth = match.featureContributions.find((feature) => feature.featureID === "mouthWidthRatio");
+
+    expect(includedFaceWidth).toMatchObject({
+      profileAvailability: "available",
+      included: true,
+      profileEvidence: {
+        value: 0.7,
+        confidence: { score: 0.96, label: "high" },
+        supportingFrameCount: 5,
+        variance: 0.01,
+        depthSupported: false,
+        availabilityState: "available",
+        occlusionState: "none"
+      },
+      catalogEvidence: {
+        value: 0.7,
+        confidence: { score: 0.95, label: "high" },
+        supportingFrameCount: 5,
+        variance: 0.01,
+        depthSupported: false,
+        availabilityState: "available",
+        occlusionState: "none"
+      }
+    });
+    expect(missingMouth).toMatchObject({
+      included: false,
+      profileAvailability: "unavailable",
+      profileEvidence: {
+        value: null,
+        confidence: { score: 0, label: "unavailable" },
+        supportingFrameCount: 0,
+        variance: null,
+        depthSupported: false,
+        availabilityState: "unavailable",
+        occlusionState: "unknown"
+      },
+      reason: "Profile measurement unavailable."
+    });
+  });
+
+  it("reduces confidence for partial profiles without filling missing measurements", () => {
+    const complete = engine().matchTopThree({ profile: syntheticProfile(), catalog: fixtureCatalog, allowTestFixtures: true })[0];
+    const partialProfile = syntheticProfile();
+    for (const id of ["eyeSpacingRatio", "meanEyeWidthRatio", "noseWidthRatio", "noseLengthRatio", "mouthWidthRatio"] as const) {
+      delete partialProfile.geometry.measurements[id];
+      partialProfile.geometry.unavailableMeasurements.push(id);
+    }
+    const partial = engine().matchTopThree({ profile: partialProfile, catalog: fixtureCatalog, allowTestFixtures: true })[0];
+
+    expect(partial.catalogItem.stableInternalID).toBe("synthetic-match-alpha");
+    expect(partial.score).toBeGreaterThan(0);
+    expect(partial.confidence.score).toBeLessThan(complete.confidence.score);
+    expect(partial.featureContributions.find((feature) => feature.featureID === "noseWidthRatio")).toMatchObject({
+      profileValue: null,
+      profileAvailability: "unavailable",
+      included: false,
+      effectiveWeight: 0
+    });
+    expect(partial.explanation.uncertaintyNotes.join(" ")).toMatch(/reliable feature evidence is incomplete/i);
+  });
+
+  it("excludes profile projection features when side-view evidence is missing", () => {
+    const profile = syntheticProfile();
+    profile.sourceAngleAvailability.leftProfile.available = false;
+    profile.sourceAngleAvailability.rightProfile.available = false;
+    profile.geometry.measurements.noseProjection = {
+      ...measurement(0.18, 0.8),
+      supportingFrameCount: 1,
+      supportingPoses: ["straightOn"],
+      profileEvidenceExists: false
+    };
+    const match = engine().matchTopThree({ profile, catalog: catalogWithProjectionMeasurements(), allowTestFixtures: true })[0];
+    const noseProjection = match.featureContributions.find((feature) => feature.featureID === "noseProjection");
+
+    expect(noseProjection).toMatchObject({
+      included: false,
+      profileAvailability: "available",
+      effectiveWeight: 0,
+      reason: "Profile side-view evidence unavailable for this projection feature."
+    });
+    expect(noseProjection?.profileEvidence.supportingFrameCount).toBe(1);
+    expect(noseProjection?.profileEvidence.depthSupported).toBe(false);
+    expect(match.explanation.uncertaintyNotes.join(" ")).toMatch(/side-view evidence unavailable/i);
+  });
+
+  it("excludes significantly occluded measurements and explains the uncertainty", () => {
+    const profile = syntheticProfile();
+    profile.geometry.measurements.faceWidthRatio = {
+      ...measurement(0.7, 0.96),
+      occlusionImpact: "significant",
+      occlusionStatus: "significant"
+    };
+    const match = engine().matchTopThree({ profile, catalog: fixtureCatalog, allowTestFixtures: true })[0];
+    const occluded = match.featureContributions.find((feature) => feature.featureID === "faceWidthRatio");
+
+    expect(occluded).toMatchObject({
+      included: false,
+      effectiveWeight: 0,
+      reliability: 0,
+      profileEvidence: {
+        occlusionState: "significant",
+        confidence: { score: 0.96, label: "high" }
+      },
+      reason: "Profile measurement blocked by significant occlusion."
+    });
+    expect(match.explanation.uncertaintyNotes.join(" ")).toMatch(/significant occlusion/i);
+  });
+
+  it("keeps low-confidence measurements unavailable to weighting while preserving their evidence", () => {
+    const profile = syntheticProfile();
+    profile.geometry.measurements.jawWidthRatio = {
+      ...measurement(0.61, 0.2),
+      supportingFrameCount: 2,
+      variance: 0.05
+    };
+    const match = engine().matchTopThree({ profile, catalog: fixtureCatalog, allowTestFixtures: true })[0];
+    const weak = match.featureContributions.find((feature) => feature.featureID === "jawWidthRatio");
+
+    expect(weak).toMatchObject({
+      included: false,
+      effectiveWeight: 0,
+      profileAvailability: "available",
+      profileEvidence: {
+        value: 0.61,
+        confidence: { score: 0.2, label: "low" },
+        supportingFrameCount: 2,
+        variance: 0.05,
+        depthSupported: false,
+        availabilityState: "available",
+        occlusionState: "none"
+      },
+      reason: "Feature confidence below matching threshold."
+    });
+  });
 });
 
 describe("CollegeFootball27Adapter matching boundary", () => {
@@ -322,6 +462,20 @@ function productionStyleCatalog(): GameCatalogManifest {
       }))
     },
     items
+  };
+}
+
+function catalogWithProjectionMeasurements(): GameCatalogManifest {
+  return {
+    ...fixtureCatalog,
+    items: fixtureCatalog.items.map((item) => ({
+      ...item,
+      geometryMeasurements: {
+        ...item.geometryMeasurements,
+        noseProjection: { value: 0.18, confidence: 0.95, supportingFrameCount: 2, variance: 0.01, depthSupported: false, occlusionStatus: "none", measurementSource: "synthetic-fixture", availabilityState: "available" },
+        chinProjection: { value: 0.1, confidence: 0.95, supportingFrameCount: 2, variance: 0.01, depthSupported: false, occlusionStatus: "none", measurementSource: "synthetic-fixture", availabilityState: "available" }
+      }
+    }))
   };
 }
 

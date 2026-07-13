@@ -1,0 +1,450 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-13T06:00:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "PRIMARY_RESEARCH_ONLY_NOT_SECOND_VERIFIED",
+  "sourceManifest": {
+    "path": "OWNER_DOWNLOADS/RELABELED_VIDEO_MANIFEST.csv",
+    "note": "The relabeling manifest is an initial source-to-working-name map. Every mapping remains subject to direct frame review."
+  },
+  "pathPolicy": {
+    "absoluteDiscoveryPathUsage": "Internal processing only. Do not use as portable production evidence.",
+    "portableRelativeEvidencePathRoot": "OWNER_DOWNLOADS"
+  },
+  "inventory": [
+    {
+      "inventoryId": "video-001",
+      "sequence": 1,
+      "manifestOriginalFilename": "01_Environment_and_Creation_Path.MP4",
+      "discoveredFilename": "01_Environment_and_Creation_Path.MP4",
+      "workingFilename": "01_Environment_and_Creation_Path.mp4",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/01_Environment_and_Creation_Path.MP4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+      "sha256": "6f42d3ef2572810fc09ac5138970dee5f325c539925f084a130d3fdcf7c2a0b2",
+      "fileSizeBytes": 156142794,
+      "durationSeconds": 73.57,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.96,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "MP4",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-12T19:03:45.000000Z",
+        "filesystemModifiedTimeLocal": "2026-07-12T15:03:45-04:00"
+      },
+      "identifiedContent": "Environment and Road to Glory creation path",
+      "beginningMenuState": "College Football 27 main/menu hub with Road to Glory visible in the left menu",
+      "endingMenuState": "Create Player appearance path/menu state",
+      "beginsMidOption": false,
+      "endsMidOption": false,
+      "overlapsAnotherRecording": false,
+      "overlapNotes": "",
+      "exactDuplicate": false,
+      "duplicateOfInventoryId": null,
+      "acceptanceStatus": "accepted_research_candidate",
+      "reviewNotes": "Accepted as primary research evidence for environment and creation-path mapping. Not production catalog data."
+    },
+    {
+      "inventoryId": "video-002",
+      "sequence": 2,
+      "manifestOriginalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "discoveredFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "workingFilename": "02_Head_Templates_Faces_01-12.mov",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/02_Appearance_Menu_Part_1.mp4.MOV",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+      "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+      "fileSizeBytes": 254684699,
+      "durationSeconds": 108.8,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.95,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "QuickTime/MOV",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-13T01:19:19.000000Z",
+        "quickTimeCreationDateLocal": "2026-07-12T15:05:22-04:00",
+        "filesystemModifiedTimeLocal": "2026-07-12T15:05:22-04:00"
+      },
+      "identifiedContent": "Head Template captures; manifest states Face 1 through Face 12",
+      "beginningMenuState": "Create Player / Appearance menu",
+      "endingMenuState": "Head Template grid; sampled end frame shows the recording continues beyond Face 12 to at least Face 15",
+      "beginsMidOption": false,
+      "endsMidOption": true,
+      "overlapsAnotherRecording": true,
+      "overlapNotes": "Intentional continuity overlap confirmed with video-003 at Face 12. Sampled video-002 frame around 96s shows Head Template / Face 12; sampled video-003 start frame shows Head Template / Face 12.",
+      "exactDuplicate": false,
+      "duplicateOfInventoryId": null,
+      "acceptanceStatus": "partially_accepted_research_candidate",
+      "reviewNotes": "Direct frame review confirms Head Template content and Face 12 overlap, but the stated Faces 1-12 working range is incomplete because sampled later frames show additional faces. Requires frame-level segmentation before catalog extraction."
+    },
+    {
+      "inventoryId": "video-003",
+      "sequence": 3,
+      "manifestOriginalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "discoveredFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "workingFilename": "03_Head_Templates_Faces_12-29.mov",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/02_Appearance_Menu_Part_2.mp4.MOV",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_2.mp4.MOV",
+      "sha256": "c348b96b1414927fca5ab12f8a65cc7668a6fdb22a2622c99e11a984d819a302",
+      "fileSizeBytes": 302595103,
+      "durationSeconds": 133.02,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.94,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "QuickTime/MOV",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-13T01:20:02.000000Z",
+        "quickTimeCreationDateLocal": "2026-07-12T15:05:22-04:00",
+        "filesystemModifiedTimeLocal": "2026-07-12T15:05:22-04:00"
+      },
+      "identifiedContent": "Head Template captures; manifest states Face 12 through Face 29",
+      "beginningMenuState": "Head Template grid at Face 12",
+      "endingMenuState": "Head Template grid after the sampled Face 20 range; exact final visible option requires frame-level review",
+      "beginsMidOption": true,
+      "endsMidOption": true,
+      "overlapsAnotherRecording": true,
+      "overlapNotes": "Intentional continuity overlap confirmed with video-002 at Face 12.",
+      "exactDuplicate": false,
+      "duplicateOfInventoryId": null,
+      "acceptanceStatus": "partially_accepted_research_candidate",
+      "reviewNotes": "Direct frame review confirms the Face 12 overlap and Head Template content. Requires frame-level segmentation to validate the full claimed range before any catalog records are created."
+    },
+    {
+      "inventoryId": "video-004",
+      "sequence": 4,
+      "manifestOriginalFilename": "03_Appearance_Skin_Tone.MP4",
+      "discoveredFilename": "03_Appearance_Skin_Tone.MP4",
+      "workingFilename": "04_Skin_Tone.mp4",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/03_Appearance_Skin_Tone.MP4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/03_Appearance_Skin_Tone.MP4",
+      "sha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+      "fileSizeBytes": 128477357,
+      "durationSeconds": 53.82,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.97,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "MP4",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-13T01:27:47.000000Z",
+        "filesystemModifiedTimeLocal": "2026-07-12T21:27:47-04:00"
+      },
+      "identifiedContent": "Skin Tone menu and options",
+      "beginningMenuState": "Create Player / Head & Skin submenu before Skin Tone grid",
+      "endingMenuState": "Skin Tone grid",
+      "beginsMidOption": false,
+      "endsMidOption": true,
+      "overlapsAnotherRecording": false,
+      "overlapNotes": "",
+      "exactDuplicate": false,
+      "duplicateOfInventoryId": null,
+      "acceptanceStatus": "accepted_research_candidate",
+      "reviewNotes": "Exact duplicate video-010 was also discovered and is retained as duplicate provenance only."
+    },
+    {
+      "inventoryId": "video-005",
+      "sequence": 5,
+      "manifestOriginalFilename": "04_Appearance_Skin_Details.MP4",
+      "discoveredFilename": "04_Appearance_Skin_Details.MP4",
+      "workingFilename": "05_Skin_Details.mp4",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/04_Appearance_Skin_Details.MP4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/04_Appearance_Skin_Details.MP4",
+      "sha256": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+      "fileSizeBytes": 78206366,
+      "durationSeconds": 31.72,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.9,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "MP4",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-13T01:28:50.000000Z",
+        "filesystemModifiedTimeLocal": "2026-07-12T21:28:50-04:00"
+      },
+      "identifiedContent": "Skin Details menu and options",
+      "beginningMenuState": "Create Player / Head & Skin submenu before Skin Details grid",
+      "endingMenuState": "Skin Details grid",
+      "beginsMidOption": false,
+      "endsMidOption": true,
+      "overlapsAnotherRecording": false,
+      "overlapNotes": "",
+      "exactDuplicate": false,
+      "duplicateOfInventoryId": null,
+      "acceptanceStatus": "accepted_research_candidate",
+      "reviewNotes": "Exact duplicate video-011 was also discovered and is retained as duplicate provenance only."
+    },
+    {
+      "inventoryId": "video-006",
+      "sequence": 6,
+      "manifestOriginalFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "discoveredFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "workingFilename": "06_Eye_Shape.mp4",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "sha256": "84bdb04ca232a662a8add3ceef92f021ad6c96d241e536b12c0af968f3d92ca2",
+      "fileSizeBytes": 61265737,
+      "durationSeconds": 24.93,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.89,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "MP4",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-13T01:29:49.000000Z",
+        "filesystemModifiedTimeLocal": "2026-07-12T21:29:49-04:00"
+      },
+      "identifiedContent": "Eye Shape menu and options",
+      "beginningMenuState": "Create Player / Head & Skin submenu before Eye Shape; includes navigation through earlier tabs",
+      "endingMenuState": "Eye Shape grid",
+      "beginsMidOption": false,
+      "endsMidOption": true,
+      "overlapsAnotherRecording": false,
+      "overlapNotes": "",
+      "exactDuplicate": false,
+      "duplicateOfInventoryId": null,
+      "acceptanceStatus": "partially_accepted_research_candidate",
+      "reviewNotes": "Accepted for research review of Eye Shape after navigation lead-in. Requires category segmentation before publication."
+    },
+    {
+      "inventoryId": "video-007",
+      "sequence": 7,
+      "manifestOriginalFilename": "352535",
+      "discoveredFilename": "a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+      "workingFilename": "07_Eye_Color.mp4",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+      "sha256": "c07fdab8d65b19859ae5985dc4fb06bb9919aecf597996ab74463bc6020acfd3",
+      "fileSizeBytes": 73201886,
+      "durationSeconds": 29.33,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.98,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "MP4",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-13T01:30:40.000000Z",
+        "filesystemModifiedTimeLocal": "2026-07-12T21:30:40-04:00"
+      },
+      "identifiedContent": "Eye Color menu and options",
+      "beginningMenuState": "Create Player / Head & Skin submenu before Eye Color",
+      "endingMenuState": "Eye Color grid",
+      "beginsMidOption": false,
+      "endsMidOption": true,
+      "overlapsAnotherRecording": false,
+      "overlapNotes": "",
+      "exactDuplicate": false,
+      "duplicateOfInventoryId": null,
+      "acceptanceStatus": "accepted_research_candidate",
+      "reviewNotes": "Manifest original filename lacked an extension; current discovered file name is retained separately for provenance."
+    },
+    {
+      "inventoryId": "video-008",
+      "sequence": 8,
+      "manifestOriginalFilename": "352537",
+      "discoveredFilename": "5bcd4869-531b-41bf-b643-5331f34cb3f3.MP4",
+      "workingFilename": "08_Nose.mp4",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/5bcd4869-531b-41bf-b643-5331f34cb3f3.MP4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/5bcd4869-531b-41bf-b643-5331f34cb3f3.MP4",
+      "sha256": "301b6c7ba55233503e54296e55366cdd0468f0c23b5117be6ca5ff0363d5e5b7",
+      "fileSizeBytes": 80062286,
+      "durationSeconds": 32.45,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.92,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "MP4",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-13T01:31:15.000000Z",
+        "filesystemModifiedTimeLocal": "2026-07-12T21:31:15-04:00"
+      },
+      "identifiedContent": "Nose menu and options",
+      "beginningMenuState": "Create Player / Head & Skin submenu before Nose",
+      "endingMenuState": "Nose grid",
+      "beginsMidOption": false,
+      "endsMidOption": true,
+      "overlapsAnotherRecording": false,
+      "overlapNotes": "",
+      "exactDuplicate": false,
+      "duplicateOfInventoryId": null,
+      "acceptanceStatus": "accepted_research_candidate",
+      "reviewNotes": "Manifest original filename lacked an extension; current discovered file name is retained separately for provenance."
+    },
+    {
+      "inventoryId": "video-009",
+      "sequence": 9,
+      "manifestOriginalFilename": "352531",
+      "discoveredFilename": "55b7d607-eefa-41a4-8635-1eedb5296ab0.MP4",
+      "workingFilename": "09_Ear_Shape.mp4",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/55b7d607-eefa-41a4-8635-1eedb5296ab0.MP4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/55b7d607-eefa-41a4-8635-1eedb5296ab0.MP4",
+      "sha256": "e615e0919ebc50da7cdb1ec27ea302e28ac632b01728a88ca28ab0bb1f5902a1",
+      "fileSizeBytes": 69914730,
+      "durationSeconds": 30.21,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.91,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "MP4",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-13T01:37:28.000000Z",
+        "filesystemModifiedTimeLocal": "2026-07-12T21:37:28-04:00"
+      },
+      "identifiedContent": "Ear Shape menu and options",
+      "beginningMenuState": "Create Player / Head & Skin submenu before Ear Shape",
+      "endingMenuState": "Ear Shape grid",
+      "beginsMidOption": false,
+      "endsMidOption": true,
+      "overlapsAnotherRecording": false,
+      "overlapNotes": "",
+      "exactDuplicate": false,
+      "duplicateOfInventoryId": null,
+      "acceptanceStatus": "partially_accepted_research_candidate",
+      "reviewNotes": "Accepted for research review of Ear Shape after navigation lead-in. Requires category segmentation before publication."
+    },
+    {
+      "inventoryId": "video-010",
+      "sequence": null,
+      "manifestOriginalFilename": null,
+      "discoveredFilename": "7cafeb6e-0488-42e6-8d6d-5836f8e30daf.MP4",
+      "workingFilename": "duplicate-reference-of-04_Skin_Tone.mp4",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/7cafeb6e-0488-42e6-8d6d-5836f8e30daf.MP4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/7cafeb6e-0488-42e6-8d6d-5836f8e30daf.MP4",
+      "sha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+      "fileSizeBytes": 128477357,
+      "durationSeconds": 53.82,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.97,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "MP4",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-13T01:27:47.000000Z",
+        "filesystemModifiedTimeLocal": "2026-07-12T21:27:47-04:00"
+      },
+      "identifiedContent": "Exact duplicate of Skin Tone menu and options recording",
+      "beginningMenuState": "Same as video-004",
+      "endingMenuState": "Same as video-004",
+      "beginsMidOption": false,
+      "endsMidOption": true,
+      "overlapsAnotherRecording": true,
+      "overlapNotes": "Exact duplicate by SHA-256 of video-004.",
+      "exactDuplicate": true,
+      "duplicateOfInventoryId": "video-004",
+      "acceptanceStatus": "rejected_duplicate_reference_only",
+      "reviewNotes": "Do not delete. Preserve as provenance-only duplicate; do not use as an additional independent evidence source."
+    },
+    {
+      "inventoryId": "video-011",
+      "sequence": null,
+      "manifestOriginalFilename": null,
+      "discoveredFilename": "4df34d2b-7dea-4afe-8dcc-05583430012f.MP4",
+      "workingFilename": "duplicate-reference-of-05_Skin_Details.mp4",
+      "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/4df34d2b-7dea-4afe-8dcc-05583430012f.MP4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/4df34d2b-7dea-4afe-8dcc-05583430012f.MP4",
+      "sha256": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+      "fileSizeBytes": 78206366,
+      "durationSeconds": 31.72,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": {
+        "observedFps": 58.9,
+        "timeBaseFps": 59.94
+      },
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "container": "MP4",
+      "creationMetadata": {
+        "creationTimeUtc": "2026-07-13T01:28:50.000000Z",
+        "filesystemModifiedTimeLocal": "2026-07-12T21:28:50-04:00"
+      },
+      "identifiedContent": "Exact duplicate of Skin Details menu and options recording",
+      "beginningMenuState": "Same as video-005",
+      "endingMenuState": "Same as video-005",
+      "beginsMidOption": false,
+      "endsMidOption": true,
+      "overlapsAnotherRecording": true,
+      "overlapNotes": "Exact duplicate by SHA-256 of video-005.",
+      "exactDuplicate": true,
+      "duplicateOfInventoryId": "video-005",
+      "acceptanceStatus": "rejected_duplicate_reference_only",
+      "reviewNotes": "Do not delete. Preserve as provenance-only duplicate; do not use as an additional independent evidence source."
+    }
+  ],
+  "summary": {
+    "filesDiscovered": 11,
+    "manifestMappedUniqueVideos": 9,
+    "exactDuplicateFiles": 2,
+    "acceptedResearchCandidates": 5,
+    "partiallyAcceptedResearchCandidates": 4,
+    "rejectedDuplicateReferenceOnly": 2,
+    "productionRecordsCreated": 0,
+    "verifiedProductionRecordsCreated": 0,
+    "intentionalFace12OverlapConfirmed": true
+  }
+}

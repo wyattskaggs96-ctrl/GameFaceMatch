@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-13T06:00:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "duplicateDetectionMethod": "Exact duplicate detection by SHA-256 hash. Filename similarity was not used to identify exact duplicates.",
+  "summary": {
+    "videoFilesScanned": 11,
+    "uniqueSha256Values": 9,
+    "duplicateGroups": 2,
+    "duplicateFiles": 2,
+    "filesDeleted": 0
+  },
+  "duplicateGroups": [
+    {
+      "duplicateGroupId": "duplicate-group-001",
+      "sha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+      "content": "Skin Tone menu and options",
+      "canonicalInventoryId": "video-004",
+      "canonicalDiscoveredFilename": "03_Appearance_Skin_Tone.MP4",
+      "duplicateInventoryIds": [
+        "video-010"
+      ],
+      "duplicateDiscoveredFilenames": [
+        "7cafeb6e-0488-42e6-8d6d-5836f8e30daf.MP4"
+      ],
+      "decision": "Preserve both files. Use video-004 as the canonical research candidate and retain video-010 as duplicate provenance only."
+    },
+    {
+      "duplicateGroupId": "duplicate-group-002",
+      "sha256": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+      "content": "Skin Details menu and options",
+      "canonicalInventoryId": "video-005",
+      "canonicalDiscoveredFilename": "04_Appearance_Skin_Details.MP4",
+      "duplicateInventoryIds": [
+        "video-011"
+      ],
+      "duplicateDiscoveredFilenames": [
+        "4df34d2b-7dea-4afe-8dcc-05583430012f.MP4"
+      ],
+      "decision": "Preserve both files. Use video-005 as the canonical research candidate and retain video-011 as duplicate provenance only."
+    }
+  ],
+  "intentionalOverlapReview": {
+    "headTemplateFace12OverlapConfirmed": true,
+    "overlapRecordings": [
+      "video-002",
+      "video-003"
+    ],
+    "basis": "Direct frame inspection showed video-002 around 96s on Head Template / Face 12 and video-003 beginning on Head Template / Face 12.",
+    "decision": "Treat as intentional continuity overlap, not an exact duplicate."
+  }
+}

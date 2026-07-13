@@ -38,3 +38,10 @@ The empty production catalog is valid and produces an explicit warning that no r
 The evidence manifest generator scans only approved local evidence directories, calculates SHA-256 checksums, records file size and MIME type, merges supplied metadata, and reports changed, missing, and unexpected files between scans. It does not upload, rename, transform, or modify evidence files.
 
 Production package validation also performs strict evidence-path portability checks. It rejects absolute paths, traversal, root escapes, missing files, filename-case mismatches, fixture-directory references, and master/derivative path-state mismatches. Reports include repair suggestions, but scripts do not silently rewrite records.
+
+## Source Video Commands
+
+- `npm run source-video:intake -- inspect data/audit/college-football-27/evidence/masters/REPLACE_WITH_LOCAL_SOURCE_VIDEO.mov`
+- `npm run source-video:intake -- extract-frame data/audit/college-football-27/evidence/masters/REPLACE_WITH_LOCAL_SOURCE_VIDEO.mov 12.345 data/audit/college-football-27/evidence/derivatives/REPLACE_WITH_FRAME_NAME.png`
+
+The source-video helper records local metadata and can extract derivative still frames only when `ffprobe` and `ffmpeg` are installed on the local machine. If those tools are unavailable, inspection still returns a manual-metadata-required result and frame extraction is disabled cleanly. Original source videos are never uploaded, renamed, recompressed, or modified.

@@ -836,6 +836,32 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-028",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Source video intake and frame-reference tool",
+      "summary": "Register original source videos, preserve masters, capture duration and stream metadata, record catalog-item timestamps, preview referenced timestamps, extract derivative still frames locally when supported, preserve provenance, mark frames as derivatives, avoid recompressing masters, and gracefully disable extraction when FFmpeg is unavailable.",
+      "owningModule": "Phase 0 source video intake",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-source-video.ts",
+        "web/features/phase-zero/SourceVideoIntakeManager.tsx",
+        "data/schemas/source-video-intake.schema.json",
+        "scripts/source-video-intake.mjs",
+        "scripts/README.md",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_CATALOG_WORKFLOW.md",
+        "docs/GAME_AUDIT_FIELD_GUIDE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-source-video.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Source-video tests cover schema fields, preserved master metadata, missing duration/dimension warnings, unsafe path/type/checksum rejection, timestamp preview, duration bounds, disabled extraction when FFmpeg is unavailable, extraction command planning, derivative frame provenance, and metadata-only local storage.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

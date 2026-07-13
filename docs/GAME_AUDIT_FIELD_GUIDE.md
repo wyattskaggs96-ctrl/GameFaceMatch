@@ -22,6 +22,7 @@ This guide defines how Wyatt records College Football 27 appearance catalog evid
 - Category discovered from the game UI.
 - Exact visible label or index from the game UI.
 - Five required screenshot asset IDs.
+- Source-video ID and timestamp references when evidence comes from a recording.
 - Capture conditions.
 - Human annotation notes.
 - Menu navigation instructions with evidence asset.
@@ -41,3 +42,13 @@ Never auto-verify. CSV imports and audit-session creation must always create dra
 ## Invalid Entries
 
 Reject empty labels, placeholder tokens, template notices, missing evidence, missing platform, missing game version, missing creation path, duplicate stable IDs, fixture flags, and records without the standard screenshot set.
+
+## Source Video Handling
+
+- Register original game-audit recordings as master evidence metadata.
+- Preserve original files exactly as captured.
+- Record duration, dimensions, frame rate, codec/container metadata when available.
+- Record catalog-item timestamp references before extracting still frames.
+- Extract still frames only as derivatives with provenance back to the original video.
+- If FFmpeg or FFprobe is unavailable, continue with timestamp metadata and mark extraction unavailable.
+- Do not upload, recompress, rename, or publish master videos automatically.

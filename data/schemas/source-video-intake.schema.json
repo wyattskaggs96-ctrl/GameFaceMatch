@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/source-video-intake.schema.json",
+  "title": "Phase0SourceVideoIntake",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "videos", "timestampReferences", "derivativeFrames"],
+  "properties": {
+    "schemaVersion": { "const": "phase0-source-video-v1" },
+    "videos": { "type": "array", "items": { "$ref": "#/$defs/sourceVideo" } },
+    "timestampReferences": { "type": "array", "items": { "$ref": "#/$defs/timestampReference" } },
+    "derivativeFrames": { "type": "array", "items": { "$ref": "#/$defs/derivativeFrame" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "safeRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?![a-zA-Z][a-zA-Z0-9+.-]*://)(?!.*(?:^|/)\\.\\.(?:/|$)).+"
+    },
+    "videoMimeType": { "enum": ["video/mp4", "video/quicktime", "video/webm"] },
+    "captureMethod": { "enum": ["captureCard", "consoleRecording", "phoneVideo", "screenRecording", "unknown"] },
+    "status": { "enum": ["registered", "metadataIncomplete", "removed"] },
+    "verificationState": { "enum": ["draft", "firstReviewPending", "firstReviewApproved", "secondReviewPending", "verified", "rejected", "retired"] },
+    "view": { "enum": ["straightOn", "left45", "right45", "leftProfile", "rightProfile", "navigationEvidence", "menuOverview", "environment", "notApplicable"] },
+    "fileRole": { "enum": ["standardAngle", "navigationEvidence", "menuState", "environment", "review", "checksumManifest", "notes", "other"] },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["durationSeconds", "width", "height", "frameRate", "videoCodec", "audioCodec", "containerFormat"],
+      "properties": {
+        "durationSeconds": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "width": { "type": ["integer", "null"], "minimum": 1 },
+        "height": { "type": ["integer", "null"], "minimum": 1 },
+        "frameRate": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "videoCodec": { "type": ["string", "null"] },
+        "audioCodec": { "type": ["string", "null"] },
+        "containerFormat": { "type": ["string", "null"] }
+      }
+    },
+    "sourceVideo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "videoID",
+        "originalFilename",
+        "relativePath",
+        "sha256",
+        "sizeBytes",
+        "mimeType",
+        "lastModified",
+        "status",
+        "captureMethod",
+        "captureDevice",
+        "platformID",
+        "gameVersionID",
+        "patchID",
+        "mode",
+        "creationPathID",
+        "environmentID",
+        "registeredAt",
+        "metadata",
+        "preservationNote",
+        "notes"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "phase0-source-video-v1" },
+        "videoID": { "$ref": "#/$defs/id" },
+        "originalFilename": { "type": "string", "minLength": 1 },
+        "relativePath": { "$ref": "#/$defs/safeRelativePath" },
+        "sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+        "sizeBytes": { "type": "integer", "minimum": 1 },
+        "mimeType": { "$ref": "#/$defs/videoMimeType" },
+        "lastModified": { "type": "integer", "minimum": 0 },
+        "status": { "$ref": "#/$defs/status" },
+        "captureMethod": { "$ref": "#/$defs/captureMethod" },
+        "captureDevice": { "type": "string", "minLength": 1 },
+        "platformID": { "$ref": "#/$defs/id" },
+        "gameVersionID": { "$ref": "#/$defs/id" },
+        "patchID": { "$ref": "#/$defs/id" },
+        "mode": { "type": "string", "minLength": 1 },
+        "creationPathID": { "$ref": "#/$defs/id" },
+        "environmentID": { "$ref": "#/$defs/id" },
+        "registeredAt": { "$ref": "#/$defs/timestamp" },
+        "metadata": { "$ref": "#/$defs/metadata" },
+        "preservationNote": { "type": "string", "minLength": 1 },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "timestampReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["referenceID", "videoID", "catalogItemID", "view", "timestampSeconds", "label", "notes", "verificationStatus", "createdAt"],
+      "properties": {
+        "referenceID": { "$ref": "#/$defs/id" },
+        "videoID": { "$ref": "#/$defs/id" },
+        "catalogItemID": { "type": ["string", "null"] },
+        "view": { "$ref": "#/$defs/view" },
+        "timestampSeconds": { "type": "number", "minimum": 0 },
+        "label": { "type": "string", "minLength": 1 },
+        "notes": { "type": "string", "minLength": 1 },
+        "verificationStatus": { "$ref": "#/$defs/verificationState" },
+        "createdAt": { "$ref": "#/$defs/timestamp" }
+      }
+    },
+    "derivativeFrame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frameID",
+        "sourceVideoID",
+        "timestampReferenceID",
+        "relativePath",
+        "derivativeState",
+        "fileRole",
+        "view",
+        "timestampSeconds",
+        "extractionMethod",
+        "extractedAt",
+        "sourceVideoProvenance",
+        "notes"
+      ],
+      "properties": {
+        "frameID": { "$ref": "#/$defs/id" },
+        "sourceVideoID": { "$ref": "#/$defs/id" },
+        "timestampReferenceID": { "$ref": "#/$defs/id" },
+        "relativePath": { "$ref": "#/$defs/safeRelativePath" },
+        "derivativeState": { "const": "derivative" },
+        "fileRole": { "$ref": "#/$defs/fileRole" },
+        "view": { "$ref": "#/$defs/view" },
+        "timestampSeconds": { "type": "number", "minimum": 0 },
+        "extractionMethod": { "type": "string", "minLength": 1 },
+        "extractedAt": { "$ref": "#/$defs/timestamp" },
+        "sourceVideoProvenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["videoID", "originalFilename", "relativePath", "sha256"],
+          "properties": {
+            "videoID": { "$ref": "#/$defs/id" },
+            "originalFilename": { "type": "string", "minLength": 1 },
+            "relativePath": { "$ref": "#/$defs/safeRelativePath" },
+            "sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+          }
+        },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

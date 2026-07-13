@@ -16,6 +16,7 @@ import { HairstyleCaptureWorkspace } from "./HairstyleCaptureWorkspace";
 import { HeadCaptureWorkspace } from "./HeadCaptureWorkspace";
 import { IssueManagementWorkspace } from "./IssueManagementWorkspace";
 import { MenuMapEditor } from "./MenuMapEditor";
+import { SourceVideoIntakeManager } from "./SourceVideoIntakeManager";
 
 const statusTone = {
   NOT_STARTED: "neutral",
@@ -62,6 +63,7 @@ export function Phase0StatusPanel({
       <EnvironmentManifestWizard />
       <CreationPathAuditWorkspace />
       <EvidenceIntakeManager />
+      <SourceVideoIntakeManager />
       <MenuMapEditor />
       <CaptureConfigurationEditor />
       <HeadCaptureWorkspace />

@@ -520,6 +520,14 @@ p {
   transform: scaleX(-1);
 }
 
+.media-preview {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  border-radius: var(--radius);
+  background: var(--field-900);
+}
+
 .camera-placeholder {
   display: grid;
   gap: var(--space-2);

@@ -88,6 +88,7 @@ const requiredSchemas = [
   "data/schemas/evidence-intake.schema.json",
   "data/schemas/evidence-naming.schema.json",
   "data/schemas/evidence-manifest.schema.json",
+  "data/schemas/source-video-intake.schema.json",
   "data/schemas/capture-log.schema.json",
   "data/schemas/manual-matching-study.schema.json",
   "data/schemas/audit-environment.schema.json",
@@ -124,6 +125,7 @@ export const CURRENT_PHASE0_REPOSITORY_STATE: Phase0RepositoryState = {
     "docs/PRIVATE_BETA_READINESS.md",
     ".env.example",
     "admin/catalog-manager/README.md",
+    "scripts/source-video-intake.mjs",
     "web/package.json",
     "web/playwright.config.ts",
     "ios/GameFaceMatchTests",
@@ -144,7 +146,8 @@ export const CURRENT_PHASE0_REPOSITORY_STATE: Phase0RepositoryState = {
     "publish-package",
     "rollback-package",
     "compare-versions",
-    "patch-reaudit"
+    "patch-reaudit",
+    "source-video-intake"
   ],
   adminCatalogManagerPresent: true,
   webTestsConfigured: true,
@@ -198,7 +201,8 @@ function buildAuditPreparationStatus(state: Phase0RepositoryState): Phase0AreaSt
     ...requiredSchemas.map((file) => schemaCheck(state, file)),
     commandCheck(state, "validate-package"),
     commandCheck(state, "verify-assets"),
-    commandCheck(state, "detect-fixtures")
+    commandCheck(state, "detect-fixtures"),
+    commandCheck(state, "source-video-intake")
   ], [], ["Begin a real audit session only with shipping-game evidence."]);
 }
 

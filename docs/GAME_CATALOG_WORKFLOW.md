@@ -59,8 +59,12 @@ Run from the repository root unless noted:
 - `node scripts/catalog-tools.mjs rollback-package <current-manifest.json> <target-manifest.json> "reason"`
 - `node scripts/catalog-tools.mjs checksum <package.json>`
 - `node scripts/catalog-tools.mjs report data/catalog/production`
+- `npm run source-video:intake -- inspect <source-video-path>`
+- `npm run source-video:intake -- extract-frame <source-video-path> <timestamp-seconds> <output-frame-path>`
 
 From `web/`, `npm run catalog:validate` validates the production directory. The empty production catalog must pass with a warning that no recommendations can be produced.
+
+Source-video intake is local-only. `inspect` preserves original video files and reports metadata from `ffprobe` when available. `extract-frame` produces derivative still frames only when `ffmpeg` is installed; otherwise it returns a disabled result so operators can continue recording timestamp references and extract frames later.
 
 ## Publication gate
 

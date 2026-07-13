@@ -883,6 +883,13 @@ p {
   gap: var(--space-4);
 }
 
+.source-video-inspector-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.34fr) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-4);
+}
+
 .evidence-record-list {
   position: sticky;
   top: 92px;
@@ -987,6 +994,35 @@ p {
   object-fit: contain;
   border-radius: var(--radius);
   background: var(--field-900);
+}
+
+.source-video-detail-card,
+.source-video-review-grid,
+.source-video-panel,
+.review-action-row {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.source-video-review-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.source-video-panel {
+  min-width: 0;
+}
+
+.source-video-player {
+  width: 100%;
+  max-height: 520px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #071109;
+}
+
+.review-action-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .result-card,
@@ -1464,6 +1500,9 @@ p {
   .coverage-map-grid,
   .card-grid,
   .evidence-gallery-layout,
+  .source-video-inspector-layout,
+  .source-video-review-grid,
+  .review-action-row,
   .evidence-view-grid,
   .form-grid,
   .verifier-comparison-grid {

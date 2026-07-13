@@ -97,6 +97,14 @@ const DevelopmentEvidenceGallery =
         loading: () => <LoadingState label="Loading research evidence gallery" />
       });
 
+const DevelopmentSourceVideoEvidenceInspector =
+  process.env.NODE_ENV === "production"
+    ? null
+    : dynamic(() => import("@/features/phase-zero/SourceVideoEvidenceInspector").then((module) => module.SourceVideoEvidenceInspector), {
+        ssr: false,
+        loading: () => <LoadingState label="Loading source video evidence inspector" />
+      });
+
 export default function HomePage() {
   const [screen, setScreen] = useState<AppScreen>("welcome");
   const [session, setSession] = useState(() => createInitialCaptureSession());
@@ -129,6 +137,7 @@ export default function HomePage() {
         { id: "pricing" as const, label: "Pricing" },
         { id: "audit" as const, label: "Audit" },
         { id: "evidence-gallery" as const, label: "Evidence Gallery" },
+        { id: "video-inspector" as const, label: "Video Inspector" },
         { id: "phase-0" as const, label: "Phase 0" },
         { id: "matching-lab" as const, label: "Matching Lab" },
         { id: "mobile-qa" as const, label: "Mobile QA" }
@@ -611,6 +620,8 @@ export default function HomePage() {
         return isDevelopment && DevelopmentCatalogAuditInspector ? <DevelopmentCatalogAuditInspector manifest={productionCatalogManifest} /> : <GameCatalogStatus />;
       case "evidence-gallery":
         return isDevelopment && DevelopmentEvidenceGallery ? <DevelopmentEvidenceGallery /> : <GameCatalogStatus />;
+      case "video-inspector":
+        return isDevelopment && DevelopmentSourceVideoEvidenceInspector ? <DevelopmentSourceVideoEvidenceInspector /> : <GameCatalogStatus />;
       case "phase-0":
         return isDevelopment && DevelopmentPhase0Status ? <DevelopmentPhase0Status /> : <GameCatalogStatus />;
       case "matching-lab":

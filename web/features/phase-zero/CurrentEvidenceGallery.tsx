@@ -1,20 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Alert, Card, ScreenHeader, SelectField, StatusBadge } from "@/components/design-system";
+import { useEffect, useMemo, useState } from "react";
+import { Alert, Card, LoadingState, ScreenHeader, SelectField, StatusBadge } from "@/components/design-system";
 import {
   createCurrentEvidenceGallerySummary,
   createDerivativePreviewURL,
   createTimestampReferenceLabel,
   filterGalleryRecords,
   type CurrentEvidenceGalleryRecord,
-  type EvidenceManifestEntry,
-  type ImportedResearchCatalogRecord,
-  type CaptureLogEvent
+  type CurrentResearchCatalogData
 } from "@/lib/phase-zero/current-evidence-gallery";
-import importedCatalog from "../../../data/research/cf27/catalog-candidates/research/partial-catalog-import-current/imported_research_catalog.json";
-import evidenceManifest from "../../../data/research/cf27/exports/partial-research-catalog-current/evidence_manifest.json";
-import captureLog from "../../../data/research/cf27/exports/partial-research-catalog-current/capture_log.json";
 
 const categoryLabels: Record<string, string> = {
   heads: "Head Templates",
@@ -27,24 +22,61 @@ const categoryLabels: Record<string, string> = {
 };
 
 export function CurrentEvidenceGallery() {
+  const [researchData, setResearchData] = useState<CurrentResearchCatalogData | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetch("/api/internal/current-research-catalog", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Current research catalog metadata is unavailable.");
+        return response.json() as Promise<CurrentResearchCatalogData>;
+      })
+      .then((data) => {
+        if (!cancelled) {
+          setResearchData(data);
+          setLoadError(null);
+        }
+      })
+      .catch((error: unknown) => {
+        if (!cancelled) setLoadError(error instanceof Error ? error.message : "Current research catalog metadata could not be loaded.");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const summary = useMemo(
-    () =>
-      createCurrentEvidenceGallerySummary({
-        importedRecords: importedCatalog.records as ImportedResearchCatalogRecord[],
-        evidenceEntries: evidenceManifest.payload.entries as EvidenceManifestEntry[],
-        captureEvents: captureLog.payload.events as CaptureLogEvent[]
-      }),
-    []
+    () => (researchData ? createCurrentEvidenceGallerySummary(researchData) : null),
+    [researchData]
   );
   const [category, setCategory] = useState("all");
-  const records = filterGalleryRecords(summary.records, category);
+  const records = summary ? filterGalleryRecords(summary.records, category) : [];
   const [selectedID, setSelectedID] = useState(records[0]?.stableInternalID ?? "");
   const selectedRecord = records.find((record) => record.stableInternalID === selectedID) ?? records[0] ?? null;
 
   function handleCategoryChange(nextCategory: string) {
+    if (!summary) return;
     const nextRecords = filterGalleryRecords(summary.records, nextCategory);
     setCategory(nextCategory);
     setSelectedID(nextRecords[0]?.stableInternalID ?? "");
+  }
+
+  if (loadError) {
+    return (
+      <section className="screen-stack" aria-labelledby="current-evidence-gallery-title">
+        <ScreenHeader eyebrow="Internal research evidence" title="Current video-derived evidence gallery" id="current-evidence-gallery-title">
+          <p>Browse the current primary-research records and extracted evidence.</p>
+        </ScreenHeader>
+        <Alert title="Research metadata unavailable" tone="warning" role="alert">
+          {loadError}
+        </Alert>
+      </section>
+    );
+  }
+
+  if (!summary) {
+    return <LoadingState label="Loading research evidence gallery" />;
   }
 
   return (

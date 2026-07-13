@@ -38,7 +38,7 @@ describe("security headers and production debugging posture", () => {
       .map((file) => fs.readFileSync(file, "utf8"))
       .join("\n");
     const fetchCalls = sourceText.match(/\bfetch\s*\([^\n]+/g) ?? [];
-    expect(fetchCalls.every((call) => call.includes("modelPath"))).toBe(true);
+    expect(fetchCalls.every((call) => call.includes("modelPath") || call.includes("/api/internal/current-research-catalog"))).toBe(true);
     expect(sourceText).toContain('method: "HEAD"');
     expect(sourceText).not.toMatch(/method:\s*["']POST["']/i);
     expect(sourceText).not.toMatch(/method:\s*["']PUT["']/i);

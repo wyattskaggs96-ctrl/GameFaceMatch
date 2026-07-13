@@ -65,6 +65,12 @@ export interface CaptureLogEvent {
   notes: string;
 }
 
+export interface CurrentResearchCatalogData {
+  importedRecords: ImportedResearchCatalogRecord[];
+  evidenceEntries: EvidenceManifestEntry[];
+  captureEvents: CaptureLogEvent[];
+}
+
 export interface CurrentEvidenceGalleryRecord {
   stableInternalID: string;
   categoryExport: string;

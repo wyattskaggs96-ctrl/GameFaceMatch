@@ -44,6 +44,7 @@ export const APP_SCREENS = [
   "pricing",
   "audit",
   "evidence-gallery",
+  "video-inspector",
   "phase-0",
   "matching-lab",
   "mobile-qa",

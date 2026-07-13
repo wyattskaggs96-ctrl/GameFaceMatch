@@ -3,18 +3,26 @@ import {
   canSubmitScreenshotRefinement,
   createInitialScreenshotRefinementSession,
   createUnavailableScreenshotRefinementProcessor,
+  getScreenshotRefinementReadiness,
+  SCREENSHOT_REFINEMENT_CHECKLIST,
   deleteScreenshotRefinementSession,
   setScreenshot,
+  setScreenshotChecklistItem,
   validateScreenshotMetadata
 } from "@/lib/refinement/screenshot-refinement";
 import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import type { StandardFaceProfile } from "@/types/domain";
 
 describe("screenshot refinement scaffold", () => {
-  it("requires front, left 45, and right 45 screenshots", () => {
+  it("requires a front screenshot and supports optional three-quarter screenshots", () => {
     const session = createInitialScreenshotRefinementSession(new Date("2026-07-10T00:00:00.000Z"));
     expect(session.slots.map((slot) => slot.viewID)).toEqual(["front", "left45", "right45"]);
+    expect(session.slots.map((slot) => slot.required)).toEqual([true, false, false]);
     expect(canSubmitScreenshotRefinement(session)).toBe(false);
+    expect(getScreenshotRefinementReadiness(session).blockingMessages).toContain("Front screenshot is required.");
+    expect(getScreenshotRefinementReadiness(session).advisoryMessages).toContain(
+      "Optional three-quarter screenshots not provided: Left 45 screenshot, Right 45 screenshot."
+    );
   });
 
   it("validates screenshot type, size, and dimensions", () => {
@@ -47,12 +55,41 @@ describe("screenshot refinement scaffold", () => {
     expect(replacement.session.slots[0].screenshot?.objectUrl).toBe("blob:front-new");
   });
 
-  it("allows submission only after all required screenshot views are valid", () => {
+  it("blocks submission until the front screenshot and manual confirmations are complete", () => {
     let session = createInitialScreenshotRefinementSession();
     session = setScreenshot(session, validScreenshot("front", "blob:front")).session;
-    session = setScreenshot(session, validScreenshot("left45", "blob:left45")).session;
     expect(canSubmitScreenshotRefinement(session)).toBe(false);
-    session = setScreenshot(session, validScreenshot("right45", "blob:right45")).session;
+    expect(getScreenshotRefinementReadiness(session).blockingMessages).toContain("Confirm: No helmet is covering the head.");
+
+    for (const item of SCREENSHOT_REFINEMENT_CHECKLIST) {
+      session = setScreenshotChecklistItem(session, item.id, true);
+    }
+    expect(canSubmitScreenshotRefinement(session)).toBe(true);
+    expect(getScreenshotRefinementReadiness(session).advisoryMessages).toContain(
+      "Optional three-quarter screenshots not provided: Left 45 screenshot, Right 45 screenshot."
+    );
+  });
+
+  it("blocks low-resolution front screenshots even when the manual checklist is confirmed", () => {
+    let session = createInitialScreenshotRefinementSession();
+    session = setScreenshot(session, {
+      ...validScreenshot("front", "blob:small-front"),
+      width: 640,
+      height: 640
+    }).session;
+    for (const item of SCREENSHOT_REFINEMENT_CHECKLIST) {
+      session = setScreenshotChecklistItem(session, item.id, true);
+    }
+    expect(canSubmitScreenshotRefinement(session)).toBe(false);
+    expect(session.slots[0].validationErrors).toContain("Use a screenshot at least 720 pixels wide and tall.");
+  });
+
+  it("does not require optional three-quarter screenshots for intake readiness", () => {
+    let session = createInitialScreenshotRefinementSession();
+    session = setScreenshot(session, validScreenshot("front", "blob:front")).session;
+    for (const item of SCREENSHOT_REFINEMENT_CHECKLIST) {
+      session = setScreenshotChecklistItem(session, item.id, true);
+    }
     expect(canSubmitScreenshotRefinement(session)).toBe(true);
   });
 
@@ -64,6 +101,7 @@ describe("screenshot refinement scaffold", () => {
     expect(deleted.objectUrlsToRevoke).toEqual(["blob:front", "blob:left45"]);
     expect(deleted.session.status).toBe("deleted");
     expect(deleted.session.slots.every((slot) => slot.screenshot === undefined)).toBe(true);
+    expect(Object.values(deleted.session.checklist).every((checked) => checked === false)).toBe(true);
   });
 
   it("returns an honest unavailable refinement result", async () => {

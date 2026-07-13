@@ -5,9 +5,13 @@ import { useMemo, useState } from "react";
 import { Alert, Button, Card, ScreenHeader, StatusBadge } from "@/components/design-system";
 import {
   canSubmitScreenshotRefinement,
+  getScreenshotRefinementReadiness,
+  SCREENSHOT_REFINEMENT_CHECKLIST,
   createUnavailableScreenshotRefinementProcessor,
   deleteScreenshotRefinementSession,
   setScreenshot,
+  setScreenshotChecklistItem,
+  type ScreenshotChecklistItemID,
   type ScreenshotRefinementSession,
   type ScreenshotSlotState,
   type ScreenshotViewID
@@ -27,6 +31,7 @@ export function ScreenshotRefinementEntry({
   const [result, setResult] = useState<RefinementResult | null>(null);
   const processor = useMemo(() => createUnavailableScreenshotRefinementProcessor(), []);
   const canSubmit = canSubmitScreenshotRefinement(session);
+  const readiness = getScreenshotRefinementReadiness(session);
 
   async function handleFile(viewID: ScreenshotViewID, event: ChangeEvent<HTMLInputElement>) {
     const file = event.currentTarget.files?.[0];
@@ -78,6 +83,11 @@ export function ScreenshotRefinementEntry({
     setResult(null);
   }
 
+  function updateChecklistItem(itemID: ScreenshotChecklistItemID, checked: boolean) {
+    onSessionChange(setScreenshotChecklistItem(session, itemID, checked));
+    setResult(null);
+  }
+
   async function requestRefinement() {
     const unavailable = await processor.refine({
       originalProfile: createPlaceholderProfile(),
@@ -88,10 +98,10 @@ export function ScreenshotRefinementEntry({
 
   return (
     <section className="screen-stack" aria-labelledby="refinement-title">
-      <ScreenHeader eyebrow="Screenshot refinement" title="Refinement scaffold" id="refinement-title">
+      <ScreenHeader eyebrow="Screenshot refinement" title="Screenshot refinement intake" id="refinement-title">
         <p>
-          Upload front, left 45-degree, and right 45-degree created-player screenshots. This scaffold validates basic image metadata but does not perform
-          cross-domain face comparison.
+          Upload a front-facing created-player screenshot, with optional left and right 45-degree images for future comparison. This intake validates basic
+          image metadata and records your confirmations, but it does not perform cross-domain face comparison.
         </p>
       </ScreenHeader>
       <Alert title="Refinement unavailable" tone="warning">
@@ -101,7 +111,10 @@ export function ScreenshotRefinementEntry({
         <h2>Screenshot requirements</h2>
         <ul className="message-list">
           <li>Use screenshots from the same created player build.</li>
-          <li>Keep the face visible and avoid UI overlays over the head.</li>
+          <li>Upload at least one front-facing character screenshot.</li>
+          <li>Optional left and right 45-degree screenshots can support future refinement.</li>
+          <li>Keep the face visible and avoid helmets, masks, sunglasses, and UI overlays over the head.</li>
+          <li>Use neutral expression and steady menu lighting where the game allows it.</li>
           <li>Use JPEG, PNG, or WebP files under 12 MB.</li>
           <li>Use screenshots at least 720 pixels wide and tall.</li>
           <li>Delete the screenshot session when finished; screenshots are not stored in localStorage.</li>
@@ -112,6 +125,50 @@ export function ScreenshotRefinementEntry({
           <ScreenshotSlot key={slot.viewID} slot={slot} onFile={handleFile} />
         ))}
       </div>
+      <Card>
+        <h2>Manual screenshot confirmations</h2>
+        <p className="field-note">
+          These confirmations are required because the current web MVP cannot yet verify helmets, masks, overlays, expression, or game-character pose
+          automatically.
+        </p>
+        <div className="confirmation-list" role="group" aria-label="Screenshot refinement requirements">
+          {SCREENSHOT_REFINEMENT_CHECKLIST.map((item) => (
+            <label className="confirmation-item" key={item.id}>
+              <input
+                type="checkbox"
+                checked={Boolean(session.checklist[item.id])}
+                onChange={(event) => updateChecklistItem(item.id, event.currentTarget.checked)}
+              />
+              <span>
+                <strong>{item.label}</strong>
+                <small>{item.description}</small>
+              </span>
+            </label>
+          ))}
+        </div>
+      </Card>
+      <Card tone={readiness.canSubmit ? "success" : "warning"}>
+        <div className="status-row">
+          <h2>Intake readiness</h2>
+          <StatusBadge tone={readiness.canSubmit ? "success" : "warning"}>{readiness.canSubmit ? "Ready" : "Blocked"}</StatusBadge>
+        </div>
+        {readiness.blockingMessages.length > 0 ? (
+          <ul className="error-list">
+            {readiness.blockingMessages.map((message) => (
+              <li key={message}>{message}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>Screenshot intake requirements are complete. Refinement recommendations remain unavailable until verified catalog data and comparison logic exist.</p>
+        )}
+        {readiness.advisoryMessages.length > 0 ? (
+          <ul className="message-list">
+            {readiness.advisoryMessages.map((message) => (
+              <li key={message}>{message}</li>
+            ))}
+          </ul>
+        ) : null}
+      </Card>
       {result ? (
         <Alert title="Refinement result" tone="info" role="status">
           {result.message}
@@ -126,7 +183,8 @@ export function ScreenshotRefinementEntry({
         </Button>
       </div>
       <div className="sr-only" role="status" aria-live="polite">
-        {session.slots.filter((slot) => slot.screenshot).length} of 3 screenshot views uploaded.
+        {session.slots.filter((slot) => slot.screenshot).length} of 3 screenshot views uploaded. {readiness.blockingMessages.length} blocking screenshot intake
+        requirements remaining.
       </div>
     </section>
   );
@@ -143,7 +201,9 @@ function ScreenshotSlot({
     <Card className="screenshot-card" tone={slot.validationStatus === "valid" ? "success" : "neutral"}>
       <div className="status-row">
         <h2>{slot.label}</h2>
-        <StatusBadge tone={slot.validationStatus === "valid" ? "success" : "warning"}>{slot.validationStatus}</StatusBadge>
+        <StatusBadge tone={slot.validationStatus === "valid" ? "success" : "warning"}>
+          {slot.required ? slot.validationStatus : slot.validationStatus === "valid" ? "valid" : "optional"}
+        </StatusBadge>
       </div>
       <p>{slot.instruction}</p>
       {slot.screenshot ? (

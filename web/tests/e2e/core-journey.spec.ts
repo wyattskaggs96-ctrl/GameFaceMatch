@@ -73,9 +73,17 @@ test.describe("GameFace Match production-representative journey", () => {
 
     await page.getByRole("button", { name: "Home" }).click();
     await page.getByRole("heading", { name: "Screenshot refinement" }).locator("xpath=ancestor::div[contains(@class, 'action-card')]").getByRole("button", { name: "Open" }).click();
-    await expect(page.getByRole("heading", { name: "Refinement scaffold" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Screenshot refinement intake" })).toBeVisible();
     await page.getByLabel("Upload screenshot").first().setInputFiles(syntheticPng("created-player-front.png", 800, 800, 20));
     await expect(page.getByText("created-player-front.png | 800x800")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Check refinement" })).toBeDisabled();
+    await expect(page.getByText("Confirm: No helmet is covering the head.")).toBeVisible();
+    for (const checkbox of await page.getByRole("checkbox").all()) {
+      await checkbox.check();
+    }
+    await expect(page.getByRole("button", { name: "Check refinement" })).toBeEnabled();
+    await page.getByRole("button", { name: "Check refinement" }).click();
+    await expect(page.getByText("Screenshot refinement is unavailable until verified catalog data")).toBeVisible();
     await page.getByRole("button", { name: "Delete screenshot session data" }).click();
     await expect(page.getByText("No screenshot selected").first()).toBeVisible();
 

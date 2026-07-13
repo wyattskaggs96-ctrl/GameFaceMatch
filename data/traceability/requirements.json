@@ -1351,10 +1351,10 @@
         "web/tests/e2e/core-journey.spec.ts"
       ],
       "status": "IMPLEMENTED_WITH_LIMITATION",
-      "evidence": "Screenshot intake, validation, deletion, and unavailable result are implemented and tested.",
+      "evidence": "Screenshot intake requires a front-facing screenshot, supports optional left/right three-quarter screenshots, validates file metadata and resolution, gates progression on manual screenshot-condition confirmations, supports deletion/object URL cleanup, and returns an honest unavailable result until real comparison and verified catalog data exist.",
       "blocker": "Real cross-domain comparison and verified catalog data are not available.",
       "owner": "Matching lead",
-      "lastCheckedDate": "2026-07-12"
+      "lastCheckedDate": "2026-07-13"
     },
     {
       "id": "GFM-PRIV-001",

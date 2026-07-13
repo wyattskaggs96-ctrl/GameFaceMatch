@@ -4,6 +4,7 @@ import type { Phase0EvidenceDerivativeState, Phase0EvidenceFileRole, Phase0Evide
 
 export const PHASE0_EVIDENCE_INTAKE_SCHEMA_VERSION = "phase0-evidence-intake-v1";
 export const PHASE0_EVIDENCE_INTAKE_STORAGE_KEY = "gameface-match.phase0.evidence-intake.metadata.v1";
+export const PHASE0_EVIDENCE_INTAKE_DRAFT_STORAGE_KEY = "gameface-match.phase0.evidence-intake.draft.v1";
 
 export type Phase0EvidenceIntakeSource = "dragDrop" | "filePicker" | "folderPicker";
 export type Phase0EvidenceClassification = "environment" | "catalogItem" | "menuNavigation" | "standardAngle" | "review" | "other";
@@ -86,6 +87,24 @@ export interface Phase0EvidenceIntakeBatch {
   finalizedRecords: Phase0FinalizedEvidenceIntakeRecord[];
 }
 
+export interface Phase0EvidenceIntakeDraft {
+  schemaVersion: typeof PHASE0_EVIDENCE_INTAKE_SCHEMA_VERSION;
+  draftID: Phase0EntityID;
+  savedAt: ISODateString;
+  batch: Phase0EvidenceIntakeBatch;
+  productionReady: false;
+  rawFileBytesStored: false;
+  recoveryNote: string;
+}
+
+export interface Phase0EvidenceIntakeRecoveryReport {
+  hasDraft: boolean;
+  activeItemCount: number;
+  interruptedUploadCount: number;
+  canFinalize: boolean;
+  messages: string[];
+}
+
 export interface Phase0EvidenceIntakeReport {
   ok: boolean;
   errors: Phase0EvidenceIntakeWarning[];
@@ -97,6 +116,12 @@ export interface Phase0EvidenceIntakeReport {
 export interface Phase0EvidenceIntakeLocalStore {
   load(): Phase0FinalizedEvidenceIntakeRecord[];
   save(records: Phase0FinalizedEvidenceIntakeRecord[]): void;
+  clear(): void;
+}
+
+export interface Phase0EvidenceIntakeDraftStore {
+  load(): Phase0EvidenceIntakeDraft | null;
+  save(draft: Phase0EvidenceIntakeDraft): void;
   clear(): void;
 }
 
@@ -222,6 +247,44 @@ export function validateEvidenceIntakeBatch(batch: Phase0EvidenceIntakeBatch): P
   };
 }
 
+export function createEvidenceIntakeDraft(batch: Phase0EvidenceIntakeBatch, savedAt: ISODateString): Phase0EvidenceIntakeDraft {
+  return {
+    schemaVersion: PHASE0_EVIDENCE_INTAKE_SCHEMA_VERSION,
+    draftID: `${batch.batchID}-draft`,
+    savedAt,
+    batch: sanitizeDraftBatch(batch),
+    productionReady: false,
+    rawFileBytesStored: false,
+    recoveryNote:
+      "Draft audit-session metadata is local and incomplete until source files are available, validation passes, and the catalog publication workflow approves it."
+  };
+}
+
+export function createEvidenceIntakeRecoveryReport(draft: Phase0EvidenceIntakeDraft | null): Phase0EvidenceIntakeRecoveryReport {
+  if (!draft) {
+    return {
+      hasDraft: false,
+      activeItemCount: 0,
+      interruptedUploadCount: 0,
+      canFinalize: false,
+      messages: ["No local evidence-intake draft is available."]
+    };
+  }
+  const activeItems = draft.batch.items.filter((item) => item.status !== "removed");
+  const report = validateEvidenceIntakeBatch(draft.batch);
+  return {
+    hasDraft: true,
+    activeItemCount: activeItems.length,
+    interruptedUploadCount: activeItems.length,
+    canFinalize: report.ok,
+    messages: [
+      `${activeItems.length} evidence metadata row${activeItems.length === 1 ? "" : "s"} can be reviewed after recovery.`,
+      "Browser refresh cannot restore original File objects. Reselect source evidence before relying on checksums or final package validation.",
+      "Recovered drafts are not production-ready and cannot verify College Football 27 records."
+    ]
+  };
+}
+
 export function createEvidenceIntakeLocalStore(storage: Pick<Storage, "getItem" | "setItem" | "removeItem">): Phase0EvidenceIntakeLocalStore {
   return {
     load() {
@@ -239,6 +302,32 @@ export function createEvidenceIntakeLocalStore(storage: Pick<Storage, "getItem" 
     },
     clear() {
       storage.removeItem(PHASE0_EVIDENCE_INTAKE_STORAGE_KEY);
+    }
+  };
+}
+
+export function createEvidenceIntakeDraftStore(storage: Pick<Storage, "getItem" | "setItem" | "removeItem">): Phase0EvidenceIntakeDraftStore {
+  return {
+    load() {
+      const raw = storage.getItem(PHASE0_EVIDENCE_INTAKE_DRAFT_STORAGE_KEY);
+      if (!raw) return null;
+      try {
+        const parsed = JSON.parse(raw) as Phase0EvidenceIntakeDraft;
+        return parsed?.schemaVersion === PHASE0_EVIDENCE_INTAKE_SCHEMA_VERSION ? parsed : null;
+      } catch {
+        return null;
+      }
+    },
+    save(draft) {
+      storage.setItem(PHASE0_EVIDENCE_INTAKE_DRAFT_STORAGE_KEY, JSON.stringify({
+        ...draft,
+        batch: sanitizeDraftBatch(draft.batch),
+        productionReady: false,
+        rawFileBytesStored: false
+      }));
+    },
+    clear() {
+      storage.removeItem(PHASE0_EVIDENCE_INTAKE_DRAFT_STORAGE_KEY);
     }
   };
 }
@@ -291,6 +380,14 @@ function revalidateEvidenceIntakeBatch(batch: Phase0EvidenceIntakeBatch): Phase0
         warnings
       };
     })
+  };
+}
+
+function sanitizeDraftBatch(batch: Phase0EvidenceIntakeBatch): Phase0EvidenceIntakeBatch {
+  return {
+    ...batch,
+    items: batch.items.map((item) => ({ ...item })),
+    finalizedRecords: batch.finalizedRecords.map((record) => ({ ...record }))
   };
 }
 

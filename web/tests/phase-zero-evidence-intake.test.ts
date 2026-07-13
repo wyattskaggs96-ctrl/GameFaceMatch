@@ -4,8 +4,11 @@ import { describe, expect, it } from "vitest";
 import {
   PHASE0_MAX_EVIDENCE_FILE_SIZE_BYTES,
   addEvidenceFilesToBatch,
+  createEvidenceIntakeDraft,
+  createEvidenceIntakeDraftStore,
   createEmptyEvidenceIntakeBatch,
   createEvidenceIntakeLocalStore,
+  createEvidenceIntakeRecoveryReport,
   finalizeEvidenceIntakeBatch,
   removeEvidenceIntakeItem,
   updateEvidenceIntakeMetadata,
@@ -116,6 +119,27 @@ describe("Phase 0 evidence intake manager", () => {
     expect(raw).not.toContain("ArrayBuffer");
     store.clear();
     expect(store.load()).toEqual([]);
+  });
+
+  it("stores draft audit-session metadata for interrupted local evidence intake without raw bytes", () => {
+    const storage = fakeStorage();
+    const store = createEvidenceIntakeDraftStore(storage);
+    let batch = addEvidenceFilesToBatch(baseBatch(), [file({ name: "interrupted.png", size: 8192 })], "filePicker", now);
+    batch = completeMetadata(batch);
+    const draft = createEvidenceIntakeDraft(batch, now);
+
+    store.save(draft);
+    const loaded = store.load();
+    const recovery = createEvidenceIntakeRecoveryReport(loaded);
+    const raw = storage.getItem("gameface-match.phase0.evidence-intake.draft.v1") ?? "";
+
+    expect(loaded?.productionReady).toBe(false);
+    expect(loaded?.rawFileBytesStored).toBe(false);
+    expect(recovery.hasDraft).toBe(true);
+    expect(recovery.messages.join(" ")).toContain("not production-ready");
+    expect(raw).toContain("interrupted.png");
+    expect(raw).not.toContain("data:image");
+    expect(raw).not.toContain("ArrayBuffer");
   });
 });
 

@@ -42,6 +42,13 @@ import {
   type SavedProfileStorageStatus,
   type SavedProfileSummary
 } from "@/lib/privacy/profile-storage";
+import {
+  createCaptureRecoverySnapshot,
+  createCaptureRecoveryStore,
+  createOfflineRecoveryStatus,
+  hasRecoverableCaptureProgress,
+  type OfflineRecoveryStatus
+} from "@/lib/recovery/offline-recovery";
 import { createInitialAttributeConfirmation, type AttributeConfirmationState } from "@/lib/profile/attribute-confirmation";
 import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { createInitialScreenshotRefinementSession, deleteScreenshotRefinementSession } from "@/lib/refinement/screenshot-refinement";
@@ -97,6 +104,8 @@ export default function HomePage() {
   const [savedProfileStatus, setSavedProfileStatus] = useState<SavedProfileStorageStatus | null>(null);
   const [profileSaveStatusMessage, setProfileSaveStatusMessage] = useState<string | null>(null);
   const [profileSaveErrorMessage, setProfileSaveErrorMessage] = useState<string | null>(null);
+  const [captureRecoveryNotice, setCaptureRecoveryNotice] = useState<string | null>(null);
+  const [offlineRecoveryStatus, setOfflineRecoveryStatus] = useState<OfflineRecoveryStatus | null>(null);
   const cameraService = useMemo(() => createBrowserCameraService(), []);
   const privacyStore = useMemo(() => createMemoryPrivacyStore(), []);
   const savedProfileStorage = useMemo<SavedProfileStorage>(
@@ -170,6 +179,37 @@ export default function HomePage() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    const snapshot = createCaptureRecoveryStore(window.sessionStorage).load();
+    if (snapshot && hasRecoverableCaptureProgress(snapshot)) {
+      setCaptureRecoveryNotice(
+        `Recovered metadata for ${snapshot.completedAngleCount} of ${snapshot.totalAngleCount} capture angles from a previous browser session. Raw images are not restored; retake or re-upload any needed angle before continuing.`
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof navigator === "undefined") return;
+    function updateRecoveryStatus() {
+      setOfflineRecoveryStatus(
+        createOfflineRecoveryStatus({
+          browserOnline: navigator.onLine,
+          externalResources: {
+            "Production catalog runtime": catalogRuntimeError ? "unavailable" : catalogRuntimeStatus ? "available" : "unknown"
+          }
+        })
+      );
+    }
+    updateRecoveryStatus();
+    window.addEventListener("online", updateRecoveryStatus);
+    window.addEventListener("offline", updateRecoveryStatus);
+    return () => {
+      window.removeEventListener("online", updateRecoveryStatus);
+      window.removeEventListener("offline", updateRecoveryStatus);
+    };
+  }, [catalogRuntimeError, catalogRuntimeStatus]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
     function handlePopState() {
       const nextScreen = getScreenFromHash(window.location.hash) ?? "welcome";
       if (nextScreen === "home" && !hasRequiredCaptureConsent(consentState)) {
@@ -220,17 +260,27 @@ export default function HomePage() {
   function handleSessionChange(nextSession: typeof session) {
     setSession(nextSession);
     privacyStore.setCurrentSessionImages(nextSession.angles.flatMap((angle) => (angle.image ? [angle.image] : [])));
+    if (typeof window !== "undefined") {
+      const recoveryStore = createCaptureRecoveryStore(window.sessionStorage);
+      if (nextSession.angles.some((angle) => angle.status !== "empty" || angle.validationErrors.length > 0)) {
+        recoveryStore.save(createCaptureRecoverySnapshot(nextSession));
+      } else {
+        recoveryStore.clear();
+      }
+    }
     refreshPrivacyState();
   }
 
   function deleteCurrentSession() {
     revokeObjectUrls(session.angles.flatMap((angle) => (angle.image?.objectUrl ? [angle.image.objectUrl] : [])));
+    if (typeof window !== "undefined") createCaptureRecoveryStore(window.sessionStorage).clear();
     privacyStore.deleteCurrentSession();
     setSession(createInitialCaptureSession());
     setAttributeConfirmation(createInitialAttributeConfirmation());
     setStandardProfile(null);
     setProfileSaveStatusMessage(null);
     setProfileSaveErrorMessage(null);
+    setCaptureRecoveryNotice(null);
     privacyStore.recordDeletionCompletion("active-capture-session");
     setDeletionRecorded(true);
     refreshPrivacyState();
@@ -238,6 +288,7 @@ export default function HomePage() {
 
   function deleteTemporaryImages() {
     revokeObjectUrls(session.angles.flatMap((angle) => (angle.image?.objectUrl ? [angle.image.objectUrl] : [])));
+    if (typeof window !== "undefined") createCaptureRecoveryStore(window.sessionStorage).clear();
     privacyStore.deleteTemporaryImages();
     setSession(createInitialCaptureSession());
     privacyStore.recordDeletionCompletion("temporary-images");
@@ -302,6 +353,7 @@ export default function HomePage() {
       ...session.angles.flatMap((angle) => (angle.image?.objectUrl ? [angle.image.objectUrl] : [])),
       ...screenshotSession.slots.flatMap((slot) => (slot.screenshot?.objectUrl ? [slot.screenshot.objectUrl] : []))
     ]);
+    if (typeof window !== "undefined") createCaptureRecoveryStore(window.sessionStorage).clear();
     privacyStore.deleteAllLocalData();
     savedProfileStorage.deleteAllProfiles();
     setSession(createInitialCaptureSession());
@@ -313,6 +365,7 @@ export default function HomePage() {
     setSavedProfileStatus(savedProfileStorage.getStatus());
     setProfileSaveStatusMessage(null);
     setProfileSaveErrorMessage(null);
+    setCaptureRecoveryNotice(null);
     setDeletionRecorded(true);
     refreshPrivacyState();
   }
@@ -615,6 +668,16 @@ export default function HomePage() {
       <div className="sr-only" role="status" aria-live="polite">
         Current screen: {screen}. {completedAngles} of {requiredAngles} capture angles completed.
       </div>
+      {captureRecoveryNotice ? (
+        <Alert title="Capture recovery" tone="warning" role="status">
+          {captureRecoveryNotice} Draft recovery is not production-ready.
+        </Alert>
+      ) : null}
+      {offlineRecoveryStatus && (!offlineRecoveryStatus.browserOnline || catalogRuntimeError) ? (
+        <Alert title="Offline and external-resource status" tone="warning" role="status">
+          {offlineRecoveryStatus.messages.map((message) => message.message).join(" ")}
+        </Alert>
+      ) : null}
       {stepFlowProgress.isInStepFlow ? (
         <div className="flow-layout">
           <StepFlowRail steps={STEP_FLOW_DETAILS} activeScreen={screen} onNavigate={navigate} />

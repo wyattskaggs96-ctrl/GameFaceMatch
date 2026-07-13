@@ -1,8 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
   canApproveReleaseCandidate,
+  createCatalogManagerReviewDraft,
+  createCatalogManagerReviewDraftStore,
   createCatalogManagerReviewAction,
   createCatalogManagerReviewSession,
+  createCatalogManagerValidationRerunSummary,
   createSignedCatalogManagerReviewReport,
   parseCatalogManagerCandidatePackage
 } from "@/lib/phase-zero/catalog-manager-review-console";
@@ -161,6 +164,43 @@ describe("catalog-manager review console", () => {
     expect(parseCatalogManagerCandidatePackage(JSON.stringify(validCandidatePackage())).packageID).toBe("test-only-manager-package");
     expect(() => parseCatalogManagerCandidatePackage("[]")).toThrow(/object/i);
   });
+
+  it("stores local catalog-manager drafts and rerun summaries without production approval", () => {
+    const storage = fakeStorage();
+    const store = createCatalogManagerReviewDraftStore(storage);
+    const action = createCatalogManagerReviewAction({
+      recordID: "CF27_TESTONLY_RTG_HEAD_001",
+      decision: "requestRepair",
+      reviewerID: "manager-test-only",
+      note: "test-only repair",
+      createdAt: now
+    });
+    const draft = createCatalogManagerReviewDraft({
+      packageText: JSON.stringify(validCandidatePackage()),
+      validationText: "",
+      reviewerID: "manager-test-only",
+      selectedRecordID: "CF27_TESTONLY_RTG_HEAD_001",
+      actionNote: "",
+      reportNotes: "test-only local draft",
+      actions: [action],
+      savedAt: now
+    });
+
+    store.save(draft);
+    const loaded = store.load();
+    const session = createCatalogManagerReviewSession({
+      candidatePackage: validCandidatePackage(),
+      importedAt: now,
+      reviewActions: loaded?.actions
+    });
+    const rerun = createCatalogManagerValidationRerunSummary(session, now);
+
+    expect(loaded?.productionReady).toBe(false);
+    expect(loaded?.recoveryNote).toMatch(/do not publish/);
+    expect(rerun.productionReady).toBe(false);
+    expect(rerun.unresolvedFailureCount).toBeGreaterThan(0);
+    expect(rerun.message).toMatch(/draft review/);
+  });
 });
 
 function validCandidatePackage() {
@@ -234,4 +274,19 @@ function asset(assetID: string, angle: string) {
 
 function codes(issues: Array<{ code: string }>) {
   return issues.map((issue) => issue.code);
+}
+
+function fakeStorage() {
+  const values = new Map<string, string>();
+  return {
+    getItem(key: string) {
+      return values.get(key) ?? null;
+    },
+    setItem(key: string, value: string) {
+      values.set(key, value);
+    },
+    removeItem(key: string) {
+      values.delete(key);
+    }
+  };
 }

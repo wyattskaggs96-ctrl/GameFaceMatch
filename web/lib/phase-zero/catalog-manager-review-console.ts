@@ -1,6 +1,7 @@
 import type { ISODateString } from "@/types/domain";
 
 export const CATALOG_MANAGER_REVIEW_SCHEMA_VERSION = "catalog-manager-review-v1";
+export const CATALOG_MANAGER_REVIEW_DRAFT_STORAGE_KEY = "gameface-match.phase0.catalog-manager-review.draft.v1";
 
 export type CatalogManagerGateStatus = "pass" | "warning" | "fail";
 export type CatalogManagerReviewDecision = "acceptVerifiedWithNotes" | "rejectVerifiedWithNotes" | "requestRepair" | "rejectRecord";
@@ -125,6 +126,38 @@ export interface CatalogManagerReviewSession {
   releaseCandidateApprovalStatus: "blocked" | "ready";
 }
 
+export interface CatalogManagerReviewDraft {
+  schemaVersion: typeof CATALOG_MANAGER_REVIEW_SCHEMA_VERSION;
+  draftID: string;
+  savedAt: ISODateString;
+  packageText: string;
+  validationText: string;
+  reviewerID: string;
+  selectedRecordID: string;
+  actionNote: string;
+  reportNotes: string;
+  actions: CatalogManagerReviewAction[];
+  productionReady: false;
+  recoveryNote: string;
+}
+
+export interface CatalogManagerReviewDraftStore {
+  load(): CatalogManagerReviewDraft | null;
+  save(draft: CatalogManagerReviewDraft): void;
+  clear(): void;
+}
+
+export interface CatalogManagerValidationRerunSummary {
+  rerunAt: ISODateString;
+  packageID: string;
+  packageVersion: string;
+  mandatoryGatesPass: boolean;
+  unresolvedFailureCount: number;
+  releaseCandidateApprovalStatus: CatalogManagerReviewSession["releaseCandidateApprovalStatus"];
+  productionReady: false;
+  message: string;
+}
+
 export interface CatalogManagerSignedReviewReport {
   schemaVersion: typeof CATALOG_MANAGER_REVIEW_SCHEMA_VERSION;
   reportID: string;
@@ -246,6 +279,72 @@ export function createCatalogManagerReviewAction(input: {
 
 export function canApproveReleaseCandidate(session: CatalogManagerReviewSession): boolean {
   return session.mandatoryGatesPass && session.releaseCandidateApprovalStatus === "ready";
+}
+
+export function createCatalogManagerReviewDraft(input: {
+  packageText: string;
+  validationText: string;
+  reviewerID: string;
+  selectedRecordID: string;
+  actionNote: string;
+  reportNotes: string;
+  actions: CatalogManagerReviewAction[];
+  savedAt: ISODateString;
+}): CatalogManagerReviewDraft {
+  return {
+    schemaVersion: CATALOG_MANAGER_REVIEW_SCHEMA_VERSION,
+    draftID: `catalog-manager-review-draft-${input.savedAt}`,
+    savedAt: input.savedAt,
+    packageText: input.packageText,
+    validationText: input.validationText,
+    reviewerID: input.reviewerID,
+    selectedRecordID: input.selectedRecordID,
+    actionNote: input.actionNote,
+    reportNotes: input.reportNotes,
+    actions: input.actions,
+    productionReady: false,
+    recoveryNote:
+      "Local catalog-manager drafts preserve review work only. They do not publish records, approve releases, or bypass validation after recovery."
+  };
+}
+
+export function createCatalogManagerReviewDraftStore(storage: Pick<Storage, "getItem" | "setItem" | "removeItem">): CatalogManagerReviewDraftStore {
+  return {
+    load() {
+      const raw = storage.getItem(CATALOG_MANAGER_REVIEW_DRAFT_STORAGE_KEY);
+      if (!raw) return null;
+      try {
+        const parsed = JSON.parse(raw) as CatalogManagerReviewDraft;
+        return parsed?.schemaVersion === CATALOG_MANAGER_REVIEW_SCHEMA_VERSION ? parsed : null;
+      } catch {
+        return null;
+      }
+    },
+    save(draft) {
+      storage.setItem(CATALOG_MANAGER_REVIEW_DRAFT_STORAGE_KEY, JSON.stringify({ ...draft, productionReady: false }));
+    },
+    clear() {
+      storage.removeItem(CATALOG_MANAGER_REVIEW_DRAFT_STORAGE_KEY);
+    }
+  };
+}
+
+export function createCatalogManagerValidationRerunSummary(
+  session: CatalogManagerReviewSession,
+  rerunAt: ISODateString
+): CatalogManagerValidationRerunSummary {
+  return {
+    rerunAt,
+    packageID: session.packageID,
+    packageVersion: session.packageVersion,
+    mandatoryGatesPass: session.mandatoryGatesPass,
+    unresolvedFailureCount: session.unresolvedFailures.length,
+    releaseCandidateApprovalStatus: session.releaseCandidateApprovalStatus,
+    productionReady: false,
+    message: session.mandatoryGatesPass
+      ? "Validation rerun found no mandatory manager-review blockers, but publication still requires the full production gate."
+      : "Validation rerun still has unresolved blockers. Keep the package in local draft review."
+  };
 }
 
 export async function createSignedCatalogManagerReviewReport(input: {

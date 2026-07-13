@@ -1,9 +1,12 @@
 "use client";
 
-import { useMemo, useRef, useState, type ChangeEvent, type DragEvent, type InputHTMLAttributes } from "react";
+import { useEffect, useMemo, useRef, useState, type ChangeEvent, type DragEvent, type InputHTMLAttributes } from "react";
 import { Alert, Button, Card, SelectField, StatusBadge, TextField } from "@/components/design-system";
 import {
   addEvidenceFilesToBatch,
+  createEvidenceIntakeDraft,
+  createEvidenceIntakeDraftStore,
+  createEvidenceIntakeRecoveryReport,
   createEmptyEvidenceIntakeBatch,
   createEvidenceIntakeLocalStore,
   finalizeEvidenceIntakeBatch,
@@ -19,6 +22,7 @@ import {
   type Phase0EvidenceRenamePlan
 } from "@/lib/phase-zero/phase-zero-evidence-naming";
 import { DEFAULT_EVIDENCE_PREVIEW_PAGE_SIZE, createEvidencePreviewPlan, paginateCollection } from "@/lib/performance/large-evidence-handling";
+import { createUnsavedChangeMessage } from "@/lib/recovery/offline-recovery";
 import type { Phase0EvidenceDerivativeState, Phase0EvidenceFileRole, Phase0EvidenceView } from "@/lib/phase-zero/phase-zero-evidence";
 
 type DirectoryInputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -39,6 +43,7 @@ export function EvidenceIntakeManager() {
     })
   );
   const [savedMetadataCount, setSavedMetadataCount] = useState(0);
+  const [draftMessage, setDraftMessage] = useState<string | null>(null);
   const [itemPage, setItemPage] = useState(1);
   const [namingContext, setNamingContext] = useState({
     gameVersion: "",
@@ -81,6 +86,41 @@ export function EvidenceIntakeManager() {
       ),
     [activeItems]
   );
+  const currentDraft = useMemo(() => createEvidenceIntakeDraft(batch, new Date().toISOString()), [batch]);
+  const recoveryReport = useMemo(() => createEvidenceIntakeRecoveryReport(activeItems.length > 0 ? currentDraft : null), [activeItems.length, currentDraft]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const store = createEvidenceIntakeDraftStore(window.localStorage);
+    const draft = store.load();
+    if (draft && draft.batch.items.some((item) => item.status !== "removed")) {
+      setBatch(draft.batch);
+      setDraftMessage(`Recovered local evidence draft from ${new Date(draft.savedAt).toLocaleString()}. Source files may need to be reselected.`);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const store = createEvidenceIntakeDraftStore(window.localStorage);
+    if (report.pendingCount > 0) {
+      store.save(currentDraft);
+      setDraftMessage(`Local metadata draft saved at ${new Date(currentDraft.savedAt).toLocaleTimeString()}.`);
+    } else {
+      store.clear();
+    }
+  }, [currentDraft, report.pendingCount]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    function handleBeforeUnload(event: BeforeUnloadEvent) {
+      const message = createUnsavedChangeMessage({ hasUnsavedChanges: activeItems.length > 0 && report.pendingCount > 0, workLabel: "Evidence intake" });
+      if (!message) return;
+      event.preventDefault();
+      event.returnValue = message;
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [activeItems.length, report.pendingCount]);
 
   function handleFiles(files: FileList | File[], source: "dragDrop" | "filePicker" | "folderPicker") {
     const fileArray = Array.from(files);
@@ -105,8 +145,22 @@ export function EvidenceIntakeManager() {
     if (typeof window !== "undefined") {
       const store = createEvidenceIntakeLocalStore(window.localStorage);
       store.save(finalized.finalizedRecords);
+      createEvidenceIntakeDraftStore(window.localStorage).clear();
       setSavedMetadataCount(store.load().length);
+      setDraftMessage("Finalized metadata saved locally and evidence-intake draft cleared.");
     }
+  }
+
+  function saveDraftNow() {
+    if (typeof window === "undefined") return;
+    const draft = createEvidenceIntakeDraft(batch, new Date().toISOString());
+    createEvidenceIntakeDraftStore(window.localStorage).save(draft);
+    setDraftMessage(`Local evidence draft saved at ${new Date(draft.savedAt).toLocaleString()}.`);
+  }
+
+  function clearDraft() {
+    if (typeof window !== "undefined") createEvidenceIntakeDraftStore(window.localStorage).clear();
+    setDraftMessage("Local evidence draft cleared. Current in-memory work remains until this page changes or reloads.");
   }
 
   return (
@@ -157,6 +211,17 @@ export function EvidenceIntakeManager() {
       <Alert title="Local-only storage" tone="info">
         Finalization stores metadata only in browser localStorage. It does not serialize, transform, compress, rename, or upload the selected files.
       </Alert>
+      <Alert title="Draft recovery" tone={recoveryReport.hasDraft ? "warning" : "info"}>
+        {draftMessage ?? recoveryReport.messages[0]} Drafts are metadata-only and not production-ready; browser refresh cannot restore original File objects.
+      </Alert>
+      <div className="button-row">
+        <Button variant="secondary" onClick={saveDraftNow} disabled={report.pendingCount === 0}>
+          Save draft metadata
+        </Button>
+        <Button variant="ghost" onClick={clearDraft}>
+          Clear saved draft
+        </Button>
+      </div>
       <Card>
         <div className="status-row">
           <div>

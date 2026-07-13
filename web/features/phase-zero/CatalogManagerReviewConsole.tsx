@@ -1,11 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Alert, Button, Card, ScreenHeader, SelectField, StatusBadge, TextField } from "@/components/design-system";
 import {
   canApproveReleaseCandidate,
+  createCatalogManagerReviewDraft,
+  createCatalogManagerReviewDraftStore,
   createCatalogManagerReviewAction,
   createCatalogManagerReviewSession,
+  createCatalogManagerValidationRerunSummary,
   createSignedCatalogManagerReviewReport,
   parseCatalogManagerCandidatePackage,
   type CatalogManagerCandidatePackage,
@@ -13,10 +16,12 @@ import {
   type CatalogManagerReportDecision,
   type CatalogManagerReviewAction,
   type CatalogManagerSignedReviewReport,
+  type CatalogManagerValidationRerunSummary,
   type CatalogManagerValidationIssue,
   type CatalogManagerValidationReport
 } from "@/lib/phase-zero/catalog-manager-review-console";
 import { DEFAULT_CATALOG_TABLE_PAGE_SIZE, createIncrementalProcessingPlan, paginateCollection } from "@/lib/performance/large-evidence-handling";
+import { createUnsavedChangeMessage } from "@/lib/recovery/offline-recovery";
 
 export function CatalogManagerReviewConsole() {
   const [packageText, setPackageText] = useState("");
@@ -32,6 +37,8 @@ export function CatalogManagerReviewConsole() {
   const [signedReport, setSignedReport] = useState<CatalogManagerSignedReviewReport | null>(null);
   const [recordPage, setRecordPage] = useState(1);
   const [evidencePage, setEvidencePage] = useState(1);
+  const [draftMessage, setDraftMessage] = useState<string | null>(null);
+  const [rerunSummary, setRerunSummary] = useState<CatalogManagerValidationRerunSummary | null>(null);
 
   const session = useMemo(() => {
     if (!candidatePackage) return null;
@@ -43,6 +50,52 @@ export function CatalogManagerReviewConsole() {
     });
   }, [actions, candidatePackage, validationReport]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const draft = createCatalogManagerReviewDraftStore(window.localStorage).load();
+    if (!draft) return;
+    setPackageText(draft.packageText);
+    setValidationText(draft.validationText);
+    setActions(draft.actions);
+    setSelectedRecordID(draft.selectedRecordID);
+    setReviewerID(draft.reviewerID);
+    setActionNote(draft.actionNote);
+    setReportNotes(draft.reportNotes);
+    setDraftMessage(`Recovered local catalog-manager draft from ${new Date(draft.savedAt).toLocaleString()}. Rerun validation before any decision.`);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!packageText.trim() && actions.length === 0 && !validationText.trim()) return;
+    const draft = createCatalogManagerReviewDraft({
+      packageText,
+      validationText,
+      reviewerID,
+      selectedRecordID,
+      actionNote,
+      reportNotes,
+      actions,
+      savedAt: new Date().toISOString()
+    });
+    createCatalogManagerReviewDraftStore(window.localStorage).save(draft);
+    setDraftMessage(`Local catalog-manager draft saved at ${new Date(draft.savedAt).toLocaleTimeString()}.`);
+  }, [actionNote, actions, packageText, reportNotes, reviewerID, selectedRecordID, validationText]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    function handleBeforeUnload(event: BeforeUnloadEvent) {
+      const message = createUnsavedChangeMessage({
+        hasUnsavedChanges: Boolean(packageText.trim()) || actions.length > 0,
+        workLabel: "Catalog-manager review"
+      });
+      if (!message) return;
+      event.preventDefault();
+      event.returnValue = message;
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [actions.length, packageText]);
+
   function importPackage() {
     try {
       const nextPackage = parseCatalogManagerCandidatePackage(packageText);
@@ -53,6 +106,7 @@ export function CatalogManagerReviewConsole() {
       setSignedReport(null);
       setRecordPage(1);
       setEvidencePage(1);
+      setRerunSummary(null);
       setParseError(null);
       const firstRecordID = (nextPackage.items ?? nextPackage.manifest?.items ?? [])[0]?.stableInternalID;
       setSelectedRecordID(typeof firstRecordID === "string" ? firstRecordID : "");
@@ -89,6 +143,35 @@ export function CatalogManagerReviewConsole() {
     setSignedReport(report);
   }
 
+  function saveDraftNow() {
+    if (typeof window === "undefined") return;
+    const draft = createCatalogManagerReviewDraft({
+      packageText,
+      validationText,
+      reviewerID,
+      selectedRecordID,
+      actionNote,
+      reportNotes,
+      actions,
+      savedAt: new Date().toISOString()
+    });
+    createCatalogManagerReviewDraftStore(window.localStorage).save(draft);
+    setDraftMessage(`Local catalog-manager draft saved at ${new Date(draft.savedAt).toLocaleString()}.`);
+  }
+
+  function clearDraft() {
+    if (typeof window !== "undefined") createCatalogManagerReviewDraftStore(window.localStorage).clear();
+    setDraftMessage("Local catalog-manager draft cleared. Current in-memory work remains until this page changes or reloads.");
+  }
+
+  function rerunValidation() {
+    if (!session) {
+      importPackage();
+      return;
+    }
+    setRerunSummary(createCatalogManagerValidationRerunSummary(session, new Date().toISOString()));
+  }
+
   return (
     <section className="screen-stack" aria-labelledby="catalog-manager-review-title">
       <ScreenHeader eyebrow="Development-only catalog manager" title="Catalog-manager review console" id="catalog-manager-review-title">
@@ -100,6 +183,25 @@ export function CatalogManagerReviewConsole() {
       <Alert title="Production guard" tone="warning">
         Release-candidate approval remains blocked until every mandatory validation gate passes. This local console cannot override catalog validation.
       </Alert>
+      <Alert title="Local recovery" tone="info">
+        {draftMessage ?? "Catalog-manager drafts are saved as local JSON metadata only."} Draft review work is not production-ready and must be rerun through validation after recovery.
+      </Alert>
+      <div className="button-row">
+        <Button variant="secondary" onClick={saveDraftNow} disabled={!packageText.trim() && actions.length === 0}>
+          Save review draft
+        </Button>
+        <Button variant="secondary" onClick={rerunValidation} disabled={!packageText.trim() && !session}>
+          Rerun validation
+        </Button>
+        <Button variant="ghost" onClick={clearDraft}>
+          Clear saved draft
+        </Button>
+      </div>
+      {rerunSummary ? (
+        <Alert title="Validation rerun" tone={rerunSummary.mandatoryGatesPass ? "success" : "warning"} role="status">
+          {rerunSummary.message} Unresolved failures: {rerunSummary.unresolvedFailureCount}. Production-ready: no.
+        </Alert>
+      ) : null}
 
       <div className="card-grid">
         <Card>

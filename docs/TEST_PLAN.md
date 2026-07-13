@@ -137,6 +137,18 @@ Large local evidence workflows should avoid loading all raw evidence into memory
 
 Manual checks should verify browser responsiveness with large screenshot folders, source-video metadata entry, and catalog packages that are larger than the fixture set. Do not add real user face media or unverified game evidence to the repository while testing these paths.
 
+## Offline and recovery coverage
+
+Offline and interruption tests should verify:
+
+- Capture recovery snapshots store metadata only, without object URLs or raw image bytes
+- Evidence-intake draft audit sessions survive local storage round trips and remain marked non-production
+- Catalog-manager review drafts preserve local review work without approving releases
+- Validation rerun summaries remain blocked when repair actions or mandatory failures exist
+- Unsaved-change warnings are generated for local draft work
+- Failed checksum recovery plans tell the operator to retry validation and not publish
+- Offline and external-resource status messages do not imply recommendations are available
+
 ## Browser end-to-end coverage
 
 The active web MVP uses Playwright for production-representative browser coverage under `web/tests/e2e/`.

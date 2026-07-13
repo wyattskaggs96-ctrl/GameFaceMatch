@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/facial-feature-taxonomy.schema.json",
+  "title": "PhaseZeroFacialFeatureAnnotationSet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "annotationID", "catalogStableID", "createdAt", "updatedAt", "nativeGameLabel", "researcherAppliedMetadata"],
+  "properties": {
+    "schemaVersion": { "const": "phase0-facial-feature-taxonomy-v1" },
+    "annotationID": { "type": "string", "minLength": 1 },
+    "catalogStableID": { "type": "string", "minLength": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "nativeGameLabel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nativeCategoryLabel", "visibleGameLabelOrIndex", "nativeOrder", "menuItemID"],
+      "properties": {
+        "nativeCategoryLabel": { "type": "string", "minLength": 1 },
+        "visibleGameLabelOrIndex": { "type": "string", "minLength": 1 },
+        "nativeOrder": { "type": "integer", "minimum": 1 },
+        "menuItemID": { "type": "string", "minLength": 1 }
+      }
+    },
+    "researcherAppliedMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taxonomyVersion",
+        "face",
+        "forehead",
+        "temples",
+        "cheekbones",
+        "jaw",
+        "chin",
+        "eyes",
+        "brows",
+        "nose",
+        "mouth",
+        "ears",
+        "symmetry",
+        "hairline",
+        "facialHairCoverage"
+      ],
+      "not": {
+        "anyOf": [
+          { "required": ["race"] },
+          { "required": ["ethnicity"] },
+          { "required": ["attractiveness"] },
+          { "required": ["personality"] },
+          { "required": ["identity"] },
+          { "required": ["criminality"] },
+          { "required": ["health"] },
+          { "required": ["realPersonResemblance"] },
+          { "required": ["celebrityResemblance"] },
+          { "required": ["lookalike"] }
+        ]
+      },
+      "properties": {
+        "taxonomyVersion": { "const": "phase0-facial-feature-taxonomy-v1" },
+        "face": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["widthRatio", "lengthRatio", "widthClass", "lengthClass"],
+          "properties": {
+            "widthRatio": { "$ref": "#/$defs/numericMetric" },
+            "lengthRatio": { "$ref": "#/$defs/numericMetric" },
+            "widthClass": { "$ref": "#/$defs/widthMetric" },
+            "lengthClass": { "$ref": "#/$defs/heightMetric" }
+          }
+        },
+        "forehead": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["widthRatio", "heightRatio", "widthClass", "heightClass"],
+          "properties": {
+            "widthRatio": { "$ref": "#/$defs/numericMetric" },
+            "heightRatio": { "$ref": "#/$defs/numericMetric" },
+            "widthClass": { "$ref": "#/$defs/widthMetric" },
+            "heightClass": { "$ref": "#/$defs/heightMetric" }
+          }
+        },
+        "temples": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["widthRatio", "taperClass"],
+          "properties": {
+            "widthRatio": { "$ref": "#/$defs/numericMetric" },
+            "taperClass": { "$ref": "#/$defs/templeTaperMetric" }
+          }
+        },
+        "cheekbones": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["widthRatio", "prominenceClass"],
+          "properties": {
+            "widthRatio": { "$ref": "#/$defs/numericMetric" },
+            "prominenceClass": { "$ref": "#/$defs/projectionMetric" }
+          }
+        },
+        "jaw": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["widthRatio", "angleClass", "taperClass"],
+          "properties": {
+            "widthRatio": { "$ref": "#/$defs/numericMetric" },
+            "angleClass": { "$ref": "#/$defs/angleMetric" },
+            "taperClass": { "$ref": "#/$defs/jawTaperMetric" }
+          }
+        },
+        "chin": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["widthRatio", "lengthRatio", "projectionClass"],
+          "properties": {
+            "widthRatio": { "$ref": "#/$defs/numericMetric" },
+            "lengthRatio": { "$ref": "#/$defs/numericMetric" },
+            "projectionClass": { "$ref": "#/$defs/projectionMetric" }
+          }
+        },
+        "eyes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["spacingRatio", "meanEyeWidthRatio", "tiltClass", "opennessClass"],
+          "properties": {
+            "spacingRatio": { "$ref": "#/$defs/numericMetric" },
+            "meanEyeWidthRatio": { "$ref": "#/$defs/numericMetric" },
+            "tiltClass": { "$ref": "#/$defs/tiltMetric" },
+            "opennessClass": { "$ref": "#/$defs/heightMetric" }
+          }
+        },
+        "brows": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["thicknessClass", "positionRatio", "archClass"],
+          "properties": {
+            "thicknessClass": { "$ref": "#/$defs/sizeMetric" },
+            "positionRatio": { "$ref": "#/$defs/numericMetric" },
+            "archClass": { "$ref": "#/$defs/browArchMetric" }
+          }
+        },
+        "nose": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["widthRatio", "lengthRatio", "bridgeClass", "projectionClass"],
+          "properties": {
+            "widthRatio": { "$ref": "#/$defs/numericMetric" },
+            "lengthRatio": { "$ref": "#/$defs/numericMetric" },
+            "bridgeClass": { "$ref": "#/$defs/bridgeMetric" },
+            "projectionClass": { "$ref": "#/$defs/projectionMetric" }
+          }
+        },
+        "mouth": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["widthRatio", "fullnessClass", "cornerTiltClass"],
+          "properties": {
+            "widthRatio": { "$ref": "#/$defs/numericMetric" },
+            "fullnessClass": { "$ref": "#/$defs/sizeMetric" },
+            "cornerTiltClass": { "$ref": "#/$defs/tiltMetric" }
+          }
+        },
+        "ears": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["visibilityClass", "sizeClass", "protrusionClass"],
+          "properties": {
+            "visibilityClass": { "$ref": "#/$defs/visibilityMetric" },
+            "sizeClass": { "$ref": "#/$defs/sizeMetric" },
+            "protrusionClass": { "$ref": "#/$defs/projectionMetric" }
+          }
+        },
+        "symmetry": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["leftRightDifferenceRatio", "reviewClass"],
+          "properties": {
+            "leftRightDifferenceRatio": { "$ref": "#/$defs/numericMetric" },
+            "reviewClass": { "$ref": "#/$defs/symmetryMetric" }
+          }
+        },
+        "hairline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["positionClass", "contourClass", "visibleCoverageClass"],
+          "properties": {
+            "positionClass": { "$ref": "#/$defs/heightMetric" },
+            "contourClass": { "$ref": "#/$defs/hairlineContourMetric" },
+            "visibleCoverageClass": { "$ref": "#/$defs/visibilityMetric" }
+          }
+        },
+        "facialHairCoverage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["upperLipCoverage", "chinCoverage", "cheekCoverage", "jawCoverage", "sideburnCoverage", "densityClass"],
+          "properties": {
+            "upperLipCoverage": { "$ref": "#/$defs/coverageMetric" },
+            "chinCoverage": { "$ref": "#/$defs/coverageMetric" },
+            "cheekCoverage": { "$ref": "#/$defs/coverageMetric" },
+            "jawCoverage": { "$ref": "#/$defs/coverageMetric" },
+            "sideburnCoverage": { "$ref": "#/$defs/coverageMetric" },
+            "densityClass": { "$ref": "#/$defs/sizeMetric" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "source": { "enum": ["measured", "researcherReviewed", "userConfirmed", "unavailable"] },
+    "metricBase": {
+      "type": "object",
+      "required": ["value", "source", "confidence", "evidenceFileIDs"],
+      "properties": {
+        "source": { "$ref": "#/$defs/source" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidenceFileIDs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "numericMetric": {
+      "allOf": [
+        { "$ref": "#/$defs/metricBase" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "value": { "type": ["number", "null"] },
+            "source": true,
+            "confidence": true,
+            "evidenceFileIDs": true,
+            "notes": true
+          }
+        }
+      ]
+    },
+    "stringMetric": {
+      "allOf": [
+        { "$ref": "#/$defs/metricBase" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "value": { "type": "string" },
+            "source": true,
+            "confidence": true,
+            "evidenceFileIDs": true,
+            "notes": true
+          }
+        }
+      ]
+    },
+    "widthMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "veryNarrow", "narrow", "medium", "wide", "veryWide"] } } }] },
+    "heightMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "veryShort", "short", "medium", "tall", "veryTall"] } } }] },
+    "sizeMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "verySmall", "small", "medium", "large", "veryLarge"] } } }] },
+    "projectionMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "recessed", "slight", "medium", "prominent", "veryProminent"] } } }] },
+    "angleMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "low", "medium", "high"] } } }] },
+    "coverageMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "none", "light", "partial", "full"] } } }] },
+    "visibilityMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "notVisible", "partiallyVisible", "visible"] } } }] },
+    "symmetryMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "appearsSymmetric", "minorAsymmetry", "notableAsymmetry"] } } }] },
+    "templeTaperMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "straight", "slightInward", "strongInward", "outward"] } } }] },
+    "jawTaperMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "tapered", "straight", "broad"] } } }] },
+    "tiltMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "downward", "level", "upward"] } } }] },
+    "browArchMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "flat", "slightArch", "strongArch"] } } }] },
+    "bridgeMetric": { "allOf": [{ "$ref": "#/$defs/stringMetric" }, { "properties": { "value": { "enum": ["unknown", "low", "medium", "high"] } } }] },
+    "hairlineContourMetric": {
+      "allOf": [
+        { "$ref": "#/$defs/stringMetric" },
+        { "properties": { "value": { "enum": ["unknown", "straight", "rounded", "widowsPeak", "templeRecessed", "covered"] } } }
+      ]
+    }
+  }
+}

@@ -1195,6 +1195,29 @@
       "lastCheckedDate": "2026-07-13"
     },
     {
+      "id": "GFM-P0-043",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Objective facial-feature taxonomy",
+      "summary": "Define a controlled objective catalog annotation taxonomy for measurable or reviewable facial features, keep native game labels separate from researcher metadata, and prohibit sensitive, identity, health, criminality, attractiveness, personality, and real-person resemblance labels.",
+      "owningModule": "Catalog annotation governance",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-facial-feature-taxonomy.ts",
+        "data/schemas/facial-feature-taxonomy.schema.json",
+        "docs/FACIAL_FEATURE_TAXONOMY.md",
+        "docs/GAME_AUDIT_FIELD_GUIDE.md",
+        "docs/GAME_CATALOG_WORKFLOW.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-facial-feature-taxonomy.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Taxonomy tests verify all required feature groups, schema coverage, native-label separation, prohibited sensitive/identity/resemblance field rejection, metric evidence requirements, and honest unavailable metrics.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-13"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

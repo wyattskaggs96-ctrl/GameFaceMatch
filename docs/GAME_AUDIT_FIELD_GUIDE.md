@@ -25,6 +25,7 @@ This guide defines how Wyatt records College Football 27 appearance catalog evid
 - Source-video ID and timestamp references when evidence comes from a recording.
 - Capture conditions.
 - Human annotation notes.
+- Objective facial-feature annotations using `docs/FACIAL_FEATURE_TAXONOMY.md`; native game labels stay separate from researcher-applied metadata.
 - Menu navigation instructions with evidence asset.
 - First-review record.
 - Second-review record from a different reviewer.
@@ -42,6 +43,8 @@ Never auto-verify. CSV imports and audit-session creation must always create dra
 ## Invalid Entries
 
 Reject empty labels, placeholder tokens, template notices, missing evidence, missing platform, missing game version, missing creation path, duplicate stable IDs, fixture flags, and records without the standard screenshot set.
+
+Reject race, ethnicity, attractiveness, personality, identity, criminality, health, real-person resemblance, celebrity resemblance, and lookalike labels in catalog annotations.
 
 ## Source Video Handling
 

@@ -1,0 +1,2317 @@
+{
+  "schemaVersion": "cf27-skin-tone-research-candidates-v1",
+  "createdAt": "2026-07-13T12:02:22.747Z",
+  "updatedAt": "2026-07-13T12:02:22.747Z",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "sourceType": "researchCandidate",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "PRIMARY_RESEARCH_ONLY_NOT_SECOND_VERIFIED",
+  "verificationStateForAllRecords": "NOT_VERIFIED",
+  "scope": {
+    "category": "Skin Tone",
+    "directlySelectedRecordCount": 24,
+    "directlySelectedNativeLabels": [
+      "Skin Tone 01",
+      "Skin Tone 02",
+      "Skin Tone 03",
+      "Skin Tone 04",
+      "Skin Tone 05",
+      "Skin Tone 06",
+      "Skin Tone 07",
+      "Skin Tone 08",
+      "Skin Tone 09",
+      "Skin Tone 10",
+      "Skin Tone 11",
+      "Skin Tone 12",
+      "Skin Tone 13",
+      "Skin Tone 14",
+      "Skin Tone 15",
+      "Skin Tone 16",
+      "Skin Tone 17",
+      "Skin Tone 18",
+      "Skin Tone 19",
+      "Skin Tone 20",
+      "Skin Tone 21",
+      "Skin Tone 22",
+      "Skin Tone 23",
+      "Skin Tone 24"
+    ],
+    "recordRange": "Skin Tone 01 through Skin Tone 24 directly selected in video-004",
+    "nativeOrderRangeObserved": "Skin Tone 01 through Skin Tone 24",
+    "completeCategoryCountClaimed": false,
+    "excludedLabels": [
+      "labels beyond Skin Tone 24",
+      "unselected neighboring swatches"
+    ],
+    "reasonCompletenessIsNotClaimed": "The recording directly selects contiguous native labels 01-24, but it does not show a wrap or hard selector boundary."
+  },
+  "context": {
+    "platformCode": "XBOXUNKNOWN",
+    "modeCode": "RTG",
+    "gameVersion": "UNKNOWN",
+    "patchVersion": "UNKNOWN",
+    "creationPath": "Road to Glory / Create Player / Player / Appearance / Head & Skin / Skin Tone",
+    "sourceVideoID": "video-004",
+    "duplicateProvenanceVideoID": "video-010",
+    "duplicateProvenancePolicy": "video-010 is an exact duplicate of video-004 and is retained as duplicate provenance only, not an independent evidence source."
+  },
+  "selectorObservations": {
+    "gridStructure": "4-column scrollable grid",
+    "firstObservedValue": "Skin Tone 09",
+    "firstObservedSelectedValue": "Skin Tone 09",
+    "finalObservedValue": "Skin Tone 11",
+    "finalObservedSelectedValue": "Skin Tone 11",
+    "selectorAppearsComplete": false,
+    "selectorCompletenessExplanation": "Contiguous native labels 01-24 are directly selected, but final boundary and wrap behavior are not shown.",
+    "wrapObserved": false,
+    "skinToneChangesVisibleCharacterPresentation": true,
+    "otherVisibleSettingsChangedWhenChoosingSkinTone": false,
+    "characterRotationAvailable": true,
+    "selectedHeadRemainsConstant": true
+  },
+  "observationPolicy": {
+    "noRaceOrEthnicityLabels": true,
+    "sensitiveTraitLabelsAllowed": false,
+    "noSensitiveTraitInference": true,
+    "objectiveColorMeasurementAllowed": true,
+    "skinPresentationExcludedFromGeometrySimilarity": true,
+    "geometrySimilarityUse": "excluded",
+    "productionUseAllowed": false,
+    "sourceMasterPreserved": true,
+    "derivativesAreLocalAndGitIgnored": true
+  },
+  "sourceVideos": [
+    {
+      "videoID": "video-004",
+      "workingFilename": "04_Skin_Tone.mp4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/03_Appearance_Skin_Tone.MP4",
+      "sha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+      "durationSeconds": 53.82,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "identifiedContent": "Skin Tone menu and options"
+    }
+  ],
+  "selectionSequence": [
+    {
+      "sequenceOrder": 1,
+      "visibleGameLabelOrIndex": "Skin Tone 09",
+      "nativeOrder": 9,
+      "timestampRangeSeconds": "8.0-9.0",
+      "stableTimestampSeconds": 8.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 2,
+      "visibleGameLabelOrIndex": "Skin Tone 08",
+      "nativeOrder": 8,
+      "timestampRangeSeconds": "10.0-11.0",
+      "stableTimestampSeconds": 10.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 3,
+      "visibleGameLabelOrIndex": "Skin Tone 04",
+      "nativeOrder": 4,
+      "timestampRangeSeconds": "12.0-13.0",
+      "stableTimestampSeconds": 12.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 4,
+      "visibleGameLabelOrIndex": "Skin Tone 16",
+      "nativeOrder": 16,
+      "timestampRangeSeconds": "14.0-14.0",
+      "stableTimestampSeconds": 14,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 5,
+      "visibleGameLabelOrIndex": "Skin Tone 20",
+      "nativeOrder": 20,
+      "timestampRangeSeconds": "15.0-16.0",
+      "stableTimestampSeconds": 15.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 6,
+      "visibleGameLabelOrIndex": "Skin Tone 19",
+      "nativeOrder": 19,
+      "timestampRangeSeconds": "17.0-18.0",
+      "stableTimestampSeconds": 17.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 7,
+      "visibleGameLabelOrIndex": "Skin Tone 18",
+      "nativeOrder": 18,
+      "timestampRangeSeconds": "19.0-20.0",
+      "stableTimestampSeconds": 19.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 8,
+      "visibleGameLabelOrIndex": "Skin Tone 15",
+      "nativeOrder": 15,
+      "timestampRangeSeconds": "21.0-22.0",
+      "stableTimestampSeconds": 21.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 9,
+      "visibleGameLabelOrIndex": "Skin Tone 21",
+      "nativeOrder": 21,
+      "timestampRangeSeconds": "23.0-24.0",
+      "stableTimestampSeconds": 23.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 10,
+      "visibleGameLabelOrIndex": "Skin Tone 06",
+      "nativeOrder": 6,
+      "timestampRangeSeconds": "25.0-26.0",
+      "stableTimestampSeconds": 25.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 11,
+      "visibleGameLabelOrIndex": "Skin Tone 07",
+      "nativeOrder": 7,
+      "timestampRangeSeconds": "27.0-28.0",
+      "stableTimestampSeconds": 27.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 12,
+      "visibleGameLabelOrIndex": "Skin Tone 05",
+      "nativeOrder": 5,
+      "timestampRangeSeconds": "29.0-30.0",
+      "stableTimestampSeconds": 29.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 13,
+      "visibleGameLabelOrIndex": "Skin Tone 23",
+      "nativeOrder": 23,
+      "timestampRangeSeconds": "31.0-32.0",
+      "stableTimestampSeconds": 31.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 14,
+      "visibleGameLabelOrIndex": "Skin Tone 24",
+      "nativeOrder": 24,
+      "timestampRangeSeconds": "33.0-33.0",
+      "stableTimestampSeconds": 33,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 15,
+      "visibleGameLabelOrIndex": "Skin Tone 22",
+      "nativeOrder": 22,
+      "timestampRangeSeconds": "34.0-35.0",
+      "stableTimestampSeconds": 34.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 16,
+      "visibleGameLabelOrIndex": "Skin Tone 17",
+      "nativeOrder": 17,
+      "timestampRangeSeconds": "36.0-37.0",
+      "stableTimestampSeconds": 36.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 17,
+      "visibleGameLabelOrIndex": "Skin Tone 14",
+      "nativeOrder": 14,
+      "timestampRangeSeconds": "38.0-38.0",
+      "stableTimestampSeconds": 38,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 18,
+      "visibleGameLabelOrIndex": "Skin Tone 13",
+      "nativeOrder": 13,
+      "timestampRangeSeconds": "39.0-40.0",
+      "stableTimestampSeconds": 39.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 19,
+      "visibleGameLabelOrIndex": "Skin Tone 10",
+      "nativeOrder": 10,
+      "timestampRangeSeconds": "41.0-42.0",
+      "stableTimestampSeconds": 41.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 20,
+      "visibleGameLabelOrIndex": "Skin Tone 12",
+      "nativeOrder": 12,
+      "timestampRangeSeconds": "43.0-44.0",
+      "stableTimestampSeconds": 43.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 21,
+      "visibleGameLabelOrIndex": "Skin Tone 01",
+      "nativeOrder": 1,
+      "timestampRangeSeconds": "45.0-46.0",
+      "stableTimestampSeconds": 45.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 22,
+      "visibleGameLabelOrIndex": "Skin Tone 02",
+      "nativeOrder": 2,
+      "timestampRangeSeconds": "47.0-47.0",
+      "stableTimestampSeconds": 47,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 23,
+      "visibleGameLabelOrIndex": "Skin Tone 03",
+      "nativeOrder": 3,
+      "timestampRangeSeconds": "48.0-49.0",
+      "stableTimestampSeconds": 48.5,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 24,
+      "visibleGameLabelOrIndex": "Skin Tone 11",
+      "nativeOrder": 11,
+      "timestampRangeSeconds": "50.0-53.82",
+      "stableTimestampSeconds": 51.5,
+      "selectionType": "deliberately_selected"
+    }
+  ],
+  "records": [
+    {
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_001",
+      "visibleGameLabelOrIndex": "Skin Tone 01",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "45.0-46.0",
+          "stableTimestampSeconds": 45.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_001-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_001/CF27_XBOXUNKNOWN_RTG_SKINTONE_001_MENU_video-004_45p50s.png",
+          "outputSha256": "d0c74f973e3797777b9e937cf7811cd5022323f73b6bce6e5d0f7b15f182b2d6",
+          "sourceTimestampSeconds": 45.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_001-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_001/CF27_XBOXUNKNOWN_RTG_SKINTONE_001_CHARACTER_STABLE_video-004_45p50s.png",
+          "outputSha256": "d0c74f973e3797777b9e937cf7811cd5022323f73b6bce6e5d0f7b15f182b2d6",
+          "sourceTimestampSeconds": 45.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 1,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 45.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 90,
+            "g": 62,
+            "b": 55
+          },
+          "averageRGB": {
+            "r": 90,
+            "g": 62,
+            "b": 55
+          },
+          "averageHex": "#5a3e37",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_002",
+      "visibleGameLabelOrIndex": "Skin Tone 02",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "47.0-47.0",
+          "stableTimestampSeconds": 47,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_002-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_002/CF27_XBOXUNKNOWN_RTG_SKINTONE_002_MENU_video-004_47p00s.png",
+          "outputSha256": "8d9cbd282a9261e76948802c0e47ed11034421311cef14d737888bf1464b70fc",
+          "sourceTimestampSeconds": 47
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_002-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_002/CF27_XBOXUNKNOWN_RTG_SKINTONE_002_CHARACTER_STABLE_video-004_47p00s.png",
+          "outputSha256": "8d9cbd282a9261e76948802c0e47ed11034421311cef14d737888bf1464b70fc",
+          "sourceTimestampSeconds": 47
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 2,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 47,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 192,
+            "g": 163,
+            "b": 150
+          },
+          "averageRGB": {
+            "r": 192,
+            "g": 163,
+            "b": 150
+          },
+          "averageHex": "#c0a396",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_003",
+      "visibleGameLabelOrIndex": "Skin Tone 03",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "48.0-49.0",
+          "stableTimestampSeconds": 48.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_003-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_003/CF27_XBOXUNKNOWN_RTG_SKINTONE_003_MENU_video-004_48p50s.png",
+          "outputSha256": "b42f9dcab6e7c5106865c5ab10d9759d9a586857be201dcce23841ca91319803",
+          "sourceTimestampSeconds": 48.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_003-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_003/CF27_XBOXUNKNOWN_RTG_SKINTONE_003_CHARACTER_STABLE_video-004_48p50s.png",
+          "outputSha256": "b42f9dcab6e7c5106865c5ab10d9759d9a586857be201dcce23841ca91319803",
+          "sourceTimestampSeconds": 48.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 3,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 48.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 187,
+            "g": 152,
+            "b": 138
+          },
+          "averageRGB": {
+            "r": 187,
+            "g": 152,
+            "b": 138
+          },
+          "averageHex": "#bb988a",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_004",
+      "visibleGameLabelOrIndex": "Skin Tone 04",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "12.0-13.0",
+          "stableTimestampSeconds": 12.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_004-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_004/CF27_XBOXUNKNOWN_RTG_SKINTONE_004_MENU_video-004_12p50s.png",
+          "outputSha256": "f0b38718a6c1da36cf399ea015a8af5a4324dc944837c067334273198126b9f9",
+          "sourceTimestampSeconds": 12.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_004-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_004/CF27_XBOXUNKNOWN_RTG_SKINTONE_004_CHARACTER_STABLE_video-004_12p50s.png",
+          "outputSha256": "f0b38718a6c1da36cf399ea015a8af5a4324dc944837c067334273198126b9f9",
+          "sourceTimestampSeconds": 12.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 4,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 12.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 143,
+            "g": 105,
+            "b": 96
+          },
+          "averageRGB": {
+            "r": 143,
+            "g": 105,
+            "b": 96
+          },
+          "averageHex": "#8f6960",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 5,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_005",
+      "visibleGameLabelOrIndex": "Skin Tone 05",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "29.0-30.0",
+          "stableTimestampSeconds": 29.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_005-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_005/CF27_XBOXUNKNOWN_RTG_SKINTONE_005_MENU_video-004_29p50s.png",
+          "outputSha256": "b35d102d47f9a14a66fd1862a0e54f4c7bed83649e069aa94cb32a50dc123dd9",
+          "sourceTimestampSeconds": 29.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_005-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_005/CF27_XBOXUNKNOWN_RTG_SKINTONE_005_CHARACTER_STABLE_video-004_29p50s.png",
+          "outputSha256": "b35d102d47f9a14a66fd1862a0e54f4c7bed83649e069aa94cb32a50dc123dd9",
+          "sourceTimestampSeconds": 29.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 1,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 29.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 181,
+            "g": 147,
+            "b": 133
+          },
+          "averageRGB": {
+            "r": 181,
+            "g": 147,
+            "b": 133
+          },
+          "averageHex": "#b59385",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 6,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_006",
+      "visibleGameLabelOrIndex": "Skin Tone 06",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "25.0-26.0",
+          "stableTimestampSeconds": 25.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_006-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_006/CF27_XBOXUNKNOWN_RTG_SKINTONE_006_MENU_video-004_25p50s.png",
+          "outputSha256": "bb801655293ec24779396175b6ab9db9e10b838224d34619110402c8eb29cfe7",
+          "sourceTimestampSeconds": 25.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_006-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_006/CF27_XBOXUNKNOWN_RTG_SKINTONE_006_CHARACTER_STABLE_video-004_25p50s.png",
+          "outputSha256": "bb801655293ec24779396175b6ab9db9e10b838224d34619110402c8eb29cfe7",
+          "sourceTimestampSeconds": 25.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 2,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 25.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 82,
+            "g": 55,
+            "b": 52
+          },
+          "averageRGB": {
+            "r": 82,
+            "g": 55,
+            "b": 52
+          },
+          "averageHex": "#523734",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 7,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_007",
+      "visibleGameLabelOrIndex": "Skin Tone 07",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "27.0-28.0",
+          "stableTimestampSeconds": 27.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_007-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_007/CF27_XBOXUNKNOWN_RTG_SKINTONE_007_MENU_video-004_27p50s.png",
+          "outputSha256": "41f4b10667f2e80d9310e5e99cd8d74e40e2dc4cc3940114632b1add1093e984",
+          "sourceTimestampSeconds": 27.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_007-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_007/CF27_XBOXUNKNOWN_RTG_SKINTONE_007_CHARACTER_STABLE_video-004_27p50s.png",
+          "outputSha256": "41f4b10667f2e80d9310e5e99cd8d74e40e2dc4cc3940114632b1add1093e984",
+          "sourceTimestampSeconds": 27.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 3,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 27.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 150,
+            "g": 113,
+            "b": 98
+          },
+          "averageRGB": {
+            "r": 150,
+            "g": 113,
+            "b": 98
+          },
+          "averageHex": "#967162",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 8,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_008",
+      "visibleGameLabelOrIndex": "Skin Tone 08",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "10.0-11.0",
+          "stableTimestampSeconds": 10.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_008-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_008/CF27_XBOXUNKNOWN_RTG_SKINTONE_008_MENU_video-004_10p50s.png",
+          "outputSha256": "d19dfa53bd8d97e8a46c3fff7c4e13a0d3e560cf91dd296bff69bb274d10526e",
+          "sourceTimestampSeconds": 10.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_008-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_008/CF27_XBOXUNKNOWN_RTG_SKINTONE_008_CHARACTER_STABLE_video-004_10p50s.png",
+          "outputSha256": "d19dfa53bd8d97e8a46c3fff7c4e13a0d3e560cf91dd296bff69bb274d10526e",
+          "sourceTimestampSeconds": 10.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 4,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 10.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 114,
+            "g": 80,
+            "b": 75
+          },
+          "averageRGB": {
+            "r": 114,
+            "g": 80,
+            "b": 75
+          },
+          "averageHex": "#72504b",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 9,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_009",
+      "visibleGameLabelOrIndex": "Skin Tone 09",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "8.0-9.0",
+          "stableTimestampSeconds": 8.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_009-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_009/CF27_XBOXUNKNOWN_RTG_SKINTONE_009_MENU_video-004_8p50s.png",
+          "outputSha256": "60abc1d819070dd3dc2524cd9b1fbcb566bd1e3d860178d425c18ef8c79aa536",
+          "sourceTimestampSeconds": 8.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_009-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_009/CF27_XBOXUNKNOWN_RTG_SKINTONE_009_CHARACTER_STABLE_video-004_8p50s.png",
+          "outputSha256": "60abc1d819070dd3dc2524cd9b1fbcb566bd1e3d860178d425c18ef8c79aa536",
+          "sourceTimestampSeconds": 8.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 3,
+        "nativeColumn": 1,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 8.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 170,
+            "g": 127,
+            "b": 112
+          },
+          "averageRGB": {
+            "r": 170,
+            "g": 127,
+            "b": 112
+          },
+          "averageHex": "#aa7f70",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 10,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_010",
+      "visibleGameLabelOrIndex": "Skin Tone 10",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "41.0-42.0",
+          "stableTimestampSeconds": 41.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_010-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_010/CF27_XBOXUNKNOWN_RTG_SKINTONE_010_MENU_video-004_41p50s.png",
+          "outputSha256": "66b93efcf272b6087a74b3061f0b3ad76f43cfc4d19d9d0a94ed6e7cc79eacc6",
+          "sourceTimestampSeconds": 41.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_010-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_010/CF27_XBOXUNKNOWN_RTG_SKINTONE_010_CHARACTER_STABLE_video-004_41p50s.png",
+          "outputSha256": "66b93efcf272b6087a74b3061f0b3ad76f43cfc4d19d9d0a94ed6e7cc79eacc6",
+          "sourceTimestampSeconds": 41.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 3,
+        "nativeColumn": 2,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 41.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 156,
+            "g": 116,
+            "b": 104
+          },
+          "averageRGB": {
+            "r": 156,
+            "g": 116,
+            "b": 104
+          },
+          "averageHex": "#9c7468",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 11,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_011",
+      "visibleGameLabelOrIndex": "Skin Tone 11",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "50.0-53.82",
+          "stableTimestampSeconds": 51.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_011-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_011/CF27_XBOXUNKNOWN_RTG_SKINTONE_011_MENU_video-004_51p50s.png",
+          "outputSha256": "ffd80a96debc6e8ab12c181de124a3a63a5d570e54f1198fb04a1c7c8d5d4fd5",
+          "sourceTimestampSeconds": 51.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_011-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_011/CF27_XBOXUNKNOWN_RTG_SKINTONE_011_CHARACTER_STABLE_video-004_51p50s.png",
+          "outputSha256": "ffd80a96debc6e8ab12c181de124a3a63a5d570e54f1198fb04a1c7c8d5d4fd5",
+          "sourceTimestampSeconds": 51.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 3,
+        "nativeColumn": 3,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 51.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 88,
+            "g": 63,
+            "b": 62
+          },
+          "averageRGB": {
+            "r": 88,
+            "g": 63,
+            "b": 62
+          },
+          "averageHex": "#583f3e",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 12,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_012",
+      "visibleGameLabelOrIndex": "Skin Tone 12",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "43.0-44.0",
+          "stableTimestampSeconds": 43.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_012-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_012/CF27_XBOXUNKNOWN_RTG_SKINTONE_012_MENU_video-004_43p50s.png",
+          "outputSha256": "6fb56cce8e7b6937e912e10e3c7a6c0779b5c280f1b01bd436ce69ca487b5e99",
+          "sourceTimestampSeconds": 43.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_012-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_012/CF27_XBOXUNKNOWN_RTG_SKINTONE_012_CHARACTER_STABLE_video-004_43p50s.png",
+          "outputSha256": "6fb56cce8e7b6937e912e10e3c7a6c0779b5c280f1b01bd436ce69ca487b5e99",
+          "sourceTimestampSeconds": 43.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 3,
+        "nativeColumn": 4,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 43.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 173,
+            "g": 128,
+            "b": 113
+          },
+          "averageRGB": {
+            "r": 173,
+            "g": 128,
+            "b": 113
+          },
+          "averageHex": "#ad8071",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 13,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_013",
+      "visibleGameLabelOrIndex": "Skin Tone 13",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "39.0-40.0",
+          "stableTimestampSeconds": 39.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_013-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_013/CF27_XBOXUNKNOWN_RTG_SKINTONE_013_MENU_video-004_39p50s.png",
+          "outputSha256": "57ed95ef5876d0bab4993a86bd088d9a634da02828a36b8b2905cd861fd2ffcf",
+          "sourceTimestampSeconds": 39.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_013-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_013/CF27_XBOXUNKNOWN_RTG_SKINTONE_013_CHARACTER_STABLE_video-004_39p50s.png",
+          "outputSha256": "57ed95ef5876d0bab4993a86bd088d9a634da02828a36b8b2905cd861fd2ffcf",
+          "sourceTimestampSeconds": 39.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 4,
+        "nativeColumn": 1,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 39.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 150,
+            "g": 106,
+            "b": 90
+          },
+          "averageRGB": {
+            "r": 150,
+            "g": 106,
+            "b": 90
+          },
+          "averageHex": "#966a5a",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 14,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_014",
+      "visibleGameLabelOrIndex": "Skin Tone 14",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "38.0-38.0",
+          "stableTimestampSeconds": 38,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_014-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_014/CF27_XBOXUNKNOWN_RTG_SKINTONE_014_MENU_video-004_38p00s.png",
+          "outputSha256": "85328015d10eeedb7341a3f01eea6047b7d039b8723bfa42e0101b7e0d3c0ccd",
+          "sourceTimestampSeconds": 38
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_014-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_014/CF27_XBOXUNKNOWN_RTG_SKINTONE_014_CHARACTER_STABLE_video-004_38p00s.png",
+          "outputSha256": "85328015d10eeedb7341a3f01eea6047b7d039b8723bfa42e0101b7e0d3c0ccd",
+          "sourceTimestampSeconds": 38
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 4,
+        "nativeColumn": 2,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 38,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 130,
+            "g": 100,
+            "b": 91
+          },
+          "averageRGB": {
+            "r": 130,
+            "g": 100,
+            "b": 91
+          },
+          "averageHex": "#82645b",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 15,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_015",
+      "visibleGameLabelOrIndex": "Skin Tone 15",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "21.0-22.0",
+          "stableTimestampSeconds": 21.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_015-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_015/CF27_XBOXUNKNOWN_RTG_SKINTONE_015_MENU_video-004_21p50s.png",
+          "outputSha256": "3c0896c7d685698de57cef772ce34952b68a1e33fa55bf72a653e589913e4e3e",
+          "sourceTimestampSeconds": 21.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_015-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_015/CF27_XBOXUNKNOWN_RTG_SKINTONE_015_CHARACTER_STABLE_video-004_21p50s.png",
+          "outputSha256": "3c0896c7d685698de57cef772ce34952b68a1e33fa55bf72a653e589913e4e3e",
+          "sourceTimestampSeconds": 21.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 4,
+        "nativeColumn": 3,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 21.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 135,
+            "g": 98,
+            "b": 85
+          },
+          "averageRGB": {
+            "r": 135,
+            "g": 98,
+            "b": 85
+          },
+          "averageHex": "#876255",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 16,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_016",
+      "visibleGameLabelOrIndex": "Skin Tone 16",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "14.0-14.0",
+          "stableTimestampSeconds": 14,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_016-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_016/CF27_XBOXUNKNOWN_RTG_SKINTONE_016_MENU_video-004_14p00s.png",
+          "outputSha256": "364f5963fadad77b7296a6c16d9f83df87ca4c46a37cc7affc4799ee9f787b30",
+          "sourceTimestampSeconds": 14
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_016-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_016/CF27_XBOXUNKNOWN_RTG_SKINTONE_016_CHARACTER_STABLE_video-004_14p00s.png",
+          "outputSha256": "364f5963fadad77b7296a6c16d9f83df87ca4c46a37cc7affc4799ee9f787b30",
+          "sourceTimestampSeconds": 14
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 4,
+        "nativeColumn": 4,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 14,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 188,
+            "g": 148,
+            "b": 134
+          },
+          "averageRGB": {
+            "r": 188,
+            "g": 148,
+            "b": 134
+          },
+          "averageHex": "#bc9486",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 17,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_017",
+      "visibleGameLabelOrIndex": "Skin Tone 17",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "36.0-37.0",
+          "stableTimestampSeconds": 36.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_017-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_017/CF27_XBOXUNKNOWN_RTG_SKINTONE_017_MENU_video-004_36p50s.png",
+          "outputSha256": "34d329d3f0d802da380921f9f78e71b5a74c9f4c579654d81835a2302402954f",
+          "sourceTimestampSeconds": 36.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_017-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_017/CF27_XBOXUNKNOWN_RTG_SKINTONE_017_CHARACTER_STABLE_video-004_36p50s.png",
+          "outputSha256": "34d329d3f0d802da380921f9f78e71b5a74c9f4c579654d81835a2302402954f",
+          "sourceTimestampSeconds": 36.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 5,
+        "nativeColumn": 1,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 36.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 70,
+            "g": 53,
+            "b": 48
+          },
+          "averageRGB": {
+            "r": 70,
+            "g": 53,
+            "b": 48
+          },
+          "averageHex": "#463530",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 18,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_018",
+      "visibleGameLabelOrIndex": "Skin Tone 18",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "19.0-20.0",
+          "stableTimestampSeconds": 19.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_018-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_018/CF27_XBOXUNKNOWN_RTG_SKINTONE_018_MENU_video-004_19p50s.png",
+          "outputSha256": "9e6a6d6ff7bec653e7ec231871cf906dc916903903ab72719a0ff0eed24b9471",
+          "sourceTimestampSeconds": 19.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_018-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_018/CF27_XBOXUNKNOWN_RTG_SKINTONE_018_CHARACTER_STABLE_video-004_19p50s.png",
+          "outputSha256": "9e6a6d6ff7bec653e7ec231871cf906dc916903903ab72719a0ff0eed24b9471",
+          "sourceTimestampSeconds": 19.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 5,
+        "nativeColumn": 2,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 19.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 132,
+            "g": 97,
+            "b": 82
+          },
+          "averageRGB": {
+            "r": 132,
+            "g": 97,
+            "b": 82
+          },
+          "averageHex": "#846152",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 19,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_019",
+      "visibleGameLabelOrIndex": "Skin Tone 19",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "17.0-18.0",
+          "stableTimestampSeconds": 17.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_019-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_019/CF27_XBOXUNKNOWN_RTG_SKINTONE_019_MENU_video-004_17p50s.png",
+          "outputSha256": "437927e8b73a0de35cd5bd7ddbb456a7880f188a846653d67b8bb73a974ce565",
+          "sourceTimestampSeconds": 17.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_019-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_019/CF27_XBOXUNKNOWN_RTG_SKINTONE_019_CHARACTER_STABLE_video-004_17p50s.png",
+          "outputSha256": "437927e8b73a0de35cd5bd7ddbb456a7880f188a846653d67b8bb73a974ce565",
+          "sourceTimestampSeconds": 17.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 5,
+        "nativeColumn": 3,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 17.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 97,
+            "g": 80,
+            "b": 72
+          },
+          "averageRGB": {
+            "r": 97,
+            "g": 80,
+            "b": 72
+          },
+          "averageHex": "#615048",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 20,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_020",
+      "visibleGameLabelOrIndex": "Skin Tone 20",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "15.0-16.0",
+          "stableTimestampSeconds": 15.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_020-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_020/CF27_XBOXUNKNOWN_RTG_SKINTONE_020_MENU_video-004_15p50s.png",
+          "outputSha256": "d96f67af1c5882fcd76003db629a20eef54de1155302ba5077d56d22c7a1ab85",
+          "sourceTimestampSeconds": 15.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_020-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_020/CF27_XBOXUNKNOWN_RTG_SKINTONE_020_CHARACTER_STABLE_video-004_15p50s.png",
+          "outputSha256": "d96f67af1c5882fcd76003db629a20eef54de1155302ba5077d56d22c7a1ab85",
+          "sourceTimestampSeconds": 15.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 5,
+        "nativeColumn": 4,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 15.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 164,
+            "g": 127,
+            "b": 119
+          },
+          "averageRGB": {
+            "r": 164,
+            "g": 127,
+            "b": 119
+          },
+          "averageHex": "#a47f77",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 21,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_021",
+      "visibleGameLabelOrIndex": "Skin Tone 21",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "23.0-24.0",
+          "stableTimestampSeconds": 23.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_021-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_021/CF27_XBOXUNKNOWN_RTG_SKINTONE_021_MENU_video-004_23p50s.png",
+          "outputSha256": "91703d03bd165614c7c62baed673254c8177343a0e620bb7126a01bc0cfa8158",
+          "sourceTimestampSeconds": 23.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_021-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_021/CF27_XBOXUNKNOWN_RTG_SKINTONE_021_CHARACTER_STABLE_video-004_23p50s.png",
+          "outputSha256": "91703d03bd165614c7c62baed673254c8177343a0e620bb7126a01bc0cfa8158",
+          "sourceTimestampSeconds": 23.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 6,
+        "nativeColumn": 1,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 23.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 145,
+            "g": 106,
+            "b": 95
+          },
+          "averageRGB": {
+            "r": 145,
+            "g": 106,
+            "b": 95
+          },
+          "averageHex": "#916a5f",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 22,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_022",
+      "visibleGameLabelOrIndex": "Skin Tone 22",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "34.0-35.0",
+          "stableTimestampSeconds": 34.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_022-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_022/CF27_XBOXUNKNOWN_RTG_SKINTONE_022_MENU_video-004_34p50s.png",
+          "outputSha256": "98810ede87920ee5803ca7a153e00571d365d4887bdc8b5a71d2816f723e889a",
+          "sourceTimestampSeconds": 34.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_022-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_022/CF27_XBOXUNKNOWN_RTG_SKINTONE_022_CHARACTER_STABLE_video-004_34p50s.png",
+          "outputSha256": "98810ede87920ee5803ca7a153e00571d365d4887bdc8b5a71d2816f723e889a",
+          "sourceTimestampSeconds": 34.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 6,
+        "nativeColumn": 2,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 34.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 94,
+            "g": 70,
+            "b": 65
+          },
+          "averageRGB": {
+            "r": 94,
+            "g": 70,
+            "b": 65
+          },
+          "averageHex": "#5e4641",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 23,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_023",
+      "visibleGameLabelOrIndex": "Skin Tone 23",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "31.0-32.0",
+          "stableTimestampSeconds": 31.5,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_023-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_023/CF27_XBOXUNKNOWN_RTG_SKINTONE_023_MENU_video-004_31p50s.png",
+          "outputSha256": "b683e35176283f433884ce3856a62ef67181800ea824b41a24c53aed27160349",
+          "sourceTimestampSeconds": 31.5
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_023-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_023/CF27_XBOXUNKNOWN_RTG_SKINTONE_023_CHARACTER_STABLE_video-004_31p50s.png",
+          "outputSha256": "b683e35176283f433884ce3856a62ef67181800ea824b41a24c53aed27160349",
+          "sourceTimestampSeconds": 31.5
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 6,
+        "nativeColumn": 3,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 31.5,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 154,
+            "g": 116,
+            "b": 101
+          },
+          "averageRGB": {
+            "r": 154,
+            "g": 116,
+            "b": 101
+          },
+          "averageHex": "#9a7465",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 24,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_024",
+      "visibleGameLabelOrIndex": "Skin Tone 24",
+      "category": "Skin Tone",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "skinPresentation",
+      "valueType": "index",
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-004",
+          "timestampRangeSeconds": "33.0-33.0",
+          "stableTimestampSeconds": 33,
+          "basis": "direct selected Skin Tone label visible in the Skin Tone grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_024-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_024/CF27_XBOXUNKNOWN_RTG_SKINTONE_024_MENU_video-004_33p00s.png",
+          "outputSha256": "3695744233b4cd638e786f055d017e224323cc8b249ee65a6ca3d1b488e317ac",
+          "sourceTimestampSeconds": 33
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_skintone_024-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_024/CF27_XBOXUNKNOWN_RTG_SKINTONE_024_CHARACTER_STABLE_video-004_33p00s.png",
+          "outputSha256": "3695744233b4cd638e786f055d017e224323cc8b249ee65a6ca3d1b488e317ac",
+          "sourceTimestampSeconds": 33
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 6,
+        "nativeColumn": 4,
+        "basis": "native index parsed from visible label; final selector boundary is not proven"
+      },
+      "researchMetadata": {
+        "visualColorMeasurement": {
+          "status": "measured_from_screen_recording",
+          "method": "ffmpeg_area_scaled_fixed_character_patch_rgb_average_v1",
+          "sourceTimestampSeconds": 33,
+          "sampleRegion": {
+            "x": 1230,
+            "y": 520,
+            "width": 90,
+            "height": 90,
+            "description": "Fixed approximate character face-region crop from the full video frame. Uncalibrated research metadata only; not a demographic label, biometric identifier, geometry feature, or production skin-tone truth."
+          },
+          "rgbMean": {
+            "r": 110,
+            "g": 80,
+            "b": 76
+          },
+          "averageRGB": {
+            "r": 110,
+            "g": 80,
+            "b": 76
+          },
+          "averageHex": "#6e504c",
+          "calibrated": false,
+          "productionUseAllowed": false
+        },
+        "sensitiveTraitPolicy": "Native game value and objective color samples only. No race, ethnicity, identity, health, attractiveness, or other sensitive labels are recorded.",
+        "geometryUse": "excluded_from_geometry_similarity",
+        "measurementLimitations": [
+          "Color sample is uncalibrated screen-recording RGB and may be affected by game lighting, compression, eye black, and the fixed crop location.",
+          "This measurement is research metadata only and must not be used as a demographic or identity label.",
+          "Skin presentation must remain separate from geometric similarity."
+        ]
+      },
+      "characterContext": {
+        "selectedHeadAppearsConstant": true,
+        "selectedHeadContext": "Face 1 is visible before entering Skin Tone; no Head Template change is observed during Skin Tone selections.",
+        "characterRotationAvailable": true,
+        "rotationEvidence": "Bottom control hint shows RS Zoom/Rotate; character rotation is visibly used near the end of the video while Skin Tone remains selected.",
+        "otherVisibleSettingsChanged": false,
+        "visibleSettingChangeObserved": "The selected skin presentation changes the visible character skin presentation; no other menu setting change is directly observed."
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    }
+  ],
+  "productionBlocks": [
+    "Records are primary research only and not second-person verified.",
+    "Game version, patch, and exact platform are still unknown.",
+    "Selector wrap and final category boundary are not proven.",
+    "Production catalog remains empty until verified evidence is reviewed and published."
+  ]
+}

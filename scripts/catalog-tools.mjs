@@ -388,28 +388,366 @@ export function exportCatalogItemsToCsv(items) {
 }
 
 export function compareCatalogVersions(previousManifest, nextManifest) {
-  const previousItems = new Map((previousManifest?.items ?? []).map((item, index) => [item.stableInternalID, { item, index }]));
-  const nextItems = new Map((nextManifest?.items ?? []).map((item, index) => [item.stableInternalID, { item, index }]));
-  const added = [];
-  const removed = [];
-  const changedLabels = [];
-  const reorderedOptions = [];
-  const retiredOptions = [];
+  const previousEntries = catalogEntries(previousManifest);
+  const nextEntries = catalogEntries(nextManifest);
+  const previousItems = new Map(previousEntries.map((entry) => [entry.id, entry]));
+  const nextItems = new Map(nextEntries.map((entry) => [entry.id, entry]));
+  const previousCategories = groupEntriesByCategory(previousEntries);
+  const nextCategories = groupEntriesByCategory(nextEntries);
+  const changes = {
+    menuCountChanges: [],
+    nativeOrderChanges: [],
+    firstMiddleFinalChanges: [],
+    addedOptions: [],
+    removedOptions: [],
+    changedLabels: [],
+    changedEvidenceHashes: [],
+    changedVisualAssets: [],
+    dependencyChanges: [],
+    environmentChanges: []
+  };
+
+  const categories = Array.from(new Set([...previousCategories.keys(), ...nextCategories.keys()])).sort();
+  for (const category of categories) {
+    const previousCategoryEntries = previousCategories.get(category) ?? [];
+    const nextCategoryEntries = nextCategories.get(category) ?? [];
+    if (previousCategoryEntries.length !== nextCategoryEntries.length) {
+      changes.menuCountChanges.push(categoryChange("menuCountChanged", category, previousCategoryEntries.length, nextCategoryEntries.length));
+    }
+
+    const previousBoundary = boundarySnapshot(previousCategoryEntries);
+    const nextBoundary = boundarySnapshot(nextCategoryEntries);
+    for (const position of ["first", "middle", "final"]) {
+      if (previousBoundary[position] !== nextBoundary[position]) {
+        changes.firstMiddleFinalChanges.push(categoryChange(`${position}OptionChanged`, category, previousBoundary[position], nextBoundary[position]));
+      }
+    }
+  }
+
   for (const [id, next] of nextItems) {
     const previous = previousItems.get(id);
     if (!previous) {
-      added.push(id);
+      changes.addedOptions.push(recordChange("optionAdded", id, null, summarizeRecord(next.item), next));
       continue;
     }
-    if (previous.item.visibleGameLabelOrIndex !== next.item.visibleGameLabelOrIndex) changedLabels.push(id);
-    if (previous.item.category === next.item.category && previous.index !== next.index) reorderedOptions.push(id);
-    if (next.item.deprecated) retiredOptions.push(id);
+    if (!valuesEqual(previous.item.visibleGameLabelOrIndex, next.item.visibleGameLabelOrIndex)) {
+      changes.changedLabels.push(recordChange("labelChanged", id, previous.item.visibleGameLabelOrIndex, next.item.visibleGameLabelOrIndex, next));
+    }
+    if (previous.item.category === next.item.category && previous.categoryIndex !== next.categoryIndex) {
+      changes.nativeOrderChanges.push(recordChange("nativeOrderChanged", id, previous.categoryIndex + 1, next.categoryIndex + 1, next));
+    }
+    if (!valuesEqual(evidenceHashSnapshot(previous.item), evidenceHashSnapshot(next.item))) {
+      changes.changedEvidenceHashes.push(recordChange("evidenceHashChanged", id, evidenceHashSnapshot(previous.item), evidenceHashSnapshot(next.item), next));
+    }
+    if (!valuesEqual(visualAssetSnapshot(previous.item), visualAssetSnapshot(next.item))) {
+      changes.changedVisualAssets.push(recordChange("visualAssetChanged", id, visualAssetSnapshot(previous.item), visualAssetSnapshot(next.item), next));
+    }
+    if (!valuesEqual(dependencySnapshot(previous.item), dependencySnapshot(next.item))) {
+      changes.dependencyChanges.push(recordChange("dependencyChanged", id, dependencySnapshot(previous.item), dependencySnapshot(next.item), next));
+    }
+    if (!valuesEqual(environmentSnapshot(previous.item), environmentSnapshot(next.item))) {
+      changes.environmentChanges.push(recordChange("environmentChanged", id, environmentSnapshot(previous.item), environmentSnapshot(next.item), next));
+    }
   }
+
   for (const [id, previous] of previousItems) {
-    if (!nextItems.has(id)) removed.push(id);
-    if (previous.item.deprecated) retiredOptions.push(id);
+    if (!nextItems.has(id)) {
+      changes.removedOptions.push(recordChange("optionRemoved", id, summarizeRecord(previous.item), null, previous));
+    }
   }
-  return { added, removed, changedLabels, reorderedOptions, retiredOptions };
+
+  const added = changes.addedOptions.map((change) => change.stableInternalID);
+  const removed = changes.removedOptions.map((change) => change.stableInternalID);
+  const reorderedOptions = changes.nativeOrderChanges.map((change) => change.stableInternalID);
+  const retiredOptions = Array.from(new Set([
+    ...nextEntries.filter((entry) => entry.item?.deprecated).map((entry) => entry.id),
+    ...previousEntries.filter((entry) => entry.item?.deprecated).map((entry) => entry.id)
+  ])).sort();
+
+  const affectedRecords = createAffectedRecordList(changes, previousCategories, nextCategories);
+  const requiredReverification = createRequiredReverificationList(changes, affectedRecords);
+  const recommendedRecaptureQueue = createRecommendedRecaptureQueue(affectedRecords);
+  const summary = {
+    previousItemCount: previousEntries.length,
+    nextItemCount: nextEntries.length,
+    affectedRecordCount: affectedRecords.length,
+    requiredReverificationCount: requiredReverification.length,
+    recommendedRecaptureCount: recommendedRecaptureQueue.length
+  };
+  const result = {
+    previousCatalogVersionID: previousManifest?.catalogVersion?.identifier ?? "unknown",
+    nextCatalogVersionID: nextManifest?.catalogVersion?.identifier ?? "unknown",
+    previousPatchVersion: manifestPatchVersion(previousManifest),
+    nextPatchVersion: manifestPatchVersion(nextManifest),
+    generatedAt: new Date().toISOString(),
+    summary,
+    ...changes,
+    affectedRecords,
+    requiredReverification,
+    recommendedRecaptureQueue,
+    suggestedSemanticCatalogVersion: suggestSemanticCatalogVersion(previousManifest?.catalogVersion?.identifier, changes),
+    added,
+    removed,
+    reorderedOptions,
+    retiredOptions
+  };
+  return {
+    ...result,
+    humanReadableReport: formatPatchDiffReport(result)
+  };
+}
+
+function catalogEntries(manifest) {
+  const categoryPositions = new Map();
+  return (manifest?.items ?? []).flatMap((item, index) => {
+    const id = stringValue(item?.stableInternalID);
+    if (!id) return [];
+    const category = stringValue(item?.category) || "uncategorized";
+    const categoryIndex = categoryPositions.get(category) ?? 0;
+    categoryPositions.set(category, categoryIndex + 1);
+    return [{ id, item, index, category, categoryIndex }];
+  });
+}
+
+function groupEntriesByCategory(entries) {
+  const groups = new Map();
+  for (const entry of entries) {
+    if (!groups.has(entry.category)) groups.set(entry.category, []);
+    groups.get(entry.category).push(entry);
+  }
+  return groups;
+}
+
+function boundarySnapshot(entries) {
+  if (entries.length === 0) return { first: null, middle: null, final: null };
+  return {
+    first: entries[0].id,
+    middle: entries[Math.floor((entries.length - 1) / 2)].id,
+    final: entries[entries.length - 1].id
+  };
+}
+
+function categoryChange(reason, category, previousValue, nextValue) {
+  return {
+    reason,
+    category,
+    previousValue,
+    nextValue,
+    severity: reason === "menuCountChanged" ? "blocking" : "advisory"
+  };
+}
+
+function recordChange(reason, stableInternalID, previousValue, nextValue, entry) {
+  return {
+    reason,
+    stableInternalID,
+    category: entry?.category ?? (stringValue(entry?.item?.category) || "uncategorized"),
+    previousValue,
+    nextValue,
+    severity: ["optionAdded", "optionRemoved", "dependencyChanged", "environmentChanged"].includes(reason) ? "blocking" : "advisory"
+  };
+}
+
+function summarizeRecord(item) {
+  if (!item) return null;
+  return {
+    stableInternalID: item.stableInternalID,
+    category: item.category,
+    visibleGameLabelOrIndex: item.visibleGameLabelOrIndex,
+    platform: item.platform,
+    gameVersion: item.gameVersion,
+    patchVersion: item.patchVersion,
+    gameMode: item.gameMode,
+    creationPath: item.creationPath
+  };
+}
+
+function evidenceHashSnapshot(item) {
+  return pickNonEmptyFields(
+    {
+      evidenceHash: item?.humanAnnotations?.evidenceHash,
+      evidenceSha256: item?.humanAnnotations?.evidenceSha256,
+      sha256: item?.humanAnnotations?.sha256,
+      assetChecksum: item?.humanAnnotations?.assetChecksum,
+      checksum: item?.humanAnnotations?.checksum,
+      navigationEvidenceChecksum: item?.navigationInstructions?.map((instruction) => instruction?.evidenceChecksum ?? null)
+    }
+  );
+}
+
+function visualAssetSnapshot(item) {
+  return {
+    sourceImageReferences: [...(item?.sourceImageReferences ?? [])].sort(),
+    requiredAngles: item?.requiredAngles ?? {},
+    navigationEvidenceAssetIDs: (item?.navigationInstructions ?? []).map((instruction) => instruction?.evidenceAssetID ?? null)
+  };
+}
+
+function dependencySnapshot(item) {
+  return pickNonEmptyFields({
+    dependencies: item?.dependencies,
+    locks: item?.locks,
+    dependencyNotes: item?.dependencyNotes,
+    humanDependencies: item?.humanAnnotations?.dependencies,
+    humanDependencyNotes: item?.humanAnnotations?.dependencyNotes,
+    unlockDependencies: item?.humanAnnotations?.unlockDependencies,
+    positionDependency: item?.humanAnnotations?.positionDependency
+  });
+}
+
+function environmentSnapshot(item) {
+  return {
+    platform: item?.platform ?? null,
+    gameVersion: item?.gameVersion ?? null,
+    patchVersion: item?.patchVersion ?? null,
+    gameMode: item?.gameMode ?? null,
+    creationPath: item?.creationPath ?? null,
+    captureConditions: item?.captureConditions ?? null,
+    catalogPlatform: item?.catalogVersion?.platform ?? null,
+    catalogGameVersion: item?.catalogVersion?.gameVersion ?? null
+  };
+}
+
+function pickNonEmptyFields(value) {
+  const output = {};
+  for (const [key, fieldValue] of Object.entries(value)) {
+    if (fieldValue === undefined || fieldValue === null || fieldValue === "") continue;
+    if (Array.isArray(fieldValue) && fieldValue.every((item) => item === null || item === undefined || item === "")) continue;
+    output[key] = fieldValue;
+  }
+  return output;
+}
+
+function valuesEqual(previousValue, nextValue) {
+  return stableStringify(previousValue ?? null) === stableStringify(nextValue ?? null);
+}
+
+function createAffectedRecordList(changes, previousCategories, nextCategories) {
+  const affected = new Map();
+  const addAffected = (record) => {
+    const key = `${record.stableInternalID ?? "category"}:${record.category}:${record.reason}`;
+    affected.set(key, record);
+  };
+  for (const [collectionName, collection] of Object.entries(changes)) {
+    for (const change of collection) {
+      if (change.stableInternalID) {
+        addAffected({
+          stableInternalID: change.stableInternalID,
+          category: change.category,
+          reason: change.reason,
+          severity: change.severity,
+          sourceChangeSet: collectionName
+        });
+        continue;
+      }
+      const categoryEntries = [...(previousCategories.get(change.category) ?? []), ...(nextCategories.get(change.category) ?? [])];
+      const uniqueIDs = new Set(categoryEntries.map((entry) => entry.id));
+      for (const stableInternalID of uniqueIDs) {
+        addAffected({
+          stableInternalID,
+          category: change.category,
+          reason: change.reason,
+          severity: change.severity,
+          sourceChangeSet: collectionName
+        });
+      }
+    }
+  }
+  return Array.from(affected.values()).sort((a, b) => `${a.category}:${a.stableInternalID}:${a.reason}`.localeCompare(`${b.category}:${b.stableInternalID}:${b.reason}`));
+}
+
+function createRequiredReverificationList(changes, affectedRecords) {
+  const actionsByReason = {
+    menuCountChanged: "Re-walk the full category and confirm the new count with first and second review.",
+    nativeOrderChanged: "Confirm native order against direct menu evidence.",
+    firstOptionChanged: "Reconfirm boundary option evidence for the category.",
+    middleOptionChanged: "Reconfirm midpoint option evidence for the category.",
+    finalOptionChanged: "Reconfirm boundary option evidence for the category.",
+    optionAdded: "Capture all required evidence and complete first and second review for the new option.",
+    optionRemoved: "Confirm removal, retain historical release context, and mark any retired record with context.",
+    labelChanged: "Confirm exact visible label or index from direct evidence.",
+    evidenceHashChanged: "Verify evidence integrity and regenerate package checksums.",
+    visualAssetChanged: "Review replacement visual assets and required-angle coverage.",
+    dependencyChanged: "Repeat dependency checks and update affected catalog metadata.",
+    environmentChanged: "Confirm platform, game version, patch, mode, and creation path before release."
+  };
+  return affectedRecords.map((record) => ({
+    stableInternalID: record.stableInternalID,
+    category: record.category,
+    reason: record.reason,
+    severity: record.severity,
+    requiredAction: actionsByReason[record.reason] ?? "Review affected record before publication."
+  }));
+}
+
+function createRecommendedRecaptureQueue(affectedRecords) {
+  const recaptureReasons = new Set(["optionAdded", "visualAssetChanged", "environmentChanged", "evidenceHashChanged", "menuCountChanged", "firstOptionChanged", "middleOptionChanged", "finalOptionChanged"]);
+  return affectedRecords
+    .filter((record) => recaptureReasons.has(record.reason))
+    .map((record) => ({
+      stableInternalID: record.stableInternalID,
+      category: record.category,
+      reason: record.reason,
+      recommendedViews: requiredAngles,
+      note: "Recapture recommendations are audit tasks only; they are not verified game facts until reviewed."
+    }));
+}
+
+function manifestPatchVersion(manifest) {
+  const direct = stringValue(manifest?.catalogVersion?.patchVersion);
+  if (direct) return direct;
+  const patchVersions = Array.from(new Set((manifest?.items ?? []).map((item) => stringValue(item?.patchVersion)).filter(Boolean))).sort();
+  if (patchVersions.length === 0) return null;
+  return patchVersions.length === 1 ? patchVersions[0] : patchVersions.join(", ");
+}
+
+function suggestSemanticCatalogVersion(previousVersionID, changes) {
+  const match = stringValue(previousVersionID).match(/(\d+)\.(\d+)\.(\d+)/);
+  if (!match) return "manual-semantic-version-required";
+  const [, majorText, minorText, patchText] = match;
+  const major = Number(majorText);
+  const minor = Number(minorText);
+  const patch = Number(patchText);
+  const majorChange = changes.removedOptions.length > 0 || changes.dependencyChanges.length > 0 || changes.environmentChanges.length > 0;
+  const minorChange = changes.addedOptions.length > 0
+    || changes.menuCountChanges.length > 0
+    || changes.nativeOrderChanges.length > 0
+    || changes.firstMiddleFinalChanges.length > 0
+    || changes.changedLabels.length > 0
+    || changes.changedVisualAssets.length > 0;
+  const patchChange = changes.changedEvidenceHashes.length > 0;
+  if (majorChange) return `${major + 1}.0.0`;
+  if (minorChange) return `${major}.${minor + 1}.0`;
+  if (patchChange) return `${major}.${minor}.${patch + 1}`;
+  return `${major}.${minor}.${patch}`;
+}
+
+function formatPatchDiffReport(result) {
+  const lines = [
+    `Patch diff report: ${result.previousCatalogVersionID} -> ${result.nextCatalogVersionID}`,
+    `Patch context: ${result.previousPatchVersion ?? "unknown"} -> ${result.nextPatchVersion ?? "unknown"}`,
+    `Items: ${result.summary.previousItemCount} -> ${result.summary.nextItemCount}`,
+    `Affected records: ${result.summary.affectedRecordCount}`,
+    `Required re-verifications: ${result.summary.requiredReverificationCount}`,
+    `Recommended recaptures: ${result.summary.recommendedRecaptureCount}`,
+    `Suggested semantic catalog version: ${result.suggestedSemanticCatalogVersion}`
+  ];
+  for (const [label, collection] of [
+    ["Menu count changes", result.menuCountChanges],
+    ["Native order changes", result.nativeOrderChanges],
+    ["Boundary option changes", result.firstMiddleFinalChanges],
+    ["Added options", result.addedOptions],
+    ["Removed options", result.removedOptions],
+    ["Changed labels", result.changedLabels],
+    ["Changed evidence hashes", result.changedEvidenceHashes],
+    ["Changed visual assets", result.changedVisualAssets],
+    ["Dependency changes", result.dependencyChanges],
+    ["Environment changes", result.environmentChanges]
+  ]) {
+    if (collection.length === 0) continue;
+    lines.push(`${label}: ${collection.map((change) => change.stableInternalID ?? change.category).join(", ")}`);
+  }
+  return lines.join("\n");
 }
 
 export function createPatchReauditPlan(previousManifest, nextGameVersion) {

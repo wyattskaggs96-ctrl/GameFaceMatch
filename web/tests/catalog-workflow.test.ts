@@ -147,6 +147,61 @@ describe("catalog audit workflow validator", () => {
     expect(plan.totalRecordsToCheck).toBe(2);
   });
 
+  it("generates a patch diff report with affected records, re-verification, recapture, and version guidance", () => {
+    const previousHeadA = patchComparableItem("test-only-head-a", {
+      category: "test-only-head",
+      visibleGameLabelOrIndex: "test-only-visible-label-a",
+      patchVersion: "test-only-patch-1",
+      sourceImageReferences: ["asset-a-front", "asset-a-left45"],
+      requiredAngles: { straightOn: "asset-a-front", left45: "asset-a-left45" },
+      humanAnnotations: { evidenceHash: "a".repeat(64), dependencies: "test-only-position-any" },
+      captureConditions: { lighting: "test-only-even" }
+    });
+    const previous = {
+      catalogVersion: { identifier: "1.2.3" },
+      items: [
+        previousHeadA,
+        patchComparableItem("test-only-head-b", { category: "test-only-head", patchVersion: "test-only-patch-1" }),
+        patchComparableItem("test-only-head-c", { category: "test-only-head", patchVersion: "test-only-patch-1" }),
+        patchComparableItem("test-only-hair-a", { category: "test-only-hair", patchVersion: "test-only-patch-1" })
+      ]
+    };
+    const next = {
+      catalogVersion: { identifier: "1.2.4" },
+      items: [
+        patchComparableItem("test-only-head-b", { category: "test-only-head", patchVersion: "test-only-patch-1" }),
+        patchComparableItem("test-only-head-c", { category: "test-only-head", patchVersion: "test-only-patch-1" }),
+        patchComparableItem("test-only-head-a", {
+          category: "test-only-head",
+          visibleGameLabelOrIndex: "test-only-visible-label-a-updated",
+          patchVersion: "test-only-patch-2",
+          sourceImageReferences: ["asset-a-front-recaptured", "asset-a-left45"],
+          requiredAngles: { straightOn: "asset-a-front-recaptured", left45: "asset-a-left45" },
+          humanAnnotations: { evidenceHash: "b".repeat(64), dependencies: "test-only-position-qb" },
+          captureConditions: { lighting: "test-only-updated" }
+        }),
+        patchComparableItem("test-only-head-d", { category: "test-only-head", patchVersion: "test-only-patch-2" })
+      ]
+    };
+
+    const comparison = compareCatalogVersions(previous, next);
+
+    expect(comparison.menuCountChanges.map((change: { category: unknown }) => change.category)).toEqual(expect.arrayContaining(["test-only-head", "test-only-hair"]));
+    expect(comparison.firstMiddleFinalChanges.map((change: { reason: unknown }) => change.reason)).toEqual(expect.arrayContaining(["firstOptionChanged", "middleOptionChanged", "finalOptionChanged"]));
+    expect(comparison.added).toContain("test-only-head-d");
+    expect(comparison.removed).toContain("test-only-hair-a");
+    expect(comparison.changedLabels.map((change: { stableInternalID: unknown }) => change.stableInternalID)).toContain("test-only-head-a");
+    expect(comparison.changedEvidenceHashes.map((change: { stableInternalID: unknown }) => change.stableInternalID)).toContain("test-only-head-a");
+    expect(comparison.changedVisualAssets.map((change: { stableInternalID: unknown }) => change.stableInternalID)).toContain("test-only-head-a");
+    expect(comparison.dependencyChanges.map((change: { stableInternalID: unknown }) => change.stableInternalID)).toContain("test-only-head-a");
+    expect(comparison.environmentChanges.map((change: { stableInternalID: unknown }) => change.stableInternalID)).toContain("test-only-head-a");
+    expect(comparison.affectedRecords.map((record: { stableInternalID: unknown }) => record.stableInternalID)).toEqual(expect.arrayContaining(["test-only-head-a", "test-only-head-d", "test-only-hair-a"]));
+    expect(comparison.requiredReverification.some((item: { requiredAction: string }) => item.requiredAction.includes("first and second review"))).toBe(true);
+    expect(comparison.recommendedRecaptureQueue.map((item: { stableInternalID: unknown }) => item.stableInternalID)).toContain("test-only-head-a");
+    expect(comparison.suggestedSemanticCatalogVersion).toBe("2.0.0");
+    expect(comparison.humanReadableReport).toContain("Patch diff report");
+  });
+
   it("publishes only validated packages and keeps fixture contamination detectable", () => {
     const catalogPackage = withChecksums(validPackage());
     const publication = publishPackage(catalogPackage);
@@ -384,6 +439,13 @@ function validItem(id = "cfb27-test-only-record") {
     isTestFixture: false,
     deprecated: false,
     deprecatedContext: null as string | null
+  };
+}
+
+function patchComparableItem(id: string, overrides: Record<string, unknown> = {}) {
+  return {
+    ...validItem(id),
+    ...overrides
   };
 }
 

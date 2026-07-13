@@ -13,7 +13,24 @@ declare module "../../scripts/catalog-tools.mjs" {
   export function createAuditSession(input?: Record<string, unknown>): Record<string, unknown>;
   export function importCatalogItemsFromCsv(csvText: string, defaults?: Record<string, unknown>): unknown[];
   export function exportCatalogItemsToCsv(items: unknown[]): string;
-  export function compareCatalogVersions(previousManifest: unknown, nextManifest: unknown): Record<string, string[]>;
+  export function compareCatalogVersions(previousManifest: unknown, nextManifest: unknown): Record<string, unknown> & {
+    added: string[];
+    removed: string[];
+    reorderedOptions: string[];
+    retiredOptions: string[];
+    menuCountChanges: Array<Record<string, unknown>>;
+    firstMiddleFinalChanges: Array<Record<string, unknown>>;
+    changedLabels: Array<Record<string, unknown>>;
+    changedEvidenceHashes: Array<Record<string, unknown>>;
+    changedVisualAssets: Array<Record<string, unknown>>;
+    dependencyChanges: Array<Record<string, unknown>>;
+    environmentChanges: Array<Record<string, unknown>>;
+    affectedRecords: Array<Record<string, unknown>>;
+    requiredReverification: Array<{ requiredAction: string }>;
+    recommendedRecaptureQueue: Array<Record<string, unknown>>;
+    suggestedSemanticCatalogVersion: string;
+    humanReadableReport: string;
+  };
   export function createPatchReauditPlan(previousManifest: unknown, nextGameVersion: string): Record<string, unknown>;
   export function publishPackage(catalogPackage: unknown): { ok: boolean; report: { ok: boolean; scope: string; errors: Array<{ code: string; message: string }>; warnings: string[]; checksum?: string }; manifest: unknown };
   export function rollbackPackage(currentManifest: unknown, targetManifest: unknown, reason?: string): Record<string, unknown>;

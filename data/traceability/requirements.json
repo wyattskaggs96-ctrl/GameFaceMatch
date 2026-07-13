@@ -1129,6 +1129,27 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-040",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Patch-to-patch change detection",
+      "summary": "Compare future game patch catalog manifests for menu counts, native order, first/middle/final options, added and removed records, changed labels, evidence hashes, visual assets, dependency changes, environment changes, affected records, required re-verification, recapture queue, and semantic catalog version guidance.",
+      "owningModule": "Catalog tooling",
+      "implementationFiles": [
+        "scripts/catalog-tools.mjs",
+        "docs/GAME_CATALOG_WORKFLOW.md",
+        "docs/CATALOG_PUBLISHING_RUNBOOK.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/catalog-workflow.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "`compareCatalogVersions` and `node scripts/catalog-tools.mjs compare-versions` produce patch diff reports with affected records, re-verification actions, recapture guidance, and semantic-version suggestions using synthetic test-only manifests.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-13"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

@@ -39,3 +39,5 @@ node scripts/catalog-tools.mjs patch-reaudit REPLACE_WITH_PREVIOUS_MANIFEST REPL
 ```
 
 Review added, removed, renamed, reordered, and retired options before moving any record to production.
+
+The comparison report also includes menu-count changes, first/middle/final boundary changes, changed evidence hashes, changed visual assets, dependency changes, environment changes, affected records, required re-verification actions, a recommended recapture queue, and a suggested semantic catalog version. Treat those outputs as audit tasks, not as verification or publication approval.

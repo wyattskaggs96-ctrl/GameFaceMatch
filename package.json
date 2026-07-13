@@ -9,6 +9,7 @@
     "catalog:import-check": "node scripts/catalog-import-validator.mjs --check",
     "evidence:manifest": "node scripts/evidence-manifest.mjs",
     "cf27:evidence-manifest": "node scripts/cf27-current-evidence-manifest.mjs",
+    "cf27:capture-log": "node scripts/cf27-current-capture-log.mjs",
     "media:inspect": "node scripts/cf27-media-inspect.mjs",
     "head-template:extract-frames": "node scripts/cf27-head-template-frame-extract.mjs",
     "head-template:standardization-qa": "node scripts/cf27-head-template-standardization-qa.mjs",

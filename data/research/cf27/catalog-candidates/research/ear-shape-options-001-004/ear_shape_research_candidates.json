@@ -1,0 +1,612 @@
+{
+  "schemaVersion": "cf27-ear-shape-research-candidates-v1",
+  "createdAt": "2026-07-13T13:00:17.201Z",
+  "updatedAt": "2026-07-13T13:00:17.201Z",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "sourceType": "researchCandidate",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "PRIMARY_RESEARCH_ONLY_NOT_SECOND_VERIFIED",
+  "verificationStateForAllRecords": "NOT_VERIFIED",
+  "scope": {
+    "category": "Ear Shape",
+    "directlySelectedRecordCount": 4,
+    "directlySelectedNativeLabels": [
+      "Attached Lobe",
+      "None",
+      "Round Free Lobe",
+      "Pointed"
+    ],
+    "nativeOrderRangeObserved": "4 visible Ear Shape tiles directly selected",
+    "completeCategoryCountClaimed": false,
+    "excludedLabels": [
+      "unselected or unseen Ear Shape values, if any"
+    ],
+    "reasonCompletenessIsNotClaimed": "The recording ends while Pointed is selected and does not prove wrap behavior, hard final selector boundary, or total category count."
+  },
+  "context": {
+    "platformCode": "XBOXUNKNOWN",
+    "modeCode": "RTG",
+    "gameVersion": "UNKNOWN",
+    "patchVersion": "UNKNOWN",
+    "creationPath": "Road to Glory / Create Player / Player / Appearance / Head & Skin / Ear Shape",
+    "sourceVideoID": "video-009"
+  },
+  "selectorObservations": {
+    "gridStructure": "4-column single-row grid with 4 visible Ear Shape tiles",
+    "nativeOrderBasis": "visible tile position in the Ear Shape grid after the category finishes loading",
+    "selectionSequenceBasis": "direct selected labels in the recording",
+    "selectedOptionIndicator": "white border around the selected tile",
+    "equippedOptionIndicator": "green check mark appears on the currently equipped option and is not used as the selected-option indicator",
+    "firstObservedSelectedValue": "None",
+    "firstGridSelectedValue": "Attached Lobe",
+    "finalObservedSelectedValue": "Pointed",
+    "repeatedSelectionNativeOrders": [
+      2
+    ],
+    "repeatedSelectionExplanation": "None is visible before the grid appears and later selected as the second grid tile. It is one native catalog identity with multiple observations, not two records.",
+    "timelineCorrectionNotes": [
+      "The 1fps timeline listed 21.0-22.0 as None, but full-frame inspection shows Attached Lobe remains selected at 21s.",
+      "The 16s frame still shows the prior Nose heading while Ear Shape is selected in the tab bar, so native order is based on the loaded Ear Shape grid beginning at 18s."
+    ],
+    "selectorAppearsComplete": false,
+    "selectorCompletenessExplanation": "Four visible tiles are selected during the recording, but final boundary and wrap behavior are not shown.",
+    "wrapObserved": false,
+    "earShapeChangesVisibleEarPresentation": true,
+    "geometryMeasurementComputed": false,
+    "otherVisibleSettingsChangedWhenChoosingEarShape": false,
+    "characterRotationAvailable": true,
+    "selectedHeadRemainsConstant": true
+  },
+  "observationPolicy": {
+    "nativeLabelsPreserved": true,
+    "noSubjectiveAppearanceDescriptions": true,
+    "noEthnicityAttractivenessIdentityOrRealPersonResemblance": true,
+    "singleVisibleEarOnly": true,
+    "noBothEarsClaim": true,
+    "geometryObservationIsQualitativeOnly": true,
+    "noDepthOrTrueDepthClaim": true,
+    "productionUseAllowed": false,
+    "sourceMasterPreserved": true,
+    "derivativesAreLocalAndGitIgnored": true
+  },
+  "sourceVideos": [
+    {
+      "videoID": "video-009",
+      "workingFilename": "09_Ear_Shape.mp4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/55b7d607-eefa-41a4-8635-1eedb5296ab0.MP4",
+      "sha256": "e615e0919ebc50da7cdb1ec27ea302e28ac632b01728a88ca28ab0bb1f5902a1",
+      "durationSeconds": 30.21,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "identifiedContent": "Ear Shape menu and options"
+    }
+  ],
+  "nativeOrder": [
+    {
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
+      "nativeLabelOriginalText": "Attached Lobe",
+      "nativeRow": 1,
+      "nativeColumn": 1
+    },
+    {
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "nativeLabelOriginalText": "None",
+      "nativeRow": 1,
+      "nativeColumn": 2
+    },
+    {
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
+      "nativeLabelOriginalText": "Round Free Lobe",
+      "nativeRow": 1,
+      "nativeColumn": 3
+    },
+    {
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_004",
+      "nativeLabelOriginalText": "Pointed",
+      "nativeRow": 1,
+      "nativeColumn": 4
+    }
+  ],
+  "selectionSequence": [
+    {
+      "sequenceOrder": 1,
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "nativeLabelOriginalText": "None",
+      "timestampRangeSeconds": "17.0-17.9",
+      "stableTimestampSeconds": 17,
+      "selectionType": "initial_loaded_label_before_grid"
+    },
+    {
+      "sequenceOrder": 2,
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
+      "nativeLabelOriginalText": "Attached Lobe",
+      "timestampRangeSeconds": "18.0-21.9",
+      "stableTimestampSeconds": 18,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 3,
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "nativeLabelOriginalText": "None",
+      "timestampRangeSeconds": "23.0-23.9",
+      "stableTimestampSeconds": 23,
+      "selectionType": "deliberately_reselected_same_native_identity"
+    },
+    {
+      "sequenceOrder": 4,
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
+      "nativeLabelOriginalText": "Round Free Lobe",
+      "timestampRangeSeconds": "24.0-25.9",
+      "stableTimestampSeconds": 24,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 5,
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_004",
+      "nativeLabelOriginalText": "Pointed",
+      "timestampRangeSeconds": "26.0-30.21",
+      "stableTimestampSeconds": 26,
+      "selectionType": "deliberately_selected"
+    }
+  ],
+  "labelsRequiringManualTextConfirmation": [],
+  "manualTextConfirmationNotes": "All four selected native Ear Shape labels were readable in direct frame inspection. Reconfirm all labels during second-person verification before production.",
+  "categoryCompletenessWarnings": [
+    "The footage ends with Pointed selected and does not prove whether additional Ear Shape options exist.",
+    "No total count is claimed.",
+    "Only one lateral live-character ear side is visible."
+  ],
+  "records": [
+    {
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
+      "nativeLabelOriginalText": "Attached Lobe",
+      "visibleGameLabelOrIndex": "Attached Lobe",
+      "category": "Ear Shape",
+      "kind": "faceGeometryAttribute",
+      "attributeFamily": "earShape",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-009",
+          "timestampRangeSeconds": "18.0-21.9",
+          "stableTimestampSeconds": 18,
+          "evidenceType": "selected_grid_tile",
+          "basis": "direct selected Ear Shape grid tile visible in the Ear Shape menu"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_earshape_001-menu_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001_MENU_EVIDENCE_video-009_18p00s.png",
+          "outputSha256": "af1dd337e9c5264fd2e61b4eac408af18d0a0352fe225cc929fe3f7dac3119d5",
+          "sourceTimestampSeconds": 18
+        },
+        {
+          "role": "BEST_AVAILABLE_SIDE_OR_THREE_QUARTER",
+          "frameID": "frame-cf27_xboxunknown_rtg_earshape_001-best_available_side_or_three_quarter",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001_BEST_AVAILABLE_SIDE_OR_THREE_QUARTER_video-009_21p00s.png",
+          "outputSha256": "e831c08b54e3657778d90050c2bedcd7b5ab6d55ae2fd03f754eab1c28ba9eb3",
+          "sourceTimestampSeconds": 21
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 1,
+        "basis": "visible tile position in the Ear Shape grid. The green check is stored as equipped-state context, not selected native order."
+      },
+      "geometryObservation": {
+        "appearsGeometryChanging": true,
+        "geometryChangeEvidence": "The native Ear Shape category uses side-ear thumbnails and the visible lateral ear changes across selected grid tiles. No numerical measurement is computed from this ingest.",
+        "geometryMeasurementComputed": false,
+        "measurementStatus": "NOT_MEASURED",
+        "depthAvailable": false,
+        "depthAvailabilityReason": "Research source is a 2D RGB Xbox screen recording, not TrueDepth, depth, or ARKit capture."
+      },
+      "earVisibility": {
+        "singleLateralEarVisible": true,
+        "bothEarsEvaluated": false,
+        "leftEarVisibility": "NOT_CONFIRMED_FROM_RECORDING",
+        "rightEarVisibility": "NOT_CONFIRMED_FROM_RECORDING",
+        "visibleEarSideDescription": "One lateral ear is visible in the live character frame. The recording is not used to assert whether it is the character's left or right ear.",
+        "menuThumbnailEarSide": "single_side_thumbnail"
+      },
+      "hairstyleObstruction": {
+        "status": "PARTIAL",
+        "notes": "Hair is close to the upper and rear ear area. The ear outline and lobe region remain visible, but standardized recapture with controlled hair/framing is required."
+      },
+      "visualDistinguishability": {
+        "selectedMenuThumbnailVisible": true,
+        "liveCharacterEarVisible": true,
+        "selectedOptionDistinguishable": "medium",
+        "summary": "Native label and selected menu tile are readable. Live-character ear comparison is limited by hairstyle, single-side visibility, screen-recording compression, and non-standard rotation.",
+        "subjectiveDescriptorsAvoided": true
+      },
+      "completenessStatus": {
+        "menuEvidence": "present",
+        "sideOrThreeQuarterFrame": "present_limited_nonstandard",
+        "leftEarEvaluated": false,
+        "rightEarEvaluated": false,
+        "bothEarsEvaluated": false,
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture and does not prove complete category count."
+      },
+      "missingViews": [
+        "OPPOSITE_EAR_SIDE",
+        "STANDARDIZED_LEFT_PROFILE",
+        "STANDARDIZED_RIGHT_PROFILE",
+        "STANDARDIZED_LEFT_45",
+        "STANDARDIZED_RIGHT_45",
+        "HAIR_PULLED_CLEAR_OF_EARS"
+      ],
+      "recaptureNeed": {
+        "required": true,
+        "reasons": [
+          "Only one lateral ear side is visible in the live character frames.",
+          "Hair partially obstructs or borders the upper/rear ear area.",
+          "Selector wrap and final category boundary are not proven.",
+          "Game version, patch, and exact Xbox model remain unknown."
+        ],
+        "couldOneStandardizedRunRepairAllObservedEarShapeRecords": true
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, hairstyle, account-state, and unlock dependencies are not proven by this recording.",
+          "No setting interaction or dependency test is completed for Ear Shape options."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "nativeLabelOriginalText": "None",
+      "visibleGameLabelOrIndex": "None",
+      "category": "Ear Shape",
+      "kind": "faceGeometryAttribute",
+      "attributeFamily": "earShape",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-009",
+          "timestampRangeSeconds": "17.0-17.9",
+          "stableTimestampSeconds": 17,
+          "evidenceType": "label_visible_before_grid",
+          "basis": "native Ear Shape label visible after navigation before the grid is shown"
+        },
+        {
+          "videoID": "video-009",
+          "timestampRangeSeconds": "23.0-23.9",
+          "stableTimestampSeconds": 23,
+          "evidenceType": "selected_grid_tile",
+          "basis": "direct selected Ear Shape grid tile visible in the Ear Shape menu"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_earshape_002-menu_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_002/CF27_XBOXUNKNOWN_RTG_EARSHAPE_002_MENU_EVIDENCE_video-009_23p00s.png",
+          "outputSha256": "a62301cf735877f80affbca74f9f8c107b390b8dd4fc2ef5c3b7fd5b53521b97",
+          "sourceTimestampSeconds": 23
+        },
+        {
+          "role": "BEST_AVAILABLE_SIDE_OR_THREE_QUARTER",
+          "frameID": "frame-cf27_xboxunknown_rtg_earshape_002-best_available_side_or_three_quarter",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_002/CF27_XBOXUNKNOWN_RTG_EARSHAPE_002_BEST_AVAILABLE_SIDE_OR_THREE_QUARTER_video-009_23p00s.png",
+          "outputSha256": "a62301cf735877f80affbca74f9f8c107b390b8dd4fc2ef5c3b7fd5b53521b97",
+          "sourceTimestampSeconds": 23
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 2,
+        "basis": "visible tile position in the Ear Shape grid. The green check is stored as equipped-state context, not selected native order."
+      },
+      "geometryObservation": {
+        "appearsGeometryChanging": true,
+        "geometryChangeEvidence": "The native Ear Shape category uses side-ear thumbnails and the visible lateral ear changes across selected grid tiles. No numerical measurement is computed from this ingest.",
+        "geometryMeasurementComputed": false,
+        "measurementStatus": "NOT_MEASURED",
+        "depthAvailable": false,
+        "depthAvailabilityReason": "Research source is a 2D RGB Xbox screen recording, not TrueDepth, depth, or ARKit capture."
+      },
+      "earVisibility": {
+        "singleLateralEarVisible": true,
+        "bothEarsEvaluated": false,
+        "leftEarVisibility": "NOT_CONFIRMED_FROM_RECORDING",
+        "rightEarVisibility": "NOT_CONFIRMED_FROM_RECORDING",
+        "visibleEarSideDescription": "One lateral ear is visible in the live character frame. The recording is not used to assert whether it is the character's left or right ear.",
+        "menuThumbnailEarSide": "single_side_thumbnail"
+      },
+      "hairstyleObstruction": {
+        "status": "PARTIAL",
+        "notes": "Hair is close to the upper and rear ear area. The ear outline and lobe region remain visible, but standardized recapture with controlled hair/framing is required."
+      },
+      "visualDistinguishability": {
+        "selectedMenuThumbnailVisible": true,
+        "liveCharacterEarVisible": true,
+        "selectedOptionDistinguishable": "medium",
+        "summary": "Native label and selected menu tile are readable. Live-character ear comparison is limited by hairstyle, single-side visibility, screen-recording compression, and non-standard rotation.",
+        "subjectiveDescriptorsAvoided": true
+      },
+      "completenessStatus": {
+        "menuEvidence": "present",
+        "sideOrThreeQuarterFrame": "present_limited_nonstandard",
+        "leftEarEvaluated": false,
+        "rightEarEvaluated": false,
+        "bothEarsEvaluated": false,
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture and does not prove complete category count."
+      },
+      "missingViews": [
+        "OPPOSITE_EAR_SIDE",
+        "STANDARDIZED_LEFT_PROFILE",
+        "STANDARDIZED_RIGHT_PROFILE",
+        "STANDARDIZED_LEFT_45",
+        "STANDARDIZED_RIGHT_45",
+        "HAIR_PULLED_CLEAR_OF_EARS"
+      ],
+      "recaptureNeed": {
+        "required": true,
+        "reasons": [
+          "Only one lateral ear side is visible in the live character frames.",
+          "Hair partially obstructs or borders the upper/rear ear area.",
+          "Selector wrap and final category boundary are not proven.",
+          "Game version, patch, and exact Xbox model remain unknown."
+        ],
+        "couldOneStandardizedRunRepairAllObservedEarShapeRecords": true
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, hairstyle, account-state, and unlock dependencies are not proven by this recording.",
+          "No setting interaction or dependency test is completed for Ear Shape options."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
+      "nativeLabelOriginalText": "Round Free Lobe",
+      "visibleGameLabelOrIndex": "Round Free Lobe",
+      "category": "Ear Shape",
+      "kind": "faceGeometryAttribute",
+      "attributeFamily": "earShape",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-009",
+          "timestampRangeSeconds": "24.0-25.9",
+          "stableTimestampSeconds": 24,
+          "evidenceType": "selected_grid_tile",
+          "basis": "direct selected Ear Shape grid tile visible in the Ear Shape menu"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_earshape_003-menu_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_003/CF27_XBOXUNKNOWN_RTG_EARSHAPE_003_MENU_EVIDENCE_video-009_24p00s.png",
+          "outputSha256": "5ae3f7bbd1c71ceb4be49c5009b72db056a37b5e564a45745895e83cb223683b",
+          "sourceTimestampSeconds": 24
+        },
+        {
+          "role": "BEST_AVAILABLE_SIDE_OR_THREE_QUARTER",
+          "frameID": "frame-cf27_xboxunknown_rtg_earshape_003-best_available_side_or_three_quarter",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_003/CF27_XBOXUNKNOWN_RTG_EARSHAPE_003_BEST_AVAILABLE_SIDE_OR_THREE_QUARTER_video-009_24p00s.png",
+          "outputSha256": "5ae3f7bbd1c71ceb4be49c5009b72db056a37b5e564a45745895e83cb223683b",
+          "sourceTimestampSeconds": 24
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 3,
+        "basis": "visible tile position in the Ear Shape grid. The green check is stored as equipped-state context, not selected native order."
+      },
+      "geometryObservation": {
+        "appearsGeometryChanging": true,
+        "geometryChangeEvidence": "The native Ear Shape category uses side-ear thumbnails and the visible lateral ear changes across selected grid tiles. No numerical measurement is computed from this ingest.",
+        "geometryMeasurementComputed": false,
+        "measurementStatus": "NOT_MEASURED",
+        "depthAvailable": false,
+        "depthAvailabilityReason": "Research source is a 2D RGB Xbox screen recording, not TrueDepth, depth, or ARKit capture."
+      },
+      "earVisibility": {
+        "singleLateralEarVisible": true,
+        "bothEarsEvaluated": false,
+        "leftEarVisibility": "NOT_CONFIRMED_FROM_RECORDING",
+        "rightEarVisibility": "NOT_CONFIRMED_FROM_RECORDING",
+        "visibleEarSideDescription": "One lateral ear is visible in the live character frame. The recording is not used to assert whether it is the character's left or right ear.",
+        "menuThumbnailEarSide": "single_side_thumbnail"
+      },
+      "hairstyleObstruction": {
+        "status": "PARTIAL",
+        "notes": "Hair is close to the upper and rear ear area. The ear outline and lobe region remain visible, but standardized recapture with controlled hair/framing is required."
+      },
+      "visualDistinguishability": {
+        "selectedMenuThumbnailVisible": true,
+        "liveCharacterEarVisible": true,
+        "selectedOptionDistinguishable": "medium",
+        "summary": "Native label and selected menu tile are readable. Live-character ear comparison is limited by hairstyle, single-side visibility, screen-recording compression, and non-standard rotation.",
+        "subjectiveDescriptorsAvoided": true
+      },
+      "completenessStatus": {
+        "menuEvidence": "present",
+        "sideOrThreeQuarterFrame": "present_limited_nonstandard",
+        "leftEarEvaluated": false,
+        "rightEarEvaluated": false,
+        "bothEarsEvaluated": false,
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture and does not prove complete category count."
+      },
+      "missingViews": [
+        "OPPOSITE_EAR_SIDE",
+        "STANDARDIZED_LEFT_PROFILE",
+        "STANDARDIZED_RIGHT_PROFILE",
+        "STANDARDIZED_LEFT_45",
+        "STANDARDIZED_RIGHT_45",
+        "HAIR_PULLED_CLEAR_OF_EARS"
+      ],
+      "recaptureNeed": {
+        "required": true,
+        "reasons": [
+          "Only one lateral ear side is visible in the live character frames.",
+          "Hair partially obstructs or borders the upper/rear ear area.",
+          "Selector wrap and final category boundary are not proven.",
+          "Game version, patch, and exact Xbox model remain unknown."
+        ],
+        "couldOneStandardizedRunRepairAllObservedEarShapeRecords": true
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, hairstyle, account-state, and unlock dependencies are not proven by this recording.",
+          "No setting interaction or dependency test is completed for Ear Shape options."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_004",
+      "nativeLabelOriginalText": "Pointed",
+      "visibleGameLabelOrIndex": "Pointed",
+      "category": "Ear Shape",
+      "kind": "faceGeometryAttribute",
+      "attributeFamily": "earShape",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-009",
+          "timestampRangeSeconds": "26.0-30.21",
+          "stableTimestampSeconds": 26,
+          "evidenceType": "selected_grid_tile",
+          "basis": "direct selected Ear Shape grid tile visible in the Ear Shape menu"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_earshape_004-menu_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004_MENU_EVIDENCE_video-009_26p00s.png",
+          "outputSha256": "042a78d561b6154053f8155e07b9872b323b9ca900db9b3c324bc5e8f02265af",
+          "sourceTimestampSeconds": 26
+        },
+        {
+          "role": "BEST_AVAILABLE_SIDE_OR_THREE_QUARTER",
+          "frameID": "frame-cf27_xboxunknown_rtg_earshape_004-best_available_side_or_three_quarter",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004_BEST_AVAILABLE_SIDE_OR_THREE_QUARTER_video-009_26p00s.png",
+          "outputSha256": "042a78d561b6154053f8155e07b9872b323b9ca900db9b3c324bc5e8f02265af",
+          "sourceTimestampSeconds": 26
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 4,
+        "basis": "visible tile position in the Ear Shape grid. The green check is stored as equipped-state context, not selected native order."
+      },
+      "geometryObservation": {
+        "appearsGeometryChanging": true,
+        "geometryChangeEvidence": "The native Ear Shape category uses side-ear thumbnails and the visible lateral ear changes across selected grid tiles. No numerical measurement is computed from this ingest.",
+        "geometryMeasurementComputed": false,
+        "measurementStatus": "NOT_MEASURED",
+        "depthAvailable": false,
+        "depthAvailabilityReason": "Research source is a 2D RGB Xbox screen recording, not TrueDepth, depth, or ARKit capture."
+      },
+      "earVisibility": {
+        "singleLateralEarVisible": true,
+        "bothEarsEvaluated": false,
+        "leftEarVisibility": "NOT_CONFIRMED_FROM_RECORDING",
+        "rightEarVisibility": "NOT_CONFIRMED_FROM_RECORDING",
+        "visibleEarSideDescription": "One lateral ear is visible in the live character frame. The recording is not used to assert whether it is the character's left or right ear.",
+        "menuThumbnailEarSide": "single_side_thumbnail"
+      },
+      "hairstyleObstruction": {
+        "status": "PARTIAL",
+        "notes": "Hair is close to the upper and rear ear area. The ear outline and lobe region remain visible, but standardized recapture with controlled hair/framing is required."
+      },
+      "visualDistinguishability": {
+        "selectedMenuThumbnailVisible": true,
+        "liveCharacterEarVisible": true,
+        "selectedOptionDistinguishable": "medium",
+        "summary": "Native label and selected menu tile are readable. Live-character ear comparison is limited by hairstyle, single-side visibility, screen-recording compression, and non-standard rotation.",
+        "subjectiveDescriptorsAvoided": true
+      },
+      "completenessStatus": {
+        "menuEvidence": "present",
+        "sideOrThreeQuarterFrame": "present_limited_nonstandard",
+        "leftEarEvaluated": false,
+        "rightEarEvaluated": false,
+        "bothEarsEvaluated": false,
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture and does not prove complete category count."
+      },
+      "missingViews": [
+        "OPPOSITE_EAR_SIDE",
+        "STANDARDIZED_LEFT_PROFILE",
+        "STANDARDIZED_RIGHT_PROFILE",
+        "STANDARDIZED_LEFT_45",
+        "STANDARDIZED_RIGHT_45",
+        "HAIR_PULLED_CLEAR_OF_EARS"
+      ],
+      "recaptureNeed": {
+        "required": true,
+        "reasons": [
+          "Only one lateral ear side is visible in the live character frames.",
+          "Hair partially obstructs or borders the upper/rear ear area.",
+          "Selector wrap and final category boundary are not proven.",
+          "Game version, patch, and exact Xbox model remain unknown."
+        ],
+        "couldOneStandardizedRunRepairAllObservedEarShapeRecords": true
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, hairstyle, account-state, and unlock dependencies are not proven by this recording.",
+          "No setting interaction or dependency test is completed for Ear Shape options."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    }
+  ],
+  "productionBlocks": [
+    "Records are primary research only and not second-person verified.",
+    "Game version, patch, and exact platform are still unknown.",
+    "Selector wrap and final category boundary are not proven.",
+    "Only one lateral ear side is visible in live-character evidence.",
+    "Production catalog remains empty until verified evidence is reviewed and published."
+  ]
+}

@@ -12,8 +12,12 @@ struct AppleCaptureCapabilityService: CaptureCapabilityProviding {
         return .unavailableInSimulator
         #else
         switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .notDetermined, .denied, .restricted:
+        case .notDetermined:
             return .cameraPermissionRequired
+        case .denied:
+            return .cameraPermissionDenied
+        case .restricted:
+            return .cameraPermissionRestricted
         case .authorized:
             break
         @unknown default:

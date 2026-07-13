@@ -36,6 +36,8 @@ private extension CaptureCapabilityStatus {
         case .trueDepthAndARFaceTrackingSupported: "Premium scan capable"
         case .unsupported: "Depth scan unsupported"
         case .cameraPermissionRequired: "Camera permission required"
+        case .cameraPermissionDenied: "Camera permission denied"
+        case .cameraPermissionRestricted: "Camera permission restricted"
         case .unavailableInSimulator: "Simulator unavailable"
         case .cameraUnavailable: "Camera unavailable"
         case .unknown: "Capability unknown"
@@ -51,6 +53,10 @@ private extension CaptureCapabilityStatus {
             "This device may support only a standard camera scan. Results may be less precise around the jaw, nose profile, and side of the face."
         case .cameraPermissionRequired:
             "Camera permission is needed before a future capture session can begin."
+        case .cameraPermissionDenied:
+            "Camera permission is currently denied. Enable camera access in iOS Settings before a future native capture session."
+        case .cameraPermissionRestricted:
+            "Camera access is restricted by device policy or Screen Time, so native capture cannot start on this device."
         case .unavailableInSimulator:
             "The simulator cannot provide real camera, TrueDepth, or AR face-tracking capability."
         case .cameraUnavailable:
@@ -67,6 +73,8 @@ private extension CaptureCapabilityStatus {
         case .trueDepthAndARFaceTrackingSupported: "checkmark.circle"
         case .unsupported: "exclamationmark.triangle"
         case .cameraPermissionRequired: "camera.badge.ellipsis"
+        case .cameraPermissionDenied: "camera.badge.exclamationmark"
+        case .cameraPermissionRestricted: "lock.trianglebadge.exclamationmark"
         case .unavailableInSimulator: "iphone.slash"
         case .cameraUnavailable: "camera.fill"
         case .unknown: "questionmark.circle"

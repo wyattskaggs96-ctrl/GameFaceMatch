@@ -29,6 +29,8 @@ enum CaptureCapabilityStatus: Equatable, Sendable {
     case trueDepthAndARFaceTrackingSupported
     case unsupported
     case cameraPermissionRequired
+    case cameraPermissionDenied
+    case cameraPermissionRestricted
     case unavailableInSimulator
     case cameraUnavailable
     case unknown

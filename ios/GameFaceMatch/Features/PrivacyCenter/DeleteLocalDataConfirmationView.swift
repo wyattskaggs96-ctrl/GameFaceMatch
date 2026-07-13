@@ -25,7 +25,7 @@ struct DeleteLocalDataConfirmationView: View {
             .accessibilityLabel("Delete all local user data")
             .confirmationDialog("Delete all local user data?", isPresented: $showConfirmation, titleVisibility: .visible) {
                 Button("Delete Local Data", role: .destructive) {
-                    viewModel.markDeletionCompleted()
+                    viewModel.deleteAllLocalData()
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {

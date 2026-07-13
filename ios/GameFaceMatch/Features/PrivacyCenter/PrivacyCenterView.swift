@@ -26,6 +26,11 @@ struct PrivacyCenterView: View {
                     .foregroundStyle(.green)
                     .accessibilityLabel("Deletion completion recorded")
             }
+            if let deletionErrorMessage = viewModel.deletionErrorMessage {
+                Label(deletionErrorMessage, systemImage: "exclamationmark.triangle")
+                    .foregroundStyle(.red)
+                    .accessibilityLabel("Local data deletion failed")
+            }
         }
     }
 }

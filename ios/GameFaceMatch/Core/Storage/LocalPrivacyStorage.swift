@@ -27,6 +27,11 @@ final class LocalFilePrivacyStore: TemporaryCaptureSessionStorage, DerivedProfil
     private let baseURL: URL
     private let fileManager: FileManager
 
+    static func applicationSupportStore(fileManager: FileManager = .default) -> LocalFilePrivacyStore {
+        let root = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first ?? fileManager.temporaryDirectory
+        return LocalFilePrivacyStore(baseURL: root.appendingPathComponent("GameFaceMatch", isDirectory: true), fileManager: fileManager)
+    }
+
     init(baseURL: URL, fileManager: FileManager = .default) {
         self.baseURL = baseURL
         self.fileManager = fileManager

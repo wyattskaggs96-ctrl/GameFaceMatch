@@ -1240,6 +1240,28 @@
       "lastCheckedDate": "2026-07-13"
     },
     {
+      "id": "GFM-P0-045",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Catalog image measurement pipeline",
+      "summary": "Build a local game-character image measurement pipeline using explainable geometry and image-derived normalized ratios, including view validation, face-region detection, reliable landmark extraction summaries, confidence, supporting-view counts, variance, failure states, and human correction without claiming scientific biometric precision.",
+      "owningModule": "Catalog annotation governance",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-catalog-image-measurement.ts",
+        "data/schemas/catalog-image-measurement.schema.json",
+        "web/features/phase-zero/CatalogAnnotationWorkspace.tsx",
+        "docs/GAME_CATALOG_WORKFLOW.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-catalog-image-measurement.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Catalog image measurement tests cover schema safety, view validation, face-region detection, landmark reliability summaries, normalized measurement values, per-measurement confidence, supporting views, variance, failure states, human correction provenance, depth support fixed false, and non-biometric precision wording.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-13"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

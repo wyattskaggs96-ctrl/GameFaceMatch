@@ -16,6 +16,7 @@ import {
   type Phase0CatalogReviewerAnnotation,
   type Phase0CatalogReviewerRole
 } from "@/lib/phase-zero/phase-zero-catalog-annotation-workspace";
+import { createCatalogImageMeasurementReport } from "@/lib/phase-zero/phase-zero-catalog-image-measurement";
 import type { Phase0OrdinalAngle, Phase0OrdinalWidth } from "@/lib/phase-zero/phase-zero-facial-feature-taxonomy";
 
 const now = () => new Date().toISOString();
@@ -56,6 +57,20 @@ export function CatalogAnnotationWorkspace() {
   const [jawAngleClass, setJawAngleClass] = useState<Phase0OrdinalAngle>("medium");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const validation = useMemo(() => validateCatalogAnnotationWorkspace(workspace), [workspace]);
+  const measurementReport = useMemo(
+    () =>
+      createCatalogImageMeasurementReport({
+        catalogStableID: workspace.catalogStableID,
+        catalogVersionID: workspace.catalogVersionID,
+        createdAt: workspace.updatedAt,
+        imageViews: workspace.imageViews.map((view) => ({
+          ...view,
+          faceLandmarkReport: null,
+          manualFaceRegion: null
+        }))
+      }),
+    [workspace]
+  );
   const completedViews = PHASE0_CATALOG_ANNOTATION_REQUIRED_VIEWS.length - validation.missingRequiredViews.length;
 
   async function attachSyntheticViewSet() {
@@ -183,6 +198,27 @@ export function CatalogAnnotationWorkspace() {
               <dd>{validation.interReviewerComparison.differenceCount}</dd>
             </div>
           </dl>
+        </Card>
+        <Card tone={measurementReport.readyForAnnotationReview ? "success" : "warning"}>
+          <h2>Measurement pipeline</h2>
+          <dl className="metadata-list">
+            <div>
+              <dt>Local ratios available</dt>
+              <dd>{Object.values(measurementReport.measurements).filter((measurement) => measurement?.availabilityState === "available").length}</dd>
+            </div>
+            <div>
+              <dt>Failure states</dt>
+              <dd>{measurementReport.failureMessages.length}</dd>
+            </div>
+            <div>
+              <dt>Production-ready</dt>
+              <dd>{measurementReport.readyForProductionCatalog ? "Yes" : "No"}</dd>
+            </div>
+          </dl>
+          <p className="supporting">
+            The pipeline calculates explainable normalized ratios only when local landmarks are reliable. Human corrections are versioned inputs, not
+            automatic game facts.
+          </p>
         </Card>
       </div>
 

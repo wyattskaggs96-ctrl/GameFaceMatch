@@ -1,0 +1,326 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/catalog-image-measurement.schema.json",
+  "title": "Phase0CatalogImageMeasurementReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "catalogStableID",
+    "catalogVersionID",
+    "createdAt",
+    "viewValidations",
+    "faceRegions",
+    "landmarkExtractions",
+    "measurements",
+    "failureMessages",
+    "humanCorrectionCount",
+    "readyForAnnotationReview",
+    "readyForProductionCatalog",
+    "precisionNotice"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "phase0-catalog-image-measurement-v1"
+    },
+    "catalogStableID": {
+      "type": "string",
+      "minLength": 1
+    },
+    "catalogVersionID": {
+      "type": "string",
+      "minLength": 1
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "viewValidations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/viewValidation"
+      }
+    },
+    "faceRegions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/faceRegionDetection"
+      }
+    },
+    "landmarkExtractions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/landmarkExtraction"
+      }
+    },
+    "measurements": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/measurement"
+      }
+    },
+    "failureMessages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "humanCorrectionCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "readyForAnnotationReview": {
+      "type": "boolean"
+    },
+    "readyForProductionCatalog": {
+      "const": false
+    },
+    "precisionNotice": {
+      "type": "string",
+      "pattern": "not .*biometric|Not .*biometric"
+    }
+  },
+  "$defs": {
+    "viewID": {
+      "enum": [
+        "straightOn",
+        "left45",
+        "right45",
+        "leftProfile",
+        "rightProfile",
+        "rear",
+        "elevated",
+        "lowered",
+        "menuEvidence"
+      ]
+    },
+    "measurementID": {
+      "enum": [
+        "faceWidthRatio",
+        "faceLengthRatio",
+        "foreheadWidthRatio",
+        "jawWidthRatio",
+        "chinWidthRatio",
+        "eyeSpacingRatio",
+        "meanEyeWidthRatio",
+        "noseWidthRatio",
+        "noseLengthRatio",
+        "mouthWidthRatio",
+        "lowerFaceRatio",
+        "eyeTilt",
+        "browPosition",
+        "jawAngle",
+        "noseProjection",
+        "chinProjection"
+      ]
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "label"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "label": {
+          "enum": ["low", "medium", "high", "unavailable"]
+        }
+      }
+    },
+    "viewValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["viewID", "evidenceFileID", "status", "issues"],
+      "properties": {
+        "viewID": {
+          "$ref": "#/$defs/viewID"
+        },
+        "evidenceFileID": {
+          "type": "string"
+        },
+        "status": {
+          "enum": ["usable", "needsHumanReview", "blocked"]
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["code", "severity", "message"],
+            "properties": {
+              "code": {
+                "enum": [
+                  "missingEvidenceID",
+                  "invalidDimensions",
+                  "landmarksUnavailable",
+                  "zeroFaces",
+                  "multipleFaces",
+                  "faceRegionMissing",
+                  "viewPoseUnconfirmed",
+                  "viewPoseMismatch",
+                  "lowLandmarkConfidence"
+                ]
+              },
+              "severity": {
+                "enum": ["blocking", "warning"]
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "faceRegion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit", "x", "y", "width", "height", "confidence", "source"],
+      "properties": {
+        "unit": {
+          "const": "normalized"
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "source": {
+          "enum": ["landmarkBoundingBox", "humanCorrected"]
+        }
+      }
+    },
+    "faceRegionDetection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["viewID", "evidenceFileID", "state", "region", "message"],
+      "properties": {
+        "viewID": {
+          "$ref": "#/$defs/viewID"
+        },
+        "evidenceFileID": {
+          "type": "string"
+        },
+        "state": {
+          "enum": ["detected", "humanCorrected", "unavailable"]
+        },
+        "region": {
+          "anyOf": [{ "$ref": "#/$defs/faceRegion" }, { "type": "null" }]
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "landmarkExtraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["viewID", "state", "provider", "coreLandmarkCount", "confidence", "failureReason"],
+      "properties": {
+        "viewID": {
+          "$ref": "#/$defs/viewID"
+        },
+        "state": {
+          "enum": ["available", "unavailable", "unreliable"]
+        },
+        "provider": {
+          "type": ["object", "null"]
+        },
+        "coreLandmarkCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "failureReason": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measurementID",
+        "value",
+        "source",
+        "availabilityState",
+        "confidence",
+        "supportingViewCount",
+        "supportingViews",
+        "supportingEvidenceFileIDs",
+        "variance",
+        "depthSupported",
+        "algorithmVersion",
+        "failureReason",
+        "humanCorrection",
+        "precisionNotice"
+      ],
+      "properties": {
+        "measurementID": {
+          "$ref": "#/$defs/measurementID"
+        },
+        "value": {
+          "type": ["number", "null"]
+        },
+        "source": {
+          "enum": ["landmarkDerived", "humanCorrected", "unavailable"]
+        },
+        "availabilityState": {
+          "enum": ["available", "unavailable", "needsHumanCorrection"]
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "supportingViewCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "supportingViews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/viewID"
+          }
+        },
+        "supportingEvidenceFileIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "variance": {
+          "type": ["number", "null"],
+          "minimum": 0
+        },
+        "depthSupported": {
+          "const": false
+        },
+        "algorithmVersion": {
+          "const": "phase0-catalog-image-measurement-v1"
+        },
+        "failureReason": {
+          "type": ["string", "null"]
+        },
+        "humanCorrection": {
+          "type": ["object", "null"]
+        },
+        "precisionNotice": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

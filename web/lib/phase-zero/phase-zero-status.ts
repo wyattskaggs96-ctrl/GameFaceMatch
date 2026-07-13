@@ -109,6 +109,8 @@ const requiredSchemas = [
   "data/schemas/facial-hair-capture-workspace.schema.json",
   "data/schemas/additional-face-attribute.schema.json",
   "data/schemas/additional-attributes-workspace.schema.json",
+  "data/schemas/catalog-annotation-workspace.schema.json",
+  "data/schemas/catalog-image-measurement.schema.json",
   "data/schemas/dependency-test-runner.schema.json",
   "data/schemas/issue-register.schema.json",
   "data/schemas/phase-zero-domain.schema.json"
@@ -135,6 +137,8 @@ export const CURRENT_PHASE0_REPOSITORY_STATE: Phase0RepositoryState = {
     "web/lib/phase-zero/phase-zero-capture-consistency.ts",
     "web/lib/phase-zero/phase-zero-required-view-completeness.ts",
     "web/lib/phase-zero/phase-zero-duplicate-review.ts",
+    "web/lib/phase-zero/phase-zero-catalog-annotation-workspace.ts",
+    "web/lib/phase-zero/phase-zero-catalog-image-measurement.ts",
     "web/lib/phase-zero/phase-zero-export-pipeline.ts",
     "web/lib/phase-zero/catalog-manager-review-console.ts",
     "web/features/phase-zero/CatalogManagerReviewConsole.tsx",

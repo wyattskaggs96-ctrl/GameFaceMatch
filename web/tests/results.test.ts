@@ -24,6 +24,21 @@ describe("results experience state", () => {
     expect(state.matches).toEqual([]);
   });
 
+  it("does not render fixture recommendations when the production catalog is unavailable", () => {
+    const fixtureMatches = createRuleBasedMatchingEngine().matchTopThree({ profile: syntheticProfile(), catalog: fixtureCatalog, allowTestFixtures: true });
+    const state = createResultsState({
+      profile: syntheticProfile(),
+      catalogIsEmpty: true,
+      matches: fixtureMatches
+    });
+
+    expect(fixtureMatches.length).toBeGreaterThan(0);
+    expect(state.kind).toBe("catalogUnavailable");
+    expect(state.matches).toEqual([]);
+    expect(JSON.stringify(state)).not.toContain("synthetic-match-alpha");
+    expect(JSON.stringify(state)).not.toContain("synthetic-label-alpha");
+  });
+
   it("blocks results when profile evidence is incomplete", () => {
     const profile = syntheticProfile();
     profile.sourceAngleAvailability.rightProfile = { angleID: "rightProfile", available: false };

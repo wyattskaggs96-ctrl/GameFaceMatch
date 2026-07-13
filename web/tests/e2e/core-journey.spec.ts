@@ -39,7 +39,17 @@ test.describe("GameFace Match production-representative journey", () => {
     await page.getByRole("button", { name: "Continue when ready" }).click();
 
     await expect(page.locator("#results-title")).toHaveText("Verified College Football 27 catalog not loaded.");
+    await expect(page.getByText("Your capture and local profile review completed successfully.")).toBeVisible();
+    await expect(page.getByText("Real College Football 27 recommendations require a verified production catalog")).toBeVisible();
     await expect(page.getByText("No production top-three results, labels, sliders, hairstyles, facial-hair options, or menu paths are displayed")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Ready" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Blocked" })).toBeVisible();
+    await expect(page.getByText("This is a catalog availability issue, not a capture mistake.")).toBeVisible();
+    await expect(page.getByText("Your derived face profile can stay local in this browser session")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Check catalog status" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Delete local profile" })).toBeVisible();
+    await expect(page.getByText("synthetic-match-alpha")).toHaveCount(0);
+    await expect(page.getByText("synthetic-label-alpha")).toHaveCount(0);
     await expect(page.getByText("empty-production")).toBeVisible();
     await expectNoRawImagePersistence(page);
   });

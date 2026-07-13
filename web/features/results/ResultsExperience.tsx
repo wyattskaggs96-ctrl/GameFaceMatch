@@ -14,6 +14,7 @@ export function ResultsExperience({
   errorMessage,
   isProcessing = false,
   onStartOver,
+  onRetryCatalog,
   canSaveBuild = false,
   onSaveBuild,
   onDeleteResult,
@@ -29,6 +30,7 @@ export function ResultsExperience({
   errorMessage?: string | null;
   isProcessing?: boolean;
   onStartOver: () => void;
+  onRetryCatalog?: () => void;
   canSaveBuild?: boolean;
   onSaveBuild?: (match: GameAppearanceMatch) => void;
   onDeleteResult?: () => void;
@@ -75,6 +77,11 @@ export function ResultsExperience({
           catalogStatusMessage={catalogStatusMessage}
           catalogStalenessMessage={catalogStalenessMessage}
           onStartOver={onStartOver}
+          onRetryCatalog={onRetryCatalog}
+          onDeleteProfile={() => {
+            onDeleteResult?.();
+            setResultDeleted(true);
+          }}
         />
       ) : null}
 
@@ -129,7 +136,9 @@ function CatalogUnavailableState({
   catalogRecordCount,
   catalogStatusMessage,
   catalogStalenessMessage,
-  onStartOver
+  onStartOver,
+  onRetryCatalog,
+  onDeleteProfile
 }: {
   captureSummary: string;
   catalogVersionID: string;
@@ -138,27 +147,40 @@ function CatalogUnavailableState({
   catalogStatusMessage: string;
   catalogStalenessMessage: string | null;
   onStartOver: () => void;
+  onRetryCatalog?: () => void;
+  onDeleteProfile: () => void;
 }) {
   return (
     <>
       <EmptyState
         title={CATALOG_UNAVAILABLE_MESSAGE}
         action={
-          <Button variant="secondary" onClick={onStartOver}>
-            Start over
-          </Button>
+          <div className="button-row">
+            <Button variant="secondary" onClick={onRetryCatalog ?? onStartOver}>
+              Check catalog status
+            </Button>
+            <Button variant="danger" onClick={onDeleteProfile}>
+              Delete local profile
+            </Button>
+            <Button variant="secondary" onClick={onStartOver}>
+              Start over
+            </Button>
+          </div>
         }
       >
+        <p>Your capture and local profile review completed successfully. Real College Football 27 recommendations require a verified production catalog, and that catalog is not loaded yet.</p>
         <p>No production top-three results, labels, sliders, hairstyles, facial-hair options, or menu paths are displayed because none have been verified.</p>
       </EmptyState>
       <div className="result-grid">
         <Card tone="info">
-          <h2>Capture-quality summary</h2>
+          <h2>Ready</h2>
           <p>{captureSummary}</p>
+          <p>Your derived face profile can stay local in this browser session while you check catalog status or retry later.</p>
         </Card>
         <Card tone="warning">
-          <h2>Build guide unavailable</h2>
-          <p>Step-by-step instructions require exact verified game labels and navigation evidence from the production catalog.</p>
+          <h2>Blocked</h2>
+          <p>Verified game recommendations and step-by-step build instructions are blocked until approved College Football 27 catalog records are available.</p>
+          <p>This is a catalog availability issue, not a capture mistake.</p>
         </Card>
         <Card tone="neutral">
           <h2>Catalog traceability</h2>
@@ -184,6 +206,14 @@ function CatalogUnavailableState({
               <strong>{catalogStalenessMessage ?? "No verified catalog date"}</strong>
             </div>
           </dl>
+        </Card>
+        <Card tone="info">
+          <h2>Next options</h2>
+          <ul className="message-list">
+            <li>Keep the local derived profile and check catalog status again later.</li>
+            <li>Delete the local derived profile if you do not want to keep it in this session.</li>
+            <li>Start over only if you want to redo capture or profile confirmation.</li>
+          </ul>
         </Card>
       </div>
     </>

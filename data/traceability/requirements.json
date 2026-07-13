@@ -1274,7 +1274,7 @@
         "web/tests/matching-engine.test.ts"
       ],
       "status": "IMPLEMENTED_WITH_LIMITATION",
-      "evidence": "Synthetic tests cover ordering, configurable feature weights, explicit per-feature confidence evidence, partial profiles, missing side views, occlusion, low confidence, redistribution, ties, structured top-three recommendation explanations, deterministic output, catalog version, fixture exclusion, approved-release production gating, adapter publish-gate enforcement, and empty-catalog fail-closed behavior.",
+      "evidence": "Synthetic tests cover ordering, configurable feature weights, explicit per-feature confidence evidence, partial profiles, missing side views, occlusion, low confidence, redistribution, ties, structured top-three recommendation explanations, honest catalog-unavailable results, deterministic output, catalog version, fixture exclusion, approved-release production gating, adapter publish-gate enforcement, and empty-catalog fail-closed behavior.",
       "blocker": "Real production matching cannot be verified until verified catalog records exist.",
       "owner": "Matching lead",
       "lastCheckedDate": "2026-07-13"

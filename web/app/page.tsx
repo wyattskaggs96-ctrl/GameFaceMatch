@@ -436,6 +436,7 @@ export default function HomePage() {
             catalogStatusMessage={catalogRuntimeError ?? catalogRuntimeStatus?.integrity.message ?? "Catalog status pending."}
             catalogStalenessMessage={catalogRuntimeStatus?.staleness.message}
             onStartOver={startOver}
+            onRetryCatalog={() => navigate("catalog")}
             canSaveBuild={isConsentGranted(consentState, "saveCompletedBuild")}
             onSaveBuild={(match) =>
               {

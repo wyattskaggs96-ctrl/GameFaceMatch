@@ -106,6 +106,22 @@ Secondary-angle sampling is deterministic to prevent cherry-picking. For each ca
 
 Source-video intake is local-only. `inspect` preserves original video files and reports metadata from `ffprobe` when available. `extract-frame` produces derivative still frames only when `ffmpeg` is installed; otherwise it returns a disabled result so operators can continue recording timestamp references and extract frames later.
 
+## Research evidence staging
+
+Current Xbox screen-recording evidence is staged under `data/research/cf27/` before it becomes any kind of catalog package.
+
+- `source-video-references/` stores metadata, checksums, source-root tokens, and timestamp references. It must not contain committed source-video masters.
+- `generated/contact-sheets/` stores local generated contact sheets only; images are ignored and must be represented by manifests or reports when committed.
+- `generated/full-resolution-frames/` stores local extracted full-resolution frame derivatives only; images are ignored and must preserve source-video ID and timestamp provenance.
+- `generated/cropped-measurement-derivatives/` stores local non-destructive crop/alignment derivatives only; images are ignored and must not alter the depicted game option.
+- `catalog-candidates/research/` is for direct-observation research candidates that remain non-production and not second-verified.
+- `catalog-candidates/verification/` is for candidate metadata ready for independent second-person review; it is still not production data.
+- `imports/tomorrow-additional-videos/` is the documented import landing zone for the next owner-supplied video batch. Commit manifests and notes only; raw videos are ignored.
+
+Production catalog data remains exclusively under `data/catalog/production/`, and test fixtures remain under `data/fixtures/test-only/`.
+
+Repository ignore rules and `node scripts/repository-status.mjs --strict` protect against accidentally committing source masters, generated derivatives, fixture contamination, or local absolute paths without portable evidence references.
+
 ## Publication gate
 
 A production publication requires:

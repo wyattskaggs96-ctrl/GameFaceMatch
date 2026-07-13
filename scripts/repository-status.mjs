@@ -43,6 +43,9 @@ const rawMediaExtensions = new Set([
 const videoExtensions = new Set([".3gp", ".avi", ".m4v", ".mov", ".mp4", ".mpeg", ".mpg", ".webm"]);
 const riskyFacePathPattern = /(^|[/_-])(face|facial|selfie|scan|capture|captures|portrait|tester|user-face)([/_.-]|$)/i;
 const localEvidencePathPattern = /(^|[/_-])(local-evidence|evidence-master|evidence-masters|raw-evidence|raw-media|raw-videos|game-videos)([/_.-]|$)/i;
+const cf27ResearchPathPattern = /^data\/research\/cf27\//;
+const cf27ResearchGeneratedMediaPattern = /^data\/research\/cf27\/generated\/(contact-sheets|full-resolution-frames|cropped-measurement-derivatives)\//;
+const cf27ResearchSourceVideoPattern = /^data\/research\/cf27\/(source-video-references|imports)\//;
 const approvedTemporaryPathPatterns = [
   /^web\/test-results\//,
   /^web\/playwright-report\//,
@@ -60,6 +63,7 @@ const warnings = [
   ...findSecretWarnings(trackedAndVisibleFiles),
   ...findProductionFixtureWarnings(),
   ...findRawMediaWarnings(trackedAndVisibleFiles),
+  ...findResearchEvidenceReferenceWarnings(trackedAndVisibleFiles),
   ...findOversizedWarnings(oversizedFiles)
 ];
 
@@ -159,11 +163,38 @@ function findRawMediaWarnings(files) {
     if (localEvidencePathPattern.test(normalized)) {
       warnings.push(`Local evidence or raw media should not be committed: ${normalized}`);
     }
+    if (cf27ResearchGeneratedMediaPattern.test(normalized)) {
+      warnings.push(`Generated CF27 research media should stay local and ignored; commit manifests instead: ${normalized}`);
+    }
+    if (cf27ResearchSourceVideoPattern.test(normalized) && videoExtensions.has(extension)) {
+      warnings.push(`CF27 source-video masters should be referenced by metadata, not committed: ${normalized}`);
+    }
+    if (cf27ResearchPathPattern.test(normalized) && rawMediaExtensions.has(extension)) {
+      warnings.push(`CF27 research evidence media should stay outside git unless explicitly approved as a small metadata fixture: ${normalized}`);
+    }
     if (videoExtensions.has(extension) && /game|cfb|college-football|road-to-glory|audit|evidence/i.test(normalized)) {
       warnings.push(`Raw game video should stay outside git or in private evidence storage: ${normalized}`);
     }
     if (riskyFacePathPattern.test(normalized)) {
       warnings.push(`Possible raw facial media outside approved temporary directories: ${normalized}`);
+    }
+  }
+  return warnings;
+}
+
+function findResearchEvidenceReferenceWarnings(files) {
+  const warnings = [];
+  for (const relativePath of files) {
+    const normalized = relativePath.replaceAll(path.sep, "/");
+    if (!cf27ResearchPathPattern.test(normalized)) continue;
+    if (!/\.(csv|json|md|txt)$/i.test(normalized)) continue;
+    const text = safeReadText(path.join(repositoryRoot, relativePath));
+    if (!text) continue;
+    const containsAbsoluteLocalPath = /\/Users\/|\/Volumes\/|[A-Z]:\\Users\\/i.test(text);
+    if (!containsAbsoluteLocalPath) continue;
+    const containsPortableReference = /OWNER_DOWNLOADS|portableRelativeEvidencePath|relativeEvidencePath|evidenceRootToken|sourceRootToken|portable/i.test(text);
+    if (!containsPortableReference) {
+      warnings.push(`CF27 research evidence file contains local absolute paths without a portable evidence reference: ${normalized}`);
     }
   }
   return warnings;

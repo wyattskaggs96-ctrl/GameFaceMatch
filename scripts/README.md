@@ -12,6 +12,8 @@ Local catalog workflow utilities live here.
 
 The repository status script reports staged, modified, untracked, ignored, and oversized files. It also warns about potential secrets, fixture-like content in production catalog directories, possible raw facial media, raw game videos, and local evidence masters.
 
+For CF27 research evidence, it also warns when source-video masters, generated contact sheets, extracted frames, cropped derivatives, or sole local absolute-path references appear in commit-visible files. Use `data/research/cf27/` for metadata and manifests only; keep media masters and generated derivatives local unless a future owner-approved storage decision says otherwise.
+
 The traceability generator reads `data/traceability/requirements.json` and writes `docs/status/REQUIREMENT_TRACEABILITY.md`. Use `--check` in verification to fail when the report is stale.
 
 `npm run verify` orchestrates the full repository quality suite and stops at the first failed stage.

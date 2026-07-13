@@ -110,6 +110,32 @@ describe("repository hygiene tooling", () => {
     expect(workflow).toContain("node scripts/repository-status.mjs");
     expect(workflow).toContain("Do not run `git reset --hard`");
   });
+
+  it("keeps CF27 research evidence staging separated from production and fixtures", () => {
+    const root = path.resolve(process.cwd(), "..");
+    const script = fs.readFileSync(path.join(root, "scripts/repository-status.mjs"), "utf8");
+    const ignore = fs.readFileSync(path.join(root, ".gitignore"), "utf8");
+    const workflow = fs.readFileSync(path.join(root, "docs/GAME_CATALOG_WORKFLOW.md"), "utf8");
+    for (const relativePath of [
+      "data/research/cf27/source-video-references",
+      "data/research/cf27/generated/contact-sheets",
+      "data/research/cf27/generated/full-resolution-frames",
+      "data/research/cf27/generated/cropped-measurement-derivatives",
+      "data/research/cf27/catalog-candidates/research",
+      "data/research/cf27/catalog-candidates/verification",
+      "data/research/cf27/imports/tomorrow-additional-videos",
+      "data/research/cf27/manifests",
+      "data/research/cf27/reports"
+    ]) {
+      expect(fs.existsSync(path.join(root, relativePath)), relativePath).toBe(true);
+    }
+    expect(script).toContain("findResearchEvidenceReferenceWarnings");
+    expect(script).toContain("CF27 source-video masters should be referenced by metadata");
+    expect(ignore).toContain("data/research/cf27/source-video-references");
+    expect(ignore).toContain("data/research/cf27/generated/contact-sheets");
+    expect(workflow).toContain("Research evidence staging");
+    expect(workflow).toContain("imports/tomorrow-additional-videos/");
+  });
 });
 
 describe("unified verification command", () => {

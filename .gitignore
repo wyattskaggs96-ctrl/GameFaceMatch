@@ -44,6 +44,25 @@ data/audit/**/raw-media/
 data/audit/**/raw-videos/
 data/audit/**/local-evidence/
 
+# CF27 research staging: commit metadata and manifests, not local masters or generated media
+data/research/cf27/source-video-references/**/*.[mM][pP]4
+data/research/cf27/source-video-references/**/*.[mM][oO][vV]
+data/research/cf27/source-video-references/**/*.[mM]4[vV]
+data/research/cf27/source-video-references/**/*.[wW][eE][bB][mM]
+data/research/cf27/imports/**/*.[mM][pP]4
+data/research/cf27/imports/**/*.[mM][oO][vV]
+data/research/cf27/imports/**/*.[mM]4[vV]
+data/research/cf27/imports/**/*.[wW][eE][bB][mM]
+data/research/cf27/generated/contact-sheets/*
+!data/research/cf27/generated/contact-sheets/.gitkeep
+!data/research/cf27/generated/contact-sheets/README.md
+data/research/cf27/generated/full-resolution-frames/*
+!data/research/cf27/generated/full-resolution-frames/.gitkeep
+!data/research/cf27/generated/full-resolution-frames/README.md
+data/research/cf27/generated/cropped-measurement-derivatives/*
+!data/research/cf27/generated/cropped-measurement-derivatives/.gitkeep
+!data/research/cf27/generated/cropped-measurement-derivatives/README.md
+
 # Web local dependencies and build output
 web/node_modules/
 web/.next/

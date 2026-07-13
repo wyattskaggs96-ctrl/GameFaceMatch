@@ -108,6 +108,7 @@
         "web/features/capture/CapturePreparation.tsx",
         "web/features/capture/BrowserCapabilityPanel.tsx",
         "web/features/capture/GuidedCaptureFlow.tsx",
+        "web/lib/capture/capture-state-machine.ts",
         "web/lib/capture/capture-session.ts",
         "docs/status/WEB_CAPTURE_FLOW_AUDIT.md"
       ],
@@ -119,7 +120,7 @@
         "web/tests/e2e/core-journey.spec.ts"
       ],
       "status": "IMPLEMENTED_WITH_LIMITATION",
-      "evidence": "Five required RGB angles, one-face and neutral-expression guidance, lighting and distance preparation, browser fallback messaging, configurable real-time quality scoring, selective retake, removal, review, and cancellation flows are implemented and tested.",
+      "evidence": "Five required RGB angles, optional elevated/lowered/detail view tracking, one-face and neutral-expression guidance, lighting and distance preparation, browser fallback messaging, configurable real-time quality scoring, selective retake, abandonment/recovery, removal, review, and cancellation flows are implemented and tested.",
       "blocker": "Real mobile camera behavior still requires physical-device QA.",
       "owner": "Capture lead",
       "lastCheckedDate": "2026-07-13"

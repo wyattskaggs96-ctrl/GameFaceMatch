@@ -7,8 +7,18 @@ import {
   REQUIRED_CAPTURE_ANGLES,
   removeAngleCapture,
   retakeAngle,
-  setAngleCapture
+  setAngleCapture,
+  setAngleError
 } from "@/lib/capture/capture-session";
+import {
+  abandonGuidedCaptureView,
+  createGuidedCaptureStateMachine,
+  getOptionalViewIDs,
+  getRequiredViewIDs,
+  recoverGuidedCaptureView,
+  skipOptionalGuidedCaptureView,
+  summarizeGuidedCapture
+} from "@/lib/capture/capture-state-machine";
 import {
   createBasicDuplicateSignature,
   createTemporaryImageReference,
@@ -20,6 +30,15 @@ import {
 import type { CapturedAngleID, TemporaryImageReference } from "@/types/domain";
 
 describe("capture session", () => {
+  it("initializes a multi-view state machine with required and optional RGB views", () => {
+    const session = createInitialCaptureSession(new Date("2026-07-10T00:00:00.000Z"));
+    expect(getRequiredViewIDs()).toEqual(["front", "leftThreeQuarter", "rightThreeQuarter", "leftProfile", "rightProfile"]);
+    expect(getOptionalViewIDs()).toEqual(["elevatedFront", "loweredFront", "hairlineDetail", "facialHairDetail"]);
+    expect(Object.keys(session.captureState.views)).toHaveLength(9);
+    expect(session.captureState.currentViewID).toBe("front");
+    expect(session.captureState.canContinueToReview).toBe(false);
+  });
+
   it("requires all five capture angles", () => {
     const session = createInitialCaptureSession(new Date("2026-07-10T00:00:00.000Z"));
     expect(getMissingRequiredAngles(session.angles)).toEqual(["straightOn", "left45", "right45", "leftProfile", "rightProfile"]);
@@ -46,15 +65,64 @@ describe("capture session", () => {
     const captured = setAngleCapture(session, "straightOn", image("straightOn", "blob:front"), "upload");
     expect(getCompletedAngleCount(captured.session.angles)).toBe(1);
     expect(captured.objectUrlsToRevoke).toEqual([]);
+    expect(captured.session.captureState.views.front.status).toBe("captured");
+    expect(captured.session.captureState.currentViewID).toBe("leftThreeQuarter");
 
     const retaken = retakeAngle(captured.session, "straightOn");
     expect(retaken.session.angles[0].status).toBe("empty");
     expect(retaken.objectUrlsToRevoke).toEqual(["blob:front"]);
+    expect(retaken.session.captureState.views.front.status).toBe("retakeRequested");
+    expect(retaken.session.captureState.views.front.retakeCount).toBe(1);
 
     const recaptured = setAngleCapture(retaken.session, "straightOn", image("straightOn", "blob:front-2"), "camera");
     const removed = removeAngleCapture(recaptured.session, "straightOn");
     expect(removed.session.angles[0].image).toBeUndefined();
     expect(removed.objectUrlsToRevoke).toEqual(["blob:front-2"]);
+    expect(removed.session.captureState.views.front.status).toBe("retakeRequested");
+    expect(removed.session.captureState.views.leftThreeQuarter.status).toBe("pending");
+  });
+
+  it("marks one failed required view without restarting completed views", () => {
+    let session = createInitialCaptureSession();
+    session = setAngleCapture(session, "straightOn", image("straightOn", "blob:front"), "upload").session;
+    const failed = setAngleError(session, "left45", ["Image may be blurry."]);
+    expect(failed.captureState.views.front.status).toBe("captured");
+    expect(failed.captureState.views.leftThreeQuarter.status).toBe("qualityFailed");
+    expect(failed.captureState.currentViewID).toBe("leftThreeQuarter");
+    expect(failed.captureState.canContinueToReview).toBe(false);
+  });
+
+  it("reaches review when required views are complete while optional views remain pending", () => {
+    let session = createInitialCaptureSession();
+    for (const angleID of ["straightOn", "left45", "right45", "leftProfile", "rightProfile"] as const) {
+      session = setAngleCapture(session, angleID, image(angleID, `blob:${angleID}`), "upload").session;
+    }
+    expect(session.status).toBe("complete");
+    expect(session.captureState.status).toBe("requiredComplete");
+    expect(session.captureState.canContinueToReview).toBe(true);
+    expect(session.captureState.completedRequiredCount).toBe(5);
+    expect(session.captureState.completedOptionalCount).toBe(0);
+  });
+
+  it("tracks optional view skip and required-view abandonment recovery separately", () => {
+    let machine = createGuidedCaptureStateMachine(new Date("2026-07-10T00:00:00.000Z"));
+    machine = skipOptionalGuidedCaptureView(machine, "hairlineDetail", "Hairline detail not practical for this session.");
+    expect(machine.views.hairlineDetail.status).toBe("skipped");
+
+    machine = abandonGuidedCaptureView(machine, "leftProfile", "User paused before profile capture.");
+    expect(machine.views.leftProfile.status).toBe("abandoned");
+    expect(summarizeGuidedCapture(machine).abandonedViewIDs).toContain("leftProfile");
+
+    machine = recoverGuidedCaptureView(machine, "leftProfile", "User returned to finish only this view.");
+    expect(machine.views.leftProfile.status).toBe("active");
+    expect(machine.views.front.status).toBe("pending");
+    expect(machine.currentViewID).toBe("leftProfile");
+  });
+
+  it("does not allow optional-skip semantics for required views", () => {
+    expect(() => skipOptionalGuidedCaptureView(createGuidedCaptureStateMachine(), "front", "Required view cannot be skipped.")).toThrow(
+      /Cannot skip required/
+    );
   });
 
   it("cancels the session and returns every temporary object URL for cleanup", () => {

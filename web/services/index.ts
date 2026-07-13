@@ -16,6 +16,33 @@ export {
   setAngleManualConfirmation,
   setCurrentAngle
 } from "../lib/capture/capture-session";
+export type {
+  GuidedCaptureAttempt,
+  GuidedCaptureStateMachine,
+  GuidedCaptureSummary,
+  GuidedCaptureViewDefinition,
+  GuidedCaptureViewID,
+  GuidedCaptureViewState
+} from "../lib/capture/capture-state-machine";
+export {
+  abandonGuidedCaptureSession,
+  abandonGuidedCaptureView,
+  capturedAngleToGuidedView,
+  createGuidedCaptureStateMachine,
+  getOptionalViewIDs,
+  getRequiredViewIDs,
+  guidedCaptureViewDefinitions,
+  markCapturedAngleFailureInStateMachine,
+  markGuidedCaptureQualityFailure,
+  recordCapturedAngleInStateMachine,
+  recordGuidedCaptureResult,
+  recoverGuidedCaptureView,
+  requestCapturedAngleRetakeInStateMachine,
+  requestGuidedCaptureRetake,
+  selectGuidedCaptureView,
+  skipOptionalGuidedCaptureView,
+  summarizeGuidedCapture
+} from "../lib/capture/capture-state-machine";
 export type { BrowserImageQualityService, ImageQualityInput, PixelSample } from "../lib/capture/image-quality-service";
 export {
   applyManualConfirmationToReport,

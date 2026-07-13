@@ -430,6 +430,13 @@ export function GuidedCaptureFlow({
           <p>Capture one straight-on front view, two three-quarter views, and two full profile views. Complete all five before continuing.</p>
         </Card>
         <Card tone="info">
+          <h2>Capture state</h2>
+          <p>
+            {session.captureState.completedRequiredCount} of {session.captureState.totalRequiredCount} required views complete. Optional elevated, lowered,
+            hairline, and facial-hair detail views are tracked separately and do not block this MVP review.
+          </p>
+        </Card>
+        <Card tone="info">
           <h2>One-face RGB guidance</h2>
           <p>Keep one person centered, use neutral expression with lips gently closed, and stay near arm's length unless guidance says to move.</p>
         </Card>

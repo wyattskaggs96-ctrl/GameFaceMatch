@@ -10,6 +10,8 @@ This audit covers the active responsive web MVP capture flow under `web/`. The w
 
 - Preparation checklist covers posture, glasses/headwear, hair away from face, even front lighting, neutral expression, one-person framing, distance, portrait orientation, no filters, motion avoidance, and lens cleaning.
 - The required capture plan is five RGB images: straight-on, left 45-degree, right 45-degree, left profile, and right profile.
+- The web capture state machine tracks five required views plus optional slightly elevated front, slightly lowered front, hairline detail, and facial-hair detail views.
+- Completion, quality failure, retake requests, per-view abandonment, recovery, and optional-view skips are tracked per view so one failed view does not force a full restart.
 - Per-angle instructions distinguish front, three-quarter, and profile views.
 - Browser capability panel distinguishes secure context, camera API support, permission state, camera availability, matching camera availability, and upload fallback.
 - Permission recovery copy covers iPhone Safari and Android Chrome reset paths.

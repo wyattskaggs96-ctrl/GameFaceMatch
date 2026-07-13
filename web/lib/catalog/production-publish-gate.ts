@@ -175,7 +175,8 @@ const requiredImportValidationChecks = [
   "productionRecommenderFixtureAccess",
   "supportedTarget",
   "validChecksums",
-  "validSupersessionChains"
+  "validSupersessionChains",
+  "dependencyRecordValidity"
 ];
 
 export function evaluateProductionPublishGate(input: ProductionPublishGateInput): ProductionPublishGateReport {

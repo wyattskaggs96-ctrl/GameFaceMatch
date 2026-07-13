@@ -33,6 +33,22 @@ Web tests should also include:
 - Production bundle excluding test fixtures
 - Key navigation flow coverage
 
+## Catalog property and integrity coverage
+
+Catalog integrity tests should include deterministic property-style mutation coverage for:
+
+- Unique stable IDs across catalog records, assets, and reviews
+- Native-order continuity by platform, game version, mode, creation path, and category
+- Supersession-chain references, deprecated-record context, and cycle rejection
+- Portable relative evidence paths, fixture-path rejection, and repair guidance
+- Verification-state enums and unverified production-record rejection
+- Immutable release checksum verification and duplicate release-version rejection
+- Fixture segregation across manifests, records, and evidence assets
+- Required-angle, source-image, navigation-evidence, manifest-count, and asset-association failures
+- Catalog version, platform, mode, and creation-path compatibility
+- Structured dependency-record validity with evidence references
+- Production-publish gate invariants proving no single boolean can approve a release
+
 ## Mobile-browser hardening coverage
 
 Hardening checks should include:

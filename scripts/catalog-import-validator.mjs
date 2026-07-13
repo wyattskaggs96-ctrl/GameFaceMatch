@@ -32,7 +32,8 @@ export const CATALOG_IMPORT_CHECKS = [
   "productionRecommenderFixtureAccess",
   "supportedTarget",
   "validChecksums",
-  "validSupersessionChains"
+  "validSupersessionChains",
+  "dependencyRecordValidity"
 ];
 
 const requiredAngles = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"];
@@ -77,6 +78,7 @@ export function validateCatalogImport(catalogPackage, options = {}) {
   runCheck(report, "supportedTarget", () => validateSupportedTargets(catalogPackage, options));
   runCheck(report, "validChecksums", () => validateChecksums(catalogPackage, options));
   runCheck(report, "validSupersessionChains", () => validateSupersessionChains(catalogPackage));
+  runCheck(report, "dependencyRecordValidity", () => validateDependencyRecords(catalogPackage));
   finalizeImportReport(report);
   return report;
 }
@@ -546,6 +548,54 @@ function validateSupersessionChains(catalogPackage) {
       visited.add(nextID);
       current = byID.get(nextID);
       if (!current) break;
+    }
+  }
+  return findings;
+}
+
+function validateDependencyRecords(catalogPackage) {
+  const findings = createCheckFindings();
+  const assetIDs = new Set((catalogPackage?.assets ?? []).map((asset) => asset?.assetID).filter(hasText));
+  for (const item of catalogPackage?.items ?? []) {
+    const id = item?.stableInternalID || "Record";
+    if (item?.dependencies === undefined || item.dependencies === null) continue;
+    if (!Array.isArray(item.dependencies)) {
+      findings.errors.push(error("invalidDependencyRecord", `${id} dependencies must be an array.`, "Record each dependency as a structured object with evidence."));
+      continue;
+    }
+    const seenDependencyIDs = new Set();
+    for (const [index, dependency] of item.dependencies.entries()) {
+      const dependencyLabel = dependency?.dependencyID || `${id} dependency ${index + 1}`;
+      if (!dependency || typeof dependency !== "object" || Array.isArray(dependency)) {
+        findings.errors.push(error("invalidDependencyRecord", `${dependencyLabel} is not a structured dependency record.`, "Replace malformed dependency entries with reviewed dependency records."));
+        continue;
+      }
+      if (!hasText(dependency.dependencyID)) {
+        findings.errors.push(error("missingDependencyID", `${id} dependency ${index + 1} is missing dependencyID.`, "Assign a stable dependency ID before production import."));
+      } else if (seenDependencyIDs.has(dependency.dependencyID)) {
+        findings.errors.push(error("duplicateDependencyID", `${id} repeats dependencyID ${dependency.dependencyID}.`, "Keep dependency identifiers unique within each catalog item."));
+      }
+      if (hasText(dependency.dependencyID)) seenDependencyIDs.add(dependency.dependencyID);
+      if (!hasText(dependency.condition)) {
+        findings.errors.push(error("invalidDependencyRecord", `${dependencyLabel} is missing a condition.`, "Describe the exact verified condition that changes availability or ordering."));
+      }
+      if (!hasText(dependency.dependsOnStableID) && !hasText(dependency.dependsOnMenuID)) {
+        findings.errors.push(error("invalidDependencyRecord", `${dependencyLabel} is missing dependsOnStableID or dependsOnMenuID.`, "Link the dependency to a catalog record or menu control."));
+      }
+      if (dependency.dependsOnStableID === id) {
+        findings.errors.push(error("invalidDependencyRecord", `${dependencyLabel} depends on its own catalog item.`, "Reference the external record or menu control that actually creates the dependency."));
+      }
+      if (!Array.isArray(dependency.evidenceFileIDs) || dependency.evidenceFileIDs.length === 0) {
+        findings.errors.push(error("missingDependencyEvidence", `${dependencyLabel} is missing evidenceFileIDs.`, "Attach direct evidence for the dependency before import."));
+        continue;
+      }
+      for (const evidenceID of dependency.evidenceFileIDs) {
+        if (!hasText(evidenceID)) {
+          findings.errors.push(error("missingDependencyEvidence", `${dependencyLabel} includes a blank evidence ID.`, "Remove blank evidence references and attach verified evidence."));
+        } else if (!assetIDs.has(evidenceID)) {
+          findings.errors.push(error("missingDependencyEvidence", `${dependencyLabel} references unavailable evidence ${evidenceID}.`, "Add the evidence asset record or correct the dependency reference."));
+        }
+      }
     }
   }
   return findings;

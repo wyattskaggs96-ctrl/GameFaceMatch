@@ -97,6 +97,14 @@ const stages = [
     skip: skipE2E,
     skipReason: "GAMEFACE_VERIFY_SKIP_E2E=1"
   },
+  {
+    name: "Development-only Phase 0 end-to-end tests",
+    command: "npm",
+    args: ["run", "test:e2e:phase0"],
+    cwd: webRoot,
+    skip: skipE2E,
+    skipReason: "GAMEFACE_VERIFY_SKIP_E2E=1"
+  },
   ...iosStages()
 ];
 

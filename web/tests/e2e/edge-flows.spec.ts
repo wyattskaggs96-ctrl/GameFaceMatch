@@ -83,4 +83,15 @@ test.describe("GameFace Match E2E edge flows", () => {
     await page.getByRole("button", { name: "Start walkthrough" }).click();
     await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
   });
+
+  test("keeps development-only audit and fixture approval paths out of the production app", async ({ page }) => {
+    await page.goto("/#phase-0");
+
+    await expect(page.getByRole("heading", { name: "Phase 0 readiness" })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "Environment manifest wizard" })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "Catalog-manager review console" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Approve release candidate" })).toHaveCount(0);
+    await expect(page.getByText("CF27_TESTONLY")).toHaveCount(0);
+    await expect(page.getByText("Verified College Football 27 catalog not loaded.")).toBeVisible();
+  });
 });

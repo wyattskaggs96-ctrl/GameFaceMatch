@@ -13,6 +13,7 @@
     "lint": "node scripts/lint.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "test:e2e:phase0": "playwright test --config playwright.phase0.config.ts",
     "test:e2e:ci": "npm run build && npm run test:e2e",
     "integrity": "node scripts/integrity-check.mjs",
     "catalog:validate": "node scripts/validate-catalog.mjs ../data/catalog/production",

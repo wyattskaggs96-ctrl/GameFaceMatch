@@ -166,6 +166,27 @@ Run the CI-oriented command from `web/`:
 npm run test:e2e:ci
 ```
 
+Development-only Phase 0 audit workflow coverage runs separately from `web/`:
+
+```bash
+npm run test:e2e:phase0
+```
+
+This suite starts `next dev` and targets only internal audit tools that are intentionally absent from `next start` production builds. It covers:
+
+- Environment manifest drafts and complete non-production environment save
+- Menu-map creation from TESTONLY labels
+- Evidence intake with synthetic files, invalid filename diagnostics, and metadata-only storage
+- Required-view missing-state reporting
+- Local checksum generation using generated synthetic bytes
+- Catalog-manager import validation failure
+- Fixture promotion rejection through a mandatory validation-report failure
+- Approved-release simulation using TESTONLY package data only
+- Production gate blocked state with the empty production catalog
+- Second-verifier mismatch, recapture evidence linkage, resolution, and acknowledgments
+
+The default production Playwright suite explicitly excludes the Phase 0 audit spec and verifies that development-only audit, verifier, and approval controls are not reachable in the production app.
+
 The Playwright suite runs against `next start`, not `next dev`, and covers:
 
 - Welcome, product explanation, disclaimer, privacy summary, and consent progression

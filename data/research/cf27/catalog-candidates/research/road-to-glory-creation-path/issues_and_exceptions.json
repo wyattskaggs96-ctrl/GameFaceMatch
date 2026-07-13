@@ -1,0 +1,312 @@
+{
+  "dataClass": "RESEARCH_CANDIDATE",
+  "issues": [
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Console model / Xbox Series X versus Series S is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-console-model",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-console-model",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: console model",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Console OS version is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-console-os-version",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-console-os-version",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: console os version",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Game edition is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-edition",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-edition",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: edition",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Region is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-region",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-region",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: region",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Storefront is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-storefront",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-storefront",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: storefront",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Disc/digital/copy type is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-copy-type",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-copy-type",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: copy type",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Exact executable version is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-game-executable-version",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-game-executable-version",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: game executable version",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Patch identifier is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-patch",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-patch",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: patch",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Latest update state is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-latest-update-state",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-latest-update-state",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: latest update state",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Online/offline state is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-online-state",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-online-state",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: online state",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "EA account state is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-ea-account-state",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-ea-account-state",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: ea account state",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Console/display output resolution is not visible; source video resolution is known separately.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-output-resolution",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-output-resolution",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: output resolution",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "HDR state is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-hdr",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-hdr",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: hdr",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Display model is not visible.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-display-model",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-display-model",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: display model",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "env-cf27-research-video-001-rtg-path"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Exact capture hardware is not visible beyond Xbox screen-recording context.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-missing-capture-hardware",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-capture-hardware",
+      "resolutionNotes": null,
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment field: capture hardware",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    },
+    {
+      "affectedRecordIDs": [
+        "creation-path-cf27-rtg-qb-create-player-hair-video-001",
+        "menu-cf27-create-player-hair"
+      ],
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "description": "Hair is visible under Appearance at 44s, but this recording does not show the Hair menu entered. A later audit video is required before treating Hair controls as discovered.",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "issueID": "issue-cf27-video-001-hair-not-opened",
+      "issueKind": "missingEvidence",
+      "owner": "wyatt-skaggs",
+      "recaptureRequestID": "recapture-cf27-video-001-open-hair-menu",
+      "resolutionNotes": null,
+      "severity": "warning",
+      "status": "open",
+      "title": "Hair menu visible but not opened in video-001",
+      "updatedAt": "2026-07-13T00:00:00.000Z"
+    }
+  ],
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "schemaVersion": "phase0-issue-register-v1"
+}

@@ -1,0 +1,323 @@
+{
+  "createdAt": "2026-07-13T00:00:00.000Z",
+  "creationPathID": "creation-path-cf27-rtg-qb-create-player-hair-video-001",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "environmentID": "env-cf27-research-video-001-rtg-path",
+  "items": [
+    {
+      "controlType": "screen",
+      "displayLabel": "Main interface",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 7.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 0.0,
+          "timestampReferenceID": "ts-video-001-main-interface-road-to-glory-visible"
+        }
+      ],
+      "id": "menu-cf27-main-interface",
+      "nativeLabel": "Main interface",
+      "notes": "Root screen label supplied as descriptive research label; child labels are directly visible.",
+      "ordinal": null,
+      "parentID": null,
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "navigationItem",
+      "displayLabel": "Road to Glory",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 7.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 0.0,
+          "timestampReferenceID": "ts-video-001-main-interface-road-to-glory-visible"
+        }
+      ],
+      "id": "menu-cf27-main-road-to-glory",
+      "nativeLabel": "ROAD TO GLORY",
+      "notes": "Visible in the Modes list; exact native order outside the visible group is not asserted.",
+      "ordinal": null,
+      "parentID": "menu-cf27-main-interface",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "screen",
+      "displayLabel": "Road to Glory Setup",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 17.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 14.0,
+          "timestampReferenceID": "ts-video-001-road-to-glory-setup"
+        }
+      ],
+      "id": "menu-cf27-rtg-setup",
+      "nativeLabel": "ROAD TO GLORY SETUP",
+      "notes": "Screen title directly visible.",
+      "ordinal": null,
+      "parentID": "menu-cf27-main-road-to-glory",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "navigationItem",
+      "displayLabel": "Advance",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 17.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 14.0,
+          "timestampReferenceID": "ts-video-001-road-to-glory-setup"
+        }
+      ],
+      "id": "menu-cf27-rtg-setup-advance",
+      "nativeLabel": "Advance",
+      "notes": "Selected row at the Road to Glory Setup screen.",
+      "ordinal": 1,
+      "parentID": "menu-cf27-rtg-setup",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "screen",
+      "displayLabel": "Journey type selection",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation-not-second-verified",
+          "endSeconds": 23.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 18.0,
+          "timestampReferenceID": "ts-video-001-journey-type-selection"
+        }
+      ],
+      "id": "menu-cf27-rtg-journey-type",
+      "nativeLabel": "Journey type selection",
+      "notes": "Screen title is not visible in the frame; card labels are directly visible.",
+      "ordinal": null,
+      "parentID": "menu-cf27-rtg-setup-advance",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "selectionCard",
+      "displayLabel": "Contributor",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation-not-second-verified",
+          "endSeconds": 23.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 18.0,
+          "timestampReferenceID": "ts-video-001-journey-type-selection"
+        }
+      ],
+      "id": "menu-cf27-rtg-journey-contributor",
+      "nativeLabel": "CONTRIBUTOR",
+      "notes": "Highlighted immediately before the position screen appears; not second-person verified.",
+      "ordinal": null,
+      "parentID": "menu-cf27-rtg-journey-type",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "screen",
+      "displayLabel": "Choose Your Position",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 30.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 24.0,
+          "timestampReferenceID": "ts-video-001-position-qb-selection"
+        }
+      ],
+      "id": "menu-cf27-rtg-position",
+      "nativeLabel": "CHOOSE YOUR POSITION",
+      "notes": "Screen title directly visible.",
+      "ordinal": null,
+      "parentID": "menu-cf27-rtg-journey-type",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "navigationItem",
+      "displayLabel": "QB",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 30.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 24.0,
+          "timestampReferenceID": "ts-video-001-position-qb-selection"
+        }
+      ],
+      "id": "menu-cf27-rtg-position-qb",
+      "nativeLabel": "QB",
+      "notes": "QB is selected at the visible position screen.",
+      "ordinal": 1,
+      "parentID": "menu-cf27-rtg-position",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "screen",
+      "displayLabel": "Create Player",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 37.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 35.0,
+          "timestampReferenceID": "ts-video-001-create-player-player-root"
+        }
+      ],
+      "id": "menu-cf27-create-player",
+      "nativeLabel": "CREATE PLAYER",
+      "notes": "Create Player title directly visible.",
+      "ordinal": null,
+      "parentID": "menu-cf27-rtg-position-qb",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "topTab",
+      "displayLabel": "Player",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 37.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 35.0,
+          "timestampReferenceID": "ts-video-001-create-player-player-root"
+        }
+      ],
+      "id": "menu-cf27-create-player-player-tab",
+      "nativeLabel": "PLAYER",
+      "notes": "Top tab directly visible and selected.",
+      "ordinal": 2,
+      "parentID": "menu-cf27-create-player",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "navigationItem",
+      "displayLabel": "Player Info",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 37.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 35.0,
+          "timestampReferenceID": "ts-video-001-create-player-player-root"
+        },
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 39.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 38.0,
+          "timestampReferenceID": "ts-video-001-player-info-opened"
+        }
+      ],
+      "id": "menu-cf27-create-player-player-info",
+      "nativeLabel": "Player Info",
+      "notes": "Selected row under Player tab; Player Info screen opens in the recording.",
+      "ordinal": 1,
+      "parentID": "menu-cf27-create-player-player-tab",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "navigationItem",
+      "displayLabel": "Appearance",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 37.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 35.0,
+          "timestampReferenceID": "ts-video-001-create-player-player-root"
+        },
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 45.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 44.0,
+          "timestampReferenceID": "ts-video-001-appearance-root-head-skin-hair-visible"
+        }
+      ],
+      "id": "menu-cf27-create-player-appearance",
+      "nativeLabel": "Appearance",
+      "notes": "Visible under Player tab and entered before the Head & Skin/Hair submenu appears.",
+      "ordinal": 2,
+      "parentID": "menu-cf27-create-player-player-tab",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "navigationItem",
+      "displayLabel": "Head & Skin",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 45.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 44.0,
+          "timestampReferenceID": "ts-video-001-appearance-root-head-skin-hair-visible"
+        }
+      ],
+      "id": "menu-cf27-create-player-head-skin",
+      "nativeLabel": "Head & Skin",
+      "notes": "Selected row in the Appearance submenu.",
+      "ordinal": 1,
+      "parentID": "menu-cf27-create-player-appearance",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    },
+    {
+      "controlType": "navigationItem",
+      "displayLabel": "Hair",
+      "evidence": [
+        {
+          "confidence": "direct-frame-observation",
+          "endSeconds": 45.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "sourceVideoID": "video-001",
+          "startSeconds": 44.0,
+          "timestampReferenceID": "ts-video-001-appearance-root-head-skin-hair-visible"
+        }
+      ],
+      "id": "menu-cf27-create-player-hair",
+      "nativeLabel": "Hair",
+      "notes": "Visible as the second row in the Appearance submenu. This video does not show Hair opened.",
+      "ordinal": 2,
+      "parentID": "menu-cf27-create-player-appearance",
+      "sourceType": "research",
+      "verificationState": "research_candidate"
+    }
+  ],
+  "notes": "Root path records from video-001 only. This is not a complete menu map and does not define production catalog options.",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "schemaVersion": "cf27-research-menu-map-v1",
+  "sourceVideoID": "video-001",
+  "updatedAt": "2026-07-13T00:00:00.000Z"
+}

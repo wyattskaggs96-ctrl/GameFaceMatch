@@ -1,0 +1,242 @@
+{
+  "dataClass": "RESEARCH_CANDIDATE",
+  "evidenceFiles": [
+    {
+      "captureDevice": "Xbox screen recording (exact capture hardware UNKNOWN)",
+      "captureMethod": "screenRecording",
+      "capturedAt": "2026-07-12T19:03:45.000Z",
+      "catalogItemID": null,
+      "creationPathID": "creation-path-cf27-rtg-qb-create-player-hair-video-001",
+      "derivativeState": "master",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "fileRole": "sourceVideo",
+      "gameVersionID": "cf27-version-unknown-video-001",
+      "mimeType": "video/mp4",
+      "mode": "Road to Glory",
+      "notes": "Portable owner-downloads reference to the preserved source video. The repository does not commit the master video.",
+      "patchID": "cf27-patch-unknown-video-001",
+      "platformID": "platform-xbox-unknown",
+      "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+      "researcherID": "wyatt-skaggs",
+      "schemaVersion": "phase0-evidence-v1",
+      "sha256": "6f42d3ef2572810fc09ac5138970dee5f325c539925f084a130d3fdcf7c2a0b2",
+      "sizeBytes": 137769336,
+      "stableEvidenceID": "evidence-cf27-video-001-source",
+      "supersededEvidenceID": null,
+      "verificationStatus": "draft",
+      "verifierID": null,
+      "view": "navigationEvidence"
+    }
+  ],
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "schemaVersion": "cf27-research-evidence-references-v1",
+  "sourceVideo": {
+    "audioCodec": "aac LC stereo 48000 Hz",
+    "creationTimeUtc": "2026-07-12T19:03:45.000Z",
+    "dataClass": "RESEARCH_CANDIDATE",
+    "durationSeconds": 73.57,
+    "fileSizeBytes": 137769336,
+    "frameRate": "58.96 observed / 59.94 time base",
+    "identifiedContent": "Environment and Road to Glory creation path",
+    "originalFilename": "01_Environment_and_Creation_Path.MP4",
+    "portableRelativeEvidencePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+    "productionStatus": "NOT_PRODUCTION_DATA",
+    "resolution": "1920x1080",
+    "sha256": "6f42d3ef2572810fc09ac5138970dee5f325c539925f084a130d3fdcf7c2a0b2",
+    "videoCodec": "h264 Main",
+    "videoID": "video-001",
+    "workingFilename": "01_Environment_and_Creation_Path.MP4"
+  },
+  "timestampReferences": [
+    {
+      "confidence": "direct-frame-observation",
+      "endSeconds": 7.0,
+      "observedLabels": [
+        "WHAT'S NEW",
+        "PLAY",
+        "TRAINING",
+        "CREATE & SHARE",
+        "ULTIMATE TEAM",
+        "ROAD TO GLORY",
+        "DYNASTY",
+        "ACCESSIBILITY",
+        "SETTINGS",
+        "MORE"
+      ],
+      "observedScreen": "College Football 27 main interface; Road to Glory is visible in the Modes list.",
+      "referenceID": "ts-video-001-main-interface-road-to-glory-visible",
+      "sourceVideoID": "video-001",
+      "startSeconds": 0.0
+    },
+    {
+      "confidence": "direct-frame-observation",
+      "endSeconds": 11.0,
+      "observedLabels": [],
+      "observedScreen": "Road to Glory transition/loading sequence.",
+      "referenceID": "ts-video-001-rtg-loading",
+      "sourceVideoID": "video-001",
+      "startSeconds": 8.0
+    },
+    {
+      "confidence": "direct-frame-observation",
+      "endSeconds": 17.0,
+      "observedLabels": [
+        "ROAD TO GLORY SETUP",
+        "Advance",
+        "Road to Glory Settings",
+        "Import High School Team Builder",
+        "Import Team Builder",
+        "Custom Conferences"
+      ],
+      "observedScreen": "ROAD TO GLORY SETUP screen with Advance selected.",
+      "referenceID": "ts-video-001-road-to-glory-setup",
+      "sourceVideoID": "video-001",
+      "startSeconds": 14.0
+    },
+    {
+      "confidence": "direct-frame-observation-not-second-verified",
+      "endSeconds": 23.0,
+      "observedLabels": [
+        "ELITE",
+        "BLUE CHIP",
+        "CONTRIBUTOR",
+        "UNDERDOG"
+      ],
+      "observedScreen": "Journey type selection cards; CONTRIBUTOR is highlighted before the next position screen appears.",
+      "referenceID": "ts-video-001-journey-type-selection",
+      "sourceVideoID": "video-001",
+      "startSeconds": 18.0
+    },
+    {
+      "confidence": "direct-frame-observation",
+      "endSeconds": 30.0,
+      "observedLabels": [
+        "CHOOSE YOUR POSITION",
+        "POSITION",
+        "PLAYER",
+        "PLAYER BASE",
+        "PHYSIQUE",
+        "RATINGS POTENTIALS",
+        "MENTALS",
+        "SUMMARY",
+        "QB",
+        "HB",
+        "WR",
+        "TE",
+        "EDGE",
+        "MIKE",
+        "CB",
+        "FS"
+      ],
+      "observedScreen": "CHOOSE YOUR POSITION screen with QB selected.",
+      "referenceID": "ts-video-001-position-qb-selection",
+      "sourceVideoID": "video-001",
+      "startSeconds": 24.0
+    },
+    {
+      "confidence": "direct-frame-observation",
+      "endSeconds": 37.0,
+      "observedLabels": [
+        "CREATE PLAYER",
+        "POSITION",
+        "PLAYER",
+        "PLAYER BASE",
+        "PHYSIQUE",
+        "RATINGS POTENTIALS",
+        "MENTALS",
+        "SUMMARY",
+        "Player Info",
+        "Appearance",
+        "Gear",
+        "Styles",
+        "Continue"
+      ],
+      "observedScreen": "CREATE PLAYER screen on the PLAYER top tab with Player Info selected.",
+      "referenceID": "ts-video-001-create-player-player-root",
+      "sourceVideoID": "video-001",
+      "startSeconds": 35.0
+    },
+    {
+      "confidence": "direct-frame-observation",
+      "endSeconds": 39.0,
+      "observedLabels": [
+        "PLAYER INFO",
+        "First Name",
+        "Last Name",
+        "Position",
+        "Jersey #",
+        "Handedness",
+        "Home State",
+        "Hometown",
+        "Pipeline",
+        "High School Name",
+        "Mascot"
+      ],
+      "observedScreen": "PLAYER INFO screen with player biographical/editing fields visible.",
+      "referenceID": "ts-video-001-player-info-opened",
+      "sourceVideoID": "video-001",
+      "startSeconds": 38.0
+    },
+    {
+      "confidence": "direct-frame-observation",
+      "endSeconds": 45.0,
+      "observedLabels": [
+        "Head & Skin",
+        "Hair"
+      ],
+      "observedScreen": "Appearance submenu with Head & Skin selected and Hair visible as the next row.",
+      "referenceID": "ts-video-001-appearance-root-head-skin-hair-visible",
+      "sourceVideoID": "video-001",
+      "startSeconds": 44.0
+    },
+    {
+      "confidence": "direct-frame-observation",
+      "endSeconds": 50.0,
+      "observedLabels": [
+        "EDIT GEAR",
+        "Head Gear",
+        "Torso",
+        "Arms",
+        "Lower Body",
+        "Feet"
+      ],
+      "observedScreen": "Gear submenu; not part of requested appearance path but observed during recording.",
+      "referenceID": "ts-video-001-gear-root",
+      "sourceVideoID": "video-001",
+      "startSeconds": 46.0
+    },
+    {
+      "confidence": "direct-frame-observation",
+      "endSeconds": 66.0,
+      "observedLabels": [
+        "STYLES",
+        "QB Throw Style",
+        "Ball Carry Style",
+        "Run Style",
+        "QB Shotgun Stance",
+        "QB Under Center Stance",
+        "HB 2-Point Stance",
+        "WR 2-Point Stance",
+        "LB 2-Point Stance",
+        "CB 2-Point Stance"
+      ],
+      "observedScreen": "Styles submenu; not part of requested appearance path but observed during recording.",
+      "referenceID": "ts-video-001-styles-root",
+      "sourceVideoID": "video-001",
+      "startSeconds": 52.0
+    },
+    {
+      "confidence": "direct-frame-observation",
+      "endSeconds": 70.0,
+      "observedLabels": [
+        "LEAVE PLAYER CREATION?",
+        "No, I want to stay",
+        "Yes, let me leave"
+      ],
+      "observedScreen": "Leave Player Creation confirmation modal.",
+      "referenceID": "ts-video-001-exit-confirmation",
+      "sourceVideoID": "video-001",
+      "startSeconds": 67.0
+    }
+  ]
+}

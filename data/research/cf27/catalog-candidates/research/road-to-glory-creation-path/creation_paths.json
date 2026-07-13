@@ -1,0 +1,200 @@
+{
+  "creationPaths": [
+    {
+      "appearanceRelevance": "Path reaches the Player > Appearance submenu and directly shows Head & Skin plus Hair as visible appearance-related entries.",
+      "createdAt": "2026-07-13T00:00:00.000Z",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "dependencies": [
+        {
+          "dependencyID": "dependency-game-version-unknown",
+          "description": "Exact executable version and patch are unknown; path requires patch re-check before publication.",
+          "status": "unresolved"
+        },
+        {
+          "dependencyID": "dependency-platform-model-unknown",
+          "description": "Xbox family is known from evidence context, but Series X/S model is unknown.",
+          "status": "unresolved"
+        }
+      ],
+      "displayName": "Road to Glory QB Create Player appearance path from video-001",
+      "evidenceFileIDs": [
+        "evidence-cf27-video-001-source"
+      ],
+      "exactPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type selection > Position selection > QB > Create Player > Player > Appearance > Head & Skin / Hair visible",
+      "gameID": "cf27",
+      "gameMode": "Road to Glory",
+      "id": "creation-path-cf27-rtg-qb-create-player-hair-video-001",
+      "menuItemIDs": [
+        "menu-cf27-main-road-to-glory",
+        "menu-cf27-rtg-setup-advance",
+        "menu-cf27-rtg-journey-type",
+        "menu-cf27-rtg-position-qb",
+        "menu-cf27-create-player",
+        "menu-cf27-create-player-player-tab",
+        "menu-cf27-create-player-appearance",
+        "menu-cf27-create-player-head-skin",
+        "menu-cf27-create-player-hair"
+      ],
+      "observedPatchIDs": [
+        "cf27-patch-unknown-video-001"
+      ],
+      "platformIDs": [
+        "platform-xbox-unknown"
+      ],
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "reproducibleSteps": [
+        {
+          "evidence": {
+            "confidence": "direct-frame-observation",
+            "endSeconds": 7.0,
+            "evidenceID": "evidence-cf27-video-001-source",
+            "sourceVideoID": "video-001",
+            "startSeconds": 0.0,
+            "timestampReferenceID": "ts-video-001-main-interface-road-to-glory-visible"
+          },
+          "expectedResult": "Road to Glory transition/loading begins.",
+          "instruction": "From the College Football 27 main interface, navigate to Road to Glory.",
+          "stepNumber": 1
+        },
+        {
+          "evidence": {
+            "confidence": "direct-frame-observation",
+            "endSeconds": 17.0,
+            "evidenceID": "evidence-cf27-video-001-source",
+            "sourceVideoID": "video-001",
+            "startSeconds": 14.0,
+            "timestampReferenceID": "ts-video-001-road-to-glory-setup"
+          },
+          "expectedResult": "Journey type selection cards appear.",
+          "instruction": "On Road to Glory Setup, choose Advance.",
+          "stepNumber": 2
+        },
+        {
+          "evidence": {
+            "confidence": "direct-frame-observation-not-second-verified",
+            "endSeconds": 23.0,
+            "evidenceID": "evidence-cf27-video-001-source",
+            "sourceVideoID": "video-001",
+            "startSeconds": 18.0,
+            "timestampReferenceID": "ts-video-001-journey-type-selection"
+          },
+          "expectedResult": "Position selection appears.",
+          "instruction": "On the journey type selection screen, choose the observed journey type card before continuing.",
+          "observedSelectedLabelBeforeTransition": "CONTRIBUTOR",
+          "stepNumber": 3
+        },
+        {
+          "evidence": {
+            "confidence": "direct-frame-observation",
+            "endSeconds": 30.0,
+            "evidenceID": "evidence-cf27-video-001-source",
+            "sourceVideoID": "video-001",
+            "startSeconds": 24.0,
+            "timestampReferenceID": "ts-video-001-position-qb-selection"
+          },
+          "expectedResult": "QB is selected and the player creation flow can continue.",
+          "instruction": "On Choose Your Position, select QB.",
+          "stepNumber": 4
+        },
+        {
+          "evidence": {
+            "confidence": "direct-frame-observation",
+            "endSeconds": 37.0,
+            "evidenceID": "evidence-cf27-video-001-source",
+            "sourceVideoID": "video-001",
+            "startSeconds": 35.0,
+            "timestampReferenceID": "ts-video-001-create-player-player-root"
+          },
+          "expectedResult": "Create Player screen opens on the Player top tab.",
+          "instruction": "Advance into Create Player.",
+          "stepNumber": 5
+        },
+        {
+          "evidence": {
+            "confidence": "direct-frame-observation",
+            "endSeconds": 37.0,
+            "evidenceID": "evidence-cf27-video-001-source",
+            "sourceVideoID": "video-001",
+            "startSeconds": 35.0,
+            "timestampReferenceID": "ts-video-001-create-player-player-root"
+          },
+          "expectedResult": "Player Info, Appearance, Gear, Styles, and Continue rows are visible.",
+          "instruction": "Use the Player top tab.",
+          "stepNumber": 6
+        },
+        {
+          "evidence": {
+            "confidence": "direct-frame-observation",
+            "endSeconds": 45.0,
+            "evidenceID": "evidence-cf27-video-001-source",
+            "sourceVideoID": "video-001",
+            "startSeconds": 44.0,
+            "timestampReferenceID": "ts-video-001-appearance-root-head-skin-hair-visible"
+          },
+          "expectedResult": "Appearance submenu appears.",
+          "instruction": "Open Appearance from the Player tab.",
+          "stepNumber": 7
+        },
+        {
+          "evidence": {
+            "confidence": "direct-frame-observation",
+            "endSeconds": 45.0,
+            "evidenceID": "evidence-cf27-video-001-source",
+            "sourceVideoID": "video-001",
+            "startSeconds": 44.0,
+            "timestampReferenceID": "ts-video-001-appearance-root-head-skin-hair-visible"
+          },
+          "expectedResult": "Head & Skin is visible and selected.",
+          "instruction": "Observe Head & Skin in the Appearance submenu.",
+          "stepNumber": 8
+        },
+        {
+          "evidence": {
+            "confidence": "direct-frame-observation",
+            "endSeconds": 45.0,
+            "evidenceID": "evidence-cf27-video-001-source",
+            "sourceVideoID": "video-001",
+            "startSeconds": 44.0,
+            "timestampReferenceID": "ts-video-001-appearance-root-head-skin-hair-visible"
+          },
+          "expectedResult": "Hair is visible as the next row. The recording does not show Hair opened.",
+          "instruction": "Observe Hair in the Appearance submenu.",
+          "limitation": "Hair visibility is confirmed; Hair entry is not confirmed in this recording.",
+          "stepNumber": 9
+        }
+      ],
+      "requirements": [
+        {
+          "description": "All path steps require visible source-video timestamp evidence.",
+          "requirementID": "requirement-direct-video-evidence",
+          "status": "met-for-observed-steps"
+        },
+        {
+          "description": "Second-person verification is required before production publication.",
+          "requirementID": "requirement-second-verifier",
+          "status": "not_met"
+        }
+      ],
+      "restrictions": [
+        {
+          "description": "This path is a research candidate and must not be used to enable production recommendations.",
+          "restrictionID": "restriction-not-production",
+          "status": "active"
+        },
+        {
+          "description": "Hair is visible but not opened in video-001.",
+          "restrictionID": "restriction-hair-not-opened",
+          "status": "active"
+        }
+      ],
+      "schemaVersion": "phase0-creation-path-v1",
+      "sourceType": "research",
+      "status": "draft",
+      "updatedAt": "2026-07-13T00:00:00.000Z",
+      "verificationState": "research_candidate"
+    }
+  ],
+  "dataClass": "RESEARCH_CANDIDATE",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "schemaVersion": "cf27-research-creation-paths-v1"
+}

@@ -76,6 +76,59 @@ export function generateEvidenceManifest({
   };
 }
 
+export async function generateEvidenceManifestAsync({
+  root = repositoryRoot,
+  directories = [approvedEvidenceDirectories[0]],
+  metadataByPath = {},
+  previousManifest = null,
+  generatedAt = new Date().toISOString()
+} = {}) {
+  const normalizedRoot = path.resolve(root);
+  const approvedRoots = approvedEvidenceDirectories.map((directory) => normalizeRelativePath(directory));
+  const normalizedDirectories = directories.map((directory) => normalizeRelativePath(directory));
+  const warnings = [];
+  const entries = [];
+
+  for (const directory of normalizedDirectories) {
+    if (!isApprovedEvidenceDirectory(directory, approvedRoots)) {
+      warnings.push(warning("unapprovedDirectory", `Skipped unapproved evidence directory: ${directory}`));
+      continue;
+    }
+    const absoluteDirectory = path.resolve(normalizedRoot, directory);
+    if (!fs.existsSync(absoluteDirectory)) {
+      warnings.push(warning("missingDirectory", `Evidence directory does not exist: ${directory}`));
+      continue;
+    }
+    for await (const absoluteFilePath of listFilesAsync(absoluteDirectory)) {
+      const relativePath = normalizeRelativePath(path.relative(normalizedRoot, absoluteFilePath));
+      if (!isRelativeSafePath(relativePath)) {
+        warnings.push(warning("unsafePath", `Skipped unsafe evidence path: ${relativePath}`));
+        continue;
+      }
+      const metadata = metadataByPath[relativePath] ?? metadataByPath[normalizeRelativePath(path.relative(absoluteDirectory, absoluteFilePath))] ?? {};
+      if (Object.keys(metadata).length === 0) warnings.push(warning("missingMetadata", `No metadata supplied for ${relativePath}`));
+      entries.push(await createManifestEntryAsync(normalizedRoot, absoluteFilePath, relativePath, metadata));
+    }
+  }
+
+  entries.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
+  const comparison = compareEvidenceManifests(previousManifest, { entries });
+
+  return {
+    schemaVersion: EVIDENCE_MANIFEST_SCHEMA_VERSION,
+    generatedAt,
+    approvedDirectories: normalizedDirectories,
+    entries,
+    comparison,
+    warnings,
+    uploadPolicy: "local-only; no external upload performed",
+    performance: {
+      checksumMode: "streaming-sha256",
+      fileTraversal: "async-recursive-directory-iterator"
+    }
+  };
+}
+
 export function compareEvidenceManifests(previousManifest, nextManifest) {
   if (!previousManifest) {
     return {
@@ -164,12 +217,49 @@ function createManifestEntry(root, absoluteFilePath, relativePath, metadata) {
   };
 }
 
+async function createManifestEntryAsync(root, absoluteFilePath, relativePath, metadata) {
+  const stat = fs.statSync(absoluteFilePath);
+  return {
+    relativePath,
+    sha256: await sha256FileStream(absoluteFilePath),
+    sizeBytes: stat.size,
+    mimeType: mimeTypeForPath(absoluteFilePath),
+    fileRole: metadata.fileRole ?? "other",
+    derivativeState: metadata.derivativeState ?? "master",
+    environmentID: metadata.environmentID ?? null,
+    catalogItemID: metadata.catalogItemID ?? null,
+    view: metadata.view ?? "notApplicable",
+    captureMetadata: {
+      platformID: metadata.captureMetadata?.platformID ?? metadata.platformID ?? "unknown",
+      gameVersionID: metadata.captureMetadata?.gameVersionID ?? metadata.gameVersionID ?? "unknown",
+      patchID: metadata.captureMetadata?.patchID ?? metadata.patchID ?? "unknown",
+      mode: metadata.captureMetadata?.mode ?? metadata.mode ?? "unknown",
+      creationPathID: metadata.captureMetadata?.creationPathID ?? metadata.creationPathID ?? "unknown",
+      captureMethod: metadata.captureMetadata?.captureMethod ?? metadata.captureMethod ?? "unknown",
+      captureDevice: metadata.captureMetadata?.captureDevice ?? metadata.captureDevice ?? "unknown",
+      capturedAt: metadata.captureMetadata?.capturedAt ?? metadata.capturedAt ?? null,
+      researcherID: metadata.captureMetadata?.researcherID ?? metadata.researcherID ?? null,
+      notes: metadata.captureMetadata?.notes ?? metadata.notes ?? ""
+    }
+  };
+}
+
 function listFiles(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const absolutePath = path.join(directory, entry.name);
     if (ignoredFileNames.has(entry.name)) return [];
     return entry.isDirectory() ? listFiles(absolutePath) : [absolutePath];
   });
+}
+
+async function* listFilesAsync(directory) {
+  const entries = await fs.promises.readdir(directory, { withFileTypes: true });
+  for (const entry of entries) {
+    const absolutePath = path.join(directory, entry.name);
+    if (ignoredFileNames.has(entry.name)) continue;
+    if (entry.isDirectory()) yield* listFilesAsync(absolutePath);
+    else yield absolutePath;
+  }
 }
 
 function isApprovedEvidenceDirectory(directory, approvedRoots) {
@@ -194,6 +284,16 @@ function mimeTypeForPath(filePath) {
 
 function sha256File(filePath) {
   return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
+}
+
+export function sha256FileStream(filePath, { highWaterMark = 1024 * 1024 } = {}) {
+  return new Promise((resolve, reject) => {
+    const hash = crypto.createHash("sha256");
+    const stream = fs.createReadStream(filePath, { highWaterMark });
+    stream.on("data", (chunk) => hash.update(chunk));
+    stream.on("error", reject);
+    stream.on("end", () => resolve(hash.digest("hex")));
+  });
 }
 
 function readJSON(filePath) {
@@ -241,7 +341,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   }
   const metadataByPath = readMetadataFile(args.metadata);
   const previousManifest = args.previous ? readJSON(path.resolve(repositoryRoot, args.previous)) : null;
-  const manifest = generateEvidenceManifest({
+  const manifest = await generateEvidenceManifestAsync({
     directories: args.directories.length > 0 ? args.directories : undefined,
     metadataByPath,
     previousManifest,

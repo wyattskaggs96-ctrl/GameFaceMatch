@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 // @ts-expect-error Root evidence manifest CLI is plain ESM JavaScript and is exercised here as the command source of truth.
-import { EVIDENCE_MANIFEST_SCHEMA_VERSION, compareEvidenceManifests, formatEvidenceManifestReport, generateEvidenceManifest, readMetadataFile, writeManifest } from "../../scripts/evidence-manifest.mjs";
+import { EVIDENCE_MANIFEST_SCHEMA_VERSION, compareEvidenceManifests, formatEvidenceManifestReport, generateEvidenceManifest, generateEvidenceManifestAsync, readMetadataFile, sha256FileStream, writeManifest } from "../../scripts/evidence-manifest.mjs";
 
 const root = path.resolve(process.cwd(), "..");
 const fixtureDirectory = "data/fixtures/test-only/evidence-manifest/approved";
@@ -61,6 +61,23 @@ describe("Phase 0 evidence manifest generator", () => {
       patchID: "patch-test-only",
       captureMethod: "manualEntry"
     });
+  });
+
+  it("supports streaming checksum generation for larger evidence sets", async () => {
+    const manifest = await generateEvidenceManifestAsync({
+      root,
+      directories: [fixtureDirectory],
+      metadataByPath: readMetadataFile(metadataPath, root),
+      generatedAt: "2026-07-12T00:00:00.000Z"
+    });
+    const front = manifest.entries.find((entry: { relativePath: string }) => entry.relativePath === frontFixturePath);
+
+    expect(manifest.performance).toEqual({
+      checksumMode: "streaming-sha256",
+      fileTraversal: "async-recursive-directory-iterator"
+    });
+    expect(front?.sha256).toBe(await sha256FileStream(path.resolve(root, frontFixturePath)));
+    expect(front?.sha256).toBe(sha256(fs.readFileSync(path.resolve(root, frontFixturePath))));
   });
 
   it("detects changed, missing, and unexpected files between scans", () => {

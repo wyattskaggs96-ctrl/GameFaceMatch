@@ -125,6 +125,18 @@ Security tests should include:
 - Untrusted metadata rejects unknown keys, control characters, long strings, and non-primitive values
 - Production recommendation and publication gates cannot be enabled by spoofed partial reports, fixture records, placeholders, or environment variables alone
 
+## Large-evidence and performance coverage
+
+Large local evidence workflows should avoid loading all raw evidence into memory or rendering every row at once. Automated coverage should verify:
+
+- Evidence manifests can use streaming SHA-256 reads and asynchronous recursive traversal
+- Source-video inspection can use streaming SHA-256 reads without serializing video bytes
+- Evidence intake plans immediate previews, lazy previews, and metadata-only rows based on MIME type, size, and page budget
+- Catalog-manager review tables paginate records and evidence assets
+- Long validation/export-style work can be planned in deterministic chunks with a worker/background recommendation
+
+Manual checks should verify browser responsiveness with large screenshot folders, source-video metadata entry, and catalog packages that are larger than the fixture set. Do not add real user face media or unverified game evidence to the repository while testing these paths.
+
 ## Browser end-to-end coverage
 
 The active web MVP uses Playwright for production-representative browser coverage under `web/tests/e2e/`.

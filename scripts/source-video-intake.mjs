@@ -47,11 +47,48 @@ export function inspectSourceVideo(videoPath, { root = repositoryRoot, nowISO = 
   };
 }
 
+export async function inspectSourceVideoAsync(videoPath, { root = repositoryRoot, nowISO = new Date().toISOString() } = {}) {
+  const absolutePath = path.resolve(root, videoPath);
+  if (!fs.existsSync(absolutePath)) {
+    return {
+      ok: false,
+      code: "missingSourceVideo",
+      message: `Source video does not exist: ${videoPath}`
+    };
+  }
+  const stat = fs.statSync(absolutePath);
+  const ffprobe = commandExists("ffprobe");
+  const metadata = ffprobe ? readFfprobeMetadata(absolutePath) : unavailableMetadata("ffprobe is unavailable; duration and stream metadata must be entered manually.");
+  return {
+    ok: true,
+    schemaVersion: SOURCE_VIDEO_INTAKE_SCHEMA_VERSION,
+    inspectedAt: nowISO,
+    sourceVideo: {
+      originalFilename: path.basename(absolutePath),
+      relativePath: normalizeRelativePath(path.relative(root, absolutePath)),
+      sha256: await sha256FileStream(absolutePath),
+      sizeBytes: stat.size,
+      mimeType: mimeTypeForPath(absolutePath),
+      lastModified: stat.mtimeMs,
+      metadata,
+      preservationNote: "Original source video was inspected only; the file was not modified, recompressed, or uploaded."
+    },
+    capabilities: {
+      ffprobe: ffprobe ? "available" : "unavailable",
+      ffmpeg: commandExists("ffmpeg") ? "available" : "unavailable"
+    },
+    performance: {
+      checksumMode: "streaming-sha256"
+    }
+  };
+}
+
 export function extractSourceVideoFrame({
   videoPath,
   timestampSeconds,
   outputPath,
-  root = repositoryRoot
+  root = repositoryRoot,
+  checksumMode = "sync"
 }) {
   const absoluteVideoPath = path.resolve(root, videoPath);
   const absoluteOutputPath = path.resolve(root, outputPath);
@@ -106,7 +143,7 @@ export function extractSourceVideoFrame({
     derivativeFrame: {
       relativePath: normalizeRelativePath(path.relative(root, absoluteOutputPath)),
       derivativeState: "derivative",
-      sha256: sha256File(absoluteOutputPath),
+      sha256: checksumMode === "defer" ? "" : sha256File(absoluteOutputPath),
       sizeBytes: stat.size,
       mimeType: mimeTypeForPath(absoluteOutputPath),
       timestampSeconds,
@@ -114,6 +151,16 @@ export function extractSourceVideoFrame({
       preservationNote: "Source video was used as input only. The original master file was not recompressed or modified."
     }
   };
+}
+
+export async function extractSourceVideoFrameAsync(input) {
+  const report = extractSourceVideoFrame({ ...input, checksumMode: "defer" });
+  if (report.ok && report.derivativeFrame?.relativePath) {
+    const absoluteOutputPath = path.resolve(input.root ?? repositoryRoot, report.derivativeFrame.relativePath);
+    report.derivativeFrame.sha256 = await sha256FileStream(absoluteOutputPath);
+    report.performance = { checksumMode: "streaming-sha256" };
+  }
+  return report;
 }
 
 function readFfprobeMetadata(videoPath) {
@@ -194,6 +241,16 @@ function sha256File(filePath) {
   return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
 }
 
+export function sha256FileStream(filePath, { highWaterMark = 1024 * 1024 } = {}) {
+  return new Promise((resolve, reject) => {
+    const hash = crypto.createHash("sha256");
+    const stream = fs.createReadStream(filePath, { highWaterMark });
+    stream.on("data", (chunk) => hash.update(chunk));
+    stream.on("error", reject);
+    stream.on("end", () => resolve(hash.digest("hex")));
+  });
+}
+
 function printHelp() {
   console.log([
     "Usage:",
@@ -212,12 +269,12 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     process.exit(0);
   }
   if (command === "inspect") {
-    const report = inspectSourceVideo(args[0] ?? "");
+    const report = await inspectSourceVideoAsync(args[0] ?? "");
     console.log(JSON.stringify(report, null, 2));
     process.exit(report.ok ? 0 : 1);
   }
   if (command === "extract-frame") {
-    const report = extractSourceVideoFrame({
+    const report = await extractSourceVideoFrameAsync({
       videoPath: args[0] ?? "",
       timestampSeconds: Number.parseFloat(args[1] ?? ""),
       outputPath: args[2] ?? ""

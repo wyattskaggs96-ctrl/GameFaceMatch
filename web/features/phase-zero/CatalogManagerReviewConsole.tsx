@@ -16,6 +16,7 @@ import {
   type CatalogManagerValidationIssue,
   type CatalogManagerValidationReport
 } from "@/lib/phase-zero/catalog-manager-review-console";
+import { DEFAULT_CATALOG_TABLE_PAGE_SIZE, createIncrementalProcessingPlan, paginateCollection } from "@/lib/performance/large-evidence-handling";
 
 export function CatalogManagerReviewConsole() {
   const [packageText, setPackageText] = useState("");
@@ -29,6 +30,8 @@ export function CatalogManagerReviewConsole() {
   const [actionNote, setActionNote] = useState("");
   const [reportNotes, setReportNotes] = useState("");
   const [signedReport, setSignedReport] = useState<CatalogManagerSignedReviewReport | null>(null);
+  const [recordPage, setRecordPage] = useState(1);
+  const [evidencePage, setEvidencePage] = useState(1);
 
   const session = useMemo(() => {
     if (!candidatePackage) return null;
@@ -48,6 +51,8 @@ export function CatalogManagerReviewConsole() {
       setValidationReport(nextValidation);
       setActions([]);
       setSignedReport(null);
+      setRecordPage(1);
+      setEvidencePage(1);
       setParseError(null);
       const firstRecordID = (nextPackage.items ?? nextPackage.manifest?.items ?? [])[0]?.stableInternalID;
       setSelectedRecordID(typeof firstRecordID === "string" ? firstRecordID : "");
@@ -152,6 +157,9 @@ export function CatalogManagerReviewConsole() {
 
       {session ? (
         <>
+          <Alert title="Large package handling" tone="info">
+            {largePackageSummary(session.records.length, session.evidence.length)}
+          </Alert>
           <div className="result-grid">
             <ReviewList title="Unresolved failures" issues={session.unresolvedFailures} />
             <Card>
@@ -181,8 +189,14 @@ export function CatalogManagerReviewConsole() {
             </Card>
           </div>
 
-          <RecordInspector records={session.records} selectedRecordID={selectedRecordID} onSelectedRecordChange={setSelectedRecordID} />
-          <EvidenceInspector evidence={session.evidence} />
+          <RecordInspector
+            records={session.records}
+            selectedRecordID={selectedRecordID}
+            onSelectedRecordChange={setSelectedRecordID}
+            page={recordPage}
+            onPageChange={setRecordPage}
+          />
+          <EvidenceInspector evidence={session.evidence} page={evidencePage} onPageChange={setEvidencePage} />
 
           <Card>
             <h2>Manager decision</h2>
@@ -265,23 +279,44 @@ function ReviewList({ title, issues }: { title: string; issues: CatalogManagerVa
 function RecordInspector({
   records,
   selectedRecordID,
-  onSelectedRecordChange
+  onSelectedRecordChange,
+  page,
+  onPageChange
 }: {
   records: CatalogManagerRecordSummary[];
   selectedRecordID: string;
   onSelectedRecordChange: (recordID: string) => void;
+  page: number;
+  onPageChange: (page: number) => void;
 }) {
   const selected = records.find((record) => record.stableInternalID === selectedRecordID) ?? records[0];
+  const pagedRecords = paginateCollection(records, { page, pageSize: DEFAULT_CATALOG_TABLE_PAGE_SIZE });
+  const optionRecords = selected && !pagedRecords.items.some((record) => record.stableInternalID === selected.stableInternalID)
+    ? [selected, ...pagedRecords.items]
+    : pagedRecords.items;
   return (
     <Card>
       <div className="status-row">
         <h2>Record inspector</h2>
         <SelectField label="Inspect record" value={selected?.stableInternalID ?? ""} onChange={(event) => onSelectedRecordChange(event.currentTarget.value)}>
-          {records.map((record) => (
+          {optionRecords.map((record) => (
             <option key={record.stableInternalID} value={record.stableInternalID}>{record.stableInternalID}</option>
           ))}
         </SelectField>
       </div>
+      {records.length > DEFAULT_CATALOG_TABLE_PAGE_SIZE ? (
+        <div className="button-row" aria-label="Catalog record pagination">
+          <Button variant="secondary" disabled={!pagedRecords.hasPreviousPage} onClick={() => onPageChange(Math.max(1, page - 1))}>
+            Previous records
+          </Button>
+          <span className="supporting" aria-live="polite">
+            Showing records {pagedRecords.startIndex + 1}-{pagedRecords.endIndexExclusive} of {pagedRecords.totalItems}
+          </span>
+          <Button variant="secondary" disabled={!pagedRecords.hasNextPage} onClick={() => onPageChange(page + 1)}>
+            Next records
+          </Button>
+        </div>
+      ) : null}
       {selected ? (
         <dl className="metadata-list">
           <div><dt>Category</dt><dd>{selected.category}</dd></div>
@@ -298,21 +333,54 @@ function RecordInspector({
   );
 }
 
-function EvidenceInspector({ evidence }: { evidence: Array<{ assetID: string; angle: string; relativePath: string; sha256: string; referencedByRecordIDs: string[] }> }) {
+function EvidenceInspector({
+  evidence,
+  page,
+  onPageChange
+}: {
+  evidence: Array<{ assetID: string; angle: string; relativePath: string; sha256: string; referencedByRecordIDs: string[] }>;
+  page: number;
+  onPageChange: (page: number) => void;
+}) {
+  const pagedEvidence = paginateCollection(evidence, { page, pageSize: DEFAULT_CATALOG_TABLE_PAGE_SIZE });
   return (
     <Card>
       <h2>Evidence inspector</h2>
       {evidence.length === 0 ? (
         <p className="supporting">No evidence assets imported.</p>
       ) : (
-        <ul className="compact-list">
-          {evidence.slice(0, 10).map((asset) => (
-            <li key={asset.assetID}>
-              <strong>{asset.assetID}</strong> · {asset.angle} · {asset.relativePath || "missing path"} · referenced by {asset.referencedByRecordIDs.join(", ") || "none"}
-            </li>
-          ))}
-        </ul>
+        <>
+          {evidence.length > DEFAULT_CATALOG_TABLE_PAGE_SIZE ? (
+            <div className="button-row" aria-label="Catalog evidence pagination">
+              <Button variant="secondary" disabled={!pagedEvidence.hasPreviousPage} onClick={() => onPageChange(Math.max(1, page - 1))}>
+                Previous evidence
+              </Button>
+              <span className="supporting" aria-live="polite">
+                Showing evidence {pagedEvidence.startIndex + 1}-{pagedEvidence.endIndexExclusive} of {pagedEvidence.totalItems}
+              </span>
+              <Button variant="secondary" disabled={!pagedEvidence.hasNextPage} onClick={() => onPageChange(page + 1)}>
+                Next evidence
+              </Button>
+            </div>
+          ) : null}
+          <ul className="compact-list">
+            {pagedEvidence.items.map((asset) => (
+              <li key={asset.assetID}>
+                <strong>{asset.assetID}</strong> · {asset.angle} · {asset.relativePath || "missing path"} · referenced by {asset.referencedByRecordIDs.join(", ") || "none"}
+              </li>
+            ))}
+          </ul>
+        </>
       )}
     </Card>
   );
+}
+
+function largePackageSummary(recordCount: number, evidenceCount: number) {
+  const plan = createIncrementalProcessingPlan({
+    totalItems: recordCount + evidenceCount,
+    largeItemCount: evidenceCount,
+    chunkSize: DEFAULT_CATALOG_TABLE_PAGE_SIZE
+  });
+  return `Review uses paged tables of ${DEFAULT_CATALOG_TABLE_PAGE_SIZE} rows. Validation should process ${plan.totalItems} records/assets in ${plan.chunkCount} chunks${plan.workerRecommended ? " and prefer worker or background execution for heavy checks." : "."}`;
 }

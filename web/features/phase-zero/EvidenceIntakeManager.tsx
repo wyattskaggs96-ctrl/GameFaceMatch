@@ -18,6 +18,7 @@ import {
   extensionFromFilename,
   type Phase0EvidenceRenamePlan
 } from "@/lib/phase-zero/phase-zero-evidence-naming";
+import { DEFAULT_EVIDENCE_PREVIEW_PAGE_SIZE, createEvidencePreviewPlan, paginateCollection } from "@/lib/performance/large-evidence-handling";
 import type { Phase0EvidenceDerivativeState, Phase0EvidenceFileRole, Phase0EvidenceView } from "@/lib/phase-zero/phase-zero-evidence";
 
 type DirectoryInputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -38,6 +39,7 @@ export function EvidenceIntakeManager() {
     })
   );
   const [savedMetadataCount, setSavedMetadataCount] = useState(0);
+  const [itemPage, setItemPage] = useState(1);
   const [namingContext, setNamingContext] = useState({
     gameVersion: "",
     patch: "",
@@ -63,11 +65,28 @@ export function EvidenceIntakeManager() {
     })), new Date().toISOString());
   }, [batch.items, namingContext]);
   const renamePlanByIntakeID = useMemo(() => new Map(renamePlans.map((plan) => [plan.intakeID, plan])), [renamePlans]);
+  const activeItems = useMemo(() => batch.items.filter((item) => item.status !== "removed"), [batch.items]);
+  const pagedItems = useMemo(
+    () => paginateCollection(activeItems, { page: itemPage, pageSize: DEFAULT_EVIDENCE_PREVIEW_PAGE_SIZE }),
+    [activeItems, itemPage]
+  );
+  const previewPlan = useMemo(
+    () =>
+      createEvidencePreviewPlan(
+        activeItems.map((item) => ({
+          id: item.intakeID,
+          sizeBytes: item.sizeBytes,
+          mimeType: item.mimeType
+        }))
+      ),
+    [activeItems]
+  );
 
   function handleFiles(files: FileList | File[], source: "dragDrop" | "filePicker" | "folderPicker") {
     const fileArray = Array.from(files);
     if (fileArray.length === 0) return;
     setBatch((currentBatch) => addEvidenceFilesToBatch(currentBatch, fileArray, source, new Date().toISOString()));
+    setItemPage(1);
   }
 
   function handleFileInput(event: ChangeEvent<HTMLInputElement>, source: "filePicker" | "folderPicker") {
@@ -164,7 +183,19 @@ export function EvidenceIntakeManager() {
           <dl className="metadata-list">
             <div>
               <dt>Active files</dt>
-              <dd>{batch.items.filter((item) => item.status !== "removed").length}</dd>
+              <dd>{activeItems.length}</dd>
+            </div>
+            <div>
+              <dt>Visible page</dt>
+              <dd>{pagedItems.page} of {pagedItems.totalPages}</dd>
+            </div>
+            <div>
+              <dt>Lazy previews</dt>
+              <dd>{previewPlan.lazyPreviewIDs.length}</dd>
+            </div>
+            <div>
+              <dt>Metadata-only previews</dt>
+              <dd>{previewPlan.skippedPreviewIDs.length}</dd>
             </div>
             <div>
               <dt>Warnings</dt>
@@ -194,8 +225,26 @@ export function EvidenceIntakeManager() {
           )}
         </Card>
       </div>
+      {previewPlan.warnings.length > 0 ? (
+        <Alert title="Large evidence handling" tone="info">
+          {previewPlan.warnings.join(" ")} File bytes are not serialized into the UI state.
+        </Alert>
+      ) : null}
+      {activeItems.length > DEFAULT_EVIDENCE_PREVIEW_PAGE_SIZE ? (
+        <div className="button-row" aria-label="Evidence intake pagination">
+          <Button variant="secondary" disabled={!pagedItems.hasPreviousPage} onClick={() => setItemPage((page) => Math.max(1, page - 1))}>
+            Previous evidence page
+          </Button>
+          <span className="supporting" aria-live="polite">
+            Showing {pagedItems.startIndex + 1}-{pagedItems.endIndexExclusive} of {pagedItems.totalItems}
+          </span>
+          <Button variant="secondary" disabled={!pagedItems.hasNextPage} onClick={() => setItemPage((page) => page + 1)}>
+            Next evidence page
+          </Button>
+        </div>
+      ) : null}
       <div className="result-grid">
-        {batch.items.filter((item) => item.status !== "removed").map((item) => (
+        {pagedItems.items.map((item) => (
           <Card key={item.intakeID} tone={item.warnings.some((warning) => warning.severity === "error") || renamePlanByIntakeID.get(item.intakeID)?.status === "blocked" ? "warning" : "neutral"}>
             <div className="status-row">
               <h3>{item.originalFilename}</h3>

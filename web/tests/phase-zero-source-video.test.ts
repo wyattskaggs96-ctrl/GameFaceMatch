@@ -1,6 +1,9 @@
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+// @ts-expect-error Root source-video CLI is plain ESM JavaScript and is exercised here as the command source of truth.
+import { inspectSourceVideoAsync, sha256FileStream as sha256SourceVideoFileStream } from "../../scripts/source-video-intake.mjs";
 import {
   PHASE0_SOURCE_VIDEO_SCHEMA_VERSION,
   availableFrameExtractionCapability,
@@ -154,6 +157,20 @@ describe("Phase 0 source-video intake", () => {
     expect(raw).not.toContain("ArrayBuffer");
     store.clear();
     expect(store.load()).toEqual([]);
+  });
+
+  it("streams source-video checksums without serializing video bytes", async () => {
+    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "gameface-source-video-"));
+    const videoPath = path.join(tempDir, "synthetic-source.mov");
+    fs.writeFileSync(videoPath, Buffer.alloc(1024 * 1024 + 17, 7));
+
+    const report = await inspectSourceVideoAsync("synthetic-source.mov", { root: tempDir, nowISO: now });
+
+    expect(report.ok).toBe(true);
+    expect(report.performance).toEqual({ checksumMode: "streaming-sha256" });
+    expect(report.sourceVideo.sha256).toBe(await sha256SourceVideoFileStream(videoPath));
+    expect(JSON.stringify(report)).not.toContain("fileBytes");
+    expect(JSON.stringify(report)).not.toContain("ArrayBuffer");
   });
 });
 

@@ -762,6 +762,18 @@ p {
   font-weight: 800;
 }
 
+.analysis-panel {
+  display: grid;
+  gap: var(--space-3);
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-3);
+}
+
+.analysis-panel h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
 .message-title {
   margin: 0 0 var(--space-1);
 }

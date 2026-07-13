@@ -1,4 +1,5 @@
 import type { ISODateString, RefinementResult, StandardFaceProfile } from "@/types/domain";
+import type { ScreenshotQualityAlignmentReport } from "./screenshot-quality-alignment";
 
 export type ScreenshotViewID = "front" | "left45" | "right45";
 export type ScreenshotValidationStatus = "valid" | "invalid";
@@ -33,6 +34,7 @@ export interface ScreenshotSlotState {
   instruction: string;
   required: boolean;
   screenshot?: ScreenshotReference;
+  analysisReport?: ScreenshotQualityAlignmentReport;
   validationStatus: ScreenshotValidationStatus;
   validationErrors: string[];
 }
@@ -220,12 +222,24 @@ export function setScreenshot(session: ScreenshotRefinementSession, input: Scree
           ? {
               ...slot,
               screenshot,
+              analysisReport: undefined,
               validationStatus: validation.status,
               validationErrors: validation.errors
             }
           : slot
       )
     }
+  };
+}
+
+export function setScreenshotAnalysisReport(
+  session: ScreenshotRefinementSession,
+  viewID: ScreenshotViewID,
+  analysisReport: ScreenshotQualityAlignmentReport
+): ScreenshotRefinementSession {
+  return {
+    ...session,
+    slots: session.slots.map((slot) => (slot.viewID === viewID ? { ...slot, analysisReport } : slot))
   };
 }
 
@@ -265,6 +279,9 @@ export function getScreenshotRefinementReadiness(session: ScreenshotRefinementSe
     } else if (slot.validationStatus === "invalid" && slot.validationErrors.length > 0) {
       blockingMessages.push(...slot.validationErrors);
     }
+    if (slot.analysisReport?.overallState === "blocked") {
+      blockingMessages.push(...slot.analysisReport.blockingMessages);
+    }
   });
 
   const missingChecklistItems = SCREENSHOT_REFINEMENT_CHECKLIST.filter((item) => !session.checklist[item.id]);
@@ -277,6 +294,9 @@ export function getScreenshotRefinementReadiness(session: ScreenshotRefinementSe
   optionalSlots.forEach((slot) => {
     if (slot.screenshot && slot.validationStatus === "invalid") {
       advisoryMessages.push(...slot.validationErrors.map((error) => `${slot.label}: ${error}`));
+    }
+    if (slot.analysisReport?.overallState === "blocked") {
+      advisoryMessages.push(...slot.analysisReport.blockingMessages.map((message) => `${slot.label}: ${message}`));
     }
   });
 

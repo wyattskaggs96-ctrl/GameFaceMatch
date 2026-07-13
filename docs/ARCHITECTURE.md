@@ -75,6 +75,7 @@ The web app includes an empty bundled production manifest for browser runtime us
 - Object URLs for capture and screenshot sessions are revoked on retake, removal, cancellation, deletion, and session reset paths.
 - No network upload path exists in the web MVP; image bytes remain in memory/object URLs only for the active session.
 - Face landmark extraction uses the local browser provider documented in `docs/FACE_LANDMARK_PROVIDER.md`. It does not identify people, produce identity embeddings, infer sensitive traits, upload media, or claim TrueDepth/ARKit equivalence.
+- Screenshot refinement intake uses `web/lib/refinement/screenshot-quality-alignment.ts` to combine metadata checks, local face-landmark reports when available, canvas-derived lighting/sharpness estimates, occlusion warnings, pose summaries, standard-coordinate alignment scaffolding, and actionable retake instructions. These reports are validation scaffolds only and must not be described as proven cross-domain comparison accuracy.
 
 ## Commerce readiness boundaries
 

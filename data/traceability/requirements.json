@@ -1344,6 +1344,7 @@
       "owningModule": "Screenshot refinement",
       "implementationFiles": [
         "web/lib/refinement/screenshot-refinement.ts",
+        "web/lib/refinement/screenshot-quality-alignment.ts",
         "web/features/refinement/ScreenshotRefinementEntry.tsx"
       ],
       "testFiles": [
@@ -1351,7 +1352,7 @@
         "web/tests/e2e/core-journey.spec.ts"
       ],
       "status": "IMPLEMENTED_WITH_LIMITATION",
-      "evidence": "Screenshot intake requires a front-facing screenshot, supports optional left/right three-quarter screenshots, validates file metadata and resolution, gates progression on manual screenshot-condition confirmations, supports deletion/object URL cleanup, and returns an honest unavailable result until real comparison and verified catalog data exist.",
+      "evidence": "Screenshot intake requires a front-facing screenshot, supports optional left/right three-quarter screenshots, validates file metadata and resolution, runs local quality/alignment scaffolding with face-count, bounding-box, pose, landmark, occlusion, lighting, and standard-coordinate alignment reports when evidence exists, gates progression on manual screenshot-condition confirmations, supports deletion/object URL cleanup, and returns an honest unavailable result until real comparison and verified catalog data exist.",
       "blocker": "Real cross-domain comparison and verified catalog data are not available.",
       "owner": "Matching lead",
       "lastCheckedDate": "2026-07-13"

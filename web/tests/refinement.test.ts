@@ -11,7 +11,9 @@ import {
   validateScreenshotMetadata
 } from "@/lib/refinement/screenshot-refinement";
 import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
-import type { StandardFaceProfile } from "@/types/domain";
+import { analyzeScreenshotQualityAndAlignment } from "@/lib/refinement/screenshot-quality-alignment";
+import { MEDIAPIPE_FACE_LANDMARKER_METADATA, unavailableFaceLandmarkReport } from "@/lib/face-landmarks/face-landmark-provider";
+import type { FaceLandmarkReport, FaceLandmarkPoint, StandardFaceProfile } from "@/types/domain";
 
 describe("screenshot refinement scaffold", () => {
   it("requires a front screenshot and supports optional three-quarter screenshots", () => {
@@ -113,6 +115,104 @@ describe("screenshot refinement scaffold", () => {
     expect(result.message).toMatch(/unavailable until verified catalog data/i);
     expect(result.suggestedMatches).toEqual([]);
   });
+
+  it("gracefully reports unavailable local face analysis without fabricating landmarks", () => {
+    const report = analyzeScreenshotQualityAndAlignment({
+      screenshot: validScreenshot("front", "blob:front"),
+      faceLandmarkReport: unavailableFaceLandmarkReport({ message: "Local model missing." }),
+      imageMeasurements: goodMeasurements()
+    });
+
+    expect(report.overallState).toBe("needsReview");
+    expect(report.faceDetection.state).toBe("unavailable");
+    expect(report.landmarkEstimate.coreLandmarkCount).toBe(0);
+    expect(report.alignment.transform).toBeNull();
+    expect(report.advisoryMessages.join(" ")).toMatch(/unavailable/i);
+  });
+
+  it("creates an alignment report from a single detected face", () => {
+    const report = analyzeScreenshotQualityAndAlignment({
+      screenshot: validScreenshot("front", "blob:front"),
+      faceLandmarkReport: oneFaceReport({ yaw: 2, roll: 3 }),
+      imageMeasurements: goodMeasurements()
+    });
+
+    expect(report.overallState).toBe("ready");
+    expect(report.faceDetection.faceCount).toBe("one");
+    expect(report.faceDetection.boundingBox).toMatchObject({ x: 0.3, y: 0.16, width: 0.4, height: 0.5 });
+    expect(report.poseEstimate.state).toBe("ready");
+    expect(report.landmarkEstimate.coreLandmarkCount).toBeGreaterThanOrEqual(8);
+    expect(report.alignment.standardCoordinateSystem).toBe("gameface-screenshot-alignment-v1");
+    expect(report.alignment.transform).toMatchObject({ translateX: 0, translateY: 0.01, scale: 0.96, rotationDegrees: -3 });
+  });
+
+  it("blocks zero or multiple detected faces with actionable retake guidance", () => {
+    const zero = analyzeScreenshotQualityAndAlignment({
+      screenshot: validScreenshot("front", "blob:front"),
+      faceLandmarkReport: { ...oneFaceReport(), faceCount: "zero", detectedFaceCount: 0, faces: [] },
+      imageMeasurements: goodMeasurements()
+    });
+    const multiple = analyzeScreenshotQualityAndAlignment({
+      screenshot: validScreenshot("front", "blob:front"),
+      faceLandmarkReport: { ...oneFaceReport(), faceCount: "multiple", detectedFaceCount: 2, faces: [oneFaceReport().faces[0], oneFaceReport().faces[0]] },
+      imageMeasurements: goodMeasurements()
+    });
+
+    expect(zero.overallState).toBe("blocked");
+    expect(multiple.overallState).toBe("blocked");
+    expect(multiple.retakeInstructions.map((instruction) => instruction.code)).toContain("useSingleVisibleFace");
+  });
+
+  it("blocks front screenshots with a strong turned-pose estimate", () => {
+    const report = analyzeScreenshotQualityAndAlignment({
+      screenshot: validScreenshot("front", "blob:front"),
+      faceLandmarkReport: oneFaceReport({ yaw: 34 }),
+      imageMeasurements: goodMeasurements()
+    });
+
+    expect(report.overallState).toBe("blocked");
+    expect(report.poseEstimate.message).toMatch(/retake facing the camera/i);
+    expect(report.retakeInstructions.map((instruction) => instruction.code)).toContain("retakeFront");
+  });
+
+  it("blocks extreme lighting, severe blur, and low resolution", () => {
+    const report = analyzeScreenshotQualityAndAlignment({
+      screenshot: { ...validScreenshot("front", "blob:front"), width: 640, height: 640 },
+      faceLandmarkReport: oneFaceReport(),
+      imageMeasurements: {
+        ...goodMeasurements(),
+        brightness: 0.08,
+        shadowClipping: 0.52,
+        sharpness: 4
+      }
+    });
+
+    expect(report.overallState).toBe("blocked");
+    expect(report.resolutionCheck.state).toBe("blocked");
+    expect(report.lightingWarning.state).toBe("blocked");
+    expect(report.retakeInstructions.map((instruction) => instruction.code)).toEqual(expect.arrayContaining(["useHigherResolution", "improveLighting"]));
+  });
+
+  it("flags occlusion when required core regions cannot be estimated", () => {
+    const base = oneFaceReport();
+    const report = analyzeScreenshotQualityAndAlignment({
+      screenshot: validScreenshot("front", "blob:front"),
+      faceLandmarkReport: {
+        ...base,
+        faces: [
+          {
+            ...base.faces[0],
+            coreLandmarks: base.faces[0].coreLandmarks.filter((landmark) => landmark.label === "nose tip")
+          }
+        ]
+      },
+      imageMeasurements: goodMeasurements()
+    });
+
+    expect(report.overallState).toBe("blocked");
+    expect(report.occlusionCheck.missingCoreRegions).toContain("chin");
+    expect(report.retakeInstructions.map((instruction) => instruction.code)).toContain("removeObstruction");
+  });
 });
 
 function validScreenshot(viewID: "front" | "left45" | "right45", objectUrl: string) {
@@ -125,6 +225,78 @@ function validScreenshot(viewID: "front" | "left45" | "right45", objectUrl: stri
     height: 720,
     objectUrl,
     createdAt: "2026-07-10T00:00:00.000Z"
+  };
+}
+
+function goodMeasurements() {
+  return {
+    brightness: 0.5,
+    highlightClipping: 0.01,
+    shadowClipping: 0.02,
+    sharpness: 22,
+    lightingImbalance: 0.04
+  };
+}
+
+function oneFaceReport(input: { yaw?: number; roll?: number } = {}): FaceLandmarkReport {
+  return {
+    availabilityState: "available",
+    faceCount: "one",
+    detectedFaceCount: 1,
+    faces: [
+      {
+        boundingBox: {
+          x: 0.3,
+          y: 0.16,
+          width: 0.4,
+          height: 0.5,
+          confidence: { score: 0.8, label: "medium", evidence: "estimated" }
+        },
+        coreLandmarks: [
+          landmark("nose tip", 1, 0.5, 0.38),
+          landmark("left eye inner corner", 133, 0.44, 0.3),
+          landmark("right eye inner corner", 362, 0.56, 0.3),
+          landmark("left mouth corner", 61, 0.44, 0.52),
+          landmark("right mouth corner", 291, 0.56, 0.52),
+          landmark("chin", 152, 0.5, 0.66),
+          landmark("left jaw", 172, 0.36, 0.56),
+          landmark("right jaw", 397, 0.64, 0.56)
+        ],
+        approximateHeadPose: {
+          yawDegrees: input.yaw ?? 0,
+          pitchDegrees: 0,
+          rollDegrees: input.roll ?? 0,
+          confidence: { score: 0.6, label: "medium", evidence: "estimated" },
+          availabilityState: "available"
+        },
+        expression: {
+          leftEyeOpenness: 0.2,
+          rightEyeOpenness: 0.2,
+          mouthOpenness: 0.05,
+          smileLikelihood: 0.1,
+          strongExpressionLikelihood: 0.12,
+          confidence: { score: 0.6, label: "medium", evidence: "estimated" },
+          availabilityState: "available"
+        },
+        confidence: { score: 0.8, label: "medium", evidence: "estimated" }
+      }
+    ],
+    provider: MEDIAPIPE_FACE_LANDMARKER_METADATA,
+    confidence: { score: 0.8, label: "medium", evidence: "estimated" },
+    advisoryMessages: [],
+    blockingMessages: [],
+    createdAt: "2026-07-10T00:00:00.000Z"
+  };
+}
+
+function landmark(label: string, sourceIndex: number, x: number, y: number): FaceLandmarkPoint {
+  return {
+    label,
+    sourceIndex,
+    x,
+    y,
+    z: null,
+    confidence: { score: 0.7, label: "medium", evidence: "estimated" }
   };
 }
 

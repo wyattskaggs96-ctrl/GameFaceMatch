@@ -1,7 +1,7 @@
 "use client";
 
 import type { ChangeEvent } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Button, Card, ScreenHeader, StatusBadge } from "@/components/design-system";
 import {
   canSubmitScreenshotRefinement,
@@ -10,12 +10,20 @@ import {
   createUnavailableScreenshotRefinementProcessor,
   deleteScreenshotRefinementSession,
   setScreenshot,
+  setScreenshotAnalysisReport,
   setScreenshotChecklistItem,
   type ScreenshotChecklistItemID,
+  type ScreenshotReference,
   type ScreenshotRefinementSession,
   type ScreenshotSlotState,
   type ScreenshotViewID
 } from "@/lib/refinement/screenshot-refinement";
+import {
+  analyzeScreenshotQualityAndAlignment,
+  type ScreenshotQualityAlignmentReport
+} from "@/lib/refinement/screenshot-quality-alignment";
+import { calculateImageMeasurements, type PixelSample } from "@/lib/capture/image-quality-service";
+import { createLocalFaceLandmarkProvider } from "@/lib/face-landmarks/face-landmark-worker-client";
 import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import type { RefinementResult } from "@/types/domain";
 
@@ -29,16 +37,30 @@ export function ScreenshotRefinementEntry({
   onSessionDeleted: () => void;
 }) {
   const [result, setResult] = useState<RefinementResult | null>(null);
+  const [analysisPendingViewID, setAnalysisPendingViewID] = useState<ScreenshotViewID | null>(null);
+  const latestSessionRef = useRef(session);
   const processor = useMemo(() => createUnavailableScreenshotRefinementProcessor(), []);
-  const canSubmit = canSubmitScreenshotRefinement(session);
+  const faceLandmarkProvider = useMemo(() => createLocalFaceLandmarkProvider(), []);
+  const canSubmit = canSubmitScreenshotRefinement(session) && analysisPendingViewID === null;
   const readiness = getScreenshotRefinementReadiness(session);
+
+  useEffect(() => {
+    latestSessionRef.current = session;
+  }, [session]);
+
+  useEffect(() => {
+    return () => {
+      void faceLandmarkProvider.dispose();
+    };
+  }, [faceLandmarkProvider]);
 
   async function handleFile(viewID: ScreenshotViewID, event: ChangeEvent<HTMLInputElement>) {
     const file = event.currentTarget.files?.[0];
     if (!file) return;
     const objectUrl = URL.createObjectURL(file);
     try {
-      const dimensions = await readImageDimensions(objectUrl);
+      const imageElement = await loadImageElement(objectUrl);
+      const dimensions = { width: imageElement.naturalWidth, height: imageElement.naturalHeight };
       const mutation = setScreenshot(session, {
         viewID,
         fileName: file.name,
@@ -52,8 +74,17 @@ export function ScreenshotRefinementEntry({
       if (mutation.session.slots.find((slot) => slot.viewID === viewID)?.validationStatus === "invalid") {
         URL.revokeObjectURL(objectUrl);
       }
+      latestSessionRef.current = mutation.session;
       onSessionChange(mutation.session);
       setResult(null);
+      const screenshot = mutation.session.slots.find((slot) => slot.viewID === viewID)?.screenshot;
+      if (screenshot) {
+        setAnalysisPendingViewID(viewID);
+        const analysisReport = await analyzeScreenshot(imageElement, screenshot);
+        const nextSession = setScreenshotAnalysisReport(latestSessionRef.current, viewID, analysisReport);
+        latestSessionRef.current = nextSession;
+        onSessionChange(nextSession);
+      }
     } catch {
       URL.revokeObjectURL(objectUrl);
       const mutation = setScreenshot(session, {
@@ -71,20 +102,44 @@ export function ScreenshotRefinementEntry({
         )
       });
     } finally {
+      setAnalysisPendingViewID(null);
       event.currentTarget.value = "";
     }
+  }
+
+  async function analyzeScreenshot(imageElement: HTMLImageElement, screenshot: ScreenshotReference): Promise<ScreenshotQualityAlignmentReport> {
+    const faceLandmarkReport = await faceLandmarkProvider.detect(
+      {
+        image: imageElement,
+        width: screenshot.width,
+        height: screenshot.height,
+        angleID: screenshot.viewID
+      },
+      {
+        detectionTimeoutMs: 6_000
+      }
+    );
+    const pixelSample = createScreenshotPixelSample(imageElement);
+    return analyzeScreenshotQualityAndAlignment({
+      screenshot,
+      faceLandmarkReport,
+      imageMeasurements: pixelSample ? calculateImageMeasurements(pixelSample) : null
+    });
   }
 
   function deleteSession() {
     const mutation = deleteScreenshotRefinementSession(session);
     revokeObjectUrls(mutation.objectUrlsToRevoke);
+    latestSessionRef.current = mutation.session;
     onSessionChange(mutation.session);
     onSessionDeleted();
     setResult(null);
   }
 
   function updateChecklistItem(itemID: ScreenshotChecklistItemID, checked: boolean) {
-    onSessionChange(setScreenshotChecklistItem(session, itemID, checked));
+    const nextSession = setScreenshotChecklistItem(latestSessionRef.current, itemID, checked);
+    latestSessionRef.current = nextSession;
+    onSessionChange(nextSession);
     setResult(null);
   }
 
@@ -122,7 +177,7 @@ export function ScreenshotRefinementEntry({
       </Card>
       <div className="screenshot-grid">
         {session.slots.map((slot) => (
-          <ScreenshotSlot key={slot.viewID} slot={slot} onFile={handleFile} />
+          <ScreenshotSlot key={slot.viewID} slot={slot} pending={analysisPendingViewID === slot.viewID} onFile={handleFile} />
         ))}
       </div>
       <Card>
@@ -161,6 +216,7 @@ export function ScreenshotRefinementEntry({
         ) : (
           <p>Screenshot intake requirements are complete. Refinement recommendations remain unavailable until verified catalog data and comparison logic exist.</p>
         )}
+        {analysisPendingViewID ? <p role="status">Running local screenshot analysis for {analysisPendingViewID}.</p> : null}
         {readiness.advisoryMessages.length > 0 ? (
           <ul className="message-list">
             {readiness.advisoryMessages.map((message) => (
@@ -192,9 +248,11 @@ export function ScreenshotRefinementEntry({
 
 function ScreenshotSlot({
   slot,
+  pending,
   onFile
 }: {
   slot: ScreenshotSlotState;
+  pending: boolean;
   onFile: (viewID: ScreenshotViewID, event: ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
@@ -216,6 +274,8 @@ function ScreenshotSlot({
           {slot.screenshot.fileName} | {slot.screenshot.width}x{slot.screenshot.height}
         </p>
       ) : null}
+      {pending ? <p role="status">Analyzing screenshot locally...</p> : null}
+      {slot.analysisReport ? <ScreenshotAnalysisSummary report={slot.analysisReport} /> : null}
       {slot.validationErrors.length > 0 ? (
         <ul className="error-list">
           {slot.validationErrors.map((error) => (
@@ -231,13 +291,101 @@ function ScreenshotSlot({
   );
 }
 
-function readImageDimensions(objectUrl: string): Promise<{ width: number; height: number }> {
+function ScreenshotAnalysisSummary({ report }: { report: ScreenshotQualityAlignmentReport }) {
+  return (
+    <div className="analysis-panel" aria-label="Local screenshot quality and alignment">
+      <div className="status-row">
+        <h3>Local quality and alignment</h3>
+        <StatusBadge tone={report.overallState === "ready" ? "success" : report.overallState === "blocked" ? "danger" : "warning"}>
+          {report.overallState}
+        </StatusBadge>
+      </div>
+      <dl className="quality-metrics">
+        <div>
+          <dt>Face detection</dt>
+          <dd>{report.faceDetection.message}</dd>
+        </div>
+        <div>
+          <dt>Bounding box</dt>
+          <dd>{formatBoundingBox(report.faceDetection.boundingBox)}</dd>
+        </div>
+        <div>
+          <dt>Pose estimate</dt>
+          <dd>{report.poseEstimate.message}</dd>
+        </div>
+        <div>
+          <dt>Landmarks</dt>
+          <dd>{report.landmarkEstimate.coreLandmarkCount} core points</dd>
+        </div>
+        <div>
+          <dt>Lighting</dt>
+          <dd>{report.lightingWarning.message}</dd>
+        </div>
+        <div>
+          <dt>Alignment</dt>
+          <dd>{report.alignment.message}</dd>
+        </div>
+      </dl>
+      {report.alignment.transform ? (
+        <p className="field-note">
+          Standard coordinate system {report.alignment.standardCoordinateSystem}: translate {report.alignment.transform.translateX},{" "}
+          {report.alignment.transform.translateY}; scale {report.alignment.transform.scale}; rotation{" "}
+          {report.alignment.transform.rotationDegrees ?? "unavailable"} degrees.
+        </p>
+      ) : null}
+      {report.blockingMessages.length > 0 ? (
+        <ul className="error-list">
+          {report.blockingMessages.map((message) => (
+            <li key={message}>{message}</li>
+          ))}
+        </ul>
+      ) : null}
+      {report.advisoryMessages.length > 0 ? (
+        <ul className="message-list">
+          {report.advisoryMessages.map((message) => (
+            <li key={message}>{message}</li>
+          ))}
+        </ul>
+      ) : null}
+      {report.retakeInstructions.length > 0 ? (
+        <ul className="message-list">
+          {report.retakeInstructions.map((instruction) => (
+            <li key={instruction.code}>{instruction.message}</li>
+          ))}
+        </ul>
+      ) : null}
+      <p className="field-note">These local signals are intake checks only. They do not validate cross-domain match accuracy.</p>
+    </div>
+  );
+}
+
+function loadImageElement(objectUrl: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const image = new Image();
-    image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight });
+    image.onload = () => resolve(image);
     image.onerror = () => reject(new Error("Unreadable image"));
     image.src = objectUrl;
   });
+}
+
+function createScreenshotPixelSample(imageElement: HTMLImageElement): PixelSample | null {
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(imageElement.naturalWidth, 1);
+  canvas.height = Math.max(imageElement.naturalHeight, 1);
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+  if (!context) return null;
+  context.drawImage(imageElement, 0, 0, canvas.width, canvas.height);
+  const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+  return {
+    width: canvas.width,
+    height: canvas.height,
+    rgba: imageData.data
+  };
+}
+
+function formatBoundingBox(box: ScreenshotQualityAlignmentReport["faceDetection"]["boundingBox"]) {
+  if (!box) return "Unavailable";
+  return `${box.x}, ${box.y}, ${box.width} x ${box.height}`;
 }
 
 function revokeObjectUrls(objectUrls: string[]) {

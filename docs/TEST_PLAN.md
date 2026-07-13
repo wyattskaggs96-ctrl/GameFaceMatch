@@ -47,6 +47,22 @@ Hardening checks should include:
 - PWA manifest exists without a service-worker offline claim
 - Raw face images remain absent from localStorage/sessionStorage paths
 
+## Accessibility hardening coverage
+
+Accessibility checks should include the automated `web/tests/accessibility-hardening.test.ts` coverage plus the manual protocol in `docs/ACCESSIBILITY_QA.md`.
+
+Automated coverage should verify:
+
+- Keyboard journey coverage and navigation key behavior
+- Reduced-motion behavior
+- Core color contrast tokens
+- Non-color-only status evidence
+- User-relative left/right capture instructions
+- Selective retake without restart
+- Plain-language recovery paths for common errors
+
+Manual checks should verify screen-reader announcement quality, Dynamic Type or browser zoom behavior, real-device one-handed use, grayscale/color-filter readability, and that no haptic feedback is required as the only cue.
+
 ## Manual-study evaluation harness coverage
 
 The Phase 0 manual top-three feasibility operational module and evaluation harness should be exercised with fixture-only records until real approved study results exist. Tests should cover:

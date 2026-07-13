@@ -47,22 +47,22 @@ export const REQUIRED_CAPTURE_ANGLES: ReadonlyArray<
   {
     id: "left45",
     label: "Left 45 degrees",
-    instruction: "Three-quarter view: turn your head about 45 degrees to your left while keeping the full face visible, centered, and still."
+    instruction: "Three-quarter view: turn your head about 45 degrees to your left, meaning the left side of your face moves slightly away from the camera, while keeping the full face visible, centered, and still."
   },
   {
     id: "right45",
     label: "Right 45 degrees",
-    instruction: "Three-quarter view: turn your head about 45 degrees to your right while keeping the full face visible, centered, and still."
+    instruction: "Three-quarter view: turn your head about 45 degrees to your right, meaning the right side of your face moves slightly away from the camera, while keeping the full face visible, centered, and still."
   },
   {
     id: "leftProfile",
     label: "Left profile",
-    instruction: "Profile view: turn to show the left side of your face, keep one person in frame, avoid blur, and keep the full forehead, nose, lips, chin, and jaw visible."
+    instruction: "Profile view: turn to show the left side of your face, so your left ear side faces the camera. Keep one person in frame, avoid blur, and keep the full forehead, nose, lips, chin, and jaw visible."
   },
   {
     id: "rightProfile",
     label: "Right profile",
-    instruction: "Profile view: turn to show the right side of your face, avoid strong shadows and motion, and keep the full forehead, nose, lips, chin, and jaw visible."
+    instruction: "Profile view: turn to show the right side of your face, so your right ear side faces the camera. Avoid strong shadows and motion, and keep the full forehead, nose, lips, chin, and jaw visible."
   }
 ];
 

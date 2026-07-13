@@ -458,6 +458,10 @@ export function GuidedCaptureFlow({
             </StatusBadge>
           </div>
           <p>{currentAngle.instruction}</p>
+          <div className="instruction-caption" role="note" aria-label="Current capture instruction">
+            <strong>Captioned instruction:</strong>
+            <span>{currentAngle.instruction}</span>
+          </div>
           <Alert title="Mobile capture guidance" tone="info">
             Use portrait orientation when possible. The front-camera preview is mirrored like a selfie view, but captured still images are stored unmirrored for
             review. Browser RGB capture is not TrueDepth, depth geometry, ARKit, or 3D reconstruction.
@@ -532,8 +536,16 @@ export function GuidedCaptureFlow({
             </div>
           </div>
           <label className="checkbox-field">
-            <input type="checkbox" checked={useExtendedHold} onChange={(event) => setUseExtendedHold(event.currentTarget.checked)} />
-            <span>Use extended steady-hold timing</span>
+            <input
+              type="checkbox"
+              checked={useExtendedHold}
+              onChange={(event) => setUseExtendedHold(event.currentTarget.checked)}
+              aria-describedby="extended-hold-note"
+            />
+            <span>
+              Use extended steady-hold timing
+              <small id="extended-hold-note">Adds more time to settle before capture guidance calls the pose ready.</small>
+            </span>
           </label>
           {cameraError ? (
             <Alert title="Permission reset help" tone="info">
@@ -552,6 +564,7 @@ export function GuidedCaptureFlow({
                 </StatusBadge>
               </div>
               <p>{angle.instruction}</p>
+              <p className="field-note">Left and right are your left and right, not the viewer's.</p>
               {angle.image ? (
                 <p className="field-note">
                   {angle.image.fileName} | {angle.image.width}x{angle.image.height} | {angle.image.source}
@@ -565,12 +578,15 @@ export function GuidedCaptureFlow({
                 </ul>
               ) : null}
               <label className="form-field">
-                <span className="small-text">Upload fallback for {angle.label.toLowerCase()}</span>
+                <span className="small-text" id={`${angle.id}-upload-label`}>
+                  Upload fallback for {angle.label.toLowerCase()}
+                </span>
                 <input
                   className="file-input"
                   type="file"
                   accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
                   capture="user"
+                  aria-labelledby={`${angle.id}-upload-label`}
                   onChange={(event) => void handleFile(angle, event)}
                 />
               </label>
@@ -743,12 +759,15 @@ export function GuidedCaptureFlow({
                   </label>
                 </fieldset>
                 <label className="form-field">
-                  <span className="small-text">Replace upload for {angle.label.toLowerCase()}</span>
-                <input
-                  className="file-input"
-                  type="file"
-                  accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
-                  capture="user"
+                  <span className="small-text" id={`${angle.id}-replace-upload-label`}>
+                    Replace upload for {angle.label.toLowerCase()}
+                  </span>
+                  <input
+                    className="file-input"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+                    capture="user"
+                    aria-labelledby={`${angle.id}-replace-upload-label`}
                     onChange={(event) => void handleFile(angle, event)}
                   />
                 </label>

@@ -47,6 +47,22 @@ Hardening checks should include:
 - PWA manifest exists without a service-worker offline claim
 - Raw face images remain absent from localStorage/sessionStorage paths
 
+## Manual-study evaluation harness coverage
+
+The Phase 0 manual top-three feasibility evaluation harness should be exercised with fixture-only records until real approved study results exist. Tests should cover:
+
+- Top-one useful-match rate
+- Top-three useful-match rate
+- Rank selected distribution
+- Inter-reviewer agreement
+- Preset confusion matrix
+- Common mismatch reasons
+- Performance by capture mode
+- Performance by capture device
+- Confidence calibration
+- Clear fixture-derived metric labels
+- Exclusion of invalid, incomplete, or incorrectly classified records
+
 ## Commerce readiness coverage
 
 Commerce tests should include:

@@ -58,5 +58,10 @@ Production package validation also performs strict evidence-path portability che
 
 - `npm run source-video:intake -- inspect data/audit/college-football-27/evidence/masters/REPLACE_WITH_LOCAL_SOURCE_VIDEO.mov`
 - `npm run source-video:intake -- extract-frame data/audit/college-football-27/evidence/masters/REPLACE_WITH_LOCAL_SOURCE_VIDEO.mov 12.345 data/audit/college-football-27/evidence/derivatives/REPLACE_WITH_FRAME_NAME.png`
+- `npm run media:inspect -- inspect /path/to/local/source-video.mov --evidence-root-token OWNER_DOWNLOADS`
 
 The source-video helper records local metadata with streaming checksum reads and can extract derivative still frames only when `ffprobe` and `ffmpeg` are installed on the local machine. If those tools are unavailable, inspection still returns a manual-metadata-required result and frame extraction is disabled cleanly. Original source videos are never uploaded, renamed, recompressed, or modified.
+
+The CF27 media-inspection command performs a fuller local technical pass for evidence videos. It writes ffprobe metadata JSON, SHA-256, duration/resolution/frame-rate reports, scene-change indices, candidate menu-transition timestamps, candidate stable-frame timestamps, and processing error reports under `data/research/cf27/manifests/media-inspection/`. Low-resolution contact sheets are generated under ignored local storage at `data/research/cf27/generated/media-inspections/`. The command is resumable: unchanged checksum-addressed outputs are skipped, while changed inputs produce a new checksum-addressed inspection package.
+
+Use `CF27_FFPROBE_PATH` and `CF27_FFMPEG_PATH`, or the `--ffprobe` and `--ffmpeg` flags, when the tools are installed outside `PATH`. The command supports MP4, MOV, and extensionless valid video files as determined by ffprobe metadata; corrupt or unsupported media fails with a clear processing error report.

@@ -62,6 +62,9 @@ data/research/cf27/generated/full-resolution-frames/*
 data/research/cf27/generated/cropped-measurement-derivatives/*
 !data/research/cf27/generated/cropped-measurement-derivatives/.gitkeep
 !data/research/cf27/generated/cropped-measurement-derivatives/README.md
+data/research/cf27/generated/media-inspections/*
+!data/research/cf27/generated/media-inspections/.gitkeep
+!data/research/cf27/generated/media-inspections/README.md
 
 # Web local dependencies and build output
 web/node_modules/

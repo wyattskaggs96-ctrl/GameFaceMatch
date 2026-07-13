@@ -73,6 +73,7 @@ Run from the repository root unless noted:
 - `node scripts/catalog-tools.mjs report data/catalog/production`
 - `npm run source-video:intake -- inspect <source-video-path>`
 - `npm run source-video:intake -- extract-frame <source-video-path> <timestamp-seconds> <output-frame-path>`
+- `npm run media:inspect -- inspect <source-video-path> --evidence-root-token OWNER_DOWNLOADS`
 - `npm run phase-zero:export -- <phase-zero-snapshot.json> <output-directory>`
 - `node scripts/phase-zero-export.mjs --check`
 
@@ -105,6 +106,8 @@ When the primary researcher and second verifier disagree, the discrepancy workfl
 Secondary-angle sampling is deterministic to prevent cherry-picking. For each category, the workspace builds the seed from `environment_id + verifier_id + catalog_version`, hashes that seed with each eligible catalog ID using SHA-256, sorts eligible records by hash, and selects the first required quartile for secondary-angle review. The workspace stores the method ID, seed input, selected records, per-category coverage, and a human-readable sample report.
 
 Source-video intake is local-only. `inspect` preserves original video files and reports metadata from `ffprobe` when available. `extract-frame` produces derivative still frames only when `ffmpeg` is installed; otherwise it returns a disabled result so operators can continue recording timestamp references and extract frames later.
+
+Technical media inspection uses `scripts/cf27-media-inspect.mjs`. It preserves source masters, calculates SHA-256, writes ffprobe metadata JSON, duration/resolution/frame-rate reports, scene-change indices, candidate menu-transition timestamps, candidate stable-frame timestamps, contact-sheet provenance, and processing error reports. Outputs are deterministic and checksum-addressed. Unchanged inspections are skipped; checksum changes create a new inspection package. MP4, MOV, and extensionless valid video files are accepted when ffprobe reports a supported video container and stream. Corrupt or unsupported media fails without creating catalog records.
 
 ## Research evidence staging
 

@@ -19,6 +19,7 @@ It must not contain committed source-video masters, raw user face media, or prod
 | `generated/contact-sheets/` | Locally generated contact sheets used for frame review. | Git-ignored except this README and `.gitkeep`. Contact sheets are derivatives, never masters. |
 | `generated/full-resolution-frames/` | Locally extracted full-resolution frame derivatives with timestamp provenance. | Git-ignored except this README and `.gitkeep`. Commit manifests, not frame images. |
 | `generated/cropped-measurement-derivatives/` | Non-destructive crops or alignment derivatives for measurement review. | Git-ignored except this README and `.gitkeep`. Never overwrite masters. |
+| `generated/media-inspections/` | Contact sheets and other generated artifacts from technical media inspection. | Git-ignored except this README and `.gitkeep`. Commit JSON manifests instead. |
 | `catalog-candidates/research/` | Research-candidate records derived from direct frame inspection. | Commit only non-production records that declare their research status and provenance. |
 | `catalog-candidates/verification/` | Candidate packages prepared for second-person review. | Commit only verification-candidate metadata; do not mark records `VERIFIED` without genuine second review. |
 | `imports/tomorrow-additional-videos/` | Documented landing zone for the next batch of owner-supplied videos. | Commit import manifests and notes only. Raw videos are ignored. |
@@ -44,3 +45,15 @@ Test fixtures remain under `data/fixtures/test-only/`.
 The repository ignores local source-video media and generated derivatives in this staging area. If someone force-adds those files, `node scripts/repository-status.mjs --strict` warns before commit.
 
 Allowed committed artifacts include JSON, CSV, Markdown, and other lightweight metadata needed to reproduce the audit trail.
+
+## Technical Inspection Command
+
+Run a reusable local inspection pass with:
+
+```sh
+npm run media:inspect -- inspect /path/to/local/source-video.mov --evidence-root-token OWNER_DOWNLOADS
+```
+
+The command requires `ffprobe` and `ffmpeg`. If either tool is installed outside `PATH`, set `CF27_FFPROBE_PATH` and `CF27_FFMPEG_PATH`, or pass `--ffprobe` and `--ffmpeg`.
+
+The command writes JSON manifests under `data/research/cf27/manifests/media-inspection/` and generated contact sheets under ignored `data/research/cf27/generated/media-inspections/`.

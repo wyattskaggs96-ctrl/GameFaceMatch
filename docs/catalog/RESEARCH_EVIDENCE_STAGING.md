@@ -18,6 +18,7 @@ The staging area is under `data/research/cf27/` and is intentionally separate fr
 | Generated contact sheets | `data/research/cf27/generated/contact-sheets/` | No |
 | Extracted full-resolution frames | `data/research/cf27/generated/full-resolution-frames/` | No |
 | Cropped measurement derivatives | `data/research/cf27/generated/cropped-measurement-derivatives/` | No |
+| Technical media inspection artifacts | `data/research/cf27/generated/media-inspections/` plus manifests in `data/research/cf27/manifests/media-inspection/` | No |
 | Research-candidate catalog data | `data/research/cf27/catalog-candidates/research/` | No |
 | Verification-candidate data | `data/research/cf27/catalog-candidates/verification/` | Not until publish gates pass |
 | Production data | `data/catalog/production/` | Only through existing production gates |
@@ -53,6 +54,25 @@ They must retain provenance back to:
 - Operator/date when known
 
 Generated media files are ignored by Git. Commit manifests and reports instead.
+
+## Technical Media Inspection
+
+Use:
+
+```sh
+npm run media:inspect -- inspect /path/to/local/source-video.mov --evidence-root-token OWNER_DOWNLOADS
+```
+
+The command preserves the master and generates:
+
+- `ffprobe.json`
+- `media-report.json`
+- `scene-change-index.json`
+- `stable-frame-index.json`
+- `processing-error-report.json`
+- A low-resolution contact sheet in ignored generated storage
+
+Outputs are checksum-addressed and resumable. If the same file is processed again unchanged, the command skips existing complete outputs. If the checksum changes, it writes a new inspection package.
 
 ## Additional Video Import
 

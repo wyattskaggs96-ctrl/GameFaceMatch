@@ -1,0 +1,572 @@
+{
+  "completionPolicy": "A submenu is complete only when its own recording proves selector boundaries and values. Current records are not production verified.",
+  "createdAt": "2026-07-13T00:00:00.000Z",
+  "creationPathID": "creation-path-cf27-rtg-qb-create-player-hair-video-001",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "environmentID": "env-cf27-research-video-001-rtg-path",
+  "gameID": "cf27",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "records": [
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "submenu",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Appearance",
+      "evidence": [
+        {
+          "description": "Create Player > Player tab shows Appearance row and opens Appearance submenu.",
+          "endSeconds": 45.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+          "selectedStateObserved": true,
+          "sha256": "6f42d3ef2572810fc09ac5138970dee5f325c539925f084a130d3fdcf7c2a0b2",
+          "startSeconds": 35.0,
+          "timelineID": "video-001-tl-008",
+          "videoID": "video-001"
+        },
+        {
+          "description": "Create Player > Player tab shows Appearance selected before entering Head & Skin.",
+          "endSeconds": 5.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": true,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 0.0,
+          "timelineID": "video-002-tl-001",
+          "videoID": "video-002"
+        }
+      ],
+      "inspected": true,
+      "nativeLabel": "Appearance",
+      "nativeOrder": 2,
+      "notes": "Appearance is directly observed and entered. Boundary completeness is not claimed because only Head & Skin and Hair are visible; no dedicated Appearance boundary recording exists.",
+      "parentMenuID": "menu-cf27-create-player-player-tab",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-player-appearance",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "submenu",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Head & Skin",
+      "evidence": [
+        {
+          "description": "Appearance submenu shows Head & Skin selected and Hair visible.",
+          "endSeconds": 45.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+          "selectedStateObserved": true,
+          "sha256": "6f42d3ef2572810fc09ac5138970dee5f325c539925f084a130d3fdcf7c2a0b2",
+          "startSeconds": 44.0,
+          "timelineID": "ts-video-001-appearance-root-head-skin-hair-visible",
+          "videoID": "video-001"
+        },
+        {
+          "description": "Head & Skin submenu entered before Head Template grid.",
+          "endSeconds": 7.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": true,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 6.0,
+          "timelineID": "video-002-tl-002",
+          "videoID": "video-002"
+        },
+        {
+          "description": "Head & Skin tab row shows Head Template through Chin.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": true,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        }
+      ],
+      "inspected": true,
+      "nativeLabel": "Head & Skin",
+      "nativeOrder": 1,
+      "notes": "Head & Skin hierarchy is directly observed. It is not marked complete because Mouth Shape, Jaw Shape, Chin, and full boundary checks are not independently inspected.",
+      "parentMenuID": "cf27-menu-player-appearance",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-appearance-head-skin",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "submenu",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Hair",
+      "evidence": [
+        {
+          "description": "Appearance submenu shows Hair as the second visible row.",
+          "endSeconds": 45.0,
+          "evidenceID": "evidence-cf27-video-001-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+          "selectedStateObserved": false,
+          "sha256": "6f42d3ef2572810fc09ac5138970dee5f325c539925f084a130d3fdcf7c2a0b2",
+          "startSeconds": 44.0,
+          "timelineID": "ts-video-001-appearance-root-head-skin-hair-visible",
+          "videoID": "video-001"
+        },
+        {
+          "description": "Appearance submenu shows Hair as the second visible row before Head & Skin entry.",
+          "endSeconds": 7.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": false,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 6.0,
+          "timelineID": "video-002-tl-002",
+          "videoID": "video-002"
+        }
+      ],
+      "inspected": false,
+      "nativeLabel": "Hair",
+      "nativeOrder": 2,
+      "notes": "Hair is visible as a sibling under Appearance, but no current recording opens Hair or proves its child controls.",
+      "parentMenuID": "cf27-menu-player-appearance",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-appearance-hair",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "list",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Head Template",
+      "evidence": [
+        {
+          "description": "Dedicated or supporting evidence for Head Template.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": true,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        },
+        {
+          "description": "Continuation recording for Head Template selected labels; starts at Face 12 overlap.",
+          "endSeconds": 133.02,
+          "evidenceID": "evidence-cf27-video-003-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_2.mp4.MOV",
+          "selectedStateObserved": true,
+          "sha256": "c348b96b1414927fca5ab12f8a65cc7668a6fdb22a2622c99e11a984d819a302",
+          "startSeconds": 0.0,
+          "timelineID": "video-003-tl-001",
+          "videoID": "video-003"
+        }
+      ],
+      "inspected": true,
+      "nativeLabel": "Head Template",
+      "nativeOrder": 1,
+      "notes": "Head Template has dedicated recordings in video-002 and video-003 with selected Face labels, but both inventory and timeline require frame-level segmentation and boundary proof before completion.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-head-skin-head-template",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "list",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Skin Tone",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": false,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Skin Tone.",
+          "endSeconds": 53.82,
+          "evidenceID": "evidence-cf27-video-004-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/03_Appearance_Skin_Tone.MP4",
+          "selectedStateObserved": true,
+          "sha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+          "startSeconds": 8.0,
+          "timelineID": "video-004-tl-002",
+          "videoID": "video-004"
+        }
+      ],
+      "inspected": true,
+      "nativeLabel": "Skin Tone",
+      "nativeOrder": 2,
+      "notes": "Skin Tone has a dedicated recording with selected labels, but selector boundary and full ordered value continuity are not yet proven.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-head-skin-skin-tone",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "list",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Skin Details",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": false,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Skin Details.",
+          "endSeconds": 31.72,
+          "evidenceID": "evidence-cf27-video-005-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/04_Appearance_Skin_Details.MP4",
+          "selectedStateObserved": true,
+          "sha256": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+          "startSeconds": 8.0,
+          "timelineID": "video-005-tl-002",
+          "videoID": "video-005"
+        }
+      ],
+      "inspected": true,
+      "nativeLabel": "Skin Details",
+      "nativeOrder": 3,
+      "notes": "Skin Details has a dedicated recording with selected labels, but selector boundary and full ordered value continuity are not yet proven.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-head-skin-skin-details",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "list",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Eye Shape",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": false,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Eye Shape.",
+          "endSeconds": 24.93,
+          "evidenceID": "evidence-cf27-video-006-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+          "selectedStateObserved": true,
+          "sha256": "84bdb04ca232a662a8add3ceef92f021ad6c96d241e536b12c0af968f3d92ca2",
+          "startSeconds": 14.0,
+          "timelineID": "video-006-tl-002",
+          "videoID": "video-006"
+        }
+      ],
+      "inspected": true,
+      "nativeLabel": "Eye Shape",
+      "nativeOrder": 4,
+      "notes": "Eye Shape has a dedicated recording with selected labels, but selector boundary and full ordered value continuity are not yet proven.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-head-skin-eye-shape",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "list",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Eye Color",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": false,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Eye Color.",
+          "endSeconds": 29.33,
+          "evidenceID": "evidence-cf27-video-007-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+          "selectedStateObserved": true,
+          "sha256": "c07fdab8d65b19859ae5985dc4fb06bb9919aecf597996ab74463bc6020acfd3",
+          "startSeconds": 12.0,
+          "timelineID": "video-007-tl-002",
+          "videoID": "video-007"
+        }
+      ],
+      "inspected": true,
+      "nativeLabel": "Eye Color",
+      "nativeOrder": 5,
+      "notes": "Eye Color has a dedicated recording with selected labels, but selector boundary and full ordered value continuity are not yet proven.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-head-skin-eye-color",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "list",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Nose",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": false,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Nose.",
+          "endSeconds": 32.45,
+          "evidenceID": "evidence-cf27-video-008-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/5bcd4869-531b-41bf-b643-5331f34cb3f3.MP4",
+          "selectedStateObserved": true,
+          "sha256": "301b6c7ba55233503e54296e55366cdd0468f0c23b5117be6ca5ff0363d5e5b7",
+          "startSeconds": 14.0,
+          "timelineID": "video-008-tl-002",
+          "videoID": "video-008"
+        }
+      ],
+      "inspected": true,
+      "nativeLabel": "Nose",
+      "nativeOrder": 6,
+      "notes": "Nose has a dedicated recording with selected labels, including a repeated Aquiline observation, but selector boundary and full ordered value continuity are not yet proven.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-head-skin-nose",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "list",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Ear Shape",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": false,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Ear Shape.",
+          "endSeconds": 30.21,
+          "evidenceID": "evidence-cf27-video-009-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/55b7d607-eefa-41a4-8635-1eedb5296ab0.MP4",
+          "selectedStateObserved": true,
+          "sha256": "e615e0919ebc50da7cdb1ec27ea302e28ac632b01728a88ca28ab0bb1f5902a1",
+          "startSeconds": 16.0,
+          "timelineID": "video-009-tl-002",
+          "videoID": "video-009"
+        }
+      ],
+      "inspected": true,
+      "nativeLabel": "Ear Shape",
+      "nativeOrder": 7,
+      "notes": "Ear Shape has a dedicated recording with selected labels, but selector boundary and full ordered value continuity are not yet proven.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-head-skin-ear-shape",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "list",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Mouth Shape",
+      "evidence": [
+        {
+          "description": "Dedicated or supporting evidence for Mouth Shape.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": false,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        }
+      ],
+      "inspected": false,
+      "nativeLabel": "Mouth Shape",
+      "nativeOrder": 8,
+      "notes": "Mouth Shape is visible in the Head & Skin tab row, but no current recording opens or inspects its selector.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-head-skin-mouth-shape",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "list",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Jaw Shape",
+      "evidence": [
+        {
+          "description": "Dedicated or supporting evidence for Jaw Shape.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": false,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        }
+      ],
+      "inspected": false,
+      "nativeLabel": "Jaw Shape",
+      "nativeOrder": 9,
+      "notes": "Jaw Shape is visible in the Head & Skin tab row, but no current recording opens or inspects its selector.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-head-skin-jaw-shape",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    },
+    {
+      "additionalRecordingRequired": true,
+      "complete": false,
+      "controlType": "list",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "displayLabel": "Chin",
+      "evidence": [
+        {
+          "description": "Dedicated or supporting evidence for Chin.",
+          "endSeconds": 19.0,
+          "evidenceID": "evidence-cf27-video-002-source",
+          "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+          "selectedStateObserved": false,
+          "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+          "startSeconds": 10.0,
+          "timelineID": "video-002-tl-004",
+          "videoID": "video-002"
+        }
+      ],
+      "inspected": false,
+      "nativeLabel": "Chin",
+      "nativeOrder": 10,
+      "notes": "Chin is visible in the Head & Skin tab row, but no current recording opens or inspects its selector.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "sourceType": "research",
+      "stableMenuID": "cf27-menu-head-skin-chin",
+      "totalValuesObserved": null,
+      "verificationStatus": "draft"
+    }
+  ],
+  "schemaVersion": "cf27-research-appearance-menu-hierarchy-v1",
+  "sourceVideos": [
+    {
+      "path": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+      "sha": "6f42d3ef2572810fc09ac5138970dee5f325c539925f084a130d3fdcf7c2a0b2",
+      "videoID": "video-001"
+    },
+    {
+      "path": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+      "sha": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+      "videoID": "video-002"
+    },
+    {
+      "path": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_2.mp4.MOV",
+      "sha": "c348b96b1414927fca5ab12f8a65cc7668a6fdb22a2622c99e11a984d819a302",
+      "videoID": "video-003"
+    },
+    {
+      "path": "OWNER_DOWNLOADS/03_Appearance_Skin_Tone.MP4",
+      "sha": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+      "videoID": "video-004"
+    },
+    {
+      "path": "OWNER_DOWNLOADS/04_Appearance_Skin_Details.MP4",
+      "sha": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+      "videoID": "video-005"
+    },
+    {
+      "path": "OWNER_DOWNLOADS/45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "sha": "84bdb04ca232a662a8add3ceef92f021ad6c96d241e536b12c0af968f3d92ca2",
+      "videoID": "video-006"
+    },
+    {
+      "path": "OWNER_DOWNLOADS/a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+      "sha": "c07fdab8d65b19859ae5985dc4fb06bb9919aecf597996ab74463bc6020acfd3",
+      "videoID": "video-007"
+    },
+    {
+      "path": "OWNER_DOWNLOADS/5bcd4869-531b-41bf-b643-5331f34cb3f3.MP4",
+      "sha": "301b6c7ba55233503e54296e55366cdd0468f0c23b5117be6ca5ff0363d5e5b7",
+      "videoID": "video-008"
+    },
+    {
+      "path": "OWNER_DOWNLOADS/55b7d607-eefa-41a4-8635-1eedb5296ab0.MP4",
+      "sha": "e615e0919ebc50da7cdb1ec27ea302e28ac632b01728a88ca28ab0bb1f5902a1",
+      "videoID": "video-009"
+    }
+  ],
+  "updatedAt": "2026-07-13T00:00:00.000Z",
+  "verificationStatus": "PRIMARY_RESEARCH_CANDIDATE_NOT_SECOND_VERIFIED"
+}

@@ -1,0 +1,49 @@
+{
+  "createdAt": "2026-07-13T00:00:00.000Z",
+  "knownGaps": [
+    "menu-map.schema.json does not have dedicated inspected, complete, additionalRecordingRequired, sourceType, or dataClass fields.",
+    "menu-map.schema.json evidence references do not structure timestamps; timestamps are embedded in evidence descriptions in the schema export.",
+    "All records remain draft because no second-person verification has occurred."
+  ],
+  "matchedRequiredFields": [
+    "schemaVersion",
+    "mapID",
+    "createdAt",
+    "updatedAt",
+    "gameID",
+    "creationPathID",
+    "catalogVersionID",
+    "items",
+    "stableMenuID",
+    "parentMenuID",
+    "displayLabel",
+    "nativeLabel",
+    "nativeOrder",
+    "controlType",
+    "environmentID",
+    "evidence",
+    "captureResearcher",
+    "verifier",
+    "verificationStatus",
+    "notes"
+  ],
+  "menuMapSchemaPath": "data/schemas/menu-map.schema.json",
+  "representationStrategy": "The strict menu-map export stores Prompt 86 inspection/completion facts in item notes and warning records; the richer research hierarchy JSON remains the source for structured inspected/complete booleans and timestamp evidence.",
+  "researchHierarchyPath": "data/research/cf27/catalog-candidates/research/appearance-menu-hierarchy/appearance_menu_hierarchy.json",
+  "researchOnlyFieldsNotRepresentedInSchema": [
+    "dataClass",
+    "productionStatus",
+    "sourceType",
+    "inspected",
+    "complete",
+    "additionalRecordingRequired",
+    "videoID",
+    "timelineID",
+    "startSeconds",
+    "endSeconds",
+    "selectedStateObserved"
+  ],
+  "result": "compatible_with_schema_export_limitations",
+  "schemaExportPath": "data/research/cf27/catalog-candidates/research/appearance-menu-hierarchy/menu_map_schema_export.json",
+  "schemaVersion": "cf27-menu-map-schema-comparison-v1"
+}

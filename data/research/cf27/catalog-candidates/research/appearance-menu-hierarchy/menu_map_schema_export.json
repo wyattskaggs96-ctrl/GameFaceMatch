@@ -1,0 +1,601 @@
+{
+  "catalogVersionID": null,
+  "createdAt": "2026-07-13T00:00:00.000Z",
+  "creationPathID": "creation-path-cf27-rtg-qb-create-player-hair-video-001",
+  "gameID": "cf27",
+  "items": [
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "submenu",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Appearance",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Create Player > Player tab shows Appearance row and opens Appearance submenu. Timestamp 35.0-45.0s in video-001.",
+          "evidenceFileID": "evidence-cf27-video-001-source"
+        },
+        {
+          "description": "Create Player > Player tab shows Appearance selected before entering Head & Skin. Timestamp 0.0-5.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Appearance",
+      "nativeOrder": 2,
+      "notes": "Appearance is directly observed and entered. Boundary completeness is not claimed because only Head & Skin and Hair are visible; no dedicated Appearance boundary recording exists. Inspected=True; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "menu-cf27-create-player-player-tab",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-player-appearance",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-001-source"
+          ],
+          "id": "warning-cf27-menu-player-appearance-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "submenu",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Head & Skin",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Appearance submenu shows Head & Skin selected and Hair visible. Timestamp 44.0-45.0s in video-001.",
+          "evidenceFileID": "evidence-cf27-video-001-source"
+        },
+        {
+          "description": "Head & Skin submenu entered before Head Template grid. Timestamp 6.0-7.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        },
+        {
+          "description": "Head & Skin tab row shows Head Template through Chin. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Head & Skin",
+      "nativeOrder": 1,
+      "notes": "Head & Skin hierarchy is directly observed. It is not marked complete because Mouth Shape, Jaw Shape, Chin, and full boundary checks are not independently inspected. Inspected=True; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-player-appearance",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-appearance-head-skin",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-001-source"
+          ],
+          "id": "warning-cf27-menu-appearance-head-skin-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "submenu",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Hair",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Appearance submenu shows Hair as the second visible row. Timestamp 44.0-45.0s in video-001.",
+          "evidenceFileID": "evidence-cf27-video-001-source"
+        },
+        {
+          "description": "Appearance submenu shows Hair as the second visible row before Head & Skin entry. Timestamp 6.0-7.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Hair",
+      "nativeOrder": 2,
+      "notes": "Hair is visible as a sibling under Appearance, but no current recording opens Hair or proves its child controls. Inspected=False; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-player-appearance",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-appearance-hair",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-001-source"
+          ],
+          "id": "warning-cf27-menu-appearance-hair-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "list",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Head Template",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Dedicated or supporting evidence for Head Template. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        },
+        {
+          "description": "Continuation recording for Head Template selected labels; starts at Face 12 overlap. Timestamp 0.0-133.02s in video-003.",
+          "evidenceFileID": "evidence-cf27-video-003-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Head Template",
+      "nativeOrder": 1,
+      "notes": "Head Template has dedicated recordings in video-002 and video-003 with selected Face labels, but both inventory and timeline require frame-level segmentation and boundary proof before completion. Inspected=True; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-head-skin-head-template",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-002-source"
+          ],
+          "id": "warning-cf27-menu-head-skin-head-template-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "list",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Skin Tone",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Skin Tone. Timestamp 8.0-53.82s in video-004.",
+          "evidenceFileID": "evidence-cf27-video-004-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Skin Tone",
+      "nativeOrder": 2,
+      "notes": "Skin Tone has a dedicated recording with selected labels, but selector boundary and full ordered value continuity are not yet proven. Inspected=True; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-head-skin-skin-tone",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-002-source"
+          ],
+          "id": "warning-cf27-menu-head-skin-skin-tone-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "list",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Skin Details",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Skin Details. Timestamp 8.0-31.72s in video-005.",
+          "evidenceFileID": "evidence-cf27-video-005-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Skin Details",
+      "nativeOrder": 3,
+      "notes": "Skin Details has a dedicated recording with selected labels, but selector boundary and full ordered value continuity are not yet proven. Inspected=True; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-head-skin-skin-details",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-002-source"
+          ],
+          "id": "warning-cf27-menu-head-skin-skin-details-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "list",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Eye Shape",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Eye Shape. Timestamp 14.0-24.93s in video-006.",
+          "evidenceFileID": "evidence-cf27-video-006-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Eye Shape",
+      "nativeOrder": 4,
+      "notes": "Eye Shape has a dedicated recording with selected labels, but selector boundary and full ordered value continuity are not yet proven. Inspected=True; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-head-skin-eye-shape",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-002-source"
+          ],
+          "id": "warning-cf27-menu-head-skin-eye-shape-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "list",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Eye Color",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Eye Color. Timestamp 12.0-29.33s in video-007.",
+          "evidenceFileID": "evidence-cf27-video-007-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Eye Color",
+      "nativeOrder": 5,
+      "notes": "Eye Color has a dedicated recording with selected labels, but selector boundary and full ordered value continuity are not yet proven. Inspected=True; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-head-skin-eye-color",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-002-source"
+          ],
+          "id": "warning-cf27-menu-head-skin-eye-color-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "list",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Nose",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Nose. Timestamp 14.0-32.45s in video-008.",
+          "evidenceFileID": "evidence-cf27-video-008-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Nose",
+      "nativeOrder": 6,
+      "notes": "Nose has a dedicated recording with selected labels, including a repeated Aquiline observation, but selector boundary and full ordered value continuity are not yet proven. Inspected=True; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-head-skin-nose",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-002-source"
+          ],
+          "id": "warning-cf27-menu-head-skin-nose-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "list",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Ear Shape",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Head & Skin tab row visibly includes this menu label. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        },
+        {
+          "description": "Dedicated or supporting evidence for Ear Shape. Timestamp 16.0-30.21s in video-009.",
+          "evidenceFileID": "evidence-cf27-video-009-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Ear Shape",
+      "nativeOrder": 7,
+      "notes": "Ear Shape has a dedicated recording with selected labels, but selector boundary and full ordered value continuity are not yet proven. Inspected=True; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-head-skin-ear-shape",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-002-source"
+          ],
+          "id": "warning-cf27-menu-head-skin-ear-shape-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "list",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Mouth Shape",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Dedicated or supporting evidence for Mouth Shape. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Mouth Shape",
+      "nativeOrder": 8,
+      "notes": "Mouth Shape is visible in the Head & Skin tab row, but no current recording opens or inspects its selector. Inspected=False; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-head-skin-mouth-shape",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-002-source"
+          ],
+          "id": "warning-cf27-menu-head-skin-mouth-shape-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "list",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Jaw Shape",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Dedicated or supporting evidence for Jaw Shape. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Jaw Shape",
+      "nativeOrder": 9,
+      "notes": "Jaw Shape is visible in the Head & Skin tab row, but no current recording opens or inspects its selector. Inspected=False; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-head-skin-jaw-shape",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-002-source"
+          ],
+          "id": "warning-cf27-menu-head-skin-jaw-shape-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    },
+    {
+      "advancedControl": false,
+      "captureResearcher": "wyatt-skaggs",
+      "controlType": "list",
+      "defaultValue": null,
+      "defects": [],
+      "dependencies": [],
+      "displayLabel": "Chin",
+      "environmentID": "env-cf27-research-video-001-rtg-path",
+      "evidence": [
+        {
+          "description": "Dedicated or supporting evidence for Chin. Timestamp 10.0-19.0s in video-002.",
+          "evidenceFileID": "evidence-cf27-video-002-source"
+        }
+      ],
+      "laterEditability": "unknown",
+      "locks": [],
+      "maximum": null,
+      "minimum": null,
+      "nativeLabel": "Chin",
+      "nativeOrder": 10,
+      "notes": "Chin is visible in the Head & Skin tab row, but no current recording opens or inspects its selector. Inspected=False; complete=False; additionalRecordingRequired=True.",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "resetBehavior": "unknown",
+      "scrollingContinuationEvidence": [],
+      "stableMenuID": "cf27-menu-head-skin-chin",
+      "step": null,
+      "totalValues": null,
+      "verificationStatus": "draft",
+      "verifier": null,
+      "visibleLabelState": "visible",
+      "warnings": [
+        {
+          "evidenceFileIDs": [
+            "evidence-cf27-video-002-source"
+          ],
+          "id": "warning-cf27-menu-head-skin-chin-research-only",
+          "message": "Research candidate only; not production verified and not eligible for user-facing recommendations."
+        }
+      ],
+      "wrapBehavior": "unknown"
+    }
+  ],
+  "mapID": "menu-map-cf27-research-appearance-hierarchy-v1",
+  "schemaVersion": "phase0-menu-map-v1",
+  "updatedAt": "2026-07-13T00:00:00.000Z"
+}

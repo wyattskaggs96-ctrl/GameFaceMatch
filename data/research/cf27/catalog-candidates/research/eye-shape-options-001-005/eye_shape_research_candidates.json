@@ -1,0 +1,653 @@
+{
+  "schemaVersion": "cf27-eye-shape-research-candidates-v1",
+  "createdAt": "2026-07-13T12:27:11.250Z",
+  "updatedAt": "2026-07-13T12:27:11.250Z",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "sourceType": "researchCandidate",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "PRIMARY_RESEARCH_ONLY_NOT_SECOND_VERIFIED",
+  "verificationStateForAllRecords": "NOT_VERIFIED",
+  "scope": {
+    "category": "Eye Shape",
+    "directlySelectedRecordCount": 5,
+    "directlySelectedNativeLabels": [
+      "Almond",
+      "None",
+      "Prominent",
+      "Monolid",
+      "Hooded"
+    ],
+    "nativeOrderRangeObserved": "5 visible Eye Shape tiles directly selected",
+    "completeCategoryCountClaimed": false,
+    "excludedLabels": [
+      "unselected or unseen Eye Shape values, if any"
+    ],
+    "reasonCompletenessIsNotClaimed": "The recording shows five visible selected tiles, but does not prove wrap behavior or a hard final selector boundary."
+  },
+  "context": {
+    "platformCode": "XBOXUNKNOWN",
+    "modeCode": "RTG",
+    "gameVersion": "UNKNOWN",
+    "patchVersion": "UNKNOWN",
+    "creationPath": "Road to Glory / Create Player / Player / Appearance / Head & Skin / Eye Shape",
+    "sourceVideoID": "video-006"
+  },
+  "selectorObservations": {
+    "gridStructure": "4-column grid with 5 visible tiles",
+    "nativeOrderBasis": "visible tile position in the Eye Shape grid",
+    "selectionSequenceBasis": "direct selected labels in the recording",
+    "firstObservedSelectedValue": "Almond",
+    "finalObservedSelectedValue": "Hooded",
+    "selectorAppearsComplete": false,
+    "selectorCompletenessExplanation": "All five visible tiles are selected during the recording, but final boundary and wrap behavior are not shown.",
+    "wrapObserved": false,
+    "eyeShapeAppearsToChangeEyeGeometry": true,
+    "geometryMeasurementComputed": false,
+    "otherVisibleSettingsChangedWhenChoosingEyeShape": false,
+    "characterRotationAvailable": true,
+    "selectedHeadRemainsConstant": true,
+    "eyeBlackPresent": true,
+    "eyeBlackEvaluationImpact": "Eye black limits evaluation around lower-eye and cheek-adjacent regions in representative character frames."
+  },
+  "observationPolicy": {
+    "nativeLabelsPreserved": true,
+    "noRaceOrEthnicityLabels": true,
+    "noIdentityRelatedClassification": true,
+    "noSensitiveTraitInference": true,
+    "noComputedFacialMeasurements": true,
+    "productionUseAllowed": false,
+    "sourceMasterPreserved": true,
+    "derivativesAreLocalAndGitIgnored": true
+  },
+  "sourceVideos": [
+    {
+      "videoID": "video-006",
+      "workingFilename": "06_Eye_Shape.mp4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "sha256": "84bdb04ca232a662a8add3ceef92f021ad6c96d241e536b12c0af968f3d92ca2",
+      "durationSeconds": 24.93,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "identifiedContent": "Eye Shape menu and options"
+    }
+  ],
+  "nativeOrder": [
+    {
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
+      "nativeLabelOriginalText": "Almond",
+      "nativeRow": 1,
+      "nativeColumn": 1
+    },
+    {
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
+      "nativeLabelOriginalText": "None",
+      "nativeRow": 1,
+      "nativeColumn": 2
+    },
+    {
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_003",
+      "nativeLabelOriginalText": "Prominent",
+      "nativeRow": 1,
+      "nativeColumn": 3
+    },
+    {
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_004",
+      "nativeLabelOriginalText": "Monolid",
+      "nativeRow": 1,
+      "nativeColumn": 4
+    },
+    {
+      "nativeOrder": 5,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_005",
+      "nativeLabelOriginalText": "Hooded",
+      "nativeRow": 2,
+      "nativeColumn": 1
+    }
+  ],
+  "selectionSequence": [
+    {
+      "sequenceOrder": 1,
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
+      "nativeLabelOriginalText": "Almond",
+      "timestampRangeSeconds": "14.0-14.9",
+      "stableTimestampSeconds": 14,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 2,
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
+      "nativeLabelOriginalText": "None",
+      "timestampRangeSeconds": "15.0-16.9",
+      "stableTimestampSeconds": 16,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 3,
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_003",
+      "nativeLabelOriginalText": "Prominent",
+      "timestampRangeSeconds": "17.0-18.9",
+      "stableTimestampSeconds": 18,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 4,
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_004",
+      "nativeLabelOriginalText": "Monolid",
+      "timestampRangeSeconds": "19.0-20.0",
+      "stableTimestampSeconds": 19,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 5,
+      "nativeOrder": 5,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_005",
+      "nativeLabelOriginalText": "Hooded",
+      "timestampRangeSeconds": "21.0-24.9",
+      "stableTimestampSeconds": 22,
+      "selectionType": "deliberately_selected"
+    }
+  ],
+  "labelsRequiringManualTextConfirmation": [],
+  "manualTextConfirmationNotes": "All five selected native Eye Shape labels were readable in direct frame inspection. Reconfirm during second-person verification before production.",
+  "records": [
+    {
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
+      "nativeLabelOriginalText": "Almond",
+      "visibleGameLabelOrIndex": "Almond",
+      "category": "Eye Shape",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeShape",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "appearsGeometryChanging": true,
+      "affectsTextureRatherThanGeometry": false,
+      "affectsGeometrySimilarity": "research_candidate_pending_measurement",
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-006",
+          "timestampRangeSeconds": "14.0-14.9",
+          "stableTimestampSeconds": 14,
+          "basis": "direct selected Eye Shape label visible in the Eye Shape grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyeshape_001-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_001/CF27_XBOXUNKNOWN_RTG_EYESHAPE_001_MENU_video-006_14p00s.png",
+          "outputSha256": "04d62fca726a41aed7e0092a8cc19dd4b53982312b6f51660418250968232d45",
+          "sourceTimestampSeconds": 14
+        },
+        {
+          "role": "CHARACTER_FRONT",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyeshape_001-character_front",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_001/CF27_XBOXUNKNOWN_RTG_EYESHAPE_001_CHARACTER_FRONT_video-006_14p00s.png",
+          "outputSha256": "04d62fca726a41aed7e0092a8cc19dd4b53982312b6f51660418250968232d45",
+          "sourceTimestampSeconds": 14
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 1,
+        "basis": "selected tile position visible in the Eye Shape grid; native text is stored separately and unchanged"
+      },
+      "eyeBlackAssessment": {
+        "eyeBlackPresent": true,
+        "eyeBlackAffectsAssessment": true,
+        "impact": "limited",
+        "notes": "Eye black sits below the eyes and limits lower-eye and cheek-adjacent assessment on representative character frames."
+      },
+      "visualDistinguishability": {
+        "selectedMenuThumbnail": "visible",
+        "representativeCharacterFrame": "limited",
+        "summary": "Eye Shape differences are visible in selected menu thumbnails; representative character-frame differences are limited by UI framing, compression, and eye black."
+      },
+      "geometryObservation": {
+        "appearsGeometryChanging": true,
+        "geometryChangeEvidence": "The native category changes selected eye-region thumbnail geometry. No numerical eye measurement is computed in this research ingestion.",
+        "measurementComputed": false,
+        "measurementStatus": "NOT_MEASURED"
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "representativeFrameQA": {
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front-facing or slight three-quarter view",
+        "eyeBlackObstructsEvaluation": true,
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Eye-area details are partially affected by screen-recording compression.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "frontCharacterFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Almond",
+        "nativeLabelPolicy": "Native game label only. No race, ethnicity, identity, attractiveness, health, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No landmark, metric, or facial-classification measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Eye Shape records remain research candidates pending second-person verification and production recapture."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
+      "nativeLabelOriginalText": "None",
+      "visibleGameLabelOrIndex": "None",
+      "category": "Eye Shape",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeShape",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "appearsGeometryChanging": true,
+      "affectsTextureRatherThanGeometry": false,
+      "affectsGeometrySimilarity": "research_candidate_pending_measurement",
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-006",
+          "timestampRangeSeconds": "15.0-16.9",
+          "stableTimestampSeconds": 16,
+          "basis": "direct selected Eye Shape label visible in the Eye Shape grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyeshape_002-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_002/CF27_XBOXUNKNOWN_RTG_EYESHAPE_002_MENU_video-006_16p00s.png",
+          "outputSha256": "d293523adec68c318173dd98bedd64aed9a07032af57006f949a422fa530afd2",
+          "sourceTimestampSeconds": 16
+        },
+        {
+          "role": "CHARACTER_FRONT",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyeshape_002-character_front",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_002/CF27_XBOXUNKNOWN_RTG_EYESHAPE_002_CHARACTER_FRONT_video-006_16p00s.png",
+          "outputSha256": "d293523adec68c318173dd98bedd64aed9a07032af57006f949a422fa530afd2",
+          "sourceTimestampSeconds": 16
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 2,
+        "basis": "selected tile position visible in the Eye Shape grid; native text is stored separately and unchanged"
+      },
+      "eyeBlackAssessment": {
+        "eyeBlackPresent": true,
+        "eyeBlackAffectsAssessment": true,
+        "impact": "limited",
+        "notes": "Eye black sits below the eyes and limits lower-eye and cheek-adjacent assessment on representative character frames."
+      },
+      "visualDistinguishability": {
+        "selectedMenuThumbnail": "visible",
+        "representativeCharacterFrame": "limited",
+        "summary": "Eye Shape differences are visible in selected menu thumbnails; representative character-frame differences are limited by UI framing, compression, and eye black."
+      },
+      "geometryObservation": {
+        "appearsGeometryChanging": true,
+        "geometryChangeEvidence": "The native category changes selected eye-region thumbnail geometry. No numerical eye measurement is computed in this research ingestion.",
+        "measurementComputed": false,
+        "measurementStatus": "NOT_MEASURED"
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "representativeFrameQA": {
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front-facing or slight three-quarter view",
+        "eyeBlackObstructsEvaluation": true,
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Eye-area details are partially affected by screen-recording compression.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "frontCharacterFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "None",
+        "nativeLabelPolicy": "Native game label only. No race, ethnicity, identity, attractiveness, health, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No landmark, metric, or facial-classification measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Eye Shape records remain research candidates pending second-person verification and production recapture."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_003",
+      "nativeLabelOriginalText": "Prominent",
+      "visibleGameLabelOrIndex": "Prominent",
+      "category": "Eye Shape",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeShape",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "appearsGeometryChanging": true,
+      "affectsTextureRatherThanGeometry": false,
+      "affectsGeometrySimilarity": "research_candidate_pending_measurement",
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-006",
+          "timestampRangeSeconds": "17.0-18.9",
+          "stableTimestampSeconds": 18,
+          "basis": "direct selected Eye Shape label visible in the Eye Shape grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyeshape_003-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_003/CF27_XBOXUNKNOWN_RTG_EYESHAPE_003_MENU_video-006_18p00s.png",
+          "outputSha256": "53038effa7cd6fda18cd041900e07f2e02159c2a85d5d7628062adaed0031bab",
+          "sourceTimestampSeconds": 18
+        },
+        {
+          "role": "CHARACTER_FRONT",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyeshape_003-character_front",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_003/CF27_XBOXUNKNOWN_RTG_EYESHAPE_003_CHARACTER_FRONT_video-006_18p00s.png",
+          "outputSha256": "53038effa7cd6fda18cd041900e07f2e02159c2a85d5d7628062adaed0031bab",
+          "sourceTimestampSeconds": 18
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 3,
+        "basis": "selected tile position visible in the Eye Shape grid; native text is stored separately and unchanged"
+      },
+      "eyeBlackAssessment": {
+        "eyeBlackPresent": true,
+        "eyeBlackAffectsAssessment": true,
+        "impact": "limited",
+        "notes": "Eye black sits below the eyes and limits lower-eye and cheek-adjacent assessment on representative character frames."
+      },
+      "visualDistinguishability": {
+        "selectedMenuThumbnail": "visible",
+        "representativeCharacterFrame": "limited",
+        "summary": "Eye Shape differences are visible in selected menu thumbnails; representative character-frame differences are limited by UI framing, compression, and eye black."
+      },
+      "geometryObservation": {
+        "appearsGeometryChanging": true,
+        "geometryChangeEvidence": "The native category changes selected eye-region thumbnail geometry. No numerical eye measurement is computed in this research ingestion.",
+        "measurementComputed": false,
+        "measurementStatus": "NOT_MEASURED"
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "representativeFrameQA": {
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front-facing or slight three-quarter view",
+        "eyeBlackObstructsEvaluation": true,
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Eye-area details are partially affected by screen-recording compression.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "frontCharacterFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Prominent",
+        "nativeLabelPolicy": "Native game label only. No race, ethnicity, identity, attractiveness, health, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No landmark, metric, or facial-classification measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Eye Shape records remain research candidates pending second-person verification and production recapture."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_004",
+      "nativeLabelOriginalText": "Monolid",
+      "visibleGameLabelOrIndex": "Monolid",
+      "category": "Eye Shape",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeShape",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "appearsGeometryChanging": true,
+      "affectsTextureRatherThanGeometry": false,
+      "affectsGeometrySimilarity": "research_candidate_pending_measurement",
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-006",
+          "timestampRangeSeconds": "19.0-20.0",
+          "stableTimestampSeconds": 19,
+          "basis": "direct selected Eye Shape label visible in the Eye Shape grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyeshape_004-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_004/CF27_XBOXUNKNOWN_RTG_EYESHAPE_004_MENU_video-006_19p00s.png",
+          "outputSha256": "bdd753544771499cbf8e6fc4bea3157c8a6799b0f929564976ab8176d860a13d",
+          "sourceTimestampSeconds": 19
+        },
+        {
+          "role": "CHARACTER_FRONT",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyeshape_004-character_front",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_004/CF27_XBOXUNKNOWN_RTG_EYESHAPE_004_CHARACTER_FRONT_video-006_19p00s.png",
+          "outputSha256": "bdd753544771499cbf8e6fc4bea3157c8a6799b0f929564976ab8176d860a13d",
+          "sourceTimestampSeconds": 19
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 4,
+        "basis": "selected tile position visible in the Eye Shape grid; native text is stored separately and unchanged"
+      },
+      "eyeBlackAssessment": {
+        "eyeBlackPresent": true,
+        "eyeBlackAffectsAssessment": true,
+        "impact": "limited",
+        "notes": "Eye black sits below the eyes and limits lower-eye and cheek-adjacent assessment on representative character frames."
+      },
+      "visualDistinguishability": {
+        "selectedMenuThumbnail": "visible",
+        "representativeCharacterFrame": "limited",
+        "summary": "Eye Shape differences are visible in selected menu thumbnails; representative character-frame differences are limited by UI framing, compression, and eye black."
+      },
+      "geometryObservation": {
+        "appearsGeometryChanging": true,
+        "geometryChangeEvidence": "The native category changes selected eye-region thumbnail geometry. No numerical eye measurement is computed in this research ingestion.",
+        "measurementComputed": false,
+        "measurementStatus": "NOT_MEASURED"
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "representativeFrameQA": {
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front-facing or slight three-quarter view",
+        "eyeBlackObstructsEvaluation": true,
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Eye-area details are partially affected by screen-recording compression.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "frontCharacterFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Monolid",
+        "nativeLabelPolicy": "Native game label only. No race, ethnicity, identity, attractiveness, health, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No landmark, metric, or facial-classification measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Eye Shape records remain research candidates pending second-person verification and production recapture."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 5,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_005",
+      "nativeLabelOriginalText": "Hooded",
+      "visibleGameLabelOrIndex": "Hooded",
+      "category": "Eye Shape",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeShape",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "appearsGeometryChanging": true,
+      "affectsTextureRatherThanGeometry": false,
+      "affectsGeometrySimilarity": "research_candidate_pending_measurement",
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-006",
+          "timestampRangeSeconds": "21.0-24.9",
+          "stableTimestampSeconds": 22,
+          "basis": "direct selected Eye Shape label visible in the Eye Shape grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyeshape_005-menu",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_005_MENU_video-006_22p00s.png",
+          "outputSha256": "acf7b0a186924ddf281dd3e8bedf15ba710aa41357384d3d35e451c6265c093a",
+          "sourceTimestampSeconds": 22
+        },
+        {
+          "role": "CHARACTER_FRONT",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyeshape_005-character_front",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_005_CHARACTER_FRONT_video-006_22p00s.png",
+          "outputSha256": "acf7b0a186924ddf281dd3e8bedf15ba710aa41357384d3d35e451c6265c093a",
+          "sourceTimestampSeconds": 22
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 1,
+        "basis": "selected tile position visible in the Eye Shape grid; native text is stored separately and unchanged"
+      },
+      "eyeBlackAssessment": {
+        "eyeBlackPresent": true,
+        "eyeBlackAffectsAssessment": true,
+        "impact": "limited",
+        "notes": "Eye black sits below the eyes and limits lower-eye and cheek-adjacent assessment on representative character frames."
+      },
+      "visualDistinguishability": {
+        "selectedMenuThumbnail": "visible",
+        "representativeCharacterFrame": "limited",
+        "summary": "Eye Shape differences are visible in selected menu thumbnails; representative character-frame differences are limited by UI framing, compression, and eye black."
+      },
+      "geometryObservation": {
+        "appearsGeometryChanging": true,
+        "geometryChangeEvidence": "The native category changes selected eye-region thumbnail geometry. No numerical eye measurement is computed in this research ingestion.",
+        "measurementComputed": false,
+        "measurementStatus": "NOT_MEASURED"
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "representativeFrameQA": {
+        "characterFaceFrameAvailable": true,
+        "characterPose": "front-facing or slight three-quarter view",
+        "eyeBlackObstructsEvaluation": true,
+        "characterFrameLimitations": [
+          "The live character frame includes game UI, uniform, and eye black.",
+          "Eye-area details are partially affected by screen-recording compression.",
+          "Selected menu thumbnails are clearer for option identity than the representative character frame."
+        ]
+      },
+      "captureCompleteness": {
+        "menuEvidence": "present",
+        "frontCharacterFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "nativeLabelOriginalText": "Hooded",
+        "nativeLabelPolicy": "Native game label only. No race, ethnicity, identity, attractiveness, health, or other sensitive labels are recorded.",
+        "measurementLimitations": [
+          "No landmark, metric, or facial-classification measurement is computed from this ingestion.",
+          "Representative frames are not standardized production comparison evidence.",
+          "Eye Shape records remain research candidates pending second-person verification and production recapture."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    }
+  ],
+  "productionBlocks": [
+    "Records are primary research only and not second-person verified.",
+    "Game version, patch, and exact platform are still unknown.",
+    "Selector wrap and final category boundary are not proven.",
+    "Eye black and screen-recording compression limit representative character-frame assessment.",
+    "Production catalog remains empty until verified evidence is reviewed and published."
+  ]
+}

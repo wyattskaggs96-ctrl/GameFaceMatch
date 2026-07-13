@@ -1,0 +1,815 @@
+{
+  "schemaVersion": "cf27-authoritative-recapture-queue-v1",
+  "reportLabel": "AUTHORITATIVE CURRENT RECAPTURE QUEUE - PRIMARY RESEARCH ONLY - NOT PRODUCTION VERIFIED",
+  "generatedAt": "2026-07-13T15:17:34.853Z",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+  "sourceType": "researchCandidate",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "RECAPTURE_REQUIRED_NOT_SECOND_VERIFIED",
+  "productionRecommendationsEnabled": false,
+  "policy": {
+    "noInventedOptions": "The queue records what to capture next. It does not create, verify, or infer College Football 27 options.",
+    "evidenceUsePolicy": "Existing recordings remain useful for the exact evidence roles listed on each queue item.",
+    "productionGatePolicy": "Completing this queue still does not mark records production verified; second-person verification and publication gates remain required.",
+    "sourceSeparation": "This queue lives under data/research/cf27 and docs/catalog, not production catalog data."
+  },
+  "sourceInputs": {
+    "partialManifest": "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json",
+    "partialRecaptureQueue": "data/research/cf27/exports/partial-research-catalog-current/recapture_queue.csv",
+    "partialIssues": "data/research/cf27/exports/partial-research-catalog-current/issues_and_exceptions.csv",
+    "headStandardizationQA": "data/research/cf27/reports/head-template-standardization-qa/head_template_standardization_qa_report.json",
+    "headRecaptureQueue": "data/research/cf27/reports/head-template-standardization-qa/head_template_recapture_queue.csv",
+    "sequenceReviewQueue": "data/research/cf27/reports/native-sequence-integrity/native_sequence_human_review_queue.json",
+    "ocrReviewQueue": "data/research/cf27/reports/ocr-native-label-review/manual_label_review_queue.json",
+    "videoInventory": "data/research/cf27/video_inventory.json",
+    "timelineIndex": "data/research/cf27/video_timeline_index.json"
+  },
+  "sourceContext": {
+    "currentResearchRecordCounts": {
+      "captureLogEvents": 106,
+      "creationPaths": 1,
+      "ear_shapes": 4,
+      "environments": 1,
+      "evidenceManifestEntries": 335,
+      "eye_colors": 7,
+      "eye_shapes": 5,
+      "heads": 29,
+      "issuesAndExceptions": 16,
+      "menuItems": 13,
+      "noses": 7,
+      "recaptureQueue": 56,
+      "skin_details": 10,
+      "skin_tones": 24,
+      "totalResearchCatalogRecords": 86
+    },
+    "currentRecaptureRows": 56,
+    "currentIssueRows": 16,
+    "headRecaptureRows": 29,
+    "sequenceReviewSuggestions": 119,
+    "ocrManualReviewItems": 33,
+    "acceptedOrPartialVideoCount": 9,
+    "intentionalFace12OverlapConfirmed": true,
+    "productionRecordsCreated": 0
+  },
+  "summary": {
+    "queueItemCount": 24,
+    "priorityCounts": {
+      "P0": 8,
+      "P1": 12,
+      "P2": 4,
+      "P3": 0
+    },
+    "productionBlockingCount": 22,
+    "existingEvidenceUsefulCount": 24,
+    "sourceRecaptureRowsConsolidated": 56,
+    "sourceIssueRowsConsolidated": 16,
+    "headStandardizationRecaptureRowsConsolidated": 29,
+    "sequenceReviewSuggestionsReferenced": 119,
+    "ocrManualReviewItemsReferenced": 33,
+    "productionRecommendationsEnabled": false
+  },
+  "items": [
+    {
+      "queueID": "RQ-001",
+      "priority": "P0",
+      "group": "Environment",
+      "title": "Record exact Xbox console model and console OS",
+      "ownerRecordingInstructions": "Open Xbox Settings > System > Console info and record the exact console model name, serial-sensitive fields excluded, console OS version, and system update status. Include a continuous screen recording from the settings navigation into the visible console-info screen.",
+      "requiredEvidence": [
+        "Console info screen",
+        "System update status screen"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Console model is visible",
+        "Console OS version is visible",
+        "Update status is visible",
+        "No account secrets or serial numbers are transcribed into catalog data"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing gameplay recordings remain useful for Road to Glory navigation, selected menu labels, and current research-candidate provenance, but they do not prove exact Xbox model or console OS.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/issues_and_exceptions.csv",
+        "data/research/cf27/video_inventory.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 1
+    },
+    {
+      "queueID": "RQ-002",
+      "priority": "P0",
+      "group": "Environment",
+      "title": "Record game executable version and installed patch/update screen",
+      "ownerRecordingInstructions": "Record the game title screen and any visible in-game version/build display, then record Xbox manage-game/update screens showing installed version, latest update state, and update date if visible. Do not infer patch from upload date.",
+      "requiredEvidence": [
+        "Game title/version screen",
+        "Installed game version screen",
+        "Update/latest-version screen"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Game executable version or explicit UNKNOWN is recorded from evidence",
+        "Patch/update state is visible",
+        "Capture date is recorded"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing videos remain useful for observed menus and options, but they cannot become production records until the executable version and patch context are tied to the audit environment.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/issues_and_exceptions.csv",
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 2
+    },
+    {
+      "queueID": "RQ-003",
+      "priority": "P0",
+      "group": "Environment",
+      "title": "Record edition, entitlement, copy type, storefront, online, and EA account state",
+      "ownerRecordingInstructions": "Record only non-secret account/entitlement context: game edition as shown by the console/store/manage-game UI, installed add-ons or entitlements relevant to player creation, copy type, storefront/region, online/offline state, and EA account signed-in state if visible without exposing credentials.",
+      "requiredEvidence": [
+        "Manage game add-ons/edition screen",
+        "Storefront or ownership screen where safe",
+        "Network or online-state evidence where safe"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Edition is visible or marked UNKNOWN from evidence",
+        "Entitlements/add-ons are visible or marked none/UNKNOWN",
+        "No credentials, emails, payment data, or recovery data are recorded"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing menu recordings remain useful for current Road to Glory observations, but they do not prove whether edition or entitlement state changes available appearance options.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/issues_and_exceptions.csv"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 3
+    },
+    {
+      "queueID": "RQ-004",
+      "priority": "P0",
+      "group": "Head Templates",
+      "title": "Capture Remaining Head Templates after Face 29 and prove category boundary",
+      "ownerRecordingInstructions": "Starting from Face 29 in Head Template, continue advancing in native order until the selector visibly reaches the last option and either wraps to the first option or otherwise proves the end boundary. Keep the visible selected label/index on screen for every deliberate selection.",
+      "requiredEvidence": [
+        "Menu evidence for every selected option after Face 29",
+        "End-of-category or wrap evidence",
+        "Timestamped continuous recording"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "No option after Face 29 is created unless deliberately selected",
+        "Final count is proven by boundary/wrap evidence",
+        "Native order is preserved"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing Face 1-29 recordings remain useful for selected label/order evidence, extracted derivatives, Face 12 overlap provenance, and sequence-review cues. They do not prove the complete Head Template count.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json",
+        "data/research/cf27/reports/native-sequence-integrity/native_sequence_human_review_queue.json",
+        "data/research/cf27/video_inventory.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 4
+    },
+    {
+      "queueID": "RQ-005",
+      "priority": "P0",
+      "group": "Head Templates",
+      "title": "Perform a second full Head Template count",
+      "ownerRecordingInstructions": "Run a second pass through the complete Head Template selector from the first option to the proven final option. Record selected labels/indices in native order without skipping, and call out any grid traversal or jump intentionally.",
+      "requiredEvidence": [
+        "Continuous second count recording",
+        "First option evidence",
+        "Final/wrap evidence",
+        "Researcher count notes"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Second count agrees or discrepancy is opened",
+        "Selector jumps are documented",
+        "Face 12 overlap is preserved as overlap evidence, not duplicate identity"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing Face 1-29 footage remains useful as the primary-observation pass and as a comparison source for the second count.",
+      "sourceReferences": [
+        "data/research/cf27/reports/native-sequence-integrity/native_sequence_human_review_queue.json",
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 5
+    },
+    {
+      "queueID": "RQ-006",
+      "priority": "P0",
+      "group": "Head Templates",
+      "title": "Standardized head capture pass without eye black",
+      "ownerRecordingInstructions": "After confirming the canonical capture configuration, record every Head Template with eye black disabled or absent if the game allows. Capture menu evidence plus front, left three-quarter, left profile, rear, right profile, and right three-quarter views for each selected head.",
+      "requiredEvidence": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "REAR",
+        "RIGHT_PROFILE",
+        "RIGHT_3Q"
+      ],
+      "optionalEvidence": [
+        "ELEVATED",
+        "LOWERED"
+      ],
+      "acceptanceCriteria": [
+        "Eye black is absent or explicitly unavoidable",
+        "Zoom/framing is consistent",
+        "Native order is preserved",
+        "Every current and newly discovered head has the standard view set"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing Face 1-29 recordings remain valid identity/order/menu evidence. Current QA says one standardized recapture run can repair recurring image-comparison limitations, but not category completeness, environment gaps, or second verification.",
+      "sourceReferences": [
+        "data/research/cf27/reports/head-template-standardization-qa/head_template_standardization_qa_report.json",
+        "data/research/cf27/reports/head-template-standardization-qa/head_template_recapture_queue.csv"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 6
+    },
+    {
+      "queueID": "RQ-007",
+      "priority": "P0",
+      "group": "Head Templates",
+      "title": "Lock controlled short hairstyle and facial hair set to None where possible for head comparison",
+      "ownerRecordingInstructions": "Before the standardized head pass, identify whether hair and facial-hair controls can be held constant while changing Head Template. If possible, set a controlled short/non-obstructing hairstyle and facial hair None, then record proof of those settings before the pass.",
+      "requiredEvidence": [
+        "Hair/facial-hair settings before head pass",
+        "Evidence that settings remain unchanged after several head changes",
+        "Note if head templates force hair or facial hair"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Canonical hair state is recorded",
+        "Canonical facial-hair state is recorded",
+        "Any forced changes are documented as dependencies, not inferred options"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing head footage remains useful for native Head Template labels and order, but visible hair, facial hair, and eye black currently limit geometry comparison.",
+      "sourceReferences": [
+        "data/research/cf27/reports/head-template-standardization-qa/head_template_standardization_qa_report.json",
+        "data/research/cf27/exports/partial-research-catalog-current/recapture_queue.csv"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 7
+    },
+    {
+      "queueID": "RQ-008",
+      "priority": "P0",
+      "group": "Capture protocol",
+      "title": "Record missing true front and profile views under a locked capture protocol",
+      "ownerRecordingInstructions": "For each category being captured, pause on stable character views and record true front, left profile, and right profile views where the UI allows. Avoid transition frames, loading animation, cursor/notification overlays, and inconsistent zoom.",
+      "requiredEvidence": [
+        "True front stable frame",
+        "Left profile stable frame",
+        "Right profile stable frame",
+        "View-angle notes"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Angle labels are supported by visible rotation state",
+        "Profile views are not approximated from three-quarter views",
+        "Missing views are explicitly marked unavailable if the UI cannot show them"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing extracted frames remain useful as derivatives and review aids, but some are best-available approximations rather than production-ready true front/profile evidence.",
+      "sourceReferences": [
+        "data/research/cf27/reports/head-template-standardization-qa/head_template_standardization_qa_report.json",
+        "data/research/cf27/exports/partial-research-catalog-current/recapture_queue.csv"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 8
+    },
+    {
+      "queueID": "RQ-009",
+      "priority": "P1",
+      "group": "Uncaptured face menus",
+      "title": "Record Mouth Shape menu",
+      "ownerRecordingInstructions": "Navigate to Appearance > Head & Skin > Mouth Shape if present. Record the category entry, every deliberately selected native label/index in order, representative character view, and selector boundary/wrap evidence.",
+      "requiredEvidence": [
+        "Category entry",
+        "Every selected Mouth Shape value",
+        "Boundary or wrap evidence",
+        "Stable face frame per value where available"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Native labels/indices are readable or queued for manual label review",
+        "Count is not claimed without boundary evidence",
+        "No values are inferred from thumbnails"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing appearance hierarchy evidence suggests Mouth Shape is part of the observed hierarchy, but no complete own-category recording is available for production use.",
+      "sourceReferences": [
+        "data/research/cf27/video_timeline_index.json",
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 9
+    },
+    {
+      "queueID": "RQ-010",
+      "priority": "P1",
+      "group": "Uncaptured face menus",
+      "title": "Record Jaw Shape menu",
+      "ownerRecordingInstructions": "Navigate to Jaw Shape if present and record each deliberately selected value in native order with front and profile/three-quarter character evidence where available. Prove selector boundary or wrap.",
+      "requiredEvidence": [
+        "Category entry",
+        "Every selected Jaw Shape value",
+        "Front and side/three-quarter evidence",
+        "Boundary or wrap evidence"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Native order is preserved",
+        "Geometry-changing status is recorded as observation, not production fact until reviewed",
+        "Count is proven"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing hierarchy evidence supports that Jaw Shape appears in the current menu area, but option values are not cataloged yet.",
+      "sourceReferences": [
+        "data/research/cf27/video_timeline_index.json",
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 10
+    },
+    {
+      "queueID": "RQ-011",
+      "priority": "P1",
+      "group": "Uncaptured face menus",
+      "title": "Complete Chin menu capture",
+      "ownerRecordingInstructions": "Navigate to Chin if present and record every selected native value in order, with front and profile/three-quarter evidence where available. Capture first, middle, final, and wrap/boundary evidence.",
+      "requiredEvidence": [
+        "Category entry",
+        "Every selected Chin value",
+        "Front and side/three-quarter evidence",
+        "Boundary or wrap evidence"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "No Chin values are inferred from neighboring thumbnails",
+        "Native labels/indices are readable or sent to manual review",
+        "Count is proven"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing hierarchy evidence suggests Chin is visible, but the category values still need direct selected evidence.",
+      "sourceReferences": [
+        "data/research/cf27/video_timeline_index.json",
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 11
+    },
+    {
+      "queueID": "RQ-012",
+      "priority": "P1",
+      "group": "Hair",
+      "title": "Open and map the complete Hair menu",
+      "ownerRecordingInstructions": "From Appearance, enter Hair and record the full submenu hierarchy before selecting options. Capture all visible categories, native order, control type, whether later editable, and dependencies or locks.",
+      "requiredEvidence": [
+        "Hair menu entry",
+        "Full submenu list",
+        "Scroll continuation if any",
+        "Control type evidence"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Hair controls are discovered from direct menu evidence",
+        "No category is pre-populated as confirmed",
+        "Locked/unavailable controls are documented"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing Road to Glory path footage shows Hair as a visible menu item but does not open it; it remains useful only as path evidence.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/issues_and_exceptions.csv",
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 12
+    },
+    {
+      "queueID": "RQ-013",
+      "priority": "P1",
+      "group": "Hair",
+      "title": "Capture complete Hairstyles catalog",
+      "ownerRecordingInstructions": "Within Hair, record every hairstyle deliberately selected in native order using the canonical head and canonical hair color. Capture menu evidence, front, left three-quarter, left profile, rear, right profile, and right three-quarter views where available.",
+      "requiredEvidence": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "REAR",
+        "RIGHT_PROFILE",
+        "RIGHT_3Q"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Native order and count are proven",
+        "Canonical head and hair color are visible/recorded",
+        "Dependencies or unlocks are recorded"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing videos do not provide a complete Hair menu or hairstyle catalog. Existing head footage may help choose a non-obstructing canonical head after review.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 13
+    },
+    {
+      "queueID": "RQ-014",
+      "priority": "P1",
+      "group": "Hair",
+      "title": "Capture Hair Colors",
+      "ownerRecordingInstructions": "Record every hair-color control value in native order with the canonical hairstyle and head. Capture menu evidence and a stable representative character frame for each value.",
+      "requiredEvidence": [
+        "Every selected Hair Color value",
+        "Representative character frame",
+        "Boundary or wrap evidence"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Native labels/indices are preserved",
+        "Lighting/capture conditions are constant",
+        "Color observations are objective metadata only"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing current videos do not prove hair-color values. They remain useful for path and non-hair categories only.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 14
+    },
+    {
+      "queueID": "RQ-015",
+      "priority": "P1",
+      "group": "Facial hair",
+      "title": "Capture complete Facial Hair menu, including None",
+      "ownerRecordingInstructions": "Navigate to facial-hair controls if present. Record None and every other deliberately selected option in native order using canonical head, hairstyle, and facial-hair color. Capture required angle views and menu evidence.",
+      "requiredEvidence": [
+        "None option evidence if present",
+        "Every selected Facial Hair value",
+        "Front and side/three-quarter evidence",
+        "Boundary or wrap evidence"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Native order and count are proven",
+        "Coverage metadata stays researcher-applied and separate from native labels",
+        "Dependencies are recorded"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing head footage cannot be treated as facial-hair catalog evidence because facial-hair controls were not independently locked or audited.",
+      "sourceReferences": [
+        "data/research/cf27/reports/head-template-standardization-qa/head_template_standardization_qa_report.json",
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 15
+    },
+    {
+      "queueID": "RQ-016",
+      "priority": "P1",
+      "group": "Facial hair",
+      "title": "Capture Facial Hair Colors",
+      "ownerRecordingInstructions": "Record every facial-hair color control value in native order using a canonical visible facial-hair option. Capture menu label/index evidence and stable face frames under constant lighting.",
+      "requiredEvidence": [
+        "Every selected Facial Hair Color value",
+        "Representative character frame",
+        "Boundary or wrap evidence"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Values are not inferred from hair color controls",
+        "Color observations are objective metadata only",
+        "Dependencies with facial-hair style are recorded"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing videos do not prove facial-hair color values. They remain useful for non-facial-hair research only.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 16
+    },
+    {
+      "queueID": "RQ-017",
+      "priority": "P1",
+      "group": "Body and physique",
+      "title": "Record Physique controls",
+      "ownerRecordingInstructions": "In the Road to Glory creation path, record every physique/body-shape control that affects player appearance. Preserve exact native labels, indices, ranges, default values, and dependencies.",
+      "requiredEvidence": [
+        "Physique menu entry",
+        "Every control value or range boundary",
+        "Default/reset evidence",
+        "Representative character frames where useful"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Controls are categorized as geometry, texture, color, or presentation-only effects",
+        "No slider range is guessed",
+        "Position/archetype dependencies are noted"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing path footage proves the route into player creation but does not audit physique controls.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": false,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 17
+    },
+    {
+      "queueID": "RQ-018",
+      "priority": "P1",
+      "group": "Body and physique",
+      "title": "Record Height, Weight, and Body Type controls",
+      "ownerRecordingInstructions": "Record height, weight, and body type controls from the selected Road to Glory creation path. Capture min, max, step, default, restrictions, and whether values affect available appearance options.",
+      "requiredEvidence": [
+        "Height min/max/default",
+        "Weight min/max/default",
+        "Body Type values or range",
+        "Restriction/dependency evidence"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "No ranges are inferred",
+        "Position and archetype used during capture are recorded",
+        "Dependency checks are queued if values change appearance menus"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing path evidence records QB/Create Player context but does not prove height, weight, or body type ranges.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": false,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 18
+    },
+    {
+      "queueID": "RQ-019",
+      "priority": "P1",
+      "group": "Selector validation",
+      "title": "Run selector wrap and boundary tests for every captured category",
+      "ownerRecordingInstructions": "For Head Template, Skin Tone, Skin Details, Eye Shape, Eye Color, Nose, Ear Shape, and future categories, record first value, final value, and wrap/no-wrap behavior. Include deliberate navigation steps and avoid relying on thumbnail visibility.",
+      "requiredEvidence": [
+        "First value",
+        "Final value",
+        "Wrap or boundary behavior",
+        "Navigation notes"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Complete counts are only claimed when boundary/wrap is proven",
+        "Repeated selections and jumps are documented",
+        "Native order remains intact"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing recordings provide many selected values and sequence-review suggestions, but several categories still need explicit boundary or wrap proof before production.",
+      "sourceReferences": [
+        "data/research/cf27/reports/native-sequence-integrity/native_sequence_human_review_queue.json",
+        "data/research/cf27/exports/partial-research-catalog-current/recapture_queue.csv"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 19
+    },
+    {
+      "queueID": "RQ-020",
+      "priority": "P1",
+      "group": "Dependency checks",
+      "title": "Run dependency checks across platform, mode, position, archetype, height, weight, body type, online state, EA account state, edition, entitlements, and patch",
+      "ownerRecordingInstructions": "Use the dependency-test runner matrix: record a baseline, change one variable at a time, capture expected versus observed behavior, and document count/order/label/geometry changes with evidence.",
+      "requiredEvidence": [
+        "Baseline recording",
+        "Changed-variable recording",
+        "Observed count/order/label changes",
+        "Remaining uncertainty notes"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Each run changes only one variable where practical",
+        "No dependency is promoted from assumption",
+        "Unresolved dependencies create issues or recapture requests"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing current videos provide a single research environment and path baseline, but they do not prove whether other states change catalog availability.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/issues_and_exceptions.csv",
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 20
+    },
+    {
+      "queueID": "RQ-021",
+      "priority": "P2",
+      "group": "Manual text review",
+      "title": "Review OCR/manual-label queue for readable native labels",
+      "ownerRecordingInstructions": "For Skin Details, Eye Shape, Eye Color, Nose, and Ear Shape labels already extracted into the OCR review queue, visually inspect the original frame and targeted crop before confirming or correcting each native label.",
+      "requiredEvidence": [
+        "Original menu frame",
+        "Targeted label crop",
+        "Reviewer confirmation"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "OCR output is not accepted without visual confirmation",
+        "Low-confidence labels remain queued",
+        "Native labels are preserved exactly as shown"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing extracted menu frames and crops remain useful for manual label confirmation; they are not production-verified without review.",
+      "sourceReferences": [
+        "data/research/cf27/reports/ocr-native-label-review/manual_label_review_queue.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 21
+    },
+    {
+      "queueID": "RQ-022",
+      "priority": "P2",
+      "group": "Current captured categories",
+      "title": "Recapture Nose category with standardized profile evidence",
+      "ownerRecordingInstructions": "Repeat Nose options under the canonical capture configuration, preserving native order and capturing menu evidence, front, best three-quarter, and true profile views when available.",
+      "requiredEvidence": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q or RIGHT_3Q",
+        "LEFT_PROFILE or RIGHT_PROFILE",
+        "Boundary or wrap evidence"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Profile view availability is proven or explicitly unavailable",
+        "Current labels are confirmed by direct selected evidence",
+        "No subjective trait labels are added"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing Nose footage remains useful for selected labels/order and current research candidates, but current frames are not standardized production comparison captures.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/recapture_queue.csv"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 22
+    },
+    {
+      "queueID": "RQ-023",
+      "priority": "P2",
+      "group": "Current captured categories",
+      "title": "Recapture Ear Shape with unobstructed side evidence where possible",
+      "ownerRecordingInstructions": "Repeat Ear Shape options with a hairstyle that exposes ears if the game allows. Capture menu evidence and side/three-quarter evidence sufficient to determine left/right ear visibility.",
+      "requiredEvidence": [
+        "MENU",
+        "Left or right side evidence",
+        "Hair obstruction state",
+        "Boundary or wrap evidence"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Do not claim both ears evaluated unless both are visible",
+        "Hair obstruction is recorded",
+        "Selector completeness is proven"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing Ear Shape footage remains useful for selected labels/order, but hair obstruction and one-sided visibility limit production comparison.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/recapture_queue.csv"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 23
+    },
+    {
+      "queueID": "RQ-024",
+      "priority": "P2",
+      "group": "Current captured categories",
+      "title": "Confirm Skin Tone, Skin Details, Eye Shape, and Eye Color boundaries and representative frames",
+      "ownerRecordingInstructions": "For each currently captured category, record deliberate first-to-final selection evidence, wrap/no-wrap behavior, and stable representative frames under consistent lighting. Keep native labels/indices separate from researcher metadata.",
+      "requiredEvidence": [
+        "First value evidence",
+        "Final value evidence",
+        "Wrap/no-wrap evidence",
+        "Representative frames"
+      ],
+      "optionalEvidence": [],
+      "acceptanceCriteria": [
+        "Counts are proven by boundary evidence",
+        "Manual-label queue items are resolved",
+        "Color/texture observations remain objective metadata"
+      ],
+      "existingEvidenceRemainsUseful": true,
+      "existingEvidenceUsefulness": "Existing recordings provide primary research candidates for Skin Tone, Skin Details, Eye Shape, and Eye Color, but production use still requires boundary confirmation, label review, and second verification.",
+      "sourceReferences": [
+        "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json",
+        "data/research/cf27/reports/ocr-native-label-review/manual_label_review_queue.json",
+        "data/research/cf27/reports/native-sequence-integrity/native_sequence_human_review_queue.json"
+      ],
+      "blocksProduction": true,
+      "status": "open",
+      "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "NOT_VERIFIED",
+      "nativeSort": 24
+    }
+  ]
+}

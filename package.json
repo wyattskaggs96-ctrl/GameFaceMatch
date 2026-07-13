@@ -28,6 +28,7 @@
     "cf27:head-visual-measurements": "node scripts/cf27-head-visual-measurements.mjs",
     "cf27:head-annotation-workspace": "node scripts/cf27-head-annotation-workspace.mjs",
     "cf27:partial-match-sandbox": "node scripts/cf27-partial-matching-sandbox.mjs",
+    "cf27:recapture-queue": "node scripts/cf27-authoritative-recapture-queue.mjs",
     "source-video:intake": "node scripts/source-video-intake.mjs",
     "phase-zero:export": "node scripts/phase-zero-export.mjs"
   }

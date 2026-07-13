@@ -985,7 +985,8 @@ p {
 }
 
 .form-field select,
-.form-field input {
+.form-field input,
+.form-field textarea {
   min-height: 48px;
   width: 100%;
   border: 1px solid #b9cbb5;
@@ -993,6 +994,24 @@ p {
   padding: 10px var(--space-3);
   color: var(--ink);
   background: white;
+}
+
+.form-field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.code-block {
+  max-width: 100%;
+  max-height: 420px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  color: var(--chalk);
+  background: var(--field-900);
+  font-size: 0.84rem;
+  line-height: 1.45;
 }
 
 .checkbox-field {
@@ -1084,7 +1103,8 @@ p {
 .step-item,
 .file-input,
 .form-field select,
-.form-field input {
+.form-field input,
+.form-field textarea {
   touch-action: manipulation;
 }
 

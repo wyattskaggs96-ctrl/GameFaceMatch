@@ -1,5 +1,7 @@
 # Catalog Manager
 
-Reserved for a future internal tool used to upload, annotate, review, verify, publish, and roll back game appearance catalogs.
+The current catalog manager is a development-only local review console surfaced inside the web Phase 0 tools.
 
-Do not build this before the manual audit and iPhone prototype establish the required workflow.
+It can import candidate package JSON, inspect validation results, review records and evidence, check native order, review duplicate observations, decide `VERIFIED_WITH_NOTES` records, request repairs, reject bad rows, and produce a local signed review report.
+
+It does not publish production data, upload evidence, connect a backend, or override the catalog import-validation engine. A release candidate can be approved only when mandatory validation gates pass.

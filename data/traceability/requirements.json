@@ -1011,6 +1011,31 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-035",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Catalog-manager review console",
+      "summary": "Build a catalog-manager review console that imports candidate packages, displays validation results and unresolved failures, inspects records and evidence, checks native order, reviews duplicate observations and verification states, accepts or rejects VERIFIED_WITH_NOTES, requests repairs, rejects placeholder or missing-evidence rows, produces a signed review report, and approves release candidates only after mandatory gates pass.",
+      "owningModule": "Catalog manager review",
+      "implementationFiles": [
+        "web/lib/phase-zero/catalog-manager-review-console.ts",
+        "web/features/phase-zero/CatalogManagerReviewConsole.tsx",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "admin/catalog-manager/README.md",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_CATALOG_WORKFLOW.md"
+      ],
+      "testFiles": [
+        "web/tests/catalog-manager-review-console.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Catalog-manager review tests cover candidate package import, record and evidence summaries, native-order checks, unresolved validation failures, placeholder and missing-evidence blocking, VERIFIED_WITH_NOTES acceptance and rejection, repair requests, duplicate-observation visibility, machine-readable validation report gates, signed review reports, and release-candidate approval only when mandatory gates pass.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

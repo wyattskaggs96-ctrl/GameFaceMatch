@@ -73,6 +73,8 @@ The Phase 0 export pipeline writes deterministic UTF-8 CSV and JSON files for th
 
 The catalog import-validation engine produces both readable text and machine-readable JSON reports before a package can be published. It checks schema references, unique identifiers, evidence-path portability and checksums, native-order continuity, required environment fields, verification state, placeholder and College Football 26 contamination, duplicate-observation retention, production/test separation, production recommender fixture access, supported platform/version/mode/path targets, package checksums, and supersession chains.
 
+The development-only catalog-manager review console lives in the web Phase 0 tools. It imports candidate package JSON and optional machine-readable validation reports, shows unresolved failures, records, evidence, native-order groups, duplicate observations, and verification-state summaries, lets the manager accept or reject `VERIFIED_WITH_NOTES`, request repairs, reject placeholder or missing-evidence rows, and produce a local signed review report. It cannot publish a package and cannot approve a release candidate while mandatory validation gates are unresolved.
+
 Source-video intake is local-only. `inspect` preserves original video files and reports metadata from `ffprobe` when available. `extract-frame` produces derivative still frames only when `ffmpeg` is installed; otherwise it returns a disabled result so operators can continue recording timestamp references and extract frames later.
 
 ## Publication gate

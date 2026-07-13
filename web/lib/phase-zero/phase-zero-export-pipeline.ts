@@ -6,6 +6,7 @@ import type {
   Phase0Discrepancy,
   Phase0EvidenceFile
 } from "./phase-zero-domain";
+import { sanitizeCSVCellForExport } from "@/lib/security/security-hardening";
 import { validatePhase0DomainSnapshot } from "./phase-zero-domain";
 
 export const PHASE0_EXPORT_PIPELINE_SCHEMA_VERSION = "phase0-export-pipeline-v1";
@@ -450,7 +451,7 @@ function serializeCSV(rows: Array<Record<string, unknown>>, columns: string[]) {
 }
 
 function csvEscape(value: unknown) {
-  const text = String(value);
+  const text = sanitizeCSVCellForExport(value);
   return /[",\n\r]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
 }
 

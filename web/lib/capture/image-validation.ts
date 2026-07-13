@@ -1,4 +1,5 @@
 import type { CapturedAngle, CapturedAngleID, CaptureSource, TemporaryImageReference } from "@/types/domain";
+import { isSafeUploadFileName } from "@/lib/security/security-hardening";
 
 const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
 const heicTypes = new Set(["image/heic", "image/heif"]);
@@ -36,6 +37,9 @@ export function validateImageMetadata(input: ImageMetadataInput, existingAngles:
   }
   if (!hasAllowedImageExtension(input.fileName)) {
     errors.push("Use a file ending in .jpg, .jpeg, .png, or .webp.");
+  }
+  if (!isSafeUploadFileName(input.fileName, { allowedExtensions })) {
+    errors.push("Use a simple image filename without folders, control characters, or unsafe path characters.");
   }
   if (input.fileSizeBytes <= 0) {
     errors.push("The image file is empty or unreadable.");

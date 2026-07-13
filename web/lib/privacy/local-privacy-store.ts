@@ -2,6 +2,7 @@ import type { SavedBuild, StandardFaceProfile, TemporaryImageReference } from "@
 import type { ConsentState } from "./consent";
 import type { ApplicationPreferences, DeletionRecord, DeletionScope } from "./data-lifecycle";
 import type { ScreenshotReference } from "@/lib/refinement/screenshot-refinement";
+import { parseLocalStorageJSON } from "@/lib/security/security-hardening";
 
 export interface LocalPrivacyStore {
   saveConsentState(consent: ConsentState): void;
@@ -147,14 +148,14 @@ export function createBrowserLocalPrivacyStore(
       storage.setItem(consentKey, JSON.stringify(consent));
     },
     getConsentState() {
-      return JSON.parse(storage.getItem(consentKey) ?? "null") as ConsentState | null;
+      return parseLocalStorageJSON<ConsentState | null>(storage.getItem(consentKey), null).value;
     },
     saveBuild(build) {
       const saved = this.getSavedBuilds();
       storage.setItem(savedBuildKey, JSON.stringify([...saved, build]));
     },
     getSavedBuilds() {
-      return JSON.parse(storage.getItem(savedBuildKey) ?? "[]") as SavedBuild[];
+      return parseLocalStorageJSON<SavedBuild[]>(storage.getItem(savedBuildKey), []).value;
     },
     deleteSavedBuild(buildID) {
       storage.setItem(savedBuildKey, JSON.stringify(this.getSavedBuilds().filter((build) => build.id !== buildID)));
@@ -174,7 +175,7 @@ export function createBrowserLocalPrivacyStore(
       );
     },
     getApplicationPreferences() {
-      return JSON.parse(storage.getItem(preferencesKey) ?? "{}") as ApplicationPreferences;
+      return parseLocalStorageJSON<ApplicationPreferences>(storage.getItem(preferencesKey), {}).value;
     },
     deleteApplicationPreferences() {
       storage.removeItem(preferencesKey);
@@ -185,7 +186,7 @@ export function createBrowserLocalPrivacyStore(
       storage.setItem(deletionKey, JSON.stringify([...records, { scope, completedAt: new Date().toISOString() }]));
     },
     getDeletionRecords() {
-      return JSON.parse(storage.getItem(deletionKey) ?? "[]") as DeletionRecord[];
+      return parseLocalStorageJSON<DeletionRecord[]>(storage.getItem(deletionKey), []).value;
     }
   };
 }

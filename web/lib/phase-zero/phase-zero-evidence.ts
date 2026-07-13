@@ -1,5 +1,6 @@
 import type { CapturedAngleID, ISODateString } from "@/types/domain";
 import type { Phase0EntityID, Phase0VerificationState } from "./phase-zero-domain";
+import { isSafeRepositoryRelativePath } from "@/lib/security/security-hardening";
 
 export const PHASE0_EVIDENCE_SCHEMA_VERSION = "phase0-evidence-v1";
 export const PHASE0_CAPTURE_LOG_SCHEMA_VERSION = "phase0-capture-log-v1";
@@ -231,7 +232,7 @@ function validateActionReferences(log: Phase0CaptureLog, errors: Phase0EvidenceV
 }
 
 function isRelativePath(value: string) {
-  return hasUsableText(value) && !value.startsWith("/") && !/^[a-z]+:\/\//i.test(value) && !/^[A-Za-z]:[\\/]/.test(value) && !value.split("/").includes("..");
+  return hasUsableText(value) && isSafeRepositoryRelativePath(value);
 }
 
 function isISODate(value: string) {

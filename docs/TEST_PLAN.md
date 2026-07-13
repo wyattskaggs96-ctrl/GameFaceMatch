@@ -113,6 +113,18 @@ Analytics tests should include:
 - Rejection of unknown payload keys and long free-form strings
 - No analytics SDK or network provider required for the MVP
 
+## Security hardening coverage
+
+Security tests should include:
+
+- Production browser source maps remain disabled
+- CSV exports neutralize spreadsheet formulas
+- Upload filenames reject path traversal, folders, control characters, and unsafe extensions
+- Evidence paths reject absolute paths, URLs, Windows paths, encoded traversal, and parent traversal
+- Malformed or oversized localStorage JSON falls back safely
+- Untrusted metadata rejects unknown keys, control characters, long strings, and non-primitive values
+- Production recommendation and publication gates cannot be enabled by spoofed partial reports, fixture records, placeholders, or environment variables alone
+
 ## Browser end-to-end coverage
 
 The active web MVP uses Playwright for production-representative browser coverage under `web/tests/e2e/`.

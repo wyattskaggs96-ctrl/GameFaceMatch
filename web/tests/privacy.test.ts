@@ -153,6 +153,21 @@ describe("local privacy store", () => {
     expect(assertNoRawImagesInStorage(storage)).toEqual({ passed: true, unsafeMatches: [] });
   });
 
+  it("falls back safely when browser localStorage contains malformed or oversized JSON", () => {
+    const storage = memoryStorage();
+    const store = createBrowserLocalPrivacyStore(storage);
+
+    storage.setItem("gameface-match:saved-builds", "{not-json");
+    storage.setItem("gameface-match:consent", "x".repeat(300 * 1024));
+    storage.setItem("gameface-match:preferences", "[");
+    storage.setItem("gameface-match:deletion-records", "[");
+
+    expect(store.getSavedBuilds()).toEqual([]);
+    expect(store.getConsentState()).toBeNull();
+    expect(store.getApplicationPreferences()).toEqual({});
+    expect(store.getDeletionRecords()).toEqual([]);
+  });
+
   it("saves derived profiles only through explicit browser profile storage without raw media", async () => {
     const storage = memoryStorage();
     const store = createBrowserSavedProfileStorage(storage, globalThis.crypto ?? null);

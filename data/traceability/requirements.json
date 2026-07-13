@@ -1060,6 +1060,27 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-037",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Deterministic 25% secondary-angle sample",
+      "summary": "Implement a reproducible no-cherry-picking secondary-angle selection method using environment_id + verifier_id + catalog_version as the deterministic seed, hashing that seed with each eligible catalog ID, sorting by hash, selecting the first required quartile, storing the method and seed input, covering categories, and producing a human-readable sample report.",
+      "owningModule": "Second-person verification",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-second-verifier-workspace.ts",
+        "web/features/phase-zero/SecondVerifierWorkspace.tsx",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_CATALOG_WORKFLOW.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-second-verifier-workspace.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Second-verifier workspace tests verify deterministic SHA-256 category-quartile sampling, repeated stable output, input-order independence, seed-change sensitivity, per-category quartile counts, stored seed and selected records, and human-readable sample report contents.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

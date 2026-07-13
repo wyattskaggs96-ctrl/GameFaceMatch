@@ -77,6 +77,8 @@ The development-only catalog-manager review console lives in the web Phase 0 too
 
 The development-only second-verifier workspace is separate from catalog-manager review. It records the verifier environment, independent menu counts, independent catalog counts, native-order confirmation, record-by-record checks, evidence-file checks, front-view verification, secondary-angle sampling, dependency and exception review, mismatch reports, and sign-off. Primary researcher observations and verifier observations must remain distinct; exported second-person verification records still require package validation before publication.
 
+Secondary-angle sampling is deterministic to prevent cherry-picking. For each category, the workspace builds the seed from `environment_id + verifier_id + catalog_version`, hashes that seed with each eligible catalog ID using SHA-256, sorts eligible records by hash, and selects the first required quartile for secondary-angle review. The workspace stores the method ID, seed input, selected records, per-category coverage, and a human-readable sample report.
+
 Source-video intake is local-only. `inspect` preserves original video files and reports metadata from `ffprobe` when available. `extract-frame` produces derivative still frames only when `ffmpeg` is installed; otherwise it returns a disabled result so operators can continue recording timestamp references and extract frames later.
 
 ## Publication gate

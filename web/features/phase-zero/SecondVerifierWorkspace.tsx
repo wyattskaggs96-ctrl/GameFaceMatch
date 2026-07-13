@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { Alert, Button, Card, SelectField, StatusBadge, TextField } from "@/components/design-system";
 import {
   addSecondVerifierRecordCheck,
+  applySecondaryAngleSampleToWorkspace,
+  createDeterministicSecondaryAngleSample,
   createEmptySecondVerifierWorkspace,
   createSecondVerifierCountCheck,
   createSecondVerifierRecordCheck,
@@ -38,6 +40,16 @@ interface RecordDraft {
 const now = () => new Date().toISOString();
 const checkStatuses: Phase0VerifierCheckStatus[] = ["confirmed", "mismatch", "notChecked", "notApplicable"];
 const allowedStatuses = getAllowedSecondVerifierStatuses();
+const defaultEligibleCatalogIDs = [
+  "CF27_TESTONLY_SECOND_HEAD_001,head",
+  "CF27_TESTONLY_SECOND_HEAD_002,head",
+  "CF27_TESTONLY_SECOND_HEAD_003,head",
+  "CF27_TESTONLY_SECOND_HEAD_004,head",
+  "CF27_TESTONLY_SECOND_HAIR_001,hairstyle",
+  "CF27_TESTONLY_SECOND_HAIR_002,hairstyle",
+  "CF27_TESTONLY_SECOND_HAIR_003,hairstyle",
+  "CF27_TESTONLY_SECOND_HAIR_004,hairstyle"
+].join("\n");
 
 const initialDraft: RecordDraft = {
   recordID: "second-review-record-synthetic",
@@ -75,6 +87,8 @@ export function SecondVerifierWorkspace() {
   const [catalogLabel, setCatalogLabel] = useState("Head catalog count");
   const [catalogPrimaryCount, setCatalogPrimaryCount] = useState("0");
   const [catalogVerifierCount, setCatalogVerifierCount] = useState("0");
+  const [catalogVersion, setCatalogVersion] = useState("catalog-version-synthetic");
+  const [eligibleCatalogIDs, setEligibleCatalogIDs] = useState(defaultEligibleCatalogIDs);
   const [signOffNotes, setSignOffNotes] = useState("");
   const validation = useMemo(() => validateSecondVerifierWorkspace(workspace), [workspace]);
   const exportedRecords = useMemo(() => exportSecondPersonVerificationRecords(workspace), [workspace]);
@@ -120,6 +134,27 @@ export function SecondVerifierWorkspace() {
       signedOffAt: null,
       signOffVerifierID: null,
       signOffNotes: ""
+    }));
+  }
+
+  async function generateSecondaryAngleSample() {
+    const timestamp = now();
+    const sample = await createDeterministicSecondaryAngleSample({
+      seed: {
+        environmentID: workspace.environment.verifierEnvironmentID,
+        verifierID: workspace.environment.verifierID,
+        catalogVersion
+      },
+      eligibleRecords: parseEligibleCatalogIDs(eligibleCatalogIDs)
+    });
+    setWorkspace((currentWorkspace) => applySecondaryAngleSampleToWorkspace({
+      workspace: currentWorkspace,
+      sample,
+      updatedAt: timestamp
+    }));
+    setDraft((currentDraft) => ({
+      ...currentDraft,
+      randomizationMethod: `${sample.methodID}; seed=${sample.seedInput}`
     }));
   }
 
@@ -209,6 +244,26 @@ export function SecondVerifierWorkspace() {
             <Button variant="secondary" onClick={addCatalogCountCheck}>Add catalog count</Button>
           </div>
         </Card>
+        <Card>
+          <h3>Deterministic secondary-angle sample</h3>
+          <p className="supporting">
+            The sample uses environment ID + verifier ID + catalog version, hashed with each eligible catalog ID, then selects the first quartile per category.
+          </p>
+          <div className="form-stack">
+            <TextField label="Catalog version" value={catalogVersion} onChange={(event) => setCatalogVersion(event.currentTarget.value)} />
+            <label className="form-field" htmlFor="second-verifier-eligible-ids">
+              <span>Eligible catalog IDs and categories</span>
+              <textarea
+                id="second-verifier-eligible-ids"
+                rows={8}
+                value={eligibleCatalogIDs}
+                onChange={(event) => setEligibleCatalogIDs(event.currentTarget.value)}
+              />
+              <span className="field-note">One record per line: stableInternalID,category. Use only audit records backed by evidence.</span>
+            </label>
+            <Button variant="secondary" onClick={() => void generateSecondaryAngleSample()}>Generate sample</Button>
+          </div>
+        </Card>
         <Card tone={validation.signOffReady ? "success" : "danger"}>
           <h3>Verification summary</h3>
           <dl className="metadata-list">
@@ -221,6 +276,20 @@ export function SecondVerifierWorkspace() {
           </dl>
         </Card>
       </div>
+
+      {workspace.secondaryAngleSample ? (
+        <Card>
+          <h3>Secondary-angle sample report</h3>
+          <dl className="metadata-list">
+            <div><dt>Method</dt><dd>{workspace.secondaryAngleSample.methodID}</dd></div>
+            <div><dt>Seed input</dt><dd>{workspace.secondaryAngleSample.seedInput}</dd></div>
+            <div><dt>Selected</dt><dd>{workspace.secondaryAngleSample.selectedCount}/{workspace.secondaryAngleSample.eligibleCount}</dd></div>
+          </dl>
+          <pre className="code-block" aria-label="Deterministic secondary-angle sample report">
+            {workspace.secondaryAngleSample.humanReadableReport}
+          </pre>
+        </Card>
+      ) : null}
 
       <Card>
         <h3>Record-by-record verification</h3>
@@ -350,4 +419,15 @@ function VerifierStatusField({
 
 function splitList(value: string) {
   return value.split(",").map((item) => item.trim()).filter(Boolean);
+}
+
+function parseEligibleCatalogIDs(value: string) {
+  return value
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const [stableInternalID, category = "uncategorized"] = line.split(",").map((item) => item.trim());
+      return { stableInternalID, category };
+    });
 }

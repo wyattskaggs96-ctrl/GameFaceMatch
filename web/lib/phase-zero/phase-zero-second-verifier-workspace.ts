@@ -85,6 +85,47 @@ export interface Phase0SecondVerifierMismatchReport {
   notes: string;
 }
 
+export interface Phase0SecondaryAngleEligibleCatalogRecord {
+  stableInternalID: Phase0EntityID;
+  category: string;
+}
+
+export interface Phase0SecondaryAngleSampleSeed {
+  environmentID: Phase0EntityID;
+  verifierID: string;
+  catalogVersion: string;
+}
+
+export interface Phase0SecondaryAngleSampleSelection {
+  stableInternalID: Phase0EntityID;
+  category: string;
+  hashInput: string;
+  hash: string;
+  categoryRank: number;
+  categorySize: number;
+  requiredCategorySampleSize: number;
+}
+
+export interface Phase0SecondaryAngleCategorySampleSummary {
+  category: string;
+  eligibleCount: number;
+  requiredSampleSize: number;
+  selectedCount: number;
+  selectedStableInternalIDs: Phase0EntityID[];
+}
+
+export interface Phase0SecondaryAngleSampleReport {
+  methodID: "deterministic-sha256-category-quartile-v1";
+  methodDescription: string;
+  seedInput: string;
+  seed: Phase0SecondaryAngleSampleSeed;
+  eligibleCount: number;
+  selectedCount: number;
+  categories: Phase0SecondaryAngleCategorySampleSummary[];
+  selectedRecords: Phase0SecondaryAngleSampleSelection[];
+  humanReadableReport: string;
+}
+
 export interface Phase0SecondVerifierWorkspace {
   schemaVersion: typeof PHASE0_SECOND_VERIFIER_WORKSPACE_SCHEMA_VERSION;
   workspaceID: Phase0EntityID;
@@ -95,6 +136,7 @@ export interface Phase0SecondVerifierWorkspace {
   catalogCountChecks: Phase0SecondVerifierCountCheck[];
   recordChecks: Phase0SecondVerifierRecordCheck[];
   mismatchReports: Phase0SecondVerifierMismatchReport[];
+  secondaryAngleSample: Phase0SecondaryAngleSampleReport | null;
   signedOffAt: ISODateString | null;
   signOffVerifierID: string | null;
   signOffNotes: string;
@@ -168,6 +210,79 @@ export function createEmptySecondVerifierWorkspace(input: {
     catalogCountChecks: [],
     recordChecks: [],
     mismatchReports: [],
+    secondaryAngleSample: null,
+    signedOffAt: null,
+    signOffVerifierID: null,
+    signOffNotes: ""
+  };
+}
+
+export async function createDeterministicSecondaryAngleSample(input: {
+  seed: Phase0SecondaryAngleSampleSeed;
+  eligibleRecords: Phase0SecondaryAngleEligibleCatalogRecord[];
+}): Promise<Phase0SecondaryAngleSampleReport> {
+  const seedInput = `${input.seed.environmentID.trim()}+${input.seed.verifierID.trim()}+${input.seed.catalogVersion.trim()}`;
+  const grouped = groupEligibleRecords(input.eligibleRecords);
+  const categories: Phase0SecondaryAngleCategorySampleSummary[] = [];
+  const selectedRecords: Phase0SecondaryAngleSampleSelection[] = [];
+
+  for (const [category, records] of grouped.entries()) {
+    const ranked = await Promise.all(records.map(async (record) => {
+      const hashInput = `${seedInput}+${record.stableInternalID}`;
+      return {
+        stableInternalID: record.stableInternalID,
+        category,
+        hashInput,
+        hash: await sha256Hex(hashInput)
+      };
+    }));
+    ranked.sort((first, second) => first.hash.localeCompare(second.hash) || first.stableInternalID.localeCompare(second.stableInternalID));
+    const requiredSampleSize = Math.ceil(ranked.length / 4);
+    const selected = ranked.slice(0, requiredSampleSize).map((record, index): Phase0SecondaryAngleSampleSelection => ({
+      ...record,
+      categoryRank: index + 1,
+      categorySize: ranked.length,
+      requiredCategorySampleSize: requiredSampleSize
+    }));
+    selectedRecords.push(...selected);
+    categories.push({
+      category,
+      eligibleCount: ranked.length,
+      requiredSampleSize,
+      selectedCount: selected.length,
+      selectedStableInternalIDs: selected.map((record) => record.stableInternalID)
+    });
+  }
+
+  selectedRecords.sort((first, second) => first.category.localeCompare(second.category) || first.categoryRank - second.categoryRank);
+  categories.sort((first, second) => first.category.localeCompare(second.category));
+
+  return {
+    methodID: "deterministic-sha256-category-quartile-v1",
+    methodDescription: "For each category, hash environment_id + verifier_id + catalog_version with every eligible catalog ID, sort by SHA-256 hash, and select the first required quartile.",
+    seedInput,
+    seed: {
+      environmentID: input.seed.environmentID.trim(),
+      verifierID: input.seed.verifierID.trim(),
+      catalogVersion: input.seed.catalogVersion.trim()
+    },
+    eligibleCount: [...grouped.values()].reduce((total, records) => total + records.length, 0),
+    selectedCount: selectedRecords.length,
+    categories,
+    selectedRecords,
+    humanReadableReport: buildSecondaryAngleSampleReport(seedInput, categories, selectedRecords)
+  };
+}
+
+export function applySecondaryAngleSampleToWorkspace(input: {
+  workspace: Phase0SecondVerifierWorkspace;
+  sample: Phase0SecondaryAngleSampleReport;
+  updatedAt: ISODateString;
+}): Phase0SecondVerifierWorkspace {
+  return {
+    ...input.workspace,
+    updatedAt: input.updatedAt,
+    secondaryAngleSample: input.sample,
     signedOffAt: null,
     signOffVerifierID: null,
     signOffNotes: ""
@@ -446,6 +561,7 @@ function validateRecordCheck(
     catalogCountChecks: [],
     recordChecks: [record],
     mismatchReports: [],
+    secondaryAngleSample: null,
     signedOffAt: null,
     signOffVerifierID: null,
     signOffNotes: ""
@@ -544,6 +660,47 @@ function emptyEnvironment(nowISO: ISODateString): Phase0SecondVerifierEnvironmen
     evidenceFileIDs: ["validation-evidence"],
     notes: ""
   };
+}
+
+function groupEligibleRecords(records: Phase0SecondaryAngleEligibleCatalogRecord[]) {
+  const grouped = new Map<string, Phase0SecondaryAngleEligibleCatalogRecord[]>();
+  const seen = new Set<string>();
+  for (const record of records) {
+    const stableInternalID = record.stableInternalID.trim();
+    const category = record.category.trim();
+    if (!stableInternalID || !category || seen.has(stableInternalID)) continue;
+    seen.add(stableInternalID);
+    grouped.set(category, [...(grouped.get(category) ?? []), { stableInternalID, category }]);
+  }
+  return new Map([...grouped.entries()].sort(([first], [second]) => first.localeCompare(second)));
+}
+
+function buildSecondaryAngleSampleReport(
+  seedInput: string,
+  categories: Phase0SecondaryAngleCategorySampleSummary[],
+  selectedRecords: Phase0SecondaryAngleSampleSelection[]
+) {
+  const lines = [
+    "Deterministic secondary-angle sample",
+    `Method: deterministic-sha256-category-quartile-v1`,
+    `Seed input: ${seedInput}`,
+    `Eligible records: ${categories.reduce((total, category) => total + category.eligibleCount, 0)}`,
+    `Selected records: ${selectedRecords.length}`,
+    "Category coverage:"
+  ];
+  for (const category of categories) {
+    lines.push(`- ${category.category}: ${category.selectedCount}/${category.eligibleCount} selected (${category.selectedStableInternalIDs.join(", ") || "none"})`);
+  }
+  lines.push("Selected record order:");
+  for (const record of selectedRecords) {
+    lines.push(`- ${record.category} #${record.categoryRank}/${record.categorySize}: ${record.stableInternalID} (${record.hash})`);
+  }
+  return lines.join("\n");
+}
+
+async function sha256Hex(text: string) {
+  const digest = await globalThis.crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
 function uniqueList(values: Phase0EntityID[]) {

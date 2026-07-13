@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   addSecondVerifierRecordCheck,
+  applySecondaryAngleSampleToWorkspace,
+  createDeterministicSecondaryAngleSample,
   createEmptySecondVerifierWorkspace,
   createSecondVerifierCountCheck,
   createSecondVerifierRecordCheck,
@@ -147,6 +149,78 @@ describe("Phase 0 second-verifier workspace", () => {
     expect(report.signOffReady).toBe(false);
     expect(codes(report.errors)).toContain("signOffBlocked");
   });
+
+  it("selects a stable deterministic 25 percent secondary-angle sample by category", async () => {
+    const sample = await createDeterministicSecondaryAngleSample({
+      seed: sampleSeed(),
+      eligibleRecords: eligibleRecords()
+    });
+    const repeated = await createDeterministicSecondaryAngleSample({
+      seed: sampleSeed(),
+      eligibleRecords: eligibleRecords()
+    });
+
+    expect(sample.selectedRecords.map((record) => record.stableInternalID)).toEqual(repeated.selectedRecords.map((record) => record.stableInternalID));
+    expect(sample.methodID).toBe("deterministic-sha256-category-quartile-v1");
+    expect(sample.seedInput).toBe("environment-test-only+second-reviewer-test-only+catalog-version-test-only");
+    expect(sample.categories.map((category) => ({
+      category: category.category,
+      eligibleCount: category.eligibleCount,
+      requiredSampleSize: category.requiredSampleSize,
+      selectedCount: category.selectedCount
+    }))).toEqual([
+      { category: "facialHair", eligibleCount: 1, requiredSampleSize: 1, selectedCount: 1 },
+      { category: "hairstyle", eligibleCount: 4, requiredSampleSize: 1, selectedCount: 1 },
+      { category: "head", eligibleCount: 5, requiredSampleSize: 2, selectedCount: 2 }
+    ]);
+    expect(sample.selectedCount).toBe(4);
+    expect(sample.humanReadableReport).toContain("Seed input: environment-test-only+second-reviewer-test-only+catalog-version-test-only");
+    expect(sample.humanReadableReport).toContain("Category coverage:");
+  });
+
+  it("does not allow cherry-picking by input order", async () => {
+    const first = await createDeterministicSecondaryAngleSample({
+      seed: sampleSeed(),
+      eligibleRecords: eligibleRecords()
+    });
+    const reordered = await createDeterministicSecondaryAngleSample({
+      seed: sampleSeed(),
+      eligibleRecords: [...eligibleRecords()].reverse()
+    });
+
+    expect(reordered.selectedRecords.map((record) => record.stableInternalID)).toEqual(first.selectedRecords.map((record) => record.stableInternalID));
+    expect(reordered.selectedRecords.map((record) => record.hash)).toEqual(first.selectedRecords.map((record) => record.hash));
+  });
+
+  it("changes the sample when the deterministic seed changes", async () => {
+    const first = await createDeterministicSecondaryAngleSample({
+      seed: sampleSeed(),
+      eligibleRecords: eligibleRecords()
+    });
+    const changed = await createDeterministicSecondaryAngleSample({
+      seed: { ...sampleSeed(), verifierID: "different-second-reviewer-test-only" },
+      eligibleRecords: eligibleRecords()
+    });
+
+    expect(changed.seedInput).not.toBe(first.seedInput);
+    expect(changed.selectedRecords.map((record) => record.hash)).not.toEqual(first.selectedRecords.map((record) => record.hash));
+  });
+
+  it("stores the sample report on the verifier workspace", async () => {
+    const sample = await createDeterministicSecondaryAngleSample({
+      seed: sampleSeed(),
+      eligibleRecords: eligibleRecords()
+    });
+    const workspace = applySecondaryAngleSampleToWorkspace({
+      workspace: validWorkspace(),
+      sample,
+      updatedAt: now
+    });
+
+    expect(workspace.secondaryAngleSample?.seed).toEqual(sampleSeed());
+    expect(workspace.secondaryAngleSample?.selectedRecords.every((record) => record.hashInput.includes(record.stableInternalID))).toBe(true);
+    expect(workspace.signedOffAt).toBeNull();
+  });
 });
 
 function validWorkspace(): Phase0SecondVerifierWorkspace {
@@ -203,4 +277,27 @@ function validRecordCheck(overrides: Partial<Parameters<typeof createSecondVerif
 
 function codes(reportIssues: Array<{ code: string }>) {
   return reportIssues.map((issue) => issue.code);
+}
+
+function sampleSeed() {
+  return {
+    environmentID: "environment-test-only",
+    verifierID: "second-reviewer-test-only",
+    catalogVersion: "catalog-version-test-only"
+  };
+}
+
+function eligibleRecords() {
+  return [
+    { stableInternalID: "CF27_TESTONLY_HEAD_001", category: "head" },
+    { stableInternalID: "CF27_TESTONLY_HEAD_002", category: "head" },
+    { stableInternalID: "CF27_TESTONLY_HEAD_003", category: "head" },
+    { stableInternalID: "CF27_TESTONLY_HEAD_004", category: "head" },
+    { stableInternalID: "CF27_TESTONLY_HEAD_005", category: "head" },
+    { stableInternalID: "CF27_TESTONLY_HAIR_001", category: "hairstyle" },
+    { stableInternalID: "CF27_TESTONLY_HAIR_002", category: "hairstyle" },
+    { stableInternalID: "CF27_TESTONLY_HAIR_003", category: "hairstyle" },
+    { stableInternalID: "CF27_TESTONLY_HAIR_004", category: "hairstyle" },
+    { stableInternalID: "CF27_TESTONLY_FACIAL_HAIR_001", category: "facialHair" }
+  ];
 }

@@ -31,27 +31,27 @@ export const REQUIRED_CAPTURE_ANGLES: ReadonlyArray<
   {
     id: "straightOn",
     label: "Straight-on",
-    instruction: "Face the camera directly, keep lips gently closed, and use even front lighting."
+    instruction: "Front view: face the camera directly, keep one face centered, hold a neutral expression with lips gently closed, and use even front lighting."
   },
   {
     id: "left45",
     label: "Left 45 degrees",
-    instruction: "Turn your head slightly to your left while keeping your face centered and still."
+    instruction: "Three-quarter view: turn your head about 45 degrees to your left while keeping the full face visible, centered, and still."
   },
   {
     id: "right45",
     label: "Right 45 degrees",
-    instruction: "Turn your head slightly to your right while keeping your face centered and still."
+    instruction: "Three-quarter view: turn your head about 45 degrees to your right while keeping the full face visible, centered, and still."
   },
   {
     id: "leftProfile",
     label: "Left profile",
-    instruction: "Turn to show the left side of your face. Keep one person in frame and avoid blur."
+    instruction: "Profile view: turn to show the left side of your face, keep one person in frame, avoid blur, and keep the full forehead, nose, lips, chin, and jaw visible."
   },
   {
     id: "rightProfile",
     label: "Right profile",
-    instruction: "Turn to show the right side of your face. Avoid strong shadows and motion."
+    instruction: "Profile view: turn to show the right side of your face, avoid strong shadows and motion, and keep the full forehead, nose, lips, chin, and jaw visible."
   }
 ];
 

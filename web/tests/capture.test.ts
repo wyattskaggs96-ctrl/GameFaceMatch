@@ -4,6 +4,7 @@ import {
   createInitialCaptureSession,
   getCompletedAngleCount,
   getMissingRequiredAngles,
+  REQUIRED_CAPTURE_ANGLES,
   removeAngleCapture,
   retakeAngle,
   setAngleCapture
@@ -22,6 +23,16 @@ describe("capture session", () => {
   it("requires all five capture angles", () => {
     const session = createInitialCaptureSession(new Date("2026-07-10T00:00:00.000Z"));
     expect(getMissingRequiredAngles(session.angles)).toEqual(["straightOn", "left45", "right45", "leftProfile", "rightProfile"]);
+  });
+
+  it("gives honest front, three-quarter, profile, one-face, and neutral-expression instructions", () => {
+    expect(REQUIRED_CAPTURE_ANGLES.map((angle) => angle.label)).toEqual(["Straight-on", "Left 45 degrees", "Right 45 degrees", "Left profile", "Right profile"]);
+    expect(REQUIRED_CAPTURE_ANGLES.find((angle) => angle.id === "straightOn")?.instruction).toContain("neutral expression");
+    expect(REQUIRED_CAPTURE_ANGLES.find((angle) => angle.id === "straightOn")?.instruction).toContain("one face centered");
+    expect(REQUIRED_CAPTURE_ANGLES.find((angle) => angle.id === "left45")?.instruction).toContain("Three-quarter view");
+    expect(REQUIRED_CAPTURE_ANGLES.find((angle) => angle.id === "right45")?.instruction).toContain("Three-quarter view");
+    expect(REQUIRED_CAPTURE_ANGLES.find((angle) => angle.id === "leftProfile")?.instruction).toContain("Profile view");
+    expect(REQUIRED_CAPTURE_ANGLES.find((angle) => angle.id === "rightProfile")?.instruction).toContain("Profile view");
   });
 
   it("recognizes completed required angles", () => {

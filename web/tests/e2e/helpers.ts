@@ -39,10 +39,18 @@ export async function navigateToCapture(page: Page) {
   await expect(page.getByRole("heading", { name: "Start a face match" })).toBeVisible();
   await page.getByRole("button", { name: "Prepare capture" }).click();
   await expect(page.getByRole("heading", { name: "Five clean RGB angles" })).toBeVisible();
+  await expect(page.getByText("Browser capture uses guided RGB images only.")).toBeVisible();
+  await expect(page.getByText("Keep one person in frame")).toBeVisible();
+  await expect(page.getByText("Hold the phone around arm's length.")).toBeVisible();
   await page.getByRole("button", { name: "Check browser capability" }).click();
   await expect(page.getByRole("heading", { name: "Camera or upload" })).toBeVisible();
+  await expect(page.getByText("Upload fallback is still an RGB-only workflow")).toBeVisible();
   await page.getByRole("button", { name: "Continue to guided capture" }).click();
   await expect(page.getByRole("heading", { name: "0 of 5 angles completed" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Angle plan" })).toBeVisible();
+  await expect(page.getByText("one straight-on front view, two three-quarter views, and two full profile views")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Retake without restarting" })).toBeVisible();
+  await expect(page.getByText("Browser RGB capture is not TrueDepth, depth geometry, ARKit, or 3D reconstruction.")).toBeVisible();
 }
 
 export async function uploadFiveSyntheticAngles(page: Page) {

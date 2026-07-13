@@ -424,6 +424,20 @@ export function GuidedCaptureFlow({
         </p>
       </ScreenHeader>
       <ProgressBar value={completedAngles} max={5} label="Required RGB angles" />
+      <div className="result-grid">
+        <Card tone="info">
+          <h2>Angle plan</h2>
+          <p>Capture one straight-on front view, two three-quarter views, and two full profile views. Complete all five before continuing.</p>
+        </Card>
+        <Card tone="info">
+          <h2>One-face RGB guidance</h2>
+          <p>Keep one person centered, use neutral expression with lips gently closed, and stay near arm's length unless guidance says to move.</p>
+        </Card>
+        <Card tone="warning">
+          <h2>Retake without restarting</h2>
+          <p>Use Retake or Replace upload for only the weak angle. Camera denial, unsupported browsers, or interrupted previews can use upload fallback.</p>
+        </Card>
+      </div>
       <div className="capture-workspace">
         <Card className="camera-panel">
           <div className="status-row">
@@ -438,7 +452,7 @@ export function GuidedCaptureFlow({
           <p>{currentAngle.instruction}</p>
           <Alert title="Mobile capture guidance" tone="info">
             Use portrait orientation when possible. The front-camera preview is mirrored like a selfie view, but captured still images are stored unmirrored for
-            review. Browser RGB capture is not TrueDepth.
+            review. Browser RGB capture is not TrueDepth, depth geometry, ARKit, or 3D reconstruction.
           </Alert>
           {isOffline ? (
             <Alert title="Offline" tone="warning">
@@ -516,6 +530,7 @@ export function GuidedCaptureFlow({
           {cameraError ? (
             <Alert title="Permission reset help" tone="info">
               iPhone Safari: Settings, Safari, Camera, then allow or reset this site. Android Chrome: lock icon, Site settings, Camera, then allow or reset.
+              Reload and start the camera again, or continue with upload fallback for each required RGB angle.
             </Alert>
           ) : null}
         </Card>

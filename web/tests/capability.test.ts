@@ -8,6 +8,10 @@ describe("browser capability states", () => {
       navigator: {} as Navigator
     });
     await expect(service.getCapabilityStatus()).resolves.toBe("insecureContext");
+    await expect(service.getCapabilityReport()).resolves.toMatchObject({
+      fallback: "fileUploadFallbackAvailable",
+      messages: expect.arrayContaining(["Camera preview requires HTTPS or localhost.", "File-upload fallback available."])
+    });
   });
 
   it("reports unsupported camera APIs", async () => {
@@ -16,6 +20,10 @@ describe("browser capability states", () => {
       navigator: {} as Navigator
     });
     await expect(service.getCapabilityStatus()).resolves.toBe("cameraApiUnsupported");
+    await expect(service.getCapabilityReport()).resolves.toMatchObject({
+      fallback: "fileUploadFallbackAvailable",
+      messages: expect.arrayContaining(["This browser does not expose camera APIs.", "File-upload fallback available."])
+    });
   });
 
   it("reports no camera available", async () => {
@@ -29,6 +37,10 @@ describe("browser capability states", () => {
       } as unknown as Navigator
     });
     await expect(service.getCapabilityStatus()).resolves.toBe("cameraUnavailable");
+    await expect(service.getCapabilityReport()).resolves.toMatchObject({
+      fallback: "fileUploadFallbackAvailable",
+      messages: expect.arrayContaining(["No camera device was found.", "File-upload fallback available."])
+    });
   });
 
   it("reports permission required when a camera exists", async () => {

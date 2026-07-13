@@ -37,7 +37,7 @@ export function BrowserCapabilityPanel({
       <ScreenHeader eyebrow="Browser capability" title="Camera or upload" id="browser-capability-title">
         <p>
           Live camera preview is optional in this foundation. Browser camera access requires HTTPS or localhost; every required angle has a manual upload
-          fallback.
+          fallback. Upload fallback is still an RGB-only workflow and does not add depth or TrueDepth geometry.
         </p>
       </ScreenHeader>
       {isLoading ? <LoadingState label="Checking browser capability" /> : null}
@@ -70,10 +70,26 @@ export function BrowserCapabilityPanel({
           <strong>{report.availableCameras.length}</strong>
         </div>
       </div>
+      {report.summary === "insecureContext" || report.summary === "cameraApiUnsupported" || report.summary === "cameraUnavailable" || report.summary === "noMatchingCameraDevice" ? (
+        <Alert title="Use upload fallback" tone="warning">
+          {report.summary === "insecureContext"
+            ? "Camera preview is blocked outside HTTPS or localhost. Open the app from a secure origin or continue with image upload."
+            : null}
+          {report.summary === "cameraApiUnsupported"
+            ? "This browser does not expose the camera API needed for live preview. Continue with image upload for each required angle."
+            : null}
+          {report.summary === "cameraUnavailable"
+            ? "No usable camera was found. Continue with image upload from the camera roll or another local image source."
+            : null}
+          {report.summary === "noMatchingCameraDevice"
+            ? "A front-facing camera could not be confirmed. You can still try camera preview or use upload fallback."
+            : null}
+        </Alert>
+      ) : null}
       {report.summary === "permissionDenied" || report.summary === "permissionBlocked" ? (
         <Alert title="Permission recovery" tone="warning">
           On iPhone Safari, open Settings, Safari, Camera, then allow or reset camera access for this site. On Android Chrome, use the lock icon in the address
-          bar, Site settings, Camera, then allow or reset the permission.
+          bar, Site settings, Camera, then allow or reset the permission. Reload this page and tap Check again, or use upload fallback for every angle.
         </Alert>
       ) : null}
       <div className="button-row">

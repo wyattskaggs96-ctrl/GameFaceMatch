@@ -1,0 +1,1118 @@
+{
+  "schemaVersion": "cf27-eye-color-research-candidates-v1",
+  "createdAt": "2026-07-13T12:39:17.900Z",
+  "updatedAt": "2026-07-13T12:39:17.900Z",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "sourceType": "researchCandidate",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "PRIMARY_RESEARCH_ONLY_NOT_SECOND_VERIFIED",
+  "verificationStateForAllRecords": "NOT_VERIFIED",
+  "scope": {
+    "category": "Eye Color",
+    "directlySelectedRecordCount": 7,
+    "directlySelectedNativeLabels": [
+      "Light Blue",
+      "Light Brown",
+      "Brown",
+      "Blue",
+      "Light Green",
+      "Grey",
+      "Hazel"
+    ],
+    "nativeOrderRangeObserved": "7 visible Eye Color tiles directly selected",
+    "completeCategoryCountClaimed": false,
+    "excludedLabels": [
+      "unselected or unseen Eye Color values, if any"
+    ],
+    "reasonCompletenessIsNotClaimed": "The recording shows seven visible selected tiles, but does not prove wrap behavior or a hard final selector boundary."
+  },
+  "context": {
+    "platformCode": "XBOXUNKNOWN",
+    "modeCode": "RTG",
+    "gameVersion": "UNKNOWN",
+    "patchVersion": "UNKNOWN",
+    "creationPath": "Road to Glory / Create Player / Player / Appearance / Head & Skin / Eye Color",
+    "sourceVideoID": "video-007"
+  },
+  "selectorObservations": {
+    "gridStructure": "4-column grid with 7 visible tiles",
+    "nativeOrderBasis": "visible tile position in the Eye Color grid",
+    "selectionSequenceBasis": "direct selected labels in the recording",
+    "firstObservedSelectedValue": "Light Blue",
+    "finalObservedSelectedValue": "Light Green",
+    "selectorAppearsComplete": false,
+    "selectorCompletenessExplanation": "All seven visible tiles are selected during the recording, but final boundary and wrap behavior are not shown.",
+    "wrapObserved": false,
+    "eyeColorChangesVisibleIrisPresentation": true,
+    "approximateColorSamplingComputed": true,
+    "otherVisibleSettingsChangedWhenChoosingEyeColor": false,
+    "characterRotationAvailable": true,
+    "selectedHeadRemainsConstant": true,
+    "eyeBlackPresent": true,
+    "eyeBlackEvaluationImpact": "Eye black does not cover the iris but can affect under-eye contrast and perceived color in the stable face frame."
+  },
+  "observationPolicy": {
+    "nativeLabelsPreserved": true,
+    "noGenericColorSubstitutionForUnreadableLabels": true,
+    "sampledColorIsDerivedResearchMetadataOnly": true,
+    "noSensitiveTraitInference": true,
+    "eyeColorExcludedFromGeometrySimilarity": true,
+    "productionUseAllowed": false,
+    "sourceMasterPreserved": true,
+    "derivativesAreLocalAndGitIgnored": true
+  },
+  "sourceVideos": [
+    {
+      "videoID": "video-007",
+      "workingFilename": "07_Eye_Color.mp4",
+      "portableRelativeEvidencePath": "OWNER_DOWNLOADS/a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+      "sha256": "c07fdab8d65b19859ae5985dc4fb06bb9919aecf597996ab74463bc6020acfd3",
+      "durationSeconds": 29.33,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "identifiedContent": "Eye Color menu and options"
+    }
+  ],
+  "nativeOrder": [
+    {
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_001",
+      "nativeLabelOriginalText": "Light Blue",
+      "nativeRow": 1,
+      "nativeColumn": 1
+    },
+    {
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_002",
+      "nativeLabelOriginalText": "Light Brown",
+      "nativeRow": 1,
+      "nativeColumn": 2
+    },
+    {
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_003",
+      "nativeLabelOriginalText": "Brown",
+      "nativeRow": 1,
+      "nativeColumn": 3
+    },
+    {
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_004",
+      "nativeLabelOriginalText": "Blue",
+      "nativeRow": 1,
+      "nativeColumn": 4
+    },
+    {
+      "nativeOrder": 5,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_005",
+      "nativeLabelOriginalText": "Light Green",
+      "nativeRow": 2,
+      "nativeColumn": 1
+    },
+    {
+      "nativeOrder": 6,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_006",
+      "nativeLabelOriginalText": "Grey",
+      "nativeRow": 2,
+      "nativeColumn": 2
+    },
+    {
+      "nativeOrder": 7,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_007",
+      "nativeLabelOriginalText": "Hazel",
+      "nativeRow": 2,
+      "nativeColumn": 3
+    }
+  ],
+  "selectionSequence": [
+    {
+      "sequenceOrder": 1,
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_001",
+      "nativeLabelOriginalText": "Light Blue",
+      "timestampRangeSeconds": "13.0-13.9",
+      "stableTimestampSeconds": 13,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 2,
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_002",
+      "nativeLabelOriginalText": "Light Brown",
+      "timestampRangeSeconds": "14.0-15.9",
+      "stableTimestampSeconds": 15,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 3,
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_003",
+      "nativeLabelOriginalText": "Brown",
+      "timestampRangeSeconds": "16.0-17.9",
+      "stableTimestampSeconds": 17,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 4,
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_004",
+      "nativeLabelOriginalText": "Blue",
+      "timestampRangeSeconds": "18.0-20.9",
+      "stableTimestampSeconds": 19,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 5,
+      "nativeOrder": 7,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_007",
+      "nativeLabelOriginalText": "Hazel",
+      "timestampRangeSeconds": "21.0-22.9",
+      "stableTimestampSeconds": 22,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 6,
+      "nativeOrder": 6,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_006",
+      "nativeLabelOriginalText": "Grey",
+      "timestampRangeSeconds": "23.0-24.9",
+      "stableTimestampSeconds": 24,
+      "selectionType": "deliberately_selected"
+    },
+    {
+      "sequenceOrder": 7,
+      "nativeOrder": 5,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_005",
+      "nativeLabelOriginalText": "Light Green",
+      "timestampRangeSeconds": "25.0-29.3",
+      "stableTimestampSeconds": 28,
+      "selectionType": "deliberately_selected"
+    }
+  ],
+  "unreliableVisibleResultFlags": [],
+  "labelsRequiringManualTextConfirmation": [],
+  "manualTextConfirmationNotes": "All seven selected native Eye Color labels were readable in direct frame inspection. Reconfirm all labels during second-person verification before production.",
+  "records": [
+    {
+      "nativeOrder": 1,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_001",
+      "nativeLabelOriginalText": "Light Blue",
+      "visibleGameLabelOrIndex": "Light Blue",
+      "category": "Eye Color",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeColor",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-007",
+          "timestampRangeSeconds": "13.0-13.9",
+          "stableTimestampSeconds": 13,
+          "basis": "direct selected Eye Color label visible in the Eye Color grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_THUMBNAIL_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_001-menu_thumbnail_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_001/CF27_XBOXUNKNOWN_RTG_EYECOLOR_001_MENU_THUMBNAIL_EVIDENCE_video-007_13p00s.png",
+          "outputSha256": "b99e80a249cc920e5e89e87d14361562d2924012e41728f027c14b819326ea2e",
+          "sourceTimestampSeconds": 13
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_001-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_001/CF27_XBOXUNKNOWN_RTG_EYECOLOR_001_CHARACTER_STABLE_video-007_13p00s.png",
+          "outputSha256": "b99e80a249cc920e5e89e87d14361562d2924012e41728f027c14b819326ea2e",
+          "sourceTimestampSeconds": 13
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 1,
+        "basis": "visible tile position in the Eye Color grid; selection sequence is stored separately because bottom-row navigation was reverse order"
+      },
+      "sampledIrisColor": {
+        "status": "ESTIMATED",
+        "source": "selected_menu_thumbnail_crop",
+        "timestampSeconds": 13,
+        "crop": {
+          "x": 125,
+          "y": 263,
+          "width": 54,
+          "height": 42
+        },
+        "averageRgb": {
+          "red": 66,
+          "green": 70,
+          "blue": 66
+        },
+        "approximateHex": "#424642",
+        "sampledPixelCount": 810,
+        "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+        "limitations": [
+          "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+          "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+        ]
+      },
+      "visibilityAssessment": {
+        "selectedMenuThumbnailColorVisible": true,
+        "stableFaceFrameColorVisible": "limited_visible",
+        "colorVisibleConfidence": "medium",
+        "flaggedForUnreliableVisibleResult": false,
+        "reliabilitySummary": "Native label and selected menu thumbnail are readable. Stable face-frame iris color is limited by screen-recording resolution, gaze direction, compression, and lighting.",
+        "requiresProductionRecaptureForReliableComparison": true
+      },
+      "lightingAndObstructionLimitations": {
+        "lightingLimitations": [
+          "The menu uses dark background lighting and game-rendered eye highlights.",
+          "The eye thumbnail is clearer than the live character face for color evaluation."
+        ],
+        "eyeBlackPresent": true,
+        "eyeBlackImpact": "Eye black does not cover the iris but darkens the under-eye area and can reduce perceived contrast.",
+        "compressionLimitations": "Screen-recording compression and 1080p resolution limit precise iris-color evaluation.",
+        "notificationOverlayPresent": false,
+        "notificationOverlayImpact": "none_observed"
+      },
+      "completenessStatus": {
+        "menuThumbnailEvidence": "present",
+        "stableFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "sampledIrisColor": {
+          "status": "ESTIMATED",
+          "source": "selected_menu_thumbnail_crop",
+          "timestampSeconds": 13,
+          "crop": {
+            "x": 125,
+            "y": 263,
+            "width": 54,
+            "height": 42
+          },
+          "averageRgb": {
+            "red": 66,
+            "green": 70,
+            "blue": 66
+          },
+          "approximateHex": "#424642",
+          "sampledPixelCount": 810,
+          "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+          "limitations": [
+            "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+            "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+          ]
+        },
+        "colorSamplingPolicy": "Approximate color is sampled from the selected menu thumbnail eye-region crop; it does not replace the native label.",
+        "nativeLabelPolicy": "Native game label is authoritative. Do not substitute generic color names for unreadable or unverified labels.",
+        "sensitiveTraitPolicy": "Eye color is recorded only as a game appearance setting. No identity, ethnicity, health, attractiveness, or other sensitive inference is recorded."
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 2,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_002",
+      "nativeLabelOriginalText": "Light Brown",
+      "visibleGameLabelOrIndex": "Light Brown",
+      "category": "Eye Color",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeColor",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-007",
+          "timestampRangeSeconds": "14.0-15.9",
+          "stableTimestampSeconds": 15,
+          "basis": "direct selected Eye Color label visible in the Eye Color grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_THUMBNAIL_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_002-menu_thumbnail_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_002/CF27_XBOXUNKNOWN_RTG_EYECOLOR_002_MENU_THUMBNAIL_EVIDENCE_video-007_15p00s.png",
+          "outputSha256": "9a4cf2c09307365c9b13391beaaa5b736811b46488622d8655f7955602731335",
+          "sourceTimestampSeconds": 15
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_002-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_002/CF27_XBOXUNKNOWN_RTG_EYECOLOR_002_CHARACTER_STABLE_video-007_15p00s.png",
+          "outputSha256": "9a4cf2c09307365c9b13391beaaa5b736811b46488622d8655f7955602731335",
+          "sourceTimestampSeconds": 15
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 2,
+        "basis": "visible tile position in the Eye Color grid; selection sequence is stored separately because bottom-row navigation was reverse order"
+      },
+      "sampledIrisColor": {
+        "status": "ESTIMATED",
+        "source": "selected_menu_thumbnail_crop",
+        "timestampSeconds": 15,
+        "crop": {
+          "x": 272,
+          "y": 263,
+          "width": 54,
+          "height": 42
+        },
+        "averageRgb": {
+          "red": 63,
+          "green": 33,
+          "blue": 20
+        },
+        "approximateHex": "#3f2114",
+        "sampledPixelCount": 1033,
+        "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+        "limitations": [
+          "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+          "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+        ]
+      },
+      "visibilityAssessment": {
+        "selectedMenuThumbnailColorVisible": true,
+        "stableFaceFrameColorVisible": "limited_visible",
+        "colorVisibleConfidence": "medium",
+        "flaggedForUnreliableVisibleResult": false,
+        "reliabilitySummary": "Native label and selected menu thumbnail are readable. Stable face-frame iris color is limited by screen-recording resolution, gaze direction, compression, and lighting.",
+        "requiresProductionRecaptureForReliableComparison": true
+      },
+      "lightingAndObstructionLimitations": {
+        "lightingLimitations": [
+          "The menu uses dark background lighting and game-rendered eye highlights.",
+          "The eye thumbnail is clearer than the live character face for color evaluation."
+        ],
+        "eyeBlackPresent": true,
+        "eyeBlackImpact": "Eye black does not cover the iris but darkens the under-eye area and can reduce perceived contrast.",
+        "compressionLimitations": "Screen-recording compression and 1080p resolution limit precise iris-color evaluation.",
+        "notificationOverlayPresent": false,
+        "notificationOverlayImpact": "none_observed"
+      },
+      "completenessStatus": {
+        "menuThumbnailEvidence": "present",
+        "stableFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "sampledIrisColor": {
+          "status": "ESTIMATED",
+          "source": "selected_menu_thumbnail_crop",
+          "timestampSeconds": 15,
+          "crop": {
+            "x": 272,
+            "y": 263,
+            "width": 54,
+            "height": 42
+          },
+          "averageRgb": {
+            "red": 63,
+            "green": 33,
+            "blue": 20
+          },
+          "approximateHex": "#3f2114",
+          "sampledPixelCount": 1033,
+          "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+          "limitations": [
+            "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+            "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+          ]
+        },
+        "colorSamplingPolicy": "Approximate color is sampled from the selected menu thumbnail eye-region crop; it does not replace the native label.",
+        "nativeLabelPolicy": "Native game label is authoritative. Do not substitute generic color names for unreadable or unverified labels.",
+        "sensitiveTraitPolicy": "Eye color is recorded only as a game appearance setting. No identity, ethnicity, health, attractiveness, or other sensitive inference is recorded."
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 3,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_003",
+      "nativeLabelOriginalText": "Brown",
+      "visibleGameLabelOrIndex": "Brown",
+      "category": "Eye Color",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeColor",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-007",
+          "timestampRangeSeconds": "16.0-17.9",
+          "stableTimestampSeconds": 17,
+          "basis": "direct selected Eye Color label visible in the Eye Color grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_THUMBNAIL_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_003-menu_thumbnail_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_003/CF27_XBOXUNKNOWN_RTG_EYECOLOR_003_MENU_THUMBNAIL_EVIDENCE_video-007_17p00s.png",
+          "outputSha256": "f54a4d7ba5f909446093ec7d6eb57f9363f438ac5f3478c67c79777d917918ac",
+          "sourceTimestampSeconds": 17
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_003-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_003/CF27_XBOXUNKNOWN_RTG_EYECOLOR_003_CHARACTER_STABLE_video-007_17p00s.png",
+          "outputSha256": "f54a4d7ba5f909446093ec7d6eb57f9363f438ac5f3478c67c79777d917918ac",
+          "sourceTimestampSeconds": 17
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 3,
+        "basis": "visible tile position in the Eye Color grid; selection sequence is stored separately because bottom-row navigation was reverse order"
+      },
+      "sampledIrisColor": {
+        "status": "ESTIMATED",
+        "source": "selected_menu_thumbnail_crop",
+        "timestampSeconds": 17,
+        "crop": {
+          "x": 419,
+          "y": 263,
+          "width": 54,
+          "height": 42
+        },
+        "averageRgb": {
+          "red": 57,
+          "green": 33,
+          "blue": 27
+        },
+        "approximateHex": "#39211b",
+        "sampledPixelCount": 833,
+        "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+        "limitations": [
+          "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+          "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+        ]
+      },
+      "visibilityAssessment": {
+        "selectedMenuThumbnailColorVisible": true,
+        "stableFaceFrameColorVisible": "visible",
+        "colorVisibleConfidence": "medium_high",
+        "flaggedForUnreliableVisibleResult": false,
+        "reliabilitySummary": "Native label and selected menu thumbnail are readable. Stable face-frame iris color is limited by screen-recording resolution, gaze direction, compression, and lighting.",
+        "requiresProductionRecaptureForReliableComparison": true
+      },
+      "lightingAndObstructionLimitations": {
+        "lightingLimitations": [
+          "The menu uses dark background lighting and game-rendered eye highlights.",
+          "The eye thumbnail is clearer than the live character face for color evaluation."
+        ],
+        "eyeBlackPresent": true,
+        "eyeBlackImpact": "Eye black does not cover the iris but darkens the under-eye area and can reduce perceived contrast.",
+        "compressionLimitations": "Screen-recording compression and 1080p resolution limit precise iris-color evaluation.",
+        "notificationOverlayPresent": false,
+        "notificationOverlayImpact": "none_observed"
+      },
+      "completenessStatus": {
+        "menuThumbnailEvidence": "present",
+        "stableFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "sampledIrisColor": {
+          "status": "ESTIMATED",
+          "source": "selected_menu_thumbnail_crop",
+          "timestampSeconds": 17,
+          "crop": {
+            "x": 419,
+            "y": 263,
+            "width": 54,
+            "height": 42
+          },
+          "averageRgb": {
+            "red": 57,
+            "green": 33,
+            "blue": 27
+          },
+          "approximateHex": "#39211b",
+          "sampledPixelCount": 833,
+          "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+          "limitations": [
+            "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+            "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+          ]
+        },
+        "colorSamplingPolicy": "Approximate color is sampled from the selected menu thumbnail eye-region crop; it does not replace the native label.",
+        "nativeLabelPolicy": "Native game label is authoritative. Do not substitute generic color names for unreadable or unverified labels.",
+        "sensitiveTraitPolicy": "Eye color is recorded only as a game appearance setting. No identity, ethnicity, health, attractiveness, or other sensitive inference is recorded."
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 4,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_004",
+      "nativeLabelOriginalText": "Blue",
+      "visibleGameLabelOrIndex": "Blue",
+      "category": "Eye Color",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeColor",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-007",
+          "timestampRangeSeconds": "18.0-20.9",
+          "stableTimestampSeconds": 19,
+          "basis": "direct selected Eye Color label visible in the Eye Color grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_THUMBNAIL_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_004-menu_thumbnail_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_004/CF27_XBOXUNKNOWN_RTG_EYECOLOR_004_MENU_THUMBNAIL_EVIDENCE_video-007_19p00s.png",
+          "outputSha256": "faf88bb8ac9a95e892e07c71a9a3c4cc000f1b4cededdca5a6a996d70e46f1e9",
+          "sourceTimestampSeconds": 19
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_004-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_004/CF27_XBOXUNKNOWN_RTG_EYECOLOR_004_CHARACTER_STABLE_video-007_19p00s.png",
+          "outputSha256": "faf88bb8ac9a95e892e07c71a9a3c4cc000f1b4cededdca5a6a996d70e46f1e9",
+          "sourceTimestampSeconds": 19
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 1,
+        "nativeColumn": 4,
+        "basis": "visible tile position in the Eye Color grid; selection sequence is stored separately because bottom-row navigation was reverse order"
+      },
+      "sampledIrisColor": {
+        "status": "ESTIMATED",
+        "source": "selected_menu_thumbnail_crop",
+        "timestampSeconds": 19,
+        "crop": {
+          "x": 566,
+          "y": 263,
+          "width": 54,
+          "height": 42
+        },
+        "averageRgb": {
+          "red": 66,
+          "green": 88,
+          "blue": 89
+        },
+        "approximateHex": "#425859",
+        "sampledPixelCount": 1345,
+        "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+        "limitations": [
+          "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+          "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+        ]
+      },
+      "visibilityAssessment": {
+        "selectedMenuThumbnailColorVisible": true,
+        "stableFaceFrameColorVisible": "limited_visible",
+        "colorVisibleConfidence": "medium",
+        "flaggedForUnreliableVisibleResult": false,
+        "reliabilitySummary": "Native label and selected menu thumbnail are readable. Stable face-frame iris color is limited by screen-recording resolution, gaze direction, compression, and lighting.",
+        "requiresProductionRecaptureForReliableComparison": true
+      },
+      "lightingAndObstructionLimitations": {
+        "lightingLimitations": [
+          "The menu uses dark background lighting and game-rendered eye highlights.",
+          "The eye thumbnail is clearer than the live character face for color evaluation."
+        ],
+        "eyeBlackPresent": true,
+        "eyeBlackImpact": "Eye black does not cover the iris but darkens the under-eye area and can reduce perceived contrast.",
+        "compressionLimitations": "Screen-recording compression and 1080p resolution limit precise iris-color evaluation.",
+        "notificationOverlayPresent": false,
+        "notificationOverlayImpact": "none_observed"
+      },
+      "completenessStatus": {
+        "menuThumbnailEvidence": "present",
+        "stableFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "sampledIrisColor": {
+          "status": "ESTIMATED",
+          "source": "selected_menu_thumbnail_crop",
+          "timestampSeconds": 19,
+          "crop": {
+            "x": 566,
+            "y": 263,
+            "width": 54,
+            "height": 42
+          },
+          "averageRgb": {
+            "red": 66,
+            "green": 88,
+            "blue": 89
+          },
+          "approximateHex": "#425859",
+          "sampledPixelCount": 1345,
+          "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+          "limitations": [
+            "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+            "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+          ]
+        },
+        "colorSamplingPolicy": "Approximate color is sampled from the selected menu thumbnail eye-region crop; it does not replace the native label.",
+        "nativeLabelPolicy": "Native game label is authoritative. Do not substitute generic color names for unreadable or unverified labels.",
+        "sensitiveTraitPolicy": "Eye color is recorded only as a game appearance setting. No identity, ethnicity, health, attractiveness, or other sensitive inference is recorded."
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 5,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_005",
+      "nativeLabelOriginalText": "Light Green",
+      "visibleGameLabelOrIndex": "Light Green",
+      "category": "Eye Color",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeColor",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-007",
+          "timestampRangeSeconds": "25.0-29.3",
+          "stableTimestampSeconds": 28,
+          "basis": "direct selected Eye Color label visible in the Eye Color grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_THUMBNAIL_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_005-menu_thumbnail_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_005/CF27_XBOXUNKNOWN_RTG_EYECOLOR_005_MENU_THUMBNAIL_EVIDENCE_video-007_28p00s.png",
+          "outputSha256": "0c39378a93d80b479940e45842dfe44f1ae4e3ec87b7202181bad4f7dab7fe49",
+          "sourceTimestampSeconds": 28
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_005-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_005/CF27_XBOXUNKNOWN_RTG_EYECOLOR_005_CHARACTER_STABLE_video-007_28p00s.png",
+          "outputSha256": "0c39378a93d80b479940e45842dfe44f1ae4e3ec87b7202181bad4f7dab7fe49",
+          "sourceTimestampSeconds": 28
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 1,
+        "basis": "visible tile position in the Eye Color grid; selection sequence is stored separately because bottom-row navigation was reverse order"
+      },
+      "sampledIrisColor": {
+        "status": "ESTIMATED",
+        "source": "selected_menu_thumbnail_crop",
+        "timestampSeconds": 28,
+        "crop": {
+          "x": 125,
+          "y": 409,
+          "width": 54,
+          "height": 42
+        },
+        "averageRgb": {
+          "red": 96,
+          "green": 84,
+          "blue": 63
+        },
+        "approximateHex": "#60543f",
+        "sampledPixelCount": 1409,
+        "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+        "limitations": [
+          "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+          "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+        ]
+      },
+      "visibilityAssessment": {
+        "selectedMenuThumbnailColorVisible": true,
+        "stableFaceFrameColorVisible": "limited_visible",
+        "colorVisibleConfidence": "medium",
+        "flaggedForUnreliableVisibleResult": false,
+        "reliabilitySummary": "Native label and selected menu thumbnail are readable. Stable face-frame iris color is limited by screen-recording resolution, gaze direction, compression, and lighting.",
+        "requiresProductionRecaptureForReliableComparison": true
+      },
+      "lightingAndObstructionLimitations": {
+        "lightingLimitations": [
+          "The menu uses dark background lighting and game-rendered eye highlights.",
+          "The eye thumbnail is clearer than the live character face for color evaluation."
+        ],
+        "eyeBlackPresent": true,
+        "eyeBlackImpact": "Eye black does not cover the iris but darkens the under-eye area and can reduce perceived contrast.",
+        "compressionLimitations": "Screen-recording compression and 1080p resolution limit precise iris-color evaluation.",
+        "notificationOverlayPresent": true,
+        "notificationOverlayImpact": "A bottom-right system notification is visible during the stable frame, but it does not cover the eye-color menu thumbnail or face."
+      },
+      "completenessStatus": {
+        "menuThumbnailEvidence": "present",
+        "stableFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "sampledIrisColor": {
+          "status": "ESTIMATED",
+          "source": "selected_menu_thumbnail_crop",
+          "timestampSeconds": 28,
+          "crop": {
+            "x": 125,
+            "y": 409,
+            "width": 54,
+            "height": 42
+          },
+          "averageRgb": {
+            "red": 96,
+            "green": 84,
+            "blue": 63
+          },
+          "approximateHex": "#60543f",
+          "sampledPixelCount": 1409,
+          "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+          "limitations": [
+            "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+            "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+          ]
+        },
+        "colorSamplingPolicy": "Approximate color is sampled from the selected menu thumbnail eye-region crop; it does not replace the native label.",
+        "nativeLabelPolicy": "Native game label is authoritative. Do not substitute generic color names for unreadable or unverified labels.",
+        "sensitiveTraitPolicy": "Eye color is recorded only as a game appearance setting. No identity, ethnicity, health, attractiveness, or other sensitive inference is recorded."
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 6,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_006",
+      "nativeLabelOriginalText": "Grey",
+      "visibleGameLabelOrIndex": "Grey",
+      "category": "Eye Color",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeColor",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-007",
+          "timestampRangeSeconds": "23.0-24.9",
+          "stableTimestampSeconds": 24,
+          "basis": "direct selected Eye Color label visible in the Eye Color grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_THUMBNAIL_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_006-menu_thumbnail_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_006/CF27_XBOXUNKNOWN_RTG_EYECOLOR_006_MENU_THUMBNAIL_EVIDENCE_video-007_24p00s.png",
+          "outputSha256": "71e79e9fcda2a5ea5eb048129af70deba4b57e4e84f52cfff03cb7223b3c8484",
+          "sourceTimestampSeconds": 24
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_006-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_006/CF27_XBOXUNKNOWN_RTG_EYECOLOR_006_CHARACTER_STABLE_video-007_24p00s.png",
+          "outputSha256": "71e79e9fcda2a5ea5eb048129af70deba4b57e4e84f52cfff03cb7223b3c8484",
+          "sourceTimestampSeconds": 24
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 2,
+        "basis": "visible tile position in the Eye Color grid; selection sequence is stored separately because bottom-row navigation was reverse order"
+      },
+      "sampledIrisColor": {
+        "status": "ESTIMATED",
+        "source": "selected_menu_thumbnail_crop",
+        "timestampSeconds": 24,
+        "crop": {
+          "x": 272,
+          "y": 409,
+          "width": 54,
+          "height": 42
+        },
+        "averageRgb": {
+          "red": 87,
+          "green": 86,
+          "blue": 64
+        },
+        "approximateHex": "#575640",
+        "sampledPixelCount": 1237,
+        "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+        "limitations": [
+          "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+          "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+        ]
+      },
+      "visibilityAssessment": {
+        "selectedMenuThumbnailColorVisible": true,
+        "stableFaceFrameColorVisible": "limited_visible",
+        "colorVisibleConfidence": "medium",
+        "flaggedForUnreliableVisibleResult": false,
+        "reliabilitySummary": "Native label and selected menu thumbnail are readable. Stable face-frame iris color is limited by screen-recording resolution, gaze direction, compression, and lighting.",
+        "requiresProductionRecaptureForReliableComparison": true
+      },
+      "lightingAndObstructionLimitations": {
+        "lightingLimitations": [
+          "The menu uses dark background lighting and game-rendered eye highlights.",
+          "The eye thumbnail is clearer than the live character face for color evaluation."
+        ],
+        "eyeBlackPresent": true,
+        "eyeBlackImpact": "Eye black does not cover the iris but darkens the under-eye area and can reduce perceived contrast.",
+        "compressionLimitations": "Screen-recording compression and 1080p resolution limit precise iris-color evaluation.",
+        "notificationOverlayPresent": false,
+        "notificationOverlayImpact": "none_observed"
+      },
+      "completenessStatus": {
+        "menuThumbnailEvidence": "present",
+        "stableFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "sampledIrisColor": {
+          "status": "ESTIMATED",
+          "source": "selected_menu_thumbnail_crop",
+          "timestampSeconds": 24,
+          "crop": {
+            "x": 272,
+            "y": 409,
+            "width": 54,
+            "height": 42
+          },
+          "averageRgb": {
+            "red": 87,
+            "green": 86,
+            "blue": 64
+          },
+          "approximateHex": "#575640",
+          "sampledPixelCount": 1237,
+          "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+          "limitations": [
+            "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+            "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+          ]
+        },
+        "colorSamplingPolicy": "Approximate color is sampled from the selected menu thumbnail eye-region crop; it does not replace the native label.",
+        "nativeLabelPolicy": "Native game label is authoritative. Do not substitute generic color names for unreadable or unverified labels.",
+        "sensitiveTraitPolicy": "Eye color is recorded only as a game appearance setting. No identity, ethnicity, health, attractiveness, or other sensitive inference is recorded."
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "nativeOrder": 7,
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_007",
+      "nativeLabelOriginalText": "Hazel",
+      "visibleGameLabelOrIndex": "Hazel",
+      "category": "Eye Color",
+      "kind": "additionalFaceMatchingAttribute",
+      "attributeFamily": "eyeColor",
+      "originalTextPreserved": true,
+      "valueType": "nativeLabel",
+      "affectsTextureRatherThanGeometry": true,
+      "affectsGeometrySimilarity": false,
+      "selectedMenuEvidence": [
+        {
+          "videoID": "video-007",
+          "timestampRangeSeconds": "21.0-22.9",
+          "stableTimestampSeconds": 22,
+          "basis": "direct selected Eye Color label visible in the Eye Color grid"
+        }
+      ],
+      "sourceImageReferences": [
+        {
+          "role": "MENU_THUMBNAIL_EVIDENCE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_007-menu_thumbnail_evidence",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_007_MENU_THUMBNAIL_EVIDENCE_video-007_22p00s.png",
+          "outputSha256": "21ac2e39811facfa4eaa51932dca07c24de09a34726d4d6a35bd74bbdeda82a2",
+          "sourceTimestampSeconds": 22
+        },
+        {
+          "role": "CHARACTER_STABLE",
+          "frameID": "frame-cf27_xboxunknown_rtg_eyecolor_007-character_stable",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_007_CHARACTER_STABLE_video-007_22p00s.png",
+          "outputSha256": "21ac2e39811facfa4eaa51932dca07c24de09a34726d4d6a35bd74bbdeda82a2",
+          "sourceTimestampSeconds": 22
+        }
+      ],
+      "gridPositionFromNativeIndex": {
+        "columns": 4,
+        "nativeRow": 2,
+        "nativeColumn": 3,
+        "basis": "visible tile position in the Eye Color grid; selection sequence is stored separately because bottom-row navigation was reverse order"
+      },
+      "sampledIrisColor": {
+        "status": "ESTIMATED",
+        "source": "selected_menu_thumbnail_crop",
+        "timestampSeconds": 22,
+        "crop": {
+          "x": 419,
+          "y": 409,
+          "width": 54,
+          "height": 42
+        },
+        "averageRgb": {
+          "red": 99,
+          "green": 78,
+          "blue": 59
+        },
+        "approximateHex": "#634e3b",
+        "sampledPixelCount": 1274,
+        "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+        "limitations": [
+          "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+          "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+        ]
+      },
+      "visibilityAssessment": {
+        "selectedMenuThumbnailColorVisible": true,
+        "stableFaceFrameColorVisible": "limited_visible",
+        "colorVisibleConfidence": "medium",
+        "flaggedForUnreliableVisibleResult": false,
+        "reliabilitySummary": "Native label and selected menu thumbnail are readable. Stable face-frame iris color is limited by screen-recording resolution, gaze direction, compression, and lighting.",
+        "requiresProductionRecaptureForReliableComparison": true
+      },
+      "lightingAndObstructionLimitations": {
+        "lightingLimitations": [
+          "The menu uses dark background lighting and game-rendered eye highlights.",
+          "The eye thumbnail is clearer than the live character face for color evaluation."
+        ],
+        "eyeBlackPresent": true,
+        "eyeBlackImpact": "Eye black does not cover the iris but darkens the under-eye area and can reduce perceived contrast.",
+        "compressionLimitations": "Screen-recording compression and 1080p resolution limit precise iris-color evaluation.",
+        "notificationOverlayPresent": false,
+        "notificationOverlayImpact": "none_observed"
+      },
+      "completenessStatus": {
+        "menuThumbnailEvidence": "present",
+        "stableFaceFrame": "present_limited",
+        "standardizedViews": "not_present",
+        "selectorCompletenessProven": false,
+        "requiredProductionRecapture": true,
+        "notes": "Recording is valid for directly selected label/order evidence. It is not a standardized production comparison capture."
+      },
+      "researchMetadata": {
+        "sampledIrisColor": {
+          "status": "ESTIMATED",
+          "source": "selected_menu_thumbnail_crop",
+          "timestampSeconds": 22,
+          "crop": {
+            "x": 419,
+            "y": 409,
+            "width": 54,
+            "height": 42
+          },
+          "averageRgb": {
+            "red": 99,
+            "green": 78,
+            "blue": 59
+          },
+          "approximateHex": "#634e3b",
+          "sampledPixelCount": 1274,
+          "method": "Average of saturated non-extreme RGB pixels from a fixed selected-menu-thumbnail crop. This is research metadata, not a replacement for the native game label.",
+          "limitations": [
+            "The crop includes game-rendered eye highlights, shadow, eyelid edges, and compression artifacts.",
+            "The sampled value is approximate and should not be treated as a verified colorimetry measurement."
+          ]
+        },
+        "colorSamplingPolicy": "Approximate color is sampled from the selected menu thumbnail eye-region crop; it does not replace the native label.",
+        "nativeLabelPolicy": "Native game label is authoritative. Do not substitute generic color names for unreadable or unverified labels.",
+        "sensitiveTraitPolicy": "Eye color is recorded only as a game appearance setting. No identity, ethnicity, health, attractiveness, or other sensitive inference is recorded."
+      },
+      "dependencies": {
+        "status": "UNKNOWN",
+        "notes": [
+          "Platform, patch, mode, body, position, head, skin, and account-state dependencies are not proven by this recording.",
+          "Selected head appears visually constant during this recording, but dependency testing remains required."
+        ]
+      },
+      "verificationState": "NOT_VERIFIED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    }
+  ],
+  "productionBlocks": [
+    "Records are primary research only and not second-person verified.",
+    "Game version, patch, and exact platform are still unknown.",
+    "Selector wrap and final category boundary are not proven.",
+    "Stable character-frame iris color is limited by resolution, lighting, gaze direction, and compression.",
+    "Production catalog remains empty until verified evidence is reviewed and published."
+  ]
+}

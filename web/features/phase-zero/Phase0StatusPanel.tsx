@@ -21,6 +21,7 @@ import { ImageDerivativeTool } from "./ImageDerivativeTool";
 import { IssueManagementWorkspace } from "./IssueManagementWorkspace";
 import { MenuMapEditor } from "./MenuMapEditor";
 import { RequiredViewCompletenessChecker } from "./RequiredViewCompletenessChecker";
+import { SecondVerifierWorkspace } from "./SecondVerifierWorkspace";
 import { SourceVideoIntakeManager } from "./SourceVideoIntakeManager";
 
 const statusTone = {
@@ -74,6 +75,7 @@ export function Phase0StatusPanel({
       <RequiredViewCompletenessChecker />
       <DuplicateReviewTool />
       <CatalogManagerReviewConsole />
+      <SecondVerifierWorkspace />
       <MenuMapEditor />
       <CaptureConfigurationEditor />
       <HeadCaptureWorkspace />

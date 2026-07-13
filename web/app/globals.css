@@ -1014,6 +1014,28 @@ p {
   line-height: 1.45;
 }
 
+.verifier-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin: var(--space-4) 0;
+}
+
+.verifier-observation {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}
+
+.verifier-observation-primary {
+  background: #f8faf6;
+}
+
+.verifier-observation-second {
+  border-color: #86a88b;
+  background: #eef6f0;
+}
+
 .checkbox-field {
   display: grid;
   grid-template-columns: 24px minmax(0, 1fr);
@@ -1206,7 +1228,8 @@ p {
   .screenshot-grid,
   .consent-grid,
   .card-grid,
-  .form-grid {
+  .form-grid,
+  .verifier-comparison-grid {
     grid-template-columns: 1fr;
   }
 

@@ -1036,6 +1036,30 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-036",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Second-verifier workspace",
+      "summary": "Build a separate second-verifier workflow with verifier environment entry, independent menu and catalog counts, native-order confirmation, record-by-record checks, evidence-file checks, front-view verification, secondary-angle sampling, dependency and exception review, mismatch reporting, sign-off, allowed verification statuses only, and visible separation between primary and verifier observations.",
+      "owningModule": "Second-person verification",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-second-verifier-workspace.ts",
+        "web/features/phase-zero/SecondVerifierWorkspace.tsx",
+        "web/features/phase-zero/Phase0StatusPanel.tsx",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_CATALOG_WORKFLOW.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-second-verifier-workspace.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Second-verifier workspace tests cover independent verifier environment requirements, menu and catalog count mismatches, native-order and record/evidence/front-view/secondary-angle checks, dependency and exception mismatch reporting, sign-off blocking, exported second-person verification records, approved status restriction, and visual separation through the dedicated workspace component.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

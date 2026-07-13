@@ -138,6 +138,8 @@ export const CURRENT_PHASE0_REPOSITORY_STATE: Phase0RepositoryState = {
     "web/lib/phase-zero/phase-zero-export-pipeline.ts",
     "web/lib/phase-zero/catalog-manager-review-console.ts",
     "web/features/phase-zero/CatalogManagerReviewConsole.tsx",
+    "web/lib/phase-zero/phase-zero-second-verifier-workspace.ts",
+    "web/features/phase-zero/SecondVerifierWorkspace.tsx",
     "scripts/phase-zero-export.mjs",
     "scripts/catalog-import-validator.mjs",
     "web/package.json",

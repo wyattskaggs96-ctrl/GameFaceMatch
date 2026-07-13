@@ -75,6 +75,8 @@ The catalog import-validation engine produces both readable text and machine-rea
 
 The development-only catalog-manager review console lives in the web Phase 0 tools. It imports candidate package JSON and optional machine-readable validation reports, shows unresolved failures, records, evidence, native-order groups, duplicate observations, and verification-state summaries, lets the manager accept or reject `VERIFIED_WITH_NOTES`, request repairs, reject placeholder or missing-evidence rows, and produce a local signed review report. It cannot publish a package and cannot approve a release candidate while mandatory validation gates are unresolved.
 
+The development-only second-verifier workspace is separate from catalog-manager review. It records the verifier environment, independent menu counts, independent catalog counts, native-order confirmation, record-by-record checks, evidence-file checks, front-view verification, secondary-angle sampling, dependency and exception review, mismatch reports, and sign-off. Primary researcher observations and verifier observations must remain distinct; exported second-person verification records still require package validation before publication.
+
 Source-video intake is local-only. `inspect` preserves original video files and reports metadata from `ffprobe` when available. `extract-frame` produces derivative still frames only when `ffmpeg` is installed; otherwise it returns a disabled result so operators can continue recording timestamp references and extract frames later.
 
 ## Publication gate

@@ -29,6 +29,8 @@ test.describe("GameFace Match production-representative journey", () => {
     await expect(page.getByRole("heading", { name: "Standardized profile foundation" })).toBeVisible();
     await expect(page.getByText("These fields came from the confirmation form, not from model estimates")).toBeVisible();
     await expect(page.getByText("Skin presentation used by the game")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Save derived profile locally" })).toBeDisabled();
+    await expect(page.getByText("Enable the separate save-derived-profile consent before saving")).toBeVisible();
     await expect(page.getByText("Guided browser RGB")).toBeVisible();
     await expect(page.getByText("Depth supported")).toBeVisible();
     await expect(page.getByText("No", { exact: true })).toBeVisible();

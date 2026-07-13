@@ -8,6 +8,8 @@ export type DeletionScope =
   | "active-capture-session"
   | "temporary-images"
   | "derived-profile"
+  | "saved-profile"
+  | "saved-profiles"
   | "saved-build"
   | "saved-builds"
   | "screenshot-session"
@@ -33,6 +35,9 @@ export interface DataInventoryInput {
   screenshotSession: ScreenshotRefinementSession;
   deletionRecords: DeletionRecord[];
   preferences: ApplicationPreferences;
+  savedProfileCount?: number;
+  savedProfileStorageLocation?: string;
+  savedProfileEncryptionDescription?: string;
 }
 
 export interface DataInventoryItem {
@@ -43,6 +48,7 @@ export interface DataInventoryItem {
     | "captured-image-bytes"
     | "user-confirmed-attributes"
     | "derived-profile"
+    | "saved-profiles"
     | "saved-builds"
     | "screenshot-refinement-session"
     | "deletion-records"
@@ -131,13 +137,23 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
     },
     {
       id: "derived-profile",
-      label: "Derived profile",
+      label: "Current derived profile",
       currentlyStored: Boolean(input.derivedProfile),
       count: input.derivedProfile ? 1 : 0,
-      storageLocation: "React session memory; optional memory privacy store only with separate consent",
+      storageLocation: "React session memory",
       uploaded: false,
-      retention: "Current recommendation unless saved by separate consent.",
+      retention: "Current recommendation only unless the user explicitly saves it.",
       deleteAction: "derived-profile"
+    },
+    {
+      id: "saved-profiles",
+      label: "Saved derived profiles",
+      currentlyStored: (input.savedProfileCount ?? 0) > 0,
+      count: input.savedProfileCount ?? 0,
+      storageLocation: input.savedProfileStorageLocation ?? "Browser sessionStorage profile vault",
+      uploaded: false,
+      retention: `Only after explicit save. ${input.savedProfileEncryptionDescription ?? "Encrypted with WebCrypto where available."}`,
+      deleteAction: "saved-profiles"
     },
     {
       id: "saved-builds",
@@ -216,6 +232,7 @@ export function verifyDeletionState(input: DataInventoryInput, scope: DeletionSc
     check("captured-image-bytes");
   }
   if (scope === "derived-profile" || scope === "all-local-data") check("derived-profile");
+  if (scope === "saved-profile" || scope === "saved-profiles" || scope === "all-local-data") check("saved-profiles");
   if (scope === "saved-build" || scope === "saved-builds" || scope === "all-local-data") check("saved-builds");
   if (scope === "screenshot-session" || scope === "all-local-data") check("screenshot-refinement-session");
   if (scope === "application-preferences" || scope === "all-local-data") check("application-preferences");

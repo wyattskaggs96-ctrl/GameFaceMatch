@@ -35,6 +35,13 @@ import {
 import { createInitialConsentState, hasRequiredCaptureConsent, isConsentGranted, type ConsentState } from "@/lib/privacy/consent";
 import { createDataInventory, type DeletionScope } from "@/lib/privacy/data-lifecycle";
 import { createMemoryPrivacyStore } from "@/lib/privacy/local-privacy-store";
+import {
+  createBrowserSavedProfileStorage,
+  createMemorySavedProfileStorage,
+  type SavedProfileStorage,
+  type SavedProfileStorageStatus,
+  type SavedProfileSummary
+} from "@/lib/privacy/profile-storage";
 import { createInitialAttributeConfirmation, type AttributeConfirmationState } from "@/lib/profile/attribute-confirmation";
 import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { createInitialScreenshotRefinementSession, deleteScreenshotRefinementSession } from "@/lib/refinement/screenshot-refinement";
@@ -86,8 +93,16 @@ export default function HomePage() {
   const [privacyRevision, setPrivacyRevision] = useState(0);
   const [catalogRuntimeStatus, setCatalogRuntimeStatus] = useState<CatalogRuntimeStatus | null>(null);
   const [catalogRuntimeError, setCatalogRuntimeError] = useState<string | null>(null);
+  const [savedProfiles, setSavedProfiles] = useState<SavedProfileSummary[]>([]);
+  const [savedProfileStatus, setSavedProfileStatus] = useState<SavedProfileStorageStatus | null>(null);
+  const [profileSaveStatusMessage, setProfileSaveStatusMessage] = useState<string | null>(null);
+  const [profileSaveErrorMessage, setProfileSaveErrorMessage] = useState<string | null>(null);
   const cameraService = useMemo(() => createBrowserCameraService(), []);
   const privacyStore = useMemo(() => createMemoryPrivacyStore(), []);
+  const savedProfileStorage = useMemo<SavedProfileStorage>(
+    () => (typeof window === "undefined" ? createMemorySavedProfileStorage() : createBrowserSavedProfileStorage(window.sessionStorage, window.crypto)),
+    []
+  );
   const catalogIsEmpty = isProductionCatalogEmpty(productionCatalogManifest);
   const isDevelopment = process.env.NODE_ENV !== "production";
   const consentReady = hasRequiredCaptureConsent(consentState);
@@ -117,9 +132,13 @@ export default function HomePage() {
         savedBuilds,
         screenshotSession,
         deletionRecords,
-        preferences: privacyStore.getApplicationPreferences()
+        preferences: privacyStore.getApplicationPreferences(),
+        savedProfileCount: savedProfiles.length,
+        savedProfileStorageLocation:
+          savedProfileStatus?.storageLocation === "browser-session-storage" ? "Browser sessionStorage profile vault" : "Memory profile vault",
+        savedProfileEncryptionDescription: savedProfileStatus?.encryptionDescription
       }),
-    [attributeConfirmation, consentState, deletionRecords, privacyStore, savedBuilds, screenshotSession, session, standardProfile]
+    [attributeConfirmation, consentState, deletionRecords, privacyStore, savedBuilds, savedProfileStatus, savedProfiles.length, screenshotSession, session, standardProfile]
   );
 
   useEffect(() => {
@@ -143,6 +162,10 @@ export default function HomePage() {
       .catch((error: unknown) => {
         setCatalogRuntimeError(error instanceof Error ? error.message : "Catalog runtime validation failed closed.");
       });
+  }, []);
+
+  useEffect(() => {
+    refreshSavedProfileState();
   }, []);
 
   useEffect(() => {
@@ -183,6 +206,11 @@ export default function HomePage() {
     setPrivacyRevision((value) => value + 1);
   }
 
+  function refreshSavedProfileState() {
+    setSavedProfiles(savedProfileStorage.listProfileSummaries());
+    setSavedProfileStatus(savedProfileStorage.getStatus());
+  }
+
   function handleConsentChange(nextConsent: ConsentState) {
     setConsentState(nextConsent);
     privacyStore.saveConsentState(nextConsent);
@@ -201,6 +229,8 @@ export default function HomePage() {
     setSession(createInitialCaptureSession());
     setAttributeConfirmation(createInitialAttributeConfirmation());
     setStandardProfile(null);
+    setProfileSaveStatusMessage(null);
+    setProfileSaveErrorMessage(null);
     privacyStore.recordDeletionCompletion("active-capture-session");
     setDeletionRecorded(true);
     refreshPrivacyState();
@@ -218,6 +248,8 @@ export default function HomePage() {
   function deleteDerivedProfile() {
     privacyStore.deleteDerivedProfile(standardProfile?.id);
     setStandardProfile(null);
+    setProfileSaveStatusMessage(null);
+    setProfileSaveErrorMessage(null);
     privacyStore.recordDeletionCompletion("derived-profile");
     setDeletionRecorded(true);
     refreshPrivacyState();
@@ -237,6 +269,24 @@ export default function HomePage() {
     refreshPrivacyState();
   }
 
+  function deleteSavedProfile(profileID: string) {
+    savedProfileStorage.deleteProfile(profileID);
+    privacyStore.deleteDerivedProfile(profileID);
+    privacyStore.recordDeletionCompletion("saved-profile");
+    setDeletionRecorded(true);
+    refreshSavedProfileState();
+    refreshPrivacyState();
+  }
+
+  function deleteAllSavedProfiles() {
+    savedProfileStorage.deleteAllProfiles();
+    privacyStore.deleteDerivedProfile();
+    privacyStore.recordDeletionCompletion("saved-profiles");
+    setDeletionRecorded(true);
+    refreshSavedProfileState();
+    refreshPrivacyState();
+  }
+
   function deleteScreenshotSessionData() {
     const mutation = deleteScreenshotRefinementSession(screenshotSession);
     revokeObjectUrls(mutation.objectUrlsToRevoke);
@@ -253,11 +303,16 @@ export default function HomePage() {
       ...screenshotSession.slots.flatMap((slot) => (slot.screenshot?.objectUrl ? [slot.screenshot.objectUrl] : []))
     ]);
     privacyStore.deleteAllLocalData();
+    savedProfileStorage.deleteAllProfiles();
     setSession(createInitialCaptureSession());
     setAttributeConfirmation(createInitialAttributeConfirmation());
     setStandardProfile(null);
     setScreenshotSession(createInitialScreenshotRefinementSession());
     setConsentState(createInitialConsentState());
+    setSavedProfiles([]);
+    setSavedProfileStatus(savedProfileStorage.getStatus());
+    setProfileSaveStatusMessage(null);
+    setProfileSaveErrorMessage(null);
     setDeletionRecorded(true);
     refreshPrivacyState();
   }
@@ -266,6 +321,7 @@ export default function HomePage() {
     if (scope === "active-capture-session") deleteCurrentSession();
     if (scope === "temporary-images") deleteTemporaryImages();
     if (scope === "derived-profile") deleteDerivedProfile();
+    if (scope === "saved-profiles") deleteAllSavedProfiles();
     if (scope === "saved-builds") deleteAllSavedBuilds();
     if (scope === "screenshot-session") deleteScreenshotSessionData();
     if (scope === "application-preferences") {
@@ -284,11 +340,34 @@ export default function HomePage() {
       userAgent: typeof navigator === "undefined" ? undefined : navigator.userAgent
     });
     setStandardProfile(profile);
-    if (isConsentGranted(consentState, "saveDerivedProfile")) {
-      privacyStore.saveDerivedProfile(profile);
-    }
+    setProfileSaveStatusMessage(null);
+    setProfileSaveErrorMessage(null);
     refreshPrivacyState();
     navigate("profile-review");
+  }
+
+  async function saveCurrentProfile() {
+    if (!standardProfile) {
+      setProfileSaveErrorMessage("Create a profile before saving.");
+      return;
+    }
+    if (!isConsentGranted(consentState, "saveDerivedProfile")) {
+      setProfileSaveErrorMessage("Enable the separate save-derived-profile consent before saving.");
+      return;
+    }
+    const result = await savedProfileStorage.saveProfile(standardProfile);
+    if (result.ok && result.summary) {
+      privacyStore.saveDerivedProfile(standardProfile);
+      setProfileSaveStatusMessage(
+        `Saved non-image profile ${result.summary.profileID} locally with ${result.summary.encryptionStatus === "encrypted" ? "WebCrypto encryption" : "session-only fallback storage"}.`
+      );
+      setProfileSaveErrorMessage(null);
+    } else {
+      setProfileSaveStatusMessage(null);
+      setProfileSaveErrorMessage(result.error ?? "Profile could not be saved locally.");
+    }
+    refreshSavedProfileState();
+    refreshPrivacyState();
   }
 
   function startOver() {
@@ -411,7 +490,17 @@ export default function HomePage() {
           />
         );
       case "profile-review":
-        return <ProfileReview profile={standardProfile} onBack={() => navigate("attributes")} onContinue={() => navigate("processing")} />;
+        return (
+          <ProfileReview
+            profile={standardProfile}
+            onBack={() => navigate("attributes")}
+            onContinue={() => navigate("processing")}
+            canSaveProfile={isConsentGranted(consentState, "saveDerivedProfile")}
+            onSaveProfile={saveCurrentProfile}
+            saveStatusMessage={profileSaveStatusMessage}
+            saveErrorMessage={profileSaveErrorMessage}
+          />
+        );
       case "processing":
         return (
           <InfoScreen
@@ -490,9 +579,22 @@ export default function HomePage() {
             inventory={privacyInventory}
             deletionRecords={deletionRecords}
             savedBuilds={savedBuilds}
+            savedProfiles={savedProfiles}
+            savedProfileStatus={
+              savedProfileStatus ??
+              ({
+                storageLocation: "memory",
+                encryptionAvailable: false,
+                encryptionDescription: "Saved profile storage status is loading.",
+                storedProfileCount: savedProfiles.length,
+                unreadableProfileCount: 0,
+                lastError: null
+              } satisfies SavedProfileStorageStatus)
+            }
             deletionRecorded={deletionRecorded}
             onDeleteScope={deleteByScope}
             onDeleteSavedBuild={deleteSavedBuild}
+            onDeleteSavedProfile={deleteSavedProfile}
           />
         );
       case "settings":

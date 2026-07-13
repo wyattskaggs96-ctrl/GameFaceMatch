@@ -5,28 +5,41 @@ import { Alert, Button, Card, ModalDialog, ScreenHeader, StatusBadge } from "@/c
 import { INDEPENDENT_APP_DISCLAIMER } from "@/lib/product-copy";
 import { createDeletionConfirmation, getNetworkUploadStatus, type DataInventoryItem, type DeletionRecord, type DeletionScope } from "@/lib/privacy/data-lifecycle";
 import type { SavedBuild } from "@/types/domain";
+import type { SavedProfileStorageStatus, SavedProfileSummary } from "@/lib/privacy/profile-storage";
 
 export function PrivacyCenter({
   inventory,
   deletionRecords,
   savedBuilds,
+  savedProfiles,
+  savedProfileStatus,
   deletionRecorded,
   onDeleteScope,
-  onDeleteSavedBuild
+  onDeleteSavedBuild,
+  onDeleteSavedProfile
 }: {
   inventory: DataInventoryItem[];
   deletionRecords: DeletionRecord[];
   savedBuilds: SavedBuild[];
+  savedProfiles: SavedProfileSummary[];
+  savedProfileStatus: SavedProfileStorageStatus;
   deletionRecorded: boolean;
   onDeleteScope: (scope: DeletionScope) => void;
   onDeleteSavedBuild: (buildID: string) => void;
+  onDeleteSavedProfile: (profileID: string) => void;
 }) {
   const [pendingScope, setPendingScope] = useState<DeletionScope | null>(null);
   const [pendingBuildID, setPendingBuildID] = useState<string | null>(null);
+  const [pendingProfileID, setPendingProfileID] = useState<string | null>(null);
   const uploadStatus = getNetworkUploadStatus();
   const confirmation = pendingScope ? createDeletionConfirmation(pendingScope) : null;
 
   function confirmDeletion() {
+    if (pendingProfileID) {
+      onDeleteSavedProfile(pendingProfileID);
+      setPendingProfileID(null);
+      return;
+    }
     if (pendingBuildID) {
       onDeleteSavedBuild(pendingBuildID);
       setPendingBuildID(null);
@@ -100,6 +113,40 @@ export function PrivacyCenter({
 
       <Card>
         <div className="section-heading">
+          <p className="eyebrow">Saved profiles</p>
+          <h2>Delete one profile or all profiles</h2>
+          <p className="supporting">{savedProfileStatus.encryptionDescription}</p>
+        </div>
+        {savedProfileStatus.lastError ? (
+          <Alert title="Saved profile recovery" tone="warning" role="alert">
+            {savedProfileStatus.lastError}
+          </Alert>
+        ) : null}
+        {savedProfiles.length > 0 ? (
+          <ul className="review-list">
+            {savedProfiles.map((profile) => (
+              <li key={profile.profileID}>
+                <span>
+                  {profile.profileID} | {profile.savedAt} | {profile.encryptionStatus}
+                </span>
+                <Button variant="secondary" onClick={() => setPendingProfileID(profile.profileID)}>
+                  Delete this profile
+                </Button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="field-note">No saved derived profiles are stored in this browser session.</p>
+        )}
+        <div className="button-row">
+          <Button variant="secondary" disabled={savedProfiles.length === 0} onClick={() => setPendingScope("saved-profiles")}>
+            Delete all saved profiles
+          </Button>
+        </div>
+      </Card>
+
+      <Card>
+        <div className="section-heading">
           <p className="eyebrow">Saved builds</p>
           <h2>Delete one build or all builds</h2>
         </div>
@@ -142,12 +189,13 @@ export function PrivacyCenter({
         )}
       </Card>
 
-      {pendingScope || pendingBuildID ? (
+      {pendingScope || pendingBuildID || pendingProfileID ? (
         <ModalDialog
-          title={pendingBuildID ? "Delete saved build?" : confirmation?.title ?? "Confirm deletion"}
+          title={pendingProfileID ? "Delete saved profile?" : pendingBuildID ? "Delete saved build?" : confirmation?.title ?? "Confirm deletion"}
           onDismiss={() => {
             setPendingScope(null);
             setPendingBuildID(null);
+            setPendingProfileID(null);
           }}
           actions={
             <>
@@ -159,6 +207,7 @@ export function PrivacyCenter({
                 onClick={() => {
                   setPendingScope(null);
                   setPendingBuildID(null);
+                  setPendingProfileID(null);
                 }}
               >
                 Cancel

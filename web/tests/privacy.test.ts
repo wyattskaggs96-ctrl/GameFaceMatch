@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createBrowserLocalPrivacyStore, createMemoryPrivacyStore } from "@/lib/privacy/local-privacy-store";
+import { createBrowserSavedProfileStorage, SAVED_PROFILE_STORAGE_KEY } from "@/lib/privacy/profile-storage";
 import { createInitialCaptureSession } from "@/lib/capture/capture-session";
 import { createInitialAttributeConfirmation } from "@/lib/profile/attribute-confirmation";
 import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
@@ -138,6 +139,51 @@ describe("local privacy store", () => {
     store.saveConsentState(createInitialConsentState());
     expect(assertNoRawImagesInStorage(storage)).toEqual({ passed: true, unsafeMatches: [] });
   });
+
+  it("saves derived profiles only through explicit browser profile storage without raw media", async () => {
+    const storage = memoryStorage();
+    const store = createBrowserSavedProfileStorage(storage, globalThis.crypto ?? null);
+    expect(store.listProfileSummaries()).toEqual([]);
+
+    const result = await store.saveProfile(profile, new Date("2026-07-10T02:00:00.000Z"));
+    expect(result.ok).toBe(true);
+    expect(result.summary).toMatchObject({
+      profileID: profile.id,
+      savedAt: "2026-07-10T02:00:00.000Z"
+    });
+    expect(store.listProfileSummaries()).toHaveLength(1);
+    expect(assertNoRawImagesInStorage(storage)).toEqual({ passed: true, unsafeMatches: [] });
+
+    const loaded = await store.loadProfile(profile.id);
+    expect(loaded.error).toBeNull();
+    expect(loaded.profile?.id).toBe(profile.id);
+
+    expect(store.deleteProfile(profile.id)).toBe(true);
+    expect(store.listProfileSummaries()).toEqual([]);
+  });
+
+  it("uses an explicit session-only fallback when WebCrypto is unavailable", async () => {
+    const storage = memoryStorage();
+    const store = createBrowserSavedProfileStorage(storage, null);
+    const result = await store.saveProfile(profile);
+    expect(result.ok).toBe(true);
+    expect(result.summary?.encryptionStatus).toBe("unavailable");
+    expect(store.getStatus()).toMatchObject({
+      storageLocation: "browser-session-storage",
+      encryptionAvailable: false,
+      storedProfileCount: 1
+    });
+    expect(assertNoRawImagesInStorage(storage)).toEqual({ passed: true, unsafeMatches: [] });
+  });
+
+  it("deletes all saved profiles from browser profile storage", async () => {
+    const storage = memoryStorage();
+    const store = createBrowserSavedProfileStorage(storage, null);
+    await store.saveProfile(profile);
+    expect(storage.getItem(SAVED_PROFILE_STORAGE_KEY)).toBeTruthy();
+    store.deleteAllProfiles();
+    expect(storage.getItem(SAVED_PROFILE_STORAGE_KEY)).toBeNull();
+  });
 });
 
 describe("data lifecycle inventory and deletion verification", () => {
@@ -163,10 +209,14 @@ describe("data lifecycle inventory and deletion verification", () => {
       savedBuilds: [savedBuild],
       screenshotSession,
       deletionRecords: [{ scope: "saved-build", completedAt: "2026-07-10T00:00:00.000Z" }],
-      preferences: { preferredTheme: "system" }
+      preferences: { preferredTheme: "system" },
+      savedProfileCount: 1,
+      savedProfileStorageLocation: "Browser sessionStorage profile vault",
+      savedProfileEncryptionDescription: "Encrypted with WebCrypto where available."
     });
     expect(inventory.find((item) => item.id === "user-confirmed-attributes")?.count).toBe(1);
     expect(inventory.find((item) => item.id === "derived-profile")?.currentlyStored).toBe(true);
+    expect(inventory.find((item) => item.id === "saved-profiles")?.count).toBe(1);
     expect(inventory.find((item) => item.id === "saved-builds")?.count).toBe(1);
     expect(inventory.find((item) => item.id === "screenshot-refinement-session")?.count).toBe(1);
     expect(inventory.every((item) => item.uploaded === false)).toBe(true);

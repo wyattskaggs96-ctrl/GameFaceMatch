@@ -1365,6 +1365,8 @@
       "implementationFiles": [
         "web/lib/privacy/local-privacy-store.ts",
         "web/lib/privacy/data-lifecycle.ts",
+        "web/lib/privacy/profile-storage.ts",
+        "web/features/profile/ProfileReview.tsx",
         "web/features/privacy/PrivacyCenter.tsx"
       ],
       "testFiles": [
@@ -1372,10 +1374,10 @@
         "web/tests/e2e/core-journey.spec.ts"
       ],
       "status": "VERIFIED",
-      "evidence": "Privacy tests cover local-only behavior, raw images absent from localStorage, no network upload behavior, inventory accuracy, and deletion flows.",
+      "evidence": "Privacy tests cover local-only behavior, explicit saved-profile storage, raw images absent from localStorage/sessionStorage, no network upload behavior, inventory accuracy, and deletion flows. Saved derived profiles serialize through the StandardFaceProfile validator and use WebCrypto-encrypted browser sessionStorage where available, with a session-only fallback when unavailable.",
       "blocker": "",
       "owner": "Privacy engineer",
-      "lastCheckedDate": "2026-07-12"
+      "lastCheckedDate": "2026-07-13"
     },
     {
       "id": "GFM-PRIV-002",
@@ -1401,22 +1403,24 @@
       "id": "GFM-DEL-001",
       "source": "docs/PRIVACY_IMPLEMENTATION_NOTES.md",
       "section": "Deletion lifecycle",
-      "summary": "Support deletion of active capture session, temporary images, derived profiles, saved builds, screenshots, all local data, and deletion records.",
+      "summary": "Support deletion of active capture session, temporary images, current derived profiles, saved derived profiles, saved builds, screenshots, all local data, and deletion records.",
       "owningModule": "Data lifecycle",
       "implementationFiles": [
         "web/app/page.tsx",
         "web/lib/privacy/data-lifecycle.ts",
-        "web/lib/privacy/local-privacy-store.ts"
+        "web/lib/privacy/local-privacy-store.ts",
+        "web/lib/privacy/profile-storage.ts",
+        "web/features/privacy/PrivacyCenter.tsx"
       ],
       "testFiles": [
         "web/tests/privacy.test.ts",
         "web/tests/e2e/core-journey.spec.ts"
       ],
       "status": "VERIFIED",
-      "evidence": "Unit and E2E tests cover session cleanup, object URL cleanup, profile deletion, saved build deletion, screenshot deletion, delete-all behavior, and deletion confirmation.",
+      "evidence": "Unit and E2E tests cover session cleanup, object URL cleanup, current-profile deletion, saved-profile deletion, saved build deletion, screenshot deletion, delete-all behavior, visible deletion confirmation, and raw-media exclusion.",
       "blocker": "",
       "owner": "Privacy engineer",
-      "lastCheckedDate": "2026-07-12"
+      "lastCheckedDate": "2026-07-13"
     },
     {
       "id": "GFM-SEC-001",

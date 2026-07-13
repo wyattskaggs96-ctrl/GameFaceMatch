@@ -15,7 +15,8 @@
 - Selected images may exist as in-memory `File` objects or temporary object URLs during the active session.
 - Raw face images must not be written to localStorage.
 - Local face-landmark extraction may run in the browser through `FaceLandmarkProvider`; it does not upload images, identify people, generate identity embeddings, or infer sensitive traits.
-- Derived `StandardFaceProfile` geometry stores normalized ratios and provenance only. It must not serialize raw frames, object URLs, or landmark coordinate arrays.
+- Derived `StandardFaceProfile` geometry stores normalized ratios and provenance only. It must not serialize raw frames, object URLs, file names, or landmark coordinate arrays.
+- Saved derived profiles require an explicit in-app save action after separate save-profile consent. The web MVP stores saved profile payloads in browser `sessionStorage` only and encrypts them with WebCrypto AES-GCM when the browser supports it. If WebCrypto is unavailable, the app uses a clearly labeled session-only fallback and keeps deletion controls available.
 - Saved builds should contain derived settings and catalog metadata only, not raw face images.
 - No facial images are uploaded in the initial web prototype.
 - Manual upload fallback must follow the same deletion and non-retention expectations as camera capture.
@@ -31,7 +32,8 @@ The web MVP currently uses local browser/session state only. No backend, account
 | Temporary Blob URLs | Browser memory/object URL registry | Retake, removal, cancellation, or delete-all | Delete temporary images |
 | Captured image bytes | `File`/`Blob` objects in memory only | Active session only | Delete temporary images |
 | User-confirmed attributes | React session memory | Active session unless included in a saved non-image build | Delete active capture session |
-| Derived profile | React session memory; optional memory privacy store with separate consent | Current recommendation unless the user consents to save | Delete derived profile |
+| Current derived profile | React session memory | Current recommendation unless the user explicitly saves it | Delete derived profile |
+| Saved derived profiles | Browser `sessionStorage` profile vault; WebCrypto-encrypted when available | Only after explicit save and separate save-profile consent; session-only for this MVP | Delete one saved profile, all saved profiles, or all local data |
 | Saved builds | Local non-image privacy store | Until user deletes one build, all builds, or all local data | Delete one build, all builds, or all local data |
 | Screenshot-refinement session | Browser memory/object URL registry | Temporary session only | Delete screenshot session |
 | Deletion records | Local deletion log without face images | Local audit trail | Delete all local data |

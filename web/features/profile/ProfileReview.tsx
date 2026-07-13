@@ -5,11 +5,19 @@ import type { StandardFaceProfile } from "@/types/domain";
 export function ProfileReview({
   profile,
   onBack,
-  onContinue
+  onContinue,
+  canSaveProfile = false,
+  onSaveProfile,
+  saveStatusMessage = null,
+  saveErrorMessage = null
 }: {
   profile: StandardFaceProfile | null;
   onBack: () => void;
   onContinue: () => void;
+  canSaveProfile?: boolean;
+  onSaveProfile?: () => void;
+  saveStatusMessage?: string | null;
+  saveErrorMessage?: string | null;
 }) {
   if (!profile) {
     return (
@@ -100,6 +108,28 @@ export function ProfileReview({
         Matching still requires verified College Football 27 catalog records. Until that production catalog is loaded, GameFace Match cannot recommend menu
         settings or build instructions.
       </Alert>
+      <Card tone="info">
+        <h2>Save profile locally</h2>
+        <p>
+          The current profile is session-only by default. Saving is optional, local to this browser session, and excludes raw images, object URLs, file names,
+          and landmark coordinate arrays.
+        </p>
+        <p className="supporting">Saved profile payloads are encrypted with WebCrypto where the browser supports it.</p>
+        {saveStatusMessage ? (
+          <Alert title="Profile saved" tone="success">
+            {saveStatusMessage}
+          </Alert>
+        ) : null}
+        {saveErrorMessage ? (
+          <Alert title="Profile save needs attention" tone="warning" role="alert">
+            {saveErrorMessage}
+          </Alert>
+        ) : null}
+        <Button variant="secondary" onClick={onSaveProfile} disabled={!canSaveProfile || !onSaveProfile}>
+          Save derived profile locally
+        </Button>
+        {!canSaveProfile ? <p className="field-note">Enable the separate save-derived-profile consent before saving this non-image profile.</p> : null}
+      </Card>
       <div className="button-row">
         <Button variant="secondary" onClick={onBack}>
           Edit attributes

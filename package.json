@@ -23,6 +23,7 @@
     "ear-shape:ingest": "node scripts/cf27-ear-shape-ingest.mjs",
     "cf27:new-video-classify": "node scripts/cf27-new-video-classifier.mjs",
     "cf27:sequence-integrity": "node scripts/cf27-native-sequence-integrity.mjs",
+    "cf27:view-frame-selection": "node scripts/cf27-view-angle-frame-selection.mjs",
     "source-video:intake": "node scripts/source-video-intake.mjs",
     "phase-zero:export": "node scripts/phase-zero-export.mjs"
   }

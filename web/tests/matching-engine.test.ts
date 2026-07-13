@@ -7,7 +7,7 @@ import { verifyManifestIntegrity } from "@/lib/catalog/catalog-integrity";
 import { createBundledCatalogRepository } from "@/lib/catalog/catalog-repository";
 import { PRODUCTION_PUBLISH_GATE_VERSION, requiredProductionPublishGateChecks, type ProductionPublishGateReport } from "@/lib/catalog/production-publish-gate";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
-import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
+import { createRuleBasedMatchingEngine, type MatchingFeatureConfig } from "@/lib/matching/matching-engine";
 import type { AppearanceAttribute, FacialMeasurement, GameCatalogManifest, StandardFaceProfile, StandardFacialMeasurementID } from "@/types/domain";
 
 const fixtureCatalog = JSON.parse(
@@ -90,6 +90,35 @@ describe("rule-based matching engine", () => {
     });
     expect(defaultOrder[0].catalogItem.stableInternalID).toBe("synthetic-match-alpha");
     expect(athleteOrder[0].catalogItem.stableInternalID).toBe("synthetic-match-beta");
+  });
+
+  it("supports configurable feature weights without changing the default model", () => {
+    const profile = syntheticProfile();
+    profile.geometry.measurements.faceWidthRatio = measurement(0.76, 0.96);
+    const defaultOrder = engine().matchTopThree({ profile, catalog: fixtureCatalog, allowTestFixtures: true });
+    const faceWidthOnly: MatchingFeatureConfig[] = [{ id: "faceWidthRatio", group: "faceAndJawShape", weight: 1, maxDistance: 0.35 }];
+    const weightedOrder = createRuleBasedMatchingEngine({ geometryFeatures: faceWidthOnly, appearanceFeatures: [] }).matchTopThree({
+      profile,
+      catalog: fixtureCatalog,
+      allowTestFixtures: true
+    });
+
+    expect(defaultOrder[0].catalogItem.stableInternalID).toBe("synthetic-match-alpha");
+    expect(weightedOrder[0].catalogItem.stableInternalID).toBe("synthetic-match-beta");
+    expect(weightedOrder[0].featureContributions.filter((feature) => feature.included).map((feature) => feature.featureID)).toEqual(["faceWidthRatio"]);
+  });
+
+  it("keeps production matching disabled until an approved catalog release exists", async () => {
+    const notChecksummed = productionStyleCatalog();
+    expect(engine().matchTopThree({ profile: syntheticProfile(), catalog: notChecksummed })).toEqual([]);
+
+    const notApproved = await checksumCatalog({ ...productionStyleCatalog(), releaseStatus: "reviewCandidate" });
+    expect(engine().matchTopThree({ profile: syntheticProfile(), catalog: notApproved })).toEqual([]);
+
+    const approved = await checksumCatalog(productionStyleCatalog());
+    const matches = engine().matchTopThree({ profile: syntheticProfile(), catalog: approved });
+    expect(matches).toHaveLength(3);
+    expect(matches.every((match) => match.catalogVersion.identifier === "unit-test-production-catalog-v1")).toBe(true);
   });
 
   it("generates explanations and traceability metadata", () => {

@@ -42,6 +42,19 @@ export interface MatchingFeatureConfig {
   maxDistance: number;
 }
 
+export interface MatchingAppearanceFeatureConfig {
+  category: UserConfirmedAttributeCategory;
+  group: "hair" | "facialHair" | "desiredAthletePhysique";
+  weight: number;
+  annotationKeys: string[];
+}
+
+export interface RuleBasedMatchingEngineConfig {
+  geometryFeatures?: MatchingFeatureConfig[];
+  appearanceFeatures?: MatchingAppearanceFeatureConfig[];
+  requireApprovedProductionRelease?: boolean;
+}
+
 const scoreLabel = "Match score based on the game’s available appearance options.";
 const lowConfidenceThreshold = 0.25;
 
@@ -64,12 +77,7 @@ export const defaultGeometryFeatureConfig: MatchingFeatureConfig[] = [
   { id: "mouthWidthRatio", group: "mouth", weight: 0.07, maxDistance: 0.26 }
 ];
 
-const appearanceConfigs: Array<{
-  category: UserConfirmedAttributeCategory;
-  group: "hair" | "facialHair" | "desiredAthletePhysique";
-  weight: number;
-  annotationKeys: string[];
-}> = [
+export const defaultAppearanceFeatureConfig: MatchingAppearanceFeatureConfig[] = [
   { category: "hairColorFamily", group: "hair", weight: 0.04, annotationKeys: ["hairColorFamily"] },
   { category: "hairTextureFamily", group: "hair", weight: 0.03, annotationKeys: ["hairTextureFamily"] },
   { category: "hairstyleFamily", group: "hair", weight: 0.04, annotationKeys: ["hairstyleFamily"] },
@@ -78,14 +86,38 @@ const appearanceConfigs: Array<{
   { category: "preferredBodyType", group: "desiredAthletePhysique", weight: 0.03, annotationKeys: ["preferredBodyType"] }
 ];
 
-export function createRuleBasedMatchingEngine(config: MatchingFeatureConfig[] = defaultGeometryFeatureConfig): MatchingEngine {
+export function createRuleBasedMatchingEngine(config: MatchingFeatureConfig[] | RuleBasedMatchingEngineConfig = defaultGeometryFeatureConfig): MatchingEngine {
+  const engineConfig: Required<RuleBasedMatchingEngineConfig> = Array.isArray(config)
+    ? {
+        geometryFeatures: config,
+        appearanceFeatures: defaultAppearanceFeatureConfig,
+        requireApprovedProductionRelease: true
+      }
+    : {
+        geometryFeatures: config.geometryFeatures ?? defaultGeometryFeatureConfig,
+        appearanceFeatures: config.appearanceFeatures ?? defaultAppearanceFeatureConfig,
+        requireApprovedProductionRelease: config.requireApprovedProductionRelease ?? true
+      };
   return {
     modelVersion: "rule-based-web-mvp-v2-rgb-geometry",
     matchTopThree(input) {
+      if (!canMatchCatalog(input.catalog, input.allowTestFixtures ?? false, engineConfig.requireApprovedProductionRelease)) {
+        return [];
+      }
       const candidates = input.catalog.items
         .filter((item) => item.verificationState === "verified" && hasAllowedSourceType(item, input.allowTestFixtures ?? false))
         .filter((item) => hasVerifiedMenuInstructions(item, input.allowTestFixtures ?? false))
-        .map((item) => scoreCatalogItem({ profile: input.profile, item, catalog: input.catalog, config, preferences: input.preferences, modelVersion: this.modelVersion }))
+        .map((item) =>
+          scoreCatalogItem({
+            profile: input.profile,
+            item,
+            catalog: input.catalog,
+            geometryConfig: engineConfig.geometryFeatures,
+            appearanceConfig: engineConfig.appearanceFeatures,
+            preferences: input.preferences,
+            modelVersion: this.modelVersion
+          })
+        )
         .sort(compareMatches);
       return assignRanksAndTies(candidates).slice(0, input.limit ?? 3);
     }
@@ -96,19 +128,20 @@ function scoreCatalogItem(input: {
   profile: StandardFaceProfile;
   item: GameCatalogItem;
   catalog: GameCatalogManifest;
-  config: MatchingFeatureConfig[];
+  geometryConfig: MatchingFeatureConfig[];
+  appearanceConfig: MatchingAppearanceFeatureConfig[];
   preferences?: MatchingPreferences;
   modelVersion: string;
 }): GameAppearanceMatch {
   const contributions = [
-    ...input.config.map((feature) => scoreGeometryFeature(input.profile, input.item, feature, input.preferences)),
-    ...appearanceConfigs.map((feature) => scoreAppearanceFeature(input.profile, input.item, feature, input.preferences))
+    ...input.geometryConfig.map((feature) => scoreGeometryFeature(input.profile, input.item, feature, input.preferences)),
+    ...input.appearanceConfig.map((feature) => scoreAppearanceFeature(input.profile, input.item, feature, input.preferences))
   ];
   const included = contributions.filter((contribution) => contribution.included && contribution.effectiveWeight > 0);
   const effectiveWeightTotal = included.reduce((total, contribution) => total + contribution.effectiveWeight, 0);
   const weightedDistance =
     effectiveWeightTotal > 0 ? included.reduce((total, contribution) => total + contribution.normalizedDistance * contribution.effectiveWeight, 0) / effectiveWeightTotal : 1;
-  const evidenceCoverage = calculateEvidenceCoverage(contributions, input.preferences);
+  const evidenceCoverage = calculateEvidenceCoverage(contributions, input.preferences, input.geometryConfig, input.appearanceConfig);
   const averageReliability = included.length > 0 ? included.reduce((total, contribution) => total + contribution.reliability, 0) / included.length : 0;
   const preferenceAdjustment = calculatePreferenceAdjustment(input.profile, input.item, input.preferences);
   const score = clamp(round((1 - weightedDistance) * 100 + preferenceAdjustment * 5), 0, 100);
@@ -171,7 +204,7 @@ function scoreGeometryFeature(
 function scoreAppearanceFeature(
   profile: StandardFaceProfile,
   item: GameCatalogItem,
-  feature: (typeof appearanceConfigs)[number],
+  feature: MatchingAppearanceFeatureConfig,
   preferences?: MatchingPreferences
 ): MatchFeatureContribution {
   const profileAttribute = findAttribute(profile.appearance.attributes, feature.category);
@@ -215,17 +248,29 @@ function calculatePreferenceAdjustment(profile: StandardFaceProfile, item: GameC
   return String(preferredBody).toLowerCase() === catalogBody.toLowerCase() ? bodyPreference : -bodyPreference / 2;
 }
 
-function calculateEvidenceCoverage(contributions: MatchFeatureContribution[], preferences?: MatchingPreferences) {
-  const intendedTotal = contributions.reduce((total, contribution) => total + baseIntendedWeight(contribution, preferences), 0);
-  const includedTotal = contributions.filter((contribution) => contribution.included).reduce((total, contribution) => total + baseIntendedWeight(contribution, preferences), 0);
+function calculateEvidenceCoverage(
+  contributions: MatchFeatureContribution[],
+  preferences: MatchingPreferences | undefined,
+  geometryConfig: MatchingFeatureConfig[],
+  appearanceConfig: MatchingAppearanceFeatureConfig[]
+) {
+  const intendedTotal = contributions.reduce((total, contribution) => total + baseIntendedWeight(contribution, preferences, geometryConfig, appearanceConfig), 0);
+  const includedTotal = contributions
+    .filter((contribution) => contribution.included)
+    .reduce((total, contribution) => total + baseIntendedWeight(contribution, preferences, geometryConfig, appearanceConfig), 0);
   return intendedTotal > 0 ? includedTotal / intendedTotal : 0;
 }
 
-function baseIntendedWeight(contribution: MatchFeatureContribution, preferences?: MatchingPreferences) {
-  const geometryConfig = defaultGeometryFeatureConfig.find((feature) => feature.id === contribution.featureID);
-  if (geometryConfig) return geometryConfig.weight * preferenceForGroup(geometryConfig.group, preferences);
-  const appearanceConfig = appearanceConfigs.find((feature) => feature.category === contribution.featureID);
-  return appearanceConfig ? appearanceConfig.weight * preferenceForGroup(appearanceConfig.group, preferences) : 0;
+function baseIntendedWeight(
+  contribution: MatchFeatureContribution,
+  preferences: MatchingPreferences | undefined,
+  geometryConfig: MatchingFeatureConfig[],
+  appearanceConfig: MatchingAppearanceFeatureConfig[]
+) {
+  const geometryFeature = geometryConfig.find((feature) => feature.id === contribution.featureID);
+  if (geometryFeature) return geometryFeature.weight * preferenceForGroup(geometryFeature.group, preferences);
+  const appearanceFeature = appearanceConfig.find((feature) => feature.category === contribution.featureID);
+  return appearanceFeature ? appearanceFeature.weight * preferenceForGroup(appearanceFeature.group, preferences) : 0;
 }
 
 function buildExplanation(item: GameCatalogItem, score: number, contributions: MatchFeatureContribution[], evidenceCoverage: number, averageReliability: number) {
@@ -313,6 +358,18 @@ function hasVerifiedMenuInstructions(item: GameCatalogItem, allowTestFixtures: b
 function hasAllowedSourceType(item: GameCatalogItem, allowTestFixtures: boolean) {
   if (allowTestFixtures) return item.sourceType === "testFixture" && item.isTestFixture;
   return item.sourceType === "production" && !item.isTestFixture;
+}
+
+function canMatchCatalog(catalog: GameCatalogManifest, allowTestFixtures: boolean, requireApprovedProductionRelease: boolean) {
+  if (allowTestFixtures) return catalog.sourceType === "testFixture" && !catalog.isProduction;
+  if (catalog.sourceType !== "production" || !catalog.isProduction) return false;
+  if (!requireApprovedProductionRelease) return true;
+  return (
+    catalog.releaseStatus === "approvedRelease" &&
+    Boolean(catalog.packageChecksum) &&
+    Boolean(catalog.catalogVersion.verifiedAt) &&
+    catalog.items.length > 0
+  );
 }
 
 function findAttribute(attributes: AppearanceAttribute[], category: UserConfirmedAttributeCategory) {

@@ -1,0 +1,2897 @@
+{
+  "schemaVersion": "cf27-native-sequence-integrity-v1",
+  "reportLabel": "PRIMARY RESEARCH SEQUENCE REVIEW — NOT PRODUCTION VERIFIED",
+  "generatedAt": "2026-07-13T14:19:35.160Z",
+  "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REVIEW_SUGGESTIONS_ONLY_NOT_GAME_FACTS",
+  "humanReviewQueue": [
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_002_tl_007_video_002_tl_008_Face_4_Face_8_4_8",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-002-tl-007",
+        "video-002-tl-008"
+      ],
+      "labels": [
+        "Face 4",
+        "Face 8"
+      ],
+      "nativeOrders": [
+        4,
+        8
+      ],
+      "message": "Large selector movement from Face 4 to Face 8 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_002_tl_011_video_002_tl_012_Face_5_Face_9_5_9",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-002-tl-011",
+        "video-002-tl-012"
+      ],
+      "labels": [
+        "Face 5",
+        "Face 9"
+      ],
+      "nativeOrders": [
+        5,
+        9
+      ],
+      "message": "Large selector movement from Face 5 to Face 9 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_002_tl_015_video_002_tl_016_Face_12_Face_16_12_16",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-002-tl-015",
+        "video-002-tl-016"
+      ],
+      "labels": [
+        "Face 12",
+        "Face 16"
+      ],
+      "nativeOrders": [
+        12,
+        16
+      ],
+      "message": "Large selector movement from Face 12 to Face 16 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_002_tl_016_video_003_tl_001_Face_16_Face_12_16_12",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-002-tl-016",
+        "video-003-tl-001"
+      ],
+      "labels": [
+        "Face 16",
+        "Face 12"
+      ],
+      "nativeOrders": [
+        16,
+        12
+      ],
+      "message": "Large selector movement from Face 16 to Face 12 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_003_tl_001_video_003_tl_002_Face_12_Face_16_12_16",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-001",
+        "video-003-tl-002"
+      ],
+      "labels": [
+        "Face 12",
+        "Face 16"
+      ],
+      "nativeOrders": [
+        12,
+        16
+      ],
+      "message": "Large selector movement from Face 12 to Face 16 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_003_tl_004_video_003_tl_005_Face_13_Face_17_13_17",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-004",
+        "video-003-tl-005"
+      ],
+      "labels": [
+        "Face 13",
+        "Face 17"
+      ],
+      "nativeOrders": [
+        13,
+        17
+      ],
+      "message": "Large selector movement from Face 13 to Face 17 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_003_tl_006_video_003_tl_007_Face_18_Face_23_18_23",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-006",
+        "video-003-tl-007"
+      ],
+      "labels": [
+        "Face 18",
+        "Face 23"
+      ],
+      "nativeOrders": [
+        18,
+        23
+      ],
+      "message": "Large selector movement from Face 18 to Face 23 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_003_tl_010_video_003_tl_011_Face_21_Face_27_21_27",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-010",
+        "video-003-tl-011"
+      ],
+      "labels": [
+        "Face 21",
+        "Face 27"
+      ],
+      "nativeOrders": [
+        21,
+        27
+      ],
+      "message": "Large selector movement from Face 21 to Face 27 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-incompleteSelectorEnding-video_003_tl_015_Face_29_29",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "incompleteSelectorEnding",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-015"
+      ],
+      "labels": [
+        "Face 29"
+      ],
+      "nativeOrders": [
+        29
+      ],
+      "message": "Selector boundary is not proven complete for Head Templates 1-29.",
+      "reviewAction": "Record first/final value, boundary, wrap behavior, and category exit evidence before production publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-reversedMovement-video_002_tl_016_video_003_tl_001_Face_16_Face_12_16_12",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-002-tl-016",
+        "video-003-tl-001"
+      ],
+      "labels": [
+        "Face 16",
+        "Face 12"
+      ],
+      "nativeOrders": [
+        16,
+        12
+      ],
+      "message": "Chronological selection moved backward from native order 16 to 12.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-reversedMovement-video_003_tl_002_video_003_tl_003_Face_16_Face_14_16_14",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-002",
+        "video-003-tl-003"
+      ],
+      "labels": [
+        "Face 16",
+        "Face 14"
+      ],
+      "nativeOrders": [
+        16,
+        14
+      ],
+      "message": "Chronological selection moved backward from native order 16 to 14.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-reversedMovement-video_003_tl_008_video_003_tl_009_Face_24_Face_22_24_22",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-008",
+        "video-003-tl-009"
+      ],
+      "labels": [
+        "Face 24",
+        "Face 22"
+      ],
+      "nativeOrders": [
+        24,
+        22
+      ],
+      "message": "Chronological selection moved backward from native order 24 to 22.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-selectedLabelOutsideCandidateScope-video_003_tl_013_Face_31",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "selectedLabelOutsideCandidateScope",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-013"
+      ],
+      "labels": [
+        "Face 31"
+      ],
+      "nativeOrders": [],
+      "message": "Face 31 is deliberately selected in the timeline but is not present in the current candidate records.",
+      "reviewAction": "Prompt 103 scope covers current Head Template research candidates Face 1 through Face 29 only. Later visible selected labels must be reviewed before creating more records.",
+      "confidence": 0.9,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-selectedLabelOutsideCandidateScope-video_003_tl_014_Face_30",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "selectedLabelOutsideCandidateScope",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-014"
+      ],
+      "labels": [
+        "Face 30"
+      ],
+      "nativeOrders": [],
+      "message": "Face 30 is deliberately selected in the timeline but is not present in the current candidate records.",
+      "reviewAction": "Prompt 103 scope covers current Head Template research candidates Face 1 through Face 29 only. Later visible selected labels must be reviewed before creating more records.",
+      "confidence": 0.9,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_002_tl_007_video_002_tl_008_Face_4_Face_8_4_8",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-002-tl-007",
+        "video-002-tl-008"
+      ],
+      "labels": [
+        "Face 4",
+        "Face 8"
+      ],
+      "nativeOrders": [
+        4,
+        8
+      ],
+      "message": "Chronological selection jumped by 4 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_002_tl_011_video_002_tl_012_Face_5_Face_9_5_9",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-002-tl-011",
+        "video-002-tl-012"
+      ],
+      "labels": [
+        "Face 5",
+        "Face 9"
+      ],
+      "nativeOrders": [
+        5,
+        9
+      ],
+      "message": "Chronological selection jumped by 4 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_002_tl_015_video_002_tl_016_Face_12_Face_16_12_16",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-002-tl-015",
+        "video-002-tl-016"
+      ],
+      "labels": [
+        "Face 12",
+        "Face 16"
+      ],
+      "nativeOrders": [
+        12,
+        16
+      ],
+      "message": "Chronological selection jumped by 4 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_002_tl_016_video_003_tl_001_Face_16_Face_12_16_12",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-002-tl-016",
+        "video-003-tl-001"
+      ],
+      "labels": [
+        "Face 16",
+        "Face 12"
+      ],
+      "nativeOrders": [
+        16,
+        12
+      ],
+      "message": "Chronological selection jumped by -4 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_003_tl_001_video_003_tl_002_Face_12_Face_16_12_16",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-001",
+        "video-003-tl-002"
+      ],
+      "labels": [
+        "Face 12",
+        "Face 16"
+      ],
+      "nativeOrders": [
+        12,
+        16
+      ],
+      "message": "Chronological selection jumped by 4 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_003_tl_004_video_003_tl_005_Face_13_Face_17_13_17",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-004",
+        "video-003-tl-005"
+      ],
+      "labels": [
+        "Face 13",
+        "Face 17"
+      ],
+      "nativeOrders": [
+        13,
+        17
+      ],
+      "message": "Chronological selection jumped by 4 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_003_tl_006_video_003_tl_007_Face_18_Face_23_18_23",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-006",
+        "video-003-tl-007"
+      ],
+      "labels": [
+        "Face 18",
+        "Face 23"
+      ],
+      "nativeOrders": [
+        18,
+        23
+      ],
+      "message": "Chronological selection jumped by 5 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_003_tl_010_video_003_tl_011_Face_21_Face_27_21_27",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-003-tl-010",
+        "video-003-tl-011"
+      ],
+      "labels": [
+        "Face 21",
+        "Face 27"
+      ],
+      "nativeOrders": [
+        21,
+        27
+      ],
+      "message": "Chronological selection jumped by 6 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_003_tl_002_video_003_tl_003_Face_16_Face_14_16_14",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-003-tl-002",
+        "video-003-tl-003"
+      ],
+      "labels": [
+        "Face 16",
+        "Face 14"
+      ],
+      "nativeOrders": [
+        16,
+        14
+      ],
+      "message": "Large selector movement from Face 16 to Face 14 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_003_tl_008_video_003_tl_009_Face_24_Face_22_24_22",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-003-tl-008",
+        "video-003-tl-009"
+      ],
+      "labels": [
+        "Face 24",
+        "Face 22"
+      ],
+      "nativeOrders": [
+        24,
+        22
+      ],
+      "message": "Large selector movement from Face 24 to Face 22 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-accidentalJump-video_003_tl_012_video_003_tl_013_Face_28_Face_31_28_31",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-003-tl-012",
+        "video-003-tl-013"
+      ],
+      "labels": [
+        "Face 28",
+        "Face 31"
+      ],
+      "nativeOrders": [
+        28,
+        31
+      ],
+      "message": "Large selector movement from Face 28 to Face 31 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-candidateRecordWithoutTimelineSelection-Face_15_15",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "candidateRecordWithoutTimelineSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [],
+      "labels": [
+        "Face 15"
+      ],
+      "nativeOrders": [
+        15
+      ],
+      "message": "Face 15 exists as a candidate record but was not matched to a deliberately selected timeline event.",
+      "reviewAction": "Confirm the candidate selected-menu evidence and timeline mapping before publication.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-candidateRecordWithoutTimelineSelection-Face_19_19",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "candidateRecordWithoutTimelineSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [],
+      "labels": [
+        "Face 19"
+      ],
+      "nativeOrders": [
+        19
+      ],
+      "message": "Face 19 exists as a candidate record but was not matched to a deliberately selected timeline event.",
+      "reviewAction": "Confirm the candidate selected-menu evidence and timeline mapping before publication.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-candidateRecordWithoutTimelineSelection-Face_20_20",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "candidateRecordWithoutTimelineSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [],
+      "labels": [
+        "Face 20"
+      ],
+      "nativeOrders": [
+        20
+      ],
+      "message": "Face 20 exists as a candidate record but was not matched to a deliberately selected timeline event.",
+      "reviewAction": "Confirm the candidate selected-menu evidence and timeline mapping before publication.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-candidateRecordWithoutTimelineSelection-Face_25_25",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "candidateRecordWithoutTimelineSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [],
+      "labels": [
+        "Face 25"
+      ],
+      "nativeOrders": [
+        25
+      ],
+      "message": "Face 25 exists as a candidate record but was not matched to a deliberately selected timeline event.",
+      "reviewAction": "Confirm the candidate selected-menu evidence and timeline mapping before publication.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-candidateRecordWithoutTimelineSelection-Face_26_26",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "candidateRecordWithoutTimelineSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [],
+      "labels": [
+        "Face 26"
+      ],
+      "nativeOrders": [
+        26
+      ],
+      "message": "Face 26 exists as a candidate record but was not matched to a deliberately selected timeline event.",
+      "reviewAction": "Confirm the candidate selected-menu evidence and timeline mapping before publication.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-overlappingClip-video_002_tl_015_video_003_tl_001_Face_12_Face_12_12",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "overlappingClip",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-002-tl-015",
+        "video-003-tl-001"
+      ],
+      "labels": [
+        "Face 12",
+        "Face 12"
+      ],
+      "nativeOrders": [
+        12
+      ],
+      "message": "Face 12 appears in multiple source videos.",
+      "reviewAction": "Confirm this is intentional clip overlap and preserve both evidence references without creating duplicate catalog identities.",
+      "confidence": 0.9,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-overlappingClip-video_002_tl_016_video_003_tl_002_Face_16_Face_16_16",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "overlappingClip",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-002-tl-016",
+        "video-003-tl-002"
+      ],
+      "labels": [
+        "Face 16",
+        "Face 16"
+      ],
+      "nativeOrders": [
+        16
+      ],
+      "message": "Face 16 appears in multiple source videos.",
+      "reviewAction": "Confirm this is intentional clip overlap and preserve both evidence references without creating duplicate catalog identities.",
+      "confidence": 0.9,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-repeatedSelection-video_002_tl_015_video_003_tl_001_Face_12_Face_12_12",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "repeatedSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-002-tl-015",
+        "video-003-tl-001"
+      ],
+      "labels": [
+        "Face 12",
+        "Face 12"
+      ],
+      "nativeOrders": [
+        12
+      ],
+      "message": "Face 12 appears more than once in deliberately selected timeline events.",
+      "reviewAction": "Confirm whether this is intentional overlap, selector wrap, or an accidental repeated selection before publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-repeatedSelection-video_002_tl_016_video_003_tl_002_Face_16_Face_16_16",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "repeatedSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-002-tl-016",
+        "video-003-tl-002"
+      ],
+      "labels": [
+        "Face 16",
+        "Face 16"
+      ],
+      "nativeOrders": [
+        16
+      ],
+      "message": "Face 16 appears more than once in deliberately selected timeline events.",
+      "reviewAction": "Confirm whether this is intentional overlap, selector wrap, or an accidental repeated selection before publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-reversedMovement-video_002_tl_008_video_002_tl_009_Face_8_Face_7_8_7",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-002-tl-008",
+        "video-002-tl-009"
+      ],
+      "labels": [
+        "Face 8",
+        "Face 7"
+      ],
+      "nativeOrders": [
+        8,
+        7
+      ],
+      "message": "Chronological selection moved backward from native order 8 to 7.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-reversedMovement-video_002_tl_009_video_002_tl_010_Face_7_Face_6_7_6",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-002-tl-009",
+        "video-002-tl-010"
+      ],
+      "labels": [
+        "Face 7",
+        "Face 6"
+      ],
+      "nativeOrders": [
+        7,
+        6
+      ],
+      "message": "Chronological selection moved backward from native order 7 to 6.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-reversedMovement-video_002_tl_010_video_002_tl_011_Face_6_Face_5_6_5",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-002-tl-010",
+        "video-002-tl-011"
+      ],
+      "labels": [
+        "Face 6",
+        "Face 5"
+      ],
+      "nativeOrders": [
+        6,
+        5
+      ],
+      "message": "Chronological selection moved backward from native order 6 to 5.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-reversedMovement-video_003_tl_003_video_003_tl_004_Face_14_Face_13_14_13",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-003-tl-003",
+        "video-003-tl-004"
+      ],
+      "labels": [
+        "Face 14",
+        "Face 13"
+      ],
+      "nativeOrders": [
+        14,
+        13
+      ],
+      "message": "Chronological selection moved backward from native order 14 to 13.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-reversedMovement-video_003_tl_009_video_003_tl_010_Face_22_Face_21_22_21",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-003-tl-009",
+        "video-003-tl-010"
+      ],
+      "labels": [
+        "Face 22",
+        "Face 21"
+      ],
+      "nativeOrders": [
+        22,
+        21
+      ],
+      "message": "Chronological selection moved backward from native order 22 to 21.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-reversedMovement-video_003_tl_013_video_003_tl_014_Face_31_Face_30_31_30",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-003-tl-013",
+        "video-003-tl-014"
+      ],
+      "labels": [
+        "Face 31",
+        "Face 30"
+      ],
+      "nativeOrders": [
+        31,
+        30
+      ],
+      "message": "Chronological selection moved backward from native order 31 to 30.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-reversedMovement-video_003_tl_014_video_003_tl_015_Face_30_Face_29_30_29",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-003-tl-014",
+        "video-003-tl-015"
+      ],
+      "labels": [
+        "Face 30",
+        "Face 29"
+      ],
+      "nativeOrders": [
+        30,
+        29
+      ],
+      "message": "Chronological selection moved backward from native order 30 to 29.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_003_tl_002_video_003_tl_003_Face_16_Face_14_16_14",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-003-tl-002",
+        "video-003-tl-003"
+      ],
+      "labels": [
+        "Face 16",
+        "Face 14"
+      ],
+      "nativeOrders": [
+        16,
+        14
+      ],
+      "message": "Chronological selection jumped by -2 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_003_tl_008_video_003_tl_009_Face_24_Face_22_24_22",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-003-tl-008",
+        "video-003-tl-009"
+      ],
+      "labels": [
+        "Face 24",
+        "Face 22"
+      ],
+      "nativeOrders": [
+        24,
+        22
+      ],
+      "message": "Chronological selection jumped by -2 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-headTemplates-skippedIndices-video_003_tl_012_video_003_tl_013_Face_28_Face_31_28_31",
+      "categoryKey": "headTemplates",
+      "category": "Head Templates 1-29",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-003-tl-012",
+        "video-003-tl-013"
+      ],
+      "labels": [
+        "Face 28",
+        "Face 31"
+      ],
+      "nativeOrders": [
+        28,
+        31
+      ],
+      "message": "Chronological selection jumped by 3 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_002_video_004_tl_003_Skin_Tone_09_Skin_Tone_04_9_4",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-002",
+        "video-004-tl-003"
+      ],
+      "labels": [
+        "Skin Tone 09",
+        "Skin Tone 04"
+      ],
+      "nativeOrders": [
+        9,
+        4
+      ],
+      "message": "Large selector movement from Skin Tone 09 to Skin Tone 04 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_003_video_004_tl_004_Skin_Tone_04_Skin_Tone_10_4_10",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-003",
+        "video-004-tl-004"
+      ],
+      "labels": [
+        "Skin Tone 04",
+        "Skin Tone 10"
+      ],
+      "nativeOrders": [
+        4,
+        10
+      ],
+      "message": "Large selector movement from Skin Tone 04 to Skin Tone 10 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_004_video_004_tl_005_Skin_Tone_10_Skin_Tone_20_10_20",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-004",
+        "video-004-tl-005"
+      ],
+      "labels": [
+        "Skin Tone 10",
+        "Skin Tone 20"
+      ],
+      "nativeOrders": [
+        10,
+        20
+      ],
+      "message": "Large selector movement from Skin Tone 10 to Skin Tone 20 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_008_video_004_tl_009_Skin_Tone_21_Skin_Tone_08_21_8",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-008",
+        "video-004-tl-009"
+      ],
+      "labels": [
+        "Skin Tone 21",
+        "Skin Tone 08"
+      ],
+      "nativeOrders": [
+        21,
+        8
+      ],
+      "message": "Large selector movement from Skin Tone 21 to Skin Tone 08 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_011_video_004_tl_012_Skin_Tone_06_Skin_Tone_29_6_29",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-011",
+        "video-004-tl-012"
+      ],
+      "labels": [
+        "Skin Tone 06",
+        "Skin Tone 29"
+      ],
+      "nativeOrders": [
+        6,
+        29
+      ],
+      "message": "Large selector movement from Skin Tone 06 to Skin Tone 29 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_012_video_004_tl_013_Skin_Tone_29_Skin_Tone_24_29_24",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-012",
+        "video-004-tl-013"
+      ],
+      "labels": [
+        "Skin Tone 29",
+        "Skin Tone 24"
+      ],
+      "nativeOrders": [
+        29,
+        24
+      ],
+      "message": "Large selector movement from Skin Tone 29 to Skin Tone 24 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_014_video_004_tl_015_Skin_Tone_22_Skin_Tone_17_22_17",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-014",
+        "video-004-tl-015"
+      ],
+      "labels": [
+        "Skin Tone 22",
+        "Skin Tone 17"
+      ],
+      "nativeOrders": [
+        22,
+        17
+      ],
+      "message": "Large selector movement from Skin Tone 22 to Skin Tone 17 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_015_video_004_tl_016_Skin_Tone_17_Skin_Tone_13_17_13",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-015",
+        "video-004-tl-016"
+      ],
+      "labels": [
+        "Skin Tone 17",
+        "Skin Tone 13"
+      ],
+      "nativeOrders": [
+        17,
+        13
+      ],
+      "message": "Large selector movement from Skin Tone 17 to Skin Tone 13 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_018_video_004_tl_019_Skin_Tone_12_Skin_Tone_01_12_1",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-018",
+        "video-004-tl-019"
+      ],
+      "labels": [
+        "Skin Tone 12",
+        "Skin Tone 01"
+      ],
+      "nativeOrders": [
+        12,
+        1
+      ],
+      "message": "Large selector movement from Skin Tone 12 to Skin Tone 01 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_021_video_004_tl_022_Skin_Tone_03_Skin_Tone_11_3_11",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-021",
+        "video-004-tl-022"
+      ],
+      "labels": [
+        "Skin Tone 03",
+        "Skin Tone 11"
+      ],
+      "nativeOrders": [
+        3,
+        11
+      ],
+      "message": "Large selector movement from Skin Tone 03 to Skin Tone 11 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_022_video_004_tl_023_Skin_Tone_11_Skin_Tone_23_11_23",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-022",
+        "video-004-tl-023"
+      ],
+      "labels": [
+        "Skin Tone 11",
+        "Skin Tone 23"
+      ],
+      "nativeOrders": [
+        11,
+        23
+      ],
+      "message": "Large selector movement from Skin Tone 11 to Skin Tone 23 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-incompleteSelectorEnding-video_004_tl_023_Skin_Tone_23_23",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "incompleteSelectorEnding",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-023"
+      ],
+      "labels": [
+        "Skin Tone 23"
+      ],
+      "nativeOrders": [
+        23
+      ],
+      "message": "Selector boundary is not proven complete for Skin Tone.",
+      "reviewAction": "Record first/final value, boundary, wrap behavior, and category exit evidence before production publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_002_video_004_tl_003_Skin_Tone_09_Skin_Tone_04_9_4",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-002",
+        "video-004-tl-003"
+      ],
+      "labels": [
+        "Skin Tone 09",
+        "Skin Tone 04"
+      ],
+      "nativeOrders": [
+        9,
+        4
+      ],
+      "message": "Chronological selection moved backward from native order 9 to 4.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_008_video_004_tl_009_Skin_Tone_21_Skin_Tone_08_21_8",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-008",
+        "video-004-tl-009"
+      ],
+      "labels": [
+        "Skin Tone 21",
+        "Skin Tone 08"
+      ],
+      "nativeOrders": [
+        21,
+        8
+      ],
+      "message": "Chronological selection moved backward from native order 21 to 8.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_012_video_004_tl_013_Skin_Tone_29_Skin_Tone_24_29_24",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-012",
+        "video-004-tl-013"
+      ],
+      "labels": [
+        "Skin Tone 29",
+        "Skin Tone 24"
+      ],
+      "nativeOrders": [
+        29,
+        24
+      ],
+      "message": "Chronological selection moved backward from native order 29 to 24.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_013_video_004_tl_014_Skin_Tone_24_Skin_Tone_22_24_22",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-013",
+        "video-004-tl-014"
+      ],
+      "labels": [
+        "Skin Tone 24",
+        "Skin Tone 22"
+      ],
+      "nativeOrders": [
+        24,
+        22
+      ],
+      "message": "Chronological selection moved backward from native order 24 to 22.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_014_video_004_tl_015_Skin_Tone_22_Skin_Tone_17_22_17",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-014",
+        "video-004-tl-015"
+      ],
+      "labels": [
+        "Skin Tone 22",
+        "Skin Tone 17"
+      ],
+      "nativeOrders": [
+        22,
+        17
+      ],
+      "message": "Chronological selection moved backward from native order 22 to 17.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_015_video_004_tl_016_Skin_Tone_17_Skin_Tone_13_17_13",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-015",
+        "video-004-tl-016"
+      ],
+      "labels": [
+        "Skin Tone 17",
+        "Skin Tone 13"
+      ],
+      "nativeOrders": [
+        17,
+        13
+      ],
+      "message": "Chronological selection moved backward from native order 17 to 13.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_016_video_004_tl_017_Skin_Tone_13_Skin_Tone_10_13_10",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-016",
+        "video-004-tl-017"
+      ],
+      "labels": [
+        "Skin Tone 13",
+        "Skin Tone 10"
+      ],
+      "nativeOrders": [
+        13,
+        10
+      ],
+      "message": "Chronological selection moved backward from native order 13 to 10.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_018_video_004_tl_019_Skin_Tone_12_Skin_Tone_01_12_1",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-018",
+        "video-004-tl-019"
+      ],
+      "labels": [
+        "Skin Tone 12",
+        "Skin Tone 01"
+      ],
+      "nativeOrders": [
+        12,
+        1
+      ],
+      "message": "Chronological selection moved backward from native order 12 to 1.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-selectedLabelOutsideCandidateScope-video_004_tl_012_Skin_Tone_29",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "selectedLabelOutsideCandidateScope",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-012"
+      ],
+      "labels": [
+        "Skin Tone 29"
+      ],
+      "nativeOrders": [],
+      "message": "Skin Tone 29 is deliberately selected in the timeline but is not present in the current candidate records.",
+      "reviewAction": "Review source evidence before creating, excluding, or deferring this candidate record.",
+      "confidence": 0.9,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_002_video_004_tl_003_Skin_Tone_09_Skin_Tone_04_9_4",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-002",
+        "video-004-tl-003"
+      ],
+      "labels": [
+        "Skin Tone 09",
+        "Skin Tone 04"
+      ],
+      "nativeOrders": [
+        9,
+        4
+      ],
+      "message": "Chronological selection jumped by -5 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_003_video_004_tl_004_Skin_Tone_04_Skin_Tone_10_4_10",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-003",
+        "video-004-tl-004"
+      ],
+      "labels": [
+        "Skin Tone 04",
+        "Skin Tone 10"
+      ],
+      "nativeOrders": [
+        4,
+        10
+      ],
+      "message": "Chronological selection jumped by 6 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_004_video_004_tl_005_Skin_Tone_10_Skin_Tone_20_10_20",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-004",
+        "video-004-tl-005"
+      ],
+      "labels": [
+        "Skin Tone 10",
+        "Skin Tone 20"
+      ],
+      "nativeOrders": [
+        10,
+        20
+      ],
+      "message": "Chronological selection jumped by 10 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_008_video_004_tl_009_Skin_Tone_21_Skin_Tone_08_21_8",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-008",
+        "video-004-tl-009"
+      ],
+      "labels": [
+        "Skin Tone 21",
+        "Skin Tone 08"
+      ],
+      "nativeOrders": [
+        21,
+        8
+      ],
+      "message": "Chronological selection jumped by -13 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_011_video_004_tl_012_Skin_Tone_06_Skin_Tone_29_6_29",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-011",
+        "video-004-tl-012"
+      ],
+      "labels": [
+        "Skin Tone 06",
+        "Skin Tone 29"
+      ],
+      "nativeOrders": [
+        6,
+        29
+      ],
+      "message": "Chronological selection jumped by 23 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_012_video_004_tl_013_Skin_Tone_29_Skin_Tone_24_29_24",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-012",
+        "video-004-tl-013"
+      ],
+      "labels": [
+        "Skin Tone 29",
+        "Skin Tone 24"
+      ],
+      "nativeOrders": [
+        29,
+        24
+      ],
+      "message": "Chronological selection jumped by -5 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_014_video_004_tl_015_Skin_Tone_22_Skin_Tone_17_22_17",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-014",
+        "video-004-tl-015"
+      ],
+      "labels": [
+        "Skin Tone 22",
+        "Skin Tone 17"
+      ],
+      "nativeOrders": [
+        22,
+        17
+      ],
+      "message": "Chronological selection jumped by -5 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_015_video_004_tl_016_Skin_Tone_17_Skin_Tone_13_17_13",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-015",
+        "video-004-tl-016"
+      ],
+      "labels": [
+        "Skin Tone 17",
+        "Skin Tone 13"
+      ],
+      "nativeOrders": [
+        17,
+        13
+      ],
+      "message": "Chronological selection jumped by -4 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_018_video_004_tl_019_Skin_Tone_12_Skin_Tone_01_12_1",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-018",
+        "video-004-tl-019"
+      ],
+      "labels": [
+        "Skin Tone 12",
+        "Skin Tone 01"
+      ],
+      "nativeOrders": [
+        12,
+        1
+      ],
+      "message": "Chronological selection jumped by -11 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_021_video_004_tl_022_Skin_Tone_03_Skin_Tone_11_3_11",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-021",
+        "video-004-tl-022"
+      ],
+      "labels": [
+        "Skin Tone 03",
+        "Skin Tone 11"
+      ],
+      "nativeOrders": [
+        3,
+        11
+      ],
+      "message": "Chronological selection jumped by 8 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_022_video_004_tl_023_Skin_Tone_11_Skin_Tone_23_11_23",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-004-tl-022",
+        "video-004-tl-023"
+      ],
+      "labels": [
+        "Skin Tone 11",
+        "Skin Tone 23"
+      ],
+      "nativeOrders": [
+        11,
+        23
+      ],
+      "message": "Chronological selection jumped by 12 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_007_video_004_tl_008_Skin_Tone_18_Skin_Tone_21_18_21",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-007",
+        "video-004-tl-008"
+      ],
+      "labels": [
+        "Skin Tone 18",
+        "Skin Tone 21"
+      ],
+      "nativeOrders": [
+        18,
+        21
+      ],
+      "message": "Large selector movement from Skin Tone 18 to Skin Tone 21 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_013_video_004_tl_014_Skin_Tone_24_Skin_Tone_22_24_22",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-013",
+        "video-004-tl-014"
+      ],
+      "labels": [
+        "Skin Tone 24",
+        "Skin Tone 22"
+      ],
+      "nativeOrders": [
+        24,
+        22
+      ],
+      "message": "Large selector movement from Skin Tone 24 to Skin Tone 22 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_016_video_004_tl_017_Skin_Tone_13_Skin_Tone_10_13_10",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-016",
+        "video-004-tl-017"
+      ],
+      "labels": [
+        "Skin Tone 13",
+        "Skin Tone 10"
+      ],
+      "nativeOrders": [
+        13,
+        10
+      ],
+      "message": "Large selector movement from Skin Tone 13 to Skin Tone 10 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-accidentalJump-video_004_tl_017_video_004_tl_018_Skin_Tone_10_Skin_Tone_12_10_12",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-017",
+        "video-004-tl-018"
+      ],
+      "labels": [
+        "Skin Tone 10",
+        "Skin Tone 12"
+      ],
+      "nativeOrders": [
+        10,
+        12
+      ],
+      "message": "Large selector movement from Skin Tone 10 to Skin Tone 12 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-candidateRecordWithoutTimelineSelection-Skin_Tone_05_5",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "candidateRecordWithoutTimelineSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [],
+      "labels": [
+        "Skin Tone 05"
+      ],
+      "nativeOrders": [
+        5
+      ],
+      "message": "Skin Tone 05 exists as a candidate record but was not matched to a deliberately selected timeline event.",
+      "reviewAction": "Confirm the candidate selected-menu evidence and timeline mapping before publication.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-candidateRecordWithoutTimelineSelection-Skin_Tone_14_14",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "candidateRecordWithoutTimelineSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [],
+      "labels": [
+        "Skin Tone 14"
+      ],
+      "nativeOrders": [
+        14
+      ],
+      "message": "Skin Tone 14 exists as a candidate record but was not matched to a deliberately selected timeline event.",
+      "reviewAction": "Confirm the candidate selected-menu evidence and timeline mapping before publication.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-candidateRecordWithoutTimelineSelection-Skin_Tone_15_15",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "candidateRecordWithoutTimelineSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [],
+      "labels": [
+        "Skin Tone 15"
+      ],
+      "nativeOrders": [
+        15
+      ],
+      "message": "Skin Tone 15 exists as a candidate record but was not matched to a deliberately selected timeline event.",
+      "reviewAction": "Confirm the candidate selected-menu evidence and timeline mapping before publication.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-candidateRecordWithoutTimelineSelection-Skin_Tone_16_16",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "candidateRecordWithoutTimelineSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [],
+      "labels": [
+        "Skin Tone 16"
+      ],
+      "nativeOrders": [
+        16
+      ],
+      "message": "Skin Tone 16 exists as a candidate record but was not matched to a deliberately selected timeline event.",
+      "reviewAction": "Confirm the candidate selected-menu evidence and timeline mapping before publication.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-repeatedSelection-video_004_tl_004_video_004_tl_017_Skin_Tone_10_Skin_Tone_10_10",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "repeatedSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-004",
+        "video-004-tl-017"
+      ],
+      "labels": [
+        "Skin Tone 10",
+        "Skin Tone 10"
+      ],
+      "nativeOrders": [
+        10
+      ],
+      "message": "Skin Tone 10 appears more than once in deliberately selected timeline events.",
+      "reviewAction": "Confirm whether this is intentional overlap, selector wrap, or an accidental repeated selection before publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_005_video_004_tl_006_Skin_Tone_20_Skin_Tone_19_20_19",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-005",
+        "video-004-tl-006"
+      ],
+      "labels": [
+        "Skin Tone 20",
+        "Skin Tone 19"
+      ],
+      "nativeOrders": [
+        20,
+        19
+      ],
+      "message": "Chronological selection moved backward from native order 20 to 19.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_006_video_004_tl_007_Skin_Tone_19_Skin_Tone_18_19_18",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-006",
+        "video-004-tl-007"
+      ],
+      "labels": [
+        "Skin Tone 19",
+        "Skin Tone 18"
+      ],
+      "nativeOrders": [
+        19,
+        18
+      ],
+      "message": "Chronological selection moved backward from native order 19 to 18.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_009_video_004_tl_010_Skin_Tone_08_Skin_Tone_07_8_7",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-009",
+        "video-004-tl-010"
+      ],
+      "labels": [
+        "Skin Tone 08",
+        "Skin Tone 07"
+      ],
+      "nativeOrders": [
+        8,
+        7
+      ],
+      "message": "Chronological selection moved backward from native order 8 to 7.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-reversedMovement-video_004_tl_010_video_004_tl_011_Skin_Tone_07_Skin_Tone_06_7_6",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-010",
+        "video-004-tl-011"
+      ],
+      "labels": [
+        "Skin Tone 07",
+        "Skin Tone 06"
+      ],
+      "nativeOrders": [
+        7,
+        6
+      ],
+      "message": "Chronological selection moved backward from native order 7 to 6.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_007_video_004_tl_008_Skin_Tone_18_Skin_Tone_21_18_21",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-007",
+        "video-004-tl-008"
+      ],
+      "labels": [
+        "Skin Tone 18",
+        "Skin Tone 21"
+      ],
+      "nativeOrders": [
+        18,
+        21
+      ],
+      "message": "Chronological selection jumped by 3 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_013_video_004_tl_014_Skin_Tone_24_Skin_Tone_22_24_22",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-013",
+        "video-004-tl-014"
+      ],
+      "labels": [
+        "Skin Tone 24",
+        "Skin Tone 22"
+      ],
+      "nativeOrders": [
+        24,
+        22
+      ],
+      "message": "Chronological selection jumped by -2 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_016_video_004_tl_017_Skin_Tone_13_Skin_Tone_10_13_10",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-016",
+        "video-004-tl-017"
+      ],
+      "labels": [
+        "Skin Tone 13",
+        "Skin Tone 10"
+      ],
+      "nativeOrders": [
+        13,
+        10
+      ],
+      "message": "Chronological selection jumped by -3 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinTone-skippedIndices-video_004_tl_017_video_004_tl_018_Skin_Tone_10_Skin_Tone_12_10_12",
+      "categoryKey": "skinTone",
+      "category": "Skin Tone",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-004-tl-017",
+        "video-004-tl-018"
+      ],
+      "labels": [
+        "Skin Tone 10",
+        "Skin Tone 12"
+      ],
+      "nativeOrders": [
+        10,
+        12
+      ],
+      "message": "Chronological selection jumped by 2 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinDetails-accidentalJump-video_005_tl_005_video_005_tl_006_Scar_2_Redness_2_4_8",
+      "categoryKey": "skinDetails",
+      "category": "Skin Details",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-005-tl-005",
+        "video-005-tl-006"
+      ],
+      "labels": [
+        "Scar 2",
+        "Redness 2"
+      ],
+      "nativeOrders": [
+        4,
+        8
+      ],
+      "message": "Large selector movement from Scar 2 to Redness 2 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinDetails-accidentalJump-video_005_tl_009_video_005_tl_010_Scar_1_Redness_1_5_9",
+      "categoryKey": "skinDetails",
+      "category": "Skin Details",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-005-tl-009",
+        "video-005-tl-010"
+      ],
+      "labels": [
+        "Scar 1",
+        "Redness 1"
+      ],
+      "nativeOrders": [
+        5,
+        9
+      ],
+      "message": "Large selector movement from Scar 1 to Redness 1 may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinDetails-incompleteSelectorEnding-video_005_tl_011_Freckles_1_10",
+      "categoryKey": "skinDetails",
+      "category": "Skin Details",
+      "code": "incompleteSelectorEnding",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-005-tl-011"
+      ],
+      "labels": [
+        "Freckles 1"
+      ],
+      "nativeOrders": [
+        10
+      ],
+      "message": "Selector boundary is not proven complete for Skin Details.",
+      "reviewAction": "Record first/final value, boundary, wrap behavior, and category exit evidence before production publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinDetails-skippedIndices-video_005_tl_005_video_005_tl_006_Scar_2_Redness_2_4_8",
+      "categoryKey": "skinDetails",
+      "category": "Skin Details",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-005-tl-005",
+        "video-005-tl-006"
+      ],
+      "labels": [
+        "Scar 2",
+        "Redness 2"
+      ],
+      "nativeOrders": [
+        4,
+        8
+      ],
+      "message": "Chronological selection jumped by 4 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinDetails-skippedIndices-video_005_tl_009_video_005_tl_010_Scar_1_Redness_1_5_9",
+      "categoryKey": "skinDetails",
+      "category": "Skin Details",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-005-tl-009",
+        "video-005-tl-010"
+      ],
+      "labels": [
+        "Scar 1",
+        "Redness 1"
+      ],
+      "nativeOrders": [
+        5,
+        9
+      ],
+      "message": "Chronological selection jumped by 4 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinDetails-reversedMovement-video_005_tl_006_video_005_tl_007_Redness_2_Redness_3_8_7",
+      "categoryKey": "skinDetails",
+      "category": "Skin Details",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-005-tl-006",
+        "video-005-tl-007"
+      ],
+      "labels": [
+        "Redness 2",
+        "Redness 3"
+      ],
+      "nativeOrders": [
+        8,
+        7
+      ],
+      "message": "Chronological selection moved backward from native order 8 to 7.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinDetails-reversedMovement-video_005_tl_007_video_005_tl_008_Redness_3_Acne_Scar_1_7_6",
+      "categoryKey": "skinDetails",
+      "category": "Skin Details",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-005-tl-007",
+        "video-005-tl-008"
+      ],
+      "labels": [
+        "Redness 3",
+        "Acne Scar 1"
+      ],
+      "nativeOrders": [
+        7,
+        6
+      ],
+      "message": "Chronological selection moved backward from native order 7 to 6.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-skinDetails-reversedMovement-video_005_tl_008_video_005_tl_009_Acne_Scar_1_Scar_1_6_5",
+      "categoryKey": "skinDetails",
+      "category": "Skin Details",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-005-tl-008",
+        "video-005-tl-009"
+      ],
+      "labels": [
+        "Acne Scar 1",
+        "Scar 1"
+      ],
+      "nativeOrders": [
+        6,
+        5
+      ],
+      "message": "Chronological selection moved backward from native order 6 to 5.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-eyeShape-incompleteSelectorEnding-video_006_tl_006_Hooded_5",
+      "categoryKey": "eyeShape",
+      "category": "Eye Shape",
+      "code": "incompleteSelectorEnding",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-006-tl-006"
+      ],
+      "labels": [
+        "Hooded"
+      ],
+      "nativeOrders": [
+        5
+      ],
+      "message": "Selector boundary is not proven complete for Eye Shape.",
+      "reviewAction": "Record first/final value, boundary, wrap behavior, and category exit evidence before production publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-eyeColor-incompleteSelectorEnding-video_007_tl_008_Light_Green_5",
+      "categoryKey": "eyeColor",
+      "category": "Eye Color",
+      "code": "incompleteSelectorEnding",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-007-tl-008"
+      ],
+      "labels": [
+        "Light Green"
+      ],
+      "nativeOrders": [
+        5
+      ],
+      "message": "Selector boundary is not proven complete for Eye Color.",
+      "reviewAction": "Record first/final value, boundary, wrap behavior, and category exit evidence before production publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-eyeColor-accidentalJump-video_007_tl_005_video_007_tl_006_Blue_Hazel_4_7",
+      "categoryKey": "eyeColor",
+      "category": "Eye Color",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-007-tl-005",
+        "video-007-tl-006"
+      ],
+      "labels": [
+        "Blue",
+        "Hazel"
+      ],
+      "nativeOrders": [
+        4,
+        7
+      ],
+      "message": "Large selector movement from Blue to Hazel may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-eyeColor-reversedMovement-video_007_tl_006_video_007_tl_007_Hazel_Grey_7_6",
+      "categoryKey": "eyeColor",
+      "category": "Eye Color",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-007-tl-006",
+        "video-007-tl-007"
+      ],
+      "labels": [
+        "Hazel",
+        "Grey"
+      ],
+      "nativeOrders": [
+        7,
+        6
+      ],
+      "message": "Chronological selection moved backward from native order 7 to 6.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-eyeColor-reversedMovement-video_007_tl_007_video_007_tl_008_Grey_Light_Green_6_5",
+      "categoryKey": "eyeColor",
+      "category": "Eye Color",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-007-tl-007",
+        "video-007-tl-008"
+      ],
+      "labels": [
+        "Grey",
+        "Light Green"
+      ],
+      "nativeOrders": [
+        6,
+        5
+      ],
+      "message": "Chronological selection moved backward from native order 6 to 5.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-eyeColor-skippedIndices-video_007_tl_005_video_007_tl_006_Blue_Hazel_4_7",
+      "categoryKey": "eyeColor",
+      "category": "Eye Color",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-007-tl-005",
+        "video-007-tl-006"
+      ],
+      "labels": [
+        "Blue",
+        "Hazel"
+      ],
+      "nativeOrders": [
+        4,
+        7
+      ],
+      "message": "Chronological selection jumped by 3 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-nose-accidentalJump-video_008_tl_002_video_008_tl_003_Aquiline_None_5_1",
+      "categoryKey": "nose",
+      "category": "Nose",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-008-tl-002",
+        "video-008-tl-003"
+      ],
+      "labels": [
+        "Aquiline",
+        "None"
+      ],
+      "nativeOrders": [
+        5,
+        1
+      ],
+      "message": "Large selector movement from Aquiline to None may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-nose-incompleteSelectorEnding-video_008_tl_009_Aquiline_5",
+      "categoryKey": "nose",
+      "category": "Nose",
+      "code": "incompleteSelectorEnding",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-008-tl-009"
+      ],
+      "labels": [
+        "Aquiline"
+      ],
+      "nativeOrders": [
+        5
+      ],
+      "message": "Selector boundary is not proven complete for Nose.",
+      "reviewAction": "Record first/final value, boundary, wrap behavior, and category exit evidence before production publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-nose-reversedMovement-video_008_tl_002_video_008_tl_003_Aquiline_None_5_1",
+      "categoryKey": "nose",
+      "category": "Nose",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-008-tl-002",
+        "video-008-tl-003"
+      ],
+      "labels": [
+        "Aquiline",
+        "None"
+      ],
+      "nativeOrders": [
+        5,
+        1
+      ],
+      "message": "Chronological selection moved backward from native order 5 to 1.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-nose-skippedIndices-video_008_tl_002_video_008_tl_003_Aquiline_None_5_1",
+      "categoryKey": "nose",
+      "category": "Nose",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-008-tl-002",
+        "video-008-tl-003"
+      ],
+      "labels": [
+        "Aquiline",
+        "None"
+      ],
+      "nativeOrders": [
+        5,
+        1
+      ],
+      "message": "Chronological selection jumped by -4 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-nose-accidentalJump-video_008_tl_006_video_008_tl_007_Nubian_Funnel_4_7",
+      "categoryKey": "nose",
+      "category": "Nose",
+      "code": "accidentalJump",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-008-tl-006",
+        "video-008-tl-007"
+      ],
+      "labels": [
+        "Nubian",
+        "Funnel"
+      ],
+      "nativeOrders": [
+        4,
+        7
+      ],
+      "message": "Large selector movement from Nubian to Funnel may indicate an accidental jump or grid traversal.",
+      "reviewAction": "Inspect the exact source timestamps and document the navigation intent.",
+      "confidence": 0.55,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-nose-repeatedSelection-video_008_tl_002_video_008_tl_009_Aquiline_Aquiline_5",
+      "categoryKey": "nose",
+      "category": "Nose",
+      "code": "repeatedSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-008-tl-002",
+        "video-008-tl-009"
+      ],
+      "labels": [
+        "Aquiline",
+        "Aquiline"
+      ],
+      "nativeOrders": [
+        5
+      ],
+      "message": "Aquiline appears more than once in deliberately selected timeline events.",
+      "reviewAction": "Confirm whether this is intentional overlap, selector wrap, or an accidental repeated selection before publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-nose-reversedMovement-video_008_tl_007_video_008_tl_008_Funnel_Roman_7_6",
+      "categoryKey": "nose",
+      "category": "Nose",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-008-tl-007",
+        "video-008-tl-008"
+      ],
+      "labels": [
+        "Funnel",
+        "Roman"
+      ],
+      "nativeOrders": [
+        7,
+        6
+      ],
+      "message": "Chronological selection moved backward from native order 7 to 6.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-nose-reversedMovement-video_008_tl_008_video_008_tl_009_Roman_Aquiline_6_5",
+      "categoryKey": "nose",
+      "category": "Nose",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-008-tl-008",
+        "video-008-tl-009"
+      ],
+      "labels": [
+        "Roman",
+        "Aquiline"
+      ],
+      "nativeOrders": [
+        6,
+        5
+      ],
+      "message": "Chronological selection moved backward from native order 6 to 5.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-nose-skippedIndices-video_008_tl_006_video_008_tl_007_Nubian_Funnel_4_7",
+      "categoryKey": "nose",
+      "category": "Nose",
+      "code": "skippedIndices",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-008-tl-006",
+        "video-008-tl-007"
+      ],
+      "labels": [
+        "Nubian",
+        "Funnel"
+      ],
+      "nativeOrders": [
+        4,
+        7
+      ],
+      "message": "Chronological selection jumped by 3 native-order positions.",
+      "reviewAction": "Confirm whether intermediate options were skipped, visible only as thumbnails, or captured in another clip.",
+      "confidence": 0.75,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-earShape-incompleteSelectorEnding-video_009_tl_006_Pointed_4",
+      "categoryKey": "earShape",
+      "category": "Ear Shape",
+      "code": "incompleteSelectorEnding",
+      "severity": "review",
+      "priority": "high",
+      "timelineIDs": [
+        "video-009-tl-006"
+      ],
+      "labels": [
+        "Pointed"
+      ],
+      "nativeOrders": [
+        4
+      ],
+      "message": "Selector boundary is not proven complete for Ear Shape.",
+      "reviewAction": "Record first/final value, boundary, wrap behavior, and category exit evidence before production publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-earShape-repeatedSelection-video_009_tl_002_video_009_tl_004_None_None_2",
+      "categoryKey": "earShape",
+      "category": "Ear Shape",
+      "code": "repeatedSelection",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-009-tl-002",
+        "video-009-tl-004"
+      ],
+      "labels": [
+        "None",
+        "None"
+      ],
+      "nativeOrders": [
+        2
+      ],
+      "message": "None appears more than once in deliberately selected timeline events.",
+      "reviewAction": "Confirm whether this is intentional overlap, selector wrap, or an accidental repeated selection before publication.",
+      "confidence": 0.85,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "suggestionID": "seq-earShape-reversedMovement-video_009_tl_002_video_009_tl_003_None_Attached_Lobe_2_1",
+      "categoryKey": "earShape",
+      "category": "Ear Shape",
+      "code": "reversedMovement",
+      "severity": "review",
+      "priority": "medium",
+      "timelineIDs": [
+        "video-009-tl-002",
+        "video-009-tl-003"
+      ],
+      "labels": [
+        "None",
+        "Attached Lobe"
+      ],
+      "nativeOrders": [
+        2,
+        1
+      ],
+      "message": "Chronological selection moved backward from native order 2 to 1.",
+      "reviewAction": "Review the source frames to decide whether this is intentional reverse navigation, wrap, or a record-order issue.",
+      "confidence": 0.8,
+      "factStatus": "review_suggestion_not_verified_game_fact",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    }
+  ]
+}

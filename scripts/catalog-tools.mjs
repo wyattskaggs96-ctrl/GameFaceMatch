@@ -162,15 +162,7 @@ export function validatePackage(catalogPackage, options = {}) {
   for (const asset of catalogPackage.assets ?? []) {
     validateDateField(report, asset?.capturedAt, "asset.capturedAt", asset?.assetID);
     validateScreenshotName(asset, report);
-    if (options.packageDirectory && asset?.relativePath) {
-      const assetPath = path.resolve(options.packageDirectory, asset.relativePath);
-      if (!fs.existsSync(assetPath)) {
-        addError(report, "missingAsset", `Asset file missing: ${asset.relativePath}`);
-      } else {
-        const actual = sha256File(assetPath);
-        if (asset.sha256 && asset.sha256 !== actual) addError(report, "checksumMismatch", `Asset checksum mismatch for ${asset.assetID}.`);
-      }
-    }
+    mergeReport(report, validateEvidenceAssetPath(asset, { packageDirectory: options.packageDirectory }));
   }
 
   for (const review of catalogPackage.reviews ?? []) {
@@ -193,6 +185,101 @@ export function validatePackage(catalogPackage, options = {}) {
     addError(report, "checksumMismatch", "Publication sourcePackageChecksum does not match deterministic checksum.");
   }
   report.checksum = checksum;
+  return finalizeReport(report);
+}
+
+export function validateEvidenceAssetPath(asset, options = {}) {
+  const report = createReport("asset-path");
+  const assetID = stringValue(asset?.assetID) || "Asset";
+  const relativePath = stringValue(asset?.relativePath);
+  const packageDirectory = options.packageDirectory ? path.resolve(options.packageDirectory) : "";
+
+  if (!relativePath) {
+    addError(report, "missingAssetPath", `${assetID} is missing relativePath.`, "Record a repository-relative asset path under the catalog package root.");
+    return finalizeReport(report);
+  }
+  if (path.isAbsolute(relativePath) || /^[A-Za-z]:[\\/]/.test(relativePath) || /^[a-z][a-z0-9+.-]*:\/\//i.test(relativePath)) {
+    addError(
+      report,
+      "absoluteLocalPath",
+      `${assetID} uses an absolute path or URL instead of a portable relative path: ${relativePath}`,
+      "Move or reference the evidence under the catalog package root and store only its relative path."
+    );
+    return finalizeReport(report);
+  }
+  if (hasUnsafePathTraversal(relativePath)) {
+    addError(
+      report,
+      "unsafeTraversal",
+      `${assetID} contains unsafe path traversal: ${relativePath}`,
+      "Remove parent-directory segments and reference an evidence file inside the catalog package root."
+    );
+  }
+  if (pointsIntoFixtureDirectory(relativePath)) {
+    addError(
+      report,
+      "fixtureEvidencePath",
+      `${assetID} points into a fixture or test-only directory: ${relativePath}`,
+      "Replace this with verified production evidence stored under the production catalog evidence root."
+    );
+  }
+  validateDerivativePathState(asset, report);
+
+  if (!packageDirectory || !relativePath || report.errors.some((error) => error.code === "absoluteLocalPath" || error.code === "unsafeTraversal")) {
+    return finalizeReport(report);
+  }
+
+  const resolvedPath = path.resolve(packageDirectory, relativePath);
+  if (!isPathInsideRoot(resolvedPath, packageDirectory)) {
+    addError(
+      report,
+      "pathEscapesCatalogRoot",
+      `${assetID} resolves outside the catalog package root: ${relativePath}`,
+      "Move the evidence under the catalog package root and update relativePath without using traversal."
+    );
+    return finalizeReport(report);
+  }
+  const caseCheck = findCaseMismatch(packageDirectory, relativePath);
+  if (!caseCheck.exists) {
+    addError(
+      report,
+      "missingAsset",
+      `Asset file missing: ${relativePath}`,
+      "Confirm the evidence file exists at the recorded relative path before publishing."
+    );
+    return finalizeReport(report);
+  }
+  const filesystemPath = path.join(packageDirectory, caseCheck.actualRelativePath);
+  const realPath = fs.realpathSync(filesystemPath);
+  const realRoot = fs.realpathSync(packageDirectory);
+  if (!isPathInsideRoot(realPath, realRoot)) {
+    addError(
+      report,
+      "pathEscapesCatalogRoot",
+      `${assetID} resolves outside the catalog package root: ${relativePath}`,
+      "Store evidence files directly under the catalog package root instead of through links or paths that leave the package."
+    );
+    return finalizeReport(report);
+  }
+  if (caseCheck.caseMismatch) {
+    addError(
+      report,
+      "filenameCaseMismatch",
+      `${assetID} path case differs from the file on disk: ${relativePath}`,
+      `Use exact filesystem casing: ${caseCheck.actualRelativePath}`
+    );
+  }
+  if (asset?.sha256) {
+    const actual = sha256File(filesystemPath);
+    if (asset.sha256 !== actual) {
+      addError(
+        report,
+        "checksumMismatch",
+        `Asset checksum mismatch for ${assetID}.`,
+        "Regenerate the manifest checksum from the current evidence file or restore the expected file."
+      );
+    }
+  }
   return finalizeReport(report);
 }
 
@@ -436,8 +523,12 @@ export function readJSON(filePath) {
 export function formatReport(report) {
   const lines = [`${report.ok ? "OK" : "FAIL"} ${report.scope}`];
   for (const warning of report.warnings) lines.push(`warning: ${warning}`);
-  for (const error of report.errors) lines.push(`error ${error.code}: ${error.message}`);
+  for (const error of report.errors) {
+    lines.push(`error ${error.code}: ${error.message}`);
+    if (error.repairSuggestion) lines.push(`repair ${error.code}: ${error.repairSuggestion}`);
+  }
   for (const action of report.nextActions ?? []) lines.push(`next: ${action}`);
+  for (const repair of report.repairSuggestions ?? []) lines.push(`repair: ${repair}`);
   if (report.progress) {
     lines.push(`progress: ${report.progress.totalRecords} records`);
     for (const [state, count] of Object.entries(report.progress.byVerificationState ?? {})) lines.push(`progress state ${state}: ${count}`);
@@ -485,6 +576,80 @@ function validateScreenshotName(asset, report) {
   if (!screenshotNamePattern.test(fileName)) {
     addError(report, "invalidScreenshotName", `${asset?.assetID || "Asset"} does not follow the standard screenshot naming pattern.`);
   }
+}
+
+function validateDerivativePathState(asset, report) {
+  const relativePath = stringValue(asset?.relativePath);
+  const derivativeState = stringValue(asset?.derivativeState);
+  if (!relativePath || !derivativeState) return;
+  const segments = normalizedPathSegments(relativePath);
+  const pathLooksMaster = segments.some((segment) => ["master", "masters", "source", "sources"].includes(segment));
+  const pathLooksDerivative = segments.some((segment) => ["derivative", "derivatives", "derived"].includes(segment));
+  if (derivativeState === "master" && pathLooksDerivative) {
+    addError(
+      report,
+      "derivativeStateMismatch",
+      `${asset.assetID || "Asset"} is marked master but points to derivative storage: ${relativePath}`,
+      "Point master records at master/source evidence, or change derivativeState only after review confirms the file is derivative evidence."
+    );
+  }
+  if (derivativeState === "derivative" && pathLooksMaster) {
+    addError(
+      report,
+      "derivativeStateMismatch",
+      `${asset.assetID || "Asset"} is marked derivative but points to master/source storage: ${relativePath}`,
+      "Point derivative records at derivative evidence, or change derivativeState only after review confirms the file is a master."
+    );
+  }
+}
+
+function hasUnsafePathTraversal(relativePath) {
+  return normalizedPathSegments(relativePath).includes("..");
+}
+
+function pointsIntoFixtureDirectory(relativePath) {
+  const normalized = relativePath.replaceAll("\\", "/").toLowerCase();
+  return normalized.includes("data/fixtures/test-only/")
+    || normalized.includes("/fixtures/test-only/")
+    || normalized.startsWith("fixtures/test-only/")
+    || normalized.includes("/test-only/")
+    || normalized.startsWith("test-only/");
+}
+
+function isPathInsideRoot(candidatePath, rootPath) {
+  const relative = path.relative(rootPath, candidatePath);
+  return relative === "" || (!relative.startsWith("..") && !path.isAbsolute(relative));
+}
+
+function findCaseMismatch(rootPath, relativePath) {
+  const parts = relativePath.replaceAll("\\", "/").split("/").filter(Boolean);
+  let current = rootPath;
+  const actualParts = [];
+  for (const part of parts) {
+    if (part === ".") continue;
+    if (part === "..") return { exists: false, caseMismatch: false, actualRelativePath: actualParts.join("/") };
+    if (!fs.existsSync(current)) return { exists: false, caseMismatch: false, actualRelativePath: actualParts.join("/") };
+    const entries = fs.readdirSync(current);
+    const exact = entries.find((entry) => entry === part);
+    if (exact) {
+      actualParts.push(exact);
+      current = path.join(current, exact);
+      continue;
+    }
+    const caseInsensitive = entries.find((entry) => entry.toLowerCase() === part.toLowerCase());
+    if (!caseInsensitive) return { exists: false, caseMismatch: false, actualRelativePath: actualParts.concat(part).join("/") };
+    actualParts.push(caseInsensitive);
+    current = path.join(current, caseInsensitive);
+  }
+  return {
+    exists: fs.existsSync(current),
+    caseMismatch: actualParts.join("/") !== relativePath.replaceAll("\\", "/"),
+    actualRelativePath: actualParts.join("/")
+  };
+}
+
+function normalizedPathSegments(relativePath) {
+  return relativePath.replaceAll("\\", "/").split("/").filter(Boolean).map((segment) => segment.toLowerCase());
 }
 
 function validateMeasurement(report, measurementID, measurement, recordID) {
@@ -535,17 +700,19 @@ function containsPlaceholder(value) {
 }
 
 function createReport(scope) {
-  return { scope, ok: true, errors: [], warnings: [] };
+  return { scope, ok: true, errors: [], warnings: [], repairSuggestions: [] };
 }
 
-function addError(report, code, message) {
-  report.errors.push({ code, message });
+function addError(report, code, message, repairSuggestion = "") {
+  report.errors.push(repairSuggestion ? { code, message, repairSuggestion } : { code, message });
+  if (repairSuggestion && !report.repairSuggestions.includes(repairSuggestion)) report.repairSuggestions.push(repairSuggestion);
   report.ok = false;
 }
 
 function mergeReport(target, source) {
   target.errors.push(...source.errors);
   target.warnings.push(...source.warnings);
+  target.repairSuggestions = Array.from(new Set([...(target.repairSuggestions ?? []), ...(source.repairSuggestions ?? [])]));
   target.ok = target.errors.length === 0;
   if (source.checksum) target.checksum = source.checksum;
 }

@@ -1,6 +1,10 @@
+import crypto from "node:crypto";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 // @ts-expect-error Root catalog CLI is plain ESM JavaScript and is exercised here as the command source of truth.
-import { calculateDeterministicChecksum, compareCatalogVersions, createAuditSession, createPatchReauditPlan, detectDuplicateIDsInManifest, detectFixtureLeakageInPath, exportCatalogItemsToCsv, formatReport, importCatalogItemsFromCsv, publishPackage, validateAuditRecord, validatePackage, validateProductionDirectory, validateRecord } from "../../scripts/catalog-tools.mjs";
+import { calculateDeterministicChecksum, compareCatalogVersions, createAuditSession, createPatchReauditPlan, detectDuplicateIDsInManifest, detectFixtureLeakageInPath, exportCatalogItemsToCsv, formatReport, importCatalogItemsFromCsv, publishPackage, validateAuditRecord, validateEvidenceAssetPath, validatePackage, validateProductionDirectory, validateRecord } from "../../scripts/catalog-tools.mjs";
 
 describe("catalog audit workflow validator", () => {
   it("accepts empty production with an explicit recommendation warning", () => {
@@ -164,6 +168,91 @@ describe("catalog audit workflow validator", () => {
     const report = publishPackage(withChecksums(catalogPackage)).report;
     expect(errorCodes(report)).toEqual(expect.arrayContaining(["nonProductionSourceInProduction", "fixtureLeakage", "fixtureFlag"]));
   });
+
+  it("validates portable production evidence paths and checksum references", () => {
+    const { packageRoot, assetPath, sha256 } = createTemporaryPackageRoot("assets/masters/cfb27__test-only-platform__test-only-version__asset-front__straightOn__20260710.png");
+    const asset = {
+      assetID: "asset-front",
+      angle: "straightOn",
+      relativePath: assetPath,
+      sha256,
+      capturedAt: "2026-07-10T00:00:00.000Z",
+      derivativeState: "master"
+    };
+
+    expect(validateEvidenceAssetPath(asset, { packageDirectory: packageRoot }).errors).toEqual([]);
+  });
+
+  it("rejects absolute paths, traversal, fixture paths, missing files, and case mismatches with repair suggestions", () => {
+    const { packageRoot } = createTemporaryPackageRoot("assets/masters/CaseSensitiveEvidence.png");
+    const cases = [
+      ["/Users/wyatt/evidence.png", "absoluteLocalPath"],
+      ["assets/../outside.png", "unsafeTraversal"],
+      ["data/fixtures/test-only/evidence.png", "fixtureEvidencePath"],
+      ["assets/masters/missing.png", "missingAsset"],
+      ["assets/masters/casesensitiveevidence.png", "filenameCaseMismatch"]
+    ] as const;
+
+    for (const [relativePath, code] of cases) {
+      const report = validateEvidenceAssetPath({
+        assetID: `asset-${code}`,
+        relativePath,
+        sha256: "a".repeat(64),
+        derivativeState: "master"
+      }, { packageDirectory: packageRoot });
+      expect(errorCodes(report), code).toContain(code);
+      expect(report.repairSuggestions.length, code).toBeGreaterThan(0);
+    }
+  });
+
+  it("rejects files that escape the catalog root through links", () => {
+    const packageRoot = fs.mkdtempSync(path.join(os.tmpdir(), "gameface-package-root-"));
+    const outsideRoot = fs.mkdtempSync(path.join(os.tmpdir(), "gameface-package-outside-"));
+    fs.mkdirSync(path.join(packageRoot, "assets"), { recursive: true });
+    fs.writeFileSync(path.join(outsideRoot, "outside.png"), "test-only outside evidence");
+    fs.symlinkSync(path.join(outsideRoot, "outside.png"), path.join(packageRoot, "assets", "linked.png"));
+
+    const report = validateEvidenceAssetPath({
+      assetID: "asset-linked",
+      relativePath: "assets/linked.png",
+      sha256: sha256File(path.join(outsideRoot, "outside.png")),
+      derivativeState: "master"
+    }, { packageDirectory: packageRoot });
+
+    expect(errorCodes(report)).toContain("pathEscapesCatalogRoot");
+    expect(formatReport(report)).toContain("repair pathEscapesCatalogRoot");
+  });
+
+  it("rejects master and derivative state mismatches without rewriting records", () => {
+    const { packageRoot } = createTemporaryPackageRoot("assets/masters/master-evidence.png");
+    const derivativeAsMaster = validateEvidenceAssetPath({
+      assetID: "asset-derivative",
+      relativePath: "assets/masters/master-evidence.png",
+      sha256: "a".repeat(64),
+      derivativeState: "derivative"
+    }, { packageDirectory: packageRoot });
+    const masterAsDerivative = validateEvidenceAssetPath({
+      assetID: "asset-master",
+      relativePath: "assets/derivatives/derived-evidence.png",
+      sha256: "a".repeat(64),
+      derivativeState: "master"
+    }, { packageDirectory: packageRoot });
+
+    expect(errorCodes(derivativeAsMaster)).toContain("derivativeStateMismatch");
+    expect(errorCodes(masterAsDerivative)).toContain("derivativeStateMismatch");
+  });
+
+  it("applies strict evidence path validation during package validation", () => {
+    const { packageRoot, assetPath, sha256 } = createTemporaryPackageRoot("assets/masters/cfb27__test-only-platform__test-only-version__asset-front__straightOn__20260710.png");
+    const catalogPackage = withChecksums(validPackage());
+    catalogPackage.assets[0].relativePath = assetPath;
+    catalogPackage.assets[0].sha256 = sha256;
+    catalogPackage.assets[0].derivativeState = "derivative";
+
+    const report = validatePackage(catalogPackage, { packageDirectory: packageRoot });
+
+    expect(errorCodes(report)).toContain("derivativeStateMismatch");
+  });
 });
 
 function errorCodes(report: { errors: Array<{ code: string }> }) {
@@ -197,7 +286,8 @@ function validPackage() {
       angle,
       relativePath: `assets/cfb27__test-only-platform__test-only-version__${item.stableInternalID}__${angle}__20260710.png`,
       sha256: "a".repeat(64),
-      capturedAt: "2026-07-10T00:00:00.000Z"
+      capturedAt: "2026-07-10T00:00:00.000Z",
+      derivativeState: "master"
     })),
     reviews: [
       {
@@ -295,4 +385,20 @@ function validItem(id = "cfb27-test-only-record") {
     deprecated: false,
     deprecatedContext: null as string | null
   };
+}
+
+function createTemporaryPackageRoot(relativePath: string) {
+  const packageRoot = fs.mkdtempSync(path.join(os.tmpdir(), "gameface-package-root-"));
+  const absolutePath = path.join(packageRoot, relativePath);
+  fs.mkdirSync(path.dirname(absolutePath), { recursive: true });
+  fs.writeFileSync(absolutePath, `test-only evidence ${relativePath}`);
+  return {
+    packageRoot,
+    assetPath: relativePath.replaceAll(path.sep, "/"),
+    sha256: sha256File(absolutePath)
+  };
+}
+
+function sha256File(filePath: string) {
+  return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
 }

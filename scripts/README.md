@@ -36,3 +36,5 @@ The empty production catalog is valid and produces an explicit warning that no r
 - `node scripts/evidence-manifest.mjs data/audit/college-football-27/evidence --previous path/to/previous-manifest.json`
 
 The evidence manifest generator scans only approved local evidence directories, calculates SHA-256 checksums, records file size and MIME type, merges supplied metadata, and reports changed, missing, and unexpected files between scans. It does not upload, rename, transform, or modify evidence files.
+
+Production package validation also performs strict evidence-path portability checks. It rejects absolute paths, traversal, root escapes, missing files, filename-case mismatches, fixture-directory references, and master/derivative path-state mismatches. Reports include repair suggestions, but scripts do not silently rewrite records.

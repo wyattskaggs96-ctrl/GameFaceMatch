@@ -815,6 +815,27 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-027",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Relative path and portability validator",
+      "summary": "Reject production evidence records with absolute-only references, root escapes, missing files, filename case mismatches, master/derivative state mismatches, unsafe traversal, and fixture-directory paths while providing repair suggestions without silently rewriting records.",
+      "owningModule": "Catalog production validation",
+      "implementationFiles": [
+        "scripts/catalog-tools.mjs",
+        "data/schemas/asset-reference.schema.json",
+        "scripts/README.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/catalog-workflow.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Catalog package validation now uses strict evidence asset path checks and tests cover portable paths, absolute paths, unsafe traversal, fixture paths, missing files, case mismatches, symlink/root escapes, master/derivative mismatches, and repair suggestions.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

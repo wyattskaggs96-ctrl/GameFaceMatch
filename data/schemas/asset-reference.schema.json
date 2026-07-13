@@ -15,6 +15,7 @@
     },
     "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
     "capturedAt": { "type": "string", "format": "date-time" },
+    "derivativeState": { "enum": ["master", "derivative"] },
     "source": { "type": "string" }
   }
 }

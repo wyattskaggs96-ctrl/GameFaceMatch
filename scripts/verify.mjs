@@ -30,6 +30,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Catalog import validation engine check",
+    command: "node",
+    args: ["scripts/catalog-import-validator.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Web type-check",
     command: "npm",
     args: ["run", "typecheck"],

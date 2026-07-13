@@ -137,6 +137,7 @@ export const CURRENT_PHASE0_REPOSITORY_STATE: Phase0RepositoryState = {
     "web/lib/phase-zero/phase-zero-duplicate-review.ts",
     "web/lib/phase-zero/phase-zero-export-pipeline.ts",
     "scripts/phase-zero-export.mjs",
+    "scripts/catalog-import-validator.mjs",
     "web/package.json",
     "web/playwright.config.ts",
     "ios/GameFaceMatchTests",
@@ -147,6 +148,7 @@ export const CURRENT_PHASE0_REPOSITORY_STATE: Phase0RepositoryState = {
   catalogToolCommands: [
     "validate-record",
     "validate-package",
+    "validate-import",
     "validate-production",
     "verify-assets",
     "detect-placeholders",

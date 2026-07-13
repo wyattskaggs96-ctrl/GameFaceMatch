@@ -45,6 +45,9 @@ Run from the repository root unless noted:
 - `node scripts/catalog-tools.mjs validate-record <record.json>`
 - `node scripts/catalog-tools.mjs validate-audit-record <record.json>`
 - `node scripts/catalog-tools.mjs validate-package <package.json>`
+- `node scripts/catalog-import-validator.mjs validate-import <package.json>`
+- `node scripts/catalog-import-validator.mjs validate-import <package.json> --json`
+- `node scripts/catalog-import-validator.mjs --check`
 - `node scripts/catalog-tools.mjs validate-production data/catalog/production`
 - `node scripts/catalog-tools.mjs verify-assets <package.json>`
 - `node scripts/catalog-tools.mjs detect-placeholders data/catalog/production`
@@ -67,6 +70,8 @@ Run from the repository root unless noted:
 From `web/`, `npm run catalog:validate` validates the production directory. The empty production catalog must pass with a warning that no recommendations can be produced.
 
 The Phase 0 export pipeline writes deterministic UTF-8 CSV and JSON files for the audit environment, creation paths, menu maps, catalog category workbooks, dependency tests, evidence manifests, capture logs, issues and exceptions, catalog manifest, verification results, and production readiness. Production-mode exports exclude fixture catalog records and fixture evidence paths.
+
+The catalog import-validation engine produces both readable text and machine-readable JSON reports before a package can be published. It checks schema references, unique identifiers, evidence-path portability and checksums, native-order continuity, required environment fields, verification state, placeholder and College Football 26 contamination, duplicate-observation retention, production/test separation, production recommender fixture access, supported platform/version/mode/path targets, package checksums, and supersession chains.
 
 Source-video intake is local-only. `inspect` preserves original video files and reports metadata from `ffprobe` when available. `extract-frame` produces derivative still frames only when `ffmpeg` is installed; otherwise it returns a disabled result so operators can continue recording timestamp references and extract frames later.
 

@@ -19,6 +19,8 @@
     "catalog:validate-record": "node ../scripts/catalog-tools.mjs validate-record",
     "catalog:validate-audit-record": "node ../scripts/catalog-tools.mjs validate-audit-record",
     "catalog:validate-package": "node ../scripts/catalog-tools.mjs validate-package",
+    "catalog:validate-import": "node ../scripts/catalog-import-validator.mjs validate-import",
+    "catalog:import-check": "node ../scripts/catalog-import-validator.mjs --check",
     "catalog:verify-assets": "node ../scripts/catalog-tools.mjs verify-assets",
     "catalog:create-audit-session": "node ../scripts/catalog-tools.mjs create-audit-session",
     "catalog:import-csv": "node ../scripts/catalog-tools.mjs import-csv",

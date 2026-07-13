@@ -20,6 +20,9 @@ The traceability generator reads `data/traceability/requirements.json` and write
 
 - `node scripts/catalog-tools.mjs validate-record <record.json>`
 - `node scripts/catalog-tools.mjs validate-package <package.json>`
+- `node scripts/catalog-import-validator.mjs validate-import <package.json>`
+- `node scripts/catalog-import-validator.mjs validate-import <package.json> --json`
+- `node scripts/catalog-import-validator.mjs --check`
 - `node scripts/catalog-tools.mjs validate-production data/catalog/production`
 - `node scripts/catalog-tools.mjs verify-assets <package.json>`
 - `node scripts/catalog-tools.mjs detect-placeholders <path>`
@@ -29,6 +32,8 @@ The traceability generator reads `data/traceability/requirements.json` and write
 - `node scripts/catalog-tools.mjs report data/catalog/production`
 
 The empty production catalog is valid and produces an explicit warning that no recommendations can be produced.
+
+The import validator produces readable and JSON reports for schema references, IDs, evidence paths, native order, required evidence and environment fields, verification states, placeholder and College Football 26 contamination, duplicate-observation retention, production/test separation, supported targets, checksums, supersession chains, and production recommender fixture access. It does not create production records.
 
 ## Phase 0 Export Commands
 

@@ -34,6 +34,21 @@ Record display, camera, lighting, crop, zoom, menu state, and any abnormal condi
 
 A record with any missing required angle remains unverified. The validator reports the missing angle and the next action is to recapture only that missing evidence.
 
+## Capture Consistency QA
+
+Capture-consistency QA compares audited evidence against environment-specific tolerances. Automated checks may measure or estimate dimensions, aspect ratio, crop consistency, head bounding-box size, head-center position, brightness, contrast, sharpness, and color balance.
+
+Manual QA flags are required for observations the current tooling cannot prove as game facts:
+
+- Overlay obstruction
+- Cursor obstruction
+- Missing skull, hairline, chin, or lower-face framing
+- Unexpected hairstyle
+- Unexpected facial hair
+- Suspected loading animation or transient menu state
+
+Automated and manual QA findings are warnings for human review only. They do not verify a College Football 27 option, create production catalog data, or replace second-person review.
+
 ## Derivative Crop and Alignment
 
 Derivative images may be created only to make reviewed evidence easier to inspect. Approved derivative transforms are crop, rotation correction, aspect-ratio preservation, standard framing guides, and face-region alignment guides.

@@ -7,6 +7,7 @@ import { createEmptyIssueRegister } from "@/lib/phase-zero/phase-zero-issue-mana
 import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusReport } from "@/lib/phase-zero/phase-zero-status";
 import { AdditionalAttributesWorkspace } from "./AdditionalAttributesWorkspace";
 import { CaptureConfigurationEditor } from "./CaptureConfigurationEditor";
+import { CaptureConsistencyQA } from "./CaptureConsistencyQA";
 import { CreationPathAuditWorkspace } from "./CreationPathAuditWorkspace";
 import { DependencyTestRunner } from "./DependencyTestRunner";
 import { EvidenceIntakeManager } from "./EvidenceIntakeManager";
@@ -66,6 +67,7 @@ export function Phase0StatusPanel({
       <EvidenceIntakeManager />
       <SourceVideoIntakeManager />
       <ImageDerivativeTool />
+      <CaptureConsistencyQA />
       <MenuMapEditor />
       <CaptureConfigurationEditor />
       <HeadCaptureWorkspace />

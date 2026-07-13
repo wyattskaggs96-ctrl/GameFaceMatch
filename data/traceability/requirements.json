@@ -886,6 +886,30 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-030",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Capture consistency QA",
+      "summary": "Implement automated and manual capture-consistency checks for image dimensions, aspect ratio, crop consistency, head bounding-box size, head-center position, brightness, contrast, sharpness, color balance, overlay obstruction, cursor obstruction, missing skull/chin, unexpected hairstyle or facial hair, and suspected loading animation with configurable per-environment tolerances. Automated findings are QA warnings, not verified game facts.",
+      "owningModule": "Phase 0 capture consistency QA",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-capture-consistency.ts",
+        "web/features/phase-zero/CaptureConsistencyQA.tsx",
+        "data/schemas/capture-consistency-qa.schema.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_SCREENSHOT_STANDARD.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-capture-consistency.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Capture-consistency tests cover schema guardrails, clean synthetic capture sets, dimension/aspect/crop/head-size/head-center warnings, brightness/contrast/sharpness/color-balance warnings, manual obstruction and appearance flags, unavailable data warnings, synthetic pixel measurement, and per-environment tolerance overrides.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

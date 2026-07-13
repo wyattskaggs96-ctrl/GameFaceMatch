@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/capture-consistency-qa.schema.json",
+  "title": "Phase0CaptureConsistencyReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "environmentID",
+    "generatedAt",
+    "evidenceCount",
+    "tolerances",
+    "findings",
+    "summary",
+    "qaNotice"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-capture-consistency-v1" },
+    "environmentID": { "$ref": "#/$defs/requiredText" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "evidenceCount": { "type": "integer", "minimum": 0 },
+    "tolerances": { "$ref": "#/$defs/tolerances" },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/finding" }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["warningCount", "manualFlagCount", "automatedWarningCount", "verifiedGameFactsCreated"],
+      "properties": {
+        "warningCount": { "type": "integer", "minimum": 0 },
+        "manualFlagCount": { "type": "integer", "minimum": 0 },
+        "automatedWarningCount": { "type": "integer", "minimum": 0 },
+        "verifiedGameFactsCreated": { "const": false }
+      }
+    },
+    "qaNotice": {
+      "type": "string",
+      "pattern": "warnings.*not verified|not verified.*warnings"
+    }
+  },
+  "$defs": {
+    "requiredText": {
+      "type": "string",
+      "minLength": 1,
+      "not": { "pattern": "REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\\b(TBD|TODO|PLACEHOLDER|MOCK)\\b" }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "message", "evidenceKind", "automatedFinding"],
+      "properties": {
+        "code": {
+          "enum": [
+            "imageDimensions",
+            "aspectRatio",
+            "cropConsistency",
+            "headBoundingBoxSize",
+            "headCenterPosition",
+            "brightness",
+            "contrast",
+            "sharpness",
+            "colorBalance",
+            "overlayObstruction",
+            "cursorObstruction",
+            "missingSkullOrChin",
+            "unexpectedHairstyle",
+            "unexpectedFacialHair",
+            "suspectedLoadingAnimation"
+          ]
+        },
+        "severity": { "const": "warning" },
+        "evidenceID": { "type": "string" },
+        "message": { "type": "string", "minLength": 1 },
+        "evidenceKind": { "enum": ["measured", "estimated", "manualFlag", "unavailable"] },
+        "automatedFinding": { "type": "boolean" }
+      }
+    },
+    "tolerances": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "environmentID",
+        "dimensions",
+        "aspectRatio",
+        "crop",
+        "headBoundingBox",
+        "brightness",
+        "contrast",
+        "sharpness",
+        "colorBalance"
+      ],
+      "properties": {
+        "environmentID": { "$ref": "#/$defs/requiredText" },
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["expectedWidth", "expectedHeight", "tolerancePixels", "crossImageTolerancePixels"],
+          "properties": {
+            "expectedWidth": { "type": ["integer", "null"], "minimum": 1 },
+            "expectedHeight": { "type": ["integer", "null"], "minimum": 1 },
+            "tolerancePixels": { "type": "number", "minimum": 0 },
+            "crossImageTolerancePixels": { "type": "number", "minimum": 0 }
+          }
+        },
+        "aspectRatio": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["expected", "tolerance", "crossImageTolerance"],
+          "properties": {
+            "expected": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+            "tolerance": { "type": "number", "minimum": 0 },
+            "crossImageTolerance": { "type": "number", "minimum": 0 }
+          }
+        },
+        "crop": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["normalizedTolerance"],
+          "properties": {
+            "normalizedTolerance": { "type": "number", "minimum": 0 }
+          }
+        },
+        "headBoundingBox": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minSizeRatio", "maxSizeRatio", "crossImageSizeTolerance", "centerXTolerance", "centerYTolerance"],
+          "properties": {
+            "minSizeRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+            "maxSizeRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+            "crossImageSizeTolerance": { "type": "number", "minimum": 0 },
+            "centerXTolerance": { "type": "number", "minimum": 0, "maximum": 1 },
+            "centerYTolerance": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "brightness": { "$ref": "#/$defs/minMaxCrossTolerance" },
+        "contrast": { "$ref": "#/$defs/minMaxCrossTolerance" },
+        "sharpness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minimum", "crossImageTolerance"],
+          "properties": {
+            "minimum": { "type": "number", "minimum": 0 },
+            "crossImageTolerance": { "type": "number", "minimum": 0 }
+          }
+        },
+        "colorBalance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["maxChannelSpread", "crossImageTolerance"],
+          "properties": {
+            "maxChannelSpread": { "type": "number", "minimum": 0 },
+            "crossImageTolerance": { "type": "number", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "minMaxCrossTolerance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum", "maximum", "crossImageTolerance"],
+      "properties": {
+        "minimum": { "type": "number", "minimum": 0 },
+        "maximum": { "type": "number", "minimum": 0 },
+        "crossImageTolerance": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}

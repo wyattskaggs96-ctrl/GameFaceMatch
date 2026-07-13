@@ -70,6 +70,10 @@ export function PrivacyCenter({
           <h2>No sale of face data</h2>
           <p>This MVP has no advertising SDK, analytics SDK, broker sharing, cloud sync, or sale of face data.</p>
         </Card>
+        <Card tone="neutral">
+          <h2>Raw-media retention</h2>
+          <p>Raw camera and upload images are temporary by default. Saving raw images is not available in this MVP.</p>
+        </Card>
       </div>
 
       <Alert title="Independent companion" tone="info">
@@ -97,8 +101,16 @@ export function PrivacyCenter({
                   <strong>{item.storageLocation}</strong>
                 </div>
                 <div>
-                  <span>Uploaded</span>
-                  <strong>{item.uploaded ? "Yes" : "No"}</strong>
+                  <span>Why</span>
+                  <strong>{item.purpose}</strong>
+                </div>
+                <div>
+                  <span>Leaves device</span>
+                  <strong>{item.leavesDevice || item.uploaded ? "Yes" : "No"}</strong>
+                </div>
+                <div>
+                  <span>How to delete</span>
+                  <strong>{item.deletionDescription}</strong>
                 </div>
               </dl>
               {item.deleteAction ? (

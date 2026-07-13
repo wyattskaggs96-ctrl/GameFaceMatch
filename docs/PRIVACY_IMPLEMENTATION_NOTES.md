@@ -25,27 +25,27 @@
 
 The web MVP currently uses local browser/session state only. No backend, account, cloud sync, analytics SDK, advertising SDK, or upload service is connected.
 
-| Data category | Storage location | Default retention | Deletion control |
-| --- | --- | --- | --- |
-| Consent version | React session memory for the MVP | Until reload or delete-all | Delete all local data |
-| Capture-session metadata | React session memory | Active session only | Delete active capture session |
-| Temporary Blob URLs | Browser memory/object URL registry | Retake, removal, cancellation, or delete-all | Delete temporary images |
-| Captured image bytes | `File`/`Blob` objects in memory only | Active session only | Delete temporary images |
-| User-confirmed attributes | React session memory | Active session unless included in a saved non-image build | Delete active capture session |
-| Current derived profile | React session memory | Current recommendation unless the user explicitly saves it | Delete derived profile |
-| Saved derived profiles | Browser `sessionStorage` profile vault; WebCrypto-encrypted when available | Only after explicit save and separate save-profile consent; session-only for this MVP | Delete one saved profile, all saved profiles, or all local data |
-| Saved builds | Local non-image privacy store | Until user deletes one build, all builds, or all local data | Delete one build, all builds, or all local data |
-| Screenshot-refinement session | Browser memory/object URL registry | Temporary session only | Delete screenshot session |
-| Deletion records | Local deletion log without face images | Local audit trail | Delete all local data |
-| Application preferences | Local preference memory; future localStorage only for non-sensitive preferences | Until preferences or all local data are deleted | Delete application preferences |
+| Data category | Storage location | Why it is stored | Leaves device | Default retention | Deletion control |
+| --- | --- | --- | --- | --- | --- |
+| Consent version | React session memory for the MVP | Records which separate acknowledgments are active in the tab | No | Until reload or delete-all | Delete all local data |
+| Capture-session metadata | React session memory | Tracks angle completion, retakes, quality state, and non-image progress | No | Active session only | Delete active capture session |
+| Temporary Blob URLs | Browser memory/object URL registry | Displays selected/captured images during the active session without localStorage writes | No | Retake, removal, cancellation, or delete-all | Delete temporary images |
+| Captured image bytes | `File`/`Blob` objects in memory only | Supports local quality review, landmark processing, profile creation, and user review | No | Active session only | Delete temporary images |
+| User-confirmed attributes | React session memory | Keeps user-confirmed appearance preferences separate from model estimates | No | Active session unless included in a saved non-image build | Delete active capture session |
+| Current derived profile | React session memory | Holds the current non-image standardized profile for review, blocked results, or explicit save | No | Current recommendation unless the user explicitly saves it | Delete derived profile |
+| Saved derived profiles | Browser `sessionStorage` profile vault; WebCrypto-encrypted when available | Stores explicit non-image derived profile saves for this browser session | No | Only after explicit save and separate save-profile consent; session-only for this MVP | Delete one saved profile, all saved profiles, or all local data |
+| Saved builds | Local non-image privacy store | Stores non-image build records and catalog traceability only when saved by the user | No | Until user deletes one build, all builds, or all local data | Delete one build, all builds, or all local data |
+| Screenshot-refinement session | Browser memory/object URL registry | Temporarily supports local screenshot-refinement intake and validation | No | Temporary session only | Delete screenshot session |
+| Deletion records | Local deletion log without face images | Shows the user that a local deletion action completed | No | Local audit trail | Delete all local data |
+| Application preferences | Local preference memory; future localStorage only for non-sensitive preferences | Remembers non-sensitive display and interaction preferences | No | Until preferences or all local data are deleted | Delete application preferences |
 
 Raw image bytes must not be placed in `localStorage`. Saved builds are non-image records by default. Any future image-saving feature must be a separate opt-in consent and storage path.
 
 ## Consent layers
 
-The web MVP uses separate consent controls for camera use, face analysis for the current recommendation, temporary local processing, saving a derived profile, saving a completed build, saving screenshots, future product-improvement participation, and future model-training participation.
+The web MVP uses separate consent controls for camera use, face analysis for the current recommendation, temporary local processing, saving a derived profile, cloud backup if ever supported, saving raw images, saving a completed build, saving screenshots, future product-improvement participation, future model-training participation, and marketing or sharing.
 
-Future product-improvement and model-training participation remain unavailable until separately implemented. Screenshot saving is also unavailable in this MVP; screenshot files stay temporary and deletable.
+Cloud backup, raw image saving, screenshot saving, future product-improvement participation, future model-training participation, and marketing/sharing remain unavailable until separately designed, approved, and implemented. Screenshot files stay temporary and deletable. Raw face media retention defaults to no.
 
 ## Mobile testing privacy notes
 

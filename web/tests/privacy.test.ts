@@ -29,13 +29,19 @@ describe("consent architecture", () => {
       "currentFaceAnalysis",
       "temporaryProcessing",
       "saveDerivedProfile",
+      "cloudBackup",
+      "saveRawImages",
       "saveCompletedBuild",
       "saveScreenshots",
       "futureProductImprovement",
-      "futureModelTraining"
+      "futureModelTraining",
+      "marketingOrSharing"
     ]);
+    expect(CONSENT_DEFINITIONS.find((definition) => definition.id === "cloudBackup")?.available).toBe(false);
+    expect(CONSENT_DEFINITIONS.find((definition) => definition.id === "saveRawImages")?.available).toBe(false);
     expect(CONSENT_DEFINITIONS.find((definition) => definition.id === "futureProductImprovement")?.available).toBe(false);
     expect(CONSENT_DEFINITIONS.find((definition) => definition.id === "futureModelTraining")?.available).toBe(false);
+    expect(CONSENT_DEFINITIONS.find((definition) => definition.id === "marketingOrSharing")?.available).toBe(false);
   });
 
   it("requires camera, current analysis, and temporary processing before capture", () => {
@@ -48,8 +54,15 @@ describe("consent architecture", () => {
   });
 
   it("does not grant unavailable future consent", () => {
-    const consent = updateConsent(createInitialConsentState(), "futureModelTraining", true);
+    let consent = createInitialConsentState();
+    consent = updateConsent(consent, "cloudBackup", true);
+    consent = updateConsent(consent, "saveRawImages", true);
+    consent = updateConsent(consent, "futureModelTraining", true);
+    consent = updateConsent(consent, "marketingOrSharing", true);
+    expect(consent.cloudBackup.granted).toBe(false);
+    expect(consent.saveRawImages.granted).toBe(false);
     expect(consent.futureModelTraining.granted).toBe(false);
+    expect(consent.marketingOrSharing.granted).toBe(false);
   });
 });
 
@@ -220,6 +233,10 @@ describe("data lifecycle inventory and deletion verification", () => {
     expect(inventory.find((item) => item.id === "saved-builds")?.count).toBe(1);
     expect(inventory.find((item) => item.id === "screenshot-refinement-session")?.count).toBe(1);
     expect(inventory.every((item) => item.uploaded === false)).toBe(true);
+    expect(inventory.every((item) => item.leavesDevice === false)).toBe(true);
+    expect(inventory.every((item) => item.purpose.length > 0)).toBe(true);
+    expect(inventory.every((item) => item.deletionDescription.length > 0)).toBe(true);
+    expect(inventory.find((item) => item.id === "captured-image-bytes")?.retention).toContain("Never written to localStorage");
   });
 
   it("verifies delete-all behavior", () => {

@@ -57,8 +57,11 @@ export interface DataInventoryItem {
   currentlyStored: boolean;
   count: number;
   storageLocation: string;
+  purpose: string;
   uploaded: boolean;
+  leavesDevice: boolean;
   retention: string;
+  deletionDescription: string;
   deleteAction?: DeletionScope;
 }
 
@@ -91,8 +94,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: true,
       count: Object.values(input.consentState).filter((record) => record.granted).length,
       storageLocation: "React session memory for this MVP",
+      purpose: "Records which separate consent acknowledgments are currently active in this tab.",
       uploaded: false,
+      leavesDevice: false,
       retention: "Until the tab reloads or all local data is deleted.",
+      deletionDescription: "Use Delete everything local to reset all consent acknowledgments.",
       deleteAction: "all-local-data"
     },
     {
@@ -101,8 +107,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: hasCaptureActivity,
       count: hasCaptureActivity ? 1 : 0,
       storageLocation: "React session memory",
+      purpose: "Tracks angle completion, retake state, quality state, and non-image capture progress.",
       uploaded: false,
+      leavesDevice: false,
       retention: "Active session only.",
+      deletionDescription: "Delete the active capture session or delete everything local.",
       deleteAction: "active-capture-session"
     },
     {
@@ -111,8 +120,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: captureImageCount > 0,
       count: captureImageCount,
       storageLocation: "Browser memory/object URL registry",
+      purpose: "Shows selected or captured images during the active review flow without writing bytes to localStorage.",
       uploaded: false,
+      leavesDevice: false,
       retention: "Until retake, removal, session cancellation, or delete-all.",
+      deletionDescription: "Delete temporary images, delete the active capture session, retake/remove an angle, or delete everything local.",
       deleteAction: "temporary-images"
     },
     {
@@ -121,8 +133,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: captureImageCount > 0,
       count: captureImageCount,
       storageLocation: "File/Blob objects and object URLs in active browser memory only",
+      purpose: "Temporarily supports local quality review, landmark processing, profile creation, and user review.",
       uploaded: false,
+      leavesDevice: false,
       retention: "Active session only. Never written to localStorage.",
+      deletionDescription: "Delete temporary images, delete the active capture session, retake/remove an angle, or delete everything local.",
       deleteAction: "temporary-images"
     },
     {
@@ -131,8 +146,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: attributeCount > 0,
       count: attributeCount,
       storageLocation: "React session memory",
+      purpose: "Keeps user-confirmed appearance preferences separate from model estimates.",
       uploaded: false,
+      leavesDevice: false,
       retention: "Active session only unless included in a saved non-image build.",
+      deletionDescription: "Delete the active capture session or delete everything local.",
       deleteAction: "active-capture-session"
     },
     {
@@ -141,8 +159,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: Boolean(input.derivedProfile),
       count: input.derivedProfile ? 1 : 0,
       storageLocation: "React session memory",
+      purpose: "Holds the current non-image standardized profile needed to show blocked results or save an explicit profile.",
       uploaded: false,
+      leavesDevice: false,
       retention: "Current recommendation only unless the user explicitly saves it.",
+      deletionDescription: "Delete the current derived profile or delete everything local.",
       deleteAction: "derived-profile"
     },
     {
@@ -151,8 +172,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: (input.savedProfileCount ?? 0) > 0,
       count: input.savedProfileCount ?? 0,
       storageLocation: input.savedProfileStorageLocation ?? "Browser sessionStorage profile vault",
+      purpose: "Stores only explicit non-image derived profile saves for this browser session.",
       uploaded: false,
+      leavesDevice: false,
       retention: `Only after explicit save. ${input.savedProfileEncryptionDescription ?? "Encrypted with WebCrypto where available."}`,
+      deletionDescription: "Delete one saved profile, delete all saved profiles, or delete everything local.",
       deleteAction: "saved-profiles"
     },
     {
@@ -161,8 +185,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: input.savedBuilds.length > 0,
       count: input.savedBuilds.length,
       storageLocation: "Local non-image privacy store for this MVP",
+      purpose: "Stores non-image build records and catalog traceability only when the user saves a build.",
       uploaded: false,
+      leavesDevice: false,
       retention: "Until the user deletes one build, all builds, or all local data.",
+      deletionDescription: "Delete one saved build, delete all saved builds, or delete everything local.",
       deleteAction: "saved-builds"
     },
     {
@@ -171,8 +198,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: screenshotCount > 0,
       count: screenshotCount,
       storageLocation: "Browser memory/object URL registry",
+      purpose: "Temporarily supports local screenshot-refinement intake and validation.",
       uploaded: false,
+      leavesDevice: false,
       retention: "Temporary session only. Screenshot saving is not implemented.",
+      deletionDescription: "Delete the screenshot session or delete everything local.",
       deleteAction: "screenshot-session"
     },
     {
@@ -181,8 +211,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: input.deletionRecords.length > 0,
       count: input.deletionRecords.length,
       storageLocation: "Local deletion log without face images",
+      purpose: "Shows the user that a local deletion action completed.",
       uploaded: false,
+      leavesDevice: false,
       retention: "Kept locally to show deletion completion.",
+      deletionDescription: "Delete everything local to clear deletion records too.",
       deleteAction: "all-local-data"
     },
     {
@@ -191,8 +224,11 @@ export function createDataInventory(input: DataInventoryInput): DataInventoryIte
       currentlyStored: preferenceCount > 0,
       count: preferenceCount,
       storageLocation: "Local preference memory; browser localStorage only for future non-sensitive preferences",
+      purpose: "Remembers non-sensitive display and interaction preferences.",
       uploaded: false,
+      leavesDevice: false,
       retention: "Until preferences or all local data are deleted.",
+      deletionDescription: "Delete application preferences or delete everything local.",
       deleteAction: "application-preferences"
     }
   ];

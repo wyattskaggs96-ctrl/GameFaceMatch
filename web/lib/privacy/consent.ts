@@ -5,10 +5,13 @@ export type ConsentID =
   | "currentFaceAnalysis"
   | "temporaryProcessing"
   | "saveDerivedProfile"
+  | "cloudBackup"
+  | "saveRawImages"
   | "saveCompletedBuild"
   | "saveScreenshots"
   | "futureProductImprovement"
-  | "futureModelTraining";
+  | "futureModelTraining"
+  | "marketingOrSharing";
 
 export interface ConsentDefinition {
   id: ConsentID;
@@ -57,6 +60,20 @@ export const CONSENT_DEFINITIONS: ConsentDefinition[] = [
     available: true
   },
   {
+    id: "cloudBackup",
+    label: "Cloud backup",
+    description: "Unavailable in this MVP. No account, cloud sync, or backup service is connected.",
+    requiredForCapture: false,
+    available: false
+  },
+  {
+    id: "saveRawImages",
+    label: "Save raw images",
+    description: "Unavailable in this MVP. Raw face images are temporary by default and are not saved to browser storage.",
+    requiredForCapture: false,
+    available: false
+  },
+  {
     id: "saveCompletedBuild",
     label: "Save completed build",
     description: "Save non-image match and build-guide information locally. Raw face images are not included.",
@@ -81,6 +98,13 @@ export const CONSENT_DEFINITIONS: ConsentDefinition[] = [
     id: "futureModelTraining",
     label: "Future model-training participation",
     description: "Unavailable in this MVP. Face data is not used for model training.",
+    requiredForCapture: false,
+    available: false
+  },
+  {
+    id: "marketingOrSharing",
+    label: "Marketing or sharing",
+    description: "Unavailable in this MVP. The app does not share your face, profile, screenshots, or build publicly.",
     requiredForCapture: false,
     available: false
   }

@@ -15,6 +15,7 @@
     "skin-details:ingest": "node scripts/cf27-skin-details-ingest.mjs",
     "eye-shape:ingest": "node scripts/cf27-eye-shape-ingest.mjs",
     "eye-color:ingest": "node scripts/cf27-eye-color-ingest.mjs",
+    "nose:ingest": "node scripts/cf27-nose-ingest.mjs",
     "source-video:intake": "node scripts/source-video-intake.mjs",
     "phase-zero:export": "node scripts/phase-zero-export.mjs"
   }

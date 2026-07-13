@@ -114,10 +114,12 @@
       "testFiles": [
         "web/tests/capture.test.ts",
         "web/tests/capability.test.ts",
+        "web/tests/capture-guidance.test.ts",
+        "web/tests/image-quality.test.ts",
         "web/tests/e2e/core-journey.spec.ts"
       ],
       "status": "IMPLEMENTED_WITH_LIMITATION",
-      "evidence": "Five required RGB angles, one-face and neutral-expression guidance, lighting and distance preparation, browser fallback messaging, selective retake, removal, review, and cancellation flows are implemented and tested.",
+      "evidence": "Five required RGB angles, one-face and neutral-expression guidance, lighting and distance preparation, browser fallback messaging, configurable real-time quality scoring, selective retake, removal, review, and cancellation flows are implemented and tested.",
       "blocker": "Real mobile camera behavior still requires physical-device QA.",
       "owner": "Capture lead",
       "lastCheckedDate": "2026-07-13"

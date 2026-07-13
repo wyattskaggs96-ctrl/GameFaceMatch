@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
   createCaptureGuidanceSession,
+  defaultCaptureGuidanceThresholds,
   evaluateCaptureGuidanceFrame
 } from "@/lib/capture/capture-guidance-service";
 import { MEDIAPIPE_FACE_LANDMARKER_METADATA, unavailableFaceLandmarkReport } from "@/lib/face-landmarks/face-landmark-provider";
-import type { CapturedAngleID, DetectedFaceLandmarks, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
+import type { CapturedAngleID, DetectedFaceLandmarks, FaceLandmarkPoint, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
 
 describe("capture guidance frame validation", () => {
   it("validates all five required head directions", () => {
@@ -24,6 +25,8 @@ describe("capture guidance frame validation", () => {
       });
       expect(guidance.requiredPoseReached, angleID).toBe(true);
       expect(guidance.blockingIssues).toEqual([]);
+      expect(guidance.realtimeQuality.score, angleID).toBeGreaterThanOrEqual(90);
+      expect(guidance.realtimeQuality.state, angleID).toBe("ready");
       expect(guidance.readyMessages.map((issue) => issue.code)).toContain("poseReached");
     }
   });
@@ -42,6 +45,7 @@ describe("capture guidance frame validation", () => {
       timestampMs: 0
     });
     expect(multiple.blockingIssues.map((issue) => issue.code)).toContain("multipleFaces");
+    expect(multiple.realtimeQuality.signals.find((signal) => signal.id === "singleFace")?.state).toBe("blocking");
   });
 
   it("detects distance and centering problems", () => {
@@ -96,10 +100,70 @@ describe("capture guidance frame validation", () => {
     const guidance = evaluateCaptureGuidanceFrame({
       angleID: "straightOn",
       faceLandmarkReport: report({}),
-      imageQualityReport: quality({ brightness: 0.1, sharpness: 2 }),
+      imageQualityReport: quality({ brightness: 0.1, shadowClipping: 0.4, sharpness: 2 }),
       timestampMs: 0
     });
-    expect(guidance.blockingIssues.map((issue) => issue.code)).toEqual(expect.arrayContaining(["poorLighting", "severeBlur"]));
+    expect(guidance.blockingIssues.map((issue) => issue.code)).toEqual(expect.arrayContaining(["underexposed", "severeBlur"]));
+    expect(guidance.realtimeQuality.state).toBe("blocked");
+    expect(guidance.realtimeQuality.score).toBeLessThan(80);
+  });
+
+  it("separates exposure and lighting imbalance from advisory expression checks", () => {
+    const guidance = evaluateCaptureGuidanceFrame({
+      angleID: "straightOn",
+      faceLandmarkReport: report({ strongExpressionLikelihood: 0.85 }),
+      imageQualityReport: quality({ brightness: 0.95, highlightClipping: 0.25, lightingImbalance: 0.3 }),
+      timestampMs: 0
+    });
+    expect(guidance.blockingIssues.map((issue) => issue.code)).toContain("overexposed");
+    expect(guidance.advisoryWarnings.map((issue) => issue.code)).toEqual(expect.arrayContaining(["lightingImbalance", "strongExpression"]));
+    expect(guidance.realtimeQuality.signals.find((signal) => signal.id === "exposure")?.state).toBe("blocking");
+    expect(guidance.realtimeQuality.signals.find((signal) => signal.id === "lightingUniformity")?.state).toBe("advisory");
+    expect(guidance.realtimeQuality.signals.find((signal) => signal.id === "expressionNeutrality")?.state).toBe("advisory");
+  });
+
+  it("blocks likely occlusion when required regions are missing", () => {
+    const guidance = evaluateCaptureGuidanceFrame({
+      angleID: "straightOn",
+      faceLandmarkReport: report({ coreLabels: ["nose tip", "chin"] }),
+      imageQualityReport: quality(),
+      timestampMs: 0
+    });
+    expect(guidance.blockingIssues.map((issue) => issue.code)).toEqual(expect.arrayContaining(["missingRequiredRegion", "occlusionLikely"]));
+    expect(guidance.realtimeQuality.signals.find((signal) => signal.id === "requiredRegions")?.state).toBe("blocking");
+    expect(guidance.realtimeQuality.signals.find((signal) => signal.id === "occlusionFreedom")?.state).toBe("blocking");
+  });
+
+  it("uses configurable thresholds for real-time scoring", () => {
+    const strictGuidance = evaluateCaptureGuidanceFrame(
+      {
+        angleID: "straightOn",
+        faceLandmarkReport: report({}),
+        imageQualityReport: quality({ sharpness: 12 }),
+        timestampMs: 0
+      },
+      {
+        ...defaultCaptureGuidanceThresholds,
+        severeBlurSharpness: 14
+      }
+    );
+    expect(strictGuidance.blockingIssues.map((issue) => issue.code)).toContain("severeBlur");
+
+    const relaxedGuidance = evaluateCaptureGuidanceFrame(
+      {
+        angleID: "straightOn",
+        faceLandmarkReport: report({}),
+        imageQualityReport: quality({ sharpness: 12 }),
+        timestampMs: 0
+      },
+      {
+        ...defaultCaptureGuidanceThresholds,
+        severeBlurSharpness: 2,
+        targetSharpness: 12
+      }
+    );
+    expect(relaxedGuidance.blockingIssues.map((issue) => issue.code)).not.toContain("severeBlur");
+    expect(relaxedGuidance.realtimeQuality.signals.find((signal) => signal.id === "blur")?.state).toBe("pass");
   });
 
   it("allows safe continuation when local landmarks are unavailable", () => {
@@ -215,7 +279,8 @@ function face({
   leftEyeOpenness = 0.25,
   rightEyeOpenness = 0.25,
   mouthOpenness = 0.08,
-  strongExpressionLikelihood = 0.2
+  strongExpressionLikelihood = 0.2,
+  coreLabels
 }: {
   centerX?: number;
   centerY?: number;
@@ -226,6 +291,7 @@ function face({
   rightEyeOpenness?: number;
   mouthOpenness?: number;
   strongExpressionLikelihood?: number;
+  coreLabels?: string[];
 }): DetectedFaceLandmarks {
   return {
     boundingBox: {
@@ -235,7 +301,19 @@ function face({
       height: boxHeight,
       confidence: { score: 0.8, label: "medium", evidence: "estimated" }
     },
-    coreLandmarks: [],
+    coreLandmarks: (
+      coreLabels ?? [
+        "nose tip",
+        "chin",
+        "nose bridge",
+        "upper lip",
+        "lower lip",
+        "left eye outer corner",
+        "right eye outer corner",
+        "left mouth corner",
+        "right mouth corner"
+      ]
+    ).map(landmark),
     approximateHeadPose: {
       yawDegrees,
       pitchDegrees: 0,
@@ -256,17 +334,48 @@ function face({
   };
 }
 
-function quality(input: { brightness?: number; sharpness?: number } = {}): Pick<ImageQualityReport, "brightnessEstimate" | "sharpnessEstimate"> {
+function landmark(label: string, sourceIndex: number): FaceLandmarkPoint {
+  return {
+    label,
+    sourceIndex,
+    x: 0.5,
+    y: 0.5,
+    z: null,
+    confidence: { score: 0.7, label: "medium", evidence: "estimated" }
+  };
+}
+
+function quality(
+  input: { brightness?: number; highlightClipping?: number; shadowClipping?: number; sharpness?: number; lightingImbalance?: number } = {}
+): Pick<
+  ImageQualityReport,
+  "brightnessEstimate" | "highlightClippingEstimate" | "shadowClippingEstimate" | "sharpnessEstimate" | "lightingImbalanceEstimate"
+> {
   return {
     brightnessEstimate: {
       value: input.brightness ?? 0.55,
       evidence: "estimated",
       label: "Synthetic brightness"
     },
+    highlightClippingEstimate: {
+      value: input.highlightClipping ?? 0.01,
+      evidence: "estimated",
+      label: "Synthetic highlight clipping"
+    },
+    shadowClippingEstimate: {
+      value: input.shadowClipping ?? 0.01,
+      evidence: "estimated",
+      label: "Synthetic shadow clipping"
+    },
     sharpnessEstimate: {
       value: input.sharpness ?? 12,
       evidence: "estimated",
       label: "Synthetic sharpness"
+    },
+    lightingImbalanceEstimate: {
+      value: input.lightingImbalance ?? 0.04,
+      evidence: "estimated",
+      label: "Synthetic lighting imbalance"
     }
   };
 }

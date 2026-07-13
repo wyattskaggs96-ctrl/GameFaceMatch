@@ -20,6 +20,14 @@ describe("image quality measurements", () => {
     expect(bright.highlightClipping).toBe(1);
   });
 
+  it("estimates left-right lighting imbalance", () => {
+    const balanced = calculateImageMeasurements(splitPixelSample(4, 2, [128, 128, 128, 255], [128, 128, 128, 255]));
+    expect(balanced.lightingImbalance).toBe(0);
+
+    const uneven = calculateImageMeasurements(splitPixelSample(4, 2, [245, 245, 245, 255], [25, 25, 25, 255]));
+    expect(uneven.lightingImbalance).toBeGreaterThan(0.7);
+  });
+
   it("blocks images below dimension boundaries", () => {
     const report = createImageQualityReport({
       decodedSuccessfully: true,
@@ -179,6 +187,20 @@ function image(
 function pixelSample(width: number, height: number, rgba: [number, number, number, number]) {
   const data = new Uint8ClampedArray(width * height * 4);
   for (let index = 0; index < data.length; index += 4) {
+    data[index] = rgba[0];
+    data[index + 1] = rgba[1];
+    data[index + 2] = rgba[2];
+    data[index + 3] = rgba[3];
+  }
+  return { width, height, rgba: data };
+}
+
+function splitPixelSample(width: number, height: number, left: [number, number, number, number], right: [number, number, number, number]) {
+  const data = new Uint8ClampedArray(width * height * 4);
+  for (let pixelIndex = 0; pixelIndex < width * height; pixelIndex += 1) {
+    const x = pixelIndex % width;
+    const rgba = x < width / 2 ? left : right;
+    const index = pixelIndex * 4;
     data[index] = rgba[0];
     data[index + 1] = rgba[1];
     data[index + 2] = rgba[2];

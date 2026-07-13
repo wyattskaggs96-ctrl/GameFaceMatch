@@ -112,6 +112,7 @@ export function createImageQualityReport(input: ImageQualityInput): ImageQuality
   if (measurements && measurements.highlightClipping > 0.12) advisoryMessages.push("Image may be overexposed.");
   if (measurements && measurements.shadowClipping > 0.22) advisoryMessages.push("Image may have heavy shadows.");
   if (measurements && measurements.sharpness < 10) advisoryMessages.push("Image may be blurry.");
+  if (measurements && measurements.lightingImbalance > 0.24) advisoryMessages.push("Lighting may be uneven across the face.");
   if (!manualConfirmation.onePerson) advisoryMessages.push("Confirm that only one person is visible.");
   if (!manualConfirmation.neutralExpression) advisoryMessages.push("Confirm neutral expression and gently closed lips.");
   if (!manualConfirmation.requestedAngle) advisoryMessages.push("Confirm that the requested angle was followed.");
@@ -129,6 +130,7 @@ export function createImageQualityReport(input: ImageQualityInput): ImageQuality
     highlightClippingEstimate: metric(measurements?.highlightClipping ?? null, measurements ? "estimated" : "notYetImplemented", "Highlight clipping estimate"),
     shadowClippingEstimate: metric(measurements?.shadowClipping ?? null, measurements ? "estimated" : "notYetImplemented", "Shadow clipping estimate"),
     sharpnessEstimate: metric(measurements?.sharpness ?? null, measurements ? "estimated" : "notYetImplemented", "Sharpness estimate"),
+    lightingImbalanceEstimate: metric(measurements?.lightingImbalance ?? null, measurements ? "estimated" : "notYetImplemented", "Lighting imbalance estimate"),
     orientation: metric(image?.orientation ?? "unknown", image ? "measured" : "notYetImplemented", "Orientation"),
     duplicateImage: metric(duplicateImage, "measured", "Exact duplicate indicator"),
     requiredAnglePresent: metric(requiredAnglePresent, "measured", "Required-angle presence"),
@@ -208,13 +210,25 @@ export function calculateImageMeasurements(sample: PixelSample) {
   let shadowCount = 0;
   let sharpnessTotal = 0;
   let sharpnessSamples = 0;
+  let leftLuminanceTotal = 0;
+  let rightLuminanceTotal = 0;
+  let leftPixelCount = 0;
+  let rightPixelCount = 0;
   const pixels = sample.rgba;
   const luminance = new Float32Array(sample.width * sample.height);
 
   for (let index = 0, pixelIndex = 0; index < pixels.length; index += 4, pixelIndex += 1) {
     const value = (0.2126 * pixels[index] + 0.7152 * pixels[index + 1] + 0.0722 * pixels[index + 2]) / 255;
+    const x = pixelIndex % sample.width;
     luminance[pixelIndex] = value;
     luminanceTotal += value;
+    if (x < sample.width / 2) {
+      leftLuminanceTotal += value;
+      leftPixelCount += 1;
+    } else {
+      rightLuminanceTotal += value;
+      rightPixelCount += 1;
+    }
     if (value > 0.94) highlightCount += 1;
     if (value < 0.08) shadowCount += 1;
   }
@@ -230,11 +244,14 @@ export function calculateImageMeasurements(sample: PixelSample) {
   }
 
   const pixelCount = Math.max(sample.width * sample.height, 1);
+  const leftAverage = leftLuminanceTotal / Math.max(leftPixelCount, 1);
+  const rightAverage = rightLuminanceTotal / Math.max(rightPixelCount, 1);
   return {
     brightness: round(luminanceTotal / pixelCount),
     highlightClipping: round(highlightCount / pixelCount),
     shadowClipping: round(shadowCount / pixelCount),
-    sharpness: round((sharpnessTotal / Math.max(sharpnessSamples, 1)) * 100)
+    sharpness: round((sharpnessTotal / Math.max(sharpnessSamples, 1)) * 100),
+    lightingImbalance: round(Math.abs(leftAverage - rightAverage))
   };
 }
 

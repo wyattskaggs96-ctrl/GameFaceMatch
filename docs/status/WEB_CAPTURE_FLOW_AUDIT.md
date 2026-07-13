@@ -15,6 +15,7 @@ This audit covers the active responsive web MVP capture flow under `web/`. The w
 - Permission recovery copy covers iPhone Safari and Android Chrome reset paths.
 - Camera preview prefers front camera when available, supports camera switching, mirrors the preview for selfie view, and stores captured stills unmirrored.
 - Live local guidance can report one face, zero faces, multiple faces, distance, centering, head direction, blink, mouth open, strong expression, motion, lighting, blur, pose reached, and steady hold when local landmarks are available.
+- Live local quality scoring reports a configurable 0-100 browser guidance score with separate blocking and advisory signals for face found, multiple faces, face size, centering, pose, blur, exposure, lighting imbalance, occlusion likelihood, expression neutrality, and required-region visibility.
 - Upload fallback exists for every required angle.
 - HEIC/HEIF is rejected with an honest unsupported-state message.
 - Quality review supports blocking failures, advisory messages, manual confirmations, selective retake, replace upload, remove, and continue only after blocking checks resolve.

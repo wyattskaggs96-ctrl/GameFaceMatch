@@ -66,11 +66,29 @@ export type CaptureGuidanceIssueCode =
   | "strongExpression"
   | "excessiveMotion"
   | "poorLighting"
+  | "underexposed"
+  | "overexposed"
+  | "lightingImbalance"
   | "severeBlur"
+  | "occlusionLikely"
+  | "missingRequiredRegion"
   | "poseReached"
   | "poseHoldPending"
   | "poseHeld"
   | "landmarksUnavailable";
+export type RealtimeCaptureQualitySignalID =
+  | "faceFound"
+  | "singleFace"
+  | "faceSize"
+  | "centering"
+  | "pose"
+  | "blur"
+  | "exposure"
+  | "lightingUniformity"
+  | "occlusionFreedom"
+  | "expressionNeutrality"
+  | "requiredRegions";
+export type RealtimeCaptureQualitySignalState = "pass" | "advisory" | "blocking" | "unavailable";
 export type MeasurementAvailabilityState = "available" | "unavailable" | "pending";
 export type MeasurementSource = "browserRgbImage" | "iPhoneTrueDepth" | "userConfirmed" | "notMeasured";
 export type StandardFacialMeasurementID =
@@ -121,6 +139,7 @@ export interface ImageQualityReport {
   highlightClippingEstimate: QualityMetric<number | null>;
   shadowClippingEstimate: QualityMetric<number | null>;
   sharpnessEstimate: QualityMetric<number | null>;
+  lightingImbalanceEstimate: QualityMetric<number | null>;
   orientation: QualityMetric<"portrait" | "landscape" | "square" | "unknown">;
   duplicateImage: QualityMetric<boolean>;
   requiredAnglePresent: QualityMetric<boolean>;
@@ -200,6 +219,7 @@ export interface CaptureGuidanceReport {
   protocolVersion: string;
   thresholdVersion: string;
   angleID: CapturedAngleID;
+  realtimeQuality: RealtimeCaptureQualityReport;
   requiredPoseReached: boolean;
   poseHeldLongEnough: boolean;
   holdDurationMs: number;
@@ -210,6 +230,24 @@ export interface CaptureGuidanceReport {
   advisoryWarnings: CaptureGuidanceIssue[];
   readyMessages: CaptureGuidanceIssue[];
   createdAt: ISODateString;
+}
+
+export interface RealtimeCaptureQualitySignal {
+  id: RealtimeCaptureQualitySignalID;
+  label: string;
+  score: number | null;
+  state: RealtimeCaptureQualitySignalState;
+  message: string;
+  evidence: QualityEvidenceKind;
+}
+
+export interface RealtimeCaptureQualityReport {
+  score: number;
+  state: ImageQualityState;
+  thresholdVersion: string;
+  signals: RealtimeCaptureQualitySignal[];
+  blockingSignalCount: number;
+  advisorySignalCount: number;
 }
 
 export interface FaceLandmarkProviderMetadata {

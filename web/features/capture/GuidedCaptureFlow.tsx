@@ -815,7 +815,12 @@ function LiveGuidancePanel({
       </p>
       {guidance ? (
         <>
+          <ProgressBar value={guidance.realtimeQuality.score} max={100} label="Live capture quality score" />
           <ProgressBar value={Math.min(guidance.holdDurationMs, guidance.holdTargetMs)} max={guidance.holdTargetMs} label="Steady hold" />
+          <p className="supporting">
+            Local quality score {guidance.realtimeQuality.score}/100. Blocking signals: {guidance.realtimeQuality.blockingSignalCount}; advisory signals:{" "}
+            {guidance.realtimeQuality.advisorySignalCount}.
+          </p>
           <GuidanceIssueList guidance={guidance} title="Live guidance" />
         </>
       ) : null}
@@ -870,7 +875,12 @@ function formatMetric(value: number | null) {
   return value === null ? "Not measured" : String(value);
 }
 
-function createPreviewQualityReport(video: HTMLVideoElement): Pick<ImageQualityReport, "brightnessEstimate" | "sharpnessEstimate"> | undefined {
+function createPreviewQualityReport(
+  video: HTMLVideoElement
+): Pick<
+  ImageQualityReport,
+  "brightnessEstimate" | "highlightClippingEstimate" | "shadowClippingEstimate" | "sharpnessEstimate" | "lightingImbalanceEstimate"
+> | undefined {
   const width = video.videoWidth;
   const height = video.videoHeight;
   if (width === 0 || height === 0) return undefined;
@@ -894,10 +904,25 @@ function createPreviewQualityReport(video: HTMLVideoElement): Pick<ImageQualityR
       evidence: "estimated",
       label: "Live brightness estimate"
     },
+    highlightClippingEstimate: {
+      value: measurements.highlightClipping,
+      evidence: "estimated",
+      label: "Live highlight clipping estimate"
+    },
+    shadowClippingEstimate: {
+      value: measurements.shadowClipping,
+      evidence: "estimated",
+      label: "Live shadow clipping estimate"
+    },
     sharpnessEstimate: {
       value: measurements.sharpness,
       evidence: "estimated",
       label: "Live sharpness estimate"
+    },
+    lightingImbalanceEstimate: {
+      value: measurements.lightingImbalance,
+      evidence: "estimated",
+      label: "Live lighting imbalance estimate"
     }
   };
 }

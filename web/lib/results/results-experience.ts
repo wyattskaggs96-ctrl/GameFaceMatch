@@ -20,6 +20,54 @@ export interface ResultsState {
   canShare: boolean;
 }
 
+export type RecommendationPosition = "Best match" | "Second match" | "Third match";
+
+export interface RecommendationInstructionExplanation {
+  stepNumber: number;
+  menuCategory: string;
+  exactVerifiedGameLabel: string;
+  navigationPath: string[];
+  platform: string;
+  gameVersion: string;
+  patchVersion: string | null;
+  mode: string;
+  creationPath: string;
+  notes: string[];
+  verificationDate: string | null;
+}
+
+export interface RecommendationMatchExplanation {
+  position: RecommendationPosition;
+  rank: number;
+  catalogItemID: string;
+  matchScore: number;
+  scoreLabel: string;
+  confidence: {
+    label: GameAppearanceMatch["confidence"]["label"];
+    score: number;
+  };
+  keyReasons: string[];
+  keyDifferences: string[];
+  uncertaintyNotes: string[];
+  captureQuality: string;
+  catalogVersion: string;
+  verificationDate: string | null;
+  stepByStepGameInstructions: RecommendationInstructionExplanation[];
+}
+
+export interface RecommendationExplanationReport {
+  title: string;
+  scoreLanguage: string;
+  captureQuality: string;
+  recommendations: RecommendationMatchExplanation[];
+  catalogVersions: string[];
+  verificationDates: Array<string | null>;
+  limitations: string[];
+}
+
+const recommendationScoreLanguage = "Match score based on available game options.";
+const recommendationPositions: RecommendationPosition[] = ["Best match", "Second match", "Third match"];
+
 export function createResultsState(input: ResultsStateInput): ResultsState {
   if (input.isProcessing) {
     return {
@@ -87,6 +135,30 @@ export function createResultsState(input: ResultsStateInput): ResultsState {
   };
 }
 
+export function createRecommendationExplanationReport(input: {
+  profile: StandardFaceProfile | null;
+  matches: GameAppearanceMatch[];
+}): RecommendationExplanationReport {
+  const captureQuality = summarizeCaptureQuality(input.profile);
+  const recommendations = [...input.matches]
+    .sort((first, second) => first.rank - second.rank)
+    .slice(0, 3)
+    .map((match, index) => createRecommendationMatchExplanation(match, recommendationPositions[index], captureQuality));
+  return {
+    title: "Top three closest available settings",
+    scoreLanguage: recommendationScoreLanguage,
+    captureQuality,
+    recommendations,
+    catalogVersions: Array.from(new Set(recommendations.map((recommendation) => recommendation.catalogVersion))),
+    verificationDates: Array.from(new Set(recommendations.map((recommendation) => recommendation.verificationDate))),
+    limitations: [
+      "Scores compare available verified game options only.",
+      "Scores do not identify a person.",
+      "Step-by-step instructions are shown only when verified catalog navigation evidence exists."
+    ]
+  };
+}
+
 export function hasMinimumProfileEvidence(profile: StandardFaceProfile) {
   return profile.qualityReport.requiredAnglesComplete && Object.values(profile.sourceAngleAvailability).every((angle) => angle.available);
 }
@@ -130,6 +202,43 @@ export function summarizeCaptureQuality(profile: StandardFaceProfile | null) {
   const blocking = profile.qualityReport.blockingIssueCount ?? profile.qualityReport.issues.filter((issue) => issue.severity === "blocking").length;
   const advisory = profile.qualityReport.advisoryIssueCount ?? profile.qualityReport.issues.filter((issue) => issue.severity === "advisory").length;
   return `${Object.values(profile.sourceAngleAvailability).filter((angle) => angle.available).length} of 5 RGB angles available. ${blocking} blocking issue(s), ${advisory} advisory issue(s).`;
+}
+
+function createRecommendationMatchExplanation(
+  match: GameAppearanceMatch,
+  position: RecommendationPosition,
+  captureQuality: string
+): RecommendationMatchExplanation {
+  return {
+    position,
+    rank: match.rank,
+    catalogItemID: match.catalogItem.stableInternalID,
+    matchScore: match.score,
+    scoreLabel: recommendationScoreLanguage,
+    confidence: {
+      label: match.confidence.label,
+      score: match.confidence.score
+    },
+    keyReasons: match.explanation.strongestSimilarities,
+    keyDifferences: match.explanation.largestDifferences,
+    uncertaintyNotes: match.explanation.uncertaintyNotes,
+    captureQuality,
+    catalogVersion: match.catalogVersion.identifier,
+    verificationDate: match.catalogVersion.verifiedAt ?? match.catalogItem.verifiedDate,
+    stepByStepGameInstructions: createBuildInstructions(match).map((instruction) => ({
+      stepNumber: instruction.sequenceNumber,
+      menuCategory: instruction.menuCategory,
+      exactVerifiedGameLabel: instruction.verifiedGameLabel,
+      navigationPath: instruction.navigationPath,
+      platform: instruction.platform,
+      gameVersion: instruction.gameVersion,
+      patchVersion: instruction.patchVersion ?? null,
+      mode: instruction.mode,
+      creationPath: instruction.creationPath,
+      notes: instruction.notes,
+      verificationDate: instruction.verificationDate
+    }))
+  };
 }
 
 function splitNavigationPath(instruction: string) {

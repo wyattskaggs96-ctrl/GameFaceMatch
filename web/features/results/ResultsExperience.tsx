@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Alert, Button, Card, EmptyState, LoadingState, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { CATALOG_UNAVAILABLE_MESSAGE, PRODUCT_EXPLANATION } from "@/lib/product-copy";
-import { createBuildInstructions, createResultsState, getTieGroups, summarizeCaptureQuality } from "@/lib/results/results-experience";
+import { createBuildInstructions, createRecommendationExplanationReport, createResultsState, getTieGroups, summarizeCaptureQuality } from "@/lib/results/results-experience";
 import { createSafeShareCard } from "@/lib/share/share-card";
 import type { GameAppearanceMatch, StandardFaceProfile } from "@/types/domain";
 
@@ -42,8 +42,10 @@ export function ResultsExperience({
   const [resultDeleted, setResultDeleted] = useState(false);
   const state = createResultsState({ profile, catalogIsEmpty, matches, errorMessage, isProcessing });
   const selectedMatch = state.matches.find((match) => match.id === selectedMatchID) ?? state.matches[0];
-  const buildInstructions = selectedMatch ? createBuildInstructions(selectedMatch) : [];
-  const shareCard = useMemo(() => createSafeShareCard({ match: selectedMatch, buildInstructions }), [selectedMatch, buildInstructions]);
+  const recommendationReport = useMemo(() => createRecommendationExplanationReport({ profile, matches: state.matches }), [profile, state.matches]);
+  const selectedRecommendation = selectedMatch ? recommendationReport.recommendations.find((recommendation) => recommendation.rank === selectedMatch.rank) : undefined;
+  const shareBuildInstructions = selectedMatch ? createBuildInstructions(selectedMatch) : [];
+  const shareCard = useMemo(() => createSafeShareCard({ match: selectedMatch, buildInstructions: shareBuildInstructions }), [selectedMatch, shareBuildInstructions]);
 
   if (resultDeleted) {
     return (
@@ -99,7 +101,7 @@ export function ResultsExperience({
         <TopThreeResults
           matches={state.matches}
           selectedMatch={selectedMatch}
-          buildInstructions={buildInstructions}
+          selectedRecommendation={selectedRecommendation}
           captureSummary={summarizeCaptureQuality(profile)}
           shareText={shareCard.text}
           onSelectMatch={setSelectedMatchID}
@@ -191,7 +193,7 @@ function CatalogUnavailableState({
 function TopThreeResults({
   matches,
   selectedMatch,
-  buildInstructions,
+  selectedRecommendation,
   captureSummary,
   shareText,
   onSelectMatch,
@@ -202,7 +204,7 @@ function TopThreeResults({
 }: {
   matches: GameAppearanceMatch[];
   selectedMatch: GameAppearanceMatch;
-  buildInstructions: ReturnType<typeof createBuildInstructions>;
+  selectedRecommendation: ReturnType<typeof createRecommendationExplanationReport>["recommendations"][number] | undefined;
   captureSummary: string;
   shareText: string;
   onSelectMatch: (matchID: string) => void;
@@ -212,6 +214,7 @@ function TopThreeResults({
   onStartOver: () => void;
 }) {
   const tieGroups = getTieGroups(matches);
+  const buildInstructions = selectedRecommendation?.stepByStepGameInstructions ?? [];
   return (
     <>
       <div className="result-grid">
@@ -243,22 +246,22 @@ function TopThreeResults({
         <div className="section-heading">
           <p className="eyebrow">Match details</p>
           <h2>Rank {selectedMatch.rank} explanation</h2>
-          <p>{selectedMatch.explanation.summary}</p>
+          <p>{selectedRecommendation?.scoreLabel ?? selectedMatch.scoreLabel} It does not identify a person.</p>
         </div>
         <div className="result-detail-grid">
-          <ResultList title="Similarities" items={selectedMatch.explanation.strongestSimilarities} />
-          <ResultList title="Differences" items={selectedMatch.explanation.largestDifferences} />
-          <ResultList title="Confidence notes" items={selectedMatch.explanation.uncertaintyNotes} />
+          <ResultList title="Key reasons" items={selectedRecommendation?.keyReasons ?? selectedMatch.explanation.strongestSimilarities} />
+          <ResultList title="Key differences" items={selectedRecommendation?.keyDifferences ?? selectedMatch.explanation.largestDifferences} />
+          <ResultList title="Confidence notes" items={selectedRecommendation?.uncertaintyNotes ?? selectedMatch.explanation.uncertaintyNotes} />
           <Card tone="neutral">
             <h3>Traceability</h3>
             <dl className="metadata-list">
               <div>
                 <span>Catalog version</span>
-                <strong>{selectedMatch.catalogVersion.identifier}</strong>
+                <strong>{selectedRecommendation?.catalogVersion ?? selectedMatch.catalogVersion.identifier}</strong>
               </div>
               <div>
                 <span>Catalog verified</span>
-                <strong>{selectedMatch.catalogVersion.verifiedAt ?? "Not provided"}</strong>
+                <strong>{selectedRecommendation?.verificationDate ?? "Not provided"}</strong>
               </div>
               <div>
                 <span>Model version</span>
@@ -266,7 +269,7 @@ function TopThreeResults({
               </div>
               <div>
                 <span>Capture quality</span>
-                <strong>{captureSummary}</strong>
+                <strong>{selectedRecommendation?.captureQuality ?? captureSummary}</strong>
               </div>
             </dl>
           </Card>
@@ -281,11 +284,11 @@ function TopThreeResults({
         {buildInstructions.length > 0 ? (
           <ol className="instruction-list">
             {buildInstructions.map((instruction) => (
-              <li key={instruction.id}>
+              <li key={`${selectedMatch.id}-step-${instruction.stepNumber}`}>
                 <strong>
-                  {instruction.sequenceNumber}. {instruction.menuCategory}: {instruction.verifiedGameLabel}
+                  {instruction.stepNumber}. {instruction.menuCategory}: {instruction.exactVerifiedGameLabel}
                 </strong>
-                <span>{instruction.navigationPath.length > 0 ? instruction.navigationPath.join(" > ") : instruction.detail}</span>
+                <span>{instruction.navigationPath.join(" > ")}</span>
                 <small>
                   {instruction.platform} | {instruction.gameVersion} | Patch {instruction.patchVersion ?? "not provided"} | {instruction.mode} | {instruction.creationPath} | Verified{" "}
                   {instruction.verificationDate ?? "not provided"}

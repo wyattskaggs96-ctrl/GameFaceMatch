@@ -21,6 +21,8 @@ Required behavior:
 - Overall confidence is reduced when profile evidence or catalog annotation coverage is incomplete.
 - Every feature contribution records profile and catalog evidence metadata: value, confidence, supporting frame count, variance, depth availability, profile availability, and occlusion state.
 - Missing side-view evidence, significant occlusion, unavailable profile measurements, unavailable catalog measurements, and low-confidence measurements are excluded from weighting and explained as uncertainty.
+- Recommendation explanations are generated as a structured top-three report with best/second/third labels, match score, confidence, key reasons, key differences, capture quality, catalog version, verification date, and verified step-by-step game instructions.
+- Recommendation explanations must use “match score based on available game options” style language and must not use percent-identical or identity-probability language.
 - Skin tone and skin presentation are not geometry features.
 - The generic production matcher returns no matches unless the manifest is production-class, contains verified records, has an `approvedRelease` lifecycle state, has a catalog verification date, and includes a package checksum. The College Football 27 adapter also requires the full runtime catalog approval gate and definitive production publish-gate report.
 

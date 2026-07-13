@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
 import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
-import { createBuildInstructions, createResultsState, getTieGroups } from "@/lib/results/results-experience";
+import { createBuildInstructions, createRecommendationExplanationReport, createResultsState, getTieGroups } from "@/lib/results/results-experience";
 import { createSafeShareCard } from "@/lib/share/share-card";
 import type { AppearanceAttribute, FacialMeasurement, GameCatalogManifest, StandardFaceProfile } from "@/types/domain";
 
@@ -70,6 +70,48 @@ describe("results experience state", () => {
     expect(instruction.mode).toBe("synthetic-test-mode");
     expect(instruction.creationPath).toBe("synthetic-test-path");
     expect(instruction.verificationDate).toBe("2026-07-10T00:00:00.000Z");
+  });
+
+  it("generates a structured top-three recommendation explanation without identity-probability language", () => {
+    const profile = syntheticProfile();
+    const matches = createRuleBasedMatchingEngine().matchTopThree({ profile, catalog: fixtureCatalog, allowTestFixtures: true });
+    const report = createRecommendationExplanationReport({ profile, matches });
+
+    expect(report.title).toBe("Top three closest available settings");
+    expect(report.scoreLanguage).toBe("Match score based on available game options.");
+    expect(report.captureQuality).toMatch(/5 of 5 RGB angles available/);
+    expect(report.recommendations.map((recommendation) => recommendation.position)).toEqual(["Best match", "Second match", "Third match"]);
+    expect(report.recommendations.map((recommendation) => recommendation.catalogItemID)).toEqual([
+      "synthetic-match-alpha",
+      "synthetic-match-gamma",
+      "synthetic-match-beta"
+    ]);
+    const best = report.recommendations[0];
+    expect(best.matchScore).toBe(matches[0].score);
+    expect(best.confidence.label).toBe(matches[0].confidence.label);
+    expect(best.keyReasons.length).toBeGreaterThan(0);
+    expect(best.keyDifferences.length).toBeGreaterThan(0);
+    expect(best.catalogVersion).toBe("synthetic-test-catalog-v1");
+    expect(best.verificationDate).toBe("2026-07-10T00:00:00.000Z");
+    expect(best.stepByStepGameInstructions[0]).toMatchObject({
+      stepNumber: 1,
+      menuCategory: "synthetic-test-category",
+      exactVerifiedGameLabel: "synthetic-label-alpha",
+      platform: "synthetic-test-platform",
+      gameVersion: "synthetic-test-version",
+      patchVersion: "synthetic-test-patch",
+      mode: "synthetic-test-mode",
+      creationPath: "synthetic-test-path",
+      verificationDate: "2026-07-10T00:00:00.000Z"
+    });
+    expect(JSON.stringify(report).toLowerCase()).not.toMatch(/percent identical|% identical|identity probability/);
+    expect(report.limitations.join(" ")).toMatch(/do not identify a person/i);
+  });
+
+  it("returns an empty explanation report when no verified matches are supplied", () => {
+    const report = createRecommendationExplanationReport({ profile: syntheticProfile(), matches: [] });
+    expect(report.recommendations).toEqual([]);
+    expect(report.limitations.join(" ")).toMatch(/verified catalog navigation evidence/i);
   });
 
   it("defaults share cards to text-only settings", () => {

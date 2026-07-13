@@ -121,6 +121,9 @@ export function approveCatalogRelease(input: FeatureGateInput): CatalogReleaseAp
 
   if (!manifest.isProduction) reasons.push("Catalog manifest is not marked as production.");
   if (manifest.items.length === 0) reasons.push("Production catalog has no verified records.");
+  if (manifest.items.length > 0 && manifest.releaseStatus !== "approvedRelease") {
+    reasons.push("Catalog release is not marked as an approved immutable release.");
+  }
   if (!manifest.catalogVersion.verifiedAt) reasons.push("Catalog version has no verification date.");
   if (!manifest.packageChecksum) reasons.push("Catalog release has no package checksum.");
   if (input.integrity?.state !== "verified" || !input.integrity.ok) {

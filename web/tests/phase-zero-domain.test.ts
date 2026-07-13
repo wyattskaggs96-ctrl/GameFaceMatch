@@ -64,7 +64,7 @@ describe("Phase 0 domain model", () => {
 
   it("blocks fixture items and missing checksums from published catalog releases", () => {
     const snapshot = syntheticSnapshot();
-    snapshot.catalogReleases[0].status = "published";
+    snapshot.catalogReleases[0].status = "approvedRelease";
     snapshot.catalogReleases[0].deterministicChecksum = null;
     const codes = validatePhase0DomainSnapshot(snapshot).errors.map((error) => error.code);
     expect(codes).toContain("missingReleaseChecksum");
@@ -339,13 +339,18 @@ function syntheticSnapshot(): Phase0DomainSnapshot {
     platformID: "platform-synthetic",
     gameVersionID: "version-synthetic",
     patchID: "patch-synthetic",
-    status: "candidate",
+    status: "verificationCandidate",
     itemIDs: ["head-synthetic"],
     manifestRelativePath: "data/fixtures/test-only/phase-zero/catalog_manifest.json",
     deterministicChecksum: "b".repeat(64),
     approvedVerificationRecordIDs: ["review-synthetic-first", "review-synthetic-second"],
+    releaseNotes: "Synthetic release candidate notes.",
+    changeSummary: ["Synthetic catalog candidate created."],
+    previousCatalogVersionID: null,
+    supersededByCatalogVersionID: null,
     publishedAt: null,
-    rolledBackAt: null
+    supersededAt: null,
+    rejectedAt: null
   });
   snapshot.importValidationRuns.push({
     ...base("import-run-synthetic"),

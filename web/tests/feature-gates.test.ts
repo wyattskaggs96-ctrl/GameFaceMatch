@@ -107,6 +107,13 @@ async function approvedStyleCatalog(options: { itemOverrides?: Partial<GameCatal
     generatedAt: "2026-07-10T00:00:00.000Z",
     isProduction: true,
     declaredItemCount: 1,
+    releaseStatus: "approvedRelease",
+    releaseNotes: {
+      summary: "Unit-test approved release.",
+      createdAt: "2026-07-10T00:00:00.000Z",
+      author: "unit-test",
+      changes: [{ type: "added", stableInternalID: item.stableInternalID, description: "Unit-test synthetic release item." }]
+    },
     items: [item]
   };
   const integrity = await verifyManifestIntegrity(catalog);

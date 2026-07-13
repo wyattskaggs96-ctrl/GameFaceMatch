@@ -269,6 +269,17 @@ function productionStyleCatalog(): GameCatalogManifest {
     generatedAt: "2026-07-10T00:00:00.000Z",
     isProduction: true,
     declaredItemCount: items.length,
+    releaseStatus: "approvedRelease",
+    releaseNotes: {
+      summary: "Unit-test approved production-style catalog.",
+      createdAt: "2026-07-10T00:00:00.000Z",
+      author: "unit-test",
+      changes: items.map((item) => ({
+        type: "added" as const,
+        stableInternalID: item.stableInternalID,
+        description: "Added synthetic production-style matching fixture."
+      }))
+    },
     items
   };
 }

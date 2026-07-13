@@ -1102,6 +1102,33 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-039",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Immutable catalog releases",
+      "summary": "Implement immutable published catalog versions with draft, review candidate, verification candidate, approved release, superseded release, and rejected release states; prevent silent edits after approval; require corrections to create a new version; preserve historical releases for recommendations; store catalog versions on recommendations; include checksums and release notes.",
+      "owningModule": "Catalog release management",
+      "implementationFiles": [
+        "web/lib/catalog/immutable-catalog-release.ts",
+        "web/lib/gates/feature-gates.ts",
+        "web/types/domain.ts",
+        "web/lib/phase-zero/phase-zero-domain.ts",
+        "data/schemas/catalog-manifest.schema.json",
+        "data/schemas/phase-zero-domain.schema.json",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_CATALOG_WORKFLOW.md"
+      ],
+      "testFiles": [
+        "web/tests/immutable-catalog-release.test.ts",
+        "web/tests/feature-gates.test.ts",
+        "web/tests/phase-zero-domain.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Immutable catalog release tests cover all required lifecycle states, approved-release edit blocking, nested manifest mutation checksum detection, correction-by-new-version behavior, historical release lookup for recommendations, catalog-version retention on matches, release-note requirements, and manifest checksums. Feature-gate tests require an approved immutable release for production recommendations.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

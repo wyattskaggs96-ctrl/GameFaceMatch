@@ -21,6 +21,32 @@
     "isProduction": { "type": "boolean" },
     "declaredItemCount": { "type": "integer", "minimum": 0 },
     "packageChecksum": { "type": "string" },
+    "releaseStatus": { "enum": ["draft", "reviewCandidate", "verificationCandidate", "approvedRelease", "supersededRelease", "rejectedRelease"] },
+    "previousCatalogVersionID": { "type": ["string", "null"] },
+    "supersededByCatalogVersionID": { "type": ["string", "null"] },
+    "releaseNotes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "createdAt", "author", "changes"],
+      "properties": {
+        "summary": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "author": { "type": "string" },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "description"],
+            "properties": {
+              "type": { "enum": ["added", "corrected", "removed", "superseded", "metadataOnly"] },
+              "stableInternalID": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
     "items": { "type": "array", "items": { "$ref": "catalog-item.schema.json" } }
   },
   "$defs": {

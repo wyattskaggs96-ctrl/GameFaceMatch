@@ -25,7 +25,7 @@ export type Phase0ReviewDecision = "approved" | "rejected" | "needsChanges";
 export type Phase0DiscrepancyKind = "labelMismatch" | "missingEvidence" | "navigationMismatch" | "patchMismatch" | "reorderedOption" | "retiredOption" | "measurementConflict" | "other";
 export type Phase0DependencyTestKind = "categoryDependency" | "platformDifference" | "patchDifference" | "creationPathDifference" | "appearanceInteraction";
 export type Phase0DependencyTestStatus = "planned" | "running" | "passed" | "failed" | "inconclusive";
-export type Phase0CatalogReleaseStatus = "draft" | "candidate" | "approved" | "published" | "rolledBack" | "retired";
+export type Phase0CatalogReleaseStatus = "draft" | "reviewCandidate" | "verificationCandidate" | "approvedRelease" | "supersededRelease" | "rejectedRelease";
 export type Phase0ImportValidationStatus = "passed" | "failed" | "passedWithWarnings";
 export type Phase0ManualStudyStatus = "planned" | "running" | "complete" | "blocked";
 export type Phase0SubjectResultStatus = "complete" | "incomplete" | "withdrawn";
@@ -341,8 +341,13 @@ export interface Phase0CatalogRelease extends Phase0BaseEntity {
   manifestRelativePath: string;
   deterministicChecksum: string | null;
   approvedVerificationRecordIDs: Phase0EntityID[];
+  releaseNotes: string;
+  changeSummary: string[];
+  previousCatalogVersionID: Phase0VersionID | null;
+  supersededByCatalogVersionID: Phase0VersionID | null;
   publishedAt: ISODateString | null;
-  rolledBackAt: ISODateString | null;
+  supersededAt: ISODateString | null;
+  rejectedAt: ISODateString | null;
 }
 
 export interface Phase0ImportValidationRun extends Phase0BaseEntity {
@@ -507,8 +512,12 @@ export function validatePhase0DomainSnapshot(snapshot: Phase0DomainSnapshot): Ph
   }
 
   for (const release of snapshot.catalogReleases) {
-    if (release.status === "published") {
+    if (release.status === "approvedRelease" || release.status === "supersededRelease") {
       if (!release.deterministicChecksum) errors.push({ code: "missingReleaseChecksum", message: `${release.id} is missing a deterministic checksum.`, entityID: release.id });
+      if (!release.releaseNotes.trim() || release.changeSummary.length === 0) {
+        errors.push({ code: "missingReleaseNotes", message: `${release.id} requires release notes that identify changes.`, entityID: release.id });
+      }
+      if (!release.publishedAt) errors.push({ code: "missingReleasePublishedAt", message: `${release.id} requires a publishedAt timestamp.`, entityID: release.id });
       const releaseItems = release.itemIDs.map((id) => snapshot.catalogItems.find((item) => item.id === id));
       if (releaseItems.some((item) => !item)) errors.push({ code: "missingReleaseItem", message: `${release.id} references a missing catalog item.`, entityID: release.id });
       for (const item of releaseItems) {
@@ -516,6 +525,12 @@ export function validatePhase0DomainSnapshot(snapshot: Phase0DomainSnapshot): Ph
           errors.push({ code: "unverifiedReleaseItem", message: `${release.id} includes an unverified or fixture item.`, entityID: release.id });
         }
       }
+    }
+    if (release.status === "supersededRelease" && (!release.supersededAt || !release.supersededByCatalogVersionID)) {
+      errors.push({ code: "missingSupersessionContext", message: `${release.id} requires supersession context.`, entityID: release.id });
+    }
+    if (release.status === "rejectedRelease" && !release.rejectedAt) {
+      errors.push({ code: "missingRejectedAt", message: `${release.id} requires rejectedAt.`, entityID: release.id });
     }
   }
 

@@ -38,6 +38,13 @@ export type CaptureCapabilityStatus =
 
 export type CatalogVerificationStatus = "verified" | "unverified" | "rejected" | "archived";
 export type DataSourceType = "production" | "researchDraft" | "testFixture" | "demoData" | "localDeveloperSample";
+export type CatalogReleaseLifecycleStatus =
+  | "draft"
+  | "reviewCandidate"
+  | "verificationCandidate"
+  | "approvedRelease"
+  | "supersededRelease"
+  | "rejectedRelease";
 
 export type CapturedAngleID = "straightOn" | "left45" | "right45" | "leftProfile" | "rightProfile";
 export type CaptureSource = "camera" | "upload";
@@ -363,7 +370,24 @@ export interface GameCatalogManifest {
   isProduction: boolean;
   declaredItemCount?: number;
   packageChecksum?: string;
+  releaseStatus?: CatalogReleaseLifecycleStatus;
+  releaseNotes?: CatalogReleaseNotes;
+  previousCatalogVersionID?: string | null;
+  supersededByCatalogVersionID?: string | null;
   items: GameCatalogItem[];
+}
+
+export interface CatalogReleaseNotes {
+  summary: string;
+  createdAt: ISODateString;
+  author: string;
+  changes: CatalogReleaseChange[];
+}
+
+export interface CatalogReleaseChange {
+  type: "added" | "corrected" | "removed" | "superseded" | "metadataOnly";
+  stableInternalID?: string;
+  description: string;
 }
 
 export interface GameCatalogItem {

@@ -572,7 +572,7 @@
         { "$ref": "#/$defs/base" },
         {
           "type": "object",
-          "required": ["releaseID", "catalogVersionID", "gameID", "platformID", "gameVersionID", "patchID", "status", "itemIDs", "manifestRelativePath", "deterministicChecksum", "approvedVerificationRecordIDs", "publishedAt", "rolledBackAt"],
+          "required": ["releaseID", "catalogVersionID", "gameID", "platformID", "gameVersionID", "patchID", "status", "itemIDs", "manifestRelativePath", "deterministicChecksum", "approvedVerificationRecordIDs", "releaseNotes", "changeSummary", "previousCatalogVersionID", "supersededByCatalogVersionID", "publishedAt", "supersededAt", "rejectedAt"],
           "properties": {
             "releaseID": { "$ref": "#/$defs/id" },
             "catalogVersionID": { "$ref": "#/$defs/version" },
@@ -580,13 +580,18 @@
             "platformID": { "$ref": "#/$defs/id" },
             "gameVersionID": { "$ref": "#/$defs/id" },
             "patchID": { "$ref": "#/$defs/id" },
-            "status": { "enum": ["draft", "candidate", "approved", "published", "rolledBack", "retired"] },
+            "status": { "enum": ["draft", "reviewCandidate", "verificationCandidate", "approvedRelease", "supersededRelease", "rejectedRelease"] },
             "itemIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
             "manifestRelativePath": { "type": "string", "minLength": 1 },
             "deterministicChecksum": { "type": ["string", "null"] },
             "approvedVerificationRecordIDs": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+            "releaseNotes": { "type": "string" },
+            "changeSummary": { "type": "array", "items": { "type": "string" } },
+            "previousCatalogVersionID": { "type": ["string", "null"] },
+            "supersededByCatalogVersionID": { "type": ["string", "null"] },
             "publishedAt": { "$ref": "#/$defs/nullableTimestamp" },
-            "rolledBackAt": { "$ref": "#/$defs/nullableTimestamp" }
+            "supersededAt": { "$ref": "#/$defs/nullableTimestamp" },
+            "rejectedAt": { "$ref": "#/$defs/nullableTimestamp" }
           }
         }
       ]

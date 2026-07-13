@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/phase-zero-export-package.schema.json",
+  "title": "Phase0ExportPackage",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "generatedAt", "mode", "files", "productionReadiness"],
+  "properties": {
+    "schemaVersion": { "const": "phase0-export-pipeline-v1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "mode": { "enum": ["audit", "production"] },
+    "files": {
+      "type": "array",
+      "minItems": 22,
+      "items": { "$ref": "#/$defs/exportFile" }
+    },
+    "productionReadiness": { "$ref": "#/$defs/productionReadiness" }
+  },
+  "$defs": {
+    "fileName": {
+      "enum": [
+        "environment_manifest.json",
+        "creation_paths.csv",
+        "creation_paths.json",
+        "menu_map.csv",
+        "menu_map.json",
+        "heads.csv",
+        "heads.json",
+        "hairstyles.csv",
+        "hairstyles.json",
+        "facial_hair.csv",
+        "facial_hair.json",
+        "additional_attributes.csv",
+        "additional_attributes.json",
+        "dependency_tests.csv",
+        "dependency_tests.json",
+        "evidence_manifest.csv",
+        "evidence_manifest.json",
+        "capture_log.csv",
+        "issues_and_exceptions.csv",
+        "catalog_manifest.json",
+        "verification_results.csv",
+        "production_readiness.json"
+      ]
+    },
+    "exportFile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fileName", "contentType", "contentUtf8"],
+      "properties": {
+        "fileName": { "$ref": "#/$defs/fileName" },
+        "contentType": { "enum": ["application/json; charset=utf-8", "text/csv; charset=utf-8"] },
+        "contentUtf8": { "type": "string" }
+      }
+    },
+    "productionReadiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "generatedAt",
+        "mode",
+        "ok",
+        "errors",
+        "warnings",
+        "counts",
+        "requiredFiles",
+        "fixtureRecordsExcluded"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "phase0-export-pipeline-v1" },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "mode": { "enum": ["audit", "production"] },
+        "ok": { "type": "boolean" },
+        "errors": { "type": "array", "items": { "type": "string" } },
+        "warnings": { "type": "array", "items": { "type": "string" } },
+        "counts": { "type": "object" },
+        "requiredFiles": { "type": "array", "items": { "$ref": "#/$defs/fileName" } },
+        "fixtureRecordsExcluded": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

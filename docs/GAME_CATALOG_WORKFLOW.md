@@ -61,8 +61,12 @@ Run from the repository root unless noted:
 - `node scripts/catalog-tools.mjs report data/catalog/production`
 - `npm run source-video:intake -- inspect <source-video-path>`
 - `npm run source-video:intake -- extract-frame <source-video-path> <timestamp-seconds> <output-frame-path>`
+- `npm run phase-zero:export -- <phase-zero-snapshot.json> <output-directory>`
+- `node scripts/phase-zero-export.mjs --check`
 
 From `web/`, `npm run catalog:validate` validates the production directory. The empty production catalog must pass with a warning that no recommendations can be produced.
+
+The Phase 0 export pipeline writes deterministic UTF-8 CSV and JSON files for the audit environment, creation paths, menu maps, catalog category workbooks, dependency tests, evidence manifests, capture logs, issues and exceptions, catalog manifest, verification results, and production readiness. Production-mode exports exclude fixture catalog records and fixture evidence paths.
 
 Source-video intake is local-only. `inspect` preserves original video files and reports metadata from `ffprobe` when available. `extract-frame` produces derivative still frames only when `ffmpeg` is installed; otherwise it returns a disabled result so operators can continue recording timestamp references and extract frames later.
 

@@ -30,6 +30,14 @@ The traceability generator reads `data/traceability/requirements.json` and write
 
 The empty production catalog is valid and produces an explicit warning that no recommendations can be produced.
 
+## Phase 0 Export Commands
+
+- `npm run phase-zero:export -- path/to/phase-zero-snapshot.json path/to/output-directory`
+- `npm run phase-zero:export -- path/to/phase-zero-snapshot.json path/to/output-directory audit`
+- `node scripts/phase-zero-export.mjs --check`
+
+The export pipeline writes UTF-8 CSV and JSON files for environment manifests, creation paths, menu maps, catalog categories, dependency tests, evidence manifests, capture logs, issues, verification results, production readiness, and catalog manifests. Production-mode exports exclude fixture catalog records and fixture evidence paths; they do not create verified College Football 27 records.
+
 ## Evidence Manifest Commands
 
 - `npm run evidence:manifest -- data/audit/college-football-27/evidence --metadata path/to/metadata.json --output path/to/manifest.json`

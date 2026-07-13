@@ -958,6 +958,33 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-033",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "CSV and JSON export pipeline",
+      "summary": "Implement deterministic UTF-8 machine-readable exports for environment_manifest.json, creation_paths.csv/json, menu_map.csv/json, heads.csv/json, hairstyles.csv/json, facial_hair.csv/json, additional_attributes.csv/json, dependency_tests.csv/json, evidence_manifest.csv/json, capture_log.csv, issues_and_exceptions.csv, catalog_manifest.json, verification_results.csv, and production_readiness.json while preventing fixture export into production packages.",
+      "owningModule": "Phase 0 export pipeline",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-export-pipeline.ts",
+        "scripts/phase-zero-export.mjs",
+        "data/schemas/phase-zero-export-package.schema.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "scripts/verify.mjs",
+        "package.json",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_CATALOG_WORKFLOW.md",
+        "scripts/README.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-export-pipeline.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Export-pipeline tests cover the required file list, UTF-8 content metadata, empty production export, deterministic ordering, CSV escaping, fixture exclusion from production manifests, verified production candidate export, and production readiness counts. The unified verify command runs a no-write export pipeline check.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

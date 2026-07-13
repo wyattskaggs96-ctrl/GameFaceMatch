@@ -24,6 +24,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Phase 0 export pipeline check",
+    command: "node",
+    args: ["scripts/phase-zero-export.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Web type-check",
     command: "npm",
     args: ["run", "typecheck"],

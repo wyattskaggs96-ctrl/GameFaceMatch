@@ -6,6 +6,7 @@
     "verify": "node scripts/verify.mjs",
     "quality": "npm run verify",
     "evidence:manifest": "node scripts/evidence-manifest.mjs",
-    "source-video:intake": "node scripts/source-video-intake.mjs"
+    "source-video:intake": "node scripts/source-video-intake.mjs",
+    "phase-zero:export": "node scripts/phase-zero-export.mjs"
   }
 }

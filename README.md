@@ -67,6 +67,16 @@ npm run catalog:validate
 npm run integrity
 ```
 
+Fixture-backed staging rehearsal is available as a separate local build mode:
+
+```sh
+cd web
+npm run build:staging
+npm run start
+```
+
+Then open `http://localhost:3000/staging`. The route is labeled `TEST DATA`, uses only test fixtures, disables sharing and saving test recommendations, and remains disabled in normal production builds. See `docs/STAGING_RELEASE_MODE.md`.
+
 The web MVP uses guided RGB browser images only: straight-on, left 45 degrees, right 45 degrees, left profile, and right profile. It does not claim browser capture is equivalent to native TrueDepth. Raw face images are not stored in localStorage and are not uploaded.
 
 Local face-landmark extraction is implemented behind `FaceLandmarkProvider` using Google MediaPipe Face Landmarker. The model is lazy-loaded only during capture analysis, runs locally in the browser when the reviewed local model asset is installed, and returns explicit unavailable/error states otherwise. It does not identify people, create identity embeddings, infer sensitive traits, or upload media. See `docs/FACE_LANDMARK_PROVIDER.md`.

@@ -94,4 +94,14 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page.getByText("CF27_TESTONLY")).toHaveCount(0);
     await expect(page.getByText("Verified College Football 27 catalog not loaded.")).toBeVisible();
   });
+
+  test("keeps fixture-backed staging data disabled in the production app", async ({ page }) => {
+    await page.goto("/staging");
+
+    await expect(page.getByRole("heading", { name: "Staging mode is disabled" })).toBeVisible();
+    await expect(page.getByText("does not load fixture records unless the app is built")).toBeVisible();
+    await expect(page.getByText("synthetic-match-alpha")).toHaveCount(0);
+    await expect(page.getByText("synthetic-label-alpha")).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "Top three closest available settings" })).toHaveCount(0);
+  });
 });

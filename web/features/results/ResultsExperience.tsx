@@ -22,7 +22,10 @@ export function ResultsExperience({
   catalogVerificationDate = null,
   catalogRecordCount = 0,
   catalogStatusMessage = "Catalog status unavailable.",
-  catalogStalenessMessage = null
+  catalogStalenessMessage = null,
+  testDataMode = false,
+  testDataLabel = "TEST DATA",
+  shareDisabledMessage = "Sharing is disabled for test data."
 }: {
   profile: StandardFaceProfile | null;
   catalogIsEmpty: boolean;
@@ -39,6 +42,9 @@ export function ResultsExperience({
   catalogRecordCount?: number;
   catalogStatusMessage?: string;
   catalogStalenessMessage?: string | null;
+  testDataMode?: boolean;
+  testDataLabel?: string;
+  shareDisabledMessage?: string;
 }) {
   const [selectedMatchID, setSelectedMatchID] = useState<string | null>(null);
   const [resultDeleted, setResultDeleted] = useState(false);
@@ -65,6 +71,12 @@ export function ResultsExperience({
       <ScreenHeader eyebrow="Results" title={state.title} id="results-title">
         <p>{PRODUCT_EXPLANATION}</p>
       </ScreenHeader>
+
+      {testDataMode ? (
+        <Alert title={`${testDataLabel} results`} tone="warning" role="alert">
+          These recommendations come from fixture data for staging only. They are not real College Football 27 results and sharing is disabled.
+        </Alert>
+      ) : null}
 
       {state.kind === "processing" ? <LoadingState label={state.message} /> : null}
 
@@ -119,6 +131,9 @@ export function ResultsExperience({
             setResultDeleted(true);
           }}
           onStartOver={onStartOver}
+          testDataMode={testDataMode}
+          testDataLabel={testDataLabel}
+          shareDisabledMessage={shareDisabledMessage}
         />
       ) : null}
 
@@ -230,7 +245,10 @@ function TopThreeResults({
   canSaveBuild,
   onSaveBuild,
   onDeleteResult,
-  onStartOver
+  onStartOver,
+  testDataMode,
+  testDataLabel,
+  shareDisabledMessage
 }: {
   matches: GameAppearanceMatch[];
   selectedMatch: GameAppearanceMatch;
@@ -242,6 +260,9 @@ function TopThreeResults({
   onSaveBuild?: (match: GameAppearanceMatch) => void;
   onDeleteResult: () => void;
   onStartOver: () => void;
+  testDataMode: boolean;
+  testDataLabel: string;
+  shareDisabledMessage: string;
 }) {
   const tieGroups = getTieGroups(matches);
   const buildInstructions = selectedRecommendation?.stepByStepGameInstructions ?? [];
@@ -255,6 +276,7 @@ function TopThreeResults({
               <StatusBadge tone={match.confidence.label === "high" ? "success" : match.confidence.label === "medium" ? "warning" : "info"}>
                 {match.confidence.label} confidence
               </StatusBadge>
+              {testDataMode ? <StatusBadge tone="warning">{testDataLabel}</StatusBadge> : null}
             </div>
             <p>{match.scoreLabel}</p>
             <strong className="result-score">{match.score}/100</strong>
@@ -275,7 +297,9 @@ function TopThreeResults({
       <Card className="match-detail-card">
         <div className="section-heading">
           <p className="eyebrow">Match details</p>
-          <h2>Rank {selectedMatch.rank} explanation</h2>
+          <h2>
+            {testDataMode ? `${testDataLabel} ` : ""}Rank {selectedMatch.rank} explanation
+          </h2>
           <p>{selectedRecommendation?.scoreLabel ?? selectedMatch.scoreLabel} It does not identify a person.</p>
         </div>
         <div className="result-detail-grid">
@@ -309,7 +333,7 @@ function TopThreeResults({
       <Card>
         <div className="section-heading">
           <p className="eyebrow">Build instructions</p>
-          <h2>Verified guide</h2>
+          <h2>{testDataMode ? `${testDataLabel} guide` : "Verified guide"}</h2>
         </div>
         {buildInstructions.length > 0 ? (
           <ol className="instruction-list">
@@ -333,14 +357,20 @@ function TopThreeResults({
         )}
       </Card>
 
-      <Card tone="info">
-        <h2>Share card preview</h2>
-        <pre className="share-preview">{shareText}</pre>
-        <p className="field-note">Face images are excluded by default.</p>
-      </Card>
+      {testDataMode ? (
+        <Alert title="Share disabled for TEST DATA" tone="warning">
+          {shareDisabledMessage}
+        </Alert>
+      ) : (
+        <Card tone="info">
+          <h2>Share card preview</h2>
+          <pre className="share-preview">{shareText}</pre>
+          <p className="field-note">Face images are excluded by default.</p>
+        </Card>
+      )}
 
       <div className="button-row">
-        <Button onClick={() => onSaveBuild?.(selectedMatch)} disabled={!onSaveBuild || !canSaveBuild}>
+        <Button onClick={() => onSaveBuild?.(selectedMatch)} disabled={testDataMode || !onSaveBuild || !canSaveBuild}>
           Save build
         </Button>
         <Button variant="danger" onClick={onDeleteResult}>
@@ -353,6 +383,11 @@ function TopThreeResults({
       {!canSaveBuild ? (
         <Alert title="Build saving needs separate consent" tone="warning">
           Saving a completed build stores non-image build and profile information only after the saved-build consent is enabled.
+        </Alert>
+      ) : null}
+      {testDataMode ? (
+        <Alert title="Saving disabled for TEST DATA" tone="warning">
+          Staging recommendations cannot be saved as completed builds.
         </Alert>
       ) : null}
     </>

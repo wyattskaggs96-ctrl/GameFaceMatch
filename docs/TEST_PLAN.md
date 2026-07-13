@@ -182,6 +182,18 @@ Run the CI-oriented command from `web/`:
 npm run test:e2e:ci
 ```
 
+## Staging Release Mode
+
+Run fixture-backed staging rehearsal only when validating the complete workflow before real catalog data exists:
+
+```bash
+cd web
+npm run build:staging
+npm run test:e2e:staging
+```
+
+The staging E2E command builds with staging enabled, starts the local production server, and opens `/staging` to confirm permanent `TEST DATA` labeling, test-only catalog version, disabled sharing and saving for fixture recommendations, reset controls, and top-three rendering from `data/fixtures/test-only/`. Normal production verification still uses `npm run build`, which runs the production bundle guard and must not include fixture records.
+
 Development-only Phase 0 audit workflow coverage runs separately from `web/`:
 
 ```bash

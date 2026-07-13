@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "npm run catalog:generate && npm run mediapipe:assets && next dev",
     "start": "next start",
-    "build": "npm run catalog:generate && npm run mediapipe:assets && next build && npm run build:guard",
+    "build": "node scripts/clean-next-build.mjs && npm run catalog:generate && npm run mediapipe:assets && next build && npm run build:guard",
+    "build:staging": "node scripts/build-staging.mjs",
     "catalog:generate": "node scripts/generate-production-catalog.mjs",
     "mediapipe:assets": "node scripts/copy-mediapipe-assets.mjs",
     "build:guard": "node scripts/production-bundle-guard.mjs",
@@ -14,6 +15,7 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "test:e2e:phase0": "playwright test --config playwright.phase0.config.ts",
+    "test:e2e:staging": "npm run build:staging && playwright test --config playwright.staging.config.ts",
     "test:e2e:ci": "npm run build && npm run test:e2e",
     "integrity": "node scripts/integrity-check.mjs",
     "catalog:validate": "node scripts/validate-catalog.mjs ../data/catalog/production",

@@ -24,6 +24,7 @@
     "cf27:new-video-classify": "node scripts/cf27-new-video-classifier.mjs",
     "cf27:sequence-integrity": "node scripts/cf27-native-sequence-integrity.mjs",
     "cf27:view-frame-selection": "node scripts/cf27-view-angle-frame-selection.mjs",
+    "cf27:ocr-label-review": "node scripts/cf27-ocr-native-label-review.mjs",
     "source-video:intake": "node scripts/source-video-intake.mjs",
     "phase-zero:export": "node scripts/phase-zero-export.mjs"
   }

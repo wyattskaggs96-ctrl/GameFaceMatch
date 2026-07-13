@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/image-derivative.schema.json",
+  "title": "Phase0ImageDerivativeRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "derivativeID",
+    "sourceMasterEvidenceID",
+    "sourceMasterRelativePath",
+    "sourceMasterSha256",
+    "outputRelativePath",
+    "derivativeState",
+    "exportFormat",
+    "view",
+    "sourceDimensions",
+    "outputDimensions",
+    "transformationMetadata",
+    "exportedAt",
+    "operatorID",
+    "preservationNote",
+    "notes"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-image-derivative-v1" },
+    "derivativeID": { "$ref": "#/$defs/id" },
+    "sourceMasterEvidenceID": { "$ref": "#/$defs/id" },
+    "sourceMasterRelativePath": { "$ref": "#/$defs/safeRelativePath" },
+    "sourceMasterSha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "outputRelativePath": { "$ref": "#/$defs/safeRelativePath" },
+    "derivativeState": { "const": "derivative" },
+    "exportFormat": { "enum": ["image/png", "image/jpeg", "image/webp"] },
+    "view": { "enum": ["straightOn", "left45", "right45", "leftProfile", "rightProfile", "navigationEvidence", "menuOverview", "environment", "notApplicable"] },
+    "sourceDimensions": { "$ref": "#/$defs/dimensions" },
+    "outputDimensions": { "$ref": "#/$defs/dimensions" },
+    "transformationMetadata": { "$ref": "#/$defs/transformationMetadata" },
+    "exportedAt": { "$ref": "#/$defs/timestamp" },
+    "operatorID": { "$ref": "#/$defs/text" },
+    "preservationNote": { "$ref": "#/$defs/text" },
+    "notes": { "$ref": "#/$defs/text" }
+  },
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "text": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "safeRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/])(?![a-zA-Z][a-zA-Z0-9+.-]*://)(?!.*(?:^|/)\\.\\.(?:/|$)).+"
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "normalizedCrop": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit", "x", "y", "width", "height"],
+      "properties": {
+        "unit": { "const": "normalized" },
+        "x": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y": { "type": "number", "minimum": 0, "maximum": 1 },
+        "width": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+        "height": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 }
+      }
+    },
+    "aspectRatio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "width", "height"],
+      "properties": {
+        "mode": { "enum": ["preserveSource", "fixed"] },
+        "width": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "height": { "type": ["number", "null"], "exclusiveMinimum": 0 }
+      }
+    },
+    "faceRegionAlignmentGuide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "target", "region", "operatorConfirmed", "notes"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "target": { "enum": ["center", "upperThird", "profileNoseRoom"] },
+        "region": { "$ref": "#/$defs/normalizedCrop" },
+        "operatorConfirmed": { "type": "boolean" },
+        "notes": { "type": "string" }
+      }
+    },
+    "transformationMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "crop",
+        "rotationDegrees",
+        "aspectRatio",
+        "framingGuides",
+        "faceRegionAlignmentGuide",
+        "preservesDepictedOption",
+        "prohibitedOperations"
+      ],
+      "properties": {
+        "crop": { "$ref": "#/$defs/normalizedCrop" },
+        "rotationDegrees": { "type": "number", "minimum": -45, "maximum": 45 },
+        "aspectRatio": { "$ref": "#/$defs/aspectRatio" },
+        "framingGuides": {
+          "type": "array",
+          "items": { "enum": ["ruleOfThirds", "centerCrosshair", "safeMargin", "standardFiveAngle"] },
+          "uniqueItems": true
+        },
+        "faceRegionAlignmentGuide": { "$ref": "#/$defs/faceRegionAlignmentGuide" },
+        "preservesDepictedOption": { "const": true },
+        "prohibitedOperations": {
+          "type": "array",
+          "maxItems": 0,
+          "items": { "enum": ["beautyFilter", "generativeEdit", "geometryWarp", "optionChangingEdit", "colorRestyle"] }
+        }
+      }
+    }
+  }
+}

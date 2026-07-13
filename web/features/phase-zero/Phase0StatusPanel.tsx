@@ -14,6 +14,7 @@ import { EnvironmentManifestWizard } from "./EnvironmentManifestWizard";
 import { FacialHairCaptureWorkspace } from "./FacialHairCaptureWorkspace";
 import { HairstyleCaptureWorkspace } from "./HairstyleCaptureWorkspace";
 import { HeadCaptureWorkspace } from "./HeadCaptureWorkspace";
+import { ImageDerivativeTool } from "./ImageDerivativeTool";
 import { IssueManagementWorkspace } from "./IssueManagementWorkspace";
 import { MenuMapEditor } from "./MenuMapEditor";
 import { SourceVideoIntakeManager } from "./SourceVideoIntakeManager";
@@ -64,6 +65,7 @@ export function Phase0StatusPanel({
       <CreationPathAuditWorkspace />
       <EvidenceIntakeManager />
       <SourceVideoIntakeManager />
+      <ImageDerivativeTool />
       <MenuMapEditor />
       <CaptureConfigurationEditor />
       <HeadCaptureWorkspace />

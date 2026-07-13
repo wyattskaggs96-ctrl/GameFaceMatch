@@ -862,6 +862,30 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-029",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Image crop and alignment derivative tool",
+      "summary": "Create non-destructive derivative images for catalog work with crop, rotation correction, aspect-ratio preservation, standard framing guides, face-region alignment guides, export metadata, master evidence provenance, and explicit rejection of beauty filters, generative edits, geometry warping, or visual modifications that change the depicted option.",
+      "owningModule": "Phase 0 evidence derivatives",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-image-derivative.ts",
+        "web/features/phase-zero/ImageDerivativeTool.tsx",
+        "data/schemas/image-derivative.schema.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_SCREENSHOT_STANDARD.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-image-derivative.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Image derivative tests cover schema fields, crop/rotation/framing/alignment provenance, aspect-ratio output estimates, master overwrite rejection, unsafe path/crop/rotation rejection, prohibited-operation rejection, alignment warnings, and metadata-only local storage.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

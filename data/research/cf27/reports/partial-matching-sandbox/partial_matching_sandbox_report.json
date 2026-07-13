@@ -1,0 +1,670 @@
+{
+  "schemaVersion": "cf27-partial-matching-sandbox-v1",
+  "reportLabel": "PARTIAL UNVERIFIED CATALOG — INTERNAL RESEARCH SANDBOX ONLY",
+  "generatedAt": "2026-07-13T15:05:16.343Z",
+  "runtimeMode": "research",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+  "sourceType": "researchCandidate",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "PARTIAL_UNVERIFIED_RESEARCH_ONLY",
+  "productionBuildEnabled": false,
+  "publicResultRoute": null,
+  "sharing": {
+    "enabled": false,
+    "reason": "Sharing is disabled because the candidate set is partial, unverified, and not user-facing."
+  },
+  "catalogCandidateVersion": "cf27-head-annotation-workspace-v1:2026-07-13T14:57:04.539Z",
+  "sourceInputs": {
+    "annotationWorkspacePath": "data/research/cf27/reports/head-template-annotation-workspace/head_annotation_workspace.json"
+  },
+  "policy": {
+    "partialCatalogNotice": "Face 1 through Face 29 are current research candidates only. This report does not claim the full College Football 27 head catalog is known.",
+    "productionUseAllowed": false,
+    "productionRecommendationAccess": false,
+    "geometryAppearanceSeparation": "Geometry scoring is reported separately from appearance. Appearance matching is unavailable because candidate appearance annotations are not verified.",
+    "skinTonePolicy": "Skin tone and skin presentation are not inputs to geometry scoring.",
+    "missingDataPolicy": "Scores are penalized when profile or catalog-candidate measurements are missing or unreliable.",
+    "captureQualityPolicy": "The research profile capture-quality score reduces the final architecture-check score.",
+    "identityPolicy": "Scores are architecture-check closeness among partial game candidates, not identity probability."
+  },
+  "scoringModel": {
+    "version": "cf27-partial-matching-sandbox-v1",
+    "label": "Research-only weighted score against partial unverified Face 1-29 candidates.",
+    "features": [
+      {
+        "id": "faceWidthRatio",
+        "candidateMeasurementID": "faceWidthToHeightRatio",
+        "weight": 0.12,
+        "maxDistance": 0.35
+      },
+      {
+        "id": "faceLengthRatio",
+        "candidateMeasurementID": "faceLengthRatio",
+        "weight": 0.05,
+        "maxDistance": 0.35
+      },
+      {
+        "id": "foreheadWidthRatio",
+        "candidateMeasurementID": "foreheadWidthRatio",
+        "weight": 0.07,
+        "maxDistance": 0.3
+      },
+      {
+        "id": "jawWidthRatio",
+        "candidateMeasurementID": "jawWidthRatio",
+        "weight": 0.11,
+        "maxDistance": 0.3
+      },
+      {
+        "id": "chinWidthRatio",
+        "candidateMeasurementID": "chinWidthRatio",
+        "weight": 0.07,
+        "maxDistance": 0.3
+      },
+      {
+        "id": "lowerFaceRatio",
+        "candidateMeasurementID": "lowerFaceRatio",
+        "weight": 0.05,
+        "maxDistance": 0.22
+      },
+      {
+        "id": "eyeSpacingRatio",
+        "candidateMeasurementID": "eyeSpacingRatio",
+        "weight": 0.09,
+        "maxDistance": 0.22
+      },
+      {
+        "id": "noseWidthRatio",
+        "candidateMeasurementID": "noseWidthRatio",
+        "weight": 0.09,
+        "maxDistance": 0.22
+      },
+      {
+        "id": "mouthWidthRatio",
+        "candidateMeasurementID": "mouthWidthRatio",
+        "weight": 0.07,
+        "maxDistance": 0.26
+      }
+    ],
+    "prohibitedGeometryInputs": [
+      "skinTone",
+      "skinPresentation",
+      "race",
+      "ethnicity"
+    ]
+  },
+  "profile": {
+    "profileID": "research-only-fixture-profile-face-architecture-check",
+    "sourceType": "researchOnly",
+    "profileVersion": "research-only-standard-profile-v1",
+    "rawMediaIncluded": false,
+    "captureQuality": {
+      "overallScore": 0.82,
+      "requiredAnglesComplete": true,
+      "blockingIssueCount": 0,
+      "advisoryIssueCount": 2
+    },
+    "geometryMeasurementIDs": [
+      "faceWidthRatio",
+      "jawWidthRatio",
+      "chinWidthRatio",
+      "eyeSpacingRatio",
+      "noseWidthRatio",
+      "mouthWidthRatio"
+    ],
+    "appearanceMatchingEnabled": false
+  },
+  "summary": {
+    "candidateCount": 29,
+    "rankedCount": 3,
+    "geometryFeatureCount": 9,
+    "appearanceMatchingEnabled": false,
+    "productionRecommendationsEnabled": false,
+    "publicRouteCreated": false,
+    "fullCatalogClaimed": false
+  },
+  "matches": [
+    {
+      "catalogStableID": "CF27_XBOXUNKNOWN_RTG_HEAD_022",
+      "nativeOrder": 22,
+      "visibleGameLabelOrIndex": "Face 22",
+      "catalogCandidateVersion": "cf27-head-annotation-workspace-v1:2026-07-13T14:57:04.539Z",
+      "sourceType": "researchCandidate",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "rank": 1,
+      "score": 13.366,
+      "scoreLabel": "Research-only score based on partial unverified candidate measurements.",
+      "geometry": {
+        "score": 97.8,
+        "weightedDistance": 0.022,
+        "evidenceCoverage": 0.167,
+        "averageReliability": 0.336,
+        "contributionCount": 1,
+        "contributions": [
+          {
+            "featureID": "faceWidthRatio",
+            "candidateMeasurementID": "faceWidthToHeightRatio",
+            "group": "geometry",
+            "baseWeight": 0.12,
+            "effectiveWeight": 0.04032,
+            "normalizedDistance": 0.022,
+            "reliability": 0.336,
+            "profileValue": 0.86,
+            "candidateValue": 0.8523,
+            "included": true,
+            "reason": "Reliable research geometry feature included."
+          },
+          {
+            "featureID": "faceLengthRatio",
+            "candidateMeasurementID": "faceLengthRatio",
+            "group": "geometry",
+            "baseWeight": 0.05,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "foreheadWidthRatio",
+            "candidateMeasurementID": "foreheadWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.07,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "jawWidthRatio",
+            "candidateMeasurementID": "jawWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.11,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0.235,
+            "profileValue": 0.48,
+            "candidateValue": 0.6923,
+            "included": false,
+            "reason": "Feature confidence below research sandbox threshold."
+          },
+          {
+            "featureID": "chinWidthRatio",
+            "candidateMeasurementID": "chinWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.07,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0.208,
+            "profileValue": 0.3,
+            "candidateValue": 0.235,
+            "included": false,
+            "reason": "Feature confidence below research sandbox threshold."
+          },
+          {
+            "featureID": "lowerFaceRatio",
+            "candidateMeasurementID": "lowerFaceRatio",
+            "group": "geometry",
+            "baseWeight": 0.05,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "eyeSpacingRatio",
+            "candidateMeasurementID": "eyeSpacingRatio",
+            "group": "geometry",
+            "baseWeight": 0.09,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "noseWidthRatio",
+            "candidateMeasurementID": "noseWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.09,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "mouthWidthRatio",
+            "candidateMeasurementID": "mouthWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.07,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          }
+        ]
+      },
+      "appearance": {
+        "used": false,
+        "score": null,
+        "reason": "Appearance matching is not enabled for partial unverified head candidates."
+      },
+      "penalties": {
+        "missingDataPenalty": 0.833,
+        "captureQualityPenalty": 0.18,
+        "captureQualityMultiplier": 0.82
+      },
+      "confidence": {
+        "score": 0.046,
+        "label": "low"
+      },
+      "explanation": {
+        "summary": "CF27_XBOXUNKNOWN_RTG_HEAD_022 received a research-only score of 13.366/100 against a partial unverified candidate set. This is not an identity probability.",
+        "geometrySimilarities": [
+          "faceWidthRatio is close within the current research measurements."
+        ],
+        "geometryDifferences": [
+          "No large geometry difference crossed the current threshold."
+        ],
+        "appearanceNotes": [
+          "Appearance was not used; no verified appearance annotations are available for these research candidates."
+        ],
+        "uncertaintyNotes": [
+          "PARTIAL UNVERIFIED CATALOG: this sandbox uses only Face 1 through Face 29 research candidates and does not claim a full game catalog.",
+          "This is an internal architecture check, not a user-facing recommendation.",
+          "faceLengthRatio was not used because required profile or candidate data is unavailable.",
+          "foreheadWidthRatio was not used because required profile or candidate data is unavailable.",
+          "jawWidthRatio was not used because required profile or candidate data is unavailable.",
+          "chinWidthRatio was not used because required profile or candidate data is unavailable.",
+          "lowerFaceRatio was not used because required profile or candidate data is unavailable.",
+          "eyeSpacingRatio was not used because required profile or candidate data is unavailable.",
+          "noseWidthRatio was not used because required profile or candidate data is unavailable.",
+          "mouthWidthRatio was not used because required profile or candidate data is unavailable.",
+          "Missing-data penalty applied because reliable feature coverage is incomplete.",
+          "Capture-quality penalty applied from the research-only profile."
+        ]
+      },
+      "productionUseAllowed": false,
+      "sharingAllowed": false
+    },
+    {
+      "catalogStableID": "CF27_XBOXUNKNOWN_RTG_HEAD_015",
+      "nativeOrder": 15,
+      "visibleGameLabelOrIndex": "Face 15",
+      "catalogCandidateVersion": "cf27-head-annotation-workspace-v1:2026-07-13T14:57:04.539Z",
+      "sourceType": "researchCandidate",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "rank": 2,
+      "score": 13.175,
+      "scoreLabel": "Research-only score based on partial unverified candidate measurements.",
+      "geometry": {
+        "score": 96.4,
+        "weightedDistance": 0.036,
+        "evidenceCoverage": 0.167,
+        "averageReliability": 0.336,
+        "contributionCount": 1,
+        "contributions": [
+          {
+            "featureID": "faceWidthRatio",
+            "candidateMeasurementID": "faceWidthToHeightRatio",
+            "group": "geometry",
+            "baseWeight": 0.12,
+            "effectiveWeight": 0.04032,
+            "normalizedDistance": 0.036,
+            "reliability": 0.336,
+            "profileValue": 0.86,
+            "candidateValue": 0.8725,
+            "included": true,
+            "reason": "Reliable research geometry feature included."
+          },
+          {
+            "featureID": "faceLengthRatio",
+            "candidateMeasurementID": "faceLengthRatio",
+            "group": "geometry",
+            "baseWeight": 0.05,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "foreheadWidthRatio",
+            "candidateMeasurementID": "foreheadWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.07,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "jawWidthRatio",
+            "candidateMeasurementID": "jawWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.11,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0.235,
+            "profileValue": 0.48,
+            "candidateValue": 0.2045,
+            "included": false,
+            "reason": "Feature confidence below research sandbox threshold."
+          },
+          {
+            "featureID": "chinWidthRatio",
+            "candidateMeasurementID": "chinWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.07,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": 0.3,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Catalog-candidate measurement unavailable or not yet annotated."
+          },
+          {
+            "featureID": "lowerFaceRatio",
+            "candidateMeasurementID": "lowerFaceRatio",
+            "group": "geometry",
+            "baseWeight": 0.05,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "eyeSpacingRatio",
+            "candidateMeasurementID": "eyeSpacingRatio",
+            "group": "geometry",
+            "baseWeight": 0.09,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "noseWidthRatio",
+            "candidateMeasurementID": "noseWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.09,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "mouthWidthRatio",
+            "candidateMeasurementID": "mouthWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.07,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          }
+        ]
+      },
+      "appearance": {
+        "used": false,
+        "score": null,
+        "reason": "Appearance matching is not enabled for partial unverified head candidates."
+      },
+      "penalties": {
+        "missingDataPenalty": 0.833,
+        "captureQualityPenalty": 0.18,
+        "captureQualityMultiplier": 0.82
+      },
+      "confidence": {
+        "score": 0.046,
+        "label": "low"
+      },
+      "explanation": {
+        "summary": "CF27_XBOXUNKNOWN_RTG_HEAD_015 received a research-only score of 13.175/100 against a partial unverified candidate set. This is not an identity probability.",
+        "geometrySimilarities": [
+          "faceWidthRatio is close within the current research measurements."
+        ],
+        "geometryDifferences": [
+          "No large geometry difference crossed the current threshold."
+        ],
+        "appearanceNotes": [
+          "Appearance was not used; no verified appearance annotations are available for these research candidates."
+        ],
+        "uncertaintyNotes": [
+          "PARTIAL UNVERIFIED CATALOG: this sandbox uses only Face 1 through Face 29 research candidates and does not claim a full game catalog.",
+          "This is an internal architecture check, not a user-facing recommendation.",
+          "faceLengthRatio was not used because required profile or candidate data is unavailable.",
+          "foreheadWidthRatio was not used because required profile or candidate data is unavailable.",
+          "jawWidthRatio was not used because required profile or candidate data is unavailable.",
+          "chinWidthRatio was not used because required profile or candidate data is unavailable.",
+          "lowerFaceRatio was not used because required profile or candidate data is unavailable.",
+          "eyeSpacingRatio was not used because required profile or candidate data is unavailable.",
+          "noseWidthRatio was not used because required profile or candidate data is unavailable.",
+          "mouthWidthRatio was not used because required profile or candidate data is unavailable.",
+          "Missing-data penalty applied because reliable feature coverage is incomplete.",
+          "Capture-quality penalty applied from the research-only profile."
+        ]
+      },
+      "productionUseAllowed": false,
+      "sharingAllowed": false
+    },
+    {
+      "catalogStableID": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "nativeOrder": 12,
+      "visibleGameLabelOrIndex": "Face 12",
+      "catalogCandidateVersion": "cf27-head-annotation-workspace-v1:2026-07-13T14:57:04.539Z",
+      "sourceType": "researchCandidate",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "rank": 3,
+      "score": 12.724,
+      "scoreLabel": "Research-only score based on partial unverified candidate measurements.",
+      "geometry": {
+        "score": 93.1,
+        "weightedDistance": 0.069,
+        "evidenceCoverage": 0.167,
+        "averageReliability": 0.336,
+        "contributionCount": 1,
+        "contributions": [
+          {
+            "featureID": "faceWidthRatio",
+            "candidateMeasurementID": "faceWidthToHeightRatio",
+            "group": "geometry",
+            "baseWeight": 0.12,
+            "effectiveWeight": 0.04032,
+            "normalizedDistance": 0.069,
+            "reliability": 0.336,
+            "profileValue": 0.86,
+            "candidateValue": 0.836,
+            "included": true,
+            "reason": "Reliable research geometry feature included."
+          },
+          {
+            "featureID": "faceLengthRatio",
+            "candidateMeasurementID": "faceLengthRatio",
+            "group": "geometry",
+            "baseWeight": 0.05,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "foreheadWidthRatio",
+            "candidateMeasurementID": "foreheadWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.07,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "jawWidthRatio",
+            "candidateMeasurementID": "jawWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.11,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0.235,
+            "profileValue": 0.48,
+            "candidateValue": 0.2717,
+            "included": false,
+            "reason": "Feature confidence below research sandbox threshold."
+          },
+          {
+            "featureID": "chinWidthRatio",
+            "candidateMeasurementID": "chinWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.07,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": 0.3,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Catalog-candidate measurement unavailable or not yet annotated."
+          },
+          {
+            "featureID": "lowerFaceRatio",
+            "candidateMeasurementID": "lowerFaceRatio",
+            "group": "geometry",
+            "baseWeight": 0.05,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "eyeSpacingRatio",
+            "candidateMeasurementID": "eyeSpacingRatio",
+            "group": "geometry",
+            "baseWeight": 0.09,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "noseWidthRatio",
+            "candidateMeasurementID": "noseWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.09,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          },
+          {
+            "featureID": "mouthWidthRatio",
+            "candidateMeasurementID": "mouthWidthRatio",
+            "group": "geometry",
+            "baseWeight": 0.07,
+            "effectiveWeight": 0,
+            "normalizedDistance": 1,
+            "reliability": 0,
+            "profileValue": null,
+            "candidateValue": null,
+            "included": false,
+            "reason": "Research profile measurement unavailable."
+          }
+        ]
+      },
+      "appearance": {
+        "used": false,
+        "score": null,
+        "reason": "Appearance matching is not enabled for partial unverified head candidates."
+      },
+      "penalties": {
+        "missingDataPenalty": 0.833,
+        "captureQualityPenalty": 0.18,
+        "captureQualityMultiplier": 0.82
+      },
+      "confidence": {
+        "score": 0.046,
+        "label": "low"
+      },
+      "explanation": {
+        "summary": "CF27_XBOXUNKNOWN_RTG_HEAD_012 received a research-only score of 12.724/100 against a partial unverified candidate set. This is not an identity probability.",
+        "geometrySimilarities": [
+          "faceWidthRatio is close within the current research measurements."
+        ],
+        "geometryDifferences": [
+          "No large geometry difference crossed the current threshold."
+        ],
+        "appearanceNotes": [
+          "Appearance was not used; no verified appearance annotations are available for these research candidates."
+        ],
+        "uncertaintyNotes": [
+          "PARTIAL UNVERIFIED CATALOG: this sandbox uses only Face 1 through Face 29 research candidates and does not claim a full game catalog.",
+          "This is an internal architecture check, not a user-facing recommendation.",
+          "faceLengthRatio was not used because required profile or candidate data is unavailable.",
+          "foreheadWidthRatio was not used because required profile or candidate data is unavailable.",
+          "jawWidthRatio was not used because required profile or candidate data is unavailable.",
+          "chinWidthRatio was not used because required profile or candidate data is unavailable.",
+          "lowerFaceRatio was not used because required profile or candidate data is unavailable.",
+          "eyeSpacingRatio was not used because required profile or candidate data is unavailable.",
+          "noseWidthRatio was not used because required profile or candidate data is unavailable.",
+          "mouthWidthRatio was not used because required profile or candidate data is unavailable.",
+          "Missing-data penalty applied because reliable feature coverage is incomplete.",
+          "Capture-quality penalty applied from the research-only profile."
+        ]
+      },
+      "productionUseAllowed": false,
+      "sharingAllowed": false
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+rank,catalogStableID,nativeOrder,visibleGameLabelOrIndex,score,confidence,geometryEvidenceCoverage,missingDataPenalty,captureQualityPenalty,catalogCandidateVersion,productionStatus,verificationState
+1,CF27_XBOXUNKNOWN_RTG_HEAD_022,22,Face 22,13.366,0.046,0.167,0.833,0.18,cf27-head-annotation-workspace-v1:2026-07-13T14:57:04.539Z,NOT_PRODUCTION_DATA,NOT_VERIFIED
+2,CF27_XBOXUNKNOWN_RTG_HEAD_015,15,Face 15,13.175,0.046,0.167,0.833,0.18,cf27-head-annotation-workspace-v1:2026-07-13T14:57:04.539Z,NOT_PRODUCTION_DATA,NOT_VERIFIED
+3,CF27_XBOXUNKNOWN_RTG_HEAD_012,12,Face 12,12.724,0.046,0.167,0.833,0.18,cf27-head-annotation-workspace-v1:2026-07-13T14:57:04.539Z,NOT_PRODUCTION_DATA,NOT_VERIFIED

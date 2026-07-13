@@ -20,6 +20,7 @@ The review workflow protects against invented or misread College Football 27 opt
 - Re-walk the menu instructions from the live game or retained video evidence.
 - Confirm that no option was reordered, renamed, retired, or introduced by a patch.
 - Confirm that publication would not expose test fixtures or template records.
+- Follow `docs/SECOND_VERIFIER_RUNBOOK.md` for independent counts, menu remapping, native-order verification, file and front-view checks, deterministic secondary-angle sampling, mismatch classification, recapture requirements, final acknowledgment, allowed statuses, and prohibited shortcuts.
 
 ## Verification
 

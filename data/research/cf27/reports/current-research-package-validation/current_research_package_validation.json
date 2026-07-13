@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "cf27-current-research-package-validation-v1",
+  "reportLabel": "CURRENT RESEARCH PACKAGE VALIDATION - PRIMARY RESEARCH ONLY - NOT PRODUCTION VERIFIED",
+  "generatedAt": "2026-07-13T15:32:34.316Z",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "sourceDirectory": "data/research/cf27/exports/partial-research-catalog-current",
+  "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+  "sourceType": "researchCandidate",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "NOT_VERIFIED",
+  "productionRecommendationsEnabled": false,
+  "ok": true,
+  "status": "passed",
+  "summary": {
+    "checkCount": 14,
+    "passedCheckCount": 14,
+    "failedCheckCount": 0,
+    "errorCount": 0,
+    "warningCount": 0,
+    "recordCount": 86,
+    "evidenceCount": 335,
+    "localEvidenceChecked": 324,
+    "sourceMasterHashesChecked": 11,
+    "productionRecommendationsEnabled": false
+  },
+  "checks": [
+    {
+      "name": "uniqueIDs",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "recordCount": 86,
+        "uniqueRecordIDs": 86,
+        "evidenceCount": 335,
+        "uniqueEvidenceIDs": 335
+      }
+    },
+    {
+      "name": "nativeOrderContinuity",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "heads": {
+          "count": 29,
+          "first": 1,
+          "last": 29
+        },
+        "skin_tones": {
+          "count": 24,
+          "first": 1,
+          "last": 24
+        },
+        "skin_details": {
+          "count": 10,
+          "first": 1,
+          "last": 10
+        },
+        "eye_shapes": {
+          "count": 5,
+          "first": 1,
+          "last": 5
+        },
+        "eye_colors": {
+          "count": 7,
+          "first": 1,
+          "last": 7
+        },
+        "noses": {
+          "count": 7,
+          "first": 1,
+          "last": 7
+        },
+        "ear_shapes": {
+          "count": 4,
+          "first": 1,
+          "last": 4
+        }
+      }
+    },
+    {
+      "name": "face12OverlapHandling",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "face12RecordCount": 1,
+        "selectedEvidence": "video-002:95-100|video-003:0-5"
+      }
+    },
+    {
+      "name": "relativePaths",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "portableExternalReferences": 11,
+        "repositoryRelativeReferences": 324
+      }
+    },
+    {
+      "name": "evidenceExistence",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "localDerivativeEvidencePresent": 324,
+        "portableSourceMasterReferences": 11
+      }
+    },
+    {
+      "name": "checksums",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "exportFilesChecked": 25,
+        "localEvidenceChecked": 324,
+        "sourceMasterHashesChecked": 11
+      }
+    },
+    {
+      "name": "sourceTimestamps",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "selectedEvidenceRanges": 91,
+        "timestampedEvidenceEntries": 324,
+        "captureLogEventsChecked": 106
+      }
+    },
+    {
+      "name": "allowedStatuses",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "packageAllowedVerificationStatuses": [
+          "PRIMARY_RESEARCH_ONLY_NOT_SECOND_VERIFIED"
+        ],
+        "recordAllowedVerificationStatuses": [
+          "NOT_VERIFIED",
+          "PRIMARY_RESEARCH_ONLY_NOT_SECOND_VERIFIED"
+        ]
+      }
+    },
+    {
+      "name": "researchVersusProductionSeparation",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "dataClass": "PRIMARY_RESEARCH_CANDIDATE",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "forbiddenProductionValueHits": 0
+      }
+    },
+    {
+      "name": "noFixtureContamination",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "fixtureReferenceMatches": 0
+      }
+    },
+    {
+      "name": "noCollegeFootball26Contamination",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "collegeFootball26Matches": 0
+      }
+    },
+    {
+      "name": "noUnsupportedFace30PlusRecords",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "headRecordCount": 29,
+        "maxHeadNativeOrder": 29,
+        "unsupportedFace30PlusCount": 0
+      }
+    },
+    {
+      "name": "noFabricatedVersionOrPatch",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "consoleModel": "UNKNOWN",
+        "consoleOSVersion": "UNKNOWN",
+        "gameExecutableVersion": "UNKNOWN",
+        "patchLabel": "UNKNOWN",
+        "patchID": "cf27-patch-unknown-video-001",
+        "edition": "UNKNOWN",
+        "platformName": "Xbox (model UNKNOWN)",
+        "gameVersionID": "cf27-version-unknown-video-001"
+      }
+    },
+    {
+      "name": "noProductionRecommendationAccess",
+      "status": "passed",
+      "errors": [],
+      "warnings": [],
+      "details": {
+        "productionCatalogItemCount": 0,
+        "productionRecommendationsEnabled": false
+      }
+    }
+  ],
+  "sourcePackage": {
+    "manifestCounts": {
+      "captureLogEvents": 106,
+      "creationPaths": 1,
+      "ear_shapes": 4,
+      "environments": 1,
+      "evidenceManifestEntries": 335,
+      "eye_colors": 7,
+      "eye_shapes": 5,
+      "heads": 29,
+      "issuesAndExceptions": 16,
+      "menuItems": 13,
+      "noses": 7,
+      "recaptureQueue": 56,
+      "skin_details": 10,
+      "skin_tones": 24,
+      "totalResearchCatalogRecords": 86
+    },
+    "exportFileCount": 25,
+    "categories": {
+      "heads": 29,
+      "skin_tones": 24,
+      "skin_details": 10,
+      "eye_shapes": 5,
+      "eye_colors": 7,
+      "noses": 7,
+      "ear_shapes": 4
+    }
+  },
+  "policy": {
+    "packageUse": "This report validates the current partial research package only. It does not verify records, publish production data, or enable recommendations.",
+    "evidenceUse": "Repository derivative evidence is checksum-verified locally. Source-video masters are portable external references and are validated against video_inventory hashes.",
+    "productionGate": "Production recommendations remain blocked until second-person verification, catalog-manager approval, immutable release publication, and production gates pass."
+  }
+}

@@ -1,0 +1,2791 @@
+{
+  "generatedAt": "2026-07-13T11:31:29.649Z",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "reports": [
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_001",
+      "nativeOrder": 1,
+      "visibleGameLabelOrIndex": "Face 1",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "10-19",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 11.68,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_MENU_video-002_11p68s.png",
+          "outputSha256": "38e83406c2b0023cca13cba4fb814153ce4846711eac3a4536e4d485de93852a"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 12.18,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_FRONT_video-002_12p18s.png",
+          "outputSha256": "e2da881b9324979c6e4a744e65b7232b0f07ec9c477d65628116761d5b611e92"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 13.17,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_LEFT_3Q_video-002_13p17s.png",
+          "outputSha256": "7abd4e75988aab15497d8dc9a2e0457c1a05aa256c1aecb0b121dc02813579ca"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 14.17,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_LEFT_PROFILE_video-002_14p17s.png",
+          "outputSha256": "a5912ab12891932b4e838f72d104a45b2dcc381e11596a535a69059c65c35fc9"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 17.16,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_RIGHT_3Q_video-002_17p16s.png",
+          "outputSha256": "e5759f9d711cfe241be94012b1b704be8d2e025255fe6717f3d49a9b31e29739"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 16.16,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_RIGHT_PROFILE_video-002_16p16s.png",
+          "outputSha256": "535044502fe1a3285a49bcedc1f8074b2b73ada61ff083449de528765b2b7bbe"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 15.16,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_REAR_video-002_15p16s.png",
+          "outputSha256": "263a23fac745afa428d2358f24e96997d5d38fbd40656ae93a55cf4d8b71cde5"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_002",
+      "nativeOrder": 2,
+      "visibleGameLabelOrIndex": "Face 2",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "20-28",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 21.52,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_MENU_video-002_21p52s.png",
+          "outputSha256": "a9438049c2b2abf131c2f770f61d72c9c19d31620ff70bdc7323edfe3c99a1a6"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 21.96,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_FRONT_video-002_21p96s.png",
+          "outputSha256": "5d63e7829c8c10418973c42d22b4323961da2ebdc63409a94f7bc8850ba8810b"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 22.83,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_LEFT_3Q_video-002_22p83s.png",
+          "outputSha256": "be6a61ff960d337961a6c709365146ed142be3840e0ae8a054dd187c485e94b4"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 23.71,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_LEFT_PROFILE_video-002_23p71s.png",
+          "outputSha256": "2efc5cf792576a5605dfbd2681d6b821e4b9ba8cd5f9def2918e96726fcf998a"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 26.34,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_RIGHT_3Q_video-002_26p34s.png",
+          "outputSha256": "e91d0b0ba96294c0330c8833678fa4acd87d55220573fce0df6f85188d7b9284"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 25.46,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_RIGHT_PROFILE_video-002_25p46s.png",
+          "outputSha256": "282ba284d94085964474b1b5d287f51a4849b8b01dd0e62200c0fa9dadca7aca"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 24.58,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_REAR_video-002_24p58s.png",
+          "outputSha256": "bcfd888551a6df0ab21de9de2040cdd5b5431ea04c23b8a37d584a32c4657f07"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_003",
+      "nativeOrder": 3,
+      "visibleGameLabelOrIndex": "Face 3",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "29-38",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 30.68,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_MENU_video-002_30p68s.png",
+          "outputSha256": "45823ee8a4bb5930240db9c031f97cd3c33134570819d068fda803b43e510fad"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 31.18,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_FRONT_video-002_31p18s.png",
+          "outputSha256": "530983f84b22cc5d66486a84da3048dd7b2b95e5abccbc70725b75b37bf5f1d5"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 32.17,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_LEFT_3Q_video-002_32p17s.png",
+          "outputSha256": "17c651e5d41e749505a729500b86b15c5a11821d93cbe90ceeb26d3ff083ecae"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 33.17,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_LEFT_PROFILE_video-002_33p17s.png",
+          "outputSha256": "eef4d1cae971f9b63c197b90905bf080375b8ef0e6f74a2db579c0f29c1b5adf"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 36.16,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_RIGHT_3Q_video-002_36p16s.png",
+          "outputSha256": "25183fe1b05175a396b4c1006c59b7c5ab10fad541eddc9b4967f59a58a1e4a7"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 35.16,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_RIGHT_PROFILE_video-002_35p16s.png",
+          "outputSha256": "59af3e0168d384633f4da6a314507bd2975ba6d3ced9a7dc2c482e315837216c"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 34.16,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_REAR_video-002_34p16s.png",
+          "outputSha256": "3691d9faa8284e6734feb42a0ff4b3eb1e31f88cb77658ff71dd5bae00481e43"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_004",
+      "nativeOrder": 4,
+      "visibleGameLabelOrIndex": "Face 4",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "39-48",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 40.68,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_MENU_video-002_40p68s.png",
+          "outputSha256": "d58fb77bf66947917eb648066342c3e7d134875ec83fa23ea37d43ed92388734"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 41.18,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_FRONT_video-002_41p18s.png",
+          "outputSha256": "acfd12ef74e05abe431e06f2fa2ab513ee40f73fd11effb73c25008546c2826a"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 42.17,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_LEFT_3Q_video-002_42p17s.png",
+          "outputSha256": "371957836ec6a99d5457c29e61dcf7888eac760f6eea4619b6da2f52ce75d00f"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 43.17,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_LEFT_PROFILE_video-002_43p17s.png",
+          "outputSha256": "2ece78fd495d7548a86c83e105d008850cdaa042ea81ac0921028291f2e93af8"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 46.16,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_RIGHT_3Q_video-002_46p16s.png",
+          "outputSha256": "8e3a405ff77bde8e142887ef003f66bd8b1a2d2e7ce08439e88314aa59e3202b"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 45.16,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_RIGHT_PROFILE_video-002_45p16s.png",
+          "outputSha256": "b58ab3bf0e79383a7202fa935b1ba139b0a9d4b2b30cd6f4c3e6eb53c63d1c76"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 44.16,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_REAR_video-002_44p16s.png",
+          "outputSha256": "d1d21f7fff04dfc9ca722fc250e0ad4aa8830c32ddce8198c1555ced2003c2aa"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_005",
+      "nativeOrder": 5,
+      "visibleGameLabelOrIndex": "Face 5",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "69-74",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 70.04,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_MENU_video-002_70p04s.png",
+          "outputSha256": "9aa74ef8045ce742b99c794f0bd6ce9140905373f721fe156aef32c3db00f8d4"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 70.3,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_FRONT_video-002_70p30s.png",
+          "outputSha256": "c40d800b7f9dad92eee640ba6d517dc279ddc91cc4cdcd3c9ad65580f3c7f2db"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 70.81,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_LEFT_3Q_video-002_70p81s.png",
+          "outputSha256": "859b6e57c2b89c6d331a6acf975769362f5d49ce1e26b9cf0bdff24f2ca34c8a"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 71.33,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_LEFT_PROFILE_video-002_71p33s.png",
+          "outputSha256": "282e1d68aa2163f5bb7073c8500e57db89a8ae0abc72b25b07cffd3b8274f216"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 72.88,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_RIGHT_3Q_video-002_72p88s.png",
+          "outputSha256": "735c546cfa562e8459a9abcd69facca266f57150035b7dd1ae5cfe7b97ad02f7"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 72.36,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_RIGHT_PROFILE_video-002_72p36s.png",
+          "outputSha256": "2256415aa3e650c6162a632d78f47a0659388587632b401b541e76e2e04f9973"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 71.84,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_REAR_video-002_71p84s.png",
+          "outputSha256": "2810180fbcfdc2e4f456065d166467f74faf2528f95c8f2f8fe9fc539875d91e"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_006",
+      "nativeOrder": 6,
+      "visibleGameLabelOrIndex": "Face 6",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "60-68",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 61.52,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_MENU_video-002_61p52s.png",
+          "outputSha256": "51ecb2c14f047623367ff0a811466f18a28642a5982270c499e46d5daafa993c"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 61.96,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_FRONT_video-002_61p96s.png",
+          "outputSha256": "50ebb81626bc3eca1be40296097309afab13e29fe8b80bf01320d63f03a4ca19"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 62.83,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_LEFT_3Q_video-002_62p83s.png",
+          "outputSha256": "b49bb2c9f4237d8b2be306551d721857190608fab9f30b80db78c0b155f7860c"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 63.71,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_LEFT_PROFILE_video-002_63p71s.png",
+          "outputSha256": "c9fa6531528835e914ffd15f8cca797654a00e9f05a14535bf3ae46b967fbb1c"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 66.34,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_RIGHT_3Q_video-002_66p34s.png",
+          "outputSha256": "82d12d05b38ea38a910528e32c4f188439b642c6df9fe4c10f6ff02758334710"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 65.46,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_RIGHT_PROFILE_video-002_65p46s.png",
+          "outputSha256": "8d186ef031807737ff0742333c6e437a52aabe9b7336e516f77d1820412caef3"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 64.58,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_REAR_video-002_64p58s.png",
+          "outputSha256": "a60e0842547cae0c7f4678e01a1a4033adfc75d279d86a7b97737cd75eaac6b9"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_007",
+      "nativeOrder": 7,
+      "visibleGameLabelOrIndex": "Face 7",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "54-59",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 55.04,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_MENU_video-002_55p04s.png",
+          "outputSha256": "08e8a58adf2f1a4ba649c1e9129e0ab323337206cb3ea8d10c565b19ef88a77c"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 55.3,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_FRONT_video-002_55p30s.png",
+          "outputSha256": "4e2abc805d34601ea15570a460e096feac586bb96f9a23ce320d9ecb77d6cc77"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 55.81,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_LEFT_3Q_video-002_55p81s.png",
+          "outputSha256": "01f1ec646df272349b6dc95f11f834b3c0d06c5f4e5abf49e9ae841b485d6250"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 56.33,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_LEFT_PROFILE_video-002_56p33s.png",
+          "outputSha256": "689b0f11ea3823033d5270ff7443f4920b0660103e5281fa7cca5d9bc18fedaf"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 57.88,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_RIGHT_3Q_video-002_57p88s.png",
+          "outputSha256": "010afe34c7c29f918c677a44126682de819361bb4cf3eb266fbd17b1707e63a6"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 57.36,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_RIGHT_PROFILE_video-002_57p36s.png",
+          "outputSha256": "3e54f30a2489b94f0a2a3cee2a1edfbec7d59580b5acd7aba252f111c75d2eec"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 56.84,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_REAR_video-002_56p84s.png",
+          "outputSha256": "fd32c4d1d03b7316a3d2f8116a018b8c762c4e6681150f367c6386e601cf0410"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_008",
+      "nativeOrder": 8,
+      "visibleGameLabelOrIndex": "Face 8",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "49-53",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 49.88,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_MENU_video-002_49p88s.png",
+          "outputSha256": "000e18dbdab4a50f3258a83fb50a91c6822e995a7678f67929f2612c1f8b8063"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 50.08,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_FRONT_video-002_50p08s.png",
+          "outputSha256": "e253543c301180f236588e7ed51e622811d0e12a9f84b2b6cd21cd3e1c1d7206"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 50.47,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_LEFT_3Q_video-002_50p47s.png",
+          "outputSha256": "c3f160979cf438d2fb32168b328a1e43b8dc2eab7ea277bb15658bdec25ce4fa"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 50.87,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_LEFT_PROFILE_video-002_50p87s.png",
+          "outputSha256": "33ab3c48804962b44ab8eed2a48811cbe1b49a7f8d634024725cf8489a5ee84d"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 52.06,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_RIGHT_3Q_video-002_52p06s.png",
+          "outputSha256": "e3bc7fe0f02c3f543148164f322412caea4d39ef0e0bc4c601ab6678268dbf3a"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 51.66,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_RIGHT_PROFILE_video-002_51p66s.png",
+          "outputSha256": "0c25b72da63b585248ef57f3b7df035b6465732d900023e44748fb144cdf5b13"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 51.26,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_REAR_video-002_51p26s.png",
+          "outputSha256": "cd8b54da1720690e1e375e350cd01b1b4a6125888cbc8eaa0d2dc088320b0940"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_009",
+      "nativeOrder": 9,
+      "visibleGameLabelOrIndex": "Face 9",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "75-79",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 75.88,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_MENU_video-002_75p88s.png",
+          "outputSha256": "f886afc7fb7713db49a7cdb581ea0239dec1284730119671037f806e20cd9453"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 76.08,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_FRONT_video-002_76p08s.png",
+          "outputSha256": "e691e0ca1597615e847b622b72384f5d4884ed571462dde053cc565aa36abbda"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 76.47,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_LEFT_3Q_video-002_76p47s.png",
+          "outputSha256": "82bf294dadb6615ec21e95688e1dced2848f51daf93159a619d9daeead66163d"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 76.87,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_LEFT_PROFILE_video-002_76p87s.png",
+          "outputSha256": "93da199160535942175170f321e789411b6aaa5f0158b4a9b978db5dc30aab06"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 78.06,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_RIGHT_3Q_video-002_78p06s.png",
+          "outputSha256": "ebf6ac26487a9aa8703c1abb313b0f3550f9f30bc28fb8c4c0b158aff109929f"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 77.66,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_RIGHT_PROFILE_video-002_77p66s.png",
+          "outputSha256": "bd77cfd0426791f6124c7da7f19e79b1974f5cbab8bc59d95a95994848539f86"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 77.26,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_REAR_video-002_77p26s.png",
+          "outputSha256": "878329b03d4dd812a1fe7e824edea8985dd5ff84f1966ba412fb7152c9749457"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_010",
+      "nativeOrder": 10,
+      "visibleGameLabelOrIndex": "Face 10",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "80-88",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 81.52,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_MENU_video-002_81p52s.png",
+          "outputSha256": "54263393776dffc1d3820708db20c5405f80ead7d10de993db2ebabdd0a0df1e"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 81.96,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_FRONT_video-002_81p96s.png",
+          "outputSha256": "c8963b8f4b5a370e111b64d522f884185f8ed2689f2a3ecefa9e2acc661188df"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 82.83,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_LEFT_3Q_video-002_82p83s.png",
+          "outputSha256": "dd60162371bdbc0afd4732047162b90703155e17edb198949d9dd88e776642bf"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 83.71,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_LEFT_PROFILE_video-002_83p71s.png",
+          "outputSha256": "c6a60e27d064da3369f007d1e2330e1a8905cf660be5d10070f155fb22a5534e"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 86.34,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_RIGHT_3Q_video-002_86p34s.png",
+          "outputSha256": "d58f305fe8c1398ea94c63fdd75e8189bfd13ffef84ac5680fa2b2b05b41c150"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 85.46,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_RIGHT_PROFILE_video-002_85p46s.png",
+          "outputSha256": "15ffd1f75c39e9c0c8537e001cfb2f72d1ccf311390769399e144070c3125bc0"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 84.58,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_REAR_video-002_84p58s.png",
+          "outputSha256": "c8cf6488db53113c5e67d392436a327300fe4ac7de75c4920897a31229fcbd70"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_011",
+      "nativeOrder": 11,
+      "visibleGameLabelOrIndex": "Face 11",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "89-94",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 90.04,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_MENU_video-002_90p04s.png",
+          "outputSha256": "b48aa746c0b0fd7c27e73b89aba0eba232543f22f2bc3be9174541acb2375103"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 90.3,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_FRONT_video-002_90p30s.png",
+          "outputSha256": "379ce497a8b07ef0e8d391d8f3041593a88de3e048066aa7126db9f354692012"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 90.81,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_LEFT_3Q_video-002_90p81s.png",
+          "outputSha256": "d5ea898888ebda22b93adf04abe10284396b130ecaffe9d7f7788e98762c9b1f"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 91.33,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_LEFT_PROFILE_video-002_91p33s.png",
+          "outputSha256": "70645b1c171b2c2149520696e1f6ad9d9243733ddc55237d4df2ffd5ead4615e"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 92.88,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_RIGHT_3Q_video-002_92p88s.png",
+          "outputSha256": "b35a66b7742554852344c904aaef863008d15d89252299445f84748bb0adc9ae"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 92.36,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_RIGHT_PROFILE_video-002_92p36s.png",
+          "outputSha256": "36133e3186e4f2ecc3a201c46ad41dc6f93dd24aa356e8b3ebfeea8b6b3602a4"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 91.84,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_REAR_video-002_91p84s.png",
+          "outputSha256": "96210025d7c244cb005c02bba4a4d32f158bdeede16f3a99b4f49dbe281487db"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "nativeOrder": 12,
+      "visibleGameLabelOrIndex": "Face 12",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-002",
+      "selectedMenuEvidenceRangeSeconds": "95-100",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 96.04,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_MENU_video-002_96p04s.png",
+          "outputSha256": "168bba87bd943d435e24302388dc2ed4471c0c49a627bdc902224675936ac836"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 96.3,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_FRONT_video-002_96p30s.png",
+          "outputSha256": "ca2d146c67d9660cdcdb5ed7b8582ece2425650f437dccd3a3e5542da3361418"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 96.81,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_LEFT_3Q_video-002_96p81s.png",
+          "outputSha256": "c88a4423417567c2430cd58e4bd586effa07797523408f333abe3826bb373613"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 97.33,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_LEFT_PROFILE_video-002_97p33s.png",
+          "outputSha256": "a2dc1a26a35805a5303f7b737499503692d4fc767fe71170e47ba0dd2b35d3f7"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 98.88,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_RIGHT_3Q_video-002_98p88s.png",
+          "outputSha256": "1d5c07b42c3ebde3dede2574be0e52b6840f5321bedc62d2b17d77086626b08d"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 98.36,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_RIGHT_PROFILE_video-002_98p36s.png",
+          "outputSha256": "8b147dfb06a46231d604a22a55f78624bdaad1fc9d0089c013db1ecac6cf2768"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 97.84,
+          "sourceVideoID": "video-002",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_REAR_video-002_97p84s.png",
+          "outputSha256": "f780473642e51c146604bedbdd52903d183e152d732d0d29b01afe4591d99beb"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_013",
+      "nativeOrder": 13,
+      "visibleGameLabelOrIndex": "Face 13",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "27-32",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 28.04,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_MENU_video-003_28p04s.png",
+          "outputSha256": "94e33e72eaee624956bd9ee666115b63df7e434c314f4199e8c634079ad21d5a"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 28.3,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_FRONT_video-003_28p30s.png",
+          "outputSha256": "0be8eb68b4a5d67763cd0b10d488f4b755554ffbd6aaca5966f3a0f0c02f5aa7"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 28.81,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_LEFT_3Q_video-003_28p81s.png",
+          "outputSha256": "4409cdbb4d95e4a979c943088bd638b9cb1d785d5b8d9ce88cc9fde25128eafc"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 29.33,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_LEFT_PROFILE_video-003_29p33s.png",
+          "outputSha256": "8e74931dc52b6ed791eb9a570a662c4de727bc33d9bb12c068bac60f81c1313c"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 30.88,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_RIGHT_3Q_video-003_30p88s.png",
+          "outputSha256": "c6b1521a3d891a6cdcff83777406a855e6b7a0e8c0389513fddf07bc8cb655ef"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 30.36,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_RIGHT_PROFILE_video-003_30p36s.png",
+          "outputSha256": "4b4bfa3fc2ca881657d4b7fb8db3150cb4f17edff2b7d8f297f686be20da06c0"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 29.84,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_REAR_video-003_29p84s.png",
+          "outputSha256": "47424b56d5afab0ad957a7463f0a396b90895aeabf0b1e4a45e2f270592d3904"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_014",
+      "nativeOrder": 14,
+      "visibleGameLabelOrIndex": "Face 14",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "19-26",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 20.36,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_014/CF27_XBOXUNKNOWN_RTG_HEAD_014_MENU_video-003_20p36s.png",
+          "outputSha256": "d039bd703f77c121ebac3174a46bed7ef7d6a3cc27356871a7dc04789217666e"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 20.74,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_014/CF27_XBOXUNKNOWN_RTG_HEAD_014_FRONT_video-003_20p74s.png",
+          "outputSha256": "3f87c7fd3f9b8820fd410c8fb9db087bf428238724c94d1f885b09327ee8bb9f"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 21.49,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_014/CF27_XBOXUNKNOWN_RTG_HEAD_014_LEFT_3Q_video-003_21p49s.png",
+          "outputSha256": "80ed1fa45d4647f13c311298de407d5bde74afe23621c72257edaca31f656851"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 22.25,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_014/CF27_XBOXUNKNOWN_RTG_HEAD_014_LEFT_PROFILE_video-003_22p25s.png",
+          "outputSha256": "d86af81dc011842e4d8c07cb99e052a352069a6128a94f231187a26eaa405634"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 24.52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_014/CF27_XBOXUNKNOWN_RTG_HEAD_014_RIGHT_3Q_video-003_24p52s.png",
+          "outputSha256": "649782a6485b86ea2f6dbf9a66f5b2be33118a74e3286949d06502ac01044a12"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 23.76,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_014/CF27_XBOXUNKNOWN_RTG_HEAD_014_RIGHT_PROFILE_video-003_23p76s.png",
+          "outputSha256": "d86ec06ef766a497a44fedd859641772a2a1119ec4ec788148f690bab9b57ec6"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 23,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_014/CF27_XBOXUNKNOWN_RTG_HEAD_014_REAR_video-003_23p00s.png",
+          "outputSha256": "e04acfb3ce1f75e2c26ee366db6cc5420e9eb0c590f0aa352132d1bfbc4ebc73"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": true,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_015",
+      "nativeOrder": 15,
+      "visibleGameLabelOrIndex": "Face 15",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "13-18",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 14.04,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_MENU_video-003_14p04s.png",
+          "outputSha256": "51842496e1b0ab17a39c9c4dd0443c8fa5d660a8681d3b740bc5bc250c70ec8f"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 14.3,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_FRONT_video-003_14p30s.png",
+          "outputSha256": "dd8f329ebc8a18c2e09064a362290320855bfbd583b36421f8a0a757b649db41"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 14.81,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_LEFT_3Q_video-003_14p81s.png",
+          "outputSha256": "8c9db538afe841b8619c153b7e5d5a92b9442f6c1114a53102601f9d004a9602"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 15.33,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_LEFT_PROFILE_video-003_15p33s.png",
+          "outputSha256": "5eba4fdee577e3d4457ed3f4e9c889986c668c3282d7886a07b92232ee7906fa"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 16.88,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_RIGHT_3Q_video-003_16p88s.png",
+          "outputSha256": "51ddebe9b6a6cadae8576542386896c3f062f56672bbce9eff4bb3ac94ab3e92"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 16.36,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_RIGHT_PROFILE_video-003_16p36s.png",
+          "outputSha256": "7bfde9899f5851b9228f0e0454d6b144738b74a4ef66c5b2e6e566e4f1860807"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 15.84,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_REAR_video-003_15p84s.png",
+          "outputSha256": "101b32876f274e0059a7785be6ed7825da644baefe85c84071b673ff6ef68f15"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+      "nativeOrder": 16,
+      "visibleGameLabelOrIndex": "Face 16",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "6-12",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 7.2,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_MENU_video-003_7p20s.png",
+          "outputSha256": "c5416bb1230e07a953fa69d82f2b4941e4c238bd5339a83179acb770d1c32766"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 7.52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_FRONT_video-003_7p52s.png",
+          "outputSha256": "60c73b877b6910a949c8bea2ccd6d5a848cf745c8111bd9ab79e9dc8c2567ac6"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 8.15,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_LEFT_3Q_video-003_8p15s.png",
+          "outputSha256": "2ade8880070364a822689d37045c7ee7d61f31d5f339853b7727bc7ab93d4b3b"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 8.79,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_LEFT_PROFILE_video-003_8p79s.png",
+          "outputSha256": "8d910d87b0e01ab7a3c365668c6ee5fce723b9f617414a127d3c9aaf63de45ee"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 10.7,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_RIGHT_3Q_video-003_10p70s.png",
+          "outputSha256": "fef8ba2177b3057ca633b8ac0435e9467fefb60d18d904528083ce710c96bf36"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 10.06,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_RIGHT_PROFILE_video-003_10p06s.png",
+          "outputSha256": "d2d48a60d532ecd53879b351c13a5846771173a3d863a46bb419263a3df896be"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 9.42,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_REAR_video-003_9p42s.png",
+          "outputSha256": "5a05140134ac92fb153791b0cc7d47db001f7d60330678fdc2c6b1334a6fd677"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_017",
+      "nativeOrder": 17,
+      "visibleGameLabelOrIndex": "Face 17",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "33-39",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 34.2,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_MENU_video-003_34p20s.png",
+          "outputSha256": "407e9617295f52ea45f36691b987116dedf127a4590b2c5337ae0e9ae4ac129a"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 34.52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_FRONT_video-003_34p52s.png",
+          "outputSha256": "0fe91f25117ff4eafd3f3c7d3b767cca7911a4894f031e8eaab167e48fef0126"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 35.15,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_LEFT_3Q_video-003_35p15s.png",
+          "outputSha256": "9dd6958e10a0550242bbbc2be5a6c1957cadffdc86eb8fcee12e1c7d248bb43d"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 35.79,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_LEFT_PROFILE_video-003_35p79s.png",
+          "outputSha256": "f1307153b1e6371857f2de47e5ef981818a20652df4d2078f51c1d77217585e6"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 37.7,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_RIGHT_3Q_video-003_37p70s.png",
+          "outputSha256": "bca83f4f55e6650407a44d8c582e57b73e74bda8b089be937fa019c1a67eb27c"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 37.06,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_RIGHT_PROFILE_video-003_37p06s.png",
+          "outputSha256": "81ca25556df6b82bb1a3cdef08ca3675c22c496a4566d69d2a7509a14b76d25f"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 36.42,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_REAR_video-003_36p42s.png",
+          "outputSha256": "35332c73941fd20117db24746e08a16ef84971a77442d151231f22e0fd7c57a8"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_018",
+      "nativeOrder": 18,
+      "visibleGameLabelOrIndex": "Face 18",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "40-47",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 41.36,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_MENU_video-003_41p36s.png",
+          "outputSha256": "6b3b1bed4499bf07a254f0d8fe2f1f30919746011f397bfef23551e2ecb0cf40"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 41.74,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_FRONT_video-003_41p74s.png",
+          "outputSha256": "c3785f78be4392d7a6be4a25197bb0e726eb749984f45dd298234228f4510438"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 42.49,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_LEFT_3Q_video-003_42p49s.png",
+          "outputSha256": "68d03dd5971424ed714770bf5102078fab517fbb60f8dc7f46fcc3902a8a1365"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 43.25,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_LEFT_PROFILE_video-003_43p25s.png",
+          "outputSha256": "39b6ddd05b0921d89959f41a8318d878c670544b08d4451e1296c7d9835bc84e"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 45.52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_RIGHT_3Q_video-003_45p52s.png",
+          "outputSha256": "a66c82f7596c860d826ba8b2bd311c60390b711e2a34b253321f99b65333b02d"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 44.76,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_RIGHT_PROFILE_video-003_44p76s.png",
+          "outputSha256": "99e3f877134bdf4c0ffc2bf908d4f0583d86524912bb2e3cc59c68f477ff653d"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 44,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_REAR_video-003_44p00s.png",
+          "outputSha256": "f2473bd616f22da8e328cf674b70ff06a2be16ad42f6d7bdc073e8ec4ec72b3f"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_019",
+      "nativeOrder": 19,
+      "visibleGameLabelOrIndex": "Face 19",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "48-55",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 49.36,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_019/CF27_XBOXUNKNOWN_RTG_HEAD_019_MENU_video-003_49p36s.png",
+          "outputSha256": "bc7b8862d36cbc0d0f4bf93e9e37c5b32799ea514a8eeb5e93b54644e4604f18"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 49.74,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_019/CF27_XBOXUNKNOWN_RTG_HEAD_019_FRONT_video-003_49p74s.png",
+          "outputSha256": "9597085cc08044a3346ac7f4dea2b6dacb5e6aa1158b407b36b7cad8bcd3ecdc"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 50.49,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_019/CF27_XBOXUNKNOWN_RTG_HEAD_019_LEFT_3Q_video-003_50p49s.png",
+          "outputSha256": "7e9a8cfa6b5550647d2479afc734c3233e515d797cdfcb3399959789b1d7242d"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 51.25,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_019/CF27_XBOXUNKNOWN_RTG_HEAD_019_LEFT_PROFILE_video-003_51p25s.png",
+          "outputSha256": "f99c8cbf266442adf0fd588b55a3140573d787f000d3522de18163fe7e6c3012"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 53.52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_019/CF27_XBOXUNKNOWN_RTG_HEAD_019_RIGHT_3Q_video-003_53p52s.png",
+          "outputSha256": "3985465a921dd46db92642d4c68d48157f4d05a6881ed233375884e8eeb00d23"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 52.76,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_019/CF27_XBOXUNKNOWN_RTG_HEAD_019_RIGHT_PROFILE_video-003_52p76s.png",
+          "outputSha256": "a5b89f4d7646afcbb0d6055168fefa69195cb03239cecd5fcb0010bbde1b25d5"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_019/CF27_XBOXUNKNOWN_RTG_HEAD_019_REAR_video-003_52p00s.png",
+          "outputSha256": "c55a5c3d3fe4bd5c7685290638bdbbc74b12d2f8b1b88439c7aaed461d8eb46f"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_020",
+      "nativeOrder": 20,
+      "visibleGameLabelOrIndex": "Face 20",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "68-75",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 69.36,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_020/CF27_XBOXUNKNOWN_RTG_HEAD_020_MENU_video-003_69p36s.png",
+          "outputSha256": "d4b787734a55274af5481573f3b72443254bac036fe03f31c1c7c1d7baf5e05a"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 69.74,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_020/CF27_XBOXUNKNOWN_RTG_HEAD_020_FRONT_video-003_69p74s.png",
+          "outputSha256": "b92e1cb9ef439fa36b73a1498c4dad9f910010ddcb38b6b86f580b67add6e27a"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 70.49,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_020/CF27_XBOXUNKNOWN_RTG_HEAD_020_LEFT_3Q_video-003_70p49s.png",
+          "outputSha256": "9fa30cd435035ba98e595987b8075d27d543d8896b53d5f2dac1ede876f736f4"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 71.25,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_020/CF27_XBOXUNKNOWN_RTG_HEAD_020_LEFT_PROFILE_video-003_71p25s.png",
+          "outputSha256": "a694ba78a3da744ff2222a1cca9f78abaad677e588cba631add43fd3bb2fc6a2"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 73.52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_020/CF27_XBOXUNKNOWN_RTG_HEAD_020_RIGHT_3Q_video-003_73p52s.png",
+          "outputSha256": "9f105727b29209efec5f61622693f2399311b8214b31921c07689676eff00951"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 72.76,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_020/CF27_XBOXUNKNOWN_RTG_HEAD_020_RIGHT_PROFILE_video-003_72p76s.png",
+          "outputSha256": "4e88d702b44ad691b553f15d54ec62e8472ed40a669172dcefec556886d9b5e1"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 72,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_020/CF27_XBOXUNKNOWN_RTG_HEAD_020_REAR_video-003_72p00s.png",
+          "outputSha256": "23bb2d5b4e7ff938a1257179980bbfd0ea472c66834abc51d0fe871e39a145c4"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": true,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_021",
+      "nativeOrder": 21,
+      "visibleGameLabelOrIndex": "Face 21",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "80-84",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 80.88,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_MENU_video-003_80p88s.png",
+          "outputSha256": "68168fc8e7bf8f5418477add80fc2d7b957b5d40211457e6dcdc841e207fc586"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 81.08,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_FRONT_video-003_81p08s.png",
+          "outputSha256": "6351577ea1de634057d953b6fa4afc1bab8bafd1744ac18c9c8d87df132c56a5"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 81.47,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_LEFT_3Q_video-003_81p47s.png",
+          "outputSha256": "53d7bb44dd4e5ccc0f763f092dd3896186479f1a28179891b343a2ab3a1fc58d"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 81.87,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_LEFT_PROFILE_video-003_81p87s.png",
+          "outputSha256": "09085fbd65e413d8a8d1321bcd08e2bf54a5388b2b2822d9c8eab441528807e5"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 83.06,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_RIGHT_3Q_video-003_83p06s.png",
+          "outputSha256": "147a11d0bc14e25c873f4bac29c3091c32fd72233182630c539f49cc6bf1c11f"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 82.66,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_RIGHT_PROFILE_video-003_82p66s.png",
+          "outputSha256": "ad27eb1f49f50b8207ff08f6d4c18f286404a829b7c40e37bbe5edd977484d93"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 82.26,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_REAR_video-003_82p26s.png",
+          "outputSha256": "6efe6ab3c69fb62ff5daa39e3c41c9a4d0712fac86312756e6cee608d7f37846"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_022",
+      "nativeOrder": 22,
+      "visibleGameLabelOrIndex": "Face 22",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "76-79",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 76.72,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_MENU_video-003_76p72s.png",
+          "outputSha256": "a6ece7308275792c2fa20dbe7180e0e6280fa14408abf7c4c565a95cc07b2012"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 76.86,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_FRONT_video-003_76p86s.png",
+          "outputSha256": "11138f24a54f4ec562a325c9662d562fb713f0d6081ded1c347fa9542544b703"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 77.13,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_LEFT_3Q_video-003_77p13s.png",
+          "outputSha256": "a490725b6233dc749fbbb30c967f31b7abd763e351eb7d408d817c8cbd13657e"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 77.41,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_LEFT_PROFILE_video-003_77p41s.png",
+          "outputSha256": "2a59d0e4f86c8d63a1b9bf0627d0aa946fb0a4c5a16b9a8923fe42322f968a36"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 78.24,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_RIGHT_3Q_video-003_78p24s.png",
+          "outputSha256": "abdab754250b103be48587b75348969cb7260743a32596552086dd40155f9a8c"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 77.96,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_RIGHT_PROFILE_video-003_77p96s.png",
+          "outputSha256": "0869e33e84119982f91341aeca2549b87302bb1e67170ff3e9736eed38fec76b"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 77.68,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_REAR_video-003_77p68s.png",
+          "outputSha256": "42b930d8bbefe463877ecf0cc825caec1067c4d67b10c83b5d76903ad6c4104c"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_023",
+      "nativeOrder": 23,
+      "visibleGameLabelOrIndex": "Face 23",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "56-62",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 57.2,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_MENU_video-003_57p20s.png",
+          "outputSha256": "543882c20821349928e3eb65b36d4cfb94d20fbb4568a0c7ea193d41c6d653d4"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 57.52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_FRONT_video-003_57p52s.png",
+          "outputSha256": "6e7c0775feed0dd6946d585ba469439eb7807bbade514e9ca43ece86daebbbbb"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 58.15,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_LEFT_3Q_video-003_58p15s.png",
+          "outputSha256": "5c5f26be92496f9b6be94260b154b65de5716127a76ef2431810bea8f5766efe"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 58.79,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_LEFT_PROFILE_video-003_58p79s.png",
+          "outputSha256": "6e7275a420f7bc250e76635c05a26ae95d93090c195a6e894c2a5b56a2686390"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 60.7,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_RIGHT_3Q_video-003_60p70s.png",
+          "outputSha256": "ad51be5429bc7112613b5bbc9e8567b963ecf71c1ce783c43242de2b765180fb"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 60.06,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_RIGHT_PROFILE_video-003_60p06s.png",
+          "outputSha256": "d6333fec0304801413b201d021e4528bc6b8d76247caf31eb009b2ba7c243c32"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 59.42,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_REAR_video-003_59p42s.png",
+          "outputSha256": "40e4aadc185a86da4b52f5e6b4cfd060e9275635f4ac35b98bc0b1b119d9cb45"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": false,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_024",
+      "nativeOrder": 24,
+      "visibleGameLabelOrIndex": "Face 24",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "63-67",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 63.88,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_MENU_video-003_63p88s.png",
+          "outputSha256": "2dbd6f66cb8ee70a15bd788ea8d034213bc47bac3a4c31367e5cade6b1a8b468"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 64.08,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_FRONT_video-003_64p08s.png",
+          "outputSha256": "f5b5f128a71bbd8182a102970e17ecca045afeb77a8e1af95f46e4a40bae20fc"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 64.47,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_LEFT_3Q_video-003_64p47s.png",
+          "outputSha256": "6eb6bc598af43ff2e304a8e5aa3324e20bc642756c47be06c46ad2a1510bc31a"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 64.87,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_LEFT_PROFILE_video-003_64p87s.png",
+          "outputSha256": "9df24b3aa3f73022abfe201d57218b9380acbad9f73b22c35ceccbaca2c472a0"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 66.06,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_RIGHT_3Q_video-003_66p06s.png",
+          "outputSha256": "e934e43b09c8a94cf5ceefb7d30462905524bd19533fd0206068677c4c9791ab"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 65.66,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_RIGHT_PROFILE_video-003_65p66s.png",
+          "outputSha256": "03046e54a74904576573d80bfc17f274222efbac1b90d7189f19e71b5865a96e"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 65.26,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_REAR_video-003_65p26s.png",
+          "outputSha256": "9596a59bfab728008346b31823fe27a0098d7236694b9f1118da92b0052debec"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": true,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_025",
+      "nativeOrder": 25,
+      "visibleGameLabelOrIndex": "Face 25",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "85-93",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 86.52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_025/CF27_XBOXUNKNOWN_RTG_HEAD_025_MENU_video-003_86p52s.png",
+          "outputSha256": "17888c1c99fc245d5982e2ef1253cad54dcd240cb88ac45fedbe4b144aec94f6"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 86.96,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_025/CF27_XBOXUNKNOWN_RTG_HEAD_025_FRONT_video-003_86p96s.png",
+          "outputSha256": "0c5020b691efae3662e29eac39f7e6c331b91e4b2a63ce882c996e8c80df026e"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 87.83,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_025/CF27_XBOXUNKNOWN_RTG_HEAD_025_LEFT_3Q_video-003_87p83s.png",
+          "outputSha256": "1aa9228cafbd5e288ba4d560a810b5d59df8c310dc5704c83b242b0e81371973"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 88.71,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_025/CF27_XBOXUNKNOWN_RTG_HEAD_025_LEFT_PROFILE_video-003_88p71s.png",
+          "outputSha256": "44a2a9098fff970ff364cfa13b91a02efe07b75fde35c23b89c6ff39e0730a9d"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 91.34,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_025/CF27_XBOXUNKNOWN_RTG_HEAD_025_RIGHT_3Q_video-003_91p34s.png",
+          "outputSha256": "11719cb8f1b332c9a5be2d25c6bfaeb4e2f95df3a14e320ae4829f39f7d49906"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 90.46,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_025/CF27_XBOXUNKNOWN_RTG_HEAD_025_RIGHT_PROFILE_video-003_90p46s.png",
+          "outputSha256": "104863d27086cf4d685d6ab343ce9fa31b091ea527e50e9c88e0167d5ce9d146"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 89.58,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_025/CF27_XBOXUNKNOWN_RTG_HEAD_025_REAR_video-003_89p58s.png",
+          "outputSha256": "7be1f5b7ff564365130bb5da937421e7611239baab3ec689a05fbd1ef65e3599"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": true,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_026",
+      "nativeOrder": 26,
+      "visibleGameLabelOrIndex": "Face 26",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "94-99",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 95.04,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_MENU_video-003_95p04s.png",
+          "outputSha256": "3224c400274eea91b073da05f3b66ed3f48d0ff7055fbfef65339f0e4e645466"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 95.3,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_FRONT_video-003_95p30s.png",
+          "outputSha256": "7f650e7d1b5f3606ce4c6b858ad35620dffa25e870d8e0f3010d63423c0fcfa4"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 95.81,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_LEFT_3Q_video-003_95p81s.png",
+          "outputSha256": "60230593fdae8975fceecc3ca42b50bccdf1e597b76dca096124416be876b3a7"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 96.33,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_LEFT_PROFILE_video-003_96p33s.png",
+          "outputSha256": "2afd0866b2212d8b3d34bf99c2d6b5e78630d2f64f90cd303dde44ce1af3a352"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 97.88,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_RIGHT_3Q_video-003_97p88s.png",
+          "outputSha256": "0ad4da93ef161b1e5609ea471bb8be029fe16e2d7b127787a4572f7f7c5eb45c"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 97.36,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_RIGHT_PROFILE_video-003_97p36s.png",
+          "outputSha256": "8428806df7f55092e3c3e87b46e0ce8b369a2ab0617c159ec4c6d398c7f1701e"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 96.84,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_REAR_video-003_96p84s.png",
+          "outputSha256": "1b88bcbfc7a81d6c6bf7ece369fe766b61095b91158a49b6dd97abfd35b7474e"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": true,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_027",
+      "nativeOrder": 27,
+      "visibleGameLabelOrIndex": "Face 27",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "100-103",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 100.72,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_MENU_video-003_100p72s.png",
+          "outputSha256": "af258c31985fcc8bcbb4b3b22c6827cac6b2d3bc679ed4c2aec746d223e0d030"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 100.86,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_FRONT_video-003_100p86s.png",
+          "outputSha256": "40aa788bd5a38ec0b77ec09682f70f2f6a01cbda501180a605a5eb2c6143d730"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 101.13,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_LEFT_3Q_video-003_101p13s.png",
+          "outputSha256": "783ba6b9933d8c2d28acc06644115fc7eace99ef67cef360150cd5b200cbdd1e"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 101.41,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_LEFT_PROFILE_video-003_101p41s.png",
+          "outputSha256": "e89bdcf428b299e93aafe8582f304fe53e9c50b3ff4a93dd54d112c30639147d"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 102.24,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_RIGHT_3Q_video-003_102p24s.png",
+          "outputSha256": "b02062131edb2489b354d3932860252fc463d44f3f26f248da56e0678b0aa158"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 101.96,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_RIGHT_PROFILE_video-003_101p96s.png",
+          "outputSha256": "b3e3194e29289538ecff28dd096e1021be9123fca311b61cc545c183462ea13c"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 101.68,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_REAR_video-003_101p68s.png",
+          "outputSha256": "1783405b0e006878805eea719521c8b46fb51a5cef54c245d4304cfebe0460d8"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": true,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_028",
+      "nativeOrder": 28,
+      "visibleGameLabelOrIndex": "Face 28",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "104-110",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 105.2,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_028/CF27_XBOXUNKNOWN_RTG_HEAD_028_MENU_video-003_105p20s.png",
+          "outputSha256": "ccef277eb1762b1bcea4f8dabc078502da250fdffd144a2f964aab24d1a323d8"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 105.52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_028/CF27_XBOXUNKNOWN_RTG_HEAD_028_FRONT_video-003_105p52s.png",
+          "outputSha256": "7b71fa030884870206fe253c9e174d8b32a547fcedc3bfebca21f18deacb12f6"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 106.15,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_028/CF27_XBOXUNKNOWN_RTG_HEAD_028_LEFT_3Q_video-003_106p15s.png",
+          "outputSha256": "293515dce056409254823a878630c1d404a5836a3b0a49ae4ddeb1873811fc53"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 106.79,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_028/CF27_XBOXUNKNOWN_RTG_HEAD_028_LEFT_PROFILE_video-003_106p79s.png",
+          "outputSha256": "0f2d4ab307878f9d98afef10cb7cc78cf758e6adbd42eb86fd633b877832ce29"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 108.7,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_028/CF27_XBOXUNKNOWN_RTG_HEAD_028_RIGHT_3Q_video-003_108p70s.png",
+          "outputSha256": "0b03d45654620f0f6d32a20e5f3468354fcfab31716de90996cd2c1259923555"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 108.06,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_028/CF27_XBOXUNKNOWN_RTG_HEAD_028_RIGHT_PROFILE_video-003_108p06s.png",
+          "outputSha256": "580cc0a7feb940a640717a66b3695469d9fb5aa75f2b09a946b0d63bc8b4a302"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 107.42,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_028/CF27_XBOXUNKNOWN_RTG_HEAD_028_REAR_video-003_107p42s.png",
+          "outputSha256": "313b3c4a25af9ed4803550cefa76875bdbf7a2d88cefbc0f33b8c1bce27467f7"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": true,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    },
+    {
+      "stableInternalID": "CF27_XBOXUNKNOWN_RTG_HEAD_029",
+      "nativeOrder": 29,
+      "visibleGameLabelOrIndex": "Face 29",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationState": "NOT_VERIFIED",
+      "sourceVideoID": "video-003",
+      "selectedMenuEvidenceRangeSeconds": "127-133.02",
+      "requestedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "extractedViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR"
+      ],
+      "missingViews": [],
+      "selectedFrames": [
+        {
+          "view": "MENU",
+          "status": "extracted",
+          "timestampSeconds": 128.2,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_MENU_video-003_128p20s.png",
+          "outputSha256": "308695f7c8e3882efc96570e17361a3956f4a3aafefd962cb8d3ed6cb0605327"
+        },
+        {
+          "view": "FRONT",
+          "status": "extracted",
+          "timestampSeconds": 128.52,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_FRONT_video-003_128p52s.png",
+          "outputSha256": "e5e86d7fdd880ab60f42f1468d8ea65ff50634f9cf8e2d86b7110d1e2b0229df"
+        },
+        {
+          "view": "LEFT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 129.16,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_LEFT_3Q_video-003_129p16s.png",
+          "outputSha256": "a11a157b79b627f156915e02229dd9f657891787df006810af358dc02816cb04"
+        },
+        {
+          "view": "LEFT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 129.8,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_LEFT_PROFILE_video-003_129p80s.png",
+          "outputSha256": "bfd46c41cbc558da0c985c595a5bb840b01756f0f50cc44505ca3bf2f412fee5"
+        },
+        {
+          "view": "RIGHT_3Q",
+          "status": "extracted",
+          "timestampSeconds": 131.71,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_RIGHT_3Q_video-003_131p71s.png",
+          "outputSha256": "dbac27b103edd9861c77843f640abd61695f171373ed7e1f807eab0a11ad98f2"
+        },
+        {
+          "view": "RIGHT_PROFILE",
+          "status": "extracted",
+          "timestampSeconds": 131.07,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_RIGHT_PROFILE_video-003_131p07s.png",
+          "outputSha256": "7c556144a9856e5b53e3d87a4e74709001e95d76164e0f40ca7b34f1b5cc02de"
+        },
+        {
+          "view": "REAR",
+          "status": "extracted",
+          "timestampSeconds": 130.44,
+          "sourceVideoID": "video-003",
+          "outputRelativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_REAR_video-003_130p44s.png",
+          "outputSha256": "d558492bfd5a559824c7479c0ffa4ba9f4357ed2a26f1176178f5fbce7008464"
+        }
+      ],
+      "completenessStatus": "requested_views_extracted_with_approximate_angles",
+      "prompt87NotificationOverlayObserved": true,
+      "frameLevelOverlayDetection": "not_implemented_review_manually",
+      "notes": [
+        "Frames are local derivatives; source masters were not modified.",
+        "Eye black and uniform appearance are preserved.",
+        "Notification overlays are not removed and require manual frame review.",
+        "No elevated or lowered views are part of Prompt 88 extraction."
+      ]
+    }
+  ]
+}

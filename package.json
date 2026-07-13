@@ -9,6 +9,7 @@
     "catalog:import-check": "node scripts/catalog-import-validator.mjs --check",
     "evidence:manifest": "node scripts/evidence-manifest.mjs",
     "media:inspect": "node scripts/cf27-media-inspect.mjs",
+    "head-template:extract-frames": "node scripts/cf27-head-template-frame-extract.mjs",
     "source-video:intake": "node scripts/source-video-intake.mjs",
     "phase-zero:export": "node scripts/phase-zero-export.mjs"
   }

@@ -1,0 +1,59 @@
+{
+  "generatedAt": "2026-07-13T11:31:29.649Z",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "requestedHeadCount": 29,
+  "requestedViews": [
+    "MENU",
+    "FRONT",
+    "LEFT_3Q",
+    "LEFT_PROFILE",
+    "RIGHT_3Q",
+    "RIGHT_PROFILE",
+    "REAR"
+  ],
+  "viewCounts": {
+    "MENU": {
+      "extracted": 29,
+      "missing": 0,
+      "missingStableInternalIDs": []
+    },
+    "FRONT": {
+      "extracted": 29,
+      "missing": 0,
+      "missingStableInternalIDs": []
+    },
+    "LEFT_3Q": {
+      "extracted": 29,
+      "missing": 0,
+      "missingStableInternalIDs": []
+    },
+    "LEFT_PROFILE": {
+      "extracted": 29,
+      "missing": 0,
+      "missingStableInternalIDs": []
+    },
+    "RIGHT_3Q": {
+      "extracted": 29,
+      "missing": 0,
+      "missingStableInternalIDs": []
+    },
+    "RIGHT_PROFILE": {
+      "extracted": 29,
+      "missing": 0,
+      "missingStableInternalIDs": []
+    },
+    "REAR": {
+      "extracted": 29,
+      "missing": 0,
+      "missingStableInternalIDs": []
+    }
+  },
+  "categoryCompletenessStatus": "requested_views_extracted_with_approximate_angles",
+  "limitations": [
+    "This summary covers Prompt 88 requested views only.",
+    "Elevated and lowered views remain missing from the head-template candidate package.",
+    "Angle labels are approximate from rotation sequence until second-person verification.",
+    "Frame-level overlay detection is not implemented; reviewers must inspect local derivatives for lower-third or system overlays."
+  ]
+}

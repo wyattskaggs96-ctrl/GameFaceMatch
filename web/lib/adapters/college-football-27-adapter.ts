@@ -1,4 +1,5 @@
 import type { CatalogRepository } from "@/lib/catalog/catalog-repository";
+import type { ProductionPublishGateReport } from "@/lib/catalog/production-publish-gate";
 import { validateProductionCatalog } from "@/lib/catalog/catalog-validator";
 import { approveCatalogRelease } from "@/lib/gates/feature-gates";
 import { createRuleBasedMatchingEngine, type MatchingEngine, type MatchingPreferences } from "@/lib/matching/matching-engine";
@@ -14,7 +15,8 @@ export class CollegeFootball27Adapter implements GameAppearanceAdapter {
 
   constructor(
     private readonly catalogRepository: CatalogRepository,
-    private readonly matchingEngine: MatchingEngine = createRuleBasedMatchingEngine()
+    private readonly matchingEngine: MatchingEngine = createRuleBasedMatchingEngine(),
+    private readonly publishGate: ProductionPublishGateReport | null = null
   ) {}
 
   validateCatalog(manifest: GameCatalogManifest) {
@@ -27,7 +29,8 @@ export class CollegeFootball27Adapter implements GameAppearanceAdapter {
     const approval = approveCatalogRelease({
       manifest,
       integrity: status.integrity,
-      compatibility: status.compatibility
+      compatibility: status.compatibility,
+      publishGate: this.publishGate
     });
     if (!approval.approvedRelease) {
       throw new GameAdapterError("catalogUnavailable", CATALOG_UNAVAILABLE_MESSAGE);

@@ -1150,6 +1150,51 @@
       "lastCheckedDate": "2026-07-13"
     },
     {
+      "id": "GFM-P0-041",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Production publish gate",
+      "summary": "Require a definitive production publish gate before a catalog release can enable recommendations, including confirmed shipping-game environment, complete menu map, complete category counts, required evidence, valid checksums, passed import validation, catalog-manager approval, second-person verification, allowed record statuses, no unresolved blocking discrepancies, supported platform/version/mode/path, no fixtures, and no placeholders.",
+      "owningModule": "Catalog release management",
+      "implementationFiles": [
+        "web/lib/catalog/production-publish-gate.ts",
+        "web/lib/gates/feature-gates.ts",
+        "web/catalog/index.ts",
+        "docs/GAME_CATALOG_WORKFLOW.md",
+        "docs/CATALOG_PUBLISHING_RUNBOOK.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/production-publish-gate.test.ts",
+        "web/tests/feature-gates.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Production publish-gate tests cover every required named gate, prove a single ok boolean is insufficient, and feature-gate tests prove approved releases remain closed until the full publish-gate report passes.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-13"
+    },
+    {
+      "id": "GFM-P0-042",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Admin roles and audit logging",
+      "summary": "Use local/internal catalog workflow roles and track material record, evidence, verification, import, validation, release, rollback, and production-enablement actions without adding public accounts or cloud identity.",
+      "owningModule": "Catalog audit custody",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-admin-audit-log.ts",
+        "data/schemas/admin-audit-log.schema.json",
+        "docs/GAME_CATALOG_WORKFLOW.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-admin-audit-log.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Admin audit-log tests cover all local workflow roles and material actions, block read-only/developer production-enablement misuse, require complete actor/target/reason metadata, and detect hash-chain tampering.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-13"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

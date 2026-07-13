@@ -38,6 +38,14 @@ Manual audit work starts under `data/audit/college-football-27/`.
 - CSV imports create unverified draft records only. They never auto-verify production data.
 - Screenshots are retained as local audit evidence and are not automatically public web assets.
 
+## Local roles and material-action logging
+
+Catalog audit roles are local/internal workflow roles, not public user accounts or cloud identity. The approved roles are primary researcher, evidence custodian, catalog manager, second verifier, read-only reviewer, and developer.
+
+`web/lib/phase-zero/phase-zero-admin-audit-log.ts` records material catalog actions using `data/schemas/admin-audit-log.schema.json`. The log covers record creation, edit, evidence association, verification, rejection, recapture request, import, validation, release, rollback, and production enablement attempts. Each entry stores actor role attribution, target, reason, checksums when available, and a SHA-256 previous-entry hash chain so local history tampering is detectable.
+
+Read-only reviewers have no material-write permissions, developers may record validation only, and production enablement is restricted to catalog-manager attribution. These role checks help document local custody, but they do not replace second-person verification, catalog-manager approval, import validation, immutable release checks, or the definitive production publish gate.
+
 ## Local validation commands
 
 Run from the repository root unless noted:
@@ -108,3 +116,5 @@ A production publication requires:
 - Standard screenshot naming for every asset.
 - Menu navigation instructions with evidence assets.
 - No patch/platform mismatch between package manifest and item records.
+
+The definitive production publish gate in `web/lib/catalog/production-publish-gate.ts` composes the publication checks into one non-bypassable decision. It requires a confirmed shipping-game environment, complete menu map, complete category counts, required evidence, valid checksums, passed import validation, catalog-manager approval, second-person verification, allowed production record statuses, no unresolved blocking discrepancies, supported platform/version/mode/path, no fixtures, and no placeholders. Runtime recommendation gates require this full named-check report in addition to immutable release approval; a single boolean or environment variable is not enough.

@@ -1,4 +1,5 @@
 import type { CatalogCompatibilityReport, CatalogIntegrityReport } from "@/lib/catalog/catalog-integrity";
+import { isProductionPublishGateApproved, type ProductionPublishGateReport } from "@/lib/catalog/production-publish-gate";
 import { validateProductionCatalog } from "@/lib/catalog/catalog-validator";
 import type { GameCatalogManifest } from "@/types/domain";
 
@@ -50,6 +51,7 @@ export interface FeatureGateInput {
   manifest?: GameCatalogManifest | null;
   integrity?: CatalogIntegrityReport | null;
   compatibility?: CatalogCompatibilityReport | null;
+  publishGate?: ProductionPublishGateReport | null;
   environment?: FeatureGateEnvironment;
 }
 
@@ -131,6 +133,9 @@ export function approveCatalogRelease(input: FeatureGateInput): CatalogReleaseAp
   }
   if (!input.compatibility?.compatible) {
     reasons.push(input.compatibility?.message ?? "Catalog platform or game version support has not been verified.");
+  }
+  if (manifest.items.length > 0 && !isProductionPublishGateApproved(input.publishGate)) {
+    reasons.push("Definitive production publish gate has not passed.");
   }
 
   const mismatchedVersion = manifest.items.find((item) => item.catalogVersion.identifier !== manifest.catalogVersion.identifier);

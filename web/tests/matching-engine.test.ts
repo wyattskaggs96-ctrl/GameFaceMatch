@@ -5,6 +5,7 @@ import { CollegeFootball27Adapter } from "@/lib/adapters/college-football-27-ada
 import { GameAdapterError } from "@/lib/adapters/game-appearance-adapter";
 import { verifyManifestIntegrity } from "@/lib/catalog/catalog-integrity";
 import { createBundledCatalogRepository } from "@/lib/catalog/catalog-repository";
+import { PRODUCTION_PUBLISH_GATE_VERSION, requiredProductionPublishGateChecks, type ProductionPublishGateReport } from "@/lib/catalog/production-publish-gate";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
 import type { AppearanceAttribute, FacialMeasurement, GameCatalogManifest, StandardFaceProfile, StandardFacialMeasurementID } from "@/types/domain";
@@ -151,7 +152,7 @@ describe("CollegeFootball27Adapter matching boundary", () => {
 
   it("returns verified candidates and patch-aware build instructions from a checksum-verified catalog", async () => {
     const catalog = await checksumCatalog(productionStyleCatalog());
-    const adapter = new CollegeFootball27Adapter(createBundledCatalogRepository(catalog));
+    const adapter = new CollegeFootball27Adapter(createBundledCatalogRepository(catalog), undefined, passingPublishGate(catalog));
     const matches = await adapter.match(syntheticProfile());
     expect(matches).toHaveLength(3);
     expect(matches.every((match) => match.catalogItem.verificationState === "verified")).toBe(true);
@@ -167,6 +168,17 @@ describe("CollegeFootball27Adapter matching boundary", () => {
     });
   });
 });
+
+function passingPublishGate(catalog: GameCatalogManifest): ProductionPublishGateReport {
+  return {
+    schemaVersion: PRODUCTION_PUBLISH_GATE_VERSION,
+    ok: true,
+    generatedAt: "2026-07-10T00:00:00.000Z",
+    catalogVersionID: catalog.catalogVersion.identifier,
+    checks: requiredProductionPublishGateChecks.map((name) => ({ name, status: "pass", errors: [] })),
+    errors: []
+  };
+}
 
 function engine() {
   return createRuleBasedMatchingEngine();

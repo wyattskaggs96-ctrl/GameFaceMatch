@@ -19,6 +19,8 @@ node scripts/catalog-tools.mjs checksum REPLACE_WITH_PACKAGE_JSON
 
 Publication requires no validation errors, two approved reviews per record, no fixture flags, no placeholders, valid checksums, and exact menu-instruction evidence.
 
+Before a release can enable recommendations, the definitive production publish gate must also pass. That gate requires the confirmed shipping-game environment, complete menu map, complete category counts, required evidence, valid checksums, passed import validation, catalog-manager approval, second-person verification, allowed record statuses, no unresolved blocking discrepancies, supported platform/version/mode/path, no fixtures, and no placeholders. The runtime recommendation gate rejects approved releases that do not include the full named-check publish-gate report.
+
 ## Rollback
 
 Use the previous immutable catalog package as the rollback target:

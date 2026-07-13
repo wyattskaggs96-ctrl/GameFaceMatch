@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { checkCatalogCompatibility, verifyManifestIntegrity } from "@/lib/catalog/catalog-integrity";
+import { PRODUCTION_PUBLISH_GATE_VERSION, requiredProductionPublishGateChecks, type ProductionPublishGateReport } from "@/lib/catalog/production-publish-gate";
 import { approveCatalogRelease, evaluateFeatureGates } from "@/lib/gates/feature-gates";
 import type { GameCatalogItem, GameCatalogManifest } from "@/types/domain";
 
@@ -39,11 +40,13 @@ describe("feature and capability gates", () => {
       supportedPlatforms: ["unit-test-platform"],
       supportedGameVersions: ["unit-test-version"]
     });
-    const approval = approveCatalogRelease({ manifest: catalog, integrity, compatibility });
+    const publishGate = passingPublishGate(catalog);
+    const approval = approveCatalogRelease({ manifest: catalog, integrity, compatibility, publishGate });
     const gates = evaluateFeatureGates({
       manifest: catalog,
       integrity,
       compatibility,
+      publishGate,
       environment: {
         nodeEnv: "production",
         adminCatalogToolsEnabled: true,
@@ -62,6 +65,35 @@ describe("feature and capability gates", () => {
     expect(gates.adminCatalogToolsEnabled.enabled).toBe(false);
     expect(gates.verifierToolsEnabled.enabled).toBe(false);
     expect(gates.manualStudyEnabled.enabled).toBe(false);
+  });
+
+  it("keeps an approved release closed until the definitive production publish gate passes", async () => {
+    const catalog = await approvedStyleCatalog();
+    const integrity = await verifyManifestIntegrity(catalog);
+    const compatibility = checkCatalogCompatibility(catalog, {
+      supportedPlatforms: ["unit-test-platform"],
+      supportedGameVersions: ["unit-test-version"]
+    });
+
+    const withoutGate = evaluateFeatureGates({ manifest: catalog, integrity, compatibility });
+    const fakeOkOnlyGate = evaluateFeatureGates({
+      manifest: catalog,
+      integrity,
+      compatibility,
+      publishGate: {
+        schemaVersion: PRODUCTION_PUBLISH_GATE_VERSION,
+        ok: true,
+        generatedAt: "2026-07-10T00:00:00.000Z",
+        catalogVersionID: catalog.catalogVersion.identifier,
+        checks: [],
+        errors: []
+      }
+    });
+
+    expect(withoutGate.recommendationsEnabled.enabled).toBe(false);
+    expect(withoutGate.recommendationsEnabled.reason).toMatch(/production publish gate/i);
+    expect(fakeOkOnlyGate.recommendationsEnabled.enabled).toBe(false);
+    expect(fakeOkOnlyGate.recommendationsEnabled.reason).toMatch(/production publish gate/i);
   });
 
   it("does not allow environment flags alone to bypass catalog verification", () => {
@@ -89,6 +121,17 @@ async function gatesFor(catalog: GameCatalogManifest) {
     supportedGameVersions: ["unit-test-version"]
   });
   return evaluateFeatureGates({ manifest: catalog, integrity, compatibility });
+}
+
+function passingPublishGate(catalog: GameCatalogManifest): ProductionPublishGateReport {
+  return {
+    schemaVersion: PRODUCTION_PUBLISH_GATE_VERSION,
+    ok: true,
+    generatedAt: "2026-07-10T00:00:00.000Z",
+    catalogVersionID: catalog.catalogVersion.identifier,
+    checks: requiredProductionPublishGateChecks.map((name) => ({ name, status: "pass", errors: [] })),
+    errors: []
+  };
 }
 
 async function approvedStyleCatalog(options: { itemOverrides?: Partial<GameCatalogItem> } = {}): Promise<GameCatalogManifest> {

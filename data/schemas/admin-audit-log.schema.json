@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/admin-audit-log.schema.json",
+  "title": "PhaseZeroAdminAuditLogSnapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "createdAt", "updatedAt", "entries"],
+  "properties": {
+    "schemaVersion": { "const": "phase0-admin-audit-log-v1" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/auditLogEntry" }
+    }
+  },
+  "$defs": {
+    "adminRole": {
+      "enum": ["primaryResearcher", "evidenceCustodian", "catalogManager", "secondVerifier", "readOnlyReviewer", "developer"]
+    },
+    "materialAction": {
+      "enum": [
+        "recordCreation",
+        "edit",
+        "evidenceAssociation",
+        "verification",
+        "rejection",
+        "recaptureRequest",
+        "import",
+        "validation",
+        "release",
+        "rollback",
+        "productionEnablement"
+      ]
+    },
+    "auditTargetType": {
+      "enum": [
+        "catalogRecord",
+        "evidenceFile",
+        "auditEnvironment",
+        "creationPath",
+        "menuMap",
+        "catalogPackage",
+        "validationRun",
+        "catalogRelease",
+        "rollback",
+        "productionGate",
+        "other"
+      ]
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actorID", "roles"],
+      "properties": {
+        "actorID": { "type": "string", "minLength": 1 },
+        "displayName": { "type": "string", "minLength": 1 },
+        "roles": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/adminRole" },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targetType", "targetID"],
+      "properties": {
+        "targetType": { "$ref": "#/$defs/auditTargetType" },
+        "targetID": { "type": "string", "minLength": 1 }
+      }
+    },
+    "auditLogEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "entryID",
+        "occurredAt",
+        "actor",
+        "action",
+        "target",
+        "summary",
+        "reason",
+        "relatedEntityIDs",
+        "beforeChecksum",
+        "afterChecksum",
+        "metadata",
+        "previousEntryHash",
+        "entryHash"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "phase0-admin-audit-log-v1" },
+        "entryID": { "type": "string", "minLength": 1 },
+        "occurredAt": { "type": "string", "format": "date-time" },
+        "actor": { "$ref": "#/$defs/actor" },
+        "action": { "$ref": "#/$defs/materialAction" },
+        "target": { "$ref": "#/$defs/target" },
+        "summary": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 },
+        "relatedEntityIDs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "beforeChecksum": { "type": ["string", "null"] },
+        "afterChecksum": { "type": ["string", "null"] },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "number", "boolean", "null"]
+          }
+        },
+        "previousEntryHash": { "type": "string", "minLength": 1 },
+        "entryHash": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

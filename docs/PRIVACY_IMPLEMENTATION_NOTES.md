@@ -6,7 +6,7 @@
 - Delete selected raw frames and depth data after profile generation unless the user separately opts in.
 - Save derived measurements only when the user explicitly chooses to save a profile.
 - Cloud sync is opt-in and is not part of the initial prototype.
-- Analytics must not contain raw face media or precise facial measurements.
+- Analytics must not contain raw face media, identifying frames, facial geometry, precise facial measurements, landmark coordinates, identity embeddings, or unencrypted profile content.
 - The user must be able to delete session data, saved profiles, screenshots, and all local data.
 
 ## Web MVP notes
@@ -20,6 +20,7 @@
 - Saved builds should contain derived settings and catalog metadata only, not raw face images.
 - No facial images are uploaded in the initial web prototype.
 - Manual upload fallback must follow the same deletion and non-retention expectations as camera capture.
+- The analytics contract is provider-independent and defaults to local/no-op behavior. No analytics SDK or external analytics provider is connected.
 
 ## Web MVP local data inventory
 
@@ -46,6 +47,14 @@ Raw image bytes must not be placed in `localStorage`. Saved builds are non-image
 The web MVP uses separate consent controls for camera use, face analysis for the current recommendation, temporary local processing, saving a derived profile, cloud backup if ever supported, saving raw images, saving a completed build, saving screenshots, future product-improvement participation, future model-training participation, and marketing or sharing.
 
 Cloud backup, raw image saving, screenshot saving, future product-improvement participation, future model-training participation, and marketing/sharing remain unavailable until separately designed, approved, and implemented. Screenshot files stay temporary and deletable. Raw face media retention defaults to no.
+
+## Privacy-safe analytics
+
+The MVP defines a privacy-safe analytics abstraction in `web/lib/analytics/privacy-safe-analytics.ts` and documents it in `docs/ANALYTICS_CONTRACT.md`.
+
+Allowed events are limited to coarse product events such as capture started, capture completed, capture abandoned, broad quality failure category, retake, result blocked, catalog unavailable, profile deleted, refinement started, and refinement completed.
+
+Payloads are intentionally narrow. Runtime validation rejects unknown keys, raw image or Blob URL values, media-like strings, frame references, facial geometry, exact measurements, landmarks, embeddings, profile content, object/array payload values, and long free-form strings. The default implementation is no-op or local memory only until the owner explicitly approves an analytics provider.
 
 ## Mobile testing privacy notes
 

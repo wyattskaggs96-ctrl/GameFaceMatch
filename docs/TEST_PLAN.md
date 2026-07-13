@@ -102,6 +102,17 @@ Commerce tests should include:
 - No fake purchase state
 - Catalog unavailable prevents paid recommendation claims
 
+## Privacy-safe analytics coverage
+
+Analytics tests should include:
+
+- Allowed product event names only
+- Local or no-op default implementation
+- No approved external provider by default
+- Rejection of raw images, object URLs, data URLs, identifying frames, facial geometry, exact measurements, landmarks, embeddings, and unencrypted profile content
+- Rejection of unknown payload keys and long free-form strings
+- No analytics SDK or network provider required for the MVP
+
 ## Browser end-to-end coverage
 
 The active web MVP uses Playwright for production-representative browser coverage under `web/tests/e2e/`.

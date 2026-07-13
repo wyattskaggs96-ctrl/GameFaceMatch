@@ -1,5 +1,20 @@
 export type { BrowserCameraService } from "../lib/capture/browser-camera-service";
 export { createBrowserCameraService } from "../lib/capture/browser-camera-service";
+export type {
+  AnalyticsEvent,
+  AnalyticsEventName,
+  AnalyticsPayload,
+  AnalyticsValidationResult,
+  PrivacySafeAnalytics
+} from "../lib/analytics/privacy-safe-analytics";
+export {
+  ANALYTICS_SCHEMA_VERSION,
+  assertAnalyticsProviderApproved,
+  createAnalyticsEvent,
+  createLocalAnalyticsRecorder,
+  createNoopAnalytics,
+  validateAnalyticsEvent
+} from "../lib/analytics/privacy-safe-analytics";
 export type { ActiveCaptureSession } from "../lib/capture/capture-session";
 export {
   REQUIRED_CAPTURE_ANGLES,

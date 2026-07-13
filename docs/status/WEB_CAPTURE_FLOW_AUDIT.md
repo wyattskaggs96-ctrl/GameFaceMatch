@@ -12,6 +12,8 @@ This audit covers the active responsive web MVP capture flow under `web/`. The w
 - The required capture plan is five RGB images: straight-on, left 45-degree, right 45-degree, left profile, and right profile.
 - The web capture state machine tracks five required views plus optional slightly elevated front, slightly lowered front, hairline detail, and facial-hair detail views.
 - Completion, quality failure, retake requests, per-view abandonment, recovery, and optional-view skips are tracked per view so one failed view does not force a full restart.
+- The capture review includes a face-region coverage map for forehead, temples, brows, eyes, nose, cheeks, mouth, chin, jaw, ears, and hairline with Missing, Weak, Sufficient, and Conflicting/unusable states.
+- Coverage states include text and icons in addition to color and provide selective-retake buttons for the specific views that need attention.
 - Per-angle instructions distinguish front, three-quarter, and profile views.
 - Browser capability panel distinguishes secure context, camera API support, permission state, camera availability, matching camera availability, and upload fallback.
 - Permission recovery copy covers iPhone Safari and Android Chrome reset paths.

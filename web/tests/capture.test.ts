@@ -8,8 +8,10 @@ import {
   removeAngleCapture,
   retakeAngle,
   setAngleCapture,
-  setAngleError
+  setAngleError,
+  setAngleManualConfirmation
 } from "@/lib/capture/capture-session";
+import { createCaptureCoverageMap } from "@/lib/capture/capture-coverage";
 import {
   abandonGuidedCaptureView,
   createGuidedCaptureStateMachine,
@@ -27,7 +29,7 @@ import {
   shouldDownscaleImage,
   validateImageMetadata
 } from "@/lib/capture/image-validation";
-import type { CapturedAngleID, TemporaryImageReference } from "@/types/domain";
+import type { CapturedAngleID, ImageQualityReport, TemporaryImageReference } from "@/types/domain";
 
 describe("capture session", () => {
   it("initializes a multi-view state machine with required and optional RGB views", () => {
@@ -123,6 +125,80 @@ describe("capture session", () => {
     expect(() => skipOptionalGuidedCaptureView(createGuidedCaptureStateMachine(), "front", "Required view cannot be skipped.")).toThrow(
       /Cannot skip required/
     );
+  });
+
+  it("tracks missing coverage regions and selective retake targets", () => {
+    const session = createInitialCaptureSession();
+    expect(session.coverageMap.regions.forehead.state).toBe("missing");
+    expect(session.coverageMap.regions.ears.retakeAngleIDs).toEqual(["leftProfile", "rightProfile"]);
+    expect(session.coverageMap.counts.missing).toBe(11);
+  });
+
+  it("marks present but unconfirmed coverage as weak", () => {
+    const session = setAngleCapture(createInitialCaptureSession(), "straightOn", image("straightOn", "blob:front"), "upload").session;
+    expect(session.coverageMap.regions.forehead.state).toBe("weak");
+    expect(session.coverageMap.regions.brows.state).toBe("weak");
+  });
+
+  it("marks coverage sufficient after required views and manual confirmations are complete", () => {
+    let session = createInitialCaptureSession();
+    for (const angleID of ["straightOn", "left45", "right45", "leftProfile", "rightProfile"] as const) {
+      session = setAngleCapture(session, angleID, image(angleID, `blob:${angleID}`), "upload", qualityReport("ready")).session;
+      session = setAngleManualConfirmation(session, angleID, {
+        requestedAngle: true,
+        neutralExpression: true,
+        onePerson: true
+      });
+    }
+    expect(session.coverageMap.counts.sufficient).toBe(11);
+    expect(session.coverageMap.blockingRegionIDs).toEqual([]);
+  });
+
+  it("marks blocking quality as conflicting unusable without restarting other coverage", () => {
+    let session = createInitialCaptureSession();
+    session = setAngleCapture(session, "straightOn", image("straightOn", "blob:front"), "upload", qualityReport("ready")).session;
+    session = setAngleManualConfirmation(session, "straightOn", {
+      requestedAngle: true,
+      neutralExpression: true,
+      onePerson: true
+    });
+    session = setAngleCapture(session, "rightProfile", image("rightProfile", "blob:right-profile"), "upload", qualityReport("ready")).session;
+    session = setAngleManualConfirmation(session, "rightProfile", {
+      requestedAngle: true,
+      neutralExpression: true,
+      onePerson: true
+    });
+    session = setAngleCapture(session, "leftProfile", image("leftProfile", "blob:left-profile"), "upload", qualityReport("blocked")).session;
+    expect(session.coverageMap.regions.ears.state).toBe("conflictingUnusable");
+    expect(session.coverageMap.regions.ears.retakeAngleIDs).toEqual(["leftProfile"]);
+    expect(session.coverageMap.regions.mouth.state).toBe("sufficient");
+  });
+
+  it("recomputes coverage after selective retake and removal", () => {
+    let session = createInitialCaptureSession();
+    session = setAngleCapture(session, "leftProfile", image("leftProfile", "blob:left-profile"), "upload", qualityReport("ready")).session;
+    session = setAngleManualConfirmation(session, "leftProfile", {
+      requestedAngle: true,
+      neutralExpression: true,
+      onePerson: true
+    });
+    session = setAngleCapture(session, "rightProfile", image("rightProfile", "blob:right-profile"), "upload", qualityReport("ready")).session;
+    session = setAngleManualConfirmation(session, "rightProfile", {
+      requestedAngle: true,
+      neutralExpression: true,
+      onePerson: true
+    });
+    expect(session.coverageMap.regions.ears.state).toBe("sufficient");
+    const retaken = retakeAngle(session, "leftProfile").session;
+    expect(retaken.coverageMap.regions.ears.state).toBe("missing");
+    expect(retaken.coverageMap.regions.ears.retakeAngleIDs).toEqual(["leftProfile"]);
+  });
+
+  it("can build a standalone coverage map from captured angles", () => {
+    const session = setAngleCapture(createInitialCaptureSession(), "straightOn", image("straightOn", "blob:front"), "upload").session;
+    const coverage = createCaptureCoverageMap(session.angles, new Date("2026-07-10T00:00:00.000Z"));
+    expect(coverage.version).toBe("web-rgb-coverage-map-1.0.0");
+    expect(coverage.regions).toHaveProperty("hairline");
   });
 
   it("cancels the session and returns every temporary object URL for cleanup", () => {
@@ -250,4 +326,28 @@ function image(angleID: CapturedAngleID, objectUrl: string): TemporaryImageRefer
     },
     objectUrl
   );
+}
+
+function qualityReport(overallState: ImageQualityReport["overallState"]): ImageQualityReport {
+  return {
+    decodedSuccessfully: { value: true, evidence: "measured", label: "Decoded" },
+    width: { value: 900, evidence: "measured", label: "Width" },
+    height: { value: 1200, evidence: "measured", label: "Height" },
+    aspectRatio: { value: 0.75, evidence: "measured", label: "Aspect ratio" },
+    fileSizeBytes: { value: 1024, evidence: "measured", label: "File size" },
+    brightnessEstimate: { value: 128, evidence: "estimated", label: "Brightness" },
+    highlightClippingEstimate: { value: 0, evidence: "estimated", label: "Highlights" },
+    shadowClippingEstimate: { value: 0, evidence: "estimated", label: "Shadows" },
+    sharpnessEstimate: { value: 60, evidence: "estimated", label: "Sharpness" },
+    lightingImbalanceEstimate: { value: 0, evidence: "estimated", label: "Lighting imbalance" },
+    orientation: { value: "portrait", evidence: "measured", label: "Orientation" },
+    duplicateImage: { value: false, evidence: "measured", label: "Duplicate" },
+    requiredAnglePresent: { value: true, evidence: "measured", label: "Required angle present" },
+    userConfirmedRequestedAngle: { value: true, evidence: "userConfirmed", label: "Requested angle" },
+    userConfirmedNeutralExpression: { value: true, evidence: "userConfirmed", label: "Neutral expression" },
+    userConfirmedOnePerson: { value: true, evidence: "userConfirmed", label: "One person" },
+    advisoryMessages: overallState === "needsReview" ? ["Synthetic advisory for coverage test."] : [],
+    blockingMessages: overallState === "blocked" ? ["Synthetic blocking issue for coverage test."] : [],
+    overallState
+  };
 }

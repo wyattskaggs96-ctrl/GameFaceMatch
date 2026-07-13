@@ -28,6 +28,7 @@ import {
 } from "@/lib/capture/image-quality-service";
 import { createTemporaryImageReference, isHeicOrHeif, prepareImageForAnalysis, validateImageFile } from "@/lib/capture/image-validation";
 import { createLocalFaceLandmarkProvider } from "@/lib/face-landmarks/face-landmark-worker-client";
+import type { CaptureCoverageRegion, CaptureCoverageState } from "@/lib/capture/capture-coverage";
 import type { CapturedAngle, CapturedAngleID, CaptureGuidanceReport, CaptureSource, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
 
 export function GuidedCaptureFlow({
@@ -597,6 +598,7 @@ export function GuidedCaptureFlow({
             recognition and sensitive-trait inference are not performed. If local landmarks are unavailable, use the manual confirmations below.
           </p>
         </div>
+        <CoverageMapPanel coverageRegions={Object.values(session.coverageMap.regions)} onRetake={retake} />
         <div className="review-grid" aria-label="Per-angle image quality review">
           {session.angles.map((angle) => {
             const report = reviewReport.angleReports[angle.id];
@@ -787,6 +789,58 @@ export function GuidedCaptureFlow({
   );
 }
 
+function CoverageMapPanel({
+  coverageRegions,
+  onRetake
+}: {
+  coverageRegions: CaptureCoverageRegion[];
+  onRetake: (angleID: CapturedAngleID) => void;
+}) {
+  const attentionCount = coverageRegions.filter((region) => region.state !== "sufficient").length;
+  return (
+    <section className="coverage-map-panel" aria-labelledby="coverage-map-title">
+      <div className="status-row">
+        <div>
+          <p className="eyebrow">Coverage map</p>
+          <h3 id="coverage-map-title">Selective retake by face region</h3>
+        </div>
+        <StatusBadge tone={attentionCount === 0 ? "success" : "warning"}>{attentionCount === 0 ? "All sufficient" : `${attentionCount} need review`}</StatusBadge>
+      </div>
+      <p className="supporting">
+        Coverage is estimated from required RGB view presence, browser quality checks, local guidance messages, and your manual confirmations. Icons and text
+        are shown with color so the map is readable without relying on color alone.
+      </p>
+      <div className="coverage-map-grid" aria-label="Face-region coverage states">
+        {coverageRegions.map((region) => (
+          <article className={`coverage-region coverage-${region.state}`} key={region.definition.id}>
+            <div className="coverage-region-header">
+              <span className="coverage-icon" aria-hidden="true">
+                {coverageIconForState(region.state)}
+              </span>
+              <div>
+                <strong>{region.definition.label}</strong>
+                <span>{region.definition.icon} region cue</span>
+              </div>
+              <StatusBadge tone={coverageTone(region.state)}>{region.statusText}</StatusBadge>
+            </div>
+            <p>{region.messages[0]}</p>
+            <p className="field-note">Supporting views: {formatAngleIDs(region.supportingAngleIDs)}</p>
+            {region.retakeAngleIDs.length > 0 ? (
+              <div className="button-row compact-buttons">
+                {region.retakeAngleIDs.map((angleID) => (
+                  <Button variant="secondary" key={angleID} onClick={() => onRetake(angleID)}>
+                    Retake {angleLabel(angleID)}
+                  </Button>
+                ))}
+              </div>
+            ) : null}
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function LiveGuidancePanel({
   guidance,
   isAnalyzing,
@@ -959,4 +1013,32 @@ function formatExpression(report: FaceLandmarkReport) {
     expression.smileLikelihood === null ? null : `Smile ${expression.smileLikelihood}`
   ].filter(Boolean);
   return parts.length > 0 ? parts.join(" / ") : "Unavailable";
+}
+
+function coverageTone(state: CaptureCoverageState) {
+  if (state === "sufficient") return "success";
+  if (state === "weak") return "warning";
+  return "danger";
+}
+
+function coverageIconForState(state: CaptureCoverageState) {
+  if (state === "sufficient") return "OK";
+  if (state === "weak") return "!";
+  if (state === "missing") return "X";
+  return "?";
+}
+
+function formatAngleIDs(angleIDs: CapturedAngleID[]) {
+  return angleIDs.map(angleLabel).join(", ");
+}
+
+function angleLabel(angleID: CapturedAngleID) {
+  const labels: Record<CapturedAngleID, string> = {
+    straightOn: "front",
+    left45: "left 45",
+    right45: "right 45",
+    leftProfile: "left profile",
+    rightProfile: "right profile"
+  };
+  return labels[angleID];
 }

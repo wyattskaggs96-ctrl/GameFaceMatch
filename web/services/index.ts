@@ -43,6 +43,14 @@ export {
   skipOptionalGuidedCaptureView,
   summarizeGuidedCapture
 } from "../lib/capture/capture-state-machine";
+export type {
+  CaptureCoverageMap,
+  CaptureCoverageRegion,
+  CaptureCoverageRegionDefinition,
+  CaptureCoverageRegionID,
+  CaptureCoverageState
+} from "../lib/capture/capture-coverage";
+export { captureCoverageRegionDefinitions, createCaptureCoverageMap } from "../lib/capture/capture-coverage";
 export type { BrowserImageQualityService, ImageQualityInput, PixelSample } from "../lib/capture/image-quality-service";
 export {
   applyManualConfirmationToReport,

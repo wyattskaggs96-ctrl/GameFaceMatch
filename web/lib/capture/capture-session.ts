@@ -16,6 +16,7 @@ import {
   requestCapturedAngleRetakeInStateMachine,
   type GuidedCaptureStateMachine
 } from "./capture-state-machine";
+import { createCaptureCoverageMap, type CaptureCoverageMap } from "./capture-coverage";
 
 export interface ActiveCaptureSession {
   id: string;
@@ -27,6 +28,7 @@ export interface ActiveCaptureSession {
   errorMessage?: string;
   angles: CapturedAngle[];
   captureState: GuidedCaptureStateMachine;
+  coverageMap: CaptureCoverageMap;
 }
 
 export interface CaptureSessionMutation {
@@ -66,6 +68,17 @@ export const REQUIRED_CAPTURE_ANGLES: ReadonlyArray<
 
 export function createInitialCaptureSession(now = new Date()): ActiveCaptureSession {
   const timestamp = now.toISOString();
+  const angles = REQUIRED_CAPTURE_ANGLES.map((angle) => ({
+    ...angle,
+    status: "empty" as const,
+    validationStatus: "notStarted" as const,
+    manualConfirmation: {
+      requestedAngle: false,
+      neutralExpression: false,
+      onePerson: false
+    },
+    validationErrors: []
+  }));
   return {
     id: `session-${timestamp}`,
     createdAt: timestamp,
@@ -74,17 +87,8 @@ export function createInitialCaptureSession(now = new Date()): ActiveCaptureSess
     status: "active",
     currentAngleID: "straightOn",
     captureState: createGuidedCaptureStateMachine(now),
-    angles: REQUIRED_CAPTURE_ANGLES.map((angle) => ({
-      ...angle,
-      status: "empty",
-      validationStatus: "notStarted",
-      manualConfirmation: {
-        requestedAngle: false,
-        neutralExpression: false,
-        onePerson: false
-      },
-      validationErrors: []
-    }))
+    coverageMap: createCaptureCoverageMap(angles, now),
+    angles
   };
 }
 
@@ -129,29 +133,30 @@ export function setAngleCapture(
         }
       : angle
   );
+  const nextSession = {
+    ...session,
+    status: getMissingRequiredAngles(nextAngles).length === 0 ? "complete" : "active",
+    angles: nextAngles,
+    captureState: recordCapturedAngleInStateMachine(session.captureState, angleID, {
+      source,
+      qualityReport,
+      notes: captureGuidanceReport
+        ? [
+            `Live quality score ${captureGuidanceReport.realtimeQuality.score}/100.`,
+            `${captureGuidanceReport.realtimeQuality.blockingSignalCount} blocking signals; ${captureGuidanceReport.realtimeQuality.advisorySignalCount} advisory signals.`
+          ]
+        : []
+    }),
+    updatedAt: new Date().toISOString()
+  } satisfies ActiveCaptureSession;
   return {
-    session: {
-      ...session,
-      status: getMissingRequiredAngles(nextAngles).length === 0 ? "complete" : "active",
-      angles: nextAngles,
-      captureState: recordCapturedAngleInStateMachine(session.captureState, angleID, {
-        source,
-        qualityReport,
-        notes: captureGuidanceReport
-          ? [
-              `Live quality score ${captureGuidanceReport.realtimeQuality.score}/100.`,
-              `${captureGuidanceReport.realtimeQuality.blockingSignalCount} blocking signals; ${captureGuidanceReport.realtimeQuality.advisorySignalCount} advisory signals.`
-            ]
-          : []
-      }),
-      updatedAt: new Date().toISOString()
-    },
+    session: refreshCaptureCoverage(nextSession),
     objectUrlsToRevoke
   };
 }
 
 export function setAngleError(session: ActiveCaptureSession, angleID: CapturedAngleID, validationErrors: string[]): ActiveCaptureSession {
-  return {
+  return refreshCaptureCoverage({
     ...session,
     status: "active",
     captureState: markCapturedAngleFailureInStateMachine(session.captureState, angleID, validationErrors.join(" ")),
@@ -170,7 +175,7 @@ export function setAngleError(session: ActiveCaptureSession, angleID: CapturedAn
         : angle
     ),
     updatedAt: new Date().toISOString()
-  };
+  });
 }
 
 export function retakeAngle(session: ActiveCaptureSession, angleID: CapturedAngleID): CaptureSessionMutation {
@@ -187,7 +192,7 @@ export function setAngleManualConfirmation(
   confirmation: Partial<CapturedAngle["manualConfirmation"]>,
   qualityReport?: ImageQualityReport
 ): ActiveCaptureSession {
-  return {
+  return refreshCaptureCoverage({
     ...session,
     angles: session.angles.map((angle) =>
       angle.id === angleID
@@ -202,19 +207,19 @@ export function setAngleManualConfirmation(
         : angle
     ),
     updatedAt: new Date().toISOString()
-  };
+  });
 }
 
 export function cancelCaptureSession(session: ActiveCaptureSession): CaptureSessionMutation {
   const objectUrlsToRevoke = session.angles.flatMap((angle) => (angle.image?.objectUrl ? [angle.image.objectUrl] : []));
   const nextSession = createInitialCaptureSession();
   return {
-    session: {
+    session: refreshCaptureCoverage({
       ...nextSession,
       status: "cancelled",
       errorMessage: "Capture session cancelled.",
       captureState: abandonGuidedCaptureSession(session.captureState, "Capture session cancelled.")
-    },
+    }),
     objectUrlsToRevoke
   };
 }
@@ -254,33 +259,41 @@ function clearAngle(
   reason: string
 ): CaptureSessionMutation {
   const objectUrlsToRevoke = getObjectUrlsForAngle(session, angleID);
+  const nextSession = {
+    ...session,
+    status: "active",
+    currentAngleID,
+    captureState: requestCapturedAngleRetakeInStateMachine(session.captureState, angleID, reason),
+    angles: session.angles.map((angle) =>
+      angle.id === angleID
+        ? {
+            ...angle,
+            status: "empty",
+            source: undefined,
+            validationStatus: "notStarted",
+            qualityReport: undefined,
+            faceLandmarkReport: undefined,
+            captureGuidanceReport: undefined,
+            validationErrors: [],
+            image: undefined
+          }
+        : angle
+    ),
+    updatedAt: new Date().toISOString()
+  } satisfies ActiveCaptureSession;
   return {
-    session: {
-      ...session,
-      status: "active",
-      currentAngleID,
-      captureState: requestCapturedAngleRetakeInStateMachine(session.captureState, angleID, reason),
-      angles: session.angles.map((angle) =>
-        angle.id === angleID
-          ? {
-              ...angle,
-              status: "empty",
-              source: undefined,
-              validationStatus: "notStarted",
-              qualityReport: undefined,
-              faceLandmarkReport: undefined,
-              captureGuidanceReport: undefined,
-              validationErrors: [],
-              image: undefined
-            }
-          : angle
-      ),
-      updatedAt: new Date().toISOString()
-    },
+    session: refreshCaptureCoverage(nextSession),
     objectUrlsToRevoke
   };
 }
 
 function getObjectUrlsForAngle(session: ActiveCaptureSession, angleID: CapturedAngleID) {
   return session.angles.flatMap((angle) => (angle.id === angleID && angle.image?.objectUrl ? [angle.image.objectUrl] : []));
+}
+
+function refreshCaptureCoverage(session: ActiveCaptureSession): ActiveCaptureSession {
+  return {
+    ...session,
+    coverageMap: createCaptureCoverageMap(session.angles)
+  };
 }

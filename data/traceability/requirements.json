@@ -469,6 +469,7 @@
       "owningModule": "Phase 0 manual matching study",
       "implementationFiles": [
         "web/lib/phase-zero/phase-zero-manual-matching-study.ts",
+        "web/lib/phase-zero/phase-zero-manual-matching-study-module.ts",
         "web/lib/phase-zero/phase-zero-manual-matching-evaluation.ts",
         "data/schemas/manual-matching-study.schema.json",
         "data/fixtures/test-only/manual-matching-study/synthetic-study-result.json",
@@ -477,11 +478,12 @@
       ],
       "testFiles": [
         "web/tests/phase-zero-manual-matching-study.test.ts",
+        "web/tests/phase-zero-manual-matching-study-module.test.ts",
         "web/tests/phase-zero-manual-matching-evaluation.test.ts",
         "web/tests/phase-zero-status.test.ts"
       ],
       "status": "VERIFIED",
-      "evidence": "The manual study schema, validator, and evaluation harness track the requested study, consent, pseudonymous subject, capture, reference-view, reviewer, ranked-choice, subject-preference, mismatch, agreement, deletion, catalog-version, timestamp, top-one/top-three usefulness, selected-rank distribution, inter-reviewer agreement, preset confusion, mismatch reason, capture-mode/device, and confidence-calibration fields. Tests verify the required schema fields, fixture-only synthetic record, missing reference-view warnings, consent rejection, two-reviewer agreement, ranked top-three integrity, selected-rank validation, raw-media retention consent, fixture-only namespace enforcement, metric calculation, invalid-record exclusion, and fixture-derived metric labeling.",
+      "evidence": "The manual study schema, operational module, validator, and evaluation harness track the requested study, consent checkpoints, pseudonymous subject, capture, reference-view checklist, reviewer assignment, independent ranked-choice reviews, hair and facial-hair choices, subject-preference, mismatch, agreement, deletion confirmation, catalog-version, timestamp, exportable non-public reports, top-one/top-three usefulness, selected-rank distribution, inter-reviewer agreement, preset confusion, mismatch reason, capture-mode/device, and confidence-calibration fields. Tests verify the required schema fields, fixture-only synthetic record, missing reference-view warnings, consent rejection, two-reviewer agreement, ranked top-three integrity, selected-rank validation, raw-media retention consent, fixture-only namespace enforcement, operational workflow checkpoints, non-public export defaults, metric calculation, invalid-record exclusion, and fixture-derived metric labeling.",
       "blocker": "",
       "owner": "Catalog systems architect",
       "lastCheckedDate": "2026-07-12"

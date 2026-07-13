@@ -49,8 +49,18 @@ Hardening checks should include:
 
 ## Manual-study evaluation harness coverage
 
-The Phase 0 manual top-three feasibility evaluation harness should be exercised with fixture-only records until real approved study results exist. Tests should cover:
+The Phase 0 manual top-three feasibility operational module and evaluation harness should be exercised with fixture-only records until real approved study results exist. Tests should cover:
 
+- Consent checkpoint recording
+- Pseudonymous participant ID generation
+- Required reference-image checklist completion
+- Reviewer assignment
+- Independent top-three ranking preservation
+- Hair and facial-hair choice recording
+- Participant preference recording
+- Mismatch reason recording
+- Raw-media deletion confirmation
+- Exportable non-public study reports
 - Top-one useful-match rate
 - Top-three useful-match rate
 - Rank selected distribution

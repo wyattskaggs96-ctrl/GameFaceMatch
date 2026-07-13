@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/duplicate-review.schema.json",
+  "title": "Phase0DuplicateReviewReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "category",
+    "generatedAt",
+    "recordCount",
+    "candidateCount",
+    "duplicateFileCount",
+    "visuallySimilarOptionCount",
+    "candidates",
+    "recordsInNativeOrder",
+    "summary",
+    "notice"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-duplicate-review-v1" },
+    "category": { "enum": ["heads", "hairstyles", "facialHair", "additionalAttributes"] },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "recordCount": { "type": "integer", "minimum": 0 },
+    "candidateCount": { "type": "integer", "minimum": 0 },
+    "duplicateFileCount": { "type": "integer", "minimum": 0 },
+    "visuallySimilarOptionCount": { "type": "integer", "minimum": 0 },
+    "candidates": { "type": "array", "items": { "$ref": "#/$defs/candidate" } },
+    "recordsInNativeOrder": { "type": "array", "items": { "$ref": "#/$defs/requiredText" } },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewedCount",
+        "notDuplicateCount",
+        "originalEntriesPreserved",
+        "nativeOrderPreserved",
+        "noAutomaticMergeOrDelete",
+        "verifiedGameFactsCreated"
+      ],
+      "properties": {
+        "reviewedCount": { "type": "integer", "minimum": 0 },
+        "notDuplicateCount": { "type": "integer", "minimum": 0 },
+        "originalEntriesPreserved": { "const": true },
+        "nativeOrderPreserved": { "const": true },
+        "noAutomaticMergeOrDelete": { "const": true },
+        "verifiedGameFactsCreated": { "const": false }
+      }
+    },
+    "notice": {
+      "type": "string",
+      "pattern": "tooling assistance.*never deletes|never deletes.*tooling assistance"
+    }
+  },
+  "$defs": {
+    "requiredText": {
+      "type": "string",
+      "minLength": 1,
+      "not": { "pattern": "REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\\b(TBD|TODO|PLACEHOLDER|MOCK)\\b" }
+    },
+    "decision": {
+      "enum": ["unreviewed", "confirmedDuplicate", "nearDuplicate", "notDuplicate", "needsRecapture"]
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observationID", "candidateID", "researcherID", "observedAt", "decision", "notes"],
+      "properties": {
+        "observationID": { "$ref": "#/$defs/requiredText" },
+        "candidateID": { "$ref": "#/$defs/requiredText" },
+        "researcherID": { "$ref": "#/$defs/requiredText" },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "decision": { "$ref": "#/$defs/decision" },
+        "notes": { "$ref": "#/$defs/requiredText" }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateID",
+        "kind",
+        "firstStableInternalID",
+        "secondStableInternalID",
+        "firstNativeOrder",
+        "secondNativeOrder",
+        "sharedEvidenceFileIDs",
+        "comparedEvidenceFileIDs",
+        "checksum",
+        "perceptualHashDistance",
+        "perceptualSimilarity",
+        "toolConfidence",
+        "confidenceSource",
+        "confidenceIsGameFact",
+        "decision",
+        "researcherObservations",
+        "preservesNativeOrder",
+        "originalEntriesPreserved",
+        "recommendation"
+      ],
+      "properties": {
+        "candidateID": { "$ref": "#/$defs/requiredText" },
+        "kind": { "enum": ["duplicateFile", "visuallySimilarOption"] },
+        "firstStableInternalID": { "$ref": "#/$defs/requiredText" },
+        "secondStableInternalID": { "$ref": "#/$defs/requiredText" },
+        "firstNativeOrder": { "type": "integer", "minimum": 1 },
+        "secondNativeOrder": { "type": "integer", "minimum": 1 },
+        "sharedEvidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/requiredText" } },
+        "comparedEvidenceFileIDs": { "type": "array", "items": { "$ref": "#/$defs/requiredText" } },
+        "checksum": {
+          "type": ["string", "null"],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "perceptualHashDistance": { "type": ["integer", "null"], "minimum": 0 },
+        "perceptualSimilarity": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "toolConfidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "confidenceSource": { "enum": ["checksum", "perceptualHash"] },
+        "confidenceIsGameFact": { "const": false },
+        "decision": { "$ref": "#/$defs/decision" },
+        "researcherObservations": { "type": "array", "items": { "$ref": "#/$defs/observation" } },
+        "preservesNativeOrder": { "const": true },
+        "originalEntriesPreserved": { "const": true },
+        "recommendation": { "$ref": "#/$defs/requiredText" }
+      }
+    }
+  }
+}

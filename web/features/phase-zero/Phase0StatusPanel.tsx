@@ -10,6 +10,7 @@ import { CaptureConfigurationEditor } from "./CaptureConfigurationEditor";
 import { CaptureConsistencyQA } from "./CaptureConsistencyQA";
 import { CreationPathAuditWorkspace } from "./CreationPathAuditWorkspace";
 import { DependencyTestRunner } from "./DependencyTestRunner";
+import { DuplicateReviewTool } from "./DuplicateReviewTool";
 import { EvidenceIntakeManager } from "./EvidenceIntakeManager";
 import { EnvironmentManifestWizard } from "./EnvironmentManifestWizard";
 import { FacialHairCaptureWorkspace } from "./FacialHairCaptureWorkspace";
@@ -18,6 +19,7 @@ import { HeadCaptureWorkspace } from "./HeadCaptureWorkspace";
 import { ImageDerivativeTool } from "./ImageDerivativeTool";
 import { IssueManagementWorkspace } from "./IssueManagementWorkspace";
 import { MenuMapEditor } from "./MenuMapEditor";
+import { RequiredViewCompletenessChecker } from "./RequiredViewCompletenessChecker";
 import { SourceVideoIntakeManager } from "./SourceVideoIntakeManager";
 
 const statusTone = {
@@ -68,6 +70,8 @@ export function Phase0StatusPanel({
       <SourceVideoIntakeManager />
       <ImageDerivativeTool />
       <CaptureConsistencyQA />
+      <RequiredViewCompletenessChecker />
+      <DuplicateReviewTool />
       <MenuMapEditor />
       <CaptureConfigurationEditor />
       <HeadCaptureWorkspace />

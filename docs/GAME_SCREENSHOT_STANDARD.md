@@ -49,6 +49,24 @@ Manual QA flags are required for observations the current tooling cannot prove a
 
 Automated and manual QA findings are warnings for human review only. They do not verify a College Football 27 option, create production catalog data, or replace second-person review.
 
+## Required View Completeness
+
+Before a candidate record can be considered production-complete, the audit tooling must report each category-specific required view as present and not rejected or awaiting recapture.
+
+Required-view completeness covers heads, hairstyles, facial hair, additional attributes, environment evidence, and menu evidence. The report shows required, present, missing, rejected, recapture-requested, and verified states so operators can recapture only the missing or rejected evidence. Completeness is a production block, not automatic verification.
+
+## Duplicate and Near-Duplicate Review
+
+Duplicate-review assistance may use exact SHA-256 matches to flag duplicate files and local perceptual hashes to surface visually similar options. These signals are tooling output only.
+
+Rules:
+
+- Never silently delete, merge, reorder, or verify catalog records.
+- Preserve native menu order and all original entries.
+- Distinguish byte-identical evidence files from visually similar game options.
+- Record researcher observations, including “not a duplicate” decisions.
+- Treat confidence as a review aid, not a verified College Football 27 fact.
+
 ## Derivative Crop and Alignment
 
 Derivative images may be created only to make reviewed evidence easier to inspect. Approved derivative transforms are crop, rotation correction, aspect-ratio preservation, standard framing guides, and face-region alignment guides.

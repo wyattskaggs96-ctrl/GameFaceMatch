@@ -910,6 +910,54 @@
       "lastCheckedDate": "2026-07-12"
     },
     {
+      "id": "GFM-P0-031",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Required view completeness checker",
+      "summary": "Create a checker that determines required evidence views by catalog category for heads, hairstyles, facial hair, additional attributes, environment evidence, and menu evidence; report required, present, missing, rejected, recapture-requested, and verified states; and block production when mandatory views are absent.",
+      "owningModule": "Phase 0 required view completeness",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-required-view-completeness.ts",
+        "web/features/phase-zero/RequiredViewCompletenessChecker.tsx",
+        "data/schemas/required-view-completeness.schema.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_SCREENSHOT_STANDARD.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-required-view-completeness.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Required-view completeness tests cover schema state fields, verified head views, missing mandatory views, hairstyle recapture blocks, rejected facial-hair evidence, additional-attribute evidence, environment evidence slots, menu evidence, and generic rejected/recapture states.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-P0-032",
+      "source": "EA Sports College Football 27 - Complete Appearance Catalog Research and Verification Prompt",
+      "section": "Duplicate and near-duplicate review tool",
+      "summary": "Build duplicate-assistance tooling using safe local checksums, perceptual hashes, and image similarity to show likely duplicates for human review while preserving native order, distinguishing duplicate files from visually similar options, recording researcher observations, allowing not-a-duplicate decisions, tracking confidence as tooling output, and keeping all original catalog entries.",
+      "owningModule": "Phase 0 duplicate review",
+      "implementationFiles": [
+        "web/lib/phase-zero/phase-zero-duplicate-review.ts",
+        "web/features/phase-zero/DuplicateReviewTool.tsx",
+        "data/schemas/duplicate-review.schema.json",
+        "web/lib/phase-zero/phase-zero-status.ts",
+        "docs/ARCHITECTURE.md",
+        "docs/GAME_SCREENSHOT_STANDARD.md"
+      ],
+      "testFiles": [
+        "web/tests/phase-zero-duplicate-review.test.ts",
+        "web/tests/phase-zero-status.test.ts"
+      ],
+      "status": "VERIFIED",
+      "evidence": "Duplicate-review tests cover schema safety fields, deterministic perceptual hashes from synthetic pixels, exact duplicate-file detection, visually similar option candidates, native-order preservation, not-a-duplicate decisions, confidence as tooling output, and no automatic merge/delete or game-fact creation.",
+      "blocker": "",
+      "owner": "Catalog systems architect",
+      "lastCheckedDate": "2026-07-12"
+    },
+    {
       "id": "GFM-MATCH-001",
       "source": "docs/MATCHING_ENGINE_SPEC.md",
       "section": "Rule-based top-three matching engine",

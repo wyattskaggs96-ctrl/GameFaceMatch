@@ -29,6 +29,12 @@ import {
 } from "@/lib/capture/image-quality-service";
 import { createTemporaryImageReference, isHeicOrHeif, prepareImageForAnalysis, validateImageFile } from "@/lib/capture/image-validation";
 import { createLocalFaceLandmarkProvider } from "@/lib/face-landmarks/face-landmark-worker-client";
+import {
+  createPerformanceRecord,
+  estimateTemporaryImageMemoryBytes,
+  shouldSkipLiveFrameAnalysis,
+  type PerformanceMetricRecord
+} from "@/lib/performance/performance-monitor";
 import { getRecoveryPlan, recoveryPlanForCameraError, recoveryPlanForGuidanceIssue, recoveryPlanForImageMessage } from "@/lib/reliability/recovery-actions";
 import type { CaptureCoverageRegion, CaptureCoverageState } from "@/lib/capture/capture-coverage";
 import type { CapturedAngle, CapturedAngleID, CaptureGuidanceReport, CaptureSource, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
@@ -38,13 +44,15 @@ export function GuidedCaptureFlow({
   cameraService,
   onSessionChange,
   onCancelSession,
-  onContinue
+  onContinue,
+  onPerformanceRecord
 }: {
   session: ActiveCaptureSession;
   cameraService: BrowserCameraService;
   onSessionChange: (session: ActiveCaptureSession) => void;
   onCancelSession: (session: ActiveCaptureSession) => void;
   onContinue: () => void;
+  onPerformanceRecord?: (record: PerformanceMetricRecord) => void;
 }) {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
@@ -60,6 +68,9 @@ export function GuidedCaptureFlow({
   const [isAnalyzingGuidance, setIsAnalyzingGuidance] = useState(false);
   const [useExtendedHold, setUseExtendedHold] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const guidanceInFlightRef = useRef(false);
+  const lastGuidanceStartedAtRef = useRef(0);
+  const guidanceSampleCountRef = useRef(0);
   const qualityService = useMemo(() => createBrowserImageQualityService(), []);
   const faceLandmarkProvider = useMemo(() => createLocalFaceLandmarkProvider(), []);
   const guidanceSession = useMemo(() => createCaptureGuidanceSession(), []);
@@ -111,6 +122,21 @@ export function GuidedCaptureFlow({
         timeout = setTimeout(() => void analyzeFrame(), 500);
         return;
       }
+      const frameStartedAt = performance.now();
+      if (
+        shouldSkipLiveFrameAnalysis({
+          nowMs: frameStartedAt,
+          lastStartedAtMs: lastGuidanceStartedAtRef.current,
+          minIntervalMs: 500,
+          isProcessing: guidanceInFlightRef.current,
+          documentVisibilityState: typeof document === "undefined" ? undefined : document.visibilityState
+        })
+      ) {
+        timeout = setTimeout(() => void analyzeFrame(), 300);
+        return;
+      }
+      guidanceInFlightRef.current = true;
+      lastGuidanceStartedAtRef.current = frameStartedAt;
       setIsAnalyzingGuidance(true);
       try {
         const previewQuality = createPreviewQualityReport(video);
@@ -137,6 +163,20 @@ export function GuidedCaptureFlow({
           );
         }
       } finally {
+        const durationMs = performance.now() - frameStartedAt;
+        guidanceSampleCountRef.current += 1;
+        const shouldRecordSample = guidanceSampleCountRef.current % 6 === 0 || durationMs > 120;
+        if (shouldRecordSample) {
+          onPerformanceRecord?.(
+            createPerformanceRecord({
+              operation: "liveGuidanceFrame",
+              durationMs,
+              itemCount: 1,
+              notes: ["Local camera preview guidance frame; skipped when previous analysis is still running."]
+            })
+          );
+        }
+        guidanceInFlightRef.current = false;
         if (!cancelled) {
           setIsAnalyzingGuidance(false);
           timeout = setTimeout(() => void analyzeFrame(), 550);
@@ -149,7 +189,7 @@ export function GuidedCaptureFlow({
       cancelled = true;
       if (timeout) clearTimeout(timeout);
     };
-  }, [currentAngle.id, faceLandmarkProvider, guidanceSession, stream, useExtendedHold]);
+  }, [currentAngle.id, faceLandmarkProvider, guidanceSession, onPerformanceRecord, stream, useExtendedHold]);
 
   useEffect(() => {
     setIsOffline(typeof navigator !== "undefined" ? !navigator.onLine : false);
@@ -201,6 +241,7 @@ export function GuidedCaptureFlow({
   }, [hasActiveCaptureData, stream]);
 
   async function startCamera() {
+    const startedAt = performance.now();
     setCameraError(null);
     setCameraErrorCode(null);
     setLifecycleNotice(null);
@@ -224,6 +265,14 @@ export function GuidedCaptureFlow({
       setCameraErrorCode(error instanceof CameraAccessError ? error.code : "unknownError");
       setCaptureMode("upload");
     } finally {
+      onPerformanceRecord?.(
+        createPerformanceRecord({
+          operation: "cameraStart",
+          durationMs: performance.now() - startedAt,
+          itemCount: 1,
+          notes: ["Camera preview request completed or fell back to upload without storing camera frames."]
+        })
+      );
       setIsStartingCamera(false);
     }
   }
@@ -325,68 +374,81 @@ export function GuidedCaptureFlow({
     imageElement: HTMLImageElement,
     processing?: Awaited<ReturnType<typeof prepareImageForAnalysis>>
   ) {
+    const startedAt = performance.now();
     const dimensions = { width: imageElement.naturalWidth, height: imageElement.naturalHeight };
-    const validation = await validateImageFile(file, dimensions, session.angles.filter((item) => item.id !== angleID), angleID, source, objectUrl);
-    if (validation.errors.length > 0) {
-      URL.revokeObjectURL(objectUrl);
-      onSessionChange(setAngleError(session, angleID, validation.errors));
-      return;
-    }
-    const existingAngle = session.angles.find((angle) => angle.id === angleID);
-    const image = createTemporaryImageReference(
-      {
-        fileName: file.name,
-        fileType: file.type,
-        fileSizeBytes: file.size,
-        width: dimensions.width,
-        height: dimensions.height,
-        originalWidth: processing?.originalWidth,
-        originalHeight: processing?.originalHeight,
-        originalFileSizeBytes: processing?.originalFileSizeBytes,
-        processingNotes: processing?.processingNotes,
-        wasDownscaled: processing?.wasDownscaled,
-        source,
-        associatedAngleID: angleID,
-        objectUrl,
-        signature: validation.signature
-      },
-      validation.signature
-    );
-    const imageQualityReport = qualityService.analyzeImageElement({
-      image,
-      imageElement,
-      existingAngles: session.angles.filter((item) => item.id !== angleID),
-      manualConfirmation: existingAngle?.manualConfirmation
-    });
-    const faceLandmarkReport = await faceLandmarkProvider.detect(
-      {
-        image: imageElement,
-        width: dimensions.width,
-        height: dimensions.height,
-        angleID
-      },
-      {
-        detectionTimeoutMs: 6_000
+    try {
+      const validation = await validateImageFile(file, dimensions, session.angles.filter((item) => item.id !== angleID), angleID, source, objectUrl);
+      if (validation.errors.length > 0) {
+        URL.revokeObjectURL(objectUrl);
+        onSessionChange(setAngleError(session, angleID, validation.errors));
+        return;
       }
-    );
-    const captureGuidanceReport = evaluateCaptureGuidanceFrame({
-      angleID,
-      faceLandmarkReport,
-      imageQualityReport,
-      timestampMs: Date.now(),
-      useExtendedHold
-    });
-    const mutation = setAngleCapture(
-      session,
-      angleID,
-      image,
-      source,
-      imageQualityReport,
-      faceLandmarkReport,
-      captureGuidanceReport
-    );
-    revokeObjectUrls(mutation.objectUrlsToRevoke);
-    onSessionChange(mutation.session);
+      const existingAngle = session.angles.find((angle) => angle.id === angleID);
+      const image = createTemporaryImageReference(
+        {
+          fileName: file.name,
+          fileType: file.type,
+          fileSizeBytes: file.size,
+          width: dimensions.width,
+          height: dimensions.height,
+          originalWidth: processing?.originalWidth,
+          originalHeight: processing?.originalHeight,
+          originalFileSizeBytes: processing?.originalFileSizeBytes,
+          processingNotes: processing?.processingNotes,
+          wasDownscaled: processing?.wasDownscaled,
+          source,
+          associatedAngleID: angleID,
+          objectUrl,
+          signature: validation.signature
+        },
+        validation.signature
+      );
+      const imageQualityReport = qualityService.analyzeImageElement({
+        image,
+        imageElement,
+        existingAngles: session.angles.filter((item) => item.id !== angleID),
+        manualConfirmation: existingAngle?.manualConfirmation
+      });
+      const faceLandmarkReport = await faceLandmarkProvider.detect(
+        {
+          image: imageElement,
+          width: dimensions.width,
+          height: dimensions.height,
+          angleID
+        },
+        {
+          detectionTimeoutMs: 6_000
+        }
+      );
+      const captureGuidanceReport = evaluateCaptureGuidanceFrame({
+        angleID,
+        faceLandmarkReport,
+        imageQualityReport,
+        timestampMs: Date.now(),
+        useExtendedHold
+      });
+      const mutation = setAngleCapture(
+        session,
+        angleID,
+        image,
+        source,
+        imageQualityReport,
+        faceLandmarkReport,
+        captureGuidanceReport
+      );
+      revokeObjectUrls(mutation.objectUrlsToRevoke);
+      onSessionChange(mutation.session);
+    } finally {
+      onPerformanceRecord?.(
+        createPerformanceRecord({
+          operation: "frameProcessing",
+          durationMs: performance.now() - startedAt,
+          memoryBytes: estimateTemporaryImageMemoryBytes([{ fileSizeBytes: file.size, width: dimensions.width, height: dimensions.height }]),
+          itemCount: 1,
+          notes: [`Processed one ${source} image for ${angleID}; metric excludes raw media bytes.`]
+        })
+      );
+    }
   }
 
   function selectAngle(angleID: CapturedAngleID) {

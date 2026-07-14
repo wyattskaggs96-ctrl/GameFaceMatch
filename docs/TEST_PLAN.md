@@ -152,6 +152,10 @@ Large local evidence workflows should avoid loading all raw evidence into memory
 - Evidence intake plans immediate previews, lazy previews, and metadata-only rows based on MIME type, size, and page budget
 - Catalog-manager review tables paginate records and evidence assets
 - Long validation/export-style work can be planned in deterministic chunks with a worker/background recommendation
+- Web MVP performance budgets exist for initial load, camera start, live guidance, selected-frame processing, profile generation, matching, catalog loading, screenshot refinement, temporary image memory, mobile responsiveness, failure recovery, and interrupted-session recovery
+- Performance records reject raw-media-style URLs in notes and aggregate local-only budget status without facial measurements, landmarks, identity data, or sensitive inferences
+- Live camera guidance skips frames when analysis is hidden, already processing, or too soon after the last frame
+- Cooperative chunk helpers yield long local loops so future catalog or evidence work can keep the main UI thread responsive
 
 Manual checks should verify browser responsiveness with large screenshot folders, source-video metadata entry, and catalog packages that are larger than the fixture set. Do not add real user face media or unverified game evidence to the repository while testing these paths.
 

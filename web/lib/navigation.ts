@@ -51,6 +51,7 @@ export const APP_SCREENS = [
   "matching-lab",
   "mobile-qa",
   "analytics",
+  "performance",
   "privacy-center",
   "settings"
 ] as const;

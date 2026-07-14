@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { AppShell } from "@/components/AppShell";
 import { Alert, Button, Card, LoadingState, ProgressBar, ScreenHeader, StepFlowRail } from "@/components/design-system";
@@ -58,6 +58,16 @@ import {
   hasRecoverableCaptureProgress,
   type OfflineRecoveryStatus
 } from "@/lib/recovery/offline-recovery";
+import {
+  createInitialLoadPerformanceRecord,
+  createLocalPerformanceMonitor,
+  createMobileResponsivenessRecord,
+  createPerformanceRecord,
+  estimateTemporaryImageMemoryBytes,
+  measureSyncPerformance,
+  type LocalPerformanceMonitor,
+  type PerformanceMetricRecord
+} from "@/lib/performance/performance-monitor";
 import { createInitialAttributeConfirmation, type AttributeConfirmationState } from "@/lib/profile/attribute-confirmation";
 import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { createInitialScreenshotRefinementSession, deleteScreenshotRefinementSession } from "@/lib/refinement/screenshot-refinement";
@@ -96,6 +106,14 @@ const DevelopmentAnalyticsDashboard =
     : dynamic(() => import("@/features/analytics/AnalyticsDashboard").then((module) => module.AnalyticsDashboard), {
         ssr: false,
         loading: () => <LoadingState label="Loading analytics dashboard" />
+      });
+
+const DevelopmentPerformanceDashboard =
+  process.env.NODE_ENV === "production"
+    ? null
+    : dynamic(() => import("@/features/performance/PerformanceDashboard").then((module) => module.PerformanceDashboard), {
+        ssr: false,
+        loading: () => <LoadingState label="Loading performance dashboard" />
       });
 
 const DevelopmentPhase0Status =
@@ -140,9 +158,11 @@ export default function HomePage() {
   const [captureRecoveryNotice, setCaptureRecoveryNotice] = useState<string | null>(null);
   const [offlineRecoveryStatus, setOfflineRecoveryStatus] = useState<OfflineRecoveryStatus | null>(null);
   const [analyticsRevision, setAnalyticsRevision] = useState(0);
+  const [performanceRevision, setPerformanceRevision] = useState(0);
   const cameraService = useMemo(() => createBrowserCameraService(), []);
   const privacyStore = useMemo(() => createMemoryPrivacyStore(), []);
   const analytics = useMemo<PrivacySafeAnalytics>(() => createLocalAnalyticsRecorder(), []);
+  const performanceMonitor = useMemo<LocalPerformanceMonitor>(() => createLocalPerformanceMonitor(), []);
   const savedProfileStorage = useMemo<SavedProfileStorage>(
     () => (typeof window === "undefined" ? createMemorySavedProfileStorage() : createBrowserSavedProfileStorage(window.sessionStorage, window.crypto)),
     []
@@ -160,7 +180,8 @@ export default function HomePage() {
         { id: "phase-0" as const, label: "Phase 0" },
         { id: "matching-lab" as const, label: "Matching Lab" },
         { id: "mobile-qa" as const, label: "Mobile QA" },
-        { id: "analytics" as const, label: "Analytics" }
+        { id: "analytics" as const, label: "Analytics" },
+        { id: "performance" as const, label: "Performance" }
       ]
     : PRIMARY_NAV_ITEMS;
   const stepFlowProgress = getStepFlowProgress(screen);
@@ -221,6 +242,14 @@ export default function HomePage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     trackAnalytics("appSessionStarted");
+    trackPerformance(createInitialLoadPerformanceRecord(window.performance));
+    trackPerformance(
+      createMobileResponsivenessRecord({
+        viewportWidth: window.visualViewport?.width ?? window.innerWidth,
+        viewportHeight: window.visualViewport?.height ?? window.innerHeight,
+        devicePixelRatio: window.devicePixelRatio
+      })
+    );
     const initialScreen = getScreenFromHash(window.location.hash);
     if (initialScreen) {
       setScreen(initialScreen);
@@ -231,13 +260,30 @@ export default function HomePage() {
 
   useEffect(() => {
     const repository = createBundledCatalogRepository();
+    const startedAt = typeof performance === "undefined" ? Date.now() : performance.now();
     void repository
       .loadRuntimeStatus()
       .then((status) => {
+        trackPerformance(
+          createPerformanceRecord({
+            operation: "catalogLoading",
+            durationMs: (typeof performance === "undefined" ? Date.now() : performance.now()) - startedAt,
+            itemCount: status.manifest.items.length,
+            notes: ["Validated bundled production catalog manifest and integrity state."]
+          })
+        );
         setCatalogRuntimeStatus(status);
         setCatalogRuntimeError(null);
       })
       .catch((error: unknown) => {
+        trackPerformance(
+          createPerformanceRecord({
+            operation: "catalogLoading",
+            durationMs: (typeof performance === "undefined" ? Date.now() : performance.now()) - startedAt,
+            itemCount: productionCatalogManifest.items.length,
+            notes: ["Catalog loading failed closed."]
+          })
+        );
         setCatalogRuntimeError(error instanceof Error ? error.message : "Catalog runtime validation failed closed.");
       });
   }, []);
@@ -250,6 +296,14 @@ export default function HomePage() {
     if (typeof window === "undefined") return;
     const snapshot = createCaptureRecoveryStore(window.sessionStorage).load();
     if (snapshot && hasRecoverableCaptureProgress(snapshot)) {
+      trackPerformance(
+        createPerformanceRecord({
+          operation: "interruptedSessionRecovery",
+          durationMs: 0,
+          itemCount: snapshot.completedAngleCount,
+          notes: ["Recovered non-raw capture metadata only; raw images are not restored."]
+        })
+      );
       setCaptureRecoveryNotice(
         `Recovered metadata for ${snapshot.completedAngleCount} of ${snapshot.totalAngleCount} capture angles from a previous browser session. Raw images are not restored; retake or re-upload any needed angle before continuing.`
       );
@@ -317,6 +371,14 @@ export default function HomePage() {
   function refreshPrivacyState() {
     setPrivacyRevision((value) => value + 1);
   }
+
+  const trackPerformance = useCallback(
+    (record: PerformanceMetricRecord) => {
+      performanceMonitor.record(record);
+      setPerformanceRevision((value) => value + 1);
+    },
+    [performanceMonitor]
+  );
 
   function trackAnalytics(name: AnalyticsEventName, payload: AnalyticsPayload = {}) {
     const result = analytics.track(name, payload);
@@ -399,6 +461,14 @@ export default function HomePage() {
         failedAngleCount: invalidAngles.length
       });
     }
+    trackPerformance(
+      createPerformanceRecord({
+        operation: "memoryUsage",
+        memoryBytes: estimateTemporaryImageMemoryBytes(nextSession.angles.flatMap((angle) => (angle.image ? [angle.image] : []))),
+        itemCount: nextSession.angles.filter((angle) => Boolean(angle.image)).length,
+        notes: ["Estimated active capture-image memory from metadata; raw image bytes are not stored in the metric."]
+      })
+    );
     setSession(nextSession);
     privacyStore.setCurrentSessionImages(nextSession.angles.flatMap((angle) => (angle.image ? [angle.image] : [])));
     if (typeof window !== "undefined") {
@@ -413,6 +483,7 @@ export default function HomePage() {
   }
 
   function deleteCurrentSession() {
+    const startedAt = typeof performance === "undefined" ? Date.now() : performance.now();
     trackAnalytics("deletionRequested", { deletionScope: "activeCaptureSession" });
     revokeObjectUrls(session.angles.flatMap((angle) => (angle.image?.objectUrl ? [angle.image.objectUrl] : [])));
     if (typeof window !== "undefined") createCaptureRecoveryStore(window.sessionStorage).clear();
@@ -425,6 +496,13 @@ export default function HomePage() {
     setCaptureRecoveryNotice(null);
     privacyStore.recordDeletionCompletion("active-capture-session");
     trackAnalytics("deletionCompleted", { deletionScope: "activeCaptureSession" });
+    trackPerformance(
+      createPerformanceRecord({
+        operation: "failureRecovery",
+        durationMs: (typeof performance === "undefined" ? Date.now() : performance.now()) - startedAt,
+        notes: ["Deleted active capture session, temporary references, and recovery metadata."]
+      })
+    );
     setDeletionRecorded(true);
     refreshPrivacyState();
   }
@@ -508,6 +586,7 @@ export default function HomePage() {
   }
 
   function deleteAllLocalData() {
+    const startedAt = typeof performance === "undefined" ? Date.now() : performance.now();
     trackAnalytics("deletionRequested", { deletionScope: "allLocalData" });
     revokeObjectUrls([
       ...session.angles.flatMap((angle) => (angle.image?.objectUrl ? [angle.image.objectUrl] : [])),
@@ -528,6 +607,13 @@ export default function HomePage() {
     setCaptureRecoveryNotice(null);
     setDeletionRecorded(true);
     trackAnalytics("deletionCompleted", { deletionScope: "allLocalData" });
+    trackPerformance(
+      createPerformanceRecord({
+        operation: "failureRecovery",
+        durationMs: (typeof performance === "undefined" ? Date.now() : performance.now()) - startedAt,
+        notes: ["Deleted all local app data and reset in-memory state."]
+      })
+    );
     refreshPrivacyState();
   }
 
@@ -564,11 +650,20 @@ export default function HomePage() {
 
   function createProfileFromCurrentSession() {
     const startedAt = typeof performance === "undefined" ? Date.now() : performance.now();
-    const profile = createStandardFaceProfile({
-      session,
-      attributes: attributeConfirmation,
-      userAgent: typeof navigator === "undefined" ? undefined : navigator.userAgent
-    });
+    const profile = measureSyncPerformance(
+      "profileGeneration",
+      () =>
+        createStandardFaceProfile({
+          session,
+          attributes: attributeConfirmation,
+          userAgent: typeof navigator === "undefined" ? undefined : navigator.userAgent
+        }),
+      trackPerformance,
+      {
+        itemCount: session.angles.length,
+        notes: ["Generated StandardFaceProfile from local metadata, quality summaries, and user-confirmed attributes."]
+      }
+    );
     const retentionActions = createProfileCreationRetentionPlan(session);
     const retainedSession = removeRawImagesFromCaptureSession(session);
     setStandardProfile(profile);
@@ -720,6 +815,7 @@ export default function HomePage() {
             session={session}
             cameraService={cameraService}
             onSessionChange={handleSessionChange}
+            onPerformanceRecord={trackPerformance}
             onCancelSession={(cancelledSession) => {
               privacyStore.deleteCurrentSession();
               privacyStore.recordDeletionCompletion("active-capture-session");
@@ -760,6 +856,7 @@ export default function HomePage() {
             detail={CATALOG_UNAVAILABLE_MESSAGE}
             actionLabel="View results"
             onAction={() => {
+              const matchingStartedAt = typeof performance === "undefined" ? Date.now() : performance.now();
               trackAnalytics("resultGenerated", {
                 resultOutcome: catalogIsEmpty ? "unavailable" : catalogRuntimeError ? "error" : "success",
                 resultBlockReason: catalogIsEmpty ? "catalogUnavailable" : catalogRuntimeError ? "matchingError" : undefined,
@@ -779,6 +876,18 @@ export default function HomePage() {
                   catalogRecordCount: 0
                 });
               }
+              trackPerformance(
+                createPerformanceRecord({
+                  operation: "matchingLatency",
+                  durationMs: (typeof performance === "undefined" ? Date.now() : performance.now()) - matchingStartedAt,
+                  itemCount: catalogRuntimeStatus?.manifest.items.length ?? productionCatalogManifest.items.length,
+                  notes: [
+                    catalogIsEmpty
+                      ? "Recommendation gate failed closed because the verified production catalog is empty."
+                      : "Recommendation gate and matching path evaluated against the current production catalog."
+                  ]
+                })
+              );
               navigate("results");
             }}
             loading
@@ -851,6 +960,12 @@ export default function HomePage() {
         ) : (
           <GameCatalogStatus />
         );
+      case "performance":
+        return isDevelopment && DevelopmentPerformanceDashboard ? (
+          <DevelopmentPerformanceDashboard records={performanceMonitor.getRecords()} key={performanceRevision} />
+        ) : (
+          <GameCatalogStatus />
+        );
       case "saved":
         return <SavedBuildsEmpty savedBuilds={savedBuilds} onDeleteSavedBuild={deleteSavedBuild} />;
       case "refinement":
@@ -869,12 +984,22 @@ export default function HomePage() {
               refreshPrivacyState();
             }}
             onRefinementCompleted={(completedSession) => {
+              const startedAt = typeof performance === "undefined" ? Date.now() : performance.now();
               const retentionActions = createRefinementCompletionRetentionPlan(completedSession);
               const mutation = deleteScreenshotRefinementSession(completedSession);
               setScreenshotSession(mutation.session);
               privacyStore.deleteScreenshotSession();
               recordRetentionActions(retentionActions);
               trackAnalytics("refinementCompleted", { refinementOutcome: "unavailable" });
+              trackPerformance(
+                createPerformanceRecord({
+                  operation: "screenshotRefinement",
+                  durationMs: (typeof performance === "undefined" ? Date.now() : performance.now()) - startedAt,
+                  memoryBytes: estimateTemporaryImageMemoryBytes(completedSession.slots.flatMap((slot) => (slot.screenshot ? [slot.screenshot] : []))),
+                  itemCount: completedSession.slots.filter((slot) => Boolean(slot.screenshot)).length,
+                  notes: ["Completed local screenshot-refinement scaffold and deleted screenshot session data."]
+                })
+              );
               refreshPrivacyState();
             }}
           />

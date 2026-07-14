@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "cf27-production-catalog-release-manager-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "previousCatalogVersionID": "empty-production",
+  "nextCatalogVersionID": "cf27-production-empty-2026-07-14",
+  "supersededRecords": [],
+  "correctedRecords": [],
+  "removedRecords": [],
+  "addedRecords": [],
+  "notes": "No production records are superseded because no eligible verification-candidate package exists."
+}

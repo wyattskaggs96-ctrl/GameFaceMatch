@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "cf27-production-catalog-release-manager-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "decision": "BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS",
+  "productionRecommendationsEnabled": false,
+  "activeProductionCatalogUnchanged": true,
+  "activeProductionCatalogVersion": "empty-production",
+  "candidatePackageID": null,
+  "candidateImportStatus": "NO_VERIFICATION_CANDIDATE_PACKAGE",
+  "recordsEvaluated": 0,
+  "recordsPromoted": 0,
+  "recordsRejected": 0,
+  "partialCategoriesPromoted": false,
+  "unsupportedOutputsFailClosed": true,
+  "blockers": [
+    "verificationCandidateImportNotPassed",
+    "zeroProductionEligibleRecords",
+    "candidateImportPassed",
+    "directShippingGameEvidence"
+  ],
+  "promotedRecordIDs": [],
+  "rejectedRecords": []
+}

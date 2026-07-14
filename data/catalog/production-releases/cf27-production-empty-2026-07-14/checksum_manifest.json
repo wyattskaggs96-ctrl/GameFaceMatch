@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "cf27-production-catalog-release-manager-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "releaseVersion": "cf27-production-empty-2026-07-14",
+  "manifestPackageChecksum": "ef2e1203ec9976864270c083de62b6269f560d6d68e021b554ab06ac66b2e8e1",
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path": "catalog_manifest.json",
+      "sha256": "ff7dfd549846e5b14184b9a94c2a0a89cd04caf0371fe93060fce21502e11913",
+      "sizeBytes": 503
+    },
+    {
+      "path": "release_notes.md",
+      "sha256": "29321cc441fde600628538a8aa73449056fd43d0ca6481d7fe65f941b8155c7c",
+      "sizeBytes": 723
+    },
+    {
+      "path": "production_publish_gate_report.json",
+      "sha256": "1f04076d9db93bcf0237e53a9147cd57bad7c6bcda6dea5c916335883cbb5d14",
+      "sizeBytes": 1638
+    },
+    {
+      "path": "production_readiness_decision.json",
+      "sha256": "8e2820bfe5e64929f486e92c977dfc5dece2133f226de54b8de57dfae39ec67a",
+      "sizeBytes": 775
+    },
+    {
+      "path": "supersession_map.json",
+      "sha256": "73cb45029f4fd59ce55dede91a726608db9e0cda6e56e68733ace578469b31bc",
+      "sizeBytes": 434
+    },
+    {
+      "path": "rollback_instructions.md",
+      "sha256": "623400da2f4945214c174aa56c96dd2815dd42c1be106ff44e2c5342d580f52b",
+      "sizeBytes": 586
+    }
+  ]
+}

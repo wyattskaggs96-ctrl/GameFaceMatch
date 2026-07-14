@@ -60,6 +60,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Production catalog release manager check",
+    command: "node",
+    args: ["scripts/cf27-production-catalog-release-manager.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Catalog record classification check",
     command: "node",
     args: ["scripts/catalog-record-classification.mjs", "--check"],

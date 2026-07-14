@@ -1,0 +1,17 @@
+{
+  "sourceType": "production",
+  "catalogVersion": {
+    "identifier": "cf27-production-empty-2026-07-14",
+    "gameVersion": "",
+    "platform": "",
+    "verifiedAt": null
+  },
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "isProduction": true,
+  "declaredItemCount": 0,
+  "releaseStatus": "rejectedRelease",
+  "previousCatalogVersionID": "empty-production",
+  "sourceCandidatePackageID": null,
+  "items": [],
+  "packageChecksum": "ef2e1203ec9976864270c083de62b6269f560d6d68e021b554ab06ac66b2e8e1"
+}

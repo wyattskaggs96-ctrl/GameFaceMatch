@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "production-publish-gate-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "releaseVersion": "cf27-production-empty-2026-07-14",
+  "catalogVersionID": "cf27-production-empty-2026-07-14",
+  "ok": false,
+  "checks": [
+    {
+      "name": "candidateImportPassed",
+      "status": "fail",
+      "errors": [
+        {
+          "code": "candidateImportPassed",
+          "message": "Verification-candidate package import did not pass."
+        }
+      ]
+    },
+    {
+      "name": "directShippingGameEvidence",
+      "status": "fail",
+      "errors": [
+        {
+          "code": "directShippingGameEvidence",
+          "message": "No promoted record has complete direct shipping-game evidence."
+        }
+      ]
+    },
+    {
+      "name": "stableIDsAndNativeOrder",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "name": "versionPlatformModePathMetadata",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "name": "qaSecondVerificationManagerApproval",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "name": "dependencyResolution",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "name": "noPlaceholdersFixturesOrResearch",
+      "status": "pass",
+      "errors": []
+    },
+    {
+      "name": "unsupportedOutputsFailClosed",
+      "status": "pass",
+      "errors": []
+    }
+  ],
+  "errors": [
+    {
+      "code": "candidateImportPassed",
+      "message": "Verification-candidate package import did not pass."
+    },
+    {
+      "code": "directShippingGameEvidence",
+      "message": "No promoted record has complete direct shipping-game evidence."
+    }
+  ]
+}

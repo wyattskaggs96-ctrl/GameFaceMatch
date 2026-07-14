@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "cf27-production-candidate-import-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "inputPath": "data/phase-zero/verification-candidate-package/catalog_manifest.json",
+  "isolatedEnvironment": {
+    "mode": "read-only-candidate-validation",
+    "productionCatalogMutationAllowed": false,
+    "productionRecommendationAccessAllowed": false
+  },
+  "packageID": "missing",
+  "ok": false,
+  "status": "NO_VERIFICATION_CANDIDATE_PACKAGE",
+  "summary": {
+    "recordCount": 0,
+    "evidenceCount": 0,
+    "rejectedRecordCount": 0,
+    "errorCount": 1,
+    "warningCount": 0
+  },
+  "checks": [
+    {
+      "name": "candidatePackageDiscovery",
+      "status": "fail",
+      "errors": [
+        {
+          "code": "candidatePackageMissing",
+          "message": "No verification-candidate package was found at data/phase-zero/verification-candidate-package/catalog_manifest.json.",
+          "repairSuggestion": "Place a catalog-manager-approved verification candidate package at the configured path, then rerun the isolated production-candidate import validator."
+        }
+      ],
+      "warnings": []
+    }
+  ],
+  "recordResults": [],
+  "rejectedRecords": [],
+  "errors": [
+    {
+      "check": "candidatePackageDiscovery",
+      "code": "candidatePackageMissing",
+      "message": "No verification-candidate package was found at data/phase-zero/verification-candidate-package/catalog_manifest.json.",
+      "repairSuggestion": "Place a catalog-manager-approved verification candidate package at the configured path, then rerun the isolated production-candidate import validator."
+    }
+  ],
+  "warnings": [],
+  "productionImportAllowed": false
+}

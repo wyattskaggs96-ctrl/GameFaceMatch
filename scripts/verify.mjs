@@ -54,6 +54,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Production candidate import gate check",
+    command: "node",
+    args: ["scripts/cf27-production-candidate-import-validator.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Catalog record classification check",
     command: "node",
     args: ["scripts/catalog-record-classification.mjs", "--check"],

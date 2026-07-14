@@ -11,3 +11,7 @@ Before public release, obtain review for:
 - Model-training consent
 - Advertising and accuracy claims
 - Accessibility requirements
+- Customer-support and incident response templates
+- Trademark complaint response workflow
+- Child-safety concern response workflow
+- Data incident notification criteria

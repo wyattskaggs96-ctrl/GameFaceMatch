@@ -37,6 +37,9 @@ Complete this before any paid launch.
 - [ ] Create refund request intake template.
 - [ ] Create catalog error report intake template.
 - [ ] Create deletion-help template.
+- [x] Create support and incident workflow templates in `docs/support/CUSTOMER_SUPPORT_AND_INCIDENT_PLAYBOOK.md`.
+- [x] Create machine-readable escalation rules in `data/support/customer_support_workflows.json`.
+- [ ] Approve human escalation contacts for privacy, security, payment, catalog, accessibility, trademark, and child-safety issues.
 
 ## Sales tax
 

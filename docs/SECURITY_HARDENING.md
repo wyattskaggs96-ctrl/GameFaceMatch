@@ -50,7 +50,7 @@ Verification: `web/tests/security-hardening.test.ts` covers configured-root acce
 | Administrative access | Local/internal only | Phase 0 tooling is development-only and not a cloud admin system. It should not be exposed on a public host without authentication and role design. |
 | Rate limiting | Not applicable to current static/local MVP | If a backend, upload endpoint, or payment webhook is added, rate limits and abuse controls become required before launch. |
 | Abuse prevention | Mostly policy and product gating today | The app prohibits identity recognition, sensitive-trait inference, fake game data, and production recommendations from fixtures or research records. |
-| Incident response | Documentation gap remains | A formal incident-response runbook is needed before any public deployment or external storage/payment/analytics provider is connected. |
+| Incident response | Draft runbook exists | `docs/support/CUSTOMER_SUPPORT_AND_INCIDENT_PLAYBOOK.md` and `data/support/customer_support_workflows.json` define support workflows, response templates, escalation rules, and human-review requirements. Owner contacts and provider-specific paths still must be approved before launch. |
 
 ## Medium Issues
 
@@ -58,7 +58,7 @@ Verification: `web/tests/security-hardening.test.ts` covers configured-root acce
 2. **Dev-only Phase 0 tools have no authentication.** They are hidden or unavailable in production builds, but a development server should not be exposed outside a trusted local network. If internal tools are ever hosted, add authentication, authorization, audit trails tied to named users, and rate limits.
 3. **Dependency audit currently reports two moderate advisories.** `npm audit --omit=dev` on 2026-07-14 reported two moderate PostCSS advisories through the current Next dependency. `npm audit --omit=dev --audit-level=high` exited successfully, so no high or critical production dependency advisories were reported. The suggested `npm audit fix --force` would install `next@9.3.3`, a breaking downgrade, so it was not applied.
 4. **CSP still permits inline scripts/styles in production.** This is common for framework compatibility, but a stricter nonce or hash-based CSP would be stronger. Tighten only after validating Next.js runtime behavior.
-5. **No formal incident-response runbook exists.** Public launch needs owner contacts, severity levels, user notification criteria, evidence preservation, rollback steps, and provider escalation procedures.
+5. **Incident-response contacts and provider paths are still incomplete.** The support and incident playbook now exists, but public launch still needs approved owner contacts, legal counsel path, hosting/provider escalation paths, support channel, and final notification criteria.
 
 ## Low Issues
 

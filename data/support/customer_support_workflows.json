@@ -1,0 +1,190 @@
+{
+  "version": "support-incident-v1",
+  "lastReviewed": "2026-07-14",
+  "defaultPolicy": {
+    "automatedSensitiveResponsesAllowed": false,
+    "humanReviewRequiredBeforeSending": true,
+    "doNotRequest": [
+      "raw face images",
+      "created-player screenshots with faces",
+      "passwords",
+      "payment credentials",
+      "recovery codes",
+      "API keys",
+      "sensitive traits",
+      "identity labels"
+    ],
+    "requiredDisclaimer": "GameFace Match is an independent companion application. It recommends closest available in-game settings, does not directly import faces into College Football 27, and is not affiliated with EA."
+  },
+  "severityLevels": [
+    {
+      "id": "S0",
+      "label": "Critical privacy, safety, legal, or data-integrity incident",
+      "targetFirstReview": "same day",
+      "ownerAction": "Stop affected launch or beta path, preserve non-sensitive evidence, notify Wyatt, and require human incident owner review."
+    },
+    {
+      "id": "S1",
+      "label": "Launch or beta blocker",
+      "targetFirstReview": "one business day",
+      "ownerAction": "Pause affected workflow or cohort until mitigation, rollback, or user guidance is approved."
+    },
+    {
+      "id": "S2",
+      "label": "Major support issue",
+      "targetFirstReview": "two business days",
+      "ownerAction": "Triage, assign owner, and decide hotfix versus documented workaround."
+    },
+    {
+      "id": "S3",
+      "label": "Routine support issue",
+      "targetFirstReview": "normal support queue",
+      "ownerAction": "Track for routine support response or next iteration."
+    }
+  ],
+  "workflows": [
+    {
+      "id": "incorrect-recommendation",
+      "title": "Incorrect recommendation",
+      "severity": "S1",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["catalogVersion", "gameVersion", "platform", "mode", "creationPath", "recommendationRank", "buildGuideStep", "nonFaceDescription", "deviceBrowser"],
+      "firstResponseTemplate": "Thanks for reporting a recommendation issue. We will review the catalog version, platform, mode, and build-guide step before making any claim about the correct game setting. Please do not send face images through support.",
+      "resolutionTemplate": "We reviewed the reported recommendation against the verified catalog and will either keep the current record, open a catalog correction, or block the affected recommendation until direct evidence and review are complete.",
+      "escalationRules": ["Escalate to catalog manager when a verified option, rank, or build step may be wrong.", "Escalate to S0 if an unverified or fixture option reached a production user.", "Never guess or suggest a replacement option without verified catalog evidence."]
+    },
+    {
+      "id": "catalog-option-missing",
+      "title": "Catalog option missing",
+      "severity": "S2",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["platform", "gameVersion", "patch", "mode", "creationPath", "visibleNativeLabel", "visibleNativeOrder", "evidenceAvailability"],
+      "firstResponseTemplate": "Thanks for flagging a possible missing catalog option. Catalog additions require direct shipping-game evidence and verification before they can appear in recommendations.",
+      "resolutionTemplate": "The missing-option report has been routed to the catalog audit workflow. It will remain unavailable in production until evidence, review, and production gates pass.",
+      "escalationRules": ["Escalate to catalog audit when a user reports an option not present in the approved catalog.", "Escalate to second verifier if the option conflicts with a verified count.", "Do not add placeholder or user-described options to production."]
+    },
+    {
+      "id": "patch-changed-menu",
+      "title": "Patch changed menu",
+      "severity": "S1",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["gameVersion", "patch", "platform", "menuPath", "changedLabelOrOrder", "dateObserved", "catalogVersion"],
+      "firstResponseTemplate": "Thanks for reporting a possible game update or menu change. We will compare it with the catalog version and block stale recommendations if the change affects verified build steps.",
+      "resolutionTemplate": "The patch-change report has been evaluated. Affected catalog versions will remain supported, marked stale, or superseded according to evidence and verification results.",
+      "escalationRules": ["Escalate to catalog release manager when a patch may alter counts, labels, order, or menu paths.", "Escalate to S0 if stale catalog data produces production recommendations that cannot be reproduced.", "Do not silently edit immutable releases."]
+    },
+    {
+      "id": "payment-issue",
+      "title": "Payment issue",
+      "severity": "S2",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["providerName", "receiptReference", "checkoutState", "productID", "priceID", "entitlementState", "nonSensitiveErrorMessage"],
+      "firstResponseTemplate": "Thanks for reporting a payment issue. Live checkout is not connected yet unless the owner has separately approved a provider. Please do not send card numbers, passwords, or payment credentials.",
+      "resolutionTemplate": "We reviewed the payment status through the approved provider process or confirmed that checkout is unavailable. Entitlements will not be changed without verified provider records.",
+      "escalationRules": ["Escalate to Wyatt before contacting or configuring any provider.", "Escalate to S0 if payment credentials are exposed.", "Never ask users to paste card numbers or secret credentials into support."]
+    },
+    {
+      "id": "capture-failure",
+      "title": "Capture failure",
+      "severity": "S2",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["deviceModel", "osVersion", "browserVersion", "secureContext", "cameraPermissionState", "captureStep", "uploadFallbackTried", "nonFaceScreenshotAvailable"],
+      "firstResponseTemplate": "Thanks for reporting capture trouble. Please try the upload fallback for the affected angle and avoid sending face photos to support. We can diagnose with device, browser, permission state, and the on-screen error text.",
+      "resolutionTemplate": "The capture issue has been classified as permission, unsupported device, camera unavailable, upload validation, or quality guidance. The recovery path has been documented for the user.",
+      "escalationRules": ["Escalate to product engineering when primary iPhone Safari or Android Chrome capture fails.", "Escalate to accessibility review if the capture instructions over-block a user.", "Escalate to S0 if raw media appears to upload unexpectedly."]
+    },
+    {
+      "id": "deletion-request",
+      "title": "Deletion request",
+      "severity": "S1",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["dataCategory", "deletionControlUsed", "confirmationShown", "browserRefreshedAfterDeletion", "savedProfileOrBuildID", "userReportedResidualData"],
+      "firstResponseTemplate": "We can help with deletion for app-controlled local data. Use Privacy Center to delete the active scan, screenshots, saved profiles, saved builds, or all local data. Do not send face images in the support request.",
+      "resolutionTemplate": "Deletion was completed or a deletion issue was escalated. We cannot delete files the user separately saved outside the app or media sent through unapproved channels.",
+      "escalationRules": ["Escalate to S0 if app-controlled deletion materially fails.", "Escalate to privacy owner if the user reports unexpected retained face media.", "Never promise deletion outside the app's control."]
+    },
+    {
+      "id": "privacy-concern",
+      "title": "Privacy concern",
+      "severity": "S0",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["concernType", "dataCategory", "whetherRawMediaInvolved", "whetherNetworkTransmissionSuspected", "consentVersion", "browserStorageState", "timeline"],
+      "firstResponseTemplate": "Thank you for raising a privacy concern. A human reviewer will assess it before any response is finalized. Please do not send face images, sensitive traits, or identity documents through support.",
+      "resolutionTemplate": "The privacy concern has been reviewed, contained if needed, and documented with non-sensitive evidence. Any required follow-up will be approved by Wyatt and counsel where appropriate.",
+      "escalationRules": ["Escalate immediately to Wyatt and privacy owner.", "Escalate to legal review if user rights, biometric privacy, child privacy, or notification obligations may apply.", "Do not automate substantive privacy responses."]
+    },
+    {
+      "id": "trademark-complaint",
+      "title": "Trademark complaint",
+      "severity": "S0",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["complainantName", "organization", "claimedRights", "contentAtIssue", "urlOrAsset", "dateReceived", "requestedAction"],
+      "firstResponseTemplate": "We have received your trademark concern and will route it for human review. GameFace Match is intended to be an independent companion application and does not claim affiliation with EA.",
+      "resolutionTemplate": "The trademark complaint has been reviewed by the owner and, where appropriate, counsel. Any copy, asset, or page changes will be tracked in the repository.",
+      "escalationRules": ["Escalate immediately to Wyatt and legal review.", "Do not admit liability or reject the complaint without counsel-reviewed language.", "Preserve the reported page or asset for review."]
+    },
+    {
+      "id": "child-safety-concern",
+      "title": "Child-safety concern",
+      "severity": "S0",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["reporterRelationship", "minorInvolved", "consentConcern", "rawMediaInvolved", "dataCategory", "timeline", "requestedAction"],
+      "firstResponseTemplate": "Thank you for reporting a child-safety concern. A human reviewer will handle this before any substantive response. Please do not send images of a child or other sensitive material through support.",
+      "resolutionTemplate": "The child-safety concern has been reviewed, affected data handling has been assessed, and any required deletion, access restriction, or legal follow-up has been assigned.",
+      "escalationRules": ["Escalate immediately to Wyatt, privacy owner, and legal review.", "Pause affected beta participation if a minor or guardian consent issue exists.", "Do not request or retain child face media through support."]
+    },
+    {
+      "id": "data-incident",
+      "title": "Data incident",
+      "severity": "S0",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["incidentStart", "incidentDetected", "dataCategories", "rawMediaInvolved", "networkTransmission", "affectedBuildOrCatalog", "containmentAction", "evidenceLocation"],
+      "firstResponseTemplate": "We are reviewing a reported data incident. A human incident owner will assess containment, affected data categories, and notification obligations before any external response.",
+      "resolutionTemplate": "The incident has been contained, documented, reviewed for notification obligations, and assigned follow-up prevention work. Only non-sensitive evidence is retained in ordinary support records.",
+      "escalationRules": ["Notify Wyatt immediately.", "Stop affected service path if raw media, secrets, or user data may be exposed.", "Preserve non-sensitive logs and do not delete evidence without owner/legal approval.", "Do not send automated incident notices."]
+    },
+    {
+      "id": "accessibility-problem",
+      "title": "Accessibility problem",
+      "severity": "S2",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["assistiveTechnology", "deviceBrowser", "screenOrFlow", "keyboardOnly", "reducedMotion", "zoomOrTextSize", "barrierDescription", "workaroundTried"],
+      "firstResponseTemplate": "Thanks for reporting an accessibility barrier. We can investigate with device, browser, assistive technology, flow area, and the barrier description. Please avoid sending face media.",
+      "resolutionTemplate": "The accessibility issue has been triaged with severity, workaround, and acceptance criteria for remediation or documentation.",
+      "escalationRules": ["Escalate to S1 if onboarding, consent, capture, deletion, or results cannot be completed with assistive technology.", "Escalate to accessibility QA for manual device testing.", "Do not blame the user or require a full capture restart as the only recovery."]
+    },
+    {
+      "id": "unsupported-device",
+      "title": "Unsupported device",
+      "severity": "S3",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["deviceModel", "osVersion", "browserVersion", "cameraApiSupport", "secureContext", "uploadFallbackAvailable", "errorMessage"],
+      "firstResponseTemplate": "Thanks for checking device support. GameFace Match web capture works best in supported modern mobile browsers over a secure context. If camera capture is unavailable, use upload fallback where possible.",
+      "resolutionTemplate": "The device report has been classified as supported, advisory, unsupported, or requiring manual QA. The user has been given the safest available fallback.",
+      "escalationRules": ["Escalate to product engineering if a primary supported browser fails.", "Do not claim support for untested browsers or embedded web views.", "Do not claim browser capture equals native TrueDepth."]
+    },
+    {
+      "id": "refund-request",
+      "title": "Refund request",
+      "severity": "S2",
+      "humanReviewRequired": true,
+      "automatedResponseAllowed": false,
+      "intakeFields": ["providerName", "receiptReference", "productID", "purchaseDate", "refundReason", "catalogStateAtPurchase", "entitlementState"],
+      "firstResponseTemplate": "Thanks for contacting us about a refund. Checkout is not connected yet unless the owner has approved a provider. Please do not send card numbers or payment credentials; use only provider receipt references when available.",
+      "resolutionTemplate": "The refund request has been reviewed against the approved refund policy and provider records. Entitlement changes will follow the provider-backed refund state.",
+      "escalationRules": ["Escalate to Wyatt until final refund policy and provider process are approved.", "Escalate to S0 if payment credentials are exposed.", "Do not promise refunds outside the approved policy or provider capability."]
+    }
+  ]
+}

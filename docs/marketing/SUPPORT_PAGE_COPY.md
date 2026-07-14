@@ -20,3 +20,5 @@ Users should not send:
 - Recovery codes.
 
 Current payment state: checkout is not connected. Refund, purchase restoration, tax, and support-contact procedures must be finalized with the selected payment provider before paid launch.
+
+Internal support workflow source: `docs/support/CUSTOMER_SUPPORT_AND_INCIDENT_PLAYBOOK.md`.

@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import fs from "node:fs";
+import path from "node:path";
 import {
   ACCESSIBILITY_CONTRAST_PAIRS,
   WEB_ACCESSIBILITY_AUDIT_ITEMS,
@@ -13,18 +15,25 @@ describe("accessibility hardening checklist", () => {
     const expectedAreas: AccessibilityArea[] = [
       "keyboard",
       "screenReader",
+      "focusOrder",
+      "labels",
       "dynamicText",
       "contrast",
+      "highContrast",
       "reducedMotion",
       "spokenInstructions",
+      "textualInstructions",
       "captionedInstructions",
+      "captions",
       "hapticAlternatives",
       "nonColorStatus",
       "leftRightGuidance",
+      "errorMessages",
       "oneHandedSupport",
       "extendedCaptureTime",
       "selectiveRetake",
-      "plainLanguageErrors"
+      "plainLanguageErrors",
+      "mobileTouchTargets"
     ];
 
     const coveredAreas = getAccessibilityAreasCovered();
@@ -46,6 +55,25 @@ describe("accessibility hardening checklist", () => {
     for (const pair of ACCESSIBILITY_CONTRAST_PAIRS) {
       expect(contrastRatio(pair.foreground, pair.background), pair.id).toBeGreaterThanOrEqual(pair.minimumRatio);
     }
+  });
+
+  it("keeps responsive type user-relative instead of viewport-width scaled", () => {
+    const css = fs.readFileSync(path.join(process.cwd(), "app", "globals.css"), "utf8");
+
+    expect(css).not.toMatch(/font-size:\s*[^;]*\bvw\b/);
+    expect(css).toContain("@media (prefers-contrast: more)");
+    expect(css).toContain("@media (forced-colors: active)");
+    expect(css).toContain("@media (prefers-reduced-motion: reduce)");
+  });
+
+  it("documents mobile touch target and focus-order evidence", () => {
+    const touchTargetItem = WEB_ACCESSIBILITY_AUDIT_ITEMS.find((item) => item.area === "mobileTouchTargets");
+    const focusOrderItem = WEB_ACCESSIBILITY_AUDIT_ITEMS.find((item) => item.area === "focusOrder");
+    const labelItem = WEB_ACCESSIBILITY_AUDIT_ITEMS.find((item) => item.area === "labels");
+
+    expect(touchTargetItem?.automatedEvidence.join(" ")).toMatch(/48px|mobile viewport/i);
+    expect(focusOrderItem?.automatedEvidence.join(" ")).toMatch(/Main landmark|Modal dialog|Skip link/i);
+    expect(labelItem?.automatedEvidence.join(" ")).toMatch(/Angle-specific|aria-label/i);
   });
 
   it("uses plain user-relative left and right capture guidance", () => {

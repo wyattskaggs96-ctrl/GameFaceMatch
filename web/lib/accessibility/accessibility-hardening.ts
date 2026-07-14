@@ -1,18 +1,25 @@
 export type AccessibilityArea =
   | "keyboard"
   | "screenReader"
+  | "focusOrder"
+  | "labels"
   | "dynamicText"
   | "contrast"
+  | "highContrast"
   | "reducedMotion"
   | "spokenInstructions"
+  | "textualInstructions"
   | "captionedInstructions"
+  | "captions"
   | "hapticAlternatives"
   | "nonColorStatus"
   | "leftRightGuidance"
+  | "errorMessages"
   | "oneHandedSupport"
   | "extendedCaptureTime"
   | "selectiveRetake"
-  | "plainLanguageErrors";
+  | "plainLanguageErrors"
+  | "mobileTouchTargets";
 
 export interface AccessibilityAuditItem {
   id: string;
@@ -29,6 +36,20 @@ export const WEB_ACCESSIBILITY_AUDIT_ITEMS: AccessibilityAuditItem[] = [
     requirement: "Core navigation and journey controls must work with keyboard input.",
     automatedEvidence: ["AppShell nav key handling", "Playwright keyboard journey test"],
     manualTestSteps: ["Use Tab, Shift+Tab, Enter, Space, ArrowLeft, ArrowRight, Home, and End through welcome, consent, capture, and privacy center."]
+  },
+  {
+    id: "a11y-focus-order",
+    area: "focusOrder",
+    requirement: "Focus order must follow the visual journey and move to the current screen after navigation without trapping users outside dialogs.",
+    automatedEvidence: ["Main landmark receives focus on route changes", "Modal dialog focus trap and Escape dismissal", "Skip link to main content"],
+    manualTestSteps: ["Tab forward and backward from the skip link through primary navigation, step rail, capture controls, dialogs, and bottom mobile navigation."]
+  },
+  {
+    id: "a11y-control-labels",
+    area: "labels",
+    requirement: "Repeated controls must include the relevant angle, region, or action context in their accessible names.",
+    automatedEvidence: ["Angle-specific upload labels", "Angle-specific retake/remove aria-labels", "Navigation aria labels"],
+    manualTestSteps: ["With a screen reader rotor or controls list, confirm Upload, Retake, Remove, Make current, and navigation controls are distinguishable."]
   },
   {
     id: "a11y-screen-reader-labels",
@@ -52,6 +73,13 @@ export const WEB_ACCESSIBILITY_AUDIT_ITEMS: AccessibilityAuditItem[] = [
     manualTestSteps: ["Spot-check outdoor/bright-room readability on real iPhone Safari and Android Chrome."]
   },
   {
+    id: "a11y-high-contrast",
+    area: "highContrast",
+    requirement: "Core controls and status surfaces must remain understandable in high-contrast or grayscale viewing conditions.",
+    automatedEvidence: ["WCAG AA token contrast tests", "StatusBadge text", "blocking/advisory/ready text lists"],
+    manualTestSteps: ["Enable high contrast, increased contrast, or grayscale and confirm status words, outlines, and focus indicators remain visible."]
+  },
+  {
     id: "a11y-reduced-motion",
     area: "reducedMotion",
     requirement: "Motion must be minimized when the user requests reduced motion.",
@@ -66,11 +94,25 @@ export const WEB_ACCESSIBILITY_AUDIT_ITEMS: AccessibilityAuditItem[] = [
     manualTestSteps: ["With a screen reader running, confirm angle changes, blocking errors, and deletion confirmations are announced."]
   },
   {
+    id: "a11y-textual-capture-instructions",
+    area: "textualInstructions",
+    requirement: "Capture guidance must be available as persistent visible text, not only live camera feedback, sound, motion, or color.",
+    automatedEvidence: ["CapturePreparation checklist", "Current angle instruction text", "Captioned current instruction", "Coverage messages use words and icons"],
+    manualTestSteps: ["Mute the device, disable motion, and complete upload fallback using only visible text instructions."]
+  },
+  {
     id: "a11y-captioned-instructions",
     area: "captionedInstructions",
     requirement: "Every capture instruction must be visible as text, not only spoken, animated, or color-coded.",
     automatedEvidence: ["Text instructions for every required angle", "captioned mobile capture guidance card"],
     manualTestSteps: ["Mute the device and complete capture using only visible text instructions."]
+  },
+  {
+    id: "a11y-captions",
+    area: "captions",
+    requirement: "Instructional capture content must include caption-like visible text because the web MVP does not rely on audio prompts.",
+    automatedEvidence: ["Current capture instruction note", "Mobile capture guidance alert", "Live guidance text summaries"],
+    manualTestSteps: ["Confirm no capture instruction requires audio-only or animation-only understanding."]
   },
   {
     id: "a11y-haptic-alternatives",
@@ -94,11 +136,25 @@ export const WEB_ACCESSIBILITY_AUDIT_ITEMS: AccessibilityAuditItem[] = [
     manualTestSteps: ["Ask a tester to complete left 45, right 45, left profile, and right profile without extra coaching."]
   },
   {
+    id: "a11y-error-messages",
+    area: "errorMessages",
+    requirement: "Blocking errors must be announced and include a recovery path without blaming the user.",
+    automatedEvidence: ["role=alert for camera errors and capture blocking state", "image validation tests", "camera-denied E2E test"],
+    manualTestSteps: ["Trigger denied camera, HEIC upload, unreadable file, undersized image, exact duplicate, and catalog unavailable states; confirm each has a next action."]
+  },
+  {
     id: "a11y-one-handed-support",
     area: "oneHandedSupport",
     requirement: "Core mobile actions should be reachable and usable one-handed where practical.",
     automatedEvidence: ["Bottom mobile navigation", "48px touch targets", "full-width mobile buttons"],
     manualTestSteps: ["On an iPhone-sized device, complete upload fallback and privacy deletion with one hand where practical."]
+  },
+  {
+    id: "a11y-mobile-touch-targets",
+    area: "mobileTouchTargets",
+    requirement: "Primary mobile actions, navigation, upload fields, and checkboxes must provide at least 44px touch targets, with 48px preferred.",
+    automatedEvidence: ["Button, mobile nav, file input, form input, and checkbox CSS minimum sizes", "mobile viewport E2E coverage"],
+    manualTestSteps: ["On current iPhone Safari and Android Chrome, verify one-handed tapping without accidental neighboring activation."]
   },
   {
     id: "a11y-extended-capture-time",

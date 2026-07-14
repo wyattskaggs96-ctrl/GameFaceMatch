@@ -64,7 +64,8 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 
@@ -95,6 +96,7 @@ a {
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
+textarea:focus-visible,
 a:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
@@ -109,7 +111,7 @@ p {
 
 h1 {
   margin-bottom: 0;
-  font-size: clamp(2.25rem, 7vw, 5.25rem);
+  font-size: 4.25rem;
   line-height: 1;
 }
 
@@ -300,7 +302,7 @@ p {
 }
 
 .section-heading h1 {
-  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-size: 3.1rem;
 }
 
 .section-copy,
@@ -314,7 +316,7 @@ p {
 .lede {
   max-width: 760px;
   margin-bottom: 0;
-  font-size: clamp(1.16rem, 2.4vw, 1.5rem);
+  font-size: 1.35rem;
   color: #203b2d;
 }
 
@@ -330,6 +332,7 @@ p {
   border-radius: var(--radius);
   padding: 12px var(--space-4);
   font-weight: 900;
+  touch-action: manipulation;
   transition:
     background 160ms ease,
     border-color 160ms ease,
@@ -1174,6 +1177,7 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid transparent;
   border-radius: 999px;
   padding: 5px 9px;
   color: var(--field-900);
@@ -1186,21 +1190,25 @@ p {
 
 .status-success {
   color: #12532e;
+  border-color: rgba(18, 83, 46, 0.32);
   background: var(--success-soft);
 }
 
 .status-warning {
   color: var(--warning);
+  border-color: rgba(138, 97, 0, 0.32);
   background: var(--warning-soft);
 }
 
 .status-danger {
   color: var(--danger);
+  border-color: rgba(163, 49, 49, 0.32);
   background: var(--danger-soft);
 }
 
 .status-info {
   color: var(--sky-strong);
+  border-color: rgba(36, 108, 168, 0.32);
   background: var(--sky);
 }
 
@@ -1586,6 +1594,18 @@ p {
     min-height: auto;
   }
 
+  h1 {
+    font-size: 3.1rem;
+  }
+
+  .section-heading h1 {
+    font-size: 2.4rem;
+  }
+
+  .lede {
+    font-size: 1.18rem;
+  }
+
   .step-rail {
     position: static;
     grid-template-columns: repeat(7, minmax(120px, 1fr));
@@ -1627,6 +1647,23 @@ p {
     display: grid;
   }
 
+  h1,
+  .section-heading h1 {
+    line-height: 1.08;
+  }
+
+  h1 {
+    font-size: 2.45rem;
+  }
+
+  .section-heading h1 {
+    font-size: 2rem;
+  }
+
+  .lede {
+    font-size: 1.08rem;
+  }
+
   .capture-grid {
     grid-template-columns: 1fr;
     overflow-x: visible;
@@ -1644,10 +1681,29 @@ p {
 
   .button {
     width: 100%;
+    min-height: 52px;
   }
 
   .metadata-list > div {
     display: grid;
+  }
+
+  .mobile-nav button,
+  .file-input,
+  .form-field select,
+  .form-field input,
+  .form-field textarea,
+  .checkbox-field input,
+  .confirmation-list input[type="checkbox"],
+  .confirmation-item input[type="checkbox"] {
+    min-height: 48px;
+  }
+
+  .checkbox-field input,
+  .confirmation-list input[type="checkbox"],
+  .confirmation-item input[type="checkbox"] {
+    min-width: 28px;
+    min-height: 28px;
   }
 }
 
@@ -1678,5 +1734,59 @@ p {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --muted: #314137;
+    --line: #789070;
+    --focus: #003cff;
+  }
+
+  .card,
+  .alert,
+  .modal-dialog,
+  .coverage-region,
+  .quality-review-card,
+  .inventory-item,
+  .file-input,
+  .form-field select,
+  .form-field input,
+  .form-field textarea {
+    border-width: 2px;
+  }
+
+  .button-secondary,
+  .button-ghost,
+  .status-badge {
+    border-width: 2px;
+  }
+
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  a:focus-visible {
+    outline-width: 4px;
+  }
+}
+
+@media (forced-colors: active) {
+  .button,
+  .card,
+  .alert,
+  .modal-dialog,
+  .status-badge,
+  .file-input,
+  .form-field select,
+  .form-field input,
+  .form-field textarea {
+    border: 1px solid CanvasText;
+  }
+
+  .progress-track span,
+  .loading-dot {
+    background: Highlight;
   }
 }

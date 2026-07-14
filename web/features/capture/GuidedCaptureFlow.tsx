@@ -493,19 +493,19 @@ export function GuidedCaptureFlow({
             </Alert>
           ) : null}
           <div className="button-row">
-            <Button onClick={() => void startCamera()} disabled={isStartingCamera}>
+            <Button onClick={() => void startCamera()} disabled={isStartingCamera} aria-label={`Start camera for ${currentAngle.label}`}>
               {isStartingCamera ? "Starting camera" : "Start camera"}
             </Button>
-            <Button variant="secondary" onClick={stopCamera} disabled={!stream}>
+            <Button variant="secondary" onClick={stopCamera} disabled={!stream} aria-label={`Stop camera for ${currentAngle.label}`}>
               Stop camera
             </Button>
-            <Button variant="secondary" onClick={() => void switchCamera()}>
+            <Button variant="secondary" onClick={() => void switchCamera()} aria-label="Switch between available cameras">
               Switch camera
             </Button>
-            <Button variant="secondary" onClick={() => void captureStillFrame()} disabled={!stream}>
+            <Button variant="secondary" onClick={() => void captureStillFrame()} disabled={!stream} aria-label={`Capture still frame for ${currentAngle.label}`}>
               Capture still frame
             </Button>
-            <Button variant="ghost" onClick={() => setCaptureMode("upload")}>
+            <Button variant="ghost" onClick={() => setCaptureMode("upload")} aria-label={`Skip to file upload for ${currentAngle.label}`}>
               Skip to file upload
             </Button>
           </div>
@@ -571,7 +571,7 @@ export function GuidedCaptureFlow({
                 </p>
               ) : null}
               {angle.validationErrors.length > 0 ? (
-                <ul className="error-list">
+                <ul className="error-list" id={`${angle.id}-validation-errors`} role="alert">
                   {angle.validationErrors.map((error) => (
                     <li key={error}>{error}</li>
                   ))}
@@ -587,17 +587,19 @@ export function GuidedCaptureFlow({
                   accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
                   capture="user"
                   aria-labelledby={`${angle.id}-upload-label`}
+                  aria-invalid={angle.validationErrors.length > 0 ? "true" : undefined}
+                  aria-describedby={angle.validationErrors.length > 0 ? `${angle.id}-validation-errors` : undefined}
                   onChange={(event) => void handleFile(angle, event)}
                 />
               </label>
               <div className="button-row compact-buttons">
-                <Button variant="secondary" onClick={() => selectAngle(angle.id)}>
+                <Button variant="secondary" onClick={() => selectAngle(angle.id)} aria-label={`Make ${angle.label} the current capture angle`}>
                   Make current
                 </Button>
-                <Button variant="secondary" onClick={() => retake(angle.id)}>
+                <Button variant="secondary" onClick={() => retake(angle.id)} aria-label={`Retake ${angle.label}`}>
                   Retake
                 </Button>
-                <Button variant="ghost" onClick={() => remove(angle.id)}>
+                <Button variant="ghost" onClick={() => remove(angle.id)} aria-label={`Remove ${angle.label} capture`}>
                   Remove
                 </Button>
               </div>
@@ -712,7 +714,7 @@ export function GuidedCaptureFlow({
                 ) : null}
                 {angle.captureGuidanceReport ? <GuidanceIssueList guidance={angle.captureGuidanceReport} title="Pose guidance" /> : null}
                 {report.blockingMessages.length > 0 ? (
-                  <div>
+                  <div role="alert">
                     <p className="message-title">Blocking</p>
                     <ul className="message-list blocking-list">
                       {report.blockingMessages.map((message) => (
@@ -738,6 +740,7 @@ export function GuidedCaptureFlow({
                       type="checkbox"
                       checked={angle.manualConfirmation.requestedAngle}
                       onChange={(event) => updateManualConfirmation(angle, "requestedAngle", event.currentTarget.checked)}
+                      aria-label={`${angle.label}: requested angle followed`}
                     />
                     Requested angle followed
                   </label>
@@ -746,6 +749,7 @@ export function GuidedCaptureFlow({
                       type="checkbox"
                       checked={angle.manualConfirmation.neutralExpression}
                       onChange={(event) => updateManualConfirmation(angle, "neutralExpression", event.currentTarget.checked)}
+                      aria-label={`${angle.label}: neutral expression with lips gently closed`}
                     />
                     Neutral expression, lips gently closed
                   </label>
@@ -754,6 +758,7 @@ export function GuidedCaptureFlow({
                       type="checkbox"
                       checked={angle.manualConfirmation.onePerson}
                       onChange={(event) => updateManualConfirmation(angle, "onePerson", event.currentTarget.checked)}
+                      aria-label={`${angle.label}: one person visible`}
                     />
                     One person visible
                   </label>
@@ -768,14 +773,15 @@ export function GuidedCaptureFlow({
                     accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
                     capture="user"
                     aria-labelledby={`${angle.id}-replace-upload-label`}
+                    aria-invalid={report.blockingMessages.length > 0 ? "true" : undefined}
                     onChange={(event) => void handleFile(angle, event)}
                   />
                 </label>
                 <div className="button-row compact-buttons">
-                  <Button variant="secondary" onClick={() => retake(angle.id)}>
+                  <Button variant="secondary" onClick={() => retake(angle.id)} aria-label={`Retake ${angle.label} from quality review`}>
                     Retake
                   </Button>
-                  <Button variant="ghost" onClick={() => remove(angle.id)}>
+                  <Button variant="ghost" onClick={() => remove(angle.id)} aria-label={`Remove ${angle.label} from quality review`}>
                     Remove
                   </Button>
                 </div>
@@ -831,23 +837,33 @@ function CoverageMapPanel({
       </p>
       <div className="coverage-map-grid" aria-label="Face-region coverage states">
         {coverageRegions.map((region) => (
-          <article className={`coverage-region coverage-${region.state}`} key={region.definition.id}>
+          <article
+            className={`coverage-region coverage-${region.state}`}
+            key={region.definition.id}
+            aria-labelledby={`coverage-${region.definition.id}-title`}
+            aria-describedby={`coverage-${region.definition.id}-message`}
+          >
             <div className="coverage-region-header">
               <span className="coverage-icon" aria-hidden="true">
                 {coverageIconForState(region.state)}
               </span>
               <div>
-                <strong>{region.definition.label}</strong>
+                <strong id={`coverage-${region.definition.id}-title`}>{region.definition.label}</strong>
                 <span>{region.definition.icon} region cue</span>
               </div>
               <StatusBadge tone={coverageTone(region.state)}>{region.statusText}</StatusBadge>
             </div>
-            <p>{region.messages[0]}</p>
+            <p id={`coverage-${region.definition.id}-message`}>{region.messages[0]}</p>
             <p className="field-note">Supporting views: {formatAngleIDs(region.supportingAngleIDs)}</p>
             {region.retakeAngleIDs.length > 0 ? (
               <div className="button-row compact-buttons">
                 {region.retakeAngleIDs.map((angleID) => (
-                  <Button variant="secondary" key={angleID} onClick={() => onRetake(angleID)}>
+                  <Button
+                    variant="secondary"
+                    key={angleID}
+                    onClick={() => onRetake(angleID)}
+                    aria-label={`Retake ${angleLabel(angleID)} for ${region.definition.label} coverage`}
+                  >
                     Retake {angleLabel(angleID)}
                   </Button>
                 ))}
@@ -871,7 +887,7 @@ function LiveGuidancePanel({
 }) {
   if (!isCameraActive) {
     return (
-      <div className="live-guidance-card" aria-live="polite">
+      <div className="live-guidance-card" aria-live="polite" aria-atomic="true">
         <div className="status-row">
           <strong>Live guidance</strong>
           <StatusBadge tone="neutral">inactive</StatusBadge>
@@ -883,7 +899,7 @@ function LiveGuidancePanel({
   const tone = guidance?.canCapture ? "success" : guidance?.blockingIssues.length ? "danger" : "warning";
   const status = guidance?.canCapture ? "ready" : guidance?.blockingIssues.length ? "adjust" : isAnalyzing ? "checking" : "review";
   return (
-    <div className="live-guidance-card" aria-live="polite">
+    <div className="live-guidance-card" aria-live="polite" aria-atomic="true">
       <div className="status-row">
         <strong>Live local guidance</strong>
         <StatusBadge tone={tone}>{status}</StatusBadge>

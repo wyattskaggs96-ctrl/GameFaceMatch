@@ -27,8 +27,13 @@ export function AppShell({
   const desktopNavRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const mobileNavRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const mainRef = useRef<HTMLElement | null>(null);
+  const hasMountedRef = useRef(false);
 
   useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true;
+      return;
+    }
     mainRef.current?.focus({ preventScroll: true });
   }, [activeScreen]);
 
@@ -43,7 +48,7 @@ export function AppShell({
 
   return (
     <div className="app-shell">
-      <a className="skip-link" href="#main-content">
+      <a className="skip-link" href="#main-content" onClick={() => mainRef.current?.focus()}>
         Skip to main content
       </a>
       <header className="topbar">
@@ -57,6 +62,7 @@ export function AppShell({
               key={item.id}
               type="button"
               aria-current={item.id === activeScreen ? "page" : undefined}
+              aria-label={item.label}
               onClick={() => onNavigate(item.id)}
               onKeyDown={(event) => handleNavKeyDown(event, index, navItems, desktopNavRefs.current)}
               ref={(element) => {
@@ -87,6 +93,7 @@ export function AppShell({
             key={item.id}
             type="button"
             aria-current={item.id === activeScreen ? "page" : undefined}
+            aria-label={item.label}
             onClick={() => onNavigate(item.id)}
             onKeyDown={(event) => handleNavKeyDown(event, index, mobileNavItems, mobileNavRefs.current)}
             ref={(element) => {

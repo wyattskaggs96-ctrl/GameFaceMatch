@@ -62,6 +62,7 @@ test.describe("GameFace Match E2E edge flows", () => {
 
     await page.getByLabel("Upload fallback for straight-on").setInputFiles(invalidTextFile());
     await expect(page.getByText("The image could not be read.")).toBeVisible();
+    await expect(page.getByLabel("Upload fallback for straight-on")).toHaveAttribute("aria-invalid", "true");
 
     await uploadFallbackForAngle(page, "Straight-on", syntheticPng("too-small.png", 120, 120, 1));
     await expect(page.getByText("Use an image at least 480 pixels wide and tall.")).toBeVisible();
@@ -86,6 +87,10 @@ test.describe("GameFace Match E2E edge flows", () => {
 
   test("supports keyboard navigation through the main journey", async ({ page }) => {
     await page.goto("/");
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("link", { name: "Skip to main content" })).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#main-content")).toBeFocused();
     await page.getByRole("button", { name: "Start walkthrough" }).focus();
     await expect(page.getByRole("button", { name: "Start walkthrough" })).toBeFocused();
     await page.keyboard.press("Enter");
@@ -93,6 +98,18 @@ test.describe("GameFace Match E2E edge flows", () => {
     await page.getByRole("button", { name: "Continue to disclaimer" }).focus();
     await page.keyboard.press("Enter");
     await expect(page.getByRole("heading", { name: "Independent companion" })).toBeVisible();
+  });
+
+  test("exposes angle-specific capture control labels", async ({ page }) => {
+    await completeOnboarding(page);
+    await acceptRequiredConsent(page);
+    await navigateToCapture(page);
+
+    await expect(page.getByRole("button", { name: "Start camera for Straight-on", exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Skip to file upload for Straight-on", exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Make Left 45 degrees the current capture angle", exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Retake Left 45 degrees", exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Remove Left 45 degrees capture", exact: true })).toBeVisible();
   });
 
   test("remains usable with reduced motion preferences", async ({ page }) => {

@@ -74,7 +74,15 @@ export function ProgressBar({
         <span>{label}</span>
         <strong>{value}/{max}</strong>
       </div>
-      <div className="progress-track" role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={max} aria-valuenow={value}>
+      <div
+        className="progress-track"
+        role="progressbar"
+        aria-label={label}
+        aria-valuemin={0}
+        aria-valuemax={max}
+        aria-valuenow={value}
+        aria-valuetext={`${value} of ${max}`}
+      >
         <span style={{ width: `${percent}%` }} />
       </div>
     </div>
@@ -184,10 +192,15 @@ export function ModalDialog({
   tone?: Tone;
 }) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const firstButton = dialogRef.current?.querySelector("button");
     firstButton?.focus();
+    return () => {
+      previousFocusRef.current?.focus({ preventScroll: true });
+    };
   }, []);
 
   function trapFocus(event: KeyboardEvent<HTMLDivElement>) {
@@ -255,6 +268,7 @@ export function StepFlowRail({
           data-complete={activeIndex > index}
           onClick={() => onNavigate(step.id)}
           aria-current={step.id === activeScreen ? "step" : undefined}
+          aria-label={`${step.label}: ${step.description}`}
         >
           <span className="step-marker">{index + 1}</span>
           <span>

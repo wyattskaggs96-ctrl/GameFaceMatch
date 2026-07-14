@@ -20,6 +20,7 @@
     "cf27:research-catalog-release:check": "node scripts/cf27-research-catalog-release.mjs --check",
     "cf27:blind-verification-package": "node scripts/cf27-blind-verification-package.mjs",
     "cf27:blind-verification-package:check": "node scripts/cf27-blind-verification-package.mjs --check",
+    "cf27:second-verifier-results-intake": "node scripts/cf27-second-verifier-results-intake.mjs",
     "media:inspect": "node scripts/cf27-media-inspect.mjs",
     "head-template:extract-frames": "node scripts/cf27-head-template-frame-extract.mjs",
     "head-template:standardization-qa": "node scripts/cf27-head-template-standardization-qa.mjs",

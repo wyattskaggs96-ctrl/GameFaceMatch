@@ -12,6 +12,7 @@ import type {
   StandardFacialMeasurementID,
   UserConfirmedAttributeCategory
 } from "@/types/domain";
+import { classifyCatalogRecord } from "@/lib/catalog/catalog-record-classification";
 
 export interface MatchingEngine {
   readonly modelVersion: string;
@@ -59,6 +60,7 @@ export interface RuleBasedMatchingEngineConfig {
 
 const scoreLabel = "Match score based on the game’s available appearance options.";
 const lowConfidenceThreshold = 0.25;
+const nearTieScoreDelta = 1;
 
 export const defaultGeometryFeatureConfig: MatchingFeatureConfig[] = [
   { id: "faceWidthRatio", group: "faceAndJawShape", weight: 0.12, maxDistance: 0.35 },
@@ -107,7 +109,7 @@ export function createRuleBasedMatchingEngine(config: MatchingFeatureConfig[] | 
         return [];
       }
       const candidates = input.catalog.items
-        .filter((item) => item.verificationState === "verified" && hasAllowedSourceType(item, input.allowTestFixtures ?? false))
+        .filter((item) => isMatchableCatalogItem(item, input.catalog, input.allowTestFixtures ?? false))
         .filter((item) => hasVerifiedMenuInstructions(item, input.allowTestFixtures ?? false))
         .map((item) =>
           scoreCatalogItem({
@@ -320,7 +322,7 @@ function buildExplanation(item: GameCatalogItem, score: number, contributions: M
   if (appearanceIncluded === 0) uncertaintyNotes.push("Appearance selection was not used because catalog annotations or user-confirmed attributes were incomplete.");
 
   return {
-    summary: `${scoreLabel} ${item.stableInternalID} scored ${score}/100. This is not an identity probability.`,
+    summary: `${scoreLabel} ${item.stableInternalID} scored ${score}/100. This is a relative game-option score, not biometric identification.`,
     strongestSimilarities: strongestSimilarities.length > 0 ? strongestSimilarities : ["No strong similarity feature crossed the current threshold."],
     largestDifferences: largestDifferences.length > 0 ? largestDifferences : ["No large feature differences crossed the current threshold."],
     uncertaintyNotes
@@ -331,7 +333,7 @@ function assignRanksAndTies(matches: GameAppearanceMatch[]) {
   let currentTieGroup = 0;
   return matches.map((match, index) => {
     const previous = matches[index - 1];
-    const isTie = previous ? Math.abs(previous.score - match.score) < 0.001 : false;
+    const isTie = previous ? Math.abs(previous.score - match.score) <= nearTieScoreDelta : false;
     if (!isTie) currentTieGroup += 1;
     return {
       ...match,
@@ -485,6 +487,19 @@ function hasVerifiedMenuInstructions(item: GameCatalogItem, allowTestFixtures: b
   );
 }
 
+function isMatchableCatalogItem(item: GameCatalogItem, catalog: GameCatalogManifest, allowTestFixtures: boolean) {
+  if (item.verificationState !== "verified") return false;
+  if (!hasAllowedSourceType(item, allowTestFixtures)) return false;
+  if (allowTestFixtures) return true;
+  if (!classifyCatalogRecord(item).productionAccessAllowed) return false;
+  if (item.catalogVersion.identifier !== catalog.catalogVersion.identifier) return false;
+  if (item.catalogVersion.gameVersion !== catalog.catalogVersion.gameVersion) return false;
+  if (item.catalogVersion.platform !== catalog.catalogVersion.platform) return false;
+  if (item.gameVersion !== catalog.catalogVersion.gameVersion) return false;
+  if (item.platform !== catalog.catalogVersion.platform) return false;
+  return true;
+}
+
 function hasAllowedSourceType(item: GameCatalogItem, allowTestFixtures: boolean) {
   if (allowTestFixtures) return item.sourceType === "testFixture" && item.isTestFixture;
   return item.sourceType === "production" && !item.isTestFixture;
@@ -494,6 +509,7 @@ function canMatchCatalog(catalog: GameCatalogManifest, allowTestFixtures: boolea
   if (allowTestFixtures) return catalog.sourceType === "testFixture" && !catalog.isProduction;
   if (catalog.sourceType !== "production" || !catalog.isProduction) return false;
   if (!requireApprovedProductionRelease) return true;
+  if (!catalog.catalogVersion.gameVersion.trim() || !catalog.catalogVersion.platform.trim()) return false;
   return (
     catalog.releaseStatus === "approvedRelease" &&
     Boolean(catalog.packageChecksum) &&

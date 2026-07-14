@@ -16,6 +16,21 @@ const fixtureCatalog = JSON.parse(
 ) as GameCatalogManifest;
 
 describe("rule-based matching engine", () => {
+  it("returns an exact match score for identical reliable features without identity-probability language", () => {
+    const profile = syntheticProfile();
+    profile.appearance.attributes = [
+      attribute("hairColorFamily", "brown"),
+      attribute("facialHairPresence", "yes"),
+      attribute("preferredBodyType", "balanced")
+    ];
+    const match = engine().matchTopThree({ profile, catalog: fixtureCatalog, allowTestFixtures: true })[0];
+
+    expect(match.catalogItem.stableInternalID).toBe("synthetic-match-alpha");
+    expect(match.score).toBe(100);
+    expect(match.scoreLabel).toBe("Match score based on the game’s available appearance options.");
+    expect(match.explanation.summary).not.toMatch(/percent identical|you are|identity match|identity probability/i);
+  });
+
   it("orders the top three deterministically using synthetic fixtures", () => {
     const matches = engine().matchTopThree({ profile: syntheticProfile(), catalog: fixtureCatalog, allowTestFixtures: true });
     expect(matches.map((match) => match.catalogItem.stableInternalID)).toEqual(["synthetic-match-alpha", "synthetic-match-gamma", "synthetic-match-beta"]);
@@ -54,6 +69,37 @@ describe("rule-based matching engine", () => {
     const matches = engine().matchTopThree({ profile: syntheticProfile(), catalog: tiedCatalog, allowTestFixtures: true });
     expect(matches[0].catalogItem.stableInternalID).toBe("synthetic-tie-a");
     expect(matches[1].catalogItem.stableInternalID).toBe("synthetic-tie-b");
+    expect(matches[0].tieGroup).toBe(matches[1].tieGroup);
+    expect(matches[1].explanation.uncertaintyNotes.join(" ")).toMatch(/tied/i);
+  });
+
+  it("detects near ties within the MVP score tolerance", () => {
+    const nearTieCatalog = {
+      ...fixtureCatalog,
+      items: [
+        { ...fixtureCatalog.items[0], stableInternalID: "synthetic-near-tie-a" },
+        {
+          ...fixtureCatalog.items[0],
+          stableInternalID: "synthetic-near-tie-b",
+          geometryMeasurements: {
+            ...fixtureCatalog.items[0].geometryMeasurements,
+            faceWidthRatio: {
+              value: 0.702,
+              confidence: 0.95,
+              supportingFrameCount: 5,
+              variance: 0.01,
+              depthSupported: false,
+              occlusionStatus: "none" as const,
+              measurementSource: "synthetic-fixture",
+              availabilityState: "available" as const
+            }
+          }
+        },
+        fixtureCatalog.items[1]
+      ]
+    };
+    const matches = engine().matchTopThree({ profile: syntheticProfile(), catalog: nearTieCatalog, allowTestFixtures: true });
+
     expect(matches[0].tieGroup).toBe(matches[1].tieGroup);
     expect(matches[1].explanation.uncertaintyNotes.join(" ")).toMatch(/tied/i);
   });
@@ -122,6 +168,73 @@ describe("rule-based matching engine", () => {
     expect(matches.every((match) => match.catalogVersion.identifier === "unit-test-production-catalog-v1")).toBe(true);
   });
 
+  it("fails closed for an empty production catalog", async () => {
+    const emptyCatalog = await checksumCatalog({
+      ...productionStyleCatalog(),
+      declaredItemCount: 0,
+      releaseNotes: {
+        summary: "Unit-test empty catalog.",
+        createdAt: "2026-07-10T00:00:00.000Z",
+        author: "unit-test",
+        changes: []
+      },
+      items: []
+    });
+
+    expect(engine().matchTopThree({ profile: syntheticProfile(), catalog: emptyCatalog })).toEqual([]);
+  });
+
+  it("filters out production records whose version metadata is incompatible with the manifest", async () => {
+    const catalog = productionStyleCatalog();
+    const incompatible = await checksumCatalog({
+      ...catalog,
+      items: catalog.items.map((item, index) =>
+        index === 0
+          ? {
+              ...item,
+              gameVersion: "different-unit-test-version",
+              catalogVersion: {
+                ...item.catalogVersion,
+                gameVersion: "different-unit-test-version"
+              }
+            }
+          : item
+      )
+    });
+    const matches = engine().matchTopThree({ profile: syntheticProfile(), catalog: incompatible });
+
+    expect(matches).toHaveLength(2);
+    expect(matches.map((match) => match.catalogItem.stableInternalID)).not.toContain("unit-test-production-1");
+  });
+
+  it("blocks fixture leakage from production matching even when a manifest is production-shaped", async () => {
+    const catalog = productionStyleCatalog();
+    const leakedFixture = await checksumCatalog({
+      ...catalog,
+      items: catalog.items.map((item) => ({
+        ...item,
+        sourceType: "testFixture" as const,
+        isTestFixture: true
+      }))
+    });
+
+    expect(engine().matchTopThree({ profile: syntheticProfile(), catalog: leakedFixture })).toEqual([]);
+  });
+
+  it("blocks unverified production records from matching", async () => {
+    const catalog = productionStyleCatalog();
+    const unverified = await checksumCatalog({
+      ...catalog,
+      items: catalog.items.map((item) => ({
+        ...item,
+        verificationState: "unverified" as const,
+        verifiedDate: null
+      }))
+    });
+
+    expect(engine().matchTopThree({ profile: syntheticProfile(), catalog: unverified })).toEqual([]);
+  });
+
   it("generates explanations and traceability metadata", () => {
     const match = engine().matchTopThree({ profile: syntheticProfile(), catalog: fixtureCatalog, allowTestFixtures: true })[0];
     expect(match.scoreLabel).toBe("Match score based on the game’s available appearance options.");
@@ -129,7 +242,8 @@ describe("rule-based matching engine", () => {
     expect(match.explanation.strongestSimilarities.length).toBeGreaterThan(0);
     expect(match.catalogVersion.identifier).toBe("synthetic-test-catalog-v1");
     expect(match.modelVersion).toBe("rule-based-web-mvp-v2-rgb-geometry");
-    expect(match.explanation.summary).toMatch(/not an identity probability/i);
+    expect(match.explanation.summary).toMatch(/relative game-option score/i);
+    expect(match.explanation.summary).not.toMatch(/identity probability|percent identical|you are/i);
   });
 
   it("excludes test fixtures unless explicitly allowed", () => {

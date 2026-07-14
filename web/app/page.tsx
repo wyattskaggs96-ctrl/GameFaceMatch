@@ -33,8 +33,8 @@ import {
   toScreenHash,
   type AppScreen
 } from "@/lib/navigation";
-import { createInitialConsentState, hasRequiredCaptureConsent, isConsentGranted, type ConsentState } from "@/lib/privacy/consent";
-import { createDataInventory, type DeletionScope } from "@/lib/privacy/data-lifecycle";
+import { createInitialConsentState, hasRequiredCaptureConsent, isConsentGranted, updateConsent, type ConsentID, type ConsentState } from "@/lib/privacy/consent";
+import { createDataInventory, createNonRawPrivacyExport, type DeletionScope } from "@/lib/privacy/data-lifecycle";
 import { createMemoryPrivacyStore } from "@/lib/privacy/local-privacy-store";
 import {
   createBrowserSavedProfileStorage,
@@ -168,6 +168,36 @@ export default function HomePage() {
       }),
     [attributeConfirmation, consentState, deletionRecords, privacyStore, savedBuilds, savedProfileStatus, savedProfiles.length, screenshotSession, session, standardProfile]
   );
+  const nonRawExportJson = useMemo(
+    () =>
+      JSON.stringify(
+        createNonRawPrivacyExport(
+          {
+            consentState,
+            captureSession: session,
+            attributes: attributeConfirmation,
+            derivedProfile: standardProfile,
+            savedBuilds,
+            screenshotSession,
+            deletionRecords,
+            preferences: privacyStore.getApplicationPreferences(),
+            savedProfileCount: savedProfiles.length,
+            savedProfileStorageLocation:
+              savedProfileStatus?.storageLocation === "browser-session-storage" ? "Browser sessionStorage profile vault" : "Memory profile vault",
+            savedProfileEncryptionDescription: savedProfileStatus?.encryptionDescription,
+            savedProfileSummaries: savedProfiles.map((profile) => ({
+              profileID: profile.profileID,
+              savedAt: profile.savedAt,
+              encryptionStatus: profile.encryptionStatus
+            }))
+          },
+          new Date()
+        ),
+        null,
+        2
+      ),
+    [attributeConfirmation, consentState, deletionRecords, privacyStore, savedBuilds, savedProfileStatus, savedProfiles, screenshotSession, session, standardProfile]
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -271,6 +301,13 @@ export default function HomePage() {
   }
 
   function handleConsentChange(nextConsent: ConsentState) {
+    setConsentState(nextConsent);
+    privacyStore.saveConsentState(nextConsent);
+    refreshPrivacyState();
+  }
+
+  function revokeOptionalConsent(consentID: ConsentID) {
+    const nextConsent = updateConsent(consentState, consentID, false);
     setConsentState(nextConsent);
     privacyStore.saveConsentState(nextConsent);
     refreshPrivacyState();
@@ -670,10 +707,13 @@ export default function HomePage() {
                 lastError: null
               } satisfies SavedProfileStorageStatus)
             }
+            consentState={consentState}
+            nonRawExportJson={nonRawExportJson}
             deletionRecorded={deletionRecorded}
             onDeleteScope={deleteByScope}
             onDeleteSavedBuild={deleteSavedBuild}
             onDeleteSavedProfile={deleteSavedProfile}
+            onRevokeOptionalConsent={revokeOptionalConsent}
           />
         );
       case "settings":

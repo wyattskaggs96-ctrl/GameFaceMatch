@@ -3,6 +3,7 @@ import {
   acceptRequiredConsent,
   completeOnboarding,
   confirmStandardAttributes,
+  consentCard,
   expectNoRawImagePersistence,
   navigateToCapture,
   uploadFiveSyntheticAngles
@@ -62,6 +63,7 @@ test.describe("GameFace Match production-representative journey", () => {
 
   test("covers saved-build empty state, screenshot-refinement intake, privacy inventory, and deletion flows", async ({ page }) => {
     await completeOnboarding(page);
+    await consentCard(page, "Save completed build").getByRole("checkbox").check();
     await acceptRequiredConsent(page);
     await navigateToCapture(page);
     await uploadFiveSyntheticAngles(page);
@@ -93,7 +95,37 @@ test.describe("GameFace Match production-representative journey", () => {
     await page.getByRole("button", { name: "Privacy" }).click();
     await expect(page.getByRole("heading", { name: "Local data controls" })).toBeVisible();
     await expect(page.getByText("No face images, screenshots, profiles, or builds have been uploaded.")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Collected, processed, and saved" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Collected temporarily" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Processed locally" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Saved non-raw data", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Current consent version:/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Analytics and logs" })).toBeVisible();
+    await expect(page.getByText("Analytics validation rejects raw images")).toBeVisible();
+    await expect(page.getByText("Deletion records contain only scope and completion time")).toBeVisible();
     await expect(page.getByRole("heading", { name: "Temporary Blob URLs" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Captured image bytes in memory" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Current derived profile" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Screenshot-refinement session" })).toBeVisible();
+
+    await expect(page.getByRole("heading", { name: "Save completed build" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Revoke save completed build" })).toBeEnabled();
+    await page.getByRole("button", { name: "Revoke save completed build" }).click();
+    await expect(page.getByRole("button", { name: "Revoke save completed build" })).toBeDisabled();
+
+    await page.getByRole("button", { name: "Generate non-raw export" }).click();
+    const exportValue = await page.getByLabel("Non-raw data export").inputValue();
+    const exportData = JSON.parse(exportValue) as {
+      exportVersion: string;
+      consentVersion: string;
+      privacyAssertions: string[];
+      savedBuilds: unknown[];
+    };
+    expect(exportData.exportVersion).toBe("gameface-match-non-raw-export-v1");
+    expect(exportData.consentVersion).toBe("web-mvp-consent-v1");
+    expect(exportData.privacyAssertions.join(" ")).toContain("excludes raw face images");
+    expect(exportData.savedBuilds).toEqual([]);
+    expect(exportValue).not.toMatch(/data:image|blob:http|objectUrl|landmarkCoordinates|identityEmbedding|faceVector|cameraFrame/i);
 
     await page.getByRole("button", { name: "Delete capture-session metadata" }).click();
     await expect(page.getByRole("alertdialog", { name: "Delete active capture session?" })).toBeVisible();

@@ -1098,6 +1098,22 @@ p {
   font-family: inherit;
 }
 
+.export-preview {
+  width: 100%;
+  min-height: 240px;
+  margin-top: var(--space-4);
+  overflow: auto;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  color: var(--field-900);
+  background: #f7faf4;
+  font: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  line-height: 1.45;
+}
+
 .profile-section {
   align-content: start;
 }

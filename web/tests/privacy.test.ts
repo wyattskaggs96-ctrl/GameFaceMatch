@@ -9,6 +9,7 @@ import {
   assertNoRawImagesInStorage,
   createDataInventory,
   createDeletionConfirmation,
+  createNonRawPrivacyExport,
   getNetworkUploadStatus,
   verifyDeletionState
 } from "@/lib/privacy/data-lifecycle";
@@ -288,6 +289,51 @@ describe("data lifecycle inventory and deletion verification", () => {
       uploadedBytes: 0,
       uploadedCategories: []
     });
+  });
+
+  it("exports saved non-raw data without raw media, landmarks, embeddings, or precise measurements", () => {
+    const consentState = updateConsent(updateConsent(createInitialConsentState(), "saveCompletedBuild", true), "saveDerivedProfile", true);
+    const exportPayload = createNonRawPrivacyExport(
+      {
+        consentState,
+        captureSession: createInitialCaptureSession(),
+        attributes: {
+          ...createInitialAttributeConfirmation(),
+          hairColorFamily: "brown"
+        },
+        derivedProfile: profile,
+        savedBuilds: [savedBuild],
+        screenshotSession: createInitialScreenshotRefinementSession(),
+        deletionRecords: [{ scope: "saved-build", completedAt: "2026-07-10T00:00:00.000Z" }],
+        preferences: { preferredTheme: "system" },
+        savedProfileCount: 1,
+        savedProfileSummaries: [
+          {
+            profileID: profile.id,
+            savedAt: "2026-07-10T02:00:00.000Z",
+            encryptionStatus: "encrypted"
+          }
+        ]
+      },
+      new Date("2026-07-14T00:00:00.000Z")
+    );
+    const serialized = JSON.stringify(exportPayload);
+
+    expect(exportPayload.exportVersion).toBe("gameface-match-non-raw-export-v1");
+    expect(exportPayload.consentVersion).toBe(CONSENT_VERSION);
+    expect(exportPayload.savedBuilds).toEqual([
+      {
+        id: "saved-build",
+        createdAt: "2026-07-10T00:00:00.000Z",
+        profileVersion: "unit-test",
+        catalogVersionID: null,
+        buildInstructionCount: 0
+      }
+    ]);
+    expect(exportPayload.savedProfiles[0]).toMatchObject({ profileID: profile.id, encryptionStatus: "encrypted" });
+    expect(exportPayload.privacyAssertions.join(" ")).toMatch(/excludes raw face images/i);
+    expect(serialized).not.toMatch(/data:image|blob:http|objectUrl|landmarkCoordinates|identityEmbedding|faceVector|cameraFrame/i);
+    expect(serialized).not.toMatch(/"measurements":|"geometry":|jawWidth|faceWidth|noseWidth|mouthWidth/i);
   });
 });
 

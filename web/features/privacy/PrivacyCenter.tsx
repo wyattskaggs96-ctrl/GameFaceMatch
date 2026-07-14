@@ -5,6 +5,7 @@ import { Alert, Button, Card, ModalDialog, ScreenHeader, StatusBadge } from "@/c
 import { INDEPENDENT_APP_DISCLAIMER } from "@/lib/product-copy";
 import { createDeletionConfirmation, getNetworkUploadStatus, type DataInventoryItem, type DeletionRecord, type DeletionScope } from "@/lib/privacy/data-lifecycle";
 import type { SavedBuild } from "@/types/domain";
+import { CONSENT_DEFINITIONS, CONSENT_VERSION, type ConsentID, type ConsentState } from "@/lib/privacy/consent";
 import type { SavedProfileStorageStatus, SavedProfileSummary } from "@/lib/privacy/profile-storage";
 
 export function PrivacyCenter({
@@ -13,26 +14,47 @@ export function PrivacyCenter({
   savedBuilds,
   savedProfiles,
   savedProfileStatus,
+  consentState,
+  nonRawExportJson,
   deletionRecorded,
   onDeleteScope,
   onDeleteSavedBuild,
-  onDeleteSavedProfile
+  onDeleteSavedProfile,
+  onRevokeOptionalConsent
 }: {
   inventory: DataInventoryItem[];
   deletionRecords: DeletionRecord[];
   savedBuilds: SavedBuild[];
   savedProfiles: SavedProfileSummary[];
   savedProfileStatus: SavedProfileStorageStatus;
+  consentState: ConsentState;
+  nonRawExportJson: string;
   deletionRecorded: boolean;
   onDeleteScope: (scope: DeletionScope) => void;
   onDeleteSavedBuild: (buildID: string) => void;
   onDeleteSavedProfile: (profileID: string) => void;
+  onRevokeOptionalConsent: (consentID: ConsentID) => void;
 }) {
   const [pendingScope, setPendingScope] = useState<DeletionScope | null>(null);
   const [pendingBuildID, setPendingBuildID] = useState<string | null>(null);
   const [pendingProfileID, setPendingProfileID] = useState<string | null>(null);
+  const [exportVisible, setExportVisible] = useState(false);
   const uploadStatus = getNetworkUploadStatus();
   const confirmation = pendingScope ? createDeletionConfirmation(pendingScope) : null;
+  const collectedItems = inventory.filter((item) => ["captured-image-bytes", "temporary-blob-urls", "screenshot-refinement-session"].includes(item.id));
+  const processedItems = inventory.filter((item) => ["capture-session-metadata", "user-confirmed-attributes", "derived-profile"].includes(item.id));
+  const savedItems = inventory.filter((item) => ["saved-profiles", "saved-builds", "deletion-records", "application-preferences", "consent-version"].includes(item.id));
+  const optionalConsents = CONSENT_DEFINITIONS.filter((definition) => !definition.requiredForCapture);
+
+  function downloadNonRawExport() {
+    const blob = new Blob([nonRawExportJson], { type: "application/json" });
+    const objectUrl = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = objectUrl;
+    anchor.download = "gameface-match-non-raw-export.json";
+    anchor.click();
+    URL.revokeObjectURL(objectUrl);
+  }
 
   function confirmDeletion() {
     if (pendingProfileID) {
@@ -76,9 +98,62 @@ export function PrivacyCenter({
         </Card>
       </div>
 
+      <Card>
+        <div className="section-heading">
+          <p className="eyebrow">Plain-language summary</p>
+          <h2>Collected, processed, and saved</h2>
+        </div>
+        <div className="result-detail-grid">
+          <DataSummary title="Collected temporarily" items={collectedItems} emptyText="No temporary raw media is currently stored." />
+          <DataSummary title="Processed locally" items={processedItems} emptyText="No active profile-processing data is currently stored." />
+          <DataSummary title="Saved non-raw data" items={savedItems} emptyText="No saved non-raw data is currently stored." />
+          <Card tone="info">
+            <h3>Retention</h3>
+            <p>Raw media lasts only for the active capture or screenshot session. Derived profiles and builds are saved only after explicit action and remain local until deleted.</p>
+            <p>No account, cloud sync, upload endpoint, analytics SDK, or external logging service is connected.</p>
+          </Card>
+        </div>
+      </Card>
+
+      <Card>
+        <div className="section-heading">
+          <p className="eyebrow">Consent controls</p>
+          <h2>Current consent version: {CONSENT_VERSION}</h2>
+        </div>
+        <div className="inventory-list">
+          {optionalConsents.map((definition) => {
+            const record = consentState[definition.id];
+            const granted = Boolean(record?.granted);
+            return (
+              <article className="inventory-item" key={definition.id}>
+                <div className="status-row">
+                  <div>
+                    <h3>{definition.label}</h3>
+                    <p>{definition.description}</p>
+                    <p className="field-note">Updated: {record?.updatedAt ?? "Not granted"}</p>
+                  </div>
+                  <StatusBadge tone={granted ? "warning" : definition.available ? "success" : "neutral"}>
+                    {granted ? "Granted" : definition.available ? "Not granted" : "Unavailable"}
+                  </StatusBadge>
+                </div>
+                <Button variant="secondary" disabled={!definition.available || !granted} onClick={() => onRevokeOptionalConsent(definition.id)}>
+                  Revoke {definition.label.toLowerCase()}
+                </Button>
+              </article>
+            );
+          })}
+        </div>
+      </Card>
+
       <Alert title="Independent companion" tone="info">
         {INDEPENDENT_APP_DISCLAIMER}
       </Alert>
+
+      <Card tone="neutral">
+        <h2>Analytics and logs</h2>
+        <p>The MVP uses local/no-op analytics only. Analytics validation rejects raw images, Blob URLs, camera frames, landmarks, precise measurements, embeddings, and profile payloads.</p>
+        <p>Deletion records contain only scope and completion time, not images, landmarks, measurements, or profile contents.</p>
+      </Card>
 
       <Card>
         <div className="section-heading">
@@ -186,6 +261,25 @@ export function PrivacyCenter({
         </div>
       </Card>
 
+      <Card>
+        <div className="section-heading">
+          <p className="eyebrow">Export</p>
+          <h2>Export saved non-raw data</h2>
+          <p className="supporting">The export includes consent metadata, inventory summaries, saved profile summaries, saved build metadata, deletion records, and preferences. It excludes raw media, object URLs, landmarks, embeddings, and precise facial measurements.</p>
+        </div>
+        <div className="button-row">
+          <Button variant="secondary" onClick={() => setExportVisible((visible) => !visible)}>
+            {exportVisible ? "Hide non-raw export" : "Generate non-raw export"}
+          </Button>
+          <Button variant="secondary" onClick={downloadNonRawExport}>
+            Download non-raw export
+          </Button>
+        </div>
+        {exportVisible ? (
+          <textarea className="export-preview" readOnly aria-label="Non-raw data export" value={nonRawExportJson} rows={12} />
+        ) : null}
+      </Card>
+
       <Card tone="neutral">
         <h2>Deletion records</h2>
         {deletionRecords.length > 0 ? (
@@ -237,5 +331,25 @@ export function PrivacyCenter({
         </Alert>
       ) : null}
     </section>
+  );
+}
+
+function DataSummary({ title, items, emptyText }: { title: string; items: DataInventoryItem[]; emptyText: string }) {
+  const storedItems = items.filter((item) => item.currentlyStored);
+  return (
+    <Card tone={storedItems.length > 0 ? "warning" : "success"}>
+      <h3>{title}</h3>
+      {storedItems.length > 0 ? (
+        <ul className="message-list">
+          {storedItems.map((item) => (
+            <li key={item.id}>
+              {item.label}: {item.count} stored. {item.retention}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="field-note">{emptyText}</p>
+      )}
+    </Card>
   );
 }

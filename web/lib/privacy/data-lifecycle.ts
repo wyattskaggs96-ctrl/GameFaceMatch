@@ -1,5 +1,5 @@
 import type { ActiveCaptureSession } from "@/lib/capture/capture-session";
-import type { ConsentState } from "@/lib/privacy/consent";
+import { CONSENT_DEFINITIONS, CONSENT_VERSION, type ConsentState } from "@/lib/privacy/consent";
 import type { AttributeConfirmationState } from "@/lib/profile/attribute-confirmation";
 import type { SavedBuild, StandardFaceProfile } from "@/types/domain";
 import type { ScreenshotRefinementSession } from "@/lib/refinement/screenshot-refinement";
@@ -68,6 +68,52 @@ export interface DataInventoryItem {
 export interface DeletionVerificationResult {
   passed: boolean;
   messages: string[];
+}
+
+export interface NonRawPrivacyExportInput extends DataInventoryInput {
+  savedProfileSummaries?: Array<{
+    profileID: string;
+    savedAt: string;
+    encryptionStatus: string;
+  }>;
+}
+
+export interface NonRawPrivacyExport {
+  exportVersion: "gameface-match-non-raw-export-v1";
+  exportedAt: string;
+  consentVersion: string;
+  consent: Array<{
+    id: string;
+    label: string;
+    granted: boolean;
+    available: boolean;
+    requiredForCapture: boolean;
+    updatedAt: string | null;
+  }>;
+  inventory: Array<{
+    id: DataInventoryItem["id"];
+    label: string;
+    currentlyStored: boolean;
+    count: number;
+    storageLocation: string;
+    retention: string;
+    leavesDevice: boolean;
+  }>;
+  savedProfiles: Array<{
+    profileID: string;
+    savedAt: string;
+    encryptionStatus: string;
+  }>;
+  savedBuilds: Array<{
+    id: string;
+    createdAt: string;
+    profileVersion: string;
+    catalogVersionID: string | null;
+    buildInstructionCount: number;
+  }>;
+  deletionRecords: DeletionRecord[];
+  preferences: ApplicationPreferences;
+  privacyAssertions: string[];
 }
 
 export function createDataInventory(input: DataInventoryInput): DataInventoryItem[] {
@@ -299,5 +345,46 @@ export function getNetworkUploadStatus() {
     uploadsEnabled: false,
     uploadedBytes: 0,
     uploadedCategories: [] as string[]
+  };
+}
+
+export function createNonRawPrivacyExport(input: NonRawPrivacyExportInput, now = new Date()): NonRawPrivacyExport {
+  const inventory = createDataInventory(input);
+  return {
+    exportVersion: "gameface-match-non-raw-export-v1",
+    exportedAt: now.toISOString(),
+    consentVersion: CONSENT_VERSION,
+    consent: CONSENT_DEFINITIONS.map((definition) => ({
+      id: definition.id,
+      label: definition.label,
+      granted: Boolean(input.consentState[definition.id]?.granted),
+      available: definition.available,
+      requiredForCapture: definition.requiredForCapture,
+      updatedAt: input.consentState[definition.id]?.updatedAt ?? null
+    })),
+    inventory: inventory.map((item) => ({
+      id: item.id,
+      label: item.label,
+      currentlyStored: item.currentlyStored,
+      count: item.count,
+      storageLocation: item.storageLocation,
+      retention: item.retention,
+      leavesDevice: item.leavesDevice
+    })),
+    savedProfiles: input.savedProfileSummaries ?? [],
+    savedBuilds: input.savedBuilds.map((build) => ({
+      id: build.id,
+      createdAt: build.createdAt,
+      profileVersion: build.profileVersion,
+      catalogVersionID: build.catalogVersion?.identifier ?? build.match?.catalogVersion.identifier ?? null,
+      buildInstructionCount: build.buildInstructions.length
+    })),
+    deletionRecords: input.deletionRecords,
+    preferences: input.preferences,
+    privacyAssertions: [
+      "This export excludes raw face images, screenshot images, File/Blob objects, object URLs, landmark coordinates, identity embeddings, and precise facial measurements.",
+      "No face images, screenshots, profiles, or builds are uploaded by the web MVP.",
+      "Saved builds contain non-image build metadata and catalog traceability only."
+    ]
   };
 }

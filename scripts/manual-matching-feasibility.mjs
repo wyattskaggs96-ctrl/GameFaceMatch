@@ -1,0 +1,444 @@
+#!/usr/bin/env node
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+export const MANUAL_MATCHING_FEASIBILITY_VERSION = "phase0-manual-matching-feasibility-v1";
+
+export const subjectColumns = [
+  "study_id",
+  "study_version",
+  "participant_id",
+  "participant_sequence",
+  "consent_version",
+  "consent_acknowledged_at",
+  "consent_manual_review",
+  "consent_temporary_processing",
+  "consent_derived_profile",
+  "consent_future_contact_optional",
+  "capture_mode",
+  "capture_device_label",
+  "straight_on_present",
+  "left45_present",
+  "right45_present",
+  "left_profile_present",
+  "right_profile_present",
+  "neutral_expression_confirmed",
+  "one_person_confirmed",
+  "photo_requirements_met",
+  "raw_media_deletion_status",
+  "raw_media_deletion_requested_at",
+  "raw_media_deletion_completed_at",
+  "raw_media_deletion_verified_by",
+  "withdrawal_requested_at",
+  "notes"
+];
+
+export const reviewColumns = [
+  "study_id",
+  "participant_id",
+  "reviewer_id",
+  "review_completed_at",
+  "feature_annotation_face_width",
+  "feature_annotation_face_length",
+  "feature_annotation_forehead",
+  "feature_annotation_temples",
+  "feature_annotation_cheekbones",
+  "feature_annotation_jaw",
+  "feature_annotation_chin",
+  "feature_annotation_eyes",
+  "feature_annotation_brows",
+  "feature_annotation_nose",
+  "feature_annotation_mouth",
+  "feature_annotation_ears",
+  "feature_annotation_hairline",
+  "feature_annotation_occlusion",
+  "top_head_rank_1_catalog_id",
+  "top_head_rank_1_reason",
+  "top_head_rank_2_catalog_id",
+  "top_head_rank_2_reason",
+  "top_head_rank_3_catalog_id",
+  "top_head_rank_3_reason",
+  "hair_catalog_id",
+  "hair_reason",
+  "facial_hair_catalog_id",
+  "facial_hair_reason",
+  "reviewer_disagreement_flag",
+  "mismatch_reason_codes",
+  "notes"
+];
+
+export const resultColumns = [
+  "study_id",
+  "participant_id",
+  "catalog_version_id",
+  "algorithm_version",
+  "reviewer_a_id",
+  "reviewer_b_id",
+  "reviewers_agreed_top_choice",
+  "reviewers_agreed_top_three_set",
+  "participant_selected_rank",
+  "participant_selected_catalog_id",
+  "participant_usefulness_rating_1_to_5",
+  "top_one_accepted",
+  "top_three_useful",
+  "disagreement_logged",
+  "mismatch_reason_codes",
+  "raw_media_deleted_confirmed",
+  "deletion_confirmed_at",
+  "profile_deleted_confirmed",
+  "notes"
+];
+
+const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const defaultPaths = {
+  subjects: "data/phase-zero/manual_matching_subjects.template.csv",
+  reviews: "data/phase-zero/manual_matching_reviews.template.csv",
+  results: "data/phase-zero/manual_matching_results.template.csv"
+};
+const requiredSubjectYesNoFields = [
+  "consent_manual_review",
+  "consent_temporary_processing",
+  "consent_derived_profile",
+  "straight_on_present",
+  "left45_present",
+  "right45_present",
+  "left_profile_present",
+  "right_profile_present",
+  "neutral_expression_confirmed",
+  "one_person_confirmed",
+  "photo_requirements_met"
+];
+const requiredViews = ["straight_on_present", "left45_present", "right45_present", "left_profile_present", "right_profile_present"];
+const allowedMismatchReasons = new Set([
+  "headShapeMismatch",
+  "jawMismatch",
+  "eyeMismatch",
+  "noseMismatch",
+  "mouthMismatch",
+  "hairMismatch",
+  "facialHairMismatch",
+  "bodyPreferenceMismatch",
+  "catalogCoverageGap",
+  "captureQuality",
+  "lightingOrPose",
+  "participantPreference",
+  "reviewerDisagreement",
+  "uncertain"
+]);
+const placeholderPattern = /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK)\b/i;
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const command = process.argv[2] ?? "validate";
+  if (["help", "--help", "-h"].includes(command)) {
+    printHelp();
+  } else if (command === "validate" || command === "analyze") {
+    const report = analyzeManualMatchingFeasibility({
+      root: repositoryRoot,
+      subjectsPath: cliValue("--subjects") ?? defaultPaths.subjects,
+      reviewsPath: cliValue("--reviews") ?? defaultPaths.reviews,
+      resultsPath: cliValue("--results") ?? defaultPaths.results
+    });
+    console.log(JSON.stringify(report, null, 2));
+    if (!report.ok) process.exitCode = 1;
+  } else {
+    console.error(`Unknown command: ${command}`);
+    printHelp();
+    process.exitCode = 1;
+  }
+}
+
+export function analyzeManualMatchingFeasibility({
+  root = repositoryRoot,
+  subjectsPath = defaultPaths.subjects,
+  reviewsPath = defaultPaths.reviews,
+  resultsPath = defaultPaths.results
+} = {}) {
+  const subjects = loadCSV(root, subjectsPath, subjectColumns, "subjects");
+  const reviews = loadCSV(root, reviewsPath, reviewColumns, "reviews");
+  const results = loadCSV(root, resultsPath, resultColumns, "results");
+  const errors = [...subjects.errors, ...reviews.errors, ...results.errors];
+  const warnings = [...subjects.warnings, ...reviews.warnings, ...results.warnings];
+  const rows = { subjects: subjects.rows, reviews: reviews.rows, results: results.rows };
+
+  validateSubjectRows(rows.subjects, errors, warnings);
+  validateReviewRows(rows.reviews, rows.subjects, errors, warnings);
+  validateResultRows(rows.results, rows.subjects, rows.reviews, errors, warnings);
+
+  if (rows.subjects.length > 0 && (rows.subjects.length < 10 || rows.subjects.length > 20)) {
+    warnings.push(issue("participantCountOutsideTarget", `Study target is 10-20 subjects; current subject rows: ${rows.subjects.length}.`));
+  }
+  if (rows.subjects.length === 0 && rows.reviews.length === 0 && rows.results.length === 0) {
+    warnings.push(issue("templateOnly", "Manual matching CSVs are header-only templates. No study has been run."));
+  }
+
+  const metrics = calculateManualMatchingMetrics(rows.results);
+
+  return {
+    schemaVersion: MANUAL_MATCHING_FEASIBILITY_VERSION,
+    ok: errors.length === 0,
+    studyHasRun: rows.subjects.length > 0 || rows.reviews.length > 0 || rows.results.length > 0,
+    productionStatus: "NOT_PRODUCTION_DATA",
+    verificationStatus: "NOT_VERIFIED",
+    rowCounts: {
+      subjects: rows.subjects.length,
+      reviews: rows.reviews.length,
+      results: rows.results.length
+    },
+    metrics,
+    errors,
+    warnings
+  };
+}
+
+export function calculateManualMatchingMetrics(resultRows) {
+  const completed = resultRows.filter((row) =>
+    hasText(row.participant_id) &&
+    yes(row.raw_media_deleted_confirmed) &&
+    yes(row.profile_deleted_confirmed) &&
+    isRating(row.participant_usefulness_rating_1_to_5)
+  );
+  const topOneAccepted = completed.filter((row) => yes(row.top_one_accepted) || Number(row.participant_selected_rank) === 1).length;
+  const topThreeUseful = completed.filter((row) => yes(row.top_three_useful) || [1, 2, 3].includes(Number(row.participant_selected_rank))).length;
+  const disagreementCount = completed.filter((row) => yes(row.disagreement_logged) || !sameBoolean(row.reviewers_agreed_top_choice, row.reviewers_agreed_top_three_set)).length;
+  const ratings = completed.map((row) => Number(row.participant_usefulness_rating_1_to_5));
+  return {
+    completedResultCount: completed.length,
+    topOneAcceptance: rate(topOneAccepted, completed.length),
+    topThreeUsefulness: rate(topThreeUseful, completed.length),
+    rankSelectedDistribution: distribution(completed.map((row) => normalizeRank(row.participant_selected_rank))),
+    averageParticipantUsefulnessRating: average(ratings),
+    reviewerTopChoiceAgreement: yesRate(completed.map((row) => row.reviewers_agreed_top_choice)),
+    reviewerTopThreeSetAgreement: yesRate(completed.map((row) => row.reviewers_agreed_top_three_set)),
+    disagreementCount,
+    mismatchReasonCounts: distribution(completed.flatMap((row) => splitReasons(row.mismatch_reason_codes))),
+    deletionConfirmation: rate(completed.filter((row) => yes(row.raw_media_deleted_confirmed) && yes(row.profile_deleted_confirmed)).length, completed.length)
+  };
+}
+
+function loadCSV(root, relativePath, expectedColumns, label) {
+  const absolutePath = path.resolve(root, relativePath);
+  const errors = [];
+  const warnings = [];
+  if (!fs.existsSync(absolutePath)) {
+    return { rows: [], errors: [issue("missingCSV", `${label} CSV not found at ${relativePath}.`)], warnings };
+  }
+  const parsed = parseCSV(fs.readFileSync(absolutePath, "utf8"));
+  if (parsed.length === 0) {
+    return { rows: [], errors: [issue("emptyCSV", `${label} CSV is empty.`)], warnings };
+  }
+  const header = parsed[0].map((column) => column.trim());
+  const missing = expectedColumns.filter((column) => !header.includes(column));
+  const extra = header.filter((column) => !expectedColumns.includes(column));
+  if (missing.length > 0) errors.push(issue("missingColumns", `${label} CSV missing columns: ${missing.join(", ")}.`));
+  if (extra.length > 0) warnings.push(issue("extraColumns", `${label} CSV has extra columns ignored by analysis: ${extra.join(", ")}.`));
+  const rows = parsed.slice(1)
+    .filter((row) => row.some((cell) => cell.trim().length > 0))
+    .map((row) => Object.fromEntries(expectedColumns.map((column) => [column, row[header.indexOf(column)]?.trim() ?? ""])));
+  return { rows, errors, warnings };
+}
+
+function validateSubjectRows(rows, errors, warnings) {
+  const ids = new Set();
+  for (const [index, row] of rows.entries()) {
+    const rowNumber = index + 2;
+    requireFields(row, ["study_id", "study_version", "participant_id", "consent_version", "capture_mode"], "subjects", rowNumber, errors);
+    rejectPlaceholders(row, "subjects", rowNumber, errors);
+    if (ids.has(row.participant_id)) errors.push(issue("duplicateParticipant", `Duplicate participant_id ${row.participant_id}.`, rowNumber));
+    ids.add(row.participant_id);
+    for (const field of requiredSubjectYesNoFields) validateYesNo(row[field], `subjects.${field}`, rowNumber, errors);
+    for (const field of requiredViews) {
+      if (!yes(row[field])) errors.push(issue("missingRequiredView", `${row.participant_id} is missing required view ${field}.`, rowNumber));
+    }
+    if (row.raw_media_deletion_status === "deleted" && (!isISO(row.raw_media_deletion_completed_at) || !hasText(row.raw_media_deletion_verified_by))) {
+      errors.push(issue("incompleteRawMediaDeletion", `${row.participant_id} raw media deletion needs timestamp and verifier.`, rowNumber));
+    }
+    if (row.withdrawal_requested_at && !isISO(row.withdrawal_requested_at)) {
+      errors.push(issue("invalidWithdrawalTimestamp", `${row.participant_id} withdrawal timestamp is invalid.`, rowNumber));
+    }
+    if (!yes(row.photo_requirements_met)) warnings.push(issue("photoRequirementsNotMet", `${row.participant_id} photo requirements are not fully confirmed.`, rowNumber));
+  }
+}
+
+function validateReviewRows(rows, subjectRows, errors, warnings) {
+  const subjectIDs = new Set(subjectRows.map((row) => row.participant_id));
+  const reviewersByParticipant = new Map();
+  for (const [index, row] of rows.entries()) {
+    const rowNumber = index + 2;
+    requireFields(row, ["study_id", "participant_id", "reviewer_id", "review_completed_at", "top_head_rank_1_catalog_id", "top_head_rank_2_catalog_id", "top_head_rank_3_catalog_id"], "reviews", rowNumber, errors);
+    rejectPlaceholders(row, "reviews", rowNumber, errors);
+    if (!subjectIDs.has(row.participant_id)) errors.push(issue("unknownReviewParticipant", `Review references unknown participant ${row.participant_id}.`, rowNumber));
+    if (!isISO(row.review_completed_at)) errors.push(issue("invalidReviewTimestamp", `${row.participant_id} review timestamp is invalid.`, rowNumber));
+    const rankedIDs = [row.top_head_rank_1_catalog_id, row.top_head_rank_2_catalog_id, row.top_head_rank_3_catalog_id];
+    if (new Set(rankedIDs).size !== rankedIDs.length) errors.push(issue("duplicateTopThreeChoice", `${row.participant_id} repeats a top-three catalog ID.`, rowNumber));
+    validateYesNo(row.reviewer_disagreement_flag, "reviews.reviewer_disagreement_flag", rowNumber, errors);
+    validateMismatchReasons(row.mismatch_reason_codes, "reviews", rowNumber, errors);
+    reviewersByParticipant.set(row.participant_id, new Set([...(reviewersByParticipant.get(row.participant_id) ?? []), row.reviewer_id]));
+  }
+  for (const [participantID, reviewerIDs] of reviewersByParticipant.entries()) {
+    if (reviewerIDs.size < 2) warnings.push(issue("insufficientIndependentReviews", `${participantID} has fewer than two independent reviewer rows.`));
+  }
+}
+
+function validateResultRows(rows, subjectRows, reviewRows, errors, warnings) {
+  const subjectIDs = new Set(subjectRows.map((row) => row.participant_id));
+  const reviewersByParticipant = new Map();
+  for (const review of reviewRows) {
+    reviewersByParticipant.set(review.participant_id, new Set([...(reviewersByParticipant.get(review.participant_id) ?? []), review.reviewer_id]));
+  }
+  for (const [index, row] of rows.entries()) {
+    const rowNumber = index + 2;
+    requireFields(row, ["study_id", "participant_id", "catalog_version_id", "algorithm_version", "reviewer_a_id", "reviewer_b_id"], "results", rowNumber, errors);
+    rejectPlaceholders(row, "results", rowNumber, errors);
+    if (!subjectIDs.has(row.participant_id)) errors.push(issue("unknownResultParticipant", `Result references unknown participant ${row.participant_id}.`, rowNumber));
+    if (row.reviewer_a_id === row.reviewer_b_id) errors.push(issue("sameReviewer", `${row.participant_id} requires two different reviewers.`, rowNumber));
+    const reviewers = reviewersByParticipant.get(row.participant_id) ?? new Set();
+    if (reviewRows.length > 0 && (!reviewers.has(row.reviewer_a_id) || !reviewers.has(row.reviewer_b_id))) {
+      errors.push(issue("resultReviewerMissingReview", `${row.participant_id} result references reviewer without matching review row.`, rowNumber));
+    }
+    for (const field of ["reviewers_agreed_top_choice", "reviewers_agreed_top_three_set", "top_one_accepted", "top_three_useful", "disagreement_logged", "raw_media_deleted_confirmed", "profile_deleted_confirmed"]) {
+      validateYesNo(row[field], `results.${field}`, rowNumber, errors);
+    }
+    if (row.participant_selected_rank && !["1", "2", "3"].includes(row.participant_selected_rank)) {
+      errors.push(issue("invalidSelectedRank", `${row.participant_id} selected rank must be 1, 2, 3, or blank.`, rowNumber));
+    }
+    if (!isRating(row.participant_usefulness_rating_1_to_5)) {
+      errors.push(issue("invalidUsefulnessRating", `${row.participant_id} usefulness rating must be 1-5.`, rowNumber));
+    }
+    if (yes(row.raw_media_deleted_confirmed) && !isISO(row.deletion_confirmed_at)) {
+      errors.push(issue("missingDeletionTimestamp", `${row.participant_id} deletion confirmation needs a timestamp.`, rowNumber));
+    }
+    if (!yes(row.raw_media_deleted_confirmed) || !yes(row.profile_deleted_confirmed)) {
+      warnings.push(issue("deletionNotConfirmed", `${row.participant_id} is not complete until raw media and profile deletion are confirmed.`, rowNumber));
+    }
+    validateMismatchReasons(row.mismatch_reason_codes, "results", rowNumber, errors);
+  }
+}
+
+function requireFields(row, fields, label, rowNumber, errors) {
+  for (const field of fields) {
+    if (!hasText(row[field])) errors.push(issue("missingRequiredField", `${label} row is missing ${field}.`, rowNumber));
+  }
+}
+
+function rejectPlaceholders(row, label, rowNumber, errors) {
+  for (const [field, value] of Object.entries(row)) {
+    if (placeholderPattern.test(String(value))) errors.push(issue("placeholderValue", `${label}.${field} contains a placeholder value.`, rowNumber));
+  }
+}
+
+function validateYesNo(value, field, rowNumber, errors) {
+  if (!["yes", "no"].includes(String(value).trim().toLowerCase())) {
+    errors.push(issue("invalidBoolean", `${field} must be yes or no.`, rowNumber));
+  }
+}
+
+function validateMismatchReasons(value, label, rowNumber, errors) {
+  for (const reason of splitReasons(value)) {
+    if (!allowedMismatchReasons.has(reason)) errors.push(issue("invalidMismatchReason", `${label} has unsupported mismatch reason ${reason}.`, rowNumber));
+  }
+}
+
+function parseCSV(text) {
+  const rows = [];
+  let current = "";
+  let row = [];
+  let inQuotes = false;
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    const next = text[index + 1];
+    if (char === "\"" && inQuotes && next === "\"") {
+      current += "\"";
+      index += 1;
+    } else if (char === "\"") {
+      inQuotes = !inQuotes;
+    } else if (char === "," && !inQuotes) {
+      row.push(current);
+      current = "";
+    } else if ((char === "\n" || char === "\r") && !inQuotes) {
+      if (char === "\r" && next === "\n") index += 1;
+      row.push(current);
+      rows.push(row);
+      current = "";
+      row = [];
+    } else {
+      current += char;
+    }
+  }
+  if (current.length > 0 || row.length > 0) {
+    row.push(current);
+    rows.push(row);
+  }
+  return rows;
+}
+
+function splitReasons(value) {
+  return String(value ?? "").split(/[;|]/).map((item) => item.trim()).filter(Boolean);
+}
+
+function distribution(values) {
+  const counts = {};
+  for (const value of values) counts[value] = (counts[value] ?? 0) + 1;
+  return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
+}
+
+function rate(numerator, denominator) {
+  return { numerator, denominator, rate: denominator > 0 ? numerator / denominator : null };
+}
+
+function yesRate(values) {
+  const normalized = values.filter((value) => ["yes", "no"].includes(String(value).trim().toLowerCase()));
+  return rate(normalized.filter(yes).length, normalized.length);
+}
+
+function average(values) {
+  return values.length > 0 ? values.reduce((total, value) => total + value, 0) / values.length : null;
+}
+
+function normalizeRank(value) {
+  return ["1", "2", "3"].includes(String(value).trim()) ? String(value).trim() : "notSelected";
+}
+
+function sameBoolean(first, second) {
+  return String(first).trim().toLowerCase() === String(second).trim().toLowerCase();
+}
+
+function yes(value) {
+  return String(value).trim().toLowerCase() === "yes";
+}
+
+function hasText(value) {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
+function isRating(value) {
+  const number = Number(value);
+  return Number.isInteger(number) && number >= 1 && number <= 5;
+}
+
+function isISO(value) {
+  return hasText(value) && !Number.isNaN(Date.parse(value));
+}
+
+function issue(code, message, rowNumber) {
+  return { code, message, rowNumber };
+}
+
+function cliValue(flag) {
+  const index = process.argv.indexOf(flag);
+  return index >= 0 ? process.argv[index + 1] : null;
+}
+
+function printHelp() {
+  console.log(`Manual matching feasibility validation
+
+Usage:
+  node scripts/manual-matching-feasibility.mjs validate
+  node scripts/manual-matching-feasibility.mjs analyze
+
+Options:
+  --subjects <path>  Subjects CSV path
+  --reviews <path>   Reviews CSV path
+  --results <path>   Results CSV path
+`);
+}

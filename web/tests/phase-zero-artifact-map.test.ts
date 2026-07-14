@@ -19,6 +19,9 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/heads.research.json",
   "data/phase-zero/additional_attributes.research.json",
   "data/phase-zero/evidence_manifest.json",
+  "data/phase-zero/research_evidence_package_manifest.json",
+  "data/phase-zero/research_evidence_package_manifest.csv",
+  "data/phase-zero/research_evidence_path_resolution.json",
   "data/phase-zero/capture_log.json",
   "data/phase-zero/issues_register.research.json",
   "data/phase-zero/capture_requests.json",
@@ -30,6 +33,7 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/manual_matching_reviews.template.csv",
   "data/phase-zero/manual_matching_results.template.csv",
   "docs/phase-zero/APPEARANCE_MENU_GAP_MATRIX.md",
+  "docs/phase-zero/RESEARCH_EVIDENCE_PACKAGE_MANIFEST.md",
   "docs/phase-zero/DEPENDENCY_TEST_EXECUTION.md",
   "docs/phase-zero/WYATT_RECORDING_SCRIPT.md",
   "docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md"

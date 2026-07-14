@@ -85,6 +85,18 @@ This dictionary defines how current Phase 0 artifacts should be interpreted. It 
 | `catalogID` / `menuID` | Associated catalog or menu record. | Blank only when evidence is general environment/context. |
 | `verificationState` | Evidence verification state. | Current evidence remains not second-verified. |
 
+## Research Evidence Package Fields
+
+| Field | Meaning | Notes |
+| --- | --- | --- |
+| `releaseCandidateStatus` | Whether the local research package passes evidence-custody checks. | `PASS_RESEARCH_PACKAGE_RC_PATH_RESOLUTION` means local paths, checksums, catalog links, chronology, and issue links passed; it does not mean production verification. |
+| `masterInventory` | Every available source master from the canonical video inventory. | Includes duplicates and portable `OWNER_DOWNLOADS/...` references; masters are not committed. |
+| `derivativeInventory` | Every derivative evidence row from the canonical evidence manifest. | Each derivative must link to a source master and source timestamp. |
+| `pathResolution` | Local path-resolution test results. | Derivative files must resolve locally; source masters resolve as external owner-master references with hashes and portable paths. |
+| `catalogEvidenceLinks` | Evidence-link validation for canonical research catalog rows. | A valid research row must point to an evidence ID or evidence path known to the canonical evidence manifest or local generated evidence. |
+| `captureLogCheck` | Chronology and evidence-reference validation for capture-log events. | Events must remain ordered by source-video sequence and timestamp. |
+| `issueLinkCheck` | Issue-register linkage validation. | Issues must connect to affected records, affected evidence, related issues, or a recapture request. |
+
 ## Capture And Issue Fields
 
 | Field | Meaning | Notes |

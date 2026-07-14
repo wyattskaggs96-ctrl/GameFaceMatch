@@ -30,6 +30,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Phase 0 research evidence package check",
+    command: "node",
+    args: ["scripts/cf27-research-evidence-package-rc.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Catalog import validation engine check",
     command: "node",
     args: ["scripts/catalog-import-validator.mjs", "--check"],

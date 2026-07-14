@@ -47,6 +47,7 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/manual_matching_subjects.template.csv",
   "data/phase-zero/manual_matching_reviews.template.csv",
   "data/phase-zero/manual_matching_results.template.csv",
+  "data/phase-zero/manual_matching_accuracy_analysis.json",
   "data/schemas/verified-head-geometry-annotation.schema.json",
   "data/phase-zero/annotation-forms/verified_head_geometry_annotation_form.template.json",
   "data/phase-zero/annotation-forms/verified_head_geometry_annotation_form.template.csv",
@@ -59,6 +60,7 @@ const requiredCanonicalArtifacts = [
   "docs/phase-zero/BLIND_SECOND_VERIFIER_PRINTABLE_PACKET.md",
   "docs/phase-zero/SECOND_VERIFIER_RESULTS_INTAKE.md",
   "docs/phase-zero/VERIFICATION_DISCREPANCY_MANAGEMENT.md",
+  "docs/phase-zero/MANUAL_MATCHING_ACCURACY_ANALYSIS.md",
   "docs/phase-zero/WYATT_RECORDING_SCRIPT.md",
   "docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md"
 ];
@@ -159,6 +161,40 @@ describe("Phase 0 artifact map", () => {
     expect(artifactMap).toContain("Current planning should use `data/phase-zero/*`");
     expect(dataDictionary).toContain("Older historical exports can have different counts");
     expect(dataDictionary).toContain("Do not treat `OBSERVED_PENDING_VERIFICATION` as verified.");
+  });
+
+  it("keeps manual matching accuracy conclusions blocked when no real completed study data exists", () => {
+    const artifactMap = readText("docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md");
+    const analysisDoc = readText("docs/phase-zero/MANUAL_MATCHING_ACCURACY_ANALYSIS.md");
+    const analysis = readJSON<{
+      analysisStatus: string;
+      validParticipants: number;
+      completedResultCount: number;
+      fixtureDataExcluded: boolean;
+      metrics: {
+        topOneAcceptanceRate: { rate: number | null; denominator: number };
+        topThreeUsefulnessRate: { rate: number | null; denominator: number };
+        averageResemblanceRating: { value: number | null };
+        medianResemblanceRating: { value: number | null };
+        presetConfusionMatrix: unknown[];
+        mostCommonMismatchReasons: unknown[];
+      };
+    }>("data/phase-zero/manual_matching_accuracy_analysis.json");
+
+    expect(artifactMap).toContain("data/phase-zero/manual_matching_accuracy_analysis.json");
+    expect(artifactMap).toContain("docs/phase-zero/MANUAL_MATCHING_ACCURACY_ANALYSIS.md");
+    expect(analysis.analysisStatus).toBe("NO_REAL_COMPLETED_STUDY_DATA");
+    expect(analysis.fixtureDataExcluded).toBe(true);
+    expect(analysis.validParticipants).toBe(0);
+    expect(analysis.completedResultCount).toBe(0);
+    expect(analysis.metrics.topOneAcceptanceRate).toMatchObject({ denominator: 0, rate: null });
+    expect(analysis.metrics.topThreeUsefulnessRate).toMatchObject({ denominator: 0, rate: null });
+    expect(analysis.metrics.averageResemblanceRating.value).toBeNull();
+    expect(analysis.metrics.medianResemblanceRating.value).toBeNull();
+    expect(analysis.metrics.presetConfusionMatrix).toHaveLength(0);
+    expect(analysis.metrics.mostCommonMismatchReasons).toHaveLength(0);
+    expect(analysisDoc).toContain("No real completed manual matching study data exists");
+    expect(analysisDoc).toContain("This report makes no statistical claim.");
   });
 });
 

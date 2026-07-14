@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "manual-matching-accuracy-analysis-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "analysisStatus": "NO_REAL_COMPLETED_STUDY_DATA",
+  "productionRecommendationStatus": "FAIL_CLOSED",
+  "sourceType": "researchStatus",
+  "realCompletedStudyDataOnly": true,
+  "fixtureDataExcluded": true,
+  "statisticalCertaintyClaimed": false,
+  "inputsReviewed": [
+    {
+      "path": "data/phase-zero/manual_matching_subjects.template.csv",
+      "finding": "Header-only template; 0 participant rows."
+    },
+    {
+      "path": "data/phase-zero/manual_matching_reviews.template.csv",
+      "finding": "Header-only template; 0 reviewer rows."
+    },
+    {
+      "path": "data/phase-zero/manual_matching_results.template.csv",
+      "finding": "Header-only template; 0 result rows."
+    },
+    {
+      "path": "data/phase-zero/manual_matching_participant_intake_checkpoint.json",
+      "finding": "Blocked intake checkpoint; 0 participant packages discovered and 0 participants recorded."
+    },
+    {
+      "path": "data/phase-zero/manual_matching_results_ingestion_checkpoint.json",
+      "finding": "Rejected ingestion checkpoint; 0 submissions discovered and 0 ratings committed."
+    },
+    {
+      "path": "data/catalog/production/catalog_manifest.json",
+      "finding": "Production catalog is empty; verified production recommendations remain unavailable."
+    },
+    {
+      "path": "data/fixtures/test-only/manual-matching-study/synthetic-study-result.json",
+      "finding": "Synthetic test fixture exists and was excluded from this real-data analysis."
+    }
+  ],
+  "validParticipants": 0,
+  "completedResultCount": 0,
+  "metrics": {
+    "topOneAcceptanceRate": {
+      "numerator": 0,
+      "denominator": 0,
+      "rate": null,
+      "status": "not_calculable",
+      "reason": "No real completed participant results exist."
+    },
+    "topThreeUsefulnessRate": {
+      "numerator": 0,
+      "denominator": 0,
+      "rate": null,
+      "status": "not_calculable",
+      "reason": "No real completed participant results exist."
+    },
+    "averageResemblanceRating": {
+      "value": null,
+      "status": "not_calculable",
+      "reason": "No real resemblance ratings exist."
+    },
+    "medianResemblanceRating": {
+      "value": null,
+      "status": "not_calculable",
+      "reason": "No real resemblance ratings exist."
+    },
+    "interReviewerAgreement": {
+      "topChoiceAgreementRate": {
+        "numerator": 0,
+        "denominator": 0,
+        "rate": null
+      },
+      "topThreeSetAgreementRate": {
+        "numerator": 0,
+        "denominator": 0,
+        "rate": null
+      },
+      "status": "not_calculable",
+      "reason": "No real paired reviewer results exist."
+    },
+    "confidenceCalibration": {
+      "buckets": [],
+      "meanAbsoluteCalibrationError": null,
+      "status": "not_calculable",
+      "reason": "No real predictions or observed outcomes exist."
+    },
+    "performanceByCaptureMode": [],
+    "performanceByLightingQuality": [],
+    "performanceByFacialHairCondition": [],
+    "performanceByHairstyleCondition": [],
+    "presetConfusionMatrix": [],
+    "mostCommonMismatchReasons": [],
+    "repeatability": {
+      "repeatScanParticipants": 0,
+      "comparisons": [],
+      "status": "not_calculable",
+      "reason": "No real repeat scans exist."
+    }
+  },
+  "mvpTargetComparison": [
+    {
+      "target": "Study participant count",
+      "required": "10-20 consenting subjects for feasibility; fewer than 10 is dry-run only.",
+      "current": "0 valid participants",
+      "result": "not_met"
+    },
+    {
+      "target": "Top-one acceptance",
+      "required": "At least 55% of testers rate the top result 4 or 5 on the resemblance rubric.",
+      "current": "Not calculable with denominator 0.",
+      "result": "not_evaluable"
+    },
+    {
+      "target": "Top-three usefulness",
+      "required": "At least 75% of testers rate at least one top-three result 4 or 5.",
+      "current": "Not calculable with denominator 0.",
+      "result": "not_evaluable"
+    },
+    {
+      "target": "Repeatability",
+      "required": "Repeated captures should preserve core geometry tolerances and at least two of the top-three recommendations once a catalog is available.",
+      "current": "No real repeat scans.",
+      "result": "not_evaluable"
+    }
+  ],
+  "blockedCalculations": [
+    "number of valid participants beyond zero",
+    "top-one acceptance rate",
+    "top-three usefulness rate",
+    "average resemblance rating",
+    "median resemblance rating",
+    "inter-reviewer agreement",
+    "confidence calibration",
+    "performance by capture mode",
+    "performance by lighting quality",
+    "performance by facial-hair condition",
+    "performance by hairstyle condition",
+    "preset confusion matrix",
+    "most common mismatch reasons",
+    "repeatability where repeat scans exist"
+  ],
+  "requiredToAnalyze": [
+    "Approve a verified production College Football 27 catalog release.",
+    "Confirm the manual matching study is READY before collection begins.",
+    "Ingest non-fixture participant rows with consent, required capture views, and deletion status.",
+    "Ingest paired reviewer rows and completed participant result rows.",
+    "Ensure every recommendation references verified production catalog records and exact catalog versions."
+  ],
+  "privacyFinding": {
+    "rawParticipantMediaCommitted": false,
+    "rawParticipantMediaAnalyzed": false,
+    "notes": [
+      "No participant media package was discovered.",
+      "No raw biometric media was added by this analysis.",
+      "Synthetic fixture data was not treated as real study evidence."
+    ]
+  }
+}

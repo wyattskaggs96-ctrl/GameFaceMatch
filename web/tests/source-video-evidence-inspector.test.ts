@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   appendSourceVideoReviewAction,
+  assertEvidenceQAStatusTransition,
   createSourceVideoEvidenceInspectorModel,
   createSourceVideoReviewAuditLog,
   createSourceVideoURL,
+  getDecisionHistoryForCatalog,
+  getLatestEvidenceQAStatus,
   createSurroundingTimestampWindow,
   isSafeSourceVideoID,
   summarizeSourceVideoReviewActions
@@ -102,5 +105,70 @@ describe("source video evidence inspector model", () => {
       approvedDerivatives: 1,
       recaptureRequests: 1
     });
+  });
+
+  it("tracks evidence QA statuses without treating research QA as production verification", () => {
+    const log = createSourceVideoReviewAuditLog();
+    const accepted = appendSourceVideoReviewAction(log, {
+      actionType: "statusMarked",
+      catalogID: "CF27_XBOXUNKNOWN_RTG_HEAD_001",
+      evidenceID: "evidence-head-001-front",
+      sourceVideoID: "video-002",
+      timestampSeconds: 12,
+      reviewerRole: "QA_REVIEWER",
+      targetStatus: "QA_ACCEPTED_RESEARCH",
+      createdAt: "2026-07-13T12:00:00.000Z",
+      notes: "Usable for research only."
+    });
+    const pendingSecondReview = appendSourceVideoReviewAction(accepted, {
+      actionType: "statusMarked",
+      catalogID: "CF27_XBOXUNKNOWN_RTG_HEAD_001",
+      evidenceID: "evidence-head-001-front",
+      sourceVideoID: "video-002",
+      timestampSeconds: 12,
+      reviewerRole: "QA_REVIEWER",
+      targetStatus: "PENDING_SECOND_VERIFICATION",
+      createdAt: "2026-07-13T12:01:00.000Z",
+      notes: "Ready for a separate verifier."
+    });
+
+    expect(getLatestEvidenceQAStatus(pendingSecondReview, "CF27_XBOXUNKNOWN_RTG_HEAD_001")).toBe("PENDING_SECOND_VERIFICATION");
+    expect(getDecisionHistoryForCatalog(pendingSecondReview, "CF27_XBOXUNKNOWN_RTG_HEAD_001")).toHaveLength(2);
+    expect(summarizeSourceVideoReviewActions(pendingSecondReview).statusCounts).toMatchObject({
+      PENDING_SECOND_VERIFICATION: 1,
+      VERIFIED: 0,
+      VERIFIED_WITH_NOTES: 0
+    });
+  });
+
+  it("prevents verified statuses unless the second-verifier workflow supplies the role", () => {
+    expect(() => assertEvidenceQAStatusTransition({
+      targetStatus: "VERIFIED",
+      reviewerRole: "QA_REVIEWER"
+    })).toThrow(/second-verifier/i);
+    expect(() => appendSourceVideoReviewAction(createSourceVideoReviewAuditLog(), {
+      actionType: "statusMarked",
+      catalogID: "CF27_XBOXUNKNOWN_RTG_HEAD_001",
+      evidenceID: "evidence-head-001-front",
+      sourceVideoID: "video-002",
+      timestampSeconds: 12,
+      reviewerRole: "QA_REVIEWER",
+      targetStatus: "VERIFIED_WITH_NOTES",
+      createdAt: "2026-07-13T12:00:00.000Z",
+      notes: "This must be blocked."
+    })).toThrow(/second-verifier/i);
+
+    const verifiedBySecondVerifier = appendSourceVideoReviewAction(createSourceVideoReviewAuditLog(), {
+      actionType: "statusMarked",
+      catalogID: "CF27_XBOXUNKNOWN_RTG_HEAD_001",
+      evidenceID: "evidence-head-001-front",
+      sourceVideoID: "video-002",
+      timestampSeconds: 12,
+      reviewerRole: "SECOND_VERIFIER",
+      targetStatus: "VERIFIED_WITH_NOTES",
+      createdAt: "2026-07-13T12:00:00.000Z",
+      notes: "Second-verifier synthetic test action."
+    });
+    expect(getLatestEvidenceQAStatus(verifiedBySecondVerifier, "CF27_XBOXUNKNOWN_RTG_HEAD_001")).toBe("VERIFIED_WITH_NOTES");
   });
 });

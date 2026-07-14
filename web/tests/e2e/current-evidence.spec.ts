@@ -123,15 +123,24 @@ test.describe("GameFace Match current evidence E2E", () => {
     await expect(sectionByHeading(page, "Research records").locator("dd").filter({ hasText: /^CF27_XBOXUNKNOWN_RTG_HEAD_012$/ })).toBeVisible();
 
     await page.goto("/#video-inspector");
-    await expect(page.getByRole("heading", { name: "Source video evidence inspector" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Evidence QA workspace" })).toBeVisible();
     await page.getByLabel("Category").selectOption("heads");
     await page.getByRole("button", { name: /Face 12/ }).click();
     await expect(page.getByRole("heading", { name: "Source video", exact: true })).toBeVisible();
     await expect(page.getByText("Source video preview is not supported by this browser.")).toBeVisible();
+    await expect(page.getByText("Native label/index")).toBeVisible();
+    await expect(page.getByText("Source metadata and overlap review")).toBeVisible();
+    await expect(page.getByText("VERIFIED statuses are disabled here")).toBeVisible();
+    await page.getByLabel("Reviewer notes").fill("Synthetic QA note for Face 12 evidence.");
+    await page.getByRole("button", { name: "Mark usable" }).click();
+    await page.getByRole("button", { name: "Mark recapture required" }).click();
     await page.getByRole("button", { name: "Approve derivative" }).click();
     await page.getByRole("button", { name: "Request recapture" }).click();
     await expect(page.getByLabel("Local source-video review audit log")).toContainText("approvedDerivative");
     await expect(page.getByLabel("Local source-video review audit log")).toContainText("recaptureRequested");
+    await expect(page.getByLabel("Local source-video review audit log")).toContainText("QA_ACCEPTED_RESEARCH");
+    await expect(page.getByLabel("Local source-video review audit log")).toContainText("RECAPTURE_REQUIRED");
+    await expect(page.getByLabel("Local source-video review audit log")).not.toContainText("\"targetStatus\": \"VERIFIED\"");
   });
 
   test("records source-video intake metadata and creates recapture issues without storing raw video bytes", async ({ page }) => {

@@ -7,7 +7,11 @@ import {
   createEvidencePreviewURL,
   createSourceVideoEvidenceInspectorModel,
   createSourceVideoReviewAuditLog,
+  EVIDENCE_QA_STATUSES,
+  getDecisionHistoryForCatalog,
+  getLatestEvidenceQAStatus,
   summarizeSourceVideoReviewActions,
+  type EvidenceQAStatus,
   type SourceVideoInspectorOption,
   type SourceVideoInspectorRecord,
   type SourceVideoReviewAuditLog,
@@ -81,7 +85,7 @@ export function SourceVideoEvidenceInspector() {
   if (loadError) {
     return (
       <section className="screen-stack" aria-labelledby="source-video-evidence-inspector-title">
-        <ScreenHeader eyebrow="Internal catalog review" title="Source video evidence inspector" id="source-video-evidence-inspector-title">
+        <ScreenHeader eyebrow="Internal catalog review" title="Evidence QA workspace" id="source-video-evidence-inspector-title">
           <p>Open locally available source videos and preserve review actions in a local audit log.</p>
         </ScreenHeader>
         <Alert title="Research metadata unavailable" tone="warning" role="alert">
@@ -97,10 +101,11 @@ export function SourceVideoEvidenceInspector() {
 
   return (
     <section className="screen-stack" aria-labelledby="source-video-evidence-inspector-title">
-      <ScreenHeader eyebrow="Internal catalog review" title="Source video evidence inspector" id="source-video-evidence-inspector-title">
+      <ScreenHeader eyebrow="Internal catalog review" title="Evidence QA workspace" id="source-video-evidence-inspector-title">
         <p>
           Open locally available source videos, seek to recorded evidence timestamps, compare menu and character-frame derivatives, and preserve review actions
-          in a local audit log. This tool never uploads or publicly streams source media.
+          in a local audit log. Reviewers can mark research evidence usable, ambiguous, or recapture required. This tool never uploads or publicly streams
+          source media.
         </p>
       </ScreenHeader>
       <Alert title="PRIMARY RESEARCH REVIEW — NOT PRODUCTION VERIFICATION" tone="warning" role="alert">
@@ -174,13 +179,21 @@ function SourceVideoInspectorDetail({ record }: { record: SourceVideoInspectorRe
   const [selectedEvidenceID, setSelectedEvidenceID] = useState(record.derivativePreview?.evidenceID ?? evidenceChoices[0]?.evidenceID ?? "");
   const selectedEvidence = evidenceChoices.find((entry) => entry.evidenceID === selectedEvidenceID) ?? evidenceChoices[0] ?? null;
   const [auditLog, setAuditLog] = useState<SourceVideoReviewAuditLog>(() => loadAuditLog());
+  const [selectedQAStatus, setSelectedQAStatus] = useState<EvidenceQAStatus>("QA_ACCEPTED_RESEARCH");
+  const [reviewNotes, setReviewNotes] = useState("");
+  const [reviewError, setReviewError] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const previewURL = createEvidencePreviewURL(selectedEvidence);
   const actionSummary = summarizeSourceVideoReviewActions(auditLog);
+  const currentQAStatus = getLatestEvidenceQAStatus(auditLog, record.stableInternalID);
+  const decisionHistory = getDecisionHistoryForCatalog(auditLog, record.stableInternalID);
 
   useEffect(() => {
     setSelectedSourceVideoIndex("0");
     setSelectedEvidenceID(record.derivativePreview?.evidenceID ?? evidenceChoices[0]?.evidenceID ?? "");
+    setSelectedQAStatus("QA_ACCEPTED_RESEARCH");
+    setReviewNotes("");
+    setReviewError(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [record.stableInternalID]);
 
@@ -205,9 +218,52 @@ function SourceVideoInspectorDetail({ record }: { record: SourceVideoInspectorRe
       sourceVideoID: selectedVideoOption?.sourceVideoID ?? selectedEvidence?.sourceVideo ?? null,
       timestampSeconds: selectedVideoOption?.exactTimestampSeconds ?? selectedEvidence?.timestamp ?? null,
       createdAt: new Date().toISOString(),
+      reviewerRole: "QA_REVIEWER",
       notes: createReviewNote(actionType, record, selectedEvidence)
     });
     setAuditLog(nextLog);
+  }
+
+  function markQAStatus(targetStatus: EvidenceQAStatus) {
+    try {
+      const nextLog = appendSourceVideoReviewAction(auditLog, {
+        actionType: "statusMarked",
+        catalogID: record.stableInternalID,
+        evidenceID: selectedEvidence?.evidenceID ?? null,
+        sourceVideoID: selectedVideoOption?.sourceVideoID ?? selectedEvidence?.sourceVideo ?? null,
+        timestampSeconds: selectedVideoOption?.exactTimestampSeconds ?? selectedEvidence?.timestamp ?? null,
+        createdAt: new Date().toISOString(),
+        reviewerRole: "QA_REVIEWER",
+        targetStatus,
+        notes: reviewNotes.trim() || createStatusReviewNote(targetStatus, record)
+      });
+      setAuditLog(nextLog);
+      setReviewNotes("");
+      setReviewError(null);
+    } catch (error: unknown) {
+      setReviewError(error instanceof Error ? error.message : "Unable to save QA status.");
+    }
+  }
+
+  function addNote() {
+    const trimmed = reviewNotes.trim();
+    if (!trimmed) {
+      setReviewError("Add a note before saving a note-only action.");
+      return;
+    }
+    const nextLog = appendSourceVideoReviewAction(auditLog, {
+      actionType: "noteAdded",
+      catalogID: record.stableInternalID,
+      evidenceID: selectedEvidence?.evidenceID ?? null,
+      sourceVideoID: selectedVideoOption?.sourceVideoID ?? selectedEvidence?.sourceVideo ?? null,
+      timestampSeconds: selectedVideoOption?.exactTimestampSeconds ?? selectedEvidence?.timestamp ?? null,
+      createdAt: new Date().toISOString(),
+      reviewerRole: "QA_REVIEWER",
+      notes: trimmed
+    });
+    setAuditLog(nextLog);
+    setReviewNotes("");
+    setReviewError(null);
   }
 
   return (
@@ -231,8 +287,16 @@ function SourceVideoInspectorDetail({ record }: { record: SourceVideoInspectorRe
           <dd>{record.researchStatus}</dd>
         </div>
         <div>
+          <dt>Evidence QA status</dt>
+          <dd>{currentQAStatus}</dd>
+        </div>
+        <div>
           <dt>Production access</dt>
           <dd>{record.productionStatus}</dd>
+        </div>
+        <div>
+          <dt>Native label/index</dt>
+          <dd>{record.nativeLabel} / {record.nativeOrder ?? "unknown"}</dd>
         </div>
       </dl>
       <div className="source-video-review-grid">
@@ -300,8 +364,81 @@ function SourceVideoInspectorDetail({ record }: { record: SourceVideoInspectorRe
           </div>
         </section>
       </div>
+      <section className="source-video-panel" aria-labelledby={`${record.stableInternalID}-metadata-heading`}>
+        <h3 id={`${record.stableInternalID}-metadata-heading`}>Source metadata and overlap review</h3>
+        <dl className="metadata-list">
+          <div>
+            <dt>Source videos</dt>
+            <dd>{record.sourceVideoNames.join(", ") || "None linked"}</dd>
+          </div>
+          <div>
+            <dt>Extracted frames</dt>
+            <dd>{record.angleViews.length + record.menuEvidence.length}</dd>
+          </div>
+          <div>
+            <dt>Duplicate evidence entries</dt>
+            <dd>{record.duplicateEvidence.length}</dd>
+          </div>
+          <div>
+            <dt>Overlap observation</dt>
+            <dd>{record.face12Overlap ? record.overlapSummary ?? "Face 12 overlap present" : "No special overlap flag"}</dd>
+          </div>
+          <div>
+            <dt>Missing views</dt>
+            <dd>{record.missingViews.join(", ") || "None recorded"}</dd>
+          </div>
+        </dl>
+        {record.captureQualityWarnings.length > 0 ? (
+          <ul className="compact-list" aria-label="Evidence QA warnings">
+            {record.captureQualityWarnings.slice(0, 6).map((warning) => (
+              <li key={warning}>{warning}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="supporting">No capture-quality warnings are linked to this record.</p>
+        )}
+      </section>
       <section className="source-video-panel" aria-labelledby={`${record.stableInternalID}-review-actions`}>
-        <h3 id={`${record.stableInternalID}-review-actions`}>Review actions</h3>
+        <h3 id={`${record.stableInternalID}-review-actions`}>Evidence QA decisions</h3>
+        <div className="form-grid">
+          <SelectField
+            label="QA status"
+            value={selectedQAStatus}
+            onChange={(event) => setSelectedQAStatus(event.currentTarget.value as EvidenceQAStatus)}
+            note="VERIFIED statuses are disabled here and require the second-verifier workflow."
+          >
+            {EVIDENCE_QA_STATUSES.map((status) => (
+              <option key={status} value={status} disabled={status === "VERIFIED" || status === "VERIFIED_WITH_NOTES"}>
+                {status}
+              </option>
+            ))}
+          </SelectField>
+          <label className="form-field" htmlFor={`${record.stableInternalID}-qa-notes`}>
+            <span>Reviewer notes</span>
+            <textarea
+              id={`${record.stableInternalID}-qa-notes`}
+              value={reviewNotes}
+              onChange={(event) => setReviewNotes(event.currentTarget.value)}
+              placeholder="Record why the evidence is usable, ambiguous, or needs recapture."
+            />
+          </label>
+        </div>
+        {reviewError ? (
+          <Alert title="QA action blocked" tone="warning" role="alert">
+            {reviewError}
+          </Alert>
+        ) : null}
+        <div className="review-action-row">
+          <Button onClick={() => markQAStatus(selectedQAStatus)}>Save QA status</Button>
+          <Button variant="secondary" onClick={addNote}>Add note</Button>
+          <Button variant="secondary" onClick={() => markQAStatus("QA_ACCEPTED_RESEARCH")}>Mark usable</Button>
+          <Button variant="secondary" onClick={() => markQAStatus("QA_REJECTED")}>Mark ambiguous/rejected</Button>
+          <Button variant="danger" onClick={() => markQAStatus("RECAPTURE_REQUIRED")}>Mark recapture required</Button>
+        </div>
+        <Alert title="Verification gate" tone="info">
+          This workspace cannot assign VERIFIED or VERIFIED_WITH_NOTES. Those statuses require the separate second-verifier workflow.
+        </Alert>
+        <h4>Derivative review shortcuts</h4>
         <div className="review-action-row">
           <Button onClick={() => recordReviewAction("approvedDerivative")}>Approve derivative</Button>
           <Button variant="secondary" onClick={() => recordReviewAction("rejectedDerivative")}>Reject derivative</Button>
@@ -325,7 +462,24 @@ function SourceVideoInspectorDetail({ record }: { record: SourceVideoInspectorRe
             <dt>Recaptures</dt>
             <dd>{actionSummary.recaptureRequests}</dd>
           </div>
+          <div>
+            <dt>Pending second verification</dt>
+            <dd>{actionSummary.statusCounts.PENDING_SECOND_VERIFICATION}</dd>
+          </div>
         </dl>
+        <h4>Decision history for this record</h4>
+        {decisionHistory.length === 0 ? (
+          <p className="supporting">No local QA decisions have been recorded for this catalog item in this browser session.</p>
+        ) : (
+          <ul className="review-list" aria-label="Evidence QA decision history">
+            {decisionHistory.map((action) => (
+              <li key={action.actionID}>
+                <span>{action.createdAt} · {action.actionType} · {action.targetStatus ?? "no status change"}</span>
+                <strong>{action.notes || "No note"}</strong>
+              </li>
+            ))}
+          </ul>
+        )}
         <pre className="code-block" aria-label="Local source-video review audit log">
           {JSON.stringify(auditLog, null, 2)}
         </pre>
@@ -389,4 +543,12 @@ function createReviewNote(actionType: SourceVideoReviewDecision, record: SourceV
   if (actionType === "rejectedDerivative") return `Reviewer rejected ${evidenceLabel} for ${record.stableInternalID}.`;
   if (actionType === "incorrectOptionAssociation") return `Reviewer marked ${evidenceLabel} as incorrectly associated with ${record.stableInternalID}.`;
   return `Reviewer requested recapture for ${record.stableInternalID} based on ${evidenceLabel}.`;
+}
+
+function createStatusReviewNote(status: EvidenceQAStatus, record: SourceVideoInspectorRecord) {
+  if (status === "QA_ACCEPTED_RESEARCH") return `Reviewer marked evidence usable for research on ${record.stableInternalID}.`;
+  if (status === "QA_REJECTED") return `Reviewer marked evidence ambiguous or rejected for ${record.stableInternalID}.`;
+  if (status === "RECAPTURE_REQUIRED") return `Reviewer marked recapture required for ${record.stableInternalID}.`;
+  if (status === "PENDING_SECOND_VERIFICATION") return `Reviewer marked ${record.stableInternalID} ready for independent second verification.`;
+  return `Reviewer updated ${record.stableInternalID} to ${status}.`;
 }

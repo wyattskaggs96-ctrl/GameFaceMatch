@@ -11,6 +11,28 @@ export const SOURCE_VIDEO_EVIDENCE_INSPECTOR_SCHEMA_VERSION = "source-video-evid
 export const SOURCE_VIDEO_REVIEW_LABEL = "PRIMARY RESEARCH REVIEW — NOT PRODUCTION VERIFICATION";
 
 export type SourceVideoReviewDecision = "approvedDerivative" | "rejectedDerivative" | "incorrectOptionAssociation" | "recaptureRequested";
+export type EvidenceQAStatus =
+  | "OBSERVED_PENDING_QA"
+  | "QA_ACCEPTED_RESEARCH"
+  | "QA_REJECTED"
+  | "RECAPTURE_REQUIRED"
+  | "PENDING_SECOND_VERIFICATION"
+  | "VERIFIED"
+  | "VERIFIED_WITH_NOTES";
+export type EvidenceQAReviewerRole = "QA_REVIEWER" | "SECOND_VERIFIER";
+export type EvidenceQAActionType = SourceVideoReviewDecision | "statusMarked" | "noteAdded";
+
+export const EVIDENCE_QA_STATUSES: EvidenceQAStatus[] = [
+  "OBSERVED_PENDING_QA",
+  "QA_ACCEPTED_RESEARCH",
+  "QA_REJECTED",
+  "RECAPTURE_REQUIRED",
+  "PENDING_SECOND_VERIFICATION",
+  "VERIFIED",
+  "VERIFIED_WITH_NOTES"
+];
+
+export const SECOND_VERIFIER_ONLY_STATUSES: EvidenceQAStatus[] = ["VERIFIED", "VERIFIED_WITH_NOTES"];
 
 export interface SourceVideoInspectorRecord extends CurrentEvidenceGalleryRecord {
   sourceVideoOptions: SourceVideoInspectorOption[];
@@ -41,12 +63,14 @@ export interface SourceVideoInspectorModel {
 
 export interface SourceVideoReviewAction {
   actionID: string;
-  actionType: SourceVideoReviewDecision;
+  actionType: EvidenceQAActionType;
   catalogID: string;
   evidenceID: string | null;
   sourceVideoID: string | null;
   timestampSeconds: number | null;
   reviewerID: string;
+  reviewerRole: EvidenceQAReviewerRole;
+  targetStatus: EvidenceQAStatus | null;
   notes: string;
   createdAt: string;
   previousActionHash: string | null;
@@ -85,16 +109,21 @@ export function createSourceVideoReviewAuditLog(): SourceVideoReviewAuditLog {
 }
 
 export function createSourceVideoReviewAction(input: {
-  actionType: SourceVideoReviewDecision;
+  actionType: EvidenceQAActionType;
   catalogID: string;
   evidenceID: string | null;
   sourceVideoID: string | null;
   timestampSeconds: number | null;
   reviewerID?: string;
+  reviewerRole?: EvidenceQAReviewerRole;
+  targetStatus?: EvidenceQAStatus | null;
   notes?: string;
   createdAt: string;
   previousActionHash: string | null;
 }): SourceVideoReviewAction {
+  const reviewerRole = input.reviewerRole ?? "QA_REVIEWER";
+  const targetStatus = input.targetStatus ?? null;
+  assertEvidenceQAStatusTransition({ targetStatus, reviewerRole });
   const actionID = `source-video-review-${stableTextHash(
     [
       input.actionType,
@@ -102,6 +131,8 @@ export function createSourceVideoReviewAction(input: {
       input.evidenceID ?? "no-evidence",
       input.sourceVideoID ?? "no-video",
       input.timestampSeconds ?? "no-time",
+      targetStatus ?? "no-status",
+      reviewerRole,
       input.createdAt,
       input.previousActionHash ?? "root"
     ].join("|")
@@ -114,6 +145,8 @@ export function createSourceVideoReviewAction(input: {
     sourceVideoID: input.sourceVideoID,
     timestampSeconds: input.timestampSeconds,
     reviewerID: input.reviewerID ?? "LOCAL_REVIEWER",
+    reviewerRole,
+    targetStatus,
     notes: input.notes ?? "",
     createdAt: input.createdAt,
     previousActionHash: input.previousActionHash
@@ -133,13 +166,35 @@ export function appendSourceVideoReviewAction(log: SourceVideoReviewAuditLog, ac
 }
 
 export function summarizeSourceVideoReviewActions(log: SourceVideoReviewAuditLog) {
+  const latestStatusByCatalogID = getLatestEvidenceQAStatusByCatalogID(log);
   return {
     totalActions: log.actions.length,
     approvedDerivatives: log.actions.filter((action) => action.actionType === "approvedDerivative").length,
     rejectedDerivatives: log.actions.filter((action) => action.actionType === "rejectedDerivative").length,
     incorrectAssociations: log.actions.filter((action) => action.actionType === "incorrectOptionAssociation").length,
-    recaptureRequests: log.actions.filter((action) => action.actionType === "recaptureRequested").length
+    recaptureRequests: log.actions.filter((action) => action.actionType === "recaptureRequested" || action.targetStatus === "RECAPTURE_REQUIRED").length,
+    statusCounts: Object.fromEntries(EVIDENCE_QA_STATUSES.map((status) => [
+      status,
+      [...latestStatusByCatalogID.values()].filter((candidate) => candidate === status).length
+    ])) as Record<EvidenceQAStatus, number>
   };
+}
+
+export function getLatestEvidenceQAStatus(log: SourceVideoReviewAuditLog, catalogID: string): EvidenceQAStatus {
+  return [...log.actions].reverse().find((action) => action.catalogID === catalogID && action.targetStatus)?.targetStatus ?? "OBSERVED_PENDING_QA";
+}
+
+export function getDecisionHistoryForCatalog(log: SourceVideoReviewAuditLog, catalogID: string): SourceVideoReviewAction[] {
+  return log.actions.filter((action) => action.catalogID === catalogID);
+}
+
+export function assertEvidenceQAStatusTransition(input: {
+  targetStatus: EvidenceQAStatus | null;
+  reviewerRole: EvidenceQAReviewerRole;
+}) {
+  if (input.targetStatus && SECOND_VERIFIER_ONLY_STATUSES.includes(input.targetStatus) && input.reviewerRole !== "SECOND_VERIFIER") {
+    throw new Error(`${input.targetStatus} requires the second-verifier workflow.`);
+  }
 }
 
 export function createSourceVideoURL(sourceVideoID: string) {
@@ -260,6 +315,14 @@ function chooseDerivativePreview(angleViews: EvidenceManifestEntry[], menuEviden
     menuEvidence[0] ??
     null
   );
+}
+
+function getLatestEvidenceQAStatusByCatalogID(log: SourceVideoReviewAuditLog) {
+  const statuses = new Map<string, EvidenceQAStatus>();
+  for (const action of log.actions) {
+    if (action.targetStatus) statuses.set(action.catalogID, action.targetStatus);
+  }
+  return statuses;
 }
 
 function indexCaptureEvents(events: CaptureLogEvent[]) {

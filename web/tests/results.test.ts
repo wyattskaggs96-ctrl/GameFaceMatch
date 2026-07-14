@@ -47,6 +47,19 @@ describe("results experience state", () => {
     expect(state.kind).toBe("insufficientProfileData");
   });
 
+  it("surfaces incompatible catalog version errors without rendering results", () => {
+    const state = createResultsState({
+      profile: syntheticProfile(),
+      catalogIsEmpty: false,
+      errorMessage: "Catalog version is incompatible with the selected platform or game version."
+    });
+    expect(state.kind).toBe("matchingError");
+    expect(state.message).toContain("incompatible");
+    expect(state.matches).toEqual([]);
+    expect(state.canSave).toBe(false);
+    expect(state.canShare).toBe(false);
+  });
+
   it("supports top-three development fixture behavior without production catalog records", () => {
     const matches = createRuleBasedMatchingEngine().matchTopThree({ profile: syntheticProfile(), catalog: fixtureCatalog, allowTestFixtures: true });
     const state = createResultsState({ profile: syntheticProfile(), catalogIsEmpty: false, matches });
@@ -193,6 +206,23 @@ describe("results experience state", () => {
     expect(report.limitations.join(" ")).toMatch(/do not identify a person/i);
   });
 
+  it("keeps low-confidence match explanations explicit", () => {
+    const profile = syntheticProfile();
+    const matches = createRuleBasedMatchingEngine().matchTopThree({ profile, catalog: fixtureCatalog, allowTestFixtures: true });
+    const lowConfidenceMatch = {
+      ...matches[0],
+      confidence: {
+        score: 0.2,
+        label: "low" as const
+      }
+    };
+    const report = createRecommendationExplanationReport({ profile, matches: [lowConfidenceMatch] });
+
+    expect(report.recommendations[0].confidence).toEqual({ score: 0.2, label: "low" });
+    expect(report.recommendations[0].scoreLabel).toBe("Match score based on available game options.");
+    expect(JSON.stringify(report).toLowerCase()).not.toMatch(/percent identical|% identical|identity probability/);
+  });
+
   it("returns an empty explanation report when no verified matches are supplied", () => {
     const report = createRecommendationExplanationReport({ profile: syntheticProfile(), matches: [] });
     expect(report.recommendations).toEqual([]);
@@ -208,6 +238,26 @@ describe("results experience state", () => {
     expect(share.includesFaceImage).toBe(false);
     expect(share.faceImageObjectUrl).toBeUndefined();
     expect(share.text).toContain(CATALOG_UNAVAILABLE_MESSAGE);
+  });
+
+  it("creates text-only share cards for verified settings unless a face image is explicitly enabled", () => {
+    const match = createRuleBasedMatchingEngine().matchTopThree({
+      profile: syntheticProfileWithConfirmedAppearance(),
+      catalog: catalogWithBuildGuideAnnotations(),
+      allowTestFixtures: true
+    })[0];
+    const share = createSafeShareCard({
+      match,
+      buildInstructions: createBuildInstructions(match),
+      includeFaceImage: false,
+      faceImageObjectUrl: "blob:raw-face-image"
+    });
+
+    expect(share.title).toBe("GameFace Match build guide");
+    expect(share.includesFaceImage).toBe(false);
+    expect(share.faceImageObjectUrl).toBeUndefined();
+    expect(share.text).toContain("Hairstyle: SYNTHETIC_NATIVE_HAIRSTYLE_ALPHA");
+    expect(share.text).toContain("does not include a face image unless explicitly enabled");
   });
 });
 

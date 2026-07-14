@@ -5,7 +5,7 @@ import { Alert, Button, Card, EmptyState, LoadingState, ScreenHeader, StatusBadg
 import { CATALOG_UNAVAILABLE_MESSAGE, PRODUCT_EXPLANATION } from "@/lib/product-copy";
 import { createBuildInstructions, createRecommendationExplanationReport, createResultsState, getTieGroups, summarizeCaptureQuality } from "@/lib/results/results-experience";
 import { createSafeShareCard } from "@/lib/share/share-card";
-import type { GameAppearanceMatch, StandardFaceProfile } from "@/types/domain";
+import type { AppearanceRecommendationCategory, GameAppearanceMatch, StandardFaceProfile, VerifiedAppearanceRecommendation } from "@/types/domain";
 
 export function ResultsExperience({
   profile,
@@ -266,21 +266,41 @@ function TopThreeResults({
 }) {
   const tieGroups = getTieGroups(matches);
   const buildInstructions = selectedRecommendation?.stepByStepGameInstructions ?? [];
+  const selectedPosition = selectedRecommendation?.position ?? resultPositionLabel(selectedMatch.rank);
+  const selectedAppearanceRecommendations = selectedMatch.appearanceRecommendations ?? [];
+  const selectedMissingCategories = selectedAppearanceRecommendations.filter((recommendation) => recommendation.status !== "selected");
+  const selectedAdditionalControls = buildInstructions.filter((instruction) =>
+    ["eyebrows", "skinPresentation", "otherVerifiedControl", "height", "weight", "bodySelection"].includes(instruction.instructionKind)
+  );
   return (
     <>
       <div className="result-grid">
         {matches.map((match) => (
           <Card className="result-card" tone={match.id === selectedMatch.id ? "info" : "neutral"} key={match.id}>
             <div className="status-row">
-              <h2>Rank {match.rank}</h2>
+              <h2>{resultPositionLabel(match.rank)}</h2>
               <StatusBadge tone={match.confidence.label === "high" ? "success" : match.confidence.label === "medium" ? "warning" : "info"}>
                 {match.confidence.label} confidence
               </StatusBadge>
               {testDataMode ? <StatusBadge tone="warning">{testDataLabel}</StatusBadge> : null}
             </div>
+            <p className="field-note">Rank {match.rank}</p>
             <p>{match.scoreLabel}</p>
             <strong className="result-score">{match.score}/100</strong>
-            <p className="field-note">Catalog item: {match.catalogItem.stableInternalID}</p>
+            <dl className="metadata-list">
+              <div>
+                <span>Verified head</span>
+                <strong>{match.catalogItem.visibleGameLabelOrIndex}</strong>
+              </div>
+              <div>
+                <span>Confidence</span>
+                <strong>{Math.round(match.confidence.score * 100)}%</strong>
+              </div>
+              <div>
+                <span>Catalog item</span>
+                <strong>{match.catalogItem.stableInternalID}</strong>
+              </div>
+            </dl>
             <Button variant="secondary" onClick={() => onSelectMatch(match.id)}>
               View details
             </Button>
@@ -298,11 +318,62 @@ function TopThreeResults({
         <div className="section-heading">
           <p className="eyebrow">Match details</p>
           <h2>
-            {testDataMode ? `${testDataLabel} ` : ""}Rank {selectedMatch.rank} explanation
+            {testDataMode ? `${testDataLabel} ` : ""}{selectedPosition} explanation
           </h2>
           <p>{selectedRecommendation?.scoreLabel ?? selectedMatch.scoreLabel} It does not identify a person.</p>
         </div>
         <div className="result-detail-grid">
+          <Card tone="neutral">
+            <h3>Verified settings</h3>
+            <dl className="metadata-list">
+              <div>
+                <span>Verified head</span>
+                <strong>{selectedMatch.catalogItem.visibleGameLabelOrIndex}</strong>
+              </div>
+              <div>
+                <span>Hair</span>
+                <strong>{appearanceValue(selectedAppearanceRecommendations, "hairstyle")}</strong>
+              </div>
+              <div>
+                <span>Hair color</span>
+                <strong>{appearanceValue(selectedAppearanceRecommendations, "hairColor")}</strong>
+              </div>
+              <div>
+                <span>Facial hair</span>
+                <strong>{appearanceValue(selectedAppearanceRecommendations, "facialHair")}</strong>
+              </div>
+              <div>
+                <span>Facial-hair color</span>
+                <strong>{appearanceValue(selectedAppearanceRecommendations, "facialHairColor")}</strong>
+              </div>
+              <div>
+                <span>Additional controls</span>
+                <strong>{selectedAdditionalControls.length > 0 ? `${selectedAdditionalControls.length} verified control(s)` : "No verified additional controls"}</strong>
+              </div>
+            </dl>
+          </Card>
+          <Card tone={selectedMatch.confidence.label === "low" ? "warning" : "info"}>
+            <h3>Score and confidence</h3>
+            <dl className="metadata-list">
+              <div>
+                <span>Match score</span>
+                <strong>{selectedMatch.score}/100</strong>
+              </div>
+              <div>
+                <span>Confidence</span>
+                <strong>
+                  {selectedMatch.confidence.label} ({Math.round(selectedMatch.confidence.score * 100)}%)
+                </strong>
+              </div>
+              <div>
+                <span>Capture quality</span>
+                <strong>{selectedRecommendation?.captureQuality ?? captureSummary}</strong>
+              </div>
+            </dl>
+            {selectedMatch.confidence.label === "low" ? (
+              <p className="field-note">Low-confidence results should be reviewed carefully because profile evidence, catalog annotation, or both are incomplete.</p>
+            ) : null}
+          </Card>
           <ResultList title="Key reasons" items={selectedRecommendation?.keyReasons ?? selectedMatch.explanation.strongestSimilarities} />
           <ResultList title="Key differences" items={selectedRecommendation?.keyDifferences ?? selectedMatch.explanation.largestDifferences} />
           <ResultList title="Confidence notes" items={selectedRecommendation?.uncertaintyNotes ?? selectedMatch.explanation.uncertaintyNotes} />
@@ -327,7 +398,44 @@ function TopThreeResults({
               </div>
             </dl>
           </Card>
+          <ResultList
+            title="Limitations"
+            items={[
+              "Scores compare available verified game options only.",
+              "Scores are not identity probabilities.",
+              "Browser RGB capture is not TrueDepth, ARKit, depth geometry, or 3D reconstruction.",
+              ...(selectedRecommendation?.stepByStepGameInstructions.flatMap((instruction) => instruction.limitations) ?? [])
+            ]}
+          />
         </div>
+      </Card>
+
+      <Card>
+        <div className="section-heading">
+          <p className="eyebrow">Appearance controls</p>
+          <h2>Verified and missing categories</h2>
+        </div>
+        {selectedAppearanceRecommendations.length > 0 ? (
+          <dl className="metadata-list">
+            {selectedAppearanceRecommendations.map((recommendation) => (
+              <div key={recommendation.category}>
+                <span>
+                  {recommendation.label} ({recommendation.status})
+                </span>
+                <strong>{recommendation.nativeGameValue ?? "Missing verified value"}</strong>
+              </div>
+            ))}
+          </dl>
+        ) : (
+          <Alert title="No appearance controls" tone="warning">
+            This result has no verified hair, facial-hair, color, skin, or additional-control recommendations attached.
+          </Alert>
+        )}
+        {selectedMissingCategories.length > 0 ? (
+          <Alert title="Missing or ambiguous categories" tone="warning">
+            {selectedMissingCategories.map((recommendation) => `${recommendation.label}: ${recommendation.explanation}`).join(" ")}
+          </Alert>
+        ) : null}
       </Card>
 
       <Card>
@@ -399,10 +507,24 @@ function ResultList({ title, items }: { title: string; items: string[] }) {
     <Card tone="neutral">
       <h3>{title}</h3>
       <ul className="message-list">
-        {items.map((item) => (
+        {Array.from(new Set(items)).map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
     </Card>
   );
+}
+
+function resultPositionLabel(rank: number) {
+  if (rank === 1) return "Best match";
+  if (rank === 2) return "Second match";
+  if (rank === 3) return "Third match";
+  return `Rank ${rank}`;
+}
+
+function appearanceValue(recommendations: VerifiedAppearanceRecommendation[], category: AppearanceRecommendationCategory) {
+  const recommendation = recommendations.find((candidate) => candidate.category === category);
+  if (!recommendation) return "Not available";
+  if (recommendation.status !== "selected") return `${recommendation.status}: ${recommendation.nativeGameValue ?? "missing verified value"}`;
+  return recommendation.nativeGameValue ?? "Missing verified value";
 }

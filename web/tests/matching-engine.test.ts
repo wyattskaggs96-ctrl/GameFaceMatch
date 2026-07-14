@@ -120,6 +120,100 @@ describe("rule-based matching engine", () => {
     expect(changedSkin.map((match) => match.score)).toEqual(original.map((match) => match.score));
   });
 
+  it("returns verified native appearance recommendations from user-confirmed attributes", () => {
+    const match = engine().matchTopThree({
+      profile: syntheticProfileWithConfirmedAppearance(),
+      catalog: catalogWithVerifiedAppearanceAnnotations(),
+      allowTestFixtures: true
+    })[0];
+    const recommendations = match.appearanceRecommendations ?? [];
+
+    expect(recommendations.filter((recommendation) => recommendation.status === "selected").map((recommendation) => recommendation.category)).toEqual([
+      "hairstyle",
+      "hairColor",
+      "facialHair",
+      "facialHairColor",
+      "eyebrows",
+      "skinPresentation",
+      "otherVisualAttribute"
+    ]);
+    expect(recommendations.find((recommendation) => recommendation.category === "hairstyle")).toMatchObject({
+      nativeGameValue: "SYNTHETIC_NATIVE_HAIRSTYLE_ALPHA",
+      sourceAnnotationKey: "verifiedHairstyleNativeValue",
+      gameVersion: "synthetic-test-version",
+      platform: "synthetic-test-platform",
+      mode: "synthetic-test-mode",
+      creationPath: "synthetic-test-path"
+    });
+    expect(recommendations.every((recommendation) => recommendation.explanation.includes("geometric head similarity") || recommendation.status !== "selected")).toBe(true);
+  });
+
+  it("marks unsupported appearance categories unavailable without inventing game values", () => {
+    const match = engine().matchTopThree({
+      profile: syntheticProfileWithConfirmedAppearance(),
+      catalog: fixtureCatalog,
+      allowTestFixtures: true
+    })[0];
+    const recommendations = match.appearanceRecommendations ?? [];
+
+    expect(recommendations.find((recommendation) => recommendation.category === "hairstyle")).toMatchObject({
+      status: "unavailable",
+      nativeGameValue: null,
+      sourceAnnotationKey: null
+    });
+    expect(recommendations.find((recommendation) => recommendation.category === "facialHairColor")?.explanation).toMatch(/does not include a verified native game value/i);
+  });
+
+  it("marks appearance recommendations ambiguous until user corrections align with catalog classifications", () => {
+    const ambiguous = engine().matchTopThree({
+      profile: syntheticProfileWithConfirmedAppearance({ hairstyleFamily: "long" }),
+      catalog: catalogWithVerifiedAppearanceAnnotations(),
+      allowTestFixtures: true
+    })[0].appearanceRecommendations?.find((recommendation) => recommendation.category === "hairstyle");
+    const corrected = engine().matchTopThree({
+      profile: syntheticProfileWithConfirmedAppearance({ hairstyleFamily: "short" }),
+      catalog: catalogWithVerifiedAppearanceAnnotations(),
+      allowTestFixtures: true
+    })[0].appearanceRecommendations?.find((recommendation) => recommendation.category === "hairstyle");
+
+    expect(ambiguous).toMatchObject({
+      status: "ambiguous",
+      nativeGameValue: "SYNTHETIC_NATIVE_HAIRSTYLE_ALPHA"
+    });
+    expect(ambiguous?.explanation).toMatch(/user-confirmed appearance value does not match/i);
+    expect(corrected).toMatchObject({
+      status: "selected",
+      nativeGameValue: "SYNTHETIC_NATIVE_HAIRSTYLE_ALPHA"
+    });
+  });
+
+  it("does not let skin presentation recommendations alter geometric head similarity", () => {
+    const profile = syntheticProfileWithConfirmedAppearance({ skinPresentation: "synthetic-skin-alpha" });
+    const withSkin = engine().matchTopThree({ profile, catalog: catalogWithVerifiedAppearanceAnnotations(), allowTestFixtures: true });
+    const changedSkinNativeValues = engine().matchTopThree({
+      profile,
+      catalog: {
+        ...catalogWithVerifiedAppearanceAnnotations(),
+        items: catalogWithVerifiedAppearanceAnnotations().items.map((item) => ({
+          ...item,
+          humanAnnotations: {
+            ...item.humanAnnotations,
+            verifiedSkinPresentationNativeValue: `DIFFERENT_${item.stableInternalID}`,
+            skinPresentation: "different-skin-classification"
+          }
+        }))
+      },
+      allowTestFixtures: true
+    });
+
+    expect(changedSkinNativeValues.map((match) => match.catalogItem.stableInternalID)).toEqual(withSkin.map((match) => match.catalogItem.stableInternalID));
+    expect(changedSkinNativeValues[0].featureContributions.filter((feature) => feature.group === "geometry").map((feature) => feature.featureID)).not.toContain("skinPresentation");
+    expect(changedSkinNativeValues[0].appearanceRecommendations?.find((recommendation) => recommendation.category === "skinPresentation")).toMatchObject({
+      status: "ambiguous",
+      nativeGameValue: "DIFFERENT_synthetic-match-alpha"
+    });
+  });
+
   it("applies user preferences separately from geometry", () => {
     const defaultOrder = engine().matchTopThree({ profile: syntheticProfile(), catalog: fixtureCatalog, allowTestFixtures: true });
     const athleteOrder = engine().matchTopThree({
@@ -527,6 +621,24 @@ function syntheticProfile(): StandardFaceProfile {
   });
 }
 
+function syntheticProfileWithConfirmedAppearance(input: Partial<Record<AppearanceAttribute["category"], string>> = {}): StandardFaceProfile {
+  const profile = syntheticProfile();
+  profile.appearance.attributes = [
+    attribute("hairColorFamily", input.hairColorFamily ?? "brown"),
+    attribute("hairTextureFamily", input.hairTextureFamily ?? "wavy"),
+    attribute("hairstyleFamily", input.hairstyleFamily ?? "short"),
+    attribute("facialHairPresence", input.facialHairPresence ?? "yes"),
+    attribute("facialHairStyleFamily", input.facialHairStyleFamily ?? "beard"),
+    attribute("facialHairColorFamily", input.facialHairColorFamily ?? "brown"),
+    attribute("eyebrowThickness", input.eyebrowThickness ?? "medium"),
+    attribute("skinPresentation", input.skinPresentation ?? "synthetic-skin-alpha"),
+    attribute("visibleMarks", input.visibleMarks ?? "freckles"),
+    attribute("preferredBodyType", input.preferredBodyType ?? "muscular")
+  ];
+  profile.userConfirmedAttributes = profile.appearance.attributes;
+  return profile;
+}
+
 async function checksumCatalog(catalog: GameCatalogManifest): Promise<GameCatalogManifest> {
   const report = await verifyManifestIntegrity(catalog);
   return {
@@ -591,6 +703,46 @@ function catalogWithProjectionMeasurements(): GameCatalogManifest {
         noseProjection: { value: 0.18, confidence: 0.95, supportingFrameCount: 2, variance: 0.01, depthSupported: false, occlusionStatus: "none", measurementSource: "synthetic-fixture", availabilityState: "available" },
         chinProjection: { value: 0.1, confidence: 0.95, supportingFrameCount: 2, variance: 0.01, depthSupported: false, occlusionStatus: "none", measurementSource: "synthetic-fixture", availabilityState: "available" }
       }
+    }))
+  };
+}
+
+function catalogWithVerifiedAppearanceAnnotations(): GameCatalogManifest {
+  return {
+    ...fixtureCatalog,
+    items: fixtureCatalog.items.map((item, index) => ({
+      ...item,
+      humanAnnotations:
+        index === 0
+          ? {
+              ...item.humanAnnotations,
+              verifiedHairstyleNativeValue: "SYNTHETIC_NATIVE_HAIRSTYLE_ALPHA",
+              hairstyleFamily: "short",
+              hairTextureFamily: "wavy",
+              verifiedHairColorNativeValue: "SYNTHETIC_NATIVE_HAIR_COLOR_ALPHA",
+              hairColorFamily: "brown",
+              verifiedFacialHairNativeValue: "SYNTHETIC_NATIVE_FACIAL_HAIR_ALPHA",
+              facialHairPresence: "yes",
+              facialHairStyleFamily: "beard",
+              verifiedFacialHairColorNativeValue: "SYNTHETIC_NATIVE_FACIAL_HAIR_COLOR_ALPHA",
+              facialHairColorFamily: "brown",
+              verifiedEyebrowNativeValue: "SYNTHETIC_NATIVE_EYEBROW_ALPHA",
+              eyebrowThickness: "medium",
+              verifiedSkinPresentationNativeValue: "SYNTHETIC_NATIVE_SKIN_PRESENTATION_ALPHA",
+              skinPresentation: "synthetic-skin-alpha",
+              verifiedOtherVisualAttributeNativeValue: "SYNTHETIC_NATIVE_VISIBLE_MARK_ALPHA",
+              visibleMarks: "freckles",
+              preferredBodyType: "muscular"
+            }
+          : {
+              ...item.humanAnnotations,
+              verifiedHairstyleNativeValue: `SYNTHETIC_NATIVE_HAIRSTYLE_${index}`,
+              hairstyleFamily: "long",
+              verifiedHairColorNativeValue: `SYNTHETIC_NATIVE_HAIR_COLOR_${index}`,
+              hairColorFamily: "black",
+              verifiedSkinPresentationNativeValue: `SYNTHETIC_NATIVE_SKIN_PRESENTATION_${index}`,
+              skinPresentation: "different-skin-classification"
+            }
     }))
   };
 }

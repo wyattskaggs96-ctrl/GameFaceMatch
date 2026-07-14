@@ -1,5 +1,6 @@
 import type {
   AppearanceAttribute,
+  AppearanceRecommendationCategory,
   CatalogFacialMeasurement,
   FacialMeasurement,
   GameAppearanceMatch,
@@ -10,7 +11,9 @@ import type {
   MeasurementConfidence,
   StandardFaceProfile,
   StandardFacialMeasurementID,
-  UserConfirmedAttributeCategory
+  UserConfirmedAttributeValue,
+  UserConfirmedAttributeCategory,
+  VerifiedAppearanceRecommendation
 } from "@/types/domain";
 import { classifyCatalogRecord } from "@/lib/catalog/catalog-record-classification";
 
@@ -52,6 +55,14 @@ export interface MatchingAppearanceFeatureConfig {
   annotationKeys: string[];
 }
 
+export interface AppearanceRecommendationDefinition {
+  category: AppearanceRecommendationCategory;
+  label: string;
+  userAttributeCategories: UserConfirmedAttributeCategory[];
+  nativeAnnotationKeys: string[];
+  classifierAnnotationKeys: string[];
+}
+
 export interface RuleBasedMatchingEngineConfig {
   geometryFeatures?: MatchingFeatureConfig[];
   appearanceFeatures?: MatchingAppearanceFeatureConfig[];
@@ -88,6 +99,58 @@ export const defaultAppearanceFeatureConfig: MatchingAppearanceFeatureConfig[] =
   { category: "facialHairPresence", group: "facialHair", weight: 0.04, annotationKeys: ["facialHairPresence"] },
   { category: "facialHairStyleFamily", group: "facialHair", weight: 0.03, annotationKeys: ["facialHairStyleFamily"] },
   { category: "preferredBodyType", group: "desiredAthletePhysique", weight: 0.03, annotationKeys: ["preferredBodyType"] }
+];
+
+export const defaultAppearanceRecommendationDefinitions: AppearanceRecommendationDefinition[] = [
+  {
+    category: "hairstyle",
+    label: "Hairstyle",
+    userAttributeCategories: ["hairstyleFamily", "hairTextureFamily"],
+    nativeAnnotationKeys: ["verifiedHairstyleNativeValue", "hairstyleNativeValue", "nativeHairstyleLabel", "hairstyleGameLabel"],
+    classifierAnnotationKeys: ["hairstyleFamily", "hairTextureFamily"]
+  },
+  {
+    category: "hairColor",
+    label: "Hair color",
+    userAttributeCategories: ["hairColorFamily"],
+    nativeAnnotationKeys: ["verifiedHairColorNativeValue", "hairColorNativeValue", "nativeHairColorLabel", "hairColorGameLabel"],
+    classifierAnnotationKeys: ["hairColorFamily"]
+  },
+  {
+    category: "facialHair",
+    label: "Facial hair",
+    userAttributeCategories: ["facialHairPresence", "facialHairStyleFamily"],
+    nativeAnnotationKeys: ["verifiedFacialHairNativeValue", "facialHairNativeValue", "nativeFacialHairLabel", "facialHairGameLabel"],
+    classifierAnnotationKeys: ["facialHairPresence", "facialHairStyleFamily"]
+  },
+  {
+    category: "facialHairColor",
+    label: "Facial-hair color",
+    userAttributeCategories: ["facialHairPresence", "facialHairColorFamily"],
+    nativeAnnotationKeys: ["verifiedFacialHairColorNativeValue", "facialHairColorNativeValue", "nativeFacialHairColorLabel", "facialHairColorGameLabel"],
+    classifierAnnotationKeys: ["facialHairPresence", "facialHairColorFamily"]
+  },
+  {
+    category: "eyebrows",
+    label: "Eyebrows",
+    userAttributeCategories: ["eyebrowThickness"],
+    nativeAnnotationKeys: ["verifiedEyebrowNativeValue", "eyebrowNativeValue", "nativeEyebrowLabel", "eyebrowGameLabel"],
+    classifierAnnotationKeys: ["eyebrowThickness"]
+  },
+  {
+    category: "skinPresentation",
+    label: "Skin presentation",
+    userAttributeCategories: ["skinPresentation"],
+    nativeAnnotationKeys: ["verifiedSkinPresentationNativeValue", "skinPresentationNativeValue", "nativeSkinPresentationLabel", "skinPresentationGameLabel"],
+    classifierAnnotationKeys: ["skinPresentation"]
+  },
+  {
+    category: "otherVisualAttribute",
+    label: "Other verified visual attribute",
+    userAttributeCategories: ["visibleMarks", "preferredBodyType"],
+    nativeAnnotationKeys: ["verifiedOtherVisualAttributeNativeValue", "otherVisualAttributeNativeValue", "visibleMarksNativeValue", "preferredBodyTypeNativeValue"],
+    classifierAnnotationKeys: ["visibleMarks", "preferredBodyType"]
+  }
 ];
 
 export function createRuleBasedMatchingEngine(config: MatchingFeatureConfig[] | RuleBasedMatchingEngineConfig = defaultGeometryFeatureConfig): MatchingEngine {
@@ -161,7 +224,137 @@ function scoreCatalogItem(input: {
     explanation: buildExplanation(input.item, score, contributions, evidenceCoverage, averageReliability),
     catalogVersion: input.item.catalogVersion ?? input.catalog.catalogVersion,
     modelVersion: input.modelVersion,
-    featureContributions: contributions
+    featureContributions: contributions,
+    appearanceRecommendations: buildAppearanceRecommendations(input.profile, input.item, input.catalog)
+  };
+}
+
+export function buildAppearanceRecommendations(
+  profile: StandardFaceProfile,
+  item: GameCatalogItem,
+  catalog: GameCatalogManifest
+): VerifiedAppearanceRecommendation[] {
+  return defaultAppearanceRecommendationDefinitions.map((definition) => buildAppearanceRecommendation(profile, item, catalog, definition));
+}
+
+function buildAppearanceRecommendation(
+  profile: StandardFaceProfile,
+  item: GameCatalogItem,
+  catalog: GameCatalogManifest,
+  definition: AppearanceRecommendationDefinition
+): VerifiedAppearanceRecommendation {
+  const nativeEntry = firstAnnotationEntry(item, definition.nativeAnnotationKeys);
+  const classifierValues = definition.classifierAnnotationKeys.map((key) => item.humanAnnotations[key]).filter(isUsableAppearanceValue);
+  const appearanceAttributes = profile.userConfirmedAttributes.length > 0 ? profile.userConfirmedAttributes : profile.appearance.attributes;
+  const userConfirmedValues = Object.fromEntries(
+    definition.userAttributeCategories.map((category) => [category, findAttribute(appearanceAttributes, category)?.value ?? null])
+  ) as Partial<Record<UserConfirmedAttributeCategory, UserConfirmedAttributeValue>>;
+  const usableUserValues = Object.values(userConfirmedValues).filter(isUsableAppearanceValue);
+  const classifierMatchState = classifyAppearanceRecommendation(definition, userConfirmedValues, item);
+  const traceability = {
+    sourceCatalogItemID: item.stableInternalID,
+    verificationDate: item.verifiedDate ?? catalog.catalogVersion.verifiedAt,
+    catalogVersion: item.catalogVersion ?? catalog.catalogVersion,
+    gameVersion: item.gameVersion,
+    platform: item.platform,
+    mode: item.gameMode,
+    creationPath: item.creationPath
+  };
+
+  if (!nativeEntry) {
+    return {
+      category: definition.category,
+      label: definition.label,
+      status: "unavailable" as const,
+      nativeGameValue: null,
+      sourceAnnotationKey: null,
+      userConfirmedValues,
+      confidence: confidenceFromScore(0),
+      explanation: `${definition.label} is unavailable because this verified catalog record does not include a verified native game value for that category.`,
+      ...traceability
+    };
+  }
+
+  if (definition.category === "facialHairColor" && userConfirmedValues.facialHairPresence === "none") {
+    return {
+      category: definition.category,
+      label: definition.label,
+      status: "unavailable" as const,
+      nativeGameValue: null,
+      sourceAnnotationKey: nativeEntry.key,
+      userConfirmedValues,
+      confidence: confidenceFromScore(0),
+      explanation: "Facial-hair color is not recommended because the user confirmed no facial hair.",
+      ...traceability
+    };
+  }
+
+  if (usableUserValues.length === 0) {
+    return {
+      category: definition.category,
+      label: definition.label,
+      status: "ambiguous" as const,
+      nativeGameValue: nativeEntry.value,
+      sourceAnnotationKey: nativeEntry.key,
+      userConfirmedValues,
+      confidence: confidenceFromScore(0.35),
+      explanation: `${definition.label} has a verified native value, but the user-confirmed profile value is unspecified. Ask for correction before treating it as selected.`,
+      ...traceability
+    };
+  }
+
+  if (classifierValues.length === 0) {
+    return {
+      category: definition.category,
+      label: definition.label,
+      status: "ambiguous" as const,
+      nativeGameValue: nativeEntry.value,
+      sourceAnnotationKey: nativeEntry.key,
+      userConfirmedValues,
+      confidence: confidenceFromScore(0.45),
+      explanation: `${definition.label} has a verified native value, but the catalog lacks standardized appearance classification for the user-confirmed attribute.`,
+      ...traceability
+    };
+  }
+
+  if (classifierMatchState === "mismatch") {
+    return {
+      category: definition.category,
+      label: definition.label,
+      status: "ambiguous" as const,
+      nativeGameValue: nativeEntry.value,
+      sourceAnnotationKey: nativeEntry.key,
+      userConfirmedValues,
+      confidence: confidenceFromScore(0.45),
+      explanation: `${definition.label} has a verified native value, but the user-confirmed appearance value does not match the catalog classification. Let the user correct the attribute or choose another verified result.`,
+      ...traceability
+    };
+  }
+
+  if (classifierMatchState === "unclassified") {
+    return {
+      category: definition.category,
+      label: definition.label,
+      status: "ambiguous" as const,
+      nativeGameValue: nativeEntry.value,
+      sourceAnnotationKey: nativeEntry.key,
+      userConfirmedValues,
+      confidence: confidenceFromScore(0.45),
+      explanation: `${definition.label} has a verified native value, but the catalog classification cannot be compared directly to the user-confirmed attribute.`,
+      ...traceability
+    };
+  }
+
+  return {
+    category: definition.category,
+    label: definition.label,
+    status: "selected" as const,
+    nativeGameValue: nativeEntry.value,
+    sourceAnnotationKey: nativeEntry.key,
+    userConfirmedValues,
+    confidence: confidenceFromScore(0.9),
+    explanation: `${definition.label} selected verified native game value "${nativeEntry.value}" because the user-confirmed appearance attribute matches the catalog classification. This does not affect geometric head similarity.`,
+    ...traceability
   };
 }
 
@@ -520,6 +713,40 @@ function canMatchCatalog(catalog: GameCatalogManifest, allowTestFixtures: boolea
 
 function findAttribute(attributes: AppearanceAttribute[], category: UserConfirmedAttributeCategory) {
   return attributes.find((attribute) => attribute.category === category);
+}
+
+function firstAnnotationEntry(item: GameCatalogItem, keys: string[]) {
+  for (const key of keys) {
+    const value = item.humanAnnotations[key];
+    if (isUsableAppearanceValue(value)) return { key, value: String(value).trim() };
+  }
+  return null;
+}
+
+function isUsableAppearanceValue(value: unknown): value is string | number | boolean {
+  if (value === null || value === undefined) return false;
+  const normalized = String(value).trim().toLowerCase();
+  return normalized.length > 0 && normalized !== "unspecified" && normalized !== "unknown" && normalized !== "n/a";
+}
+
+function classifyAppearanceRecommendation(
+  definition: AppearanceRecommendationDefinition,
+  userConfirmedValues: Partial<Record<UserConfirmedAttributeCategory, UserConfirmedAttributeValue>>,
+  item: GameCatalogItem
+) {
+  let compared = 0;
+  for (const category of definition.userAttributeCategories) {
+    const userValue = userConfirmedValues[category];
+    const catalogValue = item.humanAnnotations[category];
+    if (!isUsableAppearanceValue(userValue) || !isUsableAppearanceValue(catalogValue)) continue;
+    compared += 1;
+    if (normalizeAppearanceValue(userValue) !== normalizeAppearanceValue(catalogValue)) return "mismatch";
+  }
+  return compared > 0 ? "match" : "unclassified";
+}
+
+function normalizeAppearanceValue(value: string | number | boolean) {
+  return String(value).trim().toLowerCase();
 }
 
 function preferenceForGroup(group: MatchingFeatureConfig["group"] | "hair" | "facialHair" | "desiredAthletePhysique", preferences?: MatchingPreferences) {

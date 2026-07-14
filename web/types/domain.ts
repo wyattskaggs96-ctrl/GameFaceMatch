@@ -563,6 +563,36 @@ export interface GameAppearanceMatch {
   modelVersion: string;
   tieGroup?: number;
   featureContributions: MatchFeatureContribution[];
+  appearanceRecommendations?: VerifiedAppearanceRecommendation[];
+}
+
+export type AppearanceRecommendationCategory =
+  | "hairstyle"
+  | "hairColor"
+  | "facialHair"
+  | "facialHairColor"
+  | "eyebrows"
+  | "skinPresentation"
+  | "otherVisualAttribute";
+
+export type AppearanceRecommendationStatus = "selected" | "unavailable" | "ambiguous";
+
+export interface VerifiedAppearanceRecommendation {
+  category: AppearanceRecommendationCategory;
+  label: string;
+  status: AppearanceRecommendationStatus;
+  nativeGameValue: string | null;
+  sourceCatalogItemID: string;
+  sourceAnnotationKey: string | null;
+  userConfirmedValues: Partial<Record<UserConfirmedAttributeCategory, UserConfirmedAttributeValue>>;
+  confidence: MeasurementConfidence;
+  explanation: string;
+  verificationDate: ISODateString | null;
+  catalogVersion: GameCatalogVersion;
+  gameVersion: string;
+  platform: string;
+  mode: string;
+  creationPath: string;
 }
 
 export interface MatchExplanation {

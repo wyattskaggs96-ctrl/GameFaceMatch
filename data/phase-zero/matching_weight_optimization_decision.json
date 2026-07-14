@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "matching-weight-optimization-decision-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "decisionStatus": "NOT_ADOPTED_NO_REAL_COMPLETED_STUDY_DATA",
+  "sourceType": "researchStatus",
+  "realFeasibilityStudyResultsOnly": true,
+  "fixtureDataExcluded": true,
+  "productionRecommendationStatus": "FAIL_CLOSED",
+  "baseline": {
+    "modelVersion": "rule-based-web-mvp-v2-rgb-geometry",
+    "geometryWeights": [
+      { "feature": "faceWidthRatio", "group": "faceAndJawShape", "weight": 0.12 },
+      { "feature": "faceLengthRatio", "group": "faceAndJawShape", "weight": 0.05 },
+      { "feature": "foreheadWidthRatio", "group": "faceAndJawShape", "weight": 0.07 },
+      { "feature": "jawWidthRatio", "group": "faceAndJawShape", "weight": 0.11 },
+      { "feature": "chinWidthRatio", "group": "faceAndJawShape", "weight": 0.07 },
+      { "feature": "lowerFaceRatio", "group": "faceAndJawShape", "weight": 0.05 },
+      { "feature": "jawAngle", "group": "faceAndJawShape", "weight": 0.04 },
+      { "feature": "eyeSpacingRatio", "group": "eyesAndEyebrows", "weight": 0.09 },
+      { "feature": "meanEyeWidthRatio", "group": "eyesAndEyebrows", "weight": 0.05 },
+      { "feature": "eyeTilt", "group": "eyesAndEyebrows", "weight": 0.03 },
+      { "feature": "browPosition", "group": "eyesAndEyebrows", "weight": 0.04 },
+      { "feature": "noseWidthRatio", "group": "nose", "weight": 0.09 },
+      { "feature": "noseLengthRatio", "group": "nose", "weight": 0.07 },
+      { "feature": "noseProjection", "group": "profileProjection", "weight": 0.05 },
+      { "feature": "chinProjection", "group": "profileProjection", "weight": 0.04 },
+      { "feature": "mouthWidthRatio", "group": "mouth", "weight": 0.07 }
+    ],
+    "appearanceWeights": [
+      { "feature": "hairColorFamily", "group": "hair", "weight": 0.04 },
+      { "feature": "hairTextureFamily", "group": "hair", "weight": 0.03 },
+      { "feature": "hairstyleFamily", "group": "hair", "weight": 0.04 },
+      { "feature": "facialHairPresence", "group": "facialHair", "weight": 0.04 },
+      { "feature": "facialHairStyleFamily", "group": "facialHair", "weight": 0.03 },
+      { "feature": "preferredBodyType", "group": "desiredAthletePhysique", "weight": 0.03 }
+    ]
+  },
+  "trainingEvaluationSplit": {
+    "status": "not_available",
+    "trainingParticipantCount": 0,
+    "evaluationParticipantCount": 0,
+    "reason": "No real completed feasibility-study results exist. Splitting a zero-row sample would be meaningless."
+  },
+  "candidateModel": {
+    "adopted": false,
+    "candidateModelVersion": null,
+    "modelVersionAfterDecision": "rule-based-web-mvp-v2-rgb-geometry",
+    "weightChanges": [],
+    "rationale": "No weight change is defensible without real completed participant outcomes. The baseline remains active."
+  },
+  "participantRerun": {
+    "status": "not_applicable",
+    "participantsRerun": 0,
+    "participantsAvailable": 0,
+    "reason": "No accepted real participants or completed result rows exist."
+  },
+  "performanceComparison": {
+    "baseline": {
+      "validParticipants": 0,
+      "topOneAcceptanceRate": null,
+      "topThreeUsefulnessRate": null,
+      "averageResemblanceRating": null,
+      "medianResemblanceRating": null
+    },
+    "candidate": null,
+    "improvedWithoutUnacceptableRegression": false,
+    "reason": "No real data exists to measure improvement or regression."
+  },
+  "overfittingControl": {
+    "status": "passed_by_noop",
+    "actions": [
+      "No weights were tuned from a zero-row or synthetic-only dataset.",
+      "No fixture-derived performance was used to justify a production model change.",
+      "No candidate model was adopted."
+    ]
+  },
+  "sensitiveTraitControls": {
+    "demographicOrSensitiveTraitInferenceUsed": false,
+    "identityInferenceUsed": false,
+    "skinPresentationAffectsGeometry": false,
+    "notes": [
+      "The baseline matching specification keeps geometry and appearance separate.",
+      "Skin tone and skin presentation remain excluded from geometric similarity.",
+      "No participant demographics, identity labels, sensitive traits, or raw face media were used."
+    ]
+  },
+  "rollback": {
+    "required": false,
+    "rollbackModelVersion": "rule-based-web-mvp-v2-rgb-geometry",
+    "procedure": "No rollback action is required because no new weights or model version were adopted. If a future tuned model is adopted, keep this baseline version available and switch configuration back to rule-based-web-mvp-v2-rgb-geometry."
+  },
+  "inputsReviewed": [
+    "data/phase-zero/manual_matching_accuracy_analysis.json",
+    "data/phase-zero/manual_matching_results_ingestion_checkpoint.json",
+    "data/phase-zero/manual_matching_study_readiness_decision.json",
+    "data/catalog/production/catalog_manifest.json",
+    "docs/MATCHING_ENGINE_SPEC.md",
+    "web/lib/matching/matching-engine.ts"
+  ],
+  "requiredBeforeNextOptimizationAttempt": [
+    "Approved nonempty verified production College Football 27 catalog release.",
+    "Accepted real feasibility-study participant rows.",
+    "Accepted paired reviewer rows.",
+    "Accepted participant result rows with top-one/top-three outcomes, resemblance ratings, confidence perception, mismatch reasons, and deletion confirmation.",
+    "Enough completed rows to separate tuning from evaluation records, or a documented reason why the sample size is too small for tuning."
+  ]
+}

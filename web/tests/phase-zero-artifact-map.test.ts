@@ -48,6 +48,7 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/manual_matching_reviews.template.csv",
   "data/phase-zero/manual_matching_results.template.csv",
   "data/phase-zero/manual_matching_accuracy_analysis.json",
+  "data/phase-zero/matching_weight_optimization_decision.json",
   "data/schemas/verified-head-geometry-annotation.schema.json",
   "data/phase-zero/annotation-forms/verified_head_geometry_annotation_form.template.json",
   "data/phase-zero/annotation-forms/verified_head_geometry_annotation_form.template.csv",
@@ -61,6 +62,7 @@ const requiredCanonicalArtifacts = [
   "docs/phase-zero/SECOND_VERIFIER_RESULTS_INTAKE.md",
   "docs/phase-zero/VERIFICATION_DISCREPANCY_MANAGEMENT.md",
   "docs/phase-zero/MANUAL_MATCHING_ACCURACY_ANALYSIS.md",
+  "docs/phase-zero/MATCHING_WEIGHT_OPTIMIZATION_DECISION.md",
   "docs/phase-zero/WYATT_RECORDING_SCRIPT.md",
   "docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md"
 ];
@@ -195,6 +197,51 @@ describe("Phase 0 artifact map", () => {
     expect(analysis.metrics.mostCommonMismatchReasons).toHaveLength(0);
     expect(analysisDoc).toContain("No real completed manual matching study data exists");
     expect(analysisDoc).toContain("This report makes no statistical claim.");
+  });
+
+  it("preserves baseline matching weights when real optimization data is unavailable", () => {
+    const decisionDoc = readText("docs/phase-zero/MATCHING_WEIGHT_OPTIMIZATION_DECISION.md");
+    const decision = readJSON<{
+      decisionStatus: string;
+      fixtureDataExcluded: boolean;
+      baseline: {
+        modelVersion: string;
+        geometryWeights: Array<{ feature: string; weight: number }>;
+      };
+      candidateModel: {
+        adopted: boolean;
+        candidateModelVersion: string | null;
+        modelVersionAfterDecision: string;
+        weightChanges: unknown[];
+      };
+      sensitiveTraitControls: {
+        demographicOrSensitiveTraitInferenceUsed: boolean;
+        identityInferenceUsed: boolean;
+        skinPresentationAffectsGeometry: boolean;
+      };
+      performanceComparison: {
+        improvedWithoutUnacceptableRegression: boolean;
+      };
+    }>("data/phase-zero/matching_weight_optimization_decision.json");
+
+    expect(decision.decisionStatus).toBe("NOT_ADOPTED_NO_REAL_COMPLETED_STUDY_DATA");
+    expect(decision.fixtureDataExcluded).toBe(true);
+    expect(decision.baseline.modelVersion).toBe("rule-based-web-mvp-v2-rgb-geometry");
+    expect(decision.baseline.geometryWeights).toContainEqual({ feature: "faceWidthRatio", group: "faceAndJawShape", weight: 0.12 });
+    expect(decision.candidateModel).toMatchObject({
+      adopted: false,
+      candidateModelVersion: null,
+      modelVersionAfterDecision: "rule-based-web-mvp-v2-rgb-geometry",
+      weightChanges: []
+    });
+    expect(decision.performanceComparison.improvedWithoutUnacceptableRegression).toBe(false);
+    expect(decision.sensitiveTraitControls).toMatchObject({
+      demographicOrSensitiveTraitInferenceUsed: false,
+      identityInferenceUsed: false,
+      skinPresentationAffectsGeometry: false
+    });
+    expect(decisionDoc).toContain("No matching weights were changed");
+    expect(decisionDoc).toContain("Skin presentation remains outside geometric similarity.");
   });
 });
 

@@ -5,10 +5,12 @@ import { createPhase0CompletionDashboard } from "@/lib/phase-zero/phase-zero-com
 import { loadPhase0CompletionArtifacts } from "@/lib/phase-zero/phase-zero-completion-artifacts.server";
 
 interface CaptureRequestPackage {
+  schemaVersion: string;
   productionStatus: string;
   verificationStatus: string;
   summary: {
     requestCount: number;
+    productionEligibleRows: number;
     productionRecommendationsEnabled: boolean;
   };
   requests: Array<Record<string, unknown>>;
@@ -20,43 +22,63 @@ const issueRegister = readJSON<{ issues: Array<{ issueID: string; affectedRecord
 
 describe("Phase 0 capture requests", () => {
   it("provides the complete non-production capture package with required sections", () => {
+    const script = readText("docs/phase-zero/WYATT_RECORDING_SCRIPT.md");
+    const checklist = readText("docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md");
+
+    expect(captureRequests.schemaVersion).toBe("cf27-wyatt-recording-script-v1");
     expect(captureRequests.productionStatus).toBe("NOT_PRODUCTION_DATA");
     expect(captureRequests.verificationStatus).toBe("REQUESTED_NOT_CAPTURED");
     expect(captureRequests.summary.productionRecommendationsEnabled).toBe(false);
     expect(captureRequests.summary.requestCount).toBe(captureRequests.requests.length);
+    expect(captureRequests.summary.requestCount).toBe(10);
+    expect(captureRequests.summary.productionEligibleRows).toBe(0);
     expect(new Set(captureRequests.requests.map((request) => request.section))).toEqual(new Set([
-      "must_capture_before_phase0_catalog_completion",
-      "must_recapture_because_current_evidence_is_inadequate",
-      "dependency_tests",
-      "second_verifier_captures",
-      "nice_to_have_evidence"
+      "record_this_tonight",
+      "record_after_p0_if_time"
     ]));
+    expect(captureRequests.requests.map((request) => request.captureID)).toEqual([
+      "GFM-CAP-001",
+      "GFM-CAP-002",
+      "GFM-CAP-003",
+      "GFM-CAP-004",
+      "GFM-CAP-005",
+      "GFM-CAP-006",
+      "GFM-CAP-007",
+      "GFM-CAP-008",
+      "GFM-CAP-009",
+      "GFM-CAP-010"
+    ]);
+    expect(script).toContain("Session 1: GFM-CAP-001");
+    expect(checklist).toContain("Record this tonight, in order");
   });
 
   it("keeps every capture request executable without inventing production verification", () => {
     const requiredFields = [
       "captureID",
+      "sessionNumber",
       "priority",
+      "title",
+      "expectedDuration",
       "exactMenuPath",
       "exactCategory",
-      "startingOption",
-      "endingOption",
-      "performTwoCounts",
-      "nativeIndexMustRemainVisible",
+      "exactSettingsToLock",
+      "exactStartingOption",
+      "exactEndingOption",
+      "navigationSpeed",
+      "requiredPauses",
+      "requiredCameraViews",
+      "menuIndexMustRemainVisible",
+      "twoIndependentCountsRequired",
+      "stillScreenshotsRequired",
+      "frontViewsRequired",
+      "threeQuarterViewsRequired",
+      "profileViewsRequired",
+      "rearViewsRequired",
       "requiredViews",
-      "rearViewRequired",
-      "canonicalHead",
-      "canonicalHairstyle",
-      "facialHairSetting",
-      "skinSetting",
-      "bodySetting",
-      "lightingRequirement",
-      "cameraRequirement",
-      "zoomRequirement",
-      "recommendedRecordingLength",
-      "videoOrScreenshotsPreferable",
+      "requiredFileNamingConvention",
+      "qualityChecklist",
+      "stopCondition",
       "existingFootageCanBeReused",
-      "whyRequired",
       "acceptanceCriteria"
     ];
 
@@ -70,6 +92,8 @@ describe("Phase 0 capture requests", () => {
       expect(request.productionStatus).toBe("NOT_PRODUCTION_DATA");
       expect(request.verificationStatus).toBe("REQUESTED_NOT_CAPTURED");
       expect(request.exactMenuPath).not.toMatch(/College Football 26/i);
+      expect(request.exactMenuPath).not.toMatch(/Xbox Settings|Payment|Stripe|PayPal/i);
+      expect(String(request.existingFootageCanBeReused)).toMatch(/Existing|No complete/);
       expect(request.acceptanceCriteria).toEqual(expect.any(Array));
     }
   });
@@ -81,10 +105,15 @@ describe("Phase 0 capture requests", () => {
 
     expect(trackingIssue?.affectedRecordIDs).toEqual(requestIDs);
     expect(dashboard.highestPriorityMissingCapture).toContain("GFM-CAP-001");
+    expect(dashboard.highestPriorityMissingCapture).toContain("Appearance");
     expect(dashboard.nextRequiredHumanAction).toContain("GFM-CAP-001");
   });
 });
 
+function readText(relativePath: string): string {
+  return fs.readFileSync(path.resolve(repositoryRoot, relativePath), "utf8");
+}
+
 function readJSON<T>(relativePath: string): T {
-  return JSON.parse(fs.readFileSync(path.resolve(repositoryRoot, relativePath), "utf8")) as T;
+  return JSON.parse(readText(relativePath)) as T;
 }

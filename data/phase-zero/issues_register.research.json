@@ -1234,8 +1234,8 @@
     {
       "issueID": "issue-phase0-wyatt-next-capture-plan",
       "kind": "recaptureRequired",
-      "title": "Wyatt next capture plan is ready for execution",
-      "description": "The consolidated capture request package identifies the smallest complete set of additional captures currently needed before Phase 0 catalog completion, recapture repair, dependency testing, and second-person verification.",
+      "title": "Wyatt appearance-menu recording script is ready for execution",
+      "description": "The current recording package is the executable appearance-menu script derived from the canonical gap matrix. It excludes broad Phase 0 captures already outside this menu-gap scope.",
       "owner": "wyatt-skaggs",
       "severity": "info",
       "status": "open",
@@ -1249,33 +1249,22 @@
         "GFM-CAP-007",
         "GFM-CAP-008",
         "GFM-CAP-009",
-        "GFM-CAP-010",
-        "GFM-CAP-011",
-        "GFM-CAP-012",
-        "GFM-CAP-013",
-        "GFM-CAP-014",
-        "GFM-CAP-015",
-        "GFM-CAP-016",
-        "GFM-CAP-017",
-        "GFM-CAP-018",
-        "GFM-CAP-019",
-        "GFM-CAP-020",
-        "GFM-CAP-021"
+        "GFM-CAP-010"
       ],
       "affectedEvidenceFileIDs": [],
       "createdAt": "2026-07-14T03:30:00-04:00",
-      "updatedAt": "2026-07-14T03:30:00-04:00",
-      "resolutionNotes": "Close this tracking issue after the requested captures are imported or explicitly superseded by a newer capture plan.",
+      "updatedAt": "2026-07-14T04:15:00-04:00",
+      "resolutionNotes": "Close this tracking issue after the requested appearance-menu recordings are imported or explicitly superseded by a newer recording script.",
       "recaptureRequest": {
         "required": false,
         "queueStatus": "notQueued",
         "requestedAngles": [],
         "requestedEvidenceKinds": [
-          "Execute data/phase-zero/capture_requests.json and docs/phase-zero/WYATT_NEXT_CAPTURE_PLAN.md."
+          "Execute data/phase-zero/capture_requests.json, docs/phase-zero/WYATT_RECORDING_SCRIPT.md, and docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md."
         ],
         "owner": "wyatt-skaggs",
         "priority": "info",
-        "notes": "This issue tracks the plan artifact, not a single blocking category."
+        "notes": "This issue tracks the appearance-menu recording script artifact, not a single blocking category."
       }
     }
   ]

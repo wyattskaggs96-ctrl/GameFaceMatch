@@ -89,7 +89,7 @@ This dictionary defines how current Phase 0 artifacts should be interpreted. It 
 
 | Field | Meaning | Notes |
 | --- | --- | --- |
-| `captureID` | Stable human capture request ID. | Current canonical range is `GFM-CAP-001` through `GFM-CAP-021`. |
+| `captureID` | Stable human capture request ID. | Current executable appearance-menu recording script uses `GFM-CAP-001` through `GFM-CAP-010`; older broad Phase 0 request IDs are superseded by `docs/phase-zero/WYATT_RECORDING_SCRIPT.md`. |
 | `priority` | Operational priority. | `P0`, `P1`, `P2`, or second-verifier-specific priority. |
 | `exactMenuPath` | Menu path to record. | Must be based on current evidence or explicitly provisional. |
 | `requiredViews` | Required views for closing the request. | Use text and exact requirements; do not assume future categories. |

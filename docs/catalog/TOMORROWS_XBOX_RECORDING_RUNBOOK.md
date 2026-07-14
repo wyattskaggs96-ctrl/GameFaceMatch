@@ -1,6 +1,6 @@
 # Tomorrow's Xbox Recording Runbook
 
-**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` and `docs/phase-zero/WYATT_NEXT_CAPTURE_PLAN.md` for current canonical capture planning.
+**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` and `docs/phase-zero/WYATT_RECORDING_SCRIPT.md` for current canonical capture planning.
 
 **TOMORROW'S XBOX RECORDING RUNBOOK - PRIMARY RESEARCH ONLY - NOT PRODUCTION VERIFIED**
 

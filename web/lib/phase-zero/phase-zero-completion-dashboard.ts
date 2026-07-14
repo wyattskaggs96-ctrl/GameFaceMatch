@@ -428,7 +428,9 @@ function chooseHighestPriorityMissingCapture(context: ArtifactContext): string {
 function chooseNextHumanAction(context: ArtifactContext): string {
   const captureRequest = chooseHighestPriorityCaptureRequest(context);
   if (captureRequest) {
-    return `${stringValue(captureRequest.captureID)}: record ${stringValue(captureRequest.exactCategory)} from ${stringValue(captureRequest.startingOption)} through ${stringValue(captureRequest.endingOption)}.`;
+    const startingOption = stringValue(captureRequest.exactStartingOption) || stringValue(captureRequest.startingOption);
+    const endingOption = stringValue(captureRequest.exactEndingOption) || stringValue(captureRequest.endingOption);
+    return `${stringValue(captureRequest.captureID)}: record ${stringValue(captureRequest.exactCategory)} from ${startingOption} through ${endingOption}.`;
   }
   const item = [...context.recaptureItems]
     .filter((candidate) => stringValue(candidate.blocksProduction) !== "false")
@@ -437,6 +439,10 @@ function chooseNextHumanAction(context: ArtifactContext): string {
 }
 
 function chooseHighestPriorityCaptureRequest(context: ArtifactContext): RecordObject | null {
+  const currentScriptRequest = [...context.captureRequests]
+    .filter((request) => stringValue(request.section) === "record_this_tonight")
+    .sort((first, second) => priorityRank(first) - priorityRank(second) || numberValue(first.sessionNumber) - numberValue(second.sessionNumber) || stringValue(first.captureID).localeCompare(stringValue(second.captureID)))[0];
+  if (currentScriptRequest) return currentScriptRequest;
   return [...context.captureRequests]
     .filter((request) => stringValue(request.section) === "must_capture_before_phase0_catalog_completion" || stringValue(request.section) === "must_recapture_because_current_evidence_is_inadequate")
     .sort((first, second) => priorityRank(first) - priorityRank(second) || stringValue(first.captureID).localeCompare(stringValue(second.captureID)))[0] ?? null;

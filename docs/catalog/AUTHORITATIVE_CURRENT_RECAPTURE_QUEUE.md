@@ -1,6 +1,6 @@
 # Authoritative Current Recapture Queue
 
-**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` and `docs/phase-zero/WYATT_NEXT_CAPTURE_PLAN.md` for current canonical capture planning.
+**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` and `docs/phase-zero/WYATT_RECORDING_SCRIPT.md` for current canonical capture planning.
 
 **AUTHORITATIVE CURRENT RECAPTURE QUEUE - PRIMARY RESEARCH ONLY - NOT PRODUCTION VERIFIED**
 

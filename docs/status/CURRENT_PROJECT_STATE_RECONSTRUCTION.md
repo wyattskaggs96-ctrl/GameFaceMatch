@@ -183,44 +183,29 @@ Important nuance: some nested evidence objects in the broad classification repor
 
 ## Exact Human Captures Still Needed
 
-The authoritative capture plan is `docs/phase-zero/WYATT_NEXT_CAPTURE_PLAN.md` and the machine-readable source is `data/phase-zero/capture_requests.json`.
+The current executable appearance-menu recording plan is `docs/phase-zero/WYATT_RECORDING_SCRIPT.md`, the one-page console checklist is `docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md`, and the machine-readable source is `data/phase-zero/capture_requests.json`.
 
-Must capture before Phase 0 catalog completion:
+The older broad `docs/phase-zero/WYATT_NEXT_CAPTURE_PLAN.md` is preserved only as a compatibility pointer. Environment/version evidence remains a Phase 0 blocker, but it is outside this appearance-menu recording script.
 
-1. `GFM-CAP-001` - Environment and game-version evidence.
-2. `GFM-CAP-002` - Creation path and body setup.
-3. `GFM-CAP-003` - Appearance menu hierarchy.
-4. `GFM-CAP-004` - Head Template count and native order.
-5. `GFM-CAP-013` - Mouth, Jaw, Chin face-shape controls.
-6. `GFM-CAP-014` - Hair menu hierarchy.
-7. `GFM-CAP-015` - Hairstyles.
-8. `GFM-CAP-016` - Hair colors.
-9. `GFM-CAP-017` - Facial hair.
-10. `GFM-CAP-018` - Facial-hair colors.
+Record this tonight, in order:
 
-Must recapture because current evidence is inadequate:
+1. `GFM-CAP-001` - Appearance and Head & Skin boundary map.
+2. `GFM-CAP-002` - Head Template full count and boundary proof.
+3. `GFM-CAP-003` - Canonical appearance lock slate.
+4. `GFM-CAP-004` - Head Template standardized visual pass.
+5. `GFM-CAP-005` - Head & Skin color and texture controls.
+6. `GFM-CAP-006` - Head & Skin geometry controls.
 
-1. `GFM-CAP-005` - Canonical comparison setup lock.
-2. `GFM-CAP-006` - Standardized Head Template visual catalog.
-3. `GFM-CAP-007` - Skin Tone.
-4. `GFM-CAP-008` - Skin Details.
-5. `GFM-CAP-009` - Eye Shape.
-6. `GFM-CAP-010` - Eye Color.
-7. `GFM-CAP-011` - Nose.
-8. `GFM-CAP-012` - Ear Shape.
+Continue only if time and native controls are visible:
 
-Dependency and verification captures:
-
-1. `GFM-CAP-019` - Dependency tests.
-2. `GFM-CAP-020` - Second-person verification captures.
-
-Nice-to-have:
-
-1. `GFM-CAP-021` - Operator context slates and backup evidence.
+1. `GFM-CAP-007` - Hair submenu boundary map.
+2. `GFM-CAP-008` - Hairstyle options, only if visible in Hair.
+3. `GFM-CAP-009` - Hair color options, only if visible in Hair.
+4. `GFM-CAP-010` - Facial-hair controls, only if visible in Hair.
 
 Highest-priority missing capture from the dashboard:
 
-`P0: GFM-CAP-001 - Environment and game-version evidence`.
+`P0: GFM-CAP-001 - Appearance menu hierarchy`.
 
 Next required human action:
 
@@ -282,53 +267,49 @@ Codex must not ingest new catalog conclusions, add production records, tune real
 
 ## New Codex Queue Starting At Prompt 93
 
-### Prompt 93 - Post-Checkpoint Evidence Intake Readiness
+### Prompt 93 - Appearance Menu Recording Intake Readiness
 
-Review this checkpoint, `WYATT_NEXT_CAPTURE_PLAN.md`, `capture_requests.json`, and the source registry. Confirm the repository is clean and the production catalog remains empty. Do not ingest new facts. Improve only validation/reporting defects that would block processing Wyatt's next uploaded clips.
+Review this checkpoint, `WYATT_RECORDING_SCRIPT.md`, `WYATT_RECORDING_QUICK_CHECKLIST.md`, `capture_requests.json`, and the source registry. Confirm the repository is clean and the production catalog remains empty. Do not ingest new facts. Improve only validation/reporting defects that would block processing Wyatt's next uploaded clips.
 
-### Prompt 94 - Environment Capture Intake
+### Prompt 94 - Appearance And Head & Skin Boundary Intake
 
-After Wyatt supplies `GFM-CAP-001`, inventory the new environment/version media, preserve masters, update video inventory/timeline/evidence manifest/issues, and populate only directly visible environment fields. Do not infer console model, patch, edition, entitlements, or account state.
+After Wyatt supplies `GFM-CAP-001`, inventory the new media, preserve masters, update video timeline/evidence/capture log, and update only directly visible Appearance and Head & Skin boundaries.
 
-### Prompt 95 - Creation Path And Body Setup Intake
+### Prompt 95 - Head Template Count And Boundary Intake
 
-After Wyatt supplies `GFM-CAP-002`, update the research environment, creation path, body setup fields, capture log, and unresolved issue list. Keep Road to Glory Custom provisional unless directly supported.
+After Wyatt supplies `GFM-CAP-002`, update head-template sequence integrity, native order, skipped-number handling, duplicate observations, wrap/no-wrap proof, and final-boundary evidence. Do not create unobserved Face records.
 
-### Prompt 96 - Appearance Menu Hierarchy Intake
+### Prompt 96 - Canonical Appearance Lock Intake
 
-After Wyatt supplies `GFM-CAP-003`, reconstruct the directly observed Head & Skin and Hair hierarchy, scroll continuations, locks, warnings, and control types. Mark all incomplete or ambiguous categories explicitly.
+After Wyatt supplies `GFM-CAP-003`, record the canonical low-obstruction settings, evidence references, settings hash, and deviations. Keep all records research-only.
 
-### Prompt 97 - Head Template Count And Boundary Intake
+### Prompt 97 - Standardized Head Template Evidence Intake
 
-After Wyatt supplies `GFM-CAP-004`, update head-template sequence integrity, native order, skipped-number handling, duplicate observations, wrap/no-wrap proof, and final-boundary evidence. Do not create unobserved Face records.
+After Wyatt supplies `GFM-CAP-004`, extract standardized head evidence frames, update QA reports, recapture status, annotation readiness, and production-blocking issues. Do not mark records verified.
 
-### Prompt 98 - Canonical Comparison Setup Lock Intake
+### Prompt 98 - Head & Skin Color And Texture Intake
 
-After Wyatt supplies `GFM-CAP-005`, record the canonical low-obstruction settings, evidence references, settings hash, and deviations. Keep all records research-only.
+After Wyatt supplies `GFM-CAP-005`, update Skin Tone, Skin Details, Eye Shape, and Eye Color research records with directly observed boundaries, defaults, wrap behavior, and evidence frames.
 
-### Prompt 99 - Standardized Head Template Evidence Intake
+### Prompt 99 - Head & Skin Geometry Intake
 
-After Wyatt supplies `GFM-CAP-006`, extract standardized head evidence frames, update QA reports, recapture status, annotation readiness, and production-blocking issues. Do not mark records verified.
+After Wyatt supplies `GFM-CAP-006`, update Nose, Ear Shape, Mouth Shape, Jaw Shape, and Chin research records with direct selected-value evidence and required views.
 
-### Prompt 100 - Existing Additional Attribute Recapture Intake
+### Prompt 100 - Hair Menu Boundary Intake
 
-After Wyatt supplies `GFM-CAP-007` through `GFM-CAP-012`, update Skin Tone, Skin Details, Eye Shape, Eye Color, Nose, and Ear Shape research records with directly observed boundaries, defaults, wrap behavior, and evidence frames.
+After Wyatt supplies `GFM-CAP-007`, reconstruct the directly observed Hair submenu hierarchy. Do not treat hairstyles, hair colors, facial hair, or facial-hair colors as confirmed native controls unless shown.
 
-### Prompt 101 - Missing Geometry Category Intake
+### Prompt 101 - Hairstyle Intake
 
-After Wyatt supplies `GFM-CAP-013`, ingest Mouth Shape, Jaw Shape, and Chin evidence into the research namespace only. Preserve native labels/order and do not infer unrecorded values.
+After Wyatt supplies `GFM-CAP-008`, ingest hairstyle records only if the native control was directly visible. Preserve native labels/order and required views.
 
-### Prompt 102 - Hair Menu And Hair Catalog Intake
+### Prompt 102 - Hair Color Intake
 
-After Wyatt supplies `GFM-CAP-014` through `GFM-CAP-016`, ingest Hair menu hierarchy, Hairstyles, and Hair Colors as research-only records with menu evidence and required views.
+After Wyatt supplies `GFM-CAP-009`, ingest hair-color records only if the native control was directly visible. Do not substitute generic color names for unreadable game text.
 
-### Prompt 103 - Facial Hair Catalog Intake
+### Prompt 103 - Facial Hair Intake
 
-After Wyatt supplies `GFM-CAP-017` and `GFM-CAP-018`, ingest Facial Hair and Facial-Hair Colors as research-only records, including None only if directly visible.
-
-### Prompt 104 - Dependency Test Intake
-
-After Wyatt supplies `GFM-CAP-019`, update dependency-test records for platform, mode, body setup, head, hairstyle, account state, entitlement, and patch effects from direct evidence only.
+After Wyatt supplies `GFM-CAP-010`, ingest facial-hair and facial-hair-color records only if native controls were directly visible, including None only if directly visible.
 
 ### Prompt 105 - Evidence QA Consolidation
 

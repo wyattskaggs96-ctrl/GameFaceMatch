@@ -69,27 +69,27 @@ const unknownInspectionAreas = [
 ];
 
 const explicitCaptureRequestsByLabel = new Map([
-  ["Appearance", ["GFM-CAP-003"]],
-  ["Head & Skin", ["GFM-CAP-003"]],
-  ["Head Template", ["GFM-CAP-004", "GFM-CAP-006"]],
-  ["Skin Tone", ["GFM-CAP-007"]],
-  ["Skin Details", ["GFM-CAP-008"]],
-  ["Eye Shape", ["GFM-CAP-009"]],
-  ["Eye Color", ["GFM-CAP-010"]],
-  ["Nose", ["GFM-CAP-011"]],
-  ["Ear Shape", ["GFM-CAP-012"]],
-  ["Mouth Shape", ["GFM-CAP-013"]],
-  ["Jaw Shape", ["GFM-CAP-013"]],
-  ["Chin", ["GFM-CAP-013"]],
-  ["Hair", ["GFM-CAP-014"]],
-  ["Hairstyles", ["GFM-CAP-014", "GFM-CAP-015"]],
-  ["Hair colors", ["GFM-CAP-014", "GFM-CAP-016"]],
-  ["Facial hair", ["GFM-CAP-014", "GFM-CAP-017"]],
-  ["Facial-hair colors", ["GFM-CAP-014", "GFM-CAP-018"]],
-  ["Body/height/weight/physique", ["GFM-CAP-002"]],
-  ["Additional Appearance rows beyond visible Head & Skin and Hair", ["GFM-CAP-003"]],
-  ["Additional Head & Skin rows beyond visible Chin", ["GFM-CAP-003"]],
-  ["Hair submenu child controls", ["GFM-CAP-014"]]
+  ["Appearance", ["GFM-CAP-001"]],
+  ["Head & Skin", ["GFM-CAP-001"]],
+  ["Head Template", ["GFM-CAP-002", "GFM-CAP-004"]],
+  ["Skin Tone", ["GFM-CAP-005"]],
+  ["Skin Details", ["GFM-CAP-005"]],
+  ["Eye Shape", ["GFM-CAP-005"]],
+  ["Eye Color", ["GFM-CAP-005"]],
+  ["Nose", ["GFM-CAP-006"]],
+  ["Ear Shape", ["GFM-CAP-006"]],
+  ["Mouth Shape", ["GFM-CAP-006"]],
+  ["Jaw Shape", ["GFM-CAP-006"]],
+  ["Chin", ["GFM-CAP-006"]],
+  ["Hair", ["GFM-CAP-007"]],
+  ["Hairstyles", ["GFM-CAP-007", "GFM-CAP-008"]],
+  ["Hair colors", ["GFM-CAP-007", "GFM-CAP-009"]],
+  ["Facial hair", ["GFM-CAP-007", "GFM-CAP-010"]],
+  ["Facial-hair colors", ["GFM-CAP-007", "GFM-CAP-010"]],
+  ["Body/height/weight/physique", []],
+  ["Additional Appearance rows beyond visible Head & Skin and Hair", ["GFM-CAP-001"]],
+  ["Additional Head & Skin rows beyond visible Chin", ["GFM-CAP-001"]],
+  ["Hair submenu child controls", ["GFM-CAP-007"]]
 ]);
 
 const menuOrderRankByLabel = new Map([

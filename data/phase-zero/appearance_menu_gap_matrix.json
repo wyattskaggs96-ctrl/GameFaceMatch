@@ -81,7 +81,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-003"
+        "GFM-CAP-001"
       ],
       "productionEligible": false,
       "notes": [
@@ -136,7 +136,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-003"
+        "GFM-CAP-001"
       ],
       "productionEligible": false,
       "notes": [
@@ -547,8 +547,8 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-004",
-        "GFM-CAP-006"
+        "GFM-CAP-002",
+        "GFM-CAP-004"
       ],
       "productionEligible": false,
       "notes": [
@@ -881,7 +881,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-007"
+        "GFM-CAP-005"
       ],
       "productionEligible": false,
       "notes": [
@@ -1056,7 +1056,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-008"
+        "GFM-CAP-005"
       ],
       "productionEligible": false,
       "notes": [
@@ -1166,7 +1166,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-009"
+        "GFM-CAP-005"
       ],
       "productionEligible": false,
       "notes": [
@@ -1302,7 +1302,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-010"
+        "GFM-CAP-005"
       ],
       "productionEligible": false,
       "notes": [
@@ -1451,7 +1451,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-011"
+        "GFM-CAP-006"
       ],
       "productionEligible": false,
       "notes": [
@@ -1561,7 +1561,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-012"
+        "GFM-CAP-006"
       ],
       "productionEligible": false,
       "notes": [
@@ -1620,7 +1620,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-013"
+        "GFM-CAP-006"
       ],
       "productionEligible": false,
       "notes": [
@@ -1679,7 +1679,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-013"
+        "GFM-CAP-006"
       ],
       "productionEligible": false,
       "notes": [
@@ -1738,7 +1738,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-013"
+        "GFM-CAP-006"
       ],
       "productionEligible": false,
       "notes": [
@@ -1793,7 +1793,7 @@
         }
       ],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-014"
+        "GFM-CAP-007"
       ],
       "productionEligible": false,
       "notes": [
@@ -1833,8 +1833,8 @@
       ],
       "sourceEvidence": [],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-014",
-        "GFM-CAP-015"
+        "GFM-CAP-007",
+        "GFM-CAP-008"
       ],
       "productionEligible": false,
       "notes": [
@@ -1873,8 +1873,8 @@
       ],
       "sourceEvidence": [],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-014",
-        "GFM-CAP-016"
+        "GFM-CAP-007",
+        "GFM-CAP-009"
       ],
       "productionEligible": false,
       "notes": [
@@ -1913,8 +1913,8 @@
       ],
       "sourceEvidence": [],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-014",
-        "GFM-CAP-017"
+        "GFM-CAP-007",
+        "GFM-CAP-010"
       ],
       "productionEligible": false,
       "notes": [
@@ -1953,8 +1953,8 @@
       ],
       "sourceEvidence": [],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-014",
-        "GFM-CAP-018"
+        "GFM-CAP-007",
+        "GFM-CAP-010"
       ],
       "productionEligible": false,
       "notes": [
@@ -2029,9 +2029,7 @@
         "Capture direct shipping-game evidence before creating research candidate records."
       ],
       "sourceEvidence": [],
-      "relatedCaptureRequestIDs": [
-        "GFM-CAP-002"
-      ],
+      "relatedCaptureRequestIDs": [],
       "productionEligible": false,
       "notes": [
         "This row is a source-required product gap, not a confirmed College Football 27 native category."
@@ -2069,7 +2067,7 @@
       ],
       "sourceEvidence": [],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-003"
+        "GFM-CAP-001"
       ],
       "productionEligible": false,
       "notes": [
@@ -2108,7 +2106,7 @@
       ],
       "sourceEvidence": [],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-003"
+        "GFM-CAP-001"
       ],
       "productionEligible": false,
       "notes": [
@@ -2147,7 +2145,7 @@
       ],
       "sourceEvidence": [],
       "relatedCaptureRequestIDs": [
-        "GFM-CAP-014"
+        "GFM-CAP-007"
       ],
       "productionEligible": false,
       "notes": [

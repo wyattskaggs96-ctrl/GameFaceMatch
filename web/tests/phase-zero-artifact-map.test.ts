@@ -28,7 +28,9 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/manual_matching_subjects.template.csv",
   "data/phase-zero/manual_matching_reviews.template.csv",
   "data/phase-zero/manual_matching_results.template.csv",
-  "docs/phase-zero/APPEARANCE_MENU_GAP_MATRIX.md"
+  "docs/phase-zero/APPEARANCE_MENU_GAP_MATRIX.md",
+  "docs/phase-zero/WYATT_RECORDING_SCRIPT.md",
+  "docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md"
 ];
 
 const supersededOrHistoricalDocs = [

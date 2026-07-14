@@ -29,7 +29,7 @@ describe("CF27 appearance menu gap audit", () => {
       classification: "CONFIRMED_PRESENT_INCOMPLETE",
       evidenceBasis: "MENU_ROW_VISIBLE_ONLY",
       notCaptured: true,
-      relatedCaptureRequestIDs: ["GFM-CAP-003"]
+      relatedCaptureRequestIDs: ["GFM-CAP-001"]
     });
     expect(byLabel.get("Head Template")).toMatchObject({
       classification: "CONFIRMED_PRESENT_INCOMPLETE",
@@ -47,7 +47,7 @@ describe("CF27 appearance menu gap audit", () => {
     expect(byLabel.get("Hair")).toMatchObject({
       classification: "CONFIRMED_PRESENT_INCOMPLETE",
       evidenceBasis: "MENU_ROW_VISIBLE_ONLY",
-      relatedCaptureRequestIDs: ["GFM-CAP-014"]
+      relatedCaptureRequestIDs: ["GFM-CAP-007"]
     });
     expect(byLabel.get("Hairstyles")).toMatchObject({
       classification: "SUSPECTED_NOT_OBSERVED",

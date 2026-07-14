@@ -54,7 +54,8 @@ export function ConsentPanel({
       </div>
       {!canContinue ? (
         <Alert title="Required consent missing" tone="warning" role="alert">
-          Camera use, face analysis for the current recommendation, and temporary local processing must be acknowledged before capture.
+          Camera use, face analysis for the current recommendation, temporary local processing, age eligibility, and self-or-permission confirmation must be
+          acknowledged before capture.
         </Alert>
       ) : null}
       <Button disabled={!canContinue} onClick={onContinue}>

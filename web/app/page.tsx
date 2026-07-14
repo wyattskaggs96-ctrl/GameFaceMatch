@@ -6,6 +6,7 @@ import { AppShell } from "@/components/AppShell";
 import { Alert, Button, Card, LoadingState, ProgressBar, ScreenHeader, StepFlowRail } from "@/components/design-system";
 import { AttributeConfirmation } from "@/features/attributes/AttributeConfirmation";
 import { BrowserCapabilityPanel } from "@/features/capture/BrowserCapabilityPanel";
+import { CaptureLightingCheck } from "@/features/capture/CaptureLightingCheck";
 import { CapturePreparation } from "@/features/capture/CapturePreparation";
 import { GuidedCaptureFlow } from "@/features/capture/GuidedCaptureFlow";
 import { GameCatalogStatus } from "@/features/catalog/GameCatalogStatus";
@@ -532,7 +533,9 @@ export default function HomePage() {
           />
         );
       case "preparation":
-        return <CapturePreparation onContinue={() => navigate("capability")} />;
+        return <CapturePreparation onContinue={() => navigate("lighting")} />;
+      case "lighting":
+        return <CaptureLightingCheck onContinue={() => navigate("capability")} />;
       case "capability":
         return <BrowserCapabilityPanel cameraService={cameraService} onContinue={() => navigate("capture")} />;
       case "capture":

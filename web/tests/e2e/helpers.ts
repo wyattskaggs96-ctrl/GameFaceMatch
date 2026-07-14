@@ -4,7 +4,9 @@ import { syntheticPng, type SyntheticImageFile } from "./synthetic-images";
 export const requiredConsentNames = [
   "Camera use",
   "Face analysis for this recommendation",
-  "Temporary local processing"
+  "Temporary local processing",
+  "Age eligibility",
+  "Self or permission confirmation"
 ] as const;
 
 export const requiredAngleLabels = ["Straight-on", "Left 45 degrees", "Right 45 degrees", "Left profile", "Right profile"] as const;
@@ -42,7 +44,15 @@ export async function navigateToCapture(page: Page) {
   await expect(page.getByText("Browser capture uses guided RGB images only.")).toBeVisible();
   await expect(page.getByText("Keep one person in frame")).toBeVisible();
   await expect(page.getByText("Hold the phone around arm's length.")).toBeVisible();
-  await page.getByRole("button", { name: "Check browser capability" }).click();
+  await page.getByRole("button", { name: "Continue to lighting check" }).click();
+  await expect(page.getByRole("heading", { name: "Confirm lighting before capture" })).toBeVisible();
+  await expect(page.getByText("This is a manual readiness checkpoint for the web RGB workflow.")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Continue to browser capability" })).toBeDisabled();
+  for (const checkbox of await page.getByRole("group", { name: "Required lighting confirmations" }).getByRole("checkbox").all()) {
+    await checkbox.check();
+  }
+  await expect(page.getByText("Lighting readiness confirmed for guided RGB capture.")).toBeVisible();
+  await page.getByRole("button", { name: "Continue to browser capability" }).click();
   await expect(page.getByRole("heading", { name: "Camera or upload" })).toBeVisible();
   await expect(page.getByText("Upload fallback is still an RGB-only workflow")).toBeVisible();
   await page.getByRole("button", { name: "Continue to guided capture" }).click();

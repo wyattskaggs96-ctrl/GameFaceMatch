@@ -10,6 +10,7 @@ export const ONBOARDING_FLOW = [
 export const STEP_FLOW = [
   "start",
   "preparation",
+  "lighting",
   "capability",
   "capture",
   "attributes",
@@ -26,6 +27,7 @@ export const HARDENED_E2E_FLOW = [
   "privacy",
   "consent",
   "preparation",
+  "lighting",
   "capability",
   "capture",
   "attributes",
@@ -85,6 +87,7 @@ export const STEP_FLOW_DETAILS: Array<{
 }> = [
   { id: "start", label: "Start", description: "Set expectations before capture." },
   { id: "preparation", label: "Prep", description: "Check lighting, hair, hats, glasses, and expression." },
+  { id: "lighting", label: "Lighting", description: "Confirm front lighting, shadows, backlighting, visibility, and lens clarity." },
   { id: "capability", label: "Capability", description: "Check browser camera support and upload fallback." },
   { id: "capture", label: "Capture", description: "Collect five guided RGB angles." },
   { id: "attributes", label: "Attributes", description: "Confirm user-provided appearance notes." },

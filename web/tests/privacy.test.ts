@@ -28,6 +28,8 @@ describe("consent architecture", () => {
       "cameraUse",
       "currentFaceAnalysis",
       "temporaryProcessing",
+      "ageEligibility",
+      "subjectPermission",
       "saveDerivedProfile",
       "cloudBackup",
       "saveRawImages",
@@ -50,6 +52,8 @@ describe("consent architecture", () => {
     consent = updateConsent(consent, "cameraUse", true);
     consent = updateConsent(consent, "currentFaceAnalysis", true);
     consent = updateConsent(consent, "temporaryProcessing", true);
+    consent = updateConsent(consent, "ageEligibility", true);
+    consent = updateConsent(consent, "subjectPermission", true);
     expect(hasRequiredCaptureConsent(consent)).toBe(true);
   });
 

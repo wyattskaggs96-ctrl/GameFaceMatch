@@ -12,6 +12,26 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page.getByRole("button", { name: "Continue to home" })).toBeDisabled();
   });
 
+  test("blocks capture setup until lighting readiness is confirmed", async ({ page }) => {
+    await completeOnboarding(page);
+    await acceptRequiredConsent(page);
+    await page.getByRole("button", { name: "Start" }).first().click();
+    await page.getByRole("button", { name: "Prepare capture" }).click();
+    await page.getByRole("button", { name: "Continue to lighting check" }).click();
+
+    await expect(page.getByRole("heading", { name: "Confirm lighting before capture" })).toBeVisible();
+    await expect(page.getByText("0 of 5 lighting checks confirmed.")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Continue to browser capability" })).toBeDisabled();
+    await page.getByRole("group", { name: "Required lighting confirmations" }).getByRole("checkbox", { name: /Soft front lighting/ }).check();
+    await expect(page.getByRole("button", { name: "Continue to browser capability" })).toBeDisabled();
+
+    for (const checkbox of await page.getByRole("group", { name: "Required lighting confirmations" }).getByRole("checkbox").all()) {
+      await checkbox.check();
+    }
+    await expect(page.getByText("Lighting readiness confirmed for guided RGB capture.")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Continue to browser capability" })).toBeEnabled();
+  });
+
   test("reports camera permission denial and keeps upload fallback available", async ({ page }) => {
     await page.addInitScript(() => {
       const deniedStatus = { state: "denied", onchange: null, addEventListener: () => undefined, removeEventListener: () => undefined, dispatchEvent: () => false };

@@ -4,6 +4,8 @@ export type ConsentID =
   | "cameraUse"
   | "currentFaceAnalysis"
   | "temporaryProcessing"
+  | "ageEligibility"
+  | "subjectPermission"
   | "saveDerivedProfile"
   | "cloudBackup"
   | "saveRawImages"
@@ -49,6 +51,20 @@ export const CONSENT_DEFINITIONS: ConsentDefinition[] = [
     id: "temporaryProcessing",
     label: "Temporary local processing",
     description: "Keep images in memory or temporary object URLs during the active session, then delete them when the session ends.",
+    requiredForCapture: true,
+    available: true
+  },
+  {
+    id: "ageEligibility",
+    label: "Age eligibility",
+    description: "Confirm you meet the age requirements for using this prototype, or have the required parent or guardian involvement.",
+    requiredForCapture: true,
+    available: true
+  },
+  {
+    id: "subjectPermission",
+    label: "Self or permission confirmation",
+    description: "Confirm you are scanning yourself or have permission from the person being captured.",
     requiredForCapture: true,
     available: true
   },

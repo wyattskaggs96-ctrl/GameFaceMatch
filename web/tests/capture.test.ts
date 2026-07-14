@@ -29,6 +29,12 @@ import {
   shouldDownscaleImage,
   validateImageMetadata
 } from "@/lib/capture/image-validation";
+import {
+  LIGHTING_READINESS_CHECKS,
+  createInitialLightingReadinessState,
+  evaluateLightingReadiness,
+  updateLightingReadiness
+} from "@/lib/capture/lighting-readiness";
 import type { CapturedAngleID, ImageQualityReport, TemporaryImageReference } from "@/types/domain";
 
 describe("capture session", () => {
@@ -308,6 +314,30 @@ describe("image metadata validation", () => {
     const first = new Blob(["same-bytes"], { type: "image/jpeg" });
     const second = new Blob(["same-bytes"], { type: "image/jpeg" });
     await expect(createBasicDuplicateSignature(first)).resolves.toBe(await createBasicDuplicateSignature(second));
+  });
+});
+
+describe("capture lighting readiness", () => {
+  it("blocks capture progression until every required lighting check is confirmed", () => {
+    const initial = createInitialLightingReadinessState();
+    const blocked = evaluateLightingReadiness(initial);
+    expect(blocked.status).toBe("blocked");
+    expect(blocked.completedCount).toBe(0);
+    expect(blocked.requiredCount).toBe(LIGHTING_READINESS_CHECKS.length);
+    expect(blocked.blockingMessages).toContain("Soft front lighting must be confirmed before capture.");
+
+    const almostReady = LIGHTING_READINESS_CHECKS.slice(0, -1).reduce(
+      (state, check) => updateLightingReadiness(state, check.id, true),
+      initial
+    );
+    expect(evaluateLightingReadiness(almostReady).status).toBe("blocked");
+
+    const ready = LIGHTING_READINESS_CHECKS.reduce((state, check) => updateLightingReadiness(state, check.id, true), initial);
+    const report = evaluateLightingReadiness(ready);
+    expect(report.status).toBe("ready");
+    expect(report.completedCount).toBe(report.requiredCount);
+    expect(report.summary).toBe("Lighting readiness confirmed for guided RGB capture.");
+    expect(report.advisoryMessages.join(" ")).toMatch(/brightness, shadow, highlight, blur, and lighting-imbalance/i);
   });
 });
 

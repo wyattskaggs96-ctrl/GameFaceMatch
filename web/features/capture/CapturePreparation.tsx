@@ -37,7 +37,7 @@ export function CapturePreparation({ onContinue }: { onContinue: () => void }) {
         </p>
       </Card>
       <Button onClick={onContinue}>
-        Check browser capability
+        Continue to lighting check
       </Button>
     </section>
   );

@@ -33,6 +33,7 @@ describe("customer-facing navigation flow", () => {
     expect(STEP_FLOW_DETAILS.map((step) => step.id)).toEqual([
       "start",
       "preparation",
+      "lighting",
       "capability",
       "capture",
       "attributes",
@@ -41,8 +42,8 @@ describe("customer-facing navigation flow", () => {
       "results"
     ]);
     expect(getStepFlowProgress("capture")).toEqual({
-      currentIndex: 3,
-      total: 8,
+      currentIndex: 4,
+      total: 9,
       isInStepFlow: true
     });
   });
@@ -107,6 +108,7 @@ describe("required product guardrails", () => {
       "privacy",
       "consent",
       "preparation",
+      "lighting",
       "capability",
       "capture",
       "attributes",

@@ -200,6 +200,7 @@ describe("key navigation flow", () => {
       "home",
       "start",
       "preparation",
+      "lighting",
       "capability",
       "capture",
       "attributes",

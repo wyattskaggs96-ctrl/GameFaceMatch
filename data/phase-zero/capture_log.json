@@ -257,7 +257,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_001",
+      "head_native_option_number": 1,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-005",
@@ -273,7 +282,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_002",
+      "head_native_option_number": 2,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-006",
@@ -289,7 +307,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_003",
+      "head_native_option_number": 3,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-007",
@@ -305,7 +332,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_004",
+      "head_native_option_number": 4,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-008",
@@ -321,7 +357,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_008",
+      "head_native_option_number": 8,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-009",
@@ -337,7 +382,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_007",
+      "head_native_option_number": 7,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-010",
@@ -353,7 +407,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_006",
+      "head_native_option_number": 6,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-011",
@@ -369,7 +432,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_005",
+      "head_native_option_number": 5,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-012",
@@ -385,7 +457,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_009",
+      "head_native_option_number": 9,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-013",
@@ -401,7 +482,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_010",
+      "head_native_option_number": 10,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-014",
@@ -417,7 +507,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_011",
+      "head_native_option_number": 11,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-015",
@@ -433,7 +532,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "head_native_option_number": 12,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-002-tl-016",
@@ -449,7 +557,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options. This selected label appears despite the source-manifest description of this recording as Face 1 through Face 12; timeline records the observed selected state only."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options. This selected label appears despite the source-manifest description of this recording as Face 1 through Face 12; timeline records the observed selected state only.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+      "head_native_option_number": 16,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-001",
@@ -465,7 +582,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected. Recording begins mid-option on an already selected Head Template item; intentional overlap with video-002 is preserved."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected. Recording begins mid-option on an already selected Head Template item; intentional overlap with video-002 is preserved.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "head_native_option_number": 12,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-002",
@@ -481,7 +607,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+      "head_native_option_number": 16,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-003",
@@ -497,7 +632,17 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_014",
+      "head_native_option_number": 14,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Frame-path/catalog-ID mismatch requires manual review before reuse.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-004",
@@ -513,7 +658,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_013",
+      "head_native_option_number": 13,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-005",
@@ -529,7 +683,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_017",
+      "head_native_option_number": 17,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-006",
@@ -545,7 +708,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_018",
+      "head_native_option_number": 18,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-007",
@@ -561,7 +733,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_023",
+      "head_native_option_number": 23,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-008",
@@ -577,7 +758,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_024",
+      "head_native_option_number": 24,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-009",
@@ -593,7 +783,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_022",
+      "head_native_option_number": 22,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-010",
@@ -609,7 +808,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_021",
+      "head_native_option_number": 21,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-011",
@@ -625,7 +833,17 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_027",
+      "head_native_option_number": 27,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Frame-path/catalog-ID mismatch requires manual review before reuse.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-012",
@@ -641,7 +859,17 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_028",
+      "head_native_option_number": 28,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Frame-path/catalog-ID mismatch requires manual review before reuse.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-013",
@@ -657,7 +885,17 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_031",
+      "head_native_option_number": 31,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Frame-path/catalog-ID mismatch requires manual review before reuse.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-014",
@@ -673,7 +911,17 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_030",
+      "head_native_option_number": 30,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Frame-path/catalog-ID mismatch requires manual review before reuse.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-003-tl-015",
@@ -689,7 +937,16 @@
       ],
       "issue_detected": [],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
-      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected. Recording ends while still in Head Template with Face 29 selected."
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected. Recording ends while still in Head Template with Face 29 selected.",
+      "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_029",
+      "head_native_option_number": 29,
+      "head_research_flags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ]
     },
     {
       "capture_event_id": "capture-phase0-video-004-tl-001",
@@ -1699,5 +1956,55 @@
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected native Ear Shape label is directly readable; neighboring ear thumbnails are non-selected."
     }
-  ]
+  ],
+  "updatedAt": "2026-07-14T00:30:00-04:00",
+  "headTemplateResearchCatalog": {
+    "generatedAt": "2026-07-14T00:30:00-04:00",
+    "catalogPath": "data/phase-zero/heads.research.json",
+    "recordCount": 26,
+    "productionStatus": "NOT_PRODUCTION_DATA",
+    "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+    "expectationReview": {
+      "firstVideoExpectedCoverage": "Face 1 through Face 12",
+      "firstVideoFinding": "REJECTED_AS_COMPLETE_1_THROUGH_12_ONLY",
+      "firstVideoObservedNumbers": [
+        1,
+        2,
+        3,
+        4,
+        8,
+        7,
+        6,
+        5,
+        9,
+        10,
+        11,
+        12,
+        16
+      ],
+      "firstVideoReason": "The first head-template video visibly includes Face 16 after Face 12, so it cannot be described as covering only Face 1 through Face 12.",
+      "secondVideoExpectedCoverage": "Face 12 through Face 29",
+      "secondVideoFinding": "REJECTED_AS_COMPLETE_12_THROUGH_29_ONLY",
+      "secondVideoObservedNumbers": [
+        12,
+        16,
+        14,
+        13,
+        17,
+        18,
+        23,
+        24,
+        22,
+        21,
+        27,
+        28,
+        31,
+        30,
+        29
+      ],
+      "secondVideoReason": "The second head-template video visibly includes Face 30 and Face 31 before ending on Face 29. Face 29 is not proven to be the final available head.",
+      "face12OverlapFinding": "CONFIRMED_AS_REPEATED_CONTINUITY_ENTRY",
+      "face12OverlapReason": "Face 12 is selected near the end of video 002 and again at the beginning of video 003. It is one catalog identity with multiple evidence observations, not two records."
+    }
+  }
 }

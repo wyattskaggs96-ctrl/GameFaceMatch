@@ -1,0 +1,2443 @@
+{
+  "schemaVersion": "cf27-head-template-research-catalog-v1",
+  "generatedAt": "2026-07-14T00:30:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "productionRecommendationsEnabled": false,
+  "sourceTimeline": "data/phase-zero/video_timeline.json",
+  "sourceEvidenceManifest": "data/phase-zero/evidence_manifest.json",
+  "sourceFrameManifest": "data/research/cf27/manifests/head-template-evidence-frames/head_template_evidence_frame_manifest.json",
+  "sourceQAReport": "data/research/cf27/reports/head-template-standardization-qa/head_template_standardization_qa_report.json",
+  "expectationReview": {
+    "firstVideoExpectedCoverage": "Face 1 through Face 12",
+    "firstVideoFinding": "REJECTED_AS_COMPLETE_1_THROUGH_12_ONLY",
+    "firstVideoObservedNumbers": [
+      1,
+      2,
+      3,
+      4,
+      8,
+      7,
+      6,
+      5,
+      9,
+      10,
+      11,
+      12,
+      16
+    ],
+    "firstVideoReason": "The first head-template video visibly includes Face 16 after Face 12, so it cannot be described as covering only Face 1 through Face 12.",
+    "secondVideoExpectedCoverage": "Face 12 through Face 29",
+    "secondVideoFinding": "REJECTED_AS_COMPLETE_12_THROUGH_29_ONLY",
+    "secondVideoObservedNumbers": [
+      12,
+      16,
+      14,
+      13,
+      17,
+      18,
+      23,
+      24,
+      22,
+      21,
+      27,
+      28,
+      31,
+      30,
+      29
+    ],
+    "secondVideoReason": "The second head-template video visibly includes Face 30 and Face 31 before ending on Face 29. Face 29 is not proven to be the final available head.",
+    "face12OverlapFinding": "CONFIRMED_AS_REPEATED_CONTINUITY_ENTRY",
+    "face12OverlapReason": "Face 12 is selected near the end of video 002 and again at the beginning of video 003. It is one catalog identity with multiple evidence observations, not two records."
+  },
+  "summary": {
+    "directlyObservedUniqueHeadTemplates": 26,
+    "totalSelectedObservations": 28,
+    "observedMinimumNativeNumber": 1,
+    "observedMaximumNativeNumber": 31,
+    "skippedNumbersWithinObservedRange": [
+      15,
+      19,
+      20,
+      25,
+      26
+    ],
+    "duplicateObservationNumbers": [
+      12,
+      16
+    ],
+    "repeatedContinuityNumbers": [
+      12
+    ],
+    "ambiguousRecordCount": 7,
+    "productionEligibleRecords": 0
+  },
+  "timelineFindings": {
+    "skippedNumbers": [
+      15,
+      19,
+      20,
+      25,
+      26
+    ],
+    "duplicateObservationNumbers": [
+      12,
+      16
+    ],
+    "repeatedContinuityNumbers": [
+      12
+    ],
+    "ambiguousEntries": [
+      "Video 002 contains Face 16 despite the previous working-name expectation of Face 1 through Face 12.",
+      "Video 003 contains Face 30 and Face 31 despite the previous working-name expectation of Face 12 through Face 29.",
+      "Observed traversal is non-monotonic; native option numbers are preserved from visible labels, but full sequence/order continuity is incomplete.",
+      "Face 29 is not treated as the final available head because selector ending/wrap is not directly demonstrated."
+    ],
+    "transitionFrames": [
+      "phase0-video-003-tl-001",
+      "phase0-video-003-tl-002",
+      "phase0-video-002-tl-004",
+      "phase0-video-003-tl-003",
+      "phase0-video-002-tl-005",
+      "phase0-video-003-tl-004",
+      "phase0-video-002-tl-006",
+      "phase0-video-003-tl-005",
+      "phase0-video-002-tl-007",
+      "phase0-video-003-tl-006",
+      "phase0-video-002-tl-008",
+      "phase0-video-003-tl-007",
+      "phase0-video-002-tl-009",
+      "phase0-video-002-tl-010",
+      "phase0-video-003-tl-008",
+      "phase0-video-002-tl-011",
+      "phase0-video-003-tl-009",
+      "phase0-video-002-tl-012",
+      "phase0-video-002-tl-013",
+      "phase0-video-003-tl-010",
+      "phase0-video-002-tl-014",
+      "phase0-video-003-tl-011",
+      "phase0-video-002-tl-015",
+      "phase0-video-003-tl-012",
+      "phase0-video-002-tl-016",
+      "phase0-video-003-tl-013",
+      "phase0-video-003-tl-014",
+      "phase0-video-003-tl-015"
+    ],
+    "loadingStateContamination": [],
+    "inconsistentFraming": "NOT_LOCKED_MENU_ROTATION_FRAMING",
+    "inconsistentCharacterSettings": "UNKNOWN_NOT_CONTROLLED",
+    "productionCountBoundary": "NOT_PROVEN"
+  },
+  "records": [
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_001",
+      "nativeOptionNumber": 1,
+      "nativeOrder": 1,
+      "visibleGameLabelOrIndex": "Face 1",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "10-19",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-004",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "10-19",
+          "startTimestamp": 10,
+          "endTimestamp": 19,
+          "visibleOptionLabel": "Face 1",
+          "visibleOptionIndex": 1,
+          "evidenceID": "phase0-frame-video-002-tl-004",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_MENU_video-002_11p68s.png",
+          "evidenceFrameTimestamp": 11.68,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-004",
+        "timelineRecordID": "phase0-video-002-tl-004",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_MENU_video-002_11p68s.png",
+        "timestamp": 11.68,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_001-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_MENU_video-002_11p68s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_002",
+      "nativeOptionNumber": 2,
+      "nativeOrder": 2,
+      "visibleGameLabelOrIndex": "Face 2",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "20-28",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-005",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "20-28",
+          "startTimestamp": 20,
+          "endTimestamp": 28,
+          "visibleOptionLabel": "Face 2",
+          "visibleOptionIndex": 2,
+          "evidenceID": "phase0-frame-video-002-tl-005",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_MENU_video-002_21p52s.png",
+          "evidenceFrameTimestamp": 21.52,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-005",
+        "timelineRecordID": "phase0-video-002-tl-005",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_MENU_video-002_21p52s.png",
+        "timestamp": 21.52,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_002-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_MENU_video-002_21p52s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_003",
+      "nativeOptionNumber": 3,
+      "nativeOrder": 3,
+      "visibleGameLabelOrIndex": "Face 3",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "29-38",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-006",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "29-38",
+          "startTimestamp": 29,
+          "endTimestamp": 38,
+          "visibleOptionLabel": "Face 3",
+          "visibleOptionIndex": 3,
+          "evidenceID": "phase0-frame-video-002-tl-006",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_MENU_video-002_30p68s.png",
+          "evidenceFrameTimestamp": 30.68,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-006",
+        "timelineRecordID": "phase0-video-002-tl-006",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_MENU_video-002_30p68s.png",
+        "timestamp": 30.68,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_003-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_MENU_video-002_30p68s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_004",
+      "nativeOptionNumber": 4,
+      "nativeOrder": 4,
+      "visibleGameLabelOrIndex": "Face 4",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "39-48",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-007",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "39-48",
+          "startTimestamp": 39,
+          "endTimestamp": 48,
+          "visibleOptionLabel": "Face 4",
+          "visibleOptionIndex": 4,
+          "evidenceID": "phase0-frame-video-002-tl-007",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_MENU_video-002_40p68s.png",
+          "evidenceFrameTimestamp": 40.68,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-007",
+        "timelineRecordID": "phase0-video-002-tl-007",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_MENU_video-002_40p68s.png",
+        "timestamp": 40.68,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_004-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_MENU_video-002_40p68s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_005",
+      "nativeOptionNumber": 5,
+      "nativeOrder": 5,
+      "visibleGameLabelOrIndex": "Face 5",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "69-74",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-011",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "69-74",
+          "startTimestamp": 69,
+          "endTimestamp": 74,
+          "visibleOptionLabel": "Face 5",
+          "visibleOptionIndex": 5,
+          "evidenceID": "phase0-frame-video-002-tl-011",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_MENU_video-002_70p04s.png",
+          "evidenceFrameTimestamp": 70.04,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-011",
+        "timelineRecordID": "phase0-video-002-tl-011",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_MENU_video-002_70p04s.png",
+        "timestamp": 70.04,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_005-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_MENU_video-002_70p04s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_006",
+      "nativeOptionNumber": 6,
+      "nativeOrder": 6,
+      "visibleGameLabelOrIndex": "Face 6",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "60-68",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-010",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "60-68",
+          "startTimestamp": 60,
+          "endTimestamp": 68,
+          "visibleOptionLabel": "Face 6",
+          "visibleOptionIndex": 6,
+          "evidenceID": "phase0-frame-video-002-tl-010",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_MENU_video-002_61p52s.png",
+          "evidenceFrameTimestamp": 61.52,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-010",
+        "timelineRecordID": "phase0-video-002-tl-010",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_MENU_video-002_61p52s.png",
+        "timestamp": 61.52,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_006-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_MENU_video-002_61p52s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_007",
+      "nativeOptionNumber": 7,
+      "nativeOrder": 7,
+      "visibleGameLabelOrIndex": "Face 7",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "54-59",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-009",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "54-59",
+          "startTimestamp": 54,
+          "endTimestamp": 59,
+          "visibleOptionLabel": "Face 7",
+          "visibleOptionIndex": 7,
+          "evidenceID": "phase0-frame-video-002-tl-009",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_MENU_video-002_55p04s.png",
+          "evidenceFrameTimestamp": 55.04,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-009",
+        "timelineRecordID": "phase0-video-002-tl-009",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_MENU_video-002_55p04s.png",
+        "timestamp": 55.04,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_007-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_MENU_video-002_55p04s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_008",
+      "nativeOptionNumber": 8,
+      "nativeOrder": 8,
+      "visibleGameLabelOrIndex": "Face 8",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "49-53",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-008",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "49-53",
+          "startTimestamp": 49,
+          "endTimestamp": 53,
+          "visibleOptionLabel": "Face 8",
+          "visibleOptionIndex": 8,
+          "evidenceID": "phase0-frame-video-002-tl-008",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_MENU_video-002_49p88s.png",
+          "evidenceFrameTimestamp": 49.88,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-008",
+        "timelineRecordID": "phase0-video-002-tl-008",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_MENU_video-002_49p88s.png",
+        "timestamp": 49.88,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_008-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_MENU_video-002_49p88s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_009",
+      "nativeOptionNumber": 9,
+      "nativeOrder": 9,
+      "visibleGameLabelOrIndex": "Face 9",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "75-79",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-012",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "75-79",
+          "startTimestamp": 75,
+          "endTimestamp": 79,
+          "visibleOptionLabel": "Face 9",
+          "visibleOptionIndex": 9,
+          "evidenceID": "phase0-frame-video-002-tl-012",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_MENU_video-002_75p88s.png",
+          "evidenceFrameTimestamp": 75.88,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-012",
+        "timelineRecordID": "phase0-video-002-tl-012",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_MENU_video-002_75p88s.png",
+        "timestamp": 75.88,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_009-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_MENU_video-002_75p88s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_010",
+      "nativeOptionNumber": 10,
+      "nativeOrder": 10,
+      "visibleGameLabelOrIndex": "Face 10",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "80-88",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-013",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "80-88",
+          "startTimestamp": 80,
+          "endTimestamp": 88,
+          "visibleOptionLabel": "Face 10",
+          "visibleOptionIndex": 10,
+          "evidenceID": "phase0-frame-video-002-tl-013",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_MENU_video-002_81p52s.png",
+          "evidenceFrameTimestamp": 81.52,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-013",
+        "timelineRecordID": "phase0-video-002-tl-013",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_MENU_video-002_81p52s.png",
+        "timestamp": 81.52,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_010-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_MENU_video-002_81p52s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_011",
+      "nativeOptionNumber": 11,
+      "nativeOrder": 11,
+      "visibleGameLabelOrIndex": "Face 11",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "89-94",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-002-tl-014",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "89-94",
+          "startTimestamp": 89,
+          "endTimestamp": 94,
+          "visibleOptionLabel": "Face 11",
+          "visibleOptionIndex": 11,
+          "evidenceID": "phase0-frame-video-002-tl-014",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_MENU_video-002_90p04s.png",
+          "evidenceFrameTimestamp": 90.04,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-014",
+        "timelineRecordID": "phase0-video-002-tl-014",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_MENU_video-002_90p04s.png",
+        "timestamp": 90.04,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_011-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_MENU_video-002_90p04s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "nativeOptionNumber": 12,
+      "nativeOrder": 12,
+      "visibleGameLabelOrIndex": "Face 12",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003",
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-002",
+      "primaryTimestampRange": "95-100",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-001",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "0-4",
+          "startTimestamp": 0,
+          "endTimestamp": 4,
+          "visibleOptionLabel": "Face 12",
+          "visibleOptionIndex": 12,
+          "evidenceID": "phase0-frame-video-003-tl-001",
+          "evidenceFramePath": "data/phase-zero/derivative-frames/video-003-tl-001_03-head-templates-faces-12-29-mov_2s.png",
+          "evidenceFrameTimestamp": 2,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected. Recording begins mid-option on an already selected Head Template item; intentional overlap with video-002 is preserved."
+        },
+        {
+          "timelineRecordID": "phase0-video-002-tl-015",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "95-100",
+          "startTimestamp": 95,
+          "endTimestamp": 100,
+          "visibleOptionLabel": "Face 12",
+          "visibleOptionIndex": 12,
+          "evidenceID": "phase0-frame-video-002-tl-015",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_MENU_video-002_96p04s.png",
+          "evidenceFrameTimestamp": 96.04,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-002-tl-015",
+        "timelineRecordID": "phase0-video-002-tl-015",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_MENU_video-002_96p04s.png",
+        "timestamp": 96.04,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_012-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_MENU_video-002_96p04s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [
+        "Duplicate selected observations exist and are preserved as provenance."
+      ],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_013",
+      "nativeOptionNumber": 13,
+      "nativeOrder": 13,
+      "visibleGameLabelOrIndex": "Face 13",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "21-29",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-004",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "21-29",
+          "startTimestamp": 21,
+          "endTimestamp": 29,
+          "visibleOptionLabel": "Face 13",
+          "visibleOptionIndex": 13,
+          "evidenceID": "phase0-frame-video-003-tl-004",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_MENU_video-003_28p04s.png",
+          "evidenceFrameTimestamp": 28.04,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-004",
+        "timelineRecordID": "phase0-video-003-tl-004",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_MENU_video-003_28p04s.png",
+        "timestamp": 28.04,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_013-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_MENU_video-003_28p04s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_014",
+      "nativeOptionNumber": 14,
+      "nativeOrder": 14,
+      "visibleGameLabelOrIndex": "Face 14",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "14-20",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-003",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "14-20",
+          "startTimestamp": 14,
+          "endTimestamp": 20,
+          "visibleOptionLabel": "Face 14",
+          "visibleOptionIndex": 14,
+          "evidenceID": "phase0-frame-video-003-tl-003",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_MENU_video-003_14p04s.png",
+          "evidenceFrameTimestamp": 14.04,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-003",
+        "timelineRecordID": "phase0-video-003-tl-003",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_MENU_video-003_14p04s.png",
+        "timestamp": 14.04,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_014-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_014/CF27_XBOXUNKNOWN_RTG_HEAD_014_MENU_video-003_20p36s.png",
+        "pathMatchesStableID": false
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "MEDIUM_NATIVE_NUMBER_VISIBLE_FRAME_ID_MISMATCH_REVIEW_REQUIRED",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Frame-path/catalog-ID mismatch requires manual review before reuse.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination",
+        "legacy_frame_manifest_id_mismatch"
+      ],
+      "ambiguities": [
+        "Evidence frame path was generated by an older candidate package naming pass and does not match this direct native-number ID."
+      ],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+      "nativeOptionNumber": 16,
+      "nativeOrder": 16,
+      "visibleGameLabelOrIndex": "Face 16",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003",
+        "phase0-video-002"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "5-13",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-002",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "5-13",
+          "startTimestamp": 5,
+          "endTimestamp": 13,
+          "visibleOptionLabel": "Face 16",
+          "visibleOptionIndex": 16,
+          "evidenceID": "phase0-frame-video-003-tl-002",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_MENU_video-003_7p20s.png",
+          "evidenceFrameTimestamp": 7.2,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        },
+        {
+          "timelineRecordID": "phase0-video-002-tl-016",
+          "videoID": "phase0-video-002",
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov",
+          "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+          "timestampRange": "101-108.8",
+          "startTimestamp": 101,
+          "endTimestamp": 108.8,
+          "visibleOptionLabel": "Face 16",
+          "visibleOptionIndex": 16,
+          "evidenceID": "phase0-frame-video-002-tl-016",
+          "evidenceFramePath": "data/phase-zero/derivative-frames/video-002-tl-016_02-head-templates-faces-01-12-mov_104p9s.png",
+          "evidenceFrameTimestamp": 104.9,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options. This selected label appears despite the source-manifest description of this recording as Face 1 through Face 12; timeline records the observed selected state only."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-002",
+        "timelineRecordID": "phase0-video-003-tl-002",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_MENU_video-003_7p20s.png",
+        "timestamp": 7.2,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_016-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_MENU_video-003_7p20s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [
+        "Duplicate selected observations exist and are preserved as provenance."
+      ],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_017",
+      "nativeOptionNumber": 17,
+      "nativeOrder": 17,
+      "visibleGameLabelOrIndex": "Face 17",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "30-39",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-005",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "30-39",
+          "startTimestamp": 30,
+          "endTimestamp": 39,
+          "visibleOptionLabel": "Face 17",
+          "visibleOptionIndex": 17,
+          "evidenceID": "phase0-frame-video-003-tl-005",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_MENU_video-003_34p20s.png",
+          "evidenceFrameTimestamp": 34.2,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-005",
+        "timelineRecordID": "phase0-video-003-tl-005",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_MENU_video-003_34p20s.png",
+        "timestamp": 34.2,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_017-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_MENU_video-003_34p20s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_018",
+      "nativeOptionNumber": 18,
+      "nativeOrder": 18,
+      "visibleGameLabelOrIndex": "Face 18",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "40-49",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-006",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "40-49",
+          "startTimestamp": 40,
+          "endTimestamp": 49,
+          "visibleOptionLabel": "Face 18",
+          "visibleOptionIndex": 18,
+          "evidenceID": "phase0-frame-video-003-tl-006",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_MENU_video-003_41p36s.png",
+          "evidenceFrameTimestamp": 41.36,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-006",
+        "timelineRecordID": "phase0-video-003-tl-006",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_MENU_video-003_41p36s.png",
+        "timestamp": 41.36,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_018-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_MENU_video-003_41p36s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_021",
+      "nativeOptionNumber": 21,
+      "nativeOrder": 21,
+      "visibleGameLabelOrIndex": "Face 21",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "80-89",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-010",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "80-89",
+          "startTimestamp": 80,
+          "endTimestamp": 89,
+          "visibleOptionLabel": "Face 21",
+          "visibleOptionIndex": 21,
+          "evidenceID": "phase0-frame-video-003-tl-010",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_MENU_video-003_80p88s.png",
+          "evidenceFrameTimestamp": 80.88,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-010",
+        "timelineRecordID": "phase0-video-003-tl-010",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_MENU_video-003_80p88s.png",
+        "timestamp": 80.88,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_021-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_MENU_video-003_80p88s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_022",
+      "nativeOptionNumber": 22,
+      "nativeOrder": 22,
+      "visibleGameLabelOrIndex": "Face 22",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "70-79",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-009",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "70-79",
+          "startTimestamp": 70,
+          "endTimestamp": 79,
+          "visibleOptionLabel": "Face 22",
+          "visibleOptionIndex": 22,
+          "evidenceID": "phase0-frame-video-003-tl-009",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_MENU_video-003_76p72s.png",
+          "evidenceFrameTimestamp": 76.72,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-009",
+        "timelineRecordID": "phase0-video-003-tl-009",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_MENU_video-003_76p72s.png",
+        "timestamp": 76.72,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_022-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_MENU_video-003_76p72s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_023",
+      "nativeOptionNumber": 23,
+      "nativeOrder": 23,
+      "visibleGameLabelOrIndex": "Face 23",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "50-59",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-007",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "50-59",
+          "startTimestamp": 50,
+          "endTimestamp": 59,
+          "visibleOptionLabel": "Face 23",
+          "visibleOptionIndex": 23,
+          "evidenceID": "phase0-frame-video-003-tl-007",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_MENU_video-003_57p20s.png",
+          "evidenceFrameTimestamp": 57.2,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-007",
+        "timelineRecordID": "phase0-video-003-tl-007",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_MENU_video-003_57p20s.png",
+        "timestamp": 57.2,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_023-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_MENU_video-003_57p20s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_024",
+      "nativeOptionNumber": 24,
+      "nativeOrder": 24,
+      "visibleGameLabelOrIndex": "Face 24",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "60-69",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-008",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "60-69",
+          "startTimestamp": 60,
+          "endTimestamp": 69,
+          "visibleOptionLabel": "Face 24",
+          "visibleOptionIndex": 24,
+          "evidenceID": "phase0-frame-video-003-tl-008",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_MENU_video-003_63p88s.png",
+          "evidenceFrameTimestamp": 63.88,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-008",
+        "timelineRecordID": "phase0-video-003-tl-008",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_MENU_video-003_63p88s.png",
+        "timestamp": 63.88,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_024-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_MENU_video-003_63p88s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_027",
+      "nativeOptionNumber": 27,
+      "nativeOrder": 27,
+      "visibleGameLabelOrIndex": "Face 27",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "90-99",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-011",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "90-99",
+          "startTimestamp": 90,
+          "endTimestamp": 99,
+          "visibleOptionLabel": "Face 27",
+          "visibleOptionIndex": 27,
+          "evidenceID": "phase0-frame-video-003-tl-011",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_MENU_video-003_95p04s.png",
+          "evidenceFrameTimestamp": 95.04,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-011",
+        "timelineRecordID": "phase0-video-003-tl-011",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_MENU_video-003_95p04s.png",
+        "timestamp": 95.04,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_027-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_MENU_video-003_100p72s.png",
+        "pathMatchesStableID": false
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "MEDIUM_NATIVE_NUMBER_VISIBLE_FRAME_ID_MISMATCH_REVIEW_REQUIRED",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Frame-path/catalog-ID mismatch requires manual review before reuse.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination",
+        "legacy_frame_manifest_id_mismatch"
+      ],
+      "ambiguities": [
+        "Evidence frame path was generated by an older candidate package naming pass and does not match this direct native-number ID."
+      ],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_028",
+      "nativeOptionNumber": 28,
+      "nativeOrder": 28,
+      "visibleGameLabelOrIndex": "Face 28",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "100-109",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-012",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "100-109",
+          "startTimestamp": 100,
+          "endTimestamp": 109,
+          "visibleOptionLabel": "Face 28",
+          "visibleOptionIndex": 28,
+          "evidenceID": "phase0-frame-video-003-tl-012",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_MENU_video-003_100p72s.png",
+          "evidenceFrameTimestamp": 100.72,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-012",
+        "timelineRecordID": "phase0-video-003-tl-012",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_MENU_video-003_100p72s.png",
+        "timestamp": 100.72,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_028-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_028/CF27_XBOXUNKNOWN_RTG_HEAD_028_MENU_video-003_105p20s.png",
+        "pathMatchesStableID": false
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "MEDIUM_NATIVE_NUMBER_VISIBLE_FRAME_ID_MISMATCH_REVIEW_REQUIRED",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Frame-path/catalog-ID mismatch requires manual review before reuse.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination",
+        "legacy_frame_manifest_id_mismatch"
+      ],
+      "ambiguities": [
+        "Evidence frame path was generated by an older candidate package naming pass and does not match this direct native-number ID."
+      ],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_029",
+      "nativeOptionNumber": 29,
+      "nativeOrder": 29,
+      "visibleGameLabelOrIndex": "Face 29",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "127-133.02",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-015",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "127-133.02",
+          "startTimestamp": 127,
+          "endTimestamp": 133.02,
+          "visibleOptionLabel": "Face 29",
+          "visibleOptionIndex": 29,
+          "evidenceID": "phase0-frame-video-003-tl-015",
+          "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_MENU_video-003_128p20s.png",
+          "evidenceFrameTimestamp": 128.2,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected. Recording ends while still in Head Template with Face 29 selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-015",
+        "timelineRecordID": "phase0-video-003-tl-015",
+        "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_MENU_video-003_128p20s.png",
+        "timestamp": 128.2,
+        "frameManifestID": "frame-cf27_xboxunknown_rtg_head_029-menu",
+        "frameManifestPath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_MENU_video-003_128p20s.png",
+        "pathMatchesStableID": true
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": true,
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "HIGH_NATIVE_NUMBER_VISIBLE_FOR_THIS_RECORD_SEQUENCE_INCOMPLETE",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination"
+      ],
+      "ambiguities": [],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_030",
+      "nativeOptionNumber": 30,
+      "nativeOrder": 30,
+      "visibleGameLabelOrIndex": "Face 30",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "120-126",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-014",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "120-126",
+          "startTimestamp": 120,
+          "endTimestamp": 126,
+          "visibleOptionLabel": "Face 30",
+          "visibleOptionIndex": 30,
+          "evidenceID": "phase0-frame-video-003-tl-014",
+          "evidenceFramePath": "data/phase-zero/derivative-frames/video-003-tl-014_03-head-templates-faces-12-29-mov_123s.png",
+          "evidenceFrameTimestamp": 123,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-014",
+        "timelineRecordID": "phase0-video-003-tl-014",
+        "path": "data/phase-zero/derivative-frames/video-003-tl-014_03-head-templates-faces-12-29-mov_123s.png",
+        "timestamp": 123,
+        "frameManifestID": null,
+        "frameManifestPath": null,
+        "pathMatchesStableID": false
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": "UNKNOWN",
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "RESEARCH_MENU_EVIDENCE_ONLY",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "MEDIUM_NATIVE_NUMBER_VISIBLE_FRAME_ID_MISMATCH_REVIEW_REQUIRED",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Frame-path/catalog-ID mismatch requires manual review before reuse.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination",
+        "legacy_frame_manifest_id_mismatch"
+      ],
+      "ambiguities": [
+        "Evidence frame path was generated by an older candidate package naming pass and does not match this direct native-number ID.",
+        "This option appears beyond the earlier expected Face 29 endpoint; category ending is not proven."
+      ],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    },
+    {
+      "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_031",
+      "nativeOptionNumber": 31,
+      "nativeOrder": 31,
+      "visibleGameLabelOrIndex": "Face 31",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideos": [
+        "phase0-video-003"
+      ],
+      "primarySourceVideo": "phase0-video-003",
+      "primaryTimestampRange": "110-119",
+      "sourceObservations": [
+        {
+          "timelineRecordID": "phase0-video-003-tl-013",
+          "videoID": "phase0-video-003",
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov",
+          "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+          "timestampRange": "110-119",
+          "startTimestamp": 110,
+          "endTimestamp": 119,
+          "visibleOptionLabel": "Face 31",
+          "visibleOptionIndex": 31,
+          "evidenceID": "phase0-frame-video-003-tl-013",
+          "evidenceFramePath": "data/phase-zero/derivative-frames/video-003-tl-013_03-head-templates-faces-12-29-mov_114p5s.png",
+          "evidenceFrameTimestamp": 114.5,
+          "menuNumberVisible": true,
+          "transitionAnimationFinished": false,
+          "transitionActive": true,
+          "blurPresent": false,
+          "obstructionPresent": false,
+          "timelineConfidence": "HIGH",
+          "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+        }
+      ],
+      "evidenceFrame": {
+        "evidenceID": "phase0-frame-video-003-tl-013",
+        "timelineRecordID": "phase0-video-003-tl-013",
+        "path": "data/phase-zero/derivative-frames/video-003-tl-013_03-head-templates-faces-12-29-mov_114p5s.png",
+        "timestamp": 114.5,
+        "frameManifestID": null,
+        "frameManifestPath": null,
+        "pathMatchesStableID": false
+      },
+      "menuNumberVisible": true,
+      "transitionAnimationFinished": false,
+      "characterLoaded": "UNKNOWN",
+      "constants": {
+        "hair": "NOT_CONTROLLED_OR_PROVEN",
+        "facialHair": "NOT_CONTROLLED_OR_PROVEN",
+        "skinTone": "NOT_CONTROLLED_OR_PROVEN",
+        "lighting": "GAME_MENU_LIGHTING_APPEARS_CONSISTENT_BUT_NOT_MEASURED",
+        "zoom": "NOT_LOCKED",
+        "framing": "NOT_LOCKED",
+        "characterSettings": "UNKNOWN_NOT_FULLY_DOCUMENTED"
+      },
+      "visualEvidenceQuality": "RESEARCH_MENU_EVIDENCE_ONLY",
+      "countConfidence": "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
+      "orderingConfidence": "MEDIUM_NATIVE_NUMBER_VISIBLE_FRAME_ID_MISMATCH_REVIEW_REQUIRED",
+      "suitability": {
+        "menuPresence": true,
+        "ordering": true,
+        "counting": "PARTIAL_OBSERVED_PRESENCE_ONLY_NOT_TOTAL_COUNT",
+        "preliminaryVisualAnnotation": true,
+        "productionGeometricComparison": false
+      },
+      "qualityFlags": [
+        "Black cheek eye paint is present in the current head-template footage.",
+        "Hair/facial-hair state is not independently locked by evidence.",
+        "Non-menu angles are approximate derivatives where available.",
+        "Menu UI/framing is not a production geometric comparison protocol.",
+        "Frame-path/catalog-ID mismatch requires manual review before reuse.",
+        "Recapture required before production comparison."
+      ],
+      "defects": [
+        "transition_frame_or_loading_state_contamination",
+        "legacy_frame_manifest_id_mismatch"
+      ],
+      "ambiguities": [
+        "Evidence frame path was generated by an older candidate package naming pass and does not match this direct native-number ID.",
+        "This option appears beyond the earlier expected Face 29 endpoint; category ending is not proven."
+      ],
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
+      },
+      "createdAt": "2026-07-14T00:30:00-04:00",
+      "updatedAt": "2026-07-14T00:30:00-04:00"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "manual-matching-participant-intake-checkpoint-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "intakeStatus": "BLOCKED",
+  "studyStatus": "NOT_STARTED",
+  "productionRecommendationStatus": "FAIL_CLOSED",
+  "sourceType": "researchDraft",
+  "rawMediaCommitted": false,
+  "rawMediaRetainedByRepository": false,
+  "participantPackagesDiscovered": 0,
+  "participantsRecorded": 0,
+  "pseudonymousStudyIDsAssigned": [],
+  "profilesCreated": [],
+  "topThreeRecommendationsRecorded": [],
+  "buildInstructionsGenerated": [],
+  "reviewerMaterialsPrepared": [],
+  "discoverySummary": {
+    "gitWorkingTreeParticipantFiles": 0,
+    "approvedPrivateIntakePackages": 0,
+    "notes": [
+      "No new participant intake package, subject CSV, reviewer CSV, result CSV, or approved private participant media set was discoverable in the repository workspace.",
+      "Existing image files found during inspection are College Football 27 research evidence derivatives or local game-evidence review files, not participant study media.",
+      "Manual matching CSV templates remain header-only."
+    ]
+  },
+  "gateChecks": [
+    {
+      "gate": "verifiedProductionCatalog",
+      "status": "BLOCKED",
+      "evidence": "data/catalog/production/catalog_manifest.json contains 0 items and version empty-production.",
+      "impact": "Verified production matcher cannot produce recommendations."
+    },
+    {
+      "gate": "manualMatchingReadiness",
+      "status": "BLOCKED",
+      "evidence": "data/phase-zero/manual_matching_study_readiness_decision.json decision is NOT_READY.",
+      "impact": "The 10-20-person feasibility study must not begin."
+    },
+    {
+      "gate": "participantConsent",
+      "status": "NOT_EVALUATED",
+      "evidence": "No participant consent record was discoverable.",
+      "impact": "No pseudonymous participant row can be created."
+    },
+    {
+      "gate": "requiredImageViews",
+      "status": "NOT_EVALUATED",
+      "evidence": "No participant image package was discoverable.",
+      "impact": "Required straight-on, left 45, right 45, left profile, and right profile views could not be validated."
+    },
+    {
+      "gate": "neutralExpressionAndImageQuality",
+      "status": "NOT_EVALUATED",
+      "evidence": "No participant image package was discoverable.",
+      "impact": "Neutral expression and image-quality checks could not be run."
+    },
+    {
+      "gate": "rawMediaRetention",
+      "status": "PASS",
+      "evidence": "No participant raw media was committed or referenced as retained in repository records.",
+      "impact": "Repository remains free of participant raw biometric media."
+    }
+  ],
+  "blockedActions": [
+    "assignPseudonymousStudyID",
+    "validateConsent",
+    "validateRequiredImageViews",
+    "validateNeutralExpression",
+    "validateImageQuality",
+    "recordCaptureMode",
+    "createStandardizedFaceProfile",
+    "runVerifiedProductionMatcher",
+    "recordTopThreeRecommendations",
+    "generateBuildInstructions",
+    "prepareReviewerMaterials"
+  ],
+  "requiredToProceed": [
+    "Place non-repository participant intake materials in an approved private intake workspace and provide a non-identifying manifest with consent state and required-view mapping.",
+    "Approve the study consent/privacy language for the real study context.",
+    "Import a nonzero verified production College Football 27 catalog release.",
+    "Re-run manual matching readiness and confirm READY before assigning participant IDs or creating study rows.",
+    "Keep raw participant media out of Git and delete it according to the approved retention plan."
+  ]
+}

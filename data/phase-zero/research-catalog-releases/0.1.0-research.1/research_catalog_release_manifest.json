@@ -1,0 +1,411 @@
+{
+  "schemaVersion": "cf27-research-catalog-release-v1",
+  "version": "0.1.0-research.1",
+  "semver": "0.1.0-research.1",
+  "generatedAt": "2026-07-14T03:15:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_RESEARCH_CATALOG_RELEASE_CANDIDATE",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "productionRecommendationsEnabled": false,
+  "releaseLabel": "PRIMARY RESEARCH CATALOG EXPORT - NOT PRODUCTION VERIFIED",
+  "versionDecision": "0.1.0-research.1 is the first semantic release-candidate package from the canonical data/phase-zero artifacts.",
+  "productionGate": {
+    "recommendationsEnabled": false,
+    "reason": "Records are research observations only. Second-person verification and catalog-manager approval have not occurred."
+  },
+  "sourceExports": [
+    {
+      "key": "environment_manifest",
+      "sourceJsonPath": "data/phase-zero/environment_manifest.research.json",
+      "sourceCsvPath": null,
+      "jsonOutput": "environment_manifest.json",
+      "csvOutput": "environment_manifest.csv",
+      "recordCount": 1,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "key": "creation_paths",
+      "sourceJsonPath": "data/phase-zero/creation_paths.research.json",
+      "sourceCsvPath": "data/phase-zero/creation_paths.research.csv",
+      "jsonOutput": "creation_paths.json",
+      "csvOutput": "creation_paths.csv",
+      "recordCount": 1,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "key": "menu_map",
+      "sourceJsonPath": "data/phase-zero/menu_map.research.json",
+      "sourceCsvPath": "data/phase-zero/menu_map.research.csv",
+      "jsonOutput": "menu_map.json",
+      "csvOutput": "menu_map.csv",
+      "recordCount": 93,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "key": "heads",
+      "sourceJsonPath": "data/phase-zero/heads.research.json",
+      "sourceCsvPath": "data/phase-zero/heads.research.csv",
+      "jsonOutput": "heads.json",
+      "csvOutput": "heads.csv",
+      "recordCount": 26,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "key": "hairstyles",
+      "sourceJsonPath": "data/phase-zero/hairstyles.research.json",
+      "sourceCsvPath": "data/phase-zero/hairstyles.research.csv",
+      "jsonOutput": "hairstyles.json",
+      "csvOutput": "hairstyles.csv",
+      "recordCount": 0,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "REQUESTED_NOT_CAPTURED"
+    },
+    {
+      "key": "hair_colors",
+      "sourceJsonPath": "data/phase-zero/hair_colors.research.json",
+      "sourceCsvPath": "data/phase-zero/hair_colors.research.csv",
+      "jsonOutput": "hair_colors.json",
+      "csvOutput": "hair_colors.csv",
+      "recordCount": 0,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "REQUESTED_NOT_CAPTURED"
+    },
+    {
+      "key": "facial_hair",
+      "sourceJsonPath": "data/phase-zero/facial_hair.research.json",
+      "sourceCsvPath": "data/phase-zero/facial_hair.research.csv",
+      "jsonOutput": "facial_hair.json",
+      "csvOutput": "facial_hair.csv",
+      "recordCount": 0,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "REQUESTED_NOT_CAPTURED"
+    },
+    {
+      "key": "facial_hair_colors",
+      "sourceJsonPath": "data/phase-zero/facial_hair_colors.research.json",
+      "sourceCsvPath": "data/phase-zero/facial_hair_colors.research.csv",
+      "jsonOutput": "facial_hair_colors.json",
+      "csvOutput": "facial_hair_colors.csv",
+      "recordCount": 0,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "REQUESTED_NOT_CAPTURED"
+    },
+    {
+      "key": "additional_attributes",
+      "sourceJsonPath": "data/phase-zero/additional_attributes.research.json",
+      "sourceCsvPath": "data/phase-zero/additional_attributes.research.csv",
+      "jsonOutput": "additional_attributes.json",
+      "csvOutput": "additional_attributes.csv",
+      "recordCount": 54,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "key": "body_controls",
+      "sourceJsonPath": "data/phase-zero/body_controls.research.json",
+      "sourceCsvPath": "data/phase-zero/body_controls.research.csv",
+      "jsonOutput": "body_controls.json",
+      "csvOutput": "body_controls.csv",
+      "recordCount": 5,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "key": "dependency_tests",
+      "sourceJsonPath": "data/phase-zero/dependency_tests.research.json",
+      "sourceCsvPath": "data/phase-zero/dependency_tests.research.csv",
+      "jsonOutput": "dependency_tests.json",
+      "csvOutput": "dependency_tests.csv",
+      "recordCount": 16,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "key": "evidence_manifest",
+      "sourceJsonPath": "data/phase-zero/evidence_manifest.json",
+      "sourceCsvPath": "data/phase-zero/evidence_manifest.csv",
+      "jsonOutput": "evidence_manifest.json",
+      "csvOutput": "evidence_manifest.csv",
+      "recordCount": 96,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "key": "capture_log",
+      "sourceJsonPath": "data/phase-zero/capture_log.json",
+      "sourceCsvPath": "data/phase-zero/capture_log.csv",
+      "jsonOutput": "capture_log.json",
+      "csvOutput": "capture_log.csv",
+      "recordCount": 106,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "key": "issues_and_exceptions",
+      "sourceJsonPath": "data/phase-zero/issues_register.research.json",
+      "sourceCsvPath": null,
+      "jsonOutput": "issues_and_exceptions.json",
+      "csvOutput": "issues_and_exceptions.csv",
+      "recordCount": 41,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "key": "recapture_requests",
+      "sourceJsonPath": "data/phase-zero/capture_requests.json",
+      "sourceCsvPath": "data/phase-zero/capture_requests.csv",
+      "jsonOutput": "recapture_requests.json",
+      "csvOutput": "recapture_requests.csv",
+      "recordCount": 10,
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "REQUESTED_NOT_CAPTURED"
+    }
+  ],
+  "files": [
+    {
+      "fileName": "additional_attributes.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "d7fcc5ca9284088bc52be874e17dc81b2755327c1b0d3f471aed9074a3c5cd2f",
+      "sizeBytes": 39358,
+      "sourcePath": "data/phase-zero/additional_attributes.research.csv"
+    },
+    {
+      "fileName": "additional_attributes.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "8b5f7c90b72e1e22ca7563539fe873d0a8c91fe186425f1542b31fd38089e9e9",
+      "sizeBytes": 335201,
+      "sourcePath": "data/phase-zero/additional_attributes.research.json"
+    },
+    {
+      "fileName": "body_controls.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "1439fb47d58c4e1d1e96f774b80511190c97b0b22ade2b678bb9670507605b73",
+      "sizeBytes": 2256,
+      "sourcePath": "data/phase-zero/body_controls.research.csv"
+    },
+    {
+      "fileName": "body_controls.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "0b5be8523f3f68c5fd4e2e809e502793e0dd493a1df9c1c274bc143d49b2e098",
+      "sizeBytes": 28285,
+      "sourcePath": "data/phase-zero/body_controls.research.json"
+    },
+    {
+      "fileName": "capture_log.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "be0ede813afe7c5d4481e7c28cb722bdfcb1aaa10822b74b3ce5670d95bc5b4b",
+      "sizeBytes": 42830,
+      "sourcePath": "data/phase-zero/capture_log.csv"
+    },
+    {
+      "fileName": "capture_log.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "b14b3861e865f17f25479f4af7de3a35b1252a4aaa326dcbd53c0ff76f66fc3a",
+      "sizeBytes": 85160,
+      "sourcePath": "data/phase-zero/capture_log.json"
+    },
+    {
+      "fileName": "creation_paths.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "c92a715a54ae2294022f76e337fff84340ea08a96b263122dcd40d7abc2728b8",
+      "sizeBytes": 582,
+      "sourcePath": "data/phase-zero/creation_paths.research.csv"
+    },
+    {
+      "fileName": "creation_paths.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "79137d73a3319176d45d27f05bcb18f8c9dad05cbb8fce437ce7d8f341890546",
+      "sizeBytes": 10918,
+      "sourcePath": "data/phase-zero/creation_paths.research.json"
+    },
+    {
+      "fileName": "dependency_tests.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "17d156fbd6afce3f2610be6d8445e8054e3f91778066ec5130ad2a7b55b9483d",
+      "sizeBytes": 6133,
+      "sourcePath": "data/phase-zero/dependency_tests.research.csv"
+    },
+    {
+      "fileName": "dependency_tests.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "908fb4f11abc797108f80d1eb6c486b6dab50f640989724d8ecf6ceb325a3f8f",
+      "sizeBytes": 62014,
+      "sourcePath": "data/phase-zero/dependency_tests.research.json"
+    },
+    {
+      "fileName": "environment_manifest.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "07e61dfe20a38c36e8f95f26e8a3eb801376d9f233542ed8376ed60ed463a7dc",
+      "sizeBytes": 957,
+      "sourcePath": "data/phase-zero/environment_manifest.research.json"
+    },
+    {
+      "fileName": "environment_manifest.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "20b2aaad31db594a1c7d5597d91e2e500f6de26746f78738abce24a61dd130c1",
+      "sizeBytes": 22412,
+      "sourcePath": "data/phase-zero/environment_manifest.research.json"
+    },
+    {
+      "fileName": "evidence_manifest.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "c6f8483c1d4ab3cd12e615b96c1e335896e6fe83d8980bdcdb07775eb52d75d6",
+      "sizeBytes": 48269,
+      "sourcePath": "data/phase-zero/evidence_manifest.csv"
+    },
+    {
+      "fileName": "evidence_manifest.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "cf1505e42637278c25fa38ce197650e00b0078824551c1b7edad7dbbbaf3646e",
+      "sizeBytes": 100362,
+      "sourcePath": "data/phase-zero/evidence_manifest.json"
+    },
+    {
+      "fileName": "facial_hair_colors.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "75f7b0a802d7914082fa78211ef90204fa39eb2eb4ebd2875d4f0d3d33c77a02",
+      "sizeBytes": 513,
+      "sourcePath": "data/phase-zero/facial_hair_colors.research.csv"
+    },
+    {
+      "fileName": "facial_hair_colors.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "70d5a9ba7d5cffe15460371c4bccd85f4c4151f9a0ff611d0a65baf0e7e79f39",
+      "sizeBytes": 7096,
+      "sourcePath": "data/phase-zero/facial_hair_colors.research.json"
+    },
+    {
+      "fileName": "facial_hair.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "ee85cd07bdd6244fa118df6f4ecba733418a8a7734d163c86efdeed75e085987",
+      "sizeBytes": 540,
+      "sourcePath": "data/phase-zero/facial_hair.research.csv"
+    },
+    {
+      "fileName": "facial_hair.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "7dcf7099dfac43a8f9d855e2ee9b846118781ba81454c1355b547a8771ae7c0a",
+      "sizeBytes": 7041,
+      "sourcePath": "data/phase-zero/facial_hair.research.json"
+    },
+    {
+      "fileName": "hair_colors.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "16e27a2f45e8c5f5207b1de25f150e1b5c76887295e8de7790d772a323d14686",
+      "sizeBytes": 417,
+      "sourcePath": "data/phase-zero/hair_colors.research.csv"
+    },
+    {
+      "fileName": "hair_colors.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "c4ee3e0396bfe5cf0a8289dd805219e98d48eb7941b99699fda5bda3e0e3a90e",
+      "sizeBytes": 6307,
+      "sourcePath": "data/phase-zero/hair_colors.research.json"
+    },
+    {
+      "fileName": "hairstyles.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "83db1a1cf280d9e03d7008e4cc4c93834b93f63ddab6f2541552c44cf3cc13e7",
+      "sizeBytes": 380,
+      "sourcePath": "data/phase-zero/hairstyles.research.csv"
+    },
+    {
+      "fileName": "hairstyles.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "95d5ab0919a51c18abf6f259e14ff0bda96a26905f91a47619753c313918f227",
+      "sizeBytes": 6263,
+      "sourcePath": "data/phase-zero/hairstyles.research.json"
+    },
+    {
+      "fileName": "heads.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "bea510f08cd9e86161f04737622788c42dc18cc952e1bc56e59ab8ee89371c2f",
+      "sizeBytes": 19921,
+      "sourcePath": "data/phase-zero/heads.research.csv"
+    },
+    {
+      "fileName": "heads.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "cd1c10de8d1bb54791c8161d1cb485739a327d3d9314ad1b396aac3eecdb2c6e",
+      "sizeBytes": 190722,
+      "sourcePath": "data/phase-zero/heads.research.json"
+    },
+    {
+      "fileName": "issues_and_exceptions.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "c85951826bc270e5da9425fc574888bac24e013206470c56baf6cdfb501f257b",
+      "sizeBytes": 12557,
+      "sourcePath": "data/phase-zero/issues_register.research.json"
+    },
+    {
+      "fileName": "issues_and_exceptions.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "0214b596175031993b96e2b6d861aa9b8b338521ee295d5f5a4080621c439dd3",
+      "sizeBytes": 52621,
+      "sourcePath": "data/phase-zero/issues_register.research.json"
+    },
+    {
+      "fileName": "menu_map.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "99c4434d62d302bd2564fba553a502b9494328dc509d9c80a90daf1f9057702d",
+      "sizeBytes": 21881,
+      "sourcePath": "data/phase-zero/menu_map.research.csv"
+    },
+    {
+      "fileName": "menu_map.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "d4745ecebfc7387af38ebe62c03863bf10f11a5b0d48baa27752500387b1d24f",
+      "sizeBytes": 252378,
+      "sourcePath": "data/phase-zero/menu_map.research.json"
+    },
+    {
+      "fileName": "README.md",
+      "contentType": "text/markdown; charset=utf-8",
+      "sha256": "d7d84ee0cc99309930e2645e737c5ab0445977605a63416364dc65c3170a2931",
+      "sizeBytes": 1239,
+      "sourcePath": null
+    },
+    {
+      "fileName": "recapture_requests.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "dcb9b2342c04980f5590113ba85f534d78fc09ad94ed47d660e0e3394e6dbeb7",
+      "sizeBytes": 12115,
+      "sourcePath": "data/phase-zero/capture_requests.csv"
+    },
+    {
+      "fileName": "recapture_requests.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "4ddc88ac246dc0c85c2f6af130fff433e66e9b85019333b09129d03e550d8390",
+      "sizeBytes": 47606,
+      "sourcePath": "data/phase-zero/capture_requests.json"
+    },
+    {
+      "fileName": "research_catalog_release_manifest.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "862f67d7c5d011b52bb31b5d79f52df6caca483f995f7e4d35cdc28d4d0e03f5",
+      "sizeBytes": 6828,
+      "sourcePath": null
+    },
+    {
+      "fileName": "research_catalog_release_validation.csv",
+      "contentType": "text/csv; charset=utf-8",
+      "sha256": "1611bc9f03cb9681dfba52665498e43a376134937e98610c4a21fb9462dd8107",
+      "sizeBytes": 673,
+      "sourcePath": null
+    },
+    {
+      "fileName": "research_catalog_release_validation.json",
+      "contentType": "application/json; charset=utf-8",
+      "sha256": "3f56fd49bc5e0438d7573d69de9dd468eb5a6f8a8bb27a170fd16024ecd0ca37",
+      "sizeBytes": 2819,
+      "sourcePath": null
+    }
+  ]
+}

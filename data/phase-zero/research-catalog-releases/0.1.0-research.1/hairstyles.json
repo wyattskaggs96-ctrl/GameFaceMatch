@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "cf27-hairstyle-research-catalog-v1",
+  "generatedAt": "2026-07-14T02:30:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_HAIRSTYLE_RESEARCH_CATALOG",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "productionRecommendationsEnabled": false,
+  "sourceMenuMap": "data/phase-zero/menu_map.research.json",
+  "sourceCaptureRequests": "data/phase-zero/capture_requests.json",
+  "directObservationPolicy": [
+    "Create hairstyle option records only from directly selected native game values.",
+    "Do not infer hairstyles from a visible Hair submenu row.",
+    "Do not assign cultural, ethnic, personality, gender-identity, or lifestyle labels.",
+    "Researcher-applied visual metadata must remain separate from native game labels."
+  ],
+  "summary": {
+    "recordCount": 0,
+    "productionEligibleRecords": 0,
+    "hairMenuRowObserved": true,
+    "hairstyleSelectorOpened": false,
+    "hairstyleNativeValuesObserved": false,
+    "completeSelectorDoubleCountAvailable": false,
+    "nativeOrderStatus": "NOT_OBSERVED",
+    "countStatus": "COUNT_UNKNOWN",
+    "noneShavedOrShortestOptionStatus": "NOT_IDENTIFIED_NO_SELECTOR_EVIDENCE",
+    "evidenceExtractionStatus": "NO_HAIRSTYLE_OPTION_FRAMES_AVAILABLE",
+    "recaptureRequired": true,
+    "blocker": "Current evidence shows the Hair submenu row only. It does not open a hairstyle control or select hairstyle values."
+  },
+  "canonicalContext": {
+    "canonicalHead": "UNCONFIRMED_NOT_CAPTURED",
+    "canonicalSkinSetting": "UNCONFIRMED_NOT_CAPTURED",
+    "facialHairState": "UNCONFIRMED_NOT_CAPTURED",
+    "hairColorUsed": "UNCONFIRMED_NOT_CAPTURED",
+    "framingConsistency": "NOT_ASSESSABLE_NO_HAIRSTYLE_SEQUENCE",
+    "menuOrder": "HAIR_ROW_VISIBLE_ONLY_HAIRSTYLE_ORDER_NOT_OBSERVED",
+    "notes": [
+      "The existing head-template footage does not independently lock a canonical head for hairstyle capture.",
+      "The current evidence does not prove a canonical skin setting, facial-hair state, or hair color for hairstyle comparison."
+    ]
+  },
+  "sourceEvidence": {
+    "hairMenuRow": {
+      "stableMenuID": "cf27-menu-appearance-hair",
+      "displayLabel": "Hair",
+      "nativeLabel": "Hair",
+      "nativeOrder": 2,
+      "captureStatus": "PARTIAL",
+      "inspected": false,
+      "complete": false,
+      "gapFlags": [
+        "PARTIAL",
+        "COUNT_UNKNOWN",
+        "RECAPTURE_REQUIRED",
+        "FIRST_VALUE_UNKNOWN",
+        "FINAL_VALUE_UNKNOWN",
+        "ORDER_NOT_INSPECTED"
+      ],
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY"
+        }
+      ],
+      "missingEvidence": [
+        "Open Hair and record its child controls, boundaries, defaults, counts, dependencies, and evidence."
+      ]
+    },
+    "hairBoundaryCaptureRequest": {
+      "captureID": "GFM-CAP-007",
+      "title": "Hair submenu boundary map",
+      "priority": "P1",
+      "exactMenuPath": "Create Player > Player > Appearance > Hair",
+      "requiredViews": [
+        "FULL_MENU_LIST",
+        "SCROLL_CONTINUATION",
+        "LOCK_WARNING_OR_DEPENDENCY_IF_VISIBLE"
+      ],
+      "twoIndependentCountsRequired": false,
+      "verificationStatus": "REQUESTED_NOT_CAPTURED",
+      "existingFootageCanBeReused": "Existing footage proves the Hair entry exists only; no child controls are captured.",
+      "acceptanceCriteria": [
+        "Hair child controls are directly visible in native order.",
+        "Hairstyle, hair color, facial hair, and facial-hair color are not treated as confirmed native controls unless shown.",
+        "Locks or unavailable controls remain documented as visible states."
+      ]
+    },
+    "hairstyleCaptureRequest": {
+      "captureID": "GFM-CAP-008",
+      "title": "Hairstyle options, only if visible in Hair",
+      "priority": "P1",
+      "exactMenuPath": "Create Player > Player > Appearance > Hair > visible hairstyle control from GFM-CAP-007",
+      "requiredViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "REAR",
+        "RIGHT_PROFILE",
+        "RIGHT_3Q"
+      ],
+      "twoIndependentCountsRequired": true,
+      "verificationStatus": "REQUESTED_NOT_CAPTURED",
+      "existingFootageCanBeReused": "No complete hairstyle control evidence exists.",
+      "acceptanceCriteria": [
+        "The native control is visibly confirmed before option capture begins.",
+        "Every selected value has menu evidence and required angle views.",
+        "Rear view is included for hair shape/length."
+      ]
+    },
+    "hairstyleOptionEvidence": []
+  },
+  "viewCoverage": {
+    "requiredViews": [
+      "MENU",
+      "FRONT",
+      "LEFT_3Q",
+      "LEFT_PROFILE",
+      "REAR",
+      "RIGHT_PROFILE",
+      "RIGHT_3Q"
+    ],
+    "extractedViews": [],
+    "missingViews": [
+      "MENU",
+      "FRONT",
+      "LEFT_3Q",
+      "LEFT_PROFILE",
+      "REAR",
+      "RIGHT_PROFILE",
+      "RIGHT_3Q"
+    ],
+    "status": "NO_OPTION_VIEW_EVIDENCE_AVAILABLE"
+  },
+  "dependencyAssessment": {
+    "changesByHead": "UNKNOWN_NOT_TESTED",
+    "changesByPosition": "UNKNOWN_NOT_TESTED",
+    "changesByMode": "UNKNOWN_NOT_TESTED",
+    "changesByBodyType": "UNKNOWN_NOT_TESTED",
+    "changesByAccount": "UNKNOWN_NOT_TESTED",
+    "changesByUnlockState": "UNKNOWN_NOT_TESTED",
+    "notes": [
+      "Hair submenu dependencies cannot be assessed until GFM-CAP-007 maps visible Hair controls and GFM-CAP-008 captures a hairstyle selector if present."
+    ]
+  },
+  "researcherAppliedVisualMetadata": {
+    "status": "NONE_RECORDED_NO_OPTION_EVIDENCE",
+    "prohibitedLabels": [
+      "cultural labels",
+      "ethnic labels",
+      "personality labels",
+      "gender-identity labels",
+      "lifestyle labels",
+      "real-person resemblance labels"
+    ],
+    "separationRule": "Any future visual tags must be stored under researcherAppliedVisualMetadata, separate from nativeGameLabel."
+  },
+  "records": []
+}

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "cf27-research-catalog-release-v1-validation",
+  "version": "0.1.0-research.1",
+  "generatedAt": "2026-07-14T03:15:00-04:00",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "productionRecommendationsEnabled": false,
+  "status": "passed_with_warnings",
+  "ok": true,
+  "summary": {
+    "filesChecked": 34,
+    "errorCount": 0,
+    "warningCount": 3,
+    "sourceExports": 15,
+    "totalRows": 449
+  },
+  "checks": [
+    {
+      "name": "expectedFiles",
+      "ok": true,
+      "detail": {
+        "expected": 34,
+        "missing": []
+      }
+    },
+    {
+      "name": "utf8",
+      "ok": true,
+      "detail": {
+        "invalid": []
+      }
+    },
+    {
+      "name": "noPlaceholdersFixturesOrForbiddenSources",
+      "ok": true,
+      "detail": {
+        "findings": []
+      }
+    },
+    {
+      "name": "requiredFields",
+      "ok": true,
+      "detail": {
+        "missing": []
+      }
+    },
+    {
+      "name": "enumValuesAndProductionStatus",
+      "ok": true,
+      "detail": {
+        "invalid": []
+      }
+    },
+    {
+      "name": "stableIDsAndNativeOrder",
+      "ok": true,
+      "detail": {
+        "duplicateIDs": [],
+        "nativeOrderWarnings": []
+      }
+    },
+    {
+      "name": "evidenceLinks",
+      "ok": true,
+      "detail": {
+        "invalidLinks": []
+      }
+    },
+    {
+      "name": "versionPlatformModeAndCreationPath",
+      "ok": true,
+      "detail": {
+        "notes": [
+          "environment:gameVersion:unresolved",
+          "environment:patchVersion:unresolved",
+          "heads:platformExactModel:unresolvedStableIDSegment"
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    {
+      "code": "versionPlatformModePathLimitation",
+      "message": "environment:gameVersion:unresolved remains unresolved in research release 0.1.0-research.1."
+    },
+    {
+      "code": "versionPlatformModePathLimitation",
+      "message": "environment:patchVersion:unresolved remains unresolved in research release 0.1.0-research.1."
+    },
+    {
+      "code": "versionPlatformModePathLimitation",
+      "message": "heads:platformExactModel:unresolvedStableIDSegment remains unresolved in research release 0.1.0-research.1."
+    }
+  ]
+}

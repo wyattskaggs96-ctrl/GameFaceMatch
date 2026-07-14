@@ -1,0 +1,621 @@
+{
+  "schemaVersion": "cf27-body-control-research-catalog-v1",
+  "generatedAt": "2026-07-14T04:15:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_BODY_CONTROL_RESEARCH_CATALOG",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "productionRecommendationsEnabled": false,
+  "sourceEnvironmentManifest": "data/phase-zero/environment_manifest.research.json",
+  "sourceCreationPaths": "data/phase-zero/creation_paths.research.json",
+  "sourceGapMatrix": "data/phase-zero/appearance_menu_gap_matrix.json",
+  "sourceIssuesRegister": "data/phase-zero/issues_register.research.json",
+  "directObservationPolicy": [
+    "Create body-control records only from directly visible shipping-game evidence.",
+    "Do not infer height, weight, body type, build, physique, muscle-definition, position, or archetype values from product requirements.",
+    "Do not treat desired athlete physique as a measured facial characteristic.",
+    "Dependency effects on heads, hair, facial hair, camera framing, and instructions remain unknown until tested directly."
+  ],
+  "summary": {
+    "observedResearchRecordCount": 5,
+    "productionEligibleRecords": 0,
+    "observedPositionContext": "QB",
+    "observedJourneyTypeHighlight": "CONTRIBUTOR",
+    "controlsWithDirectContextValues": [
+      "Position",
+      "Archetype Restrictions"
+    ],
+    "controlsNotCaptured": [
+      "Height",
+      "Weight",
+      "Body Type",
+      "Build",
+      "Physique",
+      "Muscle Definition"
+    ],
+    "dependencyTestingStatus": "NOT_TESTED",
+    "blocker": "Current evidence supports QB and journey-type context only. It does not inspect height, weight, body type, build, physique, muscle definition, or dependency effects."
+  },
+  "canonicalContext": {
+    "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+    "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+    "gameMode": "Road to Glory",
+    "creationPathStatus": "supported_for_research_only",
+    "productionCatalogPathAssessment": "NOT_SUFFICIENT_FOR_PRODUCTION_CATALOG_PATH",
+    "notes": [
+      "The observed path is usable for research context only.",
+      "Production body-control instructions require version, patch, dependency testing, second verification, and catalog-manager approval."
+    ]
+  },
+  "dependencyAssessment": {
+    "changesAvailableHeadOptions": {
+      "status": "UNKNOWN_NOT_TESTED",
+      "reason": "No direct test changes position, journey type, height, weight, body type, build, or physique while inspecting head availability."
+    },
+    "changesHeadRendering": {
+      "status": "UNKNOWN_NOT_TESTED",
+      "reason": "No direct test compares head rendering across body-control contexts."
+    },
+    "changesHairstyleAvailability": {
+      "status": "UNKNOWN_NOT_TESTED",
+      "reason": "Hair controls were not opened in current body/position evidence."
+    },
+    "changesFacialHairAvailability": {
+      "status": "UNKNOWN_NOT_TESTED",
+      "reason": "Facial-hair controls were not opened in current body/position evidence."
+    },
+    "altersCameraFraming": {
+      "status": "UNKNOWN_NOT_TESTED",
+      "reason": "A preview rotation is visible, but no controlled body-value comparison is available."
+    },
+    "affectsRecommendationInstructions": {
+      "status": "AFFECTS_CREATION_PATH_CONTEXT_ONLY",
+      "reason": "Future instructions may need to preserve observed Road to Glory position/path context. No facial-option dependency is proven."
+    }
+  },
+  "controls": [
+    {
+      "controlID": "cf27-body-control-height",
+      "requestedControlLabel": "Height",
+      "nativeControlLabel": null,
+      "observationStatus": "NOT_OBSERVED_IN_CURRENT_EVIDENCE",
+      "productRole": "USER_DESIRED_BODY_ATTRIBUTE_NOT_MEASURED_FACIAL_CHARACTERISTIC",
+      "isMeasuredFacialCharacteristic": false,
+      "records": [],
+      "valuesOrRangeStatus": "NO_VALUES_OR_RANGE_CAPTURED",
+      "minimum": null,
+      "maximum": null,
+      "default": null,
+      "stepSize": null,
+      "countStatus": "COUNT_UNKNOWN",
+      "dependencyStatus": "UNKNOWN_NOT_TESTED",
+      "resetBehavior": "UNKNOWN_NOT_TESTED",
+      "laterEditabilityStatus": "UNKNOWN_NOT_DEMONSTRATED_IN_CURRENT_EVIDENCE",
+      "recommendationInstructionImpact": "UNKNOWN_NOT_TESTED",
+      "unsuitableForRecommendation": true,
+      "suitabilityReason": "No direct native control evidence is available.",
+      "relatedGapID": "appearance-gap-suspected-body-height-weight-physique",
+      "relatedIssueIDs": [
+        "issue-phase0-env-height"
+      ],
+      "missingEvidence": [
+        "Direct menu/control evidence.",
+        "Readable native label or index.",
+        "Minimum, maximum, default, step, count, and wrap evidence where applicable.",
+        "Dependency and later-editability testing."
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "controlID": "cf27-body-control-weight",
+      "requestedControlLabel": "Weight",
+      "nativeControlLabel": null,
+      "observationStatus": "NOT_OBSERVED_IN_CURRENT_EVIDENCE",
+      "productRole": "USER_DESIRED_BODY_ATTRIBUTE_NOT_MEASURED_FACIAL_CHARACTERISTIC",
+      "isMeasuredFacialCharacteristic": false,
+      "records": [],
+      "valuesOrRangeStatus": "NO_VALUES_OR_RANGE_CAPTURED",
+      "minimum": null,
+      "maximum": null,
+      "default": null,
+      "stepSize": null,
+      "countStatus": "COUNT_UNKNOWN",
+      "dependencyStatus": "UNKNOWN_NOT_TESTED",
+      "resetBehavior": "UNKNOWN_NOT_TESTED",
+      "laterEditabilityStatus": "UNKNOWN_NOT_DEMONSTRATED_IN_CURRENT_EVIDENCE",
+      "recommendationInstructionImpact": "UNKNOWN_NOT_TESTED",
+      "unsuitableForRecommendation": true,
+      "suitabilityReason": "No direct native control evidence is available.",
+      "relatedGapID": "appearance-gap-suspected-body-height-weight-physique",
+      "relatedIssueIDs": [
+        "issue-phase0-env-weight"
+      ],
+      "missingEvidence": [
+        "Direct menu/control evidence.",
+        "Readable native label or index.",
+        "Minimum, maximum, default, step, count, and wrap evidence where applicable.",
+        "Dependency and later-editability testing."
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "controlID": "cf27-body-control-body-type",
+      "requestedControlLabel": "Body Type",
+      "nativeControlLabel": null,
+      "observationStatus": "NOT_OBSERVED_IN_CURRENT_EVIDENCE",
+      "productRole": "USER_DESIRED_BODY_ATTRIBUTE_NOT_MEASURED_FACIAL_CHARACTERISTIC",
+      "isMeasuredFacialCharacteristic": false,
+      "records": [],
+      "valuesOrRangeStatus": "NO_VALUES_OR_RANGE_CAPTURED",
+      "minimum": null,
+      "maximum": null,
+      "default": null,
+      "stepSize": null,
+      "countStatus": "COUNT_UNKNOWN",
+      "dependencyStatus": "UNKNOWN_NOT_TESTED",
+      "resetBehavior": "UNKNOWN_NOT_TESTED",
+      "laterEditabilityStatus": "UNKNOWN_NOT_DEMONSTRATED_IN_CURRENT_EVIDENCE",
+      "recommendationInstructionImpact": "UNKNOWN_NOT_TESTED",
+      "unsuitableForRecommendation": true,
+      "suitabilityReason": "No direct native control evidence is available.",
+      "relatedGapID": "appearance-gap-suspected-body-height-weight-physique",
+      "relatedIssueIDs": [
+        "issue-phase0-env-body-type"
+      ],
+      "missingEvidence": [
+        "Direct menu/control evidence.",
+        "Readable native label or index.",
+        "Minimum, maximum, default, step, count, and wrap evidence where applicable.",
+        "Dependency and later-editability testing."
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "controlID": "cf27-body-control-build",
+      "requestedControlLabel": "Build",
+      "nativeControlLabel": null,
+      "observationStatus": "NOT_OBSERVED_IN_CURRENT_EVIDENCE",
+      "productRole": "USER_DESIRED_BODY_ATTRIBUTE_NOT_MEASURED_FACIAL_CHARACTERISTIC",
+      "isMeasuredFacialCharacteristic": false,
+      "records": [],
+      "valuesOrRangeStatus": "NO_VALUES_OR_RANGE_CAPTURED",
+      "minimum": null,
+      "maximum": null,
+      "default": null,
+      "stepSize": null,
+      "countStatus": "COUNT_UNKNOWN",
+      "dependencyStatus": "UNKNOWN_NOT_TESTED",
+      "resetBehavior": "UNKNOWN_NOT_TESTED",
+      "laterEditabilityStatus": "UNKNOWN_NOT_DEMONSTRATED_IN_CURRENT_EVIDENCE",
+      "recommendationInstructionImpact": "UNKNOWN_NOT_TESTED",
+      "unsuitableForRecommendation": true,
+      "suitabilityReason": "No direct native control evidence is available.",
+      "relatedGapID": "appearance-gap-suspected-body-height-weight-physique",
+      "relatedIssueIDs": [],
+      "missingEvidence": [
+        "Direct menu/control evidence.",
+        "Readable native label or index.",
+        "Minimum, maximum, default, step, count, and wrap evidence where applicable.",
+        "Dependency and later-editability testing."
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "controlID": "cf27-body-control-physique",
+      "requestedControlLabel": "Physique",
+      "nativeControlLabel": null,
+      "observationStatus": "NOT_OBSERVED_IN_CURRENT_EVIDENCE",
+      "productRole": "USER_DESIRED_BODY_ATTRIBUTE_NOT_MEASURED_FACIAL_CHARACTERISTIC",
+      "isMeasuredFacialCharacteristic": false,
+      "records": [],
+      "valuesOrRangeStatus": "NO_VALUES_OR_RANGE_CAPTURED",
+      "minimum": null,
+      "maximum": null,
+      "default": null,
+      "stepSize": null,
+      "countStatus": "COUNT_UNKNOWN",
+      "dependencyStatus": "UNKNOWN_NOT_TESTED",
+      "resetBehavior": "UNKNOWN_NOT_TESTED",
+      "laterEditabilityStatus": "UNKNOWN_NOT_DEMONSTRATED_IN_CURRENT_EVIDENCE",
+      "recommendationInstructionImpact": "UNKNOWN_NOT_TESTED",
+      "unsuitableForRecommendation": true,
+      "suitabilityReason": "No direct native control evidence is available.",
+      "relatedGapID": "appearance-gap-suspected-body-height-weight-physique",
+      "relatedIssueIDs": [],
+      "missingEvidence": [
+        "Direct menu/control evidence.",
+        "Readable native label or index.",
+        "Minimum, maximum, default, step, count, and wrap evidence where applicable.",
+        "Dependency and later-editability testing."
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "controlID": "cf27-body-control-muscle-definition",
+      "requestedControlLabel": "Muscle Definition",
+      "nativeControlLabel": null,
+      "observationStatus": "NOT_OBSERVED_IN_CURRENT_EVIDENCE",
+      "productRole": "USER_DESIRED_BODY_ATTRIBUTE_NOT_MEASURED_FACIAL_CHARACTERISTIC",
+      "isMeasuredFacialCharacteristic": false,
+      "records": [],
+      "valuesOrRangeStatus": "NO_VALUES_OR_RANGE_CAPTURED",
+      "minimum": null,
+      "maximum": null,
+      "default": null,
+      "stepSize": null,
+      "countStatus": "COUNT_UNKNOWN",
+      "dependencyStatus": "UNKNOWN_NOT_TESTED",
+      "resetBehavior": "UNKNOWN_NOT_TESTED",
+      "laterEditabilityStatus": "UNKNOWN_NOT_DEMONSTRATED_IN_CURRENT_EVIDENCE",
+      "recommendationInstructionImpact": "UNKNOWN_NOT_TESTED",
+      "unsuitableForRecommendation": true,
+      "suitabilityReason": "No direct native control evidence is available.",
+      "relatedGapID": "appearance-gap-suspected-body-height-weight-physique",
+      "relatedIssueIDs": [],
+      "missingEvidence": [
+        "Direct menu/control evidence.",
+        "Readable native label or index.",
+        "Minimum, maximum, default, step, count, and wrap evidence where applicable.",
+        "Dependency and later-editability testing."
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "controlID": "cf27-body-control-position",
+      "requestedControlLabel": "Position",
+      "nativeControlLabel": "Position",
+      "observationStatus": "DIRECT_CONTEXT_VALUE_OBSERVED_PENDING_VERIFICATION",
+      "productRole": "CREATION_PATH_CONTEXT_POTENTIAL_RESTRICTION",
+      "isMeasuredFacialCharacteristic": false,
+      "records": [
+        "CF27_XBOXUNKNOWN_RTG_POSITION_QB"
+      ],
+      "valuesOrRangeStatus": "DIRECT_CONTEXT_LABELS_ONLY_NOT_BODY_CONTROL_RANGE",
+      "minimum": null,
+      "maximum": null,
+      "default": null,
+      "stepSize": null,
+      "countStatus": "COUNT_NOT_APPLICABLE_CONTEXT_ONLY",
+      "dependencyStatus": "UNKNOWN_NOT_TESTED",
+      "resetBehavior": "UNKNOWN_NOT_TESTED",
+      "laterEditabilityStatus": "UNKNOWN_NOT_DEMONSTRATED_IN_CURRENT_EVIDENCE",
+      "recommendationInstructionImpact": "MAY_AFFECT_CREATION_PATH_CONTEXT_ONLY_UNTIL_DEPENDENCY_TESTED",
+      "unsuitableForRecommendation": true,
+      "suitabilityReason": "Observed context is not independently verified or dependency tested.",
+      "relatedGapID": "appearance-gap-suspected-body-height-weight-physique",
+      "relatedIssueIDs": [],
+      "missingEvidence": [
+        "Second-person verification.",
+        "Dependency tests for head, hair, facial hair, body, and camera effects.",
+        "Production catalog path/version/patch approval."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "originalFilename": "01_Environment_and_Creation_Path.MP4",
+          "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+          "timelineRecordID": "phase0-video-001-tl-005",
+          "startTimestamp": 24,
+          "endTimestamp": 29,
+          "visibleMenuLabel": "Player setup / position path",
+          "confidence": "HIGH_OBSERVED_PENDING_VERIFICATION",
+          "note": "QB is visible during the position/path step."
+        }
+      ]
+    },
+    {
+      "controlID": "cf27-body-control-archetype",
+      "requestedControlLabel": "Archetype Restrictions",
+      "nativeControlLabel": "Journey Type Cards",
+      "observationStatus": "DIRECT_CONTEXT_VALUE_OBSERVED_PENDING_VERIFICATION",
+      "productRole": "CREATION_PATH_CONTEXT_POTENTIAL_RESTRICTION",
+      "isMeasuredFacialCharacteristic": false,
+      "records": [
+        "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_ELITE",
+        "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_BLUE_CHIP",
+        "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_CONTRIBUTOR",
+        "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_UNDERDOG"
+      ],
+      "valuesOrRangeStatus": "DIRECT_CONTEXT_LABELS_ONLY_NOT_BODY_CONTROL_RANGE",
+      "minimum": null,
+      "maximum": null,
+      "default": null,
+      "stepSize": null,
+      "countStatus": "COUNT_NOT_APPLICABLE_CONTEXT_ONLY",
+      "dependencyStatus": "UNKNOWN_NOT_TESTED",
+      "resetBehavior": "UNKNOWN_NOT_TESTED",
+      "laterEditabilityStatus": "UNKNOWN_NOT_DEMONSTRATED_IN_CURRENT_EVIDENCE",
+      "recommendationInstructionImpact": "UNKNOWN_NOT_TESTED",
+      "unsuitableForRecommendation": true,
+      "suitabilityReason": "Observed context is not independently verified or dependency tested.",
+      "relatedGapID": "appearance-gap-suspected-body-height-weight-physique",
+      "relatedIssueIDs": [
+        "issue-phase0-env-archetype"
+      ],
+      "missingEvidence": [
+        "Second-person verification.",
+        "Dependency tests for head, hair, facial hair, body, and camera effects.",
+        "Production catalog path/version/patch approval."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "originalFilename": "01_Environment_and_Creation_Path.MP4",
+          "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+          "timelineRecordID": "phase0-video-001-tl-004",
+          "startTimestamp": 18,
+          "endTimestamp": 23,
+          "visibleMenuLabel": "Archetype / prospect selection cards",
+          "confidence": "HIGH_OBSERVED_PENDING_VERIFICATION",
+          "note": "Journey type cards are visible; they are context labels, not appearance catalog records."
+        },
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "originalFilename": "01_Environment_and_Creation_Path.MP4",
+          "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+          "timelineRecordID": "phase0-video-001-tl-004",
+          "startTimestamp": 18,
+          "endTimestamp": 23,
+          "visibleMenuLabel": "Archetype / prospect selection cards",
+          "confidence": "HIGH_OBSERVED_PENDING_VERIFICATION",
+          "note": "Journey type cards are visible; they are context labels, not appearance catalog records."
+        },
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "originalFilename": "01_Environment_and_Creation_Path.MP4",
+          "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+          "timelineRecordID": "phase0-video-001-tl-004",
+          "startTimestamp": 18,
+          "endTimestamp": 23,
+          "visibleMenuLabel": "Archetype / prospect selection cards",
+          "confidence": "MEDIUM_PENDING_SECOND_VERIFICATION",
+          "note": "Existing evidence references note CONTRIBUTOR highlighted before position selection; requires second verification before production use."
+        },
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "originalFilename": "01_Environment_and_Creation_Path.MP4",
+          "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+          "timelineRecordID": "phase0-video-001-tl-004",
+          "startTimestamp": 18,
+          "endTimestamp": 23,
+          "visibleMenuLabel": "Archetype / prospect selection cards",
+          "confidence": "HIGH_OBSERVED_PENDING_VERIFICATION",
+          "note": "Journey type cards are visible; they are context labels, not appearance catalog records."
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "stableResearchID": "CF27_XBOXUNKNOWN_RTG_POSITION_QB",
+      "recordKind": "POSITION_CONTEXT",
+      "nativeControlLabel": "Position",
+      "nativeDisplayLabel": "QB",
+      "nativeOrder": null,
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Position context is observed but not independently verified and not dependency tested."
+      },
+      "isMeasuredFacialCharacteristic": false,
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "originalFilename": "01_Environment_and_Creation_Path.MP4",
+          "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+          "timelineRecordID": "phase0-video-001-tl-005",
+          "startTimestamp": 24,
+          "endTimestamp": 29,
+          "visibleMenuLabel": "Player setup / position path",
+          "confidence": "HIGH_OBSERVED_PENDING_VERIFICATION",
+          "note": "QB is visible during the position/path step."
+        }
+      ],
+      "effectAssessment": {
+        "changesAvailableHeadOptions": "UNKNOWN_NOT_TESTED",
+        "changesHeadRendering": "UNKNOWN_NOT_TESTED",
+        "changesHairstyleAvailability": "UNKNOWN_NOT_TESTED",
+        "changesFacialHairAvailability": "UNKNOWN_NOT_TESTED",
+        "altersCameraFraming": "UNKNOWN_NOT_TESTED",
+        "affectsRecommendationInstructions": "AFFECTS_CREATION_PATH_CONTEXT_ONLY"
+      },
+      "notes": [
+        "QB is observed as creation-path context.",
+        "Current evidence does not prove whether position changes body controls, head options, rendering, hairstyles, facial hair, or camera framing."
+      ],
+      "createdAt": "2026-07-14T04:15:00-04:00",
+      "updatedAt": "2026-07-14T04:15:00-04:00"
+    },
+    {
+      "stableResearchID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_ELITE",
+      "recordKind": "ROAD_TO_GLORY_JOURNEY_TYPE_CONTEXT",
+      "nativeControlLabel": "Journey Type Cards",
+      "nativeDisplayLabel": "ELITE",
+      "nativeOrder": null,
+      "selectionStatus": "VISIBLE_CONTEXT_LABEL_NOT_SELECTED_CONFIRMED",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Journey type cards are creation-flow context, not verified appearance/body controls."
+      },
+      "isMeasuredFacialCharacteristic": false,
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "originalFilename": "01_Environment_and_Creation_Path.MP4",
+          "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+          "timelineRecordID": "phase0-video-001-tl-004",
+          "startTimestamp": 18,
+          "endTimestamp": 23,
+          "visibleMenuLabel": "Archetype / prospect selection cards",
+          "confidence": "HIGH_OBSERVED_PENDING_VERIFICATION",
+          "note": "Journey type cards are visible; they are context labels, not appearance catalog records."
+        }
+      ],
+      "effectAssessment": {
+        "changesAvailableHeadOptions": "UNKNOWN_NOT_TESTED",
+        "changesHeadRendering": "UNKNOWN_NOT_TESTED",
+        "changesHairstyleAvailability": "UNKNOWN_NOT_TESTED",
+        "changesFacialHairAvailability": "UNKNOWN_NOT_TESTED",
+        "altersCameraFraming": "UNKNOWN_NOT_TESTED",
+        "affectsRecommendationInstructions": "AFFECTS_CREATION_PATH_CONTEXT_ONLY"
+      },
+      "notes": [
+        "Visible journey-type card labels are preserved as context only.",
+        "Current evidence does not prove these are body archetype controls or that they affect appearance options."
+      ],
+      "createdAt": "2026-07-14T04:15:00-04:00",
+      "updatedAt": "2026-07-14T04:15:00-04:00"
+    },
+    {
+      "stableResearchID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_BLUE_CHIP",
+      "recordKind": "ROAD_TO_GLORY_JOURNEY_TYPE_CONTEXT",
+      "nativeControlLabel": "Journey Type Cards",
+      "nativeDisplayLabel": "BLUE CHIP",
+      "nativeOrder": null,
+      "selectionStatus": "VISIBLE_CONTEXT_LABEL_NOT_SELECTED_CONFIRMED",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Journey type cards are creation-flow context, not verified appearance/body controls."
+      },
+      "isMeasuredFacialCharacteristic": false,
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "originalFilename": "01_Environment_and_Creation_Path.MP4",
+          "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+          "timelineRecordID": "phase0-video-001-tl-004",
+          "startTimestamp": 18,
+          "endTimestamp": 23,
+          "visibleMenuLabel": "Archetype / prospect selection cards",
+          "confidence": "HIGH_OBSERVED_PENDING_VERIFICATION",
+          "note": "Journey type cards are visible; they are context labels, not appearance catalog records."
+        }
+      ],
+      "effectAssessment": {
+        "changesAvailableHeadOptions": "UNKNOWN_NOT_TESTED",
+        "changesHeadRendering": "UNKNOWN_NOT_TESTED",
+        "changesHairstyleAvailability": "UNKNOWN_NOT_TESTED",
+        "changesFacialHairAvailability": "UNKNOWN_NOT_TESTED",
+        "altersCameraFraming": "UNKNOWN_NOT_TESTED",
+        "affectsRecommendationInstructions": "AFFECTS_CREATION_PATH_CONTEXT_ONLY"
+      },
+      "notes": [
+        "Visible journey-type card labels are preserved as context only.",
+        "Current evidence does not prove these are body archetype controls or that they affect appearance options."
+      ],
+      "createdAt": "2026-07-14T04:15:00-04:00",
+      "updatedAt": "2026-07-14T04:15:00-04:00"
+    },
+    {
+      "stableResearchID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_CONTRIBUTOR",
+      "recordKind": "ROAD_TO_GLORY_JOURNEY_TYPE_CONTEXT",
+      "nativeControlLabel": "Journey Type Cards",
+      "nativeDisplayLabel": "CONTRIBUTOR",
+      "nativeOrder": null,
+      "selectionStatus": "HIGHLIGHTED_PENDING_SECOND_VERIFICATION",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Journey type cards are creation-flow context, not verified appearance/body controls."
+      },
+      "isMeasuredFacialCharacteristic": false,
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "originalFilename": "01_Environment_and_Creation_Path.MP4",
+          "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+          "timelineRecordID": "phase0-video-001-tl-004",
+          "startTimestamp": 18,
+          "endTimestamp": 23,
+          "visibleMenuLabel": "Archetype / prospect selection cards",
+          "confidence": "MEDIUM_PENDING_SECOND_VERIFICATION",
+          "note": "Existing evidence references note CONTRIBUTOR highlighted before position selection; requires second verification before production use."
+        }
+      ],
+      "effectAssessment": {
+        "changesAvailableHeadOptions": "UNKNOWN_NOT_TESTED",
+        "changesHeadRendering": "UNKNOWN_NOT_TESTED",
+        "changesHairstyleAvailability": "UNKNOWN_NOT_TESTED",
+        "changesFacialHairAvailability": "UNKNOWN_NOT_TESTED",
+        "altersCameraFraming": "UNKNOWN_NOT_TESTED",
+        "affectsRecommendationInstructions": "AFFECTS_CREATION_PATH_CONTEXT_ONLY"
+      },
+      "notes": [
+        "Visible journey-type card labels are preserved as context only.",
+        "Current evidence does not prove these are body archetype controls or that they affect appearance options."
+      ],
+      "createdAt": "2026-07-14T04:15:00-04:00",
+      "updatedAt": "2026-07-14T04:15:00-04:00"
+    },
+    {
+      "stableResearchID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_UNDERDOG",
+      "recordKind": "ROAD_TO_GLORY_JOURNEY_TYPE_CONTEXT",
+      "nativeControlLabel": "Journey Type Cards",
+      "nativeDisplayLabel": "UNDERDOG",
+      "nativeOrder": null,
+      "selectionStatus": "VISIBLE_CONTEXT_LABEL_NOT_SELECTED_CONFIRMED",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "shippingGameVideoResearch",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "productionEligibility": {
+        "eligible": false,
+        "reason": "Journey type cards are creation-flow context, not verified appearance/body controls."
+      },
+      "isMeasuredFacialCharacteristic": false,
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "originalFilename": "01_Environment_and_Creation_Path.MP4",
+          "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+          "timelineRecordID": "phase0-video-001-tl-004",
+          "startTimestamp": 18,
+          "endTimestamp": 23,
+          "visibleMenuLabel": "Archetype / prospect selection cards",
+          "confidence": "HIGH_OBSERVED_PENDING_VERIFICATION",
+          "note": "Journey type cards are visible; they are context labels, not appearance catalog records."
+        }
+      ],
+      "effectAssessment": {
+        "changesAvailableHeadOptions": "UNKNOWN_NOT_TESTED",
+        "changesHeadRendering": "UNKNOWN_NOT_TESTED",
+        "changesHairstyleAvailability": "UNKNOWN_NOT_TESTED",
+        "changesFacialHairAvailability": "UNKNOWN_NOT_TESTED",
+        "altersCameraFraming": "UNKNOWN_NOT_TESTED",
+        "affectsRecommendationInstructions": "AFFECTS_CREATION_PATH_CONTEXT_ONLY"
+      },
+      "notes": [
+        "Visible journey-type card labels are preserved as context only.",
+        "Current evidence does not prove these are body archetype controls or that they affect appearance options."
+      ],
+      "createdAt": "2026-07-14T04:15:00-04:00",
+      "updatedAt": "2026-07-14T04:15:00-04:00"
+    }
+  ]
+}

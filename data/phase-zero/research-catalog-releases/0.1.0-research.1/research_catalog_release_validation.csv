@@ -1,0 +1,9 @@
+name,ok,detail
+expectedFiles,true,"{""expected"":34,""missing"":[]}"
+utf8,true,"{""invalid"":[]}"
+noPlaceholdersFixturesOrForbiddenSources,true,"{""findings"":[]}"
+requiredFields,true,"{""missing"":[]}"
+enumValuesAndProductionStatus,true,"{""invalid"":[]}"
+stableIDsAndNativeOrder,true,"{""duplicateIDs"":[],""nativeOrderWarnings"":[]}"
+evidenceLinks,true,"{""invalidLinks"":[]}"
+versionPlatformModeAndCreationPath,true,"{""notes"":[""environment:gameVersion:unresolved"",""environment:patchVersion:unresolved"",""heads:platformExactModel:unresolvedStableIDSegment""]}"

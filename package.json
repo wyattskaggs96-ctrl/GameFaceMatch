@@ -16,6 +16,8 @@
     "cf27:research-package-validate": "node scripts/cf27-current-research-package-validator.mjs",
     "cf27:research-evidence-package": "node scripts/cf27-research-evidence-package-rc.mjs",
     "cf27:research-evidence-package:check": "node scripts/cf27-research-evidence-package-rc.mjs --check",
+    "cf27:research-catalog-release": "node scripts/cf27-research-catalog-release.mjs",
+    "cf27:research-catalog-release:check": "node scripts/cf27-research-catalog-release.mjs --check",
     "media:inspect": "node scripts/cf27-media-inspect.mjs",
     "head-template:extract-frames": "node scripts/cf27-head-template-frame-extract.mjs",
     "head-template:standardization-qa": "node scripts/cf27-head-template-standardization-qa.mjs",

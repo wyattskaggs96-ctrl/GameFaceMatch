@@ -1,0 +1,249 @@
+{
+  "schemaVersion": "cf27-environment-creation-path-research-v1-creation-path-package",
+  "generatedAt": "2026-07-13T22:20:00-04:00",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "creationPaths": [
+    {
+      "schemaVersion": "cf27-environment-creation-path-research-v1-creation-path",
+      "generatedAt": "2026-07-13T22:20:00-04:00",
+      "id": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+      "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "sourceType": "research",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "gameTitle": "EA SPORTS College Football 27",
+      "gameMode": "Road to Glory",
+      "displayName": "Road to Glory Custom QB Create Player appearance path",
+      "exactPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+      "status": "supported_for_research_only",
+      "reproducibleSteps": [
+        {
+          "stepID": "step-001",
+          "stepNumber": 1,
+          "instruction": "Open College Football 27 main interface and navigate to Road to Glory.",
+          "expectedResult": "Road to Glory transition/loading begins.",
+          "parentMenu": "Road to Glory",
+          "visibleMenuLabel": "College Football hub / Road to Glory navigation",
+          "evidence": {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "timelineRecordID": "phase0-video-001-tl-001",
+            "startTimestamp": 0,
+            "endTimestamp": 7,
+            "confidence": "OBSERVED_PENDING_VERIFICATION"
+          }
+        },
+        {
+          "stepID": "step-002",
+          "stepNumber": 2,
+          "instruction": "On Road to Glory Setup, choose Advance.",
+          "expectedResult": "Journey type cards appear.",
+          "parentMenu": "Road to Glory",
+          "visibleMenuLabel": "Road to Glory menu/start area",
+          "evidence": {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "timelineRecordID": "phase0-video-001-tl-003",
+            "startTimestamp": 12,
+            "endTimestamp": 17,
+            "confidence": "OBSERVED_PENDING_VERIFICATION"
+          }
+        },
+        {
+          "stepID": "step-003",
+          "stepNumber": 3,
+          "instruction": "Select the observed journey type card highlighted before the position screen.",
+          "expectedResult": "Position selection appears.",
+          "parentMenu": "Road to Glory Setup",
+          "visibleMenuLabel": "Archetype / prospect selection cards",
+          "evidence": {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "timelineRecordID": "phase0-video-001-tl-004",
+            "startTimestamp": 18,
+            "endTimestamp": 23,
+            "confidence": "OBSERVED_PENDING_VERIFICATION"
+          }
+        },
+        {
+          "stepID": "step-004",
+          "stepNumber": 4,
+          "instruction": "Choose QB on the position screen.",
+          "expectedResult": "QB is selected and the flow can continue toward Create Player.",
+          "parentMenu": "Choose Your Position",
+          "visibleMenuLabel": "Player setup / position path",
+          "evidence": {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "timelineRecordID": "phase0-video-001-tl-005",
+            "startTimestamp": 24,
+            "endTimestamp": 29,
+            "confidence": "OBSERVED_PENDING_VERIFICATION"
+          }
+        },
+        {
+          "stepID": "step-005",
+          "stepNumber": 5,
+          "instruction": "Advance into Create Player.",
+          "expectedResult": "Create Player opens on the Player top tab.",
+          "parentMenu": "Create Player",
+          "visibleMenuLabel": "Create Player appearance path/menu",
+          "evidence": {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "timelineRecordID": "phase0-video-001-tl-007",
+            "startTimestamp": 33,
+            "endTimestamp": 37,
+            "confidence": "OBSERVED_PENDING_VERIFICATION"
+          }
+        },
+        {
+          "stepID": "step-006",
+          "stepNumber": 6,
+          "instruction": "Open or observe Player Info from the Player tab.",
+          "expectedResult": "Player Info fields are visible, including Handedness as a field.",
+          "parentMenu": "Create Player > Player",
+          "visibleMenuLabel": "Create Player menu navigation",
+          "evidence": {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "timelineRecordID": "phase0-video-001-tl-008",
+            "startTimestamp": 38,
+            "endTimestamp": 45,
+            "confidence": "OBSERVED_PENDING_VERIFICATION"
+          }
+        },
+        {
+          "stepID": "step-007",
+          "stepNumber": 7,
+          "instruction": "Open Appearance from the Player tab.",
+          "expectedResult": "Appearance submenu appears.",
+          "parentMenu": "Create Player > Player",
+          "visibleMenuLabel": "Create Player menu navigation",
+          "evidence": {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "timelineRecordID": "phase0-video-001-tl-008",
+            "startTimestamp": 38,
+            "endTimestamp": 45,
+            "confidence": "OBSERVED_PENDING_VERIFICATION"
+          }
+        },
+        {
+          "stepID": "step-008",
+          "stepNumber": 8,
+          "instruction": "Observe Head & Skin in the Appearance submenu.",
+          "expectedResult": "Head & Skin is visible and selected.",
+          "parentMenu": "Create Player > Appearance",
+          "visibleMenuLabel": "Create Player menu navigation",
+          "evidence": {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "timelineRecordID": "phase0-video-001-tl-008",
+            "startTimestamp": 38,
+            "endTimestamp": 45,
+            "confidence": "OBSERVED_PENDING_VERIFICATION"
+          }
+        },
+        {
+          "stepID": "step-009",
+          "stepNumber": 9,
+          "instruction": "Observe Hair under Appearance.",
+          "expectedResult": "Hair is visible as a sibling row; Hair is not opened in this footage.",
+          "parentMenu": "Create Player > Appearance",
+          "visibleMenuLabel": "Create Player menu navigation",
+          "evidence": {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "timelineRecordID": "phase0-video-001-tl-008",
+            "startTimestamp": 38,
+            "endTimestamp": 45,
+            "confidence": "OBSERVED_PENDING_VERIFICATION"
+          }
+        }
+      ],
+      "dependencies": [
+        {
+          "field": "gameVersion",
+          "value": null,
+          "status": "unresolved",
+          "reason": "Visible game version or executable version is not shown in the footage.",
+          "requiredBeforeProduction": true,
+          "evidenceID": "phase0-source-phase0-video-001",
+          "recommendedEvidence": "Record the visible game version/build screen."
+        },
+        {
+          "field": "patchVersion",
+          "value": null,
+          "status": "unresolved",
+          "reason": "Patch number or update version is not shown in the footage.",
+          "requiredBeforeProduction": true,
+          "evidenceID": "phase0-source-phase0-video-001",
+          "recommendedEvidence": "Record the installed patch/update details."
+        },
+        {
+          "field": "consoleModel",
+          "value": null,
+          "status": "unresolved",
+          "reason": "The recording supports Xbox family context, but not Series X versus Series S.",
+          "requiredBeforeProduction": true,
+          "evidenceID": "phase0-source-phase0-video-001",
+          "recommendedEvidence": "Record the Xbox console model screen."
+        },
+        {
+          "field": "onlineState",
+          "value": null,
+          "status": "unresolved",
+          "reason": "Online/offline state is not visible.",
+          "requiredBeforeProduction": true,
+          "evidenceID": "phase0-source-phase0-video-001",
+          "recommendedEvidence": "Record online/offline state during audit."
+        },
+        {
+          "field": "eaAccountRequirement",
+          "value": null,
+          "status": "unresolved",
+          "reason": "EA account requirement/sign-in state is not visible.",
+          "requiredBeforeProduction": true,
+          "evidenceID": "phase0-source-phase0-video-001",
+          "recommendedEvidence": "Record EA account sign-in/requirement state."
+        },
+        {
+          "field": "appearanceEditableLater",
+          "value": null,
+          "status": "unresolved",
+          "reason": "The footage reaches creation-time Appearance but does not prove later editability after creation.",
+          "requiredBeforeProduction": true,
+          "evidenceID": "phase0-source-phase0-video-001",
+          "recommendedEvidence": "Record post-creation editability path or absence."
+        }
+      ],
+      "restrictions": [
+        {
+          "id": "restriction-research-only",
+          "severity": "blocking",
+          "description": "This creation path is not production verified and cannot enable production recommendations."
+        },
+        {
+          "id": "restriction-hair-not-opened",
+          "severity": "warning",
+          "description": "Hair is visible under Appearance but was not opened in the environment video."
+        },
+        {
+          "id": "restriction-later-editability-not-proven",
+          "severity": "blocking",
+          "description": "The footage does not prove whether appearance can be edited later after player creation."
+        }
+      ],
+      "assessment": {
+        "researchPathAssessment": "SUPPORTED_AS_RESEARCH_CANONICAL_PATH_WITH_LIMITATIONS",
+        "researchPathReason": "The footage directly supports Road to Glory > QB > Create Player > Player > Appearance > Head & Skin as a reproducible research path for the current audit, with timestamped evidence for each observed step.",
+        "productionCatalogPathAssessment": "NOT_SUFFICIENT_FOR_PRODUCTION_CATALOG_PATH",
+        "productionCatalogPathReason": "Production path support still requires exact game version/patch, platform environment, later editability/dependency checks, second-person verification, and catalog-manager approval."
+      }
+    }
+  ]
+}

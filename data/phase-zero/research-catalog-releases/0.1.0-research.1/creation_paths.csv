@@ -1,0 +1,2 @@
+id,display_name,status,game_mode,exact_path,research_path_assessment,production_path_assessment,step_count,verification_status
+creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001,Road to Glory Custom QB Create Player appearance path,supported_for_research_only,Road to Glory,Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible,SUPPORTED_AS_RESEARCH_CANONICAL_PATH_WITH_LIMITATIONS,NOT_SUFFICIENT_FOR_PRODUCTION_CATALOG_PATH,9,OBSERVED_PENDING_VERIFICATION

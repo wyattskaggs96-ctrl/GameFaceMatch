@@ -97,6 +97,16 @@ This dictionary defines how current Phase 0 artifacts should be interpreted. It 
 | `captureLogCheck` | Chronology and evidence-reference validation for capture-log events. | Events must remain ordered by source-video sequence and timestamp. |
 | `issueLinkCheck` | Issue-register linkage validation. | Issues must connect to affected records, affected evidence, related issues, or a recapture request. |
 
+## Research Catalog Release Fields
+
+| Field | Meaning | Notes |
+| --- | --- | --- |
+| `version` / `semver` | Semantic research catalog release version. | Current release is `0.1.0-research.1`; it is a research package version, not a production catalog version. |
+| `releaseLabel` | Human-readable lifecycle label. | Must state that the package is primary research and not production verified. |
+| `sourceExports` | Export family manifest. | Lists environment, creation paths, menu map, research catalogs, dependency tests, evidence, capture log, issues, and recapture requests with record counts. |
+| `research_catalog_release_validation.*` | Validation report for the release package. | Checks UTF-8, required fields, enum values, stable IDs, native order, evidence links, version/platform fields, placeholder/fixture exclusion, and production-status rules. |
+| `passed_with_warnings` | Validation status with unresolved research limitations. | Acceptable for research export packaging only; not acceptable for production catalog publication. |
+
 ## Capture And Issue Fields
 
 | Field | Meaning | Notes |

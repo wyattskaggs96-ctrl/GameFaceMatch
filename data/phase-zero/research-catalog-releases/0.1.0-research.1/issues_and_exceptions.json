@@ -1,0 +1,1271 @@
+{
+  "schemaVersion": "phase0-issue-register-v1",
+  "registerID": "phase0-environment-creation-path-issues",
+  "createdAt": "2026-07-13T22:20:00-04:00",
+  "updatedAt": "2026-07-14T03:30:00-04:00",
+  "issues": [
+    {
+      "issueID": "issue-phase0-appearance-control-ear-shape-recapture",
+      "kind": "recaptureRequired",
+      "title": "Complete Ear Shape selector evidence",
+      "description": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_004"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Menu label and selected native value visible for every deliberately selected option.",
+          "First-value proof.",
+          "Final-value proof.",
+          "Wrap or no-wrap proof.",
+          "Visible default proof.",
+          "Second-person verification.",
+          "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Record Ear Shape from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes."
+      }
+    },
+    {
+      "issueID": "issue-phase0-appearance-control-eye-color-recapture",
+      "kind": "recaptureRequired",
+      "title": "Complete Eye Color selector evidence",
+      "description": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_001",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_002",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_003",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_004",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_005",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_006",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_007"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Menu label and selected native value visible for every deliberately selected option.",
+          "First-value proof.",
+          "Final-value proof.",
+          "Wrap or no-wrap proof.",
+          "Visible default proof.",
+          "Second-person verification.",
+          "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Record Eye Color from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes."
+      }
+    },
+    {
+      "issueID": "issue-phase0-appearance-control-eye-shape-recapture",
+      "kind": "recaptureRequired",
+      "title": "Complete Eye Shape selector evidence",
+      "description": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_003",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_004",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_005"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Menu label and selected native value visible for every deliberately selected option.",
+          "First-value proof.",
+          "Final-value proof.",
+          "Wrap or no-wrap proof.",
+          "Visible default proof.",
+          "Second-person verification.",
+          "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Record Eye Shape from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes."
+      }
+    },
+    {
+      "issueID": "issue-phase0-appearance-control-nose-recapture",
+      "kind": "recaptureRequired",
+      "title": "Complete Nose selector evidence",
+      "description": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_NOSE_001",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_002",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_003",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_004",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_005",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_006",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_007"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Menu label and selected native value visible for every deliberately selected option.",
+          "First-value proof.",
+          "Final-value proof.",
+          "Wrap or no-wrap proof.",
+          "Visible default proof.",
+          "Second-person verification.",
+          "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Record Nose from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes."
+      }
+    },
+    {
+      "issueID": "issue-phase0-appearance-control-skin-details-recapture",
+      "kind": "recaptureRequired",
+      "title": "Complete Skin Details selector evidence",
+      "description": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Menu label and selected native value visible for every deliberately selected option.",
+          "First-value proof.",
+          "Final-value proof.",
+          "Wrap or no-wrap proof.",
+          "Visible default proof.",
+          "Second-person verification.",
+          "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Record Skin Details from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes."
+      }
+    },
+    {
+      "issueID": "issue-phase0-appearance-control-skin-tone-recapture",
+      "kind": "recaptureRequired",
+      "title": "Complete Skin Tone selector evidence",
+      "description": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_001",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_002",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_003",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_004",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_006",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_007",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_008",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_009",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_010",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_011",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_012",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_013",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_017",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_018",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_019",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_020",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_021",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_022",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_023",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_024",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_029"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Menu label and selected native value visible for every deliberately selected option.",
+          "First-value proof.",
+          "Final-value proof.",
+          "Wrap or no-wrap proof.",
+          "Visible default proof.",
+          "Second-person verification.",
+          "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Record Skin Tone from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-appearance-editable-later",
+      "kind": "dependencyUncertainty",
+      "title": "Missing environment/path evidence: appearanceEditableLater",
+      "description": "The footage reaches creation-time Appearance but does not prove later editability after creation.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record post-creation editability path or absence."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "The footage reaches creation-time Appearance but does not prove later editability after creation."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-archetype",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: archetype",
+      "description": "Journey cards are visible, including Contributor, but archetype as a player-build value is not confirmed.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record player archetype/build value after journey setup."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Journey cards are visible, including Contributor, but archetype as a player-build value is not confirmed."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-body-type",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: bodyType",
+      "description": "Body type value is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record selected body type."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Body type value is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-console-model",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: consoleModel",
+      "description": "The recording supports Xbox family context, but not Series X versus Series S.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record the Xbox console model screen."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "The recording supports Xbox family context, but not Series X versus Series S."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-console-osversion",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: consoleOSVersion",
+      "description": "Console OS/version screen is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record the console OS/version screen."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Console OS/version screen is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-copy-type",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: copyType",
+      "description": "Disc/digital/subscription copy type is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record disc/digital/subscription copy evidence if available."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Disc/digital/subscription copy type is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-display-model",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: displayModel",
+      "description": "Display device model is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record display/capture setup notes."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Display device model is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-ea-account-requirement",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: eaAccountRequirement",
+      "description": "EA account requirement/sign-in state is not visible.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record EA account sign-in/requirement state."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "EA account requirement/sign-in state is not visible."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-edition",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: edition",
+      "description": "Game edition is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record purchase/edition screen or visible edition evidence."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Game edition is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-entitlement-status",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: entitlementStatus",
+      "description": "Entitlement, preorder, deluxe, or subscription status is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record entitlement/add-on state if it can affect menus."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Entitlement, preorder, deluxe, or subscription status is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-game-version",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: gameVersion",
+      "description": "Visible game version or executable version is not shown in the footage.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record the visible game version/build screen."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Visible game version or executable version is not shown in the footage."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-hair-visible-not-opened",
+      "kind": "missingEvidence",
+      "title": "Hair menu visible but not opened in environment video",
+      "description": "Hair is visible under Appearance, but the environment/creation-path recording does not open Hair or prove its controls.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Appearance > Hair and record visible child controls."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Required before Hair controls can be mapped."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-handedness",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: handedness",
+      "description": "Player Info includes Handedness as a visible field, but its value is not readable/confirmed.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record Player Info handedness selected value."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Player Info includes Handedness as a visible field, but its value is not readable/confirmed."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-hdr-state",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: hdrState",
+      "description": "HDR state is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record console/display HDR state."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "HDR state is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-height",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: height",
+      "description": "Height value is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record selected height."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Height value is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-online-state",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: onlineState",
+      "description": "Online/offline state is not visible.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record online/offline state during audit."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Online/offline state is not visible."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-output-resolution",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: outputResolution",
+      "description": "Console output resolution is not shown; only source-video resolution is known.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record console output resolution setting."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Console output resolution is not shown; only source-video resolution is known."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-patch-version",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: patchVersion",
+      "description": "Patch number or update version is not shown in the footage.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record the installed patch/update details."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Patch number or update version is not shown in the footage."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-player-base-selection",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: playerBaseSelection",
+      "description": "Player Base screen is visible as a top-tab step, but a selected player-base value is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record Player Base screen and selected value."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Player Base screen is visible as a top-tab step, but a selected player-base value is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-storefront-region",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: storefrontRegion",
+      "description": "Storefront or region is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record storefront/region evidence if used for catalog scope."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Storefront or region is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-weight",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: weight",
+      "description": "Weight value is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record selected weight."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Weight value is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-appearance",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Appearance",
+      "description": "Appearance is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Full Appearance boundary capture proving first and final top-level appearance categories.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-player-appearance"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Appearance and record its full selector before any catalog item records are created."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-chin",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Chin",
+      "description": "Chin is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Open Chin and record selected values, count/order boundaries, defaults, dependencies, and required evidence.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-chin"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Chin and record its full selector before any catalog item records are created."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-ear-shape",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Ear Shape",
+      "description": "Ear Shape is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE. Complete first-to-final Ear Shape selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-ear-shape"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Ear Shape from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-eye-color",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Eye Color",
+      "description": "Eye Color is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE. Complete first-to-final Eye Color selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-eye-color"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Eye Color from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-eye-shape",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Eye Shape",
+      "description": "Eye Shape is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE. Complete first-to-final Eye Shape selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-eye-shape"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Eye Shape from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-hair",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Hair",
+      "description": "Hair is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Open Hair and record its child controls, boundaries, defaults, counts, dependencies, and evidence.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-appearance-hair"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Hair and record a complete boundary/count/order pass before creating any Hair catalog records."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-head-skin",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Head & Skin",
+      "description": "Head & Skin is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Dedicated boundary recording proving whether Head & Skin has additional rows above or below the visible set.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-appearance-head-skin"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Head & Skin and record its full selector before any catalog item records are created."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-head-template",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Head Template",
+      "description": "Head Template is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE, VISIBLE_INDEX_GAPS. Complete first-to-final Head Template selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-head-template"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Head Template from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-jaw-shape",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Jaw Shape",
+      "description": "Jaw Shape is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Open Jaw Shape and record selected values, count/order boundaries, defaults, dependencies, and required evidence.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-jaw-shape"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Jaw Shape and record its full selector before any catalog item records are created."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-mouth-shape",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Mouth Shape",
+      "description": "Mouth Shape is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Open Mouth Shape and record selected values, count/order boundaries, defaults, dependencies, and required evidence.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-mouth-shape"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Mouth Shape and record its full selector before any catalog item records are created."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-nose",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Nose",
+      "description": "Nose is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE. Complete first-to-final Nose selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-nose"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Nose from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-skin-details",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Skin Details",
+      "description": "Skin Details is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE. Complete first-to-final Skin Details selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-skin-details"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Skin Details from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-skin-tone",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Skin Tone",
+      "description": "Skin Tone is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE, VISIBLE_INDEX_GAPS. Complete first-to-final Skin Tone selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-skin-tone"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Skin Tone from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-wyatt-next-capture-plan",
+      "kind": "recaptureRequired",
+      "title": "Wyatt appearance-menu recording script is ready for execution",
+      "description": "The current recording package is the executable appearance-menu script derived from the canonical gap matrix. It excludes broad Phase 0 captures already outside this menu-gap scope.",
+      "owner": "wyatt-skaggs",
+      "severity": "info",
+      "status": "open",
+      "affectedRecordIDs": [
+        "GFM-CAP-001",
+        "GFM-CAP-002",
+        "GFM-CAP-003",
+        "GFM-CAP-004",
+        "GFM-CAP-005",
+        "GFM-CAP-006",
+        "GFM-CAP-007",
+        "GFM-CAP-008",
+        "GFM-CAP-009",
+        "GFM-CAP-010"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T03:30:00-04:00",
+      "updatedAt": "2026-07-14T04:15:00-04:00",
+      "resolutionNotes": "Close this tracking issue after the requested appearance-menu recordings are imported or explicitly superseded by a newer recording script.",
+      "recaptureRequest": {
+        "required": false,
+        "queueStatus": "notQueued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Execute data/phase-zero/capture_requests.json, docs/phase-zero/WYATT_RECORDING_SCRIPT.md, and docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "info",
+        "notes": "This issue tracks the appearance-menu recording script artifact, not a single blocking category."
+      }
+    }
+  ]
+}

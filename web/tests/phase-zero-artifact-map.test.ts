@@ -22,6 +22,8 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/research_evidence_package_manifest.json",
   "data/phase-zero/research_evidence_package_manifest.csv",
   "data/phase-zero/research_evidence_path_resolution.json",
+  "data/phase-zero/research-catalog-releases/0.1.0-research.1/research_catalog_release_manifest.json",
+  "data/phase-zero/research-catalog-releases/0.1.0-research.1/research_catalog_release_validation.json",
   "data/phase-zero/capture_log.json",
   "data/phase-zero/issues_register.research.json",
   "data/phase-zero/capture_requests.json",

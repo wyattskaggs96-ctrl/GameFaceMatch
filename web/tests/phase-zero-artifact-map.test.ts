@@ -49,6 +49,7 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/manual_matching_results.template.csv",
   "data/phase-zero/manual_matching_accuracy_analysis.json",
   "data/phase-zero/matching_weight_optimization_decision.json",
+  "data/phase-zero/matching_engine_release_review.json",
   "data/schemas/verified-head-geometry-annotation.schema.json",
   "data/phase-zero/annotation-forms/verified_head_geometry_annotation_form.template.json",
   "data/phase-zero/annotation-forms/verified_head_geometry_annotation_form.template.csv",
@@ -63,6 +64,7 @@ const requiredCanonicalArtifacts = [
   "docs/phase-zero/VERIFICATION_DISCREPANCY_MANAGEMENT.md",
   "docs/phase-zero/MANUAL_MATCHING_ACCURACY_ANALYSIS.md",
   "docs/phase-zero/MATCHING_WEIGHT_OPTIMIZATION_DECISION.md",
+  "docs/phase-zero/MATCHING_ENGINE_RELEASE_REVIEW.md",
   "docs/phase-zero/WYATT_RECORDING_SCRIPT.md",
   "docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md"
 ];
@@ -242,6 +244,32 @@ describe("Phase 0 artifact map", () => {
     });
     expect(decisionDoc).toContain("No matching weights were changed");
     expect(decisionDoc).toContain("Skin presentation remains outside geometric similarity.");
+  });
+
+  it("blocks matching-engine release approval when catalog and real study evidence are absent", () => {
+    const releaseDoc = readText("docs/phase-zero/MATCHING_ENGINE_RELEASE_REVIEW.md");
+    const release = readJSON<{
+      reviewStatus: string;
+      productionRecommendationStatus: string;
+      fixtureDataExcludedFromReleaseDecision: boolean;
+      criteria: Array<{ criterion: string; status: string }>;
+      decisionRationale: string[];
+    }>("data/phase-zero/matching_engine_release_review.json");
+
+    expect(release.reviewStatus).toBe("BLOCKED");
+    expect(release.productionRecommendationStatus).toBe("FAIL_CLOSED");
+    expect(release.fixtureDataExcludedFromReleaseDecision).toBe(true);
+    expect(release.criteria).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ criterion: "top-one acceptance", status: "BLOCKED_NO_REAL_DATA" }),
+        expect.objectContaining({ criterion: "top-three usefulness", status: "BLOCKED_NO_REAL_DATA" }),
+        expect.objectContaining({ criterion: "production catalog integrity", status: "BLOCKED_EMPTY_PRODUCTION_CATALOG" }),
+        expect.objectContaining({ criterion: "failure behavior", status: "PASS_FOR_FAIL_CLOSED_BEHAVIOR" })
+      ])
+    );
+    expect(release.decisionRationale.join(" ")).toMatch(/production catalog contains no verified College Football 27 records/i);
+    expect(releaseDoc).toContain("**Status:** BLOCKED");
+    expect(releaseDoc).toContain("Approving with limitations would be misleading");
   });
 });
 

@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "matching-engine-release-review-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "reviewStatus": "BLOCKED",
+  "reviewerRole": "matching-engine release reviewer",
+  "releaseCandidateModelVersion": "rule-based-web-mvp-v2-rgb-geometry",
+  "productionRecommendationStatus": "FAIL_CLOSED",
+  "realCompletedStudyDataOnly": true,
+  "fixtureDataExcludedFromReleaseDecision": true,
+  "summary": "The MVP matching engine is structurally implemented and fixture-tested, but it cannot be approved for private beta because the production College Football 27 catalog is empty and there are zero real completed feasibility-study participants or result rows.",
+  "criteria": [
+    {
+      "criterion": "top-one acceptance",
+      "status": "BLOCKED_NO_REAL_DATA",
+      "evidence": [
+        "data/phase-zero/manual_matching_accuracy_analysis.json reports validParticipants = 0 and topOneAcceptanceRate.denominator = 0.",
+        "docs/PRIVATE_BETA_READINESS.md requires at least 55% of testers to rate the top result 4 or 5."
+      ],
+      "releaseImpact": "Cannot evaluate top-one acceptance."
+    },
+    {
+      "criterion": "top-three usefulness",
+      "status": "BLOCKED_NO_REAL_DATA",
+      "evidence": [
+        "data/phase-zero/manual_matching_accuracy_analysis.json reports topThreeUsefulnessRate.denominator = 0.",
+        "docs/PRIVATE_BETA_READINESS.md requires at least 75% of testers to rate at least one top-three result 4 or 5."
+      ],
+      "releaseImpact": "Cannot evaluate top-three usefulness."
+    },
+    {
+      "criterion": "repeatability",
+      "status": "BLOCKED_NO_REAL_REPEAT_SCANS",
+      "evidence": [
+        "data/phase-zero/manual_matching_accuracy_analysis.json reports repeatability.repeatScanParticipants = 0.",
+        "docs/PRIVATE_BETA_READINESS.md says repeatability is synthetic only."
+      ],
+      "releaseImpact": "Cannot validate repeatability for private-beta matching."
+    },
+    {
+      "criterion": "confidence calibration",
+      "status": "BLOCKED_NO_REAL_OUTCOMES",
+      "evidence": [
+        "data/phase-zero/manual_matching_accuracy_analysis.json reports confidenceCalibration.status = not_calculable.",
+        "data/phase-zero/matching_weight_optimization_decision.json reports no real data exists to measure improvement or regression."
+      ],
+      "releaseImpact": "Cannot calibrate or validate confidence labels."
+    },
+    {
+      "criterion": "failure behavior",
+      "status": "PASS_FOR_FAIL_CLOSED_BEHAVIOR",
+      "evidence": [
+        "docs/MATCHING_ENGINE_SPEC.md requires the matcher to return no matches unless an approved verified production catalog exists.",
+        "web/tests/matching-engine.test.ts covers empty catalog, unapproved catalog, fixture leakage, and production gate behavior.",
+        "data/catalog/production/catalog_manifest.json contains 0 items, and production recommendations remain fail-closed."
+      ],
+      "releaseImpact": "Failure behavior is correct, but it does not unblock release."
+    },
+    {
+      "criterion": "explanation accuracy",
+      "status": "IMPLEMENTED_WITH_SYNTHETIC_COVERAGE_ONLY",
+      "evidence": [
+        "docs/MATCHING_ENGINE_SPEC.md requires relative game-option match-score language and prohibits identity-probability language.",
+        "web/tests/matching-engine.test.ts covers explanation wording, reasons, differences, ties, uncertainty, and catalog traceability with test fixtures.",
+        "No real production recommendations exist to validate explanation accuracy against verified College Football 27 records."
+      ],
+      "releaseImpact": "Needs real catalog and study validation before private-beta approval."
+    },
+    {
+      "criterion": "hair and facial-hair usefulness",
+      "status": "BLOCKED_NO_VERIFIED_CATEGORIES_OR_REAL_RATINGS",
+      "evidence": [
+        "data/phase-zero/manual_matching_accuracy_analysis.json reports no hair recommendation rating and no facial-hair recommendation rating.",
+        "docs/phase-zero/APPEARANCE_MENU_GAP_MATRIX.md marks Hairstyles, Hair colors, Facial hair, and Facial-hair colors as suspected/not observed or incomplete and blocked.",
+        "data/catalog/production/catalog_manifest.json contains 0 verified records."
+      ],
+      "releaseImpact": "Cannot evaluate hair or facial-hair usefulness."
+    },
+    {
+      "criterion": "screenshot refinement",
+      "status": "SCAFFOLDED_BUT_PRODUCTION_BLOCKED",
+      "evidence": [
+        "web/tests/refinement.test.ts covers screenshot intake, validation, deletion, unavailable behavior, and fixture-only refinement cases.",
+        "web/tests/refinement.test.ts keeps production refinement unavailable when the approved production catalog is empty.",
+        "docs/PRIVATE_BETA_READINESS.md says real verified result saving and recommendations cannot be exercised while the catalog is empty."
+      ],
+      "releaseImpact": "Not releasable for real recommendation refinement."
+    },
+    {
+      "criterion": "privacy handling",
+      "status": "READY_WITH_REVIEW_REQUIRED",
+      "evidence": [
+        "data/phase-zero/manual_matching_accuracy_analysis.json reports rawParticipantMediaCommitted = false and rawParticipantMediaAnalyzed = false.",
+        "docs/PRIVATE_BETA_READINESS.md marks data deletion ready with manual device verification and privacy wording ready with legal review pending.",
+        "AGENTS.md requires raw face media deleted by default and prohibits identity or sensitive-trait inference."
+      ],
+      "releaseImpact": "Privacy scaffolding is not the primary blocker, but legal/manual QA is still required before real beta collection."
+    },
+    {
+      "criterion": "production catalog integrity",
+      "status": "BLOCKED_EMPTY_PRODUCTION_CATALOG",
+      "evidence": [
+        "data/catalog/production/catalog_manifest.json contains 0 items and version empty-production.",
+        "data/catalog/production-releases/cf27-production-empty-2026-07-14/production_readiness_decision.json decision is BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS.",
+        "data/phase-zero/manual_matching_study_readiness_decision.json reports verifiedProductionCatalog = BLOCKED."
+      ],
+      "releaseImpact": "This is the primary release blocker."
+    }
+  ],
+  "exactEvidence": [
+    "data/phase-zero/manual_matching_accuracy_analysis.json: validParticipants = 0, completedResultCount = 0, top-one/top-three/repeatability/confidence metrics not calculable.",
+    "data/phase-zero/matching_weight_optimization_decision.json: no candidate matcher adopted and baseline remains active because no real completed study data exists.",
+    "data/phase-zero/manual_matching_results_ingestion_checkpoint.json: 0 submissions discovered and 0 ratings committed.",
+    "data/phase-zero/manual_matching_study_readiness_decision.json: decision = NOT_READY and productionRecommendationsEnabled = false.",
+    "data/catalog/production/catalog_manifest.json: production items array is empty.",
+    "data/catalog/production-releases/cf27-production-empty-2026-07-14/production_readiness_decision.json: decision = BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS.",
+    "docs/PRIVATE_BETA_READINESS.md: not ready for a real private beta that evaluates College Football 27 recommendations.",
+    "web/tests/matching-engine.test.ts: fixture and production-gate tests pass, but real production matching remains blocked."
+  ],
+  "decisionRationale": [
+    "Release criteria requiring measured top-one acceptance, top-three usefulness, repeatability, confidence calibration, and hair/facial-hair usefulness have no real participant denominator.",
+    "The production catalog contains no verified College Football 27 records, so the matcher cannot produce release-eligible recommendations.",
+    "Fail-closed behavior is correct and should be preserved.",
+    "Approving with limitations would be misleading because the central matching result cannot be shown or evaluated."
+  ],
+  "requiredToReconsider": [
+    "Approve a nonempty verified production College Football 27 catalog release.",
+    "Run the approved 10-20 participant feasibility study with consent, paired reviewer rows, participant ratings, and deletion confirmations.",
+    "Recalculate top-one acceptance, top-three usefulness, repeatability, confidence calibration, hair/facial-hair usefulness, and screenshot-refinement outcomes from real completed data.",
+    "Rerun matching-engine release review after the new evidence is committed."
+  ]
+}

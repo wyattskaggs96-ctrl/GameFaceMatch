@@ -1,0 +1,810 @@
+{
+  "schemaVersion": "cf27-standardized-capture-qa-v1-recapture-queue",
+  "generatedAt": "2026-07-14T05:15:00-04:00",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "summary": {
+    "itemCount": 42,
+    "materialOnly": true
+  },
+  "recaptureQueue": [
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-001",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_001",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 1",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-004",
+          "timelineRecordID": "phase0-video-002-tl-004",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_MENU_video-002_11p68s.png",
+          "timestamp": 11.68,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-002",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_002",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 2",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-005",
+          "timelineRecordID": "phase0-video-002-tl-005",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_MENU_video-002_21p52s.png",
+          "timestamp": 21.52,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-003",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_003",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 3",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-006",
+          "timelineRecordID": "phase0-video-002-tl-006",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_MENU_video-002_30p68s.png",
+          "timestamp": 30.68,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-004",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_004",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 4",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-007",
+          "timelineRecordID": "phase0-video-002-tl-007",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_MENU_video-002_40p68s.png",
+          "timestamp": 40.68,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-005",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_005",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 5",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-011",
+          "timelineRecordID": "phase0-video-002-tl-011",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_MENU_video-002_70p04s.png",
+          "timestamp": 70.04,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-006",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_006",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 6",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-010",
+          "timelineRecordID": "phase0-video-002-tl-010",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_MENU_video-002_61p52s.png",
+          "timestamp": 61.52,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-007",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_007",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 7",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-009",
+          "timelineRecordID": "phase0-video-002-tl-009",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_MENU_video-002_55p04s.png",
+          "timestamp": 55.04,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-008",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_008",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 8",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-008",
+          "timelineRecordID": "phase0-video-002-tl-008",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_MENU_video-002_49p88s.png",
+          "timestamp": 49.88,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-009",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_009",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 9",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-012",
+          "timelineRecordID": "phase0-video-002-tl-012",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_MENU_video-002_75p88s.png",
+          "timestamp": 75.88,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-010",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_010",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 10",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-013",
+          "timelineRecordID": "phase0-video-002-tl-013",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_MENU_video-002_81p52s.png",
+          "timestamp": 81.52,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-011",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_011",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 11",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-014",
+          "timelineRecordID": "phase0-video-002-tl-014",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_MENU_video-002_90p04s.png",
+          "timestamp": 90.04,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-012",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 12",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-015",
+          "timelineRecordID": "phase0-video-002-tl-015",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_MENU_video-002_96p04s.png",
+          "timestamp": 96.04,
+          "sourceVideo": "02_Head_Templates_Faces_01-12.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-013",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_013",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 13",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-004",
+          "timelineRecordID": "phase0-video-003-tl-004",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_MENU_video-003_28p04s.png",
+          "timestamp": 28.04,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-014",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_014",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 14",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-003",
+          "timelineRecordID": "phase0-video-003-tl-003",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_MENU_video-003_14p04s.png",
+          "timestamp": 14.04,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-016",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 16",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-002",
+          "timelineRecordID": "phase0-video-003-tl-002",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_MENU_video-003_7p20s.png",
+          "timestamp": 7.2,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-017",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_017",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 17",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-005",
+          "timelineRecordID": "phase0-video-003-tl-005",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_MENU_video-003_34p20s.png",
+          "timestamp": 34.2,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-018",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_018",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 18",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-006",
+          "timelineRecordID": "phase0-video-003-tl-006",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_MENU_video-003_41p36s.png",
+          "timestamp": 41.36,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-021",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_021",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 21",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-010",
+          "timelineRecordID": "phase0-video-003-tl-010",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_MENU_video-003_80p88s.png",
+          "timestamp": 80.88,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-022",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_022",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 22",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-009",
+          "timelineRecordID": "phase0-video-003-tl-009",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_MENU_video-003_76p72s.png",
+          "timestamp": 76.72,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-023",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_023",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 23",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-007",
+          "timelineRecordID": "phase0-video-003-tl-007",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_MENU_video-003_57p20s.png",
+          "timestamp": 57.2,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-024",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_024",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 24",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-008",
+          "timelineRecordID": "phase0-video-003-tl-008",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_MENU_video-003_63p88s.png",
+          "timestamp": 63.88,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-027",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_027",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 27",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-011",
+          "timelineRecordID": "phase0-video-003-tl-011",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_MENU_video-003_95p04s.png",
+          "timestamp": 95.04,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-028",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_028",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 28",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-012",
+          "timelineRecordID": "phase0-video-003-tl-012",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_MENU_video-003_100p72s.png",
+          "timestamp": 100.72,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-029",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_029",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 29",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-015",
+          "timelineRecordID": "phase0-video-003-tl-015",
+          "path": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_MENU_video-003_128p20s.png",
+          "timestamp": 128.2,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-030",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_030",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 30",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Menu evidence only; matching views are missing or inadequate. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-014",
+          "timelineRecordID": "phase0-video-003-tl-014",
+          "path": "data/phase-zero/derivative-frames/video-003-tl-014_03-head-templates-faces-12-29-mov_123s.png",
+          "timestamp": 123,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-head-031",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_HEAD_031",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Face 31",
+      "priority": "P0",
+      "reason": "Canonical head-template comparison settings are not locked. | Angle, zoom, distance, crop, lighting, and obstruction checks are not approved for production geometry. | Current head record is explicitly not suitable for production geometric comparison. | Menu evidence only; matching views are missing or inadequate. | Transition contamination is present in the source observation.",
+      "requiredAction": "Recapture using locked canonical settings with verified front, three-quarter, profile, and rear views before geometric matching.",
+      "existingEvidenceUse": "Valid research identity/order/menu evidence; not production geometry.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-003-tl-013",
+          "timelineRecordID": "phase0-video-003-tl-013",
+          "path": "data/phase-zero/derivative-frames/video-003-tl-013_03-head-templates-faces-12-29-mov_114p5s.png",
+          "timestamp": 114.5,
+          "sourceVideo": "03_Head_Templates_Faces_12-29.mov"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-eyeshape-001",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Almond",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-006-tl-002",
+          "timelineRecordID": "phase0-video-006-tl-002",
+          "path": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_001/CF27_XBOXUNKNOWN_RTG_EYESHAPE_001_MENU_video-006_14p00s.png",
+          "timestamp": 14,
+          "sourceVideo": "phase0-video-006"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-eyeshape-002",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "None",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-006-tl-003",
+          "timelineRecordID": "phase0-video-006-tl-003",
+          "path": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_002/CF27_XBOXUNKNOWN_RTG_EYESHAPE_002_MENU_video-006_16p00s.png",
+          "timestamp": 16,
+          "sourceVideo": "phase0-video-006"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-eyeshape-003",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_003",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Prominent",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-006-tl-004",
+          "timelineRecordID": "phase0-video-006-tl-004",
+          "path": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_003/CF27_XBOXUNKNOWN_RTG_EYESHAPE_003_MENU_video-006_18p00s.png",
+          "timestamp": 18,
+          "sourceVideo": "phase0-video-006"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-eyeshape-004",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_004",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Monolid",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-006-tl-005",
+          "timelineRecordID": "phase0-video-006-tl-005",
+          "path": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_004/CF27_XBOXUNKNOWN_RTG_EYESHAPE_004_MENU_video-006_19p00s.png",
+          "timestamp": 19,
+          "sourceVideo": "phase0-video-006"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-eyeshape-005",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_005",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Hooded",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-006-tl-006",
+          "timelineRecordID": "phase0-video-006-tl-006",
+          "path": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_005_MENU_video-006_22p00s.png",
+          "timestamp": 22,
+          "sourceVideo": "phase0-video-006"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-nose-001",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_NOSE_001",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "None",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-008-tl-003",
+          "timelineRecordID": "phase0-video-008-tl-003",
+          "path": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_001/CF27_XBOXUNKNOWN_RTG_NOSE_001_MENU_EVIDENCE_video-008_15p00s.png",
+          "timestamp": 15,
+          "sourceVideo": "phase0-video-008"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-nose-002",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_NOSE_002",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Hooked",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-008-tl-004",
+          "timelineRecordID": "phase0-video-008-tl-004",
+          "path": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_002/CF27_XBOXUNKNOWN_RTG_NOSE_002_MENU_EVIDENCE_video-008_17p00s.png",
+          "timestamp": 17,
+          "sourceVideo": "phase0-video-008"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-nose-003",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_NOSE_003",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Button",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-008-tl-005",
+          "timelineRecordID": "phase0-video-008-tl-005",
+          "path": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_003/CF27_XBOXUNKNOWN_RTG_NOSE_003_MENU_EVIDENCE_video-008_19p00s.png",
+          "timestamp": 19,
+          "sourceVideo": "phase0-video-008"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-nose-004",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_NOSE_004",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Nubian",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-008-tl-006",
+          "timelineRecordID": "phase0-video-008-tl-006",
+          "path": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_004/CF27_XBOXUNKNOWN_RTG_NOSE_004_MENU_EVIDENCE_video-008_21p00s.png",
+          "timestamp": 21,
+          "sourceVideo": "phase0-video-008"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-nose-005",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_NOSE_005",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Aquiline",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-008-tl-002",
+          "timelineRecordID": "phase0-video-008-tl-002",
+          "path": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_005/CF27_XBOXUNKNOWN_RTG_NOSE_005_BEST_AVAILABLE_THREE_QUARTER_video-008_14p00s.png",
+          "timestamp": 14,
+          "sourceVideo": "phase0-video-008"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-nose-006",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_NOSE_006",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Roman",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-008-tl-008",
+          "timelineRecordID": "phase0-video-008-tl-008",
+          "path": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_006/CF27_XBOXUNKNOWN_RTG_NOSE_006_MENU_EVIDENCE_video-008_26p00s.png",
+          "timestamp": 26,
+          "sourceVideo": "phase0-video-008"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-nose-007",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_NOSE_007",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Funnel",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-008-tl-007",
+          "timelineRecordID": "phase0-video-008-tl-007",
+          "path": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_007/CF27_XBOXUNKNOWN_RTG_NOSE_007_MENU_EVIDENCE_video-008_23p00s.png",
+          "timestamp": 23,
+          "sourceVideo": "phase0-video-008"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-earshape-001",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Attached Lobe",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-009-tl-003",
+          "timelineRecordID": "phase0-video-009-tl-003",
+          "path": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001_MENU_EVIDENCE_video-009_18p00s.png",
+          "timestamp": 18,
+          "sourceVideo": "phase0-video-009"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-earshape-002",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "None",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-009-tl-002",
+          "timelineRecordID": "phase0-video-009-tl-002",
+          "path": "data/phase-zero/derivative-frames/video-009-tl-002_09-ear-shape-mp4_16p5s.png",
+          "timestamp": 16.5,
+          "sourceVideo": "phase0-video-009"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-earshape-003",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Round Free Lobe",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-009-tl-005",
+          "timelineRecordID": "phase0-video-009-tl-005",
+          "path": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_002/CF27_XBOXUNKNOWN_RTG_EARSHAPE_002_MENU_EVIDENCE_video-009_23p00s.png",
+          "timestamp": 23,
+          "sourceVideo": "phase0-video-009"
+        }
+      ]
+    },
+    {
+      "recaptureID": "standardized-recapture-cf27-xboxunknown-rtg-earshape-004",
+      "itemID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_004",
+      "itemType": "CATALOG_IMAGE_RECORD",
+      "nativeLabel": "Pointed",
+      "priority": "P0",
+      "reason": "Canonical capture settings are not fully locked. | Selector boundaries, defaults, and production evidence are not verified. | Geometry-relevant appearance-control imagery is not standardized for geometric matching.",
+      "requiredAction": "Recapture this control under the approved canonical comparison setup before geometric matching.",
+      "existingEvidenceUse": "Research menu/order/value evidence only.",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-009-tl-006",
+          "timelineRecordID": "phase0-video-009-tl-006",
+          "path": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004_MENU_EVIDENCE_video-009_26p00s.png",
+          "timestamp": 26,
+          "sourceVideo": "phase0-video-009"
+        }
+      ]
+    }
+  ]
+}

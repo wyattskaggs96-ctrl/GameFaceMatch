@@ -27,6 +27,7 @@
     "catalog:verify-assets": "node ../scripts/catalog-tools.mjs verify-assets",
     "phase0:detailed-facial-controls": "node ../scripts/cf27-detailed-facial-controls-research-catalog.mjs",
     "phase0:body-controls": "node ../scripts/cf27-body-control-research-catalog.mjs",
+    "phase0:standardized-capture-qa": "node ../scripts/cf27-standardized-capture-qa.mjs",
     "catalog:create-audit-session": "node ../scripts/catalog-tools.mjs create-audit-session",
     "catalog:import-csv": "node ../scripts/catalog-tools.mjs import-csv",
     "catalog:export-csv": "node ../scripts/catalog-tools.mjs export-csv",

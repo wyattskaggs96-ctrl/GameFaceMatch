@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "cf27-evidence-intake-agent-v1",
+  "generatedAt": "2026-07-14T04:49:35.979Z",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_EVIDENCE_INTAKE_REPORT",
+  "sourceType": "research",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "productionPromotion": {
+    "allowed": false,
+    "reason": "Evidence intake records are source observations only. They do not satisfy second-person verification or catalog-manager approval."
+  },
+  "scanPolicy": {
+    "approvedRoots": [
+      {
+        "path": "data/research/cf27/imports/tomorrow-additional-videos",
+        "rootToken": "TOMORROW_UPLOADS",
+        "mode": "intake-directory"
+      },
+      {
+        "path": "~/Downloads",
+        "rootToken": "OWNER_DOWNLOADS",
+        "mode": "capture-request-named"
+      }
+    ],
+    "downloadsRule": "Downloads are scanned only for files named with an open capture-request ID such as GFM-CAP-001.",
+    "intakeDirectoryRule": "The dedicated research intake directory accepts supported media files for triage.",
+    "ignoredDerivativeRule": "Generated keyframes, contact sheets, derivative frames, and prior review crops are excluded from source intake."
+  },
+  "summary": {
+    "candidateFilesScanned": 0,
+    "newSourceEvidence": 0,
+    "duplicateEvidence": 0,
+    "matchedCaptureRequests": 0,
+    "unmatchedNewSourceEvidence": 0,
+    "captureRequestsClosed": 0,
+    "productionRecordsCreated": 0,
+    "catalogRecordsCreated": 0
+  },
+  "records": []
+}

@@ -33,6 +33,7 @@
     "cf27:recapture-queue": "node scripts/cf27-authoritative-recapture-queue.mjs",
     "cf27:xbox-runbook": "node scripts/cf27-tomorrows-xbox-recording-runbook.mjs",
     "cf27:video-inventory": "node scripts/cf27-video-source-inventory.mjs",
+    "cf27:evidence-intake": "node scripts/cf27-evidence-intake-agent.mjs",
     "cf27:video-timeline": "node scripts/cf27-video-timeline-map.mjs",
     "cf27:environment-path": "node scripts/cf27-environment-creation-path-research.mjs",
     "cf27:appearance-menu-map": "node scripts/cf27-appearance-menu-map-research.mjs",

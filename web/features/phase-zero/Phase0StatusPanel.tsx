@@ -1,8 +1,13 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Alert, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { createPhase0AuditDashboardReport, type Phase0AuditDashboardReport } from "@/lib/phase-zero/phase-zero-audit-dashboard";
+import {
+  createPhase0CompletionDashboard,
+  type Phase0CompletionCategoryProgress,
+  type Phase0CompletionDashboardReport
+} from "@/lib/phase-zero/phase-zero-completion-dashboard";
 import { createEmptyIssueRegister } from "@/lib/phase-zero/phase-zero-issue-management";
 import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusReport } from "@/lib/phase-zero/phase-zero-status";
 import { AdditionalAttributesWorkspace } from "./AdditionalAttributesWorkspace";
@@ -35,10 +40,12 @@ const statusTone = {
 
 export function Phase0StatusPanel({
   report = createPhase0StatusReport(),
-  dashboard
+  dashboard,
+  completionDashboard
 }: {
   report?: Phase0StatusReport;
   dashboard?: Phase0AuditDashboardReport;
+  completionDashboard?: Phase0CompletionDashboardReport;
 }) {
   const [issueRegister, setIssueRegister] = useState(() =>
     createEmptyIssueRegister({
@@ -46,6 +53,8 @@ export function Phase0StatusPanel({
       nowISO: new Date().toISOString()
     })
   );
+  const [liveCompletionDashboard, setLiveCompletionDashboard] = useState<Phase0CompletionDashboardReport | null>(null);
+  const [completionDashboardError, setCompletionDashboardError] = useState<string | null>(null);
   const activeDashboard = useMemo(
     () => dashboard ?? createPhase0AuditDashboardReport({
       phase0Report: report,
@@ -54,6 +63,32 @@ export function Phase0StatusPanel({
     }),
     [dashboard, issueRegister, report]
   );
+  const activeCompletionDashboard = useMemo(
+    () => completionDashboard ?? liveCompletionDashboard ?? createPhase0CompletionDashboard(),
+    [completionDashboard, liveCompletionDashboard]
+  );
+
+  useEffect(() => {
+    if (completionDashboard || process.env.NODE_ENV === "production") return;
+    let isActive = true;
+    fetch("/api/internal/phase-zero-completion", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Phase 0 completion endpoint returned ${response.status}`);
+        return response.json() as Promise<Phase0CompletionDashboardReport>;
+      })
+      .then((nextDashboard) => {
+        if (!isActive) return;
+        setLiveCompletionDashboard(nextDashboard);
+        setCompletionDashboardError(null);
+      })
+      .catch((error: unknown) => {
+        if (!isActive) return;
+        setCompletionDashboardError(error instanceof Error ? error.message : "Unable to load Phase 0 completion data.");
+      });
+    return () => {
+      isActive = false;
+    };
+  }, [completionDashboard]);
 
   return (
     <section className="screen-stack" aria-labelledby="phase-zero-title">
@@ -67,6 +102,7 @@ export function Phase0StatusPanel({
         {report.overall.status.replaceAll("_", " ")} · {report.overall.percentComplete}% from {report.overall.completedChecks}/
         {report.overall.totalChecks} evidence checks. Production records loaded: {report.productionRecordCount}.
       </Alert>
+      <Phase0CompletionDashboard dashboard={activeCompletionDashboard} loadError={completionDashboardError} />
       <EnvironmentManifestWizard />
       <CreationPathAuditWorkspace />
       <EvidenceIntakeManager />
@@ -132,6 +168,118 @@ export function Phase0StatusPanel({
         ))}
       </div>
     </section>
+  );
+}
+
+function Phase0CompletionDashboard({ dashboard, loadError }: { dashboard: Phase0CompletionDashboardReport; loadError: string | null }) {
+  return (
+    <section className="screen-stack" aria-labelledby="phase-zero-completion-dashboard-title">
+      <Alert title="Live Phase 0 completion dashboard" tone={dashboard.productionReadiness.status === "ready" ? "success" : "danger"}>
+        {dashboard.productionReadiness.reason}
+      </Alert>
+      {loadError ? (
+        <Alert title="Live artifact load failed" tone="warning">
+          {loadError}
+        </Alert>
+      ) : null}
+      <div className="card-grid">
+        <Card>
+          <h2 id="phase-zero-completion-dashboard-title">Completion summary</h2>
+          <dl className="metadata-list">
+            <div>
+              <dt>Overall Phase 0</dt>
+              <dd>{dashboard.metrics.overallPhase0CompletionPercent}%</dd>
+            </div>
+            <div>
+              <dt>Evidence completion</dt>
+              <dd>{dashboard.metrics.evidenceCompletionPercent}%</dd>
+            </div>
+            <div>
+              <dt>Catalog completion</dt>
+              <dd>{dashboard.metrics.catalogCompletionPercent}%</dd>
+            </div>
+            <div>
+              <dt>Verification completion</dt>
+              <dd>{dashboard.metrics.verificationCompletionPercent}%</dd>
+            </div>
+          </dl>
+        </Card>
+        <Card tone="warning">
+          <h2>Next capture</h2>
+          <p className="supporting">{dashboard.highestPriorityMissingCapture}</p>
+          <h3>Human action</h3>
+          <p className="supporting">{dashboard.nextRequiredHumanAction}</p>
+        </Card>
+        <Card>
+          <h2>Next Codex action</h2>
+          <p className="supporting">{dashboard.nextRecommendedCodexAction}</p>
+          <p className="field-note">Generated from machine-readable Phase 0 artifacts at {dashboard.generatedAt}.</p>
+        </Card>
+      </div>
+      <Card>
+        <div className="status-row">
+          <h2>Category completion</h2>
+          <StatusBadge tone={dashboard.productionReadiness.status === "ready" ? "success" : "danger"}>
+            {dashboard.productionReadiness.status}
+          </StatusBadge>
+        </div>
+        <p className="supporting">
+          Research observations count only as observed or cataloged. Independent verification and production approval stay at zero until the
+          machine-readable catalog artifacts prove those gates passed.
+        </p>
+        <div className="data-table-scroll" role="region" aria-label="Phase 0 category completion table" tabIndex={0}>
+          <table className="data-table">
+            <caption>Phase 0 category progress from current repository artifacts</caption>
+            <thead>
+              <tr>
+                <th scope="col">Category</th>
+                <th scope="col">Required</th>
+                <th scope="col">Evidence</th>
+                <th scope="col">Observed</th>
+                <th scope="col">Cataloged</th>
+                <th scope="col">QA reviewed</th>
+                <th scope="col">Independently verified</th>
+                <th scope="col">Production approved</th>
+                <th scope="col">Recapture</th>
+                <th scope="col">Blockers</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dashboard.categoryProgress.map((category) => (
+                <Phase0CompletionRow key={category.id} category={category} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </section>
+  );
+}
+
+function Phase0CompletionRow({ category }: { category: Phase0CompletionCategoryProgress }) {
+  return (
+    <tr>
+      <th scope="row">
+        <span>{category.label}</span>
+        <small>{category.sourceSummary}</small>
+        <small>{category.nextAction}</small>
+      </th>
+      <td>{category.required ? "Yes" : "No"}</td>
+      <td>{category.evidenceAvailable}</td>
+      <td>{category.observed}</td>
+      <td>{category.cataloged}</td>
+      <td>{category.qaReviewed}</td>
+      <td>{category.independentlyVerified}</td>
+      <td>{category.productionApproved}</td>
+      <td>{category.recaptureRequired}</td>
+      <td>{category.blockingIssueCount}</td>
+      <td>
+        <StatusBadge tone={category.productionApproved > 0 ? "success" : category.blockingIssueCount > 0 ? "danger" : "warning"}>
+          {category.status}
+        </StatusBadge>
+      </td>
+    </tr>
   );
 }
 

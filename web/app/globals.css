@@ -1353,6 +1353,59 @@ p {
   border-bottom: 0;
 }
 
+.data-table-scroll {
+  overflow-x: auto;
+  margin-top: var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.data-table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.data-table caption {
+  padding: var(--space-3);
+  text-align: left;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--space-3);
+  border-top: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table thead th {
+  background: rgba(29, 63, 49, 0.08);
+  color: var(--field-900);
+  font-size: 0.78rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.data-table tbody th {
+  min-width: 260px;
+}
+
+.data-table tbody th span,
+.data-table tbody th small {
+  display: block;
+}
+
+.data-table tbody th small {
+  margin-top: var(--space-1);
+  color: var(--muted);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
 .loading-state {
   display: flex;
   align-items: center;

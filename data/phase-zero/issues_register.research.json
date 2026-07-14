@@ -1,0 +1,638 @@
+{
+  "schemaVersion": "phase0-issue-register-v1",
+  "registerID": "phase0-environment-creation-path-issues",
+  "createdAt": "2026-07-13T22:20:00-04:00",
+  "updatedAt": "2026-07-13T22:20:00-04:00",
+  "issues": [
+    {
+      "issueID": "issue-phase0-env-game-version",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: gameVersion",
+      "description": "Visible game version or executable version is not shown in the footage.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record the visible game version/build screen."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Visible game version or executable version is not shown in the footage."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-patch-version",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: patchVersion",
+      "description": "Patch number or update version is not shown in the footage.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record the installed patch/update details."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Patch number or update version is not shown in the footage."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-console-model",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: consoleModel",
+      "description": "The recording supports Xbox family context, but not Series X versus Series S.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record the Xbox console model screen."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "The recording supports Xbox family context, but not Series X versus Series S."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-console-osversion",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: consoleOSVersion",
+      "description": "Console OS/version screen is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record the console OS/version screen."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Console OS/version screen is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-edition",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: edition",
+      "description": "Game edition is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record purchase/edition screen or visible edition evidence."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Game edition is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-storefront-region",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: storefrontRegion",
+      "description": "Storefront or region is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record storefront/region evidence if used for catalog scope."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Storefront or region is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-copy-type",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: copyType",
+      "description": "Disc/digital/subscription copy type is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record disc/digital/subscription copy evidence if available."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Disc/digital/subscription copy type is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-entitlement-status",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: entitlementStatus",
+      "description": "Entitlement, preorder, deluxe, or subscription status is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record entitlement/add-on state if it can affect menus."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Entitlement, preorder, deluxe, or subscription status is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-display-model",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: displayModel",
+      "description": "Display device model is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record display/capture setup notes."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Display device model is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-hdr-state",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: hdrState",
+      "description": "HDR state is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record console/display HDR state."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "HDR state is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-output-resolution",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: outputResolution",
+      "description": "Console output resolution is not shown; only source-video resolution is known.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record console output resolution setting."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Console output resolution is not shown; only source-video resolution is known."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-online-state",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: onlineState",
+      "description": "Online/offline state is not visible.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record online/offline state during audit."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Online/offline state is not visible."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-ea-account-requirement",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: eaAccountRequirement",
+      "description": "EA account requirement/sign-in state is not visible.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record EA account sign-in/requirement state."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "EA account requirement/sign-in state is not visible."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-player-base-selection",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: playerBaseSelection",
+      "description": "Player Base screen is visible as a top-tab step, but a selected player-base value is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record Player Base screen and selected value."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Player Base screen is visible as a top-tab step, but a selected player-base value is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-archetype",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: archetype",
+      "description": "Journey cards are visible, including Contributor, but archetype as a player-build value is not confirmed.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record player archetype/build value after journey setup."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Journey cards are visible, including Contributor, but archetype as a player-build value is not confirmed."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-handedness",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: handedness",
+      "description": "Player Info includes Handedness as a visible field, but its value is not readable/confirmed.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record Player Info handedness selected value."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Player Info includes Handedness as a visible field, but its value is not readable/confirmed."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-height",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: height",
+      "description": "Height value is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record selected height."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Height value is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-weight",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: weight",
+      "description": "Weight value is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record selected weight."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Weight value is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-body-type",
+      "kind": "missingEvidence",
+      "title": "Missing environment/path evidence: bodyType",
+      "description": "Body type value is not shown.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record selected body type."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Body type value is not shown."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-appearance-editable-later",
+      "kind": "dependencyUncertainty",
+      "title": "Missing environment/path evidence: appearanceEditableLater",
+      "description": "The footage reaches creation-time Appearance but does not prove later editability after creation.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Record post-creation editability path or absence."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "The footage reaches creation-time Appearance but does not prove later editability after creation."
+      }
+    },
+    {
+      "issueID": "issue-phase0-env-hair-visible-not-opened",
+      "kind": "missingEvidence",
+      "title": "Hair menu visible but not opened in environment video",
+      "description": "Hair is visible under Appearance, but the environment/creation-path recording does not open Hair or prove its controls.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001"
+      ],
+      "affectedEvidenceFileIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "createdAt": "2026-07-13T22:20:00-04:00",
+      "updatedAt": "2026-07-13T22:20:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Appearance > Hair and record visible child controls."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Required before Hair controls can be mapped."
+      }
+    }
+  ]
+}

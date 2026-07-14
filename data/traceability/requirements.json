@@ -2,7 +2,7 @@
   "metadata": {
     "name": "GameFace Match Requirement Traceability Matrix",
     "version": "2026-07-12",
-    "lastCheckedDate": "2026-07-12",
+    "lastCheckedDate": "2026-07-13",
     "generatedReport": "docs/status/REQUIREMENT_TRACEABILITY.md",
     "statusValues": [
       "NOT_STARTED",
@@ -97,6 +97,48 @@
       "blocker": "",
       "owner": "Lead engineer",
       "lastCheckedDate": "2026-07-12"
+    },
+    {
+      "id": "GFM-P0-ENV-001",
+      "source": "docs/GAME_CATALOG_WORKFLOW.md",
+      "section": "Phase 0 audit environment",
+      "summary": "Record directly observed shipping-game environment fields and leave unsupported version, patch, console, account, display, and entitlement fields unresolved.",
+      "owningModule": "Phase 0 environment audit",
+      "implementationFiles": [
+        "scripts/cf27-environment-creation-path-research.mjs",
+        "data/phase-zero/environment_manifest.research.json",
+        "data/phase-zero/issues_register.research.json",
+        "docs/phase-zero/ENVIRONMENT_AND_CREATION_PATH_FINDINGS.md"
+      ],
+      "testFiles": [
+        "web/tests/cf27-environment-creation-path-research.test.ts"
+      ],
+      "status": "IMPLEMENTED_WITH_LIMITATION",
+      "evidence": "Research environment manifest is generated from video 001 inventory/timeline evidence. Supported fields include game title, Xbox family/platform context, Road to Glory mode, QB position, appearance entry point, capture date/method/format, and visible appearance menu labels. Twenty required fields remain explicit null/unresolved and issue-tracked.",
+      "blocker": "Requires direct evidence for visible game version, patch, exact console model, console OS, edition, storefront/region, copy/entitlement state, display/HDR/output settings, online/EA state, player base value, archetype, handedness value, height, weight, body type, and later editability.",
+      "owner": "Phase 0 readiness owner",
+      "lastCheckedDate": "2026-07-13"
+    },
+    {
+      "id": "GFM-P0-PATH-001",
+      "source": "docs/GAME_CATALOG_WORKFLOW.md",
+      "section": "Creation-path mapping",
+      "summary": "Create a reproducible Road to Glory creation-path map from direct footage and distinguish research support from production catalog-path approval.",
+      "owningModule": "Phase 0 creation-path audit",
+      "implementationFiles": [
+        "scripts/cf27-environment-creation-path-research.mjs",
+        "data/phase-zero/creation_paths.research.json",
+        "data/phase-zero/creation_paths.research.csv",
+        "docs/phase-zero/ENVIRONMENT_AND_CREATION_PATH_FINDINGS.md"
+      ],
+      "testFiles": [
+        "web/tests/cf27-environment-creation-path-research.test.ts"
+      ],
+      "status": "IMPLEMENTED_WITH_LIMITATION",
+      "evidence": "Creation path contains nine timestamped evidence-backed steps from the main interface through Road to Glory, QB selection, Create Player, Player Info, Appearance, and Head & Skin visibility. It is marked supported for research only and not sufficient for production catalog path approval.",
+      "blocker": "Needs exact version/patch/platform environment confirmation, later editability and dependency checks, complete category recordings, second-person verification, and catalog-manager approval.",
+      "owner": "Phase 0 readiness owner",
+      "lastCheckedDate": "2026-07-13"
     },
     {
       "id": "GFM-CAP-001",
@@ -259,17 +301,22 @@
       "implementationFiles": [
         "data/audit/college-football-27/",
         "scripts/catalog-tools.mjs",
-        "docs/CATALOG_REVIEW_GUIDE.md",
-        "docs/CATALOG_PUBLISHING_RUNBOOK.md"
+        "data/phase-zero/video_inventory.json",
+        "data/phase-zero/video_timeline.json",
+        "data/phase-zero/environment_manifest.research.json",
+        "docs/phase-zero/ENVIRONMENT_AND_CREATION_PATH_FINDINGS.md"
       ],
       "testFiles": [
-        "web/tests/catalog-workflow.test.ts"
+        "web/tests/catalog-workflow.test.ts",
+        "web/tests/cf27-video-inventory.test.ts",
+        "web/tests/cf27-video-timeline.test.ts",
+        "web/tests/cf27-environment-creation-path-research.test.ts"
       ],
-      "status": "BLOCKED_BY_GAME_ACCESS",
-      "evidence": "Audit templates, CSV import/export, review validation, package validation, publication and rollback tooling exist.",
-      "blocker": "No owner-supplied shipping-game evidence package is present; production catalog has zero verified records.",
+      "status": "IMPLEMENTED_WITH_LIMITATION",
+      "evidence": "Direct Xbox source videos are inventoried and timeline-indexed, and environment/creation-path research records are generated from observed evidence. Production publication remains blocked by missing environment fields, complete category evidence, catalog-manager approval, and independent second-person verification.",
+      "blocker": "Real evidence exists, but no College Football 27 record is production verified. Missing exact game version/patch, console model, platform environment details, later editability/dependency checks, and second-person verification.",
       "owner": "Wyatt / Catalog auditor",
-      "lastCheckedDate": "2026-07-12"
+      "lastCheckedDate": "2026-07-13"
     },
     {
       "id": "GFM-CAT-003",

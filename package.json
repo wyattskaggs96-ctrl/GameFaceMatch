@@ -33,6 +33,7 @@
     "cf27:xbox-runbook": "node scripts/cf27-tomorrows-xbox-recording-runbook.mjs",
     "cf27:video-inventory": "node scripts/cf27-video-source-inventory.mjs",
     "cf27:video-timeline": "node scripts/cf27-video-timeline-map.mjs",
+    "cf27:environment-path": "node scripts/cf27-environment-creation-path-research.mjs",
     "source-video:intake": "node scripts/source-video-intake.mjs",
     "phase-zero:export": "node scripts/phase-zero-export.mjs"
   }

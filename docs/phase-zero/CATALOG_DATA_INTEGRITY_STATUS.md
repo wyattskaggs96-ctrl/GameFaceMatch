@@ -7,7 +7,7 @@ This report is generated from repository-local catalog, Phase 0, research, fixtu
 | Classification | Count |
 | --- | ---: |
 | PRODUCTION_VERIFIED | 0 |
-| RESEARCH_OBSERVED | 926 |
+| RESEARCH_OBSERVED | 1017 |
 | PUBLIC_SOURCE_ONLY | 0 |
 | TEST_FIXTURE | 69 |
 | PLACEHOLDER | 375 |

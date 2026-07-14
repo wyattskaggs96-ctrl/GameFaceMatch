@@ -215,6 +215,31 @@ function Phase0CompletionDashboard({ dashboard, loadError }: { dashboard: Phase0
           <p className="supporting">{dashboard.nextRecommendedCodexAction}</p>
           <p className="field-note">Generated from machine-readable Phase 0 artifacts at {dashboard.generatedAt}.</p>
         </Card>
+        <Card tone="warning">
+          <h2>Appearance-menu gaps</h2>
+          <dl className="metadata-list">
+            <div>
+              <dt>Confirmed incomplete</dt>
+              <dd>{dashboard.appearanceMenuGapSummary.confirmedPresentIncomplete}</dd>
+            </div>
+            <div>
+              <dt>Complete for research</dt>
+              <dd>{dashboard.appearanceMenuGapSummary.confirmedPresentCompleteForResearch}</dd>
+            </div>
+            <div>
+              <dt>Suspected, not observed</dt>
+              <dd>{dashboard.appearanceMenuGapSummary.suspectedButNotObserved}</dd>
+            </div>
+            <div>
+              <dt>Unknown menu regions</dt>
+              <dd>{dashboard.appearanceMenuGapSummary.unknownBecauseMenuNotFullyInspected}</dd>
+            </div>
+            <div>
+              <dt>Production eligible</dt>
+              <dd>{dashboard.appearanceMenuGapSummary.productionEligibleRows}</dd>
+            </div>
+          </dl>
+        </Card>
       </div>
       <Card>
         <div className="status-row">

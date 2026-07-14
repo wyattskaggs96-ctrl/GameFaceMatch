@@ -15,6 +15,7 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/environment_manifest.research.json",
   "data/phase-zero/creation_paths.research.json",
   "data/phase-zero/menu_map.research.json",
+  "data/phase-zero/appearance_menu_gap_matrix.json",
   "data/phase-zero/heads.research.json",
   "data/phase-zero/additional_attributes.research.json",
   "data/phase-zero/evidence_manifest.json",
@@ -26,7 +27,8 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/verification_results.template.csv",
   "data/phase-zero/manual_matching_subjects.template.csv",
   "data/phase-zero/manual_matching_reviews.template.csv",
-  "data/phase-zero/manual_matching_results.template.csv"
+  "data/phase-zero/manual_matching_results.template.csv",
+  "docs/phase-zero/APPEARANCE_MENU_GAP_MATRIX.md"
 ];
 
 const supersededOrHistoricalDocs = [

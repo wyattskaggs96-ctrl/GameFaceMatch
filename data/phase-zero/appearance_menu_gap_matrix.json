@@ -1,0 +1,2158 @@
+{
+  "schemaVersion": "cf27-appearance-menu-gap-audit-v1",
+  "generatedAt": "2026-07-14T01:30:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "RESEARCH_GAP_AUDIT",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "sourceMenuMap": "data/phase-zero/menu_map.research.json",
+  "sourceTimeline": "data/phase-zero/video_timeline.json",
+  "sourceHeadCatalog": "data/phase-zero/heads.research.json",
+  "sourceAdditionalAttributes": "data/phase-zero/additional_attributes.research.json",
+  "sourceCaptureRequests": "data/phase-zero/capture_requests.json",
+  "rules": [
+    "Do not infer categories, values, counts, boundaries, defaults, or absence from other games.",
+    "Treat visible menu rows without selected values as confirmed present but incomplete.",
+    "Treat source-required but unobserved recommendation surfaces as suspected, not game facts.",
+    "Treat uninspected menu regions as unknown, not absent.",
+    "No row in this gap audit is production eligible."
+  ],
+  "summary": {
+    "totalRows": 22,
+    "confirmedPresentIncomplete": 13,
+    "confirmedPresentCompleteForResearch": 0,
+    "suspectedButNotObserved": 6,
+    "confirmedAbsent": 0,
+    "unknownBecauseMenuNotFullyInspected": 3,
+    "notCaptured": 15,
+    "partiallyCaptured": 13,
+    "capturedWithoutClearIndices": 2,
+    "capturedWithoutSelectorBoundaries": 22,
+    "capturedWithoutStableConditions": 19,
+    "capturedWithoutSufficientVisualViews": 19,
+    "capturedButUnsuitableForProductionMatching": 22,
+    "productionEligibleRows": 0
+  },
+  "rows": [
+    {
+      "gapID": "appearance-gap-appearance",
+      "displayedCategoryLabel": "Appearance",
+      "stableMenuID": "cf27-menu-player-appearance",
+      "parentMenuID": "menu-cf27-create-player-player-tab",
+      "parentMenuLabel": "Player tab",
+      "nativeOrder": 2,
+      "evidenceBasis": "MENU_ROW_VISIBLE_ONLY",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "top_level_appearance_category",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": false,
+      "capturedWithoutSufficientVisualViews": false,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No selected option values are cataloged.",
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Full Appearance boundary capture proving first and final top-level appearance categories."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-003"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Only the menu/category row is visible in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-head-skin",
+      "displayedCategoryLabel": "Head & Skin",
+      "stableMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuID": "cf27-menu-player-appearance",
+      "parentMenuLabel": "Appearance",
+      "nativeOrder": 1,
+      "evidenceBasis": "MENU_ROW_VISIBLE_ONLY",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "submenu",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": false,
+      "capturedWithoutSufficientVisualViews": false,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No selected option values are cataloged.",
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Dedicated boundary recording proving whether Head & Skin has additional rows above or below the visible set."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-003"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Only the menu/category row is visible in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-head-template",
+      "displayedCategoryLabel": "Head Template",
+      "stableMenuID": "cf27-menu-head-skin-head-template",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": 1,
+      "evidenceBasis": "SELECTED_VALUES_OBSERVED",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "numbered_option_grid",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 28,
+      "directlyCatalogedValueCount": 26,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": false,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": true,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Observed numeric/index range has unresolved gaps: 15, 19, 20, 25, 26.",
+        "Canonical capture conditions are not locked and independently verified.",
+        "Required standardized visual views are missing or insufficient.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Complete first-to-final Head Template selector recording with count, wrap, default, and dependency checks.",
+        "Resolve observed numeric/index gaps: 15, 19, 20, 25, 26.",
+        "Record under locked canonical conditions before production matching use.",
+        "Capture required standardized visual views for production matching suitability."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-004",
+          "timelineRecordID": "phase0-video-002-tl-004",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 10,
+          "endTimestamp": 19,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_MENU_video-002_11p68s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-005",
+          "timelineRecordID": "phase0-video-002-tl-005",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 20,
+          "endTimestamp": 28,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_MENU_video-002_21p52s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-006",
+          "timelineRecordID": "phase0-video-002-tl-006",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 29,
+          "endTimestamp": 38,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_MENU_video-002_30p68s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-007",
+          "timelineRecordID": "phase0-video-002-tl-007",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 39,
+          "endTimestamp": 48,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_MENU_video-002_40p68s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-008",
+          "timelineRecordID": "phase0-video-002-tl-008",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 49,
+          "endTimestamp": 53,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_MENU_video-002_49p88s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-009",
+          "timelineRecordID": "phase0-video-002-tl-009",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 54,
+          "endTimestamp": 59,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_MENU_video-002_55p04s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-010",
+          "timelineRecordID": "phase0-video-002-tl-010",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 60,
+          "endTimestamp": 68,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_MENU_video-002_61p52s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-011",
+          "timelineRecordID": "phase0-video-002-tl-011",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 69,
+          "endTimestamp": 74,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_MENU_video-002_70p04s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-012",
+          "timelineRecordID": "phase0-video-002-tl-012",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 75,
+          "endTimestamp": 79,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_MENU_video-002_75p88s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-013",
+          "timelineRecordID": "phase0-video-002-tl-013",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 80,
+          "endTimestamp": 88,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_MENU_video-002_81p52s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-014",
+          "timelineRecordID": "phase0-video-002-tl-014",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 89,
+          "endTimestamp": 94,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_MENU_video-002_90p04s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-015",
+          "timelineRecordID": "phase0-video-002-tl-015",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 95,
+          "endTimestamp": 100,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_MENU_video-002_96p04s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-002-tl-016",
+          "timelineRecordID": "phase0-video-002-tl-016",
+          "videoID": "phase0-video-002",
+          "startTimestamp": 101,
+          "endTimestamp": 108.8,
+          "extractedFramePath": "data/phase-zero/derivative-frames/video-002-tl-016_02-head-templates-faces-01-12-mov_104p9s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-001",
+          "timelineRecordID": "phase0-video-003-tl-001",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 0,
+          "endTimestamp": 4,
+          "extractedFramePath": "data/phase-zero/derivative-frames/video-003-tl-001_03-head-templates-faces-12-29-mov_2s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-002",
+          "timelineRecordID": "phase0-video-003-tl-002",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 5,
+          "endTimestamp": 13,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_MENU_video-003_7p20s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-003",
+          "timelineRecordID": "phase0-video-003-tl-003",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 14,
+          "endTimestamp": 20,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_MENU_video-003_14p04s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-004",
+          "timelineRecordID": "phase0-video-003-tl-004",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 21,
+          "endTimestamp": 29,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_MENU_video-003_28p04s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-005",
+          "timelineRecordID": "phase0-video-003-tl-005",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 30,
+          "endTimestamp": 39,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_MENU_video-003_34p20s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-006",
+          "timelineRecordID": "phase0-video-003-tl-006",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 40,
+          "endTimestamp": 49,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_MENU_video-003_41p36s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-007",
+          "timelineRecordID": "phase0-video-003-tl-007",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 50,
+          "endTimestamp": 59,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_MENU_video-003_57p20s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-008",
+          "timelineRecordID": "phase0-video-003-tl-008",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 60,
+          "endTimestamp": 69,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_MENU_video-003_63p88s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-009",
+          "timelineRecordID": "phase0-video-003-tl-009",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 70,
+          "endTimestamp": 79,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_MENU_video-003_76p72s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-010",
+          "timelineRecordID": "phase0-video-003-tl-010",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 80,
+          "endTimestamp": 89,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_MENU_video-003_80p88s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-011",
+          "timelineRecordID": "phase0-video-003-tl-011",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 90,
+          "endTimestamp": 99,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_MENU_video-003_95p04s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-012",
+          "timelineRecordID": "phase0-video-003-tl-012",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 100,
+          "endTimestamp": 109,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_MENU_video-003_100p72s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-013",
+          "timelineRecordID": "phase0-video-003-tl-013",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 110,
+          "endTimestamp": 119,
+          "extractedFramePath": "data/phase-zero/derivative-frames/video-003-tl-013_03-head-templates-faces-12-29-mov_114p5s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-014",
+          "timelineRecordID": "phase0-video-003-tl-014",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 120,
+          "endTimestamp": 126,
+          "extractedFramePath": "data/phase-zero/derivative-frames/video-003-tl-014_03-head-templates-faces-12-29-mov_123s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-015",
+          "timelineRecordID": "phase0-video-003-tl-015",
+          "videoID": "phase0-video-003",
+          "startTimestamp": 127,
+          "endTimestamp": 133.02,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_MENU_video-003_128p20s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-004",
+        "GFM-CAP-006"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Directly selected values exist in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-skin-tone",
+      "displayedCategoryLabel": "Skin Tone",
+      "stableMenuID": "cf27-menu-head-skin-skin-tone",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": 2,
+      "evidenceBasis": "SELECTED_VALUES_OBSERVED",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "color_selector_numbered_grid",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 22,
+      "directlyCatalogedValueCount": 21,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": false,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": true,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Observed numeric/index range has unresolved gaps: 5, 14, 15, 16, 25, 26, 27, 28.",
+        "Canonical capture conditions are not locked and independently verified.",
+        "Required standardized visual views are missing or insufficient.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Complete first-to-final Skin Tone selector recording with count, wrap, default, and dependency checks.",
+        "Resolve observed numeric/index gaps: 5, 14, 15, 16, 25, 26, 27, 28.",
+        "Record under locked canonical conditions before production matching use.",
+        "Capture required standardized visual views for production matching suitability."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-004-tl-002",
+          "timelineRecordID": "phase0-video-004-tl-002",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 8,
+          "endTimestamp": 11,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_008/CF27_XBOXUNKNOWN_RTG_SKINTONE_008_MENU_video-004_10p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-003",
+          "timelineRecordID": "phase0-video-004-tl-003",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 12,
+          "endTimestamp": 13,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_004/CF27_XBOXUNKNOWN_RTG_SKINTONE_004_MENU_video-004_12p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-004",
+          "timelineRecordID": "phase0-video-004-tl-004",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 14,
+          "endTimestamp": 14,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_016/CF27_XBOXUNKNOWN_RTG_SKINTONE_016_MENU_video-004_14p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-005",
+          "timelineRecordID": "phase0-video-004-tl-005",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 15,
+          "endTimestamp": 16,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_020/CF27_XBOXUNKNOWN_RTG_SKINTONE_020_MENU_video-004_15p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-006",
+          "timelineRecordID": "phase0-video-004-tl-006",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 17,
+          "endTimestamp": 19,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_019/CF27_XBOXUNKNOWN_RTG_SKINTONE_019_MENU_video-004_17p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-007",
+          "timelineRecordID": "phase0-video-004-tl-007",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 20,
+          "endTimestamp": 22,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_015/CF27_XBOXUNKNOWN_RTG_SKINTONE_015_MENU_video-004_21p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-008",
+          "timelineRecordID": "phase0-video-004-tl-008",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 23,
+          "endTimestamp": 24,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_021/CF27_XBOXUNKNOWN_RTG_SKINTONE_021_MENU_video-004_23p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-009",
+          "timelineRecordID": "phase0-video-004-tl-009",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 25,
+          "endTimestamp": 26,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_006/CF27_XBOXUNKNOWN_RTG_SKINTONE_006_MENU_video-004_25p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-010",
+          "timelineRecordID": "phase0-video-004-tl-010",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 27,
+          "endTimestamp": 28,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_007/CF27_XBOXUNKNOWN_RTG_SKINTONE_007_MENU_video-004_27p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-011",
+          "timelineRecordID": "phase0-video-004-tl-011",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 29,
+          "endTimestamp": 30,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_005/CF27_XBOXUNKNOWN_RTG_SKINTONE_005_MENU_video-004_29p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-012",
+          "timelineRecordID": "phase0-video-004-tl-012",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 31,
+          "endTimestamp": 32,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_023/CF27_XBOXUNKNOWN_RTG_SKINTONE_023_MENU_video-004_31p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-013",
+          "timelineRecordID": "phase0-video-004-tl-013",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 33,
+          "endTimestamp": 34,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_024/CF27_XBOXUNKNOWN_RTG_SKINTONE_024_MENU_video-004_33p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-014",
+          "timelineRecordID": "phase0-video-004-tl-014",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 35,
+          "endTimestamp": 36,
+          "extractedFramePath": "data/phase-zero/derivative-frames/video-004-tl-014_04-skin-tone-mp4_35p5s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-015",
+          "timelineRecordID": "phase0-video-004-tl-015",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 37,
+          "endTimestamp": 38,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_014/CF27_XBOXUNKNOWN_RTG_SKINTONE_014_MENU_video-004_38p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-016",
+          "timelineRecordID": "phase0-video-004-tl-016",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 39,
+          "endTimestamp": 40,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_013/CF27_XBOXUNKNOWN_RTG_SKINTONE_013_MENU_video-004_39p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-017",
+          "timelineRecordID": "phase0-video-004-tl-017",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 41,
+          "endTimestamp": 42,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_010/CF27_XBOXUNKNOWN_RTG_SKINTONE_010_MENU_video-004_41p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-018",
+          "timelineRecordID": "phase0-video-004-tl-018",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 43,
+          "endTimestamp": 44,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_012/CF27_XBOXUNKNOWN_RTG_SKINTONE_012_MENU_video-004_43p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-019",
+          "timelineRecordID": "phase0-video-004-tl-019",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 45,
+          "endTimestamp": 46,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_001/CF27_XBOXUNKNOWN_RTG_SKINTONE_001_MENU_video-004_45p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-020",
+          "timelineRecordID": "phase0-video-004-tl-020",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 47,
+          "endTimestamp": 47,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_002/CF27_XBOXUNKNOWN_RTG_SKINTONE_002_MENU_video-004_47p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-021",
+          "timelineRecordID": "phase0-video-004-tl-021",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 48,
+          "endTimestamp": 49,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_003/CF27_XBOXUNKNOWN_RTG_SKINTONE_003_MENU_video-004_48p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-022",
+          "timelineRecordID": "phase0-video-004-tl-022",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 50,
+          "endTimestamp": 51,
+          "extractedFramePath": "data/phase-zero/derivative-frames/video-004-tl-022_04-skin-tone-mp4_50p5s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-023",
+          "timelineRecordID": "phase0-video-004-tl-023",
+          "videoID": "phase0-video-004",
+          "startTimestamp": 52,
+          "endTimestamp": 53.82,
+          "extractedFramePath": "data/phase-zero/derivative-frames/video-004-tl-023_04-skin-tone-mp4_52p91s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-007"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Directly selected values exist in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-skin-details",
+      "displayedCategoryLabel": "Skin Details",
+      "stableMenuID": "cf27-menu-head-skin-skin-details",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": 3,
+      "evidenceBasis": "SELECTED_VALUES_OBSERVED",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "named_option_grid",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 10,
+      "directlyCatalogedValueCount": 10,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": false,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Canonical capture conditions are not locked and independently verified.",
+        "Required standardized visual views are missing or insufficient.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Complete first-to-final Skin Details selector recording with count, wrap, default, and dependency checks.",
+        "Record under locked canonical conditions before production matching use.",
+        "Capture required standardized visual views for production matching suitability."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-005-tl-002",
+          "timelineRecordID": "phase0-video-005-tl-002",
+          "videoID": "phase0-video-005",
+          "startTimestamp": 8,
+          "endTimestamp": 8,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001_MENU_video-005_8p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-005-tl-003",
+          "timelineRecordID": "phase0-video-005-tl-003",
+          "videoID": "phase0-video-005",
+          "startTimestamp": 9,
+          "endTimestamp": 10,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002_MENU_video-005_10p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-005-tl-004",
+          "timelineRecordID": "phase0-video-005-tl-004",
+          "videoID": "phase0-video-005",
+          "startTimestamp": 11,
+          "endTimestamp": 14,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003_MENU_video-005_13p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-005-tl-005",
+          "timelineRecordID": "phase0-video-005-tl-005",
+          "videoID": "phase0-video-005",
+          "startTimestamp": 15,
+          "endTimestamp": 16,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004_MENU_video-005_15p50s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-005-tl-006",
+          "timelineRecordID": "phase0-video-005-tl-006",
+          "videoID": "phase0-video-005",
+          "startTimestamp": 17,
+          "endTimestamp": 18,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008_MENU_video-005_18p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-005-tl-007",
+          "timelineRecordID": "phase0-video-005-tl-007",
+          "videoID": "phase0-video-005",
+          "startTimestamp": 19,
+          "endTimestamp": 20,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007_MENU_video-005_20p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-005-tl-008",
+          "timelineRecordID": "phase0-video-005-tl-008",
+          "videoID": "phase0-video-005",
+          "startTimestamp": 21,
+          "endTimestamp": 22,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006_MENU_video-005_22p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-005-tl-009",
+          "timelineRecordID": "phase0-video-005-tl-009",
+          "videoID": "phase0-video-005",
+          "startTimestamp": 23,
+          "endTimestamp": 24,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005_MENU_video-005_24p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-005-tl-010",
+          "timelineRecordID": "phase0-video-005-tl-010",
+          "videoID": "phase0-video-005",
+          "startTimestamp": 25,
+          "endTimestamp": 26,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009_MENU_video-005_26p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-005-tl-011",
+          "timelineRecordID": "phase0-video-005-tl-011",
+          "videoID": "phase0-video-005",
+          "startTimestamp": 27,
+          "endTimestamp": 31.72,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010_MENU_video-005_29p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-008"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Directly selected values exist in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-eye-shape",
+      "displayedCategoryLabel": "Eye Shape",
+      "stableMenuID": "cf27-menu-head-skin-eye-shape",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": 4,
+      "evidenceBasis": "SELECTED_VALUES_OBSERVED",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "named_option_grid",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 5,
+      "directlyCatalogedValueCount": 5,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": false,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Canonical capture conditions are not locked and independently verified.",
+        "Required standardized visual views are missing or insufficient.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Complete first-to-final Eye Shape selector recording with count, wrap, default, and dependency checks.",
+        "Record under locked canonical conditions before production matching use.",
+        "Capture required standardized visual views for production matching suitability."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-006-tl-002",
+          "timelineRecordID": "phase0-video-006-tl-002",
+          "videoID": "phase0-video-006",
+          "startTimestamp": 14,
+          "endTimestamp": 14,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_001/CF27_XBOXUNKNOWN_RTG_EYESHAPE_001_MENU_video-006_14p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-006-tl-003",
+          "timelineRecordID": "phase0-video-006-tl-003",
+          "videoID": "phase0-video-006",
+          "startTimestamp": 15,
+          "endTimestamp": 16,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_002/CF27_XBOXUNKNOWN_RTG_EYESHAPE_002_MENU_video-006_16p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-006-tl-004",
+          "timelineRecordID": "phase0-video-006-tl-004",
+          "videoID": "phase0-video-006",
+          "startTimestamp": 17,
+          "endTimestamp": 18,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_003/CF27_XBOXUNKNOWN_RTG_EYESHAPE_003_MENU_video-006_18p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-006-tl-005",
+          "timelineRecordID": "phase0-video-006-tl-005",
+          "videoID": "phase0-video-006",
+          "startTimestamp": 19,
+          "endTimestamp": 19,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_004/CF27_XBOXUNKNOWN_RTG_EYESHAPE_004_MENU_video-006_19p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-006-tl-006",
+          "timelineRecordID": "phase0-video-006-tl-006",
+          "videoID": "phase0-video-006",
+          "startTimestamp": 20,
+          "endTimestamp": 24.93,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_005_MENU_video-006_22p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-009"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Directly selected values exist in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-eye-color",
+      "displayedCategoryLabel": "Eye Color",
+      "stableMenuID": "cf27-menu-head-skin-eye-color",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": 5,
+      "evidenceBasis": "SELECTED_VALUES_OBSERVED",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "color_selector_named_grid",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 7,
+      "directlyCatalogedValueCount": 7,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": false,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Canonical capture conditions are not locked and independently verified.",
+        "Required standardized visual views are missing or insufficient.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Complete first-to-final Eye Color selector recording with count, wrap, default, and dependency checks.",
+        "Record under locked canonical conditions before production matching use.",
+        "Capture required standardized visual views for production matching suitability."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-007-tl-002",
+          "timelineRecordID": "phase0-video-007-tl-002",
+          "videoID": "phase0-video-007",
+          "startTimestamp": 12,
+          "endTimestamp": 12,
+          "extractedFramePath": "data/phase-zero/derivative-frames/video-007-tl-002_07-eye-color-mp4_12s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-007-tl-003",
+          "timelineRecordID": "phase0-video-007-tl-003",
+          "videoID": "phase0-video-007",
+          "startTimestamp": 13,
+          "endTimestamp": 15,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_001/CF27_XBOXUNKNOWN_RTG_EYECOLOR_001_MENU_THUMBNAIL_EVIDENCE_video-007_13p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-007-tl-004",
+          "timelineRecordID": "phase0-video-007-tl-004",
+          "videoID": "phase0-video-007",
+          "startTimestamp": 16,
+          "endTimestamp": 17,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_003/CF27_XBOXUNKNOWN_RTG_EYECOLOR_003_MENU_THUMBNAIL_EVIDENCE_video-007_17p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-007-tl-005",
+          "timelineRecordID": "phase0-video-007-tl-005",
+          "videoID": "phase0-video-007",
+          "startTimestamp": 18,
+          "endTimestamp": 20,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_004/CF27_XBOXUNKNOWN_RTG_EYECOLOR_004_MENU_THUMBNAIL_EVIDENCE_video-007_19p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-007-tl-006",
+          "timelineRecordID": "phase0-video-007-tl-006",
+          "videoID": "phase0-video-007",
+          "startTimestamp": 21,
+          "endTimestamp": 22,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_007_MENU_THUMBNAIL_EVIDENCE_video-007_22p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-007-tl-007",
+          "timelineRecordID": "phase0-video-007-tl-007",
+          "videoID": "phase0-video-007",
+          "startTimestamp": 23,
+          "endTimestamp": 24,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_006/CF27_XBOXUNKNOWN_RTG_EYECOLOR_006_MENU_THUMBNAIL_EVIDENCE_video-007_24p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-007-tl-008",
+          "timelineRecordID": "phase0-video-007-tl-008",
+          "videoID": "phase0-video-007",
+          "startTimestamp": 25,
+          "endTimestamp": 29.33,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_005/CF27_XBOXUNKNOWN_RTG_EYECOLOR_005_MENU_THUMBNAIL_EVIDENCE_video-007_28p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-010"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Directly selected values exist in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-nose",
+      "displayedCategoryLabel": "Nose",
+      "stableMenuID": "cf27-menu-head-skin-nose",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": 6,
+      "evidenceBasis": "SELECTED_VALUES_OBSERVED",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "named_option_grid",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 8,
+      "directlyCatalogedValueCount": 7,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "POSSIBLE_WRAP_OBSERVED_UNVERIFIED",
+      "notCaptured": false,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Canonical capture conditions are not locked and independently verified.",
+        "Required standardized visual views are missing or insufficient.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Complete first-to-final Nose selector recording with count, wrap, default, and dependency checks.",
+        "Record under locked canonical conditions before production matching use.",
+        "Capture required standardized visual views for production matching suitability."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-008-tl-002",
+          "timelineRecordID": "phase0-video-008-tl-002",
+          "videoID": "phase0-video-008",
+          "startTimestamp": 14,
+          "endTimestamp": 14,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_005/CF27_XBOXUNKNOWN_RTG_NOSE_005_BEST_AVAILABLE_THREE_QUARTER_video-008_14p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-008-tl-003",
+          "timelineRecordID": "phase0-video-008-tl-003",
+          "videoID": "phase0-video-008",
+          "startTimestamp": 15,
+          "endTimestamp": 15,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_001/CF27_XBOXUNKNOWN_RTG_NOSE_001_MENU_EVIDENCE_video-008_15p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-008-tl-004",
+          "timelineRecordID": "phase0-video-008-tl-004",
+          "videoID": "phase0-video-008",
+          "startTimestamp": 16,
+          "endTimestamp": 18,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_002/CF27_XBOXUNKNOWN_RTG_NOSE_002_MENU_EVIDENCE_video-008_17p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-008-tl-005",
+          "timelineRecordID": "phase0-video-008-tl-005",
+          "videoID": "phase0-video-008",
+          "startTimestamp": 19,
+          "endTimestamp": 20,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_003/CF27_XBOXUNKNOWN_RTG_NOSE_003_MENU_EVIDENCE_video-008_19p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-008-tl-006",
+          "timelineRecordID": "phase0-video-008-tl-006",
+          "videoID": "phase0-video-008",
+          "startTimestamp": 21,
+          "endTimestamp": 22,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_004/CF27_XBOXUNKNOWN_RTG_NOSE_004_MENU_EVIDENCE_video-008_21p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-008-tl-007",
+          "timelineRecordID": "phase0-video-008-tl-007",
+          "videoID": "phase0-video-008",
+          "startTimestamp": 23,
+          "endTimestamp": 24,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_007/CF27_XBOXUNKNOWN_RTG_NOSE_007_MENU_EVIDENCE_video-008_23p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-008-tl-008",
+          "timelineRecordID": "phase0-video-008-tl-008",
+          "videoID": "phase0-video-008",
+          "startTimestamp": 25,
+          "endTimestamp": 27,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_006/CF27_XBOXUNKNOWN_RTG_NOSE_006_MENU_EVIDENCE_video-008_26p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-008-tl-009",
+          "timelineRecordID": "phase0-video-008-tl-009",
+          "videoID": "phase0-video-008",
+          "startTimestamp": 28,
+          "endTimestamp": 32.45,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_005/CF27_XBOXUNKNOWN_RTG_NOSE_005_MENU_EVIDENCE_video-008_29p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-011"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Directly selected values exist in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-ear-shape",
+      "displayedCategoryLabel": "Ear Shape",
+      "stableMenuID": "cf27-menu-head-skin-ear-shape",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": 7,
+      "evidenceBasis": "SELECTED_VALUES_OBSERVED",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "named_option_grid",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 5,
+      "directlyCatalogedValueCount": 4,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": false,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Canonical capture conditions are not locked and independently verified.",
+        "Required standardized visual views are missing or insufficient.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Complete first-to-final Ear Shape selector recording with count, wrap, default, and dependency checks.",
+        "Record under locked canonical conditions before production matching use.",
+        "Capture required standardized visual views for production matching suitability."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-frame-video-009-tl-002",
+          "timelineRecordID": "phase0-video-009-tl-002",
+          "videoID": "phase0-video-009",
+          "startTimestamp": 16,
+          "endTimestamp": 17,
+          "extractedFramePath": "data/phase-zero/derivative-frames/video-009-tl-002_09-ear-shape-mp4_16p5s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-009-tl-003",
+          "timelineRecordID": "phase0-video-009-tl-003",
+          "videoID": "phase0-video-009",
+          "startTimestamp": 18,
+          "endTimestamp": 20,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001_MENU_EVIDENCE_video-009_18p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-009-tl-004",
+          "timelineRecordID": "phase0-video-009-tl-004",
+          "videoID": "phase0-video-009",
+          "startTimestamp": 21,
+          "endTimestamp": 22,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001_BEST_AVAILABLE_SIDE_OR_THREE_QUARTER_video-009_21p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-009-tl-005",
+          "timelineRecordID": "phase0-video-009-tl-005",
+          "videoID": "phase0-video-009",
+          "startTimestamp": 23,
+          "endTimestamp": 25,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_002/CF27_XBOXUNKNOWN_RTG_EARSHAPE_002_MENU_EVIDENCE_video-009_23p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        },
+        {
+          "evidenceID": "phase0-frame-video-009-tl-006",
+          "timelineRecordID": "phase0-video-009-tl-006",
+          "videoID": "phase0-video-009",
+          "startTimestamp": 26,
+          "endTimestamp": 30.21,
+          "extractedFramePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004_MENU_EVIDENCE_video-009_26p00s.png",
+          "confidence": "HIGH",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-012"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Directly selected values exist in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-mouth-shape",
+      "displayedCategoryLabel": "Mouth Shape",
+      "stableMenuID": "cf27-menu-head-skin-mouth-shape",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": 8,
+      "evidenceBasis": "MENU_ROW_VISIBLE_ONLY",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "unknown_selector",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No selected option values are cataloged.",
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Canonical capture conditions are not locked and independently verified.",
+        "Required standardized visual views are missing or insufficient.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Open Mouth Shape and record selected values, count/order boundaries, defaults, dependencies, and required evidence.",
+        "Record under locked canonical conditions before production matching use.",
+        "Capture required standardized visual views for production matching suitability."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-013"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Only the menu/category row is visible in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-jaw-shape",
+      "displayedCategoryLabel": "Jaw Shape",
+      "stableMenuID": "cf27-menu-head-skin-jaw-shape",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": 9,
+      "evidenceBasis": "MENU_ROW_VISIBLE_ONLY",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "unknown_selector",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No selected option values are cataloged.",
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Canonical capture conditions are not locked and independently verified.",
+        "Required standardized visual views are missing or insufficient.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Open Jaw Shape and record selected values, count/order boundaries, defaults, dependencies, and required evidence.",
+        "Record under locked canonical conditions before production matching use.",
+        "Capture required standardized visual views for production matching suitability."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-013"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Only the menu/category row is visible in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-chin",
+      "displayedCategoryLabel": "Chin",
+      "stableMenuID": "cf27-menu-head-skin-chin",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": 10,
+      "evidenceBasis": "MENU_ROW_VISIBLE_ONLY",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "unknown_selector",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No selected option values are cataloged.",
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Canonical capture conditions are not locked and independently verified.",
+        "Required standardized visual views are missing or insufficient.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Open Chin and record selected values, count/order boundaries, defaults, dependencies, and required evidence.",
+        "Record under locked canonical conditions before production matching use.",
+        "Capture required standardized visual views for production matching suitability."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-013"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Only the menu/category row is visible in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-hair",
+      "displayedCategoryLabel": "Hair",
+      "stableMenuID": "cf27-menu-appearance-hair",
+      "parentMenuID": "cf27-menu-player-appearance",
+      "parentMenuLabel": "Appearance",
+      "nativeOrder": 2,
+      "evidenceBasis": "MENU_ROW_VISIBLE_ONLY",
+      "classification": "CONFIRMED_PRESENT_INCOMPLETE",
+      "controlType": "submenu",
+      "captureStatus": "PARTIAL",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": true,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": false,
+      "capturedWithoutSufficientVisualViews": false,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No selected option values are cataloged.",
+        "Selector first/final boundary, default, total count, or wrap/no-wrap proof is missing.",
+        "Independent second-person verification has not occurred."
+      ],
+      "missingEvidence": [
+        "Open Hair and record its child controls, boundaries, defaults, counts, dependencies, and evidence."
+      ],
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY",
+          "sourceType": "research",
+          "dataClass": "RESEARCH_GAP_AUDIT",
+          "productionStatus": "NOT_PRODUCTION_DATA",
+          "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+        }
+      ],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-014"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "Research-only gap audit row.",
+        "Only the menu/category row is visible in current evidence."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-suspected-hairstyles",
+      "displayedCategoryLabel": "Hairstyles",
+      "stableMenuID": null,
+      "parentMenuID": null,
+      "parentMenuLabel": "Hair",
+      "nativeOrder": null,
+      "evidenceBasis": "SOURCE_REQUIRED_NOT_DIRECTLY_OBSERVED",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "controlType": "UNKNOWN_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": false,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No direct native game category, selected values, boundaries, defaults, or visual evidence are present in current footage."
+      ],
+      "missingEvidence": [
+        "Source-of-truth MVP requires hairstyle recommendations, but current footage only proves a Hair submenu row.",
+        "Capture direct shipping-game evidence before creating research candidate records."
+      ],
+      "sourceEvidence": [],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-014",
+        "GFM-CAP-015"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "This row is a source-required product gap, not a confirmed College Football 27 native category."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-suspected-hair-colors",
+      "displayedCategoryLabel": "Hair colors",
+      "stableMenuID": null,
+      "parentMenuID": null,
+      "parentMenuLabel": "Hair",
+      "nativeOrder": null,
+      "evidenceBasis": "SOURCE_REQUIRED_NOT_DIRECTLY_OBSERVED",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "controlType": "UNKNOWN_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": false,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No direct native game category, selected values, boundaries, defaults, or visual evidence are present in current footage."
+      ],
+      "missingEvidence": [
+        "Source-of-truth MVP requires hair-color recommendations, but current footage has not opened the Hair submenu.",
+        "Capture direct shipping-game evidence before creating research candidate records."
+      ],
+      "sourceEvidence": [],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-014",
+        "GFM-CAP-016"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "This row is a source-required product gap, not a confirmed College Football 27 native category."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-suspected-facial-hair",
+      "displayedCategoryLabel": "Facial hair",
+      "stableMenuID": null,
+      "parentMenuID": null,
+      "parentMenuLabel": "Hair",
+      "nativeOrder": null,
+      "evidenceBasis": "SOURCE_REQUIRED_NOT_DIRECTLY_OBSERVED",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "controlType": "UNKNOWN_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": false,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No direct native game category, selected values, boundaries, defaults, or visual evidence are present in current footage."
+      ],
+      "missingEvidence": [
+        "Source-of-truth MVP requires facial-hair recommendations, but current footage has not opened the Hair submenu.",
+        "Capture direct shipping-game evidence before creating research candidate records."
+      ],
+      "sourceEvidence": [],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-014",
+        "GFM-CAP-017"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "This row is a source-required product gap, not a confirmed College Football 27 native category."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-suspected-facial-hair-colors",
+      "displayedCategoryLabel": "Facial-hair colors",
+      "stableMenuID": null,
+      "parentMenuID": null,
+      "parentMenuLabel": "Hair",
+      "nativeOrder": null,
+      "evidenceBasis": "SOURCE_REQUIRED_NOT_DIRECTLY_OBSERVED",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "controlType": "UNKNOWN_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": false,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No direct native game category, selected values, boundaries, defaults, or visual evidence are present in current footage."
+      ],
+      "missingEvidence": [
+        "Source-of-truth MVP requires facial-hair color handling when supported, but current footage has not opened the Hair submenu.",
+        "Capture direct shipping-game evidence before creating research candidate records."
+      ],
+      "sourceEvidence": [],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-014",
+        "GFM-CAP-018"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "This row is a source-required product gap, not a confirmed College Football 27 native category."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-suspected-eyebrows",
+      "displayedCategoryLabel": "Eyebrows",
+      "stableMenuID": null,
+      "parentMenuID": null,
+      "parentMenuLabel": "Unknown",
+      "nativeOrder": null,
+      "evidenceBasis": "SOURCE_REQUIRED_NOT_DIRECTLY_OBSERVED",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "controlType": "UNKNOWN_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": false,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No direct native game category, selected values, boundaries, defaults, or visual evidence are present in current footage."
+      ],
+      "missingEvidence": [
+        "The matching and profile requirements include eyebrows, but current footage does not show a native Eyebrows control.",
+        "Capture direct shipping-game evidence before creating research candidate records."
+      ],
+      "sourceEvidence": [],
+      "relatedCaptureRequestIDs": [],
+      "productionEligible": false,
+      "notes": [
+        "This row is a source-required product gap, not a confirmed College Football 27 native category."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-suspected-body-height-weight-physique",
+      "displayedCategoryLabel": "Body/height/weight/physique",
+      "stableMenuID": null,
+      "parentMenuID": null,
+      "parentMenuLabel": "Unknown",
+      "nativeOrder": null,
+      "evidenceBasis": "SOURCE_REQUIRED_NOT_DIRECTLY_OBSERVED",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "controlType": "UNKNOWN_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": false,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "No direct native game category, selected values, boundaries, defaults, or visual evidence are present in current footage."
+      ],
+      "missingEvidence": [
+        "The product requirements include height, weight, body type, and physique preferences, but current appearance-menu footage does not inspect those controls.",
+        "Capture direct shipping-game evidence before creating research candidate records."
+      ],
+      "sourceEvidence": [],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-002"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "This row is a source-required product gap, not a confirmed College Football 27 native category."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-unknown-additional-appearance-rows-beyond-visible-head-skin-and-hair",
+      "displayedCategoryLabel": "Additional Appearance rows beyond visible Head & Skin and Hair",
+      "stableMenuID": null,
+      "parentMenuID": null,
+      "parentMenuLabel": "Appearance",
+      "nativeOrder": null,
+      "evidenceBasis": "MENU_REGION_NOT_FULLY_INSPECTED",
+      "classification": "UNKNOWN_MENU_NOT_FULLY_INSPECTED",
+      "controlType": "UNKNOWN",
+      "captureStatus": "UNKNOWN_NOT_FULLY_INSPECTED",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": false,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "The relevant menu region has not been fully inspected, so additional categories cannot be confirmed absent or cataloged."
+      ],
+      "missingEvidence": [
+        "Appearance was not fully boundary-captured, so additional rows cannot be confirmed absent.",
+        "Record complete first-to-final menu boundary evidence and scrolling continuation where applicable."
+      ],
+      "sourceEvidence": [],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-003"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "This row records uncertainty caused by incomplete menu inspection, not a native game option."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-unknown-additional-head-skin-rows-beyond-visible-chin",
+      "displayedCategoryLabel": "Additional Head & Skin rows beyond visible Chin",
+      "stableMenuID": null,
+      "parentMenuID": null,
+      "parentMenuLabel": "Head & Skin",
+      "nativeOrder": null,
+      "evidenceBasis": "MENU_REGION_NOT_FULLY_INSPECTED",
+      "classification": "UNKNOWN_MENU_NOT_FULLY_INSPECTED",
+      "controlType": "UNKNOWN",
+      "captureStatus": "UNKNOWN_NOT_FULLY_INSPECTED",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": false,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "The relevant menu region has not been fully inspected, so additional categories cannot be confirmed absent or cataloged."
+      ],
+      "missingEvidence": [
+        "Head & Skin was not fully boundary-captured, so rows after Chin or before Head Template cannot be confirmed absent.",
+        "Record complete first-to-final menu boundary evidence and scrolling continuation where applicable."
+      ],
+      "sourceEvidence": [],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-003"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "This row records uncertainty caused by incomplete menu inspection, not a native game option."
+      ]
+    },
+    {
+      "gapID": "appearance-gap-unknown-hair-submenu-child-controls",
+      "displayedCategoryLabel": "Hair submenu child controls",
+      "stableMenuID": null,
+      "parentMenuID": null,
+      "parentMenuLabel": "Hair",
+      "nativeOrder": null,
+      "evidenceBasis": "MENU_REGION_NOT_FULLY_INSPECTED",
+      "classification": "UNKNOWN_MENU_NOT_FULLY_INSPECTED",
+      "controlType": "UNKNOWN",
+      "captureStatus": "UNKNOWN_NOT_FULLY_INSPECTED",
+      "directlySelectedObservationCount": 0,
+      "directlyCatalogedValueCount": 0,
+      "visibleCountStatus": "COUNT_UNKNOWN",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "wrapStatus": "UNKNOWN",
+      "notCaptured": true,
+      "partiallyCaptured": false,
+      "capturedWithoutClearIndices": false,
+      "capturedWithoutSelectorBoundaries": true,
+      "capturedWithoutStableConditions": true,
+      "capturedWithoutSufficientVisualViews": true,
+      "capturedButUnsuitableForProductionMatching": true,
+      "productionUnsuitableReasons": [
+        "The relevant menu region has not been fully inspected, so additional categories cannot be confirmed absent or cataloged."
+      ],
+      "missingEvidence": [
+        "Hair is visible as a submenu row, but the submenu was not opened in current footage.",
+        "Record complete first-to-final menu boundary evidence and scrolling continuation where applicable."
+      ],
+      "sourceEvidence": [],
+      "relatedCaptureRequestIDs": [
+        "GFM-CAP-014"
+      ],
+      "productionEligible": false,
+      "notes": [
+        "This row records uncertainty caused by incomplete menu inspection, not a native game option."
+      ]
+    }
+  ]
+}

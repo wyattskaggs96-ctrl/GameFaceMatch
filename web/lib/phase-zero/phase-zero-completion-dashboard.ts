@@ -48,6 +48,7 @@ export interface Phase0CompletionCategoryProgress {
 export interface Phase0CompletionDashboardReport {
   generatedAt: string;
   categoryProgress: Phase0CompletionCategoryProgress[];
+  appearanceMenuGapSummary: Phase0AppearanceMenuGapSummary;
   metrics: {
     overallPhase0CompletionPercent: number;
     evidenceCompletionPercent: number;
@@ -63,9 +64,27 @@ export interface Phase0CompletionDashboardReport {
   nextRequiredHumanAction: string;
 }
 
+export interface Phase0AppearanceMenuGapSummary {
+  totalRows: number;
+  confirmedPresentIncomplete: number;
+  confirmedPresentCompleteForResearch: number;
+  suspectedButNotObserved: number;
+  confirmedAbsent: number;
+  unknownBecauseMenuNotFullyInspected: number;
+  notCaptured: number;
+  partiallyCaptured: number;
+  capturedWithoutClearIndices: number;
+  capturedWithoutSelectorBoundaries: number;
+  capturedWithoutStableConditions: number;
+  capturedWithoutSufficientVisualViews: number;
+  capturedButUnsuitableForProductionMatching: number;
+  productionEligibleRows: number;
+}
+
 export interface Phase0CompletionArtifacts {
   additionalAttributes?: unknown;
   additionalAttributeRecapture?: unknown;
+  appearanceMenuGaps?: unknown;
   environment?: unknown;
   evidenceManifest?: unknown;
   headRecapture?: unknown;
@@ -128,6 +147,7 @@ export function createPhase0CompletionDashboard(input: Phase0CompletionArtifacts
   return {
     generatedAt: input.nowISO ?? new Date().toISOString(),
     categoryProgress,
+    appearanceMenuGapSummary: context.appearanceMenuGapSummary,
     metrics,
     productionReadiness,
     highestPriorityMissingCapture: chooseHighestPriorityMissingCapture(context),
@@ -177,6 +197,7 @@ interface ArtifactContext {
   captureRequests: RecordObject[];
   researchExportCounts: Record<string, number>;
   researchPackageValidated: boolean;
+  appearanceMenuGapSummary: Phase0AppearanceMenuGapSummary;
 }
 
 interface RecordObject {
@@ -192,6 +213,7 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
   const menuMap = asRecord(artifacts.menuMap);
   const researchExportManifest = asRecord(artifacts.researchExportManifest);
   const researchValidation = asRecord(artifacts.researchValidation);
+  const appearanceMenuGaps = asRecord(artifacts.appearanceMenuGaps);
 
   return {
     additionalRecords: asArray(additionalAttributes.records),
@@ -210,7 +232,8 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
     ],
     captureRequests: asArray(asRecord(artifacts.captureRequests).requests),
     researchExportCounts: numberRecord(asRecord(researchExportManifest.counts)),
-    researchPackageValidated: researchValidation.ok === true || researchValidation.status === "passed"
+    researchPackageValidated: researchValidation.ok === true || researchValidation.status === "passed",
+    appearanceMenuGapSummary: normalizeAppearanceMenuGapSummary(asRecord(appearanceMenuGaps.summary))
   };
 }
 
@@ -481,6 +504,25 @@ function asArray(value: unknown): RecordObject[] {
 
 function numberRecord(value: RecordObject): Record<string, number> {
   return Object.fromEntries(Object.entries(value).filter((entry): entry is [string, number] => typeof entry[1] === "number"));
+}
+
+function normalizeAppearanceMenuGapSummary(value: RecordObject): Phase0AppearanceMenuGapSummary {
+  return {
+    totalRows: numberValue(value.totalRows),
+    confirmedPresentIncomplete: numberValue(value.confirmedPresentIncomplete),
+    confirmedPresentCompleteForResearch: numberValue(value.confirmedPresentCompleteForResearch),
+    suspectedButNotObserved: numberValue(value.suspectedButNotObserved),
+    confirmedAbsent: numberValue(value.confirmedAbsent),
+    unknownBecauseMenuNotFullyInspected: numberValue(value.unknownBecauseMenuNotFullyInspected),
+    notCaptured: numberValue(value.notCaptured),
+    partiallyCaptured: numberValue(value.partiallyCaptured),
+    capturedWithoutClearIndices: numberValue(value.capturedWithoutClearIndices),
+    capturedWithoutSelectorBoundaries: numberValue(value.capturedWithoutSelectorBoundaries),
+    capturedWithoutStableConditions: numberValue(value.capturedWithoutStableConditions),
+    capturedWithoutSufficientVisualViews: numberValue(value.capturedWithoutSufficientVisualViews),
+    capturedButUnsuitableForProductionMatching: numberValue(value.capturedButUnsuitableForProductionMatching),
+    productionEligibleRows: numberValue(value.productionEligibleRows)
+  };
 }
 
 function stringValue(value: unknown): string {

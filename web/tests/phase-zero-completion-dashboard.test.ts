@@ -52,6 +52,13 @@ describe("Phase 0 completion dashboard", () => {
     expect(report.productionReadiness.status).toBe("blocked");
     expect(report.productionReadiness.reason).toMatch(/No independently verified/);
     expect(report.highestPriorityMissingCapture).toMatch(/^P0:/);
+    expect(report.appearanceMenuGapSummary).toMatchObject({
+      confirmedPresentIncomplete: 13,
+      confirmedPresentCompleteForResearch: 0,
+      suspectedButNotObserved: 6,
+      unknownBecauseMenuNotFullyInspected: 3,
+      productionEligibleRows: 0
+    });
   });
 
   it("keeps uncataloged required categories visible as zero-progress blockers", () => {

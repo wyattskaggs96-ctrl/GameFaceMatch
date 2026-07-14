@@ -5,6 +5,7 @@ import type { Phase0CompletionArtifacts } from "./phase-zero-completion-dashboar
 const artifactPaths = {
   additionalAttributes: "data/phase-zero/additional_attributes.research.json",
   additionalAttributeRecapture: "data/phase-zero/additional_attributes_recapture_requirements.research.json",
+  appearanceMenuGaps: "data/phase-zero/appearance_menu_gap_matrix.json",
   environment: "data/phase-zero/environment_manifest.research.json",
   evidenceManifest: "data/phase-zero/evidence_manifest.json",
   headRecapture: "data/phase-zero/head_template_recapture_list.research.json",

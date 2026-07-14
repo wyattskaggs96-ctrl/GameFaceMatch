@@ -1,0 +1,12 @@
+checkID,status,finding,productionImpact,evidence
+canonical_head,UNCONFIRMED,No hairstyle capture sequence proves the canonical head used for hair comparison.,BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,
+canonical_skin_setting,UNCONFIRMED,No hairstyle capture sequence proves the skin setting.,BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,
+facial_hair_absent,UNCONFIRMED,No hairstyle capture sequence proves facial hair was set to None or absent.,BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,
+hair_color,UNCONFIRMED,No hairstyle capture sequence proves the hair color used.,BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,
+framing_consistency,NOT_ASSESSABLE,No hairstyle option sequence exists for framing comparison.,BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,
+menu_order,NOT_OBSERVED,The hairstyle selector has not been opened or traversed.,BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,
+double_count,NOT_AVAILABLE,No complete hairstyle selector count is available.,BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,
+required_views,MISSING,"Missing all required views: MENU, FRONT, LEFT_3Q, LEFT_PROFILE, REAR, RIGHT_PROFILE, RIGHT_3Q.",BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,
+loading_animation,NOT_ASSESSABLE,No hairstyle frames were extracted.,BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,
+clipping,NOT_ASSESSABLE,No hairstyle frames were extracted.,BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,
+native_label_integrity,NO_RECORDS_CREATED,No native hairstyle labels or indices have been entered.,BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS,

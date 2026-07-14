@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "cf27-hairstyle-quality-report-v1",
+  "generatedAt": "2026-07-14T02:30:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_HAIRSTYLE_QUALITY_REPORT",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "summary": {
+    "status": "BLOCKED_NO_HAIRSTYLE_SELECTOR_EVIDENCE",
+    "optionsAssessed": 0,
+    "optionsAcceptedForResearch": 0,
+    "optionsRejected": 0,
+    "optionsRequiringRecapture": 0,
+    "sequenceLevelRecaptureRequired": true,
+    "blocker": "Current evidence shows the Hair submenu row only. It does not open a hairstyle control or select hairstyle values."
+  },
+  "checks": [
+    {
+      "checkID": "canonical_head",
+      "status": "UNCONFIRMED",
+      "finding": "No hairstyle capture sequence proves the canonical head used for hair comparison.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "canonical_skin_setting",
+      "status": "UNCONFIRMED",
+      "finding": "No hairstyle capture sequence proves the skin setting.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "facial_hair_absent",
+      "status": "UNCONFIRMED",
+      "finding": "No hairstyle capture sequence proves facial hair was set to None or absent.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "hair_color",
+      "status": "UNCONFIRMED",
+      "finding": "No hairstyle capture sequence proves the hair color used.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "framing_consistency",
+      "status": "NOT_ASSESSABLE",
+      "finding": "No hairstyle option sequence exists for framing comparison.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "menu_order",
+      "status": "NOT_OBSERVED",
+      "finding": "The hairstyle selector has not been opened or traversed.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "double_count",
+      "status": "NOT_AVAILABLE",
+      "finding": "No complete hairstyle selector count is available.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "required_views",
+      "status": "MISSING",
+      "finding": "Missing all required views: MENU, FRONT, LEFT_3Q, LEFT_PROFILE, REAR, RIGHT_PROFILE, RIGHT_3Q.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "loading_animation",
+      "status": "NOT_ASSESSABLE",
+      "finding": "No hairstyle frames were extracted.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "clipping",
+      "status": "NOT_ASSESSABLE",
+      "finding": "No hairstyle frames were extracted.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "native_label_integrity",
+      "status": "NO_RECORDS_CREATED",
+      "finding": "No native hairstyle labels or indices have been entered.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIRSTYLE_RECORDS",
+      "evidence": null
+    }
+  ]
+}

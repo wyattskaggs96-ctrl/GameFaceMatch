@@ -1,0 +1,35 @@
+# Hairstyle Recapture Report
+
+Status: **OPEN_RECAPTURE_REQUIRED**
+
+## HAIRSTYLE-RECAPTURE-001
+
+- Priority: P0
+- Linked capture requests: GFM-CAP-007, GFM-CAP-008
+- Exact menu path: Create Player > Player > Appearance > Hair, then the visible hairstyle control only if directly shown
+- Reason: The current evidence proves the Hair submenu row exists but does not open Hair or show any hairstyle selector values.
+- Existing footage usefulness: Current footage remains useful only to show that Hair appears as an Appearance submenu row.
+
+## Required Canonical Context
+
+- Confirm native head value used for hairstyle capture.
+- Confirm native skin setting.
+- Confirm facial hair is None/absent if the game offers that control.
+- Confirm hair color used for the hairstyle pass.
+- Keep position, mode, body type, account state, and unlock state unchanged or document visible constraints.
+
+## Required Evidence
+
+- Hair submenu boundary map from GFM-CAP-007.
+- Readable native hairstyle label or index for every selected value.
+- Two complete counts when selector boundaries make that possible.
+- Required views for each option: MENU, FRONT, LEFT_3Q, LEFT_PROFILE, REAR, RIGHT_PROFILE, RIGHT_3Q.
+- Boundary or wrap/no-wrap proof for first and final values.
+
+## Acceptance Criteria
+
+- Every entered hairstyle record is backed by directly selected native game evidence.
+- Native order is preserved without inferred skipped values.
+- None, shaved, or shortest option is identified only if visibly selected.
+- Clipping, loading, animation, obstruction, and framing issues are recorded per option.
+- No record is assigned VERIFIED or production eligibility during primary research.

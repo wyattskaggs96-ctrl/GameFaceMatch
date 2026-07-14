@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "cf27-hairstyle-recapture-report-v1",
+  "generatedAt": "2026-07-14T02:30:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_HAIRSTYLE_RECAPTURE_REPORT",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "summary": {
+    "openRequests": 1,
+    "productionBlockers": 1,
+    "captureRequestIDs": [
+      "GFM-CAP-007",
+      "GFM-CAP-008"
+    ],
+    "status": "OPEN_RECAPTURE_REQUIRED"
+  },
+  "requests": [
+    {
+      "recaptureID": "HAIRSTYLE-RECAPTURE-001",
+      "priority": "P0",
+      "linkedCaptureRequestIDs": [
+        "GFM-CAP-007",
+        "GFM-CAP-008"
+      ],
+      "exactMenuPath": "Create Player > Player > Appearance > Hair, then the visible hairstyle control only if directly shown",
+      "reason": "The current evidence proves the Hair submenu row exists but does not open Hair or show any hairstyle selector values.",
+      "requiredCanonicalContext": [
+        "Confirm native head value used for hairstyle capture.",
+        "Confirm native skin setting.",
+        "Confirm facial hair is None/absent if the game offers that control.",
+        "Confirm hair color used for the hairstyle pass.",
+        "Keep position, mode, body type, account state, and unlock state unchanged or document visible constraints."
+      ],
+      "requiredEvidence": [
+        "Hair submenu boundary map from GFM-CAP-007.",
+        "Readable native hairstyle label or index for every selected value.",
+        "Two complete counts when selector boundaries make that possible.",
+        "Required views for each option: MENU, FRONT, LEFT_3Q, LEFT_PROFILE, REAR, RIGHT_PROFILE, RIGHT_3Q.",
+        "Boundary or wrap/no-wrap proof for first and final values."
+      ],
+      "acceptanceCriteria": [
+        "Every entered hairstyle record is backed by directly selected native game evidence.",
+        "Native order is preserved without inferred skipped values.",
+        "None, shaved, or shortest option is identified only if visibly selected.",
+        "Clipping, loading, animation, obstruction, and framing issues are recorded per option.",
+        "No record is assigned VERIFIED or production eligibility during primary research."
+      ],
+      "existingFootageUsefulness": "Current footage remains useful only to show that Hair appears as an Appearance submenu row.",
+      "status": "OPEN",
+      "productionBlocker": true
+    }
+  ]
+}

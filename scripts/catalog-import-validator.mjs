@@ -29,6 +29,7 @@ export const CATALOG_IMPORT_CHECKS = [
   "collegeFootball26Records",
   "duplicateObservationsRetained",
   "productionTestSeparation",
+  "recordClassification",
   "productionRecommenderFixtureAccess",
   "supportedTarget",
   "validChecksums",
@@ -38,7 +39,8 @@ export const CATALOG_IMPORT_CHECKS = [
 
 const requiredAngles = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"];
 const allowedVerificationStates = new Set(["verified", "unverified", "rejected", "archived"]);
-const productionBlockedSourceTypes = new Set(["researchDraft", "testFixture", "demoData", "localDeveloperSample"]);
+const productionBlockedSourceTypes = new Set(["research", "researchDraft", "researchCandidate", "shippingGameVideoResearch", "publicSourceOnly", "testFixture", "demoData", "localDeveloperSample"]);
+const approvedCatalogManagerDispositions = new Set(["approved", "approvedWithNotes"]);
 const placeholderPattern = /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK)\b/i;
 const collegeFootball26Pattern = /\b(College\s*Football\s*26|CFB?26|CF26|CollegeFootball26)\b/i;
 const fixtureAccessPattern = /data\/fixtures\/test-only|synthetic-catalog|synthetic-match|sourceType["']?\s*:\s*["']testFixture/i;
@@ -74,6 +76,7 @@ export function validateCatalogImport(catalogPackage, options = {}) {
   runCheck(report, "collegeFootball26Records", () => validateNoCollegeFootball26Records(catalogPackage));
   runCheck(report, "duplicateObservationsRetained", () => validateDuplicateObservationsRetained(catalogPackage));
   runCheck(report, "productionTestSeparation", () => validateProductionTestSeparation(catalogPackage));
+  runCheck(report, "recordClassification", () => validateRecordClassification(catalogPackage));
   runCheck(report, "productionRecommenderFixtureAccess", () => validateProductionRecommenderFixtureAccess(options.repositoryRoot ?? defaultRepositoryRoot));
   runCheck(report, "supportedTarget", () => validateSupportedTargets(catalogPackage, options));
   runCheck(report, "validChecksums", () => validateChecksums(catalogPackage, options));
@@ -143,6 +146,7 @@ export function createCatalogImportSelfCheckPackage() {
       }
     },
     humanAnnotations: { note: "test-only validator self-check" },
+    catalogManagerDisposition: "approved",
     navigationInstructions: [
       {
         sequenceNumber: 1,
@@ -462,6 +466,29 @@ function validateProductionTestSeparation(catalogPackage) {
   for (const asset of catalogPackage?.assets ?? []) {
     if (/data\/fixtures\/test-only|\/fixtures\/test-only\/|^fixtures\/test-only\/|\/test-only\//i.test(String(asset?.relativePath ?? "").replaceAll("\\", "/"))) {
       findings.errors.push(error("fixtureEvidencePath", `${asset?.assetID || "Asset"} points to test-only or fixture evidence.`, "Production imports must reference verified production evidence paths."));
+    }
+  }
+  return findings;
+}
+
+function validateRecordClassification(catalogPackage) {
+  const findings = createCheckFindings();
+  for (const item of catalogPackage?.items ?? []) {
+    const id = item?.stableInternalID || "Record";
+    if (item?.sourceType !== "production") {
+      findings.errors.push(error("recordNotProductionVerified", `${id} is non-production ${item?.sourceType ?? "missing"}.`, "Only approved production records can enter production import."));
+    }
+    if (item?.sourceType === "publicSourceOnly") {
+      findings.errors.push(error("publicSourceOnlyRecordInProduction", `${id} is public-source-only and cannot be shown as a shipping-game setting.`, "Replace public-source planning data with verified shipping-game evidence."));
+    }
+    if (item?.verificationState !== "verified") {
+      findings.errors.push(error("recordNotProductionVerified", `${id} is not verified.`, "Complete verification and catalog-manager approval before import."));
+    }
+    if (!approvedCatalogManagerDispositions.has(item?.catalogManagerDisposition)) {
+      findings.errors.push(error("missingCatalogManagerDisposition", `${id} is missing approved catalog-manager disposition.`, "Record catalog-manager disposition on each production item."));
+    }
+    if (item?.deprecated === true && !hasText(item?.deprecatedContext)) {
+      findings.errors.push(error("deprecatedContextMissing", `${id} is deprecated without context.`, "Record deprecation context before import."));
     }
   }
   return findings;

@@ -1,4 +1,5 @@
 import type { GameCatalogManifest } from "@/types/domain";
+import { classifyCatalogRecord, hasApprovedCatalogManagerDisposition } from "@/lib/catalog/catalog-record-classification";
 import { isDataSourceType, isProductionBlockedSource, isProductionSource } from "@/lib/data/source-types";
 import { CatalogValidationError } from "./catalog-errors";
 
@@ -40,6 +41,13 @@ export function validateProductionCatalog(manifest: GameCatalogManifest, availab
     if (isProductionBlockedSource(item.sourceType)) {
       throw new CatalogValidationError("nonProductionSourceInProduction", `Production catalog cannot include ${item.sourceType} record: ${id}.`);
     }
+    const classification = classifyCatalogRecord(item);
+    if (classification.classification === "PUBLIC_SOURCE_ONLY") {
+      throw new CatalogValidationError("publicSourceOnlyRecordInProduction", `Public-source-only record cannot be shown as a shipping-game setting: ${id}.`);
+    }
+    if (classification.classification === "PLACEHOLDER") {
+      throw new CatalogValidationError("placeholderToken", `Placeholder token in production record: ${id}.`);
+    }
     if (seen.has(id)) {
       throw new CatalogValidationError("duplicateStableID", `Duplicate stable ID: ${id}`);
     }
@@ -67,6 +75,12 @@ export function validateProductionCatalog(manifest: GameCatalogManifest, availab
     }
     if (item.isTestFixture) {
       throw new CatalogValidationError("fixtureRecordInProduction", `Fixture record in production catalog: ${id}.`);
+    }
+    if (!hasApprovedCatalogManagerDisposition(item)) {
+      throw new CatalogValidationError("missingCatalogManagerDisposition", `Production record is missing catalog-manager disposition: ${id}.`);
+    }
+    if (!classification.productionAccessAllowed) {
+      throw new CatalogValidationError("recordNotProductionVerified", `Record is not eligible for production recommendation access: ${id}.`);
     }
     if (containsPlaceholder(item)) {
       throw new CatalogValidationError("placeholderToken", `Placeholder token in production record: ${id}.`);

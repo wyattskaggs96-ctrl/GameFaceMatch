@@ -1,4 +1,5 @@
 import type { GameCatalogItem, ISODateString } from "@/types/domain";
+import { classifyCatalogRecord, hasApprovedCatalogManagerDisposition } from "@/lib/catalog/catalog-record-classification";
 
 export const PRODUCTION_PUBLISH_GATE_VERSION = "production-publish-gate-v1";
 
@@ -156,7 +157,7 @@ export interface ProductionPublishGateInput {
 const requiredAngles = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"] as const;
 const allowedProductionRecordStatuses = new Set(["verified"]);
 const allowedSecondPersonDispositions = new Set(["VERIFIED", "VERIFIED_WITH_NOTES"]);
-const fixtureSourceTypes = new Set(["researchDraft", "testFixture", "demoData", "localDeveloperSample"]);
+const fixtureSourceTypes = new Set(["research", "researchDraft", "researchCandidate", "shippingGameVideoResearch", "publicSourceOnly", "testFixture", "demoData", "localDeveloperSample"]);
 const placeholderPattern = /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK)\b/i;
 const fixturePathPattern = /data\/fixtures\/test-only|\/fixtures\/test-only\/|^fixtures\/test-only\/|\/test-only\//i;
 const requiredImportValidationChecks = [
@@ -172,6 +173,7 @@ const requiredImportValidationChecks = [
   "collegeFootball26Records",
   "duplicateObservationsRetained",
   "productionTestSeparation",
+  "recordClassification",
   "productionRecommenderFixtureAccess",
   "supportedTarget",
   "validChecksums",
@@ -320,11 +322,20 @@ function validateSecondPersonVerification(items: GameCatalogItem[], records: Pro
 }
 
 function validateAllowedRecordStatuses(items: GameCatalogItem[]) {
-  return items.flatMap((item) =>
-    allowedProductionRecordStatuses.has(item.verificationState)
-      ? []
-      : [issue("recordStatusNotAllowed", `${item.stableInternalID} has disallowed production status ${item.verificationState}.`, item.stableInternalID)]
-  );
+  return items.flatMap((item) => {
+    const errors: ProductionPublishGateIssue[] = [];
+    const classification = classifyCatalogRecord(item);
+    if (!allowedProductionRecordStatuses.has(item.verificationState)) {
+      errors.push(issue("recordStatusNotAllowed", `${item.stableInternalID} has disallowed production status ${item.verificationState}.`, item.stableInternalID));
+    }
+    if (!hasApprovedCatalogManagerDisposition(item)) {
+      errors.push(issue("missingCatalogManagerDisposition", `${item.stableInternalID} is missing approved catalog-manager disposition.`, item.stableInternalID));
+    }
+    if (!classification.productionAccessAllowed) {
+      errors.push(issue("recordNotProductionVerified", `${item.stableInternalID} is classified ${classification.classification} and cannot publish.`, item.stableInternalID));
+    }
+    return errors;
+  });
 }
 
 function validateDiscrepancies(discrepancies: ProductionPublishDiscrepancyRecord[]) {
@@ -360,7 +371,10 @@ function validateNoFixtures(catalogPackage: ProductionPublishGateCatalogPackage 
   const errors: ProductionPublishGateIssue[] = [];
   if (catalogPackage?.manifest?.sourceType !== "production") errors.push(issue("manifestNotProduction", "Manifest sourceType is not production."));
   for (const item of items) {
-    if (item.isTestFixture || fixtureSourceTypes.has(item.sourceType)) errors.push(issue("fixtureRecordInProduction", `${item.stableInternalID} is fixture or non-production data.`, item.stableInternalID));
+    const classification = classifyCatalogRecord(item);
+    if (item.isTestFixture || fixtureSourceTypes.has(item.sourceType) || classification.classification !== "PRODUCTION_VERIFIED") {
+      errors.push(issue("fixtureRecordInProduction", `${item.stableInternalID} is ${classification.classification} data and cannot publish.`, item.stableInternalID));
+    }
   }
   for (const asset of assets) {
     if (fixturePathPattern.test(String(asset.relativePath ?? "").replaceAll("\\", "/"))) errors.push(issue("fixtureEvidencePath", `${asset.relativePath ?? "Asset"} points to fixture evidence.`));

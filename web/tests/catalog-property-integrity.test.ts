@@ -662,6 +662,7 @@ function releaseManifest(versionID: string): GameCatalogManifest {
     },
     geometryMeasurements: {},
     humanAnnotations: { note: "Synthetic property-test catalog item." },
+    catalogManagerDisposition: "approved",
     navigationInstructions: [{ sequenceNumber: 1, instruction: "Synthetic property-test navigation.", evidenceAssetID: "asset-front" }],
     catalogVersion: {
       identifier: versionID,

@@ -21,7 +21,17 @@ describe("production bundle boundaries", () => {
 
 describe("data source separation", () => {
   it("keeps production, research, fixture, demo, and local sample namespaces explicit", () => {
-    expect(dataSourceTypes).toEqual(["production", "researchDraft", "testFixture", "demoData", "localDeveloperSample"]);
+    expect(dataSourceTypes).toEqual([
+      "production",
+      "research",
+      "researchDraft",
+      "researchCandidate",
+      "shippingGameVideoResearch",
+      "publicSourceOnly",
+      "testFixture",
+      "demoData",
+      "localDeveloperSample"
+    ]);
     for (const sourceType of dataSourceTypes) {
       expect(dataSourceTypeLabels[sourceType]).toBeTruthy();
     }

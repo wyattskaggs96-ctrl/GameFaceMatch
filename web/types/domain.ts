@@ -37,7 +37,16 @@ export type CaptureCapabilityStatus =
   | "unknownError";
 
 export type CatalogVerificationStatus = "verified" | "unverified" | "rejected" | "archived";
-export type DataSourceType = "production" | "researchDraft" | "testFixture" | "demoData" | "localDeveloperSample";
+export type DataSourceType =
+  | "production"
+  | "research"
+  | "researchDraft"
+  | "researchCandidate"
+  | "shippingGameVideoResearch"
+  | "publicSourceOnly"
+  | "testFixture"
+  | "demoData"
+  | "localDeveloperSample";
 export type CatalogReleaseLifecycleStatus =
   | "draft"
   | "reviewCandidate"
@@ -510,6 +519,7 @@ export interface GameCatalogItem {
     menuInstructionVerified?: boolean;
     retiredReason?: string;
   };
+  catalogManagerDisposition?: "approved" | "approvedWithNotes" | "rejected" | "repairRequested";
   navigationInstructions?: NavigationInstruction[];
   catalogVersion: GameCatalogVersion;
   isTestFixture: boolean;

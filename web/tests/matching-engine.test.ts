@@ -433,6 +433,7 @@ function productionStyleCatalog(): GameCatalogManifest {
     gameMode: "Road to Glory",
     creationPath: "unit-test-road-to-glory-path",
     isTestFixture: false,
+    catalogManagerDisposition: "approved" as const,
     catalogVersion: {
       identifier: "unit-test-production-catalog-v1",
       gameVersion: "unit-test-version",

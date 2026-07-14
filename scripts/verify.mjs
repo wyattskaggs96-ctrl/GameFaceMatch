@@ -36,6 +36,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Catalog record classification check",
+    command: "node",
+    args: ["scripts/catalog-record-classification.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Web type-check",
     command: "npm",
     args: ["run", "typecheck"],

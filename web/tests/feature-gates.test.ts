@@ -199,6 +199,7 @@ function validItem(id: string): GameCatalogItem {
       }
     },
     humanAnnotations: { note: "unit-test-only" },
+    catalogManagerDisposition: "approved",
     navigationInstructions: [
       {
         sequenceNumber: 1,

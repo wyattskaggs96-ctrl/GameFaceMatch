@@ -423,6 +423,7 @@ function validItem(id = "cfb27-test-only-record") {
       }
     },
     humanAnnotations: { note: "test-only" },
+    catalogManagerDisposition: "approved",
     navigationInstructions: [
       {
         sequenceNumber: 1,

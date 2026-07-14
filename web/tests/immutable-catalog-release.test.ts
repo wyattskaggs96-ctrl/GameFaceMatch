@@ -186,6 +186,7 @@ function validItem(id: string, versionID: string): GameCatalogItem {
     },
     geometryMeasurements: {},
     humanAnnotations: { note: "unit-test-only" },
+    catalogManagerDisposition: "approved",
     navigationInstructions: [{ sequenceNumber: 1, instruction: "unit-test-only navigation", evidenceAssetID: "asset-front" }],
     catalogVersion: {
       identifier: versionID,

@@ -7,9 +7,10 @@ import { fileURLToPath } from "node:url";
 export const requiredAngles = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"];
 export const placeholderPattern = /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK)\b/i;
 export const screenshotNamePattern = /^cfb27__[a-z0-9-]+__[a-z0-9.-]+__[a-z0-9-]+__(straightOn|left45|right45|leftProfile|rightProfile|navigationEvidence)__\d{8}\.(png|jpg|jpeg|webp)$/i;
-export const sourceTypes = ["production", "researchDraft", "testFixture", "demoData", "localDeveloperSample"];
+export const sourceTypes = ["production", "research", "researchDraft", "researchCandidate", "shippingGameVideoResearch", "publicSourceOnly", "testFixture", "demoData", "localDeveloperSample"];
 const sourceTypeSet = new Set(sourceTypes);
-const productionBlockedSourceTypes = new Set(["researchDraft", "testFixture", "demoData", "localDeveloperSample"]);
+const productionBlockedSourceTypes = new Set(["research", "researchDraft", "researchCandidate", "shippingGameVideoResearch", "publicSourceOnly", "testFixture", "demoData", "localDeveloperSample"]);
+const approvedCatalogManagerDispositions = new Set(["approved", "approvedWithNotes"]);
 const validVerificationStates = new Set(["verified", "unverified", "rejected", "archived"]);
 const allowedTransitions = new Set(["draft->verified", "unverified->verified", "reviewed->verified", "reviewed->archived"]);
 const csvColumns = [
@@ -57,6 +58,9 @@ export function validateRecord(record, options = {}) {
   }
   validateSourceType(report, record, id || "Record", options);
   if (record?.isTestFixture) addError(report, "fixtureFlag", `${id || "Record"} is marked as a fixture.`);
+  if (options.requireProductionSource && !approvedCatalogManagerDispositions.has(record?.catalogManagerDisposition)) {
+    addError(report, "missingCatalogManagerDisposition", `${id || "Record"} is missing approved catalog-manager disposition.`);
+  }
   validateDateField(report, record?.capturedDate, "capturedDate", id);
   if (record?.verificationState === "verified") validateDateField(report, record?.verifiedDate, "verifiedDate", id);
   validateDateField(report, record?.catalogVersion?.verifiedAt, "catalogVersion.verifiedAt", id, { allowNull: true });

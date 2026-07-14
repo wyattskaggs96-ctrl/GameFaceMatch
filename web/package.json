@@ -25,6 +25,7 @@
     "catalog:validate-import": "node ../scripts/catalog-import-validator.mjs validate-import",
     "catalog:import-check": "node ../scripts/catalog-import-validator.mjs --check",
     "catalog:verify-assets": "node ../scripts/catalog-tools.mjs verify-assets",
+    "phase0:detailed-facial-controls": "node ../scripts/cf27-detailed-facial-controls-research-catalog.mjs",
     "catalog:create-audit-session": "node ../scripts/catalog-tools.mjs create-audit-session",
     "catalog:import-csv": "node ../scripts/catalog-tools.mjs import-csv",
     "catalog:export-csv": "node ../scripts/catalog-tools.mjs export-csv",

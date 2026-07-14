@@ -2,7 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { Alert, Button, Card, EmptyState, LoadingState, ScreenHeader, StatusBadge } from "@/components/design-system";
+import { RecoveryActionList } from "@/components/reliability";
 import { CATALOG_UNAVAILABLE_MESSAGE, PRODUCT_EXPLANATION } from "@/lib/product-copy";
+import { getRecoveryPlan, recoveryPlanForResultsState } from "@/lib/reliability/recovery-actions";
 import { createBuildInstructions, createRecommendationExplanationReport, createResultsState, getTieGroups, summarizeCaptureQuality } from "@/lib/results/results-experience";
 import { createSafeShareCard } from "@/lib/share/share-card";
 import type { AppearanceRecommendationCategory, GameAppearanceMatch, StandardFaceProfile, VerifiedAppearanceRecommendation } from "@/types/domain";
@@ -98,22 +100,28 @@ export function ResultsExperience({
       ) : null}
 
       {state.kind === "insufficientProfileData" ? (
-        <EmptyState
-          title={state.message}
-          action={
-            <Button variant="secondary" onClick={onStartOver}>
-              Restart capture
-            </Button>
-          }
-        >
-          <p>Results need a local profile with all five required RGB angles. No production match was attempted.</p>
-        </EmptyState>
+        <>
+          <EmptyState
+            title={state.message}
+            action={
+              <Button variant="secondary" onClick={onStartOver}>
+                Restart capture
+              </Button>
+            }
+          >
+            <p>Results need a local profile with all five required RGB angles. No production match was attempted.</p>
+          </EmptyState>
+          <RecoveryActionList plans={[recoveryPlanForResultsState(state.kind, state.message)]} />
+        </>
       ) : null}
 
       {state.kind === "matchingError" ? (
-        <Alert title="Matching error" tone="danger" role="alert">
-          {state.message}
-        </Alert>
+        <>
+          <Alert title="Matching error" tone="danger" role="alert">
+            {state.message}
+          </Alert>
+          <RecoveryActionList plans={[recoveryPlanForResultsState(state.kind, state.message)]} />
+        </>
       ) : null}
 
       {state.kind === "topThree" && selectedMatch ? (
@@ -187,6 +195,7 @@ function CatalogUnavailableState({
         <p>No production top-three results, labels, sliders, hairstyles, facial-hair options, or menu paths are displayed because none have been verified.</p>
       </EmptyState>
       <div className="result-grid">
+        <RecoveryActionList plans={[getRecoveryPlan("emptyProductionCatalog")]} />
         <Card tone="info">
           <h2>Ready</h2>
           <p>{captureSummary}</p>

@@ -1,5 +1,7 @@
 import { Alert, Button, Card, ScreenHeader, StatusBadge } from "@/components/design-system";
+import { RecoveryActionList } from "@/components/reliability";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
+import { getRecoveryPlan } from "@/lib/reliability/recovery-actions";
 import type { StandardFaceProfile } from "@/types/domain";
 
 export function ProfileReview({
@@ -121,9 +123,12 @@ export function ProfileReview({
           </Alert>
         ) : null}
         {saveErrorMessage ? (
-          <Alert title="Profile save needs attention" tone="warning" role="alert">
-            {saveErrorMessage}
-          </Alert>
+          <>
+            <Alert title="Profile save needs attention" tone="warning" role="alert">
+              {saveErrorMessage}
+            </Alert>
+            <RecoveryActionList plans={[getRecoveryPlan("saveFailure")]} />
+          </>
         ) : null}
         <Button variant="secondary" onClick={onSaveProfile} disabled={!canSaveProfile || !onSaveProfile}>
           Save derived profile locally

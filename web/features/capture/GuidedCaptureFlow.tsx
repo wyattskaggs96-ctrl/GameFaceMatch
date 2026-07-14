@@ -3,6 +3,7 @@
 import type { ChangeEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Button, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
+import { RecoveryActionList } from "@/components/reliability";
 import { CameraAccessError, type BrowserCameraService, type CameraDeviceOption, type CameraFacingMode } from "@/lib/capture/browser-camera-service";
 import {
   createCaptureGuidanceSession,
@@ -28,6 +29,7 @@ import {
 } from "@/lib/capture/image-quality-service";
 import { createTemporaryImageReference, isHeicOrHeif, prepareImageForAnalysis, validateImageFile } from "@/lib/capture/image-validation";
 import { createLocalFaceLandmarkProvider } from "@/lib/face-landmarks/face-landmark-worker-client";
+import { getRecoveryPlan, recoveryPlanForCameraError, recoveryPlanForGuidanceIssue, recoveryPlanForImageMessage } from "@/lib/reliability/recovery-actions";
 import type { CaptureCoverageRegion, CaptureCoverageState } from "@/lib/capture/capture-coverage";
 import type { CapturedAngle, CapturedAngleID, CaptureGuidanceReport, CaptureSource, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
 
@@ -46,6 +48,7 @@ export function GuidedCaptureFlow({
 }) {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
+  const [cameraErrorCode, setCameraErrorCode] = useState<CameraAccessError["code"] | null>(null);
   const [isStartingCamera, setIsStartingCamera] = useState(false);
   const [captureMode, setCaptureMode] = useState<"camera" | "upload">("camera");
   const [cameraDevices, setCameraDevices] = useState<CameraDeviceOption[]>([]);
@@ -199,6 +202,7 @@ export function GuidedCaptureFlow({
 
   async function startCamera() {
     setCameraError(null);
+    setCameraErrorCode(null);
     setLifecycleNotice(null);
     setIsStartingCamera(true);
     try {
@@ -217,6 +221,7 @@ export function GuidedCaptureFlow({
       setCaptureMode("camera");
     } catch (error) {
       setCameraError(error instanceof CameraAccessError ? error.message : "Camera could not be started. Upload fallback remains available.");
+      setCameraErrorCode(error instanceof CameraAccessError ? error.code : "unknownError");
       setCaptureMode("upload");
     } finally {
       setIsStartingCamera(false);
@@ -471,6 +476,7 @@ export function GuidedCaptureFlow({
               The app is offline. Capture images remain local; no upload service exists.
             </Alert>
           ) : null}
+          {isOffline ? <RecoveryActionList plans={[getRecoveryPlan("networkFailure")]} /> : null}
           {lifecycleNotice ? (
             <Alert title="Mobile session notice" tone="warning" role="status">
               {lifecycleNotice}
@@ -492,6 +498,7 @@ export function GuidedCaptureFlow({
               {cameraError}
             </Alert>
           ) : null}
+          {cameraErrorCode ? <RecoveryActionList plans={[recoveryPlanForCameraError(cameraErrorCode)]} /> : null}
           <div className="button-row">
             <Button onClick={() => void startCamera()} disabled={isStartingCamera} aria-label={`Start camera for ${currentAngle.label}`}>
               {isStartingCamera ? "Starting camera" : "Start camera"}
@@ -576,6 +583,9 @@ export function GuidedCaptureFlow({
                     <li key={error}>{error}</li>
                   ))}
                 </ul>
+              ) : null}
+              {angle.validationErrors.length > 0 ? (
+                <RecoveryActionList plans={angle.validationErrors.map(recoveryPlanForImageMessage)} title="Upload recovery action" />
               ) : null}
               <label className="form-field">
                 <span className="small-text" id={`${angle.id}-upload-label`}>
@@ -721,6 +731,9 @@ export function GuidedCaptureFlow({
                         <li key={message}>{message}</li>
                       ))}
                     </ul>
+                    {angle.status !== "empty" && angle.validationErrors.length === 0 ? (
+                      <RecoveryActionList plans={report.blockingMessages.map(recoveryPlanForImageMessage)} title="Quality recovery action" />
+                    ) : null}
                   </div>
                 ) : null}
                 {report.advisoryMessages.length > 0 ? (
@@ -799,6 +812,7 @@ export function GuidedCaptureFlow({
           Resolve missing images, unsupported files, unreadable images, undersized images, oversized files, or exact duplicate angle images before continuing.
         </Alert>
       )}
+      {!reviewReport.canContinue ? <RecoveryActionList plans={[getRecoveryPlan("missingView")]} /> : null}
       <div className="button-row">
         <Button disabled={!reviewReport.canContinue} onClick={onContinue}>
           Continue to attribute confirmation
@@ -944,6 +958,7 @@ function GuidanceIssueList({ guidance, title }: { guidance: CaptureGuidanceRepor
           </li>
         ))}
       </ul>
+      <RecoveryActionList plans={messages.map((issue) => recoveryPlanForGuidanceIssue(issue.code))} title="Capture recovery action" />
     </div>
   );
 }

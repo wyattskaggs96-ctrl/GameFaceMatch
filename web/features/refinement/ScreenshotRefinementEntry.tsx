@@ -3,6 +3,7 @@
 import type { ChangeEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Button, Card, ScreenHeader, StatusBadge } from "@/components/design-system";
+import { RecoveryActionList } from "@/components/reliability";
 import {
   canSubmitScreenshotRefinement,
   getScreenshotRefinementReadiness,
@@ -26,6 +27,7 @@ import { calculateImageMeasurements, type PixelSample } from "@/lib/capture/imag
 import { createLocalFaceLandmarkProvider } from "@/lib/face-landmarks/face-landmark-worker-client";
 import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
+import { getRecoveryPlan, recoveryPlanForImageMessage } from "@/lib/reliability/recovery-actions";
 import type { GameAppearanceMatch, RefinementResult, StandardFaceProfile } from "@/types/domain";
 
 export function ScreenshotRefinementEntry({
@@ -173,6 +175,7 @@ export function ScreenshotRefinementEntry({
       <Alert title="Refinement unavailable" tone="warning">
         Verified catalog matching must exist before GameFace Match can recommend screenshot-based changes.
       </Alert>
+      <RecoveryActionList plans={[getRecoveryPlan("emptyProductionCatalog")]} />
       <Card tone="info">
         <h2>Screenshot requirements</h2>
         <ul className="message-list">
@@ -227,6 +230,9 @@ export function ScreenshotRefinementEntry({
         ) : (
           <p>Screenshot intake requirements are complete. Refinement recommendations remain unavailable until verified catalog data exists.</p>
         )}
+        {readiness.blockingMessages.length > 0 ? (
+          <RecoveryActionList plans={readiness.blockingMessages.map(recoveryPlanForImageMessage)} title="Screenshot recovery action" />
+        ) : null}
         {analysisPendingViewID ? <p role="status">Running local screenshot analysis for {analysisPendingViewID}.</p> : null}
         {readiness.advisoryMessages.length > 0 ? (
           <ul className="message-list">
@@ -237,17 +243,20 @@ export function ScreenshotRefinementEntry({
         ) : null}
       </Card>
       {result ? (
-        <Alert title="Refinement result" tone="info" role="status">
-          <p>{result.message}</p>
-          {result.comparisonReport ? <RefinementComparisonSummary result={result} /> : null}
-          {result.unavailableReasons && result.unavailableReasons.length > 0 ? (
-            <ul className="message-list">
-              {result.unavailableReasons.map((reason) => (
-                <li key={reason}>{reason}</li>
-              ))}
-            </ul>
-          ) : null}
-        </Alert>
+        <>
+          <Alert title="Refinement result" tone="info" role="status">
+            <p>{result.message}</p>
+            {result.comparisonReport ? <RefinementComparisonSummary result={result} /> : null}
+            {result.unavailableReasons && result.unavailableReasons.length > 0 ? (
+              <ul className="message-list">
+                {result.unavailableReasons.map((reason) => (
+                  <li key={reason}>{reason}</li>
+                ))}
+              </ul>
+            ) : null}
+          </Alert>
+          <RecoveryActionList plans={[result.status === "invalidScreenshot" ? getRecoveryPlan("invalidScreenshot") : getRecoveryPlan("emptyProductionCatalog")]} />
+        </>
       ) : null}
       <div className="button-row">
         <Button onClick={() => void requestRefinement()} disabled={!canSubmit}>
@@ -343,6 +352,7 @@ function ScreenshotSlot({
           ))}
         </ul>
       ) : null}
+      {slot.validationErrors.length > 0 ? <RecoveryActionList plans={slot.validationErrors.map(recoveryPlanForImageMessage)} title="Screenshot upload recovery" /> : null}
       <label className="form-field">
         <span>{slot.screenshot ? "Replace screenshot" : "Upload screenshot"}</span>
         <input className="file-input" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => void onFile(slot.viewID, event)} />
@@ -400,6 +410,7 @@ function ScreenshotAnalysisSummary({ report }: { report: ScreenshotQualityAlignm
           ))}
         </ul>
       ) : null}
+      {report.blockingMessages.length > 0 ? <RecoveryActionList plans={[getRecoveryPlan("invalidScreenshot")]} title="Screenshot recovery action" /> : null}
       {report.advisoryMessages.length > 0 ? (
         <ul className="message-list">
           {report.advisoryMessages.map((message) => (

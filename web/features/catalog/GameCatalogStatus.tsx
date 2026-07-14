@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Alert, Card, LoadingState, ScreenHeader, StatusBadge } from "@/components/design-system";
+import { RecoveryActionList } from "@/components/reliability";
 import { createBundledCatalogRepository, type CatalogRuntimeStatus } from "@/lib/catalog/catalog-repository";
 import { getDataSourceTypeLabel } from "@/lib/data/source-types";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
+import { getRecoveryPlan } from "@/lib/reliability/recovery-actions";
 
 export function GameCatalogStatus() {
   const [status, setStatus] = useState<CatalogRuntimeStatus | null>(null);
@@ -33,6 +35,7 @@ export function GameCatalogStatus() {
       <Alert title={CATALOG_UNAVAILABLE_MESSAGE} tone="warning">
         An empty production catalog is valid. Invented production game records are not.
       </Alert>
+      <RecoveryActionList plans={[getRecoveryPlan("emptyProductionCatalog")]} />
       <Card>
         {status && manifest ? (
           <div className="metadata-list">
@@ -70,9 +73,12 @@ export function GameCatalogStatus() {
             </div>
           </div>
         ) : errorMessage ? (
-          <Alert title="Catalog failed closed" tone="danger" role="alert">
-            {errorMessage}
-          </Alert>
+          <>
+            <Alert title="Catalog failed closed" tone="danger" role="alert">
+              {errorMessage}
+            </Alert>
+            <RecoveryActionList plans={[getRecoveryPlan("catalogMismatch")]} />
+          </>
         ) : (
           <LoadingState label="Loading bundled manifest" />
         )}

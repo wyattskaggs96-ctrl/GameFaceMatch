@@ -52,6 +52,7 @@ test.describe("GameFace Match E2E edge flows", () => {
     await navigateToCapture(page);
     await page.getByRole("button", { name: "Start camera" }).click();
     await expect(page.getByText("Camera permission denied. You can use file upload instead.")).toBeVisible();
+    await expect(page.getByText("Use upload fallback: Upload a JPEG, PNG, or WebP image for each required angle.")).toBeVisible();
     await expect(page.getByLabel("Upload straight-on image")).toBeVisible();
   });
 
@@ -62,6 +63,7 @@ test.describe("GameFace Match E2E edge flows", () => {
 
     await page.getByLabel("Upload fallback for straight-on").setInputFiles(invalidTextFile());
     await expect(page.getByText("The image could not be read.")).toBeVisible();
+    await expect(page.getByText("Choose a different image: Use a readable JPEG, PNG, or WebP file within the size and dimension limits.")).toBeVisible();
     await expect(page.getByLabel("Upload fallback for straight-on")).toHaveAttribute("aria-invalid", "true");
 
     await uploadFallbackForAngle(page, "Straight-on", syntheticPng("too-small.png", 120, 120, 1));
@@ -130,6 +132,7 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page.getByRole("button", { name: "Approve release candidate" })).toHaveCount(0);
     await expect(page.getByText("CF27_TESTONLY")).toHaveCount(0);
     await expect(page.getByText("Verified College Football 27 catalog not loaded.")).toBeVisible();
+    await expect(page.getByText("Check catalog status later: Keep or delete the local profile, then retry after an approved catalog release is loaded.")).toBeVisible();
   });
 
   test("keeps fixture-backed staging data disabled in the production app", async ({ page }) => {

@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { Alert, Button, Card, ModalDialog, ScreenHeader, StatusBadge } from "@/components/design-system";
+import { RecoveryActionList } from "@/components/reliability";
 import { INDEPENDENT_APP_DISCLAIMER } from "@/lib/product-copy";
 import { createDeletionConfirmation, getNetworkUploadStatus, type DataInventoryItem, type DeletionRecord, type DeletionScope } from "@/lib/privacy/data-lifecycle";
+import { getRecoveryPlan } from "@/lib/reliability/recovery-actions";
 import type { SavedBuild } from "@/types/domain";
 import { CONSENT_DEFINITIONS, CONSENT_VERSION, type ConsentID, type ConsentState } from "@/lib/privacy/consent";
 import type { SavedProfileStorageStatus, SavedProfileSummary } from "@/lib/privacy/profile-storage";
@@ -205,9 +207,12 @@ export function PrivacyCenter({
           <p className="supporting">{savedProfileStatus.encryptionDescription}</p>
         </div>
         {savedProfileStatus.lastError ? (
-          <Alert title="Saved profile recovery" tone="warning" role="alert">
-            {savedProfileStatus.lastError}
-          </Alert>
+          <>
+            <Alert title="Saved profile recovery" tone="warning" role="alert">
+              {savedProfileStatus.lastError}
+            </Alert>
+            <RecoveryActionList plans={[getRecoveryPlan("saveFailure")]} />
+          </>
         ) : null}
         {savedProfiles.length > 0 ? (
           <ul className="review-list">
@@ -278,6 +283,14 @@ export function PrivacyCenter({
         {exportVisible ? (
           <textarea className="export-preview" readOnly aria-label="Non-raw data export" value={nonRawExportJson} rows={12} />
         ) : null}
+      </Card>
+
+      <Card tone="info">
+        <div className="section-heading">
+          <p className="eyebrow">Reliability recovery</p>
+          <h2>Local-only failure handling</h2>
+        </div>
+        <RecoveryActionList plans={[getRecoveryPlan("deletionFailure"), getRecoveryPlan("accountOrSyncFailure")]} />
       </Card>
 
       <Card tone="neutral">

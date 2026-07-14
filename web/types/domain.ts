@@ -632,8 +632,22 @@ export interface BuildInstruction {
   sequenceNumber: number;
   title: string;
   detail: string;
+  gameTitle: string;
   menuCategory: string;
   verifiedGameLabel: string;
+  instructionKind:
+    | "headOption"
+    | "hairstyle"
+    | "hairColor"
+    | "facialHair"
+    | "facialHairColor"
+    | "eyebrows"
+    | "skinPresentation"
+    | "otherVerifiedControl"
+    | "height"
+    | "weight"
+    | "bodySelection";
+  nativeHeadOption: string;
   navigationPath: string[];
   platform: string;
   gameVersion: string;
@@ -641,8 +655,11 @@ export interface BuildInstruction {
   mode: string;
   creationPath: string;
   notes: string[];
+  limitations: string[];
   verificationDate: ISODateString | null;
   relatedCatalogItemID?: string;
+  relatedAppearanceCategory?: AppearanceRecommendationCategory;
+  sourceAnnotationKey?: string | null;
 }
 
 export interface RefinementResult {

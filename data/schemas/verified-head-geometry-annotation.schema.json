@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/verified-head-geometry-annotation.schema.json",
+  "title": "Phase0VerifiedHeadGeometryAnnotation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "annotationID",
+    "catalogStableID",
+    "catalogVersionID",
+    "targetCategory",
+    "targetVerificationStatus",
+    "createdAt",
+    "updatedAt",
+    "fieldDefinitionsVersion",
+    "fields",
+    "reviewerAgreement",
+    "annotationQA"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase0-verified-head-geometry-annotation-v1" },
+    "annotationID": { "type": "string", "minLength": 1 },
+    "catalogStableID": { "type": "string", "minLength": 1 },
+    "catalogVersionID": { "type": "string", "minLength": 1 },
+    "targetCategory": { "const": "headPreset" },
+    "targetVerificationStatus": { "enum": ["VERIFIED", "VERIFIED_WITH_NOTES"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "fieldDefinitionsVersion": { "const": "phase0-verified-head-geometry-annotation-v1" },
+    "fields": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "faceWidth",
+        "faceLength",
+        "foreheadWidth",
+        "templeWidth",
+        "cheekboneWidth",
+        "jawWidth",
+        "jawAngle",
+        "chinWidth",
+        "chinHeight",
+        "chinProjection",
+        "eyeSize",
+        "eyeSpacing",
+        "eyeTilt",
+        "browPosition",
+        "noseLength",
+        "noseWidth",
+        "noseProjection",
+        "noseTipForm",
+        "mouthWidth",
+        "lipProportions",
+        "earHeight",
+        "earProjection",
+        "symmetryIndicators"
+      ],
+      "properties": {
+        "faceWidth": { "$ref": "#/$defs/fieldAnnotation" },
+        "faceLength": { "$ref": "#/$defs/fieldAnnotation" },
+        "foreheadWidth": { "$ref": "#/$defs/fieldAnnotation" },
+        "templeWidth": { "$ref": "#/$defs/fieldAnnotation" },
+        "cheekboneWidth": { "$ref": "#/$defs/fieldAnnotation" },
+        "jawWidth": { "$ref": "#/$defs/fieldAnnotation" },
+        "jawAngle": { "$ref": "#/$defs/fieldAnnotation" },
+        "chinWidth": { "$ref": "#/$defs/fieldAnnotation" },
+        "chinHeight": { "$ref": "#/$defs/fieldAnnotation" },
+        "chinProjection": { "$ref": "#/$defs/fieldAnnotation" },
+        "eyeSize": { "$ref": "#/$defs/fieldAnnotation" },
+        "eyeSpacing": { "$ref": "#/$defs/fieldAnnotation" },
+        "eyeTilt": { "$ref": "#/$defs/fieldAnnotation" },
+        "browPosition": { "$ref": "#/$defs/fieldAnnotation" },
+        "noseLength": { "$ref": "#/$defs/fieldAnnotation" },
+        "noseWidth": { "$ref": "#/$defs/fieldAnnotation" },
+        "noseProjection": { "$ref": "#/$defs/fieldAnnotation" },
+        "noseTipForm": { "$ref": "#/$defs/fieldAnnotation" },
+        "mouthWidth": { "$ref": "#/$defs/fieldAnnotation" },
+        "lipProportions": { "$ref": "#/$defs/fieldAnnotation" },
+        "earHeight": { "$ref": "#/$defs/fieldAnnotation" },
+        "earProjection": { "$ref": "#/$defs/fieldAnnotation" },
+        "symmetryIndicators": { "$ref": "#/$defs/fieldAnnotation" }
+      }
+    },
+    "reviewerAgreement": { "$ref": "#/$defs/reviewerAgreement" },
+    "annotationQA": { "$ref": "#/$defs/annotationQA" }
+  },
+  "not": {
+    "anyOf": [
+      { "required": ["race"] },
+      { "required": ["ethnicity"] },
+      { "required": ["attractiveness"] },
+      { "required": ["personality"] },
+      { "required": ["health"] },
+      { "required": ["criminality"] },
+      { "required": ["identity"] },
+      { "required": ["celebrityResemblance"] },
+      { "required": ["lifestyle"] }
+    ]
+  },
+  "$defs": {
+    "view": { "enum": ["FRONT", "LEFT_3Q", "RIGHT_3Q", "LEFT_PROFILE", "RIGHT_PROFILE", "REAR", "ELEVATED", "LOWERED"] },
+    "availability": { "enum": ["MEASURED", "CONTROLLED_REVIEW", "UNAVAILABLE", "NOT_APPLICABLE"] },
+    "measurementSource": { "enum": ["LANDMARK_MEASUREMENT", "MANUAL_FROM_STANDARDIZED_IMAGE", "HYBRID_LANDMARK_AND_REVIEW", "HUMAN_REVIEW", "UNAVAILABLE"] },
+    "noseTipForm": { "enum": ["roundedApex", "pointedApex", "broadApex", "flatApex", "asymmetricApex", "unavailable"] },
+    "symmetryIndicators": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["faceMidlineDeviationRatio", "eyeHeightDifferenceRatio", "jawSideDifferenceRatio", "mouthCornerHeightDifferenceRatio"],
+      "properties": {
+        "faceMidlineDeviationRatio": { "type": "number", "minimum": 0, "maximum": 0.5 },
+        "eyeHeightDifferenceRatio": { "type": "number", "minimum": 0, "maximum": 0.5 },
+        "jawSideDifferenceRatio": { "type": "number", "minimum": 0, "maximum": 0.5 },
+        "mouthCornerHeightDifferenceRatio": { "type": "number", "minimum": 0, "maximum": 0.5 }
+      }
+    },
+    "fieldAnnotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fieldID", "availability", "value", "confidence", "measurementSource", "supportingEvidenceIDs", "supportingViews"],
+      "properties": {
+        "fieldID": { "type": "string", "minLength": 1 },
+        "availability": { "$ref": "#/$defs/availability" },
+        "value": {
+          "oneOf": [
+            { "type": "number" },
+            { "$ref": "#/$defs/noseTipForm" },
+            { "$ref": "#/$defs/symmetryIndicators" },
+            { "type": "null" }
+          ]
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "measurementSource": { "$ref": "#/$defs/measurementSource" },
+        "supportingEvidenceIDs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "supportingViews": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/view" }
+        },
+        "missingReason": { "type": "string" },
+        "reviewerNotes": { "type": "string" }
+      }
+    },
+    "reviewerAgreement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "primaryReviewerID", "secondReviewerID", "agreementScore", "disagreements"],
+      "properties": {
+        "status": { "enum": ["NOT_REVIEWED", "SINGLE_REVIEWER", "AGREED", "DISPUTED", "ADJUDICATED"] },
+        "primaryReviewerID": { "type": ["string", "null"] },
+        "secondReviewerID": { "type": ["string", "null"] },
+        "adjudicatorID": { "type": ["string", "null"] },
+        "agreementScore": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "disagreements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["fieldID", "primaryValue", "secondValue", "resolution"],
+            "properties": {
+              "fieldID": { "type": "string", "minLength": 1 },
+              "primaryValue": { "type": "string" },
+              "secondValue": { "type": "string" },
+              "resolution": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    },
+    "annotationQA": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "checkedBy", "checkedAt", "checklist", "unresolvedBlockers"],
+      "properties": {
+        "status": { "enum": ["DRAFT", "QA_READY", "QA_ACCEPTED", "QA_REJECTED", "RECAPTURE_REQUIRED"] },
+        "checkedBy": { "type": ["string", "null"] },
+        "checkedAt": { "type": ["string", "null"], "format": "date-time" },
+        "checklist": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "nativeLabelPreserved",
+            "verifiedHeadPresetOnly",
+            "evidenceViewsAllowed",
+            "noSensitiveTraits",
+            "missingDataMarkedUnavailable",
+            "reviewerAgreementRecorded"
+          ],
+          "properties": {
+            "nativeLabelPreserved": { "type": "boolean" },
+            "verifiedHeadPresetOnly": { "type": "boolean" },
+            "evidenceViewsAllowed": { "type": "boolean" },
+            "noSensitiveTraits": { "type": "boolean" },
+            "missingDataMarkedUnavailable": { "type": "boolean" },
+            "reviewerAgreementRecorded": { "type": "boolean" }
+          }
+        },
+        "unresolvedBlockers": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

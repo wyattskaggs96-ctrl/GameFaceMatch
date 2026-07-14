@@ -66,6 +66,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Verified head geometry annotation artifact check",
+    command: "node",
+    args: ["scripts/validate-verified-head-geometry-annotations.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Catalog record classification check",
     command: "node",
     args: ["scripts/catalog-record-classification.mjs", "--check"],

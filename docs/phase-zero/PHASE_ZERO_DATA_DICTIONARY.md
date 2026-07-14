@@ -18,6 +18,7 @@ This dictionary defines how current Phase 0 artifacts should be interpreted. It 
 | Production record | A verified, catalog-manager-approved record in the production catalog. | `data/catalog/production/`. | Current count is zero. |
 | Test fixture | Synthetic or generated data for automated tests. | `data/fixtures/test-only/`. | Must never load into production. |
 | Historical export | Preserved older research package or report snapshot. | `data/research/cf27/exports/` and `data/research/cf27/reports/`. | Useful for provenance; not current status authority if contradicted by `data/phase-zero`. |
+| Verified head geometry annotation template | Blank controlled annotation form for future verified head presets. | `data/phase-zero/annotation-forms/`. | Template only; contains placeholder IDs and does not create or verify any catalog record. |
 
 ## Common Lifecycle Fields
 
@@ -143,6 +144,20 @@ This dictionary defines how current Phase 0 artifacts should be interpreted. It 
 | `top_one_accepted` | Manual-study metric flag. | Only meaningful after a real verified-catalog study. |
 | `top_three_useful` | Manual-study metric flag. | Only meaningful after a real verified-catalog study. |
 | `raw_media_deleted_confirmed` | Manual-study privacy confirmation. | Required for completed study rows. |
+
+## Verified Head Geometry Annotation Fields
+
+| Field family | Meaning | Notes |
+| --- | --- | --- |
+| `schemaVersion` | Verified head geometry annotation schema version. | Current value is `phase0-verified-head-geometry-annotation-v1`. |
+| `targetVerificationStatus` | The verification state of the target head preset. | Must be `VERIFIED` or `VERIFIED_WITH_NOTES`; templates are not completed annotations. |
+| `fields.*.availability` | Field lifecycle state. | `MEASURED`, `CONTROLLED_REVIEW`, `UNAVAILABLE`, or `NOT_APPLICABLE`. |
+| `fields.*.value` | Normalized ratio, approximate degree, controlled nose-tip form, or symmetry indicator object. | Raw pixels are not allowed as annotation values. |
+| `fields.*.confidence` | Field confidence from 0 to 1. | Unavailable fields must use 0. |
+| `fields.*.measurementSource` | Source of the field value. | Allowed values are `LANDMARK_MEASUREMENT`, `MANUAL_FROM_STANDARDIZED_IMAGE`, `HYBRID_LANDMARK_AND_REVIEW`, `HUMAN_REVIEW`, and `UNAVAILABLE`. |
+| `fields.*.supportingViews` | Evidence views used for the annotation. | Field-specific acceptable views are defined in `web/lib/phase-zero/phase-zero-verified-head-geometry-annotation.ts`. |
+| `reviewerAgreement` | Primary/second-reviewer agreement state. | Required before QA acceptance; unresolved disputes block production use. |
+| `annotationQA` | QA state and checklist. | `QA_ACCEPTED` requires no unresolved blockers and cannot substitute for second-person verification. |
 
 ## Blind Verification Package Fields
 

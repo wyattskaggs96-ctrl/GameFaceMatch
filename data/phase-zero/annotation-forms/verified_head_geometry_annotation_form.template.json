@@ -1,0 +1,58 @@
+{
+  "templateNotice": "NOT PRODUCTION DATA - BLANK VERIFIED HEAD GEOMETRY ANNOTATION TEMPLATE",
+  "schemaVersion": "phase0-verified-head-geometry-annotation-v1",
+  "annotationID": "REPLACE_WITH_ANNOTATION_ID",
+  "catalogStableID": "REPLACE_WITH_VERIFIED_HEAD_STABLE_ID",
+  "catalogVersionID": "REPLACE_WITH_APPROVED_CATALOG_VERSION_ID",
+  "targetCategory": "headPreset",
+  "targetVerificationStatus": "VERIFIED",
+  "createdAt": "REPLACE_WITH_ISO_TIMESTAMP",
+  "updatedAt": "REPLACE_WITH_ISO_TIMESTAMP",
+  "fieldDefinitionsVersion": "phase0-verified-head-geometry-annotation-v1",
+  "fields": {
+    "faceWidth": { "fieldID": "faceWidth", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "faceLength": { "fieldID": "faceLength", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "foreheadWidth": { "fieldID": "foreheadWidth", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "templeWidth": { "fieldID": "templeWidth", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "cheekboneWidth": { "fieldID": "cheekboneWidth", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "jawWidth": { "fieldID": "jawWidth", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "jawAngle": { "fieldID": "jawAngle", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "chinWidth": { "fieldID": "chinWidth", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "chinHeight": { "fieldID": "chinHeight", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "chinProjection": { "fieldID": "chinProjection", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "eyeSize": { "fieldID": "eyeSize", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "eyeSpacing": { "fieldID": "eyeSpacing", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "eyeTilt": { "fieldID": "eyeTilt", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "browPosition": { "fieldID": "browPosition", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "noseLength": { "fieldID": "noseLength", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "noseWidth": { "fieldID": "noseWidth", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "noseProjection": { "fieldID": "noseProjection", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "noseTipForm": { "fieldID": "noseTipForm", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "mouthWidth": { "fieldID": "mouthWidth", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "lipProportions": { "fieldID": "lipProportions", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "earHeight": { "fieldID": "earHeight", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "earProjection": { "fieldID": "earProjection", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." },
+    "symmetryIndicators": { "fieldID": "symmetryIndicators", "availability": "UNAVAILABLE", "value": null, "confidence": 0, "measurementSource": "UNAVAILABLE", "supportingEvidenceIDs": [], "supportingViews": [], "missingReason": "Not annotated yet." }
+  },
+  "reviewerAgreement": {
+    "status": "NOT_REVIEWED",
+    "primaryReviewerID": null,
+    "secondReviewerID": null,
+    "agreementScore": null,
+    "disagreements": []
+  },
+  "annotationQA": {
+    "status": "DRAFT",
+    "checkedBy": null,
+    "checkedAt": null,
+    "checklist": {
+      "nativeLabelPreserved": false,
+      "verifiedHeadPresetOnly": false,
+      "evidenceViewsAllowed": false,
+      "noSensitiveTraits": false,
+      "missingDataMarkedUnavailable": true,
+      "reviewerAgreementRecorded": false
+    },
+    "unresolvedBlockers": ["Template has not been completed."]
+  }
+}

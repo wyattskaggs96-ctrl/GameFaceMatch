@@ -41,6 +41,14 @@ Every metric must record:
 
 Unavailable fields must remain unavailable instead of being guessed.
 
+## Verified Head Geometry Annotation
+
+The stricter verified-head preset geometry contract is documented in `docs/phase-zero/VERIFIED_HEAD_GEOMETRY_ANNOTATION_SCHEMA.md` and implemented in `web/lib/phase-zero/phase-zero-verified-head-geometry-annotation.ts`.
+
+It covers objective measurable fields only: face width, face length, forehead width, temple width, cheekbone width, jaw width, jaw angle, chin width, chin height, chin projection, eye size, eye spacing, eye tilt, brow position, nose length, nose width, nose projection, nose-tip form, mouth width, lip proportions, ear height, ear projection, and symmetry indicators.
+
+That schema applies only after the underlying head preset has already been verified. It does not create verified College Football 27 records and it does not enable recommendations.
+
 ## Prohibited Fields
 
 Catalog annotation must not include:

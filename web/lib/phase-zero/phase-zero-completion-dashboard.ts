@@ -76,6 +76,7 @@ export interface Phase0CompletionArtifacts {
   researchExportManifest?: unknown;
   researchValidation?: unknown;
   authoritativeRecaptureQueue?: unknown;
+  captureRequests?: unknown;
   nowISO?: string;
 }
 
@@ -173,6 +174,7 @@ interface ArtifactContext {
   issues: RecordObject[];
   menuRecords: RecordObject[];
   recaptureItems: RecordObject[];
+  captureRequests: RecordObject[];
   researchExportCounts: Record<string, number>;
   researchPackageValidated: boolean;
 }
@@ -206,6 +208,7 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
       ...asArray(asRecord(artifacts.additionalAttributeRecapture).items),
       ...asArray(asRecord(artifacts.authoritativeRecaptureQueue).items)
     ],
+    captureRequests: asArray(asRecord(artifacts.captureRequests).requests),
     researchExportCounts: numberRecord(asRecord(researchExportManifest.counts)),
     researchPackageValidated: researchValidation.ok === true || researchValidation.status === "passed"
   };
@@ -391,6 +394,8 @@ function checkpointProgress(category: Pick<
 }
 
 function chooseHighestPriorityMissingCapture(context: ArtifactContext): string {
+  const captureRequest = chooseHighestPriorityCaptureRequest(context);
+  if (captureRequest) return `${stringValue(captureRequest.priority) || "P?"}: ${stringValue(captureRequest.captureID)} - ${stringValue(captureRequest.exactCategory)}`;
   const sorted = [...context.recaptureItems]
     .filter((item) => stringValue(item.status).toLowerCase() !== "closed")
     .sort((first, second) => priorityRank(first) - priorityRank(second) || stringValue(first.title).localeCompare(stringValue(second.title)));
@@ -398,10 +403,20 @@ function chooseHighestPriorityMissingCapture(context: ArtifactContext): string {
 }
 
 function chooseNextHumanAction(context: ArtifactContext): string {
+  const captureRequest = chooseHighestPriorityCaptureRequest(context);
+  if (captureRequest) {
+    return `${stringValue(captureRequest.captureID)}: record ${stringValue(captureRequest.exactCategory)} from ${stringValue(captureRequest.startingOption)} through ${stringValue(captureRequest.endingOption)}.`;
+  }
   const item = [...context.recaptureItems]
     .filter((candidate) => stringValue(candidate.blocksProduction) !== "false")
     .sort((first, second) => priorityRank(first) - priorityRank(second) || stringValue(first.title).localeCompare(stringValue(second.title)))[0];
   return item ? `${stringValue(item.title)} — ${stringValue(item.ownerRecordingInstructions) || "capture the required evidence listed in the queue."}` : "Assign second-person verification after evidence capture is complete.";
+}
+
+function chooseHighestPriorityCaptureRequest(context: ArtifactContext): RecordObject | null {
+  return [...context.captureRequests]
+    .filter((request) => stringValue(request.section) === "must_capture_before_phase0_catalog_completion" || stringValue(request.section) === "must_recapture_because_current_evidence_is_inadequate")
+    .sort((first, second) => priorityRank(first) - priorityRank(second) || stringValue(first.captureID).localeCompare(stringValue(second.captureID)))[0] ?? null;
 }
 
 function chooseNextCodexAction(categories: Phase0CompletionCategoryProgress[], context: ArtifactContext): string {

@@ -2,7 +2,7 @@
   "schemaVersion": "phase0-issue-register-v1",
   "registerID": "phase0-environment-creation-path-issues",
   "createdAt": "2026-07-13T22:20:00-04:00",
-  "updatedAt": "2026-07-14T01:15:00-04:00",
+  "updatedAt": "2026-07-14T03:30:00-04:00",
   "issues": [
     {
       "issueID": "issue-phase0-appearance-control-ear-shape-recapture",
@@ -1229,6 +1229,53 @@
         "owner": "wyatt-skaggs",
         "priority": "warning",
         "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-wyatt-next-capture-plan",
+      "kind": "recaptureRequired",
+      "title": "Wyatt next capture plan is ready for execution",
+      "description": "The consolidated capture request package identifies the smallest complete set of additional captures currently needed before Phase 0 catalog completion, recapture repair, dependency testing, and second-person verification.",
+      "owner": "wyatt-skaggs",
+      "severity": "info",
+      "status": "open",
+      "affectedRecordIDs": [
+        "GFM-CAP-001",
+        "GFM-CAP-002",
+        "GFM-CAP-003",
+        "GFM-CAP-004",
+        "GFM-CAP-005",
+        "GFM-CAP-006",
+        "GFM-CAP-007",
+        "GFM-CAP-008",
+        "GFM-CAP-009",
+        "GFM-CAP-010",
+        "GFM-CAP-011",
+        "GFM-CAP-012",
+        "GFM-CAP-013",
+        "GFM-CAP-014",
+        "GFM-CAP-015",
+        "GFM-CAP-016",
+        "GFM-CAP-017",
+        "GFM-CAP-018",
+        "GFM-CAP-019",
+        "GFM-CAP-020",
+        "GFM-CAP-021"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T03:30:00-04:00",
+      "updatedAt": "2026-07-14T03:30:00-04:00",
+      "resolutionNotes": "Close this tracking issue after the requested captures are imported or explicitly superseded by a newer capture plan.",
+      "recaptureRequest": {
+        "required": false,
+        "queueStatus": "notQueued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Execute data/phase-zero/capture_requests.json and docs/phase-zero/WYATT_NEXT_CAPTURE_PLAN.md."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "info",
+        "notes": "This issue tracks the plan artifact, not a single blocking category."
       }
     }
   ]

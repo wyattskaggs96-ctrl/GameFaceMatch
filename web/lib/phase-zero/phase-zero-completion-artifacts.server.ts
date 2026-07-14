@@ -14,7 +14,8 @@ const artifactPaths = {
   creationPaths: "data/phase-zero/creation_paths.research.json",
   researchExportManifest: "data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json",
   researchValidation: "data/research/cf27/reports/current-research-package-validation/current_research_package_validation.json",
-  authoritativeRecaptureQueue: "data/research/cf27/reports/authoritative-recapture-queue/authoritative_recapture_queue.json"
+  authoritativeRecaptureQueue: "data/research/cf27/reports/authoritative-recapture-queue/authoritative_recapture_queue.json",
+  captureRequests: "data/phase-zero/capture_requests.json"
 } satisfies Record<keyof Omit<Phase0CompletionArtifacts, "nowISO">, string>;
 
 export function loadPhase0CompletionArtifacts(repositoryRoot = path.resolve(process.cwd(), "..")): Phase0CompletionArtifacts {

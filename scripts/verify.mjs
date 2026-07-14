@@ -78,6 +78,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Legal and marketing copy guard",
+    command: "node",
+    args: ["scripts/legal-copy-guard.mjs"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Web type-check",
     command: "npm",
     args: ["run", "typecheck"],

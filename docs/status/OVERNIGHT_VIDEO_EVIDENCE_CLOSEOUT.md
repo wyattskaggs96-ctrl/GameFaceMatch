@@ -9,6 +9,10 @@ Verification status: `PRIMARY_RESEARCH_ONLY_NOT_SECOND_VERIFIED`
 
 This closeout summarizes the evidence-ingestion work completed from Prompt 80 through Prompt 113. It does not mark the College Football 27 catalog verified, production-ready, complete, or recommendation-enabled.
 
+## Current Checkpoint Note
+
+This file is preserved as the overnight video-evidence closeout. For the latest post-`b40f0072a20365a80f697c1ea2407ac846b0a5da` readiness review, completion estimates, blockers, human capture plan, second-verifier work, and Prompt 93+ queue, use `docs/status/CURRENT_PROJECT_STATE_RECONSTRUCTION.md`.
+
 ## Executive Result
 
 - The current Xbox recordings were inventoried, staged, technically inspected, timeline-indexed, and converted into a partial research catalog.

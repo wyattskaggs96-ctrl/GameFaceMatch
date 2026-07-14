@@ -19,6 +19,8 @@ describe("CF27 appearance-control research catalog", () => {
 
     expect(catalog.summary.directlyObservedUniqueValues).toBe(54);
     expect(catalog.summary.selectedObservations).toBe(57);
+    expect(catalog.summary.unconfiguredDirectlyObservedCategoryLabels).toEqual([]);
+    expect(catalog.menuOnlyObservedCategories.map((item) => `${item.nativeOrder}:${item.displayedCategoryLabel}`)).toEqual(["8:Mouth Shape", "9:Jaw Shape", "10:Chin"]);
     expect(skinToneLabels).toContain("Skin Tone 29");
     expect(skinToneLabels).not.toContain("Skin Tone 05");
     expect(skinToneLabels).not.toContain("Skin Tone 14");
@@ -27,6 +29,21 @@ describe("CF27 appearance-control research catalog", () => {
     expect(skinTone.missingObservedRangeValues).toEqual([5, 14, 15, 16, 25, 26, 27, 28]);
     expect(skinTone.totalCount).toBeNull();
     expect(skinTone.totalCountStatus).toBe("COUNT_UNKNOWN");
+    expect(skinTone.demonstratedFirstValueStatus).toBe("NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY");
+    expect(skinTone.demonstratedLastValueStatus).toBe("NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY");
+    expect(skinTone.demonstratedDefault.status).toBe("NOT_DEMONSTRATED");
+    expect(skinTone.selectorBoundaryEvidence.wrappingDemonstrated).toBe(false);
+    expect(skinTone.sliderBoundaries.status).toBe("NOT_APPLICABLE_NON_SLIDER_CONTROL");
+    expect(skinTone.automaticChangesOrDependencies.resetBehaviorObserved).toBe("NOT_OBSERVED");
+    expect(skinTone.completenessAgainstObservedRange).toMatchObject({
+      status: "OBSERVED_RANGE_HAS_GAPS",
+      observedMinimum: 1,
+      observedMaximum: 29,
+      observedUniqueCount: 21,
+      expectedWithinObservedNumericRange: 29,
+      missingWithinObservedNumericRange: [5, 14, 15, 16, 25, 26, 27, 28],
+      completenessRatio: 0.724
+    });
     expect(skinTone.ambiguityAndMissingRanges.join(" ")).toContain("Do not infer unobserved values between observed values.");
   });
 
@@ -43,10 +60,15 @@ describe("CF27 appearance-control research catalog", () => {
 
     for (const record of catalog.records) {
       expect(record.dataClass).toBe("RESEARCH_CANDIDATE");
+      expect(record.displayedCategoryLabel).toBe(record.category);
+      expect(record.nativeOptionOrderPreserved).toBe(true);
       expect(record.productionStatus).toBe("NOT_PRODUCTION_DATA");
       expect(record.verificationStatus).toBe("OBSERVED_PENDING_VERIFICATION");
       expect(record.productionEligibility.eligible).toBe(false);
       expect(record.evidenceSuitability.productionGeometricComparison).toBe(false);
+      expect(record.demonstratedDefault.status).toBe("NOT_DEMONSTRATED");
+      expect(record.sliderBoundaries.applicable).toBe(false);
+      expect(record.automaticChangesOrDependencies.resetBehaviorObserved).toBe("NOT_OBSERVED");
     }
   });
 
@@ -85,6 +107,7 @@ describe("CF27 appearance-control research catalog", () => {
     const evidenceManifest = readJson<{ additionalAttributesResearchCatalog: { recordCount: number }; entries: Array<Record<string, unknown>> }>(fixture.root, "data/phase-zero/evidence_manifest.json");
     const issues = readJson<{ issues: Array<{ issueID: string }> }>(fixture.root, "data/phase-zero/issues_register.research.json");
     const summaryDoc = fs.readFileSync(path.join(fixture.root, "docs/phase-zero/appearance-controls/SKIN_TONE_RESEARCH_SUMMARY.md"), "utf8");
+    const consolidatedDoc = fs.readFileSync(path.join(fixture.root, "docs/phase-zero/appearance-controls/APPEARANCE_CONTROLS_RESEARCH_EXPORT.md"), "utf8");
     const recapture = readJson<{ items: Array<{ id: string }> }>(fixture.root, "data/phase-zero/additional_attributes_recapture_requirements.research.json");
 
     expect(catalog.records).toHaveLength(4);
@@ -96,6 +119,9 @@ describe("CF27 appearance-control research catalog", () => {
     ]));
     expect(summaryDoc).toContain("PRIMARY RESEARCH CANDIDATE - NOT PRODUCTION VERIFIED");
     expect(summaryDoc).toContain("Total count: COUNT_UNKNOWN");
+    expect(summaryDoc).toContain("First available value demonstrated: NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY");
+    expect(consolidatedDoc).toContain("Appearance Controls Research Export");
+    expect(consolidatedDoc).toContain("Menu-Only Observed Categories");
     expect(recapture.items.map((item) => item.id)).toEqual(expect.arrayContaining([
       "appearance-control-skin-tone-recapture",
       "appearance-control-eye-color-recapture"
@@ -107,15 +133,43 @@ interface AppearanceControlsCatalog {
   summary: {
     directlyObservedUniqueValues: number;
     selectedObservations: number;
+    unconfiguredDirectlyObservedCategoryLabels: string[];
   };
   categories: AppearanceControlCategory[];
   records: AppearanceControlRecord[];
+  menuOnlyObservedCategories: Array<{
+    displayedCategoryLabel: string;
+    nativeOrder: number;
+  }>;
 }
 
 interface AppearanceControlCategory {
   category: string;
   totalCount: number | null;
   totalCountStatus: string;
+  demonstratedFirstValueStatus: string;
+  demonstratedLastValueStatus: string;
+  demonstratedDefault: {
+    status: string;
+  };
+  selectorBoundaryEvidence: {
+    wrappingDemonstrated: boolean;
+  };
+  sliderBoundaries: {
+    status: string;
+  };
+  automaticChangesOrDependencies: {
+    resetBehaviorObserved: string;
+  };
+  completenessAgainstObservedRange: {
+    status: string;
+    observedMinimum: number | null;
+    observedMaximum: number | null;
+    observedUniqueCount: number;
+    expectedWithinObservedNumericRange: number | null;
+    missingWithinObservedNumericRange: number[];
+    completenessRatio: number | null;
+  };
   missingObservedRangeValues: number[];
   duplicateObservedValues: string[];
   ambiguityAndMissingRanges: string[];
@@ -125,9 +179,20 @@ interface AppearanceControlRecord {
   dataClass: string;
   productionStatus: string;
   verificationStatus: string;
+  displayedCategoryLabel: string;
   category: string;
   nativeDisplayLabel: string;
+  nativeOptionOrderPreserved: boolean;
   effectProfile: Record<string, string>;
+  demonstratedDefault: {
+    status: string;
+  };
+  sliderBoundaries: {
+    applicable: boolean;
+  };
+  automaticChangesOrDependencies: {
+    resetBehaviorObserved: string;
+  };
   evidenceSuitability: {
     productionGeometricComparison: boolean;
   };

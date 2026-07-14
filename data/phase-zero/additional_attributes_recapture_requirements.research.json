@@ -66,6 +66,8 @@
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categorySummary": {
         "category": "Skin Tone",
+        "displayedCategoryLabel": "Skin Tone",
+        "nativeCategoryLabel": "Skin Tone",
         "timelineLabel": "SKIN TONE",
         "parentMenu": "Head & Skin",
         "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -76,17 +78,42 @@
         ],
         "selectedObservationCount": 22,
         "directlyObservedUniqueValueCount": 21,
+        "visibleCounts": {
+          "selectedObservationCount": 22,
+          "directlyObservedUniqueValueCount": 21,
+          "visibleTotalCount": null,
+          "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+        },
         "firstObservedValue": "Skin Tone 09",
         "firstObservedTimestampRange": "8-11",
+        "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
         "lastObservedValue": "Skin Tone 23",
         "lastObservedTimestampRange": "52-53.82",
+        "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+        "demonstratedFirstValue": null,
+        "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+        "demonstratedLastValue": null,
+        "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
         "visibleDefault": null,
         "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "demonstratedDefault": {
+          "status": "NOT_DEMONSTRATED",
+          "value": null,
+          "timestampRange": null
+        },
         "selectorWrapObserved": false,
         "selectorWrapStatus": "NOT_OBSERVED",
         "totalCount": null,
         "totalCountStatus": "COUNT_UNKNOWN",
         "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "sliderBoundaries": {
+          "applicable": false,
+          "minimum": null,
+          "maximum": null,
+          "step": null,
+          "default": null,
+          "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+        },
         "missingObservedRangeValues": [
           5,
           14,
@@ -97,13 +124,46 @@
           27,
           28
         ],
+        "completenessAgainstObservedRange": {
+          "status": "OBSERVED_RANGE_HAS_GAPS",
+          "observedMinimum": 1,
+          "observedMaximum": 29,
+          "observedUniqueCount": 21,
+          "expectedWithinObservedNumericRange": 29,
+          "missingWithinObservedNumericRange": [
+            5,
+            14,
+            15,
+            16,
+            25,
+            26,
+            27,
+            28
+          ],
+          "completenessRatio": 0.724,
+          "note": "This measures completeness only within the currently observed numeric range. It does not prove selector beginning, ending, wrap behavior, or total count."
+        },
         "duplicateObservedValues": [
           "Skin Tone 10"
         ],
         "automaticChangesOrDependencies": {
           "automaticChangesObserved": "NONE_OBSERVED",
           "dependenciesObserved": "NONE_OBSERVED",
-          "dependencyTestingStatus": "NOT_TESTED"
+          "dependencyTestingStatus": "NOT_TESTED",
+          "resetBehaviorObserved": "NOT_OBSERVED",
+          "resetBehaviorTestingStatus": "NOT_TESTED",
+          "notes": [
+            "No automatic dependency is demonstrated in current footage.",
+            "No reset-on-other-setting-change behavior is demonstrated in current footage."
+          ]
+        },
+        "selectorBoundaryEvidence": {
+          "beginningDemonstrated": false,
+          "beginningEvidence": "NOT_DEMONSTRATED",
+          "endingDemonstrated": false,
+          "endingEvidence": "NOT_DEMONSTRATED",
+          "wrappingDemonstrated": false,
+          "wrappingEvidence": "NOT_DEMONSTRATED"
         },
         "ambiguityAndMissingRanges": [
           "Observed numeric range has unobserved values: 5, 14, 15, 16, 25, 26, 27, 28.",
@@ -166,6 +226,8 @@
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categorySummary": {
         "category": "Skin Details",
+        "displayedCategoryLabel": "Skin Details",
+        "nativeCategoryLabel": "Skin Details",
         "timelineLabel": "SKIN DETAILS",
         "parentMenu": "Head & Skin",
         "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -176,23 +238,72 @@
         ],
         "selectedObservationCount": 10,
         "directlyObservedUniqueValueCount": 10,
+        "visibleCounts": {
+          "selectedObservationCount": 10,
+          "directlyObservedUniqueValueCount": 10,
+          "visibleTotalCount": null,
+          "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+        },
         "firstObservedValue": "None",
         "firstObservedTimestampRange": "8-8",
+        "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
         "lastObservedValue": "Freckles 1",
         "lastObservedTimestampRange": "27-31.72",
+        "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+        "demonstratedFirstValue": null,
+        "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+        "demonstratedLastValue": null,
+        "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
         "visibleDefault": null,
         "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "demonstratedDefault": {
+          "status": "NOT_DEMONSTRATED",
+          "value": null,
+          "timestampRange": null
+        },
         "selectorWrapObserved": false,
         "selectorWrapStatus": "NOT_OBSERVED",
         "totalCount": null,
         "totalCountStatus": "COUNT_UNKNOWN",
         "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "sliderBoundaries": {
+          "applicable": false,
+          "minimum": null,
+          "maximum": null,
+          "step": null,
+          "default": null,
+          "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+        },
         "missingObservedRangeValues": [],
+        "completenessAgainstObservedRange": {
+          "status": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+          "observedMinimum": null,
+          "observedMaximum": null,
+          "observedUniqueCount": 10,
+          "expectedWithinObservedNumericRange": null,
+          "missingWithinObservedNumericRange": [],
+          "completenessRatio": null,
+          "note": "No numeric native range is directly visible; completeness is limited to directly observed named values."
+        },
         "duplicateObservedValues": [],
         "automaticChangesOrDependencies": {
           "automaticChangesObserved": "NONE_OBSERVED",
           "dependenciesObserved": "NONE_OBSERVED",
-          "dependencyTestingStatus": "NOT_TESTED"
+          "dependencyTestingStatus": "NOT_TESTED",
+          "resetBehaviorObserved": "NOT_OBSERVED",
+          "resetBehaviorTestingStatus": "NOT_TESTED",
+          "notes": [
+            "No automatic dependency is demonstrated in current footage.",
+            "No reset-on-other-setting-change behavior is demonstrated in current footage."
+          ]
+        },
+        "selectorBoundaryEvidence": {
+          "beginningDemonstrated": false,
+          "beginningEvidence": "NOT_DEMONSTRATED",
+          "endingDemonstrated": false,
+          "endingEvidence": "NOT_DEMONSTRATED",
+          "wrappingDemonstrated": false,
+          "wrappingEvidence": "NOT_DEMONSTRATED"
         },
         "ambiguityAndMissingRanges": [
           "Beginning boundary is not proven.",
@@ -248,6 +359,8 @@
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categorySummary": {
         "category": "Eye Shape",
+        "displayedCategoryLabel": "Eye Shape",
+        "nativeCategoryLabel": "Eye Shape",
         "timelineLabel": "EYE SHAPE",
         "parentMenu": "Head & Skin",
         "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -258,23 +371,72 @@
         ],
         "selectedObservationCount": 5,
         "directlyObservedUniqueValueCount": 5,
+        "visibleCounts": {
+          "selectedObservationCount": 5,
+          "directlyObservedUniqueValueCount": 5,
+          "visibleTotalCount": null,
+          "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+        },
         "firstObservedValue": "Almond",
         "firstObservedTimestampRange": "14-14",
+        "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
         "lastObservedValue": "Hooded",
         "lastObservedTimestampRange": "20-24.93",
+        "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+        "demonstratedFirstValue": null,
+        "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+        "demonstratedLastValue": null,
+        "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
         "visibleDefault": null,
         "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "demonstratedDefault": {
+          "status": "NOT_DEMONSTRATED",
+          "value": null,
+          "timestampRange": null
+        },
         "selectorWrapObserved": false,
         "selectorWrapStatus": "NOT_OBSERVED",
         "totalCount": null,
         "totalCountStatus": "COUNT_UNKNOWN",
         "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "sliderBoundaries": {
+          "applicable": false,
+          "minimum": null,
+          "maximum": null,
+          "step": null,
+          "default": null,
+          "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+        },
         "missingObservedRangeValues": [],
+        "completenessAgainstObservedRange": {
+          "status": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+          "observedMinimum": null,
+          "observedMaximum": null,
+          "observedUniqueCount": 5,
+          "expectedWithinObservedNumericRange": null,
+          "missingWithinObservedNumericRange": [],
+          "completenessRatio": null,
+          "note": "No numeric native range is directly visible; completeness is limited to directly observed named values."
+        },
         "duplicateObservedValues": [],
         "automaticChangesOrDependencies": {
           "automaticChangesObserved": "NONE_OBSERVED",
           "dependenciesObserved": "NONE_OBSERVED",
-          "dependencyTestingStatus": "NOT_TESTED"
+          "dependencyTestingStatus": "NOT_TESTED",
+          "resetBehaviorObserved": "NOT_OBSERVED",
+          "resetBehaviorTestingStatus": "NOT_TESTED",
+          "notes": [
+            "No automatic dependency is demonstrated in current footage.",
+            "No reset-on-other-setting-change behavior is demonstrated in current footage."
+          ]
+        },
+        "selectorBoundaryEvidence": {
+          "beginningDemonstrated": false,
+          "beginningEvidence": "NOT_DEMONSTRATED",
+          "endingDemonstrated": false,
+          "endingEvidence": "NOT_DEMONSTRATED",
+          "wrappingDemonstrated": false,
+          "wrappingEvidence": "NOT_DEMONSTRATED"
         },
         "ambiguityAndMissingRanges": [
           "Beginning boundary is not proven.",
@@ -332,6 +494,8 @@
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categorySummary": {
         "category": "Eye Color",
+        "displayedCategoryLabel": "Eye Color",
+        "nativeCategoryLabel": "Eye Color",
         "timelineLabel": "EYE COLOR",
         "parentMenu": "Head & Skin",
         "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -342,23 +506,72 @@
         ],
         "selectedObservationCount": 7,
         "directlyObservedUniqueValueCount": 7,
+        "visibleCounts": {
+          "selectedObservationCount": 7,
+          "directlyObservedUniqueValueCount": 7,
+          "visibleTotalCount": null,
+          "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+        },
         "firstObservedValue": "Light Blue",
         "firstObservedTimestampRange": "12-12",
+        "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
         "lastObservedValue": "Light Green",
         "lastObservedTimestampRange": "25-29.33",
+        "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+        "demonstratedFirstValue": null,
+        "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+        "demonstratedLastValue": null,
+        "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
         "visibleDefault": null,
         "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "demonstratedDefault": {
+          "status": "NOT_DEMONSTRATED",
+          "value": null,
+          "timestampRange": null
+        },
         "selectorWrapObserved": false,
         "selectorWrapStatus": "NOT_OBSERVED",
         "totalCount": null,
         "totalCountStatus": "COUNT_UNKNOWN",
         "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "sliderBoundaries": {
+          "applicable": false,
+          "minimum": null,
+          "maximum": null,
+          "step": null,
+          "default": null,
+          "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+        },
         "missingObservedRangeValues": [],
+        "completenessAgainstObservedRange": {
+          "status": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+          "observedMinimum": null,
+          "observedMaximum": null,
+          "observedUniqueCount": 7,
+          "expectedWithinObservedNumericRange": null,
+          "missingWithinObservedNumericRange": [],
+          "completenessRatio": null,
+          "note": "No numeric native range is directly visible; completeness is limited to directly observed named values."
+        },
         "duplicateObservedValues": [],
         "automaticChangesOrDependencies": {
           "automaticChangesObserved": "NONE_OBSERVED",
           "dependenciesObserved": "NONE_OBSERVED",
-          "dependencyTestingStatus": "NOT_TESTED"
+          "dependencyTestingStatus": "NOT_TESTED",
+          "resetBehaviorObserved": "NOT_OBSERVED",
+          "resetBehaviorTestingStatus": "NOT_TESTED",
+          "notes": [
+            "No automatic dependency is demonstrated in current footage.",
+            "No reset-on-other-setting-change behavior is demonstrated in current footage."
+          ]
+        },
+        "selectorBoundaryEvidence": {
+          "beginningDemonstrated": false,
+          "beginningEvidence": "NOT_DEMONSTRATED",
+          "endingDemonstrated": false,
+          "endingEvidence": "NOT_DEMONSTRATED",
+          "wrappingDemonstrated": false,
+          "wrappingEvidence": "NOT_DEMONSTRATED"
         },
         "ambiguityAndMissingRanges": [
           "Beginning boundary is not proven.",
@@ -416,6 +629,8 @@
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categorySummary": {
         "category": "Nose",
+        "displayedCategoryLabel": "Nose",
+        "nativeCategoryLabel": "Nose",
         "timelineLabel": "NOSE",
         "parentMenu": "Head & Skin",
         "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -426,25 +641,74 @@
         ],
         "selectedObservationCount": 8,
         "directlyObservedUniqueValueCount": 7,
+        "visibleCounts": {
+          "selectedObservationCount": 8,
+          "directlyObservedUniqueValueCount": 7,
+          "visibleTotalCount": null,
+          "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+        },
         "firstObservedValue": "Aquiline",
         "firstObservedTimestampRange": "14-14",
+        "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
         "lastObservedValue": "Aquiline",
         "lastObservedTimestampRange": "28-32.45",
+        "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+        "demonstratedFirstValue": null,
+        "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+        "demonstratedLastValue": null,
+        "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
         "visibleDefault": null,
         "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "demonstratedDefault": {
+          "status": "NOT_DEMONSTRATED",
+          "value": null,
+          "timestampRange": null
+        },
         "selectorWrapObserved": false,
         "selectorWrapStatus": "POSSIBLE_WRAP_OBSERVED_UNVERIFIED",
         "totalCount": null,
         "totalCountStatus": "COUNT_UNKNOWN",
         "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "sliderBoundaries": {
+          "applicable": false,
+          "minimum": null,
+          "maximum": null,
+          "step": null,
+          "default": null,
+          "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+        },
         "missingObservedRangeValues": [],
+        "completenessAgainstObservedRange": {
+          "status": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+          "observedMinimum": null,
+          "observedMaximum": null,
+          "observedUniqueCount": 7,
+          "expectedWithinObservedNumericRange": null,
+          "missingWithinObservedNumericRange": [],
+          "completenessRatio": null,
+          "note": "No numeric native range is directly visible; completeness is limited to directly observed named values."
+        },
         "duplicateObservedValues": [
           "Aquiline"
         ],
         "automaticChangesOrDependencies": {
           "automaticChangesObserved": "NONE_OBSERVED",
           "dependenciesObserved": "NONE_OBSERVED",
-          "dependencyTestingStatus": "NOT_TESTED"
+          "dependencyTestingStatus": "NOT_TESTED",
+          "resetBehaviorObserved": "NOT_OBSERVED",
+          "resetBehaviorTestingStatus": "NOT_TESTED",
+          "notes": [
+            "No automatic dependency is demonstrated in current footage.",
+            "No reset-on-other-setting-change behavior is demonstrated in current footage."
+          ]
+        },
+        "selectorBoundaryEvidence": {
+          "beginningDemonstrated": false,
+          "beginningEvidence": "NOT_DEMONSTRATED",
+          "endingDemonstrated": false,
+          "endingEvidence": "NOT_DEMONSTRATED",
+          "wrappingDemonstrated": false,
+          "wrappingEvidence": "POSSIBLE_WRAP_OBSERVED_UNVERIFIED_REQUIRES_REVIEW"
         },
         "ambiguityAndMissingRanges": [
           "Duplicate selected values observed: Aquiline.",
@@ -500,6 +764,8 @@
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categorySummary": {
         "category": "Ear Shape",
+        "displayedCategoryLabel": "Ear Shape",
+        "nativeCategoryLabel": "Ear Shape",
         "timelineLabel": "EAR SHAPE",
         "parentMenu": "Head & Skin",
         "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -510,25 +776,74 @@
         ],
         "selectedObservationCount": 5,
         "directlyObservedUniqueValueCount": 4,
+        "visibleCounts": {
+          "selectedObservationCount": 5,
+          "directlyObservedUniqueValueCount": 4,
+          "visibleTotalCount": null,
+          "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+        },
         "firstObservedValue": "None",
         "firstObservedTimestampRange": "16-17",
+        "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
         "lastObservedValue": "Pointed",
         "lastObservedTimestampRange": "26-30.21",
+        "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+        "demonstratedFirstValue": null,
+        "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+        "demonstratedLastValue": null,
+        "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
         "visibleDefault": null,
         "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "demonstratedDefault": {
+          "status": "NOT_DEMONSTRATED",
+          "value": null,
+          "timestampRange": null
+        },
         "selectorWrapObserved": false,
         "selectorWrapStatus": "NOT_OBSERVED",
         "totalCount": null,
         "totalCountStatus": "COUNT_UNKNOWN",
         "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "sliderBoundaries": {
+          "applicable": false,
+          "minimum": null,
+          "maximum": null,
+          "step": null,
+          "default": null,
+          "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+        },
         "missingObservedRangeValues": [],
+        "completenessAgainstObservedRange": {
+          "status": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+          "observedMinimum": null,
+          "observedMaximum": null,
+          "observedUniqueCount": 4,
+          "expectedWithinObservedNumericRange": null,
+          "missingWithinObservedNumericRange": [],
+          "completenessRatio": null,
+          "note": "No numeric native range is directly visible; completeness is limited to directly observed named values."
+        },
         "duplicateObservedValues": [
           "None"
         ],
         "automaticChangesOrDependencies": {
           "automaticChangesObserved": "NONE_OBSERVED",
           "dependenciesObserved": "NONE_OBSERVED",
-          "dependencyTestingStatus": "NOT_TESTED"
+          "dependencyTestingStatus": "NOT_TESTED",
+          "resetBehaviorObserved": "NOT_OBSERVED",
+          "resetBehaviorTestingStatus": "NOT_TESTED",
+          "notes": [
+            "No automatic dependency is demonstrated in current footage.",
+            "No reset-on-other-setting-change behavior is demonstrated in current footage."
+          ]
+        },
+        "selectorBoundaryEvidence": {
+          "beginningDemonstrated": false,
+          "beginningEvidence": "NOT_DEMONSTRATED",
+          "endingDemonstrated": false,
+          "endingEvidence": "NOT_DEMONSTRATED",
+          "wrappingDemonstrated": false,
+          "wrappingEvidence": "NOT_DEMONSTRATED"
         },
         "ambiguityAndMissingRanges": [
           "Duplicate selected values observed: None.",

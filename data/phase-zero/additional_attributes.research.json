@@ -13,6 +13,16 @@
   "sourceMenuMap": "data/phase-zero/menu_map.research.json",
   "summary": {
     "categoryCount": 6,
+    "directlyObservedCategoryLabels": [
+      "Skin Tone",
+      "Skin Details",
+      "Eye Shape",
+      "Eye Color",
+      "Nose",
+      "Ear Shape"
+    ],
+    "unconfiguredDirectlyObservedCategoryLabels": [],
+    "menuOnlyObservedCategoryCount": 3,
     "directlyObservedUniqueValues": 54,
     "selectedObservations": 57,
     "productionEligibleRecords": 0,
@@ -30,9 +40,85 @@
       "Ear Shape"
     ]
   },
+  "menuOnlyObservedCategories": [
+    {
+      "displayedCategoryLabel": "Mouth Shape",
+      "menuID": "cf27-menu-head-skin-mouth-shape",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "nativeOrder": 8,
+      "controlType": "unknown_selector",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY"
+        }
+      ],
+      "sourceTimestampStatus": "TIMESTAMP_UNRESOLVED_MENU_ROW_VISIBLE_ONLY",
+      "directlyObservedValues": 0,
+      "catalogStatus": "MENU_ONLY_NO_DIRECT_OPTION_VALUES_IN_CURRENT_TIMELINE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "note": "The category label appears in the current menu map, but no selected option values are cataloged from current evidence."
+    },
+    {
+      "displayedCategoryLabel": "Jaw Shape",
+      "menuID": "cf27-menu-head-skin-jaw-shape",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "nativeOrder": 9,
+      "controlType": "unknown_selector",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY"
+        }
+      ],
+      "sourceTimestampStatus": "TIMESTAMP_UNRESOLVED_MENU_ROW_VISIBLE_ONLY",
+      "directlyObservedValues": 0,
+      "catalogStatus": "MENU_ONLY_NO_DIRECT_OPTION_VALUES_IN_CURRENT_TIMELINE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "note": "The category label appears in the current menu map, but no selected option values are cataloged from current evidence."
+    },
+    {
+      "displayedCategoryLabel": "Chin",
+      "menuID": "cf27-menu-head-skin-chin",
+      "parentMenuID": "cf27-menu-appearance-head-skin",
+      "nativeOrder": 10,
+      "controlType": "unknown_selector",
+      "sourceEvidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY"
+        }
+      ],
+      "sourceTimestampStatus": "TIMESTAMP_UNRESOLVED_MENU_ROW_VISIBLE_ONLY",
+      "directlyObservedValues": 0,
+      "catalogStatus": "MENU_ONLY_NO_DIRECT_OPTION_VALUES_IN_CURRENT_TIMELINE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "note": "The category label appears in the current menu map, but no selected option values are cataloged from current evidence."
+    }
+  ],
   "categories": [
     {
       "category": "Skin Tone",
+      "displayedCategoryLabel": "Skin Tone",
+      "nativeCategoryLabel": "Skin Tone",
       "timelineLabel": "SKIN TONE",
       "parentMenu": "Head & Skin",
       "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -43,17 +129,42 @@
       ],
       "selectedObservationCount": 22,
       "directlyObservedUniqueValueCount": 21,
+      "visibleCounts": {
+        "selectedObservationCount": 22,
+        "directlyObservedUniqueValueCount": 21,
+        "visibleTotalCount": null,
+        "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+      },
       "firstObservedValue": "Skin Tone 09",
       "firstObservedTimestampRange": "8-11",
+      "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
       "lastObservedValue": "Skin Tone 23",
       "lastObservedTimestampRange": "52-53.82",
+      "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+      "demonstratedFirstValue": null,
+      "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+      "demonstratedLastValue": null,
+      "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
       "visibleDefault": null,
       "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "selectorWrapStatus": "NOT_OBSERVED",
       "totalCount": null,
       "totalCountStatus": "COUNT_UNKNOWN",
       "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "missingObservedRangeValues": [
         5,
         14,
@@ -64,13 +175,46 @@
         27,
         28
       ],
+      "completenessAgainstObservedRange": {
+        "status": "OBSERVED_RANGE_HAS_GAPS",
+        "observedMinimum": 1,
+        "observedMaximum": 29,
+        "observedUniqueCount": 21,
+        "expectedWithinObservedNumericRange": 29,
+        "missingWithinObservedNumericRange": [
+          5,
+          14,
+          15,
+          16,
+          25,
+          26,
+          27,
+          28
+        ],
+        "completenessRatio": 0.724,
+        "note": "This measures completeness only within the currently observed numeric range. It does not prove selector beginning, ending, wrap behavior, or total count."
+      },
       "duplicateObservedValues": [
         "Skin Tone 10"
       ],
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No automatic dependency is demonstrated in current footage.",
+          "No reset-on-other-setting-change behavior is demonstrated in current footage."
+        ]
+      },
+      "selectorBoundaryEvidence": {
+        "beginningDemonstrated": false,
+        "beginningEvidence": "NOT_DEMONSTRATED",
+        "endingDemonstrated": false,
+        "endingEvidence": "NOT_DEMONSTRATED",
+        "wrappingDemonstrated": false,
+        "wrappingEvidence": "NOT_DEMONSTRATED"
       },
       "ambiguityAndMissingRanges": [
         "Observed numeric range has unobserved values: 5, 14, 15, 16, 25, 26, 27, 28.",
@@ -88,6 +232,8 @@
     },
     {
       "category": "Skin Details",
+      "displayedCategoryLabel": "Skin Details",
+      "nativeCategoryLabel": "Skin Details",
       "timelineLabel": "SKIN DETAILS",
       "parentMenu": "Head & Skin",
       "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -98,23 +244,72 @@
       ],
       "selectedObservationCount": 10,
       "directlyObservedUniqueValueCount": 10,
+      "visibleCounts": {
+        "selectedObservationCount": 10,
+        "directlyObservedUniqueValueCount": 10,
+        "visibleTotalCount": null,
+        "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+      },
       "firstObservedValue": "None",
       "firstObservedTimestampRange": "8-8",
+      "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
       "lastObservedValue": "Freckles 1",
       "lastObservedTimestampRange": "27-31.72",
+      "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+      "demonstratedFirstValue": null,
+      "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+      "demonstratedLastValue": null,
+      "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
       "visibleDefault": null,
       "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "selectorWrapStatus": "NOT_OBSERVED",
       "totalCount": null,
       "totalCountStatus": "COUNT_UNKNOWN",
       "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "missingObservedRangeValues": [],
+      "completenessAgainstObservedRange": {
+        "status": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+        "observedMinimum": null,
+        "observedMaximum": null,
+        "observedUniqueCount": 10,
+        "expectedWithinObservedNumericRange": null,
+        "missingWithinObservedNumericRange": [],
+        "completenessRatio": null,
+        "note": "No numeric native range is directly visible; completeness is limited to directly observed named values."
+      },
       "duplicateObservedValues": [],
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No automatic dependency is demonstrated in current footage.",
+          "No reset-on-other-setting-change behavior is demonstrated in current footage."
+        ]
+      },
+      "selectorBoundaryEvidence": {
+        "beginningDemonstrated": false,
+        "beginningEvidence": "NOT_DEMONSTRATED",
+        "endingDemonstrated": false,
+        "endingEvidence": "NOT_DEMONSTRATED",
+        "wrappingDemonstrated": false,
+        "wrappingEvidence": "NOT_DEMONSTRATED"
       },
       "ambiguityAndMissingRanges": [
         "Beginning boundary is not proven.",
@@ -130,6 +325,8 @@
     },
     {
       "category": "Eye Shape",
+      "displayedCategoryLabel": "Eye Shape",
+      "nativeCategoryLabel": "Eye Shape",
       "timelineLabel": "EYE SHAPE",
       "parentMenu": "Head & Skin",
       "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -140,23 +337,72 @@
       ],
       "selectedObservationCount": 5,
       "directlyObservedUniqueValueCount": 5,
+      "visibleCounts": {
+        "selectedObservationCount": 5,
+        "directlyObservedUniqueValueCount": 5,
+        "visibleTotalCount": null,
+        "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+      },
       "firstObservedValue": "Almond",
       "firstObservedTimestampRange": "14-14",
+      "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
       "lastObservedValue": "Hooded",
       "lastObservedTimestampRange": "20-24.93",
+      "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+      "demonstratedFirstValue": null,
+      "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+      "demonstratedLastValue": null,
+      "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
       "visibleDefault": null,
       "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "selectorWrapStatus": "NOT_OBSERVED",
       "totalCount": null,
       "totalCountStatus": "COUNT_UNKNOWN",
       "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "missingObservedRangeValues": [],
+      "completenessAgainstObservedRange": {
+        "status": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+        "observedMinimum": null,
+        "observedMaximum": null,
+        "observedUniqueCount": 5,
+        "expectedWithinObservedNumericRange": null,
+        "missingWithinObservedNumericRange": [],
+        "completenessRatio": null,
+        "note": "No numeric native range is directly visible; completeness is limited to directly observed named values."
+      },
       "duplicateObservedValues": [],
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No automatic dependency is demonstrated in current footage.",
+          "No reset-on-other-setting-change behavior is demonstrated in current footage."
+        ]
+      },
+      "selectorBoundaryEvidence": {
+        "beginningDemonstrated": false,
+        "beginningEvidence": "NOT_DEMONSTRATED",
+        "endingDemonstrated": false,
+        "endingEvidence": "NOT_DEMONSTRATED",
+        "wrappingDemonstrated": false,
+        "wrappingEvidence": "NOT_DEMONSTRATED"
       },
       "ambiguityAndMissingRanges": [
         "Beginning boundary is not proven.",
@@ -172,6 +418,8 @@
     },
     {
       "category": "Eye Color",
+      "displayedCategoryLabel": "Eye Color",
+      "nativeCategoryLabel": "Eye Color",
       "timelineLabel": "EYE COLOR",
       "parentMenu": "Head & Skin",
       "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -182,23 +430,72 @@
       ],
       "selectedObservationCount": 7,
       "directlyObservedUniqueValueCount": 7,
+      "visibleCounts": {
+        "selectedObservationCount": 7,
+        "directlyObservedUniqueValueCount": 7,
+        "visibleTotalCount": null,
+        "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+      },
       "firstObservedValue": "Light Blue",
       "firstObservedTimestampRange": "12-12",
+      "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
       "lastObservedValue": "Light Green",
       "lastObservedTimestampRange": "25-29.33",
+      "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+      "demonstratedFirstValue": null,
+      "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+      "demonstratedLastValue": null,
+      "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
       "visibleDefault": null,
       "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "selectorWrapStatus": "NOT_OBSERVED",
       "totalCount": null,
       "totalCountStatus": "COUNT_UNKNOWN",
       "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "missingObservedRangeValues": [],
+      "completenessAgainstObservedRange": {
+        "status": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+        "observedMinimum": null,
+        "observedMaximum": null,
+        "observedUniqueCount": 7,
+        "expectedWithinObservedNumericRange": null,
+        "missingWithinObservedNumericRange": [],
+        "completenessRatio": null,
+        "note": "No numeric native range is directly visible; completeness is limited to directly observed named values."
+      },
       "duplicateObservedValues": [],
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No automatic dependency is demonstrated in current footage.",
+          "No reset-on-other-setting-change behavior is demonstrated in current footage."
+        ]
+      },
+      "selectorBoundaryEvidence": {
+        "beginningDemonstrated": false,
+        "beginningEvidence": "NOT_DEMONSTRATED",
+        "endingDemonstrated": false,
+        "endingEvidence": "NOT_DEMONSTRATED",
+        "wrappingDemonstrated": false,
+        "wrappingEvidence": "NOT_DEMONSTRATED"
       },
       "ambiguityAndMissingRanges": [
         "Beginning boundary is not proven.",
@@ -214,6 +511,8 @@
     },
     {
       "category": "Nose",
+      "displayedCategoryLabel": "Nose",
+      "nativeCategoryLabel": "Nose",
       "timelineLabel": "NOSE",
       "parentMenu": "Head & Skin",
       "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -224,25 +523,74 @@
       ],
       "selectedObservationCount": 8,
       "directlyObservedUniqueValueCount": 7,
+      "visibleCounts": {
+        "selectedObservationCount": 8,
+        "directlyObservedUniqueValueCount": 7,
+        "visibleTotalCount": null,
+        "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+      },
       "firstObservedValue": "Aquiline",
       "firstObservedTimestampRange": "14-14",
+      "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
       "lastObservedValue": "Aquiline",
       "lastObservedTimestampRange": "28-32.45",
+      "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+      "demonstratedFirstValue": null,
+      "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+      "demonstratedLastValue": null,
+      "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
       "visibleDefault": null,
       "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "selectorWrapStatus": "POSSIBLE_WRAP_OBSERVED_UNVERIFIED",
       "totalCount": null,
       "totalCountStatus": "COUNT_UNKNOWN",
       "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "missingObservedRangeValues": [],
+      "completenessAgainstObservedRange": {
+        "status": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+        "observedMinimum": null,
+        "observedMaximum": null,
+        "observedUniqueCount": 7,
+        "expectedWithinObservedNumericRange": null,
+        "missingWithinObservedNumericRange": [],
+        "completenessRatio": null,
+        "note": "No numeric native range is directly visible; completeness is limited to directly observed named values."
+      },
       "duplicateObservedValues": [
         "Aquiline"
       ],
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No automatic dependency is demonstrated in current footage.",
+          "No reset-on-other-setting-change behavior is demonstrated in current footage."
+        ]
+      },
+      "selectorBoundaryEvidence": {
+        "beginningDemonstrated": false,
+        "beginningEvidence": "NOT_DEMONSTRATED",
+        "endingDemonstrated": false,
+        "endingEvidence": "NOT_DEMONSTRATED",
+        "wrappingDemonstrated": false,
+        "wrappingEvidence": "POSSIBLE_WRAP_OBSERVED_UNVERIFIED_REQUIRES_REVIEW"
       },
       "ambiguityAndMissingRanges": [
         "Duplicate selected values observed: Aquiline.",
@@ -259,6 +607,8 @@
     },
     {
       "category": "Ear Shape",
+      "displayedCategoryLabel": "Ear Shape",
+      "nativeCategoryLabel": "Ear Shape",
       "timelineLabel": "EAR SHAPE",
       "parentMenu": "Head & Skin",
       "parentMenuID": "cf27-menu-appearance-head-skin",
@@ -269,25 +619,74 @@
       ],
       "selectedObservationCount": 5,
       "directlyObservedUniqueValueCount": 4,
+      "visibleCounts": {
+        "selectedObservationCount": 5,
+        "directlyObservedUniqueValueCount": 4,
+        "visibleTotalCount": null,
+        "visibleTotalCountStatus": "NOT_VISIBLE_OR_NOT_PROVEN"
+      },
       "firstObservedValue": "None",
       "firstObservedTimestampRange": "16-17",
+      "firstObservedStatus": "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE",
       "lastObservedValue": "Pointed",
       "lastObservedTimestampRange": "26-30.21",
+      "lastObservedStatus": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE",
+      "demonstratedFirstValue": null,
+      "demonstratedFirstValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+      "demonstratedLastValue": null,
+      "demonstratedLastValueStatus": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
       "visibleDefault": null,
       "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "selectorWrapStatus": "NOT_OBSERVED",
       "totalCount": null,
       "totalCountStatus": "COUNT_UNKNOWN",
       "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "missingObservedRangeValues": [],
+      "completenessAgainstObservedRange": {
+        "status": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+        "observedMinimum": null,
+        "observedMaximum": null,
+        "observedUniqueCount": 4,
+        "expectedWithinObservedNumericRange": null,
+        "missingWithinObservedNumericRange": [],
+        "completenessRatio": null,
+        "note": "No numeric native range is directly visible; completeness is limited to directly observed named values."
+      },
       "duplicateObservedValues": [
         "None"
       ],
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No automatic dependency is demonstrated in current footage.",
+          "No reset-on-other-setting-change behavior is demonstrated in current footage."
+        ]
+      },
+      "selectorBoundaryEvidence": {
+        "beginningDemonstrated": false,
+        "beginningEvidence": "NOT_DEMONSTRATED",
+        "endingDemonstrated": false,
+        "endingEvidence": "NOT_DEMONSTRATED",
+        "wrappingDemonstrated": false,
+        "wrappingEvidence": "NOT_DEMONSTRATED"
       },
       "ambiguityAndMissingRanges": [
         "Duplicate selected values observed: None.",
@@ -306,10 +705,12 @@
   "records": [
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_001",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 01",
       "nativeOptionNumber": 1,
       "nativeOrder": 1,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -322,10 +723,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "45-46",
       "sourceObservations": [
@@ -380,7 +796,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -405,14 +827,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_002",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 02",
       "nativeOptionNumber": 2,
       "nativeOrder": 2,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -425,10 +851,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "47-47",
       "sourceObservations": [
@@ -483,7 +924,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -508,14 +955,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_003",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 03",
       "nativeOptionNumber": 3,
       "nativeOrder": 3,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -528,10 +979,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "48-49",
       "sourceObservations": [
@@ -586,7 +1052,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -611,14 +1083,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_004",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 04",
       "nativeOptionNumber": 4,
       "nativeOrder": 4,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -631,10 +1107,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "12-13",
       "sourceObservations": [
@@ -689,7 +1180,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -714,14 +1211,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_006",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 06",
       "nativeOptionNumber": 6,
       "nativeOrder": 6,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -734,10 +1235,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "29-30",
       "sourceObservations": [
@@ -792,7 +1308,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -818,14 +1340,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_007",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 07",
       "nativeOptionNumber": 7,
       "nativeOrder": 7,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -838,10 +1364,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "27-28",
       "sourceObservations": [
@@ -896,7 +1437,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -921,14 +1468,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_008",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 08",
       "nativeOptionNumber": 8,
       "nativeOrder": 8,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -941,10 +1492,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "25-26",
       "sourceObservations": [
@@ -999,7 +1565,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -1025,14 +1597,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_009",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 09",
       "nativeOptionNumber": 9,
       "nativeOrder": 9,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -1045,10 +1621,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "8-11",
       "sourceObservations": [
@@ -1103,7 +1694,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -1129,14 +1726,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_010",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 10",
       "nativeOptionNumber": 10,
       "nativeOrder": 10,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -1149,10 +1750,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "41-42",
       "sourceObservations": [
@@ -1230,7 +1846,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -1256,14 +1878,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_011",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 11",
       "nativeOptionNumber": 11,
       "nativeOrder": 11,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -1276,10 +1902,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "50-51",
       "sourceObservations": [
@@ -1334,7 +1975,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -1360,14 +2007,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_012",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 12",
       "nativeOptionNumber": 12,
       "nativeOrder": 12,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -1380,10 +2031,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "43-44",
       "sourceObservations": [
@@ -1438,7 +2104,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -1463,14 +2135,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_013",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 13",
       "nativeOptionNumber": 13,
       "nativeOrder": 13,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -1483,10 +2159,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "39-40",
       "sourceObservations": [
@@ -1541,7 +2232,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -1566,14 +2263,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_017",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 17",
       "nativeOptionNumber": 17,
       "nativeOrder": 17,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -1586,10 +2287,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "37-38",
       "sourceObservations": [
@@ -1644,7 +2360,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -1670,14 +2392,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_018",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 18",
       "nativeOptionNumber": 18,
       "nativeOrder": 18,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -1690,10 +2416,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "20-22",
       "sourceObservations": [
@@ -1748,7 +2489,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -1774,14 +2521,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_019",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 19",
       "nativeOptionNumber": 19,
       "nativeOrder": 19,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -1794,10 +2545,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "17-19",
       "sourceObservations": [
@@ -1852,7 +2618,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -1877,14 +2649,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_020",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 20",
       "nativeOptionNumber": 20,
       "nativeOrder": 20,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -1897,10 +2673,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "15-16",
       "sourceObservations": [
@@ -1955,7 +2746,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -1980,14 +2777,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_021",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 21",
       "nativeOptionNumber": 21,
       "nativeOrder": 21,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -2000,10 +2801,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "23-24",
       "sourceObservations": [
@@ -2058,7 +2874,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -2083,14 +2905,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_022",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 22",
       "nativeOptionNumber": 22,
       "nativeOrder": 22,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -2103,10 +2929,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "35-36",
       "sourceObservations": [
@@ -2161,7 +3002,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -2187,14 +3034,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_023",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 23",
       "nativeOptionNumber": 23,
       "nativeOrder": 23,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -2207,10 +3058,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "52-53.82",
       "sourceObservations": [
@@ -2265,7 +3131,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -2291,14 +3163,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_024",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 24",
       "nativeOptionNumber": 24,
       "nativeOrder": 24,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -2311,10 +3187,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "33-34",
       "sourceObservations": [
@@ -2369,7 +3260,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -2394,14 +3291,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_029",
+      "displayedCategoryLabel": "Skin Tone",
       "nativeControlLabel": "Skin Tone",
       "nativeDisplayLabel": "Skin Tone 29",
       "nativeOptionNumber": 29,
       "nativeOrder": 29,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "DIRECT_VISIBLE_NUMERIC_NATIVE_LABEL",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -2414,10 +3315,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-004",
       "sourceTimestampRange": "31-32",
       "sourceObservations": [
@@ -2472,7 +3388,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -2498,14 +3420,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
+      "categoryCompletenessRatio": 0.724
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001",
+      "displayedCategoryLabel": "Skin Details",
       "nativeControlLabel": "Skin Details",
       "nativeDisplayLabel": "None",
       "nativeOptionNumber": null,
       "nativeOrder": 1,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -2518,10 +3444,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-005",
       "sourceTimestampRange": "8-8",
       "sourceObservations": [
@@ -2576,7 +3517,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -2601,14 +3548,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002",
+      "displayedCategoryLabel": "Skin Details",
       "nativeControlLabel": "Skin Details",
       "nativeDisplayLabel": "Freckles 2",
       "nativeOptionNumber": null,
       "nativeOrder": 2,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -2621,10 +3572,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-005",
       "sourceTimestampRange": "9-10",
       "sourceObservations": [
@@ -2679,7 +3645,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -2704,14 +3676,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003",
+      "displayedCategoryLabel": "Skin Details",
       "nativeControlLabel": "Skin Details",
       "nativeDisplayLabel": "Scar 3",
       "nativeOptionNumber": null,
       "nativeOrder": 3,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -2724,10 +3700,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-005",
       "sourceTimestampRange": "11-14",
       "sourceObservations": [
@@ -2782,7 +3773,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -2807,14 +3804,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004",
+      "displayedCategoryLabel": "Skin Details",
       "nativeControlLabel": "Skin Details",
       "nativeDisplayLabel": "Scar 2",
       "nativeOptionNumber": null,
       "nativeOrder": 4,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -2827,10 +3828,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-005",
       "sourceTimestampRange": "15-16",
       "sourceObservations": [
@@ -2885,7 +3901,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -2910,14 +3932,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005",
+      "displayedCategoryLabel": "Skin Details",
       "nativeControlLabel": "Skin Details",
       "nativeDisplayLabel": "Scar 1",
       "nativeOptionNumber": null,
       "nativeOrder": 5,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -2930,10 +3956,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-005",
       "sourceTimestampRange": "23-24",
       "sourceObservations": [
@@ -2988,7 +4029,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -3013,14 +4060,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006",
+      "displayedCategoryLabel": "Skin Details",
       "nativeControlLabel": "Skin Details",
       "nativeDisplayLabel": "Acne Scar 1",
       "nativeOptionNumber": null,
       "nativeOrder": 6,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -3033,10 +4084,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-005",
       "sourceTimestampRange": "21-22",
       "sourceObservations": [
@@ -3091,7 +4157,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -3116,14 +4188,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007",
+      "displayedCategoryLabel": "Skin Details",
       "nativeControlLabel": "Skin Details",
       "nativeDisplayLabel": "Redness 3",
       "nativeOptionNumber": null,
       "nativeOrder": 7,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -3136,10 +4212,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-005",
       "sourceTimestampRange": "19-20",
       "sourceObservations": [
@@ -3194,7 +4285,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -3219,14 +4316,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008",
+      "displayedCategoryLabel": "Skin Details",
       "nativeControlLabel": "Skin Details",
       "nativeDisplayLabel": "Redness 2",
       "nativeOptionNumber": null,
       "nativeOrder": 8,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -3239,10 +4340,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-005",
       "sourceTimestampRange": "17-18",
       "sourceObservations": [
@@ -3297,7 +4413,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -3322,14 +4444,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009",
+      "displayedCategoryLabel": "Skin Details",
       "nativeControlLabel": "Skin Details",
       "nativeDisplayLabel": "Redness 1",
       "nativeOptionNumber": null,
       "nativeOrder": 9,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -3342,10 +4468,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-005",
       "sourceTimestampRange": "25-26",
       "sourceObservations": [
@@ -3400,7 +4541,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -3425,14 +4572,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010",
+      "displayedCategoryLabel": "Skin Details",
       "nativeControlLabel": "Skin Details",
       "nativeDisplayLabel": "Freckles 1",
       "nativeOptionNumber": null,
       "nativeOrder": 10,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -3445,10 +4596,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-005",
       "sourceTimestampRange": "27-31.72",
       "sourceObservations": [
@@ -3503,7 +4669,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -3528,14 +4700,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
+      "displayedCategoryLabel": "Eye Shape",
       "nativeControlLabel": "Eye Shape",
       "nativeDisplayLabel": "Almond",
       "nativeOptionNumber": null,
       "nativeOrder": 1,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -3548,10 +4724,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-006",
       "sourceTimestampRange": "14-14",
       "sourceObservations": [
@@ -3606,7 +4797,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -3631,14 +4828,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
+      "displayedCategoryLabel": "Eye Shape",
       "nativeControlLabel": "Eye Shape",
       "nativeDisplayLabel": "None",
       "nativeOptionNumber": null,
       "nativeOrder": 2,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -3651,10 +4852,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-006",
       "sourceTimestampRange": "15-16",
       "sourceObservations": [
@@ -3709,7 +4925,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -3734,14 +4956,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_003",
+      "displayedCategoryLabel": "Eye Shape",
       "nativeControlLabel": "Eye Shape",
       "nativeDisplayLabel": "Prominent",
       "nativeOptionNumber": null,
       "nativeOrder": 3,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -3754,10 +4980,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-006",
       "sourceTimestampRange": "17-18",
       "sourceObservations": [
@@ -3812,7 +5053,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -3837,14 +5084,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_004",
+      "displayedCategoryLabel": "Eye Shape",
       "nativeControlLabel": "Eye Shape",
       "nativeDisplayLabel": "Monolid",
       "nativeOptionNumber": null,
       "nativeOrder": 4,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -3857,10 +5108,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-006",
       "sourceTimestampRange": "19-19",
       "sourceObservations": [
@@ -3915,7 +5181,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -3940,14 +5212,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_005",
+      "displayedCategoryLabel": "Eye Shape",
       "nativeControlLabel": "Eye Shape",
       "nativeDisplayLabel": "Hooded",
       "nativeOptionNumber": null,
       "nativeOrder": 5,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -3960,10 +5236,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-006",
       "sourceTimestampRange": "20-24.93",
       "sourceObservations": [
@@ -4018,7 +5309,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -4043,14 +5340,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_001",
+      "displayedCategoryLabel": "Eye Color",
       "nativeControlLabel": "Eye Color",
       "nativeDisplayLabel": "Light Blue",
       "nativeOptionNumber": null,
       "nativeOrder": 1,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -4063,10 +5364,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-007",
       "sourceTimestampRange": "12-12",
       "sourceObservations": [
@@ -4121,7 +5437,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -4147,14 +5469,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_002",
+      "displayedCategoryLabel": "Eye Color",
       "nativeControlLabel": "Eye Color",
       "nativeDisplayLabel": "Light Brown",
       "nativeOptionNumber": null,
       "nativeOrder": 2,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -4167,10 +5493,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-007",
       "sourceTimestampRange": "13-15",
       "sourceObservations": [
@@ -4225,7 +5566,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -4251,14 +5598,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_003",
+      "displayedCategoryLabel": "Eye Color",
       "nativeControlLabel": "Eye Color",
       "nativeDisplayLabel": "Brown",
       "nativeOptionNumber": null,
       "nativeOrder": 3,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -4271,10 +5622,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-007",
       "sourceTimestampRange": "16-17",
       "sourceObservations": [
@@ -4329,7 +5695,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -4354,14 +5726,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_004",
+      "displayedCategoryLabel": "Eye Color",
       "nativeControlLabel": "Eye Color",
       "nativeDisplayLabel": "Blue",
       "nativeOptionNumber": null,
       "nativeOrder": 4,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -4374,10 +5750,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-007",
       "sourceTimestampRange": "18-20",
       "sourceObservations": [
@@ -4432,7 +5823,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -4457,14 +5854,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_005",
+      "displayedCategoryLabel": "Eye Color",
       "nativeControlLabel": "Eye Color",
       "nativeDisplayLabel": "Light Green",
       "nativeOptionNumber": null,
       "nativeOrder": 5,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -4477,10 +5878,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-007",
       "sourceTimestampRange": "25-29.33",
       "sourceObservations": [
@@ -4535,7 +5951,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -4560,14 +5982,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_006",
+      "displayedCategoryLabel": "Eye Color",
       "nativeControlLabel": "Eye Color",
       "nativeDisplayLabel": "Grey",
       "nativeOptionNumber": null,
       "nativeOrder": 6,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -4580,10 +6006,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-007",
       "sourceTimestampRange": "23-24",
       "sourceObservations": [
@@ -4638,7 +6079,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -4663,14 +6110,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_007",
+      "displayedCategoryLabel": "Eye Color",
       "nativeControlLabel": "Eye Color",
       "nativeDisplayLabel": "Hazel",
       "nativeOptionNumber": null,
       "nativeOrder": 7,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -4683,10 +6134,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-007",
       "sourceTimestampRange": "21-22",
       "sourceObservations": [
@@ -4741,7 +6207,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -4766,14 +6238,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_001",
+      "displayedCategoryLabel": "Nose",
       "nativeControlLabel": "Nose",
       "nativeDisplayLabel": "None",
       "nativeOptionNumber": null,
       "nativeOrder": 1,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -4786,10 +6262,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-008",
       "sourceTimestampRange": "15-15",
       "sourceObservations": [
@@ -4844,7 +6335,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -4869,14 +6366,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_002",
+      "displayedCategoryLabel": "Nose",
       "nativeControlLabel": "Nose",
       "nativeDisplayLabel": "Hooked",
       "nativeOptionNumber": null,
       "nativeOrder": 2,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -4889,10 +6390,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-008",
       "sourceTimestampRange": "16-18",
       "sourceObservations": [
@@ -4947,7 +6463,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -4972,14 +6494,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_003",
+      "displayedCategoryLabel": "Nose",
       "nativeControlLabel": "Nose",
       "nativeDisplayLabel": "Button",
       "nativeOptionNumber": null,
       "nativeOrder": 3,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -4992,10 +6518,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-008",
       "sourceTimestampRange": "19-20",
       "sourceObservations": [
@@ -5050,7 +6591,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -5075,14 +6622,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_004",
+      "displayedCategoryLabel": "Nose",
       "nativeControlLabel": "Nose",
       "nativeDisplayLabel": "Nubian",
       "nativeOptionNumber": null,
       "nativeOrder": 4,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -5095,10 +6646,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-008",
       "sourceTimestampRange": "21-22",
       "sourceObservations": [
@@ -5153,7 +6719,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -5178,14 +6750,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_005",
+      "displayedCategoryLabel": "Nose",
       "nativeControlLabel": "Nose",
       "nativeDisplayLabel": "Aquiline",
       "nativeOptionNumber": null,
       "nativeOrder": 5,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -5198,10 +6774,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-008",
       "sourceTimestampRange": "14-14",
       "sourceObservations": [
@@ -5279,7 +6870,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -5305,14 +6902,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_006",
+      "displayedCategoryLabel": "Nose",
       "nativeControlLabel": "Nose",
       "nativeDisplayLabel": "Roman",
       "nativeOptionNumber": null,
       "nativeOrder": 6,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -5325,10 +6926,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-008",
       "sourceTimestampRange": "25-27",
       "sourceObservations": [
@@ -5383,7 +6999,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -5408,14 +7030,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_007",
+      "displayedCategoryLabel": "Nose",
       "nativeControlLabel": "Nose",
       "nativeDisplayLabel": "Funnel",
       "nativeOptionNumber": null,
       "nativeOrder": 7,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -5428,10 +7054,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-008",
       "sourceTimestampRange": "23-24",
       "sourceObservations": [
@@ -5486,7 +7127,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -5511,14 +7158,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
+      "displayedCategoryLabel": "Ear Shape",
       "nativeControlLabel": "Ear Shape",
       "nativeDisplayLabel": "Attached Lobe",
       "nativeOptionNumber": null,
       "nativeOrder": 1,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -5531,10 +7182,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-009",
       "sourceTimestampRange": "18-20",
       "sourceObservations": [
@@ -5589,7 +7255,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -5614,14 +7286,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "displayedCategoryLabel": "Ear Shape",
       "nativeControlLabel": "Ear Shape",
       "nativeDisplayLabel": "None",
       "nativeOptionNumber": null,
       "nativeOrder": 2,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -5634,10 +7310,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-009",
       "sourceTimestampRange": "16-17",
       "sourceObservations": [
@@ -5715,7 +7406,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -5742,14 +7439,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
+      "displayedCategoryLabel": "Ear Shape",
       "nativeControlLabel": "Ear Shape",
       "nativeDisplayLabel": "Round Free Lobe",
       "nativeOptionNumber": null,
       "nativeOrder": 3,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -5762,10 +7463,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-009",
       "sourceTimestampRange": "23-25",
       "sourceObservations": [
@@ -5820,7 +7536,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "LIMITED_RESEARCH_FRAME_ID_REVIEW_REQUIRED",
       "confidence": {
@@ -5846,14 +7568,18 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_004",
+      "displayedCategoryLabel": "Ear Shape",
       "nativeControlLabel": "Ear Shape",
       "nativeDisplayLabel": "Pointed",
       "nativeOptionNumber": null,
       "nativeOrder": 4,
+      "nativeOptionOrderPreserved": true,
       "nativeOrderBasis": "EXISTING_RESEARCH_GRID_ORDER_PENDING_REVIEW",
       "parentMenu": "cf27-menu-appearance-head-skin",
       "parentMenuLabel": "Head & Skin",
@@ -5866,10 +7592,25 @@
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
       "defaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+      "defaultWhenObserved": false,
       "isVisibleDefault": false,
+      "demonstratedDefault": {
+        "status": "NOT_DEMONSTRATED",
+        "value": null,
+        "timestampRange": null
+      },
       "selectorWrapObserved": false,
       "totalCountSupported": false,
       "totalCount": null,
+      "sliderValue": null,
+      "sliderBoundaries": {
+        "applicable": false,
+        "minimum": null,
+        "maximum": null,
+        "step": null,
+        "default": null,
+        "status": "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+      },
       "sourceVideo": "phase0-video-009",
       "sourceTimestampRange": "26-30.21",
       "sourceObservations": [
@@ -5924,7 +7665,13 @@
       "automaticChangesOrDependencies": {
         "automaticChangesObserved": "NONE_OBSERVED",
         "dependenciesObserved": "NONE_OBSERVED",
-        "dependencyTestingStatus": "NOT_TESTED"
+        "dependencyTestingStatus": "NOT_TESTED",
+        "resetBehaviorObserved": "NOT_OBSERVED",
+        "resetBehaviorTestingStatus": "NOT_TESTED",
+        "notes": [
+          "No current evidence demonstrates that changing another setting resets this value.",
+          "No current evidence demonstrates an automatic dependency for this value."
+        ]
       },
       "visualEvidenceQuality": "RESEARCH_MENU_AND_REPRESENTATIVE_FRAME",
       "confidence": {
@@ -5949,7 +7696,9 @@
         "reason": "Research-only appearance-control observation. Requires complete boundary proof, standardized evidence where applicable, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T01:15:00-04:00",
-      "updatedAt": "2026-07-14T01:15:00-04:00"
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      "categoryCompletenessRatio": null
     }
   ]
 }

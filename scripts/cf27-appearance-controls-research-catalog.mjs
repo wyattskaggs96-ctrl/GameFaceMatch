@@ -19,6 +19,7 @@ const defaultAttributesCsvPath = "data/phase-zero/additional_attributes.research
 const defaultRecaptureJsonPath = "data/phase-zero/additional_attributes_recapture_requirements.research.json";
 const defaultRecaptureCsvPath = "data/phase-zero/additional_attributes_recapture_requirements.research.csv";
 const defaultSummaryDirectory = "docs/phase-zero/appearance-controls";
+const defaultConsolidatedExportDocPath = "docs/phase-zero/appearance-controls/APPEARANCE_CONTROLS_RESEARCH_EXPORT.md";
 
 const categoryConfigs = [
   config({
@@ -170,6 +171,9 @@ export function generateAppearanceControlsResearchCatalog(options = {}) {
   const records = [];
   const recaptureItems = [];
   const packageIndexes = loadPackageIndexes(root);
+  const directlyObservedTimelineLabels = new Set((timeline.records ?? [])
+    .filter((record) => record.event_type === "option_change" && record.visible_option_label)
+    .map((record) => record.visible_menu_label));
 
   for (const cfg of categoryConfigs) {
     const menuRecord = (menuMap.records ?? []).find((record) => record.displayLabel === cfg.canonicalLabel && record.recordType === "menu");
@@ -179,11 +183,22 @@ export function generateAppearanceControlsResearchCatalog(options = {}) {
       .sort((left, right) => left.start_timestamp - right.start_timestamp || left.timeline_record_id.localeCompare(right.timeline_record_id));
     const categoryRecords = buildCategoryRecords(cfg, timelineRecords, evidenceByTimelineID, menuRecord, packageIndexes.get(cfg.slug) ?? new Map(), generatedAt);
     const categorySummary = buildCategorySummary(cfg, timelineRecords, categoryRecords, menuRecord);
+    for (const record of categoryRecords) {
+      record.categoryCompletenessStatus = categorySummary.completenessAgainstObservedRange.status;
+      record.categoryCompletenessRatio = categorySummary.completenessAgainstObservedRange.completenessRatio;
+    }
     const recapture = buildRecaptureRequirement(cfg, categorySummary, categoryRecords, generatedAt);
     categories.push(categorySummary);
     records.push(...categoryRecords);
     recaptureItems.push(recapture);
   }
+
+  const configuredTimelineLabels = new Set(categoryConfigs.map((cfg) => cfg.timelineLabel));
+  const unconfiguredDirectlyObservedCategoryLabels = [...directlyObservedTimelineLabels]
+    .filter((label) => label !== "HEAD TEMPLATE")
+    .filter((label) => !configuredTimelineLabels.has(label))
+    .sort();
+  const menuOnlyObservedCategories = menuOnlyCategories(menuMap, configuredTimelineLabels);
 
   const catalog = {
     schemaVersion: CF27_APPEARANCE_CONTROLS_RESEARCH_SCHEMA_VERSION,
@@ -200,12 +215,16 @@ export function generateAppearanceControlsResearchCatalog(options = {}) {
     sourceMenuMap: options.menuMapPath ?? defaultMenuMapPath,
     summary: {
       categoryCount: categories.length,
+      directlyObservedCategoryLabels: categories.map((category) => category.category),
+      unconfiguredDirectlyObservedCategoryLabels,
+      menuOnlyObservedCategoryCount: menuOnlyObservedCategories.length,
       directlyObservedUniqueValues: records.length,
       selectedObservations: categories.reduce((sum, category) => sum + category.selectedObservationCount, 0),
       productionEligibleRecords: 0,
       categoriesWithUnknownTotalCount: categories.filter((category) => category.totalCountStatus === "COUNT_UNKNOWN").map((category) => category.category),
       categoriesWithDuplicateObservations: categories.filter((category) => category.duplicateObservedValues.length > 0).map((category) => category.category)
     },
+    menuOnlyObservedCategories,
     categories,
     records
   };
@@ -236,6 +255,7 @@ export function writeAppearanceControlsResearchCatalog(outputs, options = {}) {
   writeText(root, options.recaptureJsonPath ?? defaultRecaptureJsonPath, `${JSON.stringify(outputs.recaptureRequirements, null, 2)}\n`);
   writeText(root, options.recaptureCsvPath ?? defaultRecaptureCsvPath, formatRecaptureCsv(outputs.recaptureRequirements.items));
   writeCategoryMarkdown(root, outputs.catalog, options.summaryDirectory ?? defaultSummaryDirectory);
+  writeText(root, options.consolidatedExportDocPath ?? defaultConsolidatedExportDocPath, formatConsolidatedExportMarkdown(outputs.catalog));
   writeText(root, options.evidenceManifestPath ?? defaultEvidenceManifestPath, `${JSON.stringify(outputs.updatedEvidenceManifest, null, 2)}\n`);
   writeText(root, options.issuesPath ?? defaultIssuesPath, `${JSON.stringify(outputs.updatedIssuesRegister, null, 2)}\n`);
 }
@@ -288,10 +308,12 @@ function buildCategoryRecords(cfg, timelineRecords, evidenceByTimelineID, menuRe
       ];
       return {
         stableResearchCatalogID,
+        displayedCategoryLabel: cfg.canonicalLabel,
         nativeControlLabel: cfg.canonicalLabel,
         nativeDisplayLabel: label,
         nativeOptionNumber: Number.isInteger(observations[0].visibleOptionIndex) ? observations[0].visibleOptionIndex : null,
         nativeOrder,
+        nativeOptionOrderPreserved: true,
         nativeOrderBasis: nativeOrderBasisFor(cfg, observations[0], packageIndex),
         parentMenu: menuRecord?.parentMenuID ?? cfg.parentMenu,
         parentMenuLabel: cfg.parentMenu,
@@ -304,10 +326,18 @@ function buildCategoryRecords(cfg, timelineRecords, evidenceByTimelineID, menuRe
         productionStatus,
         verificationStatus,
         defaultStatus: "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        defaultWhenObserved: false,
         isVisibleDefault: false,
+        demonstratedDefault: {
+          status: "NOT_DEMONSTRATED",
+          value: null,
+          timestampRange: null
+        },
         selectorWrapObserved: false,
         totalCountSupported: false,
         totalCount: null,
+        sliderValue: null,
+        sliderBoundaries: sliderBoundariesFor(cfg),
         sourceVideo: primary.videoID,
         sourceTimestampRange: primary.timestampRange,
         sourceObservations: observations,
@@ -330,7 +360,13 @@ function buildCategoryRecords(cfg, timelineRecords, evidenceByTimelineID, menuRe
         automaticChangesOrDependencies: {
           automaticChangesObserved: "NONE_OBSERVED",
           dependenciesObserved: "NONE_OBSERVED",
-          dependencyTestingStatus: "NOT_TESTED"
+          dependencyTestingStatus: "NOT_TESTED",
+          resetBehaviorObserved: "NOT_OBSERVED",
+          resetBehaviorTestingStatus: "NOT_TESTED",
+          notes: [
+            "No current evidence demonstrates that changing another setting resets this value.",
+            "No current evidence demonstrates an automatic dependency for this value."
+          ]
         },
         visualEvidenceQuality: visualQualityFor(cfg, observations, frameIDMismatch),
         confidence: {
@@ -374,6 +410,8 @@ function buildCategorySummary(cfg, timelineRecords, records, menuRecord) {
   }
   return {
     category: cfg.canonicalLabel,
+    displayedCategoryLabel: cfg.canonicalLabel,
+    nativeCategoryLabel: cfg.canonicalLabel,
     timelineLabel: cfg.timelineLabel,
     parentMenu: cfg.parentMenu,
     parentMenuID: menuRecord?.parentMenuID ?? null,
@@ -382,12 +420,29 @@ function buildCategorySummary(cfg, timelineRecords, records, menuRecord) {
     sourceVideos: [...new Set(timelineRecords.map((record) => record.video_id))],
     selectedObservationCount: timelineRecords.length,
     directlyObservedUniqueValueCount: records.length,
+    visibleCounts: {
+      selectedObservationCount: timelineRecords.length,
+      directlyObservedUniqueValueCount: records.length,
+      visibleTotalCount: null,
+      visibleTotalCountStatus: "NOT_VISIBLE_OR_NOT_PROVEN"
+    },
     firstObservedValue: first?.visible_option_label ?? null,
     firstObservedTimestampRange: first ? `${first.start_timestamp}-${first.end_timestamp}` : null,
+    firstObservedStatus: first ? "FIRST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FIRST_AVAILABLE" : "NO_VALUE_OBSERVED",
     lastObservedValue: last?.visible_option_label ?? null,
     lastObservedTimestampRange: last ? `${last.start_timestamp}-${last.end_timestamp}` : null,
+    lastObservedStatus: last ? "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE" : "NO_VALUE_OBSERVED",
+    demonstratedFirstValue: null,
+    demonstratedFirstValueStatus: "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
+    demonstratedLastValue: null,
+    demonstratedLastValueStatus: "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY",
     visibleDefault: null,
     visibleDefaultStatus: "UNKNOWN_NOT_DIRECTLY_SHOWN",
+    demonstratedDefault: {
+      status: "NOT_DEMONSTRATED",
+      value: null,
+      timestampRange: null
+    },
     selectorWrapObserved: false,
     selectorWrapStatus: menuRecord?.wrapBehavior === "POSSIBLE_WRAP_OBSERVED_UNVERIFIED"
       ? "POSSIBLE_WRAP_OBSERVED_UNVERIFIED"
@@ -395,12 +450,30 @@ function buildCategorySummary(cfg, timelineRecords, records, menuRecord) {
     totalCount: null,
     totalCountStatus: "COUNT_UNKNOWN",
     countExplanation: "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+    sliderBoundaries: sliderBoundariesFor(cfg),
     missingObservedRangeValues,
+    completenessAgainstObservedRange: completenessAgainstObservedRange(observedNumbers, records),
     duplicateObservedValues,
     automaticChangesOrDependencies: {
       automaticChangesObserved: "NONE_OBSERVED",
       dependenciesObserved: "NONE_OBSERVED",
-      dependencyTestingStatus: "NOT_TESTED"
+      dependencyTestingStatus: "NOT_TESTED",
+      resetBehaviorObserved: "NOT_OBSERVED",
+      resetBehaviorTestingStatus: "NOT_TESTED",
+      notes: [
+        "No automatic dependency is demonstrated in current footage.",
+        "No reset-on-other-setting-change behavior is demonstrated in current footage."
+      ]
+    },
+    selectorBoundaryEvidence: {
+      beginningDemonstrated: false,
+      beginningEvidence: "NOT_DEMONSTRATED",
+      endingDemonstrated: false,
+      endingEvidence: "NOT_DEMONSTRATED",
+      wrappingDemonstrated: false,
+      wrappingEvidence: menuRecord?.wrapBehavior === "POSSIBLE_WRAP_OBSERVED_UNVERIFIED"
+        ? "POSSIBLE_WRAP_OBSERVED_UNVERIFIED_REQUIRES_REVIEW"
+        : "NOT_DEMONSTRATED"
     },
     ambiguityAndMissingRanges: [
       ...(missingObservedRangeValues.length > 0 ? [`Observed numeric range has unobserved values: ${missingObservedRangeValues.join(", ")}.`] : []),
@@ -415,6 +488,79 @@ function buildCategorySummary(cfg, timelineRecords, records, menuRecord) {
       eligible: false,
       reason: "Category is partial research evidence only and cannot feed production recommendations."
     }
+  };
+}
+
+function menuOnlyCategories(menuMap, configuredTimelineLabels) {
+  const configuredDisplayLabels = new Set(categoryConfigs.map((cfg) => cfg.canonicalLabel));
+  return (menuMap.records ?? [])
+    .filter((record) => record.recordType === "menu")
+    .filter((record) => record.parentMenuID === "cf27-menu-appearance-head-skin")
+    .filter((record) => !configuredDisplayLabels.has(record.displayLabel))
+    .filter((record) => record.displayLabel !== "Head Template")
+    .map((record) => ({
+      displayedCategoryLabel: record.displayLabel,
+      menuID: record.stableMenuID,
+      parentMenuID: record.parentMenuID,
+      nativeOrder: record.nativeOrder ?? null,
+      controlType: record.controlType ?? "UNKNOWN",
+      sourceEvidence: record.evidence ?? [],
+      sourceTimestampStatus: (record.evidence ?? []).some((entry) => entry.startTimestamp !== null || entry.endTimestamp !== null)
+        ? "TIMESTAMP_RECORDED"
+        : "TIMESTAMP_UNRESOLVED_MENU_ROW_VISIBLE_ONLY",
+      directlyObservedValues: 0,
+      catalogStatus: configuredTimelineLabels.has(String(record.displayLabel).toUpperCase())
+        ? "UNCONFIGURED_DIRECT_VALUE_EVIDENCE_REVIEW_REQUIRED"
+        : "MENU_ONLY_NO_DIRECT_OPTION_VALUES_IN_CURRENT_TIMELINE",
+      productionStatus,
+      verificationStatus,
+      note: "The category label appears in the current menu map, but no selected option values are cataloged from current evidence."
+    }))
+    .sort((left, right) => (left.nativeOrder ?? Number.MAX_SAFE_INTEGER) - (right.nativeOrder ?? Number.MAX_SAFE_INTEGER) || left.displayedCategoryLabel.localeCompare(right.displayedCategoryLabel));
+}
+
+function sliderBoundariesFor(cfg) {
+  return {
+    applicable: false,
+    minimum: null,
+    maximum: null,
+    step: null,
+    default: null,
+    status: cfg.controlTypeFallback.includes("slider")
+      ? "NOT_DEMONSTRATED"
+      : "NOT_APPLICABLE_NON_SLIDER_CONTROL"
+  };
+}
+
+function completenessAgainstObservedRange(observedNumbers, records) {
+  if (observedNumbers.length === 0) {
+    return {
+      status: "NOT_APPLICABLE_NO_NUMERIC_RANGE",
+      observedMinimum: null,
+      observedMaximum: null,
+      observedUniqueCount: records.length,
+      expectedWithinObservedNumericRange: null,
+      missingWithinObservedNumericRange: [],
+      completenessRatio: null,
+      note: "No numeric native range is directly visible; completeness is limited to directly observed named values."
+    };
+  }
+  const minimum = observedNumbers[0];
+  const maximum = observedNumbers.at(-1);
+  const expected = maximum - minimum + 1;
+  const missing = [];
+  for (let value = minimum; value <= maximum; value += 1) {
+    if (!observedNumbers.includes(value)) missing.push(value);
+  }
+  return {
+    status: missing.length === 0 ? "OBSERVED_RANGE_CONTIGUOUS_TOTAL_SELECTOR_COUNT_NOT_PROVEN" : "OBSERVED_RANGE_HAS_GAPS",
+    observedMinimum: minimum,
+    observedMaximum: maximum,
+    observedUniqueCount: observedNumbers.length,
+    expectedWithinObservedNumericRange: expected,
+    missingWithinObservedNumericRange: missing,
+    completenessRatio: Math.round((observedNumbers.length / expected) * 1000) / 1000,
+    note: "This measures completeness only within the currently observed numeric range. It does not prove selector beginning, ending, wrap behavior, or total count."
   };
 }
 
@@ -458,7 +604,7 @@ function buildRecaptureRequirement(cfg, categorySummary, records, generatedAt) {
 
 function annotateEvidenceManifest(evidenceManifest, records, categories, generatedAt) {
   const updated = structuredClone(evidenceManifest);
-  updated.updatedAt = generatedAt;
+  updated.updatedAt = latestTimestamp(updated.updatedAt, generatedAt);
   updated.additionalAttributesResearchCatalog = {
     generatedAt,
     catalogPath: defaultAttributesJsonPath,
@@ -551,11 +697,16 @@ function writeCategoryMarkdown(root, catalog, summaryDirectory) {
       `- Selected observations: ${category.selectedObservationCount}`,
       `- Directly observed unique values: ${category.directlyObservedUniqueValueCount}`,
       `- First observed value: ${category.firstObservedValue ?? "unknown"} (${category.firstObservedTimestampRange ?? "no timestamp"})`,
+      `- First available value demonstrated: ${category.demonstratedFirstValueStatus}`,
       `- Last observed value: ${category.lastObservedValue ?? "unknown"} (${category.lastObservedTimestampRange ?? "no timestamp"})`,
+      `- Final available value demonstrated: ${category.demonstratedLastValueStatus}`,
       `- Visible default: ${category.visibleDefaultStatus}`,
       `- Selector wrap: ${category.selectorWrapStatus}`,
       `- Total count: ${category.totalCountStatus}`,
       `- Count explanation: ${category.countExplanation}`,
+      `- Observed-range completeness: ${category.completenessAgainstObservedRange.status}${category.completenessAgainstObservedRange.completenessRatio === null ? "" : ` (${category.completenessAgainstObservedRange.completenessRatio})`}`,
+      `- Slider boundaries: ${category.sliderBoundaries.status}`,
+      `- Reset behavior: ${category.automaticChangesOrDependencies.resetBehaviorObserved}`,
       "",
       "## Directly Observed Values",
       "",
@@ -583,6 +734,54 @@ function writeCategoryMarkdown(root, catalog, summaryDirectory) {
   }
 }
 
+function formatConsolidatedExportMarkdown(catalog) {
+  const lines = [
+    "# Appearance Controls Research Export",
+    "",
+    "PRIMARY RESEARCH CANDIDATE - NOT PRODUCTION VERIFIED",
+    "",
+    "This consolidated export covers only directly observed College Football 27 appearance-control values in the current evidence. It does not enable production recommendations and does not infer unseen intermediate options.",
+    "",
+    "## Summary",
+    "",
+    `- Categories with directly selected values: ${catalog.summary.categoryCount}`,
+    `- Directly observed unique values: ${catalog.summary.directlyObservedUniqueValues}`,
+    `- Selected observations: ${catalog.summary.selectedObservations}`,
+    `- Production-eligible records: ${catalog.summary.productionEligibleRecords}`,
+    `- Menu-only observed categories: ${catalog.summary.menuOnlyObservedCategoryCount}`,
+    "",
+    "## Category Matrix",
+    "",
+    "| Category | Control type | Observed values | First demonstrated | Last demonstrated | Wrap demonstrated | Default demonstrated | Observed-range completeness | Production eligible |",
+    "| --- | --- | ---: | --- | --- | --- | --- | --- | --- |"
+  ];
+  for (const category of catalog.categories) {
+    lines.push(`| ${category.category} | ${category.controlType} | ${category.directlyObservedUniqueValueCount} | ${category.demonstratedFirstValueStatus} | ${category.demonstratedLastValueStatus} | ${category.selectorBoundaryEvidence.wrappingDemonstrated ? "yes" : "no"} | ${category.demonstratedDefault.status} | ${category.completenessAgainstObservedRange.status} | ${category.productionEligibility.eligible ? "yes" : "no"} |`);
+  }
+  lines.push(
+    "",
+    "## Menu-Only Observed Categories",
+    "",
+    "| Category | Native order | Control type | Status | Timestamp status |",
+    "| --- | ---: | --- | --- | --- |"
+  );
+  for (const category of catalog.menuOnlyObservedCategories) {
+    lines.push(`| ${category.displayedCategoryLabel} | ${category.nativeOrder ?? ""} | ${category.controlType} | ${category.catalogStatus} | ${category.sourceTimestampStatus} |`);
+  }
+  lines.push(
+    "",
+    "## Per-Category Reports",
+    "",
+    ...catalog.categories.map((category) => `- \`docs/phase-zero/appearance-controls/${upperSnake(slugify(category.category))}_RESEARCH_SUMMARY.md\``),
+    "",
+    "## Consolidated Machine-Readable Export",
+    "",
+    "- `data/phase-zero/additional_attributes.research.json`",
+    "- `data/phase-zero/additional_attributes.research.csv`"
+  );
+  return `${lines.join("\n")}\n`;
+}
+
 function categoryEffectLines(record) {
   if (!record) return ["- No directly observed records."];
   return [
@@ -601,6 +800,7 @@ function formatAttributesCsv(records) {
     "parentMenuLabel",
     "controlType",
     "nativeOrder",
+    "nativeOptionOrderPreserved",
     "nativeDisplayLabel",
     "nativeOptionNumber",
     "sourceVideo",
@@ -610,6 +810,10 @@ function formatAttributesCsv(records) {
     "visibleDefaultStatus",
     "selectorWrapObserved",
     "totalCountSupported",
+    "sliderBoundaryStatus",
+    "observedRangeCompletenessStatus",
+    "observedRangeCompletenessRatio",
+    "resetBehaviorObserved",
     "geometryEffect",
     "textureEffect",
     "colorEffect",
@@ -626,6 +830,7 @@ function formatAttributesCsv(records) {
     parentMenuLabel: record.parentMenuLabel,
     controlType: record.controlType,
     nativeOrder: record.nativeOrder,
+    nativeOptionOrderPreserved: record.nativeOptionOrderPreserved,
     nativeDisplayLabel: record.nativeDisplayLabel,
     nativeOptionNumber: record.nativeOptionNumber,
     sourceVideo: record.sourceVideo,
@@ -635,6 +840,10 @@ function formatAttributesCsv(records) {
     visibleDefaultStatus: record.defaultStatus,
     selectorWrapObserved: record.selectorWrapObserved,
     totalCountSupported: record.totalCountSupported,
+    sliderBoundaryStatus: record.sliderBoundaries.status,
+    observedRangeCompletenessStatus: record.categoryCompletenessStatus ?? "",
+    observedRangeCompletenessRatio: record.categoryCompletenessRatio ?? "",
+    resetBehaviorObserved: record.automaticChangesOrDependencies.resetBehaviorObserved,
     geometryEffect: record.effectProfile.geometry,
     textureEffect: record.effectProfile.texture,
     colorEffect: record.effectProfile.color,

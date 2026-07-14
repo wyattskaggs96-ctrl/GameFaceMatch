@@ -9,6 +9,7 @@ const requiredCanonicalArtifacts = [
   "docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md",
   "docs/phase-zero/PHASE_ZERO_DATA_DICTIONARY.md",
   "docs/phase-zero/HEAD_TEMPLATE_CONTINUITY_REPORT.md",
+  "docs/phase-zero/appearance-controls/APPEARANCE_CONTROLS_RESEARCH_EXPORT.md",
   "data/phase-zero/video_inventory.json",
   "data/phase-zero/video_timeline.json",
   "data/phase-zero/environment_manifest.research.json",

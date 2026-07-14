@@ -12,11 +12,16 @@ This summary contains only directly observed values from supplied College Footba
 - Selected observations: 22
 - Directly observed unique values: 21
 - First observed value: Skin Tone 09 (8-11)
+- First available value demonstrated: NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY
 - Last observed value: Skin Tone 23 (52-53.82)
+- Final available value demonstrated: NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY
 - Visible default: UNKNOWN_NOT_DIRECTLY_SHOWN
 - Selector wrap: NOT_OBSERVED
 - Total count: COUNT_UNKNOWN
 - Count explanation: The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.
+- Observed-range completeness: OBSERVED_RANGE_HAS_GAPS (0.724)
+- Slider boundaries: NOT_APPLICABLE_NON_SLIDER_CONTROL
+- Reset behavior: NOT_OBSERVED
 
 ## Directly Observed Values
 

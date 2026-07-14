@@ -12,11 +12,16 @@ This summary contains only directly observed values from supplied College Footba
 - Selected observations: 10
 - Directly observed unique values: 10
 - First observed value: None (8-8)
+- First available value demonstrated: NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY
 - Last observed value: Freckles 1 (27-31.72)
+- Final available value demonstrated: NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY
 - Visible default: UNKNOWN_NOT_DIRECTLY_SHOWN
 - Selector wrap: NOT_OBSERVED
 - Total count: COUNT_UNKNOWN
 - Count explanation: The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.
+- Observed-range completeness: NOT_APPLICABLE_NO_NUMERIC_RANGE
+- Slider boundaries: NOT_APPLICABLE_NON_SLIDER_CONTROL
+- Reset behavior: NOT_OBSERVED
 
 ## Directly Observed Values
 

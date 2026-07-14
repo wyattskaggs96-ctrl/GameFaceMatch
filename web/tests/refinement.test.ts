@@ -9,6 +9,7 @@ import {
   SCREENSHOT_REFINEMENT_CHECKLIST,
   deleteScreenshotRefinementSession,
   setScreenshot,
+  setScreenshotAnalysisReport,
   setScreenshotChecklistItem,
   validateScreenshotMetadata
 } from "@/lib/refinement/screenshot-refinement";
@@ -151,6 +152,8 @@ describe("screenshot refinement scaffold", () => {
     expect(report.faceDetection.boundingBox).toMatchObject({ x: 0.3, y: 0.16, width: 0.4, height: 0.5 });
     expect(report.poseEstimate.state).toBe("ready");
     expect(report.landmarkEstimate.coreLandmarkCount).toBeGreaterThanOrEqual(8);
+    expect(report.normalizedGeometryMeasurements.map((measurement) => measurement.id)).toContain("faceWidthRatio");
+    expect(report.normalizedGeometryMeasurements.every((measurement) => measurement.algorithmVersion === "screenshot-landmark-normalization-v1")).toBe(true);
     expect(report.alignment.standardCoordinateSystem).toBe("gameface-screenshot-alignment-v1");
     expect(report.alignment.transform).toMatchObject({ translateX: 0, translateY: 0.01, scale: 0.96, rotationDegrees: -3 });
   });
@@ -223,6 +226,21 @@ describe("screenshot refinement scaffold", () => {
     expect(report.retakeInstructions.map((instruction) => instruction.code)).toContain("removeObstruction");
   });
 
+  it("marks helmet or headwear obstruction from the manual screenshot confirmations", () => {
+    const checklist = Object.fromEntries(SCREENSHOT_REFINEMENT_CHECKLIST.map((item) => [item.id, true])) as ReturnType<typeof createInitialScreenshotRefinementSession>["checklist"];
+    checklist.noHelmet = false;
+    const report = analyzeScreenshotQualityAndAlignment({
+      screenshot: validScreenshot("front", "blob:front"),
+      faceLandmarkReport: oneFaceReport(),
+      imageMeasurements: goodMeasurements(),
+      checklist
+    });
+
+    expect(report.overallState).toBe("blocked");
+    expect(report.occlusionCheck.helmetOrHeadwearLikely).toBe(true);
+    expect(report.retakeInstructions.map((instruction) => instruction.code)).toContain("removeObstruction");
+  });
+
   it("keeps production refinement unavailable when the approved production catalog is empty", () => {
     const result = createScreenshotRefinementEngine().refine({
       profile: syntheticProfile(),
@@ -245,7 +263,7 @@ describe("screenshot refinement scaffold", () => {
     });
     const result = createScreenshotRefinementEngine().refine({
       profile: syntheticProfile(),
-      session: readySession(),
+      session: readyAnalyzedSession(),
       catalogManifest: fixtureCatalog,
       rankedMatches: matches,
       allowTestFixtures: true,
@@ -253,6 +271,13 @@ describe("screenshot refinement scaffold", () => {
     });
 
     expect(result.status).toBe("tryAlternative");
+    expect(result.comparisonReport).toMatchObject({
+      screenshotSessionID: "screenshot-refinement-2026-07-10T00:00:00.000Z",
+      screenshotEvidenceState: "ready",
+      normalizedMeasurementCount: expect.any(Number)
+    });
+    expect(result.comparisonReport?.candidateComparisons).toHaveLength(3);
+    expect(result.comparisonReport?.candidateComparisons.every((comparison) => comparison.verified)).toBe(true);
     expect(result.suggestedMatches.map((match) => match.catalogItem.stableInternalID)).toEqual([
       "synthetic-match-alpha",
       "synthetic-match-gamma",
@@ -261,13 +286,58 @@ describe("screenshot refinement scaffold", () => {
     expect(result.actions?.map((action) => action.type)).toEqual([
       "keepCurrentRecommendation",
       "tryRankTwo",
-      "tryRankThree",
-      "changeVerifiedHairstyle",
-      "changeVerifiedFacialHair",
-      "changeVerifiedControl"
+      "tryRankThree"
     ]);
     expect(result.actions?.every((action) => action.requiresVerifiedCatalog)).toBe(true);
     expect(result.message).toMatch(/tests only/i);
+  });
+
+  it("returns invalid-image recovery when screenshot analysis blocks refinement", () => {
+    const matches = createRuleBasedMatchingEngine().matchTopThree({
+      profile: syntheticProfile(),
+      catalog: fixtureCatalog,
+      allowTestFixtures: true
+    });
+    const result = createScreenshotRefinementEngine().refine({
+      profile: syntheticProfile(),
+      session: readyAnalyzedSession({
+        analysisReport: analyzeScreenshotQualityAndAlignment({
+          screenshot: { ...validScreenshot("front", "blob:front"), width: 640, height: 640 },
+          faceLandmarkReport: oneFaceReport(),
+          imageMeasurements: goodMeasurements()
+        })
+      }),
+      catalogManifest: fixtureCatalog,
+      rankedMatches: matches,
+      allowTestFixtures: true,
+      runtimeEnvironment: "test"
+    });
+
+    expect(result.status).toBe("invalidScreenshot");
+    expect(result.message).toMatch(/needs recovery/i);
+    expect(result.comparisonReport?.screenshotEvidenceState).toBe("blocked");
+    expect(result.unavailableReasons?.join(" ")).toMatch(/resolution is too low/i);
+  });
+
+  it("keeps current recommendation when screenshot comparison does not beat the current verified match", () => {
+    const matches = createRuleBasedMatchingEngine().matchTopThree({
+      profile: syntheticProfile(),
+      catalog: fixtureCatalog,
+      allowTestFixtures: true
+    });
+    const result = createScreenshotRefinementEngine().refine({
+      profile: syntheticProfile(),
+      session: readyAnalyzedSession(),
+      catalogManifest: fixtureCatalog,
+      rankedMatches: matches.slice(0, 1),
+      allowTestFixtures: true,
+      runtimeEnvironment: "test"
+    });
+
+    expect(result.status).toBe("keepCurrent");
+    expect(result.actions?.map((action) => action.type)).toContain("keepCurrentRecommendation");
+    expect(result.comparisonReport?.actionSummary).toMatch(/keep current/i);
+    expect(JSON.stringify(result).toLowerCase()).not.toMatch(/percent identical|identity probability/);
   });
 
   it("blocks fixture catalog refinement in production even when explicitly requested", () => {
@@ -292,7 +362,7 @@ describe("screenshot refinement scaffold", () => {
     const engine = createScreenshotRefinementEngine();
     const withoutConsent = engine.refine({
       profile: syntheticProfile(),
-      session: readySession(),
+      session: readyAnalyzedSession(),
       catalogManifest: fixtureCatalog,
       rankedMatches: matches,
       allowTestFixtures: true,
@@ -302,7 +372,7 @@ describe("screenshot refinement scaffold", () => {
     });
     const withConsent = engine.refine({
       profile: syntheticProfile(),
-      session: readySession(),
+      session: readyAnalyzedSession(),
       catalogManifest: fixtureCatalog,
       rankedMatches: matches,
       allowTestFixtures: true,
@@ -343,6 +413,20 @@ function readySession() {
     session = setScreenshotChecklistItem(session, item.id, true);
   }
   return session;
+}
+
+function readyAnalyzedSession(input: { analysisReport?: ReturnType<typeof analyzeScreenshotQualityAndAlignment> } = {}) {
+  const session = readySession();
+  return setScreenshotAnalysisReport(
+    session,
+    "front",
+    input.analysisReport ??
+      analyzeScreenshotQualityAndAlignment({
+        screenshot: validScreenshot("front", "blob:front"),
+        faceLandmarkReport: oneFaceReport(),
+        imageMeasurements: goodMeasurements()
+      })
+  );
 }
 
 function goodMeasurements() {

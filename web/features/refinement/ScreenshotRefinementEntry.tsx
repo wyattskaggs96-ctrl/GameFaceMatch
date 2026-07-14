@@ -26,14 +26,20 @@ import { calculateImageMeasurements, type PixelSample } from "@/lib/capture/imag
 import { createLocalFaceLandmarkProvider } from "@/lib/face-landmarks/face-landmark-worker-client";
 import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
-import type { RefinementResult } from "@/types/domain";
+import type { GameAppearanceMatch, RefinementResult, StandardFaceProfile } from "@/types/domain";
 
 export function ScreenshotRefinementEntry({
   session,
+  profile,
+  rankedMatches = [],
+  currentMatch = null,
   onSessionChange,
   onSessionDeleted
 }: {
   session: ScreenshotRefinementSession;
+  profile?: StandardFaceProfile | null;
+  rankedMatches?: GameAppearanceMatch[];
+  currentMatch?: GameAppearanceMatch | null;
   onSessionChange: (session: ScreenshotRefinementSession) => void;
   onSessionDeleted: () => void;
 }) {
@@ -145,13 +151,15 @@ export function ScreenshotRefinementEntry({
   }
 
   async function requestRefinement() {
-    const unavailable = refinementEngine.refine({
-      profile: createPlaceholderProfile(),
+    const refinementResult = refinementEngine.refine({
+      profile: profile ?? createPlaceholderProfile(),
       session,
+      currentMatch,
+      rankedMatches,
       catalogManifest: productionCatalogManifest,
       runtimeEnvironment: process.env.NODE_ENV
     });
-    setResult(unavailable);
+    setResult(refinementResult);
   }
 
   return (
@@ -159,11 +167,11 @@ export function ScreenshotRefinementEntry({
       <ScreenHeader eyebrow="Screenshot refinement" title="Screenshot refinement intake" id="refinement-title">
         <p>
           Upload a front-facing created-player screenshot, with optional left and right 45-degree images for future comparison. This intake validates basic
-          image metadata and records your confirmations, but it does not perform cross-domain face comparison.
+          image metadata, runs local quality and landmark checks when available, and compares only against verified catalog recommendations.
         </p>
       </ScreenHeader>
       <Alert title="Refinement unavailable" tone="warning">
-        Verified catalog matching and real comparison logic must exist before GameFace Match can recommend screenshot-based changes.
+        Verified catalog matching must exist before GameFace Match can recommend screenshot-based changes.
       </Alert>
       <Card tone="info">
         <h2>Screenshot requirements</h2>
@@ -217,7 +225,7 @@ export function ScreenshotRefinementEntry({
             ))}
           </ul>
         ) : (
-          <p>Screenshot intake requirements are complete. Refinement recommendations remain unavailable until verified catalog data and comparison logic exist.</p>
+          <p>Screenshot intake requirements are complete. Refinement recommendations remain unavailable until verified catalog data exists.</p>
         )}
         {analysisPendingViewID ? <p role="status">Running local screenshot analysis for {analysisPendingViewID}.</p> : null}
         {readiness.advisoryMessages.length > 0 ? (
@@ -231,6 +239,7 @@ export function ScreenshotRefinementEntry({
       {result ? (
         <Alert title="Refinement result" tone="info" role="status">
           <p>{result.message}</p>
+          {result.comparisonReport ? <RefinementComparisonSummary result={result} /> : null}
           {result.unavailableReasons && result.unavailableReasons.length > 0 ? (
             <ul className="message-list">
               {result.unavailableReasons.map((reason) => (
@@ -253,6 +262,47 @@ export function ScreenshotRefinementEntry({
         requirements remaining.
       </div>
     </section>
+  );
+}
+
+function RefinementComparisonSummary({ result }: { result: RefinementResult }) {
+  const report = result.comparisonReport;
+  if (!report) return null;
+  return (
+    <div className="analysis-panel" aria-label="Screenshot refinement comparison">
+      <h3>Local comparison</h3>
+      <p>
+        {report.normalizedMeasurementCount} normalized screenshot measurement(s). Cross-domain confidence: {report.crossDomainConfidence.label}.
+      </p>
+      <p>{report.actionSummary}</p>
+      {report.candidateComparisons.length > 0 ? (
+        <ul className="message-list">
+          {report.candidateComparisons.map((comparison) => (
+            <li key={comparison.catalogItemID}>
+              Rank {comparison.rank}: {comparison.nativeHeadOption} | screenshot closeness {comparison.screenshotClosenessScore} |{" "}
+              {comparison.comparedFeatureCount} feature(s)
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      {result.actions && result.actions.length > 0 ? (
+        <>
+          <h3>Actionable suggestions</h3>
+          <ul className="message-list">
+            {result.actions.map((action) => (
+              <li key={action.id}>
+                <strong>{action.label}:</strong> {action.description}
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
+      <ul className="message-list">
+        {report.limitations.map((limitation) => (
+          <li key={limitation}>{limitation}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

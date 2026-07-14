@@ -634,6 +634,7 @@ export default function HomePage() {
         return (
           <ScreenshotRefinementEntry
             session={screenshotSession}
+            profile={standardProfile}
             onSessionChange={(nextSession) => {
               setScreenshotSession(nextSession);
               privacyStore.setScreenshotSessionImages(nextSession.slots.flatMap((slot) => (slot.screenshot ? [slot.screenshot] : [])));
@@ -753,7 +754,7 @@ function Dashboard({
     },
     {
       title: "Screenshot refinement",
-      body: "Entry point only. Refinement will compare user screenshots after verified catalog matching exists.",
+      body: "Upload a created-player screenshot for local checks. Verified catalog matching is required before suggestions appear.",
       action: "Open",
       target: "refinement"
     },

@@ -1,4 +1,4 @@
-import type { FaceBoundingBox, FaceHeadPoseEstimate, FaceLandmarkReport } from "@/types/domain";
+import type { FaceBoundingBox, FaceHeadPoseEstimate, FaceLandmarkPoint, FaceLandmarkReport, StandardFacialMeasurementID } from "@/types/domain";
 import type { ScreenshotChecklistState, ScreenshotReference, ScreenshotViewID } from "./screenshot-refinement";
 import type { calculateImageMeasurements } from "@/lib/capture/image-quality-service";
 
@@ -62,7 +62,18 @@ export interface ScreenshotOcclusionSummary {
   state: ScreenshotQualityAlignmentState;
   evidence: ScreenshotAnalysisEvidence;
   missingCoreRegions: string[];
+  helmetOrHeadwearLikely: boolean;
+  obstructionLikely: boolean;
   message: string;
+}
+
+export interface ScreenshotNormalizedGeometryMeasurement {
+  id: StandardFacialMeasurementID;
+  value: number;
+  confidence: number;
+  evidence: ScreenshotAnalysisEvidence;
+  supportingViewID: ScreenshotViewID;
+  algorithmVersion: "screenshot-landmark-normalization-v1";
 }
 
 export interface ScreenshotAlignmentReport {
@@ -100,6 +111,7 @@ export interface ScreenshotQualityAlignmentReport {
   occlusionCheck: ScreenshotOcclusionSummary;
   lightingWarning: ScreenshotLightingSummary;
   alignment: ScreenshotAlignmentReport;
+  normalizedGeometryMeasurements: ScreenshotNormalizedGeometryMeasurement[];
   blockingMessages: string[];
   advisoryMessages: string[];
   retakeInstructions: ScreenshotRetakeInstruction[];
@@ -188,6 +200,7 @@ export function analyzeScreenshotQualityAndAlignment(input: ScreenshotQualityAli
   const dedupedBlocking = [...new Set(blockingMessages)];
   const dedupedAdvisory = [...new Set(advisoryMessages)];
   const overallState = dedupedBlocking.length > 0 ? "blocked" : dedupedAdvisory.length > 0 ? "needsReview" : "ready";
+  const normalizedGeometryMeasurements = createScreenshotNormalizedGeometry(input.screenshot.viewID, face);
   return {
     reportVersion: "screenshot-quality-alignment-v1",
     screenshotViewID: input.screenshot.viewID,
@@ -199,6 +212,7 @@ export function analyzeScreenshotQualityAndAlignment(input: ScreenshotQualityAli
     occlusionCheck,
     lightingWarning,
     alignment,
+    normalizedGeometryMeasurements,
     blockingMessages: dedupedBlocking,
     advisoryMessages: dedupedAdvisory,
     retakeInstructions: uniqueInstructions(retakeInstructions),
@@ -335,6 +349,8 @@ function summarizeOcclusion(face: FaceLandmarkReport["faces"][number] | null, ch
       state: "blocked",
       evidence: "userConfirmed",
       missingCoreRegions: [],
+      helmetOrHeadwearLikely: checklistBlocked.includes("noHelmet"),
+      obstructionLikely: true,
       message: "Manual screenshot confirmations indicate possible face obstruction."
     };
   }
@@ -343,6 +359,8 @@ function summarizeOcclusion(face: FaceLandmarkReport["faces"][number] | null, ch
       state: "unavailable",
       evidence: "unavailable",
       missingCoreRegions: requiredCoreRegions,
+      helmetOrHeadwearLikely: false,
+      obstructionLikely: true,
       message: "Occlusion cannot be checked without a local face and landmark estimate."
     };
   }
@@ -352,11 +370,118 @@ function summarizeOcclusion(face: FaceLandmarkReport["faces"][number] | null, ch
     state: missingCoreRegions.length >= 3 ? "blocked" : missingCoreRegions.length > 0 ? "needsReview" : "ready",
     evidence: "estimated",
     missingCoreRegions,
+    helmetOrHeadwearLikely: missingCoreRegions.includes("forehead") || missingCoreRegions.includes("left brow") || missingCoreRegions.includes("right brow"),
+    obstructionLikely: missingCoreRegions.length > 0,
     message:
       missingCoreRegions.length === 0
         ? "Core face regions needed for future refinement appear visible."
         : `Some core face regions could not be estimated: ${missingCoreRegions.join(", ")}.`
   };
+}
+
+function createScreenshotNormalizedGeometry(
+  viewID: ScreenshotViewID,
+  face: FaceLandmarkReport["faces"][number] | null
+): ScreenshotNormalizedGeometryMeasurement[] {
+  if (!face || face.boundingBox.width <= 0 || face.boundingBox.height <= 0) return [];
+  const confidence = face.confidence.score ?? 0.45;
+  const measurements: Array<{ id: StandardFacialMeasurementID; value: number | null; approximate?: boolean }> = [
+    { id: "faceWidthRatio", value: safeRatio(face.boundingBox.width, face.boundingBox.height) },
+    { id: "jawWidthRatio", value: ratioDistance(face, "left jaw", "right jaw", face.boundingBox.width), approximate: true },
+    { id: "chinWidthRatio", value: ratioDistance(face, "left chin edge", "right chin edge", face.boundingBox.width), approximate: true },
+    { id: "eyeSpacingRatio", value: ratioDistance(face, "left eye inner corner", "right eye inner corner", face.boundingBox.width) },
+    { id: "meanEyeWidthRatio", value: meanEyeWidth(face) },
+    { id: "noseWidthRatio", value: ratioDistance(face, "left nose wing", "right nose wing", face.boundingBox.width) },
+    { id: "noseLengthRatio", value: ratioDistance(face, "nose bridge", "nose base", face.boundingBox.height) },
+    { id: "mouthWidthRatio", value: ratioDistance(face, "left mouth corner", "right mouth corner", face.boundingBox.width) },
+    { id: "lowerFaceRatio", value: ratioDistance(face, "nose base", "chin", face.boundingBox.height), approximate: true },
+    { id: "browPosition", value: browPosition(face), approximate: true },
+    { id: "noseProjection", value: viewID === "front" ? null : projection(face, "nose tip", "nose bridge"), approximate: true },
+    { id: "chinProjection", value: viewID === "front" ? null : projectionFromMouth(face), approximate: true }
+  ];
+  return measurements.flatMap((measurement) => {
+    if (measurement.value === null || !Number.isFinite(measurement.value)) return [];
+    return [
+      {
+        id: measurement.id,
+        value: round(measurement.value),
+        confidence: round(Math.min(0.72, confidence * (measurement.approximate ? 0.72 : 0.86))),
+        evidence: "estimated" as const,
+        supportingViewID: viewID,
+        algorithmVersion: "screenshot-landmark-normalization-v1" as const
+      }
+    ];
+  });
+}
+
+type ScreenshotPointLabel =
+  | "nose tip"
+  | "nose bridge"
+  | "nose base"
+  | "left nose wing"
+  | "right nose wing"
+  | "chin"
+  | "left jaw"
+  | "right jaw"
+  | "left chin edge"
+  | "right chin edge"
+  | "left eye outer corner"
+  | "left eye inner corner"
+  | "right eye inner corner"
+  | "right eye outer corner"
+  | "left mouth corner"
+  | "right mouth corner"
+  | "left brow"
+  | "right brow";
+
+function ratioDistance(face: FaceLandmarkReport["faces"][number], first: ScreenshotPointLabel, second: ScreenshotPointLabel, denominator: number) {
+  const firstPoint = point(face, first);
+  const secondPoint = point(face, second);
+  if (!firstPoint || !secondPoint) return null;
+  return safeRatio(distance(firstPoint, secondPoint), denominator);
+}
+
+function meanEyeWidth(face: FaceLandmarkReport["faces"][number]) {
+  const left = ratioDistance(face, "left eye outer corner", "left eye inner corner", face.boundingBox.width);
+  const right = ratioDistance(face, "right eye inner corner", "right eye outer corner", face.boundingBox.width);
+  return left === null || right === null ? null : (left + right) / 2;
+}
+
+function browPosition(face: FaceLandmarkReport["faces"][number]) {
+  const leftBrow = point(face, "left brow");
+  const rightBrow = point(face, "right brow");
+  const leftEye = point(face, "left eye inner corner");
+  const rightEye = point(face, "right eye inner corner");
+  if (!leftBrow || !rightBrow || !leftEye || !rightEye) return null;
+  return safeRatio(Math.abs((leftEye.y + rightEye.y) / 2 - (leftBrow.y + rightBrow.y) / 2), face.boundingBox.height);
+}
+
+function projection(face: FaceLandmarkReport["faces"][number], first: ScreenshotPointLabel, second: ScreenshotPointLabel) {
+  const firstPoint = point(face, first);
+  const secondPoint = point(face, second);
+  if (!firstPoint || !secondPoint) return null;
+  return safeRatio(Math.abs(firstPoint.x - secondPoint.x), face.boundingBox.width);
+}
+
+function projectionFromMouth(face: FaceLandmarkReport["faces"][number]) {
+  const chin = point(face, "chin");
+  const left = point(face, "left mouth corner");
+  const right = point(face, "right mouth corner");
+  if (!chin || !left || !right) return null;
+  return safeRatio(Math.abs(chin.x - (left.x + right.x) / 2), face.boundingBox.width);
+}
+
+function point(face: FaceLandmarkReport["faces"][number], label: ScreenshotPointLabel) {
+  return face.coreLandmarks.find((item) => item.label === label) ?? null;
+}
+
+function distance(first: FaceLandmarkPoint, second: FaceLandmarkPoint) {
+  return Math.hypot(first.x - second.x, first.y - second.y);
+}
+
+function safeRatio(numerator: number, denominator: number) {
+  if (!Number.isFinite(numerator) || !Number.isFinite(denominator) || denominator <= 0) return null;
+  return numerator / denominator;
 }
 
 function summarizeLighting(measurements: ReturnType<typeof calculateImageMeasurements> | null | undefined, faceEvidenceAvailable: boolean): ScreenshotLightingSummary {

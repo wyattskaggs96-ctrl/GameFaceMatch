@@ -74,6 +74,9 @@ test.describe("GameFace Match production-representative journey", () => {
     await page.getByRole("button", { name: "Home" }).click();
     await page.getByRole("heading", { name: "Screenshot refinement" }).locator("xpath=ancestor::div[contains(@class, 'action-card')]").getByRole("button", { name: "Open" }).click();
     await expect(page.getByRole("heading", { name: "Screenshot refinement intake" })).toBeVisible();
+    await page.getByLabel("Upload screenshot").first().setInputFiles(syntheticPng("created-player-too-small.png", 320, 320, 19));
+    await expect(page.getByText("Use a screenshot at least 720 pixels wide and tall.")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Check refinement" })).toBeDisabled();
     await page.getByLabel("Upload screenshot").first().setInputFiles(syntheticPng("created-player-front.png", 800, 800, 20));
     await expect(page.getByText("created-player-front.png | 800x800")).toBeVisible();
     await expect(page.getByRole("button", { name: "Check refinement" })).toBeDisabled();

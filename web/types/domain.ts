@@ -669,8 +669,34 @@ export interface RefinementResult {
   engineVersion?: string;
   catalogVersion?: GameCatalogVersion;
   actions?: RefinementAction[];
+  comparisonReport?: RefinementComparisonReport;
   feedbackRecord?: RefinementFeedbackRecord;
   unavailableReasons?: string[];
+}
+
+export interface RefinementComparisonReport {
+  reportVersion: string;
+  screenshotSessionID: string;
+  comparedAt: ISODateString;
+  screenshotEvidenceState: "ready" | "needsReview" | "blocked" | "unavailable";
+  normalizedMeasurementCount: number;
+  crossDomainConfidence: MeasurementConfidence;
+  currentRecommendation?: RefinementCandidateComparison;
+  candidateComparisons: RefinementCandidateComparison[];
+  actionSummary: string;
+  limitations: string[];
+}
+
+export interface RefinementCandidateComparison {
+  rank: number;
+  catalogItemID: string;
+  nativeHeadOption: string;
+  screenshotClosenessScore: number;
+  confidence: MeasurementConfidence;
+  comparedFeatureCount: number;
+  verified: boolean;
+  reasons: string[];
+  differences: string[];
 }
 
 export type RefinementActionType =

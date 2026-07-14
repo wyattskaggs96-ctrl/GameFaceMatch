@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "manual-matching-results-ingestion-checkpoint-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "ingestionStatus": "REJECTED",
+  "studyStatus": "NOT_STARTED",
+  "productionRecommendationStatus": "FAIL_CLOSED",
+  "sourceType": "researchDraft",
+  "rawMediaCommitted": false,
+  "submissionsDiscovered": 0,
+  "submissionsAccepted": 0,
+  "submissionsRejected": 0,
+  "participantResultRowsCommitted": 0,
+  "reviewerRowsCommitted": 0,
+  "participantStudyIDsRecorded": [],
+  "ratingsRecorded": [],
+  "deletionConfirmationsRecorded": [],
+  "rejectionSummary": [
+    "No actual participant/reviewer ratings submission file was discoverable in the repository workspace.",
+    "Manual matching subject, review, and result CSV files remain header-only templates.",
+    "The only populated manual matching result-like data found is under data/fixtures/test-only/ and is synthetic fixture data that cannot be ingested as real study evidence.",
+    "The active production catalog contains zero verified records, so verified production recommendations and build instructions are unavailable."
+  ],
+  "requiredFieldsForFutureSubmission": [
+    "participant study ID",
+    "recommendation rank",
+    "selected final option",
+    "usefulness rating",
+    "resemblance rating",
+    "top-one accepted",
+    "top-three useful",
+    "major mismatch reasons",
+    "hair recommendation rating",
+    "facial-hair recommendation rating",
+    "confidence perception",
+    "reviewer notes",
+    "participant notes",
+    "deletion confirmation"
+  ],
+  "gateChecks": [
+    {
+      "gate": "actualRatingsSubmissionPresent",
+      "status": "BLOCKED",
+      "evidence": "No non-fixture participant/reviewer ratings file was found.",
+      "impact": "No result row can be accepted."
+    },
+    {
+      "gate": "completeRequiredFields",
+      "status": "NOT_EVALUATED",
+      "evidence": "No submission was present to validate.",
+      "impact": "Incomplete or fabricated submissions remain rejected by default."
+    },
+    {
+      "gate": "verifiedProductionCatalog",
+      "status": "BLOCKED",
+      "evidence": "data/catalog/production/catalog_manifest.json contains 0 items and version empty-production.",
+      "impact": "Recommendation ranks and final selected options cannot be verified against production catalog records."
+    },
+    {
+      "gate": "manualMatchingReadiness",
+      "status": "BLOCKED",
+      "evidence": "data/phase-zero/manual_matching_study_readiness_decision.json decision is NOT_READY.",
+      "impact": "The manual matching study cannot record real results yet."
+    },
+    {
+      "gate": "participantIntake",
+      "status": "BLOCKED",
+      "evidence": "data/phase-zero/manual_matching_participant_intake_checkpoint.json records 0 participant packages discovered and 0 participants recorded.",
+      "impact": "There are no accepted participant IDs to attach ratings to."
+    },
+    {
+      "gate": "fixtureExclusion",
+      "status": "PASS",
+      "evidence": "Synthetic manual matching data remains under data/fixtures/test-only/ and was not ingested.",
+      "impact": "No fixture-derived ratings were committed as study results."
+    }
+  ],
+  "blockedActions": [
+    "recordParticipantStudyID",
+    "recordRecommendationRank",
+    "recordSelectedFinalOption",
+    "recordUsefulnessRating",
+    "recordResemblanceRating",
+    "recordTopOneAccepted",
+    "recordTopThreeUseful",
+    "recordMajorMismatchReasons",
+    "recordHairRecommendationRating",
+    "recordFacialHairRecommendationRating",
+    "recordConfidencePerception",
+    "recordReviewerNotes",
+    "recordParticipantNotes",
+    "recordDeletionConfirmation",
+    "calculateStudyMetrics"
+  ],
+  "requiredToProceed": [
+    "Provide a non-fixture, non-media ratings submission in an approved private study workspace or explicit repository-safe CSV/JSON path.",
+    "Ensure every row references an accepted pseudonymous participant ID from a completed participant intake.",
+    "Ensure every selected option and recommendation rank references a verified production catalog record from the tested catalog version.",
+    "Include deletion confirmation for each completed participant result.",
+    "Keep raw face media and identifying details out of Git."
+  ]
+}

@@ -1,5 +1,9 @@
 # Overnight Video Evidence Closeout
 
+**Historical status:** SUPERSEDED FOR CURRENT PHASE 0 STATUS
+**Canonical replacement:** `docs/status/CURRENT_PROJECT_STATE_RECONSTRUCTION.md`
+**Artifact registry:** `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md`
+
 Date: 2026-07-13
 Repository path: `/Users/skaggssystems/Developer/GameFaceMatch`
 Reviewed HEAD before this closeout: `4f5cddb feat(catalog): harden CF27 media processing`

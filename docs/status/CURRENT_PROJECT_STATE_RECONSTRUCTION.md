@@ -8,6 +8,9 @@ Checkpoint commit before this review: `2885020 feat(phase-zero): add manual matc
 
 This is the canonical current-state checkpoint for the work completed after `b40f007`. It supersedes earlier pre-data and overnight-only status summaries for day-to-day planning, while preserving those files as historical context.
 
+Canonical artifact registry: `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md`
+Canonical data dictionary: `docs/phase-zero/PHASE_ZERO_DATA_DICTIONARY.md`
+
 ## Executive Decision
 
 GameFace Match is still **not production-ready** for College Football 27 recommendations.

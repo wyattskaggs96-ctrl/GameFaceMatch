@@ -1,5 +1,7 @@
 # College Football 27 Current Video Timeline Index
 
+**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` to identify the current canonical video timeline paths.
+
 Status: `RESEARCH_CANDIDATE`, `NOT_PRODUCTION_DATA`, `PRIMARY_RESEARCH_CANDIDATE_NOT_SECOND_VERIFIED`.
 
 This index covers the nine current unique Xbox screen recordings listed in `data/research/cf27/video_inventory.json`. Master files were inspected read-only; local contact sheets and frame crops are ignored derivatives under `data/audit/college-football-27/local-evidence/prompt84-timeline/`.

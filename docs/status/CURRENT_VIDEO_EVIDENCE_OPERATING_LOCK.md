@@ -1,5 +1,9 @@
 # Current Video Evidence Operating Lock
 
+**Historical status:** SUPERSEDED FOR CURRENT ARTIFACT STATUS
+**Canonical replacement:** `docs/status/CURRENT_PROJECT_STATE_RECONSTRUCTION.md`
+**Artifact registry:** `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md`
+
 Date: 2026-07-13
 Status: Active operating lock for current College Football 27 Xbox screen-recording evidence
 

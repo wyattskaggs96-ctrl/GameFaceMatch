@@ -1,5 +1,7 @@
 # Authoritative Current Recapture Queue
 
+**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` and `docs/phase-zero/WYATT_NEXT_CAPTURE_PLAN.md` for current canonical capture planning.
+
 **AUTHORITATIVE CURRENT RECAPTURE QUEUE - PRIMARY RESEARCH ONLY - NOT PRODUCTION VERIFIED**
 
 This queue consolidates the current evidence gaps into one owner-facing recording plan. It does not create production catalog records, verify records, or enable recommendations.
@@ -288,4 +290,3 @@ This queue consolidates the current evidence gaps into one owner-facing recordin
 - Existing evidence use: Existing recordings provide primary research candidates for Skin Tone, Skin Details, Eye Shape, and Eye Color, but production use still requires boundary confirmation, label review, and second verification.
 - Production blocking: Yes
 - Source references: data/research/cf27/exports/partial-research-catalog-current/research_catalog_manifest.json; data/research/cf27/reports/ocr-native-label-review/manual_label_review_queue.json; data/research/cf27/reports/native-sequence-integrity/native_sequence_human_review_queue.json
-

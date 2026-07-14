@@ -1,5 +1,7 @@
 # Tomorrow's Xbox Recording Runbook
 
+**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` and `docs/phase-zero/WYATT_NEXT_CAPTURE_PLAN.md` for current canonical capture planning.
+
 **TOMORROW'S XBOX RECORDING RUNBOOK - PRIMARY RESEARCH ONLY - NOT PRODUCTION VERIFIED**
 
 Use this beside the Xbox. It is ordered to avoid repeated navigation: console environment first, Road to Glory setup/body controls, Appearance/Head & Skin, Head Template completion and standardized capture, Hair/facial-hair work, then wrap/dependency checks.
@@ -358,4 +360,3 @@ Use this beside the Xbox. It is ordered to avoid repeated navigation: console en
 - Stop and create an issue if a menu path differs from current evidence.
 - Stop before recording account secrets, payment details, serial numbers, or private messages.
 - Stop using production terminology: these clips are primary research evidence until second-person verification and catalog publication gates pass.
-

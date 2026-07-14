@@ -1,5 +1,7 @@
 # Current CF27 Capture Log
 
+**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` to identify the current canonical capture log paths.
+
 This capture log is research evidence only. It is not a verified production catalog and does not enable recommendations.
 
 ## Summary

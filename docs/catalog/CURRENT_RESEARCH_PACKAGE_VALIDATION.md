@@ -1,5 +1,7 @@
 # Current Research Package Validation
 
+**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` to distinguish current normalized Phase 0 artifacts from older research-package validation snapshots.
+
 **CURRENT RESEARCH PACKAGE VALIDATION - PRIMARY RESEARCH ONLY - NOT PRODUCTION VERIFIED**
 
 This report validates the current partial College Football 27 research package. It does not verify records, publish production data, or enable recommendations.
@@ -109,4 +111,3 @@ This report validates the current partial College Football 27 research package. 
 - Current records are not second-person verified.
 - The production catalog remains empty.
 - No production recommendation access is enabled.
-

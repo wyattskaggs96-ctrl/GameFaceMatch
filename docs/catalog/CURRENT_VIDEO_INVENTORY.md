@@ -1,5 +1,7 @@
 # Current Video Inventory
 
+**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` to identify the current canonical video inventory paths.
+
 Last updated: 2026-07-13
 
 This report inventories the current GameFace Match College Football 27 video evidence found during Prompt 81. It is **research-candidate evidence only**.

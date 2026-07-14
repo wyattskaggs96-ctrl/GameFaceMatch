@@ -1,5 +1,7 @@
 # Current College Football 27 Appearance Menu Hierarchy
 
+**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` to identify the current canonical menu-map paths.
+
 **Status:** Research candidate only. Not production data. Not second-person verified.
 
 This tree reconstructs only the directly observed portion of the College Football 27 Road to Glory appearance hierarchy from the current Xbox screen recordings. It does not create verified catalog records, recommendations, or game option IDs.

@@ -1,5 +1,7 @@
 # Current CF27 Evidence Manifest
 
+**Historical report:** Preserved for provenance. Use `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md` to identify the current canonical evidence manifest paths.
+
 This manifest is research evidence only. It is not production catalog data and does not enable user-facing College Football 27 recommendations.
 
 ## Summary

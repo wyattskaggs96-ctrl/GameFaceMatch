@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">GameFace Match landing page hero</title>
+  <desc id="desc">Launch-safe screenshot-style asset with product promise and catalog-unavailable status.</desc>
+  <rect width="1200" height="675" fill="#10251d"/>
+  <path d="M0 508h1200v167H0z" fill="#1f563b"/>
+  <g opacity=".16" stroke="#fbfcf7" stroke-width="2">
+    <path d="M120 0v675M240 0v675M360 0v675M480 0v675M600 0v675M720 0v675M840 0v675M960 0v675M1080 0v675"/>
+    <path d="M0 92h1200M0 184h1200M0 276h1200M0 368h1200M0 460h1200M0 552h1200"/>
+  </g>
+  <rect x="72" y="68" width="1056" height="539" rx="18" fill="#fbfcf7"/>
+  <rect x="72" y="68" width="1056" height="76" rx="18" fill="#163428"/>
+  <text x="112" y="116" fill="#fbfcf7" font-family="Arial, sans-serif" font-size="28" font-weight="700">GameFace Match</text>
+  <text x="112" y="222" fill="#1f563b" font-family="Arial, sans-serif" font-size="24" font-weight="700">Independent College Football 27 companion</text>
+  <text x="112" y="294" fill="#10251d" font-family="Arial, sans-serif" font-size="58" font-weight="800">Build yourself in</text>
+  <text x="112" y="360" fill="#10251d" font-family="Arial, sans-serif" font-size="58" font-weight="800">College Football 27</text>
+  <text x="112" y="422" fill="#56665d" font-family="Arial, sans-serif" font-size="28">Get your closest available in-game appearance.</text>
+  <rect x="112" y="472" width="276" height="58" rx="8" fill="#1f563b"/>
+  <text x="148" y="510" fill="#fbfcf7" font-family="Arial, sans-serif" font-size="22" font-weight="700">Start web MVP</text>
+  <rect x="664" y="204" width="384" height="258" rx="14" fill="#f5fbff" stroke="#d7e2d2"/>
+  <text x="704" y="258" fill="#10251d" font-family="Arial, sans-serif" font-size="30" font-weight="800">Launch promise</text>
+  <text x="704" y="314" fill="#56665d" font-family="Arial, sans-serif" font-size="22">Top-three verified matches</text>
+  <text x="704" y="360" fill="#56665d" font-family="Arial, sans-serif" font-size="22">Manual step-by-step build guide</text>
+  <text x="704" y="406" fill="#8a6100" font-family="Arial, sans-serif" font-size="22" font-weight="700">Verified catalog not loaded</text>
+  <text x="112" y="574" fill="#56665d" font-family="Arial, sans-serif" font-size="20">No direct game import. Not affiliated with EA.</text>
+</svg>

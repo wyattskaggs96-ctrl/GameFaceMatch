@@ -879,6 +879,69 @@ p {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.marketing-page {
+  width: min(var(--content), 100%);
+  margin: 0 auto;
+  padding:
+    clamp(var(--space-5), 4vw, 48px)
+    max(clamp(var(--space-4), 4vw, var(--space-10)), var(--safe-right))
+    calc(72px + var(--safe-bottom))
+    max(clamp(var(--space-4), 4vw, var(--space-10)), var(--safe-left));
+  display: grid;
+  gap: clamp(var(--space-8), 6vw, 64px);
+}
+
+.marketing-hero {
+  min-height: calc(100vh - 96px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+  align-items: center;
+  gap: clamp(var(--space-5), 4vw, 48px);
+}
+
+.marketing-hero-copy,
+.launch-card,
+.faq-list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.marketing-asset-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.marketing-asset {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--field-900);
+}
+
+.share-card-preview {
+  border-color: rgba(31, 122, 74, 0.42);
+}
+
+.faq-list details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.faq-list summary {
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.faq-list p {
+  margin-top: var(--space-3);
+  color: var(--muted);
+}
+
 .evidence-gallery-layout {
   display: grid;
   grid-template-columns: minmax(280px, 0.38fr) minmax(0, 1fr);
@@ -1567,6 +1630,7 @@ p {
   }
 
   .hero-panel,
+  .marketing-hero,
   .flow-layout,
   .capture-workspace,
   .profile-review-grid,
@@ -1576,6 +1640,7 @@ p {
   .consent-grid,
   .coverage-map-grid,
   .card-grid,
+  .marketing-asset-grid,
   .evidence-gallery-layout,
   .source-video-inspector-layout,
   .source-video-review-grid,

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">GameFace Match safe share card</title>
+  <desc id="desc">Text-only share card that excludes face imagery.</desc>
+  <rect width="1200" height="630" fill="#10251d"/>
+  <circle cx="1010" cy="118" r="132" fill="#c9a227" opacity=".22"/>
+  <circle cx="182" cy="534" r="104" fill="#246ca8" opacity=".18"/>
+  <rect x="86" y="76" width="1028" height="478" rx="22" fill="#fbfcf7"/>
+  <text x="136" y="154" fill="#1f563b" font-family="Arial, sans-serif" font-size="30" font-weight="800">GameFace Match</text>
+  <text x="136" y="240" fill="#10251d" font-family="Arial, sans-serif" font-size="58" font-weight="900">Build yourself in</text>
+  <text x="136" y="306" fill="#10251d" font-family="Arial, sans-serif" font-size="58" font-weight="900">College Football 27</text>
+  <text x="136" y="382" fill="#56665d" font-family="Arial, sans-serif" font-size="28">Closest available in-game appearance settings.</text>
+  <text x="136" y="438" fill="#56665d" font-family="Arial, sans-serif" font-size="24">Text-only by default. No face image included.</text>
+  <text x="136" y="508" fill="#8a6100" font-family="Arial, sans-serif" font-size="22" font-weight="700">Independent companion. No direct game import. Not affiliated with EA.</text>
+</svg>

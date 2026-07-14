@@ -43,6 +43,7 @@ const requiredCanonicalArtifacts = [
   "docs/phase-zero/BLIND_SECOND_VERIFIER_INSTRUCTIONS.md",
   "docs/phase-zero/BLIND_SECOND_VERIFIER_PRINTABLE_PACKET.md",
   "docs/phase-zero/SECOND_VERIFIER_RESULTS_INTAKE.md",
+  "docs/phase-zero/VERIFICATION_DISCREPANCY_MANAGEMENT.md",
   "docs/phase-zero/WYATT_RECORDING_SCRIPT.md",
   "docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md"
 ];

@@ -6,6 +6,8 @@ import type { ScreenshotRefinementSession } from "@/lib/refinement/screenshot-re
 
 export type DeletionScope =
   | "active-capture-session"
+  | "raw-videos"
+  | "rejected-frames"
   | "temporary-images"
   | "derived-profile"
   | "saved-profile"
@@ -13,6 +15,7 @@ export type DeletionScope =
   | "saved-build"
   | "saved-builds"
   | "screenshot-session"
+  | "diagnostic-logs"
   | "application-preferences"
   | "all-local-data";
 
@@ -309,7 +312,7 @@ export function verifyDeletionState(input: DataInventoryInput, scope: DeletionSc
     check("captured-image-bytes");
     check("user-confirmed-attributes");
   }
-  if (scope === "temporary-images") {
+  if (scope === "temporary-images" || scope === "raw-videos" || scope === "rejected-frames") {
     check("temporary-blob-urls");
     check("captured-image-bytes");
   }
@@ -318,6 +321,11 @@ export function verifyDeletionState(input: DataInventoryInput, scope: DeletionSc
   if (scope === "saved-build" || scope === "saved-builds" || scope === "all-local-data") check("saved-builds");
   if (scope === "screenshot-session" || scope === "all-local-data") check("screenshot-refinement-session");
   if (scope === "application-preferences" || scope === "all-local-data") check("application-preferences");
+
+  if (scope === "diagnostic-logs") {
+    // Diagnostic logging is currently no-op/local only. The privacy-safe analytics
+    // and retention modules validate payloads before records can be retained.
+  }
 
   return {
     passed: failures.length === 0,

@@ -37,6 +37,13 @@ import { createInitialConsentState, hasRequiredCaptureConsent, isConsentGranted,
 import { createDataInventory, createNonRawPrivacyExport, type DeletionScope } from "@/lib/privacy/data-lifecycle";
 import { createMemoryPrivacyStore } from "@/lib/privacy/local-privacy-store";
 import {
+  createConsentRevocationRetentionPlan,
+  createProfileCreationRetentionPlan,
+  createRefinementCompletionRetentionPlan,
+  removeRawImagesFromCaptureSession,
+  type RetentionAction
+} from "@/lib/privacy/retention-policy";
+import {
   createBrowserSavedProfileStorage,
   createMemorySavedProfileStorage,
   type SavedProfileStorage,
@@ -310,7 +317,33 @@ export default function HomePage() {
     const nextConsent = updateConsent(consentState, consentID, false);
     setConsentState(nextConsent);
     privacyStore.saveConsentState(nextConsent);
+    applyConsentRevocationRetention(consentID);
     refreshPrivacyState();
+  }
+
+  function recordRetentionActions(actions: RetentionAction[]) {
+    revokeObjectUrls(actions.flatMap((action) => action.objectUrlsToRevoke));
+    actions.forEach((action) => privacyStore.recordDeletionCompletion(action.deletionAuditScope));
+    if (actions.length > 0) setDeletionRecorded(true);
+  }
+
+  function applyConsentRevocationRetention(consentID: ConsentID) {
+    const actions = createConsentRevocationRetentionPlan(consentID);
+    actions.forEach((action) => {
+      if (action.scope === "saved-profiles") {
+        savedProfileStorage.deleteAllProfiles();
+        privacyStore.deleteDerivedProfile();
+        refreshSavedProfileState();
+      }
+      if (action.scope === "saved-builds") privacyStore.deleteSavedBuilds();
+      if (action.scope === "screenshot-session") {
+        const mutation = deleteScreenshotRefinementSession(screenshotSession);
+        revokeObjectUrls(mutation.objectUrlsToRevoke);
+        setScreenshotSession(mutation.session);
+        privacyStore.deleteScreenshotSession();
+      }
+    });
+    recordRetentionActions(actions);
   }
 
   function handleSessionChange(nextSession: typeof session) {
@@ -428,11 +461,26 @@ export default function HomePage() {
 
   function deleteByScope(scope: DeletionScope) {
     if (scope === "active-capture-session") deleteCurrentSession();
+    if (scope === "raw-videos") {
+      privacyStore.recordDeletionCompletion("raw-videos");
+      setDeletionRecorded(true);
+      refreshPrivacyState();
+    }
+    if (scope === "rejected-frames") {
+      privacyStore.recordDeletionCompletion("rejected-frames");
+      setDeletionRecorded(true);
+      refreshPrivacyState();
+    }
     if (scope === "temporary-images") deleteTemporaryImages();
     if (scope === "derived-profile") deleteDerivedProfile();
     if (scope === "saved-profiles") deleteAllSavedProfiles();
     if (scope === "saved-builds") deleteAllSavedBuilds();
     if (scope === "screenshot-session") deleteScreenshotSessionData();
+    if (scope === "diagnostic-logs") {
+      privacyStore.recordDeletionCompletion("diagnostic-logs");
+      setDeletionRecorded(true);
+      refreshPrivacyState();
+    }
     if (scope === "application-preferences") {
       privacyStore.deleteApplicationPreferences();
       privacyStore.recordDeletionCompletion("application-preferences");
@@ -448,7 +496,15 @@ export default function HomePage() {
       attributes: attributeConfirmation,
       userAgent: typeof navigator === "undefined" ? undefined : navigator.userAgent
     });
+    const retentionActions = createProfileCreationRetentionPlan(session);
+    const retainedSession = removeRawImagesFromCaptureSession(session);
     setStandardProfile(profile);
+    setSession(retainedSession);
+    privacyStore.deleteTemporaryImages();
+    if (typeof window !== "undefined") {
+      createCaptureRecoveryStore(window.sessionStorage).save(createCaptureRecoverySnapshot(retainedSession));
+    }
+    recordRetentionActions(retentionActions);
     setProfileSaveStatusMessage(null);
     setProfileSaveErrorMessage(null);
     refreshPrivacyState();
@@ -683,6 +739,14 @@ export default function HomePage() {
             onSessionDeleted={() => {
               privacyStore.recordDeletionCompletion("screenshot-session");
               setDeletionRecorded(true);
+              refreshPrivacyState();
+            }}
+            onRefinementCompleted={(completedSession) => {
+              const retentionActions = createRefinementCompletionRetentionPlan(completedSession);
+              const mutation = deleteScreenshotRefinementSession(completedSession);
+              setScreenshotSession(mutation.session);
+              privacyStore.deleteScreenshotSession();
+              recordRetentionActions(retentionActions);
               refreshPrivacyState();
             }}
           />

@@ -14,13 +14,20 @@
 - Browser capture uses RGB images only.
 - Selected images may exist as in-memory `File` objects or temporary object URLs during the active session.
 - Raw face images must not be written to localStorage.
+- Retention policy decisions are centralized in `web/lib/privacy/retention-policy.ts` and versioned as `web-mvp-retention-v1`.
+- Raw browser video streams are not persisted by the web MVP and are treated as deleted immediately after still-frame selection.
+- Rejected capture frames are deleted immediately by revoking temporary object URLs and recording a deletion audit scope.
+- Selected capture frames are scrubbed from the active session after `StandardFaceProfile` creation. Non-image capture status may remain for user review and recovery context.
+- Screenshot-refinement files are temporary and are deleted after the refinement check completes or when the user deletes the screenshot session.
 - Local face-landmark extraction may run in the browser through `FaceLandmarkProvider`; it does not upload images, identify people, generate identity embeddings, or infer sensitive traits.
 - Derived `StandardFaceProfile` geometry stores normalized ratios and provenance only. It must not serialize raw frames, object URLs, file names, or landmark coordinate arrays.
 - Saved derived profiles require an explicit in-app save action after separate save-profile consent. The web MVP stores saved profile payloads in browser `sessionStorage` only and encrypts them with WebCrypto AES-GCM when the browser supports it. If WebCrypto is unavailable, the app uses a clearly labeled session-only fallback and keeps deletion controls available.
+- Derived profiles are local-only by default. Cloud backup remains unavailable and cannot be enabled by consent alone.
 - Saved builds should contain derived settings and catalog metadata only, not raw face images.
 - No facial images are uploaded in the initial web prototype.
 - Manual upload fallback must follow the same deletion and non-retention expectations as camera capture.
 - The analytics contract is provider-independent and defaults to local/no-op behavior. No analytics SDK or external analytics provider is connected.
+- Diagnostic log payload validation rejects raw media references, Blob/object URLs, landmarks, geometry, exact measurements, embeddings, and unencrypted profile content.
 
 ## Web MVP local data inventory
 
@@ -47,6 +54,8 @@ Raw image bytes must not be placed in `localStorage`. Saved builds are non-image
 The web MVP uses separate consent controls for camera use, face analysis for the current recommendation, temporary local processing, saving a derived profile, cloud backup if ever supported, saving raw images, saving a completed build, saving screenshots, future product-improvement participation, future model-training participation, and marketing or sharing.
 
 Cloud backup, raw image saving, screenshot saving, future product-improvement participation, future model-training participation, and marketing/sharing remain unavailable until separately designed, approved, and implemented. Screenshot files stay temporary and deletable. Raw face media retention defaults to no.
+
+Revoking optional save consent triggers local retention cleanup for the corresponding category: saved derived profiles, saved build records, or screenshot-session media. Future model-training use remains disabled because the consent control is unavailable and no model-training storage or upload path exists.
 
 ## Privacy-safe analytics
 

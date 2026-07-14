@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { createBrowserLocalPrivacyStore, createMemoryPrivacyStore } from "@/lib/privacy/local-privacy-store";
 import { createBrowserSavedProfileStorage, SAVED_PROFILE_STORAGE_KEY } from "@/lib/privacy/profile-storage";
-import { createInitialCaptureSession } from "@/lib/capture/capture-session";
+import { createInitialCaptureSession, setAngleCapture } from "@/lib/capture/capture-session";
+import { createTemporaryImageReference } from "@/lib/capture/image-validation";
 import { createInitialAttributeConfirmation } from "@/lib/profile/attribute-confirmation";
 import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { CONSENT_DEFINITIONS, CONSENT_VERSION, createInitialConsentState, hasRequiredCaptureConsent, updateConsent } from "@/lib/privacy/consent";
@@ -13,8 +14,22 @@ import {
   getNetworkUploadStatus,
   verifyDeletionState
 } from "@/lib/privacy/data-lifecycle";
+import {
+  RETENTION_POLICY_VERSION,
+  createConsentRevocationRetentionPlan,
+  createFrameSelectionRetentionPlan,
+  createProfileCreationRetentionPlan,
+  createRefinementCompletionRetentionPlan,
+  createRejectedFrameRetentionPlan,
+  getDerivedProfileStoragePolicy,
+  isCloudSaveEnabled,
+  isModelTrainingUseAllowed,
+  removeRawImagesFromCaptureSession,
+  runRetentionExpirationJob,
+  validateDiagnosticLogPayload
+} from "@/lib/privacy/retention-policy";
 import { createInitialScreenshotRefinementSession, setScreenshot } from "@/lib/refinement/screenshot-refinement";
-import type { SavedBuild, StandardFaceProfile } from "@/types/domain";
+import type { CapturedAngleID, SavedBuild, StandardFaceProfile } from "@/types/domain";
 
 describe("consent architecture", () => {
   it("versions separate consent records", () => {
@@ -337,6 +352,138 @@ describe("data lifecycle inventory and deletion verification", () => {
   });
 });
 
+describe("enforceable retention policies", () => {
+  it("versions the retention policy and records raw-video deletion after frame selection", () => {
+    const actions = createFrameSelectionRetentionPlan();
+    expect(RETENTION_POLICY_VERSION).toBe("web-mvp-retention-v1");
+    expect(actions).toEqual([
+      expect.objectContaining({
+        event: "frameSelectionCompleted",
+        scope: "raw-videos",
+        deletionAuditScope: "raw-videos"
+      })
+    ]);
+  });
+
+  it("deletes rejected frames immediately", () => {
+    const actions = createRejectedFrameRetentionPlan({ objectUrl: "blob:rejected-frame", fileName: "blurred-front.jpg" });
+    expect(actions[0]).toMatchObject({
+      event: "captureFrameRejected",
+      scope: "rejected-frames",
+      objectUrlsToRevoke: ["blob:rejected-frame"],
+      deletionAuditScope: "rejected-frames"
+    });
+  });
+
+  it("deletes selected raw frames after profile creation while preserving non-image capture status", () => {
+    const session = sessionWithImage("straightOn", "blob:selected-front");
+    const actions = createProfileCreationRetentionPlan(session);
+    const retainedSession = removeRawImagesFromCaptureSession(session);
+
+    expect(actions[0]).toMatchObject({
+      event: "profileCreated",
+      scope: "temporary-images",
+      objectUrlsToRevoke: ["blob:selected-front"],
+      deletionAuditScope: "temporary-images"
+    });
+    expect(retainedSession.angles.find((angle) => angle.id === "straightOn")?.status).toBe("complete");
+    expect(retainedSession.angles.find((angle) => angle.id === "straightOn")?.image).toBeUndefined();
+  });
+
+  it("deletes screenshot session media after refinement completes", () => {
+    const session = setScreenshot(createInitialScreenshotRefinementSession(), {
+      viewID: "front",
+      fileName: "front.png",
+      fileType: "image/png",
+      fileSizeBytes: 1_000_000,
+      width: 1280,
+      height: 720,
+      objectUrl: "blob:screenshot-front"
+    }).session;
+    const actions = createRefinementCompletionRetentionPlan(session);
+    expect(actions[0]).toMatchObject({
+      event: "refinementCompleted",
+      scope: "screenshot-session",
+      objectUrlsToRevoke: ["blob:screenshot-front"],
+      deletionAuditScope: "screenshot-session"
+    });
+  });
+
+  it("keeps derived profiles local-only by default and requires unavailable cloud opt-in", () => {
+    const consent = createInitialConsentState();
+    expect(getDerivedProfileStoragePolicy(consent)).toEqual({
+      localOnlyByDefault: true,
+      cloudSaveEnabled: false,
+      cloudSaveRequiresConsentID: "cloudBackup",
+      rawMediaIncluded: false,
+      consentVersion: CONSENT_VERSION
+    });
+    expect(isCloudSaveEnabled(updateConsent(consent, "cloudBackup", true))).toBe(false);
+  });
+
+  it("keeps model-training use disabled without separate available consent", () => {
+    const consent = updateConsent(createInitialConsentState(), "futureModelTraining", true);
+    expect(isModelTrainingUseAllowed(consent)).toBe(false);
+  });
+
+  it("creates retention actions for consent revocation", () => {
+    expect(createConsentRevocationRetentionPlan("saveDerivedProfile")[0]).toMatchObject({
+      event: "consentRevoked",
+      scope: "saved-profiles"
+    });
+    expect(createConsentRevocationRetentionPlan("saveCompletedBuild")[0]).toMatchObject({
+      event: "consentRevoked",
+      scope: "saved-builds"
+    });
+    expect(createConsentRevocationRetentionPlan("futureModelTraining")).toEqual([]);
+  });
+
+  it("runs expiration jobs for active session and screenshot media", () => {
+    const captureSession = sessionWithImage("straightOn", "blob:expired-capture");
+    const screenshotSession = setScreenshot(createInitialScreenshotRefinementSession(), {
+      viewID: "front",
+      fileName: "front.png",
+      fileType: "image/png",
+      fileSizeBytes: 1_000_000,
+      width: 1280,
+      height: 720,
+      objectUrl: "blob:expired-screenshot"
+    }).session;
+    const actions = runRetentionExpirationJob({
+      now: new Date("2026-07-14T02:00:00.000Z"),
+      captureSession,
+      captureSessionExpiresAt: new Date("2026-07-14T01:59:59.000Z"),
+      screenshotSession,
+      screenshotSessionExpiresAt: new Date("2026-07-14T01:59:59.000Z")
+    });
+    expect(actions.map((action) => action.scope)).toEqual(["active-capture-session", "screenshot-session"]);
+    expect(actions.flatMap((action) => action.objectUrlsToRevoke)).toEqual(["blob:expired-capture", "blob:expired-screenshot"]);
+  });
+
+  it("records deletion audit scopes for retention-only media categories", () => {
+    const store = createMemoryPrivacyStore();
+    store.recordDeletionCompletion("raw-videos");
+    store.recordDeletionCompletion("rejected-frames");
+    store.recordDeletionCompletion("diagnostic-logs");
+    expect(store.getDeletionRecords().map((record) => record.scope)).toEqual(["raw-videos", "rejected-frames", "diagnostic-logs"]);
+  });
+
+  it("blocks diagnostic logs containing biometric media or measurements", () => {
+    expect(validateDiagnosticLogPayload({ event: "capture_completed", angleCount: 5 })).toEqual({
+      allowed: true,
+      blockedReasons: []
+    });
+    const result = validateDiagnosticLogPayload({
+      event: "capture_failed",
+      objectUrl: "blob:front",
+      landmarks: [{ x: 1, y: 2 }],
+      measurementSummary: { jawWidth: 0.4 }
+    });
+    expect(result.allowed).toBe(false);
+    expect(result.blockedReasons.join(" ")).toMatch(/objectUrl|landmarks|measurementSummary/);
+  });
+});
+
 const profile: StandardFaceProfile = {
   ...createStandardFaceProfile({
     session: createInitialCaptureSession(new Date("2026-07-10T00:00:00.000Z")),
@@ -375,4 +522,27 @@ function memoryStorage(): Storage {
       values.set(key, value);
     }
   };
+}
+
+function sessionWithImage(angleID: CapturedAngleID, objectUrl: string) {
+  const session = createInitialCaptureSession(new Date("2026-07-10T00:00:00.000Z"));
+  return setAngleCapture(
+    session,
+    angleID,
+    createTemporaryImageReference(
+      {
+        objectUrl,
+        fileName: `${angleID}.jpg`,
+        fileType: "image/jpeg",
+        fileSizeBytes: 1_000_000,
+        width: 1000,
+        height: 1000,
+        associatedAngleID: angleID,
+        source: "upload",
+        createdAt: "2026-07-10T00:00:00.000Z"
+      },
+      `${angleID}-signature`
+    ),
+    "upload"
+  ).session;
 }

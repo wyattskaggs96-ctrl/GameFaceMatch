@@ -163,3 +163,7 @@ export function hasRequiredCaptureConsent(state: ConsentState) {
 export function isConsentGranted(state: ConsentState, id: ConsentID) {
   return Boolean(state[id]?.granted);
 }
+
+export function getConsentDefinition(id: ConsentID) {
+  return CONSENT_DEFINITIONS.find((definition) => definition.id === id) ?? null;
+}

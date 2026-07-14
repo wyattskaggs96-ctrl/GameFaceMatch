@@ -36,7 +36,8 @@ export function ScreenshotRefinementEntry({
   rankedMatches = [],
   currentMatch = null,
   onSessionChange,
-  onSessionDeleted
+  onSessionDeleted,
+  onRefinementCompleted
 }: {
   session: ScreenshotRefinementSession;
   profile?: StandardFaceProfile | null;
@@ -44,6 +45,7 @@ export function ScreenshotRefinementEntry({
   currentMatch?: GameAppearanceMatch | null;
   onSessionChange: (session: ScreenshotRefinementSession) => void;
   onSessionDeleted: () => void;
+  onRefinementCompleted?: (session: ScreenshotRefinementSession) => void;
 }) {
   const [result, setResult] = useState<RefinementResult | null>(null);
   const [analysisPendingViewID, setAnalysisPendingViewID] = useState<ScreenshotViewID | null>(null);
@@ -153,15 +155,17 @@ export function ScreenshotRefinementEntry({
   }
 
   async function requestRefinement() {
+    const activeSession = latestSessionRef.current;
     const refinementResult = refinementEngine.refine({
       profile: profile ?? createPlaceholderProfile(),
-      session,
+      session: activeSession,
       currentMatch,
       rankedMatches,
       catalogManifest: productionCatalogManifest,
       runtimeEnvironment: process.env.NODE_ENV
     });
     setResult(refinementResult);
+    onRefinementCompleted?.(activeSession);
   }
 
   return (

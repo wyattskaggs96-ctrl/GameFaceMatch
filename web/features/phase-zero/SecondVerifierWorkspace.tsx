@@ -24,6 +24,11 @@ import {
 } from "@/lib/phase-zero/phase-zero-second-verifier-workspace";
 import type { Phase0ApprovedVerificationStatus, Phase0ResolutionAction } from "@/lib/phase-zero/phase-zero-verification";
 import type { Phase0VerificationState } from "@/lib/phase-zero/phase-zero-domain";
+import {
+  validateSecondVerifierAssignmentPackage,
+  validateSecondVerifierResultsImport,
+  type Phase0VerifierResultsImportReport
+} from "@/lib/phase-zero/phase-zero-verifier-package";
 
 interface RecordDraft {
   recordID: string;
@@ -105,6 +110,9 @@ export function SecondVerifierWorkspace() {
   const [resolutionAction, setResolutionAction] = useState<Phase0ResolutionAction>("recaptureEvidence");
   const [resolutionDisposition, setResolutionDisposition] = useState<Phase0ApprovedVerificationStatus>("VERIFIED_WITH_NOTES");
   const [resolutionState, setResolutionState] = useState<Phase0VerificationState>("verified");
+  const [assignmentPackageText, setAssignmentPackageText] = useState("");
+  const [verifierResultsText, setVerifierResultsText] = useState("");
+  const [verifierImportReport, setVerifierImportReport] = useState<Phase0VerifierResultsImportReport | null>(null);
   const validation = useMemo(() => validateSecondVerifierWorkspace(workspace), [workspace]);
   const exportedRecords = useMemo(() => exportSecondPersonVerificationRecords(workspace), [workspace]);
   const exportedDiscrepancies = useMemo(() => exportDiscrepancyResolutionRecords(workspace), [workspace]);
@@ -267,6 +275,38 @@ export function SecondVerifierWorkspace() {
     }));
   }
 
+  function importVerifierResults() {
+    try {
+      const assignment = JSON.parse(assignmentPackageText);
+      setVerifierImportReport(validateSecondVerifierResultsImport(verifierResultsText, assignment));
+    } catch {
+      const assignmentReport = validateSecondVerifierAssignmentPackage(null);
+      setVerifierImportReport({
+        ...assignmentReport,
+        ok: false,
+        importable: false,
+        rowCount: 0,
+        rows: [],
+        errors: [
+          ...assignmentReport.errors,
+          { code: "invalidAssignmentJSON", message: "Assignment package JSON could not be parsed." }
+        ]
+      });
+    }
+  }
+
+  async function readAssignmentFile(file: File | undefined) {
+    if (!file) return;
+    setAssignmentPackageText(await file.text());
+    setVerifierImportReport(null);
+  }
+
+  async function readResultsFile(file: File | undefined) {
+    if (!file) return;
+    setVerifierResultsText(await file.text());
+    setVerifierImportReport(null);
+  }
+
   return (
     <section className="screen-stack" aria-labelledby="second-verifier-title">
       <div className="status-row">
@@ -358,6 +398,69 @@ export function SecondVerifierWorkspace() {
           </pre>
         </Card>
       ) : null}
+
+      <Card tone={verifierImportReport?.importable ? "success" : verifierImportReport ? "warning" : "neutral"}>
+        <h3>Import verifier results</h3>
+        <p className="supporting">
+          Import a verifier assignment JSON and completed CSV results for validation. This only checks the package locally; it does not assign VERIFIED
+          status, publish records, or enable recommendations.
+        </p>
+        <div className="form-grid">
+          <label className="form-field" htmlFor="second-verifier-assignment-file">
+            <span>Verifier assignment JSON</span>
+            <input
+              className="file-input"
+              id="second-verifier-assignment-file"
+              type="file"
+              accept="application/json,.json"
+              onChange={(event) => void readAssignmentFile(event.currentTarget.files?.[0])}
+            />
+          </label>
+          <label className="form-field" htmlFor="second-verifier-results-file">
+            <span>Verifier results CSV</span>
+            <input
+              className="file-input"
+              id="second-verifier-results-file"
+              type="file"
+              accept="text/csv,.csv"
+              onChange={(event) => void readResultsFile(event.currentTarget.files?.[0])}
+            />
+          </label>
+        </div>
+        <div className="button-row">
+          <Button variant="secondary" onClick={importVerifierResults} disabled={!assignmentPackageText || !verifierResultsText}>
+            Validate import
+          </Button>
+        </div>
+        {verifierImportReport ? (
+          <div className="stack" aria-live="polite">
+            <dl className="metadata-list">
+              <div><dt>Rows</dt><dd>{verifierImportReport.rowCount}</dd></div>
+              <div><dt>Importable</dt><dd>{verifierImportReport.importable ? "yes" : "no"}</dd></div>
+              <div><dt>Errors</dt><dd>{verifierImportReport.errors.length}</dd></div>
+              <div><dt>Warnings</dt><dd>{verifierImportReport.warnings.length}</dd></div>
+            </dl>
+            {verifierImportReport.errors.length > 0 ? (
+              <Alert title="Import blocked" tone="danger">
+                <ul className="compact-list">
+                  {verifierImportReport.errors.slice(0, 6).map((error, index) => (
+                    <li key={`${error.code}-${index}`}>{error.message}</li>
+                  ))}
+                </ul>
+              </Alert>
+            ) : null}
+            {verifierImportReport.warnings.length > 0 ? (
+              <Alert title="Import warnings" tone="warning">
+                <ul className="compact-list">
+                  {verifierImportReport.warnings.slice(0, 6).map((warning, index) => (
+                    <li key={`${warning.code}-${index}`}>{warning.message}</li>
+                  ))}
+                </ul>
+              </Alert>
+            ) : null}
+          </div>
+        ) : null}
+      </Card>
 
       <Card>
         <h3>Record-by-record verification</h3>

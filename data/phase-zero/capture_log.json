@@ -10,7 +10,7 @@
   "summary": {
     "events": 106,
     "eventsWithEvidence": 87,
-    "eventsWithIssues": 13
+    "eventsWithIssues": 41
   },
   "events": [
     {
@@ -38,7 +38,9 @@
       "action": "loading_or_transition",
       "evidence_generated": [],
       "issue_detected": [
-        "transition_active"
+        "transition_active",
+        "transition_contamination",
+        "model_not_fully_loaded"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Road to Glory splash/loading transition."
@@ -98,7 +100,9 @@
       "action": "loading_or_transition",
       "evidence_generated": [],
       "issue_detected": [
-        "transition_active"
+        "transition_active",
+        "transition_contamination",
+        "model_not_fully_loaded"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Stadium/football transition before player-creation appearance screens."
@@ -143,7 +147,8 @@
       "evidence_generated": [],
       "issue_detected": [
         "blur_present",
-        "transition_active"
+        "transition_active",
+        "transition_contamination"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Player preview rotates/moves; useful for creation-path context only."
@@ -175,7 +180,8 @@
         "phase0-frame-video-001-tl-011"
       ],
       "issue_detected": [
-        "transition_active"
+        "transition_active",
+        "transition_contamination"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Leave/exit confirmation modal appears."
@@ -238,7 +244,9 @@
       "evidence_generated": [],
       "issue_detected": [
         "obstruction_present",
-        "transition_active"
+        "transition_active",
+        "transition_contamination",
+        "model_not_fully_loaded"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Transition into Head Template. EA/music notification overlay visible around this entry."
@@ -255,7 +263,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-004"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_001",
@@ -280,7 +290,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-005"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_002",
@@ -305,7 +317,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-006"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_003",
@@ -330,7 +344,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-007"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_004",
@@ -355,7 +371,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-008"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_008",
@@ -380,7 +398,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-009"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_007",
@@ -405,7 +425,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-010"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_006",
@@ -430,7 +452,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-011"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_005",
@@ -455,7 +479,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-012"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_009",
@@ -480,7 +506,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-013"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_010",
@@ -505,7 +533,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-014"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_011",
@@ -530,7 +560,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-015"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
@@ -555,7 +587,9 @@
       "evidence_generated": [
         "phase0-frame-video-002-tl-016"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options. This selected label appears despite the source-manifest description of this recording as Face 1 through Face 12; timeline records the observed selected state only.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
@@ -580,7 +614,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-001"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected. Recording begins mid-option on an already selected Head Template item; intentional overlap with video-002 is preserved.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
@@ -605,7 +641,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-002"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
@@ -630,7 +668,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-003"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_014",
@@ -656,7 +696,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-004"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_013",
@@ -681,7 +723,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-005"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_017",
@@ -706,7 +750,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-006"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_018",
@@ -731,7 +777,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-007"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_023",
@@ -756,7 +804,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-008"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_024",
@@ -781,7 +831,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-009"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_022",
@@ -806,7 +858,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-010"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_021",
@@ -831,7 +885,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-011"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_027",
@@ -857,7 +913,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-012"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_028",
@@ -883,7 +941,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-013"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_031",
@@ -909,7 +969,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-014"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_030",
@@ -935,7 +997,9 @@
       "evidence_generated": [
         "phase0-frame-video-003-tl-015"
       ],
-      "issue_detected": [],
+      "issue_detected": [
+        "transition_contamination"
+      ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected. Recording ends while still in Head Template with Face 29 selected.",
       "head_research_catalog_id": "CF27_XBOXUNKNOWN_RTG_HEAD_029",
@@ -959,7 +1023,9 @@
       "action": "loading_or_transition",
       "evidence_generated": [],
       "issue_detected": [
-        "transition_active"
+        "transition_active",
+        "transition_contamination",
+        "model_not_fully_loaded"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Navigation from Head Template toward Skin Tone; Face 1 appears as prior selected head context, not a newly indexed option."
@@ -1327,7 +1393,9 @@
       "action": "loading_or_transition",
       "evidence_generated": [],
       "issue_detected": [
-        "transition_active"
+        "transition_active",
+        "transition_contamination",
+        "model_not_fully_loaded"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Navigation into Skin Details; prior Head Template and Skin Tone context is not indexed as newly selected appearance evidence."
@@ -1503,7 +1571,9 @@
       "action": "loading_or_transition",
       "evidence_generated": [],
       "issue_detected": [
-        "transition_active"
+        "transition_active",
+        "transition_contamination",
+        "model_not_fully_loaded"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Navigation through prior Head Template/Skin Tone/Skin Details context into Eye Shape; prior labels are not newly indexed as selected Eye Shape options."
@@ -1599,7 +1669,9 @@
       "action": "loading_or_transition",
       "evidence_generated": [],
       "issue_detected": [
-        "transition_active"
+        "transition_active",
+        "transition_contamination",
+        "model_not_fully_loaded"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Navigation through prior tabs before Eye Color; prior labels are context only."
@@ -1727,7 +1799,9 @@
       "action": "loading_or_transition",
       "evidence_generated": [],
       "issue_detected": [
-        "transition_active"
+        "transition_active",
+        "transition_contamination",
+        "model_not_fully_loaded"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Navigation through prior tabs before Nose; prior labels are context only."
@@ -1871,7 +1945,9 @@
       "action": "loading_or_transition",
       "evidence_generated": [],
       "issue_detected": [
-        "transition_active"
+        "transition_active",
+        "transition_contamination",
+        "model_not_fully_loaded"
       ],
       "verification_state": "OBSERVED_PENDING_VERIFICATION",
       "notes": "Navigation through prior tabs before Ear Shape; prior labels are context only."

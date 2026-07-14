@@ -7,6 +7,10 @@ This map is Phase 0 research evidence only. It does not mark any College Footbal
 ## Summary
 
 - Videos covered: 9
+- Source videos processed: 11
+- Fully processed videos: 9
+- Duplicate videos preserved: 2
+- Videos needing manual review: 0
 - Timeline records: 106
 - Option-change events: 85
 - Menu-transition events: 10
@@ -27,17 +31,24 @@ This map is Phase 0 research evidence only. It does not mark any College Footbal
 
 ## Per-Video Coverage
 
-| Video | Canonical filename | Records | First option | Last option | Notes |
-| --- | --- | ---: | --- | --- | --- |
-| phase0-video-001 | `01_Environment_and_Creation_Path.mp4` | 12 | QB | QB |  |
-| phase0-video-002 | `02_Head_Templates_Faces_01-12.mov` | 16 | Face 1 | Face 16 | contains limited/continuity observations |
-| phase0-video-003 | `03_Head_Templates_Faces_12-29.mov` | 15 | Face 12 | Face 29 | contains limited/continuity observations |
-| phase0-video-004 | `04_Skin_Tone.mp4` | 23 | Skin Tone 09 | Skin Tone 23 |  |
-| phase0-video-005 | `05_Skin_Details.mp4` | 11 | None | Freckles 1 |  |
-| phase0-video-006 | `06_Eye_Shape.mp4` | 6 | Almond | Hooded |  |
-| phase0-video-007 | `07_Eye_Color.mp4` | 8 | Light Blue | Light Green |  |
-| phase0-video-008 | `08_Nose.mp4` | 9 | Aquiline | Aquiline |  |
-| phase0-video-009 | `09_Ear_Shape.mp4` | 6 | None | Pointed |  |
+| Video | Canonical filename | Result | Records | First option | Last option | Notes |
+| --- | --- | --- | ---: | --- | --- | --- |
+| phase0-video-001 | `01_Environment_and_Creation_Path.mp4` | FULLY_PROCESSED | 12 | QB | QB |  |
+| phase0-video-002 | `02_Head_Templates_Faces_01-12.mov` | FULLY_PROCESSED | 16 | Face 1 | Face 16 | contains limited/continuity observations |
+| phase0-video-003 | `03_Head_Templates_Faces_12-29.mov` | FULLY_PROCESSED | 15 | Face 12 | Face 29 | contains limited/continuity observations |
+| phase0-video-004 | `04_Skin_Tone.mp4` | FULLY_PROCESSED | 23 | Skin Tone 09 | Skin Tone 23 |  |
+| phase0-video-005 | `05_Skin_Details.mp4` | FULLY_PROCESSED | 11 | None | Freckles 1 |  |
+| phase0-video-006 | `06_Eye_Shape.mp4` | FULLY_PROCESSED | 6 | Almond | Hooded |  |
+| phase0-video-007 | `07_Eye_Color.mp4` | FULLY_PROCESSED | 8 | Light Blue | Light Green |  |
+| phase0-video-008 | `08_Nose.mp4` | FULLY_PROCESSED | 9 | Aquiline | Aquiline |  |
+| phase0-video-009 | `09_Ear_Shape.mp4` | FULLY_PROCESSED | 6 | None | Pointed |  |
+
+## Duplicate Source References
+
+| Video | Canonical filename | Duplicate of | Notes |
+| --- | --- | --- | --- |
+| phase0-video-010 | `duplicate-reference-of-05_Skin_Details.mp4` | phase0-video-005 | Exact duplicate preserved; canonical processing comes from phase0-video-005. |
+| phase0-video-011 | `duplicate-reference-of-04_Skin_Tone.mp4` | phase0-video-004 | Exact duplicate preserved; canonical processing comes from phase0-video-004. |
 
 ## Outputs
 

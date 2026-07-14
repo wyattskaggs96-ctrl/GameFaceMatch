@@ -82,6 +82,35 @@ describe("Phase 0 artifact map", () => {
     }
   });
 
+  it("classifies every supplied video and preserves catalog evidence annotations", () => {
+    const inventory = readJSON<{ summary: Record<string, unknown>; inventory: Array<Record<string, unknown>> }>("data/phase-zero/video_inventory.json");
+    const timeline = readJSON<{ summary: Record<string, unknown>; videoProcessingResults: Array<Record<string, unknown>>; records: Array<Record<string, unknown>> }>("data/phase-zero/video_timeline.json");
+    const evidence = readJSON<{ entries: Array<Record<string, unknown>> }>("data/phase-zero/evidence_manifest.json");
+    const allowedResults = new Set(["FULLY_PROCESSED", "PARTIALLY_PROCESSED", "UNUSABLE", "CORRUPTED", "DUPLICATE", "NEEDS_MANUAL_REVIEW"]);
+
+    expect(timeline.videoProcessingResults).toHaveLength(inventory.inventory.length);
+    expect(timeline.summary.fullyProcessedVideos).toBe(9);
+    expect(timeline.summary.duplicateVideos).toBe(2);
+    expect(timeline.summary.videosNeedingManualReview).toBe(0);
+    expect(timeline.summary.corruptedVideos).toBe(0);
+    expect(timeline.summary.unusableVideos).toBe(0);
+
+    for (const result of timeline.videoProcessingResults) {
+      expect(allowedResults.has(String(result.processing_result)), String(result.video_id)).toBe(true);
+      expect(result.source_video_checksum, String(result.video_id)).toMatch(/^[a-f0-9]{64}$/);
+    }
+
+    for (const record of timeline.records) {
+      expect(record.source_video_checksum, String(record.timeline_record_id)).toMatch(/^[a-f0-9]{64}$/);
+      expect(record.transition_contamination, String(record.timeline_record_id)).toMatch(/YES|NO/);
+      expect(record.model_fully_loaded, String(record.timeline_record_id)).toMatch(/FULLY_LOADED|LOADING_OR_TRANSITION|NOT_APPLICABLE_OR_NOT_VISIBLE|UNKNOWN/);
+      expect(record.menu_cursor_hides_relevant_information, String(record.timeline_record_id)).toMatch(/YES|NO/);
+    }
+
+    expect(evidence.entries.filter((entry) => entry.headResearchCatalogID).length).toBeGreaterThan(0);
+    expect(evidence.entries.filter((entry) => entry.additionalAttributeResearchCatalogID).length).toBeGreaterThan(0);
+  });
+
   it("documents the reconciled current counts and the older research-export mismatch", () => {
     const artifactMap = readText("docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md");
     const dataDictionary = readText("docs/phase-zero/PHASE_ZERO_DATA_DICTIONARY.md");

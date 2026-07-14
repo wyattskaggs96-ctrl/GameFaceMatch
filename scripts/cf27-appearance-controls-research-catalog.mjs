@@ -490,10 +490,11 @@ function annotateEvidenceManifest(evidenceManifest, records, categories, generat
 
 function updateIssuesRegister(issuesRegister, recaptureItems, generatedAt) {
   const updated = structuredClone(issuesRegister);
-  updated.updatedAt = generatedAt;
+  updated.updatedAt = latestTimestamp(updated.updatedAt, generatedAt);
   const existing = new Map((updated.issues ?? []).map((issue) => [issue.issueID, issue]));
   for (const item of recaptureItems) {
     const issueID = `issue-phase0-${item.id}`;
+    const existingIssue = existing.get(issueID);
     existing.set(issueID, {
       issueID,
       kind: "recaptureRequired",
@@ -504,8 +505,8 @@ function updateIssuesRegister(issuesRegister, recaptureItems, generatedAt) {
       status: "open",
       affectedRecordIDs: item.affectedRecordIDs,
       affectedEvidenceFileIDs: [],
-      createdAt: existing.get(issueID)?.createdAt ?? generatedAt,
-      updatedAt: generatedAt,
+      createdAt: existingIssue?.createdAt ?? generatedAt,
+      updatedAt: latestTimestamp(existingIssue?.updatedAt, generatedAt),
       resolutionNotes: "",
       recaptureRequest: {
         required: true,
@@ -520,6 +521,15 @@ function updateIssuesRegister(issuesRegister, recaptureItems, generatedAt) {
   }
   updated.issues = [...existing.values()].sort((left, right) => left.issueID.localeCompare(right.issueID));
   return updated;
+}
+
+function latestTimestamp(left, right) {
+  if (!left) return right;
+  if (!right) return left;
+  const leftTime = Date.parse(left);
+  const rightTime = Date.parse(right);
+  if (Number.isFinite(leftTime) && Number.isFinite(rightTime)) return leftTime >= rightTime ? left : right;
+  return String(left) >= String(right) ? left : right;
 }
 
 function writeCategoryMarkdown(root, catalog, summaryDirectory) {

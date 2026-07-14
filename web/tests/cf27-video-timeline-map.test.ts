@@ -24,6 +24,27 @@ describe("CF27 video timeline map", () => {
     expect(outputs.timeline.records.map((record: { visible_option_label: string }) => record.visible_option_label)).toEqual(["Face 12", "Face 12"]);
     expect(outputs.timeline.repeatedOptionsForContinuity).toHaveLength(1);
     expect(outputs.timeline.records.every((record: { verification_status: string }) => record.verification_status === "OBSERVED_PENDING_VERIFICATION")).toBe(true);
+    expect(outputs.timeline.videoProcessingResults).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        video_id: "phase0-video-001",
+        processing_result: "FULLY_PROCESSED",
+        source_video_checksum: "source-sha",
+        full_duration_covered: true
+      }),
+      expect.objectContaining({
+        video_id: "phase0-video-002",
+        processing_result: "DUPLICATE",
+        exact_duplicate_of: "phase0-video-001"
+      })
+    ]));
+    expect(outputs.timeline.records[0]).toEqual(expect.objectContaining({
+      source_video_checksum: "source-sha",
+      native_order: 12,
+      transition_contamination: "NO",
+      model_fully_loaded: "FULLY_LOADED",
+      menu_cursor_hides_relevant_information: "NO",
+      canonical_settings_changed: "UNKNOWN_NOT_ASSESSED"
+    }));
   });
 
   it("extracts a full-resolution representative frame only for useful selected events without existing evidence", async () => {
@@ -93,6 +114,7 @@ function createFixtureWorkspace({ withResearchEvidence = true } = {}) {
         fileOpenStatus: "opens",
         sha256: "source-sha",
         fileSizeBytes: 16,
+        durationSeconds: 5,
         sourceLocation: {
           portableRelativeEvidencePath: "OWNER_DOWNLOADS/source.mov",
           absoluteDiscoveryPathInternal: path.join(root, "source.mov")
@@ -117,6 +139,12 @@ function createFixtureWorkspace({ withResearchEvidence = true } = {}) {
     ]
   }, null, 2));
   fs.writeFileSync(path.join(root, "data/research/cf27/video_timeline_index.json"), JSON.stringify({
+    videos: [
+      {
+        videoId: "video-001",
+        inspectionStatus: "complete_1fps_visual_pass_with_selected_spot_keyframes"
+      }
+    ],
     events: [
       timelineEvent("video-001-tl-001", 0, 2, "Face 12"),
       timelineEvent("video-001-tl-002", 3, 5, "Face 12"),

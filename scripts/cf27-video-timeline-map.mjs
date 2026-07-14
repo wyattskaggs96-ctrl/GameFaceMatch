@@ -26,6 +26,7 @@ const timelineColumns = [
   "video_id",
   "original_filename",
   "canonical_filename",
+  "source_video_checksum",
   "start_timestamp",
   "end_timestamp",
   "event_type",
@@ -33,11 +34,16 @@ const timelineColumns = [
   "visible_menu_label",
   "visible_option_label",
   "visible_option_index",
+  "native_order",
   "observed_action",
   "confidence",
   "transition_active",
+  "transition_contamination",
   "blur_present",
   "obstruction_present",
+  "model_fully_loaded",
+  "menu_cursor_hides_relevant_information",
+  "canonical_settings_changed",
   "usable_for_count",
   "usable_for_order",
   "usable_for_visual_analysis",
@@ -87,6 +93,7 @@ export async function generateVideoTimelineMap(options = {}) {
   const shouldExtractFrames = options.extractFrames !== false;
 
   const videoMap = buildVideoMap(inventory);
+  const sourceTimelineVideoMap = buildSourceTimelineVideoMap(sourceTimeline);
   const researchEvidenceIndex = buildResearchEvidenceIndex(researchEvidence);
   const timelineRecords = [];
   const evidenceEntries = [];
@@ -132,8 +139,16 @@ export async function generateVideoTimelineMap(options = {}) {
   }
 
   const duplicateContinuity = findRepeatedOptions(timelineRecords);
+  const videoProcessingResults = buildVideoProcessingResults(inventory.inventory ?? [], timelineRecords, sourceTimelineVideoMap);
   const summary = {
     videosCovered: new Set(timelineRecords.map((record) => record.video_id)).size,
+    sourceVideosProcessed: videoProcessingResults.length,
+    fullyProcessedVideos: videoProcessingResults.filter((result) => result.processing_result === "FULLY_PROCESSED").length,
+    duplicateVideos: videoProcessingResults.filter((result) => result.processing_result === "DUPLICATE").length,
+    videosNeedingManualReview: videoProcessingResults.filter((result) => result.processing_result === "NEEDS_MANUAL_REVIEW").length,
+    partiallyProcessedVideos: videoProcessingResults.filter((result) => result.processing_result === "PARTIALLY_PROCESSED").length,
+    unusableVideos: videoProcessingResults.filter((result) => result.processing_result === "UNUSABLE").length,
+    corruptedVideos: videoProcessingResults.filter((result) => result.processing_result === "CORRUPTED").length,
     sourceEvents: sourceTimeline.events?.length ?? 0,
     timelineRecords: timelineRecords.length,
     optionChangeEvents: timelineRecords.filter((record) => record.event_type === "option_change").length,
@@ -163,6 +178,7 @@ export async function generateVideoTimelineMap(options = {}) {
     inspectionBasis: "Direct visual timeline observations from the existing source-video timeline index. OCR is not used as final authority.",
     framePolicy: "Representative frames are existing full-resolution derivatives where available; additional frames are extracted only for useful selected-option events without an existing derivative.",
     summary,
+    videoProcessingResults,
     repeatedOptionsForContinuity: duplicateContinuity,
     warnings,
     records: timelineRecords
@@ -221,6 +237,10 @@ function buildVideoMap(inventory) {
   const uniqueVideos = (inventory.inventory ?? []).filter((video) => !video.exactDuplicate && video.fileOpenStatus === "opens");
   const byLegacyID = new Map(uniqueVideos.map((video) => [legacyVideoID(video), video]));
   return { uniqueVideos, byLegacyID };
+}
+
+function buildSourceTimelineVideoMap(sourceTimeline) {
+  return new Map((sourceTimeline.videos ?? []).map((video) => [video.videoId, video]));
 }
 
 function legacyVideoID(video) {
@@ -308,24 +328,31 @@ function fileEvidenceResult(relativePath, absolutePath, timestamp) {
 }
 
 function timelineRecordForEvent(event, video, extractedFramePath) {
+  const optionIndex = visibleOptionIndex(event.selectedNativeOptionLabel);
   return {
     timeline_record_id: `phase0-${event.timelineId}`,
     video_id: video.inventoryId,
     source_timeline_id: event.timelineId,
     original_filename: video.originalFilename,
     canonical_filename: video.canonicalFilename,
+    source_video_checksum: video.sha256,
     start_timestamp: event.startSeconds,
     end_timestamp: event.endSeconds,
     event_type: primaryEventType(event),
     parent_menu: parentMenuFor(event.menuHeading),
     visible_menu_label: event.menuHeading ?? "",
     visible_option_label: event.selectedNativeOptionLabel ?? "",
-    visible_option_index: visibleOptionIndex(event.selectedNativeOptionLabel),
+    visible_option_index: optionIndex,
+    native_order: optionIndex,
     observed_action: observedActionFor(event),
     confidence: confidenceFor(event),
     transition_active: Boolean(event.characterLoading || event.rotationObserved || event.menuExitObserved),
+    transition_contamination: transitionContaminationFor(event),
     blur_present: Boolean(event.motionBlurObserved),
     obstruction_present: Boolean(event.notificationOverlayObserved),
+    model_fully_loaded: modelFullyLoadedFor(event),
+    menu_cursor_hides_relevant_information: menuCursorObstructionFor(event),
+    canonical_settings_changed: canonicalSettingsChangedFor(event),
     usable_for_count: usableForCount(event),
     usable_for_order: usableForOrder(event),
     usable_for_visual_analysis: usableForVisualAnalysis(event),
@@ -340,6 +367,9 @@ function captureLogEventFor(record, evidenceEntry) {
   if (record.blur_present) issues.push("blur_present");
   if (record.obstruction_present) issues.push("obstruction_present");
   if (record.transition_active && record.event_type !== "option_change") issues.push("transition_active");
+  if (record.transition_contamination === "YES") issues.push("transition_contamination");
+  if (record.model_fully_loaded === "LOADING_OR_TRANSITION") issues.push("model_not_fully_loaded");
+  if (record.menu_cursor_hides_relevant_information === "YES") issues.push("menu_cursor_obstruction");
   if (!record.usable_for_visual_analysis && record.visible_option_label) issues.push("limited_visual_analysis");
   return {
     capture_event_id: `capture-${record.timeline_record_id}`,
@@ -355,6 +385,57 @@ function captureLogEventFor(record, evidenceEntry) {
     verification_state: verificationStatus,
     notes: record.notes
   };
+}
+
+function buildVideoProcessingResults(inventoryRows, timelineRecords, sourceTimelineVideoMap) {
+  return inventoryRows.map((video) => {
+    const records = timelineRecords.filter((record) => record.video_id === video.inventoryId);
+    const legacyID = legacyVideoID(video);
+    const sourceVideo = sourceTimelineVideoMap.get(legacyID);
+    const firstStart = records.length ? Math.min(...records.map((record) => record.start_timestamp)) : null;
+    const lastEnd = records.length ? Math.max(...records.map((record) => record.end_timestamp)) : null;
+    const duration = Number(video.durationSeconds);
+    const fullDurationCovered = Number.isFinite(duration) && Number.isFinite(firstStart) && Number.isFinite(lastEnd)
+      ? firstStart <= 1 && lastEnd >= duration - 1
+      : false;
+    const completeSourceInspection = String(sourceVideo?.inspectionStatus ?? "").startsWith("complete_");
+    const processingResult = videoProcessingResultFor(video, records, fullDurationCovered, completeSourceInspection);
+    return {
+      video_id: video.inventoryId,
+      original_filename: video.originalFilename,
+      canonical_filename: video.canonicalFilename,
+      source_video_checksum: video.sha256,
+      processing_result: processingResult,
+      timeline_record_count: records.length,
+      first_timeline_timestamp: firstStart,
+      last_timeline_timestamp: lastEnd,
+      duration_seconds: duration,
+      full_duration_covered: fullDurationCovered,
+      source_inspection_status: sourceVideo?.inspectionStatus ?? null,
+      exact_duplicate_of: video.exactDuplicateOf ?? null,
+      notes: processingNotesFor(video, processingResult, fullDurationCovered, completeSourceInspection)
+    };
+  });
+}
+
+function videoProcessingResultFor(video, records, fullDurationCovered, completeSourceInspection) {
+  if (video.exactDuplicate) return "DUPLICATE";
+  if (video.fileOpenStatus !== "opens" && video.ffmpegStatus !== "opens") return "CORRUPTED";
+  if (video.fileOpenStatus !== "opens") return "UNUSABLE";
+  if (records.length === 0) return "NEEDS_MANUAL_REVIEW";
+  if (fullDurationCovered && completeSourceInspection) return "FULLY_PROCESSED";
+  if (records.length > 0) return "PARTIALLY_PROCESSED";
+  return "NEEDS_MANUAL_REVIEW";
+}
+
+function processingNotesFor(video, processingResult, fullDurationCovered, completeSourceInspection) {
+  if (processingResult === "DUPLICATE") return `Exact duplicate preserved; canonical processing comes from ${video.exactDuplicateOf}.`;
+  if (processingResult === "FULLY_PROCESSED") return "Complete source-video range is represented by direct visual timeline ranges; no independent verification is implied.";
+  const notes = [];
+  if (!fullDurationCovered) notes.push("timeline ranges do not cover full source duration");
+  if (!completeSourceInspection) notes.push("source timeline does not declare a complete visual pass");
+  if (video.fileOpenStatus !== "opens") notes.push(`file open status: ${video.fileOpenStatus}`);
+  return notes.join("; ") || "manual review required";
 }
 
 function sourceMasterEvidence(video) {
@@ -469,6 +550,31 @@ function confidenceFor(event) {
   return "MEDIUM";
 }
 
+function transitionContaminationFor(event) {
+  if (event.characterLoading || event.motionBlurObserved || event.rotationObserved || event.menuExitObserved) return "YES";
+  return "NO";
+}
+
+function modelFullyLoadedFor(event) {
+  if (event.characterLoading) return "LOADING_OR_TRANSITION";
+  if (event.selectedNativeOptionLabel && event.stableVisualPeriod) return "FULLY_LOADED";
+  if (event.selectedNativeOptionLabel) return "UNKNOWN";
+  return "NOT_APPLICABLE_OR_NOT_VISIBLE";
+}
+
+function menuCursorObstructionFor(event) {
+  const notes = `${event.notes ?? ""} ${(event.visibleNonSelectedLabels ?? []).join(" ")}`.toLowerCase();
+  if (notes.includes("cursor") && (notes.includes("obstruct") || notes.includes("hide"))) return "YES";
+  return "NO";
+}
+
+function canonicalSettingsChangedFor(event) {
+  const notes = String(event.notes ?? "").toLowerCase();
+  if (notes.includes("canonical") && notes.includes("changed")) return "YES";
+  if (event.selectedNativeOptionLabel) return "UNKNOWN_NOT_ASSESSED";
+  return "NOT_APPLICABLE";
+}
+
 function usableForCount(event) {
   return Boolean(event.selectedNativeOptionLabel && event.selectionState?.startsWith("deliberately") && !event.characterLoading);
 }
@@ -517,6 +623,10 @@ function timelineMarkdown(timeline) {
     "## Summary",
     "",
     `- Videos covered: ${timeline.summary.videosCovered}`,
+    `- Source videos processed: ${timeline.summary.sourceVideosProcessed}`,
+    `- Fully processed videos: ${timeline.summary.fullyProcessedVideos}`,
+    `- Duplicate videos preserved: ${timeline.summary.duplicateVideos}`,
+    `- Videos needing manual review: ${timeline.summary.videosNeedingManualReview}`,
     `- Timeline records: ${timeline.summary.timelineRecords}`,
     `- Option-change events: ${timeline.summary.optionChangeEvents}`,
     `- Menu-transition events: ${timeline.summary.menuTransitionEvents}`,
@@ -537,12 +647,20 @@ function timelineMarkdown(timeline) {
     "",
     "## Per-Video Coverage",
     "",
-    "| Video | Canonical filename | Records | First option | Last option | Notes |",
-    "| --- | --- | ---: | --- | --- | --- |"
+    "| Video | Canonical filename | Result | Records | First option | Last option | Notes |",
+    "| --- | --- | --- | ---: | --- | --- | --- |"
   ];
   for (const group of groupTimelineByVideo(timeline.records)) {
     const selected = group.records.filter((record) => record.visible_option_label);
-    lines.push(`| ${group.videoID} | \`${group.canonicalFilename}\` | ${group.records.length} | ${selected[0]?.visible_option_label ?? ""} | ${selected.at(-1)?.visible_option_label ?? ""} | ${group.notes} |`);
+    const processingResult = timeline.videoProcessingResults.find((result) => result.video_id === group.videoID)?.processing_result ?? "UNKNOWN";
+    lines.push(`| ${group.videoID} | \`${group.canonicalFilename}\` | ${processingResult} | ${group.records.length} | ${selected[0]?.visible_option_label ?? ""} | ${selected.at(-1)?.visible_option_label ?? ""} | ${group.notes} |`);
+  }
+  const duplicateResults = timeline.videoProcessingResults.filter((result) => result.processing_result === "DUPLICATE");
+  if (duplicateResults.length) {
+    lines.push("", "## Duplicate Source References", "", "| Video | Canonical filename | Duplicate of | Notes |", "| --- | --- | --- | --- |");
+    for (const result of duplicateResults) {
+      lines.push(`| ${result.video_id} | \`${result.canonical_filename}\` | ${result.exact_duplicate_of ?? ""} | ${result.notes} |`);
+    }
   }
   lines.push("", "## Outputs", "", "- JSON: `data/phase-zero/video_timeline.json`", "- CSV: `data/phase-zero/video_timeline.csv`", "- Evidence manifest: `data/phase-zero/evidence_manifest.json`", "- Capture log: `data/phase-zero/capture_log.json`");
   if (timeline.warnings.length) {

@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "manual-matching-study-readiness-decision-v1",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "decision": "NOT_READY",
+  "studyMustNotBeginAutomatically": true,
+  "productionRecommendationsEnabled": false,
+  "summary": "The 10-20-person manual feasibility study is blocked because no independently verified production College Football 27 catalog release exists. The study protocol, templates, privacy rules, deletion fields, and metric calculations exist, but the required verified catalog, production top-three outputs, and verified build instructions are unavailable.",
+  "gateResults": [
+    {
+      "gate": "verifiedProductionCatalog",
+      "status": "BLOCKED",
+      "evidence": [
+        "data/catalog/production/catalog_manifest.json has 0 items and version empty-production.",
+        "data/catalog/production-releases/cf27-production-empty-2026-07-14/production_readiness_decision.json reports BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS.",
+        "data/phase-zero/production-candidate-import/production_candidate_import_report.json reports NO_VERIFICATION_CANDIDATE_PACKAGE."
+      ],
+      "blocker": "No verified production College Football 27 records are available."
+    },
+    {
+      "gate": "workingTopThreeMatcher",
+      "status": "IMPLEMENTED_BUT_BLOCKED",
+      "evidence": [
+        "web/lib/matching/matching-engine.ts implements top-three rule-based matching.",
+        "web/tests/matching-engine.test.ts covers matching behavior.",
+        "Production matching intentionally returns no results when the catalog is empty or unapproved."
+      ],
+      "blocker": "The matcher cannot be used for the manual study until a verified production catalog is approved."
+    },
+    {
+      "gate": "workingBuildInstructions",
+      "status": "IMPLEMENTED_BUT_BLOCKED",
+      "evidence": [
+        "web/lib/results/results-experience.ts generates instructions only from verified navigation data.",
+        "The production catalog has no verified instruction-bearing records."
+      ],
+      "blocker": "No verified menu paths or native values exist in the production catalog."
+    },
+    {
+      "gate": "consentFlow",
+      "status": "READY_WITH_REVIEW_REQUIRED",
+      "evidence": [
+        "docs/phase-zero/MANUAL_MATCHING_FEASIBILITY_PROTOCOL.md contains consent language and required acknowledgments.",
+        "data/phase-zero/manual_matching_subjects.template.csv contains consent fields."
+      ],
+      "blocker": "Final legal/context review is still required before collecting real participant media."
+    },
+    {
+      "gate": "deletionFlow",
+      "status": "READY_WITH_MANUAL_QA_REQUIRED",
+      "evidence": [
+        "web/lib/privacy/data-lifecycle.ts implements local inventory and deletion scopes.",
+        "data/phase-zero/manual_matching_subjects.template.csv and data/phase-zero/manual_matching_results.template.csv contain raw-media/profile deletion fields."
+      ],
+      "blocker": "Study operator deletion procedure must be exercised with real local study storage before participant collection."
+    },
+    {
+      "gate": "studyForms",
+      "status": "READY_AS_TEMPLATES",
+      "evidence": [
+        "docs/phase-zero/MANUAL_MATCHING_FEASIBILITY_PROTOCOL.md is present.",
+        "data/phase-zero/manual_matching_subjects.template.csv is present.",
+        "data/phase-zero/manual_matching_reviews.template.csv is present.",
+        "data/phase-zero/manual_matching_results.template.csv is present."
+      ],
+      "blocker": null
+    },
+    {
+      "gate": "participantIDs",
+      "status": "READY_AS_TEMPLATE_FIELDS",
+      "evidence": [
+        "data/phase-zero/manual_matching_subjects.template.csv contains participant_id and participant_sequence fields."
+      ],
+      "blocker": null
+    },
+    {
+      "gate": "reviewerForms",
+      "status": "READY_AS_TEMPLATES",
+      "evidence": [
+        "data/phase-zero/manual_matching_reviews.template.csv contains reviewer_id, top-three catalog IDs, feature annotations, hair/facial-hair fields, and mismatch reasons.",
+        "data/phase-zero/manual_matching_results.template.csv contains reviewer_a_id and reviewer_b_id."
+      ],
+      "blocker": null
+    },
+    {
+      "gate": "privacyRules",
+      "status": "READY_WITH_REVIEW_REQUIRED",
+      "evidence": [
+        "docs/phase-zero/MANUAL_MATCHING_FEASIBILITY_PROTOCOL.md documents no account requirement, pseudonymous IDs, no direct identifiers, no committed raw media, raw-photo deletion, and non-image rows only.",
+        "docs/PRIVACY_IMPLEMENTATION_NOTES.md documents local-only storage and raw-media non-retention defaults."
+      ],
+      "blocker": "Final privacy/legal review is required before real participant collection."
+    },
+    {
+      "gate": "metricCalculations",
+      "status": "READY_AS_SCRIPTED_TEMPLATE_ANALYSIS",
+      "evidence": [
+        "scripts/manual-matching-feasibility.mjs calculates top-one acceptance, top-three usefulness, reviewer agreement, mismatch counts, and deletion confirmation.",
+        "node scripts/manual-matching-feasibility.mjs validate passes with a template-only warning."
+      ],
+      "blocker": null
+    },
+    {
+      "gate": "noPlaceholderResults",
+      "status": "PASS",
+      "evidence": [
+        "Manual matching CSVs are header-only templates with 0 subject, review, and result rows.",
+        "node scripts/manual-matching-feasibility.mjs validate reports studyHasRun false."
+      ],
+      "blocker": null
+    },
+    {
+      "gate": "noFixtureLeakage",
+      "status": "PASS",
+      "evidence": [
+        "npm run catalog:fixtures passes for the production catalog.",
+        "npm run catalog:placeholders passes for the production catalog.",
+        "web production bundle guard passes during npm run build."
+      ],
+      "blocker": null
+    }
+  ],
+  "exactBlockers": [
+    "No verified production College Football 27 catalog release exists.",
+    "No verification-candidate package is present at data/phase-zero/verification-candidate-package/catalog_manifest.json.",
+    "The active production catalog has zero verified records.",
+    "The production publish gate is blocked by candidateImportPassed and directShippingGameEvidence failures.",
+    "Top-three production matching and build instructions cannot be exercised with verified real records.",
+    "Hair, hair color, facial hair, and facial-hair color research records are still requested/not captured in the current research release.",
+    "Second-person verification and catalog-manager approval have not produced a production-eligible package.",
+    "Final consent/privacy review and real study storage deletion dry-run are still required before collecting participant media."
+  ],
+  "nextDecisionTrigger": "Re-run this readiness review after a verification-candidate package passes isolated import validation, an immutable production catalog release contains nonzero verified records, and build instructions resolve to verified menu paths."
+}

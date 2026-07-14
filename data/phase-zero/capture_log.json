@@ -1,0 +1,1703 @@
+{
+  "schemaVersion": "cf27-video-timeline-map-v1-capture-log",
+  "generatedAt": "2026-07-13T21:41:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_TIMELINE_CAPTURE_LOG",
+  "sourceType": "research",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "summary": {
+    "events": 106,
+    "eventsWithEvidence": 87,
+    "eventsWithIssues": 13
+  },
+  "events": [
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-001",
+      "timeline_record_id": "phase0-video-001-tl-001",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 0,
+      "end_timestamp": 7,
+      "category": "College Football hub / Road to Glory navigation",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Main hub/navigation state; Road to Glory is visible in the left navigation. Not catalog option evidence."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-002",
+      "timeline_record_id": "phase0-video-001-tl-002",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 8,
+      "end_timestamp": 11,
+      "category": "Road to Glory transition/loading",
+      "native_option": null,
+      "action": "loading_or_transition",
+      "evidence_generated": [],
+      "issue_detected": [
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Road to Glory splash/loading transition."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-003",
+      "timeline_record_id": "phase0-video-001-tl-003",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 12,
+      "end_timestamp": 17,
+      "category": "Road to Glory menu/start area",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Road to Glory setup/navigation screens; exact small labels require a later frame-level pass before use as creation-path evidence."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-004",
+      "timeline_record_id": "phase0-video-001-tl-004",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 18,
+      "end_timestamp": 23,
+      "category": "Archetype / prospect selection cards",
+      "native_option": null,
+      "action": "context_labels_visible",
+      "evidence_generated": [],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Card labels are visible in the creation-flow UI. They are not College Football 27 appearance catalog records."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-005",
+      "timeline_record_id": "phase0-video-001-tl-005",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 24,
+      "end_timestamp": 29,
+      "category": "Player setup / position path",
+      "native_option": "QB",
+      "action": "creation_path_label_visible",
+      "evidence_generated": [],
+      "issue_detected": [
+        "limited_visual_analysis"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "QB appears on the setup screen; this is creation-path evidence, not appearance option evidence."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-006",
+      "timeline_record_id": "phase0-video-001-tl-006",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 30,
+      "end_timestamp": 32,
+      "category": "Transition into player creation",
+      "native_option": null,
+      "action": "loading_or_transition",
+      "evidence_generated": [],
+      "issue_detected": [
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Stadium/football transition before player-creation appearance screens."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-007",
+      "timeline_record_id": "phase0-video-001-tl-007",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 33,
+      "end_timestamp": 37,
+      "category": "Create Player appearance path/menu",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Created-player appearance area becomes visible."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-008",
+      "timeline_record_id": "phase0-video-001-tl-008",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 38,
+      "end_timestamp": 45,
+      "category": "Create Player menu navigation",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Menu navigation continues; small labels are not indexed as appearance options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-009",
+      "timeline_record_id": "phase0-video-001-tl-009",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 46,
+      "end_timestamp": 57,
+      "category": "Create Player preview / build-equipment area",
+      "native_option": null,
+      "action": "rotation_observed",
+      "evidence_generated": [],
+      "issue_detected": [
+        "blur_present",
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Player preview rotates/moves; useful for creation-path context only."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-010",
+      "timeline_record_id": "phase0-video-001-tl-010",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 58,
+      "end_timestamp": 66,
+      "category": "Create Player menu navigation",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Stable menu/player preview after rotation."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-011",
+      "timeline_record_id": "phase0-video-001-tl-011",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 67,
+      "end_timestamp": 70,
+      "category": "Exit confirmation modal",
+      "native_option": null,
+      "action": "menu_exit_observed",
+      "evidence_generated": [
+        "phase0-frame-video-001-tl-011"
+      ],
+      "issue_detected": [
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Leave/exit confirmation modal appears."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-001-tl-012",
+      "timeline_record_id": "phase0-video-001-tl-012",
+      "video_id": "phase0-video-001",
+      "start_timestamp": 71,
+      "end_timestamp": 73.57,
+      "category": "Create Player menu after exit cancellation/return",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [
+        "phase0-frame-video-001-tl-012"
+      ],
+      "issue_detected": [
+        "obstruction_present"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Returns to player creation/menu state; small bottom notification overlay appears near the end."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-001",
+      "timeline_record_id": "phase0-video-002-tl-001",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 0,
+      "end_timestamp": 5,
+      "category": "Create Player / Appearance navigation",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": ""
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-002",
+      "timeline_record_id": "phase0-video-002-tl-002",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 6,
+      "end_timestamp": 7,
+      "category": "Head & Skin submenu",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Navigation into head/skin area before Head Template grid."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-003",
+      "timeline_record_id": "phase0-video-002-tl-003",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 8,
+      "end_timestamp": 9,
+      "category": "Head Template transition/loading",
+      "native_option": null,
+      "action": "loading_or_transition",
+      "evidence_generated": [],
+      "issue_detected": [
+        "obstruction_present",
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Transition into Head Template. EA/music notification overlay visible around this entry."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-004",
+      "timeline_record_id": "phase0-video-002-tl-004",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 10,
+      "end_timestamp": 19,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 1",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-004"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-005",
+      "timeline_record_id": "phase0-video-002-tl-005",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 20,
+      "end_timestamp": 28,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 2",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-005"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-006",
+      "timeline_record_id": "phase0-video-002-tl-006",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 29,
+      "end_timestamp": 38,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 3",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-006"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-007",
+      "timeline_record_id": "phase0-video-002-tl-007",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 39,
+      "end_timestamp": 48,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 4",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-007"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-008",
+      "timeline_record_id": "phase0-video-002-tl-008",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 49,
+      "end_timestamp": 53,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 8",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-008"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-009",
+      "timeline_record_id": "phase0-video-002-tl-009",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 54,
+      "end_timestamp": 59,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 7",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-009"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-010",
+      "timeline_record_id": "phase0-video-002-tl-010",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 60,
+      "end_timestamp": 68,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 6",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-010"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-011",
+      "timeline_record_id": "phase0-video-002-tl-011",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 69,
+      "end_timestamp": 74,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 5",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-011"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-012",
+      "timeline_record_id": "phase0-video-002-tl-012",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 75,
+      "end_timestamp": 79,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 9",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-012"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-013",
+      "timeline_record_id": "phase0-video-002-tl-013",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 80,
+      "end_timestamp": 88,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 10",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-013"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-014",
+      "timeline_record_id": "phase0-video-002-tl-014",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 89,
+      "end_timestamp": 94,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 11",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-014"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-015",
+      "timeline_record_id": "phase0-video-002-tl-015",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 95,
+      "end_timestamp": 100,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 12",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-015"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-002-tl-016",
+      "timeline_record_id": "phase0-video-002-tl-016",
+      "video_id": "phase0-video-002",
+      "start_timestamp": 101,
+      "end_timestamp": 108.8,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 16",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-002-tl-016"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnail faces are visible but are not treated as selected options. This selected label appears despite the source-manifest description of this recording as Face 1 through Face 12; timeline records the observed selected state only."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-001",
+      "timeline_record_id": "phase0-video-003-tl-001",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 0,
+      "end_timestamp": 4,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 12",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-001"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected. Recording begins mid-option on an already selected Head Template item; intentional overlap with video-002 is preserved."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-002",
+      "timeline_record_id": "phase0-video-003-tl-002",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 5,
+      "end_timestamp": 13,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 16",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-002"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-003",
+      "timeline_record_id": "phase0-video-003-tl-003",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 14,
+      "end_timestamp": 20,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 14",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-003"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-004",
+      "timeline_record_id": "phase0-video-003-tl-004",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 21,
+      "end_timestamp": 29,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 13",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-004"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-005",
+      "timeline_record_id": "phase0-video-003-tl-005",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 30,
+      "end_timestamp": 39,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 17",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-005"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-006",
+      "timeline_record_id": "phase0-video-003-tl-006",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 40,
+      "end_timestamp": 49,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 18",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-006"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-007",
+      "timeline_record_id": "phase0-video-003-tl-007",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 50,
+      "end_timestamp": 59,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 23",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-007"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-008",
+      "timeline_record_id": "phase0-video-003-tl-008",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 60,
+      "end_timestamp": 69,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 24",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-008"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-009",
+      "timeline_record_id": "phase0-video-003-tl-009",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 70,
+      "end_timestamp": 79,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 22",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-009"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-010",
+      "timeline_record_id": "phase0-video-003-tl-010",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 80,
+      "end_timestamp": 89,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 21",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-010"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-011",
+      "timeline_record_id": "phase0-video-003-tl-011",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 90,
+      "end_timestamp": 99,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 27",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-011"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-012",
+      "timeline_record_id": "phase0-video-003-tl-012",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 100,
+      "end_timestamp": 109,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 28",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-012"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-013",
+      "timeline_record_id": "phase0-video-003-tl-013",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 110,
+      "end_timestamp": 119,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 31",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-013"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-014",
+      "timeline_record_id": "phase0-video-003-tl-014",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 120,
+      "end_timestamp": 126,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 30",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-014"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-003-tl-015",
+      "timeline_record_id": "phase0-video-003-tl-015",
+      "video_id": "phase0-video-003",
+      "start_timestamp": 127,
+      "end_timestamp": 133.02,
+      "category": "HEAD TEMPLATE",
+      "native_option": "Face 29",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-003-tl-015"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected Head Template label is directly readable. Neighboring thumbnails remain non-selected. Recording ends while still in Head Template with Face 29 selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-001",
+      "timeline_record_id": "phase0-video-004-tl-001",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 0,
+      "end_timestamp": 7,
+      "category": "Head & Skin / Head Template navigation",
+      "native_option": null,
+      "action": "loading_or_transition",
+      "evidence_generated": [],
+      "issue_detected": [
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Navigation from Head Template toward Skin Tone; Face 1 appears as prior selected head context, not a newly indexed option."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-002",
+      "timeline_record_id": "phase0-video-004-tl-002",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 8,
+      "end_timestamp": 11,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 09",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-002"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-003",
+      "timeline_record_id": "phase0-video-004-tl-003",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 12,
+      "end_timestamp": 13,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 04",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-003"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-004",
+      "timeline_record_id": "phase0-video-004-tl-004",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 14,
+      "end_timestamp": 14,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 10",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-004"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-005",
+      "timeline_record_id": "phase0-video-004-tl-005",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 15,
+      "end_timestamp": 16,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 20",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-005"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-006",
+      "timeline_record_id": "phase0-video-004-tl-006",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 17,
+      "end_timestamp": 19,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 19",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-006"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-007",
+      "timeline_record_id": "phase0-video-004-tl-007",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 20,
+      "end_timestamp": 22,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 18",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-007"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-008",
+      "timeline_record_id": "phase0-video-004-tl-008",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 23,
+      "end_timestamp": 24,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 21",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-008"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-009",
+      "timeline_record_id": "phase0-video-004-tl-009",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 25,
+      "end_timestamp": 26,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 08",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-009"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-010",
+      "timeline_record_id": "phase0-video-004-tl-010",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 27,
+      "end_timestamp": 28,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 07",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-010"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-011",
+      "timeline_record_id": "phase0-video-004-tl-011",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 29,
+      "end_timestamp": 30,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 06",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-011"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-012",
+      "timeline_record_id": "phase0-video-004-tl-012",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 31,
+      "end_timestamp": 32,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 29",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-012"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-013",
+      "timeline_record_id": "phase0-video-004-tl-013",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 33,
+      "end_timestamp": 34,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 24",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-013"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-014",
+      "timeline_record_id": "phase0-video-004-tl-014",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 35,
+      "end_timestamp": 36,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 22",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-014"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-015",
+      "timeline_record_id": "phase0-video-004-tl-015",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 37,
+      "end_timestamp": 38,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 17",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-015"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-016",
+      "timeline_record_id": "phase0-video-004-tl-016",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 39,
+      "end_timestamp": 40,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 13",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-016"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-017",
+      "timeline_record_id": "phase0-video-004-tl-017",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 41,
+      "end_timestamp": 42,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 10",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-017"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-018",
+      "timeline_record_id": "phase0-video-004-tl-018",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 43,
+      "end_timestamp": 44,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 12",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-018"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-019",
+      "timeline_record_id": "phase0-video-004-tl-019",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 45,
+      "end_timestamp": 46,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 01",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-019"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-020",
+      "timeline_record_id": "phase0-video-004-tl-020",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 47,
+      "end_timestamp": 47,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 02",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-020"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-021",
+      "timeline_record_id": "phase0-video-004-tl-021",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 48,
+      "end_timestamp": 49,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 03",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-021"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-022",
+      "timeline_record_id": "phase0-video-004-tl-022",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 50,
+      "end_timestamp": 51,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 11",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-022"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-004-tl-023",
+      "timeline_record_id": "phase0-video-004-tl-023",
+      "video_id": "phase0-video-004",
+      "start_timestamp": 52,
+      "end_timestamp": 53.82,
+      "category": "SKIN TONE",
+      "native_option": "Skin Tone 23",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-004-tl-023"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Tone label is directly readable; non-selected swatches in the grid are not indexed as selected options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-001",
+      "timeline_record_id": "phase0-video-005-tl-001",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 0,
+      "end_timestamp": 7,
+      "category": "Head & Skin / Head Template / Skin Tone navigation",
+      "native_option": null,
+      "action": "loading_or_transition",
+      "evidence_generated": [],
+      "issue_detected": [
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Navigation into Skin Details; prior Head Template and Skin Tone context is not indexed as newly selected appearance evidence."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-002",
+      "timeline_record_id": "phase0-video-005-tl-002",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 8,
+      "end_timestamp": 8,
+      "category": "SKIN DETAILS",
+      "native_option": "None",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-005-tl-002"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Details label is directly readable; neighboring thumbnail tiles are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-003",
+      "timeline_record_id": "phase0-video-005-tl-003",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 9,
+      "end_timestamp": 10,
+      "category": "SKIN DETAILS",
+      "native_option": "Freckles 2",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-005-tl-003"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Details label is directly readable; neighboring thumbnail tiles are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-004",
+      "timeline_record_id": "phase0-video-005-tl-004",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 11,
+      "end_timestamp": 14,
+      "category": "SKIN DETAILS",
+      "native_option": "Scar 3",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-005-tl-004"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Details label is directly readable; neighboring thumbnail tiles are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-005",
+      "timeline_record_id": "phase0-video-005-tl-005",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 15,
+      "end_timestamp": 16,
+      "category": "SKIN DETAILS",
+      "native_option": "Scar 2",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-005-tl-005"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Details label is directly readable; neighboring thumbnail tiles are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-006",
+      "timeline_record_id": "phase0-video-005-tl-006",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 17,
+      "end_timestamp": 18,
+      "category": "SKIN DETAILS",
+      "native_option": "Redness 2",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-005-tl-006"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Details label is directly readable; neighboring thumbnail tiles are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-007",
+      "timeline_record_id": "phase0-video-005-tl-007",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 19,
+      "end_timestamp": 20,
+      "category": "SKIN DETAILS",
+      "native_option": "Redness 3",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-005-tl-007"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Details label is directly readable; neighboring thumbnail tiles are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-008",
+      "timeline_record_id": "phase0-video-005-tl-008",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 21,
+      "end_timestamp": 22,
+      "category": "SKIN DETAILS",
+      "native_option": "Acne Scar 1",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-005-tl-008"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Details label is directly readable; neighboring thumbnail tiles are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-009",
+      "timeline_record_id": "phase0-video-005-tl-009",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 23,
+      "end_timestamp": 24,
+      "category": "SKIN DETAILS",
+      "native_option": "Scar 1",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-005-tl-009"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Details label is directly readable; neighboring thumbnail tiles are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-010",
+      "timeline_record_id": "phase0-video-005-tl-010",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 25,
+      "end_timestamp": 26,
+      "category": "SKIN DETAILS",
+      "native_option": "Redness 1",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-005-tl-010"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Details label is directly readable; neighboring thumbnail tiles are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-005-tl-011",
+      "timeline_record_id": "phase0-video-005-tl-011",
+      "video_id": "phase0-video-005",
+      "start_timestamp": 27,
+      "end_timestamp": 31.72,
+      "category": "SKIN DETAILS",
+      "native_option": "Freckles 1",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-005-tl-011"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Skin Details label is directly readable; neighboring thumbnail tiles are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-006-tl-001",
+      "timeline_record_id": "phase0-video-006-tl-001",
+      "video_id": "phase0-video-006",
+      "start_timestamp": 0,
+      "end_timestamp": 13,
+      "category": "Head & Skin navigation toward Eye Shape",
+      "native_option": null,
+      "action": "loading_or_transition",
+      "evidence_generated": [],
+      "issue_detected": [
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Navigation through prior Head Template/Skin Tone/Skin Details context into Eye Shape; prior labels are not newly indexed as selected Eye Shape options."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-006-tl-002",
+      "timeline_record_id": "phase0-video-006-tl-002",
+      "video_id": "phase0-video-006",
+      "start_timestamp": 14,
+      "end_timestamp": 14,
+      "category": "EYE SHAPE",
+      "native_option": "Almond",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-006-tl-002"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Shape label is directly readable; adjacent eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-006-tl-003",
+      "timeline_record_id": "phase0-video-006-tl-003",
+      "video_id": "phase0-video-006",
+      "start_timestamp": 15,
+      "end_timestamp": 16,
+      "category": "EYE SHAPE",
+      "native_option": "None",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-006-tl-003"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Shape label is directly readable; adjacent eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-006-tl-004",
+      "timeline_record_id": "phase0-video-006-tl-004",
+      "video_id": "phase0-video-006",
+      "start_timestamp": 17,
+      "end_timestamp": 18,
+      "category": "EYE SHAPE",
+      "native_option": "Prominent",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-006-tl-004"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Shape label is directly readable; adjacent eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-006-tl-005",
+      "timeline_record_id": "phase0-video-006-tl-005",
+      "video_id": "phase0-video-006",
+      "start_timestamp": 19,
+      "end_timestamp": 19,
+      "category": "EYE SHAPE",
+      "native_option": "Monolid",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-006-tl-005"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Shape label is directly readable; adjacent eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-006-tl-006",
+      "timeline_record_id": "phase0-video-006-tl-006",
+      "video_id": "phase0-video-006",
+      "start_timestamp": 20,
+      "end_timestamp": 24.93,
+      "category": "EYE SHAPE",
+      "native_option": "Hooded",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-006-tl-006"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Shape label is directly readable; adjacent eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-007-tl-001",
+      "timeline_record_id": "phase0-video-007-tl-001",
+      "video_id": "phase0-video-007",
+      "start_timestamp": 0,
+      "end_timestamp": 11,
+      "category": "Head & Skin navigation toward Eye Color",
+      "native_option": null,
+      "action": "loading_or_transition",
+      "evidence_generated": [],
+      "issue_detected": [
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Navigation through prior tabs before Eye Color; prior labels are context only."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-007-tl-002",
+      "timeline_record_id": "phase0-video-007-tl-002",
+      "video_id": "phase0-video-007",
+      "start_timestamp": 12,
+      "end_timestamp": 12,
+      "category": "EYE COLOR",
+      "native_option": "Light Blue",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-007-tl-002"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Color label is directly readable; neighboring eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-007-tl-003",
+      "timeline_record_id": "phase0-video-007-tl-003",
+      "video_id": "phase0-video-007",
+      "start_timestamp": 13,
+      "end_timestamp": 15,
+      "category": "EYE COLOR",
+      "native_option": "Light Brown",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-007-tl-003"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Color label is directly readable; neighboring eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-007-tl-004",
+      "timeline_record_id": "phase0-video-007-tl-004",
+      "video_id": "phase0-video-007",
+      "start_timestamp": 16,
+      "end_timestamp": 17,
+      "category": "EYE COLOR",
+      "native_option": "Brown",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-007-tl-004"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Color label is directly readable; neighboring eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-007-tl-005",
+      "timeline_record_id": "phase0-video-007-tl-005",
+      "video_id": "phase0-video-007",
+      "start_timestamp": 18,
+      "end_timestamp": 20,
+      "category": "EYE COLOR",
+      "native_option": "Blue",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-007-tl-005"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Color label is directly readable; neighboring eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-007-tl-006",
+      "timeline_record_id": "phase0-video-007-tl-006",
+      "video_id": "phase0-video-007",
+      "start_timestamp": 21,
+      "end_timestamp": 22,
+      "category": "EYE COLOR",
+      "native_option": "Hazel",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-007-tl-006"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Color label is directly readable; neighboring eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-007-tl-007",
+      "timeline_record_id": "phase0-video-007-tl-007",
+      "video_id": "phase0-video-007",
+      "start_timestamp": 23,
+      "end_timestamp": 24,
+      "category": "EYE COLOR",
+      "native_option": "Grey",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-007-tl-007"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Color label is directly readable; neighboring eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-007-tl-008",
+      "timeline_record_id": "phase0-video-007-tl-008",
+      "video_id": "phase0-video-007",
+      "start_timestamp": 25,
+      "end_timestamp": 29.33,
+      "category": "EYE COLOR",
+      "native_option": "Light Green",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-007-tl-008"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Eye Color label is directly readable; neighboring eye thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-008-tl-001",
+      "timeline_record_id": "phase0-video-008-tl-001",
+      "video_id": "phase0-video-008",
+      "start_timestamp": 0,
+      "end_timestamp": 13,
+      "category": "Head & Skin navigation toward Nose",
+      "native_option": null,
+      "action": "loading_or_transition",
+      "evidence_generated": [],
+      "issue_detected": [
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Navigation through prior tabs before Nose; prior labels are context only."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-008-tl-002",
+      "timeline_record_id": "phase0-video-008-tl-002",
+      "video_id": "phase0-video-008",
+      "start_timestamp": 14,
+      "end_timestamp": 14,
+      "category": "NOSE",
+      "native_option": "Aquiline",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-008-tl-002"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Nose label is directly readable; neighboring nose thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-008-tl-003",
+      "timeline_record_id": "phase0-video-008-tl-003",
+      "video_id": "phase0-video-008",
+      "start_timestamp": 15,
+      "end_timestamp": 15,
+      "category": "NOSE",
+      "native_option": "None",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-008-tl-003"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Nose label is directly readable; neighboring nose thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-008-tl-004",
+      "timeline_record_id": "phase0-video-008-tl-004",
+      "video_id": "phase0-video-008",
+      "start_timestamp": 16,
+      "end_timestamp": 18,
+      "category": "NOSE",
+      "native_option": "Hooked",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-008-tl-004"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Nose label is directly readable; neighboring nose thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-008-tl-005",
+      "timeline_record_id": "phase0-video-008-tl-005",
+      "video_id": "phase0-video-008",
+      "start_timestamp": 19,
+      "end_timestamp": 20,
+      "category": "NOSE",
+      "native_option": "Button",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-008-tl-005"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Nose label is directly readable; neighboring nose thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-008-tl-006",
+      "timeline_record_id": "phase0-video-008-tl-006",
+      "video_id": "phase0-video-008",
+      "start_timestamp": 21,
+      "end_timestamp": 22,
+      "category": "NOSE",
+      "native_option": "Nubian",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-008-tl-006"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Nose label is directly readable; neighboring nose thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-008-tl-007",
+      "timeline_record_id": "phase0-video-008-tl-007",
+      "video_id": "phase0-video-008",
+      "start_timestamp": 23,
+      "end_timestamp": 24,
+      "category": "NOSE",
+      "native_option": "Funnel",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-008-tl-007"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Nose label is directly readable; neighboring nose thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-008-tl-008",
+      "timeline_record_id": "phase0-video-008-tl-008",
+      "video_id": "phase0-video-008",
+      "start_timestamp": 25,
+      "end_timestamp": 27,
+      "category": "NOSE",
+      "native_option": "Roman",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-008-tl-008"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Nose label is directly readable; neighboring nose thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-008-tl-009",
+      "timeline_record_id": "phase0-video-008-tl-009",
+      "video_id": "phase0-video-008",
+      "start_timestamp": 28,
+      "end_timestamp": 32.45,
+      "category": "NOSE",
+      "native_option": "Aquiline",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-008-tl-009"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Nose label is directly readable; neighboring nose thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-009-tl-001",
+      "timeline_record_id": "phase0-video-009-tl-001",
+      "video_id": "phase0-video-009",
+      "start_timestamp": 0,
+      "end_timestamp": 15,
+      "category": "Head & Skin navigation toward Ear Shape",
+      "native_option": null,
+      "action": "loading_or_transition",
+      "evidence_generated": [],
+      "issue_detected": [
+        "transition_active"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Navigation through prior tabs before Ear Shape; prior labels are context only."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-009-tl-002",
+      "timeline_record_id": "phase0-video-009-tl-002",
+      "video_id": "phase0-video-009",
+      "start_timestamp": 16,
+      "end_timestamp": 17,
+      "category": "EAR SHAPE",
+      "native_option": "None",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-009-tl-002"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Ear Shape label is directly readable; neighboring ear thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-009-tl-003",
+      "timeline_record_id": "phase0-video-009-tl-003",
+      "video_id": "phase0-video-009",
+      "start_timestamp": 18,
+      "end_timestamp": 20,
+      "category": "EAR SHAPE",
+      "native_option": "Attached Lobe",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-009-tl-003"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Ear Shape label is directly readable; neighboring ear thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-009-tl-004",
+      "timeline_record_id": "phase0-video-009-tl-004",
+      "video_id": "phase0-video-009",
+      "start_timestamp": 21,
+      "end_timestamp": 22,
+      "category": "EAR SHAPE",
+      "native_option": "None",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-009-tl-004"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Ear Shape label is directly readable; neighboring ear thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-009-tl-005",
+      "timeline_record_id": "phase0-video-009-tl-005",
+      "video_id": "phase0-video-009",
+      "start_timestamp": 23,
+      "end_timestamp": 25,
+      "category": "EAR SHAPE",
+      "native_option": "Round Free Lobe",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-009-tl-005"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Ear Shape label is directly readable; neighboring ear thumbnails are non-selected."
+    },
+    {
+      "capture_event_id": "capture-phase0-video-009-tl-006",
+      "timeline_record_id": "phase0-video-009-tl-006",
+      "video_id": "phase0-video-009",
+      "start_timestamp": 26,
+      "end_timestamp": 30.21,
+      "category": "EAR SHAPE",
+      "native_option": "Pointed",
+      "action": "selected_option_observed",
+      "evidence_generated": [
+        "phase0-frame-video-009-tl-006"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Ear Shape label is directly readable; neighboring ear thumbnails are non-selected."
+    }
+  ]
+}

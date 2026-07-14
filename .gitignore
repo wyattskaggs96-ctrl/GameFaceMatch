@@ -67,6 +67,9 @@ data/research/cf27/generated/ocr-label-crops/*
 data/research/cf27/generated/media-inspections/*
 !data/research/cf27/generated/media-inspections/.gitkeep
 !data/research/cf27/generated/media-inspections/README.md
+data/phase-zero/derivative-frames/*
+!data/phase-zero/derivative-frames/.gitkeep
+!data/phase-zero/derivative-frames/README.md
 
 # Web local dependencies and build output
 web/node_modules/

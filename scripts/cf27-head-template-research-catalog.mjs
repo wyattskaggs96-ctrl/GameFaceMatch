@@ -11,6 +11,7 @@ const verificationStatus = "OBSERVED_PENDING_VERIFICATION";
 const productionStatus = "NOT_PRODUCTION_DATA";
 
 const defaultTimelinePath = "data/phase-zero/video_timeline.json";
+const defaultEnvironmentManifestPath = "data/phase-zero/environment_manifest.research.json";
 const defaultEvidenceManifestPath = "data/phase-zero/evidence_manifest.json";
 const defaultCaptureLogPath = "data/phase-zero/capture_log.json";
 const defaultCaptureLogCsvPath = "data/phase-zero/capture_log.csv";
@@ -20,6 +21,7 @@ const defaultHeadsJsonPath = "data/phase-zero/heads.research.json";
 const defaultHeadsCsvPath = "data/phase-zero/heads.research.csv";
 const defaultHeadDocPath = "docs/phase-zero/HEAD_TEMPLATE_RESEARCH_CATALOG.md";
 const defaultQualityDocPath = "docs/phase-zero/HEAD_CAPTURE_QUALITY_REPORT.md";
+const defaultContinuityDocPath = "docs/phase-zero/HEAD_TEMPLATE_CONTINUITY_REPORT.md";
 const defaultRecaptureJsonPath = "data/phase-zero/head_template_recapture_list.research.json";
 const defaultRecaptureCsvPath = "data/phase-zero/head_template_recapture_list.research.csv";
 
@@ -46,6 +48,7 @@ export function generateHeadTemplateResearchCatalog(options = {}) {
   const root = path.resolve(options.root ?? repositoryRoot);
   const generatedAt = options.generatedAt ?? generatedAtDefault;
   const timeline = readJson(path.resolve(root, options.timelinePath ?? defaultTimelinePath));
+  const environmentManifest = readOptionalJson(path.resolve(root, options.environmentManifestPath ?? defaultEnvironmentManifestPath));
   const evidenceManifest = readJson(path.resolve(root, options.evidenceManifestPath ?? defaultEvidenceManifestPath));
   const captureLog = readJson(path.resolve(root, options.captureLogPath ?? defaultCaptureLogPath));
   const frameManifest = readOptionalJson(path.resolve(root, options.frameManifestPath ?? defaultFrameManifestPath));
@@ -61,7 +64,7 @@ export function generateHeadTemplateResearchCatalog(options = {}) {
   const observationsByNumber = groupHeadObservations(timelineRecords, evidenceByTimelineID);
   const records = [...observationsByNumber.entries()]
     .sort(([leftNumber], [rightNumber]) => leftNumber - rightNumber)
-    .map(([nativeOptionNumber, observations]) => headRecord(nativeOptionNumber, observations, frameManifest, qaReport, generatedAt));
+    .map(([nativeOptionNumber, observations]) => headRecord(nativeOptionNumber, observations, frameManifest, qaReport, environmentManifest, generatedAt));
 
   const analysis = analyzeHeadTimeline(timelineRecords, records);
   const recaptureList = buildHeadRecaptureList(records, analysis, generatedAt);
@@ -79,6 +82,7 @@ export function generateHeadTemplateResearchCatalog(options = {}) {
     verificationStatus,
     productionRecommendationsEnabled: false,
     sourceTimeline: options.timelinePath ?? defaultTimelinePath,
+    sourceEnvironmentManifest: options.environmentManifestPath ?? defaultEnvironmentManifestPath,
     sourceEvidenceManifest: options.evidenceManifestPath ?? defaultEvidenceManifestPath,
     sourceFrameManifest: options.frameManifestPath ?? defaultFrameManifestPath,
     sourceQAReport: options.qaReportPath ?? defaultQAReportPath,
@@ -95,6 +99,9 @@ export function generateHeadTemplateResearchCatalog(options = {}) {
       productionEligibleRecords: 0
     },
     timelineFindings: analysis.timelineFindings,
+    selectorBoundaryProof: analysis.selectorBoundaryProof,
+    continuityReport: analysis.continuityReport,
+    automaticAttributeChangeSummary: analysis.automaticAttributeChangeSummary,
     records
   };
 
@@ -107,6 +114,7 @@ export function writeHeadTemplateResearchCatalog(outputs, options = {}) {
   writeText(root, options.headsCsvPath ?? defaultHeadsCsvPath, formatHeadsCsv(outputs.catalog));
   writeText(root, options.headDocPath ?? defaultHeadDocPath, formatHeadCatalogMarkdown(outputs.catalog));
   writeText(root, options.qualityDocPath ?? defaultQualityDocPath, formatQualityMarkdown(outputs.catalog, outputs.recaptureList));
+  writeText(root, options.continuityDocPath ?? defaultContinuityDocPath, formatContinuityMarkdown(outputs.catalog));
   writeText(root, options.recaptureJsonPath ?? defaultRecaptureJsonPath, `${JSON.stringify(outputs.recaptureList, null, 2)}\n`);
   writeText(root, options.recaptureCsvPath ?? defaultRecaptureCsvPath, formatRecaptureCsv(outputs.recaptureList));
   writeText(root, options.evidenceManifestPath ?? defaultEvidenceManifestPath, `${JSON.stringify(outputs.updatedEvidenceManifest, null, 2)}\n`);
@@ -147,12 +155,13 @@ function groupHeadObservations(timelineRecords, evidenceByTimelineID) {
   return byNumber;
 }
 
-function headRecord(nativeOptionNumber, observations, frameManifest, qaReport, generatedAt) {
+function headRecord(nativeOptionNumber, observations, frameManifest, qaReport, environmentManifest, generatedAt) {
   const stableResearchCatalogID = `CF27_XBOXUNKNOWN_RTG_HEAD_${String(nativeOptionNumber).padStart(3, "0")}`;
   const selectedObservation = choosePrimaryObservation(observations);
   const frames = (frameManifest?.frames ?? []).filter((frame) => frame.stableInternalID === stableResearchCatalogID);
   const qa = (qaReport?.records ?? []).find((record) => record.stableInternalID === stableResearchCatalogID);
   const menuFrame = frames.find((frame) => frame.view === "MENU");
+  const fullScreenFrame = menuFrame ?? frames.find((frame) => frame.outputRelativePath);
   const frameIDMismatch = selectedObservation.evidenceFramePath && !selectedObservation.evidenceFramePath.includes(stableResearchCatalogID);
   const visualLimitations = [
     "Black cheek eye paint is present in the current head-template footage.",
@@ -168,8 +177,10 @@ function headRecord(nativeOptionNumber, observations, frameManifest, qaReport, g
   return {
     stableResearchCatalogID,
     nativeOptionNumber,
+    nativeLabel: `Face ${nativeOptionNumber}`,
     nativeOrder: nativeOptionNumber,
     visibleGameLabelOrIndex: `Face ${nativeOptionNumber}`,
+    environmentID: environmentManifest?.environmentID ?? "UNKNOWN_ENVIRONMENT",
     dataClass: "RESEARCH_CANDIDATE",
     sourceType: "shippingGameVideoResearch",
     productionStatus,
@@ -177,6 +188,8 @@ function headRecord(nativeOptionNumber, observations, frameManifest, qaReport, g
     sourceVideos: [...new Set(observations.map((observation) => observation.videoID))],
     primarySourceVideo: selectedObservation.videoID,
     primaryTimestampRange: selectedObservation.timestampRange,
+    sourceVideo: selectedObservation.sourceVideo,
+    timestamp: selectedObservation.startTimestamp,
     sourceObservations: observations,
     evidenceFrame: {
       evidenceID: selectedObservation.evidenceID,
@@ -186,6 +199,16 @@ function headRecord(nativeOptionNumber, observations, frameManifest, qaReport, g
       frameManifestID: menuFrame?.frameID ?? null,
       frameManifestPath: menuFrame?.outputRelativePath ?? null,
       pathMatchesStableID: !frameIDMismatch
+    },
+    fullScreenEvidence: {
+      evidenceID: selectedObservation.evidenceID,
+      timelineRecordID: selectedObservation.timelineRecordID,
+      path: selectedObservation.evidenceFramePath,
+      timestamp: selectedObservation.evidenceFrameTimestamp,
+      frameManifestID: fullScreenFrame?.frameID ?? null,
+      frameManifestPath: fullScreenFrame?.outputRelativePath ?? null,
+      preservesOriginalAspectRatio: true,
+      note: "Evidence frame is a full-resolution menu/character evidence derivative; no crop or appearance edit is used as catalog fact."
     },
     menuNumberVisible: observations.every((observation) => observation.menuNumberVisible),
     transitionAnimationFinished: observations.every((observation) => observation.transitionAnimationFinished),
@@ -202,6 +225,9 @@ function headRecord(nativeOptionNumber, observations, frameManifest, qaReport, g
     visualEvidenceQuality: qa?.evidenceClassification?.limitedMatchingImage
       ? "LIMITED_RESEARCH_MENU_AND_APPROXIMATE_ROTATION_FRAMES"
       : "RESEARCH_MENU_EVIDENCE_ONLY",
+    qualityStatus: qa?.evidenceClassification?.limitedMatchingImage
+      ? "LIMITED_MATCHING_IMAGE_RECAPTURE_REQUIRED"
+      : "MENU_EVIDENCE_ONLY_RECAPTURE_REQUIRED",
     countConfidence: "PARTIAL_OBSERVED_SELECTION_ONLY_TOTAL_COUNT_NOT_PROVEN",
     orderingConfidence: frameIDMismatch
       ? "MEDIUM_NATIVE_NUMBER_VISIBLE_FRAME_ID_MISMATCH_REVIEW_REQUIRED"
@@ -213,6 +239,13 @@ function headRecord(nativeOptionNumber, observations, frameManifest, qaReport, g
       preliminaryVisualAnnotation: true,
       productionGeometricComparison: false
     },
+    visualComparisonSuitability: "NOT_SUITABLE_FOR_PRODUCTION_GEOMETRIC_COMPARISON",
+    recaptureStatus: {
+      required: true,
+      status: "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON",
+      reason: "Current footage is valid research/menu evidence but not a locked, standardized head-comparison capture."
+    },
+    automaticAttributeChanges: automaticAttributeChangesForHead(),
     qualityFlags: [
       ...visualLimitations,
       ...(observations.some((observation) => observation.blurPresent) ? ["Blur present in at least one observation."] : []),
@@ -255,6 +288,32 @@ function analyzeHeadTimeline(timelineRecords, records) {
     .map(([number]) => number)
     .sort((left, right) => left - right);
   const repeatedContinuityNumbers = duplicateObservationNumbers.filter((number) => number === 12);
+  const selectorBoundaryProof = {
+    beginningProven: video002Numbers[0] === 1,
+    beginningProof: video002Numbers[0] === 1
+      ? "The first directly observed selected Head Template value in the current head footage is Face 1."
+      : "The footage does not begin with Face 1 selected.",
+    endProven: false,
+    endProof: "The recording does not demonstrate the final selector boundary or a terminal no-more-options state.",
+    wrapShown: false,
+    wrapProof: "No selector wrap from final option back to first option is shown.",
+    face29Finality: "FINAL_CAPTURED_OPTION_ONLY_NOT_FINAL_GAME_OPTION",
+    face29FinalityReason: "Face 30 and Face 31 are directly observed before the recording ends on Face 29, and no end or wrap behavior is shown."
+  };
+  const continuityReport = buildContinuityReport(video002Numbers, video003Numbers, skippedNumbers, duplicateObservationNumbers, repeatedContinuityNumbers);
+  const automaticAttributeChangeSummary = {
+    skinTone: "NOT_PROVEN_FROM_CURRENT_HEAD_TEMPLATE_FOOTAGE",
+    skinDetail: "NOT_PROVEN_FROM_CURRENT_HEAD_TEMPLATE_FOOTAGE",
+    hair: "UNKNOWN_NOT_LOCKED_OR_INDEPENDENTLY_CONTROLLED",
+    eyebrows: "NOT_SEPARATELY_ASSESSED",
+    facialHair: "UNKNOWN_NOT_LOCKED_OR_INDEPENDENTLY_CONTROLLED",
+    otherCategories: "NOT_SEPARATELY_ASSESSED",
+    notes: [
+      "Head changes visibly change the selected head/face template.",
+      "The current recordings do not independently lock or inspect skin tone, skin detail, hair, eyebrows, facial hair, or other category values before and after each head change.",
+      "Do not treat any apparent hair, facial-hair, or skin presentation difference as a verified automatic attribute dependency."
+    ]
+  };
 
   return {
     expectationReview: {
@@ -295,9 +354,85 @@ function analyzeHeadTimeline(timelineRecords, records) {
       inconsistentCharacterSettings: "UNKNOWN_NOT_CONTROLLED",
       productionCountBoundary: "NOT_PROVEN"
     },
+    selectorBoundaryProof,
+    continuityReport,
+    automaticAttributeChangeSummary,
     skippedNumbers,
     duplicateObservationNumbers,
     repeatedContinuityNumbers
+  };
+}
+
+function buildContinuityReport(video002Numbers, video003Numbers, skippedNumbers, duplicateObservationNumbers, repeatedContinuityNumbers) {
+  return {
+    sourceVideos: [
+      {
+        videoID: "phase0-video-002",
+        observedNativeNumbersInTimelineOrder: video002Numbers,
+        firstObservedNumber: video002Numbers[0] ?? null,
+        lastObservedNumber: video002Numbers.at(-1) ?? null,
+        continuityStatus: "NON_MONOTONIC_PARTIAL_SEQUENCE",
+        notes: "Video 002 directly observes Face 1 and later Face 16; it is not a complete monotonic Face 1-12 sequence."
+      },
+      {
+        videoID: "phase0-video-003",
+        observedNativeNumbersInTimelineOrder: video003Numbers,
+        firstObservedNumber: video003Numbers[0] ?? null,
+        lastObservedNumber: video003Numbers.at(-1) ?? null,
+        continuityStatus: "CONTINUATION_WITH_OVERLAP_AND_UNPROVEN_END",
+        notes: "Video 003 begins on the overlapping Face 12 and ends with Face 29 selected after Face 30 and Face 31 were observed."
+      }
+    ],
+    overlaps: [
+      {
+        nativeNumber: 12,
+        videos: ["phase0-video-002", "phase0-video-003"],
+        disposition: "SAME_RESEARCH_CATALOG_ID_WITH_MULTIPLE_EVIDENCE_OBSERVATIONS"
+      },
+      {
+        nativeNumber: 16,
+        videos: ["phase0-video-002", "phase0-video-003"],
+        disposition: "REPEATED_SELECTED_VALUE_PRESERVED_AS_DUPLICATE_OBSERVATION_NOT_NEW_RECORD"
+      }
+    ],
+    skippedNumbersWithinObservedRange: skippedNumbers,
+    duplicateObservationNumbers,
+    repeatedContinuityNumbers,
+    gapExplanation: "Skipped numbers are not inferred as missing game options, unavailable options, or deleted options. They are only unresolved gaps in the currently observed selected sequence.",
+    finalityConclusion: "Face 29 is merely the final captured selected option in the current head-template footage, not the proven final Head Template option."
+  };
+}
+
+function automaticAttributeChangesForHead() {
+  return {
+    headTemplate: {
+      status: "DIRECTLY_OBSERVED_CHANGED",
+      evidence: "Visible selected Head Template number changes."
+    },
+    skinTone: {
+      status: "NOT_PROVEN",
+      evidence: "No controlled before/after Skin Tone inspection is present in the head-template footage."
+    },
+    skinDetail: {
+      status: "NOT_PROVEN",
+      evidence: "No controlled before/after Skin Details inspection is present in the head-template footage."
+    },
+    hair: {
+      status: "UNKNOWN_NOT_CONTROLLED",
+      evidence: "Hair appearance may vary visually, but the Hair category value was not independently locked or inspected for each head."
+    },
+    eyebrows: {
+      status: "NOT_SEPARATELY_ASSESSED",
+      evidence: "Eyebrow controls were not inspected in this footage."
+    },
+    facialHair: {
+      status: "UNKNOWN_NOT_CONTROLLED",
+      evidence: "Facial-hair state was not independently locked or inspected for each head."
+    },
+    otherCategories: {
+      status: "NOT_SEPARATELY_ASSESSED",
+      evidence: "No additional category dependency checks are present in this footage."
+    }
   };
 }
 
@@ -346,7 +481,7 @@ function recaptureItem(id, priority, title, description, requiredEvidence, block
 
 function annotateEvidenceManifest(evidenceManifest, records, analysis, generatedAt) {
   const updated = structuredClone(evidenceManifest);
-  updated.updatedAt = generatedAt;
+  updated.updatedAt = latestTimestamp(updated.updatedAt, generatedAt);
   updated.headTemplateResearchCatalog = {
     generatedAt,
     catalogPath: defaultHeadsJsonPath,
@@ -377,7 +512,7 @@ function annotateEvidenceManifest(evidenceManifest, records, analysis, generated
 
 function annotateCaptureLog(captureLog, records, analysis, generatedAt) {
   const updated = structuredClone(captureLog);
-  updated.updatedAt = generatedAt;
+  updated.updatedAt = latestTimestamp(updated.updatedAt, generatedAt);
   updated.headTemplateResearchCatalog = {
     generatedAt,
     catalogPath: defaultHeadsJsonPath,
@@ -405,11 +540,22 @@ function annotateCaptureLog(captureLog, records, analysis, generatedAt) {
   return updated;
 }
 
+function latestTimestamp(left, right) {
+  if (!left) return right;
+  if (!right) return left;
+  const leftTime = Date.parse(left);
+  const rightTime = Date.parse(right);
+  if (Number.isFinite(leftTime) && Number.isFinite(rightTime)) return leftTime >= rightTime ? left : right;
+  return String(left) >= String(right) ? left : right;
+}
+
 function formatHeadsCsv(catalog) {
   const columns = [
     "stableResearchCatalogID",
     "nativeOptionNumber",
+    "nativeLabel",
     "nativeOrder",
+    "environmentID",
     "visibleGameLabelOrIndex",
     "primarySourceVideo",
     "primaryTimestampRange",
@@ -418,9 +564,12 @@ function formatHeadsCsv(catalog) {
     "evidenceFrameTimestamp",
     "menuNumberVisible",
     "transitionAnimationFinished",
+    "qualityStatus",
     "visualEvidenceQuality",
     "countConfidence",
     "orderingConfidence",
+    "visualComparisonSuitability",
+    "recaptureStatus",
     "suitableMenuPresence",
     "suitableOrdering",
     "suitableCounting",
@@ -432,7 +581,9 @@ function formatHeadsCsv(catalog) {
   const rows = catalog.records.map((record) => ({
     stableResearchCatalogID: record.stableResearchCatalogID,
     nativeOptionNumber: record.nativeOptionNumber,
+    nativeLabel: record.nativeLabel,
     nativeOrder: record.nativeOrder,
+    environmentID: record.environmentID,
     visibleGameLabelOrIndex: record.visibleGameLabelOrIndex,
     primarySourceVideo: record.primarySourceVideo,
     primaryTimestampRange: record.primaryTimestampRange,
@@ -441,9 +592,12 @@ function formatHeadsCsv(catalog) {
     evidenceFrameTimestamp: record.evidenceFrame.timestamp,
     menuNumberVisible: record.menuNumberVisible,
     transitionAnimationFinished: record.transitionAnimationFinished,
+    qualityStatus: record.qualityStatus,
     visualEvidenceQuality: record.visualEvidenceQuality,
     countConfidence: record.countConfidence,
     orderingConfidence: record.orderingConfidence,
+    visualComparisonSuitability: record.visualComparisonSuitability,
+    recaptureStatus: record.recaptureStatus.status,
     suitableMenuPresence: record.suitability.menuPresence,
     suitableOrdering: record.suitability.ordering,
     suitableCounting: record.suitability.counting,
@@ -497,6 +651,10 @@ function formatHeadCatalogMarkdown(catalog) {
     `- Skipped numbers within observed range: ${catalog.summary.skippedNumbersWithinObservedRange.join(", ") || "none"}`,
     `- Duplicate observation numbers: ${catalog.summary.duplicateObservationNumbers.join(", ") || "none"}`,
     `- Production-eligible records: ${catalog.summary.productionEligibleRecords}`,
+    `- Beginning of selector proven: ${catalog.selectorBoundaryProof.beginningProven ? "yes" : "no"} — ${catalog.selectorBoundaryProof.beginningProof}`,
+    `- End of selector proven: ${catalog.selectorBoundaryProof.endProven ? "yes" : "no"} — ${catalog.selectorBoundaryProof.endProof}`,
+    `- Selector wrap shown: ${catalog.selectorBoundaryProof.wrapShown ? "yes" : "no"} — ${catalog.selectorBoundaryProof.wrapProof}`,
+    `- Face 29 status: ${catalog.selectorBoundaryProof.face29Finality} — ${catalog.selectorBoundaryProof.face29FinalityReason}`,
     "",
     "## Records",
     "",
@@ -507,6 +665,67 @@ function formatHeadCatalogMarkdown(catalog) {
     lines.push(`| ${record.nativeOptionNumber} | ${record.stableResearchCatalogID} | ${record.primarySourceVideo} | ${record.primaryTimestampRange} | ${record.evidenceFrame.path ?? ""} | ${record.menuNumberVisible ? "yes" : "no"} | ${record.orderingConfidence} | ${record.suitability.productionGeometricComparison ? "yes" : "no"} |`);
   }
   lines.push("", "## Production Eligibility", "", "No head-template record is production eligible. Face 29 is not assumed to be final because selector ending/wrap is not directly demonstrated.");
+  return `${lines.join("\n")}\n`;
+}
+
+function formatContinuityMarkdown(catalog) {
+  const report = catalog.continuityReport;
+  const lines = [
+    "# Head Template Continuity Report",
+    "",
+    "This report reconciles all directly observed Head Template selections from the current footage. It is research-only and does not verify or publish production catalog records.",
+    "",
+    "## Boundary Proof",
+    "",
+    `- Beginning proven: ${catalog.selectorBoundaryProof.beginningProven ? "yes" : "no"}`,
+    `- Beginning evidence: ${catalog.selectorBoundaryProof.beginningProof}`,
+    `- End proven: ${catalog.selectorBoundaryProof.endProven ? "yes" : "no"}`,
+    `- End evidence: ${catalog.selectorBoundaryProof.endProof}`,
+    `- Wrap shown: ${catalog.selectorBoundaryProof.wrapShown ? "yes" : "no"}`,
+    `- Wrap evidence: ${catalog.selectorBoundaryProof.wrapProof}`,
+    `- Face 29 conclusion: ${catalog.selectorBoundaryProof.face29Finality}`,
+    `- Face 29 reason: ${catalog.selectorBoundaryProof.face29FinalityReason}`,
+    "",
+    "## Source Video Sequences",
+    "",
+    "| Video | Observed selected numbers in timeline order | First | Last | Status | Notes |",
+    "| --- | --- | ---: | ---: | --- | --- |"
+  ];
+  for (const source of report.sourceVideos) {
+    lines.push(`| ${source.videoID} | ${source.observedNativeNumbersInTimelineOrder.join(", ")} | ${source.firstObservedNumber ?? ""} | ${source.lastObservedNumber ?? ""} | ${source.continuityStatus} | ${source.notes} |`);
+  }
+  lines.push(
+    "",
+    "## Overlaps",
+    "",
+    "| Native # | Videos | Disposition |",
+    "| ---: | --- | --- |"
+  );
+  for (const overlap of report.overlaps) {
+    lines.push(`| ${overlap.nativeNumber} | ${overlap.videos.join(", ")} | ${overlap.disposition} |`);
+  }
+  lines.push(
+    "",
+    "## Gaps And Ambiguities",
+    "",
+    `- Skipped numbers within observed range: ${report.skippedNumbersWithinObservedRange.join(", ") || "none"}`,
+    `- Duplicate observation numbers: ${report.duplicateObservationNumbers.join(", ") || "none"}`,
+    `- Repeated continuity numbers: ${report.repeatedContinuityNumbers.join(", ") || "none"}`,
+    `- Gap explanation: ${report.gapExplanation}`,
+    `- Finality conclusion: ${report.finalityConclusion}`,
+    "",
+    "## Automatic Attribute Changes",
+    "",
+    `- Head Template: ${catalog.automaticAttributeChangeSummary.notes[0]}`,
+    `- Skin tone: ${catalog.automaticAttributeChangeSummary.skinTone}`,
+    `- Skin detail: ${catalog.automaticAttributeChangeSummary.skinDetail}`,
+    `- Hair: ${catalog.automaticAttributeChangeSummary.hair}`,
+    `- Eyebrows: ${catalog.automaticAttributeChangeSummary.eyebrows}`,
+    `- Facial hair: ${catalog.automaticAttributeChangeSummary.facialHair}`,
+    `- Other categories: ${catalog.automaticAttributeChangeSummary.otherCategories}`,
+    "",
+    "No current head-template record is production-visible or independently verified."
+  );
   return `${lines.join("\n")}\n`;
 }
 

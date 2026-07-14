@@ -24,6 +24,17 @@ describe("CF27 Head Template research catalog", () => {
     expect(catalog.summary.skippedNumbersWithinObservedRange).toEqual([15, 19, 20, 25, 26]);
     expect(catalog.summary.duplicateObservationNumbers).toEqual([12, 16]);
     expect(catalog.summary.productionEligibleRecords).toBe(0);
+    expect(catalog.selectorBoundaryProof.beginningProven).toBe(true);
+    expect(catalog.selectorBoundaryProof.endProven).toBe(false);
+    expect(catalog.selectorBoundaryProof.wrapShown).toBe(false);
+    expect(catalog.selectorBoundaryProof.face29Finality).toBe("FINAL_CAPTURED_OPTION_ONLY_NOT_FINAL_GAME_OPTION");
+    expect(catalog.continuityReport.overlaps).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        nativeNumber: 12,
+        disposition: "SAME_RESEARCH_CATALOG_ID_WITH_MULTIPLE_EVIDENCE_OBSERVATIONS"
+      })
+    ]));
+    expect(catalog.automaticAttributeChangeSummary.skinTone).toBe("NOT_PROVEN_FROM_CURRENT_HEAD_TEMPLATE_FOOTAGE");
   });
 
   it("keeps every observed head research-only and blocked from production geometry use", () => {
@@ -38,12 +49,18 @@ describe("CF27 Head Template research catalog", () => {
     ]);
     for (const record of records) {
       expect(record.dataClass).toBe("RESEARCH_CANDIDATE");
+      expect(record.nativeLabel).toBe(`Face ${record.nativeOptionNumber}`);
+      expect(record.environmentID).toBeTruthy();
       expect(record.productionStatus).toBe("NOT_PRODUCTION_DATA");
       expect(record.verificationStatus).toBe("OBSERVED_PENDING_VERIFICATION");
       expect(record.productionEligibility.eligible).toBe(false);
       expect(record.suitability.menuPresence).toBe(true);
       expect(record.suitability.ordering).toBe(true);
       expect(record.suitability.productionGeometricComparison).toBe(false);
+      expect(record.visualComparisonSuitability).toBe("NOT_SUITABLE_FOR_PRODUCTION_GEOMETRIC_COMPARISON");
+      expect(record.recaptureStatus.required).toBe(true);
+      expect(record.automaticAttributeChanges.skinTone.status).toBe("NOT_PROVEN");
+      expect(record.fullScreenEvidence.preservesOriginalAspectRatio).toBe(true);
     }
   });
 
@@ -61,6 +78,7 @@ describe("CF27 Head Template research catalog", () => {
     const captureLog = readJson<{ headTemplateResearchCatalog: { recordCount: number }; events: Array<Record<string, unknown>> }>(fixture.root, "data/phase-zero/capture_log.json");
     const catalogDoc = fs.readFileSync(path.join(fixture.root, "docs/phase-zero/HEAD_TEMPLATE_RESEARCH_CATALOG.md"), "utf8");
     const qualityDoc = fs.readFileSync(path.join(fixture.root, "docs/phase-zero/HEAD_CAPTURE_QUALITY_REPORT.md"), "utf8");
+    const continuityDoc = fs.readFileSync(path.join(fixture.root, "docs/phase-zero/HEAD_TEMPLATE_CONTINUITY_REPORT.md"), "utf8");
     const recapture = readJson<{ items: Array<{ id: string }> }>(fixture.root, "data/phase-zero/head_template_recapture_list.research.json");
 
     expect(catalog.records).toHaveLength(5);
@@ -71,6 +89,8 @@ describe("CF27 Head Template research catalog", () => {
     expect(captureLog.events.some((event) => event.head_research_catalog_id === "CF27_XBOXUNKNOWN_RTG_HEAD_012")).toBe(true);
     expect(catalogDoc).toContain("REJECTED_AS_COMPLETE_1_THROUGH_12_ONLY");
     expect(qualityDoc).toContain("PRODUCTION_COMPARISON_BLOCKED");
+    expect(continuityDoc).toContain("Face 29 conclusion: FINAL_CAPTURED_OPTION_ONLY_NOT_FINAL_GAME_OPTION");
+    expect(continuityDoc).toContain("SAME_RESEARCH_CATALOG_ID_WITH_MULTIPLE_EVIDENCE_OBSERVATIONS");
     expect(recapture.items.map((item) => item.id)).toEqual(expect.arrayContaining([
       "head-template-boundary",
       "head-template-skipped-numbers",
@@ -95,11 +115,28 @@ interface HeadTemplateCatalog {
     productionEligibleRecords: number;
   };
   records: HeadTemplateRecord[];
+  selectorBoundaryProof: {
+    beginningProven: boolean;
+    endProven: boolean;
+    wrapShown: boolean;
+    face29Finality: string;
+  };
+  continuityReport: {
+    overlaps: Array<{
+      nativeNumber: number;
+      disposition: string;
+    }>;
+  };
+  automaticAttributeChangeSummary: {
+    skinTone: string;
+  };
 }
 
 interface HeadTemplateRecord {
   stableResearchCatalogID: string;
   nativeOptionNumber: number;
+  nativeLabel: string;
+  environmentID: string;
   dataClass: string;
   productionStatus: string;
   verificationStatus: string;
@@ -110,6 +147,18 @@ interface HeadTemplateRecord {
   };
   productionEligibility: {
     eligible: boolean;
+  };
+  visualComparisonSuitability: string;
+  recaptureStatus: {
+    required: boolean;
+  };
+  automaticAttributeChanges: {
+    skinTone: {
+      status: string;
+    };
+  };
+  fullScreenEvidence: {
+    preservesOriginalAspectRatio: boolean;
   };
 }
 

@@ -21,6 +21,10 @@ This catalog is built from directly observed Head Template timeline evidence onl
 - Skipped numbers within observed range: 15, 19, 20, 25, 26
 - Duplicate observation numbers: 12, 16
 - Production-eligible records: 0
+- Beginning of selector proven: yes — The first directly observed selected Head Template value in the current head footage is Face 1.
+- End of selector proven: no — The recording does not demonstrate the final selector boundary or a terminal no-more-options state.
+- Selector wrap shown: no — No selector wrap from final option back to first option is shown.
+- Face 29 status: FINAL_CAPTURED_OPTION_ONLY_NOT_FINAL_GAME_OPTION — Face 30 and Face 31 are directly observed before the recording ends on Face 29, and no end or wrap behavior is shown.
 
 ## Records
 

@@ -96,6 +96,16 @@ describe("production catalog runtime loading", () => {
     expect(report.compatible).toBe(false);
   });
 
+  it("blocks incompatible patch selections", () => {
+    const report = checkCatalogCompatibility(manifest([validItem("patch-compatibility")]), {
+      supportedPlatforms: ["unit-test-platform"],
+      supportedGameVersions: ["unit-test-version"],
+      supportedPatchVersions: ["different-unit-test-patch"]
+    });
+    expect(report.compatible).toBe(false);
+    expect(report.message).toMatch(/patch version not supported/i);
+  });
+
   it("warns when verified catalog data is stale", () => {
     const catalog = manifest([validItem("stale")]);
     catalog.catalogVersion.verifiedAt = "2026-07-10T00:00:00.000Z";

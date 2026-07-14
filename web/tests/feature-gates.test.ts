@@ -33,6 +33,22 @@ describe("feature and capability gates", () => {
     expect(gates.recommendationsEnabled.reason).toMatch(/not supported by this runtime/i);
   });
 
+  it("blocks recommendations when the catalog patch is unsupported", async () => {
+    const catalog = await approvedStyleCatalog();
+    const integrity = await verifyManifestIntegrity(catalog);
+    const compatibility = checkCatalogCompatibility(catalog, {
+      supportedPlatforms: ["unit-test-platform"],
+      supportedGameVersions: ["unit-test-version"],
+      supportedPatchVersions: ["different-unit-test-patch"]
+    });
+    const publishGate = passingPublishGate(catalog);
+    const gates = evaluateFeatureGates({ manifest: catalog, integrity, compatibility, publishGate });
+
+    expect(gates.catalogVersionSupported.enabled).toBe(false);
+    expect(gates.recommendationsEnabled.enabled).toBe(false);
+    expect(gates.recommendationsEnabled.reason).toMatch(/patch version not supported/i);
+  });
+
   it("enables recommendations only for an approved catalog release path", async () => {
     const catalog = await approvedStyleCatalog();
     const integrity = await verifyManifestIntegrity(catalog);

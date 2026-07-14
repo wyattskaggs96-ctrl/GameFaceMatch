@@ -82,6 +82,7 @@ export function checkCatalogCompatibility(
   input: {
     supportedPlatforms?: string[];
     supportedGameVersions?: string[];
+    supportedPatchVersions?: string[];
   } = {}
 ): CatalogCompatibilityReport {
   const platforms = Array.from(new Set(manifest.items.map((item) => item.platform).filter(Boolean))).sort();
@@ -89,6 +90,7 @@ export function checkCatalogCompatibility(
   const patchVersions = Array.from(new Set(manifest.items.map((item) => item.patchVersion).filter(Boolean))) as string[];
   const supportedPlatforms = input.supportedPlatforms ?? platforms;
   const supportedGameVersions = input.supportedGameVersions ?? gameVersions;
+  const supportedPatchVersions = input.supportedPatchVersions ?? patchVersions;
   if (manifest.items.length === 0) {
     return {
       compatible: true,
@@ -102,7 +104,8 @@ export function checkCatalogCompatibility(
   }
   const unsupportedPlatform = platforms.find((platform) => !supportedPlatforms.includes(platform));
   const unsupportedVersion = gameVersions.find((version) => !supportedGameVersions.includes(version));
-  if (unsupportedPlatform || unsupportedVersion) {
+  const unsupportedPatch = input.supportedPatchVersions ? patchVersions.find((patchVersion) => !supportedPatchVersions.includes(patchVersion)) : null;
+  if (unsupportedPlatform || unsupportedVersion || unsupportedPatch) {
     return {
       compatible: false,
       platform: platforms.join(", "),
@@ -110,7 +113,9 @@ export function checkCatalogCompatibility(
       patchVersion: patchVersions.join(", ") || null,
       supportedPlatforms,
       supportedGameVersions,
-      message: "Production catalog contains a platform or game version not supported by this runtime."
+      message: unsupportedPatch
+        ? "Production catalog contains a patch version not supported by this runtime."
+        : "Production catalog contains a platform or game version not supported by this runtime."
     };
   }
   return {

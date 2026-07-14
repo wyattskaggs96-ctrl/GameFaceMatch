@@ -9,6 +9,7 @@
     "catalog:validate-import": "node scripts/catalog-import-validator.mjs validate-import",
     "catalog:import-check": "node scripts/catalog-import-validator.mjs --check",
     "catalog:classify-records": "node scripts/catalog-record-classification.mjs",
+    "catalog:patch-change": "node scripts/catalog-patch-change-workflow.mjs",
     "evidence:manifest": "node scripts/evidence-manifest.mjs",
     "cf27:evidence-manifest": "node scripts/cf27-current-evidence-manifest.mjs",
     "cf27:capture-log": "node scripts/cf27-current-capture-log.mjs",

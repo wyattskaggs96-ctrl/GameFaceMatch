@@ -5,6 +5,8 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 // @ts-expect-error Root catalog CLI is plain ESM JavaScript and is exercised here as the command source of truth.
 import { calculateDeterministicChecksum, compareCatalogVersions, createAuditSession, createPatchReauditPlan, detectDuplicateIDsInManifest, detectFixtureLeakageInPath, exportCatalogItemsToCsv, formatReport, importCatalogItemsFromCsv, publishPackage, validateAuditRecord, validateEvidenceAssetPath, validatePackage, validateProductionDirectory, validateRecord } from "../../scripts/catalog-tools.mjs";
+// @ts-expect-error Root catalog patch workflow is plain ESM JavaScript and is exercised here as the command source of truth.
+import { buildPatchChangeWorkflow, writePatchChangeWorkflowFiles } from "../../scripts/catalog-patch-change-workflow.mjs";
 
 describe("catalog audit workflow validator", () => {
   it("accepts empty production with an explicit recommendation warning", () => {
@@ -200,6 +202,90 @@ describe("catalog audit workflow validator", () => {
     expect(comparison.recommendedRecaptureQueue.map((item: { stableInternalID: unknown }) => item.stableInternalID)).toContain("test-only-head-a");
     expect(comparison.suggestedSemanticCatalogVersion).toBe("2.0.0");
     expect(comparison.humanReadableReport).toContain("Patch diff report");
+  });
+
+  it("creates a patch-change workflow package that preserves the prior snapshot and blocks incompatible recommendations", () => {
+    const previous = {
+      sourceType: "production",
+      catalogVersion: { identifier: "1.0.0", gameVersion: "test-only-version", platform: "test-only-platform", verifiedAt: "2026-07-10T00:00:00.000Z" },
+      items: [
+        patchComparableItem("test-only-head-a", {
+          category: "test-only-head",
+          patchVersion: "test-only-patch-1",
+          sourceImageReferences: ["asset-a-front"],
+          requiredAngles: { straightOn: "asset-a-front" }
+        })
+      ]
+    };
+    const next = {
+      sourceType: "production",
+      catalogVersion: { identifier: "1.1.0", gameVersion: "test-only-version", platform: "test-only-platform", verifiedAt: "2026-07-11T00:00:00.000Z" },
+      items: [
+        patchComparableItem("test-only-head-a", {
+          category: "test-only-head",
+          patchVersion: "test-only-patch-2",
+          sourceImageReferences: ["asset-a-front-recaptured"],
+          requiredAngles: { straightOn: "asset-a-front-recaptured" }
+        })
+      ]
+    };
+
+    const workflow = buildPatchChangeWorkflow({
+      previousManifest: previous,
+      nextManifest: next,
+      newGameVersion: "test-only-version",
+      newPatchVersion: "test-only-patch-2",
+      observedAt: "2026-07-14T00:00:00.000Z"
+    });
+
+    expect(workflow.categoryTotals).toEqual([
+      {
+        category: "test-only-head",
+        total: 1,
+        firstValue: "test-only-head-a",
+        middleValue: "test-only-head-a",
+        finalValue: "test-only-head-a"
+      }
+    ]);
+    expect(workflow.countPreservingVisualChanges.map((change: { stableInternalID: unknown }) => change.stableInternalID)).toContain("test-only-head-a");
+    expect(workflow.requiredReverification[0]).toMatchObject({
+      stableInternalID: "test-only-head-a",
+      status: "REVERIFICATION_REQUIRED"
+    });
+    expect(workflow.requiredReverification.some((item: { requiredAction: string }) => item.requiredAction.includes("category count stayed the same"))).toBe(true);
+    expect(workflow.diff.humanReadableReport).toContain("Count-preserving visual changes");
+    expect(workflow.compatibilityGuard).toMatchObject({
+      recommendationsBlocked: true,
+      compatibleForRecommendations: false,
+      patchVersion: "test-only-patch-2"
+    });
+    expect(workflow.priorSnapshotPolicy.preserved).toBe(true);
+  });
+
+  it("writes deterministic patch-change reports without modifying catalog inputs", () => {
+    const previous = { catalogVersion: { identifier: "1.0.0" }, items: [validItem("test-only-previous")] };
+    const next = { catalogVersion: { identifier: "1.0.1" }, items: [validItem("test-only-next")] };
+    const outputDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "gameface-patch-change-"));
+
+    const { files } = writePatchChangeWorkflowFiles({
+      previousManifest: previous,
+      nextManifest: next,
+      outputDirectory,
+      newGameVersion: "test-only-version",
+      newPatchVersion: "test-only-patch-2",
+      observedAt: "2026-07-14T00:00:00.000Z"
+    });
+
+    expect(files.map((file: string) => path.basename(file)).sort()).toEqual([
+      "affected_records.csv",
+      "compatibility_guard.json",
+      "patch_change_report.json",
+      "patch_change_report.md",
+      "prior_catalog_snapshot.json",
+      "reverification_queue.csv"
+    ]);
+    expect(JSON.parse(fs.readFileSync(path.join(outputDirectory, "prior_catalog_snapshot.json"), "utf8"))).toEqual(previous);
+    expect(fs.readFileSync(path.join(outputDirectory, "patch_change_report.md"), "utf8")).toContain("Recommendations blocked: yes");
   });
 
   it("publishes only validated packages and keeps fixture contamination detectable", () => {

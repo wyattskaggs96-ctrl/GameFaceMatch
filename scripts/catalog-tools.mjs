@@ -407,6 +407,7 @@ export function compareCatalogVersions(previousManifest, nextManifest) {
     changedLabels: [],
     changedEvidenceHashes: [],
     changedVisualAssets: [],
+    countPreservingVisualChanges: [],
     dependencyChanges: [],
     environmentChanges: []
   };
@@ -451,6 +452,19 @@ export function compareCatalogVersions(previousManifest, nextManifest) {
     }
     if (!valuesEqual(environmentSnapshot(previous.item), environmentSnapshot(next.item))) {
       changes.environmentChanges.push(recordChange("environmentChanged", id, environmentSnapshot(previous.item), environmentSnapshot(next.item), next));
+    }
+  }
+
+  for (const visualChange of changes.changedVisualAssets) {
+    const previousCount = (previousCategories.get(visualChange.category) ?? []).length;
+    const nextCount = (nextCategories.get(visualChange.category) ?? []).length;
+    if (previousCount === nextCount) {
+      changes.countPreservingVisualChanges.push({
+        ...recordChange("countPreservingVisualChange", visualChange.stableInternalID, visualChange.previousValue, visualChange.nextValue, nextItems.get(visualChange.stableInternalID)),
+        previousCategoryCount: previousCount,
+        nextCategoryCount: nextCount,
+        severity: "blocking"
+      });
     }
   }
 
@@ -672,6 +686,7 @@ function createRequiredReverificationList(changes, affectedRecords) {
     labelChanged: "Confirm exact visible label or index from direct evidence.",
     evidenceHashChanged: "Verify evidence integrity and regenerate package checksums.",
     visualAssetChanged: "Review replacement visual assets and required-angle coverage.",
+    countPreservingVisualChange: "Re-verify changed visual evidence because the category count stayed the same but the depicted option may have changed.",
     dependencyChanged: "Repeat dependency checks and update affected catalog metadata.",
     environmentChanged: "Confirm platform, game version, patch, mode, and creation path before release."
   };
@@ -685,7 +700,7 @@ function createRequiredReverificationList(changes, affectedRecords) {
 }
 
 function createRecommendedRecaptureQueue(affectedRecords) {
-  const recaptureReasons = new Set(["optionAdded", "visualAssetChanged", "environmentChanged", "evidenceHashChanged", "menuCountChanged", "firstOptionChanged", "middleOptionChanged", "finalOptionChanged"]);
+  const recaptureReasons = new Set(["optionAdded", "visualAssetChanged", "countPreservingVisualChange", "environmentChanged", "evidenceHashChanged", "menuCountChanged", "firstOptionChanged", "middleOptionChanged", "finalOptionChanged"]);
   return affectedRecords
     .filter((record) => recaptureReasons.has(record.reason))
     .map((record) => ({
@@ -745,6 +760,7 @@ function formatPatchDiffReport(result) {
     ["Changed labels", result.changedLabels],
     ["Changed evidence hashes", result.changedEvidenceHashes],
     ["Changed visual assets", result.changedVisualAssets],
+    ["Count-preserving visual changes", result.countPreservingVisualChanges],
     ["Dependency changes", result.dependencyChanges],
     ["Environment changes", result.environmentChanges]
   ]) {

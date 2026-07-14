@@ -1,0 +1,1996 @@
+{
+  "schemaVersion": "cf27-catalog-count-order-audit-v1",
+  "generatedAt": "2026-07-14T06:15:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_COUNT_NATIVE_ORDER_AUDIT",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "productionRecommendationsEnabled": false,
+  "sourceFiles": {
+    "heads": "data/phase-zero/heads.research.json",
+    "additionalAttributes": "data/phase-zero/additional_attributes.research.json",
+    "hairstyles": "data/phase-zero/hairstyles.research.json",
+    "hairColors": "data/phase-zero/hair_colors.research.json",
+    "facialHair": "data/phase-zero/facial_hair.research.json",
+    "facialHairColors": "data/phase-zero/facial_hair_colors.research.json",
+    "bodyControls": "data/phase-zero/body_controls.research.json"
+  },
+  "policy": {
+    "requiredCheckIDs": [
+      "beginningBoundary",
+      "endingBoundary",
+      "twoCompleteCounts",
+      "nativeOrderContinuity",
+      "missingIndices",
+      "repeatedIndices",
+      "duplicateInternalIDs",
+      "continuityOverlaps",
+      "wrappingBehavior",
+      "countMatchesRecordTotal",
+      "evidenceForEveryClaimedOption",
+      "unprovenFinalOptionClaims"
+    ],
+    "completeRule": "A category is COMPLETE only when every required count/native-order check passes or is not applicable.",
+    "incompleteRule": "Any FAIL, UNKNOWN, or NOT_PROVEN result keeps the category INCOMPLETE.",
+    "noInferenceRule": "Missing indices, totals, final options, wrapping, and boundaries are not inferred from neighboring thumbnails or partial traversal."
+  },
+  "summary": {
+    "categoryCount": 12,
+    "completeCategoryCount": 1,
+    "incompleteCategoryCount": 11,
+    "hardFailureCategoryCount": 4,
+    "productionEligibleCategoryCount": 0,
+    "blockingIssueCount": 85
+  },
+  "categories": [
+    {
+      "categoryID": "head-template",
+      "categoryLabel": "Head Template",
+      "sourceFile": "data/phase-zero/heads.research.json",
+      "recordCount": 26,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        18,
+        21,
+        22,
+        23,
+        24,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "checks": {
+        "beginningBoundary": {
+          "status": "PASS",
+          "message": "The first directly observed selected Head Template value in the current head footage is Face 1."
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "The recording does not demonstrate the final selector boundary or a terminal no-more-options state."
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "FAIL",
+          "message": "Missing native indices within observed range: 15, 19, 20, 25, 26."
+        },
+        "missingIndices": {
+          "status": "FAIL",
+          "message": "Missing indices: 15, 19, 20, 25, 26.",
+          "missingIndices": [
+            15,
+            19,
+            20,
+            25,
+            26
+          ]
+        },
+        "repeatedIndices": {
+          "status": "FAIL",
+          "message": "Repeated selected indices: 12, 16.",
+          "repeatedIndices": [
+            12,
+            16
+          ]
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs.",
+          "duplicateInternalIDs": []
+        },
+        "continuityOverlaps": {
+          "status": "PASS_WITH_NOTES",
+          "message": "Continuity overlaps are recorded; Face 12 is preserved as overlap evidence.",
+          "overlaps": [
+            {
+              "nativeNumber": 12,
+              "videos": [
+                "phase0-video-002",
+                "phase0-video-003"
+              ],
+              "disposition": "SAME_RESEARCH_CATALOG_ID_WITH_MULTIPLE_EVIDENCE_OBSERVATIONS"
+            },
+            {
+              "nativeNumber": 16,
+              "videos": [
+                "phase0-video-002",
+                "phase0-video-003"
+              ],
+              "disposition": "REPEATED_SELECTED_VALUE_PRESERVED_AS_DUPLICATE_OBSERVATION_NOT_NEW_RECORD"
+            }
+          ]
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "No selector wrap from final option back to first option is shown."
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "PASS",
+          "message": "Every claimed option has evidence linkage.",
+          "missingEvidence": []
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "FAIL",
+          "message": "Face 30 and Face 31 are directly observed before the recording ends on Face 29, and no end or wrap behavior is shown."
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": true,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "The recording does not demonstrate the final selector boundary or a terminal no-more-options state."
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "nativeOrderContinuity",
+          "status": "FAIL",
+          "message": "Missing native indices within observed range: 15, 19, 20, 25, 26."
+        },
+        {
+          "checkID": "missingIndices",
+          "status": "FAIL",
+          "message": "Missing indices: 15, 19, 20, 25, 26."
+        },
+        {
+          "checkID": "repeatedIndices",
+          "status": "FAIL",
+          "message": "Repeated selected indices: 12, 16."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "No selector wrap from final option back to first option is shown."
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "FAIL",
+          "message": "Face 30 and Face 31 are directly observed before the recording ends on Face 29, and no end or wrap behavior is shown."
+        }
+      ]
+    },
+    {
+      "categoryID": "skin-tone",
+      "categoryLabel": "Skin Tone",
+      "sourceFile": "data/phase-zero/additional_attributes.research.json",
+      "recordCount": 21,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        29
+      ],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "FAIL",
+          "message": "Missing native-order values inside observed range: 5, 14, 15, 16, 25, 26, 27, 28."
+        },
+        "missingIndices": {
+          "status": "FAIL",
+          "message": "Missing indices: 5, 14, 15, 16, 25, 26, 27, 28.",
+          "missingIndices": [
+            5,
+            14,
+            15,
+            16,
+            25,
+            26,
+            27,
+            28
+          ]
+        },
+        "repeatedIndices": {
+          "status": "FAIL",
+          "message": "Repeated selected indices or labels: 10.",
+          "repeatedIndices": [
+            10
+          ]
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs.",
+          "duplicateInternalIDs": []
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No multi-clip continuity overlap is required for this category in current evidence."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED"
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "PASS",
+          "message": "Every claimed option has evidence linkage.",
+          "missingEvidence": []
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": true,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "beginningBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "nativeOrderContinuity",
+          "status": "FAIL",
+          "message": "Missing native-order values inside observed range: 5, 14, 15, 16, 25, 26, 27, 28."
+        },
+        {
+          "checkID": "missingIndices",
+          "status": "FAIL",
+          "message": "Missing indices: 5, 14, 15, 16, 25, 26, 27, 28."
+        },
+        {
+          "checkID": "repeatedIndices",
+          "status": "FAIL",
+          "message": "Repeated selected indices or labels: 10."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED"
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      ]
+    },
+    {
+      "categoryID": "skin-details",
+      "categoryLabel": "Skin Details",
+      "sourceFile": "data/phase-zero/additional_attributes.research.json",
+      "recordCount": 10,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "PASS_WITH_NOTES",
+          "message": "No missing native-order values inside the observed range."
+        },
+        "missingIndices": {
+          "status": "PASS",
+          "message": "No missing indices inside observed range.",
+          "missingIndices": []
+        },
+        "repeatedIndices": {
+          "status": "PASS",
+          "message": "No repeated selected indices.",
+          "repeatedIndices": []
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs.",
+          "duplicateInternalIDs": []
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No multi-clip continuity overlap is required for this category in current evidence."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED"
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "PASS",
+          "message": "Every claimed option has evidence linkage.",
+          "missingEvidence": []
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": false,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "beginningBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED"
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      ]
+    },
+    {
+      "categoryID": "eye-shape",
+      "categoryLabel": "Eye Shape",
+      "sourceFile": "data/phase-zero/additional_attributes.research.json",
+      "recordCount": 5,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "PASS_WITH_NOTES",
+          "message": "No missing native-order values inside the observed range."
+        },
+        "missingIndices": {
+          "status": "PASS",
+          "message": "No missing indices inside observed range.",
+          "missingIndices": []
+        },
+        "repeatedIndices": {
+          "status": "PASS",
+          "message": "No repeated selected indices.",
+          "repeatedIndices": []
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs.",
+          "duplicateInternalIDs": []
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No multi-clip continuity overlap is required for this category in current evidence."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED"
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "PASS",
+          "message": "Every claimed option has evidence linkage.",
+          "missingEvidence": []
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": false,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "beginningBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED"
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      ]
+    },
+    {
+      "categoryID": "eye-color",
+      "categoryLabel": "Eye Color",
+      "sourceFile": "data/phase-zero/additional_attributes.research.json",
+      "recordCount": 7,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "PASS_WITH_NOTES",
+          "message": "No missing native-order values inside the observed range."
+        },
+        "missingIndices": {
+          "status": "PASS",
+          "message": "No missing indices inside observed range.",
+          "missingIndices": []
+        },
+        "repeatedIndices": {
+          "status": "PASS",
+          "message": "No repeated selected indices.",
+          "repeatedIndices": []
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs.",
+          "duplicateInternalIDs": []
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No multi-clip continuity overlap is required for this category in current evidence."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED"
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "PASS",
+          "message": "Every claimed option has evidence linkage.",
+          "missingEvidence": []
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": false,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "beginningBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED"
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      ]
+    },
+    {
+      "categoryID": "nose",
+      "categoryLabel": "Nose",
+      "sourceFile": "data/phase-zero/additional_attributes.research.json",
+      "recordCount": 7,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "PASS_WITH_NOTES",
+          "message": "No missing native-order values inside the observed range."
+        },
+        "missingIndices": {
+          "status": "PASS",
+          "message": "No missing indices inside observed range.",
+          "missingIndices": []
+        },
+        "repeatedIndices": {
+          "status": "FAIL",
+          "message": "Repeated selected indices or labels: 5.",
+          "repeatedIndices": [
+            5
+          ]
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs.",
+          "duplicateInternalIDs": []
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No multi-clip continuity overlap is required for this category in current evidence."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "POSSIBLE_WRAP_OBSERVED_UNVERIFIED_REQUIRES_REVIEW"
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "PASS",
+          "message": "Every claimed option has evidence linkage.",
+          "missingEvidence": []
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": true,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "beginningBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "repeatedIndices",
+          "status": "FAIL",
+          "message": "Repeated selected indices or labels: 5."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "POSSIBLE_WRAP_OBSERVED_UNVERIFIED_REQUIRES_REVIEW"
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      ]
+    },
+    {
+      "categoryID": "ear-shape",
+      "categoryLabel": "Ear Shape",
+      "sourceFile": "data/phase-zero/additional_attributes.research.json",
+      "recordCount": 4,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "PASS_WITH_NOTES",
+          "message": "No missing native-order values inside the observed range."
+        },
+        "missingIndices": {
+          "status": "PASS",
+          "message": "No missing indices inside observed range.",
+          "missingIndices": []
+        },
+        "repeatedIndices": {
+          "status": "FAIL",
+          "message": "Repeated selected indices or labels: 2.",
+          "repeatedIndices": [
+            2
+          ]
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs.",
+          "duplicateInternalIDs": []
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No multi-clip continuity overlap is required for this category in current evidence."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED"
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "PASS",
+          "message": "Every claimed option has evidence linkage.",
+          "missingEvidence": []
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": true,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "beginningBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "repeatedIndices",
+          "status": "FAIL",
+          "message": "Repeated selected indices or labels: 2."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "NOT_DEMONSTRATED"
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "NOT_PROVEN",
+          "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+        }
+      ]
+    },
+    {
+      "categoryID": "hairstyle",
+      "categoryLabel": "Hairstyles",
+      "sourceFile": "data/phase-zero/hairstyles.research.json",
+      "recordCount": 0,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "UNKNOWN",
+          "message": "No native-order rows are available to audit."
+        },
+        "missingIndices": {
+          "status": "UNKNOWN",
+          "message": "No selected values are captured."
+        },
+        "repeatedIndices": {
+          "status": "PASS",
+          "message": "No repeated selected indices are present because no records exist."
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs."
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No continuity overlap is available or required for a zero-record category."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "Wrapping behavior is not proven."
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "UNKNOWN",
+          "message": "No claimed options exist; category is incomplete because no selected values are captured."
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_PROVEN",
+          "message": "No final option is proven."
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": false,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "beginningBoundary",
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "nativeOrderContinuity",
+          "status": "UNKNOWN",
+          "message": "No native-order rows are available to audit."
+        },
+        {
+          "checkID": "missingIndices",
+          "status": "UNKNOWN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "Wrapping behavior is not proven."
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "evidenceForEveryClaimedOption",
+          "status": "UNKNOWN",
+          "message": "No claimed options exist; category is incomplete because no selected values are captured."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "NOT_PROVEN",
+          "message": "No final option is proven."
+        }
+      ]
+    },
+    {
+      "categoryID": "hairColor",
+      "categoryLabel": "Hair Color",
+      "sourceFile": "data/phase-zero/hair_colors.research.json",
+      "recordCount": 0,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "UNKNOWN",
+          "message": "No native-order rows are available to audit."
+        },
+        "missingIndices": {
+          "status": "UNKNOWN",
+          "message": "No selected values are captured."
+        },
+        "repeatedIndices": {
+          "status": "PASS",
+          "message": "No repeated selected indices are present because no records exist."
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs."
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No continuity overlap is available or required for a zero-record category."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_OBSERVED"
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "UNKNOWN",
+          "message": "No claimed options exist; category is incomplete because no selected values are captured."
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_PROVEN",
+          "message": "No final option is proven."
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": false,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "beginningBoundary",
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "nativeOrderContinuity",
+          "status": "UNKNOWN",
+          "message": "No native-order rows are available to audit."
+        },
+        {
+          "checkID": "missingIndices",
+          "status": "UNKNOWN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "NOT_OBSERVED"
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "evidenceForEveryClaimedOption",
+          "status": "UNKNOWN",
+          "message": "No claimed options exist; category is incomplete because no selected values are captured."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "NOT_PROVEN",
+          "message": "No final option is proven."
+        }
+      ]
+    },
+    {
+      "categoryID": "facialHair",
+      "categoryLabel": "Facial Hair",
+      "sourceFile": "data/phase-zero/facial_hair.research.json",
+      "recordCount": 0,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "UNKNOWN",
+          "message": "No native-order rows are available to audit."
+        },
+        "missingIndices": {
+          "status": "UNKNOWN",
+          "message": "No selected values are captured."
+        },
+        "repeatedIndices": {
+          "status": "PASS",
+          "message": "No repeated selected indices are present because no records exist."
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs."
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No continuity overlap is available or required for a zero-record category."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_OBSERVED"
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "UNKNOWN",
+          "message": "No claimed options exist; category is incomplete because no selected values are captured."
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_PROVEN",
+          "message": "No final option is proven."
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": false,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "beginningBoundary",
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "nativeOrderContinuity",
+          "status": "UNKNOWN",
+          "message": "No native-order rows are available to audit."
+        },
+        {
+          "checkID": "missingIndices",
+          "status": "UNKNOWN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "NOT_OBSERVED"
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "evidenceForEveryClaimedOption",
+          "status": "UNKNOWN",
+          "message": "No claimed options exist; category is incomplete because no selected values are captured."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "NOT_PROVEN",
+          "message": "No final option is proven."
+        }
+      ]
+    },
+    {
+      "categoryID": "facialHairColor",
+      "categoryLabel": "Facial-Hair Color",
+      "sourceFile": "data/phase-zero/facial_hair_colors.research.json",
+      "recordCount": 0,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        "endingBoundary": {
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        "nativeOrderContinuity": {
+          "status": "UNKNOWN",
+          "message": "No native-order rows are available to audit."
+        },
+        "missingIndices": {
+          "status": "UNKNOWN",
+          "message": "No selected values are captured."
+        },
+        "repeatedIndices": {
+          "status": "PASS",
+          "message": "No repeated selected indices are present because no records exist."
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs."
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No continuity overlap is available or required for a zero-record category."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_PROVEN",
+          "message": "NOT_OBSERVED"
+        },
+        "countMatchesRecordTotal": {
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "UNKNOWN",
+          "message": "No claimed options exist; category is incomplete because no selected values are captured."
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_PROVEN",
+          "message": "No final option is proven."
+        }
+      },
+      "categoryCompletionStatus": "INCOMPLETE",
+      "hasHardFailures": false,
+      "productionEligible": false,
+      "blockingIssues": [
+        {
+          "checkID": "beginningBoundary",
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "endingBoundary",
+          "status": "NOT_PROVEN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "twoCompleteCounts",
+          "status": "NOT_PROVEN",
+          "message": "Two complete independent counts are not available."
+        },
+        {
+          "checkID": "nativeOrderContinuity",
+          "status": "UNKNOWN",
+          "message": "No native-order rows are available to audit."
+        },
+        {
+          "checkID": "missingIndices",
+          "status": "UNKNOWN",
+          "message": "No selected values are captured."
+        },
+        {
+          "checkID": "wrappingBehavior",
+          "status": "NOT_PROVEN",
+          "message": "NOT_OBSERVED"
+        },
+        {
+          "checkID": "countMatchesRecordTotal",
+          "status": "UNKNOWN",
+          "message": "No total count is claimed, so count cannot be matched to record total."
+        },
+        {
+          "checkID": "evidenceForEveryClaimedOption",
+          "status": "UNKNOWN",
+          "message": "No claimed options exist; category is incomplete because no selected values are captured."
+        },
+        {
+          "checkID": "unprovenFinalOptionClaims",
+          "status": "NOT_PROVEN",
+          "message": "No final option is proven."
+        }
+      ]
+    },
+    {
+      "categoryID": "body-controls",
+      "categoryLabel": "Body Controls / Position Context",
+      "sourceFile": "data/phase-zero/body_controls.research.json",
+      "recordCount": 5,
+      "claimedTotal": null,
+      "claimedTotalStatus": "COUNT_UNKNOWN",
+      "nativeOrders": [],
+      "checks": {
+        "beginningBoundary": {
+          "status": "NOT_APPLICABLE",
+          "message": "Body controls are context records, not a counted appearance selector in current evidence."
+        },
+        "endingBoundary": {
+          "status": "NOT_APPLICABLE",
+          "message": "Body controls are context records, not a counted appearance selector in current evidence."
+        },
+        "twoCompleteCounts": {
+          "status": "NOT_APPLICABLE",
+          "message": "Body controls are context records, not a counted appearance selector in current evidence."
+        },
+        "nativeOrderContinuity": {
+          "status": "NOT_APPLICABLE",
+          "message": "No body-control option order is captured."
+        },
+        "missingIndices": {
+          "status": "NOT_APPLICABLE",
+          "message": "No body-control option order is captured."
+        },
+        "repeatedIndices": {
+          "status": "NOT_APPLICABLE",
+          "message": "No body-control option order is captured."
+        },
+        "duplicateInternalIDs": {
+          "status": "PASS",
+          "message": "No duplicate internal IDs."
+        },
+        "continuityOverlaps": {
+          "status": "NOT_APPLICABLE",
+          "message": "No body-control continuity overlap is available or required."
+        },
+        "wrappingBehavior": {
+          "status": "NOT_APPLICABLE",
+          "message": "No body-control selector wrapping is captured."
+        },
+        "countMatchesRecordTotal": {
+          "status": "NOT_APPLICABLE",
+          "message": "No body-control total count is claimed."
+        },
+        "evidenceForEveryClaimedOption": {
+          "status": "PASS",
+          "message": "Every claimed option has evidence linkage.",
+          "missingEvidence": []
+        },
+        "unprovenFinalOptionClaims": {
+          "status": "NOT_APPLICABLE",
+          "message": "No body-control final option is claimed."
+        }
+      },
+      "categoryCompletionStatus": "COMPLETE",
+      "hasHardFailures": false,
+      "productionEligible": false,
+      "blockingIssues": []
+    }
+  ],
+  "blockingIssues": [
+    {
+      "categoryID": "head-template",
+      "categoryLabel": "Head Template",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "The recording does not demonstrate the final selector boundary or a terminal no-more-options state."
+    },
+    {
+      "categoryID": "head-template",
+      "categoryLabel": "Head Template",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "head-template",
+      "categoryLabel": "Head Template",
+      "checkID": "nativeOrderContinuity",
+      "status": "FAIL",
+      "message": "Missing native indices within observed range: 15, 19, 20, 25, 26."
+    },
+    {
+      "categoryID": "head-template",
+      "categoryLabel": "Head Template",
+      "checkID": "missingIndices",
+      "status": "FAIL",
+      "message": "Missing indices: 15, 19, 20, 25, 26."
+    },
+    {
+      "categoryID": "head-template",
+      "categoryLabel": "Head Template",
+      "checkID": "repeatedIndices",
+      "status": "FAIL",
+      "message": "Repeated selected indices: 12, 16."
+    },
+    {
+      "categoryID": "head-template",
+      "categoryLabel": "Head Template",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "No selector wrap from final option back to first option is shown."
+    },
+    {
+      "categoryID": "head-template",
+      "categoryLabel": "Head Template",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "head-template",
+      "categoryLabel": "Head Template",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "FAIL",
+      "message": "Face 30 and Face 31 are directly observed before the recording ends on Face 29, and no end or wrap behavior is shown."
+    },
+    {
+      "categoryID": "skin-tone",
+      "categoryLabel": "Skin Tone",
+      "checkID": "beginningBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "skin-tone",
+      "categoryLabel": "Skin Tone",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "skin-tone",
+      "categoryLabel": "Skin Tone",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "skin-tone",
+      "categoryLabel": "Skin Tone",
+      "checkID": "nativeOrderContinuity",
+      "status": "FAIL",
+      "message": "Missing native-order values inside observed range: 5, 14, 15, 16, 25, 26, 27, 28."
+    },
+    {
+      "categoryID": "skin-tone",
+      "categoryLabel": "Skin Tone",
+      "checkID": "missingIndices",
+      "status": "FAIL",
+      "message": "Missing indices: 5, 14, 15, 16, 25, 26, 27, 28."
+    },
+    {
+      "categoryID": "skin-tone",
+      "categoryLabel": "Skin Tone",
+      "checkID": "repeatedIndices",
+      "status": "FAIL",
+      "message": "Repeated selected indices or labels: 10."
+    },
+    {
+      "categoryID": "skin-tone",
+      "categoryLabel": "Skin Tone",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED"
+    },
+    {
+      "categoryID": "skin-tone",
+      "categoryLabel": "Skin Tone",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "skin-tone",
+      "categoryLabel": "Skin Tone",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "NOT_PROVEN",
+      "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+    },
+    {
+      "categoryID": "skin-details",
+      "categoryLabel": "Skin Details",
+      "checkID": "beginningBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "skin-details",
+      "categoryLabel": "Skin Details",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "skin-details",
+      "categoryLabel": "Skin Details",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "skin-details",
+      "categoryLabel": "Skin Details",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED"
+    },
+    {
+      "categoryID": "skin-details",
+      "categoryLabel": "Skin Details",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "skin-details",
+      "categoryLabel": "Skin Details",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "NOT_PROVEN",
+      "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+    },
+    {
+      "categoryID": "eye-shape",
+      "categoryLabel": "Eye Shape",
+      "checkID": "beginningBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "eye-shape",
+      "categoryLabel": "Eye Shape",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "eye-shape",
+      "categoryLabel": "Eye Shape",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "eye-shape",
+      "categoryLabel": "Eye Shape",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED"
+    },
+    {
+      "categoryID": "eye-shape",
+      "categoryLabel": "Eye Shape",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "eye-shape",
+      "categoryLabel": "Eye Shape",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "NOT_PROVEN",
+      "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+    },
+    {
+      "categoryID": "eye-color",
+      "categoryLabel": "Eye Color",
+      "checkID": "beginningBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "eye-color",
+      "categoryLabel": "Eye Color",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "eye-color",
+      "categoryLabel": "Eye Color",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "eye-color",
+      "categoryLabel": "Eye Color",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED"
+    },
+    {
+      "categoryID": "eye-color",
+      "categoryLabel": "Eye Color",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "eye-color",
+      "categoryLabel": "Eye Color",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "NOT_PROVEN",
+      "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+    },
+    {
+      "categoryID": "nose",
+      "categoryLabel": "Nose",
+      "checkID": "beginningBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "nose",
+      "categoryLabel": "Nose",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "nose",
+      "categoryLabel": "Nose",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "nose",
+      "categoryLabel": "Nose",
+      "checkID": "repeatedIndices",
+      "status": "FAIL",
+      "message": "Repeated selected indices or labels: 5."
+    },
+    {
+      "categoryID": "nose",
+      "categoryLabel": "Nose",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "POSSIBLE_WRAP_OBSERVED_UNVERIFIED_REQUIRES_REVIEW"
+    },
+    {
+      "categoryID": "nose",
+      "categoryLabel": "Nose",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "nose",
+      "categoryLabel": "Nose",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "NOT_PROVEN",
+      "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+    },
+    {
+      "categoryID": "ear-shape",
+      "categoryLabel": "Ear Shape",
+      "checkID": "beginningBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "ear-shape",
+      "categoryLabel": "Ear Shape",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY"
+    },
+    {
+      "categoryID": "ear-shape",
+      "categoryLabel": "Ear Shape",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "ear-shape",
+      "categoryLabel": "Ear Shape",
+      "checkID": "repeatedIndices",
+      "status": "FAIL",
+      "message": "Repeated selected indices or labels: 2."
+    },
+    {
+      "categoryID": "ear-shape",
+      "categoryLabel": "Ear Shape",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "NOT_DEMONSTRATED"
+    },
+    {
+      "categoryID": "ear-shape",
+      "categoryLabel": "Ear Shape",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "ear-shape",
+      "categoryLabel": "Ear Shape",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "NOT_PROVEN",
+      "message": "LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE"
+    },
+    {
+      "categoryID": "hairstyle",
+      "categoryLabel": "Hairstyles",
+      "checkID": "beginningBoundary",
+      "status": "NOT_PROVEN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "hairstyle",
+      "categoryLabel": "Hairstyles",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "hairstyle",
+      "categoryLabel": "Hairstyles",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "hairstyle",
+      "categoryLabel": "Hairstyles",
+      "checkID": "nativeOrderContinuity",
+      "status": "UNKNOWN",
+      "message": "No native-order rows are available to audit."
+    },
+    {
+      "categoryID": "hairstyle",
+      "categoryLabel": "Hairstyles",
+      "checkID": "missingIndices",
+      "status": "UNKNOWN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "hairstyle",
+      "categoryLabel": "Hairstyles",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "Wrapping behavior is not proven."
+    },
+    {
+      "categoryID": "hairstyle",
+      "categoryLabel": "Hairstyles",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "hairstyle",
+      "categoryLabel": "Hairstyles",
+      "checkID": "evidenceForEveryClaimedOption",
+      "status": "UNKNOWN",
+      "message": "No claimed options exist; category is incomplete because no selected values are captured."
+    },
+    {
+      "categoryID": "hairstyle",
+      "categoryLabel": "Hairstyles",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "NOT_PROVEN",
+      "message": "No final option is proven."
+    },
+    {
+      "categoryID": "hairColor",
+      "categoryLabel": "Hair Color",
+      "checkID": "beginningBoundary",
+      "status": "NOT_PROVEN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "hairColor",
+      "categoryLabel": "Hair Color",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "hairColor",
+      "categoryLabel": "Hair Color",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "hairColor",
+      "categoryLabel": "Hair Color",
+      "checkID": "nativeOrderContinuity",
+      "status": "UNKNOWN",
+      "message": "No native-order rows are available to audit."
+    },
+    {
+      "categoryID": "hairColor",
+      "categoryLabel": "Hair Color",
+      "checkID": "missingIndices",
+      "status": "UNKNOWN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "hairColor",
+      "categoryLabel": "Hair Color",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "NOT_OBSERVED"
+    },
+    {
+      "categoryID": "hairColor",
+      "categoryLabel": "Hair Color",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "hairColor",
+      "categoryLabel": "Hair Color",
+      "checkID": "evidenceForEveryClaimedOption",
+      "status": "UNKNOWN",
+      "message": "No claimed options exist; category is incomplete because no selected values are captured."
+    },
+    {
+      "categoryID": "hairColor",
+      "categoryLabel": "Hair Color",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "NOT_PROVEN",
+      "message": "No final option is proven."
+    },
+    {
+      "categoryID": "facialHair",
+      "categoryLabel": "Facial Hair",
+      "checkID": "beginningBoundary",
+      "status": "NOT_PROVEN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "facialHair",
+      "categoryLabel": "Facial Hair",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "facialHair",
+      "categoryLabel": "Facial Hair",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "facialHair",
+      "categoryLabel": "Facial Hair",
+      "checkID": "nativeOrderContinuity",
+      "status": "UNKNOWN",
+      "message": "No native-order rows are available to audit."
+    },
+    {
+      "categoryID": "facialHair",
+      "categoryLabel": "Facial Hair",
+      "checkID": "missingIndices",
+      "status": "UNKNOWN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "facialHair",
+      "categoryLabel": "Facial Hair",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "NOT_OBSERVED"
+    },
+    {
+      "categoryID": "facialHair",
+      "categoryLabel": "Facial Hair",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "facialHair",
+      "categoryLabel": "Facial Hair",
+      "checkID": "evidenceForEveryClaimedOption",
+      "status": "UNKNOWN",
+      "message": "No claimed options exist; category is incomplete because no selected values are captured."
+    },
+    {
+      "categoryID": "facialHair",
+      "categoryLabel": "Facial Hair",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "NOT_PROVEN",
+      "message": "No final option is proven."
+    },
+    {
+      "categoryID": "facialHairColor",
+      "categoryLabel": "Facial-Hair Color",
+      "checkID": "beginningBoundary",
+      "status": "NOT_PROVEN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "facialHairColor",
+      "categoryLabel": "Facial-Hair Color",
+      "checkID": "endingBoundary",
+      "status": "NOT_PROVEN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "facialHairColor",
+      "categoryLabel": "Facial-Hair Color",
+      "checkID": "twoCompleteCounts",
+      "status": "NOT_PROVEN",
+      "message": "Two complete independent counts are not available."
+    },
+    {
+      "categoryID": "facialHairColor",
+      "categoryLabel": "Facial-Hair Color",
+      "checkID": "nativeOrderContinuity",
+      "status": "UNKNOWN",
+      "message": "No native-order rows are available to audit."
+    },
+    {
+      "categoryID": "facialHairColor",
+      "categoryLabel": "Facial-Hair Color",
+      "checkID": "missingIndices",
+      "status": "UNKNOWN",
+      "message": "No selected values are captured."
+    },
+    {
+      "categoryID": "facialHairColor",
+      "categoryLabel": "Facial-Hair Color",
+      "checkID": "wrappingBehavior",
+      "status": "NOT_PROVEN",
+      "message": "NOT_OBSERVED"
+    },
+    {
+      "categoryID": "facialHairColor",
+      "categoryLabel": "Facial-Hair Color",
+      "checkID": "countMatchesRecordTotal",
+      "status": "UNKNOWN",
+      "message": "No total count is claimed, so count cannot be matched to record total."
+    },
+    {
+      "categoryID": "facialHairColor",
+      "categoryLabel": "Facial-Hair Color",
+      "checkID": "evidenceForEveryClaimedOption",
+      "status": "UNKNOWN",
+      "message": "No claimed options exist; category is incomplete because no selected values are captured."
+    },
+    {
+      "categoryID": "facialHairColor",
+      "categoryLabel": "Facial-Hair Color",
+      "checkID": "unprovenFinalOptionClaims",
+      "status": "NOT_PROVEN",
+      "message": "No final option is proven."
+    }
+  ]
+}

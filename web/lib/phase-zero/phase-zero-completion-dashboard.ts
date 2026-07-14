@@ -98,6 +98,7 @@ export interface Phase0CompletionArtifacts {
   researchValidation?: unknown;
   authoritativeRecaptureQueue?: unknown;
   captureRequests?: unknown;
+  dependencyTests?: unknown;
   nowISO?: string;
 }
 
@@ -201,6 +202,8 @@ interface ArtifactContext {
   menuRecords: RecordObject[];
   recaptureItems: RecordObject[];
   captureRequests: RecordObject[];
+  dependencyTestRecords: RecordObject[];
+  dependencyTestSummary: RecordObject;
   researchExportCounts: Record<string, number>;
   researchPackageValidated: boolean;
   appearanceMenuGapSummary: Phase0AppearanceMenuGapSummary;
@@ -222,6 +225,7 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
   const researchExportManifest = asRecord(artifacts.researchExportManifest);
   const researchValidation = asRecord(artifacts.researchValidation);
   const appearanceMenuGaps = asRecord(artifacts.appearanceMenuGaps);
+  const dependencyTests = asRecord(artifacts.dependencyTests);
 
   return {
     additionalRecords: asArray(additionalAttributes.records),
@@ -243,6 +247,8 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
       ...asArray(asRecord(artifacts.authoritativeRecaptureQueue).items)
     ],
     captureRequests: asArray(asRecord(artifacts.captureRequests).requests),
+    dependencyTestRecords: asArray(dependencyTests.tests),
+    dependencyTestSummary: asRecord(dependencyTests.summary),
     researchExportCounts: numberRecord(asRecord(researchExportManifest.counts)),
     researchPackageValidated: researchValidation.ok === true || researchValidation.status === "passed",
     appearanceMenuGapSummary: normalizeAppearanceMenuGapSummary(asRecord(appearanceMenuGaps.summary))
@@ -371,6 +377,26 @@ function populateCategoryProgress(
         qaReviewed: context.researchPackageValidated && records > 0 ? records : 0,
         sourceSummary: records > 0 ? `${records} research catalog record(s) are included in the partial export.` : row.sourceSummary,
         nextAction: "Keep research exports labeled not-production and rerun validation after each evidence ingest."
+      };
+    }
+    case "dependencyTests": {
+      const executed = context.dependencyTestRecords.filter((test) => stringValue(test.executionStatus) === "EXECUTED_RESEARCH_OBSERVATION");
+      const blocked = context.dependencyTestRecords.filter((test) => stringValue(test.executionStatus) !== "EXECUTED_RESEARCH_OBSERVATION");
+      const variableCount = numberValue(context.dependencyTestSummary.variableCount) || context.dependencyTestRecords.length;
+      return {
+        ...row,
+        evidenceAvailable: sum(executed.map((test) => asArray(test.evidence).length)),
+        observed: executed.length,
+        cataloged: 0,
+        qaReviewed: 0,
+        recaptureRequired: Math.max(row.recaptureRequired, blocked.length),
+        blockingIssueCount: Math.max(row.blockingIssueCount, blocked.length),
+        sourceSummary: context.dependencyTestRecords.length > 0
+          ? `${executed.length} of ${variableCount} dependency variable(s) have current evidence-backed research observations; ${blocked.length} remain blocked or not executed.`
+          : row.sourceSummary,
+        nextAction: blocked.length > 0
+          ? "Capture controlled dependency tests for blocked variables before Phase 0 production readiness."
+          : "Submit dependency observations for independent verification."
       };
     }
     case "secondVerification":

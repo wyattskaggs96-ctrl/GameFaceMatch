@@ -14,6 +14,7 @@ describe("Phase 0 completion dashboard", () => {
     const report = createPhase0CompletionDashboard({ ...currentArtifacts, nowISO: "2026-07-14T00:00:00.000Z" });
     const heads = report.categoryProgress.find((category) => category.id === "headTemplates");
     const skinTone = report.categoryProgress.find((category) => category.id === "skinTone");
+    const dependencyTests = report.categoryProgress.find((category) => category.id === "dependencyTests");
     const secondVerification = report.categoryProgress.find((category) => category.id === "secondVerification");
 
     expect(report.categoryProgress.map((category) => category.id)).toEqual([
@@ -48,6 +49,11 @@ describe("Phase 0 completion dashboard", () => {
     expect(heads?.productionApproved).toBe(0);
     expect(skinTone?.observed).toBeGreaterThan(0);
     expect(skinTone?.status).toBe("qaReviewed");
+    expect(dependencyTests?.observed).toBe(2);
+    expect(dependencyTests?.cataloged).toBe(0);
+    expect(dependencyTests?.status).toBe("observed");
+    expect(dependencyTests?.sourceSummary).toMatch(/2 of 16 dependency/);
+    expect(dependencyTests?.blockingIssueCount).toBeGreaterThanOrEqual(14);
     expect(secondVerification?.status).toBe("notStarted");
     expect(report.productionReadiness.status).toBe("blocked");
     expect(report.productionReadiness.reason).toMatch(/No independently verified/);

@@ -99,6 +99,17 @@ This dictionary defines how current Phase 0 artifacts should be interpreted. It 
 | `severity` | Impact level. | Blocking issues prevent production readiness. |
 | `status` | Issue state. | Keep unresolved until direct evidence or verified resolution exists. |
 
+## Dependency-Test Fields
+
+| Field | Meaning | Notes |
+| --- | --- | --- |
+| `testID` | Stable dependency-test record ID. | Current records live in `data/phase-zero/dependency_tests.research.json`; they are research-only. |
+| `variable` | Dependency variable being tested. | Current matrix includes requested variables such as head, skin tone, facial hair, platform, patch, and Road to Glory base type. |
+| `executionStatus` | Whether current evidence actually executes the dependency test. | `EXECUTED_RESEARCH_OBSERVATION` requires direct evidence of that variable changing; blocked/not-executed statuses must not be treated as passed. |
+| `result` | Research conclusion for the dependency test. | Current executed runs are `INCONCLUSIVE_RESEARCH_ONLY`; unexecuted runs are `NOT_RUN`. |
+| `observedChanges` | Count/order/geometry/label observations. | Use `NOT_TESTED` or `UNKNOWN_*` when current evidence does not support a conclusion. |
+| `requiredFollowUp` | Evidence needed to close the dependency test. | Follow-up must be captured before Phase 0 production readiness. |
+
 ## Verification And Study Fields
 
 | Field | Meaning | Notes |
@@ -117,7 +128,7 @@ This dictionary defines how current Phase 0 artifacts should be interpreted. It 
 - No production catalog item exists.
 - No second-verifier result exists.
 - No manual matching participant result exists.
-- Hair, facial hair, mouth, jaw/chin/cheeks, eyebrows, body/height/weight/physique, and dependency-test records are not cataloged.
+- Hair, facial hair, mouth, jaw/chin/cheeks, eyebrows, body/height/weight/physique, and most dependency-test variables are not executed or cataloged.
 - Older historical exports can have different counts from the current normalized `data/phase-zero` artifacts.
 
 ## Forbidden Interpretations

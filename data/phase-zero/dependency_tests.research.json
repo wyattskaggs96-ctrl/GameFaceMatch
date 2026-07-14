@@ -1,0 +1,1309 @@
+{
+  "schemaVersion": "cf27-dependency-evidence-tests-v1",
+  "generatedAt": "2026-07-14T07:00:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_DEPENDENCY_TEST_EXECUTION",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "productionRecommendationsEnabled": false,
+  "productionCompletionAllowed": false,
+  "sourceArtifacts": {
+    "environment": "data/phase-zero/environment_manifest.research.json",
+    "creationPaths": "data/phase-zero/creation_paths.research.json",
+    "heads": "data/phase-zero/heads.research.json",
+    "additionalAttributes": "data/phase-zero/additional_attributes.research.json",
+    "bodyControls": "data/phase-zero/body_controls.research.json",
+    "captureRequests": "data/phase-zero/capture_requests.json",
+    "evidenceManifest": "data/phase-zero/evidence_manifest.json"
+  },
+  "rules": [
+    "Only direct controlled evidence can create an executed dependency test.",
+    "Observed menu traversal is not treated as a complete dependency test unless the changed variable is the selected control itself.",
+    "Unexecuted tests are recorded as blocked or not executed, never passed.",
+    "No dependency test in this report is independently verified or production eligible."
+  ],
+  "baseline": {
+    "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+    "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+    "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+    "gameTitle": "EA SPORTS College Football 27",
+    "platform": "Xbox",
+    "mode": "Road to Glory",
+    "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+    "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+    "observedJourneyType": "CONTRIBUTOR",
+    "position": "QB",
+    "archetype": "UNKNOWN",
+    "height": "UNKNOWN_NOT_VISIBLE",
+    "weight": "UNKNOWN_NOT_VISIBLE",
+    "bodyType": "UNKNOWN_NOT_VISIBLE",
+    "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+    "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+    "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+    "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+    "onlineState": "UNKNOWN_NOT_VISIBLE",
+    "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+    "edition": "UNKNOWN_NOT_VISIBLE",
+    "entitlements": [
+      "UNKNOWN_NOT_VISIBLE"
+    ],
+    "patch": "UNKNOWN_NOT_VISIBLE",
+    "evidence": [
+      {
+        "evidenceID": "phase0-source-phase0-video-001",
+        "videoID": "phase0-video-001",
+        "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+        "timestampRange": "0-73.57",
+        "note": "Source environment video evidence."
+      }
+    ],
+    "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+  },
+  "summary": {
+    "variableCount": 16,
+    "executedVariableCount": 2,
+    "blockedOrNotExecutedVariableCount": 14,
+    "independentlyVerifiedRunCount": 0,
+    "productionEligibleRunCount": 0,
+    "variablesWithExecutedEvidence": [
+      "head",
+      "skinTone"
+    ],
+    "variablesStillRequired": [
+      "position",
+      "archetype",
+      "height",
+      "weight",
+      "bodyType",
+      "hairstyle",
+      "facialHair",
+      "onlineState",
+      "eaAccountState",
+      "edition",
+      "entitlements",
+      "baseType",
+      "platform",
+      "patch"
+    ]
+  },
+  "tests": [
+    {
+      "testID": "dep-test-position-not-executed",
+      "runNumber": 1,
+      "variable": "position",
+      "executionStatus": "NOT_EXECUTED_NO_CONTROLLED_EVIDENCE",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "position",
+        "fromValue": "QB",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change position while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "QB is observed as the selected position context, but no other position is selected for comparison.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-005",
+          "timestampRange": "24-29",
+          "note": "position baseline evidence: QB is visible during the position/path step."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "GFM-CAP-001: Appearance and Head & Skin boundary map"
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-archetype-not-executed",
+      "runNumber": 2,
+      "variable": "archetype",
+      "executionStatus": "NOT_EXECUTED_NO_CONTROLLED_EVIDENCE",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "archetype",
+        "fromValue": "CONTRIBUTOR",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change archetype while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "A Contributor journey-type card is observed, but no controlled archetype/prospect-type change is executed.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-005",
+          "timestampRange": "24-29",
+          "note": "position baseline evidence: QB is visible during the position/path step."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "GFM-CAP-001: Appearance and Head & Skin boundary map"
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-height-not-executed",
+      "runNumber": 3,
+      "variable": "height",
+      "executionStatus": "BLOCKED_BY_UNOBSERVED_BODY_CONTROL",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "height",
+        "fromValue": "UNKNOWN_NOT_VISIBLE",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change height while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes height as a controlled dependency variable. The body-control research catalog confirms this control is not observed in current evidence.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-005",
+          "timestampRange": "24-29",
+          "note": "position baseline evidence: QB is visible during the position/path step."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Record body/height/weight/physique controls and then test their effects on appearance availability and framing.",
+        "GFM-CAP-001: Appearance and Head & Skin boundary map"
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-weight-not-executed",
+      "runNumber": 4,
+      "variable": "weight",
+      "executionStatus": "BLOCKED_BY_UNOBSERVED_BODY_CONTROL",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "weight",
+        "fromValue": "UNKNOWN_NOT_VISIBLE",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change weight while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes weight as a controlled dependency variable. The body-control research catalog confirms this control is not observed in current evidence.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-005",
+          "timestampRange": "24-29",
+          "note": "position baseline evidence: QB is visible during the position/path step."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Record body/height/weight/physique controls and then test their effects on appearance availability and framing.",
+        "GFM-CAP-001: Appearance and Head & Skin boundary map"
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-body-type-not-executed",
+      "runNumber": 5,
+      "variable": "bodyType",
+      "executionStatus": "BLOCKED_BY_UNOBSERVED_BODY_CONTROL",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "bodyType",
+        "fromValue": "UNKNOWN_NOT_VISIBLE",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change body type while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes body type as a controlled dependency variable. The body-control research catalog confirms this control is not observed in current evidence.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-005",
+          "timestampRange": "24-29",
+          "note": "position baseline evidence: QB is visible during the position/path step."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Record body/height/weight/physique controls and then test their effects on appearance availability and framing.",
+        "GFM-CAP-001: Appearance and Head & Skin boundary map"
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-head-selected-head-change",
+      "runNumber": 6,
+      "variable": "head",
+      "executionStatus": "EXECUTED_RESEARCH_OBSERVATION",
+      "result": "INCONCLUSIVE_RESEARCH_ONLY",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "head",
+        "fromValue": "Face 1",
+        "toValue": "Face 31"
+      },
+      "expectedTest": "Change selected Head Template values while holding all other variables constant enough to detect whether counts, ordering, labels, geometry, or other categories change.",
+      "observedBehavior": "Head Template selected values were changed across the current head-template footage. Native selected labels/order are directly observed for the recorded head values, but canonical settings were not locked and other category dependencies were not directly tested.",
+      "observedChanges": {
+        "countsChanged": "UNKNOWN_NOT_TESTED",
+        "orderChanged": "ORDER_INCOMPLETE_WITH_VISIBLE_GAPS",
+        "geometryChanged": "SELECTED_HEAD_VISUAL_PRESENTATION_CHANGED_BUT_PRODUCTION_GEOMETRY_NOT_VALIDATED",
+        "labelsChanged": "SELECTED_NATIVE_HEAD_LABEL_CHANGED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-frame-video-002-tl-004",
+          "relativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_MENU_video-002_11p68s.png",
+          "videoID": "phase0-video-002",
+          "timestamp": 11.68,
+          "note": "Evidence for Face 1."
+        },
+        {
+          "evidenceID": "phase0-frame-video-003-tl-013",
+          "relativePath": "data/phase-zero/derivative-frames/video-003-tl-013_03-head-templates-faces-12-29-mov_114p5s.png",
+          "videoID": "phase0-video-003",
+          "timestamp": 114.5,
+          "note": "Evidence for Face 31."
+        }
+      ],
+      "uncertainty": [
+        "Hair, facial hair, skin tone, and other category resets are not directly tested by this footage.",
+        "Selector total, final boundary, wrap behavior, and two complete counts remain unproven.",
+        "Visual comparison suitability is limited by non-canonical conditions."
+      ],
+      "requiredFollowUp": [
+        "Run GFM-CAP-002 for complete Head Template count/order boundary proof.",
+        "Run GFM-CAP-003 and GFM-CAP-004 for canonical appearance lock and standardized head visual evidence.",
+        "Test whether changing head resets skin, hair, facial hair, and other controls under locked conditions."
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-skin-tone-selected-value-change",
+      "runNumber": 7,
+      "variable": "skinTone",
+      "executionStatus": "EXECUTED_RESEARCH_OBSERVATION",
+      "result": "INCONCLUSIVE_RESEARCH_ONLY",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "skinTone",
+        "fromValue": "Skin Tone 01",
+        "toValue": "Skin Tone 29"
+      },
+      "expectedTest": "Change Skin Tone selected values while holding the player draft constant and observe whether counts, order, labels, geometry, or dependent appearance settings change.",
+      "observedBehavior": "Skin Tone selected values were changed in current footage and native selected labels are directly observed for recorded values. The selector run is partial and does not prove total count, final boundary, wrapping, or automatic dependency effects.",
+      "observedChanges": {
+        "countsChanged": "UNKNOWN_PARTIAL_RANGE_WITH_MISSING_OBSERVED_INDICES",
+        "orderChanged": "ORDER_INCOMPLETE_WITH_VISIBLE_GAPS",
+        "geometryChanged": "NO_GEOMETRY_CHANGE_CLAIMED_COLOR_PRESENTATION_CONTROL_ONLY",
+        "labelsChanged": "SELECTED_NATIVE_SKIN_TONE_LABEL_CHANGED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-frame-video-004-tl-019",
+          "relativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_001/CF27_XBOXUNKNOWN_RTG_SKINTONE_001_MENU_video-004_45p50s.png",
+          "videoID": "phase0-video-004",
+          "timestamp": 45.5,
+          "note": "Evidence for Skin Tone 01."
+        },
+        {
+          "evidenceID": "phase0-frame-video-004-tl-012",
+          "relativePath": "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_023/CF27_XBOXUNKNOWN_RTG_SKINTONE_023_MENU_video-004_31p50s.png",
+          "videoID": "phase0-video-004",
+          "timestamp": 31.5,
+          "note": "Evidence for Skin Tone 29."
+        }
+      ],
+      "uncertainty": [
+        "The first and final selector boundaries are not proven.",
+        "No controlled test shows whether skin tone affects other categories.",
+        "No racial or ethnic labels are inferred from this evidence."
+      ],
+      "requiredFollowUp": [
+        "Run GFM-CAP-005 for complete Skin Tone boundary, count, default, wrap, and dependency evidence.",
+        "Under canonical settings, test whether skin tone changes skin details, head rendering, hair, or other visible controls."
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-hairstyle-not-executed",
+      "runNumber": 8,
+      "variable": "hairstyle",
+      "executionStatus": "BLOCKED_BY_UNOPENED_MENU",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "hairstyle",
+        "fromValue": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change hairstyle while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes hairstyle as a controlled dependency variable. The current evidence does not open the relevant Hair/facial-hair controls.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-005",
+          "timestampRange": "24-29",
+          "note": "position baseline evidence: QB is visible during the position/path step."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Open and record the Hair submenu before dependency testing.",
+        "GFM-CAP-001: Appearance and Head & Skin boundary map"
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-facial-hair-not-executed",
+      "runNumber": 9,
+      "variable": "facialHair",
+      "executionStatus": "BLOCKED_BY_UNOPENED_MENU",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "facialHair",
+        "fromValue": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change facial hair while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes facial hair as a controlled dependency variable. The current evidence does not open the relevant Hair/facial-hair controls.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-005",
+          "timestampRange": "24-29",
+          "note": "position baseline evidence: QB is visible during the position/path step."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Open and record the Hair submenu before dependency testing.",
+        "GFM-CAP-002: Head Template full count and boundary proof"
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-online-state-not-executed",
+      "runNumber": 10,
+      "variable": "onlineState",
+      "executionStatus": "BLOCKED_BY_MISSING_ENVIRONMENT_METADATA",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "onlineState",
+        "fromValue": "UNKNOWN_NOT_VISIBLE",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change online state while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes online state as a controlled dependency variable. The environment manifest does not contain enough metadata to compare this condition.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-001",
+          "timestampRange": "0-7",
+          "note": "platform baseline evidence: Current evidence set is direct Xbox screen recording; exact model remains unresolved."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Record the missing environment/version/account/entitlement state before dependency testing.",
+        "Capture a controlled dependency run that changes only this variable and records counts, ordering, labels, geometry, and dependency effects."
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-ea-account-state-not-executed",
+      "runNumber": 11,
+      "variable": "eaAccountState",
+      "executionStatus": "BLOCKED_BY_MISSING_ENVIRONMENT_METADATA",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "eaAccountState",
+        "fromValue": "UNKNOWN_NOT_VISIBLE",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change ea account state while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes ea account state as a controlled dependency variable. The environment manifest does not contain enough metadata to compare this condition.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-001",
+          "timestampRange": "0-7",
+          "note": "platform baseline evidence: Current evidence set is direct Xbox screen recording; exact model remains unresolved."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Record the missing environment/version/account/entitlement state before dependency testing.",
+        "GFM-CAP-001: Appearance and Head & Skin boundary map"
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-edition-not-executed",
+      "runNumber": 12,
+      "variable": "edition",
+      "executionStatus": "BLOCKED_BY_MISSING_ENVIRONMENT_METADATA",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "edition",
+        "fromValue": "UNKNOWN_NOT_VISIBLE",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change edition while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes edition as a controlled dependency variable. The environment manifest does not contain enough metadata to compare this condition.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-001",
+          "timestampRange": "0-7",
+          "note": "platform baseline evidence: Current evidence set is direct Xbox screen recording; exact model remains unresolved."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Record the missing environment/version/account/entitlement state before dependency testing.",
+        "Capture a controlled dependency run that changes only this variable and records counts, ordering, labels, geometry, and dependency effects."
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-entitlements-not-executed",
+      "runNumber": 13,
+      "variable": "entitlements",
+      "executionStatus": "BLOCKED_BY_MISSING_ENVIRONMENT_METADATA",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "entitlements",
+        "fromValue": "UNKNOWN_NOT_VISIBLE",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change entitlements while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes entitlements as a controlled dependency variable. The environment manifest does not contain enough metadata to compare this condition.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-001",
+          "timestampRange": "0-7",
+          "note": "platform baseline evidence: Current evidence set is direct Xbox screen recording; exact model remains unresolved."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Record the missing environment/version/account/entitlement state before dependency testing.",
+        "Capture a controlled dependency run that changes only this variable and records counts, ordering, labels, geometry, and dependency effects."
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-base-type-not-executed",
+      "runNumber": 14,
+      "variable": "baseType",
+      "executionStatus": "NOT_EXECUTED_NO_CONTROLLED_EVIDENCE",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "baseType",
+        "fromValue": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Compare Road to Glory Custom versus other player bases such as Legend templates only when those bases are directly visible.",
+      "observedBehavior": "Player-base context is visible, but Custom versus Legend/template comparison is not executed in current footage.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-005",
+          "timestampRange": "24-29",
+          "note": "position baseline evidence: QB is visible during the position/path step."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Capture a controlled dependency run that changes only this variable and records counts, ordering, labels, geometry, and dependency effects."
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-platform-not-executed",
+      "runNumber": 15,
+      "variable": "platform",
+      "executionStatus": "BLOCKED_BY_MISSING_ENVIRONMENT_METADATA",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "platform",
+        "fromValue": "Xbox",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change platform while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes platform as a controlled dependency variable. The environment manifest does not contain enough metadata to compare this condition.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-001",
+          "timestampRange": "0-7",
+          "note": "platform baseline evidence: Current evidence set is direct Xbox screen recording; exact model remains unresolved."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Record the missing environment/version/account/entitlement state before dependency testing.",
+        "Capture a controlled dependency run that changes only this variable and records counts, ordering, labels, geometry, and dependency effects."
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "testID": "dep-test-patch-not-executed",
+      "runNumber": 16,
+      "variable": "patch",
+      "executionStatus": "BLOCKED_BY_MISSING_ENVIRONMENT_METADATA",
+      "result": "NOT_RUN",
+      "baseline": {
+        "baselineID": "baseline-cf27-phase0-current-xbox-rtg-qb",
+        "environmentID": "env-cf27-phase0-video-001-rtg-custom-qb",
+        "creationPathID": "creation-path-cf27-rtg-custom-qb-create-player-appearance-video-001",
+        "gameTitle": "EA SPORTS College Football 27",
+        "platform": "Xbox",
+        "mode": "Road to Glory",
+        "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+        "baseType": "UNKNOWN_NOT_SELECTED_AS_CONTROLLED_VARIABLE",
+        "observedJourneyType": "CONTRIBUTOR",
+        "position": "QB",
+        "archetype": "UNKNOWN",
+        "height": "UNKNOWN_NOT_VISIBLE",
+        "weight": "UNKNOWN_NOT_VISIBLE",
+        "bodyType": "UNKNOWN_NOT_VISIBLE",
+        "selectedHead": "VARIES_IN_HEAD_TEMPLATE_FOOTAGE",
+        "skinTone": "VARIES_IN_SKIN_TONE_FOOTAGE",
+        "hairstyle": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "facialHair": "UNKNOWN_HAIR_MENU_NOT_OPENED",
+        "onlineState": "UNKNOWN_NOT_VISIBLE",
+        "eaAccountState": "UNKNOWN_NOT_VISIBLE",
+        "edition": "UNKNOWN_NOT_VISIBLE",
+        "entitlements": [
+          "UNKNOWN_NOT_VISIBLE"
+        ],
+        "patch": "UNKNOWN_NOT_VISIBLE",
+        "evidence": [
+          {
+            "evidenceID": "phase0-source-phase0-video-001",
+            "videoID": "phase0-video-001",
+            "relativePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+            "timestampRange": "0-73.57",
+            "note": "Source environment video evidence."
+          }
+        ],
+        "notes": "Baseline is the current research environment only; exact patch, edition, account state, online state, body values, hairstyle, and facial-hair settings are unresolved."
+      },
+      "changedVariable": {
+        "variable": "patch",
+        "fromValue": "UNKNOWN_NOT_VISIBLE",
+        "toValue": "UNAVAILABLE_IN_CURRENT_EVIDENCE"
+      },
+      "expectedTest": "Change patch while holding the baseline constant and record whether counts, native order, geometry, labels, or availability change.",
+      "observedBehavior": "No current footage changes patch as a controlled dependency variable. The environment manifest does not contain enough metadata to compare this condition.",
+      "observedChanges": {
+        "countsChanged": "NOT_TESTED",
+        "orderChanged": "NOT_TESTED",
+        "geometryChanged": "NOT_TESTED",
+        "labelsChanged": "NOT_TESTED"
+      },
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "videoID": "phase0-video-001",
+          "timelineRecordID": "phase0-video-001-tl-001",
+          "timestampRange": "0-7",
+          "note": "platform baseline evidence: Current evidence set is direct Xbox screen recording; exact model remains unresolved."
+        }
+      ],
+      "uncertainty": [
+        "No controlled before/after test exists in the current evidence set."
+      ],
+      "requiredFollowUp": [
+        "Record the missing environment/version/account/entitlement state before dependency testing.",
+        "Capture a controlled dependency run that changes only this variable and records counts, ordering, labels, geometry, and dependency effects."
+      ],
+      "productionEligible": false,
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    }
+  ]
+}

@@ -22,6 +22,7 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/capture_log.json",
   "data/phase-zero/issues_register.research.json",
   "data/phase-zero/capture_requests.json",
+  "data/phase-zero/dependency_tests.research.json",
   "data/phase-zero/catalog_record_classification.csv",
   "data/phase-zero/verification_assignment.json",
   "data/phase-zero/verification_results.template.csv",
@@ -29,6 +30,7 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/manual_matching_reviews.template.csv",
   "data/phase-zero/manual_matching_results.template.csv",
   "docs/phase-zero/APPEARANCE_MENU_GAP_MATRIX.md",
+  "docs/phase-zero/DEPENDENCY_TEST_EXECUTION.md",
   "docs/phase-zero/WYATT_RECORDING_SCRIPT.md",
   "docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md"
 ];

@@ -29,6 +29,7 @@
     "phase0:body-controls": "node ../scripts/cf27-body-control-research-catalog.mjs",
     "phase0:standardized-capture-qa": "node ../scripts/cf27-standardized-capture-qa.mjs",
     "phase0:count-order-audit": "node ../scripts/cf27-catalog-count-order-audit.mjs",
+    "phase0:dependency-tests": "node ../scripts/cf27-dependency-evidence-tests.mjs",
     "catalog:create-audit-session": "node ../scripts/catalog-tools.mjs create-audit-session",
     "catalog:import-csv": "node ../scripts/catalog-tools.mjs import-csv",
     "catalog:export-csv": "node ../scripts/catalog-tools.mjs export-csv",

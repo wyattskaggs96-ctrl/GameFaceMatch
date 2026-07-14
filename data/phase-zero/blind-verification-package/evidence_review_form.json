@@ -1,0 +1,31 @@
+{
+  "purpose": "Review source videos, screenshots, or frame evidence after independent counting. Do not copy primary counts from evidence filenames or other reports.",
+  "columns": [
+    "package_id",
+    "verifier_id",
+    "review_id",
+    "evidence_id",
+    "evidence_type",
+    "opens_successfully",
+    "matches_target",
+    "timestamp_visible_or_recorded",
+    "quality_status",
+    "issue_or_discrepancy_id",
+    "notes"
+  ],
+  "rows": [
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "verifier_id": "",
+      "review_id": "",
+      "evidence_id": "",
+      "evidence_type": "",
+      "opens_successfully": "",
+      "matches_target": "",
+      "timestamp_visible_or_recorded": "",
+      "quality_status": "",
+      "issue_or_discrepancy_id": "",
+      "notes": ""
+    }
+  ]
+}

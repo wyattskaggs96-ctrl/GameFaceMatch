@@ -1,0 +1,53 @@
+{
+  "purpose": "Sign only after environment, path, menu, counts, evidence review, discrepancies, and recapture requests are complete.",
+  "rows": [
+    {
+      "field": "verifier_id",
+      "value": ""
+    },
+    {
+      "field": "verifier_name_or_initials",
+      "value": ""
+    },
+    {
+      "field": "completed_independent_counts_before_primary_comparison",
+      "value": ""
+    },
+    {
+      "field": "environment_recorded",
+      "value": ""
+    },
+    {
+      "field": "creation_path_reproduced",
+      "value": ""
+    },
+    {
+      "field": "menu_map_completed",
+      "value": ""
+    },
+    {
+      "field": "evidence_review_completed",
+      "value": ""
+    },
+    {
+      "field": "discrepancies_logged",
+      "value": ""
+    },
+    {
+      "field": "recapture_requests_logged",
+      "value": ""
+    },
+    {
+      "field": "final_status",
+      "value": "NOT_VERIFIED"
+    },
+    {
+      "field": "signed_at",
+      "value": ""
+    },
+    {
+      "field": "notes",
+      "value": ""
+    }
+  ]
+}

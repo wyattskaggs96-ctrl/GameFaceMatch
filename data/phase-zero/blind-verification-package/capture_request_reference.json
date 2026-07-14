@@ -1,0 +1,82 @@
+[
+  {
+    "capture_id": "GFM-CAP-001",
+    "priority": "P0",
+    "title": "Appearance and Head & Skin boundary map",
+    "exact_menu_path": "Create Player > Player > Appearance, then Head & Skin",
+    "acceptance_summary": "Appearance entry is visible from the Player tab. | Head & Skin row order is visible from first through final observed row. | Mouth Shape, Jaw Shape, Chin, and any additional visible Head & Skin rows are captured as menu rows only unless opened in later sessions. | No category is marked absent unless the menu boundary is visible.",
+    "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+  },
+  {
+    "capture_id": "GFM-CAP-002",
+    "priority": "P0",
+    "title": "Head Template full count and boundary proof",
+    "exact_menu_path": "Create Player > Player > Appearance > Head & Skin > Head Template",
+    "acceptance_summary": "Two complete selected-value passes are visible. | Currently unresolved values inside the observed range are resolved by direct traversal evidence, not inference. | The final count is not claimed unless final/wrap/no-wrap evidence is visible. | [withheld primary head value] overlap remains preserved as continuity evidence, not a duplicate production record.",
+    "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+  },
+  {
+    "capture_id": "GFM-CAP-003",
+    "priority": "P0",
+    "title": "Canonical appearance lock slate",
+    "exact_menu_path": "Create Player > Player > Appearance > Head & Skin, plus Hair if visible",
+    "acceptance_summary": "The lock slate contains only visible native settings or explicit unavailable states. | Eye black and obstruction are removed if visibly possible or documented if not possible. | The slate does not rely on assumed hairstyle, facial-hair, or eye-black labels.",
+    "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+  },
+  {
+    "capture_id": "GFM-CAP-004",
+    "priority": "P0",
+    "title": "Head Template standardized visual pass",
+    "exact_menu_path": "Create Player > Player > Appearance > Head & Skin > Head Template",
+    "acceptance_summary": "Every head has menu evidence and all required views. | Frames are free of severe blur, loading animation, overlays, and inconsistent zoom. | Rear view is captured for completeness but not used to infer facial geometry.",
+    "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+  },
+  {
+    "capture_id": "GFM-CAP-005",
+    "priority": "P0",
+    "title": "Head & Skin color and texture controls",
+    "exact_menu_path": "Create Player > Player > Appearance > Head & Skin > Skin Tone, Skin Details, Eye Shape, Eye Color",
+    "acceptance_summary": "No racial or ethnic descriptions are recorded for skin presentation. | Unreadable native labels remain queued for review rather than replaced with generic names. | Skin Tone unresolved numeric gaps are closed by direct evidence or explicitly recorded as unavailable/skipped.",
+    "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+  },
+  {
+    "capture_id": "GFM-CAP-006",
+    "priority": "P0",
+    "title": "Head & Skin geometry controls",
+    "exact_menu_path": "Create Player > Player > Appearance > Head & Skin > Nose, Ear Shape, Mouth Shape, Jaw Shape, Chin",
+    "acceptance_summary": "Every selected value is direct evidence, not a thumbnail-only observation. | Side views are captured for Nose and Ear Shape when available. | Mouth, Jaw Shape, and Chin selected values are cataloged only after direct selection.",
+    "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+  },
+  {
+    "capture_id": "GFM-CAP-007",
+    "priority": "P1",
+    "title": "Hair submenu boundary map",
+    "exact_menu_path": "Create Player > Player > Appearance > Hair",
+    "acceptance_summary": "Hair child controls are directly visible in native order. | Hairstyle, hair color, facial hair, and facial-hair color are not treated as confirmed native controls unless shown. | Locks or unavailable controls remain documented as visible states.",
+    "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+  },
+  {
+    "capture_id": "GFM-CAP-008",
+    "priority": "P1",
+    "title": "Hairstyle options, only if visible in Hair",
+    "exact_menu_path": "Create Player > Player > Appearance > Hair > visible hairstyle control from GFM-CAP-007",
+    "acceptance_summary": "The native control is visibly confirmed before option capture begins. | Every selected value has menu evidence and required angle views. | Rear view is included for hair shape/length.",
+    "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+  },
+  {
+    "capture_id": "GFM-CAP-009",
+    "priority": "P1",
+    "title": "Hair color options, only if visible in Hair",
+    "exact_menu_path": "Create Player > Player > Appearance > Hair > visible hair-color control from GFM-CAP-007",
+    "acceptance_summary": "Every selected value has readable native label/index evidence. | Lighting stays constant. | No generic color name replaces unreadable game text.",
+    "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+  },
+  {
+    "capture_id": "GFM-CAP-010",
+    "priority": "P1",
+    "title": "Facial-hair controls, only if visible in Hair",
+    "exact_menu_path": "Create Player > Player > Appearance > Hair > visible facial-hair or facial-hair-color controls from GFM-CAP-007",
+    "acceptance_summary": "None is included only if directly visible. | Coverage, mustache, beard, sideburn, stubble, density, and color-control observations are recorded only when visible. | Facial-hair color is not assumed to exist unless shown.",
+    "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+  }
+]

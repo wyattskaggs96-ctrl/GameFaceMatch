@@ -1,0 +1,87 @@
+{
+  "purpose": "Navigate the player-creation path yourself and record whether each broad step is reproducible.",
+  "primaryCountsWithheld": true,
+  "rows": [
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "step_number": 1,
+      "broad_instruction": "Open College Football 27 main interface and navigate to Road to Glory.",
+      "verifier_reached_step": "",
+      "verifier_screen_label_seen": "",
+      "evidence_reference": "",
+      "mismatch_or_notes": ""
+    },
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "step_number": 2,
+      "broad_instruction": "On Road to Glory Setup, choose Advance.",
+      "verifier_reached_step": "",
+      "verifier_screen_label_seen": "",
+      "evidence_reference": "",
+      "mismatch_or_notes": ""
+    },
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "step_number": 3,
+      "broad_instruction": "Select the observed journey type card highlighted before the position screen.",
+      "verifier_reached_step": "",
+      "verifier_screen_label_seen": "",
+      "evidence_reference": "",
+      "mismatch_or_notes": ""
+    },
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "step_number": 4,
+      "broad_instruction": "Choose QB on the position screen.",
+      "verifier_reached_step": "",
+      "verifier_screen_label_seen": "",
+      "evidence_reference": "",
+      "mismatch_or_notes": ""
+    },
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "step_number": 5,
+      "broad_instruction": "Advance into Create Player.",
+      "verifier_reached_step": "",
+      "verifier_screen_label_seen": "",
+      "evidence_reference": "",
+      "mismatch_or_notes": ""
+    },
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "step_number": 6,
+      "broad_instruction": "Open or observe Player Info from the Player tab.",
+      "verifier_reached_step": "",
+      "verifier_screen_label_seen": "",
+      "evidence_reference": "",
+      "mismatch_or_notes": ""
+    },
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "step_number": 7,
+      "broad_instruction": "Open Appearance from the Player tab.",
+      "verifier_reached_step": "",
+      "verifier_screen_label_seen": "",
+      "evidence_reference": "",
+      "mismatch_or_notes": ""
+    },
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "step_number": 8,
+      "broad_instruction": "Observe Head & Skin in the Appearance submenu.",
+      "verifier_reached_step": "",
+      "verifier_screen_label_seen": "",
+      "evidence_reference": "",
+      "mismatch_or_notes": ""
+    },
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "step_number": 9,
+      "broad_instruction": "Observe Hair under Appearance.",
+      "verifier_reached_step": "",
+      "verifier_screen_label_seen": "",
+      "evidence_reference": "",
+      "mismatch_or_notes": ""
+    }
+  ]
+}

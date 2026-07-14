@@ -1,0 +1,10 @@
+package_id,step_number,broad_instruction,verifier_reached_step,verifier_screen_label_seen,evidence_reference,mismatch_or_notes
+phase0-blind-second-verifier-package-20260714,1,Open College Football 27 main interface and navigate to Road to Glory.,,,,
+phase0-blind-second-verifier-package-20260714,2,"On Road to Glory Setup, choose Advance.",,,,
+phase0-blind-second-verifier-package-20260714,3,Select the observed journey type card highlighted before the position screen.,,,,
+phase0-blind-second-verifier-package-20260714,4,Choose QB on the position screen.,,,,
+phase0-blind-second-verifier-package-20260714,5,Advance into Create Player.,,,,
+phase0-blind-second-verifier-package-20260714,6,Open or observe Player Info from the Player tab.,,,,
+phase0-blind-second-verifier-package-20260714,7,Open Appearance from the Player tab.,,,,
+phase0-blind-second-verifier-package-20260714,8,Observe Head & Skin in the Appearance submenu.,,,,
+phase0-blind-second-verifier-package-20260714,9,Observe Hair under Appearance.,,,,

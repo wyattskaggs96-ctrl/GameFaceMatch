@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "cf27-blind-verifier-import-format-v1",
+  "packageID": "phase0-blind-second-verifier-package-20260714",
+  "csvTemplate": "data/phase-zero/blind-verification-package/data_entry_template.csv",
+  "requiredColumns": [
+    "package_id",
+    "verifier_id",
+    "section",
+    "target_id",
+    "target_label",
+    "verifier_count",
+    "first_observed_value",
+    "final_observed_value",
+    "wrap_observed",
+    "native_order_preserved",
+    "selector_boundary_confirmed",
+    "dependency_observed",
+    "evidence_ids",
+    "screenshot_or_video_reference",
+    "status",
+    "notes"
+  ],
+  "allowedStatusValues": [
+    "NOT_VERIFIED",
+    "VERIFIED",
+    "VERIFIED_WITH_NOTES",
+    "RECAPTURE_REQUIRED",
+    "VERSION_MISMATCH",
+    "MISSING_EVIDENCE",
+    "COUNT_MISMATCH",
+    "ORDER_MISMATCH",
+    "DEPENDENCY_UNRESOLVED"
+  ],
+  "importRules": [
+    "Import is allowed only after the verifier completes independent counts.",
+    "Rows with VERIFIED or VERIFIED_WITH_NOTES require evidence references and sign-off.",
+    "Rows may not contain primary-count columns.",
+    "Rows do not enable production recommendations."
+  ]
+}

@@ -1,0 +1,2 @@
+package_id,verifier_id,section,target_id,target_label,verifier_count,first_observed_value,final_observed_value,wrap_observed,native_order_preserved,selector_boundary_confirmed,dependency_observed,evidence_ids,screenshot_or_video_reference,status,notes
+phase0-blind-second-verifier-package-20260714,,,,,,,,,,,,,,,

@@ -24,6 +24,9 @@ const requiredCanonicalArtifacts = [
   "data/phase-zero/research_evidence_path_resolution.json",
   "data/phase-zero/research-catalog-releases/0.1.0-research.1/research_catalog_release_manifest.json",
   "data/phase-zero/research-catalog-releases/0.1.0-research.1/research_catalog_release_validation.json",
+  "data/phase-zero/blind-verification-package/blind_verification_package.json",
+  "data/phase-zero/blind-verification-package/data_entry_template.csv",
+  "data/phase-zero/blind-verification-package/import_format.json",
   "data/phase-zero/capture_log.json",
   "data/phase-zero/issues_register.research.json",
   "data/phase-zero/capture_requests.json",
@@ -37,6 +40,8 @@ const requiredCanonicalArtifacts = [
   "docs/phase-zero/APPEARANCE_MENU_GAP_MATRIX.md",
   "docs/phase-zero/RESEARCH_EVIDENCE_PACKAGE_MANIFEST.md",
   "docs/phase-zero/DEPENDENCY_TEST_EXECUTION.md",
+  "docs/phase-zero/BLIND_SECOND_VERIFIER_INSTRUCTIONS.md",
+  "docs/phase-zero/BLIND_SECOND_VERIFIER_PRINTABLE_PACKET.md",
   "docs/phase-zero/WYATT_RECORDING_SCRIPT.md",
   "docs/phase-zero/WYATT_RECORDING_QUICK_CHECKLIST.md"
 ];

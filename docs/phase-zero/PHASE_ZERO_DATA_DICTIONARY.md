@@ -144,6 +144,21 @@ This dictionary defines how current Phase 0 artifacts should be interpreted. It 
 | `top_three_useful` | Manual-study metric flag. | Only meaningful after a real verified-catalog study. |
 | `raw_media_deleted_confirmed` | Manual-study privacy confirmation. | Required for completed study rows. |
 
+## Blind Verification Package Fields
+
+| Field | Meaning | Notes |
+| --- | --- | --- |
+| `packageID` | Stable ID for the blind packet handed to a second verifier. | Current package lives under `data/phase-zero/blind-verification-package/`. |
+| `dataClass` | Blind package class. | `BLIND_SECOND_VERIFIER_PACKAGE`; not production data. |
+| `primaryCountsWithheld` | Confirms primary catalog totals are intentionally absent. | Must be true. Primary count fields, primary head record IDs, and primary head labels are forbidden in this package. |
+| `independentCountWorksheet` | Generic category-count worksheet for the second verifier. | Lists categories to count but does not reveal current research totals. |
+| `menuMapWorksheet` | Menu discovery worksheet. | Contains menu/category prompts and generic discovery rows, not option record rows. |
+| `environmentForm` | Verifier-owned environment recording form. | The verifier records what they see; unknown fields stay blank rather than guessed. |
+| `evidenceReviewForm` | Evidence review worksheet completed after independent counts. | It can mark evidence usable, ambiguous, or recapture-required, but does not assign production verification by itself. |
+| `discrepancyForm` | Count, order, label, evidence, dependency, or version mismatch log. | Discrepancies must be resolved before production approval. |
+| `signOffForm` | Verifier completion attestation. | Sign-off can say the blind review is complete; it is not the same as enabling production recommendations. |
+| `importFormat` | Machine-readable format for importing completed verifier rows later. | Import rules keep production recommendations disabled until all production gates pass. |
+
 ## Current Known Data Gaps
 
 - Exact Xbox platform/environment fields are unresolved; current IDs retain `XBOXUNKNOWN`.

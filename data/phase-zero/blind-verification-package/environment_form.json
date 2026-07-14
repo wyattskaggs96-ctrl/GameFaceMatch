@@ -1,0 +1,45 @@
+{
+  "purpose": "Record the verifier's own setup before counting anything.",
+  "primaryEnvironmentReference": "env-cf27-phase0-video-001-rtg-custom-qb",
+  "primaryValuesWithheld": true,
+  "columns": [
+    "package_id",
+    "verifier_id",
+    "game_title_seen",
+    "platform",
+    "console_model",
+    "console_os_version",
+    "game_version",
+    "patch_version",
+    "edition_or_entitlement",
+    "online_state",
+    "ea_account_state",
+    "display_resolution",
+    "hdr_state",
+    "capture_method",
+    "capture_date",
+    "evidence_reference",
+    "notes"
+  ],
+  "rows": [
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "verifier_id": "",
+      "game_title_seen": "",
+      "platform": "",
+      "console_model": "",
+      "console_os_version": "",
+      "game_version": "",
+      "patch_version": "",
+      "edition_or_entitlement": "",
+      "online_state": "",
+      "ea_account_state": "",
+      "display_resolution": "",
+      "hdr_state": "",
+      "capture_method": "",
+      "capture_date": "",
+      "evidence_reference": "",
+      "notes": "Fill from the verifier's console or directly visible evidence. Leave unknown fields blank; do not guess."
+    }
+  ]
+}

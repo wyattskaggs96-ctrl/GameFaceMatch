@@ -1,0 +1,900 @@
+{
+  "schemaVersion": "cf27-blind-verification-package-v1",
+  "generatedAt": "2026-07-14T03:45:00-04:00",
+  "packageID": "phase0-blind-second-verifier-package-20260714",
+  "dataClass": "BLIND_SECOND_VERIFIER_PACKAGE",
+  "sourceType": "verification_assignment",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "NOT_VERIFIED",
+  "verificationHasOccurred": false,
+  "primaryCountsWithheld": true,
+  "productionRecommendationsEnabled": false,
+  "instructionsDocument": "docs/phase-zero/BLIND_SECOND_VERIFIER_INSTRUCTIONS.md",
+  "printablePacket": "docs/phase-zero/BLIND_SECOND_VERIFIER_PRINTABLE_PACKET.md",
+  "ruleSummary": [
+    "Use only this blind package until your independent counts are submitted.",
+    "Do not look up primary research totals, head lists, or existing catalog exports first.",
+    "Write exactly what you see in the game or evidence.",
+    "If you are unsure, write unsure and request recapture."
+  ],
+  "environmentForm": {
+    "purpose": "Record the verifier's own setup before counting anything.",
+    "primaryEnvironmentReference": "env-cf27-phase0-video-001-rtg-custom-qb",
+    "primaryValuesWithheld": true,
+    "columns": [
+      "package_id",
+      "verifier_id",
+      "game_title_seen",
+      "platform",
+      "console_model",
+      "console_os_version",
+      "game_version",
+      "patch_version",
+      "edition_or_entitlement",
+      "online_state",
+      "ea_account_state",
+      "display_resolution",
+      "hdr_state",
+      "capture_method",
+      "capture_date",
+      "evidence_reference",
+      "notes"
+    ],
+    "rows": [
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "verifier_id": "",
+        "game_title_seen": "",
+        "platform": "",
+        "console_model": "",
+        "console_os_version": "",
+        "game_version": "",
+        "patch_version": "",
+        "edition_or_entitlement": "",
+        "online_state": "",
+        "ea_account_state": "",
+        "display_resolution": "",
+        "hdr_state": "",
+        "capture_method": "",
+        "capture_date": "",
+        "evidence_reference": "",
+        "notes": "Fill from the verifier's console or directly visible evidence. Leave unknown fields blank; do not guess."
+      }
+    ]
+  },
+  "creationPathWorksheet": {
+    "purpose": "Navigate the player-creation path yourself and record whether each broad step is reproducible.",
+    "primaryCountsWithheld": true,
+    "rows": [
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "step_number": 1,
+        "broad_instruction": "Open College Football 27 main interface and navigate to Road to Glory.",
+        "verifier_reached_step": "",
+        "verifier_screen_label_seen": "",
+        "evidence_reference": "",
+        "mismatch_or_notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "step_number": 2,
+        "broad_instruction": "On Road to Glory Setup, choose Advance.",
+        "verifier_reached_step": "",
+        "verifier_screen_label_seen": "",
+        "evidence_reference": "",
+        "mismatch_or_notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "step_number": 3,
+        "broad_instruction": "Select the observed journey type card highlighted before the position screen.",
+        "verifier_reached_step": "",
+        "verifier_screen_label_seen": "",
+        "evidence_reference": "",
+        "mismatch_or_notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "step_number": 4,
+        "broad_instruction": "Choose QB on the position screen.",
+        "verifier_reached_step": "",
+        "verifier_screen_label_seen": "",
+        "evidence_reference": "",
+        "mismatch_or_notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "step_number": 5,
+        "broad_instruction": "Advance into Create Player.",
+        "verifier_reached_step": "",
+        "verifier_screen_label_seen": "",
+        "evidence_reference": "",
+        "mismatch_or_notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "step_number": 6,
+        "broad_instruction": "Open or observe Player Info from the Player tab.",
+        "verifier_reached_step": "",
+        "verifier_screen_label_seen": "",
+        "evidence_reference": "",
+        "mismatch_or_notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "step_number": 7,
+        "broad_instruction": "Open Appearance from the Player tab.",
+        "verifier_reached_step": "",
+        "verifier_screen_label_seen": "",
+        "evidence_reference": "",
+        "mismatch_or_notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "step_number": 8,
+        "broad_instruction": "Observe Head & Skin in the Appearance submenu.",
+        "verifier_reached_step": "",
+        "verifier_screen_label_seen": "",
+        "evidence_reference": "",
+        "mismatch_or_notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "step_number": 9,
+        "broad_instruction": "Observe Hair under Appearance.",
+        "verifier_reached_step": "",
+        "verifier_screen_label_seen": "",
+        "evidence_reference": "",
+        "mismatch_or_notes": ""
+      }
+    ]
+  },
+  "menuMapWorksheet": {
+    "purpose": "Map menus and controls from the game without using primary totals.",
+    "primaryCountsWithheld": true,
+    "rows": [
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-head-skin-head-template",
+        "parent_menu_id": "cf27-menu-appearance-head-skin",
+        "displayed_label_to_find": "Head Template",
+        "control_type_hint": "numbered_option_grid",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-head-skin-skin-tone",
+        "parent_menu_id": "cf27-menu-appearance-head-skin",
+        "displayed_label_to_find": "Skin Tone",
+        "control_type_hint": "color_selector_numbered_grid",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-head-skin-skin-details",
+        "parent_menu_id": "cf27-menu-appearance-head-skin",
+        "displayed_label_to_find": "Skin Details",
+        "control_type_hint": "named_option_grid",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-head-skin-eye-shape",
+        "parent_menu_id": "cf27-menu-appearance-head-skin",
+        "displayed_label_to_find": "Eye Shape",
+        "control_type_hint": "named_option_grid",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-head-skin-eye-color",
+        "parent_menu_id": "cf27-menu-appearance-head-skin",
+        "displayed_label_to_find": "Eye Color",
+        "control_type_hint": "color_selector_named_grid",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-head-skin-nose",
+        "parent_menu_id": "cf27-menu-appearance-head-skin",
+        "displayed_label_to_find": "Nose",
+        "control_type_hint": "named_option_grid",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-head-skin-ear-shape",
+        "parent_menu_id": "cf27-menu-appearance-head-skin",
+        "displayed_label_to_find": "Ear Shape",
+        "control_type_hint": "named_option_grid",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-head-skin-mouth-shape",
+        "parent_menu_id": "cf27-menu-appearance-head-skin",
+        "displayed_label_to_find": "Mouth Shape",
+        "control_type_hint": "unknown_selector",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-head-skin-jaw-shape",
+        "parent_menu_id": "cf27-menu-appearance-head-skin",
+        "displayed_label_to_find": "Jaw Shape",
+        "control_type_hint": "unknown_selector",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-head-skin-chin",
+        "parent_menu_id": "cf27-menu-appearance-head-skin",
+        "displayed_label_to_find": "Chin",
+        "control_type_hint": "unknown_selector",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-appearance-head-skin",
+        "parent_menu_id": "cf27-menu-player-appearance",
+        "displayed_label_to_find": "Head & Skin",
+        "control_type_hint": "submenu",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-appearance-hair",
+        "parent_menu_id": "cf27-menu-player-appearance",
+        "displayed_label_to_find": "Hair",
+        "control_type_hint": "submenu",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "cf27-menu-player-appearance",
+        "parent_menu_id": "menu-cf27-create-player-player-tab",
+        "displayed_label_to_find": "Appearance",
+        "control_type_hint": "top_level_appearance_category",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "new-discovery-1",
+        "parent_menu_id": "",
+        "displayed_label_to_find": "Any extra appearance category visible",
+        "control_type_hint": "verifier records if seen",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "new-discovery-2",
+        "parent_menu_id": "",
+        "displayed_label_to_find": "Any extra Head & Skin control visible",
+        "control_type_hint": "verifier records if seen",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "new-discovery-3",
+        "parent_menu_id": "",
+        "displayed_label_to_find": "Any Hair submenu control visible",
+        "control_type_hint": "verifier records if seen",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "menu_id": "new-discovery-4",
+        "parent_menu_id": "",
+        "displayed_label_to_find": "Any body/height/weight/physique control visible",
+        "control_type_hint": "verifier records if seen",
+        "verifier_seen": "",
+        "verifier_native_order": "",
+        "verifier_parent_label": "",
+        "verifier_child_rows_seen": "",
+        "boundary_confirmed": "",
+        "dependency_or_lock_seen": "",
+        "evidence_reference": "",
+        "notes": ""
+      }
+    ]
+  },
+  "independentCountWorksheet": {
+    "purpose": "Write your own count, first value, final value, and boundary notes before any primary comparison.",
+    "primaryCountsWithheld": true,
+    "rows": [
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-head-templates",
+        "target_label": "Head Templates",
+        "target_kind": "headTemplateCategory",
+        "verifier_task": "Count every head template from the first available value to the final available value.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-hairstyles",
+        "target_label": "Hairstyles",
+        "target_kind": "hairstyleCategory",
+        "verifier_task": "Count every hairstyle option if the Hair menu exposes hairstyles.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-facial-hair",
+        "target_label": "Facial Hair",
+        "target_kind": "facialHairCategory",
+        "verifier_task": "Count every facial-hair option, including None if present.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-facial-hair-colors",
+        "target_label": "Facial-Hair Colors",
+        "target_kind": "facialHairColorCategory",
+        "verifier_task": "Count every facial-hair color option if the game exposes this control.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-hair-colors",
+        "target_label": "Hair Colors",
+        "target_kind": "hairColorCategory",
+        "verifier_task": "Count every hair color option if the game exposes this control.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-skin-tone",
+        "target_label": "Skin Tone",
+        "target_kind": "additionalCategory",
+        "verifier_task": "Count Skin Tone values and confirm first/final boundaries.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-skin-details",
+        "target_label": "Skin Details",
+        "target_kind": "additionalCategory",
+        "verifier_task": "Count Skin Details values and confirm first/final boundaries.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-eye-shape",
+        "target_label": "Eye Shape",
+        "target_kind": "additionalCategory",
+        "verifier_task": "Count Eye Shape values and confirm first/final boundaries.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-eye-color",
+        "target_label": "Eye Color",
+        "target_kind": "additionalCategory",
+        "verifier_task": "Count Eye Color values and confirm first/final boundaries.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-nose",
+        "target_label": "Nose",
+        "target_kind": "additionalCategory",
+        "verifier_task": "Count Nose values and confirm first/final boundaries.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-ear-shape",
+        "target_label": "Ear Shape",
+        "target_kind": "additionalCategory",
+        "verifier_task": "Count Ear Shape values and confirm first/final boundaries.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-mouth-shape",
+        "target_label": "Mouth Shape",
+        "target_kind": "additionalCategory",
+        "verifier_task": "Confirm whether Mouth Shape exists; count it only if directly visible.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-jaw-shape",
+        "target_label": "Jaw Shape",
+        "target_kind": "additionalCategory",
+        "verifier_task": "Confirm whether Jaw Shape exists; count it only if directly visible.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      },
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "target_id": "count-chin",
+        "target_label": "Chin",
+        "target_kind": "additionalCategory",
+        "verifier_task": "Confirm whether Chin exists; count it only if directly visible.",
+        "verifier_count": "",
+        "first_observed_value": "",
+        "final_observed_value": "",
+        "wrap_observed": "",
+        "native_order_preserved": "",
+        "selector_boundary_confirmed": "",
+        "dependency_observed": "",
+        "evidence_ids": "",
+        "notes": ""
+      }
+    ]
+  },
+  "evidenceReviewForm": {
+    "purpose": "Review source videos, screenshots, or frame evidence after independent counting. Do not copy primary counts from evidence filenames or other reports.",
+    "columns": [
+      "package_id",
+      "verifier_id",
+      "review_id",
+      "evidence_id",
+      "evidence_type",
+      "opens_successfully",
+      "matches_target",
+      "timestamp_visible_or_recorded",
+      "quality_status",
+      "issue_or_discrepancy_id",
+      "notes"
+    ],
+    "rows": [
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "verifier_id": "",
+        "review_id": "",
+        "evidence_id": "",
+        "evidence_type": "",
+        "opens_successfully": "",
+        "matches_target": "",
+        "timestamp_visible_or_recorded": "",
+        "quality_status": "",
+        "issue_or_discrepancy_id": "",
+        "notes": ""
+      }
+    ]
+  },
+  "discrepancyForm": {
+    "purpose": "Record anything that does not match what you saw, including missing evidence, label mismatch, count mismatch, order mismatch, dependency uncertainty, or recapture need.",
+    "columns": [
+      "package_id",
+      "verifier_id",
+      "discrepancy_id",
+      "target_id",
+      "discrepancy_type",
+      "verifier_observation",
+      "evidence_ids",
+      "recapture_required",
+      "severity",
+      "notes"
+    ],
+    "rows": [
+      {
+        "package_id": "phase0-blind-second-verifier-package-20260714",
+        "verifier_id": "",
+        "discrepancy_id": "",
+        "target_id": "",
+        "discrepancy_type": "",
+        "verifier_observation": "",
+        "evidence_ids": "",
+        "recapture_required": "",
+        "severity": "",
+        "notes": ""
+      }
+    ]
+  },
+  "signOffForm": {
+    "purpose": "Sign only after environment, path, menu, counts, evidence review, discrepancies, and recapture requests are complete.",
+    "rows": [
+      {
+        "field": "verifier_id",
+        "value": ""
+      },
+      {
+        "field": "verifier_name_or_initials",
+        "value": ""
+      },
+      {
+        "field": "completed_independent_counts_before_primary_comparison",
+        "value": ""
+      },
+      {
+        "field": "environment_recorded",
+        "value": ""
+      },
+      {
+        "field": "creation_path_reproduced",
+        "value": ""
+      },
+      {
+        "field": "menu_map_completed",
+        "value": ""
+      },
+      {
+        "field": "evidence_review_completed",
+        "value": ""
+      },
+      {
+        "field": "discrepancies_logged",
+        "value": ""
+      },
+      {
+        "field": "recapture_requests_logged",
+        "value": ""
+      },
+      {
+        "field": "final_status",
+        "value": "NOT_VERIFIED"
+      },
+      {
+        "field": "signed_at",
+        "value": ""
+      },
+      {
+        "field": "notes",
+        "value": ""
+      }
+    ]
+  },
+  "dataEntryTemplate": {
+    "columns": [
+      "package_id",
+      "verifier_id",
+      "section",
+      "target_id",
+      "target_label",
+      "verifier_count",
+      "first_observed_value",
+      "final_observed_value",
+      "wrap_observed",
+      "native_order_preserved",
+      "selector_boundary_confirmed",
+      "dependency_observed",
+      "evidence_ids",
+      "screenshot_or_video_reference",
+      "status",
+      "notes"
+    ],
+    "csvPath": "data/phase-zero/blind-verification-package/data_entry_template.csv",
+    "jsonPath": "data/phase-zero/blind-verification-package/data_entry_template.json"
+  },
+  "importFormat": {
+    "schemaVersion": "cf27-blind-verifier-import-format-v1",
+    "packageID": "phase0-blind-second-verifier-package-20260714",
+    "csvTemplate": "data/phase-zero/blind-verification-package/data_entry_template.csv",
+    "requiredColumns": [
+      "package_id",
+      "verifier_id",
+      "section",
+      "target_id",
+      "target_label",
+      "verifier_count",
+      "first_observed_value",
+      "final_observed_value",
+      "wrap_observed",
+      "native_order_preserved",
+      "selector_boundary_confirmed",
+      "dependency_observed",
+      "evidence_ids",
+      "screenshot_or_video_reference",
+      "status",
+      "notes"
+    ],
+    "allowedStatusValues": [
+      "NOT_VERIFIED",
+      "VERIFIED",
+      "VERIFIED_WITH_NOTES",
+      "RECAPTURE_REQUIRED",
+      "VERSION_MISMATCH",
+      "MISSING_EVIDENCE",
+      "COUNT_MISMATCH",
+      "ORDER_MISMATCH",
+      "DEPENDENCY_UNRESOLVED"
+    ],
+    "importRules": [
+      "Import is allowed only after the verifier completes independent counts.",
+      "Rows with VERIFIED or VERIFIED_WITH_NOTES require evidence references and sign-off.",
+      "Rows may not contain primary-count columns.",
+      "Rows do not enable production recommendations."
+    ]
+  },
+  "captureRequestReference": [
+    {
+      "capture_id": "GFM-CAP-001",
+      "priority": "P0",
+      "title": "Appearance and Head & Skin boundary map",
+      "exact_menu_path": "Create Player > Player > Appearance, then Head & Skin",
+      "acceptance_summary": "Appearance entry is visible from the Player tab. | Head & Skin row order is visible from first through final observed row. | Mouth Shape, Jaw Shape, Chin, and any additional visible Head & Skin rows are captured as menu rows only unless opened in later sessions. | No category is marked absent unless the menu boundary is visible.",
+      "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+    },
+    {
+      "capture_id": "GFM-CAP-002",
+      "priority": "P0",
+      "title": "Head Template full count and boundary proof",
+      "exact_menu_path": "Create Player > Player > Appearance > Head & Skin > Head Template",
+      "acceptance_summary": "Two complete selected-value passes are visible. | Currently unresolved values inside the observed range are resolved by direct traversal evidence, not inference. | The final count is not claimed unless final/wrap/no-wrap evidence is visible. | [withheld primary head value] overlap remains preserved as continuity evidence, not a duplicate production record.",
+      "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+    },
+    {
+      "capture_id": "GFM-CAP-003",
+      "priority": "P0",
+      "title": "Canonical appearance lock slate",
+      "exact_menu_path": "Create Player > Player > Appearance > Head & Skin, plus Hair if visible",
+      "acceptance_summary": "The lock slate contains only visible native settings or explicit unavailable states. | Eye black and obstruction are removed if visibly possible or documented if not possible. | The slate does not rely on assumed hairstyle, facial-hair, or eye-black labels.",
+      "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+    },
+    {
+      "capture_id": "GFM-CAP-004",
+      "priority": "P0",
+      "title": "Head Template standardized visual pass",
+      "exact_menu_path": "Create Player > Player > Appearance > Head & Skin > Head Template",
+      "acceptance_summary": "Every head has menu evidence and all required views. | Frames are free of severe blur, loading animation, overlays, and inconsistent zoom. | Rear view is captured for completeness but not used to infer facial geometry.",
+      "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+    },
+    {
+      "capture_id": "GFM-CAP-005",
+      "priority": "P0",
+      "title": "Head & Skin color and texture controls",
+      "exact_menu_path": "Create Player > Player > Appearance > Head & Skin > Skin Tone, Skin Details, Eye Shape, Eye Color",
+      "acceptance_summary": "No racial or ethnic descriptions are recorded for skin presentation. | Unreadable native labels remain queued for review rather than replaced with generic names. | Skin Tone unresolved numeric gaps are closed by direct evidence or explicitly recorded as unavailable/skipped.",
+      "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+    },
+    {
+      "capture_id": "GFM-CAP-006",
+      "priority": "P0",
+      "title": "Head & Skin geometry controls",
+      "exact_menu_path": "Create Player > Player > Appearance > Head & Skin > Nose, Ear Shape, Mouth Shape, Jaw Shape, Chin",
+      "acceptance_summary": "Every selected value is direct evidence, not a thumbnail-only observation. | Side views are captured for Nose and Ear Shape when available. | Mouth, Jaw Shape, and Chin selected values are cataloged only after direct selection.",
+      "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+    },
+    {
+      "capture_id": "GFM-CAP-007",
+      "priority": "P1",
+      "title": "Hair submenu boundary map",
+      "exact_menu_path": "Create Player > Player > Appearance > Hair",
+      "acceptance_summary": "Hair child controls are directly visible in native order. | Hairstyle, hair color, facial hair, and facial-hair color are not treated as confirmed native controls unless shown. | Locks or unavailable controls remain documented as visible states.",
+      "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+    },
+    {
+      "capture_id": "GFM-CAP-008",
+      "priority": "P1",
+      "title": "Hairstyle options, only if visible in Hair",
+      "exact_menu_path": "Create Player > Player > Appearance > Hair > visible hairstyle control from GFM-CAP-007",
+      "acceptance_summary": "The native control is visibly confirmed before option capture begins. | Every selected value has menu evidence and required angle views. | Rear view is included for hair shape/length.",
+      "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+    },
+    {
+      "capture_id": "GFM-CAP-009",
+      "priority": "P1",
+      "title": "Hair color options, only if visible in Hair",
+      "exact_menu_path": "Create Player > Player > Appearance > Hair > visible hair-color control from GFM-CAP-007",
+      "acceptance_summary": "Every selected value has readable native label/index evidence. | Lighting stays constant. | No generic color name replaces unreadable game text.",
+      "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+    },
+    {
+      "capture_id": "GFM-CAP-010",
+      "priority": "P1",
+      "title": "Facial-hair controls, only if visible in Hair",
+      "exact_menu_path": "Create Player > Player > Appearance > Hair > visible facial-hair or facial-hair-color controls from GFM-CAP-007",
+      "acceptance_summary": "None is included only if directly visible. | Coverage, mustache, beard, sideburn, stubble, density, and color-control observations are recorded only when visible. | Facial-hair color is not assumed to exist unless shown.",
+      "verifier_note": "Use this as guidance for what to record or review; do not use any primary option count."
+    }
+  ]
+}

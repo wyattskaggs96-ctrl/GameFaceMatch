@@ -1,0 +1,13 @@
+field,value
+verifier_id,
+verifier_name_or_initials,
+completed_independent_counts_before_primary_comparison,
+environment_recorded,
+creation_path_reproduced,
+menu_map_completed,
+evidence_review_completed,
+discrepancies_logged,
+recapture_requests_logged,
+final_status,NOT_VERIFIED
+signed_at,
+notes,

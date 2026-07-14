@@ -1,0 +1,29 @@
+{
+  "purpose": "Record anything that does not match what you saw, including missing evidence, label mismatch, count mismatch, order mismatch, dependency uncertainty, or recapture need.",
+  "columns": [
+    "package_id",
+    "verifier_id",
+    "discrepancy_id",
+    "target_id",
+    "discrepancy_type",
+    "verifier_observation",
+    "evidence_ids",
+    "recapture_required",
+    "severity",
+    "notes"
+  ],
+  "rows": [
+    {
+      "package_id": "phase0-blind-second-verifier-package-20260714",
+      "verifier_id": "",
+      "discrepancy_id": "",
+      "target_id": "",
+      "discrepancy_type": "",
+      "verifier_observation": "",
+      "evidence_ids": "",
+      "recapture_required": "",
+      "severity": "",
+      "notes": ""
+    }
+  ]
+}

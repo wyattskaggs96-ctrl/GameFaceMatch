@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "cf27-hair-color-quality-report-v1",
+  "generatedAt": "2026-07-14T03:15:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_HAIR_COLOR_QUALITY_REPORT",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "summary": {
+    "status": "BLOCKED_NO_HAIR_COLOR_CONTROL_EVIDENCE",
+    "valuesAssessed": 0,
+    "valuesAcceptedForResearch": 0,
+    "valuesRejected": 0,
+    "sequenceLevelRecaptureRequired": true,
+    "blocker": "Current evidence shows the Hair submenu row only. It does not open Hair or show any hair-color control or selected hair-color values."
+  },
+  "checks": [
+    {
+      "checkID": "native_values",
+      "status": "NO_RECORDS_CREATED",
+      "finding": "No native hair-color labels or indices have been entered.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "selected_canonical_hairstyle",
+      "status": "UNCONFIRMED",
+      "finding": "No hair-color capture sequence proves the selected canonical hairstyle.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "selected_canonical_head",
+      "status": "UNCONFIRMED",
+      "finding": "No hair-color capture sequence proves the selected canonical head.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "hair_texture_presentation_change",
+      "status": "UNKNOWN_NOT_TESTED",
+      "finding": "No hair-color value changes were captured, so texture-presentation effects cannot be assessed.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "eyebrow_auto_change",
+      "status": "UNKNOWN_NOT_TESTED",
+      "finding": "No hair-color value changes were captured, so automatic eyebrow-color behavior cannot be assessed.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "facial_hair_color_auto_change",
+      "status": "UNKNOWN_NOT_TESTED",
+      "finding": "No hair-color value changes were captured, so automatic facial-hair-color behavior cannot be assessed.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "selector_wrap",
+      "status": "NOT_DEMONSTRATED",
+      "finding": "No hair-color selector boundary or wrap proof exists.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "default",
+      "status": "NOT_DEMONSTRATED",
+      "finding": "No hair-color default is visible in current evidence.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "dependency_observations",
+      "status": "UNKNOWN_NOT_TESTED",
+      "finding": "No head, hairstyle, mode, body, account, or unlock dependency tests exist for hair color.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "required_views",
+      "status": "MISSING",
+      "finding": "Missing all required views: MENU, FRONT_REPRESENTATIVE_FRAME_PER_VALUE, LEFT_3Q_IF_NEEDED_FOR_VISIBILITY.",
+      "productionImpact": "BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS",
+      "evidence": null
+    }
+  ]
+}

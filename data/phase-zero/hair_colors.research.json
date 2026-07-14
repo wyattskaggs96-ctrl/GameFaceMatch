@@ -1,0 +1,154 @@
+{
+  "schemaVersion": "cf27-hair-color-research-catalog-v1",
+  "generatedAt": "2026-07-14T03:15:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_HAIR_COLOR_RESEARCH_CATALOG",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "productionRecommendationsEnabled": false,
+  "sourceMenuMap": "data/phase-zero/menu_map.research.json",
+  "sourceCaptureRequests": "data/phase-zero/capture_requests.json",
+  "directObservationPolicy": [
+    "Create hair-color records only from directly selected native game values.",
+    "Do not infer hair colors from a visible Hair submenu row or from current head-template footage.",
+    "Preserve native labels or indices exactly; never replace unreadable native values with guessed color names.",
+    "Researcher-applied color descriptions must remain separate from native game labels."
+  ],
+  "summary": {
+    "recordCount": 0,
+    "productionEligibleRecords": 0,
+    "hairMenuRowObserved": true,
+    "hairColorControlObserved": false,
+    "hairColorNativeValuesObserved": false,
+    "completeSelectorDoubleCountAvailable": false,
+    "nativeOrderStatus": "NOT_OBSERVED",
+    "countStatus": "COUNT_UNKNOWN",
+    "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+    "selectorWrapStatus": "NOT_OBSERVED",
+    "evidenceExtractionStatus": "NO_HAIR_COLOR_OPTION_FRAMES_AVAILABLE",
+    "recaptureRequired": true,
+    "blocker": "Current evidence shows the Hair submenu row only. It does not open Hair or show any hair-color control or selected hair-color values."
+  },
+  "canonicalContext": {
+    "selectedCanonicalHairstyle": "UNCONFIRMED_NOT_CAPTURED",
+    "selectedCanonicalHead": "UNCONFIRMED_NOT_CAPTURED",
+    "selectedCanonicalSkinSetting": "UNCONFIRMED_NOT_CAPTURED",
+    "selectedFacialHairState": "UNCONFIRMED_NOT_CAPTURED",
+    "framingConsistency": "NOT_ASSESSABLE_NO_HAIR_COLOR_SEQUENCE",
+    "notes": [
+      "No current footage confirms the hairstyle used for a hair-color pass.",
+      "No current footage confirms the head used for a hair-color pass.",
+      "No current footage opens the Hair submenu or proves whether a hair-color control exists."
+    ]
+  },
+  "sourceEvidence": {
+    "hairMenuRow": {
+      "stableMenuID": "cf27-menu-appearance-hair",
+      "displayLabel": "Hair",
+      "nativeLabel": "Hair",
+      "nativeOrder": 2,
+      "captureStatus": "PARTIAL",
+      "inspected": false,
+      "complete": false,
+      "gapFlags": [
+        "PARTIAL",
+        "COUNT_UNKNOWN",
+        "RECAPTURE_REQUIRED",
+        "FIRST_VALUE_UNKNOWN",
+        "FINAL_VALUE_UNKNOWN",
+        "ORDER_NOT_INSPECTED"
+      ],
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY"
+        }
+      ],
+      "missingEvidence": [
+        "Open Hair and record its child controls, boundaries, defaults, counts, dependencies, and evidence."
+      ]
+    },
+    "hairBoundaryCaptureRequest": {
+      "captureID": "GFM-CAP-007",
+      "title": "Hair submenu boundary map",
+      "priority": "P1",
+      "exactMenuPath": "Create Player > Player > Appearance > Hair",
+      "requiredViews": [
+        "FULL_MENU_LIST",
+        "SCROLL_CONTINUATION",
+        "LOCK_WARNING_OR_DEPENDENCY_IF_VISIBLE"
+      ],
+      "twoIndependentCountsRequired": false,
+      "verificationStatus": "REQUESTED_NOT_CAPTURED",
+      "existingFootageCanBeReused": "Existing footage proves the Hair entry exists only; no child controls are captured.",
+      "acceptanceCriteria": [
+        "Hair child controls are directly visible in native order.",
+        "Hairstyle, hair color, facial hair, and facial-hair color are not treated as confirmed native controls unless shown.",
+        "Locks or unavailable controls remain documented as visible states."
+      ]
+    },
+    "hairColorCaptureRequest": {
+      "captureID": "GFM-CAP-009",
+      "title": "Hair color options, only if visible in Hair",
+      "priority": "P1",
+      "exactMenuPath": "Create Player > Player > Appearance > Hair > visible hair-color control from GFM-CAP-007",
+      "requiredViews": [
+        "MENU",
+        "FRONT_REPRESENTATIVE_FRAME_PER_VALUE",
+        "LEFT_3Q_IF_NEEDED_FOR_VISIBILITY"
+      ],
+      "twoIndependentCountsRequired": true,
+      "verificationStatus": "REQUESTED_NOT_CAPTURED",
+      "existingFootageCanBeReused": "No complete hair-color control evidence exists.",
+      "acceptanceCriteria": [
+        "Every selected value has readable native label/index evidence.",
+        "Lighting stays constant.",
+        "No generic color name replaces unreadable game text."
+      ]
+    },
+    "hairColorOptionEvidence": []
+  },
+  "viewCoverage": {
+    "requiredViews": [
+      "MENU",
+      "FRONT_REPRESENTATIVE_FRAME_PER_VALUE",
+      "LEFT_3Q_IF_NEEDED_FOR_VISIBILITY"
+    ],
+    "extractedViews": [],
+    "missingViews": [
+      "MENU",
+      "FRONT_REPRESENTATIVE_FRAME_PER_VALUE",
+      "LEFT_3Q_IF_NEEDED_FOR_VISIBILITY"
+    ],
+    "status": "NO_OPTION_VIEW_EVIDENCE_AVAILABLE"
+  },
+  "observations": {
+    "hairTexturePresentationChanges": "UNKNOWN_NOT_TESTED",
+    "eyebrowsChangeAutomatically": "UNKNOWN_NOT_TESTED",
+    "facialHairColorChangesAutomatically": "UNKNOWN_NOT_TESTED",
+    "selectorWrapping": "NOT_DEMONSTRATED",
+    "defaults": "NOT_DEMONSTRATED",
+    "dependencies": {
+      "changesByHead": "UNKNOWN_NOT_TESTED",
+      "changesByHairstyle": "UNKNOWN_NOT_TESTED",
+      "changesByPosition": "UNKNOWN_NOT_TESTED",
+      "changesByMode": "UNKNOWN_NOT_TESTED",
+      "changesByBodyType": "UNKNOWN_NOT_TESTED",
+      "changesByAccount": "UNKNOWN_NOT_TESTED",
+      "changesByUnlockState": "UNKNOWN_NOT_TESTED"
+    }
+  },
+  "researcherAppliedColorMetadata": {
+    "status": "NONE_RECORDED_NO_OPTION_EVIDENCE",
+    "separationRule": "Any future approximate color-family notes must be stored under researcherAppliedColorMetadata, separate from nativeGameLabel.",
+    "prohibitedReplacementRule": "Do not replace native labels or indices with guessed color names."
+  },
+  "records": []
+}

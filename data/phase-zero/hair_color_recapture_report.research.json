@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "cf27-hair-color-recapture-report-v1",
+  "generatedAt": "2026-07-14T03:15:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_HAIR_COLOR_RECAPTURE_REPORT",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "summary": {
+    "openRequests": 1,
+    "productionBlockers": 1,
+    "captureRequestIDs": [
+      "GFM-CAP-007",
+      "GFM-CAP-009"
+    ],
+    "status": "OPEN_RECAPTURE_REQUIRED"
+  },
+  "requests": [
+    {
+      "recaptureID": "HAIR-COLOR-RECAPTURE-001",
+      "priority": "P0",
+      "linkedCaptureRequestIDs": [
+        "GFM-CAP-007",
+        "GFM-CAP-009"
+      ],
+      "exactMenuPath": "Create Player > Player > Appearance > Hair, then the visible hair-color control only if directly shown",
+      "reason": "Current evidence proves only that Hair is visible as an Appearance submenu row. It does not show a hair-color control or selected hair-color values.",
+      "requiredCanonicalContext": [
+        "Confirm the native hairstyle value used for color review.",
+        "Confirm the native head value used for color review.",
+        "Confirm skin setting and facial-hair state before changing hair colors.",
+        "Keep lighting and framing stable across all selected color values."
+      ],
+      "requiredEvidence": [
+        "Hair submenu boundary map from GFM-CAP-007.",
+        "Readable native hair-color label or index for every selected value.",
+        "Two complete counts when selector boundaries make that possible.",
+        "Representative frames for MENU, FRONT_REPRESENTATIVE_FRAME_PER_VALUE, and LEFT_3Q_IF_NEEDED_FOR_VISIBILITY.",
+        "Boundary or wrap/no-wrap proof for first and final values.",
+        "Observation of whether eyebrows or facial-hair color change automatically."
+      ],
+      "acceptanceCriteria": [
+        "Every entered hair-color record is backed by directly selected native game evidence.",
+        "Native order is preserved without inferred skipped values.",
+        "Researcher-applied color descriptions are stored separately and never replace native labels.",
+        "Hair texture presentation, eyebrow behavior, facial-hair color behavior, defaults, wrapping, and dependencies are recorded only when demonstrated.",
+        "No record is assigned VERIFIED or production eligibility during primary research."
+      ],
+      "existingFootageUsefulness": "Current footage remains useful only to show that Hair appears as an Appearance submenu row.",
+      "status": "OPEN",
+      "productionBlocker": true
+    }
+  ]
+}

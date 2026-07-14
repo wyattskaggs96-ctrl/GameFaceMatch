@@ -1,0 +1,11 @@
+checkID,status,finding,productionImpact,evidence
+native_values,NO_RECORDS_CREATED,No native hair-color labels or indices have been entered.,BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS,
+selected_canonical_hairstyle,UNCONFIRMED,No hair-color capture sequence proves the selected canonical hairstyle.,BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS,
+selected_canonical_head,UNCONFIRMED,No hair-color capture sequence proves the selected canonical head.,BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS,
+hair_texture_presentation_change,UNKNOWN_NOT_TESTED,"No hair-color value changes were captured, so texture-presentation effects cannot be assessed.",BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS,
+eyebrow_auto_change,UNKNOWN_NOT_TESTED,"No hair-color value changes were captured, so automatic eyebrow-color behavior cannot be assessed.",BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS,
+facial_hair_color_auto_change,UNKNOWN_NOT_TESTED,"No hair-color value changes were captured, so automatic facial-hair-color behavior cannot be assessed.",BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS,
+selector_wrap,NOT_DEMONSTRATED,No hair-color selector boundary or wrap proof exists.,BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS,
+default,NOT_DEMONSTRATED,No hair-color default is visible in current evidence.,BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS,
+dependency_observations,UNKNOWN_NOT_TESTED,"No head, hairstyle, mode, body, account, or unlock dependency tests exist for hair color.",BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS,
+required_views,MISSING,"Missing all required views: MENU, FRONT_REPRESENTATIVE_FRAME_PER_VALUE, LEFT_3Q_IF_NEEDED_FOR_VISIBILITY.",BLOCKS_PRODUCTION_HAIR_COLOR_RECORDS,

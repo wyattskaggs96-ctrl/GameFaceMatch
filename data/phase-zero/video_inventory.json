@@ -1,0 +1,553 @@
+{
+  "schemaVersion": "cf27-video-source-inventory-v1",
+  "generatedAt": "2026-07-13T21:32:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "SOURCE_VIDEO_INVENTORY",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "preservationPolicy": "Original source videos are read-only masters. This inventory records metadata and checksums only; it does not rename, trim, recompress, or alter master evidence.",
+  "sourceRoot": {
+    "token": "OWNER_DOWNLOADS",
+    "absoluteDiscoveryRootInternal": "/Users/skaggssystems/Downloads"
+  },
+  "relabeledManifest": {
+    "path": "OWNER_DOWNLOADS/RELABELED_VIDEO_MANIFEST.csv",
+    "rowCount": 9,
+    "status": "loaded"
+  },
+  "ffmpeg": {
+    "wrapper": "scripts/media/ffmpeg-wrapper",
+    "metadataMethod": "ffmpeg first-frame open probe; ffprobe is optional and not required for this inventory"
+  },
+  "summary": {
+    "manifestRows": 9,
+    "inventoryRows": 11,
+    "filesFound": 11,
+    "filesOpenSuccessfully": 11,
+    "missingManifestFiles": 0,
+    "uniqueVideoFiles": 9,
+    "exactDuplicateFiles": 2,
+    "likelyDuplicateFiles": 0,
+    "totalUniqueDurationSeconds": 517.85,
+    "productionQualityCatalogImageryFiles": 0
+  },
+  "inventory": [
+    {
+      "inventoryId": "phase0-video-001",
+      "manifestSequence": 1,
+      "originalFilename": "01_Environment_and_Creation_Path.MP4",
+      "discoveredFilename": "01_Environment_and_Creation_Path.MP4",
+      "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/01_Environment_and_Creation_Path.MP4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/01_Environment_and_Creation_Path.MP4"
+      },
+      "manifestMatch": {
+        "status": "matched_by_original_filename",
+        "expectedDurationSeconds": 73.574,
+        "manifestNotes": "Unique master"
+      },
+      "sha256": "6f42d3ef2572810fc09ac5138970dee5f325c539925f084a130d3fdcf7c2a0b2",
+      "fileSizeBytes": 156142794,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 73.57,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.96,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": true,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "expectedContent": "Environment and Road to Glory creation path",
+      "observedContent": "Environment and Road to Glory creation path",
+      "conditionAssessment": "appears_complete_for_manifest_scope",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": false,
+        "orderingEvidence": false,
+        "visualComparison": false,
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    },
+    {
+      "inventoryId": "phase0-video-002",
+      "manifestSequence": 2,
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "discoveredFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "canonicalFilename": "02_Head_Templates_Faces_01-12.mov",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_1.mp4.MOV",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/02_Appearance_Menu_Part_1.mp4.MOV"
+      },
+      "manifestMatch": {
+        "status": "matched_by_original_filename",
+        "expectedDurationSeconds": 108.803,
+        "manifestNotes": "Includes menu entry and standardized rotations"
+      },
+      "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+      "fileSizeBytes": 254684699,
+      "mediaContainer": "QuickTime/MOV",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 108.8,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.95,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": true,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "expectedContent": "Head Template captures Face 1 through Face 12",
+      "observedContent": "Head Template captures; manifest states Face 1 through Face 12",
+      "conditionAssessment": "partially_accepted_research_evidence",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": true,
+        "orderingEvidence": true,
+        "visualComparison": "limited",
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    },
+    {
+      "inventoryId": "phase0-video-003",
+      "manifestSequence": 3,
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "discoveredFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "canonicalFilename": "03_Head_Templates_Faces_12-29.mov",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/02_Appearance_Menu_Part_2.mp4.MOV",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/02_Appearance_Menu_Part_2.mp4.MOV"
+      },
+      "manifestMatch": {
+        "status": "matched_by_original_filename",
+        "expectedDurationSeconds": 133.015,
+        "manifestNotes": "Face 12 overlaps prior video for continuity"
+      },
+      "sha256": "c348b96b1414927fca5ab12f8a65cc7668a6fdb22a2622c99e11a984d819a302",
+      "fileSizeBytes": 302595103,
+      "mediaContainer": "QuickTime/MOV",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 133.02,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.94,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": true,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "expectedContent": "Head Template captures Face 12 through Face 29",
+      "observedContent": "Head Template captures; manifest states Face 12 through Face 29",
+      "conditionAssessment": "partially_accepted_research_evidence",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": true,
+        "orderingEvidence": true,
+        "visualComparison": "limited",
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    },
+    {
+      "inventoryId": "phase0-video-004",
+      "manifestSequence": 4,
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "discoveredFilename": "03_Appearance_Skin_Tone.MP4",
+      "canonicalFilename": "04_Skin_Tone.mp4",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/03_Appearance_Skin_Tone.MP4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/03_Appearance_Skin_Tone.MP4"
+      },
+      "manifestMatch": {
+        "status": "matched_by_original_filename",
+        "expectedDurationSeconds": 53.821,
+        "manifestNotes": "Unique master"
+      },
+      "sha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+      "fileSizeBytes": 128477357,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 53.82,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.97,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": true,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "expectedContent": "Skin Tone menu and options",
+      "observedContent": "Skin Tone menu and options",
+      "conditionAssessment": "appears_complete_for_manifest_scope",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": true,
+        "orderingEvidence": true,
+        "visualComparison": "limited",
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    },
+    {
+      "inventoryId": "phase0-video-005",
+      "manifestSequence": 5,
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "discoveredFilename": "04_Appearance_Skin_Details.MP4",
+      "canonicalFilename": "05_Skin_Details.mp4",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/04_Appearance_Skin_Details.MP4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/04_Appearance_Skin_Details.MP4"
+      },
+      "manifestMatch": {
+        "status": "matched_by_original_filename",
+        "expectedDurationSeconds": 31.715,
+        "manifestNotes": "Unique master"
+      },
+      "sha256": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+      "fileSizeBytes": 78206366,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 31.72,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.9,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": true,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "expectedContent": "Skin Details menu and options",
+      "observedContent": "Skin Details menu and options",
+      "conditionAssessment": "appears_complete_for_manifest_scope",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": true,
+        "orderingEvidence": true,
+        "visualComparison": "limited",
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    },
+    {
+      "inventoryId": "phase0-video-006",
+      "manifestSequence": 6,
+      "originalFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "discoveredFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "canonicalFilename": "06_Eye_Shape.mp4",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/45926e39-7553-43b1-803a-6ddc787c63dd.MP4"
+      },
+      "manifestMatch": {
+        "status": "matched_by_original_filename",
+        "expectedDurationSeconds": 24.925,
+        "manifestNotes": "Starts with navigation through earlier tabs"
+      },
+      "sha256": "84bdb04ca232a662a8add3ceef92f021ad6c96d241e536b12c0af968f3d92ca2",
+      "fileSizeBytes": 61265737,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 24.93,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.89,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": true,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "expectedContent": "Eye Shape menu and options",
+      "observedContent": "Eye Shape menu and options",
+      "conditionAssessment": "partially_accepted_research_evidence",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": true,
+        "orderingEvidence": true,
+        "visualComparison": "limited",
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    },
+    {
+      "inventoryId": "phase0-video-007",
+      "manifestSequence": 7,
+      "originalFilename": "352535",
+      "discoveredFilename": "a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+      "canonicalFilename": "07_Eye_Color.mp4",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/a1e6193d-625e-4880-8977-3a8c7670c336.MP4"
+      },
+      "manifestMatch": {
+        "status": "matched_by_existing_inventory_or_duration",
+        "expectedDurationSeconds": 29.33,
+        "manifestNotes": "Original lacked extension"
+      },
+      "sha256": "c07fdab8d65b19859ae5985dc4fb06bb9919aecf597996ab74463bc6020acfd3",
+      "fileSizeBytes": 73201886,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 29.33,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.98,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": true,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "expectedContent": "Eye Color menu and options",
+      "observedContent": "Eye Color menu and options",
+      "conditionAssessment": "appears_complete_for_manifest_scope",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": true,
+        "orderingEvidence": true,
+        "visualComparison": "limited",
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    },
+    {
+      "inventoryId": "phase0-video-008",
+      "manifestSequence": 8,
+      "originalFilename": "352537",
+      "discoveredFilename": "5bcd4869-531b-41bf-b643-5331f34cb3f3.MP4",
+      "canonicalFilename": "08_Nose.mp4",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/5bcd4869-531b-41bf-b643-5331f34cb3f3.MP4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/5bcd4869-531b-41bf-b643-5331f34cb3f3.MP4"
+      },
+      "manifestMatch": {
+        "status": "matched_by_existing_inventory_or_duration",
+        "expectedDurationSeconds": 32.449,
+        "manifestNotes": "Original lacked extension"
+      },
+      "sha256": "301b6c7ba55233503e54296e55366cdd0468f0c23b5117be6ca5ff0363d5e5b7",
+      "fileSizeBytes": 80062286,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 32.45,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.92,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": true,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "expectedContent": "Nose menu and options",
+      "observedContent": "Nose menu and options",
+      "conditionAssessment": "appears_complete_for_manifest_scope",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": true,
+        "orderingEvidence": true,
+        "visualComparison": "limited",
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    },
+    {
+      "inventoryId": "phase0-video-009",
+      "manifestSequence": 9,
+      "originalFilename": "352531",
+      "discoveredFilename": "55b7d607-eefa-41a4-8635-1eedb5296ab0.MP4",
+      "canonicalFilename": "09_Ear_Shape.mp4",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/55b7d607-eefa-41a4-8635-1eedb5296ab0.MP4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/55b7d607-eefa-41a4-8635-1eedb5296ab0.MP4"
+      },
+      "manifestMatch": {
+        "status": "matched_by_existing_inventory_or_duration",
+        "expectedDurationSeconds": 30.214,
+        "manifestNotes": "Original lacked extension"
+      },
+      "sha256": "e615e0919ebc50da7cdb1ec27ea302e28ac632b01728a88ca28ab0bb1f5902a1",
+      "fileSizeBytes": 69914730,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 30.21,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.91,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": true,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "expectedContent": "Ear Shape menu and options",
+      "observedContent": "Ear Shape menu and options",
+      "conditionAssessment": "partially_accepted_research_evidence",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": true,
+        "orderingEvidence": true,
+        "visualComparison": "limited",
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    },
+    {
+      "inventoryId": "phase0-video-010",
+      "manifestSequence": null,
+      "originalFilename": "4df34d2b-7dea-4afe-8dcc-05583430012f.MP4",
+      "discoveredFilename": "4df34d2b-7dea-4afe-8dcc-05583430012f.MP4",
+      "canonicalFilename": "duplicate-reference-of-05_Skin_Details.mp4",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/4df34d2b-7dea-4afe-8dcc-05583430012f.MP4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/4df34d2b-7dea-4afe-8dcc-05583430012f.MP4"
+      },
+      "manifestMatch": {
+        "status": "not_in_relabel_manifest",
+        "expectedDurationSeconds": null,
+        "manifestNotes": ""
+      },
+      "sha256": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+      "fileSizeBytes": 78206366,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 31.72,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.9,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": false,
+      "exactDuplicate": true,
+      "exactDuplicateOf": "phase0-video-005",
+      "likelyDuplicateOf": null,
+      "expectedContent": "Exact duplicate of Skin Details menu and options recording",
+      "observedContent": "Exact duplicate of Skin Details menu and options recording",
+      "conditionAssessment": "exact_duplicate_reference_only",
+      "suitability": {
+        "menuEvidence": false,
+        "countEvidence": false,
+        "orderingEvidence": false,
+        "visualComparison": false,
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    },
+    {
+      "inventoryId": "phase0-video-011",
+      "manifestSequence": null,
+      "originalFilename": "7cafeb6e-0488-42e6-8d6d-5836f8e30daf.MP4",
+      "discoveredFilename": "7cafeb6e-0488-42e6-8d6d-5836f8e30daf.MP4",
+      "canonicalFilename": "duplicate-reference-of-04_Skin_Tone.mp4",
+      "sourceLocation": {
+        "rootToken": "OWNER_DOWNLOADS",
+        "portableRelativeEvidencePath": "OWNER_DOWNLOADS/7cafeb6e-0488-42e6-8d6d-5836f8e30daf.MP4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Downloads/7cafeb6e-0488-42e6-8d6d-5836f8e30daf.MP4"
+      },
+      "manifestMatch": {
+        "status": "not_in_relabel_manifest",
+        "expectedDurationSeconds": null,
+        "manifestNotes": ""
+      },
+      "sha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+      "fileSizeBytes": 128477357,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "durationSeconds": 53.82,
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.97,
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": false,
+      "exactDuplicate": true,
+      "exactDuplicateOf": "phase0-video-004",
+      "likelyDuplicateOf": null,
+      "expectedContent": "Exact duplicate of Skin Tone menu and options recording",
+      "observedContent": "Exact duplicate of Skin Tone menu and options recording",
+      "conditionAssessment": "exact_duplicate_reference_only",
+      "suitability": {
+        "menuEvidence": false,
+        "countEvidence": false,
+        "orderingEvidence": false,
+        "visualComparison": false,
+        "productionQualityCatalogImagery": false
+      },
+      "preservationStatus": "master_preserved_unchanged",
+      "productionUseStatus": "not_production_data"
+    }
+  ]
+}

@@ -31,6 +31,7 @@
     "cf27:partial-match-sandbox": "node scripts/cf27-partial-matching-sandbox.mjs",
     "cf27:recapture-queue": "node scripts/cf27-authoritative-recapture-queue.mjs",
     "cf27:xbox-runbook": "node scripts/cf27-tomorrows-xbox-recording-runbook.mjs",
+    "cf27:video-inventory": "node scripts/cf27-video-source-inventory.mjs",
     "source-video:intake": "node scripts/source-video-intake.mjs",
     "phase-zero:export": "node scripts/phase-zero-export.mjs"
   }

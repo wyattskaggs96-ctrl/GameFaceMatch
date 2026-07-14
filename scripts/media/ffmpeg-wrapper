@@ -1,0 +1,40 @@
+#!/bin/sh
+set -eu
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: scripts/media/ffmpeg-wrapper <ffmpeg|ffprobe> [args...]" >&2
+  exit 64
+fi
+
+tool="$1"
+shift
+
+case "$tool" in
+  ffmpeg)
+    if [ -n "${CF27_FFMPEG_PATH:-}" ] && [ -x "$CF27_FFMPEG_PATH" ]; then
+      exec "$CF27_FFMPEG_PATH" "$@"
+    fi
+    if command -v ffmpeg >/dev/null 2>&1; then
+      exec ffmpeg "$@"
+    fi
+    if [ -x "/Applications/Plaud.app/Contents/Resources/ffmpeg" ]; then
+      exec "/Applications/Plaud.app/Contents/Resources/ffmpeg" "$@"
+    fi
+    echo "ffmpeg unavailable. Set CF27_FFMPEG_PATH or install ffmpeg on PATH." >&2
+    exit 127
+    ;;
+  ffprobe)
+    if [ -n "${CF27_FFPROBE_PATH:-}" ] && [ -x "$CF27_FFPROBE_PATH" ]; then
+      exec "$CF27_FFPROBE_PATH" "$@"
+    fi
+    if command -v ffprobe >/dev/null 2>&1; then
+      exec ffprobe "$@"
+    fi
+    echo "ffprobe unavailable. Set CF27_FFPROBE_PATH or install ffprobe on PATH." >&2
+    exit 127
+    ;;
+  *)
+    echo "Unsupported media tool '$tool'. Use ffmpeg or ffprobe." >&2
+    exit 64
+    ;;
+esac

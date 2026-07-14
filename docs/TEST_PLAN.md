@@ -127,6 +127,8 @@ Analytics tests should include:
 - No approved external provider by default
 - Rejection of raw images, object URLs, data URLs, identifying frames, facial geometry, exact measurements, landmarks, embeddings, and unencrypted profile content
 - Rejection of unknown payload keys and long free-form strings
+- Rejection of invalid recommendation ranks and unsafe latency values
+- Dashboard aggregation for scan completion, retake rate, quality pass rate, recommendation success, top-one/top-three selection, screenshot refinement, deletion success, crash-free sessions, and processing latency
 - No analytics SDK or network provider required for the MVP
 
 ## Security hardening coverage

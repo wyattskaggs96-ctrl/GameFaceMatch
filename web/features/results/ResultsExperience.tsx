@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Button, Card, EmptyState, LoadingState, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { RecoveryActionList } from "@/components/reliability";
 import { CATALOG_UNAVAILABLE_MESSAGE, PRODUCT_EXPLANATION } from "@/lib/product-copy";
@@ -19,6 +19,9 @@ export function ResultsExperience({
   onRetryCatalog,
   canSaveBuild = false,
   onSaveBuild,
+  onTopThreeViewed,
+  onRecommendationSelected,
+  onBuildGuideUsed,
   onDeleteResult,
   catalogVersionID = "empty-production",
   catalogVerificationDate = null,
@@ -38,6 +41,9 @@ export function ResultsExperience({
   onRetryCatalog?: () => void;
   canSaveBuild?: boolean;
   onSaveBuild?: (match: GameAppearanceMatch) => void;
+  onTopThreeViewed?: (matchCount: number) => void;
+  onRecommendationSelected?: (rank: 1 | 2 | 3) => void;
+  onBuildGuideUsed?: (stepCount: number) => void;
   onDeleteResult?: () => void;
   catalogVersionID?: string;
   catalogVerificationDate?: string | null;
@@ -50,12 +56,21 @@ export function ResultsExperience({
 }) {
   const [selectedMatchID, setSelectedMatchID] = useState<string | null>(null);
   const [resultDeleted, setResultDeleted] = useState(false);
+  const trackedTopThreeViewRef = useRef<string | null>(null);
   const state = createResultsState({ profile, catalogIsEmpty, matches, errorMessage, isProcessing });
   const selectedMatch = state.matches.find((match) => match.id === selectedMatchID) ?? state.matches[0];
   const recommendationReport = useMemo(() => createRecommendationExplanationReport({ profile, matches: state.matches }), [profile, state.matches]);
   const selectedRecommendation = selectedMatch ? recommendationReport.recommendations.find((recommendation) => recommendation.rank === selectedMatch.rank) : undefined;
   const shareBuildInstructions = selectedMatch ? createBuildInstructions(selectedMatch) : [];
   const shareCard = useMemo(() => createSafeShareCard({ match: selectedMatch, buildInstructions: shareBuildInstructions }), [selectedMatch, shareBuildInstructions]);
+
+  useEffect(() => {
+    const trackingKey = state.kind === "topThree" ? `top-three-${state.matches.length}` : null;
+    if (trackingKey && trackedTopThreeViewRef.current !== trackingKey) {
+      trackedTopThreeViewRef.current = trackingKey;
+      onTopThreeViewed?.(state.matches.length);
+    }
+  }, [onTopThreeViewed, state.kind, state.matches.length]);
 
   if (resultDeleted) {
     return (
@@ -134,6 +149,8 @@ export function ResultsExperience({
           onSelectMatch={setSelectedMatchID}
           canSaveBuild={canSaveBuild}
           onSaveBuild={onSaveBuild}
+          onRecommendationSelected={onRecommendationSelected}
+          onBuildGuideUsed={onBuildGuideUsed}
           onDeleteResult={() => {
             onDeleteResult?.();
             setResultDeleted(true);
@@ -253,6 +270,8 @@ function TopThreeResults({
   onSelectMatch,
   canSaveBuild,
   onSaveBuild,
+  onRecommendationSelected,
+  onBuildGuideUsed,
   onDeleteResult,
   onStartOver,
   testDataMode,
@@ -267,6 +286,8 @@ function TopThreeResults({
   onSelectMatch: (matchID: string) => void;
   canSaveBuild: boolean;
   onSaveBuild?: (match: GameAppearanceMatch) => void;
+  onRecommendationSelected?: (rank: 1 | 2 | 3) => void;
+  onBuildGuideUsed?: (stepCount: number) => void;
   onDeleteResult: () => void;
   onStartOver: () => void;
   testDataMode: boolean;
@@ -310,7 +331,13 @@ function TopThreeResults({
                 <strong>{match.catalogItem.stableInternalID}</strong>
               </div>
             </dl>
-            <Button variant="secondary" onClick={() => onSelectMatch(match.id)}>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                onSelectMatch(match.id);
+                if (match.rank === 1 || match.rank === 2 || match.rank === 3) onRecommendationSelected?.(match.rank);
+              }}
+            >
               View details
             </Button>
           </Card>
@@ -487,7 +514,13 @@ function TopThreeResults({
       )}
 
       <div className="button-row">
-        <Button onClick={() => onSaveBuild?.(selectedMatch)} disabled={testDataMode || !onSaveBuild || !canSaveBuild}>
+        <Button
+          onClick={() => {
+            onBuildGuideUsed?.(buildInstructions.length);
+            onSaveBuild?.(selectedMatch);
+          }}
+          disabled={testDataMode || !onSaveBuild || !canSaveBuild}
+        >
           Save build
         </Button>
         <Button variant="danger" onClick={onDeleteResult}>

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { AppShell } from "@/components/AppShell";
 import { Alert, Button, Card, LoadingState, ProgressBar, ScreenHeader, StepFlowRail } from "@/components/design-system";
+import { createLocalAnalyticsRecorder, type AnalyticsEventName, type AnalyticsPayload, type PrivacySafeAnalytics } from "@/lib/analytics/privacy-safe-analytics";
 import { AttributeConfirmation } from "@/features/attributes/AttributeConfirmation";
 import { BrowserCapabilityPanel } from "@/features/capture/BrowserCapabilityPanel";
 import { CaptureLightingCheck } from "@/features/capture/CaptureLightingCheck";
@@ -18,7 +19,7 @@ import { ResultsExperience } from "@/features/results/ResultsExperience";
 import { SavedBuildsEmpty } from "@/features/saved-builds/SavedBuildsEmpty";
 import { ScreenshotRefinementEntry } from "@/features/refinement/ScreenshotRefinementEntry";
 import { SettingsPanel } from "@/features/settings/SettingsPanel";
-import { createInitialCaptureSession } from "@/lib/capture/capture-session";
+import { createInitialCaptureSession, type ActiveCaptureSession } from "@/lib/capture/capture-session";
 import { createBrowserCameraService } from "@/lib/capture/browser-camera-service";
 import { createBundledCatalogRepository, type CatalogRuntimeStatus } from "@/lib/catalog/catalog-repository";
 import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
@@ -89,6 +90,14 @@ const DevelopmentMobileQAStatus =
         loading: () => <LoadingState label="Loading mobile QA status" />
       });
 
+const DevelopmentAnalyticsDashboard =
+  process.env.NODE_ENV === "production"
+    ? null
+    : dynamic(() => import("@/features/analytics/AnalyticsDashboard").then((module) => module.AnalyticsDashboard), {
+        ssr: false,
+        loading: () => <LoadingState label="Loading analytics dashboard" />
+      });
+
 const DevelopmentPhase0Status =
   process.env.NODE_ENV === "production"
     ? null
@@ -130,8 +139,10 @@ export default function HomePage() {
   const [profileSaveErrorMessage, setProfileSaveErrorMessage] = useState<string | null>(null);
   const [captureRecoveryNotice, setCaptureRecoveryNotice] = useState<string | null>(null);
   const [offlineRecoveryStatus, setOfflineRecoveryStatus] = useState<OfflineRecoveryStatus | null>(null);
+  const [analyticsRevision, setAnalyticsRevision] = useState(0);
   const cameraService = useMemo(() => createBrowserCameraService(), []);
   const privacyStore = useMemo(() => createMemoryPrivacyStore(), []);
+  const analytics = useMemo<PrivacySafeAnalytics>(() => createLocalAnalyticsRecorder(), []);
   const savedProfileStorage = useMemo<SavedProfileStorage>(
     () => (typeof window === "undefined" ? createMemorySavedProfileStorage() : createBrowserSavedProfileStorage(window.sessionStorage, window.crypto)),
     []
@@ -148,7 +159,8 @@ export default function HomePage() {
         { id: "video-inspector" as const, label: "Video Inspector" },
         { id: "phase-0" as const, label: "Phase 0" },
         { id: "matching-lab" as const, label: "Matching Lab" },
-        { id: "mobile-qa" as const, label: "Mobile QA" }
+        { id: "mobile-qa" as const, label: "Mobile QA" },
+        { id: "analytics" as const, label: "Analytics" }
       ]
     : PRIMARY_NAV_ITEMS;
   const stepFlowProgress = getStepFlowProgress(screen);
@@ -208,6 +220,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    trackAnalytics("appSessionStarted");
     const initialScreen = getScreenFromHash(window.location.hash);
     if (initialScreen) {
       setScreen(initialScreen);
@@ -295,11 +308,19 @@ export default function HomePage() {
       commitScreen("consent");
       return;
     }
+    if (nextScreen === "refinement" && screen !== "refinement") {
+      trackAnalytics("refinementStarted", { catalogVersionID: productionCatalogManifest.catalogVersion.identifier });
+    }
     commitScreen(nextScreen);
   }
 
   function refreshPrivacyState() {
     setPrivacyRevision((value) => value + 1);
+  }
+
+  function trackAnalytics(name: AnalyticsEventName, payload: AnalyticsPayload = {}) {
+    const result = analytics.track(name, payload);
+    if (result.ok) setAnalyticsRevision((value) => value + 1);
   }
 
   function refreshSavedProfileState() {
@@ -308,6 +329,15 @@ export default function HomePage() {
   }
 
   function handleConsentChange(nextConsent: ConsentState) {
+    if (!consentState.cameraUse.granted && nextConsent.cameraUse.granted) {
+      trackAnalytics("permissionAccepted", { permissionKind: "camera", permissionOutcome: "accepted" });
+    }
+    if (!consentState.currentFaceAnalysis.granted && nextConsent.currentFaceAnalysis.granted) {
+      trackAnalytics("permissionAccepted", { permissionKind: "currentFaceAnalysis", permissionOutcome: "accepted" });
+    }
+    if (!consentState.temporaryProcessing.granted && nextConsent.temporaryProcessing.granted) {
+      trackAnalytics("permissionAccepted", { permissionKind: "temporaryProcessing", permissionOutcome: "accepted" });
+    }
     setConsentState(nextConsent);
     privacyStore.saveConsentState(nextConsent);
     refreshPrivacyState();
@@ -347,6 +377,28 @@ export default function HomePage() {
   }
 
   function handleSessionChange(nextSession: typeof session) {
+    const previousCompletedAngles = session.angles.filter((angle) => angle.status === "complete").length;
+    const nextCompletedAngles = nextSession.angles.filter((angle) => angle.status === "complete").length;
+    if (nextCompletedAngles < previousCompletedAngles) {
+      trackAnalytics("retake", { captureMode: "webRgbGuided", completedAngleCount: nextCompletedAngles, requiredAngleCount: nextSession.angles.length });
+    }
+    if (nextCompletedAngles === nextSession.angles.length && previousCompletedAngles < session.angles.length) {
+      trackAnalytics("captureCompleted", {
+        captureMode: "webRgbGuided",
+        captureSource: inferCaptureSource(nextSession),
+        completedAngleCount: nextCompletedAngles,
+        requiredAngleCount: nextSession.angles.length,
+        usedUploadFallback: nextSession.angles.some((angle) => angle.source === "upload")
+      });
+    }
+    const invalidAngles = nextSession.angles.filter((angle) => angle.validationErrors.length > 0 || angle.validationStatus === "invalid");
+    if (invalidAngles.length > 0) {
+      trackAnalytics("qualityFailureCategory", {
+        captureMode: "webRgbGuided",
+        qualityFailureCategory: classifyQualityFailure(invalidAngles.flatMap((angle) => angle.validationErrors)),
+        failedAngleCount: invalidAngles.length
+      });
+    }
     setSession(nextSession);
     privacyStore.setCurrentSessionImages(nextSession.angles.flatMap((angle) => (angle.image ? [angle.image] : [])));
     if (typeof window !== "undefined") {
@@ -361,6 +413,7 @@ export default function HomePage() {
   }
 
   function deleteCurrentSession() {
+    trackAnalytics("deletionRequested", { deletionScope: "activeCaptureSession" });
     revokeObjectUrls(session.angles.flatMap((angle) => (angle.image?.objectUrl ? [angle.image.objectUrl] : [])));
     if (typeof window !== "undefined") createCaptureRecoveryStore(window.sessionStorage).clear();
     privacyStore.deleteCurrentSession();
@@ -371,73 +424,91 @@ export default function HomePage() {
     setProfileSaveErrorMessage(null);
     setCaptureRecoveryNotice(null);
     privacyStore.recordDeletionCompletion("active-capture-session");
+    trackAnalytics("deletionCompleted", { deletionScope: "activeCaptureSession" });
     setDeletionRecorded(true);
     refreshPrivacyState();
   }
 
   function deleteTemporaryImages() {
+    trackAnalytics("deletionRequested", { deletionScope: "temporaryImages" });
     revokeObjectUrls(session.angles.flatMap((angle) => (angle.image?.objectUrl ? [angle.image.objectUrl] : [])));
     if (typeof window !== "undefined") createCaptureRecoveryStore(window.sessionStorage).clear();
     privacyStore.deleteTemporaryImages();
     setSession(createInitialCaptureSession());
     privacyStore.recordDeletionCompletion("temporary-images");
+    trackAnalytics("deletionCompleted", { deletionScope: "temporaryImages" });
     setDeletionRecorded(true);
     refreshPrivacyState();
   }
 
   function deleteDerivedProfile() {
+    trackAnalytics("deletionRequested", { deletionScope: "derivedProfile" });
     privacyStore.deleteDerivedProfile(standardProfile?.id);
     setStandardProfile(null);
     setProfileSaveStatusMessage(null);
     setProfileSaveErrorMessage(null);
     privacyStore.recordDeletionCompletion("derived-profile");
+    trackAnalytics("deletionCompleted", { deletionScope: "derivedProfile" });
+    trackAnalytics("profileDeleted", { deletionScope: "derivedProfile" });
     setDeletionRecorded(true);
     refreshPrivacyState();
   }
 
   function deleteSavedBuild(buildID: string) {
+    trackAnalytics("deletionRequested", { deletionScope: "savedBuild" });
     privacyStore.deleteSavedBuild(buildID);
     privacyStore.recordDeletionCompletion("saved-build");
+    trackAnalytics("deletionCompleted", { deletionScope: "savedBuild" });
     setDeletionRecorded(true);
     refreshPrivacyState();
   }
 
   function deleteAllSavedBuilds() {
+    trackAnalytics("deletionRequested", { deletionScope: "savedBuild" });
     privacyStore.deleteSavedBuilds();
     privacyStore.recordDeletionCompletion("saved-builds");
+    trackAnalytics("deletionCompleted", { deletionScope: "savedBuild" });
     setDeletionRecorded(true);
     refreshPrivacyState();
   }
 
   function deleteSavedProfile(profileID: string) {
+    trackAnalytics("deletionRequested", { deletionScope: "savedProfile" });
     savedProfileStorage.deleteProfile(profileID);
     privacyStore.deleteDerivedProfile(profileID);
     privacyStore.recordDeletionCompletion("saved-profile");
+    trackAnalytics("deletionCompleted", { deletionScope: "savedProfile" });
+    trackAnalytics("profileDeleted", { deletionScope: "savedProfile" });
     setDeletionRecorded(true);
     refreshSavedProfileState();
     refreshPrivacyState();
   }
 
   function deleteAllSavedProfiles() {
+    trackAnalytics("deletionRequested", { deletionScope: "savedProfile" });
     savedProfileStorage.deleteAllProfiles();
     privacyStore.deleteDerivedProfile();
     privacyStore.recordDeletionCompletion("saved-profiles");
+    trackAnalytics("deletionCompleted", { deletionScope: "savedProfile" });
     setDeletionRecorded(true);
     refreshSavedProfileState();
     refreshPrivacyState();
   }
 
   function deleteScreenshotSessionData() {
+    trackAnalytics("deletionRequested", { deletionScope: "screenshotSession" });
     const mutation = deleteScreenshotRefinementSession(screenshotSession);
     revokeObjectUrls(mutation.objectUrlsToRevoke);
     privacyStore.deleteScreenshotSession();
     setScreenshotSession(mutation.session);
     privacyStore.recordDeletionCompletion("screenshot-session");
+    trackAnalytics("deletionCompleted", { deletionScope: "screenshotSession" });
     setDeletionRecorded(true);
     refreshPrivacyState();
   }
 
   function deleteAllLocalData() {
+    trackAnalytics("deletionRequested", { deletionScope: "allLocalData" });
     revokeObjectUrls([
       ...session.angles.flatMap((angle) => (angle.image?.objectUrl ? [angle.image.objectUrl] : [])),
       ...screenshotSession.slots.flatMap((slot) => (slot.screenshot?.objectUrl ? [slot.screenshot.objectUrl] : []))
@@ -456,6 +527,7 @@ export default function HomePage() {
     setProfileSaveErrorMessage(null);
     setCaptureRecoveryNotice(null);
     setDeletionRecorded(true);
+    trackAnalytics("deletionCompleted", { deletionScope: "allLocalData" });
     refreshPrivacyState();
   }
 
@@ -491,6 +563,7 @@ export default function HomePage() {
   }
 
   function createProfileFromCurrentSession() {
+    const startedAt = typeof performance === "undefined" ? Date.now() : performance.now();
     const profile = createStandardFaceProfile({
       session,
       attributes: attributeConfirmation,
@@ -505,6 +578,8 @@ export default function HomePage() {
       createCaptureRecoveryStore(window.sessionStorage).save(createCaptureRecoverySnapshot(retainedSession));
     }
     recordRetentionActions(retentionActions);
+    const endedAt = typeof performance === "undefined" ? Date.now() : performance.now();
+    trackAnalytics("latencyRecorded", { latencyOperation: "profileCreation", latencyMs: Math.round(Math.max(endedAt - startedAt, 0)) });
     setProfileSaveStatusMessage(null);
     setProfileSaveErrorMessage(null);
     refreshPrivacyState();
@@ -523,11 +598,13 @@ export default function HomePage() {
     const result = await savedProfileStorage.saveProfile(standardProfile);
     if (result.ok && result.summary) {
       privacyStore.saveDerivedProfile(standardProfile);
+      trackAnalytics("buildSaved", { saveTarget: "derivedProfile", profileSaved: true });
       setProfileSaveStatusMessage(
         `Saved non-image profile ${result.summary.profileID} locally with ${result.summary.encryptionStatus === "encrypted" ? "WebCrypto encryption" : "session-only fallback storage"}.`
       );
       setProfileSaveErrorMessage(null);
     } else {
+      trackAnalytics("errorOccurred", { errorCategory: "saveFailure" });
       setProfileSaveStatusMessage(null);
       setProfileSaveErrorMessage(result.error ?? "Profile could not be saved locally.");
     }
@@ -609,7 +686,10 @@ export default function HomePage() {
           <ConsentPanel
             consentState={consentState}
             onConsentChange={handleConsentChange}
-            onContinue={() => navigate("home")}
+            onContinue={() => {
+              trackAnalytics("onboardingCompleted", { onboardingStepCount: 5 });
+              navigate("home");
+            }}
           />
         );
       case "home":
@@ -622,7 +702,10 @@ export default function HomePage() {
             body="You will capture five RGB reference angles: straight-on, left 45 degrees, right 45 degrees, left profile, and right profile. Matching remains unavailable until the verified catalog is loaded."
             detail="This walkthrough is structured for use near a TV or game console: short steps, clear states, and manual upload fallback."
             actionLabel="Prepare capture"
-            onAction={() => navigate("preparation")}
+            onAction={() => {
+              trackAnalytics("captureStarted", { captureMode: "webRgbGuided", requiredAngleCount: requiredAngles });
+              navigate("preparation");
+            }}
           />
         );
       case "preparation":
@@ -676,7 +759,28 @@ export default function HomePage() {
             body="The app has created a local standardized profile from capture metadata, local RGB landmark measurements where defensible, quality checks, and user-confirmed attributes. It does not identify people, infer sensitive traits, or claim TrueDepth-level geometry."
             detail={CATALOG_UNAVAILABLE_MESSAGE}
             actionLabel="View results"
-            onAction={() => navigate("results")}
+            onAction={() => {
+              trackAnalytics("resultGenerated", {
+                resultOutcome: catalogIsEmpty ? "unavailable" : catalogRuntimeError ? "error" : "success",
+                resultBlockReason: catalogIsEmpty ? "catalogUnavailable" : catalogRuntimeError ? "matchingError" : undefined,
+                catalogVersionID: productionCatalogManifest.catalogVersion.identifier,
+                catalogRecordCount: catalogRuntimeStatus?.manifest.items.length ?? productionCatalogManifest.items.length,
+                recommendationCount: 0
+              });
+              if (catalogIsEmpty) {
+                trackAnalytics("catalogUnavailable", {
+                  resultBlockReason: "catalogUnavailable",
+                  catalogVersionID: productionCatalogManifest.catalogVersion.identifier,
+                  catalogRecordCount: 0
+                });
+                trackAnalytics("resultBlocked", {
+                  resultBlockReason: "catalogUnavailable",
+                  catalogVersionID: productionCatalogManifest.catalogVersion.identifier,
+                  catalogRecordCount: 0
+                });
+              }
+              navigate("results");
+            }}
             loading
           />
         );
@@ -696,18 +800,35 @@ export default function HomePage() {
             canSaveBuild={isConsentGranted(consentState, "saveCompletedBuild")}
             onSaveBuild={(match) =>
               {
+                const buildInstructions = createBuildInstructions(match);
+                trackAnalytics("buildSaved", {
+                  saveTarget: "completedBuild",
+                  catalogVersionID: match.catalogVersion.identifier,
+                  recommendationCount: 1,
+                  buildGuideStepCount: buildInstructions.length
+                });
                 privacyStore.saveBuild({
                 id: `saved-build-${new Date().toISOString()}`,
                 createdAt: new Date().toISOString(),
                 profileVersion: standardProfile?.profileVersion ?? "unknown",
                 match,
-                buildInstructions: createBuildInstructions(match),
+                buildInstructions,
                 catalogVersion: match.catalogVersion
                 });
                 refreshPrivacyState();
               }
             }
             onDeleteResult={() => setStandardProfile(null)}
+            onTopThreeViewed={(matchCount) =>
+              trackAnalytics("topThreeViewed", {
+                resultOutcome: "success",
+                recommendationCount: matchCount,
+                topThreeVisible: matchCount > 0,
+                catalogVersionID: productionCatalogManifest.catalogVersion.identifier
+              })
+            }
+            onRecommendationSelected={(rank) => trackAnalytics("recommendationSelected", { selectedRecommendationRank: rank })}
+            onBuildGuideUsed={(stepCount) => trackAnalytics("buildGuideUsed", { buildGuideStepCount: stepCount })}
           />
         );
       case "catalog":
@@ -724,6 +845,12 @@ export default function HomePage() {
         return isDevelopment && DevelopmentMatchingLab ? <DevelopmentMatchingLab /> : <GameCatalogStatus />;
       case "mobile-qa":
         return isDevelopment && DevelopmentMobileQAStatus ? <DevelopmentMobileQAStatus /> : <GameCatalogStatus />;
+      case "analytics":
+        return isDevelopment && DevelopmentAnalyticsDashboard ? (
+          <DevelopmentAnalyticsDashboard events={analytics.getLocalEvents()} key={analyticsRevision} />
+        ) : (
+          <GameCatalogStatus />
+        );
       case "saved":
         return <SavedBuildsEmpty savedBuilds={savedBuilds} onDeleteSavedBuild={deleteSavedBuild} />;
       case "refinement":
@@ -747,6 +874,7 @@ export default function HomePage() {
               setScreenshotSession(mutation.session);
               privacyStore.deleteScreenshotSession();
               recordRetentionActions(retentionActions);
+              trackAnalytics("refinementCompleted", { refinementOutcome: "unavailable" });
               refreshPrivacyState();
             }}
           />
@@ -822,6 +950,30 @@ export default function HomePage() {
 
 function revokeObjectUrls(objectUrls: string[]) {
   objectUrls.forEach((objectUrl) => URL.revokeObjectURL(objectUrl));
+}
+
+function inferCaptureSource(session: ActiveCaptureSession) {
+  const sources = new Set(session.angles.map((angle) => angle.source ?? angle.image?.source ?? "unknown"));
+  if (sources.has("camera") && sources.has("upload")) return "mixed";
+  if (sources.has("camera")) return "camera";
+  if (sources.has("upload")) return "upload";
+  return "unknown";
+}
+
+function classifyQualityFailure(errors: string[]) {
+  const joined = errors.join(" ").toLowerCase();
+  if (joined.includes("missing") || joined.includes("required")) return "missingRequiredAngle";
+  if (joined.includes("format") || joined.includes("type") || joined.includes("heic") || joined.includes("heif")) return "unsupportedFormat";
+  if (joined.includes("decode") || joined.includes("readable") || joined.includes("unreadable")) return "unreadableImage";
+  if (joined.includes("small") || joined.includes("dimension")) return "imageTooSmall";
+  if (joined.includes("large") || joined.includes("12 mb") || joined.includes("size")) return "imageTooLarge";
+  if (joined.includes("duplicate")) return "exactDuplicate";
+  if (joined.includes("light") || joined.includes("dark") || joined.includes("shadow") || joined.includes("exposed")) return "poorLighting";
+  if (joined.includes("blur")) return "blur";
+  if (joined.includes("multiple")) return "multipleFaces";
+  if (joined.includes("face not found") || joined.includes("no face")) return "faceNotFound";
+  if (joined.includes("confirm")) return "manualConfirmationMissing";
+  return "unknown";
 }
 
 function Dashboard({

@@ -1,0 +1,548 @@
+{
+  "schemaVersion": "cf27-appearance-controls-research-catalog-v1-recapture-requirements",
+  "generatedAt": "2026-07-14T01:15:00-04:00",
+  "dataClass": "RESEARCH_CANDIDATE",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+  "summary": {
+    "itemCount": 6,
+    "allCategoriesRequireRecaptureBeforeProduction": true
+  },
+  "items": [
+    {
+      "id": "appearance-control-skin-tone-recapture",
+      "category": "Skin Tone",
+      "priority": "P0",
+      "status": "open",
+      "title": "Complete Skin Tone selector evidence",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_001",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_002",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_003",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_004",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_006",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_007",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_008",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_009",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_010",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_011",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_012",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_013",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_017",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_018",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_019",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_020",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_021",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_022",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_023",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_024",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_029"
+      ],
+      "reason": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "exactRecordingRequirement": "Record Skin Tone from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes.",
+      "requiredEvidence": [
+        "Menu label and selected native value visible for every deliberately selected option.",
+        "First-value proof.",
+        "Final-value proof.",
+        "Wrap or no-wrap proof.",
+        "Visible default proof.",
+        "Second-person verification.",
+        "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+      ],
+      "existingEvidenceRemainsUsefulFor": [
+        "Menu presence",
+        "Native label transcription",
+        "Partial ordering",
+        "Preliminary annotation"
+      ],
+      "existingEvidenceNotSuitableFor": [
+        "Production recommendation",
+        "Total-count claim",
+        "Production geometric comparison"
+      ],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categorySummary": {
+        "category": "Skin Tone",
+        "timelineLabel": "SKIN TONE",
+        "parentMenu": "Head & Skin",
+        "parentMenuID": "cf27-menu-appearance-head-skin",
+        "menuID": "cf27-menu-head-skin-skin-tone",
+        "controlType": "color_selector_numbered_grid",
+        "sourceVideos": [
+          "phase0-video-004"
+        ],
+        "selectedObservationCount": 22,
+        "directlyObservedUniqueValueCount": 21,
+        "firstObservedValue": "Skin Tone 09",
+        "firstObservedTimestampRange": "8-11",
+        "lastObservedValue": "Skin Tone 23",
+        "lastObservedTimestampRange": "52-53.82",
+        "visibleDefault": null,
+        "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "selectorWrapObserved": false,
+        "selectorWrapStatus": "NOT_OBSERVED",
+        "totalCount": null,
+        "totalCountStatus": "COUNT_UNKNOWN",
+        "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "missingObservedRangeValues": [
+          5,
+          14,
+          15,
+          16,
+          25,
+          26,
+          27,
+          28
+        ],
+        "duplicateObservedValues": [
+          "Skin Tone 10"
+        ],
+        "automaticChangesOrDependencies": {
+          "automaticChangesObserved": "NONE_OBSERVED",
+          "dependenciesObserved": "NONE_OBSERVED",
+          "dependencyTestingStatus": "NOT_TESTED"
+        },
+        "ambiguityAndMissingRanges": [
+          "Observed numeric range has unobserved values: 5, 14, 15, 16, 25, 26, 27, 28.",
+          "Duplicate selected values observed: Skin Tone 10.",
+          "Beginning boundary is not proven.",
+          "Ending boundary is not proven.",
+          "Wrap behavior is not proven.",
+          "Default value is not proven.",
+          "Do not infer unobserved values between observed values."
+        ],
+        "productionEligibility": {
+          "eligible": false,
+          "reason": "Category is partial research evidence only and cannot feed production recommendations."
+        }
+      }
+    },
+    {
+      "id": "appearance-control-skin-details-recapture",
+      "category": "Skin Details",
+      "priority": "P0",
+      "status": "open",
+      "title": "Complete Skin Details selector evidence",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010"
+      ],
+      "reason": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "exactRecordingRequirement": "Record Skin Details from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes.",
+      "requiredEvidence": [
+        "Menu label and selected native value visible for every deliberately selected option.",
+        "First-value proof.",
+        "Final-value proof.",
+        "Wrap or no-wrap proof.",
+        "Visible default proof.",
+        "Second-person verification.",
+        "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+      ],
+      "existingEvidenceRemainsUsefulFor": [
+        "Menu presence",
+        "Native label transcription",
+        "Partial ordering",
+        "Preliminary annotation"
+      ],
+      "existingEvidenceNotSuitableFor": [
+        "Production recommendation",
+        "Total-count claim",
+        "Production geometric comparison"
+      ],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categorySummary": {
+        "category": "Skin Details",
+        "timelineLabel": "SKIN DETAILS",
+        "parentMenu": "Head & Skin",
+        "parentMenuID": "cf27-menu-appearance-head-skin",
+        "menuID": "cf27-menu-head-skin-skin-details",
+        "controlType": "named_option_grid",
+        "sourceVideos": [
+          "phase0-video-005"
+        ],
+        "selectedObservationCount": 10,
+        "directlyObservedUniqueValueCount": 10,
+        "firstObservedValue": "None",
+        "firstObservedTimestampRange": "8-8",
+        "lastObservedValue": "Freckles 1",
+        "lastObservedTimestampRange": "27-31.72",
+        "visibleDefault": null,
+        "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "selectorWrapObserved": false,
+        "selectorWrapStatus": "NOT_OBSERVED",
+        "totalCount": null,
+        "totalCountStatus": "COUNT_UNKNOWN",
+        "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "missingObservedRangeValues": [],
+        "duplicateObservedValues": [],
+        "automaticChangesOrDependencies": {
+          "automaticChangesObserved": "NONE_OBSERVED",
+          "dependenciesObserved": "NONE_OBSERVED",
+          "dependencyTestingStatus": "NOT_TESTED"
+        },
+        "ambiguityAndMissingRanges": [
+          "Beginning boundary is not proven.",
+          "Ending boundary is not proven.",
+          "Wrap behavior is not proven.",
+          "Default value is not proven.",
+          "Do not infer unobserved values between observed values."
+        ],
+        "productionEligibility": {
+          "eligible": false,
+          "reason": "Category is partial research evidence only and cannot feed production recommendations."
+        }
+      }
+    },
+    {
+      "id": "appearance-control-eye-shape-recapture",
+      "category": "Eye Shape",
+      "priority": "P0",
+      "status": "open",
+      "title": "Complete Eye Shape selector evidence",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_003",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_004",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_005"
+      ],
+      "reason": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "exactRecordingRequirement": "Record Eye Shape from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes.",
+      "requiredEvidence": [
+        "Menu label and selected native value visible for every deliberately selected option.",
+        "First-value proof.",
+        "Final-value proof.",
+        "Wrap or no-wrap proof.",
+        "Visible default proof.",
+        "Second-person verification.",
+        "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+      ],
+      "existingEvidenceRemainsUsefulFor": [
+        "Menu presence",
+        "Native label transcription",
+        "Partial ordering",
+        "Preliminary annotation"
+      ],
+      "existingEvidenceNotSuitableFor": [
+        "Production recommendation",
+        "Total-count claim",
+        "Production geometric comparison"
+      ],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categorySummary": {
+        "category": "Eye Shape",
+        "timelineLabel": "EYE SHAPE",
+        "parentMenu": "Head & Skin",
+        "parentMenuID": "cf27-menu-appearance-head-skin",
+        "menuID": "cf27-menu-head-skin-eye-shape",
+        "controlType": "named_option_grid",
+        "sourceVideos": [
+          "phase0-video-006"
+        ],
+        "selectedObservationCount": 5,
+        "directlyObservedUniqueValueCount": 5,
+        "firstObservedValue": "Almond",
+        "firstObservedTimestampRange": "14-14",
+        "lastObservedValue": "Hooded",
+        "lastObservedTimestampRange": "20-24.93",
+        "visibleDefault": null,
+        "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "selectorWrapObserved": false,
+        "selectorWrapStatus": "NOT_OBSERVED",
+        "totalCount": null,
+        "totalCountStatus": "COUNT_UNKNOWN",
+        "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "missingObservedRangeValues": [],
+        "duplicateObservedValues": [],
+        "automaticChangesOrDependencies": {
+          "automaticChangesObserved": "NONE_OBSERVED",
+          "dependenciesObserved": "NONE_OBSERVED",
+          "dependencyTestingStatus": "NOT_TESTED"
+        },
+        "ambiguityAndMissingRanges": [
+          "Beginning boundary is not proven.",
+          "Ending boundary is not proven.",
+          "Wrap behavior is not proven.",
+          "Default value is not proven.",
+          "Do not infer unobserved values between observed values."
+        ],
+        "productionEligibility": {
+          "eligible": false,
+          "reason": "Category is partial research evidence only and cannot feed production recommendations."
+        }
+      }
+    },
+    {
+      "id": "appearance-control-eye-color-recapture",
+      "category": "Eye Color",
+      "priority": "P0",
+      "status": "open",
+      "title": "Complete Eye Color selector evidence",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_001",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_002",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_003",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_004",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_005",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_006",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_007"
+      ],
+      "reason": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "exactRecordingRequirement": "Record Eye Color from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes.",
+      "requiredEvidence": [
+        "Menu label and selected native value visible for every deliberately selected option.",
+        "First-value proof.",
+        "Final-value proof.",
+        "Wrap or no-wrap proof.",
+        "Visible default proof.",
+        "Second-person verification.",
+        "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+      ],
+      "existingEvidenceRemainsUsefulFor": [
+        "Menu presence",
+        "Native label transcription",
+        "Partial ordering",
+        "Preliminary annotation"
+      ],
+      "existingEvidenceNotSuitableFor": [
+        "Production recommendation",
+        "Total-count claim",
+        "Production geometric comparison"
+      ],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categorySummary": {
+        "category": "Eye Color",
+        "timelineLabel": "EYE COLOR",
+        "parentMenu": "Head & Skin",
+        "parentMenuID": "cf27-menu-appearance-head-skin",
+        "menuID": "cf27-menu-head-skin-eye-color",
+        "controlType": "color_selector_named_grid",
+        "sourceVideos": [
+          "phase0-video-007"
+        ],
+        "selectedObservationCount": 7,
+        "directlyObservedUniqueValueCount": 7,
+        "firstObservedValue": "Light Blue",
+        "firstObservedTimestampRange": "12-12",
+        "lastObservedValue": "Light Green",
+        "lastObservedTimestampRange": "25-29.33",
+        "visibleDefault": null,
+        "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "selectorWrapObserved": false,
+        "selectorWrapStatus": "NOT_OBSERVED",
+        "totalCount": null,
+        "totalCountStatus": "COUNT_UNKNOWN",
+        "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "missingObservedRangeValues": [],
+        "duplicateObservedValues": [],
+        "automaticChangesOrDependencies": {
+          "automaticChangesObserved": "NONE_OBSERVED",
+          "dependenciesObserved": "NONE_OBSERVED",
+          "dependencyTestingStatus": "NOT_TESTED"
+        },
+        "ambiguityAndMissingRanges": [
+          "Beginning boundary is not proven.",
+          "Ending boundary is not proven.",
+          "Wrap behavior is not proven.",
+          "Default value is not proven.",
+          "Do not infer unobserved values between observed values."
+        ],
+        "productionEligibility": {
+          "eligible": false,
+          "reason": "Category is partial research evidence only and cannot feed production recommendations."
+        }
+      }
+    },
+    {
+      "id": "appearance-control-nose-recapture",
+      "category": "Nose",
+      "priority": "P0",
+      "status": "open",
+      "title": "Complete Nose selector evidence",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_NOSE_001",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_002",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_003",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_004",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_005",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_006",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_007"
+      ],
+      "reason": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "exactRecordingRequirement": "Record Nose from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes.",
+      "requiredEvidence": [
+        "Menu label and selected native value visible for every deliberately selected option.",
+        "First-value proof.",
+        "Final-value proof.",
+        "Wrap or no-wrap proof.",
+        "Visible default proof.",
+        "Second-person verification.",
+        "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+      ],
+      "existingEvidenceRemainsUsefulFor": [
+        "Menu presence",
+        "Native label transcription",
+        "Partial ordering",
+        "Preliminary annotation"
+      ],
+      "existingEvidenceNotSuitableFor": [
+        "Production recommendation",
+        "Total-count claim",
+        "Production geometric comparison"
+      ],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categorySummary": {
+        "category": "Nose",
+        "timelineLabel": "NOSE",
+        "parentMenu": "Head & Skin",
+        "parentMenuID": "cf27-menu-appearance-head-skin",
+        "menuID": "cf27-menu-head-skin-nose",
+        "controlType": "named_option_grid",
+        "sourceVideos": [
+          "phase0-video-008"
+        ],
+        "selectedObservationCount": 8,
+        "directlyObservedUniqueValueCount": 7,
+        "firstObservedValue": "Aquiline",
+        "firstObservedTimestampRange": "14-14",
+        "lastObservedValue": "Aquiline",
+        "lastObservedTimestampRange": "28-32.45",
+        "visibleDefault": null,
+        "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "selectorWrapObserved": false,
+        "selectorWrapStatus": "POSSIBLE_WRAP_OBSERVED_UNVERIFIED",
+        "totalCount": null,
+        "totalCountStatus": "COUNT_UNKNOWN",
+        "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "missingObservedRangeValues": [],
+        "duplicateObservedValues": [
+          "Aquiline"
+        ],
+        "automaticChangesOrDependencies": {
+          "automaticChangesObserved": "NONE_OBSERVED",
+          "dependenciesObserved": "NONE_OBSERVED",
+          "dependencyTestingStatus": "NOT_TESTED"
+        },
+        "ambiguityAndMissingRanges": [
+          "Duplicate selected values observed: Aquiline.",
+          "Beginning boundary is not proven.",
+          "Ending boundary is not proven.",
+          "Wrap behavior is not proven.",
+          "Default value is not proven.",
+          "Do not infer unobserved values between observed values."
+        ],
+        "productionEligibility": {
+          "eligible": false,
+          "reason": "Category is partial research evidence only and cannot feed production recommendations."
+        }
+      }
+    },
+    {
+      "id": "appearance-control-ear-shape-recapture",
+      "category": "Ear Shape",
+      "priority": "P0",
+      "status": "open",
+      "title": "Complete Ear Shape selector evidence",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "affectedRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_004"
+      ],
+      "reason": "Current evidence is directly observed but incomplete for production: no complete first-to-final selector run, wrap proof, visible default proof, second review, or production-standard capture.",
+      "exactRecordingRequirement": "Record Ear Shape from the first available value through the final available value, pausing on each selected value long enough for label and character state review. Include beginning boundary, final boundary, wrap/no-wrap evidence, default state evidence, and dependency notes.",
+      "requiredEvidence": [
+        "Menu label and selected native value visible for every deliberately selected option.",
+        "First-value proof.",
+        "Final-value proof.",
+        "Wrap or no-wrap proof.",
+        "Visible default proof.",
+        "Second-person verification.",
+        "Dependency check against platform, mode, creation path, head, skin presentation, and relevant account/entitlement state."
+      ],
+      "existingEvidenceRemainsUsefulFor": [
+        "Menu presence",
+        "Native label transcription",
+        "Partial ordering",
+        "Preliminary annotation"
+      ],
+      "existingEvidenceNotSuitableFor": [
+        "Production recommendation",
+        "Total-count claim",
+        "Production geometric comparison"
+      ],
+      "createdAt": "2026-07-14T01:15:00-04:00",
+      "updatedAt": "2026-07-14T01:15:00-04:00",
+      "categorySummary": {
+        "category": "Ear Shape",
+        "timelineLabel": "EAR SHAPE",
+        "parentMenu": "Head & Skin",
+        "parentMenuID": "cf27-menu-appearance-head-skin",
+        "menuID": "cf27-menu-head-skin-ear-shape",
+        "controlType": "named_option_grid",
+        "sourceVideos": [
+          "phase0-video-009"
+        ],
+        "selectedObservationCount": 5,
+        "directlyObservedUniqueValueCount": 4,
+        "firstObservedValue": "None",
+        "firstObservedTimestampRange": "16-17",
+        "lastObservedValue": "Pointed",
+        "lastObservedTimestampRange": "26-30.21",
+        "visibleDefault": null,
+        "visibleDefaultStatus": "UNKNOWN_NOT_DIRECTLY_SHOWN",
+        "selectorWrapObserved": false,
+        "selectorWrapStatus": "NOT_OBSERVED",
+        "totalCount": null,
+        "totalCountStatus": "COUNT_UNKNOWN",
+        "countExplanation": "The recording contains directly selected values, but does not prove both selector boundaries and wrap behavior. Total count is not claimed.",
+        "missingObservedRangeValues": [],
+        "duplicateObservedValues": [
+          "None"
+        ],
+        "automaticChangesOrDependencies": {
+          "automaticChangesObserved": "NONE_OBSERVED",
+          "dependenciesObserved": "NONE_OBSERVED",
+          "dependencyTestingStatus": "NOT_TESTED"
+        },
+        "ambiguityAndMissingRanges": [
+          "Duplicate selected values observed: None.",
+          "Beginning boundary is not proven.",
+          "Ending boundary is not proven.",
+          "Wrap behavior is not proven.",
+          "Default value is not proven.",
+          "Do not infer unobserved values between observed values."
+        ],
+        "productionEligibility": {
+          "eligible": false,
+          "reason": "Category is partial research evidence only and cannot feed production recommendations."
+        }
+      }
+    }
+  ]
+}

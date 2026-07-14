@@ -1,16 +1,22 @@
 import type {
+  CatalogReleaseLifecycleStatus,
+  CapturedAngleID,
   FaceBoundingBox,
   FaceLandmarkPoint,
   FaceLandmarkProviderMetadata,
   FaceLandmarkReport,
+  GameCatalogItem,
   ISODateString,
   MeasurementConfidence,
   StandardFacialMeasurementID
 } from "@/types/domain";
+import { classifyCatalogRecord } from "@/lib/catalog/catalog-record-classification";
 import type { Phase0EntityID } from "./phase-zero-domain";
 import type { Phase0CatalogAnnotationViewID } from "./phase-zero-catalog-annotation-workspace";
 
 export const PHASE0_CATALOG_IMAGE_MEASUREMENT_VERSION = "phase0-catalog-image-measurement-v1";
+export const PHASE0_CATALOG_IMAGE_MEASUREMENT_PIPELINE_VERSION = "phase0-production-catalog-image-measurement-pipeline-v1";
+export const PHASE0_CATALOG_FACE_ALIGNMENT_VERSION = "phase0-catalog-face-alignment-v1";
 
 export type Phase0CatalogMeasurementSource = "landmarkDerived" | "humanCorrected" | "unavailable";
 export type Phase0CatalogMeasurementAvailability = "available" | "unavailable" | "needsHumanCorrection";
@@ -25,6 +31,8 @@ export type Phase0CatalogViewValidationIssueCode =
   | "viewPoseUnconfirmed"
   | "viewPoseMismatch"
   | "lowLandmarkConfidence";
+export type Phase0CatalogMeasurementInputGateStatus = "accepted" | "rejected";
+export type Phase0CatalogFaceAlignmentState = "aligned" | "humanCorrected" | "unavailable";
 
 type PointLabel =
   | "forehead top"
@@ -74,6 +82,16 @@ export interface Phase0CatalogMeasurementViewInput {
   capturedAt: ISODateString;
   faceLandmarkReport?: FaceLandmarkReport | null;
   manualFaceRegion?: Phase0CatalogFaceRegion | null;
+}
+
+export interface Phase0CatalogMeasurementEvidenceAsset {
+  assetID: Phase0EntityID;
+  angle?: CapturedAngleID | Phase0CatalogAnnotationViewID;
+  relativePath: string;
+  sha256: string;
+  sourceType: "production" | "testFixture" | "research" | "researchCandidate" | "shippingGameVideoResearch" | "demoData" | "localDeveloperSample" | "publicSourceOnly" | "researchDraft";
+  approvedForProduction: boolean;
+  verificationState: "verified" | "unverified" | "rejected" | "archived";
 }
 
 export interface Phase0CatalogFaceRegion {
@@ -148,6 +166,11 @@ export interface Phase0CatalogImageMeasurementReport {
   catalogStableID: string;
   catalogVersionID: string;
   createdAt: ISODateString;
+  processingModels: Phase0CatalogMeasurementProcessingModels;
+  deterministicOutputID: string;
+  sourceReferences: Phase0CatalogMeasurementSourceReference[];
+  alignmentResults: Phase0CatalogFaceAlignmentResult[];
+  inputGate: Phase0CatalogMeasurementInputGate;
   viewValidations: Phase0CatalogViewValidation[];
   faceRegions: Phase0CatalogFaceRegionDetection[];
   landmarkExtractions: Phase0CatalogLandmarkExtraction[];
@@ -156,6 +179,78 @@ export interface Phase0CatalogImageMeasurementReport {
   humanCorrectionCount: number;
   readyForAnnotationReview: boolean;
   readyForProductionCatalog: false;
+  precisionNotice: string;
+}
+
+export interface Phase0CatalogMeasurementProcessingModels {
+  pipelineVersion: typeof PHASE0_CATALOG_IMAGE_MEASUREMENT_PIPELINE_VERSION;
+  measurementAlgorithmVersion: typeof PHASE0_CATALOG_IMAGE_MEASUREMENT_VERSION;
+  faceAlignmentVersion: typeof PHASE0_CATALOG_FACE_ALIGNMENT_VERSION;
+  landmarkProviders: string[];
+}
+
+export interface Phase0CatalogMeasurementSourceReference {
+  evidenceFileID: Phase0EntityID;
+  imageRelativePath: string;
+  viewID: Phase0CatalogAnnotationViewID;
+  assetSha256: string | null;
+  sourceType: string | null;
+  approvedForProduction: boolean;
+}
+
+export interface Phase0CatalogFaceAlignmentResult {
+  viewID: Phase0CatalogAnnotationViewID;
+  evidenceFileID: Phase0EntityID;
+  state: Phase0CatalogFaceAlignmentState;
+  faceRegion: Phase0CatalogFaceRegion | null;
+  normalizedScale: number | null;
+  translateX: number | null;
+  translateY: number | null;
+  rotationDegrees: number | null;
+  yawDegrees: number | null;
+  pitchDegrees: number | null;
+  confidence: MeasurementConfidence;
+  source: "landmarkBoundingBox" | "humanCorrected" | "unavailable";
+  message: string;
+}
+
+export interface Phase0CatalogMeasurementInputGate {
+  status: Phase0CatalogMeasurementInputGateStatus;
+  errors: string[];
+  warnings: string[];
+}
+
+export interface Phase0ProductionCatalogMeasurementItemInput {
+  item: GameCatalogItem;
+  imageViews: Phase0CatalogMeasurementViewInput[];
+  humanCorrections?: Phase0CatalogHumanMeasurementCorrection[];
+}
+
+export interface Phase0ProductionCatalogImageMeasurementPipelineInput {
+  catalogVersionID: string;
+  catalogReleaseStatus: CatalogReleaseLifecycleStatus;
+  createdAt: ISODateString;
+  evidenceAssets: Phase0CatalogMeasurementEvidenceAsset[];
+  items: Phase0ProductionCatalogMeasurementItemInput[];
+}
+
+export interface Phase0ProductionCatalogImageMeasurementPipelineReport {
+  schemaVersion: typeof PHASE0_CATALOG_IMAGE_MEASUREMENT_PIPELINE_VERSION;
+  catalogVersionID: string;
+  catalogReleaseStatus: CatalogReleaseLifecycleStatus;
+  createdAt: ISODateString;
+  processingModels: Phase0CatalogMeasurementProcessingModels;
+  deterministicOutputID: string;
+  inputItemCount: number;
+  acceptedItemCount: number;
+  rejectedItemCount: number;
+  itemReports: Phase0CatalogImageMeasurementReport[];
+  rejectedItems: Array<{
+    stableInternalID: string;
+    errors: string[];
+    warnings: string[];
+  }>;
+  productionRecommendationsEnabled: false;
   precisionNotice: string;
 }
 
@@ -185,6 +280,9 @@ export function createCatalogImageMeasurementReport(input: Phase0CatalogImageMea
   const viewValidations = input.imageViews.map(validateCatalogMeasurementView);
   const faceRegions = input.imageViews.map((view) => detectFaceRegion(view));
   const landmarkExtractions = input.imageViews.map((view) => summarizeLandmarkExtraction(view));
+  const sourceReferences = input.imageViews.map((view) => sourceReferenceFromView(view));
+  const alignmentResults = input.imageViews.map((view) => alignCatalogMeasurementView(view));
+  const processingModels = processingModelsFromViews(input.imageViews);
   const usableViews = input.imageViews.flatMap((view) => {
     const validation = viewValidations.find((item) => item.evidenceFileID === view.evidenceFileID && item.viewID === view.viewID);
     const face = view.faceLandmarkReport?.faces[0];
@@ -226,6 +324,20 @@ export function createCatalogImageMeasurementReport(input: Phase0CatalogImageMea
     catalogStableID: input.catalogStableID,
     catalogVersionID: input.catalogVersionID,
     createdAt: input.createdAt,
+    processingModels,
+    deterministicOutputID: deterministicMeasurementReportID({
+      catalogStableID: input.catalogStableID,
+      catalogVersionID: input.catalogVersionID,
+      sourceReferences,
+      measurements
+    }),
+    sourceReferences,
+    alignmentResults,
+    inputGate: {
+      status: "accepted",
+      errors: [],
+      warnings: []
+    },
     viewValidations,
     faceRegions,
     landmarkExtractions,
@@ -237,6 +349,257 @@ export function createCatalogImageMeasurementReport(input: Phase0CatalogImageMea
     precisionNotice:
       "Catalog image measurements are explainable normalized ratios from local game-character imagery. They are not scientific biometric measurements and require human review before catalog use."
   };
+}
+
+export function createProductionCatalogImageMeasurementPipelineReport(
+  input: Phase0ProductionCatalogImageMeasurementPipelineInput
+): Phase0ProductionCatalogImageMeasurementPipelineReport {
+  const assetMap = new Map(input.evidenceAssets.map((asset) => [asset.assetID, asset]));
+  const itemReports: Phase0CatalogImageMeasurementReport[] = [];
+  const rejectedItems: Phase0ProductionCatalogImageMeasurementPipelineReport["rejectedItems"] = [];
+  for (const itemInput of input.items) {
+    const gate = validateProductionCatalogMeasurementItem(itemInput, input, assetMap);
+    if (gate.status === "rejected") {
+      rejectedItems.push({
+        stableInternalID: itemInput.item.stableInternalID,
+        errors: gate.errors,
+        warnings: gate.warnings
+      });
+      continue;
+    }
+    const report = createCatalogImageMeasurementReport({
+      catalogStableID: itemInput.item.stableInternalID,
+      catalogVersionID: input.catalogVersionID,
+      createdAt: input.createdAt,
+      imageViews: itemInput.imageViews,
+      humanCorrections: itemInput.humanCorrections
+    });
+    const productionSourceReferences = report.sourceReferences.map((reference) => {
+      const asset = assetMap.get(reference.evidenceFileID);
+      return {
+        ...reference,
+        imageRelativePath: asset?.relativePath ?? reference.imageRelativePath,
+        assetSha256: asset?.sha256 ?? null,
+        sourceType: asset?.sourceType ?? null,
+        approvedForProduction: asset?.approvedForProduction === true
+      };
+    });
+    itemReports.push({
+      ...report,
+      sourceReferences: productionSourceReferences,
+      inputGate: gate,
+      deterministicOutputID: deterministicMeasurementReportID({
+        catalogStableID: itemInput.item.stableInternalID,
+        catalogVersionID: input.catalogVersionID,
+        sourceReferences: productionSourceReferences,
+        measurements: report.measurements
+      })
+    });
+  }
+  const processingModels = processingModelsFromViews(input.items.flatMap((item) => item.imageViews));
+  return {
+    schemaVersion: PHASE0_CATALOG_IMAGE_MEASUREMENT_PIPELINE_VERSION,
+    catalogVersionID: input.catalogVersionID,
+    catalogReleaseStatus: input.catalogReleaseStatus,
+    createdAt: input.createdAt,
+    processingModels,
+    deterministicOutputID: deterministicHash({
+      schemaVersion: PHASE0_CATALOG_IMAGE_MEASUREMENT_PIPELINE_VERSION,
+      catalogVersionID: input.catalogVersionID,
+      catalogReleaseStatus: input.catalogReleaseStatus,
+      itemReports: itemReports.map((report) => report.deterministicOutputID),
+      rejectedItems
+    }),
+    inputItemCount: input.items.length,
+    acceptedItemCount: itemReports.length,
+    rejectedItemCount: rejectedItems.length,
+    itemReports,
+    rejectedItems,
+    productionRecommendationsEnabled: false,
+    precisionNotice:
+      "Production catalog image measurements are normalized geometry inputs only. They do not infer identity or sensitive traits and do not enable recommendations without the catalog release gate."
+  };
+}
+
+export function validateProductionCatalogMeasurementItem(
+  itemInput: Phase0ProductionCatalogMeasurementItemInput,
+  pipelineInput: Phase0ProductionCatalogImageMeasurementPipelineInput,
+  assetMap = new Map(pipelineInput.evidenceAssets.map((asset) => [asset.assetID, asset]))
+): Phase0CatalogMeasurementInputGate {
+  const errors: string[] = [];
+  const warnings: string[] = [];
+  const { item } = itemInput;
+  const classification = classifyCatalogRecord(item);
+  if (pipelineInput.catalogReleaseStatus !== "approvedRelease") errors.push("Catalog release is not approved.");
+  if (!classification.productionAccessAllowed) errors.push(`Catalog record is not production-approved: ${classification.blockingIssues.join(",") || classification.classification}.`);
+  if (item.catalogVersion.identifier !== pipelineInput.catalogVersionID) errors.push("Catalog item version does not match pipeline catalog version.");
+  if (item.isTestFixture) errors.push("Fixture records cannot be measured by the production catalog image pipeline.");
+  if (item.verificationState !== "verified") errors.push("Catalog item must be verified.");
+  if (!["approved", "approvedWithNotes"].includes(item.catalogManagerDisposition ?? "")) errors.push("Catalog item requires approved catalog-manager disposition.");
+  const requiredAngleIDs: CapturedAngleID[] = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"];
+  const sourceRefs = new Set(item.sourceImageReferences ?? []);
+  const viewByEvidenceID = new Map(itemInput.imageViews.map((view) => [view.evidenceFileID, view]));
+  for (const angle of requiredAngleIDs) {
+    const assetID = item.requiredAngles?.[angle];
+    if (!assetID) {
+      errors.push(`Missing required ${angle} evidence asset.`);
+      continue;
+    }
+    if (!sourceRefs.has(assetID)) errors.push(`Required ${angle} evidence is not listed in sourceImageReferences.`);
+    const asset = assetMap.get(assetID);
+    if (!asset) {
+      errors.push(`Missing evidence asset metadata for ${assetID}.`);
+      continue;
+    }
+    validateProductionEvidenceAsset(asset, errors);
+    if (!viewByEvidenceID.has(assetID)) errors.push(`Missing image view input for ${assetID}.`);
+  }
+  if (itemInput.imageViews.length === 0) errors.push("No image views were provided.");
+  const imageReport = createCatalogImageMeasurementReport({
+    catalogStableID: item.stableInternalID,
+    catalogVersionID: pipelineInput.catalogVersionID,
+    createdAt: pipelineInput.createdAt,
+    imageViews: itemInput.imageViews,
+    humanCorrections: itemInput.humanCorrections
+  });
+  const lowQualityViews = imageReport.viewValidations.filter((validation) => validation.status !== "usable");
+  for (const validation of lowQualityViews) {
+    errors.push(`${validation.viewID} evidence is not production quality: ${validation.issues.map((issue) => issue.code).join(",") || validation.status}.`);
+  }
+  const availableMeasurements = Object.values(imageReport.measurements).filter((measurement) => measurement?.availabilityState === "available");
+  if (availableMeasurements.length === 0) errors.push("No normalized geometry measurements could be produced from the supplied evidence.");
+  return {
+    status: errors.length === 0 ? "accepted" : "rejected",
+    errors,
+    warnings
+  };
+}
+
+export function alignCatalogMeasurementView(view: Phase0CatalogMeasurementViewInput): Phase0CatalogFaceAlignmentResult {
+  const detection = detectFaceRegion(view);
+  const face = view.faceLandmarkReport?.faces[0] ?? null;
+  if (!detection.region) {
+    return {
+      viewID: view.viewID,
+      evidenceFileID: view.evidenceFileID,
+      state: "unavailable",
+      faceRegion: null,
+      normalizedScale: null,
+      translateX: null,
+      translateY: null,
+      rotationDegrees: null,
+      yawDegrees: face?.approximateHeadPose.yawDegrees ?? null,
+      pitchDegrees: face?.approximateHeadPose.pitchDegrees ?? null,
+      confidence: confidence(0),
+      source: "unavailable",
+      message: "Face alignment unavailable because no face region was detected or corrected."
+    };
+  }
+  const region = detection.region;
+  const centerX = region.x + region.width / 2;
+  const centerY = region.y + region.height / 2;
+  const rollDegrees = face?.approximateHeadPose.rollDegrees ?? 0;
+  return {
+    viewID: view.viewID,
+    evidenceFileID: view.evidenceFileID,
+    state: detection.state === "humanCorrected" ? "humanCorrected" : "aligned",
+    faceRegion: region,
+    normalizedScale: round(1 / Math.max(region.height, 0.001)),
+    translateX: round(0.5 - centerX),
+    translateY: round(0.5 - centerY),
+    rotationDegrees: round(-rollDegrees),
+    yawDegrees: face?.approximateHeadPose.yawDegrees ?? null,
+    pitchDegrees: face?.approximateHeadPose.pitchDegrees ?? null,
+    confidence: region.confidence,
+    source: region.source,
+    message: detection.state === "humanCorrected" ? "Face alignment uses human-corrected face region." : "Face alignment uses local landmark bounding box."
+  };
+}
+
+function validateProductionEvidenceAsset(asset: Phase0CatalogMeasurementEvidenceAsset, errors: string[]) {
+  if (asset.sourceType !== "production") errors.push(`${asset.assetID} is not production source evidence.`);
+  if (!asset.approvedForProduction) errors.push(`${asset.assetID} is not approved for production measurement.`);
+  if (asset.verificationState !== "verified") errors.push(`${asset.assetID} evidence is not verified.`);
+  if (!/^[a-f0-9]{64}$/i.test(asset.sha256)) errors.push(`${asset.assetID} is missing a valid SHA-256 checksum.`);
+  if (!asset.relativePath.trim()) errors.push(`${asset.assetID} is missing a relative evidence path.`);
+  if (asset.relativePath.startsWith("/") || /^[A-Za-z]:[\\/]/.test(asset.relativePath)) errors.push(`${asset.assetID} uses an absolute evidence path.`);
+  if (asset.relativePath.includes("..")) errors.push(`${asset.assetID} evidence path contains unsafe traversal.`);
+  if (/data\/fixtures\/test-only|\/fixtures\/test-only\/|\/test-only\//i.test(asset.relativePath)) errors.push(`${asset.assetID} points at fixture evidence.`);
+}
+
+function sourceReferenceFromView(view: Phase0CatalogMeasurementViewInput): Phase0CatalogMeasurementSourceReference {
+  return {
+    evidenceFileID: view.evidenceFileID,
+    imageRelativePath: view.imageRelativePath,
+    viewID: view.viewID,
+    assetSha256: null,
+    sourceType: null,
+    approvedForProduction: false
+  };
+}
+
+function processingModelsFromViews(imageViews: Phase0CatalogMeasurementViewInput[]): Phase0CatalogMeasurementProcessingModels {
+  const landmarkProviders = Array.from(new Set(imageViews.map((view) => {
+    const provider = view.faceLandmarkReport?.provider;
+    if (!provider) return null;
+    return `${provider.providerName}:${provider.packageVersion}:${provider.modelVersion}`;
+  }).filter((value): value is string => Boolean(value)))).sort();
+  return {
+    pipelineVersion: PHASE0_CATALOG_IMAGE_MEASUREMENT_PIPELINE_VERSION,
+    measurementAlgorithmVersion: PHASE0_CATALOG_IMAGE_MEASUREMENT_VERSION,
+    faceAlignmentVersion: PHASE0_CATALOG_FACE_ALIGNMENT_VERSION,
+    landmarkProviders
+  };
+}
+
+function deterministicMeasurementReportID(input: {
+  catalogStableID: string;
+  catalogVersionID: string;
+  sourceReferences: Phase0CatalogMeasurementSourceReference[];
+  measurements: Partial<Record<StandardFacialMeasurementID, Phase0CatalogImageMeasurement>>;
+}) {
+  return deterministicHash({
+    version: PHASE0_CATALOG_IMAGE_MEASUREMENT_VERSION,
+    catalogStableID: input.catalogStableID,
+    catalogVersionID: input.catalogVersionID,
+    sourceReferences: input.sourceReferences.map((reference) => ({
+      evidenceFileID: reference.evidenceFileID,
+      assetSha256: reference.assetSha256,
+      viewID: reference.viewID
+    })),
+    measurements: Object.fromEntries(Object.entries(input.measurements).sort(([left], [right]) => left.localeCompare(right)).map(([id, measurement]) => [
+      id,
+      measurement
+        ? {
+            value: measurement.value,
+            source: measurement.source,
+            confidence: measurement.confidence.score,
+            supportingViews: measurement.supportingViews,
+            variance: measurement.variance,
+            algorithmVersion: measurement.algorithmVersion
+          }
+        : null
+    ]))
+  });
+}
+
+function deterministicHash(value: unknown) {
+  const text = stableStringify(value);
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return `fnv1a32-${hash.toString(16).padStart(8, "0")}`;
+}
+
+function stableStringify(value: unknown): string {
+  if (value === null || typeof value !== "object") return JSON.stringify(value);
+  if (Array.isArray(value)) return `[${value.map(stableStringify).join(",")}]`;
+  return `{${Object.entries(value as Record<string, unknown>)
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([key, child]) => `${JSON.stringify(key)}:${stableStringify(child)}`)
+    .join(",")}}`;
 }
 
 export function validateCatalogMeasurementView(view: Phase0CatalogMeasurementViewInput): Phase0CatalogViewValidation {
@@ -598,5 +961,6 @@ function sampleVariance(values: number[]) {
 }
 
 function round(value: number) {
-  return Math.round(value * 1000) / 1000;
+  const rounded = Math.round(value * 1000) / 1000;
+  return Object.is(rounded, -0) ? 0 : rounded;
 }

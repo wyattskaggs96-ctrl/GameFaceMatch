@@ -9,7 +9,7 @@ This report is generated from repository-local catalog, Phase 0, research, fixtu
 | PRODUCTION_VERIFIED | 0 |
 | RESEARCH_OBSERVED | 1298 |
 | PUBLIC_SOURCE_ONLY | 0 |
-| TEST_FIXTURE | 69 |
+| TEST_FIXTURE | 73 |
 | PLACEHOLDER | 375 |
 | DEPRECATED | 0 |
 | INVALID | 0 |
@@ -27,7 +27,7 @@ This report is generated from repository-local catalog, Phase 0, research, fixtu
 - Research records missing source evidence: 0
 - Placeholder records found: 375
 - Public-source-only records found: 0
-- Test fixture records found: 69
+- Test fixture records found: 73
 
 ## Current Conclusion
 

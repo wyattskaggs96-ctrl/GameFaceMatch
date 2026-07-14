@@ -11,6 +11,10 @@ $.navigationInstructions[0],data/audit/college-football-27/templates/catalog-ite
 $.requiredAngles,data/audit/college-football-27/templates/catalog-item-template.json,$.requiredAngles,template_record,PLACEHOLDER,,,,,false,false,false,,placeholderToken
 $,data/audit/college-football-27/templates/catalog-manifest-template.json,$,template_record,PLACEHOLDER,researchDraft,,,,false,false,false,sourceType:researchDraft,placeholderToken
 $.catalogVersion,data/audit/college-football-27/templates/catalog-manifest-template.json,$.catalogVersion,template_record,PLACEHOLDER,,,,,false,false,false,,placeholderToken
+$,data/fixtures/test-only/catalog-image-measurement/fixture-package.json,$,fixture_record,TEST_FIXTURE,testFixture,,,,false,false,false,sourceType:testFixture,fixtureRecord
+$.evidenceAssets[0],data/fixtures/test-only/catalog-image-measurement/fixture-package.json,$.evidenceAssets[0],fixture_record,TEST_FIXTURE,testFixture,,,verified,true,false,false,sourceType:testFixture;verification:verified,fixtureRecord
+TEST_ONLY_CATALOG_IMAGE_MEASUREMENT_HEAD_001,data/fixtures/test-only/catalog-image-measurement/fixture-package.json,$.items[0],catalog_record,TEST_FIXTURE,testFixture,,,verified,true,true,false,sourceType:testFixture;verification:verified,fixtureRecord
+$.items[0].catalogVersion,data/fixtures/test-only/catalog-image-measurement/fixture-package.json,$.items[0].catalogVersion,fixture_record,TEST_FIXTURE,,,,,false,false,false,,fixtureRecord
 $,data/fixtures/test-only/evidence-manifest/approved/CF27_PS5_RTG_HEAD_001_leftProfile_1.0.0_patch-test_20260712.json,$,fixture_record,TEST_FIXTURE,testFixture,,,,false,false,false,sourceType:testFixture,fixtureRecord
 $,data/fixtures/test-only/evidence-manifest/metadata.json,$,fixture_record,TEST_FIXTURE,testFixture,,,,false,false,false,sourceType:testFixture,fixtureRecord
 $.files,data/fixtures/test-only/evidence-manifest/metadata.json,$.files,fixture_record,TEST_FIXTURE,,,,,false,false,false,,fixtureRecord

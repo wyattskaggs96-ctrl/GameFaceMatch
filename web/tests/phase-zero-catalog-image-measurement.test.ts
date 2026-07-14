@@ -3,14 +3,21 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { MEDIAPIPE_FACE_LANDMARKER_METADATA, unavailableFaceLandmarkReport } from "@/lib/face-landmarks/face-landmark-provider";
 import {
+  alignCatalogMeasurementView,
   createCatalogImageMeasurementReport,
+  createProductionCatalogImageMeasurementPipelineReport,
   detectFaceRegion,
+  PHASE0_CATALOG_FACE_ALIGNMENT_VERSION,
   PHASE0_CATALOG_IMAGE_MEASUREMENT_VERSION,
+  PHASE0_CATALOG_IMAGE_MEASUREMENT_PIPELINE_VERSION,
   summarizeLandmarkExtraction,
+  validateProductionCatalogMeasurementItem,
   validateCatalogMeasurementView,
+  type Phase0CatalogMeasurementEvidenceAsset,
   type Phase0CatalogMeasurementViewInput
 } from "@/lib/phase-zero/phase-zero-catalog-image-measurement";
 import type {
+  GameCatalogItem,
   DetectedFaceLandmarks,
   FaceLandmarkPoint,
   FaceLandmarkReport
@@ -24,8 +31,10 @@ describe("Phase 0 catalog image measurement pipeline", () => {
     const schema = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), "../data/schemas/catalog-image-measurement.schema.json"), "utf8"));
     expect(schema.title).toBe("Phase0CatalogImageMeasurementReport");
     expect(schema.properties.schemaVersion.const).toBe(PHASE0_CATALOG_IMAGE_MEASUREMENT_VERSION);
-    expect(schema.required).toEqual(expect.arrayContaining(["viewValidations", "faceRegions", "landmarkExtractions", "measurements", "readyForProductionCatalog"]));
+    expect(schema.required).toEqual(expect.arrayContaining(["processingModels", "deterministicOutputID", "sourceReferences", "alignmentResults", "inputGate", "viewValidations", "faceRegions", "landmarkExtractions", "measurements", "readyForProductionCatalog"]));
     expect(schema.properties.readyForProductionCatalog.const).toBe(false);
+    expect(schema.$defs.processingModels.properties.pipelineVersion.const).toBe(PHASE0_CATALOG_IMAGE_MEASUREMENT_PIPELINE_VERSION);
+    expect(schema.$defs.processingModels.properties.faceAlignmentVersion.const).toBe(PHASE0_CATALOG_FACE_ALIGNMENT_VERSION);
     expect(schema.$defs.measurement.required).toEqual(expect.arrayContaining(["confidence", "supportingViewCount", "variance", "humanCorrection"]));
     expect(schema.$defs.measurement.properties.depthSupported.const).toBe(false);
   });
@@ -58,6 +67,14 @@ describe("Phase 0 catalog image measurement pipeline", () => {
       provider: MEDIAPIPE_FACE_LANDMARKER_METADATA,
       coreLandmarkCount: 23
     });
+    expect(alignCatalogMeasurementView(input)).toMatchObject({
+      state: "aligned",
+      normalizedScale: 1.563,
+      translateX: 0,
+      translateY: 0,
+      rotationDegrees: 0,
+      source: "landmarkBoundingBox"
+    });
   });
 
   it("calculates normalized, explainable game-character image ratios with confidence and no depth support", () => {
@@ -70,6 +87,14 @@ describe("Phase 0 catalog image measurement pipeline", () => {
 
     expect(report.readyForProductionCatalog).toBe(false);
     expect(report.precisionNotice).toContain("not scientific biometric");
+    expect(report.processingModels).toMatchObject({
+      pipelineVersion: PHASE0_CATALOG_IMAGE_MEASUREMENT_PIPELINE_VERSION,
+      measurementAlgorithmVersion: PHASE0_CATALOG_IMAGE_MEASUREMENT_VERSION,
+      faceAlignmentVersion: PHASE0_CATALOG_FACE_ALIGNMENT_VERSION
+    });
+    expect(report.sourceReferences).toHaveLength(5);
+    expect(report.alignmentResults.filter((alignment) => alignment.state === "aligned")).toHaveLength(5);
+    expect(report.deterministicOutputID).toMatch(/^fnv1a32-/);
     expect(report.measurements.faceWidthRatio).toMatchObject({
       value: 0.75,
       source: "landmarkDerived",
@@ -158,6 +183,80 @@ describe("Phase 0 catalog image measurement pipeline", () => {
     expect(Number(report.measurements.noseProjection?.variance)).toBeGreaterThan(0);
     expect(Number(report.measurements.noseProjection?.confidence.score)).toBeLessThanOrEqual(0.82);
   });
+
+  it("processes only production-approved catalog imagery through the gated pipeline", () => {
+    const pipelineInput = productionPipelineInput();
+    const first = createProductionCatalogImageMeasurementPipelineReport(pipelineInput);
+    const second = createProductionCatalogImageMeasurementPipelineReport(pipelineInput);
+
+    expect(first.schemaVersion).toBe(PHASE0_CATALOG_IMAGE_MEASUREMENT_PIPELINE_VERSION);
+    expect(first.acceptedItemCount).toBe(1);
+    expect(first.rejectedItemCount).toBe(0);
+    expect(first.productionRecommendationsEnabled).toBe(false);
+    expect(first.deterministicOutputID).toBe(second.deterministicOutputID);
+    expect(first.itemReports[0].inputGate.status).toBe("accepted");
+    expect(first.itemReports[0].sourceReferences.every((reference) => reference.approvedForProduction)).toBe(true);
+    expect(first.itemReports[0].sourceReferences.every((reference) => reference.assetSha256?.match(/^[a-f0-9]{64}$/))).toBe(true);
+    expect(first.itemReports[0].measurements.faceWidthRatio?.value).toBe(0.75);
+  });
+
+  it("rejects fixture, research, and unapproved evidence before production measurement", () => {
+    const fixture = readFixture();
+    const pipelineInput = productionPipelineInput({
+      item: {
+        ...productionItem(),
+        sourceType: "testFixture",
+        isTestFixture: true,
+        sourceImageReferences: fixture.items[0].sourceImageReferences as string[],
+        requiredAngles: { straightOn: "fixture-front", left45: "fixture-front", right45: "fixture-front", leftProfile: "fixture-front", rightProfile: "fixture-front" }
+      },
+      evidenceAssets: fixture.evidenceAssets as unknown as Phase0CatalogMeasurementEvidenceAsset[],
+      imageViews: [view("straightOn", { evidenceFileID: "fixture-front" })]
+    });
+
+    const report = createProductionCatalogImageMeasurementPipelineReport(pipelineInput);
+    expect(report.acceptedItemCount).toBe(0);
+    expect(report.rejectedItemCount).toBe(1);
+    expect(report.rejectedItems[0].errors.join(" ")).toMatch(/not production-approved|Fixture|not production source evidence|fixture evidence/i);
+  });
+
+  it("rejects low-quality evidence and records manual correction provenance when production inputs are valid", () => {
+    const lowQualityGate = validateProductionCatalogMeasurementItem(
+      {
+        item: productionItem(),
+        imageViews: requiredViews().map((entry) =>
+          entry.viewID === "straightOn"
+            ? { ...entry, faceLandmarkReport: unavailableFaceLandmarkReport({ message: "Synthetic unavailable landmarks." }) }
+            : entry
+        )
+      },
+      productionPipelineInput()
+    );
+    expect(lowQualityGate.status).toBe("rejected");
+    expect(lowQualityGate.errors.join(" ")).toContain("straightOn evidence is not production quality");
+
+    const report = createProductionCatalogImageMeasurementPipelineReport(productionPipelineInput({
+      humanCorrections: [
+        {
+          measurementID: "chinProjection",
+          value: 0.19,
+          confidence: 0.66,
+          correctedBy: "reviewer-test-only",
+          reason: "Synthetic correction for fixture-side profile validation.",
+          supportingViewIDs: ["leftProfile", "rightProfile"],
+          createdAt: now
+        }
+      ]
+    }));
+    expect(report.itemReports[0].humanCorrectionCount).toBe(1);
+    expect(report.itemReports[0].measurements.chinProjection).toMatchObject({
+      source: "humanCorrected",
+      value: 0.19,
+      humanCorrection: {
+        correctedBy: "reviewer-test-only"
+      }
+    });
+  });
 });
 
 function requiredViews() {
@@ -172,17 +271,97 @@ function requiredViews() {
 
 function view(
   viewID: Phase0CatalogMeasurementViewInput["viewID"],
-  input: { yaw?: number; report?: FaceLandmarkReport; profileOffset?: number } = {}
+  input: { yaw?: number; report?: FaceLandmarkReport; profileOffset?: number; evidenceFileID?: string } = {}
 ): Phase0CatalogMeasurementViewInput {
   return {
     viewID,
-    evidenceFileID: `evidence-${viewID}`,
+    evidenceFileID: input.evidenceFileID ?? `evidence-${viewID}`,
     imageRelativePath: `data/fixtures/test-only/catalog-measurement/${viewID}.png`,
     width: 1200,
     height: 1600,
     capturedAt: now,
     faceLandmarkReport: input.report ?? landmarkReport(viewID, input.yaw ?? yawForView(viewID), input.profileOffset)
   };
+}
+
+function productionPipelineInput(input: {
+  item?: GameCatalogItem;
+  evidenceAssets?: Phase0CatalogMeasurementEvidenceAsset[];
+  imageViews?: Phase0CatalogMeasurementViewInput[];
+  humanCorrections?: Parameters<typeof createProductionCatalogImageMeasurementPipelineReport>[0]["items"][number]["humanCorrections"];
+} = {}) {
+  return {
+    catalogVersionID: "cf27-production-synthetic-test-only-v1",
+    catalogReleaseStatus: "approvedRelease" as const,
+    createdAt: now,
+    evidenceAssets: input.evidenceAssets ?? productionEvidenceAssets(),
+    items: [
+      {
+        item: input.item ?? productionItem(),
+        imageViews: input.imageViews ?? requiredViews(),
+        humanCorrections: input.humanCorrections
+      }
+    ]
+  };
+}
+
+function productionItem(): GameCatalogItem {
+  return {
+    sourceType: "production",
+    stableInternalID: "CF27_SYNTHETIC_TEST_HEAD_001",
+    game: "EA SPORTS College Football 27",
+    gameVersion: "test-only-version",
+    patchVersion: "test-only-patch",
+    platform: "test-only-platform",
+    gameMode: "Road to Glory",
+    creationPath: "Synthetic test-only path",
+    category: "head",
+    visibleGameLabelOrIndex: "Synthetic Test Head 001",
+    verificationState: "verified",
+    capturedDate: now,
+    verifiedDate: now,
+    sourceImageReferences: ["evidence-straightOn", "evidence-left45", "evidence-right45", "evidence-leftProfile", "evidence-rightProfile"],
+    requiredAngles: {
+      straightOn: "evidence-straightOn",
+      left45: "evidence-left45",
+      right45: "evidence-right45",
+      leftProfile: "evidence-leftProfile",
+      rightProfile: "evidence-rightProfile"
+    },
+    geometryMeasurements: {},
+    humanAnnotations: {},
+    catalogManagerDisposition: "approved",
+    catalogVersion: {
+      identifier: "cf27-production-synthetic-test-only-v1",
+      gameVersion: "test-only-version",
+      platform: "test-only-platform",
+      verifiedAt: now
+    },
+    isTestFixture: false,
+    navigationInstructions: [
+      {
+        sequenceNumber: 1,
+        instruction: "Synthetic test-only verified instruction.",
+        evidenceAssetID: "evidence-straightOn"
+      }
+    ]
+  };
+}
+
+function productionEvidenceAssets(): Phase0CatalogMeasurementEvidenceAsset[] {
+  return ["straightOn", "left45", "right45", "leftProfile", "rightProfile"].map((angle, index) => ({
+    assetID: `evidence-${angle}`,
+    angle: angle as Phase0CatalogMeasurementEvidenceAsset["angle"],
+    relativePath: `production-evidence/synthetic-test-only/${angle}.png`,
+    sha256: String(index + 1).repeat(64).slice(0, 64),
+    sourceType: "production",
+    approvedForProduction: true,
+    verificationState: "verified"
+  }));
+}
+
+function readFixture(): { items: Array<Record<string, unknown>>; evidenceAssets: Array<Record<string, unknown>> } {
+  return JSON.parse(fs.readFileSync(path.resolve(process.cwd(), "../data/fixtures/test-only/catalog-image-measurement/fixture-package.json"), "utf8"));
 }
 
 function landmarkReport(viewID: Phase0CatalogMeasurementViewInput["viewID"], yaw: number, profileOffset?: number): FaceLandmarkReport {

@@ -9,6 +9,11 @@
     "catalogStableID",
     "catalogVersionID",
     "createdAt",
+    "processingModels",
+    "deterministicOutputID",
+    "sourceReferences",
+    "alignmentResults",
+    "inputGate",
     "viewValidations",
     "faceRegions",
     "landmarkExtractions",
@@ -34,6 +39,28 @@
     "createdAt": {
       "type": "string",
       "format": "date-time"
+    },
+    "processingModels": {
+      "$ref": "#/$defs/processingModels"
+    },
+    "deterministicOutputID": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceReferences": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/sourceReference"
+      }
+    },
+    "alignmentResults": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/alignmentResult"
+      }
+    },
+    "inputGate": {
+      "$ref": "#/$defs/inputGate"
     },
     "viewValidations": {
       "type": "array",
@@ -81,6 +108,28 @@
     }
   },
   "$defs": {
+    "processingModels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pipelineVersion", "measurementAlgorithmVersion", "faceAlignmentVersion", "landmarkProviders"],
+      "properties": {
+        "pipelineVersion": {
+          "const": "phase0-production-catalog-image-measurement-pipeline-v1"
+        },
+        "measurementAlgorithmVersion": {
+          "const": "phase0-catalog-image-measurement-v1"
+        },
+        "faceAlignmentVersion": {
+          "const": "phase0-catalog-face-alignment-v1"
+        },
+        "landmarkProviders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "viewID": {
       "enum": [
         "straightOn",
@@ -93,6 +142,116 @@
         "lowered",
         "menuEvidence"
       ]
+    },
+    "sourceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidenceFileID", "imageRelativePath", "viewID", "assetSha256", "sourceType", "approvedForProduction"],
+      "properties": {
+        "evidenceFileID": {
+          "type": "string",
+          "minLength": 1
+        },
+        "imageRelativePath": {
+          "type": "string",
+          "minLength": 1
+        },
+        "viewID": {
+          "$ref": "#/$defs/viewID"
+        },
+        "assetSha256": {
+          "type": ["string", "null"]
+        },
+        "sourceType": {
+          "type": ["string", "null"]
+        },
+        "approvedForProduction": {
+          "type": "boolean"
+        }
+      }
+    },
+    "alignmentResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "viewID",
+        "evidenceFileID",
+        "state",
+        "faceRegion",
+        "normalizedScale",
+        "translateX",
+        "translateY",
+        "rotationDegrees",
+        "yawDegrees",
+        "pitchDegrees",
+        "confidence",
+        "source",
+        "message"
+      ],
+      "properties": {
+        "viewID": {
+          "$ref": "#/$defs/viewID"
+        },
+        "evidenceFileID": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "enum": ["aligned", "humanCorrected", "unavailable"]
+        },
+        "faceRegion": {
+          "anyOf": [{ "$ref": "#/$defs/faceRegion" }, { "type": "null" }]
+        },
+        "normalizedScale": {
+          "type": ["number", "null"]
+        },
+        "translateX": {
+          "type": ["number", "null"]
+        },
+        "translateY": {
+          "type": ["number", "null"]
+        },
+        "rotationDegrees": {
+          "type": ["number", "null"]
+        },
+        "yawDegrees": {
+          "type": ["number", "null"]
+        },
+        "pitchDegrees": {
+          "type": ["number", "null"]
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "source": {
+          "enum": ["landmarkBoundingBox", "humanCorrected", "unavailable"]
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "inputGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "errors", "warnings"],
+      "properties": {
+        "status": {
+          "enum": ["accepted", "rejected"]
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "measurementID": {
       "enum": [

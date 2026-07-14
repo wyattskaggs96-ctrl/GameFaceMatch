@@ -1,0 +1,45 @@
+{
+  "fixtureNotice": "TEST FIXTURE ONLY - NOT PRODUCTION DATA",
+  "sourceType": "testFixture",
+  "catalogVersionID": "fixture-catalog-image-measurement-v1",
+  "catalogReleaseStatus": "approvedRelease",
+  "items": [
+    {
+      "sourceType": "testFixture",
+      "stableInternalID": "TEST_ONLY_CATALOG_IMAGE_MEASUREMENT_HEAD_001",
+      "game": "SYNTHETIC TEST GAME",
+      "gameVersion": "fixture",
+      "patchVersion": "fixture",
+      "platform": "fixture",
+      "gameMode": "fixture",
+      "creationPath": "fixture",
+      "category": "head",
+      "visibleGameLabelOrIndex": "SYNTHETIC TEST LABEL",
+      "verificationState": "verified",
+      "capturedDate": "2026-07-14T00:00:00.000Z",
+      "verifiedDate": "2026-07-14T00:00:00.000Z",
+      "sourceImageReferences": ["fixture-front"],
+      "geometryMeasurements": {},
+      "humanAnnotations": {},
+      "catalogManagerDisposition": "approved",
+      "catalogVersion": {
+        "identifier": "fixture-catalog-image-measurement-v1",
+        "gameVersion": "fixture",
+        "platform": "fixture",
+        "verifiedAt": "2026-07-14T00:00:00.000Z"
+      },
+      "isTestFixture": true
+    }
+  ],
+  "evidenceAssets": [
+    {
+      "assetID": "fixture-front",
+      "angle": "straightOn",
+      "relativePath": "data/fixtures/test-only/catalog-image-measurement/front.png",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "sourceType": "testFixture",
+      "approvedForProduction": false,
+      "verificationState": "verified"
+    }
+  ]
+}

@@ -409,6 +409,7 @@ phase0-source-phase0-video-001,data/phase-zero/environment_manifest.research.jso
 phase0-source-phase0-video-001,data/phase-zero/environment_manifest.research.json,$.missingEnvironmentEvidence[8],evidence_record,UNKNOWN_ORIGIN,,,,unresolved,false,false,false,verification:unresolved,
 phase0-source-phase0-video-001,data/phase-zero/environment_manifest.research.json,$.missingEnvironmentEvidence[9],evidence_record,UNKNOWN_ORIGIN,,,,unresolved,false,false,false,verification:unresolved,
 phase0-source-phase0-video-001,data/phase-zero/environment_manifest.research.json,$.sourceVideo,evidence_record,UNKNOWN_ORIGIN,,,,,true,false,false,,
+phase0-source-phase0-video-001,data/phase-zero/facial_hair.research.json,$.sourceEvidence.hairMenuRow.evidence[0],evidence_record,UNKNOWN_ORIGIN,,,,,true,false,false,,
 phase0-source-phase0-video-001,data/phase-zero/hair_colors.research.json,$.sourceEvidence.hairMenuRow.evidence[0],evidence_record,UNKNOWN_ORIGIN,,,,,true,false,false,,
 phase0-source-phase0-video-001,data/phase-zero/hairstyles.research.json,$.sourceEvidence.hairMenuRow.evidence[0],evidence_record,UNKNOWN_ORIGIN,,,,,true,false,false,,
 CF27_XBOXUNKNOWN_RTG_HEAD_001,data/phase-zero/heads.research.json,$.records[0],catalog_record,RESEARCH_OBSERVED,shippingGameVideoResearch,RESEARCH_CANDIDATE,NOT_PRODUCTION_DATA,OBSERVED_PENDING_VERIFICATION,true,false,false,sourceType:shippingGameVideoResearch;dataClass:RESEARCH_CANDIDATE;verification:OBSERVED_PENDING_VERIFICATION;productionStatus:NOT_PRODUCTION_DATA,

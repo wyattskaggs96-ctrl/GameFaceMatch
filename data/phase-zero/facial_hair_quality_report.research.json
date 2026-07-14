@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "cf27-facial-hair-quality-report-v1",
+  "generatedAt": "2026-07-14T03:45:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_FACIAL_HAIR_QUALITY_REPORT",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "summary": {
+    "status": "BLOCKED_NO_FACIAL_HAIR_CONTROL_EVIDENCE",
+    "optionsAssessed": 0,
+    "optionsAcceptedForResearch": 0,
+    "optionsRejected": 0,
+    "optionsRequiringRecapture": 0,
+    "sequenceLevelRecaptureRequired": true,
+    "blocker": "Current evidence shows the Hair submenu row only. It does not open Hair or show any facial-hair control, None option, facial-hair color, or selected facial-hair values."
+  },
+  "checks": [
+    {
+      "checkID": "native_values",
+      "status": "NO_RECORDS_CREATED",
+      "finding": "No native facial-hair labels or indices have been entered.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "none_option",
+      "status": "NOT_OBSERVED",
+      "finding": "None cannot be cataloged until directly visible and selected.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "total_observed_count",
+      "status": "COUNT_UNKNOWN",
+      "finding": "No facial-hair selector has been counted.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "selected_canonical_head",
+      "status": "UNCONFIRMED",
+      "finding": "No facial-hair capture sequence proves the selected canonical head.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "selected_canonical_hairstyle",
+      "status": "UNCONFIRMED",
+      "finding": "No facial-hair capture sequence proves the selected canonical hairstyle.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "selected_canonical_skin_setting",
+      "status": "UNCONFIRMED",
+      "finding": "No facial-hair capture sequence proves the selected skin setting.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "selected_canonical_facial_hair_color",
+      "status": "UNCONFIRMED",
+      "finding": "No facial-hair capture sequence proves the selected facial-hair color.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "full_screen_menu_evidence",
+      "status": "MISSING",
+      "finding": "No full-screen facial-hair menu evidence exists.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "front_evidence",
+      "status": "MISSING",
+      "finding": "No front facial-hair evidence exists.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "three_quarter_evidence",
+      "status": "MISSING",
+      "finding": "No left or right three-quarter facial-hair evidence exists.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "profile_evidence",
+      "status": "MISSING",
+      "finding": "No left or right profile facial-hair evidence exists.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "coverage_metadata",
+      "status": "NOT_ASSESSABLE",
+      "finding": "No option evidence exists for beardCoverage, mustachePresence, chinCoverage, cheekCoverage, jawCoverage, neckCoverage, sideburnPresence.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "selector_wrap",
+      "status": "NOT_DEMONSTRATED",
+      "finding": "No facial-hair selector boundary or wrap proof exists.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "default",
+      "status": "NOT_DEMONSTRATED",
+      "finding": "No facial-hair default is visible in current evidence.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "dependency_observations",
+      "status": "UNKNOWN_NOT_TESTED",
+      "finding": "No head, hairstyle, skin, mode, body, account, or unlock dependency tests exist for facial hair.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_RECORDS",
+      "evidence": null
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "cf27-facial-hair-research-catalog-v1",
+  "generatedAt": "2026-07-14T03:45:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_FACIAL_HAIR_RESEARCH_CATALOG",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "productionRecommendationsEnabled": false,
+  "sourceMenuMap": "data/phase-zero/menu_map.research.json",
+  "sourceCaptureRequests": "data/phase-zero/capture_requests.json",
+  "directObservationPolicy": [
+    "Create facial-hair option records only from directly selected native game values.",
+    "Include None only when a None option is directly visible and selected.",
+    "Do not infer facial-hair options from visible hair, beard-like preview states, head templates, or expected game controls.",
+    "Keep researcher-applied coverage metadata separate from native game labels and indices.",
+    "Do not use cultural, lifestyle, personality, race, ethnicity, attractiveness, identity, or real-person resemblance labels."
+  ],
+  "summary": {
+    "recordCount": 0,
+    "productionEligibleRecords": 0,
+    "hairMenuRowObserved": true,
+    "facialHairControlObserved": false,
+    "facialHairNativeValuesObserved": false,
+    "noneOptionObserved": false,
+    "totalObservedCount": 0,
+    "countStatus": "COUNT_UNKNOWN",
+    "nativeOrderStatus": "NOT_OBSERVED",
+    "completeSelectorDoubleCountAvailable": false,
+    "selectorWrapStatus": "NOT_OBSERVED",
+    "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+    "evidenceExtractionStatus": "NO_FACIAL_HAIR_OPTION_FRAMES_AVAILABLE",
+    "recaptureRequired": true,
+    "blocker": "Current evidence shows the Hair submenu row only. It does not open Hair or show any facial-hair control, None option, facial-hair color, or selected facial-hair values."
+  },
+  "canonicalContext": {
+    "canonicalHead": "UNCONFIRMED_NOT_CAPTURED",
+    "canonicalHairstyle": "UNCONFIRMED_NOT_CAPTURED",
+    "canonicalSkinSetting": "UNCONFIRMED_NOT_CAPTURED",
+    "canonicalFacialHairColor": "UNCONFIRMED_NOT_CAPTURED",
+    "framingConsistency": "NOT_ASSESSABLE_NO_FACIAL_HAIR_SEQUENCE",
+    "notes": [
+      "No current footage confirms the head used for a facial-hair pass.",
+      "No current footage confirms the hairstyle used for a facial-hair pass.",
+      "No current footage confirms the skin setting or facial-hair color used for a facial-hair pass.",
+      "No current footage opens the Hair submenu or proves whether a facial-hair control exists."
+    ]
+  },
+  "sourceEvidence": {
+    "hairMenuRow": {
+      "stableMenuID": "cf27-menu-appearance-hair",
+      "displayLabel": "Hair",
+      "nativeLabel": "Hair",
+      "nativeOrder": 2,
+      "captureStatus": "PARTIAL",
+      "inspected": false,
+      "complete": false,
+      "gapFlags": [
+        "PARTIAL",
+        "COUNT_UNKNOWN",
+        "RECAPTURE_REQUIRED",
+        "FIRST_VALUE_UNKNOWN",
+        "FINAL_VALUE_UNKNOWN",
+        "ORDER_NOT_INSPECTED"
+      ],
+      "evidence": [
+        {
+          "evidenceID": "phase0-source-phase0-video-001",
+          "timelineRecordID": null,
+          "videoID": "phase0-video-001",
+          "startTimestamp": null,
+          "endTimestamp": null,
+          "extractedFramePath": null,
+          "confidence": "LOW_VISIBLE_ONLY"
+        }
+      ],
+      "missingEvidence": [
+        "Open Hair and record its child controls, boundaries, defaults, counts, dependencies, and evidence."
+      ]
+    },
+    "hairBoundaryCaptureRequest": {
+      "captureID": "GFM-CAP-007",
+      "title": "Hair submenu boundary map",
+      "priority": "P1",
+      "exactMenuPath": "Create Player > Player > Appearance > Hair",
+      "requiredViews": [
+        "FULL_MENU_LIST",
+        "SCROLL_CONTINUATION",
+        "LOCK_WARNING_OR_DEPENDENCY_IF_VISIBLE"
+      ],
+      "twoIndependentCountsRequired": false,
+      "verificationStatus": "REQUESTED_NOT_CAPTURED",
+      "existingFootageCanBeReused": "Existing footage proves the Hair entry exists only; no child controls are captured.",
+      "acceptanceCriteria": [
+        "Hair child controls are directly visible in native order.",
+        "Hairstyle, hair color, facial hair, and facial-hair color are not treated as confirmed native controls unless shown.",
+        "Locks or unavailable controls remain documented as visible states."
+      ]
+    },
+    "facialHairCaptureRequest": {
+      "captureID": "GFM-CAP-010",
+      "title": "Facial-hair controls, only if visible in Hair",
+      "priority": "P1",
+      "exactMenuPath": "Create Player > Player > Appearance > Hair > visible facial-hair or facial-hair-color controls from GFM-CAP-007",
+      "requiredViews": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE"
+      ],
+      "twoIndependentCountsRequired": true,
+      "verificationStatus": "REQUESTED_NOT_CAPTURED",
+      "existingFootageCanBeReused": "No complete facial-hair or facial-hair-color evidence exists.",
+      "acceptanceCriteria": [
+        "None is included only if directly visible.",
+        "Coverage, mustache, beard, sideburn, stubble, density, and color-control observations are recorded only when visible.",
+        "Facial-hair color is not assumed to exist unless shown."
+      ]
+    },
+    "facialHairOptionEvidence": []
+  },
+  "viewCoverage": {
+    "requiredViews": [
+      "MENU",
+      "FRONT",
+      "LEFT_3Q",
+      "LEFT_PROFILE",
+      "RIGHT_3Q",
+      "RIGHT_PROFILE"
+    ],
+    "extractedViews": [],
+    "missingViews": [
+      "MENU",
+      "FRONT",
+      "LEFT_3Q",
+      "LEFT_PROFILE",
+      "RIGHT_3Q",
+      "RIGHT_PROFILE"
+    ],
+    "status": "NO_OPTION_VIEW_EVIDENCE_AVAILABLE"
+  },
+  "coverageMetadataPolicy": {
+    "status": "NONE_RECORDED_NO_OPTION_EVIDENCE",
+    "fields": [
+      "beardCoverage",
+      "mustachePresence",
+      "chinCoverage",
+      "cheekCoverage",
+      "jawCoverage",
+      "neckCoverage",
+      "sideburnPresence"
+    ],
+    "separationRule": "Coverage metadata is researcher-applied review data and must remain separate from nativeGameLabel and nativeIndex.",
+    "prohibitedLabels": [
+      "cultural labels",
+      "lifestyle labels",
+      "personality labels",
+      "race labels",
+      "ethnicity labels",
+      "identity labels",
+      "real-person resemblance labels"
+    ]
+  },
+  "dependencyAssessment": {
+    "changesByHead": "UNKNOWN_NOT_TESTED",
+    "changesByHairstyle": "UNKNOWN_NOT_TESTED",
+    "changesBySkinSetting": "UNKNOWN_NOT_TESTED",
+    "changesByFacialHairColor": "UNKNOWN_NOT_TESTED",
+    "changesByPosition": "UNKNOWN_NOT_TESTED",
+    "changesByMode": "UNKNOWN_NOT_TESTED",
+    "changesByBodyType": "UNKNOWN_NOT_TESTED",
+    "changesByAccount": "UNKNOWN_NOT_TESTED",
+    "changesByUnlockState": "UNKNOWN_NOT_TESTED",
+    "notes": [
+      "Facial-hair dependencies cannot be assessed until GFM-CAP-007 maps visible Hair controls and GFM-CAP-010 captures facial-hair controls if present."
+    ]
+  },
+  "records": []
+}

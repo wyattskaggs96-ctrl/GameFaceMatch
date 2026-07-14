@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "cf27-facial-hair-recapture-report-v1",
+  "generatedAt": "2026-07-14T03:45:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_FACIAL_HAIR_RECAPTURE_REPORT",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "summary": {
+    "openRequests": 1,
+    "productionBlockers": 1,
+    "captureRequestIDs": [
+      "GFM-CAP-007",
+      "GFM-CAP-010"
+    ],
+    "status": "OPEN_RECAPTURE_REQUIRED"
+  },
+  "requests": [
+    {
+      "recaptureID": "FACIAL-HAIR-RECAPTURE-001",
+      "priority": "P0",
+      "linkedCaptureRequestIDs": [
+        "GFM-CAP-007",
+        "GFM-CAP-010"
+      ],
+      "exactMenuPath": "Create Player > Player > Appearance > Hair, then the visible facial-hair control only if directly shown",
+      "reason": "Current evidence proves only that Hair is visible as an Appearance submenu row. It does not show a facial-hair control, None option, facial-hair color, or selected facial-hair values.",
+      "requiredCanonicalContext": [
+        "Confirm the native head value used for facial-hair review.",
+        "Confirm the native hairstyle value used for facial-hair review.",
+        "Confirm the native skin setting.",
+        "Confirm the facial-hair color used for the option pass if the game exposes such a control.",
+        "Keep lighting, zoom, and framing stable across all selected facial-hair values."
+      ],
+      "requiredEvidence": [
+        "Hair submenu boundary map from GFM-CAP-007.",
+        "Readable native facial-hair label or index for every selected value.",
+        "None option evidence only if None is directly visible and selected.",
+        "Two complete counts when selector boundaries make that possible.",
+        "Required views for each option: MENU, FRONT, LEFT_3Q, LEFT_PROFILE, RIGHT_3Q, RIGHT_PROFILE.",
+        "Full-screen menu evidence for every entered option.",
+        "Boundary or wrap/no-wrap proof for first and final values.",
+        "Researcher-applied coverage metadata for beard, mustache, chin, cheek, jaw, neck, and sideburn coverage."
+      ],
+      "acceptanceCriteria": [
+        "Every entered facial-hair record is backed by directly selected native game evidence.",
+        "Native order is preserved without inferred skipped values.",
+        "Coverage metadata remains separate from native labels and does not use prohibited cultural, lifestyle, personality, race, or ethnicity labels.",
+        "Evidence quality, source timestamp, and recapture status are recorded for each option.",
+        "No record is assigned VERIFIED or production eligibility during primary research."
+      ],
+      "existingFootageUsefulness": "Current footage remains useful only to show that Hair appears as an Appearance submenu row.",
+      "status": "OPEN",
+      "productionBlocker": true
+    }
+  ]
+}

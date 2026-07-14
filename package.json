@@ -43,6 +43,7 @@
     "cf27:appearance-controls-research": "node scripts/cf27-appearance-controls-research-catalog.mjs",
     "cf27:hairstyle-research": "node scripts/cf27-hairstyle-research-catalog.mjs",
     "cf27:hair-color-research": "node scripts/cf27-hair-color-research-catalog.mjs",
+    "cf27:facial-hair-research": "node scripts/cf27-facial-hair-research-catalog.mjs",
     "source-video:intake": "node scripts/source-video-intake.mjs",
     "phase-zero:export": "node scripts/phase-zero-export.mjs",
     "phase-zero:manual-matching": "node scripts/manual-matching-feasibility.mjs"

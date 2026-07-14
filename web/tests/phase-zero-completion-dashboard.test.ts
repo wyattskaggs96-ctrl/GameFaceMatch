@@ -75,7 +75,18 @@ describe("Phase 0 completion dashboard", () => {
       productionApproved: 0,
       status: "notStarted"
     });
-    expect(facialHair?.nextAction).toMatch(/shipping-game evidence/);
+    expect(facialHair).toMatchObject({
+      required: true,
+      evidenceAvailable: 0,
+      observed: 0,
+      cataloged: 0,
+      independentlyVerified: 0,
+      productionApproved: 0,
+      status: "notStarted"
+    });
+    expect(facialHair?.sourceSummary).toMatch(/Facial-hair research catalog exists with 0 record/);
+    expect(facialHair?.sourceSummary).toMatch(/does not open Hair/);
+    expect(facialHair?.nextAction).toMatch(/GFM-CAP-007 and GFM-CAP-010/);
   });
 
   it("calculates completion percentages from the six evidence-to-approval gates", () => {

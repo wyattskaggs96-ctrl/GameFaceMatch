@@ -2,9 +2,9 @@
 
 ## Status
 
-Recommended for the current web MVP: free beta before payment.
+Current implementation decision: free beta remains the validation phase, and the first paid offer is modeled as a low-cost one-time College Football 27 game pack after verified catalog and beta gates pass.
 
-No payment provider is selected. No checkout, subscription, purchase restoration, or refund processing is implemented.
+No payment provider is selected. No checkout, subscription, live purchase restoration, or refund processing is implemented.
 
 ## Current product constraints
 
@@ -27,17 +27,34 @@ No payment provider is selected. No checkout, subscription, purchase restoration
 
 ## Recommendation
 
-Launch the first public web MVP as a free beta with no payment wall.
+Use the first public web MVP as a free beta until verified recommendations can be evaluated.
 
-After the production College Football 27 catalog is verified and beta testers confirm useful recommendations, introduce a simple one-time College Football 27 game pack. That pack should unlock verified top-three results and detailed build guides. Screenshot refinement should remain free or unavailable until real comparison logic is proven.
+After the production College Football 27 catalog is verified and beta testers confirm useful recommendations, introduce a simple one-time College Football 27 game pack. The current draft offer is:
+
+- Product: College Football 27 one-game pack
+- Price: $4.99 USD
+- Purchase type: one-time one-game purchase
+- Included after production gates pass: verified top-three College Football 27 results, detailed build guides using verified menu paths, catalog/platform/mode/path traceability, and screenshot-refinement intake when verified refinement logic is available
+
+Checkout remains disabled until a payment provider, secure checkout flow, receipt handling, purchase restoration, support policy, refund policy, tax approach, and legal review are complete.
 
 ## Rationale
 
 - No verified catalog means the product cannot honestly sell recommendations yet.
 - Free beta lets users evaluate capture, privacy, and catalog limitations before paying.
 - A one-time game pack is easier to understand than a subscription for an annual sports game.
+- A transparent low-cost one-game purchase is easier to support than a broad multi-game promise while only one game is being cataloged.
 - The product should demonstrate value before charging because the experience involves face images.
 - Refund risk is lower after users see verified catalog coverage and the app can explain exactly what is included.
+
+## Privacy requirements for paid launch
+
+- Face images are not sold.
+- Face data is not used for biometric advertising.
+- Payment providers must not receive raw face media, landmarks, precise facial measurements, or unencrypted profile content.
+- Result previews before purchase may show capture readiness and catalog availability, but must not show fake College Football 27 settings.
+- The College Football 27 one-game purchase must be clearly distinguished from a future multi-game suite.
+- No trial period, recurring renewal, fake urgency, fake customer quotes, or fake purchase state may be displayed.
 
 ## Superseded paths
 

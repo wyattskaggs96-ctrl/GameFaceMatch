@@ -6,6 +6,20 @@ This document defines what must exist before GameFace Match connects a payment p
 
 No live payment credentials, checkout sessions, webhooks, or provider SDKs are part of the current MVP.
 
+## Selected offer to support
+
+The approved first paid product model is a low-cost one-time College Football 27 one-game pack after verified catalog and beta-readiness gates pass.
+
+Current draft configuration:
+
+- Product: College Football 27 one-game pack
+- Price: $4.99 USD
+- Purchase type: one-time one-game purchase
+- Entitlements: top-three results, detailed build guide, and screenshot-refinement access only when verified refinement logic is available
+- Checkout state: disabled until provider setup, receipt handling, purchase restoration, refund/support policy, tax approach, and legal review are complete
+
+The free beta remains the pre-purchase validation path. A future multi-game suite is separate and must not be implied by the one-game purchase.
+
 ## Provider selection
 
 Do not select Stripe, Squarespace Commerce, PayPal, Square, App Store IAP, or any other provider without owner input.
@@ -33,7 +47,7 @@ Provider evaluation must cover:
 - Terms of purchase approval
 - Tax collection decision
 - Target launch countries
-- Product names and exact prices
+- Confirmation or revision of the College Football 27 one-game pack name and $4.99 USD draft price
 - Whether purchases are one-time, subscription, or beta-only
 - Whether accounts are required for paid access
 - Provider preference or constraints
@@ -49,6 +63,8 @@ Provider evaluation must cover:
 - Production and test-mode credentials must be separated.
 - Purchase restoration must be defined before paid launch.
 - Refund and chargeback status must revoke or adjust entitlements when required.
+- Result previews before purchase must not show fake College Football 27 head, hair, facial-hair, menu, or slider values.
+- Payment providers must not receive raw face media, landmarks, precise facial measurements, identity data, or sensitive-trait inferences.
 
 ## Disabled current state
 

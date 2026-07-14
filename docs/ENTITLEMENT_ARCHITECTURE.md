@@ -19,12 +19,14 @@ The basic match flow must continue to work without an account.
 
 `basicFreeMatch` is included by default.
 
-All paid or premium capabilities remain unavailable until:
+The selected future paid offer is the College Football 27 one-game pack. It may grant `topThreeResults`, `detailedBuildGuide`, and `screenshotRefinement` only after:
 
 1. Verified production catalog records exist.
 2. The owner selects a payment provider.
 3. Legal and support policies are approved.
 4. Checkout, receipts, webhooks, and refund handling are implemented.
+
+`multiGameAccess` remains a separate future-suite entitlement and is not included in the College Football 27 one-game pack.
 
 ## Boundary rules
 
@@ -33,6 +35,8 @@ All paid or premium capabilities remain unavailable until:
 - Payment providers must not receive raw face images.
 - Entitlements must reference capabilities, not invented game options.
 - No paid claim may imply verified recommendations while the production catalog is empty.
+- The payment provider must not receive raw face images, landmarks, precise facial measurements, or sensitive-trait inferences.
+- Purchase restoration must be provider-backed before any paid entitlement can be restored.
 
 ## Future flow
 

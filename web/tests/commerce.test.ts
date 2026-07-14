@@ -2,8 +2,21 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { createLocalEntitlementService } from "@/lib/payments/entitlements";
-import { PAYMENT_PROVIDER_UNAVAILABLE_MESSAGE, createUnavailablePaymentProvider } from "@/lib/payments/payment-provider";
-import { PRICING_OPTIONS, canMakePaidRecommendationClaims, validatePricingConfiguration } from "@/lib/payments/pricing";
+import {
+  PAYMENT_PROVIDER_UNAVAILABLE_MESSAGE,
+  PURCHASE_RESTORATION_UNAVAILABLE_MESSAGE,
+  createSafePaymentAdapter,
+  createUnavailablePaymentProvider
+} from "@/lib/payments/payment-provider";
+import {
+  PRICING_OPTIONS,
+  SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
+  SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
+  canMakePaidRecommendationClaims,
+  createCheckoutUnavailableCopy,
+  getSelectedCollegeFootball27Offer,
+  validatePricingConfiguration
+} from "@/lib/payments/pricing";
 
 describe("payment provider scaffold", () => {
   it("fails closed when no provider is selected", async () => {
@@ -19,6 +32,35 @@ describe("payment provider scaffold", () => {
     expect(result.status).toBe("providerUnavailable");
     expect(result.checkoutUrl).toBeUndefined();
     expect(result.message).toBe(PAYMENT_PROVIDER_UNAVAILABLE_MESSAGE);
+  });
+
+  it("keeps checkout and purchase restoration behind the safe adapter", async () => {
+    const offer = getSelectedCollegeFootball27Offer();
+    expect(offer).toBeDefined();
+    const adapter = createSafePaymentAdapter(createUnavailablePaymentProvider());
+
+    const checkout = await adapter.startCheckout(offer!, {
+      productID: SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
+      priceID: SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
+      successUrl: "https://example.invalid/success",
+      cancelUrl: "https://example.invalid/cancel"
+    });
+    const restoration = await adapter.restorePurchase({
+      id: "receipt-reference-test-only",
+      provider: "provider-unselected",
+      productID: SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
+      priceID: SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
+      paymentStatus: "paid",
+      refundStatus: "notRequested"
+    });
+
+    expect(checkout.status).toBe("providerUnavailable");
+    expect(checkout.checkoutUrl).toBeUndefined();
+    expect(checkout.message).toContain(PAYMENT_PROVIDER_UNAVAILABLE_MESSAGE);
+    expect(restoration).toEqual({
+      status: "providerUnavailable",
+      message: PURCHASE_RESTORATION_UNAVAILABLE_MESSAGE
+    });
   });
 
   it("does not expose live payment dependencies or credential-shaped keys in client source", () => {
@@ -78,18 +120,40 @@ describe("pricing configuration", () => {
     expect(PRICING_OPTIONS.every((option) => !option.product.providerProductID && !option.price.providerPriceID)).toBe(true);
   });
 
-  it("recommends free beta as the only initial launch model", () => {
+  it("configures the approved low-cost one-game purchase offer transparently", () => {
+    const offer = getSelectedCollegeFootball27Offer();
+    expect(offer).toBeDefined();
+    expect(offer?.product).toMatchObject({
+      id: SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
+      name: "College Football 27 one-game pack",
+      purchaseType: "oneTime",
+      active: true
+    });
+    expect(offer?.price).toMatchObject({
+      id: SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
+      amountMinor: 499,
+      displayAmount: "$4.99",
+      currency: "USD",
+      active: true
+    });
+    expect(offer?.recommendedForLaunch).toBe(true);
+    expect(offer?.checkoutEnabled).toBe(false);
+    expect(offer?.product.entitlementIDs).toEqual(expect.arrayContaining(["topThreeResults", "detailedBuildGuide"]));
+  });
+
+  it("keeps free beta available as pre-purchase validation, not the selected paid offer", () => {
     const recommended = PRICING_OPTIONS.filter((option) => option.recommendedForLaunch);
-    expect(recommended).toHaveLength(1);
-    expect(recommended[0].product.id).toBe("free-beta");
-    expect(recommended[0].product.purchaseType).toBe("free");
-    expect(recommended[0].price.amountMinor).toBe(0);
+    expect(recommended.map((option) => option.product.id)).toContain(SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID);
+    const freeBeta = PRICING_OPTIONS.find((option) => option.product.id === "free-beta");
+    expect(freeBeta?.offerState).toBe("freeBeta");
+    expect(freeBeta?.product.purchaseType).toBe("free");
+    expect(freeBeta?.price.amountMinor).toBe(0);
   });
 
   it("does not create fake purchase state", () => {
     const commerceSource = fs.readFileSync(path.join(process.cwd(), "features/commerce/PricingScaffold.tsx"), "utf8");
     const pricingSource = fs.readFileSync(path.join(process.cwd(), "lib/payments/pricing.ts"), "utf8");
-    expect(`${commerceSource}\n${pricingSource}`).not.toMatch(/limited time|sale ends|testimonial|purchased by|revenue|discount/i);
+    expect(`${commerceSource}\n${pricingSource}`).not.toMatch(/limited time|sale ends|testimonial|purchased by|revenue|discount|free trial/i);
   });
 
   it("blocks paid recommendation claims while the production catalog is empty", () => {
@@ -98,6 +162,18 @@ describe("pricing configuration", () => {
       reason: "Verified College Football 27 catalog not loaded."
     });
     expect(canMakePaidRecommendationClaims(false).allowed).toBe(true);
+  });
+
+  it("requires privacy-safe offer claims and distinguishes the future multi-game suite", () => {
+    const offer = getSelectedCollegeFootball27Offer();
+    const multiGame = PRICING_OPTIONS.find((option) => option.product.id === "multi-game-sports-pass");
+
+    expect(offer?.privacyCommitments.join(" ")).toContain("not sold");
+    expect(offer?.privacyCommitments.join(" ")).toContain("biometric advertising");
+    expect(offer?.resultPreview).toContain("must not show fake");
+    expect(createCheckoutUnavailableCopy(offer!, true)).toContain("Verified College Football 27 catalog not loaded.");
+    expect(multiGame?.offerState).toBe("futureSuite");
+    expect(multiGame?.resultPreview.toLowerCase()).toContain("not part of the college football 27 one-game purchase");
   });
 });
 

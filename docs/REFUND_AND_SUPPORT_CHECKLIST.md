@@ -5,8 +5,10 @@ Complete this before any paid launch.
 ## Terms of purchase
 
 - [ ] Define what a purchase unlocks.
+- [ ] Confirm College Football 27 one-game pack name, price, currency, and one-time purchase wording.
 - [ ] State that GameFace Match recommends closest available in-game settings and does not import faces into the game.
 - [ ] State that College Football 27 catalog coverage depends on verified records.
+- [ ] State that the one-game purchase is separate from any future multi-game suite.
 - [ ] Include independent-app and trademark disclaimers.
 - [ ] Explain browser RGB limitations and future native capture differences.
 
@@ -23,6 +25,8 @@ Complete this before any paid launch.
 - [ ] Explain local-only raw image handling.
 - [ ] Explain whether any payment provider receives customer contact or payment metadata.
 - [ ] State that face data is not sold.
+- [ ] State that face data is not used for biometric advertising.
+- [ ] State that payment providers must not receive raw face media, landmarks, precise facial measurements, or unencrypted profile content.
 - [ ] State that identity recognition is not implemented.
 - [ ] Explain deletion controls.
 
@@ -65,6 +69,7 @@ Complete this before any paid launch.
 - [ ] Define when a purchase is considered delivered.
 - [ ] Define what happens when the catalog is unavailable.
 - [ ] Define recovery when checkout succeeds but entitlement update fails.
+- [ ] Define purchase restoration for the selected payment provider before paid launch.
 
 ## Marketing claims
 
@@ -72,4 +77,5 @@ Complete this before any paid launch.
 - [ ] Avoid direct-import claims.
 - [ ] Avoid official affiliation claims.
 - [ ] Avoid fake discounts, fake urgency, fake testimonials, fake purchases, or fake revenue claims.
+- [ ] Do not show fake result previews before purchase.
 - [ ] Review all examples against the verified production catalog.

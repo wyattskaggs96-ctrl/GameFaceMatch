@@ -112,11 +112,15 @@ Commerce tests should include:
 - Provider unavailable behavior
 - Entitlement defaults
 - No live checkout result
+- Safe payment adapter blocks checkout and purchase restoration until provider setup exists
+- Transparent College Football 27 one-game pack price, purchase type, and feature list
 - Pricing configuration validation
 - Disabled payment controls
 - No credential-like payment secrets in client source
 - No fake purchase state
 - Catalog unavailable prevents paid recommendation claims
+- Privacy-safe paid-offer claims: no sale of face data, no biometric advertising, and no fake result preview
+- Clear distinction between the one-game purchase and future multi-game suite
 
 ## Privacy-safe analytics coverage
 

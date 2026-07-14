@@ -9,6 +9,7 @@ const artifactPaths = {
   environment: "data/phase-zero/environment_manifest.research.json",
   evidenceManifest: "data/phase-zero/evidence_manifest.json",
   facialHair: "data/phase-zero/facial_hair.research.json",
+  facialHairColors: "data/phase-zero/facial_hair_colors.research.json",
   headRecapture: "data/phase-zero/head_template_recapture_list.research.json",
   heads: "data/phase-zero/heads.research.json",
   issues: "data/phase-zero/issues_register.research.json",

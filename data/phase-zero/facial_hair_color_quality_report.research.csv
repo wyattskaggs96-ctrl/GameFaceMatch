@@ -1,0 +1,12 @@
+checkID,status,finding,productionImpact,evidence
+native_values,NO_RECORDS_CREATED,No native facial-hair-color labels or indices have been entered.,BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,
+native_order,NOT_OBSERVED,No facial-hair-color selector has been traversed.,BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,
+total_observed_count,COUNT_UNKNOWN,No facial-hair-color selector has been counted.,BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,
+default,NOT_DEMONSTRATED,No facial-hair-color default is visible in current evidence.,BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,
+selector_boundaries,BOUNDARIES_UNKNOWN,No first or final facial-hair-color value is visible.,BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,
+selector_wrap,NOT_DEMONSTRATED,No facial-hair-color boundary or wrap proof exists.,BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,
+relationship_to_hair_color,UNKNOWN_NOT_TESTED,No evidence proves whether hair color and facial-hair color are linked or separate.,BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,
+hair_color_auto_change,UNKNOWN_NOT_TESTED,No evidence proves whether selecting hair color automatically changes facial-hair color.,BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,
+all_styles_support_all_colors,UNKNOWN_NOT_TESTED,No facial-hair styles or facial-hair-color values have been cross-tested.,BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,
+none_color_availability,UNKNOWN_NOT_TESTED,"No evidence proves whether selecting None hides, disables, or preserves facial-hair color availability.",BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,
+required_views,MISSING,"Missing all required views: MENU, FRONT_REPRESENTATIVE_FRAME_PER_VALUE, LEFT_3Q_IF_NEEDED_FOR_VISIBILITY.",BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS,

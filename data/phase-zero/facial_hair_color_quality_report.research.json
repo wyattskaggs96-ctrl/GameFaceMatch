@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "cf27-facial-hair-color-quality-report-v1",
+  "generatedAt": "2026-07-14T04:10:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_FACIAL_HAIR_COLOR_QUALITY_REPORT",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "summary": {
+    "status": "BLOCKED_NO_FACIAL_HAIR_COLOR_CONTROL_EVIDENCE",
+    "valuesAssessed": 0,
+    "valuesAcceptedForResearch": 0,
+    "valuesRejected": 0,
+    "sequenceLevelRecaptureRequired": true,
+    "blocker": "Current evidence shows the Hair submenu row only. It does not open Hair or show any facial-hair-color control or selected facial-hair-color values."
+  },
+  "checks": [
+    {
+      "checkID": "native_values",
+      "status": "NO_RECORDS_CREATED",
+      "finding": "No native facial-hair-color labels or indices have been entered.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "native_order",
+      "status": "NOT_OBSERVED",
+      "finding": "No facial-hair-color selector has been traversed.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "total_observed_count",
+      "status": "COUNT_UNKNOWN",
+      "finding": "No facial-hair-color selector has been counted.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "default",
+      "status": "NOT_DEMONSTRATED",
+      "finding": "No facial-hair-color default is visible in current evidence.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "selector_boundaries",
+      "status": "BOUNDARIES_UNKNOWN",
+      "finding": "No first or final facial-hair-color value is visible.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "selector_wrap",
+      "status": "NOT_DEMONSTRATED",
+      "finding": "No facial-hair-color boundary or wrap proof exists.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "relationship_to_hair_color",
+      "status": "UNKNOWN_NOT_TESTED",
+      "finding": "No evidence proves whether hair color and facial-hair color are linked or separate.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "hair_color_auto_change",
+      "status": "UNKNOWN_NOT_TESTED",
+      "finding": "No evidence proves whether selecting hair color automatically changes facial-hair color.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "all_styles_support_all_colors",
+      "status": "UNKNOWN_NOT_TESTED",
+      "finding": "No facial-hair styles or facial-hair-color values have been cross-tested.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "none_color_availability",
+      "status": "UNKNOWN_NOT_TESTED",
+      "finding": "No evidence proves whether selecting None hides, disables, or preserves facial-hair color availability.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    },
+    {
+      "checkID": "required_views",
+      "status": "MISSING",
+      "finding": "Missing all required views: MENU, FRONT_REPRESENTATIVE_FRAME_PER_VALUE, LEFT_3Q_IF_NEEDED_FOR_VISIBILITY.",
+      "productionImpact": "BLOCKS_PRODUCTION_FACIAL_HAIR_COLOR_RECORDS",
+      "evidence": null
+    }
+  ]
+}

@@ -65,6 +65,7 @@ describe("Phase 0 completion dashboard", () => {
     const report = createPhase0CompletionDashboard(currentArtifacts);
     const hairstyles = report.categoryProgress.find((category) => category.id === "hairstyles");
     const facialHair = report.categoryProgress.find((category) => category.id === "facialHair");
+    const facialHairColors = report.categoryProgress.find((category) => category.id === "facialHairColors");
 
     expect(hairstyles).toMatchObject({
       required: true,
@@ -87,6 +88,18 @@ describe("Phase 0 completion dashboard", () => {
     expect(facialHair?.sourceSummary).toMatch(/Facial-hair research catalog exists with 0 record/);
     expect(facialHair?.sourceSummary).toMatch(/does not open Hair/);
     expect(facialHair?.nextAction).toMatch(/GFM-CAP-007 and GFM-CAP-010/);
+    expect(facialHairColors).toMatchObject({
+      required: true,
+      evidenceAvailable: 0,
+      observed: 0,
+      cataloged: 0,
+      independentlyVerified: 0,
+      productionApproved: 0,
+      status: "notStarted"
+    });
+    expect(facialHairColors?.sourceSummary).toMatch(/Facial-hair-color research catalog exists with 0 record/);
+    expect(facialHairColors?.sourceSummary).toMatch(/does not open Hair/);
+    expect(facialHairColors?.nextAction).toMatch(/GFM-CAP-007 and GFM-CAP-010/);
   });
 
   it("calculates completion percentages from the six evidence-to-approval gates", () => {

@@ -88,6 +88,7 @@ export interface Phase0CompletionArtifacts {
   environment?: unknown;
   evidenceManifest?: unknown;
   facialHair?: unknown;
+  facialHairColors?: unknown;
   headRecapture?: unknown;
   heads?: unknown;
   issues?: unknown;
@@ -192,6 +193,8 @@ interface ArtifactContext {
   evidenceEntries: RecordObject[];
   facialHairRecords: RecordObject[];
   facialHairSummary: RecordObject;
+  facialHairColorRecords: RecordObject[];
+  facialHairColorSummary: RecordObject;
   headRecords: RecordObject[];
   headRecaptureSummary: RecordObject;
   issues: RecordObject[];
@@ -212,6 +215,7 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
   const creationPaths = asRecord(artifacts.creationPaths);
   const evidenceManifest = asRecord(artifacts.evidenceManifest);
   const facialHair = asRecord(artifacts.facialHair);
+  const facialHairColors = asRecord(artifacts.facialHairColors);
   const heads = asRecord(artifacts.heads);
   const issues = asRecord(artifacts.issues);
   const menuMap = asRecord(artifacts.menuMap);
@@ -227,6 +231,8 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
     evidenceEntries: asArray(evidenceManifest.entries),
     facialHairRecords: asArray(facialHair.records),
     facialHairSummary: asRecord(facialHair.summary),
+    facialHairColorRecords: asArray(facialHairColors.records),
+    facialHairColorSummary: asRecord(facialHairColors.summary),
     headRecaptureSummary: asRecord(asRecord(artifacts.headRecapture).summary),
     headRecords: asArray(heads.records),
     issues: asArray(issues.issues),
@@ -340,6 +346,8 @@ function populateCategoryProgress(
       return attributeCategory(row, context, "Ear Shape");
     case "facialHair":
       return facialHairCategory(row, context);
+    case "facialHairColors":
+      return facialHairColorCategory(row, context);
     case "evidenceManifest": {
       const observed = context.evidenceEntries.length;
       return {
@@ -380,6 +388,27 @@ function populateCategoryProgress(
     default:
       return uncatalogedRequiredCategory(row);
   }
+}
+
+function facialHairColorCategory(
+  row: Omit<Phase0CompletionCategoryProgress, "status" | "completionPercent">,
+  context: ArtifactContext
+): Omit<Phase0CompletionCategoryProgress, "status" | "completionPercent"> {
+  const observed = context.facialHairColorRecords.length;
+  const catalogGenerated = stringValue(context.facialHairColorSummary.blocker).length > 0;
+  return {
+    ...row,
+    evidenceAvailable: countRecordsWithEvidence(context.facialHairColorRecords),
+    observed,
+    cataloged: observed,
+    qaReviewed: context.researchPackageValidated && observed > 0 ? observed : 0,
+    sourceSummary: catalogGenerated
+      ? `Facial-hair-color research catalog exists with ${observed} record(s): ${stringValue(context.facialHairColorSummary.blocker)}`
+      : row.sourceSummary,
+    nextAction: stringValue(context.facialHairColorSummary.blocker)
+      ? "Record GFM-CAP-007 and GFM-CAP-010 before creating facial-hair-color research candidate records."
+      : row.nextAction
+  };
 }
 
 function facialHairCategory(

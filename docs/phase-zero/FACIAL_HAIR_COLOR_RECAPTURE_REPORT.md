@@ -1,0 +1,38 @@
+# Facial Hair Color Recapture Report
+
+Status: **OPEN_RECAPTURE_REQUIRED**
+
+## FACIAL-HAIR-COLOR-RECAPTURE-001
+
+- Priority: P0
+- Linked capture requests: GFM-CAP-007, GFM-CAP-010
+- Exact menu path: Create Player > Player > Appearance > Hair, then the visible facial-hair-color control only if directly shown
+- Reason: Current evidence proves only that Hair is visible as an Appearance submenu row. It does not show a facial-hair-color control or selected facial-hair-color values.
+- Existing footage usefulness: Current footage remains useful only to show that Hair appears as an Appearance submenu row.
+
+## Required Canonical Context
+
+- Confirm the native facial-hair style used for color review.
+- Confirm the native head, hairstyle, and skin setting.
+- Keep lighting and framing stable across all selected facial-hair-color values.
+- Record whether Hair Color and Facial Hair Color are separate controls or visibly linked.
+
+## Required Evidence
+
+- Hair submenu boundary map from GFM-CAP-007.
+- Readable native facial-hair-color label or index for every selected value.
+- Two complete counts when selector boundaries make that possible.
+- Representative frames for MENU, FRONT_REPRESENTATIVE_FRAME_PER_VALUE, and LEFT_3Q_IF_NEEDED_FOR_VISIBILITY.
+- Boundary or wrap/no-wrap proof for first and final values.
+- Default-state evidence.
+- Observation of whether selecting hair color automatically changes facial-hair color.
+- Observation of whether every facial-hair style supports every color.
+- Observation of whether None hides, disables, or preserves color availability.
+
+## Acceptance Criteria
+
+- Every entered facial-hair-color record is backed by directly selected native game evidence.
+- Native order is preserved without inferred skipped values.
+- Researcher-applied color descriptions are stored separately and never replace native labels.
+- Hair-color relationship, automatic linkage, style support, None behavior, defaults, wrapping, and dependencies are recorded only when demonstrated.
+- No record is assigned VERIFIED or production eligibility during primary research.

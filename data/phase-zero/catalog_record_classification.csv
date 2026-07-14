@@ -409,6 +409,7 @@ phase0-source-phase0-video-001,data/phase-zero/environment_manifest.research.jso
 phase0-source-phase0-video-001,data/phase-zero/environment_manifest.research.json,$.missingEnvironmentEvidence[8],evidence_record,UNKNOWN_ORIGIN,,,,unresolved,false,false,false,verification:unresolved,
 phase0-source-phase0-video-001,data/phase-zero/environment_manifest.research.json,$.missingEnvironmentEvidence[9],evidence_record,UNKNOWN_ORIGIN,,,,unresolved,false,false,false,verification:unresolved,
 phase0-source-phase0-video-001,data/phase-zero/environment_manifest.research.json,$.sourceVideo,evidence_record,UNKNOWN_ORIGIN,,,,,true,false,false,,
+phase0-source-phase0-video-001,data/phase-zero/facial_hair_colors.research.json,$.sourceEvidence.hairMenuRow.evidence[0],evidence_record,UNKNOWN_ORIGIN,,,,,true,false,false,,
 phase0-source-phase0-video-001,data/phase-zero/facial_hair.research.json,$.sourceEvidence.hairMenuRow.evidence[0],evidence_record,UNKNOWN_ORIGIN,,,,,true,false,false,,
 phase0-source-phase0-video-001,data/phase-zero/hair_colors.research.json,$.sourceEvidence.hairMenuRow.evidence[0],evidence_record,UNKNOWN_ORIGIN,,,,,true,false,false,,
 phase0-source-phase0-video-001,data/phase-zero/hairstyles.research.json,$.sourceEvidence.hairMenuRow.evidence[0],evidence_record,UNKNOWN_ORIGIN,,,,,true,false,false,,

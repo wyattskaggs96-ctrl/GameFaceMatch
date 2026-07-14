@@ -3,18 +3,10 @@ import path from "node:path";
 import { Readable } from "node:stream";
 import { NextRequest, NextResponse } from "next/server";
 import { isSafeSourceVideoID } from "@/lib/phase-zero/source-video-evidence-inspector";
-
-interface VideoInventoryFile {
-  inventoryId: string;
-  workingFilename: string;
-  manifestOriginalFilename: string;
-  discoveredFilename: string;
-  absoluteDiscoveryPathInternal: string | null;
-  portableRelativeEvidencePath: string;
-}
+import { resolveResearchVideoPath, type ResearchVideoInventoryFile } from "@/lib/security/research-video-access";
 
 interface VideoInventoryDocument {
-  inventory: VideoInventoryFile[];
+  inventory: ResearchVideoInventoryFile[];
 }
 
 const videoMimeTypes: Record<string, string> = {
@@ -40,7 +32,11 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Source video ID is not present in the current research inventory." }, { status: 404 });
   }
 
-  const absolutePath = resolveLocalVideoPath(repositoryRoot, inventoryEntry);
+  const absolutePath = resolveResearchVideoPath({
+    repositoryRoot,
+    inventoryEntry,
+    configuredVideoRoot: process.env.GAMEFACE_RESEARCH_VIDEO_ROOT
+  });
   if (!absolutePath) {
     return NextResponse.json(
       {
@@ -94,32 +90,4 @@ function readVideoInventory(repositoryRoot: string) {
   const inventoryPath = path.resolve(repositoryRoot, "data/research/cf27/video_inventory.json");
   const inventory = JSON.parse(fs.readFileSync(inventoryPath, "utf8")) as VideoInventoryDocument;
   return inventory.inventory;
-}
-
-function resolveLocalVideoPath(repositoryRoot: string, inventoryEntry: VideoInventoryFile) {
-  const candidates = [
-    process.env.GAMEFACE_RESEARCH_VIDEO_ROOT ? path.resolve(process.env.GAMEFACE_RESEARCH_VIDEO_ROOT, inventoryEntry.workingFilename) : null,
-    process.env.GAMEFACE_RESEARCH_VIDEO_ROOT ? path.resolve(process.env.GAMEFACE_RESEARCH_VIDEO_ROOT, inventoryEntry.manifestOriginalFilename) : null,
-    process.env.GAMEFACE_RESEARCH_VIDEO_ROOT ? path.resolve(process.env.GAMEFACE_RESEARCH_VIDEO_ROOT, inventoryEntry.discoveredFilename) : null,
-    inventoryEntry.absoluteDiscoveryPathInternal,
-    path.resolve(repositoryRoot, inventoryEntry.portableRelativeEvidencePath)
-  ].filter((candidate): candidate is string => Boolean(candidate));
-
-  for (const candidate of candidates) {
-    if (isSafeLocalVideoCandidate(repositoryRoot, candidate) && fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
-      return candidate;
-    }
-  }
-  return null;
-}
-
-function isSafeLocalVideoCandidate(repositoryRoot: string, candidate: string) {
-  const normalized = path.resolve(candidate);
-  if (normalized.includes(`${path.sep}node_modules${path.sep}`) || normalized.includes(`${path.sep}.next${path.sep}`)) return false;
-  const repoRelative = path.relative(repositoryRoot, normalized);
-  if (!repoRelative.startsWith("..") && !path.isAbsolute(repoRelative)) return true;
-  const allowedExternalRoots = [process.env.GAMEFACE_RESEARCH_VIDEO_ROOT, path.join(process.env.HOME ?? "", "Downloads")]
-    .filter((value): value is string => Boolean(value))
-    .map((value) => path.resolve(value));
-  return allowedExternalRoots.some((allowedRoot) => normalized === allowedRoot || normalized.startsWith(`${allowedRoot}${path.sep}`));
 }

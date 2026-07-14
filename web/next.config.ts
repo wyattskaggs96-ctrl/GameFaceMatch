@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+const productionScriptSource =
+  process.env.NODE_ENV === "production" ? "script-src 'self' 'unsafe-inline';" : "script-src 'self' 'unsafe-inline' 'unsafe-eval';";
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
@@ -11,7 +14,7 @@ const nextConfig: NextConfig = {
           {
             key: "Content-Security-Policy",
             value:
-              "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' blob: data:; media-src 'self' blob:; connect-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; manifest-src 'self';"
+              `default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' blob: data:; media-src 'self' blob:; connect-src 'self'; ${productionScriptSource} style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; manifest-src 'self';`
           },
           {
             key: "Permissions-Policy",

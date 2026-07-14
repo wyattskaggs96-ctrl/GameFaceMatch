@@ -18,6 +18,7 @@ import {
   isSafeRepositoryRelativePath,
   isSafeUploadFileName
 } from "@/lib/security/security-hardening";
+import { isAllowedResearchVideoCandidate, resolveResearchVideoPath, type ResearchVideoInventoryFile } from "@/lib/security/research-video-access";
 
 const now = "2026-07-13T00:00:00.000Z";
 
@@ -25,6 +26,13 @@ describe("security hardening", () => {
   it("keeps production browser source maps disabled", () => {
     const config = fs.readFileSync(path.resolve(process.cwd(), "next.config.ts"), "utf8");
     expect(config).toContain("productionBrowserSourceMaps: false");
+  });
+
+  it("removes unsafe-eval from the production Content Security Policy", () => {
+    const config = fs.readFileSync(path.resolve(process.cwd(), "next.config.ts"), "utf8");
+    expect(config).toContain("process.env.NODE_ENV === \"production\"");
+    expect(config).toContain("script-src 'self' 'unsafe-inline';");
+    expect(config).toContain("script-src 'self' 'unsafe-inline' 'unsafe-eval';");
   });
 
   it("neutralizes spreadsheet formulas in CSV exports", () => {
@@ -117,6 +125,35 @@ describe("security hardening", () => {
       "Metadata value for 'status' is not safe.",
       "Metadata value for 'poisoned' is not safe."
     ]));
+  });
+
+  it("serves research videos only from configured or repository-local roots", () => {
+    const tempRoot = fs.mkdtempSync(path.join(process.cwd(), ".tmp-security-"));
+    try {
+      const configuredRoot = path.join(tempRoot, "configured-videos");
+      const externalRoot = path.join(tempRoot, "external-downloads");
+      const repositoryRoot = path.join(tempRoot, "repo");
+      fs.mkdirSync(configuredRoot, { recursive: true });
+      fs.mkdirSync(externalRoot, { recursive: true });
+      fs.mkdirSync(repositoryRoot, { recursive: true });
+      fs.writeFileSync(path.join(configuredRoot, "source.mp4"), "configured video");
+      fs.writeFileSync(path.join(externalRoot, "source.mp4"), "external video");
+
+      const inventoryEntry: ResearchVideoInventoryFile = {
+        inventoryId: "video-001",
+        workingFilename: "source.mp4",
+        manifestOriginalFilename: "source-original.mp4",
+        discoveredFilename: "source-discovered.mp4",
+        absoluteDiscoveryPathInternal: path.join(externalRoot, "source.mp4"),
+        portableRelativeEvidencePath: "OWNER_DOWNLOADS/source.mp4"
+      };
+
+      expect(resolveResearchVideoPath({ repositoryRoot, configuredVideoRoot: configuredRoot, inventoryEntry })).toBe(path.join(configuredRoot, "source.mp4"));
+      expect(resolveResearchVideoPath({ repositoryRoot, configuredVideoRoot: null, inventoryEntry })).toBeNull();
+      expect(isAllowedResearchVideoCandidate({ repositoryRoot, configuredVideoRoot: configuredRoot, candidate: path.join(externalRoot, "source.mp4") })).toBe(false);
+    } finally {
+      fs.rmSync(tempRoot, { recursive: true, force: true });
+    }
   });
 
   it("does not allow a partial or spoofed production gate report to enable recommendations", () => {

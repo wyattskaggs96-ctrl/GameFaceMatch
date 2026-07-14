@@ -2,6 +2,7 @@ import type { ActiveCaptureSession } from "@/lib/capture/capture-session";
 import type {
   CapturedAngle,
   CapturedAngleID,
+  CaptureGuidanceIssue,
   DetectedFaceLandmarks,
   FacialMeasurement,
   FaceLandmarkPoint,
@@ -66,7 +67,7 @@ interface MeasurementSample {
 export function createRgbLandmarkGeometryProfile(session: ActiveCaptureSession): GeometryProfile {
   const usableAngles = session.angles.flatMap((angle) => {
     const face = angle.faceLandmarkReport?.faces[0];
-    return angle.faceLandmarkReport?.faceCount === "one" && face ? [{ angle, face }] : [];
+    return angle.faceLandmarkReport?.faceCount === "one" && face && angleUsableForGeometry(angle, face) ? [{ angle, face }] : [];
   });
   const front = usableAngles.find((entry) => entry.angle.id === "straightOn");
   const profiles = usableAngles.filter((entry) => entry.angle.id === "leftProfile" || entry.angle.id === "rightProfile");
@@ -159,14 +160,71 @@ function sample(
 ): MeasurementSample | null {
   const value = calculate(entry.face);
   if (value === null || !Number.isFinite(value)) return null;
-  const guidancePenalty = entry.angle.captureGuidanceReport?.advisoryWarnings.length ? 0.92 : 1;
+  const guidancePenalty = confidencePenaltyForGuidance(entry.angle);
+  const qualityPenalty = confidencePenaltyForImageQuality(entry.angle);
   const faceConfidence = entry.face.confidence.score ?? 0.55;
   return {
     value,
     pose: entry.angle.id,
-    confidence: Math.min(faceConfidence * guidancePenalty, 0.82),
+    confidence: Math.min(faceConfidence * guidancePenalty * qualityPenalty, 0.82),
     approximate
   };
+}
+
+function angleUsableForGeometry(angle: CapturedAngle, face: DetectedFaceLandmarks) {
+  if (angle.status !== "complete") return false;
+  if (angle.qualityReport?.overallState === "blocked") return false;
+  if (angle.captureGuidanceReport?.blockingIssues.length) return false;
+  return poseMatchesRequestedAngle(angle.id, face);
+}
+
+function poseMatchesRequestedAngle(angleID: CapturedAngleID, face: DetectedFaceLandmarks) {
+  const yaw = face.approximateHeadPose.yawDegrees;
+  if (yaw === null || face.approximateHeadPose.availabilityState !== "available") return true;
+  const range = yawRangeForAngle(angleID);
+  return yaw >= range.min && yaw <= range.max;
+}
+
+function yawRangeForAngle(angleID: CapturedAngleID) {
+  switch (angleID) {
+    case "straightOn":
+      return { min: -18, max: 18 };
+    case "left45":
+      return { min: -68, max: -16 };
+    case "right45":
+      return { min: 16, max: 68 };
+    case "leftProfile":
+      return { min: -110, max: -48 };
+    case "rightProfile":
+      return { min: 48, max: 110 };
+  }
+}
+
+function confidencePenaltyForGuidance(angle: CapturedAngle) {
+  const warnings = angle.captureGuidanceReport?.advisoryWarnings ?? [];
+  let penalty = warnings.length ? 0.94 : 1;
+  if (hasIssue(warnings, ["blink", "mouthOpen", "strongExpression"])) penalty *= 0.84;
+  if (hasIssue(warnings, ["poorLighting", "underexposed", "overexposed", "lightingImbalance"])) penalty *= 0.86;
+  if (hasIssue(warnings, ["occlusionLikely", "missingRequiredRegion"])) penalty *= 0.8;
+  if (hasIssue(warnings, ["severeBlur", "excessiveMotion"])) penalty *= 0.72;
+  return penalty;
+}
+
+function confidencePenaltyForImageQuality(angle: CapturedAngle) {
+  const report = angle.qualityReport;
+  if (!report) return 0.86;
+  let penalty = 1;
+  const messages = report.advisoryMessages.join(" ").toLowerCase();
+  if (messages.includes("blurry")) penalty *= 0.78;
+  if (messages.includes("dark") || messages.includes("shadow") || messages.includes("overexposed") || messages.includes("lighting")) penalty *= 0.86;
+  if (!report.userConfirmedNeutralExpression.value) penalty *= 0.86;
+  if (!report.userConfirmedRequestedAngle.value) penalty *= 0.82;
+  if (!report.userConfirmedOnePerson.value) penalty *= 0.72;
+  return penalty;
+}
+
+function hasIssue(issues: CaptureGuidanceIssue[], codes: CaptureGuidanceIssue["code"][]) {
+  return issues.some((issue) => codes.includes(issue.code));
 }
 
 function faceWidthToLength(face: DetectedFaceLandmarks) {

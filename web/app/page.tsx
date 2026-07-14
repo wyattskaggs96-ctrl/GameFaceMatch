@@ -577,7 +577,7 @@ export default function HomePage() {
           <InfoScreen
             eyebrow="Processing"
             title="Processing"
-            body="The app has created a local standardized profile foundation from capture metadata and user-confirmed attributes. It does not perform advanced facial analysis in this build."
+            body="The app has created a local standardized profile from capture metadata, local RGB landmark measurements where defensible, quality checks, and user-confirmed attributes. It does not identify people, infer sensitive traits, or claim TrueDepth-level geometry."
             detail={CATALOG_UNAVAILABLE_MESSAGE}
             actionLabel="View results"
             onAction={() => navigate("results")}

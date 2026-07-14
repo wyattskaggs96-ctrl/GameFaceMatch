@@ -39,7 +39,7 @@ export function ProfileReview({
       <ScreenHeader eyebrow="Profile review" title="Standardized profile foundation" id="profile-review-title">
         <p>
           This profile contains capture metadata, source-angle availability, quality summaries, and user-confirmed appearance attributes. It does not contain
-          raw image bytes or invented facial measurements.
+          raw image bytes, landmark coordinate arrays, identity embeddings, or invented facial measurements.
         </p>
       </ScreenHeader>
       <div className="profile-review-grid">
@@ -97,7 +97,7 @@ export function ProfileReview({
           </div>
           <p className="supporting">
             Browser RGB landmarks can support some normalized geometry ratios. Approximate measurements are marked separately, unavailable measurements remain
-            unavailable, and depth-supported is always no for the web flow.
+            unavailable, low-quality or wrong-pose images are not used for measurements, and depth-supported is always no for the web flow.
           </p>
           <GeometryStatusList title="Measured" measurements={geometryGroups.measured} />
           <GeometryStatusList title="Approximate" measurements={geometryGroups.approximate} />

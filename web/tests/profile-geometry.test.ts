@@ -8,6 +8,8 @@ import { createInitialAttributeConfirmation } from "@/lib/profile/attribute-conf
 import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import type {
   CapturedAngleID,
+  CaptureGuidanceIssue,
+  CaptureGuidanceReport,
   DetectedFaceLandmarks,
   FaceLandmarkPoint,
   FaceLandmarkReport,
@@ -49,6 +51,96 @@ describe("RGB landmark StandardFaceProfile geometry", () => {
       measurementSource: "browserRgbImage",
       availabilityState: "available"
     });
+  });
+
+  it("builds the supported five-angle RGB profile pipeline without serializing raw media", () => {
+    const profile = createStandardFaceProfile({
+      session: landmarkSession(defaultFixture()),
+      attributes: {
+        ...createInitialAttributeConfirmation(),
+        hairColorFamily: "brown",
+        hairTextureFamily: "wavy",
+        hairstyleFamily: "short",
+        facialHairPresence: "none",
+        eyebrowThickness: "medium",
+        skinPresentation: "medium",
+        desiredInGameHeight: "72",
+        desiredInGameWeight: "205",
+        preferredBodyType: "balanced",
+        resemblancePhysiquePreference: "balanced"
+      },
+      now: new Date("2026-07-11T00:00:00.000Z"),
+      userAgent: "rgb-profile-pipeline-test"
+    });
+
+    expect(profile.capture.mode).toBe("webRgbGuided");
+    expect(profile.capture.browserRgbOnly).toBe(true);
+    expect(profile.supportingFrames.availableAngleIDs).toEqual(["straightOn", "left45", "right45", "leftProfile", "rightProfile"]);
+    expect(profile.geometry.measurements.faceWidthRatio?.availabilityState).toBe("available");
+    expect(profile.appearance.attributes.find((attribute) => attribute.category === "hairColorFamily")?.source).toBe("userConfirmed");
+    expect(profile.userConfirmedAttributes.find((attribute) => attribute.category === "skinPresentation")?.value).toBe("medium");
+
+    const serialized = JSON.stringify(profile);
+    expect(serialized).not.toContain("blob:");
+    expect(serialized).not.toContain(".jpg");
+    expect(serialized).not.toContain("coreLandmarks");
+    expect(serialized).not.toContain("nose tip");
+  });
+
+  it("does not use wrong-pose profile views for profile projection measurements", () => {
+    const session = landmarkSession(defaultFixture(), {
+      yawByAngle: {
+        leftProfile: 0,
+        rightProfile: 0
+      }
+    });
+    const profile = createStandardFaceProfile({
+      session,
+      attributes: createInitialAttributeConfirmation(),
+      now: new Date("2026-07-11T00:00:00.000Z")
+    });
+
+    expect(profile.geometry.measurements.noseProjection).toMatchObject({
+      value: null,
+      availabilityState: "unavailable",
+      supportingFrameCount: 0,
+      depthSupported: false
+    });
+    expect(profile.geometry.measurements.chinProjection?.availabilityState).toBe("unavailable");
+  });
+
+  it("rejects blocked blur or dimension evidence instead of measuring from it", () => {
+    const profile = createStandardFaceProfile({
+      session: landmarkSession(defaultFixture(), { blockedAngles: new Set(["straightOn"]) }),
+      attributes: createInitialAttributeConfirmation(),
+      now: new Date("2026-07-11T00:00:00.000Z")
+    });
+
+    expect(profile.qualityReport.blockingIssueCount).toBeGreaterThan(0);
+    expect(profile.geometry.measurements.faceWidthRatio).toMatchObject({
+      value: null,
+      availabilityState: "unavailable",
+      supportingFrameCount: 0
+    });
+    expect(profile.geometry.measurements.noseProjection?.availabilityState).toBe("available");
+  });
+
+  it("reduces measurement confidence when expression guidance is advisory", () => {
+    const calm = createStandardFaceProfile({
+      session: landmarkSession(defaultFixture()),
+      attributes: createInitialAttributeConfirmation(),
+      now: new Date("2026-07-11T00:00:00.000Z")
+    });
+    const expressive = createStandardFaceProfile({
+      session: landmarkSession(defaultFixture(), { advisoryByAngle: { straightOn: ["strongExpression"] } }),
+      attributes: createInitialAttributeConfirmation(),
+      now: new Date("2026-07-11T00:00:00.000Z")
+    });
+
+    expect(Number(expressive.geometry.measurements.faceWidthRatio?.confidence.score)).toBeLessThan(
+      Number(calm.geometry.measurements.faceWidthRatio?.confidence.score)
+    );
+    expect(expressive.geometry.measurements.faceWidthRatio?.availabilityState).toBe("available");
   });
 
   it("marks unavailable measurements instead of guessing when landmarks are absent", () => {
@@ -106,10 +198,17 @@ describe("RGB landmark StandardFaceProfile geometry", () => {
   });
 });
 
-function landmarkSession(fixture: SyntheticGeometryFixture): ActiveCaptureSession {
+interface LandmarkSessionOptions {
+  yawByAngle?: Partial<Record<CapturedAngleID, number>>;
+  blockedAngles?: Set<CapturedAngleID>;
+  advisoryByAngle?: Partial<Record<CapturedAngleID, CaptureGuidanceIssue["code"][]>>;
+}
+
+function landmarkSession(fixture: SyntheticGeometryFixture, options: LandmarkSessionOptions = {}): ActiveCaptureSession {
   let session = createInitialCaptureSession(new Date("2026-07-11T00:00:00.000Z"));
   for (const angle of session.angles) {
-    const imageRef = image(angle.id);
+    const blocked = options.blockedAngles?.has(angle.id) ?? false;
+    const imageRef = image(angle.id, blocked ? { width: 320, height: 320 } : undefined);
     const qualityReport = createImageQualityReport({
       decodedSuccessfully: true,
       image: imageRef,
@@ -122,7 +221,15 @@ function landmarkSession(fixture: SyntheticGeometryFixture): ActiveCaptureSessio
         onePerson: true
       }
     });
-    session = setAngleCapture(session, angle.id, imageRef, "upload", qualityReport, landmarkReport(angle.id, fixture)).session;
+    session = setAngleCapture(
+      session,
+      angle.id,
+      imageRef,
+      "upload",
+      qualityReport,
+      landmarkReport(angle.id, fixture, options.yawByAngle?.[angle.id]),
+      guidanceReport(angle.id, options.advisoryByAngle?.[angle.id] ?? [])
+    ).session;
   }
   return session;
 }
@@ -153,12 +260,12 @@ function defaultFixture(input: Partial<SyntheticGeometryFixture> = {}): Syntheti
   };
 }
 
-function landmarkReport(angleID: CapturedAngleID, fixture: SyntheticGeometryFixture): FaceLandmarkReport {
+function landmarkReport(angleID: CapturedAngleID, fixture: SyntheticGeometryFixture, yawOverride?: number): FaceLandmarkReport {
   return {
     availabilityState: "available",
     faceCount: "one",
     detectedFaceCount: 1,
-    faces: [face(angleID, fixture)],
+    faces: [face(angleID, fixture, yawOverride)],
     provider: MEDIAPIPE_FACE_LANDMARKER_METADATA,
     confidence: { score: 0.8, label: "high", evidence: "estimated" },
     advisoryMessages: [],
@@ -167,7 +274,7 @@ function landmarkReport(angleID: CapturedAngleID, fixture: SyntheticGeometryFixt
   };
 }
 
-function face(angleID: CapturedAngleID, fixture: SyntheticGeometryFixture): DetectedFaceLandmarks {
+function face(angleID: CapturedAngleID, fixture: SyntheticGeometryFixture, yawOverride?: number): DetectedFaceLandmarks {
   const centerX = angleID === "leftProfile" ? 0.47 : angleID === "rightProfile" ? 0.53 : 0.5;
   const centerY = 0.5;
   const left = centerX - fixture.faceWidth / 2;
@@ -210,7 +317,7 @@ function face(angleID: CapturedAngleID, fixture: SyntheticGeometryFixture): Dete
     },
     coreLandmarks: points.map(([label, x, y], index) => landmark(label, index, x, y)),
     approximateHeadPose: {
-      yawDegrees: angleID === "leftProfile" ? -78 : angleID === "rightProfile" ? 78 : angleID === "left45" ? -42 : angleID === "right45" ? 42 : 0,
+      yawDegrees: yawOverride ?? (angleID === "leftProfile" ? -78 : angleID === "rightProfile" ? 78 : angleID === "left45" ? -42 : angleID === "right45" ? 42 : 0),
       pitchDegrees: 0,
       rollDegrees: 0,
       confidence: { score: 0.7, label: "medium", evidence: "estimated" },
@@ -240,15 +347,56 @@ function landmark(label: string, sourceIndex: number, x: number, y: number): Fac
   };
 }
 
-function image(angleID: CapturedAngleID): TemporaryImageReference {
+function guidanceReport(angleID: CapturedAngleID, advisoryCodes: CaptureGuidanceIssue["code"][] = []): CaptureGuidanceReport {
+  const advisoryWarnings = advisoryCodes.map((code) => ({
+    code,
+    severity: "advisory" as const,
+    message: `${code} advisory for deterministic profile test.`,
+    canContinueWithLimitations: true
+  }));
+  return {
+    protocolVersion: "test-guidance-protocol",
+    thresholdVersion: "test-guidance-thresholds",
+    angleID,
+    realtimeQuality: {
+      score: advisoryWarnings.length ? 82 : 94,
+      state: advisoryWarnings.length ? "needsReview" : "ready",
+      thresholdVersion: "test-guidance-thresholds",
+      signals: [],
+      blockingSignalCount: 0,
+      advisorySignalCount: advisoryWarnings.length
+    },
+    requiredPoseReached: true,
+    poseHeldLongEnough: true,
+    holdDurationMs: 1000,
+    holdTargetMs: 900,
+    canCapture: true,
+    canContinueWithLimitations: true,
+    blockingIssues: [],
+    advisoryWarnings,
+    readyMessages: advisoryWarnings.length
+      ? []
+      : [
+          {
+            code: "poseHeld",
+            severity: "ready",
+            message: "Pose held in deterministic profile test.",
+            canContinueWithLimitations: true
+          }
+        ],
+    createdAt: "2026-07-11T00:00:00.000Z"
+  };
+}
+
+function image(angleID: CapturedAngleID, options: { width?: number; height?: number } = {}): TemporaryImageReference {
   return createTemporaryImageReference(
     {
       objectUrl: `blob:${angleID}`,
       fileName: `${angleID}.jpg`,
       fileType: "image/jpeg",
       fileSizeBytes: 1_000_000,
-      width: 900,
-      height: 1200,
+      width: options.width ?? 900,
+      height: options.height ?? 1200,
       source: "upload",
       associatedAngleID: angleID,
       signature: angleID

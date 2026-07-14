@@ -68,6 +68,12 @@ Not allowed yet:
 - Claiming TrueDepth, depth geometry, ARKit, 3D reconstruction, identity recognition, or advanced facial analysis.
 - Saving or uploading raw face images by default.
 
+## Operations Runbook
+
+Private-beta operations are prepared in `docs/PRIVATE_BETA_RUNBOOK.md`. That runbook covers eligibility, consent, onboarding, supported devices, bug reports, catalog-error reporting, privacy and deletion support, incident escalation, feedback forms, resemblance ratings, screenshot-refinement feedback, beta metrics, rollback, and closeout.
+
+The runbook is not permission to invite testers. It is a pre-launch operating plan that becomes usable only after the readiness gates in this document pass and Wyatt explicitly approves a go decision.
+
 ## Required Fixes Before Private Beta
 
 1. Add a reviewed local MediaPipe Face Landmarker model asset, record its checksum, version, license review, and update policy, and verify real local landmark extraction.

@@ -2,7 +2,7 @@
   "schemaVersion": "phase0-issue-register-v1",
   "registerID": "phase0-environment-creation-path-issues",
   "createdAt": "2026-07-13T22:20:00-04:00",
-  "updatedAt": "2026-07-13T22:20:00-04:00",
+  "updatedAt": "2026-07-14T00:00:00-04:00",
   "issues": [
     {
       "issueID": "issue-phase0-env-game-version",
@@ -632,6 +632,357 @@
         "owner": "wyatt-skaggs",
         "priority": "warning",
         "notes": "Required before Hair controls can be mapped."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-appearance",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Appearance",
+      "description": "Appearance is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Full Appearance boundary capture proving first and final top-level appearance categories.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-player-appearance"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Appearance and record its full selector before any catalog item records are created."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-chin",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Chin",
+      "description": "Chin is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Open Chin and record selected values, count/order boundaries, defaults, dependencies, and required evidence.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-chin"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Chin and record its full selector before any catalog item records are created."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-ear-shape",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Ear Shape",
+      "description": "Ear Shape is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE. Complete first-to-final Ear Shape selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-ear-shape"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Ear Shape from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-eye-color",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Eye Color",
+      "description": "Eye Color is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE. Complete first-to-final Eye Color selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-eye-color"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Eye Color from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-eye-shape",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Eye Shape",
+      "description": "Eye Shape is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE. Complete first-to-final Eye Shape selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-eye-shape"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Eye Shape from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-hair",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Hair",
+      "description": "Hair is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Open Hair and record its child controls, boundaries, defaults, counts, dependencies, and evidence.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-appearance-hair"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Hair and record a complete boundary/count/order pass before creating any Hair catalog records."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-head-skin",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Head & Skin",
+      "description": "Head & Skin is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Dedicated boundary recording proving whether Head & Skin has additional rows above or below the visible set.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-appearance-head-skin"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Head & Skin and record its full selector before any catalog item records are created."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-head-template",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Head Template",
+      "description": "Head Template is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE, VISIBLE_INDEX_GAPS. Complete first-to-final Head Template selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-head-template"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Head Template from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-jaw-shape",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Jaw Shape",
+      "description": "Jaw Shape is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Open Jaw Shape and record selected values, count/order boundaries, defaults, dependencies, and required evidence.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-jaw-shape"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Jaw Shape and record its full selector before any catalog item records are created."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-mouth-shape",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Mouth Shape",
+      "description": "Mouth Shape is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_NOT_INSPECTED. Open Mouth Shape and record selected values, count/order boundaries, defaults, dependencies, and required evidence.",
+      "owner": "wyatt-skaggs",
+      "severity": "blocking",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-mouth-shape"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Open Mouth Shape and record its full selector before any catalog item records are created."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "blocking",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-nose",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Nose",
+      "description": "Nose is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE. Complete first-to-final Nose selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-nose"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Nose from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-skin-details",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Skin Details",
+      "description": "Skin Details is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE. Complete first-to-final Skin Details selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-skin-details"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Skin Details from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
+      }
+    },
+    {
+      "issueID": "issue-phase0-menu-skin-tone",
+      "kind": "missingEvidence",
+      "title": "Incomplete appearance menu capture: Skin Tone",
+      "description": "Skin Tone is PARTIAL, COUNT_UNKNOWN, RECAPTURE_REQUIRED, FIRST_VALUE_UNKNOWN, FINAL_VALUE_UNKNOWN, ORDER_INCOMPLETE, VISIBLE_INDEX_GAPS. Complete first-to-final Skin Tone selector recording with count, wrap, default, and dependency checks.",
+      "owner": "wyatt-skaggs",
+      "severity": "warning",
+      "status": "open",
+      "affectedRecordIDs": [
+        "cf27-menu-head-skin-skin-tone"
+      ],
+      "affectedEvidenceFileIDs": [],
+      "createdAt": "2026-07-14T00:00:00-04:00",
+      "updatedAt": "2026-07-14T00:00:00-04:00",
+      "resolutionNotes": "",
+      "recaptureRequest": {
+        "required": true,
+        "queueStatus": "queued",
+        "requestedAngles": [],
+        "requestedEvidenceKinds": [
+          "Recapture Skin Tone from first value through final value with count, wrap, default, and dependency checks."
+        ],
+        "owner": "wyatt-skaggs",
+        "priority": "warning",
+        "notes": "Research-only observation; requires complete capture, resolved gaps, second-person verification, and production publish gate approval."
       }
     }
   ]

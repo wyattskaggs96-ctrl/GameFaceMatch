@@ -50,12 +50,14 @@ Current local production runtime:
 - Node-compatible runtime capable of serving Next.js 16 output
 - HTTPS at public deployment
 - Ability to set response headers for CSP, permissions policy, frame blocking, no-referrer, and `nosniff`
+- Ability to serve `/api/health` and `/api/uptime`
 
 Possible future static runtime:
 
 - Static asset host that supports SPA fallback to `/`
 - HTTPS
 - Security headers configured by the host/CDN
+- A separate plan for health/uptime status because static export cannot run dynamic Next API routes
 
 ## Image and asset handling
 
@@ -76,6 +78,11 @@ No production base URL is currently required by the running app. Future launch s
 - `NEXT_PUBLIC_GAMEFACE_PRIVACY_URL`
 - `NEXT_PUBLIC_GAMEFACE_TERMS_URL`
 - `NEXT_PUBLIC_GAMEFACE_SUPPORT_URL`
+- `NEXT_PUBLIC_GAMEFACE_SUPPORT_CONTACT`
+- `NEXT_PUBLIC_GAMEFACE_RELEASE_ID`
+- `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV`
+- `NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED`
+- `NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED`
 
 All public URLs should be HTTPS. Localhost is acceptable only for local testing.
 
@@ -84,6 +91,14 @@ All public URLs should be HTTPS. Localhost is acceptable only for local testing.
 No error monitoring or analytics SDK is installed. Before public launch, select an error-monitoring approach that avoids raw face images, raw screenshots, precise facial measurements, and identity inference.
 
 Server logs, if any, must not include face media or secrets.
+
+The web app now includes privacy-safe operational contracts:
+
+- `/api/health` reports deployment configuration, catalog release status, kill-switch state, and privacy-safe operational posture.
+- `/api/uptime` reports a minimal uptime heartbeat.
+- `web/lib/operations/privacy-safe-error-reporting.ts` rejects raw media, landmarks, exact measurements, profile payloads, object URLs, and data URLs.
+- `web/lib/operations/release-monitoring.ts` detects empty, mismatched, and unverified catalog releases.
+- `web/lib/operations/rollback.ts` defines rollback readiness checks and a non-destructive rollback procedure.
 
 ## Legal and support URLs
 

@@ -29,6 +29,9 @@ export interface FeatureGateEnvironment {
   standardRGBCaptureAvailable?: boolean;
   trueDepthAvailable?: boolean;
   screenshotRefinementEnabled?: boolean;
+  recommendationsDisabled?: boolean;
+  screenshotRefinementDisabled?: boolean;
+  disableReason?: string;
   adminCatalogToolsEnabled?: boolean;
   verifierToolsEnabled?: boolean;
   manualStudyEnabled?: boolean;
@@ -61,25 +64,35 @@ export function evaluateFeatureGates(input: FeatureGateInput = {}): CapabilityGa
   const isProductionRuntime = environment.nodeEnv === "production";
   const catalogAvailable = Boolean(input.manifest && input.manifest.items.length > 0);
   const catalogVersionSupported = Boolean(input.compatibility?.compatible);
-  const recommendationsEnabled = Boolean(releaseApproval.approvedRelease);
+  const recommendationsDisabled = environment.recommendationsDisabled === true;
+  const recommendationDisableReason = environment.disableReason ?? "Recommendations are disabled by the deployment kill switch.";
+  const catalogVerified = Boolean(releaseApproval.approvedRelease);
+  const recommendationsEnabled = catalogVerified && !recommendationsDisabled;
   const standardRGBCaptureAvailable = environment.standardRGBCaptureAvailable ?? true;
+  const screenshotRefinementDisabled = environment.screenshotRefinementDisabled === true;
 
   return {
     catalogAvailable: gate(catalogAvailable, catalogAvailable ? "Catalog records are loaded." : "No catalog records are loaded."),
-    catalogVerified: gate(recommendationsEnabled, recommendationsEnabled ? "Catalog release is approved." : releaseApproval.reasons.join(" ")),
+    catalogVerified: gate(catalogVerified, catalogVerified ? "Catalog release is approved." : releaseApproval.reasons.join(" ")),
     catalogVersionSupported: gate(
       catalogVersionSupported,
       input.compatibility?.message ?? "Catalog compatibility has not been evaluated."
     ),
     recommendationsEnabled: gate(
       recommendationsEnabled,
-      recommendationsEnabled ? "Recommendations are enabled for the approved catalog release." : releaseApproval.reasons.join(" ")
+      recommendationsEnabled
+        ? "Recommendations are enabled for the approved catalog release."
+        : recommendationsDisabled
+          ? recommendationDisableReason
+          : releaseApproval.reasons.join(" ")
     ),
     screenshotRefinementEnabled: gate(
-      Boolean(environment.screenshotRefinementEnabled && recommendationsEnabled),
-      environment.screenshotRefinementEnabled && recommendationsEnabled
+      Boolean(environment.screenshotRefinementEnabled && recommendationsEnabled && !screenshotRefinementDisabled),
+      environment.screenshotRefinementEnabled && recommendationsEnabled && !screenshotRefinementDisabled
         ? "Screenshot refinement is enabled behind the approved catalog release gate."
-        : environment.screenshotRefinementEnabled
+        : screenshotRefinementDisabled
+          ? "Screenshot refinement is disabled by the deployment kill switch."
+          : environment.screenshotRefinementEnabled
         ? "Screenshot refinement still requires an approved recommendation catalog."
         : "Screenshot refinement is not enabled for this MVP."
     ),

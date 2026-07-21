@@ -11,7 +11,12 @@ export const PUBLIC_ENVIRONMENT_KEYS = [
   "NEXT_PUBLIC_GAMEFACE_PRIVACY_URL",
   "NEXT_PUBLIC_GAMEFACE_TERMS_URL",
   "NEXT_PUBLIC_GAMEFACE_SUPPORT_URL",
-  "NEXT_PUBLIC_GAMEFACE_PAYMENT_PROVIDER_LABEL"
+  "NEXT_PUBLIC_GAMEFACE_SUPPORT_CONTACT",
+  "NEXT_PUBLIC_GAMEFACE_PAYMENT_PROVIDER_LABEL",
+  "NEXT_PUBLIC_GAMEFACE_RELEASE_ID",
+  "NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV",
+  "NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED",
+  "NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED"
 ] as const;
 
 export const SERVER_ONLY_ENVIRONMENT_KEYS = [
@@ -19,6 +24,8 @@ export const SERVER_ONLY_ENVIRONMENT_KEYS = [
   "GAMEFACE_PAYMENT_SERVER_TOKEN",
   "GAMEFACE_PAYMENT_WEBHOOK_SIGNING_TOKEN",
   "GAMEFACE_PAYMENT_PRODUCT_CONFIG_REF",
+  "GAMEFACE_EXPECTED_CATALOG_VERSION_ID",
+  "GAMEFACE_ERROR_REPORTING_PROVIDER",
   "GAMEFACE_ERROR_MONITORING_SERVER_TOKEN"
 ] as const;
 
@@ -43,6 +50,9 @@ export function validateDeploymentEnvironment(
     const value = env[key];
     if (value && isUrlKey(key) && !isAllowedPublicUrl(value)) {
       errors.push(`${key} must be an absolute HTTPS URL, or localhost for local testing.`);
+    }
+    if (value && isBooleanFlagKey(key) && !isBooleanFlag(value)) {
+      errors.push(`${key} must be either "true" or "false" when set.`);
     }
   }
 
@@ -77,6 +87,14 @@ export function validateDeploymentEnvironment(
 
 function isUrlKey(key: string) {
   return key.endsWith("_URL");
+}
+
+function isBooleanFlagKey(key: string) {
+  return key.endsWith("_DISABLED");
+}
+
+function isBooleanFlag(value: string) {
+  return value === "true" || value === "false";
 }
 
 function isAllowedPublicUrl(value: string) {

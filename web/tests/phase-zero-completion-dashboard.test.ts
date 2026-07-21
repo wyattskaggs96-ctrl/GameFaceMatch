@@ -57,13 +57,40 @@ describe("Phase 0 completion dashboard", () => {
     expect(secondVerification?.status).toBe("notStarted");
     expect(report.productionReadiness.status).toBe("blocked");
     expect(report.productionReadiness.reason).toMatch(/No independently verified/);
-    expect(report.highestPriorityMissingCapture).toMatch(/^P0:/);
+    expect(report.highestPriorityMissingCapture).toMatch(/^P0: GFM-CAP-011/);
+    expect(report.evidenceCoverageControlCenter?.summary).toMatchObject({
+      captureAssignments: 15,
+      productionCatalogRecords: 0,
+      secondVerifiedRecords: 0,
+      productionRecommendationsEnabled: false
+    });
+    expect(report.evidenceCoverageControlCenter?.nextRecordingIDs).toEqual(["GFM-CAP-011", "GFM-CAP-012", "GFM-CAP-013"]);
     expect(report.appearanceMenuGapSummary).toMatchObject({
       confirmedPresentIncomplete: 13,
       confirmedPresentCompleteForResearch: 0,
       suspectedButNotObserved: 6,
       unknownBecauseMenuNotFullyInspected: 3,
       productionEligibleRows: 0
+    });
+  });
+
+  it("surfaces coverage assignments without treating them as production readiness", () => {
+    const report = createPhase0CompletionDashboard(currentArtifacts);
+    const controlCenter = report.evidenceCoverageControlCenter;
+
+    expect(controlCenter).not.toBeNull();
+    expect(controlCenter?.categoryCoverage.find((category) => category.categoryID === "head_templates")).toMatchObject({
+      observedCandidateRecords: 26,
+      productionApprovedRecords: 0,
+      productionReady: false
+    });
+    expect(controlCenter?.captureAssignments.find((assignment) => assignment.captureID === "GFM-CAP-004")).toMatchObject({
+      category: "Head templates",
+      subcategory: "Standardized head views",
+      productionReadiness: "BLOCKED_RESEARCH_ONLY_NOT_SECOND_VERIFIED"
+    });
+    expect(controlCenter?.recordingOrder[0]).toMatchObject({
+      captureIDs: ["GFM-CAP-011", "GFM-CAP-012", "GFM-CAP-013", "GFM-CAP-001"]
     });
   });
 

@@ -45,9 +45,86 @@ export interface Phase0CompletionCategoryProgress {
   nextAction: string;
 }
 
+export interface Phase0EvidenceCoverageCategory {
+  categoryID: string;
+  category: string;
+  required: boolean;
+  expectedRecords: number | null;
+  observedCandidateRecords: number;
+  acceptedEvidence: number;
+  incompleteEvidence: number;
+  duplicateEvidence: number;
+  primaryReviewedRecords: number;
+  verifierReady: boolean;
+  secondVerifiedRecords: number;
+  productionApprovedRecords: number;
+  blockerCount: number;
+  beginningProof: boolean;
+  endingProof: boolean;
+  productionReady: boolean;
+  status: string;
+  blocker: string;
+}
+
+export interface Phase0EvidenceCaptureAssignment {
+  captureID: string;
+  priority: string;
+  category: string;
+  subcategory: string;
+  objective: string;
+  exactStartScreen: string;
+  exactActionSequence: string;
+  whatMustRemainUnchanged: string;
+  requiredBeginningProof: string;
+  requiredEndingProof: string;
+  requiredCameraViews: string;
+  filenamePattern: string;
+  acceptanceCriteria: string;
+  recaptureTriggers: string;
+  status: string;
+  owner: string;
+  sessionNumber: number;
+  existingEvidenceSummary: string;
+  verifierReadiness: string;
+  productionReadiness: string;
+}
+
+export interface Phase0EvidenceCoverageControlCenter {
+  summary: {
+    sourceVideos: number;
+    evidenceEntries: number;
+    researchCandidates: number;
+    primaryApprovedWithNotes: number;
+    duplicateReviewRequired: number;
+    secondVerifiedRecords: number;
+    productionApprovedRecords: number;
+    productionCatalogRecords: number;
+    coverageCategories: number;
+    categoriesWithObservedCandidates: number;
+    categoriesProductionReady: number;
+    captureAssignments: number;
+    p0Assignments: number;
+    p1Assignments: number;
+    assignmentsComplete: number;
+    assignmentsBlocking: number;
+    productionRecommendationsEnabled: boolean;
+  };
+  categoryCoverage: Phase0EvidenceCoverageCategory[];
+  captureAssignments: Phase0EvidenceCaptureAssignment[];
+  recordingOrder: Array<{
+    sessionNumber: number;
+    title: string;
+    captureIDs: string[];
+    expectedDuration: string;
+    rationale: string;
+  }>;
+  nextRecordingIDs: string[];
+}
+
 export interface Phase0CompletionDashboardReport {
   generatedAt: string;
   categoryProgress: Phase0CompletionCategoryProgress[];
+  evidenceCoverageControlCenter: Phase0EvidenceCoverageControlCenter | null;
   appearanceMenuGapSummary: Phase0AppearanceMenuGapSummary;
   metrics: {
     overallPhase0CompletionPercent: number;
@@ -99,6 +176,7 @@ export interface Phase0CompletionArtifacts {
   authoritativeRecaptureQueue?: unknown;
   captureRequests?: unknown;
   dependencyTests?: unknown;
+  evidenceCoverageControlCenter?: unknown;
   nowISO?: string;
 }
 
@@ -150,6 +228,7 @@ export function createPhase0CompletionDashboard(input: Phase0CompletionArtifacts
   return {
     generatedAt: input.nowISO ?? new Date().toISOString(),
     categoryProgress,
+    evidenceCoverageControlCenter: context.evidenceCoverageControlCenter,
     appearanceMenuGapSummary: context.appearanceMenuGapSummary,
     metrics,
     productionReadiness,
@@ -204,6 +283,7 @@ interface ArtifactContext {
   captureRequests: RecordObject[];
   dependencyTestRecords: RecordObject[];
   dependencyTestSummary: RecordObject;
+  evidenceCoverageControlCenter: Phase0EvidenceCoverageControlCenter | null;
   researchExportCounts: Record<string, number>;
   researchPackageValidated: boolean;
   appearanceMenuGapSummary: Phase0AppearanceMenuGapSummary;
@@ -226,6 +306,7 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
   const researchValidation = asRecord(artifacts.researchValidation);
   const appearanceMenuGaps = asRecord(artifacts.appearanceMenuGaps);
   const dependencyTests = asRecord(artifacts.dependencyTests);
+  const evidenceCoverageControlCenter = normalizeEvidenceCoverageControlCenter(asRecord(artifacts.evidenceCoverageControlCenter));
 
   return {
     additionalRecords: asArray(additionalAttributes.records),
@@ -249,6 +330,7 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
     captureRequests: asArray(asRecord(artifacts.captureRequests).requests),
     dependencyTestRecords: asArray(dependencyTests.tests),
     dependencyTestSummary: asRecord(dependencyTests.summary),
+    evidenceCoverageControlCenter,
     researchExportCounts: numberRecord(asRecord(researchExportManifest.counts)),
     researchPackageValidated: researchValidation.ok === true || researchValidation.status === "passed",
     appearanceMenuGapSummary: normalizeAppearanceMenuGapSummary(asRecord(appearanceMenuGaps.summary))
@@ -501,6 +583,8 @@ function checkpointProgress(category: Pick<
 }
 
 function chooseHighestPriorityMissingCapture(context: ArtifactContext): string {
+  const coverageAssignment = chooseHighestPriorityCoverageAssignment(context);
+  if (coverageAssignment) return `${coverageAssignment.priority}: ${coverageAssignment.captureID} - ${coverageAssignment.category}: ${coverageAssignment.subcategory}`;
   const captureRequest = chooseHighestPriorityCaptureRequest(context);
   if (captureRequest) return `${stringValue(captureRequest.priority) || "P?"}: ${stringValue(captureRequest.captureID)} - ${stringValue(captureRequest.exactCategory)}`;
   const sorted = [...context.recaptureItems]
@@ -510,6 +594,10 @@ function chooseHighestPriorityMissingCapture(context: ArtifactContext): string {
 }
 
 function chooseNextHumanAction(context: ArtifactContext): string {
+  const coverageAssignment = chooseHighestPriorityCoverageAssignment(context);
+  if (coverageAssignment) {
+    return `${coverageAssignment.captureID}: ${coverageAssignment.objective}`;
+  }
   const captureRequest = chooseHighestPriorityCaptureRequest(context);
   if (captureRequest) {
     const startingOption = stringValue(captureRequest.exactStartingOption) || stringValue(captureRequest.startingOption);
@@ -520,6 +608,20 @@ function chooseNextHumanAction(context: ArtifactContext): string {
     .filter((candidate) => stringValue(candidate.blocksProduction) !== "false")
     .sort((first, second) => priorityRank(first) - priorityRank(second) || stringValue(first.title).localeCompare(stringValue(second.title)))[0];
   return item ? `${stringValue(item.title)} — ${stringValue(item.ownerRecordingInstructions) || "capture the required evidence listed in the queue."}` : "Assign second-person verification after evidence capture is complete.";
+}
+
+function chooseHighestPriorityCoverageAssignment(context: ArtifactContext): Phase0EvidenceCaptureAssignment | null {
+  const controlCenter = context.evidenceCoverageControlCenter;
+  if (!controlCenter) return null;
+  const byID = new Map(controlCenter.captureAssignments.map((assignment) => [assignment.captureID, assignment]));
+  const orderedIDs = controlCenter.recordingOrder.flatMap((session) => session.captureIDs);
+  for (const id of orderedIDs) {
+    const assignment = byID.get(id);
+    if (assignment && assignment.status !== "COMPLETE") return assignment;
+  }
+  return [...controlCenter.captureAssignments]
+    .filter((assignment) => assignment.status !== "COMPLETE")
+    .sort((first, second) => assignmentPriorityRank(first) - assignmentPriorityRank(second) || first.sessionNumber - second.sessionNumber || first.captureID.localeCompare(second.captureID))[0] ?? null;
 }
 
 function chooseHighestPriorityCaptureRequest(context: ArtifactContext): RecordObject | null {
@@ -584,6 +686,13 @@ function priorityRank(record: RecordObject): number {
   return 9;
 }
 
+function assignmentPriorityRank(record: Pick<Phase0EvidenceCaptureAssignment, "priority">): number {
+  if (record.priority === "P0") return 0;
+  if (record.priority === "P1") return 1;
+  if (record.priority === "P2") return 2;
+  return 9;
+}
+
 function asRecord(value: unknown): RecordObject {
   return typeof value === "object" && value !== null && !Array.isArray(value) ? value as RecordObject : {};
 }
@@ -612,6 +721,84 @@ function normalizeAppearanceMenuGapSummary(value: RecordObject): Phase0Appearanc
     capturedWithoutSufficientVisualViews: numberValue(value.capturedWithoutSufficientVisualViews),
     capturedButUnsuitableForProductionMatching: numberValue(value.capturedButUnsuitableForProductionMatching),
     productionEligibleRows: numberValue(value.productionEligibleRows)
+  };
+}
+
+function normalizeEvidenceCoverageControlCenter(value: RecordObject): Phase0EvidenceCoverageControlCenter | null {
+  const summary = asRecord(value.summary);
+  const categoryCoverage = asArray(value.categoryCoverage);
+  const captureAssignments = asArray(value.captureAssignments);
+  if (categoryCoverage.length === 0 && captureAssignments.length === 0) return null;
+  return {
+    summary: {
+      sourceVideos: numberValue(summary.sourceVideos),
+      evidenceEntries: numberValue(summary.evidenceEntries),
+      researchCandidates: numberValue(summary.researchCandidates),
+      primaryApprovedWithNotes: numberValue(summary.primaryApprovedWithNotes),
+      duplicateReviewRequired: numberValue(summary.duplicateReviewRequired),
+      secondVerifiedRecords: numberValue(summary.secondVerifiedRecords),
+      productionApprovedRecords: numberValue(summary.productionApprovedRecords),
+      productionCatalogRecords: numberValue(summary.productionCatalogRecords),
+      coverageCategories: numberValue(summary.coverageCategories),
+      categoriesWithObservedCandidates: numberValue(summary.categoriesWithObservedCandidates),
+      categoriesProductionReady: numberValue(summary.categoriesProductionReady),
+      captureAssignments: numberValue(summary.captureAssignments),
+      p0Assignments: numberValue(summary.p0Assignments),
+      p1Assignments: numberValue(summary.p1Assignments),
+      assignmentsComplete: numberValue(summary.assignmentsComplete),
+      assignmentsBlocking: numberValue(summary.assignmentsBlocking),
+      productionRecommendationsEnabled: summary.productionRecommendationsEnabled === true
+    },
+    categoryCoverage: categoryCoverage.map((row) => ({
+      categoryID: stringValue(row.categoryID),
+      category: stringValue(row.category),
+      required: row.required === true,
+      expectedRecords: row.expectedRecords === null ? null : numberValue(row.expectedRecords),
+      observedCandidateRecords: numberValue(row.observedCandidateRecords),
+      acceptedEvidence: numberValue(row.acceptedEvidence),
+      incompleteEvidence: numberValue(row.incompleteEvidence),
+      duplicateEvidence: numberValue(row.duplicateEvidence),
+      primaryReviewedRecords: numberValue(row.primaryReviewedRecords),
+      verifierReady: row.verifierReady === true,
+      secondVerifiedRecords: numberValue(row.secondVerifiedRecords),
+      productionApprovedRecords: numberValue(row.productionApprovedRecords),
+      blockerCount: numberValue(row.blockerCount),
+      beginningProof: row.beginningProof === true,
+      endingProof: row.endingProof === true,
+      productionReady: row.productionReady === true,
+      status: stringValue(row.status),
+      blocker: stringValue(row.blocker)
+    })),
+    captureAssignments: captureAssignments.map((row) => ({
+      captureID: stringValue(row.captureID),
+      priority: stringValue(row.priority),
+      category: stringValue(row.category),
+      subcategory: stringValue(row.subcategory),
+      objective: stringValue(row.objective),
+      exactStartScreen: stringValue(row.exactStartScreen),
+      exactActionSequence: stringValue(row.exactActionSequence),
+      whatMustRemainUnchanged: stringValue(row.whatMustRemainUnchanged),
+      requiredBeginningProof: stringValue(row.requiredBeginningProof),
+      requiredEndingProof: stringValue(row.requiredEndingProof),
+      requiredCameraViews: stringValue(row.requiredCameraViews),
+      filenamePattern: stringValue(row.filenamePattern),
+      acceptanceCriteria: stringValue(row.acceptanceCriteria),
+      recaptureTriggers: stringValue(row.recaptureTriggers),
+      status: stringValue(row.status),
+      owner: stringValue(row.owner),
+      sessionNumber: numberValue(row.sessionNumber),
+      existingEvidenceSummary: stringValue(row.existingEvidenceSummary),
+      verifierReadiness: stringValue(row.verifierReadiness),
+      productionReadiness: stringValue(row.productionReadiness)
+    })),
+    recordingOrder: asArray(value.recordingOrder).map((row) => ({
+      sessionNumber: numberValue(row.sessionNumber),
+      title: stringValue(row.title),
+      captureIDs: Array.isArray(row.captureIDs) ? row.captureIDs.map(stringValue) : [],
+      expectedDuration: stringValue(row.expectedDuration),
+      rationale: stringValue(row.rationale)
+    })),
+    nextRecordingIDs: Array.isArray(value.nextRecordingIDs) ? value.nextRecordingIDs.map(stringValue) : []
   };
 }
 

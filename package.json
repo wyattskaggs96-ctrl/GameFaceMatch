@@ -53,6 +53,8 @@
     "cf27:video-inventory": "node scripts/cf27-video-source-inventory.mjs",
     "cf27:evidence-intake": "node scripts/cf27-evidence-intake-agent.mjs",
     "phase-zero:intake": "node scripts/phase-zero-intake.mjs",
+    "phase-zero:coverage": "node scripts/phase-zero-evidence-coverage.mjs",
+    "phase-zero:coverage:check": "node scripts/phase-zero-evidence-coverage.mjs --check",
     "cf27:video-timeline": "node scripts/cf27-video-timeline-map.mjs",
     "cf27:environment-path": "node scripts/cf27-environment-creation-path-research.mjs",
     "cf27:appearance-menu-map": "node scripts/cf27-appearance-menu-map-research.mjs",

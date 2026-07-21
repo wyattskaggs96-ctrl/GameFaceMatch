@@ -54,6 +54,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Phase 0 evidence coverage control center check",
+    command: "node",
+    args: ["scripts/phase-zero-evidence-coverage.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Phase 0 blind verification package check",
     command: "node",
     args: ["scripts/cf27-blind-verification-package.mjs", "--check"],

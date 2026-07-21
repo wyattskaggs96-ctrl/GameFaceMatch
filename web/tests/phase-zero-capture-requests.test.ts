@@ -104,9 +104,9 @@ describe("Phase 0 capture requests", () => {
     const dashboard = createPhase0CompletionDashboard(loadPhase0CompletionArtifacts());
 
     expect(trackingIssue?.affectedRecordIDs).toEqual(requestIDs);
-    expect(dashboard.highestPriorityMissingCapture).toContain("GFM-CAP-001");
-    expect(dashboard.highestPriorityMissingCapture).toContain("Appearance");
-    expect(dashboard.nextRequiredHumanAction).toContain("GFM-CAP-001");
+    expect(dashboard.highestPriorityMissingCapture).toContain("GFM-CAP-011");
+    expect(dashboard.highestPriorityMissingCapture).toContain("Environment");
+    expect(dashboard.nextRequiredHumanAction).toContain("GFM-CAP-011");
   });
 });
 

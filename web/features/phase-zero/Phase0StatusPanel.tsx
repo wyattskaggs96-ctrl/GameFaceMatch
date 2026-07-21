@@ -5,6 +5,8 @@ import { Alert, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/component
 import { createPhase0AuditDashboardReport, type Phase0AuditDashboardReport } from "@/lib/phase-zero/phase-zero-audit-dashboard";
 import {
   createPhase0CompletionDashboard,
+  type Phase0EvidenceCaptureAssignment,
+  type Phase0EvidenceCoverageControlCenter,
   type Phase0CompletionCategoryProgress,
   type Phase0CompletionDashboardReport
 } from "@/lib/phase-zero/phase-zero-completion-dashboard";
@@ -241,6 +243,9 @@ function Phase0CompletionDashboard({ dashboard, loadError }: { dashboard: Phase0
           </dl>
         </Card>
       </div>
+      {dashboard.evidenceCoverageControlCenter ? (
+        <Phase0EvidenceCoverageControlCenterPanel controlCenter={dashboard.evidenceCoverageControlCenter} />
+      ) : null}
       <Card>
         <div className="status-row">
           <h2>Category completion</h2>
@@ -279,6 +284,149 @@ function Phase0CompletionDashboard({ dashboard, loadError }: { dashboard: Phase0
         </div>
       </Card>
     </section>
+  );
+}
+
+function Phase0EvidenceCoverageControlCenterPanel({ controlCenter }: { controlCenter: Phase0EvidenceCoverageControlCenter }) {
+  const activeAssignments = controlCenter.captureAssignments.filter((assignment) => assignment.status !== "COMPLETE");
+  return (
+    <section className="screen-stack" aria-labelledby="phase-zero-coverage-title">
+      <div className="card-grid">
+        <Card tone={controlCenter.summary.assignmentsBlocking > 0 ? "danger" : "success"}>
+          <div className="status-row">
+            <h2 id="phase-zero-coverage-title">Evidence coverage control center</h2>
+            <StatusBadge tone={controlCenter.summary.assignmentsBlocking > 0 ? "danger" : "success"}>
+              {controlCenter.summary.assignmentsBlocking} blocking
+            </StatusBadge>
+          </div>
+          <dl className="metadata-list">
+            <div>
+              <dt>Capture assignments</dt>
+              <dd>{controlCenter.summary.captureAssignments}</dd>
+            </div>
+            <div>
+              <dt>P0 assignments</dt>
+              <dd>{controlCenter.summary.p0Assignments}</dd>
+            </div>
+            <div>
+              <dt>Research candidates</dt>
+              <dd>{controlCenter.summary.researchCandidates}</dd>
+            </div>
+            <div>
+              <dt>Production records</dt>
+              <dd>{controlCenter.summary.productionCatalogRecords}</dd>
+            </div>
+          </dl>
+        </Card>
+        <Card tone="warning">
+          <h2>Recording order</h2>
+          <ol className="compact-list">
+            {controlCenter.recordingOrder.slice(0, 6).map((session) => (
+              <li key={session.sessionNumber}>
+                Session {session.sessionNumber}: {session.captureIDs.join(", ")} · {session.title}
+              </li>
+            ))}
+          </ol>
+        </Card>
+        <Card>
+          <h2>Next recordings</h2>
+          <ul className="compact-list">
+            {controlCenter.nextRecordingIDs.map((id) => {
+              const assignment = controlCenter.captureAssignments.find((candidate) => candidate.captureID === id);
+              return <li key={id}>{assignment ? `${id}: ${assignment.category} — ${assignment.subcategory}` : id}</li>;
+            })}
+          </ul>
+        </Card>
+      </div>
+      <Card>
+        <div className="status-row">
+          <h2>Capture assignment queue</h2>
+          <StatusBadge tone="warning">{activeAssignments.length} open</StatusBadge>
+        </div>
+        <div className="data-table-scroll" role="region" aria-label="Phase 0 capture assignment table" tabIndex={0}>
+          <table className="data-table">
+            <caption>Remaining Phase 0 capture assignments</caption>
+            <thead>
+              <tr>
+                <th scope="col">Capture</th>
+                <th scope="col">Category</th>
+                <th scope="col">Status</th>
+                <th scope="col">Start screen</th>
+                <th scope="col">Filename</th>
+              </tr>
+            </thead>
+            <tbody>
+              {activeAssignments.map((assignment) => (
+                <Phase0CaptureAssignmentRow key={assignment.captureID} assignment={assignment} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+      <Card>
+        <div className="status-row">
+          <h2>Coverage by category</h2>
+          <StatusBadge tone="danger">{controlCenter.summary.categoriesProductionReady} production ready</StatusBadge>
+        </div>
+        <div className="data-table-scroll" role="region" aria-label="Phase 0 evidence coverage table" tabIndex={0}>
+          <table className="data-table">
+            <caption>Evidence coverage control-center category status</caption>
+            <thead>
+              <tr>
+                <th scope="col">Category</th>
+                <th scope="col">Observed</th>
+                <th scope="col">Accepted evidence</th>
+                <th scope="col">Incomplete</th>
+                <th scope="col">Duplicate</th>
+                <th scope="col">Primary reviewed</th>
+                <th scope="col">Verifier ready</th>
+                <th scope="col">Production approved</th>
+                <th scope="col">Blocker</th>
+              </tr>
+            </thead>
+            <tbody>
+              {controlCenter.categoryCoverage.map((category) => (
+                <tr key={category.categoryID}>
+                  <th scope="row">
+                    <span>{category.category}</span>
+                    <small>{category.status}</small>
+                  </th>
+                  <td>{category.observedCandidateRecords}</td>
+                  <td>{category.acceptedEvidence}</td>
+                  <td>{category.incompleteEvidence}</td>
+                  <td>{category.duplicateEvidence}</td>
+                  <td>{category.primaryReviewedRecords}</td>
+                  <td>{category.verifierReady ? "Yes" : "No"}</td>
+                  <td>{category.productionApprovedRecords}</td>
+                  <td>{category.blocker}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </section>
+  );
+}
+
+function Phase0CaptureAssignmentRow({ assignment }: { assignment: Phase0EvidenceCaptureAssignment }) {
+  return (
+    <tr>
+      <th scope="row">
+        <span>{assignment.captureID}</span>
+        <small>{assignment.objective}</small>
+        <small>{assignment.existingEvidenceSummary}</small>
+      </th>
+      <td>
+        {assignment.category}
+        <small>{assignment.subcategory}</small>
+      </td>
+      <td>
+        <StatusBadge tone={assignment.priority === "P0" ? "danger" : "warning"}>{assignment.status}</StatusBadge>
+      </td>
+      <td>{assignment.exactStartScreen}</td>
+      <td>{assignment.filenamePattern}</td>
+    </tr>
   );
 }
 

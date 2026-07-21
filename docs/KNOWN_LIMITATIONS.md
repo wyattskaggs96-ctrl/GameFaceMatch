@@ -35,8 +35,8 @@ Status: Current as of the web MVP private-beta readiness review.
 
 ## Screenshot Refinement
 
-- Screenshot-refinement intake exists as a scaffold.
-- Real screenshot comparison and refinement recommendations are unavailable until comparison logic and verified catalog data exist.
+- Screenshot-refinement intake and local comparison logic exist for validated screenshots.
+- Production refinement recommendations remain unavailable while the production catalog is empty; once an approved catalog is loaded, refinement still carries reduced cross-domain confidence because game renders and human capture images differ.
 - Screenshot images should not be saved by default.
 
 ## Privacy and Storage

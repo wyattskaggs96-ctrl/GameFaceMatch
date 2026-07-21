@@ -681,9 +681,21 @@ export interface RefinementComparisonReport {
   screenshotEvidenceState: "ready" | "needsReview" | "blocked" | "unavailable";
   normalizedMeasurementCount: number;
   crossDomainConfidence: MeasurementConfidence;
+  originalProfileComparison?: RefinementProfileComparison;
   currentRecommendation?: RefinementCandidateComparison;
   candidateComparisons: RefinementCandidateComparison[];
   actionSummary: string;
+  limitations: string[];
+}
+
+export interface RefinementProfileComparison {
+  profileID: string;
+  profileVersion: string;
+  screenshotClosenessScore: number;
+  confidence: MeasurementConfidence;
+  comparedFeatureCount: number;
+  reasons: string[];
+  differences: string[];
   limitations: string[];
 }
 

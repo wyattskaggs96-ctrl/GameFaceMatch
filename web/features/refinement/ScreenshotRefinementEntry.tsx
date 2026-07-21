@@ -45,7 +45,7 @@ export function ScreenshotRefinementEntry({
   currentMatch?: GameAppearanceMatch | null;
   onSessionChange: (session: ScreenshotRefinementSession) => void;
   onSessionDeleted: () => void;
-  onRefinementCompleted?: (session: ScreenshotRefinementSession) => void;
+  onRefinementCompleted?: (session: ScreenshotRefinementSession, result: RefinementResult) => void;
 }) {
   const [result, setResult] = useState<RefinementResult | null>(null);
   const [analysisPendingViewID, setAnalysisPendingViewID] = useState<ScreenshotViewID | null>(null);
@@ -165,8 +165,10 @@ export function ScreenshotRefinementEntry({
       runtimeEnvironment: process.env.NODE_ENV
     });
     setResult(refinementResult);
-    onRefinementCompleted?.(activeSession);
+    onRefinementCompleted?.(activeSession, refinementResult);
   }
+
+  const refinementCanRun = rankedMatches.length > 0;
 
   return (
     <section className="screen-stack" aria-labelledby="refinement-title">
@@ -176,10 +178,12 @@ export function ScreenshotRefinementEntry({
           image metadata, runs local quality and landmark checks when available, and compares only against verified catalog recommendations.
         </p>
       </ScreenHeader>
-      <Alert title="Refinement unavailable" tone="warning">
-        Verified catalog matching must exist before GameFace Match can recommend screenshot-based changes.
+      <Alert title={refinementCanRun ? "Verified refinement checks" : "Refinement unavailable"} tone={refinementCanRun ? "info" : "warning"}>
+        {refinementCanRun
+          ? "Screenshot refinement will compare the uploaded created-player screenshot against the original local profile and the current verified top-three recommendations."
+          : "Verified catalog matching must exist before GameFace Match can recommend screenshot-based changes."}
       </Alert>
-      <RecoveryActionList plans={[getRecoveryPlan("emptyProductionCatalog")]} />
+      {refinementCanRun ? null : <RecoveryActionList plans={[getRecoveryPlan("emptyProductionCatalog")]} />}
       <Card tone="info">
         <h2>Screenshot requirements</h2>
         <ul className="message-list">
@@ -232,7 +236,12 @@ export function ScreenshotRefinementEntry({
             ))}
           </ul>
         ) : (
-          <p>Screenshot intake requirements are complete. Refinement recommendations remain unavailable until verified catalog data exists.</p>
+          <p>
+            Screenshot intake requirements are complete.
+            {refinementCanRun
+              ? " Check refinement to compare only against verified recommendations."
+              : " Refinement recommendations remain unavailable until verified catalog data exists."}
+          </p>
         )}
         {readiness.blockingMessages.length > 0 ? (
           <RecoveryActionList plans={readiness.blockingMessages.map(recoveryPlanForImageMessage)} title="Screenshot recovery action" />
@@ -287,6 +296,22 @@ function RefinementComparisonSummary({ result }: { result: RefinementResult }) {
       <p>
         {report.normalizedMeasurementCount} normalized screenshot measurement(s). Cross-domain confidence: {report.crossDomainConfidence.label}.
       </p>
+      {report.originalProfileComparison ? (
+        <div>
+          <h3>Original profile comparison</h3>
+          <p>
+            Screenshot-to-profile closeness {report.originalProfileComparison.screenshotClosenessScore} using{" "}
+            {report.originalProfileComparison.comparedFeatureCount} feature(s). Confidence: {report.originalProfileComparison.confidence.label}.
+          </p>
+          <ul className="message-list">
+            {[...report.originalProfileComparison.reasons, ...report.originalProfileComparison.differences, ...report.originalProfileComparison.limitations].map(
+              (message) => (
+                <li key={message}>{message}</li>
+              )
+            )}
+          </ul>
+        </div>
+      ) : null}
       <p>{report.actionSummary}</p>
       {report.candidateComparisons.length > 0 ? (
         <ul className="message-list">

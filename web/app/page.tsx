@@ -71,10 +71,11 @@ import {
 import { createInitialAttributeConfirmation, type AttributeConfirmationState } from "@/lib/profile/attribute-confirmation";
 import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { createInitialScreenshotRefinementSession, deleteScreenshotRefinementSession } from "@/lib/refinement/screenshot-refinement";
+import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
 import { createBuildInstructions } from "@/lib/results/results-experience";
 import { isProductionCatalogEmpty, shouldShowDevelopmentCatalogBanner } from "@/lib/ui/catalog-status";
 import { CATALOG_UNAVAILABLE_MESSAGE, INDEPENDENT_APP_DISCLAIMER, PRODUCT_EXPLANATION } from "@/lib/product-copy";
-import type { StandardFaceProfile } from "@/types/domain";
+import type { GameAppearanceMatch, RefinementResult, StandardFaceProfile } from "@/types/domain";
 
 const DevelopmentCatalogAuditInspector =
   process.env.NODE_ENV === "production"
@@ -156,6 +157,8 @@ export default function HomePage() {
   const [deletionRecorded, setDeletionRecorded] = useState(false);
   const [consentState, setConsentState] = useState<ConsentState>(() => createInitialConsentState());
   const [screenshotSession, setScreenshotSession] = useState(() => createInitialScreenshotRefinementSession());
+  const [latestMatches, setLatestMatches] = useState<GameAppearanceMatch[]>([]);
+  const [latestMatchingError, setLatestMatchingError] = useState<string | null>(null);
   const [privacyRevision, setPrivacyRevision] = useState(0);
   const [catalogRuntimeStatus, setCatalogRuntimeStatus] = useState<CatalogRuntimeStatus | null>(null);
   const [catalogRuntimeError, setCatalogRuntimeError] = useState<string | null>(null);
@@ -168,6 +171,7 @@ export default function HomePage() {
   const [analyticsRevision, setAnalyticsRevision] = useState(0);
   const [performanceRevision, setPerformanceRevision] = useState(0);
   const cameraService = useMemo(() => createBrowserCameraService(), []);
+  const matchingEngine = useMemo(() => createRuleBasedMatchingEngine(), []);
   const privacyStore = useMemo(() => createMemoryPrivacyStore(), []);
   const analytics = useMemo<PrivacySafeAnalytics>(() => createLocalAnalyticsRecorder(), []);
   const performanceMonitor = useMemo<LocalPerformanceMonitor>(() => createLocalPerformanceMonitor(), []);
@@ -500,6 +504,8 @@ export default function HomePage() {
     setSession(createInitialCaptureSession());
     setAttributeConfirmation(createInitialAttributeConfirmation());
     setStandardProfile(null);
+    setLatestMatches([]);
+    setLatestMatchingError(null);
     setProfileSaveStatusMessage(null);
     setProfileSaveErrorMessage(null);
     setCaptureRecoveryNotice(null);
@@ -532,6 +538,8 @@ export default function HomePage() {
     trackAnalytics("deletionRequested", { deletionScope: "derivedProfile" });
     privacyStore.deleteDerivedProfile(standardProfile?.id);
     setStandardProfile(null);
+    setLatestMatches([]);
+    setLatestMatchingError(null);
     setProfileSaveStatusMessage(null);
     setProfileSaveErrorMessage(null);
     privacyStore.recordDeletionCompletion("derived-profile");
@@ -611,6 +619,8 @@ export default function HomePage() {
     setConsentState(createInitialConsentState());
     setSavedProfiles([]);
     setSavedProfileStatus(savedProfileStorage.getStatus());
+    setLatestMatches([]);
+    setLatestMatchingError(null);
     setProfileSaveStatusMessage(null);
     setProfileSaveErrorMessage(null);
     setCaptureRecoveryNotice(null);
@@ -676,6 +686,8 @@ export default function HomePage() {
     const retentionActions = createProfileCreationRetentionPlan(session);
     const retainedSession = removeRawImagesFromCaptureSession(session);
     setStandardProfile(profile);
+    setLatestMatches([]);
+    setLatestMatchingError(null);
     setSession(retainedSession);
     privacyStore.deleteTemporaryImages();
     if (typeof window !== "undefined") {
@@ -830,7 +842,9 @@ export default function HomePage() {
               privacyStore.recordDeletionCompletion("active-capture-session");
               setDeletionRecorded(true);
               setSession(cancelledSession);
-              setStandardProfile(null);
+    setStandardProfile(null);
+    setLatestMatches([]);
+    setLatestMatchingError(null);
               refreshPrivacyState();
             }}
             onContinue={() => navigate("attributes")}
@@ -866,12 +880,23 @@ export default function HomePage() {
             actionLabel="View results"
             onAction={() => {
               const matchingStartedAt = typeof performance === "undefined" ? Date.now() : performance.now();
+              const activeManifest = catalogRuntimeStatus?.manifest ?? productionCatalogManifest;
+              const nextMatches =
+                standardProfile && !catalogIsEmpty && !catalogRuntimeError
+                  ? matchingEngine.matchTopThree({
+                      profile: standardProfile,
+                      catalog: activeManifest,
+                      limit: 3
+                    })
+                  : [];
+              setLatestMatches(nextMatches);
+              setLatestMatchingError(!catalogIsEmpty && !catalogRuntimeError && standardProfile && nextMatches.length === 0 ? CATALOG_UNAVAILABLE_MESSAGE : null);
               trackAnalytics("resultGenerated", {
-                resultOutcome: catalogIsEmpty ? "unavailable" : catalogRuntimeError ? "error" : "success",
-                resultBlockReason: catalogIsEmpty ? "catalogUnavailable" : catalogRuntimeError ? "matchingError" : undefined,
+                resultOutcome: catalogIsEmpty ? "unavailable" : catalogRuntimeError || nextMatches.length === 0 ? "error" : "success",
+                resultBlockReason: catalogIsEmpty ? "catalogUnavailable" : catalogRuntimeError || nextMatches.length === 0 ? "matchingError" : undefined,
                 catalogVersionID: productionCatalogManifest.catalogVersion.identifier,
                 catalogRecordCount: catalogRuntimeStatus?.manifest.items.length ?? productionCatalogManifest.items.length,
-                recommendationCount: 0
+                recommendationCount: nextMatches.length
               });
               if (catalogIsEmpty) {
                 trackAnalytics("catalogUnavailable", {
@@ -907,7 +932,8 @@ export default function HomePage() {
           <ResultsExperience
             profile={standardProfile}
             catalogIsEmpty={catalogIsEmpty}
-            errorMessage={catalogRuntimeError}
+            matches={latestMatches}
+            errorMessage={catalogRuntimeError ?? latestMatchingError}
             catalogVersionID={productionCatalogManifest.catalogVersion.identifier}
             catalogVerificationDate={productionCatalogManifest.catalogVersion.verifiedAt}
             catalogRecordCount={catalogRuntimeStatus?.manifest.items.length ?? productionCatalogManifest.items.length}
@@ -984,6 +1010,8 @@ export default function HomePage() {
           <ScreenshotRefinementEntry
             session={screenshotSession}
             profile={standardProfile}
+            rankedMatches={latestMatches}
+            currentMatch={latestMatches[0] ?? null}
             onSessionChange={(nextSession) => {
               setScreenshotSession(nextSession);
               privacyStore.setScreenshotSessionImages(nextSession.slots.flatMap((slot) => (slot.screenshot ? [slot.screenshot] : [])));
@@ -994,14 +1022,14 @@ export default function HomePage() {
               setDeletionRecorded(true);
               refreshPrivacyState();
             }}
-            onRefinementCompleted={(completedSession) => {
+            onRefinementCompleted={(completedSession, result) => {
               const startedAt = typeof performance === "undefined" ? Date.now() : performance.now();
               const retentionActions = createRefinementCompletionRetentionPlan(completedSession);
               const mutation = deleteScreenshotRefinementSession(completedSession);
               setScreenshotSession(mutation.session);
               privacyStore.deleteScreenshotSession();
               recordRetentionActions(retentionActions);
-              trackAnalytics("refinementCompleted", { refinementOutcome: "unavailable" });
+              trackAnalytics("refinementCompleted", { refinementOutcome: refinementAnalyticsOutcome(result) });
               trackPerformance(
                 createPerformanceRecord({
                   operation: "screenshotRefinement",
@@ -1110,6 +1138,12 @@ function classifyQualityFailure(errors: string[]) {
   if (joined.includes("face not found") || joined.includes("no face")) return "faceNotFound";
   if (joined.includes("confirm")) return "manualConfirmationMissing";
   return "unknown";
+}
+
+function refinementAnalyticsOutcome(result: RefinementResult) {
+  if (result.status === "unavailable") return "unavailable";
+  if (result.status === "invalidScreenshot") return "cancelled";
+  return "completedWithLimitations";
 }
 
 function Dashboard({

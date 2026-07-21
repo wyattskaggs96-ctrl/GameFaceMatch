@@ -8,13 +8,14 @@ import type {
   RefinementAction,
   RefinementComparisonReport,
   RefinementFeedbackRecord,
+  RefinementProfileComparison,
   RefinementResult,
   StandardFacialMeasurementID,
   StandardFaceProfile
 } from "@/types/domain";
 import { defaultGeometryFeatureConfig } from "@/lib/matching/matching-engine";
 import type { ScreenshotRefinementSession } from "./screenshot-refinement";
-import type { ScreenshotNormalizedGeometryMeasurement, ScreenshotQualityAlignmentReport } from "./screenshot-quality-alignment";
+import type { ScreenshotNormalizedGeometryMeasurement } from "./screenshot-quality-alignment";
 
 export interface ScreenshotRefinementEngine {
   readonly engineVersion: typeof SCREENSHOT_REFINEMENT_ENGINE_VERSION;
@@ -246,11 +247,29 @@ function buildVerifiedControlActions(current: GameAppearanceMatch): RefinementAc
   const actions: RefinementAction[] = [];
   const hairstyle = current.appearanceRecommendations?.find((recommendation) => recommendation.category === "hairstyle" && recommendation.status === "selected");
   const facialHair = current.appearanceRecommendations?.find((recommendation) => recommendation.category === "facialHair" && recommendation.status === "selected");
+  const additionalControl = current.appearanceRecommendations?.find(
+    (recommendation) =>
+      recommendation.status === "selected" &&
+      recommendation.nativeGameValue &&
+      recommendation.category !== "hairstyle" &&
+      recommendation.category !== "facialHair"
+  );
   if (hairstyle?.nativeGameValue) {
     actions.push(verifiedControlAction("change-verified-hairstyle", "changeVerifiedHairstyle", "Review verified hairstyle", current, hairstyle.nativeGameValue));
   }
   if (facialHair?.nativeGameValue) {
     actions.push(verifiedControlAction("change-verified-facial-hair", "changeVerifiedFacialHair", "Review verified facial hair", current, facialHair.nativeGameValue));
+  }
+  if (additionalControl?.nativeGameValue) {
+    actions.push(
+      verifiedControlAction(
+        `change-verified-${additionalControl.category}`,
+        "changeVerifiedControl",
+        `Review verified ${additionalControl.label.toLowerCase()}`,
+        current,
+        additionalControl.nativeGameValue
+      )
+    );
   }
   return actions;
 }
@@ -321,6 +340,7 @@ function compareScreenshotToMatches(input: ScreenshotRefinementEngineInput, matc
   const screenshotEvidenceState = summarizeScreenshotEvidenceState(input.session);
   const confidenceBase = average(candidateComparisons.map((candidate) => candidate.confidence.score ?? 0));
   const crossDomainConfidence = confidenceFromScore(round(confidenceBase * (screenshotEvidenceState === "ready" ? 0.78 : 0.62)));
+  const originalProfileComparison = compareScreenshotToOriginalProfile(input.profile, screenshotMeasurements, screenshotEvidenceState);
   const actionSummary =
     best.catalogItemID === currentRecommendation.catalogItemID || best.screenshotClosenessScore <= currentRecommendation.screenshotClosenessScore + 2
       ? "Keep current recommendation unless the user visually prefers an alternate verified result."
@@ -332,6 +352,7 @@ function compareScreenshotToMatches(input: ScreenshotRefinementEngineInput, matc
     screenshotEvidenceState,
     normalizedMeasurementCount: screenshotMeasurements.length,
     crossDomainConfidence,
+    originalProfileComparison,
     currentRecommendation,
     candidateComparisons,
     actionSummary,
@@ -397,6 +418,55 @@ function compareCandidate(
     verified: match.catalogItem.verificationState === "verified",
     reasons: strongest.map((item) => `${item.id} is close to the screenshot-derived measurement.`),
     differences: weakest.map((item) => `${item.id} differs from the screenshot-derived measurement.`)
+  };
+}
+
+function compareScreenshotToOriginalProfile(
+  profile: StandardFaceProfile | null,
+  screenshotMeasurements: ReturnType<typeof collectScreenshotMeasurements>,
+  screenshotEvidenceState: RefinementComparisonReport["screenshotEvidenceState"]
+): RefinementProfileComparison | undefined {
+  if (!profile) return undefined;
+  const compared = screenshotMeasurements.flatMap((measurement) => {
+    const feature = defaultGeometryFeatureConfig.find((candidate) => candidate.id === measurement.id);
+    const profileMeasurement = profile.geometry.measurements[measurement.id];
+    if (!feature || !profileMeasurement || profileMeasurement.availabilityState !== "available" || typeof profileMeasurement.value !== "number") return [];
+    const normalizedDistance = Math.min(Math.abs(measurement.value - profileMeasurement.value) / feature.maxDistance, 1);
+    const closeness = round((1 - normalizedDistance) * 100);
+    return [{ ...measurement, profileMeasurement, feature, normalizedDistance, closeness }];
+  });
+  if (compared.length === 0) {
+    return {
+      profileID: profile.id,
+      profileVersion: profile.profileVersion,
+      screenshotClosenessScore: 0,
+      confidence: confidenceFromScore(0),
+      comparedFeatureCount: 0,
+      reasons: [],
+      differences: ["No overlapping screenshot and original-profile geometry measurements were available."],
+      limitations: ["Original-profile comparison is unavailable until both the scan profile and screenshot produce compatible measurements."]
+    };
+  }
+  const weightTotal = compared.reduce((total, item) => total + item.feature.weight * item.confidence * (item.profileMeasurement.confidence.score ?? 0), 0);
+  const weightedDistance =
+    compared.reduce((total, item) => total + item.normalizedDistance * item.feature.weight * item.confidence * (item.profileMeasurement.confidence.score ?? 0), 0) /
+    Math.max(weightTotal, 0.001);
+  const screenshotClosenessScore = round((1 - weightedDistance) * 100);
+  const strongest = [...compared].sort((first, second) => second.closeness - first.closeness).slice(0, 2);
+  const weakest = [...compared].sort((first, second) => first.closeness - second.closeness).slice(0, 2);
+  const averageEvidenceConfidence = average(compared.map((item) => item.confidence * (item.profileMeasurement.confidence.score ?? 0)));
+  return {
+    profileID: profile.id,
+    profileVersion: profile.profileVersion,
+    screenshotClosenessScore,
+    confidence: confidenceFromScore(round(averageEvidenceConfidence * (screenshotEvidenceState === "ready" ? 0.68 : 0.5))),
+    comparedFeatureCount: compared.length,
+    reasons: strongest.map((item) => `${item.id} in the screenshot is close to the original-profile measurement.`),
+    differences: weakest.map((item) => `${item.id} in the screenshot differs from the original-profile measurement.`),
+    limitations: [
+      "This is a local RGB comparison between a game-render screenshot and a human capture profile.",
+      "The score is not biometric identity accuracy and should be treated as a refinement aid only."
+    ]
   };
 }
 

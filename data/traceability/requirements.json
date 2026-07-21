@@ -1387,7 +1387,7 @@
       "id": "GFM-REFINE-001",
       "source": "docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md",
       "section": "6 MVP Goals",
-      "summary": "Allow screenshot upload for future created-player refinement without pretending comparison logic exists.",
+      "summary": "Allow screenshot upload for created-player refinement without pretending cross-domain comparison is identity accuracy.",
       "owningModule": "Screenshot refinement",
       "implementationFiles": [
         "web/lib/refinement/screenshot-refinement.ts",
@@ -1400,10 +1400,10 @@
         "web/tests/e2e/core-journey.spec.ts"
       ],
       "status": "IMPLEMENTED_WITH_LIMITATION",
-      "evidence": "Screenshot intake requires a front-facing screenshot, supports optional left/right three-quarter screenshots, validates file metadata and resolution, runs local quality/alignment scaffolding with face-count, bounding-box, pose, landmark, occlusion, lighting, and standard-coordinate alignment reports when evidence exists, gates progression on manual screenshot-condition confirmations, supports deletion/object URL cleanup, and routes refinement through an engine scaffold that can model keep-current, rank-two, rank-three, verified-hairstyle, verified-facial-hair, and verified-control actions. The engine accepts fixture catalog data only in non-production tests, requires an approved production catalog gate in production, records feedback only with separate consent, and returns an honest unavailable result until real comparison and verified catalog data exist.",
-      "blocker": "Real cross-domain comparison and verified catalog data are not available.",
+      "evidence": "Screenshot intake requires a front-facing screenshot, supports optional left/right three-quarter screenshots, validates file metadata and resolution, runs local quality/alignment checks with face-count, bounding-box, pose, landmark, occlusion, lighting, and standard-coordinate alignment reports when evidence exists, gates progression on screenshot-condition confirmations, supports deletion/object URL cleanup, and routes refinement through an engine that compares screenshot-derived normalized measurements to the original StandardFaceProfile and current verified top-three candidates. Actions can keep the current recommendation, try rank two, try rank three, review verified hairstyle, review verified facial hair, or review another verified control. The engine accepts fixture catalog data only in non-production tests, requires an approved production catalog gate in production, records feedback only with separate consent, and returns an honest unavailable result when verified production recommendations are absent.",
+      "blocker": "Real production refinement suggestions require a nonempty approved production catalog and cross-domain usefulness validation from real screenshots.",
       "owner": "Matching lead",
-      "lastCheckedDate": "2026-07-13"
+      "lastCheckedDate": "2026-07-20"
     },
     {
       "id": "GFM-PRIV-001",

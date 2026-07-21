@@ -18,6 +18,7 @@ import { analyzeScreenshotQualityAndAlignment } from "@/lib/refinement/screensho
 import { createScreenshotRefinementEngine, evaluateRefinementCatalogReadiness } from "@/lib/refinement/refinement-engine";
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
 import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
+import { PRODUCTION_PUBLISH_GATE_VERSION, requiredProductionPublishGateChecks, type ProductionPublishGateReport } from "@/lib/catalog/production-publish-gate";
 import { MEDIAPIPE_FACE_LANDMARKER_METADATA, unavailableFaceLandmarkReport } from "@/lib/face-landmarks/face-landmark-provider";
 import type { AppearanceAttribute, FaceLandmarkReport, FaceLandmarkPoint, FacialMeasurement, GameCatalogManifest, StandardFaceProfile } from "@/types/domain";
 
@@ -276,6 +277,11 @@ describe("screenshot refinement scaffold", () => {
       screenshotEvidenceState: "ready",
       normalizedMeasurementCount: expect.any(Number)
     });
+    expect(result.comparisonReport?.originalProfileComparison).toMatchObject({
+      profileID: "synthetic-refinement-profile",
+      profileVersion: "standard-face-profile-v2",
+      comparedFeatureCount: expect.any(Number)
+    });
     expect(result.comparisonReport?.candidateComparisons).toHaveLength(3);
     expect(result.comparisonReport?.candidateComparisons.every((comparison) => comparison.verified)).toBe(true);
     expect(result.suggestedMatches.map((match) => match.catalogItem.stableInternalID)).toEqual([
@@ -290,6 +296,39 @@ describe("screenshot refinement scaffold", () => {
     ]);
     expect(result.actions?.every((action) => action.requiresVerifiedCatalog)).toBe(true);
     expect(result.message).toMatch(/tests only/i);
+  });
+
+  it("generates verified production-style refinement actions when an approved release and ranked matches are supplied", () => {
+    const catalog = productionStyleCatalogWithRefinementAnnotations();
+    const profile = syntheticRefinementProfile();
+    const matches = createRuleBasedMatchingEngine().matchTopThree({
+      profile,
+      catalog
+    });
+    const result = createScreenshotRefinementEngine().refine({
+      profile,
+      session: readyAnalyzedSession(),
+      catalogManifest: catalog,
+      catalogGate: passingCatalogGate(catalog),
+      rankedMatches: matches,
+      runtimeEnvironment: "production",
+      now: "2026-07-10T00:00:00.000Z"
+    });
+
+    expect(result.status).toBe("tryAlternative");
+    expect(result.suggestedMatches).toHaveLength(3);
+    expect(result.suggestedMatches.every((match) => match.catalogItem.sourceType === "production" && !match.catalogItem.isTestFixture)).toBe(true);
+    expect(result.actions?.map((action) => action.type)).toEqual([
+      "keepCurrentRecommendation",
+      "tryRankTwo",
+      "tryRankThree",
+      "changeVerifiedHairstyle",
+      "changeVerifiedFacialHair",
+      "changeVerifiedControl"
+    ]);
+    expect(result.actions?.find((action) => action.type === "changeVerifiedControl")?.reasons.join(" ")).toMatch(/SYNTHETIC_NATIVE_HAIR_COLOR_ALPHA/);
+    expect(result.comparisonReport?.originalProfileComparison?.limitations.join(" ")).toMatch(/not biometric identity accuracy/i);
+    expect(JSON.stringify(result)).not.toMatch(/synthetic-test-catalog|TEST-ONLY SYNTHETIC MATCHING FIXTURE/);
   });
 
   it("returns invalid-image recovery when screenshot analysis blocks refinement", () => {
@@ -392,6 +431,103 @@ describe("screenshot refinement scaffold", () => {
     });
   });
 });
+
+function productionStyleCatalogWithRefinementAnnotations(): GameCatalogManifest {
+  const catalogVersion = {
+    identifier: "unit-test-production-refinement-v1",
+    gameVersion: "unit-test-version",
+    platform: "unit-test-platform",
+    verifiedAt: "2026-07-10T00:00:00.000Z"
+  };
+  const items = fixtureCatalog.items.map((item, index) => ({
+    ...item,
+    sourceType: "production" as const,
+    stableInternalID: `unit-test-production-refinement-${index + 1}`,
+    game: "EA SPORTS College Football 27",
+    gameVersion: catalogVersion.gameVersion,
+    patchVersion: "unit-test-patch",
+    platform: catalogVersion.platform,
+    gameMode: "Road to Glory",
+    creationPath: "unit-test-road-to-glory-path",
+    catalogVersion,
+    catalogManagerDisposition: "approved" as const,
+    auditTrail: {
+      firstReviewID: "unit-test-primary-review",
+      secondReviewID: "unit-test-second-review",
+      menuInstructionVerified: true
+    },
+    isTestFixture: false,
+    humanAnnotations: {
+      ...item.humanAnnotations,
+      verifiedHairstyleNativeValue: index === 0 ? "SYNTHETIC_NATIVE_HAIRSTYLE_ALPHA" : `SYNTHETIC_NATIVE_HAIRSTYLE_${index}`,
+      verifiedHairColorNativeValue: index === 0 ? "SYNTHETIC_NATIVE_HAIR_COLOR_ALPHA" : `SYNTHETIC_NATIVE_HAIR_COLOR_${index}`,
+      verifiedFacialHairNativeValue: index === 0 ? "SYNTHETIC_NATIVE_FACIAL_HAIR_ALPHA" : `SYNTHETIC_NATIVE_FACIAL_HAIR_${index}`,
+      verifiedFacialHairColorNativeValue: index === 0 ? "SYNTHETIC_NATIVE_FACIAL_HAIR_COLOR_ALPHA" : `SYNTHETIC_NATIVE_FACIAL_HAIR_COLOR_${index}`,
+      verifiedOtherVisualAttributeNativeValue: index === 0 ? "SYNTHETIC_NATIVE_BODY_PRESENTATION_ALPHA" : `SYNTHETIC_NATIVE_BODY_PRESENTATION_${index}`,
+      hairstyleFamily: index === 0 ? "short" : "long",
+      hairTextureFamily: index === 0 ? "wavy" : "straight",
+      hairColorFamily: index === 0 ? "brown" : "black",
+      facialHairPresence: index === 0 ? "yes" : "none",
+      facialHairStyleFamily: index === 0 ? "beard" : "none",
+      facialHairColorFamily: index === 0 ? "brown" : "black",
+      preferredBodyType: index === 0 ? "muscular" : "lean"
+    }
+  }));
+  return {
+    sourceType: "production",
+    catalogVersion,
+    generatedAt: "2026-07-10T00:00:00.000Z",
+    isProduction: true,
+    declaredItemCount: items.length,
+    packageChecksum: "unit-test-package-checksum",
+    releaseStatus: "approvedRelease",
+    releaseNotes: {
+      summary: "Unit-test production-style refinement catalog.",
+      createdAt: "2026-07-10T00:00:00.000Z",
+      author: "unit-test",
+      changes: items.map((item) => ({
+        type: "added" as const,
+        stableInternalID: item.stableInternalID,
+        description: "Added synthetic production-style refinement fixture."
+      }))
+    },
+    items
+  };
+}
+
+function passingCatalogGate(manifest: GameCatalogManifest) {
+  return {
+    manifest,
+    integrity: {
+      state: "verified" as const,
+      expectedChecksum: manifest.packageChecksum ?? null,
+      actualChecksum: manifest.packageChecksum ?? "unit-test-package-checksum",
+      ok: true,
+      message: "Unit-test checksum verified."
+    },
+    compatibility: {
+      compatible: true,
+      platform: manifest.catalogVersion.platform,
+      gameVersion: manifest.catalogVersion.gameVersion,
+      patchVersion: "unit-test-patch",
+      supportedPlatforms: [manifest.catalogVersion.platform],
+      supportedGameVersions: [manifest.catalogVersion.gameVersion],
+      message: "Unit-test compatibility verified."
+    },
+    publishGate: passingPublishGate(manifest)
+  };
+}
+
+function passingPublishGate(catalog: GameCatalogManifest): ProductionPublishGateReport {
+  return {
+    schemaVersion: PRODUCTION_PUBLISH_GATE_VERSION,
+    ok: true,
+    generatedAt: "2026-07-10T00:00:00.000Z",
+    catalogVersionID: catalog.catalogVersion.identifier,
+    checks: requiredProductionPublishGateChecks.map((name) => ({ name, status: "pass", errors: [] })),
+    errors: []
+  };
+}
 
 function validScreenshot(viewID: "front" | "left45" | "right45", objectUrl: string) {
   return {
@@ -587,6 +723,21 @@ function syntheticProfile(): StandardFaceProfile {
       rightProfile: { angleID: "rightProfile", available: true }
     }
   });
+}
+
+function syntheticRefinementProfile(): StandardFaceProfile {
+  const profile = syntheticProfile();
+  profile.appearance.attributes = [
+    attribute("hairColorFamily", "brown"),
+    attribute("hairTextureFamily", "wavy"),
+    attribute("hairstyleFamily", "short"),
+    attribute("facialHairPresence", "yes"),
+    attribute("facialHairStyleFamily", "beard"),
+    attribute("facialHairColorFamily", "brown"),
+    attribute("preferredBodyType", "muscular")
+  ];
+  profile.userConfirmedAttributes = profile.appearance.attributes;
+  return profile;
 }
 
 function measurement(value: number): FacialMeasurement {

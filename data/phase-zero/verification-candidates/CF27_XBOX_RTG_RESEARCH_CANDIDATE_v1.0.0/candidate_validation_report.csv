@@ -1,0 +1,48 @@
+type,code_or_name,target,status_or_severity,message
+check,artifactPresence,,PASS,"{""missing"":[]}"
+check,productionCatalogRemainsEmpty,,PASS,"{""productionRecords"":0,""productionRecommendationsEnabled"":false}"
+check,primaryReviewExplicitForEveryCandidate,,BLOCKED,"{""total"":85,""reviewed"":85,""duplicateReviewRequired"":5}"
+check,captureAssignmentsComplete,,BLOCKED,"{""openCaptureAssignments"":[""GFM-CAP-011"",""GFM-CAP-012"",""GFM-CAP-013"",""GFM-CAP-001"",""GFM-CAP-002"",""GFM-CAP-003"",""GFM-CAP-004"",""GFM-CAP-005"",""GFM-CAP-006"",""GFM-CAP-007"",""GFM-CAP-008"",""GFM-CAP-009"",""GFM-CAP-010"",""GFM-CAP-014"",""GFM-CAP-015""]}"
+check,categoryCompleteness,,BLOCKED,"{""incomplete"":[""environment"",""creation_paths"",""menu_hierarchy"",""head_templates"",""hairstyles"",""hair_colors"",""facial_hair"",""facial_hair_colors"",""additional_attributes"",""body_controls"",""dependency_tests""]}"
+check,stableIDUniqueness,,PASS,"{""records"":85,""missingIDs"":0,""duplicateIDs"":[]}"
+check,evidenceIntegrity,,PASS,"{""entries"":96,""missingHashes"":[],""absoluteOnly"":[],""candidateMissingEvidence"":[]}"
+check,menuOrderAndBoundaries,,BLOCKED,"{""failures"":[""13 partial menu(s)"",""13 menu(s) require recapture"",""head skipped native numbers 15, 19, 20, 25, 26"",""7 ambiguous head record(s)"",""unknown total counts: Skin Tone, Skin Details, Eye Shape, Eye Color, Nose, Ear Shape""]}"
+check,environmentMetadataResolved,,BLOCKED,"{""unresolved"":[""null""]}"
+check,dependencyEvidenceComplete,,BLOCKED,"{""notRun"":[""dep-test-position-not-executed"",""dep-test-archetype-not-executed"",""dep-test-height-not-executed"",""dep-test-weight-not-executed"",""dep-test-body-type-not-executed"",""dep-test-head-selected-head-change"",""dep-test-skin-tone-selected-value-change"",""dep-test-hairstyle-not-executed"",""dep-test-facial-hair-not-executed"",""dep-test-online-state-not-executed"",""dep-test-ea-account-state-not-executed"",""dep-test-edition-not-executed"",""dep-test-entitlements-not-executed"",""dep-test-base-type-not-executed"",""dep-test-platform-not-executed"",""dep-test-patch-not-executed""]}"
+check,noFixturePlaceholderOrCF26Contamination,,PASS,"{""findings"":[]}"
+check,verifierQueuePresent,,PASS,"{""records"":85,""readyForEvidenceReview"":80,""duplicateOrContinuityReview"":5}"
+blocker,duplicateReviewUnresolved,primary review,BLOCKER,5 candidate(s) still require duplicate or continuity review.
+blocker,openCaptureAssignment,GFM-CAP-011,BLOCKER,GFM-CAP-011: Environment / Console and game version evidence remains EXISTING_RESEARCH_EVIDENCE_INCOMPLETE.
+blocker,openCaptureAssignment,GFM-CAP-012,BLOCKER,GFM-CAP-012: Environment / Patch/update evidence remains EXISTING_RESEARCH_EVIDENCE_INCOMPLETE.
+blocker,openCaptureAssignment,GFM-CAP-013,BLOCKER,GFM-CAP-013: Creation paths / Exact canonical Road to Glory creation path remains EXISTING_RESEARCH_EVIDENCE_INCOMPLETE.
+blocker,openCaptureAssignment,GFM-CAP-001,BLOCKER,GFM-CAP-001: Appearance menu hierarchy / Menu beginning and ending boundaries remains REQUESTED_NOT_CAPTURED.
+blocker,openCaptureAssignment,GFM-CAP-002,BLOCKER,GFM-CAP-002: Head templates / Complete Head Template count and native order remains REQUESTED_NOT_CAPTURED.
+blocker,openCaptureAssignment,GFM-CAP-003,BLOCKER,GFM-CAP-003: Canonical capture conditions / Head and skin dependency baseline remains REQUESTED_NOT_CAPTURED.
+blocker,openCaptureAssignment,GFM-CAP-004,BLOCKER,GFM-CAP-004: Head templates / Standardized head views remains REQUESTED_NOT_CAPTURED.
+blocker,openCaptureAssignment,GFM-CAP-005,BLOCKER,"GFM-CAP-005: Head & Skin controls / Skin tone, skin details, eye shape, and eye color boundaries remains REQUESTED_NOT_CAPTURED."
+blocker,openCaptureAssignment,GFM-CAP-006,BLOCKER,"GFM-CAP-006: Head & Skin geometry controls / Nose, ear, mouth, jaw, chin, and any additional visible geometry controls remains REQUESTED_NOT_CAPTURED."
+blocker,openCaptureAssignment,GFM-CAP-007,BLOCKER,GFM-CAP-007: Hair menu hierarchy / Hair submenu child controls remains REQUESTED_NOT_CAPTURED.
+blocker,openCaptureAssignment,GFM-CAP-008,BLOCKER,GFM-CAP-008: Hairstyles / Hairstyle selector values remains REQUESTED_NOT_CAPTURED.
+blocker,openCaptureAssignment,GFM-CAP-009,BLOCKER,GFM-CAP-009: Hair colors / Hair-color selector values remains REQUESTED_NOT_CAPTURED.
+blocker,openCaptureAssignment,GFM-CAP-010,BLOCKER,GFM-CAP-010: Facial hair / Facial-hair and facial-hair-color selector values remains REQUESTED_NOT_CAPTURED.
+blocker,openCaptureAssignment,GFM-CAP-014,BLOCKER,GFM-CAP-014: Dependencies / Head and skin dependency tests remains EXISTING_RESEARCH_EVIDENCE_INCOMPLETE.
+blocker,openCaptureAssignment,GFM-CAP-015,BLOCKER,"GFM-CAP-015: Body and physique controls / Height, weight, body type, build, physique, and restrictions remains EXISTING_RESEARCH_EVIDENCE_INCOMPLETE."
+blocker,categoryIncomplete,environment,BLOCKER,Environment is not complete enough for v1 verification-candidate freeze: Environment has 21 open blocking issue(s).
+blocker,categoryIncomplete,creation_paths,BLOCKER,"Creation paths is not complete enough for v1 verification-candidate freeze: Creation paths has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements."
+blocker,categoryIncomplete,menu_hierarchy,BLOCKER,"Menu hierarchy is not complete enough for v1 verification-candidate freeze: Menu hierarchy has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements."
+blocker,categoryIncomplete,head_templates,BLOCKER,"Head templates is not complete enough for v1 verification-candidate freeze: Head templates has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements."
+blocker,categoryIncomplete,hairstyles,BLOCKER,Hairstyles is not complete enough for v1 verification-candidate freeze: Hairstyles has no directly cataloged candidate records in current evidence.
+blocker,categoryIncomplete,hair_colors,BLOCKER,Hair colors is not complete enough for v1 verification-candidate freeze: Hair colors has no directly cataloged candidate records in current evidence.
+blocker,categoryIncomplete,facial_hair,BLOCKER,Facial hair is not complete enough for v1 verification-candidate freeze: Facial hair has no directly cataloged candidate records in current evidence.
+blocker,categoryIncomplete,facial_hair_colors,BLOCKER,Facial-hair colors is not complete enough for v1 verification-candidate freeze: Facial-hair colors has no directly cataloged candidate records in current evidence.
+blocker,categoryIncomplete,additional_attributes,BLOCKER,Additional attributes is not complete enough for v1 verification-candidate freeze: additionalAttributes has no explicit completion blocker in the source artifact.
+blocker,categoryIncomplete,body_controls,BLOCKER,"Body/context controls is not complete enough for v1 verification-candidate freeze: Current evidence supports QB and journey-type context only. It does not inspect height, weight, body type, build, physique, muscle definition, or dependency effects."
+blocker,categoryIncomplete,dependency_tests,BLOCKER,Dependency observations is not complete enough for v1 verification-candidate freeze: dependencyTests has no explicit completion blocker in the source artifact.
+blocker,menuOrderBoundaryIncomplete,menu/order,BLOCKER,13 partial menu(s)
+blocker,menuOrderBoundaryIncomplete,menu/order,BLOCKER,13 menu(s) require recapture
+blocker,menuOrderBoundaryIncomplete,menu/order,BLOCKER,"head skipped native numbers 15, 19, 20, 25, 26"
+blocker,menuOrderBoundaryIncomplete,menu/order,BLOCKER,7 ambiguous head record(s)
+blocker,menuOrderBoundaryIncomplete,menu/order,BLOCKER,"unknown total counts: Skin Tone, Skin Details, Eye Shape, Eye Color, Nose, Ear Shape"
+blocker,environmentMetadataUnresolved,environment,BLOCKER,Environment/version/path metadata still contains unresolved tokens: null.
+blocker,dependencyTestsNotExecuted,dependency tests,BLOCKER,16 dependency test(s) are not executed from controlled evidence.
+warning,duplicateReviewInVerifierQueue,verifier queue,WARNING,5 record(s) require duplicate or continuity review before full candidate freeze.

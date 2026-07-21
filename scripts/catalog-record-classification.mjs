@@ -22,6 +22,7 @@ const researchSourceTypes = new Set(["research", "researchDraft", "researchCandi
 const fixtureSourceTypes = new Set(["testFixture", "demoData", "localDeveloperSample"]);
 const publicSourceTypes = new Set(["publicSourceOnly"]);
 const approvedCatalogManagerDispositions = new Set(["approved", "approvedWithNotes"]);
+const catalogMetadataDataClasses = new Set(["PHASE_ZERO_VERIFICATION_CANDIDATE_GATE"]);
 const placeholderPattern = /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK)\b/i;
 const fixturePathPattern = /data\/fixtures\/test-only|\/fixtures\/test-only\/|^fixtures\/test-only\/|\/test-only\//i;
 
@@ -83,6 +84,9 @@ export function classifyRecord(record, context = {}) {
   } else if (publicSourceTypes.has(sourceType)) {
     classification = "PUBLIC_SOURCE_ONLY";
     blockingIssues.push("publicSourceOnlyRecord");
+  } else if (catalogMetadataDataClasses.has(dataClass)) {
+    classification = "UNKNOWN_ORIGIN";
+    reasons.push("catalogMetadataNotCandidateRecord");
   } else if (sourceType === "production" && verificationStatus === "verified" && !value.isTestFixture) {
     classification = "PRODUCTION_VERIFIED";
     if (!hasCatalogManagerDisposition) blockingIssues.push("missingCatalogManagerDisposition");

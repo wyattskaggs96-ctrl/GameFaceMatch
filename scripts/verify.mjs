@@ -48,6 +48,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Phase 0 verification candidate v1 gate check",
+    command: "node",
+    args: ["scripts/cf27-verification-candidate-v1.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Phase 0 primary review status check",
     command: "node",
     args: ["scripts/cf27-primary-review-status.mjs", "--check"],

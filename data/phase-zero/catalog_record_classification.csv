@@ -2557,6 +2557,7 @@ CF27_XBOXUNKNOWN_RTG_EARSHAPE_003,data/phase-zero/verification_assignment.json,$
 CF27_XBOXUNKNOWN_RTG_EARSHAPE_004,data/phase-zero/verification_assignment.json,$.nativeOrderComparisonSheet[79],catalog_record,UNKNOWN_ORIGIN,,,,,false,false,false,,
 CF27_XBOXUNKNOWN_RTG_HEAD_009,data/phase-zero/verification_assignment.json,$.nativeOrderComparisonSheet[8],catalog_record,UNKNOWN_ORIGIN,,,,,false,false,false,,
 CF27_XBOXUNKNOWN_RTG_HEAD_010,data/phase-zero/verification_assignment.json,$.nativeOrderComparisonSheet[9],catalog_record,UNKNOWN_ORIGIN,,,,,false,false,false,,
+$,data/phase-zero/verification-candidates/CF27_XBOX_RTG_RESEARCH_CANDIDATE_v1.0.0/candidate_validation_report.json,$,catalog_related_record,UNKNOWN_ORIGIN,shippingGameVideoResearch,PHASE_ZERO_VERIFICATION_CANDIDATE_GATE,NOT_PRODUCTION_DATA,,false,false,false,catalogMetadataNotCandidateRecord;sourceType:shippingGameVideoResearch;dataClass:PHASE_ZERO_VERIFICATION_CANDIDATE_GATE;productionStatus:NOT_PRODUCTION_DATA,
 $.records[0],data/phase-zero/verifier_candidate_queue.json,$.records[0],catalog_related_record,UNKNOWN_ORIGIN,,,,,true,false,false,,
 $.records[1],data/phase-zero/verifier_candidate_queue.json,$.records[1],catalog_related_record,UNKNOWN_ORIGIN,,,,,true,false,false,,
 $.records[10],data/phase-zero/verifier_candidate_queue.json,$.records[10],catalog_related_record,UNKNOWN_ORIGIN,,,,,true,false,false,,

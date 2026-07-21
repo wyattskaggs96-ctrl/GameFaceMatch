@@ -1,0 +1,998 @@
+{
+  "schemaVersion": "cf27-verification-candidate-v1-gate-v1",
+  "candidateID": "CF27_XBOX_RTG_RESEARCH_CANDIDATE_v1.0.0",
+  "generatedAt": "2026-07-21T04:00:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_VERIFICATION_CANDIDATE_GATE",
+  "sourceType": "shippingGameVideoResearch",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "productionRecommendationsEnabled": false,
+  "completenessDecision": "BLOCKED_NOT_READY_TO_FREEZE",
+  "releasePackageCreated": false,
+  "releasePackageLocation": null,
+  "blockedPackageLocation": "data/phase-zero/verification-candidates/CF27_XBOX_RTG_RESEARCH_CANDIDATE_v1.0.0",
+  "summary": {
+    "candidateRecords": 85,
+    "evidenceEntries": 96,
+    "sourceVideos": 11,
+    "primaryApproved": 0,
+    "primaryApprovedWithNotes": 80,
+    "duplicateReviewRequired": 5,
+    "secondVerifiedRecords": 0,
+    "productionApprovedRecords": 0,
+    "productionCatalogRecords": 0,
+    "openCaptureAssignments": 15,
+    "blockerCount": 34,
+    "warningCount": 1
+  },
+  "categorySummaries": [
+    {
+      "categoryID": "environment",
+      "category": "Environment",
+      "required": true,
+      "recordCount": 1,
+      "observedCandidateRecords": 1,
+      "primaryReviewedRecords": 0,
+      "productionApprovedRecords": 0,
+      "verifierReady": false,
+      "beginningProof": false,
+      "endingProof": false,
+      "productionReady": false,
+      "nativeOrderValues": [],
+      "duplicateNativeOrders": [],
+      "missingEvidenceRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb"
+      ],
+      "explicitReviewStatusRecords": 1,
+      "blocker": "Environment has 21 open blocking issue(s).",
+      "status": "INCOMPLETE_EVIDENCE"
+    },
+    {
+      "categoryID": "creation_paths",
+      "category": "Creation paths",
+      "required": true,
+      "recordCount": 1,
+      "observedCandidateRecords": 1,
+      "primaryReviewedRecords": 1,
+      "productionApprovedRecords": 0,
+      "verifierReady": true,
+      "beginningProof": true,
+      "endingProof": true,
+      "productionReady": false,
+      "nativeOrderValues": [],
+      "duplicateNativeOrders": [],
+      "missingEvidenceRecordIDs": [
+        "env-cf27-phase0-video-001-rtg-custom-qb"
+      ],
+      "explicitReviewStatusRecords": 1,
+      "blocker": "Creation paths has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
+      "status": "INCOMPLETE_EVIDENCE"
+    },
+    {
+      "categoryID": "menu_hierarchy",
+      "category": "Menu hierarchy",
+      "required": true,
+      "recordCount": 93,
+      "observedCandidateRecords": 93,
+      "primaryReviewedRecords": 0,
+      "productionApprovedRecords": 0,
+      "verifierReady": true,
+      "beginningProof": false,
+      "endingProof": false,
+      "productionReady": false,
+      "nativeOrderValues": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        1,
+        2,
+        2,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        1,
+        2,
+        3,
+        4,
+        5,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        18,
+        21,
+        22,
+        23,
+        24,
+        27,
+        28,
+        29,
+        30,
+        31,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        29
+      ],
+      "duplicateNativeOrders": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        17,
+        18,
+        21,
+        22,
+        23,
+        24,
+        29
+      ],
+      "missingEvidenceRecordIDs": [],
+      "explicitReviewStatusRecords": 93,
+      "blocker": "Menu hierarchy has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
+      "status": "INCOMPLETE_EVIDENCE"
+    },
+    {
+      "categoryID": "head_templates",
+      "category": "Head templates",
+      "required": true,
+      "recordCount": 26,
+      "observedCandidateRecords": 26,
+      "primaryReviewedRecords": 0,
+      "productionApprovedRecords": 0,
+      "verifierReady": false,
+      "beginningProof": false,
+      "endingProof": false,
+      "productionReady": false,
+      "nativeOrderValues": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        18,
+        21,
+        22,
+        23,
+        24,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "duplicateNativeOrders": [],
+      "missingEvidenceRecordIDs": [],
+      "explicitReviewStatusRecords": 26,
+      "blocker": "Head templates has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
+      "status": "INCOMPLETE_EVIDENCE"
+    },
+    {
+      "categoryID": "hairstyles",
+      "category": "Hairstyles",
+      "required": true,
+      "recordCount": 0,
+      "observedCandidateRecords": 0,
+      "primaryReviewedRecords": 0,
+      "productionApprovedRecords": 0,
+      "verifierReady": false,
+      "beginningProof": false,
+      "endingProof": false,
+      "productionReady": false,
+      "nativeOrderValues": [],
+      "duplicateNativeOrders": [],
+      "missingEvidenceRecordIDs": [],
+      "explicitReviewStatusRecords": 0,
+      "blocker": "Hairstyles has no directly cataloged candidate records in current evidence.",
+      "status": "INCOMPLETE_EVIDENCE"
+    },
+    {
+      "categoryID": "hair_colors",
+      "category": "Hair colors",
+      "required": true,
+      "recordCount": 0,
+      "observedCandidateRecords": 0,
+      "primaryReviewedRecords": 0,
+      "productionApprovedRecords": 0,
+      "verifierReady": false,
+      "beginningProof": false,
+      "endingProof": false,
+      "productionReady": false,
+      "nativeOrderValues": [],
+      "duplicateNativeOrders": [],
+      "missingEvidenceRecordIDs": [],
+      "explicitReviewStatusRecords": 0,
+      "blocker": "Hair colors has no directly cataloged candidate records in current evidence.",
+      "status": "INCOMPLETE_EVIDENCE"
+    },
+    {
+      "categoryID": "facial_hair",
+      "category": "Facial hair",
+      "required": true,
+      "recordCount": 0,
+      "observedCandidateRecords": 0,
+      "primaryReviewedRecords": 0,
+      "productionApprovedRecords": 0,
+      "verifierReady": false,
+      "beginningProof": false,
+      "endingProof": false,
+      "productionReady": false,
+      "nativeOrderValues": [],
+      "duplicateNativeOrders": [],
+      "missingEvidenceRecordIDs": [],
+      "explicitReviewStatusRecords": 0,
+      "blocker": "Facial hair has no directly cataloged candidate records in current evidence.",
+      "status": "INCOMPLETE_EVIDENCE"
+    },
+    {
+      "categoryID": "facial_hair_colors",
+      "category": "Facial-hair colors",
+      "required": true,
+      "recordCount": 0,
+      "observedCandidateRecords": 0,
+      "primaryReviewedRecords": 0,
+      "productionApprovedRecords": 0,
+      "verifierReady": false,
+      "beginningProof": false,
+      "endingProof": false,
+      "productionReady": false,
+      "nativeOrderValues": [],
+      "duplicateNativeOrders": [],
+      "missingEvidenceRecordIDs": [],
+      "explicitReviewStatusRecords": 0,
+      "blocker": "Facial-hair colors has no directly cataloged candidate records in current evidence.",
+      "status": "INCOMPLETE_EVIDENCE"
+    },
+    {
+      "categoryID": "additional_attributes",
+      "category": "Additional attributes",
+      "required": true,
+      "recordCount": 54,
+      "observedCandidateRecords": 54,
+      "primaryReviewedRecords": 0,
+      "productionApprovedRecords": 0,
+      "verifierReady": false,
+      "beginningProof": false,
+      "endingProof": false,
+      "productionReady": false,
+      "nativeOrderValues": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        29,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        1,
+        2,
+        3,
+        4,
+        5,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        1,
+        2,
+        3,
+        4
+      ],
+      "duplicateNativeOrders": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "missingEvidenceRecordIDs": [],
+      "explicitReviewStatusRecords": 54,
+      "blocker": "additionalAttributes has no explicit completion blocker in the source artifact.",
+      "status": "OBSERVED_PENDING_REVIEW"
+    },
+    {
+      "categoryID": "body_controls",
+      "category": "Body/context controls",
+      "required": true,
+      "recordCount": 5,
+      "observedCandidateRecords": 5,
+      "primaryReviewedRecords": 0,
+      "productionApprovedRecords": 0,
+      "verifierReady": false,
+      "beginningProof": false,
+      "endingProof": false,
+      "productionReady": false,
+      "nativeOrderValues": [],
+      "duplicateNativeOrders": [],
+      "missingEvidenceRecordIDs": [],
+      "explicitReviewStatusRecords": 5,
+      "blocker": "Current evidence supports QB and journey-type context only. It does not inspect height, weight, body type, build, physique, muscle definition, or dependency effects.",
+      "status": "OBSERVED_PENDING_REVIEW"
+    },
+    {
+      "categoryID": "dependency_tests",
+      "category": "Dependency observations",
+      "required": true,
+      "recordCount": 16,
+      "observedCandidateRecords": 16,
+      "primaryReviewedRecords": 0,
+      "productionApprovedRecords": 0,
+      "verifierReady": false,
+      "beginningProof": false,
+      "endingProof": false,
+      "productionReady": false,
+      "nativeOrderValues": [],
+      "duplicateNativeOrders": [],
+      "missingEvidenceRecordIDs": [],
+      "explicitReviewStatusRecords": 16,
+      "blocker": "dependencyTests has no explicit completion blocker in the source artifact.",
+      "status": "OBSERVED_PENDING_REVIEW"
+    }
+  ],
+  "checks": [
+    {
+      "name": "artifactPresence",
+      "status": "PASS",
+      "details": {
+        "missing": []
+      }
+    },
+    {
+      "name": "productionCatalogRemainsEmpty",
+      "status": "PASS",
+      "details": {
+        "productionRecords": 0,
+        "productionRecommendationsEnabled": false
+      }
+    },
+    {
+      "name": "primaryReviewExplicitForEveryCandidate",
+      "status": "BLOCKED",
+      "details": {
+        "total": 85,
+        "reviewed": 85,
+        "duplicateReviewRequired": 5
+      }
+    },
+    {
+      "name": "captureAssignmentsComplete",
+      "status": "BLOCKED",
+      "details": {
+        "openCaptureAssignments": [
+          "GFM-CAP-011",
+          "GFM-CAP-012",
+          "GFM-CAP-013",
+          "GFM-CAP-001",
+          "GFM-CAP-002",
+          "GFM-CAP-003",
+          "GFM-CAP-004",
+          "GFM-CAP-005",
+          "GFM-CAP-006",
+          "GFM-CAP-007",
+          "GFM-CAP-008",
+          "GFM-CAP-009",
+          "GFM-CAP-010",
+          "GFM-CAP-014",
+          "GFM-CAP-015"
+        ]
+      }
+    },
+    {
+      "name": "categoryCompleteness",
+      "status": "BLOCKED",
+      "details": {
+        "incomplete": [
+          "environment",
+          "creation_paths",
+          "menu_hierarchy",
+          "head_templates",
+          "hairstyles",
+          "hair_colors",
+          "facial_hair",
+          "facial_hair_colors",
+          "additional_attributes",
+          "body_controls",
+          "dependency_tests"
+        ]
+      }
+    },
+    {
+      "name": "stableIDUniqueness",
+      "status": "PASS",
+      "details": {
+        "records": 85,
+        "missingIDs": 0,
+        "duplicateIDs": []
+      }
+    },
+    {
+      "name": "evidenceIntegrity",
+      "status": "PASS",
+      "details": {
+        "entries": 96,
+        "missingHashes": [],
+        "absoluteOnly": [],
+        "candidateMissingEvidence": []
+      }
+    },
+    {
+      "name": "menuOrderAndBoundaries",
+      "status": "BLOCKED",
+      "details": {
+        "failures": [
+          "13 partial menu(s)",
+          "13 menu(s) require recapture",
+          "head skipped native numbers 15, 19, 20, 25, 26",
+          "7 ambiguous head record(s)",
+          "unknown total counts: Skin Tone, Skin Details, Eye Shape, Eye Color, Nose, Ear Shape"
+        ]
+      }
+    },
+    {
+      "name": "environmentMetadataResolved",
+      "status": "BLOCKED",
+      "details": {
+        "unresolved": [
+          "null"
+        ]
+      }
+    },
+    {
+      "name": "dependencyEvidenceComplete",
+      "status": "BLOCKED",
+      "details": {
+        "notRun": [
+          "dep-test-position-not-executed",
+          "dep-test-archetype-not-executed",
+          "dep-test-height-not-executed",
+          "dep-test-weight-not-executed",
+          "dep-test-body-type-not-executed",
+          "dep-test-head-selected-head-change",
+          "dep-test-skin-tone-selected-value-change",
+          "dep-test-hairstyle-not-executed",
+          "dep-test-facial-hair-not-executed",
+          "dep-test-online-state-not-executed",
+          "dep-test-ea-account-state-not-executed",
+          "dep-test-edition-not-executed",
+          "dep-test-entitlements-not-executed",
+          "dep-test-base-type-not-executed",
+          "dep-test-platform-not-executed",
+          "dep-test-patch-not-executed"
+        ]
+      }
+    },
+    {
+      "name": "noFixturePlaceholderOrCF26Contamination",
+      "status": "PASS",
+      "details": {
+        "findings": []
+      }
+    },
+    {
+      "name": "verifierQueuePresent",
+      "status": "PASS",
+      "details": {
+        "records": 85,
+        "readyForEvidenceReview": 80,
+        "duplicateOrContinuityReview": 5
+      }
+    }
+  ],
+  "blockers": [
+    {
+      "code": "duplicateReviewUnresolved",
+      "target": "primary review",
+      "message": "5 candidate(s) still require duplicate or continuity review.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-011",
+      "message": "GFM-CAP-011: Environment / Console and game version evidence remains EXISTING_RESEARCH_EVIDENCE_INCOMPLETE.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-012",
+      "message": "GFM-CAP-012: Environment / Patch/update evidence remains EXISTING_RESEARCH_EVIDENCE_INCOMPLETE.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-013",
+      "message": "GFM-CAP-013: Creation paths / Exact canonical Road to Glory creation path remains EXISTING_RESEARCH_EVIDENCE_INCOMPLETE.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-001",
+      "message": "GFM-CAP-001: Appearance menu hierarchy / Menu beginning and ending boundaries remains REQUESTED_NOT_CAPTURED.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-002",
+      "message": "GFM-CAP-002: Head templates / Complete Head Template count and native order remains REQUESTED_NOT_CAPTURED.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-003",
+      "message": "GFM-CAP-003: Canonical capture conditions / Head and skin dependency baseline remains REQUESTED_NOT_CAPTURED.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-004",
+      "message": "GFM-CAP-004: Head templates / Standardized head views remains REQUESTED_NOT_CAPTURED.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-005",
+      "message": "GFM-CAP-005: Head & Skin controls / Skin tone, skin details, eye shape, and eye color boundaries remains REQUESTED_NOT_CAPTURED.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-006",
+      "message": "GFM-CAP-006: Head & Skin geometry controls / Nose, ear, mouth, jaw, chin, and any additional visible geometry controls remains REQUESTED_NOT_CAPTURED.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-007",
+      "message": "GFM-CAP-007: Hair menu hierarchy / Hair submenu child controls remains REQUESTED_NOT_CAPTURED.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-008",
+      "message": "GFM-CAP-008: Hairstyles / Hairstyle selector values remains REQUESTED_NOT_CAPTURED.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-009",
+      "message": "GFM-CAP-009: Hair colors / Hair-color selector values remains REQUESTED_NOT_CAPTURED.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-010",
+      "message": "GFM-CAP-010: Facial hair / Facial-hair and facial-hair-color selector values remains REQUESTED_NOT_CAPTURED.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-014",
+      "message": "GFM-CAP-014: Dependencies / Head and skin dependency tests remains EXISTING_RESEARCH_EVIDENCE_INCOMPLETE.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "openCaptureAssignment",
+      "target": "GFM-CAP-015",
+      "message": "GFM-CAP-015: Body and physique controls / Height, weight, body type, build, physique, and restrictions remains EXISTING_RESEARCH_EVIDENCE_INCOMPLETE.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "environment",
+      "message": "Environment is not complete enough for v1 verification-candidate freeze: Environment has 21 open blocking issue(s).",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "creation_paths",
+      "message": "Creation paths is not complete enough for v1 verification-candidate freeze: Creation paths has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "menu_hierarchy",
+      "message": "Menu hierarchy is not complete enough for v1 verification-candidate freeze: Menu hierarchy has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "head_templates",
+      "message": "Head templates is not complete enough for v1 verification-candidate freeze: Head templates has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "hairstyles",
+      "message": "Hairstyles is not complete enough for v1 verification-candidate freeze: Hairstyles has no directly cataloged candidate records in current evidence.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "hair_colors",
+      "message": "Hair colors is not complete enough for v1 verification-candidate freeze: Hair colors has no directly cataloged candidate records in current evidence.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "facial_hair",
+      "message": "Facial hair is not complete enough for v1 verification-candidate freeze: Facial hair has no directly cataloged candidate records in current evidence.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "facial_hair_colors",
+      "message": "Facial-hair colors is not complete enough for v1 verification-candidate freeze: Facial-hair colors has no directly cataloged candidate records in current evidence.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "additional_attributes",
+      "message": "Additional attributes is not complete enough for v1 verification-candidate freeze: additionalAttributes has no explicit completion blocker in the source artifact.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "body_controls",
+      "message": "Body/context controls is not complete enough for v1 verification-candidate freeze: Current evidence supports QB and journey-type context only. It does not inspect height, weight, body type, build, physique, muscle definition, or dependency effects.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "categoryIncomplete",
+      "target": "dependency_tests",
+      "message": "Dependency observations is not complete enough for v1 verification-candidate freeze: dependencyTests has no explicit completion blocker in the source artifact.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "menuOrderBoundaryIncomplete",
+      "target": "menu/order",
+      "message": "13 partial menu(s)",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "menuOrderBoundaryIncomplete",
+      "target": "menu/order",
+      "message": "13 menu(s) require recapture",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "menuOrderBoundaryIncomplete",
+      "target": "menu/order",
+      "message": "head skipped native numbers 15, 19, 20, 25, 26",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "menuOrderBoundaryIncomplete",
+      "target": "menu/order",
+      "message": "7 ambiguous head record(s)",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "menuOrderBoundaryIncomplete",
+      "target": "menu/order",
+      "message": "unknown total counts: Skin Tone, Skin Details, Eye Shape, Eye Color, Nose, Ear Shape",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "environmentMetadataUnresolved",
+      "target": "environment",
+      "message": "Environment/version/path metadata still contains unresolved tokens: null.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "dependencyTestsNotExecuted",
+      "target": "dependency tests",
+      "message": "16 dependency test(s) are not executed from controlled evidence.",
+      "severity": "BLOCKER"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "duplicateReviewInVerifierQueue",
+      "target": "verifier queue",
+      "message": "5 record(s) require duplicate or continuity review before full candidate freeze.",
+      "severity": "WARNING"
+    }
+  ],
+  "recaptureRequests": [
+    {
+      "captureID": "GFM-CAP-011",
+      "priority": "P0",
+      "category": "Environment",
+      "objective": "Record direct evidence for Xbox console identity, game title/version screens, and account-safe environment context.",
+      "exactStartScreen": "Xbox dashboard or College Football 27 title screen before entering Road to Glory.",
+      "exactActionSequence": "Start from the Xbox dashboard or title screen. | Open visible game title/version information if the game provides it. | Open console information screens only if they do not expose private account, serial, payment, or credential data. | Return to College Football 27 without changing game settings.",
+      "filenamePattern": "GFM-CAP-011_ENVIRONMENT_CONSOLE_GAME_VERSION_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Game title is visible. | Platform family is visible or directly supported by the recording context. | No private account, payment, serial-number, or credential details are exposed. | Unknown version fields remain unresolved if not visible.",
+      "recaptureTriggers": "Version/build text unreadable. | Private account or credential information is exposed. | Only a filename, not visible screen evidence, supports the environment claim.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-012",
+      "priority": "P0",
+      "category": "Environment",
+      "objective": "Record direct evidence of installed game update or patch state without guessing a version.",
+      "exactStartScreen": "Xbox game tile, game management screen, or in-game version/update screen if visible.",
+      "exactActionSequence": "Open the least private screen that shows update status, installed version, or latest-update state. | Pause long enough for patch/update fields to be readable. | If no version or patch is visible, record the screen proving that it is unavailable in that path.",
+      "filenamePattern": "GFM-CAP-012_PATCH_UPDATE_STATE_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Visible patch/update/version evidence is readable when available. | No patch value is inferred from date, filename, or memory. | If unavailable, the unavailable state is captured directly.",
+      "recaptureTriggers": "Patch/update text unreadable. | Evidence shows a different game or path. | Patch state is inferred rather than visible.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-013",
+      "priority": "P0",
+      "category": "Creation paths",
+      "objective": "Re-record the canonical Road to Glory Custom creation path with direct timestamps and no missing transition steps.",
+      "exactStartScreen": "College Football 27 main interface before Road to Glory.",
+      "exactActionSequence": "Navigate Road to Glory > setup > journey type selection. | Select the visible Custom/Create Player path only if shown. | Proceed through position, QB selection, Create Player, Player, Appearance, Head & Skin, and Hair menu visibility. | Pause on each meaningful transition.",
+      "filenamePattern": "GFM-CAP-013_RTG_CREATION_PATH_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Every meaningful menu transition is visible. | Mode, creation path, player base, position, and Appearance entry are directly supported. | Unknown version, entitlement, and later-editability fields remain unresolved unless visible.",
+      "recaptureTriggers": "A transition is skipped. | A selected path is hidden by blur or overlay. | The clip begins after the canonical path decision point.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-001",
+      "priority": "P0",
+      "category": "Appearance menu hierarchy",
+      "objective": "Prove first and final visible Appearance, Head & Skin, and Hair menu boundaries without claiming absent categories.",
+      "exactStartScreen": "Create Player > Player > Appearance.",
+      "exactActionSequence": "Pause on Appearance. | Open Head & Skin and slowly traverse every visible row. | Show any scroll continuation and final boundary. | Return to Appearance and show the Hair row and any additional visible rows.",
+      "filenamePattern": "GFM-CAP-001_APPEARANCE_HEADSKIN_BOUNDARY_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Menu titles and row labels are readable. | First and final visible menu rows are proven. | Rows beyond visible Chin or beyond visible Hair remain unknown unless boundary evidence proves otherwise.",
+      "recaptureTriggers": "Menu labels unreadable. | Scroll boundary not shown. | Any row is skipped or hidden by transition blur.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-002",
+      "priority": "P0",
+      "category": "Head templates",
+      "objective": "Record two complete Head Template count/order passes with native Face number visible on each selected value.",
+      "exactStartScreen": "Create Player > Player > Appearance > Head & Skin > Head Template.",
+      "exactActionSequence": "Start at the first available Head Template value. | Move one selected value at a time while the native number remains visible. | Pause on every value. | Continue to the final value and show wrap/no-wrap proof. | Repeat the count a second time or visibly document any discrepancy.",
+      "filenamePattern": "GFM-CAP-002_HEAD_TEMPLATE_COUNT_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Two count passes agree or a discrepancy is clearly captured. | Native order is preserved without skipped selected values. | Face 12 overlap remains continuity evidence only. | Face 29 is not treated as final unless boundary proof shows that.",
+      "recaptureTriggers": "Native number hidden. | Selected value skipped. | Ending boundary not shown. | Transition frame used as selected evidence.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-003",
+      "priority": "P0",
+      "category": "Canonical capture conditions",
+      "objective": "Record the stable appearance slate used for later production-quality comparison captures.",
+      "exactStartScreen": "Create Player > Player > Appearance > Head & Skin.",
+      "exactActionSequence": "Record the current native value for every visible Head & Skin control. | Record whether eye black, obstructive hair, facial hair, hats/headwear, or other blockers can be removed. | Do not invent unavailable settings.",
+      "filenamePattern": "GFM-CAP-003_CANONICAL_APPEARANCE_LOCK_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Only visible native settings or explicit unavailable states are recorded. | Obstruction-removal attempts are directly supported. | The slate can be repeated by a verifier.",
+      "recaptureTriggers": "A canonical setting is inferred. | Slate changes without documentation. | Obstruction-removal controls are ambiguous.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-004",
+      "priority": "P0",
+      "category": "Head templates",
+      "objective": "Capture production-comparison candidate views for every head template after count/order evidence is complete.",
+      "exactStartScreen": "Create Player > Player > Appearance > Head & Skin > Head Template.",
+      "exactActionSequence": "Use the canonical slate from GFM-CAP-003. | For each selected head, wait for the preview to load completely. | Capture menu proof plus front, left three-quarter, left profile, right three-quarter, right profile, and rear if available. | Preserve native order.",
+      "filenamePattern": "GFM-CAP-004_HEAD_TEMPLATE_STANDARDIZED_VIEWS_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Every captured head uses the same slate. | Required views are not transition frames. | Obstructions and missing views are logged instead of hidden.",
+      "recaptureTriggers": "Preview not fully loaded. | Framing/zoom changes materially. | Eye black or hair/facial-hair obstruction remains unexplained. | Required view missing.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-005",
+      "priority": "P0",
+      "category": "Head & Skin controls",
+      "objective": "Record direct first-to-final selector evidence for Skin Tone, Skin Details, Eye Shape, and Eye Color.",
+      "exactStartScreen": "Create Player > Player > Appearance > Head & Skin.",
+      "exactActionSequence": "Open Skin Tone, Skin Details, Eye Shape, and Eye Color one at a time. | For each control, show first value, every selected value, final value, default when visible, and wrap/no-wrap proof. | Pause on each value until labels and preview are readable.",
+      "filenamePattern": "GFM-CAP-005_HEADSKIN_COLOR_TEXTURE_EYES_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Skin Tone boundaries are directly shown. | Skin Details boundaries are directly shown. | Eye Shape boundaries are directly shown. | Eye Color boundaries are directly shown. | No tone, detail, eye shape, or eye color is inferred from neighboring thumbnails.",
+      "recaptureTriggers": "Label/index unreadable. | First or final boundary missing. | Default not visible and not documented as unavailable. | Character preview not loaded.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-006",
+      "priority": "P0",
+      "category": "Head & Skin geometry controls",
+      "objective": "Record direct selector evidence for Nose, Ear Shape, Mouth Shape, Jaw Shape, Chin, and any additional Head & Skin controls directly visible.",
+      "exactStartScreen": "Create Player > Player > Appearance > Head & Skin.",
+      "exactActionSequence": "Open Nose, Ear Shape, Mouth Shape, Jaw Shape, and Chin one at a time when visible. | For each control, show first value, every selected value, final value, default when visible, and wrap/no-wrap proof. | If an expected control is absent, show the menu boundary rather than inventing it.",
+      "filenamePattern": "GFM-CAP-006_HEADSKIN_GEOMETRY_CONTROLS_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Nose boundaries are directly shown. | Ear Shape boundaries are directly shown. | Mouth, Jaw, and Chin controls are opened only if directly visible. | Absent controls are not claimed absent unless menu boundary proof supports it.",
+      "recaptureTriggers": "Selector boundary missing. | Native label/index hidden. | Control inferred from requirements rather than visible game menu.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-007",
+      "priority": "P1",
+      "category": "Hair menu hierarchy",
+      "objective": "Open Hair and map every visible child control without assuming hairstyles, colors, or facial hair exist.",
+      "exactStartScreen": "Create Player > Player > Appearance > Hair.",
+      "exactActionSequence": "Open Hair from Appearance. | Pause on every visible child row. | Show first and final child-control boundary plus any scroll continuation. | Do not enter child controls until hierarchy is readable.",
+      "filenamePattern": "GFM-CAP-007_HAIR_SUBMENU_BOUNDARY_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Hair child controls are directly observed. | Unknown child controls remain unknown if no boundary proof exists. | No hairstyle, hair-color, facial-hair, or facial-hair-color value is created from this hierarchy-only capture.",
+      "recaptureTriggers": "Hair submenu not opened. | Child rows unreadable. | Scroll boundary hidden.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-008",
+      "priority": "P1",
+      "category": "Hairstyles",
+      "objective": "Catalog hairstyle values only if a native hairstyle control is directly visible in Hair.",
+      "exactStartScreen": "Create Player > Player > Appearance > Hair.",
+      "exactActionSequence": "Open the native hairstyle control only if it is directly visible. | Show first value, every selected value, final value, and wrap/no-wrap proof. | Capture front, three-quarter, profile, and rear views where available.",
+      "filenamePattern": "GFM-CAP-008_HAIRSTYLES_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "The hairstyle control is direct evidence, not assumed. | Native order is preserved. | Researcher visual metadata stays separate from native labels.",
+      "recaptureTriggers": "Hairstyle control label absent. | Rear/side evidence missing where required. | Selected value skipped.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-009",
+      "priority": "P1",
+      "category": "Hair colors",
+      "objective": "Catalog hair colors only if a native hair-color control is directly visible in Hair.",
+      "exactStartScreen": "Create Player > Player > Appearance > Hair.",
+      "exactActionSequence": "Open the native hair-color control only if directly visible. | Show default, first value, every selected value, final value, and wrap/no-wrap proof. | Record whether eyebrow or facial-hair colors change automatically only if visible.",
+      "filenamePattern": "GFM-CAP-009_HAIR_COLORS_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Native labels or indices are preserved. | No generic color name replaces an unreadable native value. | Automatic dependency claims are supported by visible evidence.",
+      "recaptureTriggers": "Color label/index unreadable. | Default or boundary not shown. | Dependency inferred.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-010",
+      "priority": "P1",
+      "category": "Facial hair",
+      "objective": "Catalog facial hair and facial-hair colors only if native controls are directly visible in Hair.",
+      "exactStartScreen": "Create Player > Player > Appearance > Hair.",
+      "exactActionSequence": "Open native facial-hair control if directly visible and record None if present. | Show every selected facial-hair value in native order with menu evidence and required face views. | Open facial-hair color only if directly visible and record boundaries/default/wrap evidence.",
+      "filenamePattern": "GFM-CAP-010_FACIAL_HAIR_AND_COLORS_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "None is recorded only if directly present. | Coverage metadata is researcher-applied and separate from native labels. | Facial-hair color dependencies are directly shown or left unresolved.",
+      "recaptureTriggers": "Control not visible. | None option unclear. | Side/profile evidence missing. | Color relationship inferred.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-014",
+      "priority": "P1",
+      "category": "Dependencies",
+      "objective": "Run controlled dependency checks for head/skin controls against platform, mode, creation path, head, skin presentation, account state, and entitlement state only where visible.",
+      "exactStartScreen": "Create Player > Player > Appearance > Head & Skin after baseline controls are documented.",
+      "exactActionSequence": "Record the baseline count/order for one control. | Change one variable at a time only when the game directly exposes that variable. | Return to the same control and record whether count, order, labels, or availability changed.",
+      "filenamePattern": "GFM-CAP-014_HEADSKIN_DEPENDENCY_TESTS_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Only one variable changes per test. | Observed effect is recorded with direct evidence. | Unexecuted tests remain not tested.",
+      "recaptureTriggers": "More than one variable changed. | Baseline not visible. | Result inferred.",
+      "owner": "wyatt-skaggs"
+    },
+    {
+      "captureID": "GFM-CAP-015",
+      "priority": "P1",
+      "category": "Body and physique controls",
+      "objective": "Record body-related controls and determine whether they affect appearance availability or recommendation instructions.",
+      "exactStartScreen": "Create Player setup path or Player tab where height, weight, body type, build, or physique controls are visible.",
+      "exactActionSequence": "Open each directly visible body-related control. | Record native labels, ranges, defaults, restrictions, and dependencies. | Return to Appearance only if needed to test whether availability changed.",
+      "filenamePattern": "GFM-CAP-015_BODY_PHYSIQUE_CONTROLS_YYYYMMDD_partNN.mp4",
+      "acceptanceCriteria": "Height, weight, body type, build, and physique are cataloged only when directly visible. | Desired athlete physique remains separate from facial measurement. | Availability effects are tested, not assumed.",
+      "recaptureTriggers": "Range boundaries hidden. | Control inferred from product requirements. | Appearance dependency not directly tested.",
+      "owner": "wyatt-skaggs"
+    }
+  ],
+  "candidateFiles": []
+}

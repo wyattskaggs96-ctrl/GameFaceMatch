@@ -8,7 +8,8 @@ import {
   type Phase0EvidenceCaptureAssignment,
   type Phase0EvidenceCoverageControlCenter,
   type Phase0CompletionCategoryProgress,
-  type Phase0CompletionDashboardReport
+  type Phase0CompletionDashboardReport,
+  type Phase0SecondVerifierDashboard
 } from "@/lib/phase-zero/phase-zero-completion-dashboard";
 import { createEmptyIssueRegister } from "@/lib/phase-zero/phase-zero-issue-management";
 import { createPhase0StatusReport, type Phase0AreaStatus, type Phase0StatusReport } from "@/lib/phase-zero/phase-zero-status";
@@ -246,6 +247,9 @@ function Phase0CompletionDashboard({ dashboard, loadError }: { dashboard: Phase0
       {dashboard.evidenceCoverageControlCenter ? (
         <Phase0EvidenceCoverageControlCenterPanel controlCenter={dashboard.evidenceCoverageControlCenter} />
       ) : null}
+      {dashboard.secondVerifierDashboard ? (
+        <Phase0SecondVerifierDashboardPanel dashboard={dashboard.secondVerifierDashboard} />
+      ) : null}
       <Card>
         <div className="status-row">
           <h2>Category completion</h2>
@@ -278,6 +282,103 @@ function Phase0CompletionDashboard({ dashboard, loadError }: { dashboard: Phase0
             <tbody>
               {dashboard.categoryProgress.map((category) => (
                 <Phase0CompletionRow key={category.id} category={category} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </section>
+  );
+}
+
+function Phase0SecondVerifierDashboardPanel({ dashboard }: { dashboard: Phase0SecondVerifierDashboard }) {
+  return (
+    <section className="screen-stack" aria-labelledby="phase-zero-second-verifier-dashboard-title">
+      <div className="card-grid">
+        <Card tone={dashboard.productionEligible > 0 || dashboard.primaryReviewAloneCanPublish ? "danger" : "info"}>
+          <div className="status-row">
+            <h2 id="phase-zero-second-verifier-dashboard-title">Second-verifier execution dashboard</h2>
+            <StatusBadge tone={dashboard.completed > 0 ? "warning" : "info"}>{dashboard.status}</StatusBadge>
+          </div>
+          <dl className="metadata-list">
+            <div>
+              <dt>Assigned</dt>
+              <dd>{dashboard.assigned}</dd>
+            </div>
+            <div>
+              <dt>Completed</dt>
+              <dd>{dashboard.completed}</dd>
+            </div>
+            <div>
+              <dt>Disagreement</dt>
+              <dd>{dashboard.disagreement}</dd>
+            </div>
+            <div>
+              <dt>Recapture required</dt>
+              <dd>{dashboard.recaptureRequired}</dd>
+            </div>
+            <div>
+              <dt>Blocked</dt>
+              <dd>{dashboard.blocked}</dd>
+            </div>
+            <div>
+              <dt>Production eligible</dt>
+              <dd>{dashboard.productionEligible}</dd>
+            </div>
+          </dl>
+          <p className="field-note">Primary review alone can publish: {dashboard.primaryReviewAloneCanPublish ? "yes" : "no"}.</p>
+        </Card>
+        <Card tone="warning">
+          <h2>Verification gate</h2>
+          <dl className="metadata-list">
+            <div>
+              <dt>Second-verified records</dt>
+              <dd>{dashboard.secondVerifiedRecords}</dd>
+            </div>
+            <div>
+              <dt>Production-approved records</dt>
+              <dd>{dashboard.productionApprovedRecords}</dd>
+            </div>
+            <div>
+              <dt>Open capture assignments</dt>
+              <dd>{dashboard.openCaptureAssignments}</dd>
+            </div>
+          </dl>
+          <p className="supporting">No production recommendations can unlock until real second-verifier results are imported and approved.</p>
+        </Card>
+      </div>
+      <Card>
+        <div className="status-row">
+          <h2>Verifier category queue</h2>
+          <StatusBadge tone="warning">{dashboard.categoryStatus.length} categories</StatusBadge>
+        </div>
+        <div className="data-table-scroll" role="region" aria-label="Second-verifier category dashboard" tabIndex={0}>
+          <table className="data-table">
+            <caption>Second-verifier work status by category</caption>
+            <thead>
+              <tr>
+                <th scope="col">Category</th>
+                <th scope="col">Assigned</th>
+                <th scope="col">Completed</th>
+                <th scope="col">Disagreement</th>
+                <th scope="col">Recapture</th>
+                <th scope="col">Blocked</th>
+                <th scope="col">Production eligible</th>
+                <th scope="col">Secondary sample</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dashboard.categoryStatus.map((category) => (
+                <tr key={category.category}>
+                  <th scope="row">{category.category}</th>
+                  <td>{category.assigned}</td>
+                  <td>{category.completed}</td>
+                  <td>{category.disagreement}</td>
+                  <td>{category.recaptureRequired}</td>
+                  <td>{category.blocked}</td>
+                  <td>{category.productionEligible}</td>
+                  <td>{category.secondaryAngleSample}</td>
+                </tr>
               ))}
             </tbody>
           </table>

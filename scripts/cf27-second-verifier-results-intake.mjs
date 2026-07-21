@@ -273,7 +273,22 @@ function validateResultRowShape(row, rowNumber, errors, warnings) {
   if (!approvedFinalDispositions.has(row.final_disposition)) {
     errors.push(issue("invalidFinalDisposition", `Row ${rowNumber} final_disposition is not approved.`, row.target_stable_id));
   }
+  if (requiresIndependentCount(row) && !hasUsableText(row.verifier_count)) {
+    errors.push(issue("missingVerifierCount", `Row ${rowNumber} verifies a count target but is missing verifier_count.`, row.target_stable_id));
+  } else if (requiresIndependentCount(row) && !Number.isFinite(Number(row.verifier_count))) {
+    errors.push(issue("invalidVerifierCount", `Row ${rowNumber} verifier_count must be a number for count verification.`, row.target_stable_id));
+  }
   if (!yes(row.evidence_exists)) warnings.push(issue("rowMissingEvidence", `Row ${rowNumber} says evidence is not present.`, row.target_stable_id));
+}
+
+function requiresIndependentCount(row) {
+  const target = stringValue(row.target_stable_id).toLowerCase();
+  const scope = stringValue(row.verification_scope).toLowerCase();
+  return target.startsWith("count-") ||
+    scope.includes("count") ||
+    scope === "menumap" ||
+    scope === "menu_map" ||
+    scope === "native_order";
 }
 
 function compareVerifierRowToPrimary({ row, rowNumber, target, metadata, importedAt }) {

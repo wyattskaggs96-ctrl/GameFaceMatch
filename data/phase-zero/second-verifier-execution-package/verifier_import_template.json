@@ -1,0 +1,29 @@
+{
+  "rows": [
+    {
+      "assignment_id": "phase0-second-verifier-assignment-20260714",
+      "verifier_id": "",
+      "target_stable_id": "",
+      "category": "",
+      "verification_scope": "",
+      "verifier_native_order": "",
+      "verifier_native_label": "",
+      "verifier_count": "",
+      "evidence_exists": "",
+      "front_view_exists": "",
+      "secondary_angle_sample_included": "",
+      "native_order_status": "notChecked",
+      "record_fields_status": "notChecked",
+      "evidence_files_status": "notChecked",
+      "front_view_status": "notChecked",
+      "secondary_angle_status": "notChecked",
+      "dependency_status": "notApplicable",
+      "exception_status": "notApplicable",
+      "final_disposition": "NOT_VERIFIED",
+      "discrepancy_type": "none",
+      "resolution_action": "",
+      "resolution_evidence_ids": "",
+      "notes": ""
+    }
+  ]
+}

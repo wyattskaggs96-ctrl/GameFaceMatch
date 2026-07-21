@@ -72,6 +72,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Phase 0 second-verifier execution package check",
+    command: "node",
+    args: ["scripts/cf27-second-verifier-execution-package.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Catalog import validation engine check",
     command: "node",
     args: ["scripts/catalog-import-validator.mjs", "--check"],

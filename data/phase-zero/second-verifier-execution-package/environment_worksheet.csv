@@ -1,0 +1,2 @@
+package_id,phase,verifier_id,game_title_seen,platform,console_model,console_os_version,game_version,patch_version,mode,creation_path,capture_method,evidence_reference,notes
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,,,,,,,,,,,,Fill from the verifier's own Xbox session. Do not copy unresolved primary environment fields.

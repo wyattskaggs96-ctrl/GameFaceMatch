@@ -1,0 +1,338 @@
+{
+  "method": {
+    "methodID": "deterministic-sha256-environment-verifier-catalog-category-quartile-v1",
+    "description": "Concatenate environment ID, verifier ID, catalog version, category, and candidate ID; SHA-256 each eligible candidate; sort ascending within category; select the first required quartile using ceiling rounding.",
+    "seedInput": "env-cf27-phase0-video-001-rtg-custom-qb|VERIFIER_ID_TO_BE_ASSIGNED|CF27_XBOX_RTG_RESEARCH_CANDIDATE_v1.0.0",
+    "verifierID": "VERIFIER_ID_TO_BE_ASSIGNED",
+    "catalogVersion": "CF27_XBOX_RTG_RESEARCH_CANDIDATE_v1.0.0",
+    "categoryAware": true,
+    "sampleFraction": 0.25,
+    "rounding": "ceil",
+    "eligibleCandidateCount": 80,
+    "selectedCandidateCount": 23
+  },
+  "rows": [
+    {
+      "sampleID": "secondary-angle-body-related-appearance-controls-001",
+      "category": "Body-related appearance controls",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_BLUE_CHIP",
+      "evidenceIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "sourceTimestampRange": "18-23",
+      "selectionHash": "0492bab82941df830482dbfed6bffe54261d5dd275352302b2e03a7d6f060205",
+      "selectedRankWithinCategory": 1,
+      "categoryEligibleCount": 5,
+      "categorySampleCount": 2,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-body-related-appearance-controls-002",
+      "category": "Body-related appearance controls",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_UNDERDOG",
+      "evidenceIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "sourceTimestampRange": "18-23",
+      "selectionHash": "2f56cb9028d8fa32f1b5055d460c27c0b05f7e2d68d18fb25d55a057dd3bcfb5",
+      "selectedRankWithinCategory": 2,
+      "categoryEligibleCount": 5,
+      "categorySampleCount": 2,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-ear-shape-001",
+      "category": "Ear Shape",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
+      "evidenceIDs": [
+        "phase0-frame-video-009-tl-005"
+      ],
+      "sourceTimestampRange": "23-25",
+      "selectionHash": "384e88f4895842911144dee8c3fb3b5de3e563c351caf2712c9ed6b92fd13496",
+      "selectedRankWithinCategory": 1,
+      "categoryEligibleCount": 3,
+      "categorySampleCount": 1,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-eye-color-001",
+      "category": "Eye Color",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_006",
+      "evidenceIDs": [
+        "phase0-frame-video-007-tl-007"
+      ],
+      "sourceTimestampRange": "23-24",
+      "selectionHash": "009a20c9e35af2b98537021e5f4397bd3dce56ba4b745b0bad6c628a081d2f5c",
+      "selectedRankWithinCategory": 1,
+      "categoryEligibleCount": 7,
+      "categorySampleCount": 2,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-eye-color-002",
+      "category": "Eye Color",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_007",
+      "evidenceIDs": [
+        "phase0-frame-video-007-tl-006"
+      ],
+      "sourceTimestampRange": "21-22",
+      "selectionHash": "4a6d03a8856d697d5fa3f0ea1e5ce4564bbb0c60be981331c9155434b77cb7fe",
+      "selectedRankWithinCategory": 2,
+      "categoryEligibleCount": 7,
+      "categorySampleCount": 2,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-eye-shape-001",
+      "category": "Eye Shape",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
+      "evidenceIDs": [
+        "phase0-frame-video-006-tl-002"
+      ],
+      "sourceTimestampRange": "14-14",
+      "selectionHash": "08bb86236763e1d013f18965adc409391fcb2e10ef44008a1adb882c97a320b7",
+      "selectedRankWithinCategory": 1,
+      "categoryEligibleCount": 5,
+      "categorySampleCount": 2,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-eye-shape-002",
+      "category": "Eye Shape",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
+      "evidenceIDs": [
+        "phase0-frame-video-006-tl-003"
+      ],
+      "sourceTimestampRange": "15-16",
+      "selectionHash": "0e8251b2ac4f3ce217d801eecb9abd3bf78dd8b23ec13586ba3f6b6e6bb674b0",
+      "selectedRankWithinCategory": 2,
+      "categoryEligibleCount": 5,
+      "categorySampleCount": 2,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-heads-001",
+      "category": "Heads",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_018",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-006"
+      ],
+      "sourceTimestampRange": "40-49",
+      "selectionHash": "024e491732ffc7689b82e9be44837497a104985ec4d7b41a12d6afec8626be28",
+      "selectedRankWithinCategory": 1,
+      "categoryEligibleCount": 24,
+      "categorySampleCount": 6,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-heads-002",
+      "category": "Heads",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_027",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-011"
+      ],
+      "sourceTimestampRange": "90-99",
+      "selectionHash": "03de80d53eda4a4549353f7cb2fcb79ea17188122940aebbcbaefa517792ac44",
+      "selectedRankWithinCategory": 2,
+      "categoryEligibleCount": 24,
+      "categorySampleCount": 6,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-heads-003",
+      "category": "Heads",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_008",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-008"
+      ],
+      "sourceTimestampRange": "49-53",
+      "selectionHash": "0d64c22cd739261c6ac9c46c73271115e4377f3b56ac8cc3e6f643f34a105f2d",
+      "selectedRankWithinCategory": 3,
+      "categoryEligibleCount": 24,
+      "categorySampleCount": 6,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-heads-004",
+      "category": "Heads",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_022",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-009"
+      ],
+      "sourceTimestampRange": "70-79",
+      "selectionHash": "1d03452525d89d795aea19cf1e696299e5505edd6c551a2c6603c7ea939324de",
+      "selectedRankWithinCategory": 4,
+      "categoryEligibleCount": 24,
+      "categorySampleCount": 6,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-heads-005",
+      "category": "Heads",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_024",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-008"
+      ],
+      "sourceTimestampRange": "60-69",
+      "selectionHash": "1e0d2418a532f24e78b4a601b032b8da9050fac0249a2fab0157157fbb8bbb45",
+      "selectedRankWithinCategory": 5,
+      "categoryEligibleCount": 24,
+      "categorySampleCount": 6,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-heads-006",
+      "category": "Heads",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_023",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-007"
+      ],
+      "sourceTimestampRange": "50-59",
+      "selectionHash": "28a70ea8014fb347360e505feadad7d13f19b6d1f2f41f3fb2bc2509415af30f",
+      "selectedRankWithinCategory": 6,
+      "categoryEligibleCount": 24,
+      "categorySampleCount": 6,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-nose-001",
+      "category": "Nose",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_003",
+      "evidenceIDs": [
+        "phase0-frame-video-008-tl-005"
+      ],
+      "sourceTimestampRange": "19-20",
+      "selectionHash": "24fa00d256d6a1b5da76d2144b8924a80b683fc35eb12aec99d343b982faf38b",
+      "selectedRankWithinCategory": 1,
+      "categoryEligibleCount": 6,
+      "categorySampleCount": 2,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-nose-002",
+      "category": "Nose",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_006",
+      "evidenceIDs": [
+        "phase0-frame-video-008-tl-008"
+      ],
+      "sourceTimestampRange": "25-27",
+      "selectionHash": "31b51641da981b3d0264cc47f279da50e12506db8c300f121d6f926eb60d0610",
+      "selectedRankWithinCategory": 2,
+      "categoryEligibleCount": 6,
+      "categorySampleCount": 2,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-skin-details-001",
+      "category": "Skin Details",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-009"
+      ],
+      "sourceTimestampRange": "23-24",
+      "selectionHash": "1e6fb05e27f8e00f6ae7b25bf11a24e9c3f095709f01b56c55b73938e9639cfa",
+      "selectedRankWithinCategory": 1,
+      "categoryEligibleCount": 10,
+      "categorySampleCount": 3,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-skin-details-002",
+      "category": "Skin Details",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-011"
+      ],
+      "sourceTimestampRange": "27-31.72",
+      "selectionHash": "21b1a53b2da762a1fb288fb8a64c5502e496b4a2d00eb5367eb673de4e6a1e09",
+      "selectedRankWithinCategory": 2,
+      "categoryEligibleCount": 10,
+      "categorySampleCount": 3,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-skin-details-003",
+      "category": "Skin Details",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-007"
+      ],
+      "sourceTimestampRange": "19-20",
+      "selectionHash": "49d8c5e96d73d8e6890b36e843436c07200386208e40b17324efbdb9f4021263",
+      "selectedRankWithinCategory": 3,
+      "categoryEligibleCount": 10,
+      "categorySampleCount": 3,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-skin-tone-001",
+      "category": "Skin Tone",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_022",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-014"
+      ],
+      "sourceTimestampRange": "35-36",
+      "selectionHash": "03c645b4d31be766bd0321ee971c435ff235c056cae1b580bbae6e96abef544d",
+      "selectedRankWithinCategory": 1,
+      "categoryEligibleCount": 20,
+      "categorySampleCount": 5,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-skin-tone-002",
+      "category": "Skin Tone",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_002",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-020"
+      ],
+      "sourceTimestampRange": "47-47",
+      "selectionHash": "05767efb0a2b1d3d678f850a2b76c03c48638b2b802349b133c8a2f753f7a890",
+      "selectedRankWithinCategory": 2,
+      "categoryEligibleCount": 20,
+      "categorySampleCount": 5,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-skin-tone-003",
+      "category": "Skin Tone",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_019",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-006"
+      ],
+      "sourceTimestampRange": "17-19",
+      "selectionHash": "058367e71551d9bb99b89058578684525925215eb78be340b6d703cd97a6da51",
+      "selectedRankWithinCategory": 3,
+      "categoryEligibleCount": 20,
+      "categorySampleCount": 5,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-skin-tone-004",
+      "category": "Skin Tone",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_007",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-010"
+      ],
+      "sourceTimestampRange": "27-28",
+      "selectionHash": "1060f933ec1890a86d9a41535e27a9e786178b1b7bd03a1d73446ef8430a24eb",
+      "selectedRankWithinCategory": 4,
+      "categoryEligibleCount": 20,
+      "categorySampleCount": 5,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    },
+    {
+      "sampleID": "secondary-angle-skin-tone-005",
+      "category": "Skin Tone",
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_020",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-005"
+      ],
+      "sourceTimestampRange": "15-16",
+      "selectionHash": "14bf85501e9e3102ceb57f5ba0a611d52d9eb6eb2bafd06f945f222a5ad6285b",
+      "selectedRankWithinCategory": 5,
+      "categoryEligibleCount": 20,
+      "categorySampleCount": 5,
+      "requiredAction": "Review secondary-angle evidence after independent counts are submitted. Record missing, mismatched, or unusable angles as discrepancies."
+    }
+  ]
+}

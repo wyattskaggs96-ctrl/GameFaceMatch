@@ -1,0 +1,14 @@
+package_id,phase,worksheet_row,menu_area,displayed_label_to_find,verifier_observed_label,verifier_native_order,evidence_reference,status,notes
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,1,,Head Template,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,2,,Skin Tone,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,3,,Skin Details,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,4,,Eye Shape,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,5,,Eye Color,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,6,,Nose,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,7,,Ear Shape,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,8,,Mouth Shape,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,9,,Jaw Shape,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,10,,Chin,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,11,,Head & Skin,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,12,,Hair,,,,NOT_VERIFIED,Record only what the verifier independently sees.
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,BLIND_INDEPENDENT_COUNTS,13,,Appearance,,,,NOT_VERIFIED,Record only what the verifier independently sees.

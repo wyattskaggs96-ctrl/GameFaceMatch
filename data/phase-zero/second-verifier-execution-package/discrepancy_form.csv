@@ -1,0 +1,2 @@
+package_id,phase,discrepancy_id,verifier_id,target_stable_id,discrepancy_type,verifier_observation,evidence_reference,recapture_required,requested_status,notes
+CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1,POST_INDEPENDENT_COUNT_REVIEW,,,,,,,,NOT_VERIFIED,

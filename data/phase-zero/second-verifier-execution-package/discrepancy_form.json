@@ -1,0 +1,29 @@
+{
+  "phase": "POST_INDEPENDENT_COUNT_REVIEW",
+  "rows": [
+    {
+      "package_id": "CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1",
+      "phase": "POST_INDEPENDENT_COUNT_REVIEW",
+      "discrepancy_id": "",
+      "verifier_id": "",
+      "target_stable_id": "",
+      "discrepancy_type": "",
+      "verifier_observation": "",
+      "evidence_reference": "",
+      "recapture_required": "",
+      "requested_status": "NOT_VERIFIED",
+      "notes": ""
+    }
+  ],
+  "allowedStatuses": [
+    "VERIFIED",
+    "VERIFIED_WITH_NOTES",
+    "RECAPTURE_REQUIRED",
+    "VERSION_MISMATCH",
+    "MISSING_EVIDENCE",
+    "COUNT_MISMATCH",
+    "ORDER_MISMATCH",
+    "DEPENDENCY_UNRESOLVED",
+    "NOT_VERIFIED"
+  ]
+}

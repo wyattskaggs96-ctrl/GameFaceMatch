@@ -125,6 +125,7 @@ export interface Phase0CompletionDashboardReport {
   generatedAt: string;
   categoryProgress: Phase0CompletionCategoryProgress[];
   evidenceCoverageControlCenter: Phase0EvidenceCoverageControlCenter | null;
+  secondVerifierDashboard: Phase0SecondVerifierDashboard | null;
   appearanceMenuGapSummary: Phase0AppearanceMenuGapSummary;
   metrics: {
     overallPhase0CompletionPercent: number;
@@ -139,6 +140,32 @@ export interface Phase0CompletionDashboardReport {
   highestPriorityMissingCapture: string;
   nextRecommendedCodexAction: string;
   nextRequiredHumanAction: string;
+}
+
+export interface Phase0SecondVerifierDashboard {
+  schemaVersion: string;
+  generatedAt: string;
+  status: string;
+  assigned: number;
+  completed: number;
+  disagreement: number;
+  recaptureRequired: number;
+  blocked: number;
+  productionEligible: number;
+  secondVerifiedRecords: number;
+  productionApprovedRecords: number;
+  primaryReviewAloneCanPublish: boolean;
+  openCaptureAssignments: number;
+  categoryStatus: Array<{
+    category: string;
+    assigned: number;
+    completed: number;
+    disagreement: number;
+    recaptureRequired: number;
+    blocked: number;
+    productionEligible: number;
+    secondaryAngleSample: number;
+  }>;
 }
 
 export interface Phase0AppearanceMenuGapSummary {
@@ -177,6 +204,7 @@ export interface Phase0CompletionArtifacts {
   captureRequests?: unknown;
   dependencyTests?: unknown;
   evidenceCoverageControlCenter?: unknown;
+  secondVerifierDashboard?: unknown;
   nowISO?: string;
 }
 
@@ -229,6 +257,7 @@ export function createPhase0CompletionDashboard(input: Phase0CompletionArtifacts
     generatedAt: input.nowISO ?? new Date().toISOString(),
     categoryProgress,
     evidenceCoverageControlCenter: context.evidenceCoverageControlCenter,
+    secondVerifierDashboard: context.secondVerifierDashboard,
     appearanceMenuGapSummary: context.appearanceMenuGapSummary,
     metrics,
     productionReadiness,
@@ -284,6 +313,7 @@ interface ArtifactContext {
   dependencyTestRecords: RecordObject[];
   dependencyTestSummary: RecordObject;
   evidenceCoverageControlCenter: Phase0EvidenceCoverageControlCenter | null;
+  secondVerifierDashboard: Phase0SecondVerifierDashboard | null;
   researchExportCounts: Record<string, number>;
   researchPackageValidated: boolean;
   appearanceMenuGapSummary: Phase0AppearanceMenuGapSummary;
@@ -307,6 +337,7 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
   const appearanceMenuGaps = asRecord(artifacts.appearanceMenuGaps);
   const dependencyTests = asRecord(artifacts.dependencyTests);
   const evidenceCoverageControlCenter = normalizeEvidenceCoverageControlCenter(asRecord(artifacts.evidenceCoverageControlCenter));
+  const secondVerifierDashboard = normalizeSecondVerifierDashboard(asRecord(artifacts.secondVerifierDashboard));
 
   return {
     additionalRecords: asArray(additionalAttributes.records),
@@ -331,6 +362,7 @@ function buildArtifactContext(artifacts: Phase0CompletionArtifacts): ArtifactCon
     dependencyTestRecords: asArray(dependencyTests.tests),
     dependencyTestSummary: asRecord(dependencyTests.summary),
     evidenceCoverageControlCenter,
+    secondVerifierDashboard,
     researchExportCounts: numberRecord(asRecord(researchExportManifest.counts)),
     researchPackageValidated: researchValidation.ok === true || researchValidation.status === "passed",
     appearanceMenuGapSummary: normalizeAppearanceMenuGapSummary(asRecord(appearanceMenuGaps.summary))
@@ -799,6 +831,36 @@ function normalizeEvidenceCoverageControlCenter(value: RecordObject): Phase0Evid
       rationale: stringValue(row.rationale)
     })),
     nextRecordingIDs: Array.isArray(value.nextRecordingIDs) ? value.nextRecordingIDs.map(stringValue) : []
+  };
+}
+
+function normalizeSecondVerifierDashboard(value: RecordObject): Phase0SecondVerifierDashboard | null {
+  const categoryStatus = asArray(value.categoryStatus);
+  if (!stringValue(value.schemaVersion) && categoryStatus.length === 0) return null;
+  return {
+    schemaVersion: stringValue(value.schemaVersion),
+    generatedAt: stringValue(value.generatedAt),
+    status: stringValue(value.status),
+    assigned: numberValue(value.assigned),
+    completed: numberValue(value.completed),
+    disagreement: numberValue(value.disagreement),
+    recaptureRequired: numberValue(value.recaptureRequired),
+    blocked: numberValue(value.blocked),
+    productionEligible: numberValue(value.productionEligible),
+    secondVerifiedRecords: numberValue(value.secondVerifiedRecords),
+    productionApprovedRecords: numberValue(value.productionApprovedRecords),
+    primaryReviewAloneCanPublish: value.primaryReviewAloneCanPublish === true,
+    openCaptureAssignments: numberValue(value.openCaptureAssignments),
+    categoryStatus: categoryStatus.map((row) => ({
+      category: stringValue(row.category),
+      assigned: numberValue(row.assigned),
+      completed: numberValue(row.completed),
+      disagreement: numberValue(row.disagreement),
+      recaptureRequired: numberValue(row.recaptureRequired),
+      blocked: numberValue(row.blocked),
+      productionEligible: numberValue(row.productionEligible),
+      secondaryAngleSample: numberValue(row.secondaryAngleSample)
+    }))
   };
 }
 

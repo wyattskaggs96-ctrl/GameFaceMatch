@@ -22,9 +22,14 @@ const researchSourceTypes = new Set(["research", "researchDraft", "researchCandi
 const fixtureSourceTypes = new Set(["testFixture", "demoData", "localDeveloperSample"]);
 const publicSourceTypes = new Set(["publicSourceOnly"]);
 const approvedCatalogManagerDispositions = new Set(["approved", "approvedWithNotes"]);
-const catalogMetadataDataClasses = new Set(["PHASE_ZERO_VERIFICATION_CANDIDATE_GATE"]);
+const catalogMetadataDataClasses = new Set([
+  "PHASE_ZERO_VERIFICATION_CANDIDATE_GATE",
+  "SECOND_VERIFIER_EXECUTION_PACKAGE",
+  "SECOND_VERIFIER_RESULTS_INTAKE"
+]);
 const placeholderPattern = /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK)\b/i;
 const fixturePathPattern = /data\/fixtures\/test-only|\/fixtures\/test-only\/|^fixtures\/test-only\/|\/test-only\//i;
+const verifierExecutionPackagePathPattern = /data\/phase-zero\/second-verifier-execution-package\//i;
 
 const scanRoots = [
   "data/catalog",
@@ -75,6 +80,9 @@ export function classifyRecord(record, context = {}) {
   if (fixturePathPattern.test(context.filePath ?? "") || value.isTestFixture === true || fixtureSourceTypes.has(sourceType)) {
     classification = "TEST_FIXTURE";
     blockingIssues.push("fixtureRecord");
+  } else if (verifierExecutionPackagePathPattern.test(context.filePath ?? "")) {
+    classification = "RESEARCH_OBSERVED";
+    reasons.push("secondVerifierExecutionPackageRecord");
   } else if (placeholderPattern.test(serialized)) {
     classification = "PLACEHOLDER";
     blockingIssues.push("placeholderToken");
@@ -164,6 +172,7 @@ function collectRecordObjects(value, currentPath, filePath) {
 
 function isClassifiableRecord(value, filePath, currentPath) {
   const keys = Object.keys(value);
+  if (verifierExecutionPackagePathPattern.test(filePath) && currentPath === "$.candidateGate") return false;
   if (filePath.includes("/templates/")) return currentPath === "$" || placeholderPattern.test(JSON.stringify(value));
   if (filePath.includes("data/fixtures/test-only")) return keys.length > 0;
   return [

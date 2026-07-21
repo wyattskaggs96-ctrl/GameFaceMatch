@@ -1,0 +1,65 @@
+{
+  "phase": "POST_INDEPENDENT_COUNT_REVIEW",
+  "rows": [
+    {
+      "package_id": "CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1",
+      "phase": "POST_INDEPENDENT_COUNT_REVIEW",
+      "target_stable_id": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "category": "Ear Shape",
+      "observed_label_or_index": "None",
+      "evidence_ids": "phase0-frame-video-009-tl-002;phase0-frame-video-009-tl-004",
+      "review_question": "Is this a duplicate, continuity overlap, or distinct observed option?",
+      "verifier_decision": "",
+      "discrepancy_id": "",
+      "notes": "Preserve both observations. Do not merge records silently."
+    },
+    {
+      "package_id": "CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1",
+      "phase": "POST_INDEPENDENT_COUNT_REVIEW",
+      "target_stable_id": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "category": "Heads",
+      "observed_label_or_index": "Face 12",
+      "evidence_ids": "phase0-frame-video-002-tl-015;phase0-frame-video-003-tl-001",
+      "review_question": "Is this a duplicate, continuity overlap, or distinct observed option?",
+      "verifier_decision": "",
+      "discrepancy_id": "",
+      "notes": "Preserve both observations. Do not merge records silently."
+    },
+    {
+      "package_id": "CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1",
+      "phase": "POST_INDEPENDENT_COUNT_REVIEW",
+      "target_stable_id": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+      "category": "Heads",
+      "observed_label_or_index": "Face 16",
+      "evidence_ids": "phase0-frame-video-003-tl-002;phase0-frame-video-002-tl-016",
+      "review_question": "Is this a duplicate, continuity overlap, or distinct observed option?",
+      "verifier_decision": "",
+      "discrepancy_id": "",
+      "notes": "Preserve both observations. Do not merge records silently."
+    },
+    {
+      "package_id": "CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1",
+      "phase": "POST_INDEPENDENT_COUNT_REVIEW",
+      "target_stable_id": "CF27_XBOXUNKNOWN_RTG_NOSE_005",
+      "category": "Nose",
+      "observed_label_or_index": "Aquiline",
+      "evidence_ids": "phase0-frame-video-008-tl-002;phase0-frame-video-008-tl-009",
+      "review_question": "Is this a duplicate, continuity overlap, or distinct observed option?",
+      "verifier_decision": "",
+      "discrepancy_id": "",
+      "notes": "Preserve both observations. Do not merge records silently."
+    },
+    {
+      "package_id": "CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1",
+      "phase": "POST_INDEPENDENT_COUNT_REVIEW",
+      "target_stable_id": "CF27_XBOXUNKNOWN_RTG_SKINTONE_010",
+      "category": "Skin Tone",
+      "observed_label_or_index": "Skin Tone 10",
+      "evidence_ids": "phase0-frame-video-004-tl-017;phase0-frame-video-004-tl-004",
+      "review_question": "Is this a duplicate, continuity overlap, or distinct observed option?",
+      "verifier_decision": "",
+      "discrepancy_id": "",
+      "notes": "Preserve both observations. Do not merge records silently."
+    }
+  ]
+}

@@ -113,6 +113,28 @@ describe("CF27 second-verifier results intake", () => {
     ]));
   });
 
+  it("rejects incomplete independent count verification rows", () => {
+    const state = buildSecondVerifierResultsIntake({
+      root: repositoryRoot(),
+      resultsCSV: csvForRows([
+        validRow({
+          target_stable_id: "count-head-templates",
+          category: "Head Templates",
+          verification_scope: "independentCount",
+          verifier_count: "",
+          final_disposition: "NOT_VERIFIED"
+        })
+      ]),
+      submissionMetadata: validSubmissionMetadata(),
+      importedAt: "2026-07-14T04:30:00.000Z"
+    }).intakeState;
+
+    expect(state.validation.ok).toBe(false);
+    expect(state.validation.importable).toBe(false);
+    expect(state.status).toBe("IMPORT_BLOCKED");
+    expect(state.validation.errors.map((error) => error.code)).toContain("missingVerifierCount");
+  });
+
   it("detects version, dependency, menu, evidence, and environment discrepancies without resolving them", () => {
     const metadata = {
       ...validSubmissionMetadata(),

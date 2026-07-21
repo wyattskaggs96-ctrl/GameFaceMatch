@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "cf27-second-verifier-execution-package-v1",
+  "generatedAt": "2026-07-21T05:00:00-04:00",
+  "packageID": "CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1",
+  "dataClass": "SECOND_VERIFIER_EXECUTION_PACKAGE",
+  "sourceType": "verification_assignment",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "NOT_VERIFIED",
+  "verificationHasOccurred": false,
+  "productionRecommendationsEnabled": false,
+  "primaryReviewConclusionsWithheldForBlindPhase": true,
+  "candidateGate": {
+    "candidateID": "CF27_XBOX_RTG_RESEARCH_CANDIDATE_v1.0.0",
+    "completenessDecision": "BLOCKED_NOT_READY_TO_FREEZE",
+    "releasePackageCreated": false,
+    "blockerCount": 34,
+    "warningCount": 1
+  },
+  "policy": [
+    "This package is for a real second human verifier with independent access to the shipping game.",
+    "Do not simulate verification or copy primary conclusions into verifier fields.",
+    "Complete blind independent counts before opening post-count record-level worksheets.",
+    "No row can become production-approved from primary review alone."
+  ],
+  "allowedStatuses": [
+    "VERIFIED",
+    "VERIFIED_WITH_NOTES",
+    "RECAPTURE_REQUIRED",
+    "VERSION_MISMATCH",
+    "MISSING_EVIDENCE",
+    "COUNT_MISMATCH",
+    "ORDER_MISMATCH",
+    "DEPENDENCY_UNRESOLVED",
+    "NOT_VERIFIED"
+  ],
+  "packageContents": [
+    "environment_worksheet.csv/json",
+    "independent_menu_map_worksheet.csv/json",
+    "independent_counts_worksheet.csv/json",
+    "native_order_worksheet.csv/json",
+    "record_level_comparison_worksheet.csv/json",
+    "front_view_checks.csv/json",
+    "secondary_angle_sample.csv/json",
+    "duplicate_exception_review.csv/json",
+    "discrepancy_form.csv/json",
+    "sign_off_form.csv/json",
+    "verifier_import_template.csv/json",
+    "verifier_dashboard.csv/json"
+  ],
+  "samplingMethod": {
+    "methodID": "deterministic-sha256-environment-verifier-catalog-category-quartile-v1",
+    "description": "Concatenate environment ID, verifier ID, catalog version, category, and candidate ID; SHA-256 each eligible candidate; sort ascending within category; select the first required quartile using ceiling rounding.",
+    "seedInput": "env-cf27-phase0-video-001-rtg-custom-qb|VERIFIER_ID_TO_BE_ASSIGNED|CF27_XBOX_RTG_RESEARCH_CANDIDATE_v1.0.0",
+    "verifierID": "VERIFIER_ID_TO_BE_ASSIGNED",
+    "catalogVersion": "CF27_XBOX_RTG_RESEARCH_CANDIDATE_v1.0.0",
+    "categoryAware": true,
+    "sampleFraction": 0.25,
+    "rounding": "ceil",
+    "eligibleCandidateCount": 80,
+    "selectedCandidateCount": 23
+  },
+  "dashboard": {
+    "schemaVersion": "cf27-second-verifier-execution-package-v1-dashboard",
+    "generatedAt": "2026-07-21T05:00:00-04:00",
+    "status": "AWAITING_REAL_SECOND_VERIFIER",
+    "assigned": 85,
+    "completed": 0,
+    "disagreement": 0,
+    "recaptureRequired": 0,
+    "blocked": 85,
+    "productionEligible": 0,
+    "secondVerifiedRecords": 0,
+    "productionApprovedRecords": 0,
+    "primaryReviewAloneCanPublish": false,
+    "candidateGate": {
+      "completenessDecision": "BLOCKED_NOT_READY_TO_FREEZE",
+      "blockerCount": 34
+    },
+    "openCaptureAssignments": 15,
+    "openIssues": 44,
+    "categoryStatus": [
+      {
+        "category": "Body-related appearance controls",
+        "assigned": 5,
+        "completed": 0,
+        "disagreement": 0,
+        "recaptureRequired": 0,
+        "blocked": 5,
+        "productionEligible": 0,
+        "secondaryAngleSample": 2
+      },
+      {
+        "category": "Ear Shape",
+        "assigned": 4,
+        "completed": 0,
+        "disagreement": 0,
+        "recaptureRequired": 0,
+        "blocked": 4,
+        "productionEligible": 0,
+        "secondaryAngleSample": 1
+      },
+      {
+        "category": "Eye Color",
+        "assigned": 7,
+        "completed": 0,
+        "disagreement": 0,
+        "recaptureRequired": 0,
+        "blocked": 7,
+        "productionEligible": 0,
+        "secondaryAngleSample": 2
+      },
+      {
+        "category": "Eye Shape",
+        "assigned": 5,
+        "completed": 0,
+        "disagreement": 0,
+        "recaptureRequired": 0,
+        "blocked": 5,
+        "productionEligible": 0,
+        "secondaryAngleSample": 2
+      },
+      {
+        "category": "Heads",
+        "assigned": 26,
+        "completed": 0,
+        "disagreement": 0,
+        "recaptureRequired": 0,
+        "blocked": 26,
+        "productionEligible": 0,
+        "secondaryAngleSample": 6
+      },
+      {
+        "category": "Nose",
+        "assigned": 7,
+        "completed": 0,
+        "disagreement": 0,
+        "recaptureRequired": 0,
+        "blocked": 7,
+        "productionEligible": 0,
+        "secondaryAngleSample": 2
+      },
+      {
+        "category": "Skin Details",
+        "assigned": 10,
+        "completed": 0,
+        "disagreement": 0,
+        "recaptureRequired": 0,
+        "blocked": 10,
+        "productionEligible": 0,
+        "secondaryAngleSample": 3
+      },
+      {
+        "category": "Skin Tone",
+        "assigned": 21,
+        "completed": 0,
+        "disagreement": 0,
+        "recaptureRequired": 0,
+        "blocked": 21,
+        "productionEligible": 0,
+        "secondaryAngleSample": 5
+      }
+    ],
+    "nextActions": [
+      "Assign a real independent verifier ID.",
+      "Verifier completes environment and blind count worksheets before opening record-level comparison sheets.",
+      "Import completed verifier CSV and metadata through npm run cf27:second-verifier-results-intake.",
+      "Resolve discrepancies with direct evidence before any production catalog consideration."
+    ]
+  }
+}

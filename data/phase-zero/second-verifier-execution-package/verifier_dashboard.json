@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "cf27-second-verifier-execution-package-v1-dashboard",
+  "generatedAt": "2026-07-21T05:00:00-04:00",
+  "status": "AWAITING_REAL_SECOND_VERIFIER",
+  "assigned": 85,
+  "completed": 0,
+  "disagreement": 0,
+  "recaptureRequired": 0,
+  "blocked": 85,
+  "productionEligible": 0,
+  "secondVerifiedRecords": 0,
+  "productionApprovedRecords": 0,
+  "primaryReviewAloneCanPublish": false,
+  "candidateGate": {
+    "completenessDecision": "BLOCKED_NOT_READY_TO_FREEZE",
+    "blockerCount": 34
+  },
+  "openCaptureAssignments": 15,
+  "openIssues": 44,
+  "categoryStatus": [
+    {
+      "category": "Body-related appearance controls",
+      "assigned": 5,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 5,
+      "productionEligible": 0,
+      "secondaryAngleSample": 2
+    },
+    {
+      "category": "Ear Shape",
+      "assigned": 4,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 4,
+      "productionEligible": 0,
+      "secondaryAngleSample": 1
+    },
+    {
+      "category": "Eye Color",
+      "assigned": 7,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 7,
+      "productionEligible": 0,
+      "secondaryAngleSample": 2
+    },
+    {
+      "category": "Eye Shape",
+      "assigned": 5,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 5,
+      "productionEligible": 0,
+      "secondaryAngleSample": 2
+    },
+    {
+      "category": "Heads",
+      "assigned": 26,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 26,
+      "productionEligible": 0,
+      "secondaryAngleSample": 6
+    },
+    {
+      "category": "Nose",
+      "assigned": 7,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 7,
+      "productionEligible": 0,
+      "secondaryAngleSample": 2
+    },
+    {
+      "category": "Skin Details",
+      "assigned": 10,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 10,
+      "productionEligible": 0,
+      "secondaryAngleSample": 3
+    },
+    {
+      "category": "Skin Tone",
+      "assigned": 21,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 21,
+      "productionEligible": 0,
+      "secondaryAngleSample": 5
+    }
+  ],
+  "nextActions": [
+    "Assign a real independent verifier ID.",
+    "Verifier completes environment and blind count worksheets before opening record-level comparison sheets.",
+    "Import completed verifier CSV and metadata through npm run cf27:second-verifier-results-intake.",
+    "Resolve discrepancies with direct evidence before any production catalog consideration."
+  ]
+}

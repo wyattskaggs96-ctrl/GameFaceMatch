@@ -24,6 +24,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Current project status consistency check",
+    command: "node",
+    args: ["scripts/status-consistency-check.mjs"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Phase 0 export pipeline check",
     command: "node",
     args: ["scripts/phase-zero-export.mjs", "--check"],

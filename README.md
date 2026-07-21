@@ -15,7 +15,7 @@ The app does not import a face into the game, identify people, control a console
 - `legal/` — draft privacy, terms, and trademark-review materials
 - `design/` — research and wireframes
 
-Read `00_START_HERE.md` and `docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md` before building.
+Read `00_START_HERE.md`, `docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md`, and `docs/status/CURRENT_PROJECT_STATE.md` before building. `docs/status/CURRENT_PROJECT_STATE.md` is the current operational status source; older status reports are historical snapshots unless that document says otherwise.
 
 ## Active web MVP
 
@@ -35,6 +35,12 @@ npm run verify
 ```
 
 This orchestrates repository hygiene checks, web type-checking, linting, tests, catalog validation, fixture/production separation checks, production build gates, Playwright local smoke tests, and native iOS build/tests when Xcode is available.
+
+Check only current-status consistency:
+
+```sh
+npm run status:check
+```
 
 Start local development:
 

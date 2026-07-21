@@ -5,12 +5,13 @@ This repository is the working home for **GameFace Match**, beginning with a res
 ## First actions
 
 1. Keep `docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md` unchanged as the binding product source.
-2. Open this folder as the Codex project repository.
-3. Ask Codex to inspect the repository before generating code.
-4. Build the active customer-facing MVP inside `web/`.
-5. Preserve the native iPhone project inside `ios/` as a future premium TrueDepth capture client.
-6. Keep the production game catalog empty until every option has been verified in the shipping game.
-7. Keep all test-only records under `data/fixtures/test-only/`.
+2. Read `docs/status/CURRENT_PROJECT_STATE.md` for the current operational status before relying on older audits.
+3. Open this folder as the Codex project repository.
+4. Ask Codex to inspect the repository before generating code.
+5. Build the active customer-facing MVP inside `web/`.
+6. Preserve the native iPhone project inside `ios/` as a future premium TrueDepth capture client.
+7. Keep the production game catalog empty until every option has been verified in the shipping game.
+8. Keep all test-only records under `data/fixtures/test-only/`.
 
 ## Recommended first build order
 

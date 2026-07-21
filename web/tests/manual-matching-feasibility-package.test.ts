@@ -8,7 +8,11 @@ import * as manualMatching from "../../scripts/manual-matching-feasibility.mjs";
 const {
   analyzeManualMatchingFeasibility,
   calculateManualMatchingMetrics,
+  classifyManualMatchingStudyRecords,
+  compareManualMatchingTargets,
+  createMatchingCalibrationDecision,
   exportAnonymizedStudyResults,
+  PRIVATE_BETA_MATCHING_TARGETS,
   repeatabilityColumns,
   reviewColumns,
   resultColumns,
@@ -38,8 +42,11 @@ describe("manual matching feasibility package", () => {
     expect(report.productionStatus).toBe("NOT_PRODUCTION_DATA");
     expect(report.verificationStatus).toBe("NOT_VERIFIED");
     expect(report.rowCounts).toEqual({ subjects: 0, reviews: 0, results: 0, repeatability: 0 });
+    expect(report.recordStatus).toMatchObject({ completed: 0, incomplete: 0, invalidCapture: 0, withdrawn: 0, deleted: 0 });
     expect(report.dashboard.status).toBe("notMeasured");
     expect(report.dashboard.topOneAcceptance).toBe("not measured");
+    expect(report.targetComparison.topThreeUsefulness.status).toBe("notMeasured");
+    expect(report.calibrationDecision.decisionStatus).toBe("NOT_TUNED_INSUFFICIENT_REAL_DATA");
     expect(report.warnings.map((warning: { code: string }) => warning.code)).toContain("templateOnly");
   });
 
@@ -69,6 +76,12 @@ describe("manual matching feasibility package", () => {
     });
     expect(metrics.deletionConfirmation.rate).toBe(1);
     expect(metrics.captureFailureRate.rate).toBe(0);
+    expect(metrics.confidenceCalibration.buckets).toEqual([
+      expect.objectContaining({ bucket: "low", sampleCount: 0 }),
+      expect.objectContaining({ bucket: "medium", sampleCount: 3 }),
+      expect.objectContaining({ bucket: "high", sampleCount: 0 })
+    ]);
+    expect(metrics.captureQualityEffect.passed.sampleCount).toBe(3);
   });
 
   it("validates a temporary complete 10-subject study package without committing participant data", () => {
@@ -81,8 +94,12 @@ describe("manual matching feasibility package", () => {
     expect(report.metrics.completedResultCount).toBe(10);
     expect(report.metrics.topOneAcceptance.rate).toBe(0.5);
     expect(report.metrics.topThreeUsefulness.rate).toBe(1);
+    expect(report.targetComparison.topOneAcceptance).toMatchObject({ target: PRIVATE_BETA_MATCHING_TARGETS.topOneAcceptanceRate, status: "pass" });
+    expect(report.targetComparison.topThreeUsefulness).toMatchObject({ target: PRIVATE_BETA_MATCHING_TARGETS.topThreeUsefulMatchRate, status: "pass" });
     expect(report.dashboard.status).toBe("measured");
     expect(report.dashboard.repeatability).not.toBe("not measured");
+    expect(report.calibrationDecision.decisionStatus).toBe("NOT_TUNED_NO_HOLDOUT_GROUP");
+    expect(report.calibrationDecision.weightChanges).toEqual([]);
   });
 
   it("excludes fixture-like study rows from actual metrics and anonymized exports include no raw media", () => {
@@ -101,6 +118,8 @@ describe("manual matching feasibility package", () => {
     expect(report.metrics.fixtureRowsExcluded).toBe(1);
     expect(report.metrics.completedResultCount).toBe(0);
     expect(report.dashboard.status).toBe("notMeasured");
+    expect(report.calibrationDecision.fixtureDataUsedForTuning).toBe(false);
+    expect(report.calibrationDecision.beforeAfterEvaluation.after).toBeNull();
     expect(exportResult.rawMediaIncluded).toBe(false);
     expect(exported).not.toContain("data:image");
     expect(exported).not.toContain("faceImage");
@@ -129,6 +148,55 @@ describe("manual matching feasibility package", () => {
       "sameReviewer"
     ]));
     expect(report.warnings.map((warning: { code: string }) => warning.code)).toContain("deletionNotConfirmed");
+  });
+
+  it("separates completed, incomplete, invalid capture, withdrawn, and deleted records", () => {
+    const subjects = [
+      subjectRow(1),
+      subjectRow(2),
+      subjectRow(3),
+      subjectRow(4),
+      subjectRow(5)
+    ];
+    subjects[2].left45_present = "no";
+    subjects[3].withdrawal_requested_at = "2026-07-14T02:00:00.000Z";
+    const results = [
+      resultRow({ participant_id: subjects[0].participant_id }),
+      resultRow({ participant_id: subjects[4].participant_id, capture_failure_flag: "yes", capture_quality_state: "failed" })
+    ];
+
+    const status = classifyManualMatchingStudyRecords({ subjects, reviews: [], results, repeatability: [] });
+
+    expect(status).toMatchObject({
+      actualSubjectRows: 5,
+      actualResultRows: 2,
+      completed: 1,
+      incomplete: 1,
+      invalidCapture: 2,
+      withdrawn: 1,
+      deleted: 5
+    });
+  });
+
+  it("fails private-beta targets when a sufficiently sized actual study misses the thresholds", () => {
+    const metrics = calculateManualMatchingMetrics(
+      Array.from({ length: 10 }, (_, index) => resultRow({
+        participant_id: `participant-${String(index + 1).padStart(3, "0")}`,
+        participant_selected_rank: index === 0 ? "1" : "",
+        top_one_accepted: index === 0 ? "yes" : "no",
+        top_three_useful: index < 7 ? "yes" : "no",
+        mismatch_reason_codes: index < 5 ? "noseMismatch" : "catalogCoverageGap"
+      }))
+    );
+    const targets = compareManualMatchingTargets(metrics);
+    const decision = createMatchingCalibrationDecision(metrics, targets);
+
+    expect(targets.topOneAcceptance).toMatchObject({ status: "fail", numerator: 1, denominator: 10 });
+    expect(targets.topThreeUsefulness).toMatchObject({ status: "fail", numerator: 7, denominator: 10 });
+    expect(decision.decisionStatus).toBe("NOT_TUNED_NO_HOLDOUT_GROUP");
+    expect(decision.unsupportedSignals).toEqual(expect.arrayContaining([
+      expect.objectContaining({ reason: "noseMismatch", count: 5 })
+    ]));
   });
 
   it("documents the study protocol without implying the study has run", () => {

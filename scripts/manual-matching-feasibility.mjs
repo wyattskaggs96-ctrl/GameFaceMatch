@@ -4,6 +4,13 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const MANUAL_MATCHING_FEASIBILITY_VERSION = "phase0-manual-matching-feasibility-v1";
+export const PRIVATE_BETA_MATCHING_TARGETS = {
+  minimumCompletedParticipants: 10,
+  maximumCompletedParticipants: 20,
+  topThreeUsefulMatchRate: 0.8,
+  topOneAcceptanceRate: 0.5
+};
+export const BASELINE_MATCHING_MODEL_VERSION = "rule-based-web-mvp-v2-rgb-geometry";
 
 export const subjectColumns = [
   "study_id",
@@ -224,8 +231,11 @@ export function analyzeManualMatchingFeasibility({
     warnings.push(issue("templateOnly", "Manual matching CSVs are header-only templates. No study has been run."));
   }
 
-  const metrics = calculateManualMatchingMetrics(rows.results);
-  const dashboard = createManualMatchingStudyDashboard({ rows, metrics, errors, warnings });
+  const recordStatus = classifyManualMatchingStudyRecords(rows);
+  const metrics = calculateManualMatchingMetrics(rows.results, rows.repeatability);
+  const targetComparison = compareManualMatchingTargets(metrics);
+  const calibrationDecision = createMatchingCalibrationDecision(metrics, targetComparison);
+  const dashboard = createManualMatchingStudyDashboard({ rows, metrics, targetComparison, calibrationDecision, errors, warnings });
 
   return {
     schemaVersion: MANUAL_MATCHING_FEASIBILITY_VERSION,
@@ -240,32 +250,84 @@ export function analyzeManualMatchingFeasibility({
       repeatability: rows.repeatability.length
     },
     actualResultRowsIncluded: metrics.completedResultCount,
+    recordStatus,
     metrics,
+    targetComparison,
+    calibrationDecision,
     dashboard,
     errors,
     warnings
   };
 }
 
-export function calculateManualMatchingMetrics(resultRows) {
-  const actualRows = resultRows.filter(isActualStudyResultRow);
-  const completed = actualRows.filter((row) =>
-    hasText(row.participant_id) &&
-    yes(row.raw_media_deleted_confirmed) &&
-    yes(row.profile_deleted_confirmed) &&
-    isRating(row.participant_usefulness_rating_1_to_5) &&
-    isRating(row.participant_resemblance_rating_1_to_5)
+export function classifyManualMatchingStudyRecords(rows) {
+  const subjectRows = rows.subjects ?? [];
+  const resultRows = rows.results ?? [];
+  const actualSubjects = subjectRows.filter((row) => !isFixtureLike(row.participant_id));
+  const actualResults = resultRows.filter(isActualStudyResultRow);
+  const resultsByParticipant = new Map(actualResults.map((row) => [row.participant_id, row]));
+  const withdrawn = actualSubjects.filter((row) => hasText(row.withdrawal_requested_at));
+  const invalidCaptureSubjectIDs = new Set(
+    actualSubjects
+      .filter((row) =>
+        requiredViews.some((field) => !yes(row[field])) ||
+        !yes(row.neutral_expression_confirmed) ||
+        !yes(row.one_person_confirmed) ||
+        !yes(row.photo_requirements_met)
+      )
+      .map((row) => row.participant_id)
   );
+  for (const row of actualResults) {
+    if (yes(row.capture_failure_flag) || row.capture_quality_state === "failed") invalidCaptureSubjectIDs.add(row.participant_id);
+  }
+  const completed = actualResults.filter(isCompletedActualResult);
+  const completedIDs = new Set(completed.map((row) => row.participant_id));
+  const withdrawnIDs = new Set(withdrawn.map((row) => row.participant_id));
+  const incomplete = actualSubjects.filter((row) =>
+    !completedIDs.has(row.participant_id) &&
+    !withdrawnIDs.has(row.participant_id) &&
+    !invalidCaptureSubjectIDs.has(row.participant_id)
+  );
+  const deletedIDs = new Set([
+    ...actualSubjects.filter((row) => row.raw_media_deletion_status === "deleted").map((row) => row.participant_id),
+    ...actualResults.filter((row) => yes(row.raw_media_deleted_confirmed) && yes(row.profile_deleted_confirmed)).map((row) => row.participant_id)
+  ]);
+  return {
+    actualSubjectRows: actualSubjects.length,
+    actualResultRows: actualResults.length,
+    completed: completed.length,
+    incomplete: incomplete.length,
+    invalidCapture: invalidCaptureSubjectIDs.size,
+    withdrawn: withdrawn.length,
+    deleted: deletedIDs.size,
+    fixtureOrSyntheticSubjectsExcluded: subjectRows.length - actualSubjects.length,
+    fixtureOrSyntheticResultsExcluded: resultRows.length - actualResults.length,
+    participantsWithResultRows: resultsByParticipant.size
+  };
+}
+
+export function calculateManualMatchingMetrics(resultRows, repeatabilityRows = []) {
+  const actualRows = resultRows.filter(isActualStudyResultRow);
+  const completed = actualRows.filter(isCompletedActualResult);
   const topOneAccepted = completed.filter((row) => yes(row.top_one_accepted) || Number(row.participant_selected_rank) === 1).length;
   const topThreeUseful = completed.filter((row) => yes(row.top_three_useful) || [1, 2, 3].includes(Number(row.participant_selected_rank))).length;
   const disagreementCount = completed.filter((row) => yes(row.disagreement_logged) || !sameBoolean(row.reviewers_agreed_top_choice, row.reviewers_agreed_top_three_set)).length;
   const ratings = completed.map((row) => Number(row.participant_usefulness_rating_1_to_5));
   const resemblanceRatings = completed.map((row) => Number(row.participant_resemblance_rating_1_to_5));
   const captureFailureCount = actualRows.filter((row) => yes(row.capture_failure_flag)).length;
-  const repeatScanRows = completed.filter((row) => yes(row.repeat_scan_completed));
-  const repeatScanSameTopChoice = repeatScanRows.filter((row) => yes(row.repeat_scan_same_top_choice)).length;
-  const repeatScanOverlaps = repeatScanRows.map((row) => Number(row.repeat_scan_overlap_count)).filter((value) => Number.isFinite(value));
+  const repeatScanRowsFromResults = completed.filter((row) => yes(row.repeat_scan_completed));
+  const actualRepeatabilityRows = repeatabilityRows.filter(isActualRepeatabilityRow);
+  const repeatScanCount = Math.max(repeatScanRowsFromResults.length, actualRepeatabilityRows.length);
+  const repeatSameTopChoiceCount = Math.max(
+    repeatScanRowsFromResults.filter((row) => yes(row.repeat_scan_same_top_choice)).length,
+    actualRepeatabilityRows.filter((row) => yes(row.same_top_choice)).length
+  );
+  const repeatScanOverlaps = [
+    ...repeatScanRowsFromResults.map((row) => Number(row.repeat_scan_overlap_count)),
+    ...actualRepeatabilityRows.map((row) => Number(row.top_three_overlap_count))
+  ].filter((value) => Number.isFinite(value));
   const confidencePerceptionRatings = completed.map((row) => Number(row.confidence_perception_1_to_5)).filter((value) => Number.isInteger(value) && value >= 1 && value <= 5);
+  const confidenceCalibration = calculateConfidenceCalibration(completed);
   return {
     actualInputCount: actualRows.length,
     fixtureRowsExcluded: resultRows.length - actualRows.length,
@@ -281,24 +343,81 @@ export function calculateManualMatchingMetrics(resultRows) {
     mismatchReasonCounts: distribution(completed.flatMap((row) => splitReasons(row.mismatch_reason_codes))),
     deletionConfirmation: rate(completed.filter((row) => yes(row.raw_media_deleted_confirmed) && yes(row.profile_deleted_confirmed)).length, completed.length),
     captureFailureRate: rate(captureFailureCount, actualRows.length),
+    captureQualityEffect: buildGroupedRates(completed, (row) => row.capture_quality_state || "unknown"),
     repeatability: {
-      repeatScanCount: repeatScanRows.length,
-      sameTopChoiceRate: rate(repeatScanSameTopChoice, repeatScanRows.length),
+      repeatScanCount,
+      sameTopChoiceRate: rate(repeatSameTopChoiceCount, repeatScanCount),
       averageTopThreeOverlap: average(repeatScanOverlaps)
     },
+    confidenceCalibration,
     averageConfidencePerceptionRating: average(confidencePerceptionRatings)
   };
 }
 
-export function createManualMatchingStudyDashboard({ rows, metrics, errors = [], warnings = [] }) {
+export function compareManualMatchingTargets(metrics) {
+  const enoughCompletedRows = metrics.completedResultCount >= PRIVATE_BETA_MATCHING_TARGETS.minimumCompletedParticipants;
+  return {
+    participantCount: {
+      target: `${PRIVATE_BETA_MATCHING_TARGETS.minimumCompletedParticipants}-${PRIVATE_BETA_MATCHING_TARGETS.maximumCompletedParticipants}`,
+      actual: metrics.completedResultCount,
+      status: enoughCompletedRows && metrics.completedResultCount <= PRIVATE_BETA_MATCHING_TARGETS.maximumCompletedParticipants ? "pass" : "notMeasured"
+    },
+    topOneAcceptance: compareRateToTarget(metrics.topOneAcceptance, PRIVATE_BETA_MATCHING_TARGETS.topOneAcceptanceRate, enoughCompletedRows),
+    topThreeUsefulness: compareRateToTarget(metrics.topThreeUsefulness, PRIVATE_BETA_MATCHING_TARGETS.topThreeUsefulMatchRate, enoughCompletedRows)
+  };
+}
+
+export function createMatchingCalibrationDecision(metrics, targetComparison) {
+  const canHoldout = metrics.completedResultCount >= PRIVATE_BETA_MATCHING_TARGETS.minimumCompletedParticipants * 2;
+  const enoughForTargetRead = metrics.completedResultCount >= PRIVATE_BETA_MATCHING_TARGETS.minimumCompletedParticipants;
+  const targetFailed =
+    targetComparison.topOneAcceptance.status === "fail" ||
+    targetComparison.topThreeUsefulness.status === "fail";
+  const unsupportedSignals = Object.entries(metrics.mismatchReasonCounts)
+    .filter(([, count]) => metrics.completedResultCount > 0 && count / metrics.completedResultCount >= 0.3)
+    .map(([reason, count]) => ({ reason, count, rate: count / metrics.completedResultCount }));
+  const decisionStatus = !enoughForTargetRead
+    ? "NOT_TUNED_INSUFFICIENT_REAL_DATA"
+    : !canHoldout
+      ? "NOT_TUNED_NO_HOLDOUT_GROUP"
+      : targetFailed && unsupportedSignals.length > 0
+        ? "REVIEW_REQUIRED_BEFORE_TUNING"
+        : "NOT_TUNED_NO_EVIDENCE_OF_IMPROVEMENT";
+  return {
+    baselineModelVersion: BASELINE_MATCHING_MODEL_VERSION,
+    candidateModelVersion: null,
+    decisionStatus,
+    weightChanges: [],
+    priorConfigurationPreserved: true,
+    fixtureDataUsedForTuning: false,
+    holdout: {
+      requiredForAutomaticTuning: true,
+      available: canHoldout,
+      reason: canHoldout ? "At least 20 completed records are available for a simple tuning/holdout split." : "Fewer than 20 completed records; do not tune and evaluate on the same small sample."
+    },
+    unsupportedSignals,
+    beforeAfterEvaluation: {
+      before: {
+        modelVersion: BASELINE_MATCHING_MODEL_VERSION,
+        topOneAcceptance: metrics.topOneAcceptance,
+        topThreeUsefulness: metrics.topThreeUsefulness,
+        confidenceCalibration: metrics.confidenceCalibration
+      },
+      after: null,
+      reason: "No tuned candidate was adopted from the available evidence."
+    }
+  };
+}
+
+export function createManualMatchingStudyDashboard({ rows, metrics, targetComparison = compareManualMatchingTargets(metrics), calibrationDecision = createMatchingCalibrationDecision(metrics, targetComparison), errors = [], warnings = [] }) {
   const realParticipantCount = rows.subjects.filter((row) => !isFixtureLike(row.participant_id)).length;
   const completedParticipants = metrics.completedResultCount;
-  const enoughObservations = completedParticipants >= 10;
+  const enoughObservations = completedParticipants >= PRIVATE_BETA_MATCHING_TARGETS.minimumCompletedParticipants;
   return {
     status: enoughObservations ? "measured" : "notMeasured",
-    measurementLabel: enoughObservations ? "Calculated from real submitted study rows." : "Not measured until at least 10 complete real participant results exist.",
+    measurementLabel: enoughObservations ? "Calculated from real submitted study rows." : `Not measured until at least ${PRIVATE_BETA_MATCHING_TARGETS.minimumCompletedParticipants} complete real participant results exist.`,
     participantsCompleted: completedParticipants,
-    participantTarget: { minimum: 10, maximum: 20 },
+    participantTarget: { minimum: PRIVATE_BETA_MATCHING_TARGETS.minimumCompletedParticipants, maximum: PRIVATE_BETA_MATCHING_TARGETS.maximumCompletedParticipants },
     realParticipantRows: realParticipantCount,
     fixtureRowsExcluded: metrics.fixtureRowsExcluded,
     topOneAcceptance: notMeasuredUntilEnough(metrics.topOneAcceptance, enoughObservations),
@@ -306,6 +425,9 @@ export function createManualMatchingStudyDashboard({ rows, metrics, errors = [],
     rankDistribution: enoughObservations ? metrics.rankSelectedDistribution : "not measured",
     repeatability: enoughObservations ? metrics.repeatability : "not measured",
     captureFailure: enoughObservations ? metrics.captureFailureRate : "not measured",
+    captureQualityEffect: enoughObservations ? metrics.captureQualityEffect : "not measured",
+    targetComparison,
+    calibrationDecision,
     reviewerAgreement: enoughObservations
       ? {
           topChoice: metrics.reviewerTopChoiceAgreement,
@@ -330,6 +452,8 @@ export function exportAnonymizedStudyResults(report, outputPath, root = reposito
     rowCounts: report.rowCounts,
     metrics: report.metrics,
     dashboard: report.dashboard,
+    targetComparison: report.targetComparison,
+    calibrationDecision: report.calibrationDecision,
     privacy: {
       participantNamesIncluded: false,
       rawMediaIncluded: false,
@@ -345,6 +469,97 @@ export function exportAnonymizedStudyResults(report, outputPath, root = reposito
     rawMediaIncluded: false,
     directIdentifiersIncluded: false
   };
+}
+
+function isCompletedActualResult(row) {
+  return (
+    hasText(row.participant_id) &&
+    row.source_type === "actualStudy" &&
+    !isFixtureLike(row.participant_id) &&
+    !yes(row.capture_failure_flag) &&
+    row.capture_quality_state !== "failed" &&
+    yes(row.raw_media_deleted_confirmed) &&
+    yes(row.profile_deleted_confirmed) &&
+    isRating(row.participant_usefulness_rating_1_to_5) &&
+    isRating(row.participant_resemblance_rating_1_to_5)
+  );
+}
+
+function isActualRepeatabilityRow(row) {
+  return row.source_type === "actualStudy" && !isFixtureLike(row.participant_id);
+}
+
+function buildGroupedRates(rows, keyForRow) {
+  const groups = new Map();
+  for (const row of rows) {
+    const key = String(keyForRow(row) || "unknown");
+    groups.set(key, [...(groups.get(key) ?? []), row]);
+  }
+  return Object.fromEntries(
+    [...groups.entries()]
+      .sort(([first], [second]) => first.localeCompare(second))
+      .map(([key, group]) => [
+        key,
+        {
+          sampleCount: group.length,
+          topOneAcceptance: rate(group.filter((row) => yes(row.top_one_accepted) || Number(row.participant_selected_rank) === 1).length, group.length),
+          topThreeUsefulness: rate(group.filter((row) => yes(row.top_three_useful) || [1, 2, 3].includes(Number(row.participant_selected_rank))).length, group.length),
+          averageConfidence: average(group.map((row) => average(parseNumberList(row.original_top_three_confidence))).filter((value) => value !== null))
+        }
+      ])
+  );
+}
+
+function calculateConfidenceCalibration(completedRows) {
+  const rowsWithConfidence = completedRows
+    .map((row) => ({
+      confidence: average(parseNumberList(row.original_top_three_confidence)),
+      topThreeUseful: yes(row.top_three_useful) || [1, 2, 3].includes(Number(row.participant_selected_rank))
+    }))
+    .filter((row) => row.confidence !== null);
+  const buckets = [
+    confidenceBucket("low", rowsWithConfidence.filter((row) => row.confidence < 0.5)),
+    confidenceBucket("medium", rowsWithConfidence.filter((row) => row.confidence >= 0.5 && row.confidence < 0.75)),
+    confidenceBucket("high", rowsWithConfidence.filter((row) => row.confidence >= 0.75))
+  ];
+  const gaps = buckets.map((bucket) => bucket.calibrationGap).filter((value) => value !== null).map(Math.abs);
+  return {
+    buckets,
+    unavailableCount: completedRows.length - rowsWithConfidence.length,
+    meanAbsoluteCalibrationError: average(gaps)
+  };
+}
+
+function confidenceBucket(bucket, rows) {
+  const averageConfidence = average(rows.map((row) => row.confidence).filter((value) => value !== null));
+  const observedTopThreeUsefulRate = rows.length > 0 ? rows.filter((row) => row.topThreeUseful).length / rows.length : null;
+  return {
+    bucket,
+    sampleCount: rows.length,
+    averageConfidence,
+    observedTopThreeUsefulRate,
+    calibrationGap: averageConfidence !== null && observedTopThreeUsefulRate !== null ? averageConfidence - observedTopThreeUsefulRate : null
+  };
+}
+
+function compareRateToTarget(metric, target, enoughCompletedRows) {
+  if (!enoughCompletedRows || metric.rate === null) {
+    return { target, actual: metric.rate, status: "notMeasured", numerator: metric.numerator, denominator: metric.denominator };
+  }
+  return {
+    target,
+    actual: metric.rate,
+    status: metric.rate >= target ? "pass" : "fail",
+    numerator: metric.numerator,
+    denominator: metric.denominator
+  };
+}
+
+function parseNumberList(value) {
+  return splitList(value)
+    .map((item) => Number(item))
+    .map((number) => (number > 1 ? number / 100 : number))
+    .filter((number) => Number.isFinite(number) && number >= 0);
 }
 
 function loadCSV(root, relativePath, expectedColumns, label, options = {}) {

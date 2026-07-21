@@ -69,6 +69,7 @@ export interface RuleBasedMatchingEngineConfig {
   requireApprovedProductionRelease?: boolean;
 }
 
+export const RULE_BASED_MATCHING_MODEL_VERSION = "rule-based-web-mvp-v2-rgb-geometry";
 const scoreLabel = "Match score based on the game’s available appearance options.";
 const lowConfidenceThreshold = 0.25;
 const nearTieScoreDelta = 1;
@@ -166,7 +167,7 @@ export function createRuleBasedMatchingEngine(config: MatchingFeatureConfig[] | 
         requireApprovedProductionRelease: config.requireApprovedProductionRelease ?? true
       };
   return {
-    modelVersion: "rule-based-web-mvp-v2-rgb-geometry",
+    modelVersion: RULE_BASED_MATCHING_MODEL_VERSION,
     matchTopThree(input) {
       if (!canMatchCatalog(input.catalog, input.allowTestFixtures ?? false, engineConfig.requireApprovedProductionRelease)) {
         return [];

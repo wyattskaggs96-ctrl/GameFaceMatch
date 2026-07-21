@@ -7,7 +7,7 @@ import { verifyManifestIntegrity } from "@/lib/catalog/catalog-integrity";
 import { createBundledCatalogRepository } from "@/lib/catalog/catalog-repository";
 import { PRODUCTION_PUBLISH_GATE_VERSION, requiredProductionPublishGateChecks, type ProductionPublishGateReport } from "@/lib/catalog/production-publish-gate";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
-import { createRuleBasedMatchingEngine, type MatchingFeatureConfig } from "@/lib/matching/matching-engine";
+import { createRuleBasedMatchingEngine, RULE_BASED_MATCHING_MODEL_VERSION, type MatchingFeatureConfig } from "@/lib/matching/matching-engine";
 import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import type { AppearanceAttribute, FacialMeasurement, GameCatalogManifest, StandardFaceProfile, StandardFacialMeasurementID } from "@/types/domain";
 
@@ -16,6 +16,11 @@ const fixtureCatalog = JSON.parse(
 ) as GameCatalogManifest;
 
 describe("rule-based matching engine", () => {
+  it("exposes the active baseline model version for calibration reports", () => {
+    expect(engine().modelVersion).toBe(RULE_BASED_MATCHING_MODEL_VERSION);
+    expect(RULE_BASED_MATCHING_MODEL_VERSION).toBe("rule-based-web-mvp-v2-rgb-geometry");
+  });
+
   it("returns an exact match score for identical reliable features without identity-probability language", () => {
     const profile = syntheticProfile();
     profile.appearance.attributes = [

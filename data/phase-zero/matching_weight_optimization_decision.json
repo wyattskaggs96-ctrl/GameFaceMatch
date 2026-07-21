@@ -1,6 +1,6 @@
 {
   "schemaVersion": "matching-weight-optimization-decision-v1",
-  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "generatedAt": "2026-07-20T00:00:00.000Z",
   "decisionStatus": "NOT_ADOPTED_NO_REAL_COMPLETED_STUDY_DATA",
   "sourceType": "researchStatus",
   "realFeasibilityStudyResultsOnly": true,
@@ -39,7 +39,7 @@
     "status": "not_available",
     "trainingParticipantCount": 0,
     "evaluationParticipantCount": 0,
-    "reason": "No real completed feasibility-study results exist. Splitting a zero-row sample would be meaningless."
+    "reason": "No real completed feasibility-study results exist. Splitting a zero-row sample would be meaningless. Future automatic tuning requires a holdout group when the sample permits, and fewer than 20 completed participants is too small for a simple tune/evaluate split."
   },
   "candidateModel": {
     "adopted": false,
@@ -54,6 +54,12 @@
     "participantsAvailable": 0,
     "reason": "No accepted real participants or completed result rows exist."
   },
+  "privateBetaTargets": {
+    "topThreeUsefulnessRate": 0.8,
+    "topOneAcceptanceRate": 0.5,
+    "minimumCompletedParticipants": 10,
+    "status": "not_evaluable"
+  },
   "performanceComparison": {
     "baseline": {
       "validParticipants": 0,
@@ -65,6 +71,17 @@
     "candidate": null,
     "improvedWithoutUnacceptableRegression": false,
     "reason": "No real data exists to measure improvement or regression."
+  },
+  "beforeAfterEvaluation": {
+    "before": {
+      "modelVersion": "rule-based-web-mvp-v2-rgb-geometry",
+      "validParticipants": 0,
+      "topOneAcceptanceRate": null,
+      "topThreeUsefulnessRate": null,
+      "confidenceCalibration": null
+    },
+    "after": null,
+    "reason": "No tuned candidate was adopted from the available evidence."
   },
   "overfittingControl": {
     "status": "passed_by_noop",

@@ -1,7 +1,7 @@
 # Matching Weight Optimization Decision
 
 **Status:** NOT ADOPTED - NO REAL COMPLETED STUDY DATA  
-**Date:** 2026-07-14  
+**Date:** 2026-07-20
 **Baseline model:** `rule-based-web-mvp-v2-rgb-geometry`  
 **Production recommendation status:** FAIL-CLOSED  
 **Data policy:** Real feasibility-study results only; synthetic fixtures excluded  
@@ -10,7 +10,7 @@
 
 No matching weights were changed, no new matcher version was adopted, and no rollback is required.
 
-The optimization request depends on real completed feasibility-study results. The current accuracy analysis records 0 valid participants and 0 completed result rows. The production College Football 27 catalog is also empty, so verified production recommendations cannot be rerun or compared.
+The optimization request depends on real completed feasibility-study results. A fresh validation pass on 2026-07-20 found 0 valid participants and 0 completed result rows in the repository. The production College Football 27 catalog is also empty, so verified production recommendations cannot be rerun or compared.
 
 Changing weights from a zero-row dataset, synthetic fixtures, research candidates, or placeholder records would overfit by definition and would violate the project rule that real user-facing recommendations require verified production catalog data.
 
@@ -73,7 +73,7 @@ A future tuned model may be adopted only when measured real-data results improve
 
 1. The baseline model version and weights.
 2. The candidate model version and weights.
-3. A tuning/evaluation split, or an explicit small-sample limitation.
+3. A tuning/evaluation split, or an explicit small-sample limitation. If the study has fewer than 20 completed participants, do not treat automatic weight tuning as validated.
 4. Participant rerun results for both baseline and candidate.
 5. Top-one, top-three, resemblance, agreement, confidence-calibration, mismatch, and repeatability comparisons.
 6. Confirmation that geometry remains independent from skin presentation.

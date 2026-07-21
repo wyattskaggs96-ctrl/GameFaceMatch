@@ -1,6 +1,6 @@
 {
   "schemaVersion": "manual-matching-accuracy-analysis-v1",
-  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "generatedAt": "2026-07-20T00:00:00.000Z",
   "analysisStatus": "NO_REAL_COMPLETED_STUDY_DATA",
   "productionRecommendationStatus": "FAIL_CLOSED",
   "sourceType": "researchStatus",
@@ -21,6 +21,10 @@
       "finding": "Header-only template; 0 result rows."
     },
     {
+      "path": "data/phase-zero/manual_matching_repeatability.template.csv",
+      "finding": "Header-only template; 0 repeatability rows."
+    },
+    {
       "path": "data/phase-zero/manual_matching_participant_intake_checkpoint.json",
       "finding": "Blocked intake checkpoint; 0 participant packages discovered and 0 participants recorded."
     },
@@ -39,6 +43,13 @@
   ],
   "validParticipants": 0,
   "completedResultCount": 0,
+  "recordStatus": {
+    "completed": 0,
+    "incomplete": 0,
+    "invalidCapture": 0,
+    "withdrawn": 0,
+    "deleted": 0
+  },
   "metrics": {
     "topOneAcceptanceRate": {
       "numerator": 0,
@@ -79,10 +90,37 @@
       "reason": "No real paired reviewer results exist."
     },
     "confidenceCalibration": {
-      "buckets": [],
+      "buckets": [
+        {
+          "bucket": "low",
+          "sampleCount": 0,
+          "averageConfidence": null,
+          "observedTopThreeUsefulRate": null,
+          "calibrationGap": null
+        },
+        {
+          "bucket": "medium",
+          "sampleCount": 0,
+          "averageConfidence": null,
+          "observedTopThreeUsefulRate": null,
+          "calibrationGap": null
+        },
+        {
+          "bucket": "high",
+          "sampleCount": 0,
+          "averageConfidence": null,
+          "observedTopThreeUsefulRate": null,
+          "calibrationGap": null
+        }
+      ],
       "meanAbsoluteCalibrationError": null,
       "status": "not_calculable",
       "reason": "No real predictions or observed outcomes exist."
+    },
+    "captureQualityEffect": {
+      "status": "not_calculable",
+      "reason": "No real capture-quality-grouped outcomes exist.",
+      "groups": []
     },
     "performanceByCaptureMode": [],
     "performanceByLightingQuality": [],
@@ -106,13 +144,13 @@
     },
     {
       "target": "Top-one acceptance",
-      "required": "At least 55% of testers rate the top result 4 or 5 on the resemblance rubric.",
+      "required": "At least 50% of testers accept the top result.",
       "current": "Not calculable with denominator 0.",
       "result": "not_evaluable"
     },
     {
       "target": "Top-three usefulness",
-      "required": "At least 75% of testers rate at least one top-three result 4 or 5.",
+      "required": "At least 80% of testers find one of the top-three results useful.",
       "current": "Not calculable with denominator 0.",
       "result": "not_evaluable"
     },
@@ -130,6 +168,9 @@
     "average resemblance rating",
     "median resemblance rating",
     "inter-reviewer agreement",
+    "repeated-scan stability",
+    "capture-quality effect",
+    "feature-level mismatch frequency",
     "confidence calibration",
     "performance by capture mode",
     "performance by lighting quality",
@@ -144,7 +185,8 @@
     "Confirm the manual matching study is READY before collection begins.",
     "Ingest non-fixture participant rows with consent, required capture views, and deletion status.",
     "Ingest paired reviewer rows and completed participant result rows.",
-    "Ensure every recommendation references verified production catalog records and exact catalog versions."
+    "Ensure every recommendation references verified production catalog records and exact catalog versions.",
+    "Keep a holdout group when sample size permits; do not tune and evaluate the same small participant set."
   ],
   "privacyFinding": {
     "rawParticipantMediaCommitted": false,

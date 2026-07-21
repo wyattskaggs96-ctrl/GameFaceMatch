@@ -1,7 +1,7 @@
 # Manual Matching Accuracy Analysis
 
 **Status:** NO REAL COMPLETED STUDY DATA  
-**Date:** 2026-07-14  
+**Date:** 2026-07-20
 **Production recommendation status:** FAIL-CLOSED  
 **Data policy:** Real completed study data only; synthetic fixtures excluded  
 
@@ -9,7 +9,7 @@ This is the current transparent feasibility report for manual matching accuracy.
 
 ## Summary
 
-No real completed manual matching study data exists in the repository yet.
+No real completed manual matching study data exists in the repository yet. A fresh repository search on 2026-07-20 found only header-only study templates, prior blocked/rejected checkpoint records, and synthetic test fixtures under `data/fixtures/test-only/`.
 
 The committed subject, reviewer, and result files are header-only templates. The participant intake checkpoint records 0 discovered participant packages and 0 participants recorded. The results ingestion checkpoint records 0 submissions discovered and 0 ratings committed. The production College Football 27 catalog is still empty, so verified production recommendations cannot be produced or evaluated.
 
@@ -52,8 +52,8 @@ Because the denominator is 0, accuracy and usefulness metrics are not calculable
 | Target | Required threshold | Current result |
 | --- | --- | --- |
 | Study participant count | 10-20 consenting subjects for feasibility; fewer than 10 is dry-run only. | Not met: 0 valid participants. |
-| Top-one acceptance | At least 55% of testers rate the top result 4 or 5 on the resemblance rubric. | Not evaluable with denominator 0. |
-| Top-three usefulness | At least 75% of testers rate at least one top-three result 4 or 5. | Not evaluable with denominator 0. |
+| Top-one acceptance | At least 50% of testers accept the top result. | Not evaluable with denominator 0. |
+| Top-three usefulness | At least 80% of testers find one of the top-three results useful. | Not evaluable with denominator 0. |
 | Repeatability | Repeated captures should preserve core geometry tolerances and at least two of the top-three recommendations once a catalog is available. | Not evaluable; no real repeat scans. |
 
 ## Feasibility Decision
@@ -70,6 +70,7 @@ The project is not failing an accuracy target; it has not produced the required 
 4. Ingest paired reviewer rows.
 5. Ingest completed participant result rows with resemblance/usefulness ratings, selected rank, mismatch reasons, and deletion confirmation.
 6. Ensure every recommendation references verified production catalog records and exact catalog versions.
+7. Keep a holdout group when sample size permits; do not tune and evaluate the same small participant set.
 
 ## Privacy Finding
 

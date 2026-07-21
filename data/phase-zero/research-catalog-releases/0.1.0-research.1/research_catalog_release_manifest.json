@@ -153,7 +153,7 @@
       "sourceCsvPath": null,
       "jsonOutput": "issues_and_exceptions.json",
       "csvOutput": "issues_and_exceptions.csv",
-      "recordCount": 41,
+      "recordCount": 44,
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
     },
@@ -179,8 +179,8 @@
     {
       "fileName": "additional_attributes.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "8b5f7c90b72e1e22ca7563539fe873d0a8c91fe186425f1542b31fd38089e9e9",
-      "sizeBytes": 335201,
+      "sha256": "d8bcde64c6f324e58fe33abb60c8d5a53cd121685b54810f506f7204df972f91",
+      "sizeBytes": 394937,
       "sourcePath": "data/phase-zero/additional_attributes.research.json"
     },
     {
@@ -193,8 +193,8 @@
     {
       "fileName": "body_controls.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "0b5be8523f3f68c5fd4e2e809e502793e0dd493a1df9c1c274bc143d49b2e098",
-      "sizeBytes": 28285,
+      "sha256": "45d5e5b6c822073faeb91e560afe62ba89f72498547769a41afcd826bf3c8291",
+      "sizeBytes": 33996,
       "sourcePath": "data/phase-zero/body_controls.research.json"
     },
     {
@@ -333,22 +333,22 @@
     {
       "fileName": "heads.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "cd1c10de8d1bb54791c8161d1cb485739a327d3d9314ad1b396aac3eecdb2c6e",
-      "sizeBytes": 190722,
+      "sha256": "5df489a32b8153425abe1fd7854115ab9fcb0965fde9cfb64117e30644b043c4",
+      "sizeBytes": 220772,
       "sourcePath": "data/phase-zero/heads.research.json"
     },
     {
       "fileName": "issues_and_exceptions.csv",
       "contentType": "text/csv; charset=utf-8",
-      "sha256": "c85951826bc270e5da9425fc574888bac24e013206470c56baf6cdfb501f257b",
-      "sizeBytes": 12557,
+      "sha256": "518739256b06e52129a20686781515b7f74fb3fca17f7c207342babe07ccb089",
+      "sizeBytes": 19049,
       "sourcePath": "data/phase-zero/issues_register.research.json"
     },
     {
       "fileName": "issues_and_exceptions.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "0214b596175031993b96e2b6d861aa9b8b338521ee295d5f5a4080621c439dd3",
-      "sizeBytes": 52621,
+      "sha256": "5a5a0cb1f130509c6e25cf452c87106950eed1b60a53def6dcfea2da7cee89c7",
+      "sizeBytes": 63876,
       "sourcePath": "data/phase-zero/issues_register.research.json"
     },
     {
@@ -368,7 +368,7 @@
     {
       "fileName": "README.md",
       "contentType": "text/markdown; charset=utf-8",
-      "sha256": "d7d84ee0cc99309930e2645e737c5ab0445977605a63416364dc65c3170a2931",
+      "sha256": "427e8d59dec2fee03943384250a92607468bba5e3448fbb01ee0b5ce6cf36e2f",
       "sizeBytes": 1239,
       "sourcePath": null
     },
@@ -389,7 +389,7 @@
     {
       "fileName": "research_catalog_release_manifest.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "862f67d7c5d011b52bb31b5d79f52df6caca483f995f7e4d35cdc28d4d0e03f5",
+      "sha256": "8a885bad7e5be8cec4b25d1d050ad5a874edb53ec2f1cbb5f31f873ce56b0b74",
       "sizeBytes": 6828,
       "sourcePath": null
     },
@@ -403,7 +403,7 @@
     {
       "fileName": "research_catalog_release_validation.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "3f56fd49bc5e0438d7573d69de9dd468eb5a6f8a8bb27a170fd16024ecd0ca37",
+      "sha256": "4b1270a4de76bf3a5082c669254b802a7d446dcbacb5d312a891050cc99dfee6",
       "sizeBytes": 2819,
       "sourcePath": null
     }

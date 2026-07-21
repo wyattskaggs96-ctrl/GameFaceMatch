@@ -829,7 +829,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_002",
@@ -957,7 +982,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_003",
@@ -1085,7 +1135,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_004",
@@ -1213,7 +1288,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_006",
@@ -1342,7 +1442,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_007",
@@ -1470,7 +1595,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_008",
@@ -1599,7 +1749,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_009",
@@ -1728,7 +1903,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_010",
@@ -1880,7 +2080,33 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "DUPLICATE_REVIEW_REQUIRED",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": false,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "DUPLICATE_REVIEW_REQUIRED"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON",
+          "DUPLICATE_REVIEW_REQUIRED"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_011",
@@ -2009,7 +2235,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_012",
@@ -2137,7 +2388,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_013",
@@ -2265,7 +2541,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_017",
@@ -2394,7 +2695,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_018",
@@ -2523,7 +2849,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_019",
@@ -2651,7 +3002,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_020",
@@ -2779,7 +3155,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_021",
@@ -2907,7 +3308,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_022",
@@ -3036,7 +3462,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_023",
@@ -3165,7 +3616,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_024",
@@ -3293,7 +3769,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_029",
@@ -3422,7 +3923,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "OBSERVED_RANGE_HAS_GAPS",
-      "categoryCompletenessRatio": 0.724
+      "categoryCompletenessRatio": 0.724,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Tone selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001",
@@ -3550,7 +4076,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Details selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002",
@@ -3678,7 +4229,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Details selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003",
@@ -3806,7 +4382,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Details selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004",
@@ -3934,7 +4535,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Details selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005",
@@ -4062,7 +4688,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Details selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006",
@@ -4190,7 +4841,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Details selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007",
@@ -4318,7 +4994,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Details selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008",
@@ -4446,7 +5147,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Details selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009",
@@ -4574,7 +5300,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Details selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010",
@@ -4702,7 +5453,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Skin Details selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
@@ -4830,7 +5606,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Shape selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
@@ -4958,7 +5759,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Shape selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_003",
@@ -5086,7 +5912,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Shape selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_004",
@@ -5214,7 +6065,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Shape selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_005",
@@ -5342,7 +6218,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Shape selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_001",
@@ -5471,7 +6372,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Color selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_002",
@@ -5600,7 +6526,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Color selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_003",
@@ -5728,7 +6679,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Color selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_004",
@@ -5856,7 +6832,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Color selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_005",
@@ -5984,7 +6985,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Color selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_006",
@@ -6112,7 +7138,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Color selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_007",
@@ -6240,7 +7291,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Eye Color selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_001",
@@ -6368,7 +7444,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Nose selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_002",
@@ -6496,7 +7597,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Nose selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_003",
@@ -6624,7 +7750,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Nose selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_004",
@@ -6752,7 +7903,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Nose selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_005",
@@ -6904,7 +8080,33 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "DUPLICATE_REVIEW_REQUIRED",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": false,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "DUPLICATE_REVIEW_REQUIRED"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON",
+          "DUPLICATE_REVIEW_REQUIRED"
+        ],
+        "notes": [
+          "Nose selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_006",
@@ -7032,7 +8234,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Nose selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_NOSE_007",
@@ -7160,7 +8387,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Nose selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
@@ -7288,7 +8540,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Ear Shape selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
@@ -7441,7 +8718,33 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "DUPLICATE_REVIEW_REQUIRED",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": false,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "DUPLICATE_REVIEW_REQUIRED"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON",
+          "DUPLICATE_REVIEW_REQUIRED"
+        ],
+        "notes": [
+          "Ear Shape selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
@@ -7570,7 +8873,32 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Ear Shape selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_004",
@@ -7698,7 +9026,48 @@
       "createdAt": "2026-07-14T01:15:00-04:00",
       "updatedAt": "2026-07-14T01:15:00-04:00",
       "categoryCompletenessStatus": "NOT_APPLICABLE_NO_NUMERIC_RANGE",
-      "categoryCompletenessRatio": null
+      "categoryCompletenessRatio": null,
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Ear Shape selector boundaries, default, wrap behavior, and total count are not fully proven.",
+          "Current evidence is primary research only and not standardized for production comparison.",
+          "Second-person verification has not occurred."
+        ]
+      }
     }
-  ]
+  ],
+  "primaryReviewSummary": {
+    "totalResearchCandidates": 54,
+    "primaryApproved": 0,
+    "primaryApprovedWithNotes": 51,
+    "recaptureRequired": 0,
+    "missingEvidence": 0,
+    "labelUnresolved": 0,
+    "orderUnresolved": 0,
+    "categoryIncomplete": 0,
+    "environmentUnresolved": 0,
+    "duplicateReviewRequired": 3,
+    "notReviewed": 0,
+    "productionApproved": 0,
+    "secondVerified": 0,
+    "recordsAllowedInProductionRecommendations": 0
+  }
 }

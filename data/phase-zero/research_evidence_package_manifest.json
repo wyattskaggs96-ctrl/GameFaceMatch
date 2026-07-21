@@ -44,7 +44,7 @@
     "catalogRowsWithInvalidEvidence": 0,
     "captureLogEvents": 106,
     "captureLogChronological": true,
-    "issueCount": 41,
+    "issueCount": 44,
     "issuesWithoutLinks": 0,
     "pathResolutionEntriesChecked": 98,
     "missingResolvedFiles": 0,
@@ -99,7 +99,7 @@
       "status": "passed",
       "blocking": 0,
       "warnings": 0,
-      "details": "41 issue(s) checked; 0 issue(s) lack affected records, affected evidence, related issues, or a recapture request."
+      "details": "44 issue(s) checked; 0 issue(s) lack affected records, affected evidence, related issues, or a recapture request."
     }
   ],
   "masterInventory": [
@@ -4871,14 +4871,14 @@
     }
   },
   "issueLinkCheck": {
-    "issuesChecked": 41,
+    "issuesChecked": 44,
     "unlinkedIssues": [],
     "summaryCheck": {
       "check": "issuesAndExceptionsLinked",
       "status": "passed",
       "blocking": 0,
       "warnings": 0,
-      "details": "41 issue(s) checked; 0 issue(s) lack affected records, affected evidence, related issues, or a recapture request."
+      "details": "44 issue(s) checked; 0 issue(s) lack affected records, affected evidence, related issues, or a recapture request."
     }
   },
   "blockers": [],

@@ -60,7 +60,7 @@ describe("CF27 research catalog release", () => {
     expect(sourceExports.get("dependency_tests")).toBe(16);
     expect(sourceExports.get("evidence_manifest")).toBe(96);
     expect(sourceExports.get("capture_log")).toBe(106);
-    expect(sourceExports.get("issues_and_exceptions")).toBe(41);
+    expect(sourceExports.get("issues_and_exceptions")).toBe(44);
     expect(sourceExports.get("recapture_requests")).toBe(10);
     expect(sourceExports.get("hairstyles")).toBe(0);
     expect(sourceExports.get("hair_colors")).toBe(0);

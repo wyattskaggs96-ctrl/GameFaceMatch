@@ -35,7 +35,7 @@ This package is a local research-evidence integrity checkpoint. It does not appr
 - PASSED duplicateEvidenceDocumented: 2 exact duplicate group(s) documented in video inventory.
 - PASSED catalogRowsPointToValidEvidence: 139 catalog row(s) checked across canonical research catalogs; 0 invalid evidence linkage row(s).
 - PASSED captureLogChronologicalAndEvidenceLinked: 106 capture event(s) checked; 0 out of chronological order, 0 missing generated evidence reference(s).
-- PASSED issuesAndExceptionsLinked: 41 issue(s) checked; 0 issue(s) lack affected records, affected evidence, related issues, or a recapture request.
+- PASSED issuesAndExceptionsLinked: 44 issue(s) checked; 0 issue(s) lack affected records, affected evidence, related issues, or a recapture request.
 
 ## Duplicate Evidence
 

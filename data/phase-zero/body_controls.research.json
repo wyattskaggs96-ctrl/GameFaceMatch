@@ -435,7 +435,31 @@
         "Current evidence does not prove whether position changes body controls, head options, rendering, hairstyles, facial hair, or camera framing."
       ],
       "createdAt": "2026-07-14T04:15:00-04:00",
-      "updatedAt": "2026-07-14T04:15:00-04:00"
+      "updatedAt": "2026-07-14T04:15:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Body records are context observations, not production appearance recommendations.",
+          "Dependency effects on head, hair, facial hair, body, and camera framing are not tested.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_ELITE",
@@ -480,7 +504,31 @@
         "Current evidence does not prove these are body archetype controls or that they affect appearance options."
       ],
       "createdAt": "2026-07-14T04:15:00-04:00",
-      "updatedAt": "2026-07-14T04:15:00-04:00"
+      "updatedAt": "2026-07-14T04:15:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Body records are context observations, not production appearance recommendations.",
+          "Dependency effects on head, hair, facial hair, body, and camera framing are not tested.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_BLUE_CHIP",
@@ -525,7 +573,31 @@
         "Current evidence does not prove these are body archetype controls or that they affect appearance options."
       ],
       "createdAt": "2026-07-14T04:15:00-04:00",
-      "updatedAt": "2026-07-14T04:15:00-04:00"
+      "updatedAt": "2026-07-14T04:15:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Body records are context observations, not production appearance recommendations.",
+          "Dependency effects on head, hair, facial hair, body, and camera framing are not tested.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_CONTRIBUTOR",
@@ -570,7 +642,31 @@
         "Current evidence does not prove these are body archetype controls or that they affect appearance options."
       ],
       "createdAt": "2026-07-14T04:15:00-04:00",
-      "updatedAt": "2026-07-14T04:15:00-04:00"
+      "updatedAt": "2026-07-14T04:15:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Body records are context observations, not production appearance recommendations.",
+          "Dependency effects on head, hair, facial hair, body, and camera framing are not tested.",
+          "Second-person verification has not occurred."
+        ]
+      }
     },
     {
       "stableResearchID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_UNDERDOG",
@@ -615,7 +711,47 @@
         "Current evidence does not prove these are body archetype controls or that they affect appearance options."
       ],
       "createdAt": "2026-07-14T04:15:00-04:00",
-      "updatedAt": "2026-07-14T04:15:00-04:00"
+      "updatedAt": "2026-07-14T04:15:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Body records are context observations, not production appearance recommendations.",
+          "Dependency effects on head, hair, facial hair, body, and camera framing are not tested.",
+          "Second-person verification has not occurred."
+        ]
+      }
     }
-  ]
+  ],
+  "primaryReviewSummary": {
+    "totalResearchCandidates": 5,
+    "primaryApproved": 0,
+    "primaryApprovedWithNotes": 5,
+    "recaptureRequired": 0,
+    "missingEvidence": 0,
+    "labelUnresolved": 0,
+    "orderUnresolved": 0,
+    "categoryIncomplete": 0,
+    "environmentUnresolved": 0,
+    "duplicateReviewRequired": 0,
+    "notReviewed": 0,
+    "productionApproved": 0,
+    "secondVerified": 0,
+    "recordsAllowedInProductionRecommendations": 0
+  }
 }

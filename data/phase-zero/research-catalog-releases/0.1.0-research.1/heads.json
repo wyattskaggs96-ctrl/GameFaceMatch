@@ -376,7 +376,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_002",
@@ -513,7 +538,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_003",
@@ -650,7 +700,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_004",
@@ -787,7 +862,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_005",
@@ -924,7 +1024,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_006",
@@ -1061,7 +1186,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_007",
@@ -1198,7 +1348,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_008",
@@ -1335,7 +1510,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_009",
@@ -1472,7 +1672,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_010",
@@ -1609,7 +1834,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_011",
@@ -1746,7 +1996,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
@@ -1907,7 +2182,33 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "DUPLICATE_REVIEW_REQUIRED",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": false,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "DUPLICATE_REVIEW_REQUIRED"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON",
+          "DUPLICATE_REVIEW_REQUIRED"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_013",
@@ -2044,7 +2345,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_014",
@@ -2185,7 +2511,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
@@ -2346,7 +2697,33 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "DUPLICATE_REVIEW_REQUIRED",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": false,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "DUPLICATE_REVIEW_REQUIRED"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON",
+          "DUPLICATE_REVIEW_REQUIRED"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_017",
@@ -2483,7 +2860,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_018",
@@ -2620,7 +3022,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_021",
@@ -2757,7 +3184,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_022",
@@ -2894,7 +3346,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_023",
@@ -3031,7 +3508,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_024",
@@ -3168,7 +3670,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_027",
@@ -3309,7 +3836,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_028",
@@ -3450,7 +4002,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_029",
@@ -3587,7 +4164,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_030",
@@ -3729,7 +4331,32 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     },
     {
       "stableResearchCatalogID": "CF27_XBOXUNKNOWN_RTG_HEAD_031",
@@ -3871,7 +4498,48 @@
         "reason": "Research-only selected Head Template observation. Requires complete category boundary proof, standardized recapture, second-person verification, and production publish gate approval."
       },
       "createdAt": "2026-07-14T00:30:00-04:00",
-      "updatedAt": "2026-07-14T00:30:00-04:00"
+      "updatedAt": "2026-07-14T00:30:00-04:00",
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "reviewedAt": "2026-07-14T18:45:00-04:00",
+        "reviewerRole": "primary-catalog-reviewer",
+        "productionStatus": "NOT_PRODUCTION_DATA",
+        "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+        "readyForVerifierEvidenceReview": true,
+        "readyForProductionVerification": false,
+        "reasons": [
+          "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+        ],
+        "publicationBlockers": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ],
+        "notes": [
+          "Head category count/order is incomplete.",
+          "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
+          "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+        ]
+      }
     }
-  ]
+  ],
+  "primaryReviewSummary": {
+    "totalResearchCandidates": 26,
+    "primaryApproved": 0,
+    "primaryApprovedWithNotes": 24,
+    "recaptureRequired": 0,
+    "missingEvidence": 0,
+    "labelUnresolved": 0,
+    "orderUnresolved": 0,
+    "categoryIncomplete": 0,
+    "environmentUnresolved": 0,
+    "duplicateReviewRequired": 2,
+    "notReviewed": 0,
+    "productionApproved": 0,
+    "secondVerified": 0,
+    "recordsAllowedInProductionRecommendations": 0
+  }
 }

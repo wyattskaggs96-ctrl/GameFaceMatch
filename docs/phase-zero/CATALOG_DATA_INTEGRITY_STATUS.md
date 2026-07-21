@@ -13,7 +13,7 @@ This report is generated from repository-local catalog, Phase 0, research, fixtu
 | PLACEHOLDER | 375 |
 | DEPRECATED | 0 |
 | INVALID | 0 |
-| UNKNOWN_ORIGIN | 2193 |
+| UNKNOWN_ORIGIN | 2540 |
 
 ## Production Gate Status
 

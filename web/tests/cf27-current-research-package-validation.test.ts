@@ -140,7 +140,7 @@ function createFixtureResearchPackage() {
     path.join(realRoot, "data/research/cf27/exports/partial-research-catalog-current"),
     path.join(root, "data/research/cf27/exports/partial-research-catalog-current")
   );
-  copyDirectory(
+  linkDirectory(
     path.join(realRoot, "data/research/cf27/generated/full-resolution-frames"),
     path.join(root, "data/research/cf27/generated/full-resolution-frames")
   );
@@ -163,6 +163,11 @@ function copyDirectory(source: string, destination: string) {
     if (entry.isDirectory()) copyDirectory(sourcePath, destinationPath);
     else fs.copyFileSync(sourcePath, destinationPath);
   }
+}
+
+function linkDirectory(source: string, destination: string) {
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.symlinkSync(source, destination, "dir");
 }
 
 function copyFile(source: string, destination: string) {

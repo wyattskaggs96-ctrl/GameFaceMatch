@@ -1,0 +1,1805 @@
+{
+  "schemaVersion": "cf27-phase-zero-primary-review-v1-traceability",
+  "generatedAt": "2026-07-14T18:45:00-04:00",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "PRIMARY_REVIEW_ONLY_NOT_SECOND_VERIFIED",
+  "summary": {
+    "sourceVideos": 11,
+    "fullyTraced": 9,
+    "partiallyTraced": 0,
+    "documentedDuplicates": 2,
+    "candidatesWithoutValidSourceTimestamp": 0
+  },
+  "videos": [
+    {
+      "videoID": "phase0-video-001",
+      "originalFilename": "01_Environment_and_Creation_Path.MP4",
+      "canonicalFilename": "01_Environment_and_Creation_Path.mp4",
+      "sha256": "6f42d3ef2572810fc09ac5138970dee5f325c539925f084a130d3fdcf7c2a0b2",
+      "durationSeconds": 73.57,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+      "representedCategories": [
+        "Body-related appearance controls"
+      ],
+      "coveredTimestampRange": "0-73.57",
+      "associatedCandidateIDs": [
+        "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_BLUE_CHIP",
+        "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_CONTRIBUTOR",
+        "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_ELITE",
+        "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_UNDERDOG",
+        "CF27_XBOXUNKNOWN_RTG_POSITION_QB"
+      ],
+      "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "UNIQUE_OR_PRIMARY",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    },
+    {
+      "videoID": "phase0-video-002",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "canonicalFilename": "02_Head_Templates_Faces_01-12.mov",
+      "sha256": "b016660e24dd24e63b9f1b2412ef08e3e21a905ccc71e8b59adb406d10228a53",
+      "durationSeconds": 108.8,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+      "representedCategories": [
+        "Heads"
+      ],
+      "coveredTimestampRange": "0-108.8",
+      "associatedCandidateIDs": [
+        "CF27_XBOXUNKNOWN_RTG_HEAD_001",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_002",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_003",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_004",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_005",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_006",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_007",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_008",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_009",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_010",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_011"
+      ],
+      "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "UNIQUE_OR_PRIMARY",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    },
+    {
+      "videoID": "phase0-video-003",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "canonicalFilename": "03_Head_Templates_Faces_12-29.mov",
+      "sha256": "c348b96b1414927fca5ab12f8a65cc7668a6fdb22a2622c99e11a984d819a302",
+      "durationSeconds": 133.02,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+      "representedCategories": [
+        "Heads"
+      ],
+      "coveredTimestampRange": "0-133.02",
+      "associatedCandidateIDs": [
+        "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_013",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_014",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_017",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_018",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_021",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_022",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_023",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_024",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_027",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_028",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_029",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_030",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_031"
+      ],
+      "unusedSections": "",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "UNIQUE_OR_PRIMARY",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    },
+    {
+      "videoID": "phase0-video-004",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "canonicalFilename": "04_Skin_Tone.mp4",
+      "sha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+      "durationSeconds": 53.82,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+      "representedCategories": [
+        "Skin Tone"
+      ],
+      "coveredTimestampRange": "0-53.82",
+      "associatedCandidateIDs": [
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_001",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_002",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_003",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_004",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_006",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_007",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_008",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_009",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_010",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_011",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_012",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_013",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_017",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_018",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_019",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_020",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_021",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_022",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_023",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_024",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_029"
+      ],
+      "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "UNIQUE_OR_PRIMARY",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    },
+    {
+      "videoID": "phase0-video-005",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "canonicalFilename": "05_Skin_Details.mp4",
+      "sha256": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+      "durationSeconds": 31.72,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+      "representedCategories": [
+        "Skin Details"
+      ],
+      "coveredTimestampRange": "0-31.72",
+      "associatedCandidateIDs": [
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009",
+        "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010"
+      ],
+      "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "UNIQUE_OR_PRIMARY",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    },
+    {
+      "videoID": "phase0-video-006",
+      "originalFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "canonicalFilename": "06_Eye_Shape.mp4",
+      "sha256": "84bdb04ca232a662a8add3ceef92f021ad6c96d241e536b12c0af968f3d92ca2",
+      "durationSeconds": 24.93,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+      "representedCategories": [
+        "Eye Shape"
+      ],
+      "coveredTimestampRange": "0-24.93",
+      "associatedCandidateIDs": [
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_003",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_004",
+        "CF27_XBOXUNKNOWN_RTG_EYESHAPE_005"
+      ],
+      "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "UNIQUE_OR_PRIMARY",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    },
+    {
+      "videoID": "phase0-video-007",
+      "originalFilename": "352535",
+      "canonicalFilename": "07_Eye_Color.mp4",
+      "sha256": "c07fdab8d65b19859ae5985dc4fb06bb9919aecf597996ab74463bc6020acfd3",
+      "durationSeconds": 29.33,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+      "representedCategories": [
+        "Eye Color"
+      ],
+      "coveredTimestampRange": "0-29.33",
+      "associatedCandidateIDs": [
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_001",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_002",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_003",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_004",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_005",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_006",
+        "CF27_XBOXUNKNOWN_RTG_EYECOLOR_007"
+      ],
+      "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "UNIQUE_OR_PRIMARY",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    },
+    {
+      "videoID": "phase0-video-008",
+      "originalFilename": "352537",
+      "canonicalFilename": "08_Nose.mp4",
+      "sha256": "301b6c7ba55233503e54296e55366cdd0468f0c23b5117be6ca5ff0363d5e5b7",
+      "durationSeconds": 32.45,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+      "representedCategories": [
+        "Nose"
+      ],
+      "coveredTimestampRange": "0-32.45",
+      "associatedCandidateIDs": [
+        "CF27_XBOXUNKNOWN_RTG_NOSE_001",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_002",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_003",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_004",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_005",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_006",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_007"
+      ],
+      "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "UNIQUE_OR_PRIMARY",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    },
+    {
+      "videoID": "phase0-video-009",
+      "originalFilename": "352531",
+      "canonicalFilename": "09_Ear_Shape.mp4",
+      "sha256": "e615e0919ebc50da7cdb1ec27ea302e28ac632b01728a88ca28ab0bb1f5902a1",
+      "durationSeconds": 30.21,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+      "representedCategories": [
+        "Ear Shape"
+      ],
+      "coveredTimestampRange": "0-30.21",
+      "associatedCandidateIDs": [
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_004"
+      ],
+      "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "UNIQUE_OR_PRIMARY",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    },
+    {
+      "videoID": "phase0-video-010",
+      "originalFilename": "4df34d2b-7dea-4afe-8dcc-05583430012f.MP4",
+      "canonicalFilename": "duplicate-reference-of-05_Skin_Details.mp4",
+      "sha256": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+      "durationSeconds": 31.72,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "DUPLICATE_REFERENCE_ONLY",
+      "representedCategories": [],
+      "coveredTimestampRange": "",
+      "associatedCandidateIDs": [],
+      "unusedSections": "",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "DUPLICATE_OF_phase0-video-005",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    },
+    {
+      "videoID": "phase0-video-011",
+      "originalFilename": "7cafeb6e-0488-42e6-8d6d-5836f8e30daf.MP4",
+      "canonicalFilename": "duplicate-reference-of-04_Skin_Tone.mp4",
+      "sha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+      "durationSeconds": 53.82,
+      "ingestStatus": "opens",
+      "evidenceExtractionStatus": "DUPLICATE_REFERENCE_ONLY",
+      "representedCategories": [],
+      "coveredTimestampRange": "",
+      "associatedCandidateIDs": [],
+      "unusedSections": "",
+      "gaps": [
+        "Does not prove production-quality catalog imagery."
+      ],
+      "duplicateStatus": "DUPLICATE_OF_phase0-video-004",
+      "lowQualityFootage": true,
+      "provesFullCategoryTraversal": false,
+      "provesSelectorStartAndEndBoundaries": false,
+      "traceabilityStatus": "TRACEABLE"
+    }
+  ],
+  "candidates": [
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_BLUE_CHIP",
+      "category": "Body-related appearance controls",
+      "sourceVideoID": "phase0-video-001",
+      "sourceVideoFilename": "01_Environment_and_Creation_Path.mp4",
+      "originalFilename": "01_Environment_and_Creation_Path.MP4",
+      "sourceTimestampRange": "18-23",
+      "evidenceIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "evidenceFiles": [],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_CONTRIBUTOR",
+      "category": "Body-related appearance controls",
+      "sourceVideoID": "phase0-video-001",
+      "sourceVideoFilename": "01_Environment_and_Creation_Path.mp4",
+      "originalFilename": "01_Environment_and_Creation_Path.MP4",
+      "sourceTimestampRange": "18-23",
+      "evidenceIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "evidenceFiles": [],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_ELITE",
+      "category": "Body-related appearance controls",
+      "sourceVideoID": "phase0-video-001",
+      "sourceVideoFilename": "01_Environment_and_Creation_Path.mp4",
+      "originalFilename": "01_Environment_and_Creation_Path.MP4",
+      "sourceTimestampRange": "18-23",
+      "evidenceIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "evidenceFiles": [],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_UNDERDOG",
+      "category": "Body-related appearance controls",
+      "sourceVideoID": "phase0-video-001",
+      "sourceVideoFilename": "01_Environment_and_Creation_Path.mp4",
+      "originalFilename": "01_Environment_and_Creation_Path.MP4",
+      "sourceTimestampRange": "18-23",
+      "evidenceIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "evidenceFiles": [],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_POSITION_QB",
+      "category": "Body-related appearance controls",
+      "sourceVideoID": "phase0-video-001",
+      "sourceVideoFilename": "01_Environment_and_Creation_Path.mp4",
+      "originalFilename": "01_Environment_and_Creation_Path.MP4",
+      "sourceTimestampRange": "24-29",
+      "evidenceIDs": [
+        "phase0-source-phase0-video-001"
+      ],
+      "evidenceFiles": [],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
+      "category": "Ear Shape",
+      "sourceVideoID": "phase0-video-009",
+      "sourceVideoFilename": "09_Ear_Shape.mp4",
+      "originalFilename": "352531",
+      "sourceTimestampRange": "18-20",
+      "evidenceIDs": [
+        "phase0-frame-video-009-tl-003"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001_MENU_EVIDENCE_video-009_18p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "category": "Ear Shape",
+      "sourceVideoID": "phase0-video-009",
+      "sourceVideoFilename": "09_Ear_Shape.mp4",
+      "originalFilename": "352531",
+      "sourceTimestampRange": "16-17",
+      "evidenceIDs": [
+        "phase0-frame-video-009-tl-002",
+        "phase0-frame-video-009-tl-004"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/video-009-tl-002_09-ear-shape-mp4_16p5s.png",
+        "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001/CF27_XBOXUNKNOWN_RTG_EARSHAPE_001_BEST_AVAILABLE_SIDE_OR_THREE_QUARTER_video-009_21p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_003",
+      "category": "Ear Shape",
+      "sourceVideoID": "phase0-video-009",
+      "sourceVideoFilename": "09_Ear_Shape.mp4",
+      "originalFilename": "352531",
+      "sourceTimestampRange": "23-25",
+      "evidenceIDs": [
+        "phase0-frame-video-009-tl-005"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_002/CF27_XBOXUNKNOWN_RTG_EARSHAPE_002_MENU_EVIDENCE_video-009_23p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_004",
+      "category": "Ear Shape",
+      "sourceVideoID": "phase0-video-009",
+      "sourceVideoFilename": "09_Ear_Shape.mp4",
+      "originalFilename": "352531",
+      "sourceTimestampRange": "26-30.21",
+      "evidenceIDs": [
+        "phase0-frame-video-009-tl-006"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004_MENU_EVIDENCE_video-009_26p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_001",
+      "category": "Eye Color",
+      "sourceVideoID": "phase0-video-007",
+      "sourceVideoFilename": "07_Eye_Color.mp4",
+      "originalFilename": "352535",
+      "sourceTimestampRange": "12-12",
+      "evidenceIDs": [
+        "phase0-frame-video-007-tl-002"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/video-007-tl-002_07-eye-color-mp4_12s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_002",
+      "category": "Eye Color",
+      "sourceVideoID": "phase0-video-007",
+      "sourceVideoFilename": "07_Eye_Color.mp4",
+      "originalFilename": "352535",
+      "sourceTimestampRange": "13-15",
+      "evidenceIDs": [
+        "phase0-frame-video-007-tl-003"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_001/CF27_XBOXUNKNOWN_RTG_EYECOLOR_001_MENU_THUMBNAIL_EVIDENCE_video-007_13p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_003",
+      "category": "Eye Color",
+      "sourceVideoID": "phase0-video-007",
+      "sourceVideoFilename": "07_Eye_Color.mp4",
+      "originalFilename": "352535",
+      "sourceTimestampRange": "16-17",
+      "evidenceIDs": [
+        "phase0-frame-video-007-tl-004"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_003/CF27_XBOXUNKNOWN_RTG_EYECOLOR_003_MENU_THUMBNAIL_EVIDENCE_video-007_17p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_004",
+      "category": "Eye Color",
+      "sourceVideoID": "phase0-video-007",
+      "sourceVideoFilename": "07_Eye_Color.mp4",
+      "originalFilename": "352535",
+      "sourceTimestampRange": "18-20",
+      "evidenceIDs": [
+        "phase0-frame-video-007-tl-005"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_004/CF27_XBOXUNKNOWN_RTG_EYECOLOR_004_MENU_THUMBNAIL_EVIDENCE_video-007_19p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_005",
+      "category": "Eye Color",
+      "sourceVideoID": "phase0-video-007",
+      "sourceVideoFilename": "07_Eye_Color.mp4",
+      "originalFilename": "352535",
+      "sourceTimestampRange": "25-29.33",
+      "evidenceIDs": [
+        "phase0-frame-video-007-tl-008"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_005/CF27_XBOXUNKNOWN_RTG_EYECOLOR_005_MENU_THUMBNAIL_EVIDENCE_video-007_28p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_006",
+      "category": "Eye Color",
+      "sourceVideoID": "phase0-video-007",
+      "sourceVideoFilename": "07_Eye_Color.mp4",
+      "originalFilename": "352535",
+      "sourceTimestampRange": "23-24",
+      "evidenceIDs": [
+        "phase0-frame-video-007-tl-007"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_006/CF27_XBOXUNKNOWN_RTG_EYECOLOR_006_MENU_THUMBNAIL_EVIDENCE_video-007_24p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYECOLOR_007",
+      "category": "Eye Color",
+      "sourceVideoID": "phase0-video-007",
+      "sourceVideoFilename": "07_Eye_Color.mp4",
+      "originalFilename": "352535",
+      "sourceTimestampRange": "21-22",
+      "evidenceIDs": [
+        "phase0-frame-video-007-tl-006"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-color-options-001-007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_007/CF27_XBOXUNKNOWN_RTG_EYECOLOR_007_MENU_THUMBNAIL_EVIDENCE_video-007_22p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_001",
+      "category": "Eye Shape",
+      "sourceVideoID": "phase0-video-006",
+      "sourceVideoFilename": "06_Eye_Shape.mp4",
+      "originalFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "sourceTimestampRange": "14-14",
+      "evidenceIDs": [
+        "phase0-frame-video-006-tl-002"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_001/CF27_XBOXUNKNOWN_RTG_EYESHAPE_001_MENU_video-006_14p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_002",
+      "category": "Eye Shape",
+      "sourceVideoID": "phase0-video-006",
+      "sourceVideoFilename": "06_Eye_Shape.mp4",
+      "originalFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "sourceTimestampRange": "15-16",
+      "evidenceIDs": [
+        "phase0-frame-video-006-tl-003"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_002/CF27_XBOXUNKNOWN_RTG_EYESHAPE_002_MENU_video-006_16p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_003",
+      "category": "Eye Shape",
+      "sourceVideoID": "phase0-video-006",
+      "sourceVideoFilename": "06_Eye_Shape.mp4",
+      "originalFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "sourceTimestampRange": "17-18",
+      "evidenceIDs": [
+        "phase0-frame-video-006-tl-004"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_003/CF27_XBOXUNKNOWN_RTG_EYESHAPE_003_MENU_video-006_18p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_004",
+      "category": "Eye Shape",
+      "sourceVideoID": "phase0-video-006",
+      "sourceVideoFilename": "06_Eye_Shape.mp4",
+      "originalFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "sourceTimestampRange": "19-19",
+      "evidenceIDs": [
+        "phase0-frame-video-006-tl-005"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_004/CF27_XBOXUNKNOWN_RTG_EYESHAPE_004_MENU_video-006_19p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EYESHAPE_005",
+      "category": "Eye Shape",
+      "sourceVideoID": "phase0-video-006",
+      "sourceVideoFilename": "06_Eye_Shape.mp4",
+      "originalFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "sourceTimestampRange": "20-24.93",
+      "evidenceIDs": [
+        "phase0-frame-video-006-tl-006"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/eye-shape-options-001-005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_005/CF27_XBOXUNKNOWN_RTG_EYESHAPE_005_MENU_video-006_22p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_001",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "10-19",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-004"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_MENU_video-002_11p68s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_002",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "20-28",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-005"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_002/CF27_XBOXUNKNOWN_RTG_HEAD_002_MENU_video-002_21p52s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_003",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "29-38",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-006"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_003/CF27_XBOXUNKNOWN_RTG_HEAD_003_MENU_video-002_30p68s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_004",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "39-48",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-007"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_004/CF27_XBOXUNKNOWN_RTG_HEAD_004_MENU_video-002_40p68s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_005",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "69-74",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-011"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_005/CF27_XBOXUNKNOWN_RTG_HEAD_005_MENU_video-002_70p04s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_006",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "60-68",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-010"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_006/CF27_XBOXUNKNOWN_RTG_HEAD_006_MENU_video-002_61p52s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_007",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "54-59",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-009"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_007/CF27_XBOXUNKNOWN_RTG_HEAD_007_MENU_video-002_55p04s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_008",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "49-53",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-008"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_008/CF27_XBOXUNKNOWN_RTG_HEAD_008_MENU_video-002_49p88s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_009",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "75-79",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-012"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_009/CF27_XBOXUNKNOWN_RTG_HEAD_009_MENU_video-002_75p88s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_010",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "80-88",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-013"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_010/CF27_XBOXUNKNOWN_RTG_HEAD_010_MENU_video-002_81p52s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_011",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-002",
+      "sourceVideoFilename": "02_Head_Templates_Faces_01-12.mov",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "sourceTimestampRange": "89-94",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-014"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_011/CF27_XBOXUNKNOWN_RTG_HEAD_011_MENU_video-002_90p04s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "0-4",
+      "evidenceIDs": [
+        "phase0-frame-video-002-tl-015",
+        "phase0-frame-video-003-tl-001"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_MENU_video-002_96p04s.png",
+        "data/phase-zero/derivative-frames/video-003-tl-001_03-head-templates-faces-12-29-mov_2s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_013",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "21-29",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-004"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_013/CF27_XBOXUNKNOWN_RTG_HEAD_013_MENU_video-003_28p04s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_014",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "14-20",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-003"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_MENU_video-003_14p04s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "5-13",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-002",
+        "phase0-frame-video-002-tl-016"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_016/CF27_XBOXUNKNOWN_RTG_HEAD_016_MENU_video-003_7p20s.png",
+        "data/phase-zero/derivative-frames/video-002-tl-016_02-head-templates-faces-01-12-mov_104p9s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_017",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "30-39",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-005"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_017/CF27_XBOXUNKNOWN_RTG_HEAD_017_MENU_video-003_34p20s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_018",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "40-49",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-006"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_018/CF27_XBOXUNKNOWN_RTG_HEAD_018_MENU_video-003_41p36s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_021",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "80-89",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-010"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_021/CF27_XBOXUNKNOWN_RTG_HEAD_021_MENU_video-003_80p88s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_022",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "70-79",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-009"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_022/CF27_XBOXUNKNOWN_RTG_HEAD_022_MENU_video-003_76p72s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_023",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "50-59",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-007"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_MENU_video-003_57p20s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_024",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "60-69",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-008"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_MENU_video-003_63p88s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_027",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "90-99",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-011"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_026/CF27_XBOXUNKNOWN_RTG_HEAD_026_MENU_video-003_95p04s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_028",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "100-109",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-012"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_027/CF27_XBOXUNKNOWN_RTG_HEAD_027_MENU_video-003_100p72s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_029",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "127-133.02",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-015"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_029/CF27_XBOXUNKNOWN_RTG_HEAD_029_MENU_video-003_128p20s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_030",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "120-126",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-014"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/video-003-tl-014_03-head-templates-faces-12-29-mov_123s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_031",
+      "category": "Heads",
+      "sourceVideoID": "phase0-video-003",
+      "sourceVideoFilename": "03_Head_Templates_Faces_12-29.mov",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "sourceTimestampRange": "110-119",
+      "evidenceIDs": [
+        "phase0-frame-video-003-tl-013"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/video-003-tl-013_03-head-templates-faces-12-29-mov_114p5s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_001",
+      "category": "Nose",
+      "sourceVideoID": "phase0-video-008",
+      "sourceVideoFilename": "08_Nose.mp4",
+      "originalFilename": "352537",
+      "sourceTimestampRange": "15-15",
+      "evidenceIDs": [
+        "phase0-frame-video-008-tl-003"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_001/CF27_XBOXUNKNOWN_RTG_NOSE_001_MENU_EVIDENCE_video-008_15p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_002",
+      "category": "Nose",
+      "sourceVideoID": "phase0-video-008",
+      "sourceVideoFilename": "08_Nose.mp4",
+      "originalFilename": "352537",
+      "sourceTimestampRange": "16-18",
+      "evidenceIDs": [
+        "phase0-frame-video-008-tl-004"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_002/CF27_XBOXUNKNOWN_RTG_NOSE_002_MENU_EVIDENCE_video-008_17p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_003",
+      "category": "Nose",
+      "sourceVideoID": "phase0-video-008",
+      "sourceVideoFilename": "08_Nose.mp4",
+      "originalFilename": "352537",
+      "sourceTimestampRange": "19-20",
+      "evidenceIDs": [
+        "phase0-frame-video-008-tl-005"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_003/CF27_XBOXUNKNOWN_RTG_NOSE_003_MENU_EVIDENCE_video-008_19p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_004",
+      "category": "Nose",
+      "sourceVideoID": "phase0-video-008",
+      "sourceVideoFilename": "08_Nose.mp4",
+      "originalFilename": "352537",
+      "sourceTimestampRange": "21-22",
+      "evidenceIDs": [
+        "phase0-frame-video-008-tl-006"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_004/CF27_XBOXUNKNOWN_RTG_NOSE_004_MENU_EVIDENCE_video-008_21p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_005",
+      "category": "Nose",
+      "sourceVideoID": "phase0-video-008",
+      "sourceVideoFilename": "08_Nose.mp4",
+      "originalFilename": "352537",
+      "sourceTimestampRange": "14-14",
+      "evidenceIDs": [
+        "phase0-frame-video-008-tl-002",
+        "phase0-frame-video-008-tl-009"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_005/CF27_XBOXUNKNOWN_RTG_NOSE_005_BEST_AVAILABLE_THREE_QUARTER_video-008_14p00s.png",
+        "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_005/CF27_XBOXUNKNOWN_RTG_NOSE_005_MENU_EVIDENCE_video-008_29p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_006",
+      "category": "Nose",
+      "sourceVideoID": "phase0-video-008",
+      "sourceVideoFilename": "08_Nose.mp4",
+      "originalFilename": "352537",
+      "sourceTimestampRange": "25-27",
+      "evidenceIDs": [
+        "phase0-frame-video-008-tl-008"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_006/CF27_XBOXUNKNOWN_RTG_NOSE_006_MENU_EVIDENCE_video-008_26p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_007",
+      "category": "Nose",
+      "sourceVideoID": "phase0-video-008",
+      "sourceVideoFilename": "08_Nose.mp4",
+      "originalFilename": "352537",
+      "sourceTimestampRange": "23-24",
+      "evidenceIDs": [
+        "phase0-frame-video-008-tl-007"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/nose-options-001-007/CF27_XBOXUNKNOWN_RTG_NOSE_007/CF27_XBOXUNKNOWN_RTG_NOSE_007_MENU_EVIDENCE_video-008_23p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001",
+      "category": "Skin Details",
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "sourceTimestampRange": "8-8",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-002"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_001_MENU_video-005_8p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002",
+      "category": "Skin Details",
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "sourceTimestampRange": "9-10",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-003"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_002_MENU_video-005_10p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003",
+      "category": "Skin Details",
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "sourceTimestampRange": "11-14",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-004"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_003_MENU_video-005_13p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004",
+      "category": "Skin Details",
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "sourceTimestampRange": "15-16",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-005"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_004_MENU_video-005_15p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005",
+      "category": "Skin Details",
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "sourceTimestampRange": "23-24",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-009"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_005_MENU_video-005_24p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006",
+      "category": "Skin Details",
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "sourceTimestampRange": "21-22",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-008"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_006_MENU_video-005_22p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007",
+      "category": "Skin Details",
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "sourceTimestampRange": "19-20",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-007"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_007_MENU_video-005_20p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008",
+      "category": "Skin Details",
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "sourceTimestampRange": "17-18",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-006"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_008_MENU_video-005_18p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009",
+      "category": "Skin Details",
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "sourceTimestampRange": "25-26",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-010"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_009_MENU_video-005_26p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010",
+      "category": "Skin Details",
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "sourceTimestampRange": "27-31.72",
+      "evidenceIDs": [
+        "phase0-frame-video-005-tl-011"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-details-options-001-010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010/CF27_XBOXUNKNOWN_RTG_SKINDETAILS_010_MENU_video-005_29p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_001",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "45-46",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-019"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_001/CF27_XBOXUNKNOWN_RTG_SKINTONE_001_MENU_video-004_45p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_002",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "47-47",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-020"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_002/CF27_XBOXUNKNOWN_RTG_SKINTONE_002_MENU_video-004_47p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_003",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "48-49",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-021"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_003/CF27_XBOXUNKNOWN_RTG_SKINTONE_003_MENU_video-004_48p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_004",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "12-13",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-003"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_004/CF27_XBOXUNKNOWN_RTG_SKINTONE_004_MENU_video-004_12p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_006",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "29-30",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-011"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_005/CF27_XBOXUNKNOWN_RTG_SKINTONE_005_MENU_video-004_29p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_007",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "27-28",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-010"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_007/CF27_XBOXUNKNOWN_RTG_SKINTONE_007_MENU_video-004_27p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_008",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "25-26",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-009"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_006/CF27_XBOXUNKNOWN_RTG_SKINTONE_006_MENU_video-004_25p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_009",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "8-11",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-002"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_008/CF27_XBOXUNKNOWN_RTG_SKINTONE_008_MENU_video-004_10p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_010",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "14-14",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-017",
+        "phase0-frame-video-004-tl-004"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_010/CF27_XBOXUNKNOWN_RTG_SKINTONE_010_MENU_video-004_41p50s.png",
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_016/CF27_XBOXUNKNOWN_RTG_SKINTONE_016_MENU_video-004_14p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_011",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "50-51",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-022"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/video-004-tl-022_04-skin-tone-mp4_50p5s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_012",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "43-44",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-018"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_012/CF27_XBOXUNKNOWN_RTG_SKINTONE_012_MENU_video-004_43p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_013",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "39-40",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-016"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_013/CF27_XBOXUNKNOWN_RTG_SKINTONE_013_MENU_video-004_39p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_017",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "37-38",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-015"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_014/CF27_XBOXUNKNOWN_RTG_SKINTONE_014_MENU_video-004_38p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_018",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "20-22",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-007"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_015/CF27_XBOXUNKNOWN_RTG_SKINTONE_015_MENU_video-004_21p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_019",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "17-19",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-006"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_019/CF27_XBOXUNKNOWN_RTG_SKINTONE_019_MENU_video-004_17p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_020",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "15-16",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-005"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_020/CF27_XBOXUNKNOWN_RTG_SKINTONE_020_MENU_video-004_15p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_021",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "23-24",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-008"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_021/CF27_XBOXUNKNOWN_RTG_SKINTONE_021_MENU_video-004_23p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_022",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "35-36",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-014"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/video-004-tl-014_04-skin-tone-mp4_35p5s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_023",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "52-53.82",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-023"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/video-004-tl-023_04-skin-tone-mp4_52p91s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_024",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "33-34",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-013"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_024/CF27_XBOXUNKNOWN_RTG_SKINTONE_024_MENU_video-004_33p00s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_029",
+      "category": "Skin Tone",
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "sourceTimestampRange": "31-32",
+      "evidenceIDs": [
+        "phase0-frame-video-004-tl-012"
+      ],
+      "evidenceFiles": [
+        "data/research/cf27/generated/full-resolution-frames/skin-tone-values-001-024/CF27_XBOXUNKNOWN_RTG_SKINTONE_023/CF27_XBOXUNKNOWN_RTG_SKINTONE_023_MENU_video-004_31p50s.png"
+      ],
+      "sourceVideoResolved": true,
+      "timelineResolved": true,
+      "evidenceResolved": true
+    }
+  ]
+}

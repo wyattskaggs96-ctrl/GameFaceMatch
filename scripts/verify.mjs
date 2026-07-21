@@ -42,6 +42,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Phase 0 primary review status check",
+    command: "node",
+    args: ["scripts/cf27-primary-review-status.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Phase 0 blind verification package check",
     command: "node",
     args: ["scripts/cf27-blind-verification-package.mjs", "--check"],

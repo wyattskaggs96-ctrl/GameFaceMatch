@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gamefacematch.local/schemas/phase-zero-intake-manifest.schema.json",
+  "title": "PhaseZeroIntakeManifest",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "generatedAt",
+    "dataClass",
+    "sourceType",
+    "productionStatus",
+    "summary",
+    "records"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "phase-zero-intake-manifest-v1" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "dataClass": { "const": "PHASE_ZERO_EVIDENCE_INTAKE_MANIFEST" },
+    "sourceType": { "const": "research" },
+    "productionStatus": { "const": "NOT_PRODUCTION_DATA" },
+    "summary": { "type": "object" },
+    "records": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/intakeRecord" }
+    }
+  },
+  "$defs": {
+    "nullableString": { "type": ["string", "null"] },
+    "nullableNumber": { "type": ["number", "null"] },
+    "intakeRecord": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "intake_id",
+        "original_filename",
+        "assigned_capture_id",
+        "category",
+        "subcategory",
+        "source_platform",
+        "capture_date",
+        "source_file_hash",
+        "file_size",
+        "duration",
+        "resolution",
+        "codec",
+        "orientation",
+        "duplicate_of",
+        "processing_status",
+        "review_status",
+        "evidence_status",
+        "notes"
+      ],
+      "properties": {
+        "intake_id": { "type": "string", "pattern": "^GFM-INTAKE-[A-F0-9]{12}$" },
+        "original_filename": { "type": "string", "minLength": 1 },
+        "assigned_capture_id": { "type": ["string", "null"], "pattern": "^GFM-CAP-[0-9]{3}$" },
+        "category": { "$ref": "#/$defs/nullableString" },
+        "subcategory": { "$ref": "#/$defs/nullableString" },
+        "source_platform": { "$ref": "#/$defs/nullableString" },
+        "capture_date": { "$ref": "#/$defs/nullableString" },
+        "source_file_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "file_size": { "type": "integer", "minimum": 0 },
+        "duration": { "$ref": "#/$defs/nullableNumber" },
+        "resolution": { "$ref": "#/$defs/nullableString" },
+        "codec": { "$ref": "#/$defs/nullableString" },
+        "orientation": { "type": "string", "minLength": 1 },
+        "duplicate_of": { "$ref": "#/$defs/nullableString" },
+        "processing_status": {
+          "enum": [
+            "INVENTORIED_PENDING_REVIEW",
+            "UNASSIGNED_REVIEW_REQUIRED",
+            "EXACT_DUPLICATE_REVIEW_REQUIRED",
+            "UNREADABLE_REVIEW_REQUIRED",
+            "UNSUPPORTED_FILE_REVIEW_REQUIRED",
+            "EXTERNAL_REFERENCE_REVIEW_REQUIRED"
+          ]
+        },
+        "review_status": {
+          "enum": [
+            "PENDING_HUMAN_REVIEW",
+            "DUPLICATE_REVIEW_REQUIRED",
+            "NO_REVIEW_REQUIRED"
+          ]
+        },
+        "evidence_status": { "const": "UNREVIEWED_RESEARCH_EVIDENCE_NOT_PRODUCTION" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

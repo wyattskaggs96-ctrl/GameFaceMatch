@@ -70,6 +70,18 @@ data/research/cf27/generated/media-inspections/*
 data/phase-zero/derivative-frames/*
 !data/phase-zero/derivative-frames/.gitkeep
 !data/phase-zero/derivative-frames/README.md
+data/phase-zero/intake/pending/*
+!data/phase-zero/intake/pending/.gitkeep
+!data/phase-zero/intake/pending/README.md
+data/phase-zero/intake/accepted/*
+!data/phase-zero/intake/accepted/.gitkeep
+!data/phase-zero/intake/accepted/README.md
+data/phase-zero/intake/duplicates/*
+!data/phase-zero/intake/duplicates/.gitkeep
+!data/phase-zero/intake/duplicates/README.md
+data/phase-zero/intake/rejected/*
+!data/phase-zero/intake/rejected/.gitkeep
+!data/phase-zero/intake/rejected/README.md
 
 # Web local dependencies and build output
 web/node_modules/

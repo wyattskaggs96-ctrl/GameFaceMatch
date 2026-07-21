@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "phase-zero-intake-manifest-v1",
+  "generatedAt": "2026-07-21T02:13:54.732Z",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "PHASE_ZERO_EVIDENCE_INTAKE_MANIFEST",
+  "sourceType": "research",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "productionPromotion": {
+    "allowed": false,
+    "reason": "Intake records are unreviewed research evidence. They cannot become production catalog records without primary QA, independent verification, catalog-manager approval, and production release gates."
+  },
+  "policy": {
+    "mastersPreserved": true,
+    "originalsRenamed": false,
+    "originalsMoved": false,
+    "automaticProductionPromotion": false,
+    "uncertainCaptureMappingsRequireReview": true
+  },
+  "intakePath": {
+    "requestedPath": "data/phase-zero/intake/pending",
+    "portablePath": "data/phase-zero/intake/pending"
+  },
+  "summary": {
+    "filesScanned": 0,
+    "supportedFiles": 0,
+    "unsupportedFiles": 0,
+    "unreadableFiles": 0,
+    "exactDuplicates": 0,
+    "assignedFiles": 0,
+    "unassignedFiles": 0,
+    "recordsRequiringReview": 0,
+    "captureRequestsTotal": 10,
+    "captureRequestsCoveredByReadableUniqueIntake": 0,
+    "captureRequestsMissingCoverage": 10,
+    "productionRecordsCreated": 0,
+    "productionCatalogRecordsPromoted": 0
+  },
+  "records": []
+}

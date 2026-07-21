@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "phase-zero-intake-missing-coverage-v1",
+  "generatedAt": "2026-07-21T02:13:54.732Z",
+  "dataClass": "PHASE_ZERO_INTAKE_MISSING_CAPTURE_COVERAGE",
+  "sourceType": "research",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "missingCoverage": [
+    {
+      "capture_id": "GFM-CAP-001",
+      "priority": "P0",
+      "title": "Appearance and Head & Skin boundary map",
+      "category": "Appearance menu hierarchy",
+      "reason": "No unique readable intake file currently maps to this capture request."
+    },
+    {
+      "capture_id": "GFM-CAP-002",
+      "priority": "P0",
+      "title": "Head Template full count and boundary proof",
+      "category": "Head Template count and native order",
+      "reason": "No unique readable intake file currently maps to this capture request."
+    },
+    {
+      "capture_id": "GFM-CAP-003",
+      "priority": "P0",
+      "title": "Canonical appearance lock slate",
+      "category": "Stable capture conditions",
+      "reason": "No unique readable intake file currently maps to this capture request."
+    },
+    {
+      "capture_id": "GFM-CAP-004",
+      "priority": "P0",
+      "title": "Head Template standardized visual pass",
+      "category": "Head Template production-comparison imagery",
+      "reason": "No unique readable intake file currently maps to this capture request."
+    },
+    {
+      "capture_id": "GFM-CAP-005",
+      "priority": "P0",
+      "title": "Head & Skin color and texture controls",
+      "category": "Skin Tone, Skin Details, Eye Shape, Eye Color",
+      "reason": "No unique readable intake file currently maps to this capture request."
+    },
+    {
+      "capture_id": "GFM-CAP-006",
+      "priority": "P0",
+      "title": "Head & Skin geometry controls",
+      "category": "Nose, Ear Shape, Mouth Shape, Jaw Shape, Chin",
+      "reason": "No unique readable intake file currently maps to this capture request."
+    },
+    {
+      "capture_id": "GFM-CAP-007",
+      "priority": "P1",
+      "title": "Hair submenu boundary map",
+      "category": "Hair menu hierarchy",
+      "reason": "No unique readable intake file currently maps to this capture request."
+    },
+    {
+      "capture_id": "GFM-CAP-008",
+      "priority": "P1",
+      "title": "Hairstyle options, only if visible in Hair",
+      "category": "Hairstyles",
+      "reason": "No unique readable intake file currently maps to this capture request."
+    },
+    {
+      "capture_id": "GFM-CAP-009",
+      "priority": "P1",
+      "title": "Hair color options, only if visible in Hair",
+      "category": "Hair colors",
+      "reason": "No unique readable intake file currently maps to this capture request."
+    },
+    {
+      "capture_id": "GFM-CAP-010",
+      "priority": "P1",
+      "title": "Facial-hair controls, only if visible in Hair",
+      "category": "Facial hair and facial-hair colors",
+      "reason": "No unique readable intake file currently maps to this capture request."
+    }
+  ]
+}

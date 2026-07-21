@@ -48,6 +48,7 @@ export const APP_SCREENS = [
   "evidence-gallery",
   "video-inspector",
   "phase-0",
+  "manual-study",
   "matching-lab",
   "mobile-qa",
   "analytics",

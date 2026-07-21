@@ -7,15 +7,19 @@ import {
 import {
   PHASE0_MANUAL_MATCHING_STUDY_SCHEMA_VERSION,
   validatePhase0ManualMatchingStudyResult,
+  type Phase0FinalInGameSelection,
   type Phase0ManualAppearanceChoice,
   type Phase0ManualMatchingStudyResult,
   type Phase0ManualMismatchReason,
   type Phase0ManualStudyCatalogVersion,
   type Phase0ManualStudyConsentRecord,
+  type Phase0OriginalRecommendationSnapshot,
   type Phase0RankedHeadChoice,
   type Phase0RawMediaDeletionState,
   type Phase0ReferenceViewCompleteness,
+  type Phase0RepeatScanResult,
   type Phase0ReviewerAgreement,
+  type Phase0StudyCaptureQualitySummary,
   type Phase0StudyRank,
   type Phase0SubjectPreferredResult
 } from "./phase-zero-manual-matching-study";
@@ -64,11 +68,16 @@ export interface Phase0ManualStudyParticipant {
   consentCheckpoint: Phase0ManualStudyConsentCheckpoint | null;
   captureMode: CaptureMode;
   captureDeviceLabel: string;
+  captureQualitySummary: Phase0StudyCaptureQualitySummary;
   referenceImageChecklist: Phase0ManualStudyReferenceImageChecklist;
+  originalTopThreeRecommendations: Phase0OriginalRecommendationSnapshot[];
   assignedReviewerIDs: string[];
   independentReviews: Phase0ManualStudyIndependentReview[];
   participantPreference: Phase0SubjectPreferredResult | null;
   rankSelected: Phase0StudyRank | null;
+  finalInGameSelection: Phase0FinalInGameSelection | null;
+  resemblanceRating: number | null;
+  repeatScanResult: Phase0RepeatScanResult | null;
   mainMismatchReasons: Phase0ManualMismatchReason[];
   rawMediaDeletionState: Phase0RawMediaDeletionState;
   createdAt: ISODateString;
@@ -114,8 +123,30 @@ export interface Phase0ManualMatchingStudyExportReport {
   catalogGate: Phase0ManualStudyCatalogGate;
   resultRecords: Phase0ManualMatchingStudyResult[];
   evaluation: Phase0ManualMatchingEvaluationReport;
+  dashboard: Phase0ManualMatchingStudyDashboard;
   issues: Phase0ManualStudyOperationalIssue[];
   generatedAt: ISODateString;
+}
+
+export interface Phase0ManualMatchingStudyDashboard {
+  status: "notMeasured" | "measured";
+  measurementLabel: string;
+  participantsCompleted: number;
+  participantTargetRange: Phase0ManualMatchingStudyOperation["participantTargetRange"];
+  topOneAcceptance: Phase0ManualMatchingEvaluationReport["topOneUsefulMatchRate"] | "not measured";
+  topThreeUsefulness: Phase0ManualMatchingEvaluationReport["topThreeUsefulMatchRate"] | "not measured";
+  rankDistribution: Phase0ManualMatchingEvaluationReport["rankSelectedDistribution"] | "not measured";
+  repeatability: {
+    repeatScanCount: number;
+    sameTopChoiceCount: number;
+    averageTopThreeOverlap: number | null;
+  } | "not measured";
+  captureFailure: {
+    failedCaptureCount: number;
+    denominator: number;
+  } | "not measured";
+  reviewerAgreement: Phase0ManualMatchingEvaluationReport["interReviewerAgreement"] | "not measured";
+  confidenceCalibration: Phase0ManualMatchingEvaluationReport["confidenceCalibration"] | "not measured";
 }
 
 const requiredAngles: CapturedAngleID[] = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"];
@@ -187,11 +218,22 @@ export function addManualStudyParticipant(
     consentCheckpoint: null,
     captureMode: input.captureMode,
     captureDeviceLabel: input.captureDeviceLabel.trim() || "unknown-capture-device",
+    captureQualitySummary: {
+      qualityState: "notRecorded",
+      overallScore: null,
+      blockingIssueCount: 0,
+      advisoryIssueCount: 0,
+      notes: "Capture quality has not been recorded for this participant."
+    },
     referenceImageChecklist: input.referenceImageChecklist ?? createReferenceImageChecklist(),
+    originalTopThreeRecommendations: [],
     assignedReviewerIDs: [],
     independentReviews: [],
     participantPreference: null,
     rankSelected: null,
+    finalInGameSelection: null,
+    resemblanceRating: null,
+    repeatScanResult: null,
     mainMismatchReasons: [],
     rawMediaDeletionState: {
       status: "pendingDeletion",
@@ -205,6 +247,30 @@ export function addManualStudyParticipant(
     notes: input.notes ?? ""
   };
   return updateParticipantList(operation, [...operation.participants, participant], input.createdAt);
+}
+
+export function recordOriginalTopThreeRecommendations(
+  participant: Phase0ManualStudyParticipant,
+  recommendations: Phase0OriginalRecommendationSnapshot[],
+  updatedAt: ISODateString
+): Phase0ManualStudyParticipant {
+  return {
+    ...participant,
+    originalTopThreeRecommendations: [...recommendations].sort((a, b) => a.rank - b.rank),
+    updatedAt
+  };
+}
+
+export function recordCaptureQualitySummary(
+  participant: Phase0ManualStudyParticipant,
+  captureQualitySummary: Phase0StudyCaptureQualitySummary,
+  updatedAt: ISODateString
+): Phase0ManualStudyParticipant {
+  return {
+    ...participant,
+    captureQualitySummary,
+    updatedAt
+  };
 }
 
 export function recordConsentCheckpoint(
@@ -249,6 +315,8 @@ export function recordParticipantPreference(
   input: {
     participantPreference: Phase0SubjectPreferredResult;
     rankSelected: Phase0StudyRank | null;
+    finalInGameSelection?: Phase0FinalInGameSelection | null;
+    resemblanceRating?: number | null;
     mainMismatchReasons: Phase0ManualMismatchReason[];
     updatedAt: ISODateString;
   }
@@ -257,9 +325,23 @@ export function recordParticipantPreference(
     ...participant,
     participantPreference: input.participantPreference,
     rankSelected: input.rankSelected,
+    finalInGameSelection: input.finalInGameSelection ?? participant.finalInGameSelection,
+    resemblanceRating: input.resemblanceRating ?? participant.resemblanceRating,
     mainMismatchReasons: [...input.mainMismatchReasons],
     status: "complete",
     updatedAt: input.updatedAt
+  };
+}
+
+export function recordRepeatScanResult(
+  participant: Phase0ManualStudyParticipant,
+  repeatScanResult: Phase0RepeatScanResult,
+  updatedAt: ISODateString
+): Phase0ManualStudyParticipant {
+  return {
+    ...participant,
+    repeatScanResult,
+    updatedAt
   };
 }
 
@@ -328,6 +410,11 @@ export function buildManualMatchingStudyResult(
     reviewerAgreement,
     rawMediaDeletionState: participant.rawMediaDeletionState,
     catalogVersion: operation.catalogVersion,
+    originalTopThreeRecommendations: participant.originalTopThreeRecommendations.length > 0 ? participant.originalTopThreeRecommendations : undefined,
+    captureQualitySummary: participant.captureQualitySummary,
+    finalInGameSelection: participant.finalInGameSelection,
+    resemblanceRating: participant.resemblanceRating,
+    repeatScanResult: participant.repeatScanResult,
     status: participant.status === "withdrawn" ? "withdrawn" : participant.status === "complete" ? "complete" : "inReview",
     resultTimestamps: {
       capturedAt: participant.createdAt,
@@ -351,6 +438,14 @@ export function exportManualMatchingStudyReport(operation: Phase0ManualMatchingS
     }))
   );
   const issues = [...validateManualMatchingStudyOperation(operation), ...validationIssues];
+  const evaluation = evaluatePhase0ManualMatchingStudy(
+    resultRecords.map((result, index) => ({
+      result,
+      captureDeviceLabel: operation.participants[index]?.captureDeviceLabel ?? null,
+      predictedConfidence: averageOriginalRecommendationConfidence(operation.participants[index]?.originalTopThreeRecommendations ?? [])
+    })),
+    { fixtureOnly: operation.sourceType === "testFixture" }
+  );
   return {
     reportVersion: PHASE0_MANUAL_MATCHING_OPERATION_VERSION,
     studyID: operation.studyID,
@@ -363,16 +458,44 @@ export function exportManualMatchingStudyReport(operation: Phase0ManualMatchingS
     catalogVersion: operation.catalogVersion,
     catalogGate: operation.catalogGate,
     resultRecords,
-    evaluation: evaluatePhase0ManualMatchingStudy(
-      resultRecords.map((result, index) => ({
-        result,
-        captureDeviceLabel: operation.participants[index]?.captureDeviceLabel ?? null,
-        predictedConfidence: null
-      })),
-      { fixtureOnly: operation.sourceType === "testFixture" }
-    ),
+    evaluation,
+    dashboard: createManualMatchingStudyDashboard(operation, evaluation),
     issues,
     generatedAt
+  };
+}
+
+export function createManualMatchingStudyDashboard(
+  operation: Phase0ManualMatchingStudyOperation,
+  evaluation: Phase0ManualMatchingEvaluationReport
+): Phase0ManualMatchingStudyDashboard {
+  const participantsCompleted = operation.participants.filter((participant) => participant.status === "complete" && participant.rawMediaDeletionState.status === "deleted").length;
+  const enoughObservations = operation.sourceType !== "testFixture" && participantsCompleted >= MANUAL_STUDY_MIN_PARTICIPANTS;
+  const repeatScans = operation.participants.map((participant) => participant.repeatScanResult).filter((repeat): repeat is Phase0RepeatScanResult => Boolean(repeat?.completed));
+  const failedCaptures = operation.participants.filter((participant) => participant.captureQualitySummary.qualityState === "failed").length;
+  return {
+    status: enoughObservations ? "measured" : "notMeasured",
+    measurementLabel: enoughObservations ? "Calculated from complete real submitted study records." : "Not measured until at least 10 complete real participant records exist.",
+    participantsCompleted,
+    participantTargetRange: operation.participantTargetRange,
+    topOneAcceptance: enoughObservations ? evaluation.topOneUsefulMatchRate : "not measured",
+    topThreeUsefulness: enoughObservations ? evaluation.topThreeUsefulMatchRate : "not measured",
+    rankDistribution: enoughObservations ? evaluation.rankSelectedDistribution : "not measured",
+    repeatability: enoughObservations
+      ? {
+          repeatScanCount: repeatScans.length,
+          sameTopChoiceCount: repeatScans.filter((repeat) => repeat.sameTopChoice).length,
+          averageTopThreeOverlap: average(repeatScans.map((repeat) => repeat.topThreeOverlapCount).filter((value): value is number => typeof value === "number"))
+        }
+      : "not measured",
+    captureFailure: enoughObservations
+      ? {
+          failedCaptureCount: failedCaptures,
+          denominator: operation.participants.length
+        }
+      : "not measured",
+    reviewerAgreement: enoughObservations ? evaluation.interReviewerAgreement : "not measured",
+    confidenceCalibration: enoughObservations ? evaluation.confidenceCalibration : "not measured"
   };
 }
 
@@ -401,6 +524,12 @@ function validateParticipant(participant: Phase0ManualStudyParticipant): Phase0M
   }
   if (!participant.participantPreference || participant.rankSelected === null) {
     issues.push({ code: "missingParticipantPreference", message: "Participant preference and selected rank are required before final evaluation.", severity: "blocking", participantID: participant.participantID });
+  }
+  if (participant.originalTopThreeRecommendations.length !== 3) {
+    issues.push({ code: "missingOriginalTopThreeRecommendations", message: "Participant requires the original app-generated top-three recommendation snapshot.", severity: "blocking", participantID: participant.participantID });
+  }
+  if (participant.resemblanceRating !== null && (!Number.isInteger(participant.resemblanceRating) || participant.resemblanceRating < 1 || participant.resemblanceRating > 5)) {
+    issues.push({ code: "invalidResemblanceRating", message: "Participant resemblance rating must be 1-5 when recorded.", severity: "blocking", participantID: participant.participantID });
   }
   if (participant.rawMediaDeletionState.status !== "deleted" || !participant.rawMediaDeletionState.completedAt || !participant.rawMediaDeletionState.verifiedBy) {
     issues.push({ code: "rawMediaDeletionNotConfirmed", message: "Raw-media deletion must be confirmed before the participant result is complete.", severity: "blocking", participantID: participant.participantID });
@@ -462,4 +591,15 @@ function uniqueUsableText(values: string[]) {
 
 function isISODateString(value: string | null): value is string {
   return typeof value === "string" && !Number.isNaN(Date.parse(value));
+}
+
+function averageOriginalRecommendationConfidence(recommendations: Phase0OriginalRecommendationSnapshot[]) {
+  const values = recommendations.map((recommendation) => recommendation.confidenceScore).filter((value): value is number => typeof value === "number" && Number.isFinite(value));
+  if (values.length === 0) return null;
+  const normalized = values.map((value) => (value > 1 ? value / 100 : value));
+  return average(normalized);
+}
+
+function average(values: number[]) {
+  return values.length > 0 ? values.reduce((total, value) => total + value, 0) / values.length : null;
 }

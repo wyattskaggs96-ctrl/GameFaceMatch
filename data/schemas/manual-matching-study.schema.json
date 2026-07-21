@@ -64,6 +64,16 @@
     "reviewerAgreement": { "$ref": "#/$defs/reviewerAgreement" },
     "rawMediaDeletionState": { "$ref": "#/$defs/rawMediaDeletionState" },
     "catalogVersion": { "$ref": "#/$defs/catalogVersion" },
+    "originalTopThreeRecommendations": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/originalRecommendation" }
+    },
+    "captureQualitySummary": { "$ref": "#/$defs/captureQualitySummary" },
+    "finalInGameSelection": { "anyOf": [{ "$ref": "#/$defs/finalInGameSelection" }, { "type": "null" }] },
+    "resemblanceRating": { "type": ["integer", "null"], "minimum": 1, "maximum": 5 },
+    "repeatScanResult": { "anyOf": [{ "$ref": "#/$defs/repeatScanResult" }, { "type": "null" }] },
     "status": { "enum": ["planned", "inReview", "complete", "withdrawn", "blocked"] },
     "resultTimestamps": { "$ref": "#/$defs/resultTimestamps" },
     "notes": { "$ref": "#/$defs/text" },
@@ -155,8 +165,74 @@
         "bodyPreferenceMismatch",
         "catalogCoverageGap",
         "captureQuality",
+        "lightingOrPose",
+        "participantPreference",
+        "reviewerDisagreement",
         "uncertain"
       ]
+    },
+    "originalRecommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rank", "catalogItemID", "catalogStableInternalID", "matchScore", "confidenceScore", "algorithmVersion", "generatedAt"],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "catalogItemID": { "$ref": "#/$defs/id" },
+        "catalogStableInternalID": { "$ref": "#/$defs/text" },
+        "matchScore": { "type": ["number", "null"], "minimum": 0 },
+        "confidenceScore": { "type": ["number", "null"], "minimum": 0 },
+        "algorithmVersion": { "$ref": "#/$defs/text" },
+        "generatedAt": { "$ref": "#/$defs/timestamp" }
+      }
+    },
+    "captureQualitySummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["qualityState", "overallScore", "blockingIssueCount", "advisoryIssueCount", "notes"],
+      "properties": {
+        "qualityState": { "enum": ["passed", "passedWithWarnings", "failed", "notRecorded"] },
+        "overallScore": { "type": ["number", "null"], "minimum": 0 },
+        "blockingIssueCount": { "type": "integer", "minimum": 0 },
+        "advisoryIssueCount": { "type": "integer", "minimum": 0 },
+        "notes": { "$ref": "#/$defs/text" }
+      }
+    },
+    "finalInGameSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selectedCatalogItemID", "selectedStableInternalID", "builtInGame", "notes"],
+      "properties": {
+        "selectedCatalogItemID": { "type": ["string", "null"] },
+        "selectedStableInternalID": { "type": ["string", "null"] },
+        "builtInGame": { "type": "boolean" },
+        "notes": { "$ref": "#/$defs/text" }
+      }
+    },
+    "repeatScanResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["completed", "repeatScanID", "captureMode", "completedAt", "topThreeStableInternalIDs", "sameTopChoice", "topThreeOverlapCount", "notes"],
+      "properties": {
+        "completed": { "type": "boolean" },
+        "repeatScanID": { "type": ["string", "null"] },
+        "captureMode": {
+          "enum": [
+            "webRgbGuided",
+            "webManualUpload",
+            "iPhoneTrueDepthAssisted",
+            "iPhoneTrueDepthSelfScan",
+            "standardCamera",
+            "screenshotRefinement",
+            "unknown",
+            null
+          ]
+        },
+        "completedAt": { "$ref": "#/$defs/nullableTimestamp" },
+        "topThreeStableInternalIDs": { "type": "array", "items": { "$ref": "#/$defs/text" } },
+        "sameTopChoice": { "type": ["boolean", "null"] },
+        "topThreeOverlapCount": { "type": ["integer", "null"], "minimum": 0, "maximum": 3 },
+        "notes": { "$ref": "#/$defs/text" }
+      }
     },
     "reviewerAgreement": {
       "type": "object",

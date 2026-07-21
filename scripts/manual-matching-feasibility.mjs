@@ -69,10 +69,17 @@ export const reviewColumns = [
 ];
 
 export const resultColumns = [
+  "source_type",
   "study_id",
   "participant_id",
   "catalog_version_id",
   "algorithm_version",
+  "original_top_three_catalog_ids",
+  "original_top_three_scores",
+  "original_top_three_confidence",
+  "capture_quality_state",
+  "capture_quality_score",
+  "capture_failure_flag",
   "reviewer_a_id",
   "reviewer_b_id",
   "reviewers_agreed_top_choice",
@@ -80,13 +87,36 @@ export const resultColumns = [
   "participant_selected_rank",
   "participant_selected_catalog_id",
   "participant_usefulness_rating_1_to_5",
+  "participant_resemblance_rating_1_to_5",
   "top_one_accepted",
   "top_three_useful",
+  "final_in_game_catalog_id",
+  "final_in_game_notes",
+  "repeat_scan_completed",
+  "repeat_scan_top_three_catalog_ids",
+  "repeat_scan_same_top_choice",
+  "repeat_scan_overlap_count",
+  "confidence_perception_1_to_5",
   "disagreement_logged",
   "mismatch_reason_codes",
   "raw_media_deleted_confirmed",
   "deletion_confirmed_at",
   "profile_deleted_confirmed",
+  "notes"
+];
+
+export const repeatabilityColumns = [
+  "source_type",
+  "study_id",
+  "participant_id",
+  "repeat_scan_id",
+  "repeat_scan_completed_at",
+  "capture_mode",
+  "capture_quality_state",
+  "original_top_three_catalog_ids",
+  "repeat_top_three_catalog_ids",
+  "same_top_choice",
+  "top_three_overlap_count",
   "notes"
 ];
 
@@ -96,6 +126,7 @@ const defaultPaths = {
   reviews: "data/phase-zero/manual_matching_reviews.template.csv",
   results: "data/phase-zero/manual_matching_results.template.csv"
 };
+const defaultRepeatabilityPath = "data/phase-zero/manual_matching_repeatability.template.csv";
 const requiredSubjectYesNoFields = [
   "consent_manual_review",
   "consent_temporary_processing",
@@ -137,10 +168,28 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       root: repositoryRoot,
       subjectsPath: cliValue("--subjects") ?? defaultPaths.subjects,
       reviewsPath: cliValue("--reviews") ?? defaultPaths.reviews,
-      resultsPath: cliValue("--results") ?? defaultPaths.results
+      resultsPath: cliValue("--results") ?? defaultPaths.results,
+      repeatabilityPath: cliValue("--repeatability") ?? defaultRepeatabilityPath
     });
     console.log(JSON.stringify(report, null, 2));
     if (!report.ok) process.exitCode = 1;
+  } else if (command === "export-anonymized") {
+    const outputPath = cliValue("--out");
+    if (!outputPath) {
+      console.error("Missing required --out <path> for export-anonymized.");
+      process.exitCode = 1;
+    } else {
+      const report = analyzeManualMatchingFeasibility({
+        root: repositoryRoot,
+        subjectsPath: cliValue("--subjects") ?? defaultPaths.subjects,
+        reviewsPath: cliValue("--reviews") ?? defaultPaths.reviews,
+        resultsPath: cliValue("--results") ?? defaultPaths.results,
+        repeatabilityPath: cliValue("--repeatability") ?? defaultRepeatabilityPath
+      });
+      const exportResult = exportAnonymizedStudyResults(report, outputPath, repositoryRoot);
+      console.log(JSON.stringify(exportResult, null, 2));
+      if (!report.ok) process.exitCode = 1;
+    }
   } else {
     console.error(`Unknown command: ${command}`);
     printHelp();
@@ -152,75 +201,161 @@ export function analyzeManualMatchingFeasibility({
   root = repositoryRoot,
   subjectsPath = defaultPaths.subjects,
   reviewsPath = defaultPaths.reviews,
-  resultsPath = defaultPaths.results
+  resultsPath = defaultPaths.results,
+  repeatabilityPath = defaultRepeatabilityPath
 } = {}) {
   const subjects = loadCSV(root, subjectsPath, subjectColumns, "subjects");
   const reviews = loadCSV(root, reviewsPath, reviewColumns, "reviews");
   const results = loadCSV(root, resultsPath, resultColumns, "results");
-  const errors = [...subjects.errors, ...reviews.errors, ...results.errors];
-  const warnings = [...subjects.warnings, ...reviews.warnings, ...results.warnings];
-  const rows = { subjects: subjects.rows, reviews: reviews.rows, results: results.rows };
+  const repeatability = loadCSV(root, repeatabilityPath, repeatabilityColumns, "repeatability", { optional: true });
+  const errors = [...subjects.errors, ...reviews.errors, ...results.errors, ...repeatability.errors];
+  const warnings = [...subjects.warnings, ...reviews.warnings, ...results.warnings, ...repeatability.warnings];
+  const rows = { subjects: subjects.rows, reviews: reviews.rows, results: results.rows, repeatability: repeatability.rows };
 
   validateSubjectRows(rows.subjects, errors, warnings);
   validateReviewRows(rows.reviews, rows.subjects, errors, warnings);
   validateResultRows(rows.results, rows.subjects, rows.reviews, errors, warnings);
+  validateRepeatabilityRows(rows.repeatability, rows.subjects, errors, warnings);
 
   if (rows.subjects.length > 0 && (rows.subjects.length < 10 || rows.subjects.length > 20)) {
     warnings.push(issue("participantCountOutsideTarget", `Study target is 10-20 subjects; current subject rows: ${rows.subjects.length}.`));
   }
-  if (rows.subjects.length === 0 && rows.reviews.length === 0 && rows.results.length === 0) {
+  if (rows.subjects.length === 0 && rows.reviews.length === 0 && rows.results.length === 0 && rows.repeatability.length === 0) {
     warnings.push(issue("templateOnly", "Manual matching CSVs are header-only templates. No study has been run."));
   }
 
   const metrics = calculateManualMatchingMetrics(rows.results);
+  const dashboard = createManualMatchingStudyDashboard({ rows, metrics, errors, warnings });
 
   return {
     schemaVersion: MANUAL_MATCHING_FEASIBILITY_VERSION,
     ok: errors.length === 0,
-    studyHasRun: rows.subjects.length > 0 || rows.reviews.length > 0 || rows.results.length > 0,
+    studyHasRun: rows.subjects.length > 0 || rows.reviews.length > 0 || rows.results.length > 0 || rows.repeatability.length > 0,
     productionStatus: "NOT_PRODUCTION_DATA",
     verificationStatus: "NOT_VERIFIED",
     rowCounts: {
       subjects: rows.subjects.length,
       reviews: rows.reviews.length,
-      results: rows.results.length
+      results: rows.results.length,
+      repeatability: rows.repeatability.length
     },
+    actualResultRowsIncluded: metrics.completedResultCount,
     metrics,
+    dashboard,
     errors,
     warnings
   };
 }
 
 export function calculateManualMatchingMetrics(resultRows) {
-  const completed = resultRows.filter((row) =>
+  const actualRows = resultRows.filter(isActualStudyResultRow);
+  const completed = actualRows.filter((row) =>
     hasText(row.participant_id) &&
     yes(row.raw_media_deleted_confirmed) &&
     yes(row.profile_deleted_confirmed) &&
-    isRating(row.participant_usefulness_rating_1_to_5)
+    isRating(row.participant_usefulness_rating_1_to_5) &&
+    isRating(row.participant_resemblance_rating_1_to_5)
   );
   const topOneAccepted = completed.filter((row) => yes(row.top_one_accepted) || Number(row.participant_selected_rank) === 1).length;
   const topThreeUseful = completed.filter((row) => yes(row.top_three_useful) || [1, 2, 3].includes(Number(row.participant_selected_rank))).length;
   const disagreementCount = completed.filter((row) => yes(row.disagreement_logged) || !sameBoolean(row.reviewers_agreed_top_choice, row.reviewers_agreed_top_three_set)).length;
   const ratings = completed.map((row) => Number(row.participant_usefulness_rating_1_to_5));
+  const resemblanceRatings = completed.map((row) => Number(row.participant_resemblance_rating_1_to_5));
+  const captureFailureCount = actualRows.filter((row) => yes(row.capture_failure_flag)).length;
+  const repeatScanRows = completed.filter((row) => yes(row.repeat_scan_completed));
+  const repeatScanSameTopChoice = repeatScanRows.filter((row) => yes(row.repeat_scan_same_top_choice)).length;
+  const repeatScanOverlaps = repeatScanRows.map((row) => Number(row.repeat_scan_overlap_count)).filter((value) => Number.isFinite(value));
+  const confidencePerceptionRatings = completed.map((row) => Number(row.confidence_perception_1_to_5)).filter((value) => Number.isInteger(value) && value >= 1 && value <= 5);
   return {
+    actualInputCount: actualRows.length,
+    fixtureRowsExcluded: resultRows.length - actualRows.length,
     completedResultCount: completed.length,
     topOneAcceptance: rate(topOneAccepted, completed.length),
     topThreeUsefulness: rate(topThreeUseful, completed.length),
     rankSelectedDistribution: distribution(completed.map((row) => normalizeRank(row.participant_selected_rank))),
     averageParticipantUsefulnessRating: average(ratings),
+    averageResemblanceRating: average(resemblanceRatings),
     reviewerTopChoiceAgreement: yesRate(completed.map((row) => row.reviewers_agreed_top_choice)),
     reviewerTopThreeSetAgreement: yesRate(completed.map((row) => row.reviewers_agreed_top_three_set)),
     disagreementCount,
     mismatchReasonCounts: distribution(completed.flatMap((row) => splitReasons(row.mismatch_reason_codes))),
-    deletionConfirmation: rate(completed.filter((row) => yes(row.raw_media_deleted_confirmed) && yes(row.profile_deleted_confirmed)).length, completed.length)
+    deletionConfirmation: rate(completed.filter((row) => yes(row.raw_media_deleted_confirmed) && yes(row.profile_deleted_confirmed)).length, completed.length),
+    captureFailureRate: rate(captureFailureCount, actualRows.length),
+    repeatability: {
+      repeatScanCount: repeatScanRows.length,
+      sameTopChoiceRate: rate(repeatScanSameTopChoice, repeatScanRows.length),
+      averageTopThreeOverlap: average(repeatScanOverlaps)
+    },
+    averageConfidencePerceptionRating: average(confidencePerceptionRatings)
   };
 }
 
-function loadCSV(root, relativePath, expectedColumns, label) {
+export function createManualMatchingStudyDashboard({ rows, metrics, errors = [], warnings = [] }) {
+  const realParticipantCount = rows.subjects.filter((row) => !isFixtureLike(row.participant_id)).length;
+  const completedParticipants = metrics.completedResultCount;
+  const enoughObservations = completedParticipants >= 10;
+  return {
+    status: enoughObservations ? "measured" : "notMeasured",
+    measurementLabel: enoughObservations ? "Calculated from real submitted study rows." : "Not measured until at least 10 complete real participant results exist.",
+    participantsCompleted: completedParticipants,
+    participantTarget: { minimum: 10, maximum: 20 },
+    realParticipantRows: realParticipantCount,
+    fixtureRowsExcluded: metrics.fixtureRowsExcluded,
+    topOneAcceptance: notMeasuredUntilEnough(metrics.topOneAcceptance, enoughObservations),
+    topThreeUsefulness: notMeasuredUntilEnough(metrics.topThreeUsefulness, enoughObservations),
+    rankDistribution: enoughObservations ? metrics.rankSelectedDistribution : "not measured",
+    repeatability: enoughObservations ? metrics.repeatability : "not measured",
+    captureFailure: enoughObservations ? metrics.captureFailureRate : "not measured",
+    reviewerAgreement: enoughObservations
+      ? {
+          topChoice: metrics.reviewerTopChoiceAgreement,
+          topThreeSet: metrics.reviewerTopThreeSetAgreement
+        }
+      : "not measured",
+    confidenceCalibration: enoughObservations ? { averageConfidencePerceptionRating: metrics.averageConfidencePerceptionRating } : "not measured",
+    issues: {
+      errors: errors.length,
+      warnings: warnings.length
+    }
+  };
+}
+
+export function exportAnonymizedStudyResults(report, outputPath, root = repositoryRoot) {
+  const destination = path.resolve(root, outputPath);
+  const exportPayload = {
+    schemaVersion: `${MANUAL_MATCHING_FEASIBILITY_VERSION}-anonymized-export-v1`,
+    generatedAt: new Date().toISOString(),
+    productionStatus: report.productionStatus,
+    verificationStatus: report.verificationStatus,
+    rowCounts: report.rowCounts,
+    metrics: report.metrics,
+    dashboard: report.dashboard,
+    privacy: {
+      participantNamesIncluded: false,
+      rawMediaIncluded: false,
+      preciseFacialMeasurementsIncluded: false,
+      directIdentifiersIncluded: false
+    }
+  };
+  fs.mkdirSync(path.dirname(destination), { recursive: true });
+  fs.writeFileSync(destination, `${JSON.stringify(exportPayload, null, 2)}\n`);
+  return {
+    ok: report.ok,
+    outputPath: path.relative(root, destination),
+    rawMediaIncluded: false,
+    directIdentifiersIncluded: false
+  };
+}
+
+function loadCSV(root, relativePath, expectedColumns, label, options = {}) {
   const absolutePath = path.resolve(root, relativePath);
   const errors = [];
   const warnings = [];
   if (!fs.existsSync(absolutePath)) {
+    if (options.optional) {
+      warnings.push(issue("optionalCSVMissing", `${label} CSV not found at ${relativePath}; treating as not measured.`));
+      return { rows: [], errors, warnings };
+    }
     return { rows: [], errors: [issue("missingCSV", `${label} CSV not found at ${relativePath}.`)], warnings };
   }
   const parsed = parseCSV(fs.readFileSync(absolutePath, "utf8"));
@@ -288,15 +423,16 @@ function validateResultRows(rows, subjectRows, reviewRows, errors, warnings) {
   }
   for (const [index, row] of rows.entries()) {
     const rowNumber = index + 2;
-    requireFields(row, ["study_id", "participant_id", "catalog_version_id", "algorithm_version", "reviewer_a_id", "reviewer_b_id"], "results", rowNumber, errors);
+    requireFields(row, ["source_type", "study_id", "participant_id", "catalog_version_id", "algorithm_version", "reviewer_a_id", "reviewer_b_id"], "results", rowNumber, errors);
     rejectPlaceholders(row, "results", rowNumber, errors);
+    validateStudySourceType(row.source_type, "results.source_type", rowNumber, errors);
     if (!subjectIDs.has(row.participant_id)) errors.push(issue("unknownResultParticipant", `Result references unknown participant ${row.participant_id}.`, rowNumber));
     if (row.reviewer_a_id === row.reviewer_b_id) errors.push(issue("sameReviewer", `${row.participant_id} requires two different reviewers.`, rowNumber));
     const reviewers = reviewersByParticipant.get(row.participant_id) ?? new Set();
     if (reviewRows.length > 0 && (!reviewers.has(row.reviewer_a_id) || !reviewers.has(row.reviewer_b_id))) {
       errors.push(issue("resultReviewerMissingReview", `${row.participant_id} result references reviewer without matching review row.`, rowNumber));
     }
-    for (const field of ["reviewers_agreed_top_choice", "reviewers_agreed_top_three_set", "top_one_accepted", "top_three_useful", "disagreement_logged", "raw_media_deleted_confirmed", "profile_deleted_confirmed"]) {
+    for (const field of ["reviewers_agreed_top_choice", "reviewers_agreed_top_three_set", "top_one_accepted", "top_three_useful", "capture_failure_flag", "repeat_scan_completed", "repeat_scan_same_top_choice", "disagreement_logged", "raw_media_deleted_confirmed", "profile_deleted_confirmed"]) {
       validateYesNo(row[field], `results.${field}`, rowNumber, errors);
     }
     if (row.participant_selected_rank && !["1", "2", "3"].includes(row.participant_selected_rank)) {
@@ -305,6 +441,20 @@ function validateResultRows(rows, subjectRows, reviewRows, errors, warnings) {
     if (!isRating(row.participant_usefulness_rating_1_to_5)) {
       errors.push(issue("invalidUsefulnessRating", `${row.participant_id} usefulness rating must be 1-5.`, rowNumber));
     }
+    if (!isRating(row.participant_resemblance_rating_1_to_5)) {
+      errors.push(issue("invalidResemblanceRating", `${row.participant_id} resemblance rating must be 1-5.`, rowNumber));
+    }
+    if (row.confidence_perception_1_to_5 && !isRating(row.confidence_perception_1_to_5)) {
+      errors.push(issue("invalidConfidencePerceptionRating", `${row.participant_id} confidence perception rating must be blank or 1-5.`, rowNumber));
+    }
+    validateCatalogIDList(row.original_top_three_catalog_ids, "results.original_top_three_catalog_ids", rowNumber, errors);
+    if (row.repeat_scan_top_three_catalog_ids) validateCatalogIDList(row.repeat_scan_top_three_catalog_ids, "results.repeat_scan_top_three_catalog_ids", rowNumber, errors);
+    if (row.repeat_scan_overlap_count && !["0", "1", "2", "3"].includes(row.repeat_scan_overlap_count)) {
+      errors.push(issue("invalidRepeatOverlap", `${row.participant_id} repeat_scan_overlap_count must be 0, 1, 2, 3, or blank.`, rowNumber));
+    }
+    if (isFixtureLike(row.participant_id) || row.source_type === "testFixture") {
+      warnings.push(issue("fixtureStudyRowsExcluded", `${row.participant_id} is fixture-like and excluded from actual study metrics.`, rowNumber));
+    }
     if (yes(row.raw_media_deleted_confirmed) && !isISO(row.deletion_confirmed_at)) {
       errors.push(issue("missingDeletionTimestamp", `${row.participant_id} deletion confirmation needs a timestamp.`, rowNumber));
     }
@@ -312,6 +462,27 @@ function validateResultRows(rows, subjectRows, reviewRows, errors, warnings) {
       warnings.push(issue("deletionNotConfirmed", `${row.participant_id} is not complete until raw media and profile deletion are confirmed.`, rowNumber));
     }
     validateMismatchReasons(row.mismatch_reason_codes, "results", rowNumber, errors);
+  }
+}
+
+function validateRepeatabilityRows(rows, subjectRows, errors, warnings) {
+  const subjectIDs = new Set(subjectRows.map((row) => row.participant_id));
+  for (const [index, row] of rows.entries()) {
+    const rowNumber = index + 2;
+    requireFields(row, ["source_type", "study_id", "participant_id", "repeat_scan_id", "repeat_scan_completed_at"], "repeatability", rowNumber, errors);
+    rejectPlaceholders(row, "repeatability", rowNumber, errors);
+    validateStudySourceType(row.source_type, "repeatability.source_type", rowNumber, errors);
+    if (!subjectIDs.has(row.participant_id)) errors.push(issue("unknownRepeatabilityParticipant", `Repeatability row references unknown participant ${row.participant_id}.`, rowNumber));
+    if (!isISO(row.repeat_scan_completed_at)) errors.push(issue("invalidRepeatScanTimestamp", `${row.participant_id} repeat scan timestamp is invalid.`, rowNumber));
+    validateYesNo(row.same_top_choice, "repeatability.same_top_choice", rowNumber, errors);
+    validateCatalogIDList(row.original_top_three_catalog_ids, "repeatability.original_top_three_catalog_ids", rowNumber, errors);
+    validateCatalogIDList(row.repeat_top_three_catalog_ids, "repeatability.repeat_top_three_catalog_ids", rowNumber, errors);
+    if (!["0", "1", "2", "3"].includes(row.top_three_overlap_count)) {
+      errors.push(issue("invalidRepeatOverlap", `${row.participant_id} top_three_overlap_count must be 0, 1, 2, or 3.`, rowNumber));
+    }
+    if (isFixtureLike(row.participant_id) || row.source_type === "testFixture") {
+      warnings.push(issue("fixtureRepeatabilityRowsExcluded", `${row.participant_id} repeatability row is fixture-like and not actual study evidence.`, rowNumber));
+    }
   }
 }
 
@@ -330,6 +501,22 @@ function rejectPlaceholders(row, label, rowNumber, errors) {
 function validateYesNo(value, field, rowNumber, errors) {
   if (!["yes", "no"].includes(String(value).trim().toLowerCase())) {
     errors.push(issue("invalidBoolean", `${field} must be yes or no.`, rowNumber));
+  }
+}
+
+function validateStudySourceType(value, field, rowNumber, errors) {
+  if (!["actualStudy", "testFixture"].includes(String(value).trim())) {
+    errors.push(issue("invalidStudySourceType", `${field} must be actualStudy or testFixture.`, rowNumber));
+  }
+}
+
+function validateCatalogIDList(value, field, rowNumber, errors) {
+  const ids = splitList(value);
+  if (ids.length !== 3) {
+    errors.push(issue("invalidTopThreeList", `${field} must contain exactly three semicolon-separated catalog IDs.`, rowNumber));
+  }
+  if (new Set(ids).size !== ids.length) {
+    errors.push(issue("duplicateTopThreeListItem", `${field} repeats a catalog ID.`, rowNumber));
   }
 }
 
@@ -376,6 +563,10 @@ function splitReasons(value) {
   return String(value ?? "").split(/[;|]/).map((item) => item.trim()).filter(Boolean);
 }
 
+function splitList(value) {
+  return String(value ?? "").split(/[;|]/).map((item) => item.trim()).filter(Boolean);
+}
+
 function distribution(values) {
   const counts = {};
   for (const value of values) counts[value] = (counts[value] ?? 0) + 1;
@@ -407,6 +598,18 @@ function yes(value) {
   return String(value).trim().toLowerCase() === "yes";
 }
 
+function isActualStudyResultRow(row) {
+  return row.source_type === "actualStudy" && !isFixtureLike(row.participant_id);
+}
+
+function isFixtureLike(value) {
+  return /^(synthetic|test-only|fixture)/i.test(String(value ?? "").trim());
+}
+
+function notMeasuredUntilEnough(metric, enoughObservations) {
+  return enoughObservations ? metric : "not measured";
+}
+
 function hasText(value) {
   return typeof value === "string" && value.trim().length > 0;
 }
@@ -435,10 +638,12 @@ function printHelp() {
 Usage:
   node scripts/manual-matching-feasibility.mjs validate
   node scripts/manual-matching-feasibility.mjs analyze
+  node scripts/manual-matching-feasibility.mjs export-anonymized --out <path>
 
 Options:
   --subjects <path>  Subjects CSV path
   --reviews <path>   Reviews CSV path
   --results <path>   Results CSV path
+  --repeatability <path> Repeatability CSV path
 `);
 }

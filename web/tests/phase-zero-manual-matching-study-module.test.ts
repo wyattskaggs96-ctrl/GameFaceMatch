@@ -10,9 +10,12 @@ import {
   MANUAL_STUDY_MAX_PARTICIPANTS,
   MANUAL_STUDY_MIN_PARTICIPANTS,
   PHASE0_MANUAL_MATCHING_OPERATION_VERSION,
+  recordCaptureQualitySummary,
   recordConsentCheckpoint,
   recordIndependentTopThreeReview,
+  recordOriginalTopThreeRecommendations,
   recordParticipantPreference,
+  recordRepeatScanResult,
   validateManualMatchingStudyOperation,
   type Phase0ManualMatchingStudyOperation,
   type Phase0ManualStudyIndependentReview,
@@ -61,6 +64,7 @@ describe("Phase 0 manual matching study operational module", () => {
         "referenceImagesIncomplete",
         "insufficientReviewerAssignment",
         "missingIndependentReviews",
+        "missingOriginalTopThreeRecommendations",
         "missingParticipantPreference",
         "rawMediaDeletionNotConfirmed"
       ])
@@ -91,6 +95,11 @@ describe("Phase 0 manual matching study operational module", () => {
       agreedTopThreeSet: true
     });
     expect(report.evaluation.topThreeUsefulMatchRate).toMatchObject({ numerator: 1, denominator: 1, rate: 1, fixtureDerived: true });
+    expect(report.dashboard.status).toBe("notMeasured");
+    expect(report.dashboard.topThreeUsefulness).toBe("not measured");
+    expect(report.resultRecords[0]?.originalTopThreeRecommendations).toHaveLength(3);
+    expect(report.resultRecords[0]?.resemblanceRating).toBe(4);
+    expect(report.resultRecords[0]?.repeatScanResult).toMatchObject({ completed: true, sameTopChoice: false, topThreeOverlapCount: 2 });
   });
 
   it("preserves independent reviewer rankings before export", () => {
@@ -146,6 +155,22 @@ function completeParticipantWorkflow(): Phase0ManualMatchingStudyOperation {
     withdrawalRequestedAt: null
   });
   participant = assignManualStudyReviewers(participant, ["synthetic-reviewer-a", "synthetic-reviewer-b"], "2026-07-13T01:10:00.000Z");
+  participant = recordCaptureQualitySummary(participant, {
+    qualityState: "passedWithWarnings",
+    overallScore: 0.82,
+    blockingIssueCount: 0,
+    advisoryIssueCount: 1,
+    notes: "Synthetic capture quality summary."
+  }, "2026-07-13T01:12:00.000Z");
+  participant = recordOriginalTopThreeRecommendations(participant, ["001", "002", "003"].map((suffix, index) => ({
+    rank: (index + 1) as 1 | 2 | 3,
+    catalogItemID: `synthetic-head-choice-${suffix}`,
+    catalogStableInternalID: `CF27_TESTONLY_HEAD_${suffix}`,
+    matchScore: 90 - index * 4,
+    confidenceScore: 0.75 - index * 0.05,
+    algorithmVersion: "synthetic-matcher-v1",
+    generatedAt: "2026-07-13T01:13:00.000Z"
+  })), "2026-07-13T01:13:00.000Z");
   participant = recordIndependentTopThreeReview(participant, review("synthetic-reviewer-a", ["001", "002", "003"], "2026-07-13T01:20:00.000Z"));
   participant = recordIndependentTopThreeReview(participant, review("synthetic-reviewer-b", ["002", "001", "003"], "2026-07-13T01:25:00.000Z"));
   participant = recordParticipantPreference(participant, {
@@ -155,9 +180,26 @@ function completeParticipantWorkflow(): Phase0ManualMatchingStudyOperation {
       notes: "Synthetic participant selected the second fixture candidate."
     },
     rankSelected: 2,
+    finalInGameSelection: {
+      selectedCatalogItemID: "synthetic-head-choice-002",
+      selectedStableInternalID: "CF27_TESTONLY_HEAD_002",
+      builtInGame: true,
+      notes: "Synthetic in-game final selection."
+    },
+    resemblanceRating: 4,
     mainMismatchReasons: ["jawMismatch", "catalogCoverageGap"],
     updatedAt: "2026-07-13T01:30:00.000Z"
   });
+  participant = recordRepeatScanResult(participant, {
+    completed: true,
+    repeatScanID: "synthetic-repeat-001",
+    captureMode: "webRgbGuided",
+    completedAt: "2026-07-13T01:32:00.000Z",
+    topThreeStableInternalIDs: ["CF27_TESTONLY_HEAD_002", "CF27_TESTONLY_HEAD_001", "CF27_TESTONLY_HEAD_004"],
+    sameTopChoice: false,
+    topThreeOverlapCount: 2,
+    notes: "Synthetic repeat scan comparison."
+  }, "2026-07-13T01:32:00.000Z");
   participant = confirmRawMediaDeletion(participant, {
     completedAt: "2026-07-13T01:35:00.000Z",
     verifiedBy: "synthetic-privacy-reviewer"

@@ -17,6 +17,9 @@ export type Phase0ManualMismatchReason =
   | "bodyPreferenceMismatch"
   | "catalogCoverageGap"
   | "captureQuality"
+  | "lightingOrPose"
+  | "participantPreference"
+  | "reviewerDisagreement"
   | "uncertain";
 
 export type Phase0ReferenceViewCompleteness = Record<CapturedAngleID, boolean>;
@@ -38,6 +41,42 @@ export interface Phase0ManualStudyCatalogVersion {
   gameVersion: string;
   patchVersion: string;
   verifiedAt: ISODateString | null;
+}
+
+export interface Phase0OriginalRecommendationSnapshot {
+  rank: Phase0StudyRank;
+  catalogItemID: Phase0EntityID;
+  catalogStableInternalID: string;
+  matchScore: number | null;
+  confidenceScore: number | null;
+  algorithmVersion: string;
+  generatedAt: ISODateString;
+}
+
+export interface Phase0StudyCaptureQualitySummary {
+  qualityState: "passed" | "passedWithWarnings" | "failed" | "notRecorded";
+  overallScore: number | null;
+  blockingIssueCount: number;
+  advisoryIssueCount: number;
+  notes: string;
+}
+
+export interface Phase0FinalInGameSelection {
+  selectedCatalogItemID: Phase0EntityID | null;
+  selectedStableInternalID: string | null;
+  builtInGame: boolean;
+  notes: string;
+}
+
+export interface Phase0RepeatScanResult {
+  completed: boolean;
+  repeatScanID: Phase0EntityID | null;
+  captureMode: CaptureMode | null;
+  completedAt: ISODateString | null;
+  topThreeStableInternalIDs: string[];
+  sameTopChoice: boolean | null;
+  topThreeOverlapCount: number | null;
+  notes: string;
 }
 
 export interface Phase0RankedHeadChoice {
@@ -96,6 +135,11 @@ export interface Phase0ManualMatchingStudyResult {
   reviewerAgreement: Phase0ReviewerAgreement;
   rawMediaDeletionState: Phase0RawMediaDeletionState;
   catalogVersion: Phase0ManualStudyCatalogVersion;
+  originalTopThreeRecommendations?: Phase0OriginalRecommendationSnapshot[];
+  captureQualitySummary?: Phase0StudyCaptureQualitySummary;
+  finalInGameSelection?: Phase0FinalInGameSelection | null;
+  resemblanceRating?: number | null;
+  repeatScanResult?: Phase0RepeatScanResult | null;
   status: Phase0ManualStudyResultStatus;
   resultTimestamps: {
     capturedAt: ISODateString | null;
@@ -153,6 +197,7 @@ export function validatePhase0ManualMatchingStudyResult(
   validateOptionalChoice(result.hairChoice, "hairChoice", errors, entityID);
   validateOptionalChoice(result.facialHairChoice, "facialHairChoice", errors, entityID);
   validateSubjectSelection(result, errors, entityID);
+  validateStudyExtensions(result, errors, entityID);
   validateRawMediaDeletion(result, errors, warnings, entityID);
   validateCatalogVersion(result, errors, entityID);
   validateTimestamps(result, errors, entityID);
@@ -265,6 +310,49 @@ function validateSubjectSelection(result: Phase0ManualMatchingStudyResult, error
   }
 }
 
+function validateStudyExtensions(result: Phase0ManualMatchingStudyResult, errors: Phase0ManualMatchingStudyValidationIssue[], entityID: string) {
+  if (result.originalTopThreeRecommendations !== undefined) {
+    if (result.originalTopThreeRecommendations.length !== 3) {
+      errors.push(issue("invalidOriginalRecommendationCount", `${entityID} must store exactly three original app recommendations when provided.`, entityID));
+    }
+    const ranks = new Set<number>();
+    for (const recommendation of result.originalTopThreeRecommendations) {
+      if (!validRanks.has(recommendation.rank)) errors.push(issue("invalidOriginalRecommendationRank", `${entityID} has invalid original recommendation rank.`, entityID));
+      if (ranks.has(recommendation.rank)) errors.push(issue("duplicateOriginalRecommendationRank", `${entityID} repeats original recommendation rank ${recommendation.rank}.`, entityID));
+      ranks.add(recommendation.rank);
+      if (!hasUsableText(recommendation.catalogItemID) || !hasUsableText(recommendation.catalogStableInternalID) || !hasUsableText(recommendation.algorithmVersion)) {
+        errors.push(issue("invalidOriginalRecommendation", `${entityID} has incomplete original recommendation traceability.`, entityID));
+      }
+      if (!isNullableScore(recommendation.matchScore) || !isNullableScore(recommendation.confidenceScore)) {
+        errors.push(issue("invalidOriginalRecommendationScore", `${entityID} original recommendation scores must be null or numeric.`, entityID));
+      }
+      if (!isISODate(recommendation.generatedAt)) errors.push(issue("invalidOriginalRecommendationTimestamp", `${entityID} original recommendation timestamp is invalid.`, entityID));
+    }
+  }
+  if (result.captureQualitySummary) {
+    const quality = result.captureQualitySummary;
+    if (!["passed", "passedWithWarnings", "failed", "notRecorded"].includes(quality.qualityState)) {
+      errors.push(issue("invalidCaptureQualityState", `${entityID} capture quality state is invalid.`, entityID));
+    }
+    if (!isNullableScore(quality.overallScore) || quality.blockingIssueCount < 0 || quality.advisoryIssueCount < 0) {
+      errors.push(issue("invalidCaptureQualitySummary", `${entityID} capture quality summary is invalid.`, entityID));
+    }
+  }
+  if (result.resemblanceRating !== undefined && result.resemblanceRating !== null && (!Number.isInteger(result.resemblanceRating) || result.resemblanceRating < 1 || result.resemblanceRating > 5)) {
+    errors.push(issue("invalidResemblanceRating", `${entityID} resemblance rating must be null or 1-5.`, entityID));
+  }
+  if (result.repeatScanResult) {
+    const repeat = result.repeatScanResult;
+    if (repeat.completedAt && !isISODate(repeat.completedAt)) errors.push(issue("invalidRepeatScanTimestamp", `${entityID} repeat scan timestamp is invalid.`, entityID));
+    if (repeat.topThreeStableInternalIDs.length > 0 && repeat.topThreeStableInternalIDs.length !== 3) {
+      errors.push(issue("invalidRepeatScanTopThree", `${entityID} repeat scan top-three must contain exactly three stable IDs when recorded.`, entityID));
+    }
+    if (repeat.topThreeOverlapCount !== null && (!Number.isInteger(repeat.topThreeOverlapCount) || repeat.topThreeOverlapCount < 0 || repeat.topThreeOverlapCount > 3)) {
+      errors.push(issue("invalidRepeatScanOverlap", `${entityID} repeat scan overlap must be null or 0-3.`, entityID));
+    }
+  }
+}
+
 function validateRawMediaDeletion(
   result: Phase0ManualMatchingStudyResult,
   errors: Phase0ManualMatchingStudyValidationIssue[],
@@ -317,6 +405,10 @@ function hasUsableText(value: string) {
 
 function isISODate(value: string | null | undefined) {
   return typeof value === "string" && value.trim().length > 0 && !Number.isNaN(Date.parse(value));
+}
+
+function isNullableScore(value: number | null) {
+  return value === null || (typeof value === "number" && Number.isFinite(value) && value >= 0);
 }
 
 function issue(code: string, message: string, entityID?: string): Phase0ManualMatchingStudyValidationIssue {

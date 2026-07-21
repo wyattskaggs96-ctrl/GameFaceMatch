@@ -1,6 +1,6 @@
 # Manual Matching Feasibility Protocol
 
-**Status:** protocol template only  
+**Status:** protocol and workflow template only
 **Production status:** NOT PRODUCTION DATA  
 **Study status:** NOT STARTED  
 
@@ -8,7 +8,7 @@ This package prepares the future 10-20-subject manual feasibility study for Game
 
 ## Purpose
 
-The study asks whether human reviewers can use a verified College Football 27 appearance catalog to choose useful top-three in-game head matches, hair options, and facial-hair options for consenting subjects. It measures usefulness, not identity probability.
+The study asks whether GameFace Match can produce useful top-three recommendations from a verified College Football 27 appearance catalog, and whether human reviewers and participants agree that those recommendations are usable. It measures usefulness and perceived resemblance, not identity probability.
 
 The study must not claim:
 
@@ -129,6 +129,20 @@ Each subject needs at least two independent reviewers.
 8. Ask the participant to rate usefulness and select the best available top-three option.
 9. Confirm raw-media deletion and profile deletion.
 
+## App Recommendation Snapshot
+
+For each participant, record the original app-generated top three before any human review changes:
+
+- catalog item IDs
+- stable internal IDs
+- match scores as presented by the app
+- confidence score or label
+- matching algorithm version
+- catalog version
+- generation timestamp
+
+Do not edit the original top-three snapshot after reviewers or participants respond.
+
 ## Top-Three Head-Ranking Form
 
 Required fields are in `data/phase-zero/manual_matching_reviews.template.csv`:
@@ -174,6 +188,12 @@ After showing the participant the top-three candidate summary, ask:
 - How useful is the recommendation from 1 to 5?
 - What was the main mismatch?
 - Would any verified hair or facial-hair change make the result more useful?
+- How close was the final in-game result from 1 to 5?
+- Which in-game option did the participant actually keep, if any?
+
+## Repeatability
+
+When practical, repeat the same capture flow for the participant after a short break. Record whether the top choice stayed the same and how many of the top-three recommendations overlapped. Repeatability records are not required for every participant, but they must be labeled as not measured until enough real repeat scans exist.
 
 ## Metrics
 
@@ -193,11 +213,16 @@ Additional analysis:
 
 - rank selected distribution
 - average participant usefulness rating
+- average resemblance rating
 - reviewer top-choice agreement
 - reviewer top-three-set agreement
 - disagreement count
 - mismatch-reason taxonomy counts
 - deletion confirmation count
+- repeat-scan top-choice stability
+- repeat-scan top-three overlap
+- capture failure rate
+- confidence perception
 
 ## Mismatch-Reason Taxonomy
 
@@ -223,6 +248,7 @@ Allowed codes:
 - Subjects: `data/phase-zero/manual_matching_subjects.template.csv`
 - Reviews: `data/phase-zero/manual_matching_reviews.template.csv`
 - Results: `data/phase-zero/manual_matching_results.template.csv`
+- Repeatability: `data/phase-zero/manual_matching_repeatability.template.csv`
 
 The committed templates are header-only. Fill copies outside the repository or in an approved private study workspace. Do not commit raw photos or real participant-identifying information.
 
@@ -233,6 +259,7 @@ Use:
 ```bash
 node scripts/manual-matching-feasibility.mjs validate
 node scripts/manual-matching-feasibility.mjs analyze
+node scripts/manual-matching-feasibility.mjs export-anonymized --out data/phase-zero/exports/manual_matching_anonymized_results.json
 ```
 
 The script validates headers, consent flags, five required views, reviewer coverage, result rows, deletion confirmation, placeholder values, and participant-count gates. Header-only templates are valid as templates but produce no study metrics.

@@ -8,6 +8,8 @@ import * as manualMatching from "../../scripts/manual-matching-feasibility.mjs";
 const {
   analyzeManualMatchingFeasibility,
   calculateManualMatchingMetrics,
+  exportAnonymizedStudyResults,
+  repeatabilityColumns,
   reviewColumns,
   resultColumns,
   subjectColumns
@@ -35,23 +37,27 @@ describe("manual matching feasibility package", () => {
     expect(report.studyHasRun).toBe(false);
     expect(report.productionStatus).toBe("NOT_PRODUCTION_DATA");
     expect(report.verificationStatus).toBe("NOT_VERIFIED");
-    expect(report.rowCounts).toEqual({ subjects: 0, reviews: 0, results: 0 });
+    expect(report.rowCounts).toEqual({ subjects: 0, reviews: 0, results: 0, repeatability: 0 });
+    expect(report.dashboard.status).toBe("notMeasured");
+    expect(report.dashboard.topOneAcceptance).toBe("not measured");
     expect(report.warnings.map((warning: { code: string }) => warning.code)).toContain("templateOnly");
   });
 
   it("calculates top-one, top-three, rating, agreement, disagreement, mismatch, and deletion metrics", () => {
     const metrics = calculateManualMatchingMetrics([
-      resultRow({ participant_id: "participant-001", participant_selected_rank: "1", participant_usefulness_rating_1_to_5: "5", top_one_accepted: "yes", top_three_useful: "yes", mismatch_reason_codes: "jawMismatch;hairMismatch" }),
-      resultRow({ participant_id: "participant-002", participant_selected_rank: "2", participant_usefulness_rating_1_to_5: "4", top_one_accepted: "no", top_three_useful: "yes", reviewers_agreed_top_choice: "no", mismatch_reason_codes: "catalogCoverageGap" }),
-      resultRow({ participant_id: "participant-003", participant_selected_rank: "", participant_usefulness_rating_1_to_5: "2", top_one_accepted: "no", top_three_useful: "no", disagreement_logged: "yes", mismatch_reason_codes: "captureQuality" })
+      resultRow({ participant_id: "participant-001", participant_selected_rank: "1", participant_usefulness_rating_1_to_5: "5", participant_resemblance_rating_1_to_5: "5", top_one_accepted: "yes", top_three_useful: "yes", mismatch_reason_codes: "jawMismatch;hairMismatch" }),
+      resultRow({ participant_id: "participant-002", participant_selected_rank: "2", participant_usefulness_rating_1_to_5: "4", participant_resemblance_rating_1_to_5: "4", top_one_accepted: "no", top_three_useful: "yes", reviewers_agreed_top_choice: "no", mismatch_reason_codes: "catalogCoverageGap" }),
+      resultRow({ participant_id: "participant-003", participant_selected_rank: "", participant_usefulness_rating_1_to_5: "2", participant_resemblance_rating_1_to_5: "2", top_one_accepted: "no", top_three_useful: "no", disagreement_logged: "yes", mismatch_reason_codes: "captureQuality" })
     ]);
 
+    expect(metrics.actualInputCount).toBe(3);
     expect(metrics.completedResultCount).toBe(3);
     expect(metrics.topOneAcceptance).toMatchObject({ numerator: 1, denominator: 3 });
     expect(metrics.topOneAcceptance.rate).toBeCloseTo(1 / 3);
     expect(metrics.topThreeUsefulness.rate).toBeCloseTo(2 / 3);
     expect(metrics.rankSelectedDistribution).toEqual({ "1": 1, "2": 1, notSelected: 1 });
     expect(metrics.averageParticipantUsefulnessRating).toBeCloseTo(11 / 3);
+    expect(metrics.averageResemblanceRating).toBeCloseTo(11 / 3);
     expect(metrics.reviewerTopChoiceAgreement.rate).toBeCloseTo(2 / 3);
     expect(metrics.reviewerTopThreeSetAgreement.rate).toBe(1);
     expect(metrics.disagreementCount).toBe(2);
@@ -62,6 +68,7 @@ describe("manual matching feasibility package", () => {
       jawMismatch: 1
     });
     expect(metrics.deletionConfirmation.rate).toBe(1);
+    expect(metrics.captureFailureRate.rate).toBe(0);
   });
 
   it("validates a temporary complete 10-subject study package without committing participant data", () => {
@@ -70,10 +77,33 @@ describe("manual matching feasibility package", () => {
 
     expect(report.ok).toBe(true);
     expect(report.studyHasRun).toBe(true);
-    expect(report.rowCounts).toEqual({ subjects: 10, reviews: 20, results: 10 });
+    expect(report.rowCounts).toEqual({ subjects: 10, reviews: 20, results: 10, repeatability: 10 });
     expect(report.metrics.completedResultCount).toBe(10);
     expect(report.metrics.topOneAcceptance.rate).toBe(0.5);
     expect(report.metrics.topThreeUsefulness.rate).toBe(1);
+    expect(report.dashboard.status).toBe("measured");
+    expect(report.dashboard.repeatability).not.toBe("not measured");
+  });
+
+  it("excludes fixture-like study rows from actual metrics and anonymized exports include no raw media", () => {
+    const root = createTemporaryStudyPackage({
+      subjectCount: 1,
+      mutate: ({ subjects, results }) => {
+        subjects[0].participant_id = "synthetic-participant-001";
+        results[0].participant_id = "synthetic-participant-001";
+        results[0].source_type = "testFixture";
+      }
+    });
+    const report = analyzeManualMatchingFeasibility({ root });
+    const exportResult = exportAnonymizedStudyResults(report, "exports/anonymized-study-results.json", root);
+    const exported = fs.readFileSync(path.join(root, exportResult.outputPath), "utf8");
+
+    expect(report.metrics.fixtureRowsExcluded).toBe(1);
+    expect(report.metrics.completedResultCount).toBe(0);
+    expect(report.dashboard.status).toBe("notMeasured");
+    expect(exportResult.rawMediaIncluded).toBe(false);
+    expect(exported).not.toContain("data:image");
+    expect(exported).not.toContain("faceImage");
   });
 
   it("rejects placeholders, missing required views, invalid mismatch reasons, same reviewer rows, and missing deletion confirmation", () => {
@@ -136,6 +166,7 @@ function createTemporaryStudyPackage(options: {
   writeCSV(root, "data/phase-zero/manual_matching_subjects.template.csv", subjectColumns, subjects);
   writeCSV(root, "data/phase-zero/manual_matching_reviews.template.csv", reviewColumns, reviews);
   writeCSV(root, "data/phase-zero/manual_matching_results.template.csv", resultColumns, results);
+  writeCSV(root, "data/phase-zero/manual_matching_repeatability.template.csv", repeatabilityColumns, subjects.map((subject) => repeatabilityRow(subject.participant_id)));
   return root;
 }
 
@@ -208,10 +239,17 @@ function reviewRow(participantID: string, reviewerID: string) {
 
 function resultRow(overrides: Partial<Record<(typeof resultColumns)[number], string>> = {}) {
   return {
+    source_type: "actualStudy",
     study_id: "manual-study-test-only",
     participant_id: "participant-001",
     catalog_version_id: "verified-catalog-test-version",
     algorithm_version: "manual-study-protocol-test",
+    original_top_three_catalog_ids: "CF27_VERIFIED_TEST_HEAD_001;CF27_VERIFIED_TEST_HEAD_002;CF27_VERIFIED_TEST_HEAD_003",
+    original_top_three_scores: "92;86;81",
+    original_top_three_confidence: "0.72;0.68;0.61",
+    capture_quality_state: "passed",
+    capture_quality_score: "0.9",
+    capture_failure_flag: "no",
     reviewer_a_id: "reviewer-a",
     reviewer_b_id: "reviewer-b",
     reviewers_agreed_top_choice: "yes",
@@ -219,8 +257,16 @@ function resultRow(overrides: Partial<Record<(typeof resultColumns)[number], str
     participant_selected_rank: "1",
     participant_selected_catalog_id: "CF27_VERIFIED_TEST_HEAD_001",
     participant_usefulness_rating_1_to_5: "5",
+    participant_resemblance_rating_1_to_5: "5",
     top_one_accepted: "yes",
     top_three_useful: "yes",
+    final_in_game_catalog_id: "CF27_VERIFIED_TEST_HEAD_001",
+    final_in_game_notes: "test-only final selection",
+    repeat_scan_completed: "yes",
+    repeat_scan_top_three_catalog_ids: "CF27_VERIFIED_TEST_HEAD_001;CF27_VERIFIED_TEST_HEAD_002;CF27_VERIFIED_TEST_HEAD_003",
+    repeat_scan_same_top_choice: "yes",
+    repeat_scan_overlap_count: "3",
+    confidence_perception_1_to_5: "4",
     disagreement_logged: "no",
     mismatch_reason_codes: "jawMismatch",
     raw_media_deleted_confirmed: "yes",
@@ -228,6 +274,23 @@ function resultRow(overrides: Partial<Record<(typeof resultColumns)[number], str
     profile_deleted_confirmed: "yes",
     notes: "temporary test row",
     ...overrides
+  };
+}
+
+function repeatabilityRow(participantID: string) {
+  return {
+    source_type: "actualStudy",
+    study_id: "manual-study-test-only",
+    participant_id: participantID,
+    repeat_scan_id: `${participantID}-repeat-001`,
+    repeat_scan_completed_at: "2026-07-14T01:00:00.000Z",
+    capture_mode: "webRgbGuided",
+    capture_quality_state: "passed",
+    original_top_three_catalog_ids: "CF27_VERIFIED_TEST_HEAD_001;CF27_VERIFIED_TEST_HEAD_002;CF27_VERIFIED_TEST_HEAD_003",
+    repeat_top_three_catalog_ids: "CF27_VERIFIED_TEST_HEAD_001;CF27_VERIFIED_TEST_HEAD_002;CF27_VERIFIED_TEST_HEAD_003",
+    same_top_choice: "yes",
+    top_three_overlap_count: "3",
+    notes: "temporary test row"
   };
 }
 

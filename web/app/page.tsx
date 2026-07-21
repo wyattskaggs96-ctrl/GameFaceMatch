@@ -124,6 +124,14 @@ const DevelopmentPhase0Status =
         loading: () => <LoadingState label="Loading Phase 0 status" />
       });
 
+const DevelopmentManualMatchingStudyDashboard =
+  process.env.NODE_ENV === "production"
+    ? null
+    : dynamic(() => import("@/features/phase-zero/ManualMatchingStudyDashboard").then((module) => module.ManualMatchingStudyDashboard), {
+        ssr: false,
+        loading: () => <LoadingState label="Loading manual matching study dashboard" />
+      });
+
 const DevelopmentEvidenceGallery =
   process.env.NODE_ENV === "production"
     ? null
@@ -178,6 +186,7 @@ export default function HomePage() {
         { id: "evidence-gallery" as const, label: "Evidence Gallery" },
         { id: "video-inspector" as const, label: "Video Inspector" },
         { id: "phase-0" as const, label: "Phase 0" },
+        { id: "manual-study" as const, label: "Manual Study" },
         { id: "matching-lab" as const, label: "Matching Lab" },
         { id: "mobile-qa" as const, label: "Mobile QA" },
         { id: "analytics" as const, label: "Analytics" },
@@ -950,6 +959,8 @@ export default function HomePage() {
         return isDevelopment && DevelopmentSourceVideoEvidenceInspector ? <DevelopmentSourceVideoEvidenceInspector /> : <GameCatalogStatus />;
       case "phase-0":
         return isDevelopment && DevelopmentPhase0Status ? <DevelopmentPhase0Status /> : <GameCatalogStatus />;
+      case "manual-study":
+        return isDevelopment && DevelopmentManualMatchingStudyDashboard ? <DevelopmentManualMatchingStudyDashboard /> : <GameCatalogStatus />;
       case "matching-lab":
         return isDevelopment && DevelopmentMatchingLab ? <DevelopmentMatchingLab /> : <GameCatalogStatus />;
       case "mobile-qa":

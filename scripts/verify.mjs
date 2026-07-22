@@ -30,6 +30,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Supabase schema contract check",
+    command: "node",
+    args: ["scripts/supabase-schema-check.mjs"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Phase 0 export pipeline check",
     command: "node",
     args: ["scripts/phase-zero-export.mjs", "--check"],

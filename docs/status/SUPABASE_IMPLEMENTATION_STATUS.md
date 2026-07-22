@@ -1,16 +1,29 @@
 # Supabase Implementation Status
 
-**Status:** PHASE 0 REPOSITORY AND DATA AUDIT COMPLETE  
+**Status:** PHASE 2 LOCAL DATA MODEL DESIGN COMPLETE  
 **Date:** 2026-07-22  
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`  
 **Branch audited:** `main`  
-**HEAD audited:** `43fe30aafc9a03b57fd3807619adf73173fa68b2`  
+**HEAD audited:** `cae223243e559716238d818930023338f7e02b56` before Phase 2 changes  
 **Supabase project name reserved for setup:** `gameface-match`  
-**Supabase connection status:** NOT CONNECTED  
-**Database migration status:** NOT STARTED  
+**Supabase project status:** CREATED BY WYATT IN SKAGGS SYSTEMS ORGANIZATION  
+**Supabase connection status:** NOT CONNECTED FROM APPLICATION  
+**Database migration status:** LOCAL SCHEMA DRAFT CREATED; NOT APPLIED  
 **Storage migration status:** NOT STARTED  
 
-This document is the Phase 0 audit and planning checkpoint for moving GameFace Match from local JSON/CSV/browser persistence to Supabase PostgreSQL and private Supabase Storage. It does not create a Supabase project, add credentials, connect a database, upload media, promote catalog records, or change production recommendation behavior.
+This document tracks the phased move from local JSON/CSV/browser persistence to Supabase PostgreSQL and private Supabase Storage. It does not add credentials, connect a database, upload media, promote catalog records, or change production recommendation behavior.
+
+## Phase Progress
+
+| Phase | Status | Evidence |
+| --- | --- | --- |
+| Phase 0 - repository and data audit | Complete | This document inventories current architecture, counts, entities, media, risks, and destinations. |
+| Phase 1 - create Supabase project | Complete by user action | Wyatt confirmed `gameface-match` exists in the Skaggs Systems organization and secrets are stored outside the repository. |
+| Phase 2 - data model design | Complete locally, not applied remotely | `supabase/migrations/0001_gameface_core_schema.sql`, `scripts/supabase-schema-check.mjs`, and `npm run supabase:schema:check`. |
+| Phase 3 - Auth and RLS policies | Not started | Tables in the local schema enable RLS fail-closed, but named policies and role tests are intentionally deferred. |
+| Phase 4 - Storage architecture | Not started | Bucket names and metadata model are proposed only; no buckets created. |
+| Phase 5 - Application connection | Not started | No Supabase client/server code or environment variables added. |
+| Phase 6 - Migration | Not started | No migration script has imported local records into Supabase. |
 
 ## Binding Rules For This Migration
 
@@ -48,6 +61,7 @@ This document is the Phase 0 audit and planning checkpoint for moving GameFace M
 - Web framework is Next.js 16 with React 19, TypeScript, Vitest, and Playwright.
 - Local MediaPipe browser landmark provider is present; processing remains local and non-identifying.
 - No Supabase packages, migrations, SQL files, or environment variables are currently implemented.
+- A local SQL schema draft now exists under `supabase/migrations/`; it has not been applied to the Supabase project.
 
 ## Current Data Counts
 
@@ -126,7 +140,7 @@ This document is the Phase 0 audit and planning checkpoint for moving GameFace M
 
 ## Proposed PostgreSQL Schema
 
-The initial Supabase schema should use explicit enums and append-only history instead of vague booleans.
+The initial Supabase schema uses explicit enums and append-only history instead of vague booleans. The local migration draft is `supabase/migrations/0001_gameface_core_schema.sql`.
 
 ### Core enums
 
@@ -252,16 +266,16 @@ For later phases:
 | Area | Current readiness | Reason |
 | --- | ---: | --- |
 | Repository/data audit | 100% for Phase 0 | Current artifacts and counts are inventoried in this document. |
-| Supabase project setup | 0% | External project has not been created from this workflow. |
-| PostgreSQL schema implementation | 0% | Proposed only; no migrations created. |
-| RLS/security implementation | 0% | Proposed only; no Supabase policies created. |
+| Supabase project setup | 100% for dashboard creation | Wyatt confirmed the project exists and secrets are stored outside Git/chat. |
+| PostgreSQL schema implementation | 25% | Local schema migration exists and is statically checked, but it has not been applied to Supabase. |
+| RLS/security implementation | 10% | Tables enable RLS fail-closed in the draft, but Phase 3 policies/tests are not implemented. |
 | Storage architecture implementation | 0% | Proposed only; no buckets or uploads. |
 | Migration tooling | 0% | Existing local validators exist, but no Supabase migration scripts. |
 | App connection | 0% | No Supabase client/server integration. |
-| Overall Supabase completion | 5% | Phase 0 audit exists, but implementation has not started. |
+| Overall Supabase completion | 15% | Project exists and local schema design is committed; remote application connection and migration are still absent. |
 | Private-beta readiness after Phase 0 | 25%-35% | Web shell and tooling exist; verified catalog and backend are still absent. |
 | Public-launch readiness after Phase 0 | 5%-10% | Production catalog, legal, payment, deployment, and validation gates remain blocked. |
 
-## Phase 1 Stop Point
+## Phase 3 Stop Point
 
-Before implementation continues, Wyatt must create or confirm access to the Supabase project through the Supabase dashboard. The next assistant response for Phase 1 must stop and provide `STOP - USER ACTION REQUIRED` instructions. Secret values must be stored in a password manager or local/hosting environment configuration, not pasted into chat.
+Before Phase 3 applies migrations, configures Auth, adds policies in the Supabase dashboard, or sets environment variables, the assistant must stop and provide `STOP - USER ACTION REQUIRED` instructions. Secret values must stay in a password manager or local/hosting environment configuration, not pasted into chat.

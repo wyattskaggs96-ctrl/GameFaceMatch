@@ -7,6 +7,7 @@
     "quality": "npm run verify",
     "status:check": "node scripts/status-consistency-check.mjs",
     "supabase:schema:check": "node scripts/supabase-schema-check.mjs",
+    "fc26:validate": "node scripts/fc26-player-creator-validate.mjs",
     "legal:copy-check": "node scripts/legal-copy-guard.mjs",
     "catalog:validate-import": "node scripts/catalog-import-validator.mjs validate-import",
     "catalog:import-check": "node scripts/catalog-import-validator.mjs --check",

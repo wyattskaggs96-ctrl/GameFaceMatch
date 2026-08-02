@@ -39,10 +39,20 @@ raw-captures/
 captured-media/
 face-captures/
 game-videos/
+source-media/
 data/audit/**/evidence-masters/
 data/audit/**/raw-media/
 data/audit/**/raw-videos/
 data/audit/**/local-evidence/
+
+# FC26 research staging: commit metadata and manifests, not local masters or generated media
+data/research/fc26/generated/*
+!data/research/fc26/generated/.gitkeep
+!data/research/fc26/generated/README.md
+data/research/fc26/source-video-references/**/*.[mM][pP]4
+data/research/fc26/source-video-references/**/*.[mM][oO][vV]
+data/research/fc26/source-video-references/**/*.[mM]4[vV]
+data/research/fc26/source-video-references/**/*.[wW][eE][bB][mM]
 
 # CF27 research staging: commit metadata and manifests, not local masters or generated media
 data/research/cf27/source-video-references/**/*.[mM][pP]4

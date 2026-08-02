@@ -36,6 +36,12 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "FC26 player-creator research data check",
+    command: "node",
+    args: ["scripts/fc26-player-creator-validate.mjs"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Phase 0 export pipeline check",
     command: "node",
     args: ["scripts/phase-zero-export.mjs", "--check"],

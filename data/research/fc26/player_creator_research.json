@@ -1,0 +1,652 @@
+{
+  "schemaVersion": "fc26-player-creator-research-v1",
+  "generatedAt": "2026-08-01T00:00:00.000-04:00",
+  "sourceType": "shippingGameVideoResearch",
+  "productionEligible": false,
+  "verificationState": "research_observed_not_production_verified",
+  "game": {
+    "gameID": "ea-sports-fc-26",
+    "title": "EA SPORTS FC 26",
+    "mode": "Player Creator",
+    "supportedByRuntime": true,
+    "recommendationsEnabled": false
+  },
+  "analysisNotes": [
+    "ffprobe was unavailable on the local machine; metadata was collected with the repository FFmpeg wrapper.",
+    "The exact expected part-02 filename was not present. The readable replacement file was preserved under its original filename and assigned the canonical part-02 label in this research data.",
+    "The recordings show sampled selections and menu scrolling, not complete first-to-last selector audits.",
+    "No FC26 record in this file is verified production data."
+  ],
+  "sourceVideos": [
+    {
+      "videoID": "fc26-player-creator-part-01",
+      "canonicalFilename": "fc26-player-creator-part-01.mp4",
+      "originalFilename": "fc26-player-creator-part-01.mp4",
+      "relativePath": "source-media/Fc26/player-creator/fc26-player-creator-part-01.mp4",
+      "sha256": "6ab6bfca771c2f5595f1a51c8b8fdc87ded9078c72bc6071c4303d8d2fc57fea",
+      "sizeBytes": 583430951,
+      "durationSeconds": 240.98,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": "58.96 fps reported, 59.94 tbr",
+      "container": "mp4",
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "creationTime": "2026-08-02T01:21:41.000000Z",
+      "opensSuccessfully": true,
+      "metadataTool": "scripts/media/ffmpeg-wrapper ffmpeg"
+    },
+    {
+      "videoID": "fc26-player-creator-part-02",
+      "canonicalFilename": "fc26-player-creator-part-02.mp4",
+      "originalFilename": "fb4fb162-0876-4bd3-8cb3-8d86e63dc32e.MP4",
+      "relativePath": "source-media/Fc26/player-creator/fb4fb162-0876-4bd3-8cb3-8d86e63dc32e.MP4",
+      "sha256": "0c758eb69716938f5bca7b4c0e7219d802a8fafa64287d0851ce94312911b531",
+      "sizeBytes": 552340973,
+      "durationSeconds": 235.69,
+      "resolution": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": "58.96 fps reported, 59.94 tbr",
+      "container": "mp4",
+      "videoCodec": "h264 Main",
+      "audioCodec": "aac LC stereo 48000 Hz",
+      "creationTime": "2026-08-02T01:25:53.000000Z",
+      "opensSuccessfully": true,
+      "metadataTool": "scripts/media/ffmpeg-wrapper ffmpeg"
+    }
+  ],
+  "menuHierarchy": [
+    {
+      "menuID": "fc26-player-creator-root",
+      "label": "Player Creator",
+      "parentMenuID": null,
+      "confidence": "probable",
+      "evidence": {
+        "videoID": "fc26-player-creator-part-01",
+        "timestampSeconds": 0
+      }
+    },
+    {
+      "menuID": "fc26-player-creator-info",
+      "label": "Info",
+      "parentMenuID": "fc26-player-creator-root",
+      "confidence": "verified",
+      "evidence": {
+        "videoID": "fc26-player-creator-part-01",
+        "timestampSeconds": 0
+      }
+    },
+    {
+      "menuID": "fc26-player-creator-head",
+      "label": "Head",
+      "parentMenuID": "fc26-player-creator-root",
+      "confidence": "verified",
+      "evidence": {
+        "videoID": "fc26-player-creator-part-01",
+        "timestampSeconds": 0
+      }
+    },
+    {
+      "menuID": "fc26-player-creator-kit",
+      "label": "Kit",
+      "parentMenuID": "fc26-player-creator-root",
+      "confidence": "verified",
+      "evidence": {
+        "videoID": "fc26-player-creator-part-01",
+        "timestampSeconds": 0
+      }
+    },
+    {
+      "menuID": "fc26-player-creator-tattoos",
+      "label": "Tattoos",
+      "parentMenuID": "fc26-player-creator-root",
+      "confidence": "verified",
+      "evidence": {
+        "videoID": "fc26-player-creator-part-01",
+        "timestampSeconds": 0
+      }
+    },
+    {
+      "menuID": "fc26-player-creator-animations",
+      "label": "Animations",
+      "parentMenuID": "fc26-player-creator-root",
+      "confidence": "verified",
+      "evidence": {
+        "videoID": "fc26-player-creator-part-01",
+        "timestampSeconds": 0
+      }
+    },
+    {
+      "menuID": "fc26-player-creator-head-skin",
+      "label": "Skin",
+      "parentMenuID": "fc26-player-creator-head",
+      "confidence": "verified",
+      "evidence": {
+        "videoID": "fc26-player-creator-part-01",
+        "timestampSeconds": 0
+      }
+    },
+    {
+      "menuID": "fc26-player-creator-head-head",
+      "label": "Head",
+      "parentMenuID": "fc26-player-creator-head",
+      "confidence": "verified",
+      "evidence": {
+        "videoID": "fc26-player-creator-part-01",
+        "timestampSeconds": 120
+      }
+    },
+    {
+      "menuID": "fc26-player-creator-head-face",
+      "label": "Face",
+      "parentMenuID": "fc26-player-creator-head",
+      "confidence": "verified",
+      "evidence": {
+        "videoID": "fc26-player-creator-part-02",
+        "timestampSeconds": 60
+      }
+    },
+    {
+      "menuID": "fc26-player-creator-head-hair",
+      "label": "Hair",
+      "parentMenuID": "fc26-player-creator-head",
+      "confidence": "verified",
+      "evidence": {
+        "videoID": "fc26-player-creator-part-02",
+        "timestampSeconds": 90
+      }
+    }
+  ],
+  "controls": [
+    {
+      "controlID": "FC26_HEAD_SKIN_TONE",
+      "label": "Skin Tone",
+      "menuID": "fc26-player-creator-head-skin",
+      "controlType": "colorCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Skin Tone 3", "timestampSeconds": 0, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Skin Tone 9", "timestampSeconds": 5, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_COMPLEXION",
+      "label": "Complexion",
+      "menuID": "fc26-player-creator-head-skin",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Complexion 3", "timestampSeconds": 0, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Complexion 6", "timestampSeconds": 10, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Complexion 9", "timestampSeconds": 10, "videoID": "fc26-player-creator-part-01", "confidence": "probable" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_SKIN_SURFACE",
+      "label": "Skin Surface",
+      "menuID": "fc26-player-creator-head-skin",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Skin Surface 18", "timestampSeconds": 0, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Skin Surface 27", "timestampSeconds": 20, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Skin Surface 36", "timestampSeconds": 25, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Skin Surface 41", "timestampSeconds": 30, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Skin Surface 51", "timestampSeconds": 35, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Skin Surface 3", "timestampSeconds": 40, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_FRECKLES",
+      "label": "Freckles",
+      "menuID": "fc26-player-creator-head-skin",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "None", "timestampSeconds": 0, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Freckles 2", "timestampSeconds": 45, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Freckles 12", "timestampSeconds": 50, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Freckles 3", "timestampSeconds": 55, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_SCARRING",
+      "label": "Scarring",
+      "menuID": "fc26-player-creator-head-skin",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Scarring 9", "timestampSeconds": 60, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Scarring 18", "timestampSeconds": 65, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Scarring 26", "timestampSeconds": 70, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Scarring 36", "timestampSeconds": 75, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_MOLES",
+      "label": "Moles",
+      "menuID": "fc26-player-creator-head-skin",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Moles 2", "timestampSeconds": 80, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Moles 7", "timestampSeconds": 90, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_ROSACEA",
+      "label": "Rosacea",
+      "menuID": "fc26-player-creator-head-skin",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Rosacea 5", "timestampSeconds": 100, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_FACE_MAKEUP",
+      "label": "Face Makeup",
+      "menuID": "fc26-player-creator-head-skin",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Face Makeup 2", "timestampSeconds": 105, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_LIP_MAKEUP",
+      "label": "Lip Makeup",
+      "menuID": "fc26-player-creator-head-skin",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "None", "timestampSeconds": 110, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_FOREHEAD",
+      "label": "Forehead",
+      "menuID": "fc26-player-creator-head-head",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Forehead 1002", "timestampSeconds": 115, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Forehead 294", "timestampSeconds": 120, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Forehead 23", "timestampSeconds": 125, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Forehead 175", "timestampSeconds": 130, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Forehead 304", "timestampSeconds": 135, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Forehead 9", "timestampSeconds": 140, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_JAW",
+      "label": "Jaw",
+      "menuID": "fc26-player-creator-head-head",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Jaw 226", "timestampSeconds": 120, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Jaw 260", "timestampSeconds": 140, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Jaw 9", "timestampSeconds": 145, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Jaw 151", "timestampSeconds": 150, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Jaw 294", "timestampSeconds": 155, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Jaw 1002", "timestampSeconds": 160, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_EARS",
+      "label": "Ears",
+      "menuID": "fc26-player-creator-head-head",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Ears 175", "timestampSeconds": 120, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Ears 249", "timestampSeconds": 160, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Ears 1006", "timestampSeconds": 165, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Ears 194", "timestampSeconds": 170, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Ears 170", "timestampSeconds": 180, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_CHEEKS",
+      "label": "Cheeks",
+      "menuID": "fc26-player-creator-head-head",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Cheeks 202", "timestampSeconds": 160, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Cheeks 299", "timestampSeconds": 180, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Cheeks 43", "timestampSeconds": 185, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Cheeks 203", "timestampSeconds": 190, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Cheeks 226", "timestampSeconds": 195, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_CHIN",
+      "label": "Chin",
+      "menuID": "fc26-player-creator-head-head",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Chin 226", "timestampSeconds": 195, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Chin 268", "timestampSeconds": 190, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Chin 1003", "timestampSeconds": 200, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Chin 118", "timestampSeconds": 205, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Chin 1001", "timestampSeconds": 210, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HEAD_NECK",
+      "label": "Neck",
+      "menuID": "fc26-player-creator-head-head",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Neck 241", "timestampSeconds": 190, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Neck 304", "timestampSeconds": 215, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Neck 52", "timestampSeconds": 220, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Neck 1002", "timestampSeconds": 230, "videoID": "fc26-player-creator-part-01", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_FACE_EYE_COLOUR",
+      "label": "Eye Colour",
+      "menuID": "fc26-player-creator-head-face",
+      "controlType": "colorCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Light Grey", "timestampSeconds": 230, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Green", "timestampSeconds": 235, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Medium Grey", "timestampSeconds": 240, "videoID": "fc26-player-creator-part-01", "confidence": "verified" },
+        { "value": "Light Blue", "timestampSeconds": 0, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_FACE_EYES",
+      "label": "Eyes",
+      "menuID": "fc26-player-creator-head-face",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Eyes 299", "timestampSeconds": 0, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Eyes 1005", "timestampSeconds": 5, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Eyes 93", "timestampSeconds": 10, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Eyes 268", "timestampSeconds": 15, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Eyes 23", "timestampSeconds": 20, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Eyes 116", "timestampSeconds": 30, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_FACE_EYEBROWS",
+      "label": "Eyebrows",
+      "menuID": "fc26-player-creator-head-face",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Eyebrows 268", "timestampSeconds": 0, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Eyebrows 304", "timestampSeconds": 25, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Eyebrows 1004", "timestampSeconds": 40, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Eyebrows 115", "timestampSeconds": 105, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Eyebrows 3", "timestampSeconds": 220, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_FACE_NOSE",
+      "label": "Nose",
+      "menuID": "fc26-player-creator-head-face",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Nose 203", "timestampSeconds": 40, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Nose 226", "timestampSeconds": 45, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Nose 1004", "timestampSeconds": 50, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Nose 116", "timestampSeconds": 55, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Nose 1002", "timestampSeconds": 60, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Nose 294", "timestampSeconds": 75, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_FACE_MOUTH",
+      "label": "Mouth",
+      "menuID": "fc26-player-creator-head-face",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Mouth 226", "timestampSeconds": 60, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Mouth 304", "timestampSeconds": 65, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Mouth 241", "timestampSeconds": 70, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Mouth 1001", "timestampSeconds": 75, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Mouth 170", "timestampSeconds": 80, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_FACE_TEETH",
+      "label": "Teeth",
+      "menuID": "fc26-player-creator-head-face",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Teeth 6", "timestampSeconds": 80, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Teeth 2", "timestampSeconds": 85, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HAIR_COLOUR",
+      "label": "Hair Colour",
+      "menuID": "fc26-player-creator-head-hair",
+      "controlType": "colorCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Black", "timestampSeconds": 90, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Medium Brown", "timestampSeconds": 100, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Pastel Pink", "timestampSeconds": 110, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Pink", "timestampSeconds": 180, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Grey", "timestampSeconds": 190, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Periwinkle", "timestampSeconds": 210, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HAIR_STYLE_GROUP",
+      "label": "Hair Style group",
+      "menuID": "fc26-player-creator-head-hair",
+      "controlType": "groupSelector",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Medium", "timestampSeconds": 90, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Short", "timestampSeconds": 120, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Long", "timestampSeconds": 145, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HAIR_STYLE",
+      "label": "Hair Style",
+      "menuID": "fc26-player-creator-head-hair",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Hair Style 30", "timestampSeconds": 90, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 504", "timestampSeconds": 105, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 396", "timestampSeconds": 115, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 392", "timestampSeconds": 120, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 543", "timestampSeconds": 125, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 93", "timestampSeconds": 130, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 431", "timestampSeconds": 135, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 65", "timestampSeconds": 140, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 233", "timestampSeconds": 145, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 184", "timestampSeconds": 150, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 62", "timestampSeconds": 155, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 285", "timestampSeconds": 165, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 444", "timestampSeconds": 180, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 32", "timestampSeconds": 195, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 500", "timestampSeconds": 205, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Hair Style 421", "timestampSeconds": 210, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR",
+      "label": "Eyebrow & Facial Hair Colour",
+      "menuID": "fc26-player-creator-head-hair",
+      "controlType": "colorCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Golden", "timestampSeconds": 90, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Honey", "timestampSeconds": 170, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Pink", "timestampSeconds": 180, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Grey", "timestampSeconds": 190, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Periwinkle", "timestampSeconds": 205, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    },
+    {
+      "controlID": "FC26_HAIR_EYEBROW_SHAPE_TOP",
+      "label": "Eyebrow shape selector, first row",
+      "menuID": "fc26-player-creator-head-hair",
+      "controlType": "valueCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Straight", "timestampSeconds": 200, "videoID": "fc26-player-creator-part-02", "confidence": "probable" },
+        { "value": "'S' Shaped", "timestampSeconds": 180, "videoID": "fc26-player-creator-part-02", "confidence": "probable" }
+      ]
+    },
+    {
+      "controlID": "FC26_HAIR_EYEBROW_SHAPE_BOTTOM",
+      "label": "Eyebrow shape selector, second row",
+      "menuID": "fc26-player-creator-head-hair",
+      "controlType": "valueCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Low Arch", "timestampSeconds": 180, "videoID": "fc26-player-creator-part-02", "confidence": "probable" }
+      ]
+    },
+    {
+      "controlID": "FC26_HAIR_FACIAL_HAIR",
+      "label": "Facial Hair",
+      "menuID": "fc26-player-creator-head-hair",
+      "controlType": "presetCarousel",
+      "rangeComplete": false,
+      "firstValueProven": false,
+      "lastValueProven": false,
+      "wrapProven": false,
+      "observedValues": [
+        { "value": "Facial Hair 288", "timestampSeconds": 200, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Facial Hair 38", "timestampSeconds": 205, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Facial Hair 37", "timestampSeconds": 210, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Facial Hair 27", "timestampSeconds": 215, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Facial Hair 285", "timestampSeconds": 220, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Facial Hair 239", "timestampSeconds": 230, "videoID": "fc26-player-creator-part-02", "confidence": "verified" },
+        { "value": "Facial Hair 16", "timestampSeconds": 225, "videoID": "fc26-player-creator-part-02", "confidence": "verified" }
+      ]
+    }
+  ],
+  "notShownRequirements": [
+    { "requirement": "Slider minimum, maximum, default, and step values", "confidence": "not_shown", "notes": "No numeric slider with min/max/step was visible in the inspected FC26 player-creator footage." },
+    { "requirement": "Body, height, and weight settings", "confidence": "not_shown", "notes": "The current clips stay in the Head tab and do not show body controls." },
+    { "requirement": "Complete selector ranges", "confidence": "not_shown", "notes": "The videos sample many values but do not prove first option, final option, total count, or wrap behavior for any control." },
+    { "requirement": "Preset dependencies across position, body, account, unlock, or platform", "confidence": "not_shown", "notes": "No dependency test was performed in these clips." },
+    { "requirement": "Verified production recommendation eligibility", "confidence": "not_shown", "notes": "These are first-pass research observations only and have no independent verification." }
+  ],
+  "unresolvedObservations": [
+    {
+      "unresolvedID": "FC26_UNRESOLVED_PART02_EXPECTED_FILENAME",
+      "summary": "Expected part-02 canonical filename was not present.",
+      "detail": "A readable replacement file named fb4fb162-0876-4bd3-8cb3-8d86e63dc32e.MP4 was found and used as the part-02 source without renaming the master.",
+      "confidence": "unclear"
+    },
+    {
+      "unresolvedID": "FC26_UNRESOLVED_EYEBROW_SHAPE_LABELS",
+      "summary": "Two eyebrow shape rows are visible under Hair but their row labels are partially offscreen or obscured.",
+      "detail": "Values such as Straight, 'S' Shaped, and Low Arch are visible, but the exact row names require a cleaner capture.",
+      "confidence": "unclear"
+    },
+    {
+      "unresolvedID": "FC26_UNRESOLVED_FULL_RANGES",
+      "summary": "No control has proven first and final selector boundaries.",
+      "detail": "Observed values are useful for menu discovery, but cannot establish full count or range.",
+      "confidence": "unclear"
+    }
+  ]
+}

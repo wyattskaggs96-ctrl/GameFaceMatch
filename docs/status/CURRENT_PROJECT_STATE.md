@@ -4,7 +4,7 @@
 **Last reconciled:** 2026-08-02
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** `2ba2289461edaf87afc8bfb711f6699ef8b6f511` (`feat(media): add source-media ingestion pipeline`)
+**Repository checkpoint reviewed:** Prompt 090 pricing/game-support alignment from `bb539b6d18af367b198104da71aa4c9da41ab3aa`
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
 **Current active phase:** production-readiness health check and launch-path consolidation
@@ -33,21 +33,17 @@ GameFace Match is intended to let a customer capture their face and receive pers
 
 The current approved business direction is:
 
-- `$4.99` one-time Launch Pack for the five original launch games.
-- `$9.99/year` All Access for every supported game and future supported sport-comparison features while subscribed.
+- `$4.99` one-time Launch Pack for the five original launch games, with each game still gated by verified production-catalog support.
+- `$9.99/year` All Access for every supported game and future supported games while subscribed, again only after each catalog is production-supported.
 - Creator Program economics as defined in `docs/Product/Creator Program/CREATOR_PROGRAM_SOURCE_OF_TRUTH.md`.
 
 The current implementation does not yet support paid purchases, subscriptions, creator attribution, creator commissions, or payouts.
 
+The older Prompt 080 `$0.99` One Scan and `$1.99/month` Monthly scan-entry model is superseded for active product configuration. It may remain only as historical audit context.
+
 ## Current Working State
 
-The worktree contains untracked but intentional Creator Program material:
-
-- `docs/Product/Creator Program/CREATOR_PROGRAM_SOURCE_OF_TRUTH.md`
-- `docs/plans/CREATOR_PROGRAM_*.md`
-- `docs/status/CREATOR_PROGRAM_PHASE_01_*.md`
-
-No tracked source-code modifications existed at the start of this health check.
+Creator Program source/planning material has been committed as project documentation. No creator-program runtime behavior, checkout, payout, or commission processing exists.
 
 ## Actually Working
 
@@ -58,7 +54,7 @@ No tracked source-code modifications existed at the start of this health check.
 - College Football 27 Phase 0 tooling exists for source-video inventory, evidence manifests, timelines, research candidates, primary review, verifier packages, production gates, and fail-closed publication checks.
 - The production College Football 27 catalog is intentionally empty and recommendations fail closed.
 - Supabase runtime/config/schema contracts exist locally and fail closed; no remote persistence is active.
-- Payment/entitlement interfaces exist, but checkout remains unavailable.
+- Payment/entitlement interfaces expose the approved Launch Pack and All Access products, but checkout remains unavailable and no client state can grant paid access.
 - iOS project compiles in prior verification records as a preserved foundation, not the active production client.
 
 ## Partially Working
@@ -74,6 +70,7 @@ No tracked source-code modifications existed at the start of this health check.
 - Production recommendations: blocked by 0 production catalog records.
 - Five-game launch catalog: only CF27 and FC 26 have research material; NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026 have no verified catalog data.
 - Stripe Checkout, Stripe Billing, customer subscriptions, creator Stripe Connect onboarding, commission ledger, payout batches, and transfers are not implemented.
+- Launch game registry entries exist for College Football 27, NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026, but every launch game remains recommendation-unavailable until a verified production catalog exists.
 - Supabase remote database/storage/auth/RLS/Edge Functions/Cron are not deployed from this repo.
 - Real manual matching study: 0 valid participants, 0 completed trials, no measured accuracy.
 - Legal approval, tax/accounting review, production deployment, monitoring, support operations, and public launch approval are not complete.

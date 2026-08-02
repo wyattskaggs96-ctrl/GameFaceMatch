@@ -3,6 +3,7 @@
 **Status:** Phase 01 planning artifact  
 **Created:** 2026-08-02  
 **Source:** `docs/Product/Creator Program/CREATOR_PROGRAM_SOURCE_OF_TRUTH.md`  
+**Pricing note:** Prompt 090 supersedes the older `single_scan` / `monthly` scan-entry SKUs. Creator Program work must use the approved Launch Pack and All Access model while checkout remains disabled until later phases.
 
 This plan breaks the Creator Program into safe implementation phases. It intentionally stops short of live checkout, live commission grants, connected-account onboarding, transfers, or payouts.
 
@@ -23,7 +24,7 @@ Objective: make the Creator Program source governable and prepare a relational s
 Scope:
 
 - Register `docs/Product/Creator Program/CREATOR_PROGRAM_SOURCE_OF_TRUTH.md` in `docs/governance/SOURCE_REGISTRY.md`.
-- Resolve pricing-precedence conflict between existing scan-entry plans and Creator Program SKUs.
+- Preserve Prompt 090 Launch Pack / All Access pricing while keeping checkout disabled.
 - Add draft SQL migrations for creator entities, statuses, and constraints.
 - Add TypeScript domain contracts for creator links, attribution, commission rows, payout batches, and Stripe event records.
 - Add tests for status enums, duplicate IDs, idempotency keys, and no production behavior.
@@ -32,7 +33,7 @@ Acceptance criteria:
 
 - Schema validates locally.
 - Existing payment checkout remains disabled.
-- Existing `single_scan` and `monthly` behavior is unchanged unless the owner explicitly changes pricing.
+- Launch Pack and All Access remain typed but checkout-disabled.
 - No live Stripe or Supabase operation runs.
 
 ## Phase 03 - Stripe Test-Mode Boundary
@@ -163,4 +164,3 @@ Launch gate:
 - Supabase RLS tested.
 - Payment and payout monitoring active.
 - Owner signs off on live mode.
-

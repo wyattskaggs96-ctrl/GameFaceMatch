@@ -31,7 +31,7 @@ Current controlling hierarchy:
 5. `docs/status/CURRENT_PROJECT_STATE.md`
 6. Domain-specific runbooks and machine-readable artifacts.
 
-The Creator Program source is now treated as the governing source for creator-program planning. It conflicts with prior monetization docs that said the `$4.99` pack was superseded by Prompt 080 scan-entry pricing. The health-check conclusion is that the new Creator Program direction controls future launch pricing, but code must be aligned in a separate implementation prompt rather than changed in this audit.
+The Creator Program source is now treated as the governing source for creator-program planning. Prompt 090 aligns active product/pricing configuration to the `$4.99` Launch Pack and `$9.99/year` All Access model while preserving checkout-disabled behavior.
 
 ## Architecture Summary
 
@@ -40,7 +40,7 @@ The Creator Program source is now treated as the governing source for creator-pr
 - Preserved native client: `ios/`.
 - Data: JSON/CSV artifacts under `data/`, production catalog under `data/catalog/production/`.
 - Supabase: local schema/runtime contracts only; remote not applied.
-- Payments: provider-independent scaffold only; no live/test Stripe code.
+- Payments: provider-independent scaffold only; active products are Launch Pack and All Access; no live/test Stripe code.
 - Media: source media remains ignored; committed evidence artifacts are manifests, metadata, and selected derivatives.
 
 ## Product Shell
@@ -144,9 +144,9 @@ Evidence:
 
 Limitations:
 
-- Existing code still models Prompt 080 `$0.99` / `$1.99/month` scan-entry plans.
-- Approved business direction is `$4.99` Launch Pack and `$9.99/year` All Access.
-- No Stripe Checkout, Billing, webhooks, customer portal, receipts, refunds, disputes, tax handling, or entitlements are production-ready.
+- Active product configuration models `launch_pack` at `$4.99` and `all_access_annual` at `$9.99/year`.
+- Checkout remains disabled and provider-unavailable.
+- No Stripe Checkout, Billing, webhooks, customer portal, receipts, refunds, disputes, tax handling, or server-authoritative entitlements are production-ready.
 
 ## Creator Program
 
@@ -212,5 +212,4 @@ It did not make production catalog records, second-verifier decisions, or produc
 
 `BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS`
 
-The shortest safe path is to align launch product/pricing configuration, then complete at least one verified production game catalog, then connect server-authoritative paid access, then run human validation.
-
+The shortest safe path is to complete at least one verified production game catalog, then connect server-authoritative paid access, then run human validation.

@@ -6,6 +6,7 @@ export type OfferAvailabilityState = "availableAfterCatalogVerification" | "prov
 export interface PricingOption {
   product: Product;
   price: Price;
+  billingInterval: "none" | "year" | "future";
   recommendedForLaunch: boolean;
   checkoutEnabled: boolean;
   unavailableReason: string;
@@ -31,6 +32,7 @@ interface PricingInput {
   entitlementIDs: EntitlementAccess[];
   amountMinor: number;
   displayAmount: string;
+  billingInterval?: PricingOption["billingInterval"];
   currency?: CurrencyCode;
   recommendedForLaunch?: boolean;
   productActive?: boolean;
@@ -53,57 +55,61 @@ const defaultPrivacyCommitments = [
   "The payment provider must never receive raw face images, landmarks, or precise facial measurements."
 ];
 
-export const SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID = "single_scan";
-export const SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID = "single_scan-usd-099";
-export const MONTHLY_SCAN_OFFER_ID = "monthly";
-export const MONTHLY_SCAN_PRICE_ID = "monthly-usd-199";
+export const LAUNCH_PACK_PRODUCT_ID = "launch_pack";
+export const LAUNCH_PACK_PRICE_ID = "launch_pack-usd-499";
+export const ALL_ACCESS_ANNUAL_PRODUCT_ID = "all_access_annual";
+export const ALL_ACCESS_ANNUAL_PRICE_ID = "all_access_annual-usd-999";
 
 const pricingInputs: PricingInput[] = [
   {
-    id: SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
-    priceID: SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
-    name: "One Scan",
-    description: "One completed game-specific appearance match and build guide.",
-    purchaseType: "consumable",
-    entitlementIDs: ["topThreeResults", "detailedBuildGuide", "screenshotRefinement"],
-    amountMinor: 99,
-    displayAmount: "$0.99",
+    id: LAUNCH_PACK_PRODUCT_ID,
+    priceID: LAUNCH_PACK_PRICE_ID,
+    name: "Launch Pack",
+    description: "One-time access to the five original launch games after each game has verified production support.",
+    purchaseType: "oneTime",
+    entitlementIDs: ["topThreeResults", "detailedBuildGuide", "screenshotRefinement", "multiGameAccess"],
+    amountMinor: 499,
+    displayAmount: "$4.99",
+    billingInterval: "none",
     recommendedForLaunch: true,
     productActive: true,
     priceActive: true,
     offerState: "availableAfterCatalogVerification",
     featureList: [
-      "One completed game-specific appearance match from verified catalog records.",
-      "Detailed manual build guide using verified menu paths.",
-      "Retakes required to successfully complete the same purchased scan do not consume an additional purchase.",
+      "Intended for the five original launch games once each game has verified production catalog records.",
+      "Game-specific top-three appearance matches from verified catalog records only.",
+      "Detailed manual build guides using verified menu paths.",
+      "Unsupported or empty-catalog games remain unavailable even after purchase.",
       "Catalog version, platform, mode, and creation-path traceability."
     ],
     supportGuidance: "Refund and support requests must use the owner-approved support path before checkout is enabled.",
     restoreGuidance: "Purchase restoration will be available only through the selected payment provider after receipt handling is implemented.",
     resultPreview:
-      "Before purchase, the app may preview capture quality, catalog availability, and what the pack unlocks. It must not show fake head, hair, facial-hair, or menu values."
+      "Before purchase, the app may preview capture quality, catalog availability, and what the Launch Pack unlocks. It must not show fake head, hair, facial-hair, or menu values."
   },
   {
-    id: MONTHLY_SCAN_OFFER_ID,
-    priceID: MONTHLY_SCAN_PRICE_ID,
-    name: "Monthly",
-    description: "Repeat scans and screenshot refinements while your subscription is active.",
+    id: ALL_ACCESS_ANNUAL_PRODUCT_ID,
+    priceID: ALL_ACCESS_ANNUAL_PRICE_ID,
+    name: "All Access",
+    description: "Annual access to all currently supported games and future supported games while the subscription is active.",
     purchaseType: "subscription",
-    entitlementIDs: ["topThreeResults", "detailedBuildGuide", "screenshotRefinement", "savedProfiles"],
-    amountMinor: 199,
-    displayAmount: "$1.99/month",
+    entitlementIDs: ["topThreeResults", "detailedBuildGuide", "screenshotRefinement", "savedProfiles", "multiGameAccess"],
+    amountMinor: 999,
+    displayAmount: "$9.99/year",
+    billingInterval: "year",
     productActive: true,
     priceActive: true,
     offerState: "availableAfterCatalogVerification",
     featureList: [
-      "Repeat scans while the subscription is active.",
+      "Repeat scans for supported games while the subscription is active.",
       "Screenshot refinements when verified refinement logic and catalog data are available.",
-      "Manual build guides from verified menu paths."
+      "Manual build guides from verified menu paths.",
+      "Future supported games are eligible only after their production catalogs pass release gates."
     ],
     supportGuidance: "Subscription support, cancellation, refund, tax, and provider receipt handling must be finalized before checkout is enabled.",
     restoreGuidance: "Subscription restoration will be available only through the selected payment provider after receipt handling is implemented.",
     resultPreview:
-      "Before purchase, the app may preview capture quality, catalog availability, and what monthly access unlocks. It must not show fake head, hair, facial-hair, or menu values."
+      "Before purchase, the app may preview capture quality, catalog availability, and what All Access unlocks. It must not show fake head, hair, facial-hair, or menu values."
   },
   {
     id: "screenshot-refinement",
@@ -161,9 +167,10 @@ export const PRICING_OPTIONS: PricingOption[] = pricingInputs.map((input) => ({
     purchaseType: input.purchaseType,
     active: input.priceActive ?? input.purchaseType === "free"
   },
+  billingInterval: input.billingInterval ?? (input.offerState === "futureSuite" ? "future" : "none"),
   recommendedForLaunch: input.recommendedForLaunch ?? false,
   checkoutEnabled: false,
-  unavailableReason: input.id === SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID ? selectedOfferUnavailableReason : checkoutUnavailableReason,
+  unavailableReason: input.id === LAUNCH_PACK_PRODUCT_ID ? selectedOfferUnavailableReason : checkoutUnavailableReason,
   offerState: input.offerState,
   featureList: input.featureList,
   privacyCommitments: input.privacyCommitments ?? defaultPrivacyCommitments,
@@ -190,19 +197,29 @@ export function validatePricingConfiguration(options: PricingOption[] = PRICING_
     if (option.product.purchaseType !== "free" && option.offerState !== "futureSuite" && option.price.amountMinor <= 0) {
       errors.push(`Paid offer ${option.product.id} must show a transparent positive price.`);
     }
-    if (option.product.id === SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID) {
-      if (option.product.purchaseType !== "consumable") errors.push("One Scan must be configured as the one-completed-scan consumable plan.");
-      if (!option.product.entitlementIDs.includes("topThreeResults")) errors.push("One Scan must include top-three results.");
-      if (!option.product.entitlementIDs.includes("detailedBuildGuide")) errors.push("One Scan must include detailed build guide.");
-      if (!option.resultPreview.toLowerCase().includes("must not show fake")) errors.push("One Scan must prohibit fake result previews.");
-      if (!option.featureList.some((feature) => feature.toLowerCase().includes("retakes"))) errors.push("One Scan must preserve same-purchase completion retakes.");
-      if (!option.privacyCommitments.some((commitment) => commitment.toLowerCase().includes("not sold"))) errors.push("One Scan must state face data is not sold.");
+    if (option.product.id === LAUNCH_PACK_PRODUCT_ID) {
+      if (option.product.purchaseType !== "oneTime") errors.push("Launch Pack must be configured as a one-time purchase.");
+      if (option.price.amountMinor !== 499 || option.price.displayAmount !== "$4.99") errors.push("Launch Pack must be priced at $4.99 USD.");
+      if (option.billingInterval !== "none") errors.push("Launch Pack must not have a billing interval.");
+      if (!option.product.entitlementIDs.includes("topThreeResults")) errors.push("Launch Pack must include top-three results.");
+      if (!option.product.entitlementIDs.includes("detailedBuildGuide")) errors.push("Launch Pack must include detailed build guide.");
+      if (!option.product.entitlementIDs.includes("multiGameAccess")) errors.push("Launch Pack must include launch-game entitlement scope.");
+      if (!option.resultPreview.toLowerCase().includes("must not show fake")) errors.push("Launch Pack must prohibit fake result previews.");
+      if (!option.featureList.some((feature) => feature.toLowerCase().includes("five original launch games"))) {
+        errors.push("Launch Pack must describe the five original launch-game scope.");
+      }
+      if (!option.featureList.some((feature) => feature.toLowerCase().includes("unsupported or empty-catalog games remain unavailable"))) {
+        errors.push("Launch Pack must preserve empty-catalog fail-closed behavior.");
+      }
+      if (!option.privacyCommitments.some((commitment) => commitment.toLowerCase().includes("not sold"))) errors.push("Launch Pack must state face data is not sold.");
       if (!option.privacyCommitments.some((commitment) => commitment.toLowerCase().includes("biometric advertising"))) {
-        errors.push("One Scan must prohibit biometric advertising.");
+        errors.push("Launch Pack must prohibit biometric advertising.");
       }
     }
-    if (option.product.id === MONTHLY_SCAN_OFFER_ID && option.product.purchaseType !== "subscription") {
-      errors.push("Monthly must be configured as a subscription plan.");
+    if (option.product.id === ALL_ACCESS_ANNUAL_PRODUCT_ID) {
+      if (option.product.purchaseType !== "subscription") errors.push("All Access must be configured as a subscription plan.");
+      if (option.price.amountMinor !== 999 || option.price.displayAmount !== "$9.99/year") errors.push("All Access must be priced at $9.99/year USD.");
+      if (option.billingInterval !== "year") errors.push("All Access must use an annual billing interval.");
     }
   }
   return { valid: errors.length === 0, errors };
@@ -215,12 +232,12 @@ export function canMakePaidRecommendationClaims(catalogIsEmpty: boolean) {
   };
 }
 
-export function getSelectedCollegeFootball27Offer(options: PricingOption[] = PRICING_OPTIONS) {
-  return options.find((option) => option.product.id === SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID);
+export function getLaunchPackOffer(options: PricingOption[] = PRICING_OPTIONS) {
+  return options.find((option) => option.product.id === LAUNCH_PACK_PRODUCT_ID);
 }
 
 export function getScanEntryPricingOptions(options: PricingOption[] = PRICING_OPTIONS) {
-  return options.filter((option) => option.product.id === SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID || option.product.id === MONTHLY_SCAN_OFFER_ID);
+  return options.filter((option) => option.product.id === LAUNCH_PACK_PRODUCT_ID || option.product.id === ALL_ACCESS_ANNUAL_PRODUCT_ID);
 }
 
 export function createCheckoutUnavailableCopy(option: PricingOption, catalogIsEmpty: boolean) {

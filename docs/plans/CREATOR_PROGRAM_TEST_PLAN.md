@@ -3,6 +3,8 @@
 **Status:** Draft for future implementation phases  
 **Created:** 2026-08-02  
 
+Prompt 090 supersedes the older `single_scan` / `monthly` scan-entry SKUs. Future Creator Program tests should use the approved Launch Pack and All Access product model unless a later owner decision changes it.
+
 The Creator Program must be tested as financial infrastructure, not as ordinary UI state. This plan focuses on preventing duplicate earnings, unauthorized payouts, client-side entitlement spoofing, and payout history mutation.
 
 ## Unit Tests
@@ -69,7 +71,7 @@ The Creator Program must be tested as financial infrastructure, not as ordinary 
 
 - Existing College Football production recommendation fail-closed behavior remains unchanged.
 - Existing FC 26 and College Football game adapters do not load creator-program records.
-- Existing `single_scan` and `monthly` scan-entry plans remain unchanged unless owner explicitly changes them.
+- Launch Pack and All Access pricing remains checkout-disabled unless owner explicitly approves live payment integration.
 - Empty production catalog still prevents real recommendations.
 - Fixture/test data cannot produce creator commissions.
 - Test Stripe products cannot run in live mode.
@@ -92,4 +94,3 @@ Before any live creator payout:
 - Owner approval is recorded.
 - Kill switch is tested.
 - Incident rollback path is tested.
-

@@ -7,6 +7,8 @@
 **Starting HEAD:** `2ba2289461edaf87afc8bfb711f6699ef8b6f511`  
 **Outcome:** `HOLD_OWNER` for implementation; planning package complete.
 
+**Historical note:** This result was produced before Prompt 090. The pricing-precedence decision has since been resolved in active configuration: Launch Pack and All Access replace the older Prompt 080 scan-entry SKUs while checkout remains disabled.
+
 ## What Was Completed
 
 - Verified the Creator Program source document exists at `docs/Product/Creator Program/CREATOR_PROGRAM_SOURCE_OF_TRUTH.md`.
@@ -34,17 +36,15 @@
 
 ## Required Owner Decisions Before Phase 02 Implementation
 
-1. Decide whether Creator Program `$4.99` Launch Pack and `$9.99/year` All Access replace, coexist with, or remain separate from the existing Prompt 080 `$0.99` One Scan and `$1.99/month` Monthly scan-entry plans.
-2. Approve adding the Creator Program source to the source-governance registry.
-3. Decide whether paid Creator Program purchases require customer accounts or can begin with anonymous attribution that binds to an account at purchase.
-4. Approve Stripe as the provider for this program and confirm test-mode-only implementation can begin.
-5. Obtain legal/accounting review for creator agreements, tax handling, refund/dispute treatment, payout eligibility, and program terms before live payouts.
+1. Decide whether paid Creator Program purchases require customer accounts or can begin with anonymous attribution that binds to an account at purchase.
+2. Approve Stripe as the provider for this program and confirm test-mode-only implementation can begin.
+3. Obtain legal/accounting review for creator agreements, tax handling, refund/dispute treatment, payout eligibility, and program terms before live payouts.
 
 ## Recommended Phase 02 Scope
 
 Build only source-governance and local schema/contracts:
 
-- Add Creator Program source to `docs/governance/SOURCE_REGISTRY.md`.
+- Preserve Creator Program source governance in `docs/governance/SOURCE_REGISTRY.md`.
 - Add creator-program TypeScript domain types.
 - Add a draft Supabase migration for creator entities and RLS policy specs.
 - Add tests for status transitions, idempotency, duplicate earnings prevention, and fail-closed payout behavior.
@@ -60,4 +60,3 @@ Build only source-governance and local schema/contracts:
 - Production Creator Program launch readiness: 0%-5%.
 
 These percentages reflect planning and reusable scaffolding only. They do not represent implemented or tested payment/payout behavior.
-

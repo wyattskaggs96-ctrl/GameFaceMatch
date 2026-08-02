@@ -39,7 +39,7 @@ export function consentCard(page: Page, name: string): Locator {
 export async function navigateToCapture(page: Page) {
   await page.getByRole("button", { name: "Start" }).first().click();
   await expect(page.getByRole("heading", { name: "Build yourself in the game." })).toBeVisible();
-  await expect(page.getByText("One scan • $0.99")).toBeVisible();
+  await expect(page.getByText("Launch Pack • $4.99")).toBeVisible();
   await expect(page.getByText("Purchase verification is not connected yet")).toBeVisible();
   await expect(page.getByRole("button", { name: /Start face scan/ })).toBeDisabled();
   await page.goto("/#preparation");

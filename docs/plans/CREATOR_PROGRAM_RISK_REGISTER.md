@@ -5,7 +5,7 @@
 
 | Risk | Severity | Why it matters | Mitigation | Owner |
 | --- | --- | --- | --- | --- |
-| Pricing conflict with existing monetization docs | High | Existing docs use `$0.99` and `$1.99/month`; Creator source uses `$4.99` and `$9.99/year`. | Owner decision before implementation; isolate Creator SKUs until resolved. | Wyatt |
+| Reintroducing superseded scan-entry pricing | Medium | Prompt 090 supersedes `$0.99` and `$1.99/month`; stale docs or branches could accidentally revive old SKUs. | Keep active pricing tests on `launch_pack` and `all_access_annual`; treat old SKUs as historical only. | Engineering |
 | Unauthorized commission creation | Critical | Client-side purchase or attribution events could create false earnings. | Server-only purchase verification, Stripe webhooks, idempotency, RLS, no client ledger writes. | Engineering |
 | Duplicate webhook delivery duplicates earnings | Critical | Webhooks can be retried. | Unique Stripe event IDs and ledger idempotency keys. | Engineering |
 | Historical ledger mutation | Critical | Editing paid history breaks auditability. | Append-only ledger; reversal rows for corrections. | Engineering |
@@ -25,4 +25,3 @@
 ## Current Risk Decision
 
 Implementation should not proceed to live payments or payouts. Phase 02 may safely add schema, contracts, and tests if it keeps all payment and payout behavior disabled by default.
-

@@ -2,67 +2,52 @@
 
 ## Status
 
-Current implementation decision: Prompt 080 supersedes the earlier `$4.99` draft with two customer-facing scan-entry plans: `single_scan` at `$0.99` and
-`monthly` at `$1.99/month`.
+Current approved implementation decision: Prompt 090 replaces the older Prompt 080 scan-entry pricing with two disabled, fail-closed customer offers:
 
-No payment provider is selected. No checkout, subscription, live purchase restoration, or refund processing is implemented.
+- `launch_pack` at `$4.99 USD`
+- `all_access_annual` at `$9.99/year USD`
 
-## Current product constraints
+No payment provider is selected. No checkout, subscription, live purchase restoration, refund processing, creator attribution, creator commission, or payout behavior is implemented.
 
-- The production College Football 27 catalog is empty.
+## Current Product Constraints
+
+- The production catalog is empty for every launch game.
 - The app cannot yet produce verified top-three recommendations.
 - Browser capture is RGB only and must not be positioned as TrueDepth-level capture.
 - Trust, privacy, deletion controls, and honest limitations are more important than early revenue.
 - Refund risk is high until users can see verified recommendations and detailed build instructions.
 
-## Model comparison
+## Active Offers
 
-| Model | Strengths | Risks | Fit now |
-| --- | --- | --- | --- |
-| One Scan | Simple low-friction purchase for one completed game-specific appearance match | Requires provider receipts, catalog proof, and retake policy enforcement | Current selected entry plan |
-| Monthly | Supports repeat scans and screenshot refinements while active | Requires subscription management, cancellation, restoration, and support policy | Current selected alternate plan |
-| Paid screenshot refinement | Strong differentiator when it works | High refund risk until comparison logic is real | Not ready |
-| Multi-game sports pass | Handles annual sports releases and future adapters | Requires multiple verified catalogs and account/access management | Later |
-| Creator package | Useful for content creators and friend challenges | Requires share templates, consent flows, and support process | Later |
+| Offer | Internal ID | Price | Billing model | Current state |
+| --- | --- | ---: | --- | --- |
+| Launch Pack | `launch_pack` | `$4.99` | One-time | Planned and checkout-disabled |
+| All Access | `all_access_annual` | `$9.99/year` | Annual subscription | Planned and checkout-disabled |
+
+Launch Pack is intended to cover the five original launch games only after each game has production-supported catalog records:
+
+1. EA SPORTS College Football 27
+2. NBA 2K26
+3. Madden NFL 26
+4. EA SPORTS PGA TOUR
+5. PBA Pro Bowling 2026
+
+All Access is intended to cover currently supported and subsequently supported games only while the subscription is active.
 
 ## Recommendation
 
-Use the Prompt 080 mobile entry screen to present the approved scan plans while checkout remains fail-closed until real payment and entitlement verification exist.
+The app may display Launch Pack and All Access as planned or unavailable offers while checkout remains fail-closed. A selected plan is not proof of payment, cannot grant an entitlement, and cannot bypass catalog verification.
 
-Current selected plans:
+Checkout remains disabled until a payment provider, secure checkout flow, receipt handling, purchase restoration, support policy, refund policy, tax approach, server-authoritative entitlement verification, and legal review are complete.
 
-- Product: One Scan
-- Internal plan identifier: `single_scan`
-- Price: `$0.99 USD`
-- Purchase type: one completed scan
-- Entitlement rule: retakes required to successfully complete the same purchased scan must not consume an additional purchase
-
-- Product: Monthly
-- Internal plan identifier: `monthly`
-- Price: `$1.99/month USD`
-- Purchase type: subscription
-- Entitlement rule: repeat scans and screenshot refinements while the subscription is active
-
-Checkout remains disabled until a payment provider, secure checkout flow, receipt handling, purchase restoration, support policy, refund policy, tax approach, and legal review are complete.
-
-## Rationale
-
-- No verified catalog means the product cannot honestly sell recommendations yet.
-- One Scan keeps the first purchase small and tied to one completed game-specific appearance match.
-- Monthly access supports repeat scans and screenshot refinements only after subscription verification exists.
-- The product should demonstrate value before charging because the experience involves face images.
-- Refund risk is lower after users see verified catalog coverage and the app can explain exactly what is included.
-
-## Privacy requirements for paid launch
+## Privacy Requirements For Paid Launch
 
 - Face images are not sold.
 - Face data is not used for biometric advertising.
 - Payment providers must not receive raw face media, landmarks, precise facial measurements, or unencrypted profile content.
-- Result previews before purchase may show capture readiness and catalog availability, but must not show fake College Football 27 settings.
-- One Scan and Monthly must be clearly distinguished from a future multi-game suite.
+- Result previews before purchase may show capture readiness and catalog availability, but must not show fake game settings.
 - No misleading trial copy, fake urgency, fake customer quotes, or fake purchase state may be displayed.
 
-## Superseded paths
+## Superseded Historical Paths
 
-The earlier `$4.99` one-game pack language is superseded by Prompt 080. Do not start with a separate paid screenshot-refinement SKU, multi-game pass, or creator
-package. Those require more product proof, support policy, and legal review.
+The older Prompt 080 `single_scan` `$0.99` and `monthly` `$1.99/month` scan-entry pricing is superseded for active customer-facing configuration. Keep references only as historical audit context.

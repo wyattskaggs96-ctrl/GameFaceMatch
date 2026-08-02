@@ -7,6 +7,8 @@
 **HEAD audited:** `2ba2289461edaf87afc8bfb711f6699ef8b6f511`  
 **Phase result:** `HOLD_OWNER` for implementation; Phase 01 planning artifacts complete.  
 
+**Historical note:** This audit was written before Prompt 090 aligned active pricing. References to `single_scan` `$0.99` and `monthly` `$1.99/month` describe the pre-Prompt-090 repository state and are superseded for active product configuration.
+
 This audit ingests the Creator Program source of truth and compares it against the current GameFace Match payment, Supabase, entitlement, audit, and status architecture. It does not implement checkout, creator attribution, commissions, payouts, Stripe Connect, Supabase migrations, or live account behavior.
 
 ## Source-Document Verification
@@ -16,7 +18,7 @@ This audit ingests the Creator Program source of truth and compares it against t
 | `docs/Product/Creator Program/CREATOR_PROGRAM_SOURCE_OF_TRUTH.md` | Present, readable, 698 lines. This is the owner-supplied governing source for the Creator Program audit. |
 | `docs/GAMEFACE_MATCH_SOURCE_OF_TRUTH.md` | Present and binding for product, privacy, no-invention, no identity-recognition, and independent-companion constraints. |
 | `docs/governance/SOURCE_REGISTRY.md` | Present. It does not yet list the Creator Program source, so Phase 02 should add the new source to governance before implementation. |
-| `docs/MONETIZATION_DECISION.md` | Present. It currently says Prompt 080 superseded an earlier `$4.99` pack for scan-entry pricing. This conflicts with the new Creator Program source unless the Creator Program offer is treated as a separate commerce surface. |
+| `docs/MONETIZATION_DECISION.md` | Present. At audit time it said Prompt 080 superseded an earlier `$4.99` pack; Prompt 090 has since aligned the active monetization decision to Launch Pack and All Access. |
 | `docs/PAYMENT_INTEGRATION_REQUIREMENTS.md` | Present. It says no payment provider is selected and checkout must remain disabled. |
 | `docs/status/SUPABASE_IMPLEMENTATION_STATUS.md` | Present. Supabase project exists, but remote schema, Storage, Auth, and app connection remain unapplied. |
 
@@ -67,7 +69,7 @@ The Creator Program source defines:
 | Package manager | npm at root and under `web/`. | New scripts/tests should use existing npm conventions. |
 | Stripe dependencies | No Stripe SDK or Stripe webhook route is present in `web/package.json` or current API routes. | Stripe must be added in a later implementation phase behind server-only routes or Edge Functions. |
 | Payment adapter | `web/lib/payments/payment-provider.ts` defines a provider-independent interface and unavailable provider. | Reuse this boundary; add a Stripe implementation only after owner credential/environment decisions. |
-| Pricing | `web/lib/payments/pricing.ts` defines Prompt 080 scan plans: `single_scan` `$0.99` and `monthly` `$1.99/month`, checkout disabled. | Do not overwrite these with Creator Program SKUs without an owner decision. Add creator products separately. |
+| Pricing | At audit time, `web/lib/payments/pricing.ts` defined Prompt 080 scan plans. Prompt 090 supersedes those active SKUs with Launch Pack and All Access while keeping checkout disabled. | Do not enable checkout, creator attribution, commissions, or payouts without owner approval and server-side gates. |
 | Entitlements | `web/lib/payments/entitlements.ts` defines local entitlement scaffolding. | Paid access must become server-authoritative before creator commissions depend on purchase state. |
 | Supabase runtime | `web/lib/supabase/runtime-config.ts` and `repository-contracts.ts` provide fail-closed runtime and local-only repository adapters. | Creator data should extend the Supabase repository layer after schema and RLS are designed. |
 | Supabase schema | `supabase/migrations/0001_gameface_core_schema.sql` has generic `products`, `prices`, `entitlements`, `receipt_references`, and `audit_events`. | It does not yet model creators, attribution, commission ledger, connected accounts, milestones, or payout batches. |
@@ -103,7 +105,7 @@ The Creator Program source defines:
 
 | Conflict | Evidence | Required owner decision |
 | --- | --- | --- |
-| Current scan pricing vs Creator Program pricing | `docs/MONETIZATION_DECISION.md` and `docs/PAYMENT_INTEGRATION_REQUIREMENTS.md` say the earlier `$4.99` pack was superseded by Prompt 080 `$0.99` / `$1.99/month`. Creator source defines `$4.99` Launch Pack and `$9.99/year` All Access. | Decide whether Creator Program SKUs replace scan-entry pricing, coexist as a separate creator-commerce launch, or remain future-only until core product pricing changes. |
+| Historical scan pricing vs Creator Program pricing | This audit captured a pre-Prompt-090 conflict between Prompt 080 scan pricing and the Creator source. Prompt 090 resolves active product configuration in favor of Launch Pack and All Access. | Future work must not reintroduce the old scan-entry SKUs as active customer offers without a new owner decision. |
 | Creator source governance | `docs/governance/SOURCE_REGISTRY.md` does not list `docs/Product/Creator Program/CREATOR_PROGRAM_SOURCE_OF_TRUTH.md`. | Add the Creator Program source to the registry before implementation and define precedence versus monetization docs. |
 | Accountless basic use vs creator attribution | Existing source-of-truth says basic matching must not require an account. Creator attribution wants persisted customer attribution when possible. | Define anonymous-to-account attribution behavior that does not force an account for basic matching unless paid creator-program features require one. |
 | Payments disabled vs creator payout automation | Current payment docs require checkout disabled. Creator source requires Stripe payments and payouts eventually. | Approve a phased Stripe test-mode implementation only after schema, RLS, and provider setup instructions are accepted. |
@@ -138,4 +140,3 @@ Use Supabase/Postgres as the internal authority for attribution, status transiti
 ## Phase 01 Decision
 
 The repository is ready for a Phase 02 schema and boundary design, but it is not ready for live payment, live payout, or production creator earnings behavior. Owner decisions are required for pricing precedence, account requirements, creator eligibility terms, tax/legal review, and Stripe Connect configuration.
-

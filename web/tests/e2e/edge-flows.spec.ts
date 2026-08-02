@@ -137,11 +137,11 @@ test.describe("GameFace Match E2E edge flows", () => {
       await page.setViewportSize(viewport);
       await page.goto("/#start");
       await expect(page.getByRole("heading", { name: "Build yourself in the game." })).toBeVisible();
-      await page.getByRole("radio", { name: /One Scan/ }).click();
-      await expect(page.getByRole("radio", { name: /One Scan/ })).toHaveAttribute("aria-checked", "true");
-      await expect(page.getByRole("radio", { name: /Monthly/ })).toHaveAttribute("aria-checked", "false");
-      await page.getByRole("radio", { name: /Monthly/ }).click();
-      await expect(page.getByRole("radio", { name: /Monthly/ })).toHaveAttribute("aria-checked", "true");
+      await page.getByRole("radio", { name: /Launch Pack/ }).click();
+      await expect(page.getByRole("radio", { name: /Launch Pack/ })).toHaveAttribute("aria-checked", "true");
+      await expect(page.getByRole("radio", { name: /All Access/ })).toHaveAttribute("aria-checked", "false");
+      await page.getByRole("radio", { name: /All Access/ }).click();
+      await expect(page.getByRole("radio", { name: /All Access/ })).toHaveAttribute("aria-checked", "true");
       await expect(page.getByRole("button", { name: /Start face scan/ })).toBeDisabled();
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
       expect(overflow, `${viewport.width}x${viewport.height}`).toBe(false);

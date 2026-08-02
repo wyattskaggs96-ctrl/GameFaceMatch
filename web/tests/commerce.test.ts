@@ -9,15 +9,15 @@ import {
   createUnavailablePaymentProvider
 } from "@/lib/payments/payment-provider";
 import {
-  MONTHLY_SCAN_OFFER_ID,
-  MONTHLY_SCAN_PRICE_ID,
+  ALL_ACCESS_ANNUAL_PRICE_ID,
+  ALL_ACCESS_ANNUAL_PRODUCT_ID,
+  LAUNCH_PACK_PRICE_ID,
+  LAUNCH_PACK_PRODUCT_ID,
   PRICING_OPTIONS,
-  SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
-  SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
   canMakePaidRecommendationClaims,
   createCheckoutUnavailableCopy,
   getScanEntryPricingOptions,
-  getSelectedCollegeFootball27Offer,
+  getLaunchPackOffer,
   validatePricingConfiguration
 } from "@/lib/payments/pricing";
 
@@ -38,21 +38,21 @@ describe("payment provider scaffold", () => {
   });
 
   it("keeps checkout and purchase restoration behind the safe adapter", async () => {
-    const offer = getSelectedCollegeFootball27Offer();
+    const offer = getLaunchPackOffer();
     expect(offer).toBeDefined();
     const adapter = createSafePaymentAdapter(createUnavailablePaymentProvider());
 
     const checkout = await adapter.startCheckout(offer!, {
-      productID: SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
-      priceID: SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
+      productID: LAUNCH_PACK_PRODUCT_ID,
+      priceID: LAUNCH_PACK_PRICE_ID,
       successUrl: "https://example.invalid/success",
       cancelUrl: "https://example.invalid/cancel"
     });
     const restoration = await adapter.restorePurchase({
       id: "receipt-reference-test-only",
       provider: "provider-unselected",
-      productID: SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
-      priceID: SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
+      productID: LAUNCH_PACK_PRODUCT_ID,
+      priceID: LAUNCH_PACK_PRICE_ID,
       paymentStatus: "paid",
       refundStatus: "notRequested"
     });
@@ -123,37 +123,41 @@ describe("pricing configuration", () => {
     expect(PRICING_OPTIONS.every((option) => !option.product.providerProductID && !option.price.providerPriceID)).toBe(true);
   });
 
-  it("configures the approved One Scan offer transparently", () => {
-    const offer = getSelectedCollegeFootball27Offer();
+  it("configures the approved Launch Pack offer transparently", () => {
+    const offer = getLaunchPackOffer();
     expect(offer).toBeDefined();
     expect(offer?.product).toMatchObject({
-      id: SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
-      name: "One Scan",
-      purchaseType: "consumable",
+      id: LAUNCH_PACK_PRODUCT_ID,
+      name: "Launch Pack",
+      purchaseType: "oneTime",
       active: true
     });
     expect(offer?.price).toMatchObject({
-      id: SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
-      amountMinor: 99,
-      displayAmount: "$0.99",
+      id: LAUNCH_PACK_PRICE_ID,
+      amountMinor: 499,
+      displayAmount: "$4.99",
       currency: "USD",
       active: true
     });
+    expect(offer?.billingInterval).toBe("none");
     expect(offer?.recommendedForLaunch).toBe(true);
     expect(offer?.checkoutEnabled).toBe(false);
-    expect(offer?.product.entitlementIDs).toEqual(expect.arrayContaining(["topThreeResults", "detailedBuildGuide"]));
-    expect(offer?.featureList.join(" ")).toContain("Retakes");
+    expect(offer?.product.entitlementIDs).toEqual(expect.arrayContaining(["topThreeResults", "detailedBuildGuide", "multiGameAccess"]));
+    expect(offer?.featureList.join(" ")).toContain("five original launch games");
+    expect(offer?.featureList.join(" ")).toContain("empty-catalog games remain unavailable");
   });
 
   it("exposes exactly the two scan-entry purchase plans", () => {
     const recommended = PRICING_OPTIONS.filter((option) => option.recommendedForLaunch);
-    expect(recommended.map((option) => option.product.id)).toContain(SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID);
-    expect(getScanEntryPricingOptions().map((option) => option.product.id)).toEqual([SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID, MONTHLY_SCAN_OFFER_ID]);
-    const monthly = PRICING_OPTIONS.find((option) => option.product.id === MONTHLY_SCAN_OFFER_ID);
-    expect(monthly?.price.id).toBe(MONTHLY_SCAN_PRICE_ID);
-    expect(monthly?.price.displayAmount).toBe("$1.99/month");
-    expect(monthly?.product.purchaseType).toBe("subscription");
-    expect(monthly?.checkoutEnabled).toBe(false);
+    expect(recommended.map((option) => option.product.id)).toContain(LAUNCH_PACK_PRODUCT_ID);
+    expect(getScanEntryPricingOptions().map((option) => option.product.id)).toEqual([LAUNCH_PACK_PRODUCT_ID, ALL_ACCESS_ANNUAL_PRODUCT_ID]);
+    const allAccess = PRICING_OPTIONS.find((option) => option.product.id === ALL_ACCESS_ANNUAL_PRODUCT_ID);
+    expect(allAccess?.price.id).toBe(ALL_ACCESS_ANNUAL_PRICE_ID);
+    expect(allAccess?.price.amountMinor).toBe(999);
+    expect(allAccess?.price.displayAmount).toBe("$9.99/year");
+    expect(allAccess?.billingInterval).toBe("year");
+    expect(allAccess?.product.purchaseType).toBe("subscription");
+    expect(allAccess?.checkoutEnabled).toBe(false);
   });
 
   it("does not create fake purchase state", () => {
@@ -171,15 +175,15 @@ describe("pricing configuration", () => {
   });
 
   it("requires privacy-safe offer claims and distinguishes the future multi-game suite", () => {
-    const offer = getSelectedCollegeFootball27Offer();
-    const multiGame = PRICING_OPTIONS.find((option) => option.product.id === "multi-game-sports-pass");
+    const offer = getLaunchPackOffer();
+    const allAccess = PRICING_OPTIONS.find((option) => option.product.id === ALL_ACCESS_ANNUAL_PRODUCT_ID);
 
     expect(offer?.privacyCommitments.join(" ")).toContain("not sold");
     expect(offer?.privacyCommitments.join(" ")).toContain("biometric advertising");
     expect(offer?.resultPreview).toContain("must not show fake");
     expect(createCheckoutUnavailableCopy(offer!, true)).toContain("Verified College Football 27 catalog not loaded.");
-    expect(multiGame?.offerState).toBe("futureSuite");
-    expect(multiGame?.resultPreview.toLowerCase()).toContain("not part of the college football 27 one-game purchase");
+    expect(allAccess?.offerState).toBe("availableAfterCatalogVerification");
+    expect(allAccess?.resultPreview.toLowerCase()).toContain("all access");
   });
 });
 

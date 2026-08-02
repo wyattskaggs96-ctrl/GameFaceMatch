@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { CollegeFootball27Adapter } from "@/lib/adapters/college-football-27-adapter";
 import { EaSportsFc26Adapter, FC26_CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/adapters/ea-sports-fc-26-adapter";
 import { GameAdapterError } from "@/lib/adapters/game-appearance-adapter";
-import { createGameProfileContext, getSupportedGameDefinition } from "@/lib/adapters/game-registry";
+import { SUPPORTED_GAME_DEFINITIONS, createGameProfileContext, getSupportedGameDefinition } from "@/lib/adapters/game-registry";
 import { createBundledCatalogRepository } from "@/lib/catalog/catalog-repository";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
 import { createInitialCaptureSession } from "@/lib/capture/capture-session";
@@ -17,10 +17,37 @@ describe("game adapter isolation", () => {
 
     expect(cf27.gameID).toBe("college-football-27");
     expect(cf27.activeProductStatus).toBe("activeMvp");
+    expect(cf27.launchTarget).toBe(true);
+    expect(cf27.productionCatalogAvailability).toBe("empty");
+    expect(cf27.recommendationAvailability).toBe("unavailableNoProductionCatalog");
+    expect(cf27.entitlementEligibility).toBe("eligibleWhenProductionSupported");
     expect(fc26.gameID).toBe("ea-sports-fc-26");
     expect(fc26.activeProductStatus).toBe("researchOnly");
+    expect(fc26.launchTarget).toBe(false);
+    expect(fc26.entitlementEligibility).toBe("notEligibleResearchOnly");
     expect(fc26.researchNamespace).not.toBe(cf27.researchNamespace);
     expect(fc26.recommendationsEnabled).toBe(false);
+  });
+
+  it("registers the five launch targets without false production support", () => {
+    const launchTargets = SUPPORTED_GAME_DEFINITIONS.filter((definition) => definition.launchTarget);
+    expect(launchTargets.map((definition) => definition.gameID)).toEqual([
+      "college-football-27",
+      "nba-2k26",
+      "madden-nfl-26",
+      "ea-sports-pga-tour",
+      "pba-pro-bowling-2026"
+    ]);
+    for (const definition of launchTargets) {
+      expect(definition.productionCatalogAvailability).toBe("empty");
+      expect(definition.recommendationsEnabled).toBe(false);
+      expect(definition.entitlementEligibility).toBe("eligibleWhenProductionSupported");
+      expect(definition.customerFacingSupportState).not.toBe("supported");
+    }
+    expect(getSupportedGameDefinition("nba-2k26").researchStatus).toBe("notStarted");
+    expect(getSupportedGameDefinition("madden-nfl-26").recommendationAvailability).toBe("unavailableNotStarted");
+    expect(getSupportedGameDefinition("ea-sports-pga-tour").productionCatalogNamespace).toBe("data/catalog/production/ea-sports-pga-tour");
+    expect(getSupportedGameDefinition("pba-pro-bowling-2026").customerFacingSupportState).toBe("notStartedUnavailable");
   });
 
   it("keeps FC26 recommendations fail-closed even when research observations exist", async () => {

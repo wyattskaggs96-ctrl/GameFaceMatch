@@ -197,7 +197,7 @@ export function ScanEntryScreen({
 
       <Button className="scan-start-button" disabled={!decision.allowed || isResolving} onClick={() => void startScan()} aria-describedby="scan-start-note">
         {isResolving ? "Preparing scan..." : "Start face scan"}
-        <span id="scan-start-note">{selectedPlan.id === "monthly" ? "Monthly access • $1.99/month" : "One scan • $0.99"}</span>
+        <span id="scan-start-note">{selectedPlan.id === "all_access_annual" ? "All Access • $9.99/year" : "Launch Pack • $4.99"}</span>
       </Button>
 
       <p className="scan-entry-disclaimer">

@@ -73,7 +73,7 @@ export type AnalyticsErrorCategory =
   | "unknown";
 export type AnalyticsLatencyOperation = "captureSession" | "profileCreation" | "resultGeneration" | "screenshotRefinement" | "catalogLoad";
 export type AnalyticsCrashCategory = "unhandledError" | "unhandledRejection" | "renderFailure" | "unknown";
-export type AnalyticsScanPlan = "single_scan" | "monthly";
+export type AnalyticsScanPlan = "launch_pack" | "all_access_annual";
 export type AnalyticsScanEntryGate =
   | "ready"
   | "missingPlan"

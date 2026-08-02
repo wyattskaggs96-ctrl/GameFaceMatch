@@ -60,7 +60,7 @@
 | Supabase runtime boundary | Implemented fail-closed | `web/lib/supabase/runtime-config.ts`, `web/lib/supabase/repository-contracts.ts` |
 | Payment provider boundary | Implemented unavailable provider | `web/lib/payments/payment-provider.ts` |
 | Entitlement model | Scaffolded local model | `web/lib/payments/entitlements.ts` |
-| Current pricing code | Conflicting scaffold; still Prompt 080 pricing | `web/lib/payments/pricing.ts` |
+| Current pricing code | Launch Pack / All Access scaffold; checkout disabled | `web/lib/payments/pricing.ts` |
 | Creator Program runtime | Not started | No code beyond docs/plans |
 
 ## Native iOS
@@ -84,4 +84,3 @@ Evidence:
 | Release monitoring/rollback contracts | Implemented docs/contracts | `web/lib/operations/release-monitoring.ts`, `web/lib/operations/rollback.ts` |
 | Deployment | Documented only | `docs/DEPLOYMENT_READINESS.md`, `docs/DEPLOYMENT_RUNBOOK.md` |
 | Monitoring provider | Not connected | No provider dependency found |
-

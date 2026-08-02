@@ -1,9 +1,9 @@
-import { getScanEntryPricingOptions, SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID, type PricingOption } from "@/lib/payments/pricing";
+import { getScanEntryPricingOptions, LAUNCH_PACK_PRODUCT_ID, type PricingOption } from "@/lib/payments/pricing";
 import { hasRequiredCaptureConsent, type ConsentState } from "@/lib/privacy/consent";
 
 export const SCAN_ENTRY_CONSENT_VERSION = "scan-entry-consent-v1";
 
-export type ScanEntryPlanID = "single_scan" | "monthly";
+export type ScanEntryPlanID = "launch_pack" | "all_access_annual";
 export type BillingEligibilityState = "notConfigured" | "verifiedEntitlement" | "cancelled" | "failed" | "previewOnly";
 export type ScanEntryEnvironment = "development" | "test" | "production";
 export type ScanEntryStartDecisionReason =
@@ -43,7 +43,7 @@ export interface ScanEntryGateDecision {
 
 export const SCAN_ENTRY_PLANS: ScanEntryPlan[] = getScanEntryPricingOptions().map((option) => toScanEntryPlan(option));
 
-export const DEFAULT_SCAN_ENTRY_PLAN_ID: ScanEntryPlanID = SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID;
+export const DEFAULT_SCAN_ENTRY_PLAN_ID: ScanEntryPlanID = LAUNCH_PACK_PRODUCT_ID;
 
 export function getDefaultScanEntryPlan() {
   return getScanEntryPlan(DEFAULT_SCAN_ENTRY_PLAN_ID);
@@ -54,7 +54,7 @@ export function getScanEntryPlan(id: ScanEntryPlanID | null, plans: ScanEntryPla
 }
 
 export function isValidScanEntryPlanID(value: string): value is ScanEntryPlanID {
-  return value === "single_scan" || value === "monthly";
+  return value === "launch_pack" || value === "all_access_annual";
 }
 
 export function isScanEntryPreviewModeAllowed(environment: ScanEntryEnvironment, previewModeEnabled: boolean) {
@@ -111,9 +111,9 @@ function toScanEntryPlan(option: PricingOption): ScanEntryPlan {
     price: option.price.displayAmount,
     description: option.product.description,
     entitlementRule:
-      id === "single_scan"
-        ? "Retakes required to successfully complete the same purchased scan must not consume an additional purchase."
-        : "Repeat scans and screenshot refinements are available only while the subscription is active.",
+      id === "launch_pack"
+        ? "Covers the five original launch games only after each game has verified production support."
+        : "Covers supported and future supported games only while the annual subscription is active.",
     billingProductID: option.product.id,
     billingPriceID: option.price.id
   };

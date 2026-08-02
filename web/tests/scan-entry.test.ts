@@ -19,16 +19,16 @@ import {
 import { createInitialConsentState, updateConsent, type ConsentID, type ConsentState } from "@/lib/privacy/consent";
 
 describe("mobile scan entry gate", () => {
-  it("defaults to One Scan and keeps only one selected plan at a time", () => {
-    expect(DEFAULT_SCAN_ENTRY_PLAN_ID).toBe("single_scan");
-    expect(SCAN_ENTRY_PLANS.map((plan) => plan.id)).toEqual(["single_scan", "monthly"]);
-    expect(SCAN_ENTRY_PLANS.find((plan) => plan.id === "single_scan")?.price).toBe("$0.99");
-    expect(SCAN_ENTRY_PLANS.find((plan) => plan.id === "monthly")?.price).toBe("$1.99/month");
+  it("defaults to Launch Pack and keeps only one selected plan at a time", () => {
+    expect(DEFAULT_SCAN_ENTRY_PLAN_ID).toBe("launch_pack");
+    expect(SCAN_ENTRY_PLANS.map((plan) => plan.id)).toEqual(["launch_pack", "all_access_annual"]);
+    expect(SCAN_ENTRY_PLANS.find((plan) => plan.id === "launch_pack")?.price).toBe("$4.99");
+    expect(SCAN_ENTRY_PLANS.find((plan) => plan.id === "all_access_annual")?.price).toBe("$9.99/year");
   });
 
   it("keeps start disabled until required consent and verified entitlement are present", () => {
     const missingConsent = evaluateScanEntryStartGate({
-      selectedPlanID: "single_scan",
+      selectedPlanID: "launch_pack",
       consentState: createInitialConsentState(),
       billingState: "verifiedEntitlement",
       catalogAvailable: true,
@@ -39,7 +39,7 @@ describe("mobile scan entry gate", () => {
     expect(missingConsent).toMatchObject({ allowed: false, reason: "missingConsent" });
 
     const ready = evaluateScanEntryStartGate({
-      selectedPlanID: "monthly",
+      selectedPlanID: "all_access_annual",
       consentState: grantRequiredConsent(),
       billingState: "verifiedEntitlement",
       catalogAvailable: true,
@@ -54,7 +54,7 @@ describe("mobile scan entry gate", () => {
     const consentState = grantRequiredConsent();
     expect(
       evaluateScanEntryStartGate({
-        selectedPlanID: "single_scan",
+        selectedPlanID: "launch_pack",
         consentState,
         billingState: "notConfigured",
         catalogAvailable: true,
@@ -65,7 +65,7 @@ describe("mobile scan entry gate", () => {
 
     expect(
       evaluateScanEntryStartGate({
-        selectedPlanID: "single_scan",
+        selectedPlanID: "launch_pack",
         consentState,
         billingState: "previewOnly",
         catalogAvailable: true,

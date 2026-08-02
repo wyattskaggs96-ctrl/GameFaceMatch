@@ -1,17 +1,17 @@
 "use client";
 
 import { Alert, Button, Card, ScreenHeader, StatusBadge } from "@/components/design-system";
-import { PRICING_OPTIONS, canMakePaidRecommendationClaims, createCheckoutUnavailableCopy, getSelectedCollegeFootball27Offer } from "@/lib/payments/pricing";
+import { PRICING_OPTIONS, canMakePaidRecommendationClaims, createCheckoutUnavailableCopy, getLaunchPackOffer } from "@/lib/payments/pricing";
 
 export function PricingScaffold({ catalogIsEmpty }: { catalogIsEmpty: boolean }) {
   const paidClaims = canMakePaidRecommendationClaims(catalogIsEmpty);
-  const selectedOffer = getSelectedCollegeFootball27Offer();
+  const selectedOffer = getLaunchPackOffer();
   return (
     <section className="screen-stack" aria-labelledby="pricing-title">
       <ScreenHeader eyebrow="Purchase readiness" title="GameFace Match scan access" id="pricing-title">
         <p>
-          The selected Prompt 080 plans are One Scan and Monthly access. Checkout remains safely disabled until the verified catalog, provider account setup,
-          receipt handling, purchase restoration, refund support, and legal review are complete.
+          The approved launch offers are Launch Pack and All Access. Checkout remains safely disabled until the verified catalog, provider account setup,
+          receipt handling, purchase restoration, refund support, entitlement verification, and legal review are complete.
         </p>
       </ScreenHeader>
       <Alert title="Transparent selected offer" tone="info">
@@ -39,7 +39,7 @@ export function PricingScaffold({ catalogIsEmpty }: { catalogIsEmpty: boolean })
             </div>
             <div>
               <span>Purchase type</span>
-              <strong>One game, one-time purchase</strong>
+              <strong>Launch games, one-time purchase</strong>
             </div>
             <div>
               <span>Checkout state</span>
@@ -66,7 +66,7 @@ export function PricingScaffold({ catalogIsEmpty }: { catalogIsEmpty: boolean })
             {selectedOffer.resultPreview}
           </Alert>
           <Alert title="No completed payment state" tone="info">
-            This offer is modeled as one completed scan. Checkout, restoration, provider receipts, and subscription management are not connected.
+            This offer is modeled as a planned launch-game pack. Checkout, restoration, provider receipts, subscription management, and entitlement verification are not connected.
           </Alert>
           <Alert title="Checkout unavailable" tone="warning">
             {createCheckoutUnavailableCopy(selectedOffer, catalogIsEmpty)}
@@ -121,8 +121,8 @@ export function PricingScaffold({ catalogIsEmpty }: { catalogIsEmpty: boolean })
       <Card>
         <h2>Scan access versus future suite</h2>
         <p className="supporting">
-          One Scan and Monthly access can only deliver verified settings for supported game catalogs. A future multi-game suite would require separate verified
-          catalogs, entitlement rules, support language, and owner approval.
+          Launch Pack and All Access can only deliver verified settings for supported game catalogs. Game support metadata cannot bypass catalog verification,
+          entitlement verification, or production release gates.
         </p>
       </Card>
       <Card>

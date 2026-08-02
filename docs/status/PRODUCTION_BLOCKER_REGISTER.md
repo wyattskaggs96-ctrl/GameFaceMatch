@@ -7,8 +7,7 @@
 | Blocker | Why it matters | Owner | Required input/action |
 | --- | --- | --- | --- |
 | No verified production catalog records | Product cannot return real game settings. | Wyatt, Codex, second verifier | Complete evidence, verification, catalog-manager approval. |
-| Pricing/config conflict | Code/docs still include `$0.99` / `$1.99/month`; business direction says `$4.99` / `$9.99/year`. | Codex + Wyatt | Align source registry, pricing docs, config, and tests without enabling checkout. |
-| No production payment/subscription stack | Approved paid launch cannot collect money or grant entitlements. | Wyatt + Codex + Stripe | Test-mode Stripe Checkout/Billing/webhooks after pricing alignment. |
+| No production payment/subscription stack | Approved Launch Pack and All Access are configured but cannot collect money or grant entitlements. | Wyatt + Codex + Stripe | Implement test-mode Stripe Checkout/Billing/webhooks only after catalog and server-authoritative entitlement gates are ready. |
 | No server-authoritative entitlements | Customers cannot be safely granted paid access. | Codex | Supabase/Auth/payment integration with fail-closed checks. |
 | No real matching validation | Product promise is not measured. | Wyatt + study reviewers | 10-20 participant study after verified catalog. |
 | Legal/privacy/payment approval missing | Paid biometric-adjacent product cannot safely launch. | Wyatt + counsel | Legal review of terms, privacy, refunds, trademarks, creator terms. |
@@ -39,7 +38,7 @@
 
 ## HOLD_OWNER
 
-- Approve exact relationship between Launch Pack/All Access and existing scan-entry plans.
+- Approve account requirement for paid Launch Pack and All Access purchases.
 - Approve account requirement for paid purchases.
 - Approve supported countries/currencies.
 - Approve support/refund process.
@@ -66,4 +65,3 @@
 - Hosting/DNS/HTTPS.
 - Real second verifier.
 - Real participant study subjects.
-

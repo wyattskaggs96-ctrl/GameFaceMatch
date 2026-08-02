@@ -16,8 +16,8 @@ Scores use: 0 not started, 1 documented/conceptual, 2 scaffolded/mocked, 3 imple
 | PBA Pro Bowling 2026 support | 0 | No adapter/data | Not started. | No source evidence or catalog. | Create intake/capture plan. |
 | Recipe engine | 3 | `web/lib/matching/matching-engine.ts`, `web/lib/fc26/fc26-face-matching.ts` | Rule-based engines exist. | No verified production catalogs or measured accuracy. | Connect only after verified catalog. |
 | Supabase persistence | 2 | `supabase/migrations/0001_gameface_core_schema.sql` | Draft schema/fail-closed boundary. | Remote DB/Auth/Storage/RLS not deployed. | Apply schema in approved setup phase. |
-| Payments | 2 | `web/lib/payments/*` | Provider-unavailable scaffold. | No Stripe Checkout/Billing/webhooks. | Align pricing then implement test-mode Stripe boundary. |
-| Subscriptions | 1 | Docs/source only | Annual All Access defined, not coded. | No Stripe Billing lifecycle. | Add subscription model after pricing alignment. |
+| Payments | 2 | `web/lib/payments/*` | Provider-unavailable scaffold with `launch_pack` `$4.99` and `all_access_annual` `$9.99/year`. | No Stripe Checkout/Billing/webhooks or server-authoritative entitlement verification. | Implement test-mode Stripe boundary only after verified catalog and owner credential workflow. |
+| Subscriptions | 1 | `web/lib/payments/pricing.ts` | Annual All Access typed as a disabled subscription product. | No Stripe Billing lifecycle. | Add provider-backed annual subscription only after payment/server gates. |
 | Creator program | 1 | Creator source + Phase 01 docs | Documented and planned. | No runtime implementation. | Add governance/schema/contracts after owner approval. |
 | Creator payouts | 0 | Creator source only | Not started. | No Connect, ledger, holds, payouts, legal/tax review. | Do not implement until payment/ledger phases pass. |
 | Athlete-comparison features | 0 | Business direction only | Idea only. | No datasets/legal/engine. | Defer until core launch works. |
@@ -30,4 +30,3 @@ Scores use: 0 not started, 1 documented/conceptual, 2 scaffolded/mocked, 3 imple
 | Customer-support readiness | 2 | support docs/page | Playbooks exist. | No staffed support/contact operations. | Owner selects support channel/process. |
 
 Overall production readiness: blocked. The most important score is production catalog availability: 0 production records.
-

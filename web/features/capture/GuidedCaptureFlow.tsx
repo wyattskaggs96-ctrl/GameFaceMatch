@@ -10,6 +10,7 @@ import {
   evaluateCaptureGuidanceFrame
 } from "@/lib/capture/capture-guidance-service";
 import {
+  applyCoverageFrame,
   canBeginGuidedCapture,
   createInitialGuidedScanState,
   getGuidedScanCoveragePercent,
@@ -21,6 +22,15 @@ import {
   type GuidedScanReviewRegion,
   type GuidedScanState
 } from "@/lib/capture/guided-scan-strategy";
+import {
+  createInitialGuidedLiveCoverageAccumulatorState,
+  evaluateGuidedLiveFrameDecision,
+  guidedSegmentToCaptureAngle,
+  updateGuidedLiveCoverageAccumulator,
+  type GuidedLiveAcceptedFrame,
+  type GuidedLiveCoverageAccumulatorState,
+  type GuidedLiveFrameDecision
+} from "@/lib/capture/guided-live-coverage";
 import {
   cancelCaptureSession,
   getCompletedAngleCount,
@@ -51,6 +61,8 @@ import { getRecoveryPlan, recoveryPlanForCameraError, recoveryPlanForGuidanceIss
 import type { CaptureCoverageRegion, CaptureCoverageState } from "@/lib/capture/capture-coverage";
 import type { CapturedAngle, CapturedAngleID, CaptureGuidanceReport, CaptureSource, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
 
+type GuidedCircularStage = "positioning" | "firstPass" | "firstPassComplete" | "secondPass" | "coverageReview" | "selectiveRetake";
+
 export function GuidedCaptureFlow({
   session,
   cameraService,
@@ -77,11 +89,23 @@ export function GuidedCaptureFlow({
   const [lifecycleNotice, setLifecycleNotice] = useState<string | null>(null);
   const [isOffline, setIsOffline] = useState(false);
   const [liveGuidance, setLiveGuidance] = useState<CaptureGuidanceReport | null>(null);
+  const [baseGuidedScanState, setBaseGuidedScanState] = useState(() => createInitialGuidedScanState());
+  const [liveCoverageDecision, setLiveCoverageDecision] = useState<GuidedLiveFrameDecision | null>(null);
+  const [acceptedLiveFrames, setAcceptedLiveFrames] = useState<GuidedLiveAcceptedFrame[]>([]);
   const [isAnalyzingGuidance, setIsAnalyzingGuidance] = useState(false);
   const [useExtendedHold, setUseExtendedHold] = useState(false);
   const [captureWorkflow, setCaptureWorkflow] = useState<"guidedCircular" | "fiveAngleFallback">("guidedCircular");
-  const [guidedStage, setGuidedStage] = useState<"positioning" | "firstPass" | "coverageReview" | "selectiveRetake">("positioning");
+  const [guidedStage, setGuidedStage] = useState<GuidedCircularStage>("positioning");
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const sessionRef = useRef(session);
+  const guidedStageRef = useRef<GuidedCircularStage>(guidedStage);
+  const guidedScanStateRef = useRef(baseGuidedScanState);
+  const coverageAccumulatorRef = useRef<GuidedLiveCoverageAccumulatorState>(createInitialGuidedLiveCoverageAccumulatorState());
+  const acceptedLiveFramesRef = useRef<GuidedLiveAcceptedFrame[]>([]);
+  const autoCaptureAcceptedFrameRef = useRef<(frame: GuidedLiveAcceptedFrame) => Promise<void>>(async () => undefined);
+  const liveAutoCaptureInFlightRef = useRef(false);
+  const pendingAutoCaptureFramesRef = useRef<GuidedLiveAcceptedFrame[]>([]);
   const guidanceInFlightRef = useRef(false);
   const lastGuidanceStartedAtRef = useRef(0);
   const guidanceSampleCountRef = useRef(0);
@@ -93,15 +117,56 @@ export function GuidedCaptureFlow({
   const completedAngles = getCompletedAngleCount(session.angles);
   const hasActiveCaptureData = completedAngles > 0 || Boolean(stream);
   const previewIsMirrored = selectedFacingMode === "user";
-  const guidedScanState = useMemo(
-    () =>
-      createUiGuidedScanState({
-        permissionGranted: Boolean(stream),
-        qualityGate: createGuidedScanQualityGate(liveGuidance)
-      }),
-    [liveGuidance, stream]
-  );
+  const guidedScanState = useMemo(() => {
+    const uiState = createUiGuidedScanState({
+      permissionGranted: Boolean(stream),
+      qualityGate: createGuidedScanQualityGate(liveGuidance)
+    });
+    return {
+      ...baseGuidedScanState,
+      permissionGranted: uiState.permissionGranted,
+      initialQualityGate: uiState.initialQualityGate
+    };
+  }, [baseGuidedScanState, liveGuidance, stream]);
   const circularCanBegin = canBeginGuidedCapture(Boolean(stream), guidedScanState.initialQualityGate);
+
+  useEffect(() => {
+    sessionRef.current = session;
+  }, [session]);
+
+  useEffect(() => {
+    guidedStageRef.current = guidedStage;
+  }, [guidedStage]);
+
+  useEffect(() => {
+    streamRef.current = stream;
+  }, [stream]);
+
+  useEffect(() => {
+    guidedScanStateRef.current = baseGuidedScanState;
+  }, [baseGuidedScanState]);
+
+  useEffect(() => {
+    acceptedLiveFramesRef.current = acceptedLiveFrames;
+  }, [acceptedLiveFrames]);
+
+  useEffect(() => {
+    const firstPass = baseGuidedScanState.passes.find((pass) => pass.id === "first");
+    const secondPass = baseGuidedScanState.passes.find((pass) => pass.id === "second");
+    if (guidedStage === "positioning" && acceptedLiveFrames.length > 0) {
+      setGuidedStage("firstPass");
+      return;
+    }
+    if (guidedStage === "firstPass" && firstPass?.completed) {
+      triggerGuidedCaptureHaptic(35);
+      setGuidedStage("firstPassComplete");
+      return;
+    }
+    if (guidedStage === "secondPass" && secondPass?.completed) {
+      triggerGuidedCaptureHaptic(45);
+      setGuidedStage("coverageReview");
+    }
+  }, [acceptedLiveFrames.length, baseGuidedScanState.passes, guidedStage]);
 
   useEffect(() => {
     return () => {
@@ -132,6 +197,10 @@ export function GuidedCaptureFlow({
     if (!stream) {
       guidanceSession.reset();
       setLiveGuidance(null);
+      setLiveCoverageDecision(null);
+      coverageAccumulatorRef.current = createInitialGuidedLiveCoverageAccumulatorState();
+      pendingAutoCaptureFramesRef.current = [];
+      liveAutoCaptureInFlightRef.current = false;
       setIsAnalyzingGuidance(false);
       return;
     }
@@ -175,15 +244,34 @@ export function GuidedCaptureFlow({
           }
         );
         if (!cancelled) {
-          setLiveGuidance(
-            guidanceSession.evaluate({
-              angleID: currentAngle.id,
-              faceLandmarkReport,
-              imageQualityReport: previewQuality,
-              timestampMs: performance.now(),
-              useExtendedHold
-            })
-          );
+          const timestampMs = performance.now();
+          const guidanceReport = guidanceSession.evaluate({
+            angleID: currentAngle.id,
+            faceLandmarkReport,
+            imageQualityReport: previewQuality,
+            timestampMs,
+            useExtendedHold
+          });
+          setLiveGuidance(guidanceReport);
+          const frameDecision = evaluateGuidedLiveFrameDecision({
+            passID: getLiveCoveragePassID(guidedStageRef.current),
+            timestampMs,
+            faceLandmarkReport,
+            imageQualityReport: previewQuality,
+            acceptedFrames: acceptedLiveFramesRef.current
+          });
+          const coverageUpdate = updateGuidedLiveCoverageAccumulator(coverageAccumulatorRef.current, frameDecision);
+          coverageAccumulatorRef.current = coverageUpdate.accumulator;
+          setLiveCoverageDecision(coverageUpdate.decision);
+          if (coverageUpdate.coverageFrame) {
+            setBaseGuidedScanState((previous) => applyCoverageFrame(previous, coverageUpdate.coverageFrame!));
+          }
+          if (coverageUpdate.acceptedFrame) {
+            acceptedLiveFramesRef.current = [...acceptedLiveFramesRef.current, coverageUpdate.acceptedFrame];
+            setAcceptedLiveFrames(acceptedLiveFramesRef.current);
+            triggerGuidedCaptureHaptic(18);
+            void autoCaptureAcceptedFrameRef.current(coverageUpdate.acceptedFrame);
+          }
         }
       } finally {
         const durationMs = performance.now() - frameStartedAt;
@@ -326,10 +414,38 @@ export function GuidedCaptureFlow({
     setStream(null);
   }
 
+  async function captureAcceptedCoverageFrame(frame: GuidedLiveAcceptedFrame) {
+    pendingAutoCaptureFramesRef.current.push(frame);
+    if (liveAutoCaptureInFlightRef.current) return;
+    liveAutoCaptureInFlightRef.current = true;
+    try {
+      let nextFrame = pendingAutoCaptureFramesRef.current.shift() ?? null;
+      while (nextFrame) {
+        const angleID = guidedSegmentToCaptureAngle(nextFrame.assignedSegmentID);
+        const activeSession = sessionRef.current;
+        const targetAngle = activeSession.angles.find((angle) => angle.id === angleID);
+        if (targetAngle && targetAngle.status !== "complete") {
+          await captureStillFrameForAngle(angleID, `guided-${nextFrame.passID}-${nextFrame.assignedSegmentID}`);
+        }
+        nextFrame = pendingAutoCaptureFramesRef.current.shift() ?? null;
+      }
+    } finally {
+      liveAutoCaptureInFlightRef.current = false;
+    }
+  }
+
+  autoCaptureAcceptedFrameRef.current = captureAcceptedCoverageFrame;
+
   async function captureStillFrame() {
+    await captureStillFrameForAngle(currentAngle.id, currentAngle.id);
+  }
+
+  async function captureStillFrameForAngle(angleID: CapturedAngleID, fileLabel: string) {
     const video = videoRef.current;
-    if (!video || !stream || video.videoWidth === 0 || video.videoHeight === 0) {
-      onSessionChange(setAngleError(session, currentAngle.id, ["Camera preview is not ready. Try again or upload an image."]));
+    const activeStream = streamRef.current;
+    const activeSession = sessionRef.current;
+    if (!video || !activeStream || video.videoWidth === 0 || video.videoHeight === 0) {
+      onSessionChange(setAngleError(activeSession, angleID, ["Camera preview is not ready. Try again or upload an image."]));
       return;
     }
     const canvas = document.createElement("canvas");
@@ -337,7 +453,7 @@ export function GuidedCaptureFlow({
     canvas.height = video.videoHeight;
     const context = canvas.getContext("2d");
     if (!context) {
-      onSessionChange(setAngleError(session, currentAngle.id, ["The browser could not capture a still frame."]));
+      onSessionChange(setAngleError(activeSession, angleID, ["The browser could not capture a still frame."]));
       return;
     }
     if (previewIsMirrored) {
@@ -347,17 +463,17 @@ export function GuidedCaptureFlow({
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.92));
     if (!blob) {
-      onSessionChange(setAngleError(session, currentAngle.id, ["The browser could not create a still image."]));
+      onSessionChange(setAngleError(activeSession, angleID, ["The browser could not create a still image."]));
       return;
     }
-    const file = new File([blob], `${currentAngle.id}-${Date.now()}.jpg`, { type: "image/jpeg" });
+    const file = new File([blob], `${fileLabel}-${Date.now()}.jpg`, { type: "image/jpeg" });
     const objectUrl = URL.createObjectURL(file);
     try {
       const imageElement = await readImageElement(objectUrl);
-      await processFileForAngle(currentAngle.id, file, objectUrl, "camera", imageElement);
+      await processFileForAngle(angleID, file, objectUrl, "camera", imageElement);
     } catch {
       URL.revokeObjectURL(objectUrl);
-      onSessionChange(setAngleError(session, currentAngle.id, ["The captured image could not be decoded."]));
+      onSessionChange(setAngleError(activeSession, angleID, ["The captured image could not be decoded."]));
     }
   }
 
@@ -399,14 +515,15 @@ export function GuidedCaptureFlow({
   ) {
     const startedAt = performance.now();
     const dimensions = { width: imageElement.naturalWidth, height: imageElement.naturalHeight };
+    const activeSession = sessionRef.current;
     try {
-      const validation = await validateImageFile(file, dimensions, session.angles.filter((item) => item.id !== angleID), angleID, source, objectUrl);
+      const validation = await validateImageFile(file, dimensions, activeSession.angles.filter((item) => item.id !== angleID), angleID, source, objectUrl);
       if (validation.errors.length > 0) {
         URL.revokeObjectURL(objectUrl);
-        onSessionChange(setAngleError(session, angleID, validation.errors));
+        onSessionChange(setAngleError(activeSession, angleID, validation.errors));
         return;
       }
-      const existingAngle = session.angles.find((angle) => angle.id === angleID);
+      const existingAngle = activeSession.angles.find((angle) => angle.id === angleID);
       const image = createTemporaryImageReference(
         {
           fileName: file.name,
@@ -429,7 +546,7 @@ export function GuidedCaptureFlow({
       const imageQualityReport = qualityService.analyzeImageElement({
         image,
         imageElement,
-        existingAngles: session.angles.filter((item) => item.id !== angleID),
+        existingAngles: activeSession.angles.filter((item) => item.id !== angleID),
         manualConfirmation: existingAngle?.manualConfirmation
       });
       const faceLandmarkReport = await faceLandmarkProvider.detect(
@@ -451,7 +568,7 @@ export function GuidedCaptureFlow({
         useExtendedHold
       });
       const mutation = setAngleCapture(
-        session,
+        sessionRef.current,
         angleID,
         image,
         source,
@@ -501,6 +618,12 @@ export function GuidedCaptureFlow({
 
   function cancelSession() {
     stopCamera();
+    coverageAccumulatorRef.current = createInitialGuidedLiveCoverageAccumulatorState();
+    acceptedLiveFramesRef.current = [];
+    pendingAutoCaptureFramesRef.current = [];
+    setAcceptedLiveFrames([]);
+    setLiveCoverageDecision(null);
+    setBaseGuidedScanState(createInitialGuidedScanState());
     const mutation = cancelCaptureSession(session);
     revokeObjectUrls(mutation.objectUrlsToRevoke);
     onCancelSession(mutation.session);
@@ -527,12 +650,14 @@ export function GuidedCaptureFlow({
           isOffline={isOffline}
           isStartingCamera={isStartingCamera}
           lifecycleNotice={lifecycleNotice}
+          liveCoverageDecision={liveCoverageDecision}
           liveGuidance={liveGuidance}
+          acceptedLiveFrameCount={acceptedLiveFrames.length}
           previewIsMirrored={previewIsMirrored}
           reviewReportCanContinue={reviewReport.canContinue}
           streamActive={Boolean(stream)}
           videoRef={setPreviewVideoRef}
-          onBeginFirstPass={() => setGuidedStage("firstPass")}
+          onBeginFirstPass={() => setGuidedStage(guidedScanState.passes.find((pass) => pass.id === "first")?.completed ? "secondPass" : "firstPass")}
           onCancel={cancelSession}
           onCaptureStill={() => void captureStillFrame()}
           onOpenCoverageReview={() => setGuidedStage("coverageReview")}
@@ -990,7 +1115,9 @@ function CircularGuidedCapturePanel({
   isOffline,
   isStartingCamera,
   lifecycleNotice,
+  liveCoverageDecision,
   liveGuidance,
+  acceptedLiveFrameCount,
   previewIsMirrored,
   reviewReportCanContinue,
   streamActive,
@@ -1010,12 +1137,14 @@ function CircularGuidedCapturePanel({
   circularCanBegin: boolean;
   currentAngle: CapturedAngle;
   guidedScanState: GuidedScanState;
-  guidedStage: "positioning" | "firstPass" | "coverageReview" | "selectiveRetake";
+  guidedStage: GuidedCircularStage;
   isAnalyzingGuidance: boolean;
   isOffline: boolean;
   isStartingCamera: boolean;
   lifecycleNotice: string | null;
+  liveCoverageDecision: GuidedLiveFrameDecision | null;
   liveGuidance: CaptureGuidanceReport | null;
+  acceptedLiveFrameCount: number;
   previewIsMirrored: boolean;
   reviewReportCanContinue: boolean;
   streamActive: boolean;
@@ -1032,12 +1161,13 @@ function CircularGuidedCapturePanel({
 }) {
   const firstPass = guidedScanState.passes.find((pass) => pass.id === "first") ?? guidedScanState.passes[0];
   const secondPass = guidedScanState.passes.find((pass) => pass.id === "second") ?? guidedScanState.passes[1];
-  const activePass = guidedStage === "firstPass" ? firstPass : guidedScanState.activePassID === "second" ? secondPass : firstPass;
+  const activePass = guidedStage === "secondPass" || guidedStage === "coverageReview" ? secondPass : firstPass;
   const activeInstruction = getCircularInstruction({
     stage: guidedStage,
     streamActive,
     circularCanBegin,
-    liveGuidance
+    liveGuidance,
+    liveCoverageDecision
   });
   const firstProgress = getGuidedScanCoveragePercent(firstPass);
   const secondProgress = getGuidedScanCoveragePercent(secondPass);
@@ -1079,7 +1209,7 @@ function CircularGuidedCapturePanel({
             </StatusBadge>
             <p>{activeInstruction}</p>
             <small>
-              Circular progress is locked until accepted live pose-coverage frames are connected. Use the five-angle fallback to complete this MVP capture.
+              Circular progress advances only after a stable, distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks.
             </small>
           </div>
         </div>
@@ -1099,6 +1229,7 @@ function CircularGuidedCapturePanel({
             status={secondPass.completed ? "complete" : firstPass.completed ? "active" : "waiting"}
             detail={secondTargets.length > 0 ? `Targets weak regions: ${secondTargets.map(formatGuidedRegionID).join(", ")}.` : "Starts after the first pass."}
           />
+          <LiveCoverageDecisionPanel decision={liveCoverageDecision} acceptedLiveFrameCount={acceptedLiveFrameCount} streamActive={streamActive} />
           <div className="guided-quality-card">
             <div className="status-row">
               <strong>Initial quality check</strong>
@@ -1131,8 +1262,12 @@ function CircularGuidedCapturePanel({
             <Button onClick={onStartCamera} disabled={isStartingCamera}>
               {isStartingCamera ? "Starting camera" : "Start camera"}
             </Button>
-            <Button variant="secondary" onClick={onBeginFirstPass} disabled={!circularCanBegin || guidedStage === "firstPass"}>
-              Begin first pass
+            <Button
+              variant="secondary"
+              onClick={onBeginFirstPass}
+              disabled={!circularCanBegin || guidedStage === "firstPass" || guidedStage === "secondPass" || guidedStage === "coverageReview"}
+            >
+              {firstPass.completed ? "Start second pass" : "Begin first pass"}
             </Button>
             <Button variant="secondary" onClick={onCaptureStill} disabled={!streamActive} aria-label={`Capture fallback still for ${currentAngle.label}`}>
               Capture current view
@@ -1230,6 +1365,43 @@ function QualityGateList({ gate }: { gate: GuidedScanQualityGate }) {
   );
 }
 
+function LiveCoverageDecisionPanel({
+  acceptedLiveFrameCount,
+  decision,
+  streamActive
+}: {
+  acceptedLiveFrameCount: number;
+  decision: GuidedLiveFrameDecision | null;
+  streamActive: boolean;
+}) {
+  const tone = !streamActive ? "neutral" : decision?.status === "accepted" ? "success" : decision?.status === "rejected" ? "warning" : "info";
+  const status = !streamActive ? "waiting" : decision ? formatLiveDecisionStatus(decision.status) : "checking";
+  return (
+    <div className="guided-quality-card" aria-live="polite" aria-atomic="true">
+      <div className="status-row">
+        <strong>Live coverage decision</strong>
+        <StatusBadge tone={tone}>{status}</StatusBadge>
+      </div>
+      <p className="supporting">
+        {decision?.assignedSegmentID
+          ? `Current region: ${formatSegmentLabel(decision.assignedSegmentID)}. Accepted live frames: ${acceptedLiveFrameCount}.`
+          : streamActive
+            ? `Accepted live frames: ${acceptedLiveFrameCount}. Waiting for a usable guided region.`
+            : "Start the camera to evaluate live face coverage."}
+      </p>
+      {decision?.status === "rejected" && decision.rejectionReasons.length > 0 ? (
+        <ul className="message-list advisory-list">
+          {decision.rejectionReasons.slice(0, 3).map((reason) => (
+            <li key={reason}>{reason}</li>
+          ))}
+        </ul>
+      ) : null}
+      {decision?.status === "pendingStability" ? <p className="field-note">Hold this view briefly. Coverage is not counted until samples agree.</p> : null}
+      {decision?.status === "accepted" ? <p className="field-note">This region was accepted and connected to the profile-capture queue.</p> : null}
+    </div>
+  );
+}
+
 function CircularCoverageReviewPanel({
   completedAngles,
   coverageRegions,
@@ -1264,8 +1436,8 @@ function CircularCoverageReviewPanel({
         </StatusBadge>
       </div>
       <p>
-        Circular coverage is ready for the next live-signal task. Today, completion is based on the existing five-angle RGB review so progress remains tied to
-        real captured or uploaded views.
+        Circular coverage is based on accepted live frames. The profile step still requires the existing five validated RGB views, and accepted circular regions
+        queue those same views without storing raw video in the saved profile.
       </p>
       {showDetail ? (
         <>
@@ -1296,8 +1468,7 @@ function CircularCoverageReviewPanel({
       ) : null}
       {weakRegions.length > 0 ? (
         <Alert title="Second-pass targets" tone="warning">
-          One more scan for better detail should focus on {weakRegions.map((region) => region.label.toLowerCase()).join(", ")} when live circular coverage is
-          connected.
+          One more scan for better detail should focus on {weakRegions.map((region) => region.label.toLowerCase()).join(", ")}.
         </Alert>
       ) : null}
       <div className="button-row">
@@ -1633,24 +1804,56 @@ function createGuidedScanQualityGate(guidance: CaptureGuidanceReport | null): Gu
 
 function getCircularInstruction({
   circularCanBegin,
+  liveCoverageDecision,
   liveGuidance,
   stage,
   streamActive
 }: {
   circularCanBegin: boolean;
+  liveCoverageDecision: GuidedLiveFrameDecision | null;
   liveGuidance: CaptureGuidanceReport | null;
-  stage: "positioning" | "firstPass" | "coverageReview" | "selectiveRetake";
+  stage: GuidedCircularStage;
   streamActive: boolean;
 }) {
   if (!streamActive) return "Start the camera when you are ready.";
   if (stage === "coverageReview") return "Review which areas are complete and which need another look.";
   if (stage === "selectiveRetake") return "Retake only the missing area instead of restarting the scan.";
+  if (stage === "firstPassComplete") return "First scan complete";
+  if (stage === "secondPass") return "One more scan for better detail";
+  if (liveCoverageDecision?.status === "accepted" && liveCoverageDecision.assignedSegmentID) {
+    return `${formatSegmentLabel(liveCoverageDecision.assignedSegmentID)} coverage accepted.`;
+  }
+  if (liveCoverageDecision?.status === "pendingStability") return "Hold still.";
+  if (liveCoverageDecision?.status === "rejected" && liveCoverageDecision.rejectionReasons[0]) return liveCoverageDecision.rejectionReasons[0];
   const firstBlocking = liveGuidance?.blockingIssues[0]?.message;
   const firstReady = liveGuidance?.readyMessages[0]?.message;
   if (stage === "firstPass" && circularCanBegin) return "Move your head slowly to complete the circle";
   if (firstBlocking) return firstBlocking;
-  if (firstReady) return "Hold still, then use assisted capture while circular coverage is being connected.";
+  if (firstReady) return "Hold still.";
   return "Position your face inside the circle";
+}
+
+function getLiveCoveragePassID(stage: GuidedCircularStage): GuidedScanPassID {
+  if (stage === "secondPass" || stage === "coverageReview" || stage === "selectiveRetake") return "second";
+  return "first";
+}
+
+function triggerGuidedCaptureHaptic(durationMs: number) {
+  if (typeof navigator === "undefined" || typeof navigator.vibrate !== "function") return;
+  try {
+    navigator.vibrate(durationMs);
+  } catch {
+    // Browser haptics are optional; capture must continue when unsupported.
+  }
+}
+
+function formatLiveDecisionStatus(status: GuidedLiveFrameDecision["status"]) {
+  const labels: Record<GuidedLiveFrameDecision["status"], string> = {
+    accepted: "accepted",
+    pendingStability: "hold",
+    rejected: "adjust"
+  };
+  return labels[status];
 }
 
 function formatCoverageStatus(status: GuidedScanCoverageStatus) {

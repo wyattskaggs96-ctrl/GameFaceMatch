@@ -60,7 +60,9 @@ export async function navigateToCapture(page: Page) {
   await expect(page.getByText("Upload fallback is still an RGB-only workflow")).toBeVisible();
   await page.getByRole("button", { name: "Continue to guided capture" }).click();
   await expect(page.getByRole("heading", { name: "Position your face inside the circle" })).toBeVisible();
-  await expect(page.getByText("Circular progress is locked until accepted live pose-coverage frames are connected.")).toBeVisible();
+  await expect(
+    page.getByText("Circular progress advances only after a stable, distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks.")
+  ).toBeVisible();
   await expect(page.getByRole("button", { name: "Use assisted five-angle capture" }).first()).toBeVisible();
   await page.getByRole("button", { name: "Use assisted five-angle capture" }).first().click();
   await expect(page.getByRole("heading", { name: "0 of 5 angles completed" })).toBeVisible();

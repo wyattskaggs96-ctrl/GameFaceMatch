@@ -114,6 +114,14 @@ if (!normalized.includes("create view public.production_catalog_records")) {
   errors.push("Missing production_catalog_records fail-closed view.");
 }
 
+if (!normalized.includes("create view public.production_catalog_records\nwith (security_invoker = true)")) {
+  errors.push("production_catalog_records view must be security_invoker so it does not bypass table RLS.");
+}
+
+if (!normalized.includes("create view public.production_match_candidates\nwith (security_invoker = true)")) {
+  errors.push("production_match_candidates view must be security_invoker so it does not bypass table RLS.");
+}
+
 if (!normalized.includes("cr.current_status = 'production_approved'")) {
   errors.push("Production catalog view must require PRODUCTION_APPROVED status.");
 }

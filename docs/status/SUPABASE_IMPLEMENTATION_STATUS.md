@@ -1,15 +1,15 @@
 # Supabase Implementation Status
 
-**Status:** PHASE 2 LOCAL DATA MODEL DESIGN COMPLETE  
-**Date:** 2026-07-22  
+**Status:** PHASE 5 FAIL-CLOSED RUNTIME BOUNDARY COMPLETE; REMOTE SUPABASE STILL UNAPPLIED
+**Date:** 2026-08-02
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`  
 **Branch audited:** `main`  
-**HEAD audited:** `cae223243e559716238d818930023338f7e02b56` before Phase 2 changes  
+**HEAD audited:** `93601635a408aa9897cd21a8f48185ff3b6fc83d` before Prompt 085 changes
 **Supabase project name reserved for setup:** `gameface-match`  
 **Supabase project status:** CREATED BY WYATT IN SKAGGS SYSTEMS ORGANIZATION  
-**Supabase connection status:** NOT CONNECTED FROM APPLICATION  
+**Supabase connection status:** TYPED FAIL-CLOSED RUNTIME BOUNDARY EXISTS; NO CONCRETE REMOTE CLIENT ENABLED
 **Database migration status:** LOCAL SCHEMA DRAFT CREATED; NOT APPLIED  
-**Storage migration status:** NOT STARTED  
+**Storage migration status:** PRIVATE BUCKET CONTRACTS DEFINED LOCALLY; NO BUCKETS CREATED
 
 This document tracks the phased move from local JSON/CSV/browser persistence to Supabase PostgreSQL and private Supabase Storage. It does not add credentials, connect a database, upload media, promote catalog records, or change production recommendation behavior.
 
@@ -20,9 +20,9 @@ This document tracks the phased move from local JSON/CSV/browser persistence to 
 | Phase 0 - repository and data audit | Complete | This document inventories current architecture, counts, entities, media, risks, and destinations. |
 | Phase 1 - create Supabase project | Complete by user action | Wyatt confirmed `gameface-match` exists in the Skaggs Systems organization and secrets are stored outside the repository. |
 | Phase 2 - data model design | Complete locally, not applied remotely | `supabase/migrations/0001_gameface_core_schema.sql`, `scripts/supabase-schema-check.mjs`, and `npm run supabase:schema:check`. |
-| Phase 3 - Auth and RLS policies | Not started | Tables in the local schema enable RLS fail-closed, but named policies and role tests are intentionally deferred. |
-| Phase 4 - Storage architecture | Not started | Bucket names and metadata model are proposed only; no buckets created. |
-| Phase 5 - Application connection | Not started | No Supabase client/server code or environment variables added. |
+| Phase 3 - Auth and RLS policies | Specs started locally; not applied remotely | `web/lib/supabase/rls-policy-spec.ts` defines local policy expectations and tests. Tables enable RLS in the draft migration, but no remote policies or Auth roles exist. |
+| Phase 4 - Storage architecture | Contracts started locally; no buckets | `web/lib/supabase/storage-contracts.ts` defines private bucket contracts, signed URL requirements, and metadata validation. No Storage buckets exist. |
+| Phase 5 - Application connection | Fail-closed runtime boundary complete; concrete client not enabled | `web/lib/supabase/runtime-config.ts`, `web/lib/supabase/health.ts`, `web/lib/supabase/repository-contracts.ts`, and `/api/internal/supabase-status` provide typed config/status/repository boundaries without live writes. |
 | Phase 6 - Migration | Not started | No migration script has imported local records into Supabase. |
 
 ## Binding Rules For This Migration
@@ -43,14 +43,14 @@ This document tracks the phased move from local JSON/CSV/browser persistence to 
 | --- | --- | --- |
 | Active app | Responsive Next.js/React/TypeScript web MVP in `web/`. | Use Supabase through browser-safe clients only for user-safe reads and server-only clients for privileged operations. |
 | Native app | SwiftUI iOS foundation under `ios/`; preserved future premium TrueDepth client. | Do not couple initial Supabase work to iOS unless shared contracts require it later. |
-| Current database | No committed application database, ORM, SQL migrations, Prisma, or Drizzle config found. Only ignored Xcode DerivedData metadata exists. | Supabase migration starts from JSON/CSV/filesystem artifacts, not an existing relational schema. |
+| Current database | No committed application database, ORM, Prisma, or Drizzle config found. A local Supabase SQL draft exists, but it has not been applied remotely. | Supabase migration starts from JSON/CSV/filesystem artifacts, not an existing relational schema. |
 | Current persistence | Local JSON/CSV catalog and Phase 0 artifacts under `data/`; browser `sessionStorage`/local state for non-raw user data. | Migration needs explicit import sessions and reconciliation reports. |
 | Catalog runtime | Production catalog generated from `data/catalog/production/catalog_manifest.json`; current manifest is `empty-production` with 0 records. | Production reads must filter to approved release records only. Empty Supabase production views must fail closed. |
 | Evidence | Source-video master references plus derivative PNG metadata in Phase 0 manifests; original videos are not committed under `data/`. | Store metadata in PostgreSQL. Upload private masters only after explicit user action and never as public assets. |
 | Verification | Primary-review and second-verifier tooling exists, but no second-verifier decisions are present. | Status transitions need append-only audit events and role-bound permissions. |
 | Payments | Provider-independent payment and entitlement scaffolds exist; checkout disabled. | Paid access must be server-authoritative before any real payment provider is connected. |
 | Auth | No public account system or auth provider connected. | Private beta needs minimal Supabase Auth/role design before reviewer/customer access. |
-| Deployment | Deployment runbooks, env validation, health/uptime routes, and kill switches exist; no public deployment. | Supabase setup must be staged behind environment validation and RLS tests. |
+| Deployment | Deployment runbooks, env validation, health/uptime routes, kill switches, and a sanitized Supabase status route exist; no public deployment. | Supabase setup must be staged behind environment validation and RLS/storage tests. |
 
 ## Current Repository State
 
@@ -60,8 +60,30 @@ This document tracks the phased move from local JSON/CSV/browser persistence to 
 - Root verification command is `npm run verify`.
 - Web framework is Next.js 16 with React 19, TypeScript, Vitest, and Playwright.
 - Local MediaPipe browser landmark provider is present; processing remains local and non-identifying.
-- No Supabase packages, migrations, SQL files, or environment variables are currently implemented.
+- No Supabase package client is currently installed or enabled in runtime code.
+- No Supabase environment variables are committed. Local-only mode remains the default when env vars are absent.
 - A local SQL schema draft now exists under `supabase/migrations/`; it has not been applied to the Supabase project.
+- A sanitized server status route exists at `/api/internal/supabase-status`; it reports configuration/readiness booleans and redacted values only.
+- Remote repository methods fail closed unless the runtime is explicitly classified as `supabase_ready`; even then, concrete Supabase writes remain disabled until a real client adapter is implemented.
+
+## Runtime Boundary Added In Prompt 085
+
+The application now has a typed Supabase runtime boundary without enabling remote persistence.
+
+| Area | Implemented artifact | Current behavior |
+| --- | --- | --- |
+| Runtime modes | `web/lib/supabase/runtime-config.ts` | Supports `local_only`, `supabase_unavailable`, `supabase_configured_unverified`, and `supabase_ready`. Missing env vars keep the app in `local_only`; partial or unsafe config is `supabase_unavailable`; complete but unproven config is `supabase_configured_unverified`; `supabase_ready` requires explicit remote writes plus passing health and schema checks. |
+| Browser-safe config | `getSupabaseBrowserRuntimeConfig` | Reads only `NEXT_PUBLIC_SUPABASE_URL` and publishable/legacy anon key names. Detects unsafe `NEXT_PUBLIC_` secret/service/database variables. |
+| Server config | `getSupabaseServerRuntimeConfig` | Reads server-only secret/database flags but returns only booleans and redacted values for status reporting. |
+| Status probe | `web/lib/supabase/health.ts`, `web/app/api/internal/supabase-status/route.ts` | Produces privacy-safe status reports. Health probing uses the publishable key only and does not expose server credentials. |
+| Repository contracts | `web/lib/supabase/repository-contracts.ts` | Defines interfaces for anonymous scan sessions, consent records, derived profile metadata, saved builds, catalog reads, evidence metadata, recommendations, screenshot refinement sessions, deletion requests, and audit events. |
+| Local adapter | `createLocalOnlyRepositories` | Keeps accountless local scan/session behavior possible and never stores raw media in metadata records. |
+| Remote adapter boundary | `createFailClosedSupabaseRepositories` | Blocks remote reads/writes when not ready and does not silently fall back to local after partial Supabase configuration. |
+| Storage contracts | `web/lib/supabase/storage-contracts.ts` | Defines private buckets and signed-access validation for catalog/source/review/generated assets. Public URLs are prohibited. |
+| RLS specs | `web/lib/supabase/rls-policy-spec.ts` | Documents and tests local policy expectations. These are specifications only; remote RLS policies are not applied. |
+| Deletion contracts | `web/lib/supabase/deletion-contracts.ts` | Defines deletion plans for local session, saved profile metadata, saved builds, screenshot media, future storage objects, and audit confirmation. |
+
+No remote tables, policies, buckets, Auth settings, or production data changed during Prompt 085.
 
 ## Current Data Counts
 
@@ -195,7 +217,7 @@ All initial evidence buckets should be private.
 | `catalog-source-videos` | Private, signed URL only | Original Xbox source videos after explicit upload. | `cf27/xbox/rtg/source-videos/{source_media_id}/{original_filename}` |
 | `catalog-source-images` | Private, signed URL only | Original screenshots or still source evidence. | `cf27/xbox/rtg/source-images/{evidence_id}/{original_filename}` |
 | `review-evidence` | Private, signed URL only | Extracted frames, contact sheets, derivative review images. | `cf27/xbox/rtg/review-evidence/{catalog_record_id}/{evidence_id}.png` |
-| `generated-match-assets` | Private by default | Future user-consented non-raw result/share assets. | `users/{user_id}/match-assets/{match_run_id}/...` |
+| `generated-match-assets` | Private, signed URL only | Future user-consented generated match assets. Raw face media remains excluded by default. | `users/{user_id}/match-assets/{match_run_id}/...` |
 
 Source-video masters must not be public. Public release metadata can expose record IDs, labels, menu paths, catalog version, and checksums only after production approval; it should not expose private source evidence without a separate legal/product decision.
 
@@ -252,7 +274,9 @@ For later phases:
 ## Private-Beta Blockers
 
 - No Supabase project is connected.
-- No RLS policies, Auth roles, or Storage buckets exist yet.
+- No remote RLS policies, Auth roles, or Storage buckets exist yet.
+- No concrete Supabase client adapter is enabled.
+- No remote health check has passed against the real project from the application.
 - Production catalog records remain 0.
 - Second-verifier decisions remain 0.
 - Production-approved records remain 0.
@@ -267,12 +291,12 @@ For later phases:
 | --- | ---: | --- |
 | Repository/data audit | 100% for Phase 0 | Current artifacts and counts are inventoried in this document. |
 | Supabase project setup | 100% for dashboard creation | Wyatt confirmed the project exists and secrets are stored outside Git/chat. |
-| PostgreSQL schema implementation | 25% | Local schema migration exists and is statically checked, but it has not been applied to Supabase. |
-| RLS/security implementation | 10% | Tables enable RLS fail-closed in the draft, but Phase 3 policies/tests are not implemented. |
-| Storage architecture implementation | 0% | Proposed only; no buckets or uploads. |
+| PostgreSQL schema implementation | 30% | Local schema migration exists, is statically checked, and now marks production views as `security_invoker`; it has not been applied to Supabase. |
+| RLS/security implementation | 20% | Tables enable RLS fail-closed in the draft and local RLS policy specs/tests exist. Remote policies and role tests are not applied. |
+| Storage architecture implementation | 20% | Private bucket and signed-access contracts exist locally. No buckets or uploads exist. |
 | Migration tooling | 0% | Existing local validators exist, but no Supabase migration scripts. |
-| App connection | 0% | No Supabase client/server integration. |
-| Overall Supabase completion | 15% | Project exists and local schema design is committed; remote application connection and migration are still absent. |
+| App connection | 15% | Typed config/status/repository boundaries exist. No concrete Supabase client/server adapter, Auth, or remote writes are enabled. |
+| Overall Supabase completion | 20% | Project exists, local schema design exists, and the app now has a fail-closed runtime boundary; remote application connection and migration are still absent. |
 | Private-beta readiness after Phase 0 | 25%-35% | Web shell and tooling exist; verified catalog and backend are still absent. |
 | Public-launch readiness after Phase 0 | 5%-10% | Production catalog, legal, payment, deployment, and validation gates remain blocked. |
 

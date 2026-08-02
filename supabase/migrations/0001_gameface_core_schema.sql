@@ -646,7 +646,8 @@ create table public.audit_events (
   constraint audit_events_target_table_not_blank check (length(trim(target_table)) > 0)
 );
 
-create view public.production_catalog_records as
+create view public.production_catalog_records
+with (security_invoker = true) as
 select cr.*
 from public.catalog_records cr
 where cr.current_status = 'PRODUCTION_APPROVED'
@@ -661,7 +662,8 @@ where cr.current_status = 'PRODUCTION_APPROVED'
       and rel.release_status = 'approved_release'
   );
 
-create view public.production_match_candidates as
+create view public.production_match_candidates
+with (security_invoker = true) as
 select cr.catalog_record_id,
        cr.game_id,
        cr.platform_id,

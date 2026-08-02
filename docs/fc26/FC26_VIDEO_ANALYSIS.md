@@ -15,7 +15,7 @@ The observations here are not production catalog records. They are structured re
 | Canonical video | Preserved original filename | Duration | Resolution | Codec | SHA-256 | Notes |
 | --- | --- | ---: | --- | --- | --- | --- |
 | `fc26-player-creator-part-01.mp4` | `fc26-player-creator-part-01.mp4` | 240.98s | 1920x1080 | H.264 Main, AAC | `6ab6bfca771c2f5595f1a51c8b8fdc87ded9078c72bc6071c4303d8d2fc57fea` | Opens successfully. Covers visible Head tab Skin and Head subtabs. |
-| `fc26-player-creator-part-02.mp4` | `fb4fb162-0876-4bd3-8cb3-8d86e63dc32e.MP4` | 235.69s | 1920x1080 | H.264 Main, AAC | `0c758eb69716938f5bca7b4c0e7219d802a8fafa64287d0851ce94312911b531` | Opens successfully. The expected canonical filename was not present, so the original filename is preserved and mapped to the part-02 role in research metadata. |
+| `fc26-player-creator-part-02.MP4` | `fc26-player-creator-part-02.MP4` | 235.69s | 1920x1080 | H.264 Main, AAC | `0c758eb69716938f5bca7b4c0e7219d802a8fafa64287d0851ce94312911b531` | Opens successfully. This exact filename and capitalization is the official physical source filename for part 02. |
 
 `ffprobe` was not available on the local PATH or repository wrapper. Metadata was collected with `scripts/media/ffmpeg-wrapper ffmpeg`, which opened both files and reported the stream details above.
 

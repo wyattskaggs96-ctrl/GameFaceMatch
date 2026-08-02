@@ -1,0 +1,3091 @@
+{
+  "schemaVersion": "gfm-source-media-segments-v1",
+  "generatedAt": "2026-08-02T23:25:27.740Z",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "reviewStatus": "AUTOMATED_EXTRACTION_REQUIRES_HUMAN_REVIEW",
+  "segments": [
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_60F68A5C1AF4_0012",
+      "source_media_id": "GFM_MEDIA_CF27_60F68A5C1AF4",
+      "start_timestamp": 0,
+      "end_timestamp": 4,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "appearance_menu_hair_row",
+      "suspected_menu_label": "Appearance menu / Hair row",
+      "suspected_option_label": null,
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Appearance menu begins on Hair row before opening Hair controls.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_60F68A5C1AF4_0014",
+      "source_media_id": "GFM_MEDIA_CF27_60F68A5C1AF4",
+      "start_timestamp": 100,
+      "end_timestamp": 174,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "hair_color",
+      "suspected_menu_label": "Hair Color",
+      "suspected_option_label": "Light Brown",
+      "suspected_option_index": null,
+      "extraction_confidence": "high",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_003_hair_color_100p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Selected native Hair Color label Light Brown is directly readable, but the selector is scrolled so native order remains unresolved.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_60F68A5C1AF4_0015",
+      "source_media_id": "GFM_MEDIA_CF27_60F68A5C1AF4",
+      "start_timestamp": 175,
+      "end_timestamp": 224,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "facial_hair_style",
+      "suspected_menu_label": "Facial Hair Style",
+      "suspected_option_label": "Mutton Chops",
+      "suspected_option_index": null,
+      "extraction_confidence": "high",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_004_facial_hair_style_175p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Selected native Facial Hair Style label Mutton Chops is directly readable, but the selector is scrolled so native order remains unresolved.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_60F68A5C1AF4_0016",
+      "source_media_id": "GFM_MEDIA_CF27_60F68A5C1AF4",
+      "start_timestamp": 225,
+      "end_timestamp": 235.35,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "facial_hair_color",
+      "suspected_menu_label": "Facial Hair Color",
+      "suspected_option_label": "Purple",
+      "suspected_option_index": null,
+      "extraction_confidence": "high",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_005_facial_hair_color_225p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Selected native Facial Hair Color label Purple is directly readable, but the selector is scrolled so native order remains unresolved.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_60F68A5C1AF4_0013",
+      "source_media_id": "GFM_MEDIA_CF27_60F68A5C1AF4",
+      "start_timestamp": 5,
+      "end_timestamp": 99,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Short Curly",
+      "suspected_option_index": null,
+      "extraction_confidence": "high",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_002_hair_style_5p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Selected native Hair Style label Short Curly is directly readable. Broader traversal is visible but not all labels are cataloged by this intake.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_90A29684F972_0017",
+      "source_media_id": "GFM_MEDIA_CF27_90A29684F972",
+      "start_timestamp": 0,
+      "end_timestamp": 4,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "player_body_styles_entry",
+      "suspected_menu_label": "Player body / Styles entry",
+      "suspected_option_label": null,
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Recording begins in Player context before Styles row review.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_90A29684F972_0020",
+      "source_media_id": "GFM_MEDIA_CF27_90A29684F972",
+      "start_timestamp": 125,
+      "end_timestamp": 154,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "qb_under_center_stance",
+      "suspected_menu_label": "QB Under Center Stance",
+      "suspected_option_label": "Visible stance values",
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_003_tl_004_styles_under_center_stance_125p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Under-center stance options are visible; no facial recommendation should use this evidence.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_90A29684F972_0021",
+      "source_media_id": "GFM_MEDIA_CF27_90A29684F972",
+      "start_timestamp": 155,
+      "end_timestamp": 163.8,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "2_point_stance_rows",
+      "suspected_menu_label": "2-Point Stance rows",
+      "suspected_option_label": "Visible stance values",
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_003_tl_005_styles_point_stance_155p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Two-point stance rows are visible; no facial recommendation should use this evidence.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_90A29684F972_0018",
+      "source_media_id": "GFM_MEDIA_CF27_90A29684F972",
+      "start_timestamp": 5,
+      "end_timestamp": 74,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "qb_throw_style",
+      "suspected_menu_label": "QB Throw Style",
+      "suspected_option_label": "Over the Top 2",
+      "suspected_option_index": null,
+      "extraction_confidence": "high",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_003_tl_002_styles_throw_style_5p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Styles screen visible with QB Throw Style and other body/context rows. This is not facial-appearance catalog evidence.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_90A29684F972_0019",
+      "source_media_id": "GFM_MEDIA_CF27_90A29684F972",
+      "start_timestamp": 75,
+      "end_timestamp": 124,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "run_style",
+      "suspected_menu_label": "Run Style",
+      "suspected_option_label": "Default / visible style values",
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_003_tl_003_styles_run_style_75p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Run Style and related rows appear during traversal; used for context/dependency gap tracking only.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0001",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 0,
+      "end_timestamp": 4,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "appearance_menu_head_skin_row",
+      "suspected_menu_label": "Appearance menu / Head & Skin row",
+      "suspected_option_label": null,
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_001_appearance_menu_0p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Appearance menu visible before Head & Skin traversal.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0004",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 120,
+      "end_timestamp": 144,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "skin_details",
+      "suspected_menu_label": "Skin Details",
+      "suspected_option_label": "Selected skin-detail labels visible in recording; representative frame only.",
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_004_skin_details_125p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Skin Details traversal is present but this ingest does not replace the existing category catalog without per-label review.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0005",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 145,
+      "end_timestamp": 159,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "eye_shape",
+      "suspected_menu_label": "Eye Shape",
+      "suspected_option_label": "Selected eye-shape label visible in recording; representative frame only.",
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_005_eye_shape_155p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Eye Shape traversal is present but boundaries and every selected value still require normal category review.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0006",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 160,
+      "end_timestamp": 184,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "eye_color",
+      "suspected_menu_label": "Eye Color",
+      "suspected_option_label": "Selected eye-color labels visible in recording; representative frame only.",
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_006_eye_color_170p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Eye Color traversal is present. This clip supplements but does not replace existing category evidence review.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0007",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 185,
+      "end_timestamp": 199,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "nose",
+      "suspected_menu_label": "Nose",
+      "suspected_option_label": "Selected nose labels visible in recording; representative frame only.",
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_007_nose_190p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Nose traversal is present but duplicate/order concerns remain a later review task.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0008",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 200,
+      "end_timestamp": 209,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "ear_shape",
+      "suspected_menu_label": "Ear Shape",
+      "suspected_option_label": "Selected ear-shape label visible in recording; representative frame only.",
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_008_ear_shape_205p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Ear Shape appears briefly; frame is useful for menu/category traceability but does not prove both ears or full category completion.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0009",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 210,
+      "end_timestamp": 219,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "mouth_shape",
+      "suspected_menu_label": "Mouth Shape",
+      "suspected_option_label": "Heavy",
+      "suspected_option_index": null,
+      "extraction_confidence": "high",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_009_mouth_shape_215p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Selected native Mouth Shape label Heavy is directly readable; grid appears fully visible, but production still needs second verification.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0010",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 220,
+      "end_timestamp": 229,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "jaw_shape",
+      "suspected_menu_label": "Jaw Shape",
+      "suspected_option_label": "Square",
+      "suspected_option_index": null,
+      "extraction_confidence": "high",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_010_jaw_shape_225p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Selected native Jaw Shape label Square is directly readable; grid appears fully visible, but production still needs second verification.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0011",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 230,
+      "end_timestamp": 240.24,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "chin",
+      "suspected_menu_label": "Chin",
+      "suspected_option_label": "Square",
+      "suspected_option_index": null,
+      "extraction_confidence": "high",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_011_chin_235p0s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Selected native Chin label Square is directly readable; grid appears fully visible, but production still needs second verification.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0002",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 5,
+      "end_timestamp": 64,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "head_template",
+      "suspected_menu_label": "Head Template",
+      "suspected_option_label": "Face values visible during traversal",
+      "suspected_option_index": null,
+      "extraction_confidence": "medium",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_002_head_template_5p5s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Head Template selector is traversed; new clip reinforces existing head/menu evidence but does not independently resolve complete count or duplicate review.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_CF27_BDD75F0CE953_0003",
+      "source_media_id": "GFM_MEDIA_CF27_BDD75F0CE953",
+      "start_timestamp": 65,
+      "end_timestamp": 119,
+      "suspected_game": "cf27",
+      "suspected_mode": "Road to Glory Create Player",
+      "suspected_creation_path": "Create Player > Player",
+      "suspected_category": "skin_tone",
+      "suspected_menu_label": "Skin Tone",
+      "suspected_option_label": "Skin Tone 20",
+      "suspected_option_index": null,
+      "extraction_confidence": "high",
+      "extraction_methods": [
+        "existing_cf27_august_timeline",
+        "human_research_prior_to_generic_ingest"
+      ],
+      "evidence_frame_references": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_003_skin_tone_82p0s.png"
+      ],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "Skin Tone selector is directly visible; selected Skin Tone 20 frame is useful as supplemental evidence only because prior category completeness still requires boundary verification.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYE_COLOUR_0",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:00.000",
+      "end_timestamp": "00:00:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eye_colour",
+      "suspected_menu_label": "Eye Colour",
+      "suspected_option_label": "Light Blue",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYES_0",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:00.000",
+      "end_timestamp": "00:00:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyes",
+      "suspected_menu_label": "Eyes",
+      "suspected_option_label": "Eyes 299",
+      "suspected_option_index": 299,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYEBROWS_0",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:00.000",
+      "end_timestamp": "00:00:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrows",
+      "suspected_menu_label": "Eyebrows",
+      "suspected_option_label": "Eyebrows 268",
+      "suspected_option_index": 268,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYES_5",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:05.000",
+      "end_timestamp": "00:00:08.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyes",
+      "suspected_menu_label": "Eyes",
+      "suspected_option_label": "Eyes 1005",
+      "suspected_option_index": 1005,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYES_10",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:10.000",
+      "end_timestamp": "00:00:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyes",
+      "suspected_menu_label": "Eyes",
+      "suspected_option_label": "Eyes 93",
+      "suspected_option_index": 93,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYES_15",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:15.000",
+      "end_timestamp": "00:00:18.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyes",
+      "suspected_menu_label": "Eyes",
+      "suspected_option_label": "Eyes 268",
+      "suspected_option_index": 268,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYES_20",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:20.000",
+      "end_timestamp": "00:00:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyes",
+      "suspected_menu_label": "Eyes",
+      "suspected_option_label": "Eyes 23",
+      "suspected_option_index": 23,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYEBROWS_25",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:25.000",
+      "end_timestamp": "00:00:28.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrows",
+      "suspected_menu_label": "Eyebrows",
+      "suspected_option_label": "Eyebrows 304",
+      "suspected_option_index": 304,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYES_30",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:30.000",
+      "end_timestamp": "00:00:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyes",
+      "suspected_menu_label": "Eyes",
+      "suspected_option_label": "Eyes 116",
+      "suspected_option_index": 116,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYEBROWS_40",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:40.000",
+      "end_timestamp": "00:00:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrows",
+      "suspected_menu_label": "Eyebrows",
+      "suspected_option_label": "Eyebrows 1004",
+      "suspected_option_index": 1004,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_NOSE_40",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:40.000",
+      "end_timestamp": "00:00:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "nose",
+      "suspected_menu_label": "Nose",
+      "suspected_option_label": "Nose 203",
+      "suspected_option_index": 203,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_NOSE_45",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:45.000",
+      "end_timestamp": "00:00:48.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "nose",
+      "suspected_menu_label": "Nose",
+      "suspected_option_label": "Nose 226",
+      "suspected_option_index": 226,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_NOSE_50",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:50.000",
+      "end_timestamp": "00:00:53.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "nose",
+      "suspected_menu_label": "Nose",
+      "suspected_option_label": "Nose 1004",
+      "suspected_option_index": 1004,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_NOSE_55",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:00:55.000",
+      "end_timestamp": "00:00:58.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "nose",
+      "suspected_menu_label": "Nose",
+      "suspected_option_label": "Nose 116",
+      "suspected_option_index": 116,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_NOSE_60",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:00.000",
+      "end_timestamp": "00:01:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "nose",
+      "suspected_menu_label": "Nose",
+      "suspected_option_label": "Nose 1002",
+      "suspected_option_index": 1002,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_MOUTH_60",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:00.000",
+      "end_timestamp": "00:01:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "mouth",
+      "suspected_menu_label": "Mouth",
+      "suspected_option_label": "Mouth 226",
+      "suspected_option_index": 226,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_MOUTH_65",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:05.000",
+      "end_timestamp": "00:01:08.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "mouth",
+      "suspected_menu_label": "Mouth",
+      "suspected_option_label": "Mouth 304",
+      "suspected_option_index": 304,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_MOUTH_70",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:10.000",
+      "end_timestamp": "00:01:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "mouth",
+      "suspected_menu_label": "Mouth",
+      "suspected_option_label": "Mouth 241",
+      "suspected_option_index": 241,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_NOSE_75",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:15.000",
+      "end_timestamp": "00:01:18.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "nose",
+      "suspected_menu_label": "Nose",
+      "suspected_option_label": "Nose 294",
+      "suspected_option_index": 294,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_MOUTH_75",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:15.000",
+      "end_timestamp": "00:01:18.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "mouth",
+      "suspected_menu_label": "Mouth",
+      "suspected_option_label": "Mouth 1001",
+      "suspected_option_index": 1001,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_MOUTH_80",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:20.000",
+      "end_timestamp": "00:01:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "mouth",
+      "suspected_menu_label": "Mouth",
+      "suspected_option_label": "Mouth 170",
+      "suspected_option_index": 170,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_TEETH_80",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:20.000",
+      "end_timestamp": "00:01:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "teeth",
+      "suspected_menu_label": "Teeth",
+      "suspected_option_label": "Teeth 6",
+      "suspected_option_index": 6,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_TEETH_85",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:25.000",
+      "end_timestamp": "00:01:28.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "teeth",
+      "suspected_menu_label": "Teeth",
+      "suspected_option_label": "Teeth 2",
+      "suspected_option_index": 2,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_COLOUR_90",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:30.000",
+      "end_timestamp": "00:01:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_colour",
+      "suspected_menu_label": "Hair Colour",
+      "suspected_option_label": "Black",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_GROUP_90",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:30.000",
+      "end_timestamp": "00:01:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style_group",
+      "suspected_menu_label": "Hair Style group",
+      "suspected_option_label": "Medium",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_90",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:30.000",
+      "end_timestamp": "00:01:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 30",
+      "suspected_option_index": 30,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_90",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:30.000",
+      "end_timestamp": "00:01:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrow_facial_hair_colour",
+      "suspected_menu_label": "Eyebrow & Facial Hair Colour",
+      "suspected_option_label": "Golden",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_COLOUR_100",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:40.000",
+      "end_timestamp": "00:01:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_colour",
+      "suspected_menu_label": "Hair Colour",
+      "suspected_option_label": "Medium Brown",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYEBROWS_105",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:45.000",
+      "end_timestamp": "00:01:48.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrows",
+      "suspected_menu_label": "Eyebrows",
+      "suspected_option_label": "Eyebrows 115",
+      "suspected_option_index": 115,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_105",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:45.000",
+      "end_timestamp": "00:01:48.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 504",
+      "suspected_option_index": 504,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_COLOUR_110",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:50.000",
+      "end_timestamp": "00:01:53.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_colour",
+      "suspected_menu_label": "Hair Colour",
+      "suspected_option_label": "Pastel Pink",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_115",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:01:55.000",
+      "end_timestamp": "00:01:58.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 396",
+      "suspected_option_index": 396,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_GROUP_120",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:00.000",
+      "end_timestamp": "00:02:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style_group",
+      "suspected_menu_label": "Hair Style group",
+      "suspected_option_label": "Short",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_120",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:00.000",
+      "end_timestamp": "00:02:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 392",
+      "suspected_option_index": 392,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_125",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:05.000",
+      "end_timestamp": "00:02:08.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 543",
+      "suspected_option_index": 543,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_130",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:10.000",
+      "end_timestamp": "00:02:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 93",
+      "suspected_option_index": 93,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_135",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:15.000",
+      "end_timestamp": "00:02:18.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 431",
+      "suspected_option_index": 431,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_140",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:20.000",
+      "end_timestamp": "00:02:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 65",
+      "suspected_option_index": 65,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_GROUP_145",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:25.000",
+      "end_timestamp": "00:02:28.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style_group",
+      "suspected_menu_label": "Hair Style group",
+      "suspected_option_label": "Long",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_145",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:25.000",
+      "end_timestamp": "00:02:28.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 233",
+      "suspected_option_index": 233,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_150",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:30.000",
+      "end_timestamp": "00:02:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 184",
+      "suspected_option_index": 184,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_155",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:35.000",
+      "end_timestamp": "00:02:38.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 62",
+      "suspected_option_index": 62,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_165",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:45.000",
+      "end_timestamp": "00:02:48.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 285",
+      "suspected_option_index": 285,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_170",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:02:50.000",
+      "end_timestamp": "00:02:53.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrow_facial_hair_colour",
+      "suspected_menu_label": "Eyebrow & Facial Hair Colour",
+      "suspected_option_label": "Honey",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_COLOUR_180",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:00.000",
+      "end_timestamp": "00:03:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_colour",
+      "suspected_menu_label": "Hair Colour",
+      "suspected_option_label": "Pink",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_180",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:00.000",
+      "end_timestamp": "00:03:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 444",
+      "suspected_option_index": 444,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_180",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:00.000",
+      "end_timestamp": "00:03:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrow_facial_hair_colour",
+      "suspected_menu_label": "Eyebrow & Facial Hair Colour",
+      "suspected_option_label": "Pink",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_EYEBROW_SHAPE_TOP_180",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:00.000",
+      "end_timestamp": "00:03:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrow_shape_selector_first_row",
+      "suspected_menu_label": "Eyebrow shape selector, first row",
+      "suspected_option_label": "'S' Shaped",
+      "suspected_option_index": null,
+      "extraction_confidence": "probable",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_EYEBROW_SHAPE_BOTTOM_180",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:00.000",
+      "end_timestamp": "00:03:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrow_shape_selector_second_row",
+      "suspected_menu_label": "Eyebrow shape selector, second row",
+      "suspected_option_label": "Low Arch",
+      "suspected_option_index": null,
+      "extraction_confidence": "probable",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_COLOUR_190",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:10.000",
+      "end_timestamp": "00:03:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_colour",
+      "suspected_menu_label": "Hair Colour",
+      "suspected_option_label": "Grey",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_190",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:10.000",
+      "end_timestamp": "00:03:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrow_facial_hair_colour",
+      "suspected_menu_label": "Eyebrow & Facial Hair Colour",
+      "suspected_option_label": "Grey",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_195",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:15.000",
+      "end_timestamp": "00:03:18.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 32",
+      "suspected_option_index": 32,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_EYEBROW_SHAPE_TOP_200",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:20.000",
+      "end_timestamp": "00:03:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrow_shape_selector_first_row",
+      "suspected_menu_label": "Eyebrow shape selector, first row",
+      "suspected_option_label": "Straight",
+      "suspected_option_index": null,
+      "extraction_confidence": "probable",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_FACIAL_HAIR_200",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:20.000",
+      "end_timestamp": "00:03:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "facial_hair",
+      "suspected_menu_label": "Facial Hair",
+      "suspected_option_label": "Facial Hair 288",
+      "suspected_option_index": 288,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_205",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:25.000",
+      "end_timestamp": "00:03:28.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 500",
+      "suspected_option_index": 500,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_205",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:25.000",
+      "end_timestamp": "00:03:28.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrow_facial_hair_colour",
+      "suspected_menu_label": "Eyebrow & Facial Hair Colour",
+      "suspected_option_label": "Periwinkle",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_FACIAL_HAIR_205",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:25.000",
+      "end_timestamp": "00:03:28.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "facial_hair",
+      "suspected_menu_label": "Facial Hair",
+      "suspected_option_label": "Facial Hair 38",
+      "suspected_option_index": 38,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_COLOUR_210",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:30.000",
+      "end_timestamp": "00:03:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_colour",
+      "suspected_menu_label": "Hair Colour",
+      "suspected_option_label": "Periwinkle",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_STYLE_210",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:30.000",
+      "end_timestamp": "00:03:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "hair_style",
+      "suspected_menu_label": "Hair Style",
+      "suspected_option_label": "Hair Style 421",
+      "suspected_option_index": 421,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_FACIAL_HAIR_210",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:30.000",
+      "end_timestamp": "00:03:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "facial_hair",
+      "suspected_menu_label": "Facial Hair",
+      "suspected_option_label": "Facial Hair 37",
+      "suspected_option_index": 37,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_FACIAL_HAIR_215",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:35.000",
+      "end_timestamp": "00:03:38.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "facial_hair",
+      "suspected_menu_label": "Facial Hair",
+      "suspected_option_label": "Facial Hair 27",
+      "suspected_option_index": 27,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_FACE_EYEBROWS_220",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:40.000",
+      "end_timestamp": "00:03:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eyebrows",
+      "suspected_menu_label": "Eyebrows",
+      "suspected_option_label": "Eyebrows 3",
+      "suspected_option_index": 3,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_FACIAL_HAIR_220",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:40.000",
+      "end_timestamp": "00:03:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "facial_hair",
+      "suspected_menu_label": "Facial Hair",
+      "suspected_option_label": "Facial Hair 285",
+      "suspected_option_index": 285,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_FACIAL_HAIR_225",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:45.000",
+      "end_timestamp": "00:03:48.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "facial_hair",
+      "suspected_menu_label": "Facial Hair",
+      "suspected_option_label": "Facial Hair 16",
+      "suspected_option_index": 16,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_0C758EB69716_FC26_HAIR_FACIAL_HAIR_230",
+      "source_media_id": "GFM_MEDIA_FC26_0C758EB69716",
+      "start_timestamp": "00:03:50.000",
+      "end_timestamp": "00:03:53.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "facial_hair",
+      "suspected_menu_label": "Facial Hair",
+      "suspected_option_label": "Facial Hair 239",
+      "suspected_option_index": 239,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SKIN_TONE_0",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:00.000",
+      "end_timestamp": "00:00:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "skin_tone",
+      "suspected_menu_label": "Skin Tone",
+      "suspected_option_label": "Skin Tone 3",
+      "suspected_option_index": 3,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_COMPLEXION_0",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:00.000",
+      "end_timestamp": "00:00:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "complexion",
+      "suspected_menu_label": "Complexion",
+      "suspected_option_label": "Complexion 3",
+      "suspected_option_index": 3,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SKIN_SURFACE_0",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:00.000",
+      "end_timestamp": "00:00:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "skin_surface",
+      "suspected_menu_label": "Skin Surface",
+      "suspected_option_label": "Skin Surface 18",
+      "suspected_option_index": 18,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FRECKLES_0",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:00.000",
+      "end_timestamp": "00:00:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "freckles",
+      "suspected_menu_label": "Freckles",
+      "suspected_option_label": "None",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SKIN_TONE_5",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:05.000",
+      "end_timestamp": "00:00:08.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "skin_tone",
+      "suspected_menu_label": "Skin Tone",
+      "suspected_option_label": "Skin Tone 9",
+      "suspected_option_index": 9,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_COMPLEXION_10",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:10.000",
+      "end_timestamp": "00:00:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "complexion",
+      "suspected_menu_label": "Complexion",
+      "suspected_option_label": "Complexion 6",
+      "suspected_option_index": 6,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_COMPLEXION_10",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:10.000",
+      "end_timestamp": "00:00:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "complexion",
+      "suspected_menu_label": "Complexion",
+      "suspected_option_label": "Complexion 9",
+      "suspected_option_index": 9,
+      "extraction_confidence": "probable",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SKIN_SURFACE_20",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:20.000",
+      "end_timestamp": "00:00:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "skin_surface",
+      "suspected_menu_label": "Skin Surface",
+      "suspected_option_label": "Skin Surface 27",
+      "suspected_option_index": 27,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SKIN_SURFACE_25",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:25.000",
+      "end_timestamp": "00:00:28.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "skin_surface",
+      "suspected_menu_label": "Skin Surface",
+      "suspected_option_label": "Skin Surface 36",
+      "suspected_option_index": 36,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SKIN_SURFACE_30",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:30.000",
+      "end_timestamp": "00:00:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "skin_surface",
+      "suspected_menu_label": "Skin Surface",
+      "suspected_option_label": "Skin Surface 41",
+      "suspected_option_index": 41,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SKIN_SURFACE_35",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:35.000",
+      "end_timestamp": "00:00:38.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "skin_surface",
+      "suspected_menu_label": "Skin Surface",
+      "suspected_option_label": "Skin Surface 51",
+      "suspected_option_index": 51,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SKIN_SURFACE_40",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:40.000",
+      "end_timestamp": "00:00:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "skin_surface",
+      "suspected_menu_label": "Skin Surface",
+      "suspected_option_label": "Skin Surface 3",
+      "suspected_option_index": 3,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FRECKLES_45",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:45.000",
+      "end_timestamp": "00:00:48.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "freckles",
+      "suspected_menu_label": "Freckles",
+      "suspected_option_label": "Freckles 2",
+      "suspected_option_index": 2,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FRECKLES_50",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:50.000",
+      "end_timestamp": "00:00:53.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "freckles",
+      "suspected_menu_label": "Freckles",
+      "suspected_option_label": "Freckles 12",
+      "suspected_option_index": 12,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FRECKLES_55",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:00:55.000",
+      "end_timestamp": "00:00:58.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "freckles",
+      "suspected_menu_label": "Freckles",
+      "suspected_option_label": "Freckles 3",
+      "suspected_option_index": 3,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SCARRING_60",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:01:00.000",
+      "end_timestamp": "00:01:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "scarring",
+      "suspected_menu_label": "Scarring",
+      "suspected_option_label": "Scarring 9",
+      "suspected_option_index": 9,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SCARRING_65",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:01:05.000",
+      "end_timestamp": "00:01:08.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "scarring",
+      "suspected_menu_label": "Scarring",
+      "suspected_option_label": "Scarring 18",
+      "suspected_option_index": 18,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SCARRING_70",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:01:10.000",
+      "end_timestamp": "00:01:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "scarring",
+      "suspected_menu_label": "Scarring",
+      "suspected_option_label": "Scarring 26",
+      "suspected_option_index": 26,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_SCARRING_75",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:01:15.000",
+      "end_timestamp": "00:01:18.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "scarring",
+      "suspected_menu_label": "Scarring",
+      "suspected_option_label": "Scarring 36",
+      "suspected_option_index": 36,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_MOLES_80",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:01:20.000",
+      "end_timestamp": "00:01:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "moles",
+      "suspected_menu_label": "Moles",
+      "suspected_option_label": "Moles 2",
+      "suspected_option_index": 2,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_MOLES_90",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:01:30.000",
+      "end_timestamp": "00:01:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "moles",
+      "suspected_menu_label": "Moles",
+      "suspected_option_label": "Moles 7",
+      "suspected_option_index": 7,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_ROSACEA_100",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:01:40.000",
+      "end_timestamp": "00:01:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "rosacea",
+      "suspected_menu_label": "Rosacea",
+      "suspected_option_label": "Rosacea 5",
+      "suspected_option_index": 5,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FACE_MAKEUP_105",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:01:45.000",
+      "end_timestamp": "00:01:48.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "face_makeup",
+      "suspected_menu_label": "Face Makeup",
+      "suspected_option_label": "Face Makeup 2",
+      "suspected_option_index": 2,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_LIP_MAKEUP_110",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:01:50.000",
+      "end_timestamp": "00:01:53.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "lip_makeup",
+      "suspected_menu_label": "Lip Makeup",
+      "suspected_option_label": "None",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FOREHEAD_115",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:01:55.000",
+      "end_timestamp": "00:01:58.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "forehead",
+      "suspected_menu_label": "Forehead",
+      "suspected_option_label": "Forehead 1002",
+      "suspected_option_index": 1002,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FOREHEAD_120",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:00.000",
+      "end_timestamp": "00:02:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "forehead",
+      "suspected_menu_label": "Forehead",
+      "suspected_option_label": "Forehead 294",
+      "suspected_option_index": 294,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_JAW_120",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:00.000",
+      "end_timestamp": "00:02:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "jaw",
+      "suspected_menu_label": "Jaw",
+      "suspected_option_label": "Jaw 226",
+      "suspected_option_index": 226,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_EARS_120",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:00.000",
+      "end_timestamp": "00:02:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "ears",
+      "suspected_menu_label": "Ears",
+      "suspected_option_label": "Ears 175",
+      "suspected_option_index": 175,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FOREHEAD_125",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:05.000",
+      "end_timestamp": "00:02:08.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "forehead",
+      "suspected_menu_label": "Forehead",
+      "suspected_option_label": "Forehead 23",
+      "suspected_option_index": 23,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FOREHEAD_130",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:10.000",
+      "end_timestamp": "00:02:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "forehead",
+      "suspected_menu_label": "Forehead",
+      "suspected_option_label": "Forehead 175",
+      "suspected_option_index": 175,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FOREHEAD_135",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:15.000",
+      "end_timestamp": "00:02:18.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "forehead",
+      "suspected_menu_label": "Forehead",
+      "suspected_option_label": "Forehead 304",
+      "suspected_option_index": 304,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_FOREHEAD_140",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:20.000",
+      "end_timestamp": "00:02:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "forehead",
+      "suspected_menu_label": "Forehead",
+      "suspected_option_label": "Forehead 9",
+      "suspected_option_index": 9,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_JAW_140",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:20.000",
+      "end_timestamp": "00:02:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "jaw",
+      "suspected_menu_label": "Jaw",
+      "suspected_option_label": "Jaw 260",
+      "suspected_option_index": 260,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_JAW_145",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:25.000",
+      "end_timestamp": "00:02:28.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "jaw",
+      "suspected_menu_label": "Jaw",
+      "suspected_option_label": "Jaw 9",
+      "suspected_option_index": 9,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_JAW_150",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:30.000",
+      "end_timestamp": "00:02:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "jaw",
+      "suspected_menu_label": "Jaw",
+      "suspected_option_label": "Jaw 151",
+      "suspected_option_index": 151,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_JAW_155",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:35.000",
+      "end_timestamp": "00:02:38.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "jaw",
+      "suspected_menu_label": "Jaw",
+      "suspected_option_label": "Jaw 294",
+      "suspected_option_index": 294,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_JAW_160",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:40.000",
+      "end_timestamp": "00:02:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "jaw",
+      "suspected_menu_label": "Jaw",
+      "suspected_option_label": "Jaw 1002",
+      "suspected_option_index": 1002,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_EARS_160",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:40.000",
+      "end_timestamp": "00:02:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "ears",
+      "suspected_menu_label": "Ears",
+      "suspected_option_label": "Ears 249",
+      "suspected_option_index": 249,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_CHEEKS_160",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:40.000",
+      "end_timestamp": "00:02:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "cheeks",
+      "suspected_menu_label": "Cheeks",
+      "suspected_option_label": "Cheeks 202",
+      "suspected_option_index": 202,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_EARS_165",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:45.000",
+      "end_timestamp": "00:02:48.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "ears",
+      "suspected_menu_label": "Ears",
+      "suspected_option_label": "Ears 1006",
+      "suspected_option_index": 1006,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_EARS_170",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:02:50.000",
+      "end_timestamp": "00:02:53.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "ears",
+      "suspected_menu_label": "Ears",
+      "suspected_option_label": "Ears 194",
+      "suspected_option_index": 194,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_EARS_180",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:00.000",
+      "end_timestamp": "00:03:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "ears",
+      "suspected_menu_label": "Ears",
+      "suspected_option_label": "Ears 170",
+      "suspected_option_index": 170,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_CHEEKS_180",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:00.000",
+      "end_timestamp": "00:03:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "cheeks",
+      "suspected_menu_label": "Cheeks",
+      "suspected_option_label": "Cheeks 299",
+      "suspected_option_index": 299,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_CHEEKS_185",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:05.000",
+      "end_timestamp": "00:03:08.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "cheeks",
+      "suspected_menu_label": "Cheeks",
+      "suspected_option_label": "Cheeks 43",
+      "suspected_option_index": 43,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_CHEEKS_190",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:10.000",
+      "end_timestamp": "00:03:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "cheeks",
+      "suspected_menu_label": "Cheeks",
+      "suspected_option_label": "Cheeks 203",
+      "suspected_option_index": 203,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_CHIN_190",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:10.000",
+      "end_timestamp": "00:03:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "chin",
+      "suspected_menu_label": "Chin",
+      "suspected_option_label": "Chin 268",
+      "suspected_option_index": 268,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_NECK_190",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:10.000",
+      "end_timestamp": "00:03:13.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "neck",
+      "suspected_menu_label": "Neck",
+      "suspected_option_label": "Neck 241",
+      "suspected_option_index": 241,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_CHEEKS_195",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:15.000",
+      "end_timestamp": "00:03:18.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "cheeks",
+      "suspected_menu_label": "Cheeks",
+      "suspected_option_label": "Cheeks 226",
+      "suspected_option_index": 226,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_CHIN_195",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:15.000",
+      "end_timestamp": "00:03:18.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "chin",
+      "suspected_menu_label": "Chin",
+      "suspected_option_label": "Chin 226",
+      "suspected_option_index": 226,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_CHIN_200",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:20.000",
+      "end_timestamp": "00:03:23.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "chin",
+      "suspected_menu_label": "Chin",
+      "suspected_option_label": "Chin 1003",
+      "suspected_option_index": 1003,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_CHIN_205",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:25.000",
+      "end_timestamp": "00:03:28.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "chin",
+      "suspected_menu_label": "Chin",
+      "suspected_option_label": "Chin 118",
+      "suspected_option_index": 118,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_CHIN_210",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:30.000",
+      "end_timestamp": "00:03:33.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "chin",
+      "suspected_menu_label": "Chin",
+      "suspected_option_label": "Chin 1001",
+      "suspected_option_index": 1001,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_NECK_215",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:35.000",
+      "end_timestamp": "00:03:38.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "neck",
+      "suspected_menu_label": "Neck",
+      "suspected_option_label": "Neck 304",
+      "suspected_option_index": 304,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_NECK_220",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:40.000",
+      "end_timestamp": "00:03:43.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "neck",
+      "suspected_menu_label": "Neck",
+      "suspected_option_label": "Neck 52",
+      "suspected_option_index": 52,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_HEAD_NECK_230",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:50.000",
+      "end_timestamp": "00:03:53.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "neck",
+      "suspected_menu_label": "Neck",
+      "suspected_option_label": "Neck 1002",
+      "suspected_option_index": 1002,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_FACE_EYE_COLOUR_230",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:50.000",
+      "end_timestamp": "00:03:53.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eye_colour",
+      "suspected_menu_label": "Eye Colour",
+      "suspected_option_label": "Light Grey",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_FACE_EYE_COLOUR_235",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:03:55.000",
+      "end_timestamp": "00:03:58.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eye_colour",
+      "suspected_menu_label": "Eye Colour",
+      "suspected_option_label": "Green",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "segment_id": "SEG_GFM_MEDIA_FC26_6AB6BFCA771C_FC26_FACE_EYE_COLOUR_240",
+      "source_media_id": "GFM_MEDIA_FC26_6AB6BFCA771C",
+      "start_timestamp": "00:04:00.000",
+      "end_timestamp": "00:04:03.000",
+      "suspected_game": "fc26",
+      "suspected_mode": "Player Creator",
+      "suspected_creation_path": "Player Creator",
+      "suspected_category": "eye_colour",
+      "suspected_menu_label": "Eye Colour",
+      "suspected_option_label": "Medium Grey",
+      "suspected_option_index": null,
+      "extraction_confidence": "verified",
+      "extraction_methods": [
+        "existing_fc26_player_creator_research"
+      ],
+      "evidence_frame_references": [],
+      "review_status": "AUTOMATED_IMPORTED_REQUIRES_PRIMARY_REVIEW",
+      "notes": "FC26 observation imported from existing research data; not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    }
+  ]
+}

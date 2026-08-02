@@ -62,10 +62,15 @@ Current machine-readable authorities:
 - Owner capture closure package: `data/phase-zero/capture-closure/owner-capture-plan.json`
 - August 2026 source-recording ingest: `data/phase-zero/august_2026_source_recordings_ingest.json`
 - August 2026 supplemental candidates: `data/phase-zero/august_2026_intake_candidates.json`
+- Generic source-media inventory: `data/source-media-index/source_media_manifest.json`
+- Generic source-media segments and artifacts: `data/source-media-index/media_segments.json`, `data/source-media-index/ingestion_artifacts.json`
+- Generic catalog-research queues: `data/catalog-research/research_candidates.json`, `data/catalog-research/primary_review_queue.json`, `data/catalog-research/second_verifier_queue.json`, `data/catalog-research/recapture_queue.json`
 - Second-verifier execution package: `data/phase-zero/second-verifier-execution-package/second_verifier_execution_package.json`
 - Gate registry: `data/status/current_gate_registry.json`
 
 The current research artifacts are primary research only. They are not second verified, not production approved, and not eligible for customer-facing recommendations.
+
+The generic source-media ingestion layer recursively inventories every local file under `source-media/` and separates FC 26, College Football 27, and unknown/unsupported material. It produces research-only review queues and ignored local review artifacts under `build-artifacts/source-media-ingestion/`; it does not replace the Phase 0 human-review or production-publishing gates.
 
 ## Source-Video Inventory
 

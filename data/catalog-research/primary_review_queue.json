@@ -1,0 +1,4831 @@
+{
+  "schemaVersion": "gfm-primary-review-queue-v1",
+  "generatedAt": "2026-08-02T23:25:27.740Z",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "items": [
+    {
+      "queue_id": "PRIMARY_REVIEW_CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY",
+      "candidate_id": "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY",
+      "game_id": "college-football-27",
+      "category": "Hairstyles",
+      "suspected_native_label": "Short Curly",
+      "source_media_ids": [
+        "GFM_MEDIA_CF27_60F68A5C1AF4"
+      ],
+      "timestamps": [
+        null
+      ],
+      "evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_002_hair_style_5p5s.png"
+      ],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN",
+      "candidate_id": "CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN",
+      "game_id": "college-football-27",
+      "category": "Hair colors",
+      "suspected_native_label": "Light Brown",
+      "source_media_ids": [
+        "GFM_MEDIA_CF27_60F68A5C1AF4"
+      ],
+      "timestamps": [
+        null
+      ],
+      "evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_003_hair_color_100p5s.png"
+      ],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+      "candidate_id": "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+      "game_id": "college-football-27",
+      "category": "Facial hair",
+      "suspected_native_label": "Mutton Chops",
+      "source_media_ids": [
+        "GFM_MEDIA_CF27_60F68A5C1AF4"
+      ],
+      "timestamps": [
+        null
+      ],
+      "evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_004_facial_hair_style_175p5s.png"
+      ],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+      "candidate_id": "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+      "game_id": "college-football-27",
+      "category": "Facial-hair colors",
+      "suspected_native_label": "Purple",
+      "source_media_ids": [
+        "GFM_MEDIA_CF27_60F68A5C1AF4"
+      ],
+      "timestamps": [
+        null
+      ],
+      "evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_005_facial_hair_color_225p5s.png"
+      ],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_CF27_XBOXUNKNOWN_RTG_MOUTHSHAPE_HEAVY",
+      "candidate_id": "CF27_XBOXUNKNOWN_RTG_MOUTHSHAPE_HEAVY",
+      "game_id": "college-football-27",
+      "category": "Mouth Shape",
+      "suspected_native_label": "Heavy",
+      "source_media_ids": [
+        "GFM_MEDIA_CF27_BDD75F0CE953"
+      ],
+      "timestamps": [
+        null
+      ],
+      "evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_009_mouth_shape_215p5s.png"
+      ],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE",
+      "candidate_id": "CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE",
+      "game_id": "college-football-27",
+      "category": "Jaw Shape",
+      "suspected_native_label": "Square",
+      "source_media_ids": [
+        "GFM_MEDIA_CF27_BDD75F0CE953"
+      ],
+      "timestamps": [
+        null
+      ],
+      "evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_010_jaw_shape_225p5s.png"
+      ],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE",
+      "candidate_id": "CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE",
+      "game_id": "college-football-27",
+      "category": "Chin",
+      "suspected_native_label": "Square",
+      "source_media_ids": [
+        "GFM_MEDIA_CF27_BDD75F0CE953"
+      ],
+      "timestamps": [
+        null
+      ],
+      "evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_011_chin_235p0s.png"
+      ],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SKIN_TONE_SKIN_TONE_3",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_TONE_SKIN_TONE_3",
+      "game_id": "ea-sports-fc-26",
+      "category": "Skin Tone",
+      "suspected_native_label": "Skin Tone 3",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        0
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SKIN_TONE_SKIN_TONE_9",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_TONE_SKIN_TONE_9",
+      "game_id": "ea-sports-fc-26",
+      "category": "Skin Tone",
+      "suspected_native_label": "Skin Tone 9",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        5
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_COMPLEXION_COMPLEXION_3",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_COMPLEXION_COMPLEXION_3",
+      "game_id": "ea-sports-fc-26",
+      "category": "Complexion",
+      "suspected_native_label": "Complexion 3",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        0
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_COMPLEXION_COMPLEXION_6",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_COMPLEXION_COMPLEXION_6",
+      "game_id": "ea-sports-fc-26",
+      "category": "Complexion",
+      "suspected_native_label": "Complexion 6",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        10
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_COMPLEXION_COMPLEXION_9",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_COMPLEXION_COMPLEXION_9",
+      "game_id": "ea-sports-fc-26",
+      "category": "Complexion",
+      "suspected_native_label": "Complexion 9",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        10
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_18",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_18",
+      "game_id": "ea-sports-fc-26",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 18",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        0
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_27",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_27",
+      "game_id": "ea-sports-fc-26",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 27",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        20
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_36",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_36",
+      "game_id": "ea-sports-fc-26",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 36",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        25
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_41",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_41",
+      "game_id": "ea-sports-fc-26",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 41",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        30
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_51",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_51",
+      "game_id": "ea-sports-fc-26",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 51",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        35
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_3",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_3",
+      "game_id": "ea-sports-fc-26",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 3",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        40
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FRECKLES_NONE",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FRECKLES_NONE",
+      "game_id": "ea-sports-fc-26",
+      "category": "Freckles",
+      "suspected_native_label": "None",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        0
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FRECKLES_FRECKLES_2",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FRECKLES_FRECKLES_2",
+      "game_id": "ea-sports-fc-26",
+      "category": "Freckles",
+      "suspected_native_label": "Freckles 2",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        45
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FRECKLES_FRECKLES_12",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FRECKLES_FRECKLES_12",
+      "game_id": "ea-sports-fc-26",
+      "category": "Freckles",
+      "suspected_native_label": "Freckles 12",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        50
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FRECKLES_FRECKLES_3",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FRECKLES_FRECKLES_3",
+      "game_id": "ea-sports-fc-26",
+      "category": "Freckles",
+      "suspected_native_label": "Freckles 3",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        55
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_9",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_9",
+      "game_id": "ea-sports-fc-26",
+      "category": "Scarring",
+      "suspected_native_label": "Scarring 9",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        60
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_18",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_18",
+      "game_id": "ea-sports-fc-26",
+      "category": "Scarring",
+      "suspected_native_label": "Scarring 18",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        65
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_26",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_26",
+      "game_id": "ea-sports-fc-26",
+      "category": "Scarring",
+      "suspected_native_label": "Scarring 26",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        70
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_36",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_36",
+      "game_id": "ea-sports-fc-26",
+      "category": "Scarring",
+      "suspected_native_label": "Scarring 36",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        75
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_MOLES_MOLES_2",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_MOLES_MOLES_2",
+      "game_id": "ea-sports-fc-26",
+      "category": "Moles",
+      "suspected_native_label": "Moles 2",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        80
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_MOLES_MOLES_7",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_MOLES_MOLES_7",
+      "game_id": "ea-sports-fc-26",
+      "category": "Moles",
+      "suspected_native_label": "Moles 7",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        90
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_ROSACEA_ROSACEA_5",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_ROSACEA_ROSACEA_5",
+      "game_id": "ea-sports-fc-26",
+      "category": "Rosacea",
+      "suspected_native_label": "Rosacea 5",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        100
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FACE_MAKEUP_FACE_MAKEUP_2",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FACE_MAKEUP_FACE_MAKEUP_2",
+      "game_id": "ea-sports-fc-26",
+      "category": "Face Makeup",
+      "suspected_native_label": "Face Makeup 2",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        105
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_LIP_MAKEUP_NONE",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_LIP_MAKEUP_NONE",
+      "game_id": "ea-sports-fc-26",
+      "category": "Lip Makeup",
+      "suspected_native_label": "None",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        110
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_1002",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_1002",
+      "game_id": "ea-sports-fc-26",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 1002",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        115
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_294",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_294",
+      "game_id": "ea-sports-fc-26",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 294",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        120
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_23",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_23",
+      "game_id": "ea-sports-fc-26",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 23",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        125
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_175",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_175",
+      "game_id": "ea-sports-fc-26",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 175",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        130
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_304",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_304",
+      "game_id": "ea-sports-fc-26",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 304",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        135
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_9",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_9",
+      "game_id": "ea-sports-fc-26",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 9",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        140
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_JAW_JAW_226",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_226",
+      "game_id": "ea-sports-fc-26",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 226",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        120
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_JAW_JAW_260",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_260",
+      "game_id": "ea-sports-fc-26",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 260",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        140
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_JAW_JAW_9",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_9",
+      "game_id": "ea-sports-fc-26",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 9",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        145
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_JAW_JAW_151",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_151",
+      "game_id": "ea-sports-fc-26",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 151",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        150
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_JAW_JAW_294",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_294",
+      "game_id": "ea-sports-fc-26",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 294",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        155
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_JAW_JAW_1002",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_1002",
+      "game_id": "ea-sports-fc-26",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 1002",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        160
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_EARS_EARS_175",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_EARS_EARS_175",
+      "game_id": "ea-sports-fc-26",
+      "category": "Ears",
+      "suspected_native_label": "Ears 175",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        120
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_EARS_EARS_249",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_EARS_EARS_249",
+      "game_id": "ea-sports-fc-26",
+      "category": "Ears",
+      "suspected_native_label": "Ears 249",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        160
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_EARS_EARS_1006",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_EARS_EARS_1006",
+      "game_id": "ea-sports-fc-26",
+      "category": "Ears",
+      "suspected_native_label": "Ears 1006",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        165
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_EARS_EARS_194",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_EARS_EARS_194",
+      "game_id": "ea-sports-fc-26",
+      "category": "Ears",
+      "suspected_native_label": "Ears 194",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        170
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_EARS_EARS_170",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_EARS_EARS_170",
+      "game_id": "ea-sports-fc-26",
+      "category": "Ears",
+      "suspected_native_label": "Ears 170",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        180
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_202",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_202",
+      "game_id": "ea-sports-fc-26",
+      "category": "Cheeks",
+      "suspected_native_label": "Cheeks 202",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        160
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_299",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_299",
+      "game_id": "ea-sports-fc-26",
+      "category": "Cheeks",
+      "suspected_native_label": "Cheeks 299",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        180
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_43",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_43",
+      "game_id": "ea-sports-fc-26",
+      "category": "Cheeks",
+      "suspected_native_label": "Cheeks 43",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        185
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_203",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_203",
+      "game_id": "ea-sports-fc-26",
+      "category": "Cheeks",
+      "suspected_native_label": "Cheeks 203",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        190
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_226",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_226",
+      "game_id": "ea-sports-fc-26",
+      "category": "Cheeks",
+      "suspected_native_label": "Cheeks 226",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        195
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_226",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_226",
+      "game_id": "ea-sports-fc-26",
+      "category": "Chin",
+      "suspected_native_label": "Chin 226",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        195
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_268",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_268",
+      "game_id": "ea-sports-fc-26",
+      "category": "Chin",
+      "suspected_native_label": "Chin 268",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        190
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_1003",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_1003",
+      "game_id": "ea-sports-fc-26",
+      "category": "Chin",
+      "suspected_native_label": "Chin 1003",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        200
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_118",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_118",
+      "game_id": "ea-sports-fc-26",
+      "category": "Chin",
+      "suspected_native_label": "Chin 118",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        205
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_1001",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_1001",
+      "game_id": "ea-sports-fc-26",
+      "category": "Chin",
+      "suspected_native_label": "Chin 1001",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        210
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_NECK_NECK_241",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_NECK_NECK_241",
+      "game_id": "ea-sports-fc-26",
+      "category": "Neck",
+      "suspected_native_label": "Neck 241",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        190
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_NECK_NECK_304",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_NECK_NECK_304",
+      "game_id": "ea-sports-fc-26",
+      "category": "Neck",
+      "suspected_native_label": "Neck 304",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        215
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_NECK_NECK_52",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_NECK_NECK_52",
+      "game_id": "ea-sports-fc-26",
+      "category": "Neck",
+      "suspected_native_label": "Neck 52",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        220
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HEAD_NECK_NECK_1002",
+      "candidate_id": "FC26_RESEARCH_FC26_HEAD_NECK_NECK_1002",
+      "game_id": "ea-sports-fc-26",
+      "category": "Neck",
+      "suspected_native_label": "Neck 1002",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        230
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYE_COLOUR_LIGHT_GREY",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYE_COLOUR_LIGHT_GREY",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eye Colour",
+      "suspected_native_label": "Light Grey",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        230
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYE_COLOUR_GREEN",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYE_COLOUR_GREEN",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eye Colour",
+      "suspected_native_label": "Green",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        235
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYE_COLOUR_MEDIUM_GREY",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYE_COLOUR_MEDIUM_GREY",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eye Colour",
+      "suspected_native_label": "Medium Grey",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "timestamps": [
+        240
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYE_COLOUR_LIGHT_BLUE",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYE_COLOUR_LIGHT_BLUE",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eye Colour",
+      "suspected_native_label": "Light Blue",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        0
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYES_EYES_299",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_299",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 299",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        0
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYES_EYES_1005",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_1005",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 1005",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        5
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYES_EYES_93",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_93",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 93",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        10
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYES_EYES_268",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_268",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 268",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        15
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYES_EYES_23",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_23",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 23",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        20
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYES_EYES_116",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_116",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 116",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        30
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_268",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_268",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrows",
+      "suspected_native_label": "Eyebrows 268",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        0
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_304",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_304",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrows",
+      "suspected_native_label": "Eyebrows 304",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        25
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_1004",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_1004",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrows",
+      "suspected_native_label": "Eyebrows 1004",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        40
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_115",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_115",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrows",
+      "suspected_native_label": "Eyebrows 115",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        105
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_3",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_3",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrows",
+      "suspected_native_label": "Eyebrows 3",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        220
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_NOSE_NOSE_203",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_203",
+      "game_id": "ea-sports-fc-26",
+      "category": "Nose",
+      "suspected_native_label": "Nose 203",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        40
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_NOSE_NOSE_226",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_226",
+      "game_id": "ea-sports-fc-26",
+      "category": "Nose",
+      "suspected_native_label": "Nose 226",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        45
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_NOSE_NOSE_1004",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_1004",
+      "game_id": "ea-sports-fc-26",
+      "category": "Nose",
+      "suspected_native_label": "Nose 1004",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        50
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_NOSE_NOSE_116",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_116",
+      "game_id": "ea-sports-fc-26",
+      "category": "Nose",
+      "suspected_native_label": "Nose 116",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        55
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_NOSE_NOSE_1002",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_1002",
+      "game_id": "ea-sports-fc-26",
+      "category": "Nose",
+      "suspected_native_label": "Nose 1002",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        60
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_NOSE_NOSE_294",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_294",
+      "game_id": "ea-sports-fc-26",
+      "category": "Nose",
+      "suspected_native_label": "Nose 294",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        75
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_226",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_226",
+      "game_id": "ea-sports-fc-26",
+      "category": "Mouth",
+      "suspected_native_label": "Mouth 226",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        60
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_304",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_304",
+      "game_id": "ea-sports-fc-26",
+      "category": "Mouth",
+      "suspected_native_label": "Mouth 304",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        65
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_241",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_241",
+      "game_id": "ea-sports-fc-26",
+      "category": "Mouth",
+      "suspected_native_label": "Mouth 241",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        70
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_1001",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_1001",
+      "game_id": "ea-sports-fc-26",
+      "category": "Mouth",
+      "suspected_native_label": "Mouth 1001",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        75
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_170",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_170",
+      "game_id": "ea-sports-fc-26",
+      "category": "Mouth",
+      "suspected_native_label": "Mouth 170",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        80
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_TEETH_TEETH_6",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_TEETH_TEETH_6",
+      "game_id": "ea-sports-fc-26",
+      "category": "Teeth",
+      "suspected_native_label": "Teeth 6",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        80
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_FACE_TEETH_TEETH_2",
+      "candidate_id": "FC26_RESEARCH_FC26_FACE_TEETH_TEETH_2",
+      "game_id": "ea-sports-fc-26",
+      "category": "Teeth",
+      "suspected_native_label": "Teeth 2",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        85
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_COLOUR_BLACK",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_BLACK",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Colour",
+      "suspected_native_label": "Black",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        90
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_COLOUR_MEDIUM_BROWN",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_MEDIUM_BROWN",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Colour",
+      "suspected_native_label": "Medium Brown",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        100
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_COLOUR_PASTEL_PINK",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_PASTEL_PINK",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Colour",
+      "suspected_native_label": "Pastel Pink",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        110
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_COLOUR_PINK",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_PINK",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Colour",
+      "suspected_native_label": "Pink",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        180
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_COLOUR_GREY",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_GREY",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Colour",
+      "suspected_native_label": "Grey",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        190
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_COLOUR_PERIWINKLE",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_PERIWINKLE",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Colour",
+      "suspected_native_label": "Periwinkle",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        210
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_GROUP_MEDIUM",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_GROUP_MEDIUM",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style group",
+      "suspected_native_label": "Medium",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        90
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_GROUP_SHORT",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_GROUP_SHORT",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style group",
+      "suspected_native_label": "Short",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        120
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_GROUP_LONG",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_GROUP_LONG",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style group",
+      "suspected_native_label": "Long",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        145
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_30",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_30",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 30",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        90
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_504",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_504",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 504",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        105
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_396",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_396",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 396",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        115
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_392",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_392",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 392",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        120
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_543",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_543",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 543",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        125
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_93",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_93",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 93",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        130
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_431",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_431",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 431",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        135
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_65",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_65",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 65",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        140
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_233",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_233",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 233",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        145
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_184",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_184",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 184",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        150
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_62",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_62",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 62",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        155
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_285",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_285",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 285",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        165
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_444",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_444",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 444",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        180
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_32",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_32",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 32",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        195
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_500",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_500",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 500",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        205
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_421",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_421",
+      "game_id": "ea-sports-fc-26",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 421",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        210
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_GOLDEN",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_GOLDEN",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrow & Facial Hair Colour",
+      "suspected_native_label": "Golden",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        90
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_HONEY",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_HONEY",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrow & Facial Hair Colour",
+      "suspected_native_label": "Honey",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        170
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_PINK",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_PINK",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrow & Facial Hair Colour",
+      "suspected_native_label": "Pink",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        180
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_GREY",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_GREY",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrow & Facial Hair Colour",
+      "suspected_native_label": "Grey",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        190
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_PERIWINKLE",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_PERIWINKLE",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrow & Facial Hair Colour",
+      "suspected_native_label": "Periwinkle",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        205
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_EYEBROW_SHAPE_TOP_STRAIGHT",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_SHAPE_TOP_STRAIGHT",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrow shape selector, first row",
+      "suspected_native_label": "Straight",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        200
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_EYEBROW_SHAPE_TOP_S_SHAPED",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_SHAPE_TOP_S_SHAPED",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrow shape selector, first row",
+      "suspected_native_label": "'S' Shaped",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        180
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_EYEBROW_SHAPE_BOTTOM_LOW_ARCH",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_SHAPE_BOTTOM_LOW_ARCH",
+      "game_id": "ea-sports-fc-26",
+      "category": "Eyebrow shape selector, second row",
+      "suspected_native_label": "Low Arch",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        180
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_288",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_288",
+      "game_id": "ea-sports-fc-26",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 288",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        200
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_38",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_38",
+      "game_id": "ea-sports-fc-26",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 38",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        205
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_37",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_37",
+      "game_id": "ea-sports-fc-26",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 37",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        210
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_27",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_27",
+      "game_id": "ea-sports-fc-26",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 27",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        215
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_285",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_285",
+      "game_id": "ea-sports-fc-26",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 285",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        220
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_239",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_239",
+      "game_id": "ea-sports-fc-26",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 239",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        230
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "queue_id": "PRIMARY_REVIEW_FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_16",
+      "candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_16",
+      "game_id": "ea-sports-fc-26",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 16",
+      "source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "timestamps": [
+        225
+      ],
+      "evidence_frame_paths": [],
+      "ocr_suggestions": [],
+      "reviewer_action_required": [
+        "confirm_game",
+        "confirm_category",
+        "confirm_label_or_mark_unresolved",
+        "confirm_order_or_mark_unresolved",
+        "confirm_evidence_sufficiency"
+      ],
+      "allowed_primary_statuses": [
+        "PRIMARY_APPROVED",
+        "PRIMARY_APPROVED_WITH_NOTES",
+        "RECAPTURE_REQUIRED",
+        "MISSING_EVIDENCE",
+        "LABEL_UNRESOLVED",
+        "ORDER_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "ENVIRONMENT_UNRESOLVED",
+        "DUPLICATE_REVIEW_REQUIRED",
+        "NOT_REVIEWED"
+      ],
+      "review_status": "READY_FOR_PRIMARY_REVIEW",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    }
+  ]
+}

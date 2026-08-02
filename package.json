@@ -44,6 +44,7 @@
     "cf27:capture-closure-package:check": "node scripts/cf27-capture-closure-package.mjs --check",
     "cf27:verified-head-geometry-annotations:check": "node scripts/validate-verified-head-geometry-annotations.mjs --check",
     "media:inspect": "node scripts/cf27-media-inspect.mjs",
+    "media:ingest": "node scripts/source-media-ingest.mjs",
     "head-template:extract-frames": "node scripts/cf27-head-template-frame-extract.mjs",
     "head-template:standardization-qa": "node scripts/cf27-head-template-standardization-qa.mjs",
     "skin-tone:ingest": "node scripts/cf27-skin-tone-ingest.mjs",

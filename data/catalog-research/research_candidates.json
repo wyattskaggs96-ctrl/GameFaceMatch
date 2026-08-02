@@ -1,0 +1,4818 @@
+{
+  "schemaVersion": "gfm-catalog-research-candidates-v1",
+  "generatedAt": "2026-08-02T23:25:27.740Z",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "productionPromotionAllowed": false,
+  "candidates": [
+    {
+      "stable_candidate_id": "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY",
+      "game_id": "college-football-27",
+      "suspected_game_title": "EA SPORTS College Football 27",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creation_path": "Create Player > Player",
+      "category": "Hairstyles",
+      "suspected_native_label": "Short Curly",
+      "suspected_native_index": 1,
+      "suspected_native_order": 1,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_CF27_60F68A5C1AF4"
+      ],
+      "supporting_timestamps": [
+        null
+      ],
+      "supporting_evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_002_hair_style_5p5s.png"
+      ],
+      "menu_evidence_path": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_002_hair_style_5p5s.png",
+      "normalized_view_paths": [],
+      "extraction_confidence": "high",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [],
+      "recapture_status": "RECAPTURE_REQUIREMENTS_UNRESOLVED",
+      "duplicate_status": "not_evaluated",
+      "issues": [],
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame."
+      ],
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN",
+      "game_id": "college-football-27",
+      "suspected_game_title": "EA SPORTS College Football 27",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creation_path": "Create Player > Player",
+      "category": "Hair colors",
+      "suspected_native_label": "Light Brown",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_CF27_60F68A5C1AF4"
+      ],
+      "supporting_timestamps": [
+        null
+      ],
+      "supporting_evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_003_hair_color_100p5s.png"
+      ],
+      "menu_evidence_path": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_003_hair_color_100p5s.png",
+      "normalized_view_paths": [],
+      "extraction_confidence": "high",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [],
+      "recapture_status": "RECAPTURE_REQUIREMENTS_UNRESOLVED",
+      "duplicate_status": "not_evaluated",
+      "issues": [],
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame."
+      ],
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+      "game_id": "college-football-27",
+      "suspected_game_title": "EA SPORTS College Football 27",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creation_path": "Create Player > Player",
+      "category": "Facial hair",
+      "suspected_native_label": "Mutton Chops",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_CF27_60F68A5C1AF4"
+      ],
+      "supporting_timestamps": [
+        null
+      ],
+      "supporting_evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_004_facial_hair_style_175p5s.png"
+      ],
+      "menu_evidence_path": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_004_facial_hair_style_175p5s.png",
+      "normalized_view_paths": [],
+      "extraction_confidence": "high",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [],
+      "recapture_status": "RECAPTURE_REQUIREMENTS_UNRESOLVED",
+      "duplicate_status": "not_evaluated",
+      "issues": [],
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame."
+      ],
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+      "game_id": "college-football-27",
+      "suspected_game_title": "EA SPORTS College Football 27",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creation_path": "Create Player > Player",
+      "category": "Facial-hair colors",
+      "suspected_native_label": "Purple",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_CF27_60F68A5C1AF4"
+      ],
+      "supporting_timestamps": [
+        null
+      ],
+      "supporting_evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_005_facial_hair_color_225p5s.png"
+      ],
+      "menu_evidence_path": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_005_facial_hair_color_225p5s.png",
+      "normalized_view_paths": [],
+      "extraction_confidence": "high",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [],
+      "recapture_status": "RECAPTURE_REQUIREMENTS_UNRESOLVED",
+      "duplicate_status": "not_evaluated",
+      "issues": [],
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame."
+      ],
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "CF27_XBOXUNKNOWN_RTG_MOUTHSHAPE_HEAVY",
+      "game_id": "college-football-27",
+      "suspected_game_title": "EA SPORTS College Football 27",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creation_path": "Create Player > Player",
+      "category": "Mouth Shape",
+      "suspected_native_label": "Heavy",
+      "suspected_native_index": 7,
+      "suspected_native_order": 7,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_CF27_BDD75F0CE953"
+      ],
+      "supporting_timestamps": [
+        null
+      ],
+      "supporting_evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_009_mouth_shape_215p5s.png"
+      ],
+      "menu_evidence_path": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_009_mouth_shape_215p5s.png",
+      "normalized_view_paths": [],
+      "extraction_confidence": "high",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [],
+      "recapture_status": "RECAPTURE_REQUIREMENTS_UNRESOLVED",
+      "duplicate_status": "not_evaluated",
+      "issues": [],
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame."
+      ],
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE",
+      "game_id": "college-football-27",
+      "suspected_game_title": "EA SPORTS College Football 27",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creation_path": "Create Player > Player",
+      "category": "Jaw Shape",
+      "suspected_native_label": "Square",
+      "suspected_native_index": 2,
+      "suspected_native_order": 2,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_CF27_BDD75F0CE953"
+      ],
+      "supporting_timestamps": [
+        null
+      ],
+      "supporting_evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_010_jaw_shape_225p5s.png"
+      ],
+      "menu_evidence_path": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_010_jaw_shape_225p5s.png",
+      "normalized_view_paths": [],
+      "extraction_confidence": "high",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [],
+      "recapture_status": "RECAPTURE_REQUIREMENTS_UNRESOLVED",
+      "duplicate_status": "not_evaluated",
+      "issues": [],
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame."
+      ],
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE",
+      "game_id": "college-football-27",
+      "suspected_game_title": "EA SPORTS College Football 27",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creation_path": "Create Player > Player",
+      "category": "Chin",
+      "suspected_native_label": "Square",
+      "suspected_native_index": 2,
+      "suspected_native_order": 2,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_CF27_BDD75F0CE953"
+      ],
+      "supporting_timestamps": [
+        null
+      ],
+      "supporting_evidence_frame_paths": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_011_chin_235p0s.png"
+      ],
+      "menu_evidence_path": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_011_chin_235p0s.png",
+      "normalized_view_paths": [],
+      "extraction_confidence": "high",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [],
+      "recapture_status": "RECAPTURE_REQUIREMENTS_UNRESOLVED",
+      "duplicate_status": "not_evaluated",
+      "issues": [],
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame."
+      ],
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_TONE_SKIN_TONE_3",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Skin Tone",
+      "suspected_native_label": "Skin Tone 3",
+      "suspected_native_index": 3,
+      "suspected_native_order": 3,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        0
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_TONE_SKIN_TONE_9",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Skin Tone",
+      "suspected_native_label": "Skin Tone 9",
+      "suspected_native_index": 9,
+      "suspected_native_order": 9,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        5
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_COMPLEXION_COMPLEXION_3",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Complexion",
+      "suspected_native_label": "Complexion 3",
+      "suspected_native_index": 3,
+      "suspected_native_order": 3,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        0
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_COMPLEXION_COMPLEXION_6",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Complexion",
+      "suspected_native_label": "Complexion 6",
+      "suspected_native_index": 6,
+      "suspected_native_order": 6,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        10
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_COMPLEXION_COMPLEXION_9",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Complexion",
+      "suspected_native_label": "Complexion 9",
+      "suspected_native_index": 9,
+      "suspected_native_order": 9,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        10
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "probable",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_18",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 18",
+      "suspected_native_index": 18,
+      "suspected_native_order": 18,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        0
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_27",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 27",
+      "suspected_native_index": 27,
+      "suspected_native_order": 27,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        20
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_36",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 36",
+      "suspected_native_index": 36,
+      "suspected_native_order": 36,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        25
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_41",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 41",
+      "suspected_native_index": 41,
+      "suspected_native_order": 41,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        30
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_51",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 51",
+      "suspected_native_index": 51,
+      "suspected_native_order": 51,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        35
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SKIN_SURFACE_SKIN_SURFACE_3",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Skin Surface",
+      "suspected_native_label": "Skin Surface 3",
+      "suspected_native_index": 3,
+      "suspected_native_order": 3,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        40
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FRECKLES_NONE",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Freckles",
+      "suspected_native_label": "None",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        0
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FRECKLES_FRECKLES_2",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Freckles",
+      "suspected_native_label": "Freckles 2",
+      "suspected_native_index": 2,
+      "suspected_native_order": 2,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        45
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FRECKLES_FRECKLES_12",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Freckles",
+      "suspected_native_label": "Freckles 12",
+      "suspected_native_index": 12,
+      "suspected_native_order": 12,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        50
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FRECKLES_FRECKLES_3",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Freckles",
+      "suspected_native_label": "Freckles 3",
+      "suspected_native_index": 3,
+      "suspected_native_order": 3,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        55
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_9",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Scarring",
+      "suspected_native_label": "Scarring 9",
+      "suspected_native_index": 9,
+      "suspected_native_order": 9,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        60
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_18",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Scarring",
+      "suspected_native_label": "Scarring 18",
+      "suspected_native_index": 18,
+      "suspected_native_order": 18,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        65
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_26",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Scarring",
+      "suspected_native_label": "Scarring 26",
+      "suspected_native_index": 26,
+      "suspected_native_order": 26,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        70
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_SCARRING_SCARRING_36",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Scarring",
+      "suspected_native_label": "Scarring 36",
+      "suspected_native_index": 36,
+      "suspected_native_order": 36,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        75
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_MOLES_MOLES_2",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Moles",
+      "suspected_native_label": "Moles 2",
+      "suspected_native_index": 2,
+      "suspected_native_order": 2,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        80
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_MOLES_MOLES_7",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Moles",
+      "suspected_native_label": "Moles 7",
+      "suspected_native_index": 7,
+      "suspected_native_order": 7,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        90
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_ROSACEA_ROSACEA_5",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Rosacea",
+      "suspected_native_label": "Rosacea 5",
+      "suspected_native_index": 5,
+      "suspected_native_order": 5,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        100
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FACE_MAKEUP_FACE_MAKEUP_2",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Face Makeup",
+      "suspected_native_label": "Face Makeup 2",
+      "suspected_native_index": 2,
+      "suspected_native_order": 2,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        105
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_LIP_MAKEUP_NONE",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Lip Makeup",
+      "suspected_native_label": "None",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        110
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_1002",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 1002",
+      "suspected_native_index": 1002,
+      "suspected_native_order": 1002,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        115
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_294",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 294",
+      "suspected_native_index": 294,
+      "suspected_native_order": 294,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        120
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_23",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 23",
+      "suspected_native_index": 23,
+      "suspected_native_order": 23,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        125
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_175",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 175",
+      "suspected_native_index": 175,
+      "suspected_native_order": 175,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        130
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_304",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 304",
+      "suspected_native_index": 304,
+      "suspected_native_order": 304,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        135
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_FOREHEAD_FOREHEAD_9",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Forehead",
+      "suspected_native_label": "Forehead 9",
+      "suspected_native_index": 9,
+      "suspected_native_order": 9,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        140
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_226",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 226",
+      "suspected_native_index": 226,
+      "suspected_native_order": 226,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        120
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_260",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 260",
+      "suspected_native_index": 260,
+      "suspected_native_order": 260,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        140
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_9",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 9",
+      "suspected_native_index": 9,
+      "suspected_native_order": 9,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        145
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_151",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 151",
+      "suspected_native_index": 151,
+      "suspected_native_order": 151,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        150
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_294",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 294",
+      "suspected_native_index": 294,
+      "suspected_native_order": 294,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        155
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_JAW_JAW_1002",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Jaw",
+      "suspected_native_label": "Jaw 1002",
+      "suspected_native_index": 1002,
+      "suspected_native_order": 1002,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        160
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_EARS_EARS_175",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Ears",
+      "suspected_native_label": "Ears 175",
+      "suspected_native_index": 175,
+      "suspected_native_order": 175,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        120
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_EARS_EARS_249",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Ears",
+      "suspected_native_label": "Ears 249",
+      "suspected_native_index": 249,
+      "suspected_native_order": 249,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        160
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_EARS_EARS_1006",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Ears",
+      "suspected_native_label": "Ears 1006",
+      "suspected_native_index": 1006,
+      "suspected_native_order": 1006,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        165
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_EARS_EARS_194",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Ears",
+      "suspected_native_label": "Ears 194",
+      "suspected_native_index": 194,
+      "suspected_native_order": 194,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        170
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_EARS_EARS_170",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Ears",
+      "suspected_native_label": "Ears 170",
+      "suspected_native_index": 170,
+      "suspected_native_order": 170,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        180
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_202",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Cheeks",
+      "suspected_native_label": "Cheeks 202",
+      "suspected_native_index": 202,
+      "suspected_native_order": 202,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        160
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_299",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Cheeks",
+      "suspected_native_label": "Cheeks 299",
+      "suspected_native_index": 299,
+      "suspected_native_order": 299,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        180
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_43",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Cheeks",
+      "suspected_native_label": "Cheeks 43",
+      "suspected_native_index": 43,
+      "suspected_native_order": 43,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        185
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_203",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Cheeks",
+      "suspected_native_label": "Cheeks 203",
+      "suspected_native_index": 203,
+      "suspected_native_order": 203,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        190
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_CHEEKS_CHEEKS_226",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Cheeks",
+      "suspected_native_label": "Cheeks 226",
+      "suspected_native_index": 226,
+      "suspected_native_order": 226,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        195
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_226",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Chin",
+      "suspected_native_label": "Chin 226",
+      "suspected_native_index": 226,
+      "suspected_native_order": 226,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        195
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_268",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Chin",
+      "suspected_native_label": "Chin 268",
+      "suspected_native_index": 268,
+      "suspected_native_order": 268,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        190
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_1003",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Chin",
+      "suspected_native_label": "Chin 1003",
+      "suspected_native_index": 1003,
+      "suspected_native_order": 1003,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        200
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_118",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Chin",
+      "suspected_native_label": "Chin 118",
+      "suspected_native_index": 118,
+      "suspected_native_order": 118,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        205
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_CHIN_CHIN_1001",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Chin",
+      "suspected_native_label": "Chin 1001",
+      "suspected_native_index": 1001,
+      "suspected_native_order": 1001,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        210
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_NECK_NECK_241",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Neck",
+      "suspected_native_label": "Neck 241",
+      "suspected_native_index": 241,
+      "suspected_native_order": 241,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        190
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_NECK_NECK_304",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Neck",
+      "suspected_native_label": "Neck 304",
+      "suspected_native_index": 304,
+      "suspected_native_order": 304,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        215
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_NECK_NECK_52",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Neck",
+      "suspected_native_label": "Neck 52",
+      "suspected_native_index": 52,
+      "suspected_native_order": 52,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        220
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HEAD_NECK_NECK_1002",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Neck",
+      "suspected_native_label": "Neck 1002",
+      "suspected_native_index": 1002,
+      "suspected_native_order": 1002,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        230
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYE_COLOUR_LIGHT_GREY",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eye Colour",
+      "suspected_native_label": "Light Grey",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        230
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYE_COLOUR_GREEN",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eye Colour",
+      "suspected_native_label": "Green",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        235
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYE_COLOUR_MEDIUM_GREY",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eye Colour",
+      "suspected_native_label": "Medium Grey",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_6AB6BFCA771C"
+      ],
+      "supporting_timestamps": [
+        240
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYE_COLOUR_LIGHT_BLUE",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eye Colour",
+      "suspected_native_label": "Light Blue",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        0
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_299",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 299",
+      "suspected_native_index": 299,
+      "suspected_native_order": 299,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        0
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_1005",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 1005",
+      "suspected_native_index": 1005,
+      "suspected_native_order": 1005,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        5
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_93",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 93",
+      "suspected_native_index": 93,
+      "suspected_native_order": 93,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        10
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_268",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 268",
+      "suspected_native_index": 268,
+      "suspected_native_order": 268,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        15
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_23",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 23",
+      "suspected_native_index": 23,
+      "suspected_native_order": 23,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        20
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYES_EYES_116",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyes",
+      "suspected_native_label": "Eyes 116",
+      "suspected_native_index": 116,
+      "suspected_native_order": 116,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        30
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_268",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrows",
+      "suspected_native_label": "Eyebrows 268",
+      "suspected_native_index": 268,
+      "suspected_native_order": 268,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        0
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_304",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrows",
+      "suspected_native_label": "Eyebrows 304",
+      "suspected_native_index": 304,
+      "suspected_native_order": 304,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        25
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_1004",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrows",
+      "suspected_native_label": "Eyebrows 1004",
+      "suspected_native_index": 1004,
+      "suspected_native_order": 1004,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        40
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_115",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrows",
+      "suspected_native_label": "Eyebrows 115",
+      "suspected_native_index": 115,
+      "suspected_native_order": 115,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        105
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_EYEBROWS_EYEBROWS_3",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrows",
+      "suspected_native_label": "Eyebrows 3",
+      "suspected_native_index": 3,
+      "suspected_native_order": 3,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        220
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_203",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Nose",
+      "suspected_native_label": "Nose 203",
+      "suspected_native_index": 203,
+      "suspected_native_order": 203,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        40
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_226",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Nose",
+      "suspected_native_label": "Nose 226",
+      "suspected_native_index": 226,
+      "suspected_native_order": 226,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        45
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_1004",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Nose",
+      "suspected_native_label": "Nose 1004",
+      "suspected_native_index": 1004,
+      "suspected_native_order": 1004,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        50
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_116",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Nose",
+      "suspected_native_label": "Nose 116",
+      "suspected_native_index": 116,
+      "suspected_native_order": 116,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        55
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_1002",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Nose",
+      "suspected_native_label": "Nose 1002",
+      "suspected_native_index": 1002,
+      "suspected_native_order": 1002,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        60
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_NOSE_NOSE_294",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Nose",
+      "suspected_native_label": "Nose 294",
+      "suspected_native_index": 294,
+      "suspected_native_order": 294,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        75
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_226",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Mouth",
+      "suspected_native_label": "Mouth 226",
+      "suspected_native_index": 226,
+      "suspected_native_order": 226,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        60
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_304",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Mouth",
+      "suspected_native_label": "Mouth 304",
+      "suspected_native_index": 304,
+      "suspected_native_order": 304,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        65
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_241",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Mouth",
+      "suspected_native_label": "Mouth 241",
+      "suspected_native_index": 241,
+      "suspected_native_order": 241,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        70
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_1001",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Mouth",
+      "suspected_native_label": "Mouth 1001",
+      "suspected_native_index": 1001,
+      "suspected_native_order": 1001,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        75
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_MOUTH_MOUTH_170",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Mouth",
+      "suspected_native_label": "Mouth 170",
+      "suspected_native_index": 170,
+      "suspected_native_order": 170,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        80
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_TEETH_TEETH_6",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Teeth",
+      "suspected_native_label": "Teeth 6",
+      "suspected_native_index": 6,
+      "suspected_native_order": 6,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        80
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_FACE_TEETH_TEETH_2",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Teeth",
+      "suspected_native_label": "Teeth 2",
+      "suspected_native_index": 2,
+      "suspected_native_order": 2,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        85
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_BLACK",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Colour",
+      "suspected_native_label": "Black",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        90
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_MEDIUM_BROWN",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Colour",
+      "suspected_native_label": "Medium Brown",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        100
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_PASTEL_PINK",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Colour",
+      "suspected_native_label": "Pastel Pink",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        110
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_PINK",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Colour",
+      "suspected_native_label": "Pink",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        180
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_GREY",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Colour",
+      "suspected_native_label": "Grey",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        190
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_COLOUR_PERIWINKLE",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Colour",
+      "suspected_native_label": "Periwinkle",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        210
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_GROUP_MEDIUM",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style group",
+      "suspected_native_label": "Medium",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        90
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_GROUP_SHORT",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style group",
+      "suspected_native_label": "Short",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        120
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_GROUP_LONG",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style group",
+      "suspected_native_label": "Long",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        145
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_30",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 30",
+      "suspected_native_index": 30,
+      "suspected_native_order": 30,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        90
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_504",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 504",
+      "suspected_native_index": 504,
+      "suspected_native_order": 504,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        105
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_396",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 396",
+      "suspected_native_index": 396,
+      "suspected_native_order": 396,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        115
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_392",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 392",
+      "suspected_native_index": 392,
+      "suspected_native_order": 392,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        120
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_543",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 543",
+      "suspected_native_index": 543,
+      "suspected_native_order": 543,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        125
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_93",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 93",
+      "suspected_native_index": 93,
+      "suspected_native_order": 93,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        130
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_431",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 431",
+      "suspected_native_index": 431,
+      "suspected_native_order": 431,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        135
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_65",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 65",
+      "suspected_native_index": 65,
+      "suspected_native_order": 65,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        140
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_233",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 233",
+      "suspected_native_index": 233,
+      "suspected_native_order": 233,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        145
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_184",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 184",
+      "suspected_native_index": 184,
+      "suspected_native_order": 184,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        150
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_62",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 62",
+      "suspected_native_index": 62,
+      "suspected_native_order": 62,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        155
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_285",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 285",
+      "suspected_native_index": 285,
+      "suspected_native_order": 285,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        165
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_444",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 444",
+      "suspected_native_index": 444,
+      "suspected_native_order": 444,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        180
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_32",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 32",
+      "suspected_native_index": 32,
+      "suspected_native_order": 32,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        195
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_500",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 500",
+      "suspected_native_index": 500,
+      "suspected_native_order": 500,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        205
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_STYLE_HAIR_STYLE_421",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Hair Style",
+      "suspected_native_label": "Hair Style 421",
+      "suspected_native_index": 421,
+      "suspected_native_order": 421,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        210
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_GOLDEN",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrow & Facial Hair Colour",
+      "suspected_native_label": "Golden",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        90
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_HONEY",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrow & Facial Hair Colour",
+      "suspected_native_label": "Honey",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        170
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_PINK",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrow & Facial Hair Colour",
+      "suspected_native_label": "Pink",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        180
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_GREY",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrow & Facial Hair Colour",
+      "suspected_native_label": "Grey",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        190
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_FACIAL_HAIR_COLOUR_PERIWINKLE",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrow & Facial Hair Colour",
+      "suspected_native_label": "Periwinkle",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        205
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_SHAPE_TOP_STRAIGHT",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrow shape selector, first row",
+      "suspected_native_label": "Straight",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        200
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "probable",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_SHAPE_TOP_S_SHAPED",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrow shape selector, first row",
+      "suspected_native_label": "'S' Shaped",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        180
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "probable",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_EYEBROW_SHAPE_BOTTOM_LOW_ARCH",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Eyebrow shape selector, second row",
+      "suspected_native_label": "Low Arch",
+      "suspected_native_index": null,
+      "suspected_native_order": null,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        180
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "probable",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_288",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 288",
+      "suspected_native_index": 288,
+      "suspected_native_order": 288,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        200
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_38",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 38",
+      "suspected_native_index": 38,
+      "suspected_native_order": 38,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        205
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_37",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 37",
+      "suspected_native_index": 37,
+      "suspected_native_order": 37,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        210
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_27",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 27",
+      "suspected_native_index": 27,
+      "suspected_native_order": 27,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        215
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_285",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 285",
+      "suspected_native_index": 285,
+      "suspected_native_order": 285,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        220
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_239",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 239",
+      "suspected_native_index": 239,
+      "suspected_native_order": 239,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        230
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    },
+    {
+      "stable_candidate_id": "FC26_RESEARCH_FC26_HAIR_FACIAL_HAIR_FACIAL_HAIR_16",
+      "game_id": "ea-sports-fc-26",
+      "suspected_game_title": "EA SPORTS FC 26",
+      "platform": null,
+      "game_version": null,
+      "patch": null,
+      "mode": "Player Creator",
+      "creation_path": "Player Creator",
+      "category": "Facial Hair",
+      "suspected_native_label": "Facial Hair 16",
+      "suspected_native_index": 16,
+      "suspected_native_order": 16,
+      "supporting_source_media_ids": [
+        "GFM_MEDIA_FC26_0C758EB69716"
+      ],
+      "supporting_timestamps": [
+        225
+      ],
+      "supporting_evidence_frame_paths": [],
+      "menu_evidence_path": null,
+      "normalized_view_paths": [],
+      "extraction_confidence": "verified",
+      "primary_review_status": "NEEDS_PRIMARY_REVIEW",
+      "second_verification_status": "NOT_VERIFIED",
+      "production_status": "NOT_PRODUCTION_DATA",
+      "missing_required_views": [
+        "MENU_FRAME_REVIEW_PROXY"
+      ],
+      "recapture_status": "CATEGORY_BOUNDARY_RECAPTURE_REQUIRED",
+      "duplicate_status": "not_evaluated",
+      "issues": [
+        "COMPLETE_SELECTOR_BOUNDARIES_NOT_PROVEN"
+      ],
+      "notes": "FC26 research observation imported for review. Existing research explicitly states this is not production verified.",
+      "generated_at": "2026-08-02T23:25:27.740Z"
+    }
+  ]
+}

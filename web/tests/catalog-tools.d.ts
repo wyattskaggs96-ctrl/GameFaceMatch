@@ -36,3 +36,18 @@ declare module "../../scripts/catalog-tools.mjs" {
   export function rollbackPackage(currentManifest: unknown, targetManifest: unknown, reason?: string): Record<string, unknown>;
   export function formatReport(report: { ok: boolean; scope: string; errors: Array<{ code: string; message: string }>; warnings: string[]; checksum?: string }): string;
 }
+
+declare module "../../scripts/source-media-ingest.mjs" {
+  export function stableSourceMediaID(gameKey: string, sha256: string): string;
+  export function discoverSourceMediaFiles(sourceRootAbsolute: string, root?: string): Array<{
+    absolutePath: string;
+    relativePath: string;
+    originalFilename: string;
+    topLevelSourceFolder: string | null;
+    extension: string;
+    sizeBytes: number;
+    filesystemModifiedAt: string;
+  }>;
+  export function classifySourceMedia(discovered: Record<string, unknown>, metadata?: Record<string, unknown>, root?: string): Record<string, unknown>;
+  export function runSourceMediaIngest(options?: Record<string, unknown>): Promise<Record<string, any>>;
+}

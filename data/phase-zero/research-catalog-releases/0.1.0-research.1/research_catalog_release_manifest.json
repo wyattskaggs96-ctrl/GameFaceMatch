@@ -63,9 +63,9 @@
       "sourceCsvPath": "data/phase-zero/hairstyles.research.csv",
       "jsonOutput": "hairstyles.json",
       "csvOutput": "hairstyles.csv",
-      "recordCount": 0,
+      "recordCount": 1,
       "productionStatus": "NOT_PRODUCTION_DATA",
-      "verificationStatus": "REQUESTED_NOT_CAPTURED"
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
     },
     {
       "key": "hair_colors",
@@ -73,9 +73,9 @@
       "sourceCsvPath": "data/phase-zero/hair_colors.research.csv",
       "jsonOutput": "hair_colors.json",
       "csvOutput": "hair_colors.csv",
-      "recordCount": 0,
+      "recordCount": 1,
       "productionStatus": "NOT_PRODUCTION_DATA",
-      "verificationStatus": "REQUESTED_NOT_CAPTURED"
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
     },
     {
       "key": "facial_hair",
@@ -83,9 +83,9 @@
       "sourceCsvPath": "data/phase-zero/facial_hair.research.csv",
       "jsonOutput": "facial_hair.json",
       "csvOutput": "facial_hair.csv",
-      "recordCount": 0,
+      "recordCount": 1,
       "productionStatus": "NOT_PRODUCTION_DATA",
-      "verificationStatus": "REQUESTED_NOT_CAPTURED"
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
     },
     {
       "key": "facial_hair_colors",
@@ -93,9 +93,9 @@
       "sourceCsvPath": "data/phase-zero/facial_hair_colors.research.csv",
       "jsonOutput": "facial_hair_colors.json",
       "csvOutput": "facial_hair_colors.csv",
-      "recordCount": 0,
+      "recordCount": 1,
       "productionStatus": "NOT_PRODUCTION_DATA",
-      "verificationStatus": "REQUESTED_NOT_CAPTURED"
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
     },
     {
       "key": "additional_attributes",
@@ -133,7 +133,7 @@
       "sourceCsvPath": "data/phase-zero/evidence_manifest.csv",
       "jsonOutput": "evidence_manifest.json",
       "csvOutput": "evidence_manifest.csv",
-      "recordCount": 96,
+      "recordCount": 118,
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
     },
@@ -143,7 +143,7 @@
       "sourceCsvPath": "data/phase-zero/capture_log.csv",
       "jsonOutput": "capture_log.json",
       "csvOutput": "capture_log.csv",
-      "recordCount": 106,
+      "recordCount": 127,
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
     },
@@ -200,15 +200,15 @@
     {
       "fileName": "capture_log.csv",
       "contentType": "text/csv; charset=utf-8",
-      "sha256": "be0ede813afe7c5d4481e7c28cb722bdfcb1aaa10822b74b3ce5670d95bc5b4b",
-      "sizeBytes": 42830,
+      "sha256": "28170854fdd9a6bd63e9dc0bc11bdcb0bbe69dda46b6cb3c672a7e5dd674870e",
+      "sizeBytes": 53709,
       "sourcePath": "data/phase-zero/capture_log.csv"
     },
     {
       "fileName": "capture_log.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "b14b3861e865f17f25479f4af7de3a35b1252a4aaa326dcbd53c0ff76f66fc3a",
-      "sizeBytes": 85160,
+      "sha256": "997174f3b51b881303cf3dd90d741d85cef7d8829ce5dcfa7e46af8678b62d8b",
+      "sizeBytes": 103279,
       "sourcePath": "data/phase-zero/capture_log.json"
     },
     {
@@ -256,71 +256,71 @@
     {
       "fileName": "evidence_manifest.csv",
       "contentType": "text/csv; charset=utf-8",
-      "sha256": "c6f8483c1d4ab3cd12e615b96c1e335896e6fe83d8980bdcdb07775eb52d75d6",
-      "sizeBytes": 48269,
+      "sha256": "df83e7284da50b092b94bdaab7eba76abab9beee177fc707ea76c6e82e435100",
+      "sizeBytes": 61142,
       "sourcePath": "data/phase-zero/evidence_manifest.csv"
     },
     {
       "fileName": "evidence_manifest.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "cf1505e42637278c25fa38ce197650e00b0078824551c1b7edad7dbbbaf3646e",
-      "sizeBytes": 100362,
+      "sha256": "bd64fb59f1a55a59cd3618d2e150b1fec1c75d52a51c39d27eaeb9c0a1ae8b7e",
+      "sizeBytes": 120400,
       "sourcePath": "data/phase-zero/evidence_manifest.json"
     },
     {
       "fileName": "facial_hair_colors.csv",
       "contentType": "text/csv; charset=utf-8",
-      "sha256": "75f7b0a802d7914082fa78211ef90204fa39eb2eb4ebd2875d4f0d3d33c77a02",
-      "sizeBytes": 513,
+      "sha256": "a63b6918e0d7b16ece66760178d331c2b56fc1c9443223285421602df3cedaeb",
+      "sizeBytes": 947,
       "sourcePath": "data/phase-zero/facial_hair_colors.research.csv"
     },
     {
       "fileName": "facial_hair_colors.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "70d5a9ba7d5cffe15460371c4bccd85f4c4151f9a0ff611d0a65baf0e7e79f39",
-      "sizeBytes": 7096,
+      "sha256": "8e402d6588ed2e6759b88efd1efca26c4d17e24869c7fe51760b1a01ee43e868",
+      "sizeBytes": 8787,
       "sourcePath": "data/phase-zero/facial_hair_colors.research.json"
     },
     {
       "fileName": "facial_hair.csv",
       "contentType": "text/csv; charset=utf-8",
-      "sha256": "ee85cd07bdd6244fa118df6f4ecba733418a8a7734d163c86efdeed75e085987",
-      "sizeBytes": 540,
+      "sha256": "32509ad8bbfd678e91d6aa10dc8c19ab41d0b9b3dc76d18a7eec305b6525a6d1",
+      "sizeBytes": 954,
       "sourcePath": "data/phase-zero/facial_hair.research.csv"
     },
     {
       "fileName": "facial_hair.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "7dcf7099dfac43a8f9d855e2ee9b846118781ba81454c1355b547a8771ae7c0a",
-      "sizeBytes": 7041,
+      "sha256": "a90b834ebb4c738b60c4bfe3f80a3ca06c1d3afb97a35c8660d214bf4d38ed08",
+      "sizeBytes": 8722,
       "sourcePath": "data/phase-zero/facial_hair.research.json"
     },
     {
       "fileName": "hair_colors.csv",
       "contentType": "text/csv; charset=utf-8",
-      "sha256": "16e27a2f45e8c5f5207b1de25f150e1b5c76887295e8de7790d772a323d14686",
-      "sizeBytes": 417,
+      "sha256": "07853a373c3a3a6315fa2db357e2c181280de40029a90a5921663f4f7398fd73",
+      "sizeBytes": 937,
       "sourcePath": "data/phase-zero/hair_colors.research.csv"
     },
     {
       "fileName": "hair_colors.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "c4ee3e0396bfe5cf0a8289dd805219e98d48eb7941b99699fda5bda3e0e3a90e",
-      "sizeBytes": 6307,
+      "sha256": "5b13ee0d3a882e35a83e0ea9d659d63a0ed6eaff610b4e76dec2bbbbb576f2ce",
+      "sizeBytes": 7998,
       "sourcePath": "data/phase-zero/hair_colors.research.json"
     },
     {
       "fileName": "hairstyles.csv",
       "contentType": "text/csv; charset=utf-8",
-      "sha256": "83db1a1cf280d9e03d7008e4cc4c93834b93f63ddab6f2541552c44cf3cc13e7",
-      "sizeBytes": 380,
+      "sha256": "8dcaae45974631aebfb4ead2cbcc2232a031fd8a99407fc5be411604e549ca7c",
+      "sizeBytes": 932,
       "sourcePath": "data/phase-zero/hairstyles.research.csv"
     },
     {
       "fileName": "hairstyles.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "95d5ab0919a51c18abf6f259e14ff0bda96a26905f91a47619753c313918f227",
-      "sizeBytes": 6263,
+      "sha256": "5613ed1e42dd3b26f5ddfce0a3cdc860c24f7a178cd9cb9efc3403dad4e96a4f",
+      "sizeBytes": 7958,
       "sourcePath": "data/phase-zero/hairstyles.research.json"
     },
     {
@@ -340,15 +340,15 @@
     {
       "fileName": "issues_and_exceptions.csv",
       "contentType": "text/csv; charset=utf-8",
-      "sha256": "518739256b06e52129a20686781515b7f74fb3fca17f7c207342babe07ccb089",
-      "sizeBytes": 19049,
+      "sha256": "075fc7332fb8cfc0e060945a4570b1bbe4bd77e21ba1caaea6462fc2d046b6d8",
+      "sizeBytes": 19615,
       "sourcePath": "data/phase-zero/issues_register.research.json"
     },
     {
       "fileName": "issues_and_exceptions.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "5a5a0cb1f130509c6e25cf452c87106950eed1b60a53def6dcfea2da7cee89c7",
-      "sizeBytes": 63876,
+      "sha256": "e060f270e4b998c4b62d8073e7667b99588d3f4d61505cf0981843fe69d17364",
+      "sizeBytes": 64596,
       "sourcePath": "data/phase-zero/issues_register.research.json"
     },
     {
@@ -368,8 +368,8 @@
     {
       "fileName": "README.md",
       "contentType": "text/markdown; charset=utf-8",
-      "sha256": "427e8d59dec2fee03943384250a92607468bba5e3448fbb01ee0b5ce6cf36e2f",
-      "sizeBytes": 1239,
+      "sha256": "f4d2a05b7bd28cbb108c2368cbd7756a81d6082b31d68da35418c2c3144ade96",
+      "sizeBytes": 1240,
       "sourcePath": null
     },
     {
@@ -389,8 +389,8 @@
     {
       "fileName": "research_catalog_release_manifest.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "8a885bad7e5be8cec4b25d1d050ad5a874edb53ec2f1cbb5f31f873ce56b0b74",
-      "sizeBytes": 6828,
+      "sha256": "f23ee90925e4f318c4bcc5f9ebcf5c93617527ee668c9eccf12c529de19ec5dd",
+      "sizeBytes": 6857,
       "sourcePath": null
     },
     {
@@ -403,7 +403,7 @@
     {
       "fileName": "research_catalog_release_validation.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "4b1270a4de76bf3a5082c669254b802a7d446dcbacb5d312a891050cc99dfee6",
+      "sha256": "b54f301213b71744bd13bab6d77d5a7c77d3a508604da9bef9d87f16a02b7e01",
       "sizeBytes": 2819,
       "sourcePath": null
     }

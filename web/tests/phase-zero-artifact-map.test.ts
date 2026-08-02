@@ -131,21 +131,25 @@ describe("Phase 0 artifact map", () => {
     const allowedResults = new Set(["FULLY_PROCESSED", "PARTIALLY_PROCESSED", "UNUSABLE", "CORRUPTED", "DUPLICATE", "NEEDS_MANUAL_REVIEW"]);
 
     expect(timeline.videoProcessingResults).toHaveLength(inventory.inventory.length);
-    expect(timeline.summary.fullyProcessedVideos).toBe(9);
+    expect(timeline.summary.fullyProcessedVideos).toBe(12);
     expect(timeline.summary.duplicateVideos).toBe(2);
     expect(timeline.summary.videosNeedingManualReview).toBe(0);
     expect(timeline.summary.corruptedVideos).toBe(0);
     expect(timeline.summary.unusableVideos).toBe(0);
 
     for (const result of timeline.videoProcessingResults) {
-      expect(allowedResults.has(String(result.processing_result)), String(result.video_id)).toBe(true);
-      expect(result.source_video_checksum, String(result.video_id)).toMatch(/^[a-f0-9]{64}$/);
+      const videoID = String(result.video_id ?? result.videoID);
+      const processingResult = String(result.processing_result ?? result.processingResult);
+      const checksum = result.source_video_checksum ?? result.sourceVideoChecksum ?? result.sourceHash;
+
+      expect(allowedResults.has(processingResult), videoID).toBe(true);
+      expect(checksum, videoID).toMatch(/^[a-f0-9]{64}$/);
     }
 
     for (const record of timeline.records) {
       expect(record.source_video_checksum, String(record.timeline_record_id)).toMatch(/^[a-f0-9]{64}$/);
       expect(record.transition_contamination, String(record.timeline_record_id)).toMatch(/YES|NO/);
-      expect(record.model_fully_loaded, String(record.timeline_record_id)).toMatch(/FULLY_LOADED|LOADING_OR_TRANSITION|NOT_APPLICABLE_OR_NOT_VISIBLE|UNKNOWN/);
+      expect(record.model_fully_loaded, String(record.timeline_record_id)).toMatch(/FULLY_LOADED|VISIBLE_PREVIEW_LOADED_FOR_EXTRACTED_FRAME|LOADING_OR_TRANSITION|NOT_APPLICABLE_OR_NOT_VISIBLE|UNKNOWN/);
       expect(record.menu_cursor_hides_relevant_information, String(record.timeline_record_id)).toMatch(/YES|NO/);
     }
 

@@ -24,6 +24,7 @@
     "heads": "data/phase-zero/heads.research.json",
     "additionalAttributes": "data/phase-zero/additional_attributes.research.json",
     "bodyControls": "data/phase-zero/body_controls.research.json",
+    "supplementalCandidates": "data/phase-zero/august_2026_intake_candidates.json",
     "environment": "data/phase-zero/environment_manifest.research.json",
     "creationPaths": "data/phase-zero/creation_paths.research.json",
     "menuMap": "data/phase-zero/menu_map.research.json",
@@ -50,13 +51,13 @@
     "noInferenceRule": "Missing labels, counts, boundaries, ordering, dependencies, paths, or game settings remain unresolved rather than inferred."
   },
   "summary": {
-    "totalResearchCandidates": 85,
+    "totalResearchCandidates": 92,
     "primaryApproved": 0,
-    "primaryApprovedWithNotes": 80,
+    "primaryApprovedWithNotes": 84,
     "recaptureRequired": 0,
     "missingEvidence": 0,
     "labelUnresolved": 0,
-    "orderUnresolved": 0,
+    "orderUnresolved": 3,
     "categoryIncomplete": 0,
     "environmentUnresolved": 0,
     "duplicateReviewRequired": 5,
@@ -89,6 +90,7 @@
       "data/phase-zero/heads.research.json",
       "data/phase-zero/additional_attributes.research.json",
       "data/phase-zero/body_controls.research.json",
+      "data/phase-zero/august_2026_intake_candidates.json",
       "data/phase-zero/evidence_manifest.json",
       "data/phase-zero/video_inventory.json",
       "data/phase-zero/video_timeline.json",
@@ -117,9 +119,10 @@
       "headCandidates": 26,
       "additionalAttributeCandidates": 54,
       "bodyContextCandidates": 5,
-      "evidenceEntries": 96,
-      "videoInventoryRows": 11,
-      "timelineRecords": 106,
+      "supplementalIntakeCandidates": 7,
+      "evidenceEntries": 118,
+      "videoInventoryRows": 14,
+      "timelineRecords": 127,
       "openIssues": 44,
       "gapRows": 22
     }
@@ -179,6 +182,25 @@
       "canBeHandedToVerifier": true,
       "couldBecomeProductionEligibleAfterVerification": false,
       "blocker": "Context only; dependency tests and production environment are unresolved."
+    },
+    {
+      "category": "Chin",
+      "observedCandidateCount": 1,
+      "uniqueCandidateCount": 1,
+      "primaryApprovedCount": 0,
+      "approvedWithNotesCount": 1,
+      "recaptureRequiredCount": 1,
+      "missingEvidenceCount": 0,
+      "unresolvedOrderCount": 1,
+      "unresolvedLabelCount": 0,
+      "duplicateReviewRequiredCount": 0,
+      "firstSelectorOptionProven": false,
+      "lastSelectorOptionProven": false,
+      "selectorWrapBehaviorProven": false,
+      "nativeOrderComplete": false,
+      "canBeHandedToVerifier": true,
+      "couldBecomeProductionEligibleAfterVerification": false,
+      "blocker": "Category boundaries, counts/order, production-standard evidence, second verification, or environment metadata are not complete."
     },
     {
       "category": "Creation paths",
@@ -275,75 +297,79 @@
     },
     {
       "category": "Facial hair",
-      "observedCandidateCount": 0,
-      "uniqueCandidateCount": 0,
+      "observedCandidateCount": 1,
+      "uniqueCandidateCount": 1,
       "primaryApprovedCount": 0,
       "approvedWithNotesCount": 0,
       "recaptureRequiredCount": 1,
       "missingEvidenceCount": 0,
       "unresolvedOrderCount": 1,
       "unresolvedLabelCount": 0,
+      "duplicateReviewRequiredCount": 0,
       "firstSelectorOptionProven": false,
       "lastSelectorOptionProven": false,
       "selectorWrapBehaviorProven": false,
       "nativeOrderComplete": false,
       "canBeHandedToVerifier": false,
       "couldBecomeProductionEligibleAfterVerification": false,
-      "blocker": "No selected option records exist in current evidence."
+      "blocker": "Category boundaries, counts/order, production-standard evidence, second verification, or environment metadata are not complete."
     },
     {
       "category": "Facial-hair colors",
-      "observedCandidateCount": 0,
-      "uniqueCandidateCount": 0,
+      "observedCandidateCount": 1,
+      "uniqueCandidateCount": 1,
       "primaryApprovedCount": 0,
       "approvedWithNotesCount": 0,
       "recaptureRequiredCount": 1,
       "missingEvidenceCount": 0,
       "unresolvedOrderCount": 1,
       "unresolvedLabelCount": 0,
+      "duplicateReviewRequiredCount": 0,
       "firstSelectorOptionProven": false,
       "lastSelectorOptionProven": false,
       "selectorWrapBehaviorProven": false,
       "nativeOrderComplete": false,
       "canBeHandedToVerifier": false,
       "couldBecomeProductionEligibleAfterVerification": false,
-      "blocker": "No selected option records exist in current evidence."
+      "blocker": "Category boundaries, counts/order, production-standard evidence, second verification, or environment metadata are not complete."
     },
     {
       "category": "Hair colors",
-      "observedCandidateCount": 0,
-      "uniqueCandidateCount": 0,
+      "observedCandidateCount": 1,
+      "uniqueCandidateCount": 1,
       "primaryApprovedCount": 0,
       "approvedWithNotesCount": 0,
       "recaptureRequiredCount": 1,
       "missingEvidenceCount": 0,
       "unresolvedOrderCount": 1,
       "unresolvedLabelCount": 0,
+      "duplicateReviewRequiredCount": 0,
       "firstSelectorOptionProven": false,
       "lastSelectorOptionProven": false,
       "selectorWrapBehaviorProven": false,
       "nativeOrderComplete": false,
       "canBeHandedToVerifier": false,
       "couldBecomeProductionEligibleAfterVerification": false,
-      "blocker": "No selected option records exist in current evidence."
+      "blocker": "Category boundaries, counts/order, production-standard evidence, second verification, or environment metadata are not complete."
     },
     {
       "category": "Hairstyles",
-      "observedCandidateCount": 0,
-      "uniqueCandidateCount": 0,
+      "observedCandidateCount": 1,
+      "uniqueCandidateCount": 1,
       "primaryApprovedCount": 0,
-      "approvedWithNotesCount": 0,
+      "approvedWithNotesCount": 1,
       "recaptureRequiredCount": 1,
       "missingEvidenceCount": 0,
       "unresolvedOrderCount": 1,
       "unresolvedLabelCount": 0,
+      "duplicateReviewRequiredCount": 0,
       "firstSelectorOptionProven": false,
       "lastSelectorOptionProven": false,
       "selectorWrapBehaviorProven": false,
       "nativeOrderComplete": false,
-      "canBeHandedToVerifier": false,
+      "canBeHandedToVerifier": true,
       "couldBecomeProductionEligibleAfterVerification": false,
-      "blocker": "No selected option records exist in current evidence."
+      "blocker": "Category boundaries, counts/order, production-standard evidence, second verification, or environment metadata are not complete."
     },
     {
       "category": "Heads",
@@ -357,6 +383,44 @@
       "unresolvedLabelCount": 0,
       "duplicateReviewRequiredCount": 2,
       "firstSelectorOptionProven": true,
+      "lastSelectorOptionProven": false,
+      "selectorWrapBehaviorProven": false,
+      "nativeOrderComplete": false,
+      "canBeHandedToVerifier": true,
+      "couldBecomeProductionEligibleAfterVerification": false,
+      "blocker": "Category boundaries, counts/order, production-standard evidence, second verification, or environment metadata are not complete."
+    },
+    {
+      "category": "Jaw Shape",
+      "observedCandidateCount": 1,
+      "uniqueCandidateCount": 1,
+      "primaryApprovedCount": 0,
+      "approvedWithNotesCount": 1,
+      "recaptureRequiredCount": 1,
+      "missingEvidenceCount": 0,
+      "unresolvedOrderCount": 1,
+      "unresolvedLabelCount": 0,
+      "duplicateReviewRequiredCount": 0,
+      "firstSelectorOptionProven": false,
+      "lastSelectorOptionProven": false,
+      "selectorWrapBehaviorProven": false,
+      "nativeOrderComplete": false,
+      "canBeHandedToVerifier": true,
+      "couldBecomeProductionEligibleAfterVerification": false,
+      "blocker": "Category boundaries, counts/order, production-standard evidence, second verification, or environment metadata are not complete."
+    },
+    {
+      "category": "Mouth Shape",
+      "observedCandidateCount": 1,
+      "uniqueCandidateCount": 1,
+      "primaryApprovedCount": 0,
+      "approvedWithNotesCount": 1,
+      "recaptureRequiredCount": 1,
+      "missingEvidenceCount": 0,
+      "unresolvedOrderCount": 1,
+      "unresolvedLabelCount": 0,
+      "duplicateReviewRequiredCount": 0,
+      "firstSelectorOptionProven": false,
       "lastSelectorOptionProven": false,
       "selectorWrapBehaviorProven": false,
       "nativeOrderComplete": false,
@@ -424,13 +488,94 @@
   ],
   "videoTraceability": {
     "summary": {
-      "sourceVideos": 11,
-      "fullyTraced": 9,
+      "sourceVideos": 14,
+      "fullyTraced": 12,
       "partiallyTraced": 0,
       "documentedDuplicates": 2,
       "candidatesWithoutValidSourceTimestamp": 0
     },
     "videos": [
+      {
+        "videoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+        "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+        "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+        "sha256": "bdd75f0ce953aaf9fda0cb187658b9314ae7f6c21f5ab30d7e474549841037d5",
+        "durationSeconds": 240.24,
+        "ingestStatus": "opens",
+        "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+        "representedCategories": [
+          "Chin",
+          "Jaw Shape",
+          "Mouth Shape"
+        ],
+        "coveredTimestampRange": "0-240.24",
+        "associatedCandidateIDs": [
+          "CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE",
+          "CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE",
+          "CF27_XBOXUNKNOWN_RTG_MOUTHSHAPE_HEAVY"
+        ],
+        "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+        "gaps": [
+          "Does not prove production-quality catalog imagery."
+        ],
+        "duplicateStatus": "UNIQUE_OR_PRIMARY",
+        "lowQualityFootage": true,
+        "provesFullCategoryTraversal": false,
+        "provesSelectorStartAndEndBoundaries": false,
+        "traceabilityStatus": "TRACEABLE"
+      },
+      {
+        "videoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+        "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+        "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+        "sha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+        "durationSeconds": 235.35,
+        "ingestStatus": "opens",
+        "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+        "representedCategories": [
+          "Facial-hair colors",
+          "Facial hair",
+          "Hair colors",
+          "Hairstyles"
+        ],
+        "coveredTimestampRange": "0-235.35",
+        "associatedCandidateIDs": [
+          "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+          "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+          "CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN",
+          "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY"
+        ],
+        "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+        "gaps": [
+          "Does not prove production-quality catalog imagery."
+        ],
+        "duplicateStatus": "UNIQUE_OR_PRIMARY",
+        "lowQualityFootage": true,
+        "provesFullCategoryTraversal": false,
+        "provesSelectorStartAndEndBoundaries": false,
+        "traceabilityStatus": "TRACEABLE"
+      },
+      {
+        "videoID": "CF27_XBOX_SOURCE_2026_08_02_003",
+        "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+        "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+        "sha256": "90a29684f972dff7f41c33fb6457ee545a65c94292647ff9d91be1f1bc168586",
+        "durationSeconds": 163.8,
+        "ingestStatus": "opens",
+        "evidenceExtractionStatus": "EVIDENCE_INDEXED",
+        "representedCategories": [],
+        "coveredTimestampRange": "0-163.8",
+        "associatedCandidateIDs": [],
+        "unusedSections": "Navigation/loading/non-selected timeline sections exist and are not catalog candidates.",
+        "gaps": [
+          "Does not prove production-quality catalog imagery."
+        ],
+        "duplicateStatus": "UNIQUE_OR_PRIMARY",
+        "lowQualityFootage": true,
+        "provesFullCategoryTraversal": false,
+        "provesSelectorStartAndEndBoundaries": false,
+        "traceabilityStatus": "TRACEABLE"
+      },
       {
         "videoID": "phase0-video-001",
         "originalFilename": "01_Environment_and_Creation_Path.MP4",
@@ -778,10 +923,10 @@
   },
   "verifierQueue": {
     "summary": {
-      "records": 85,
-      "readyForEvidenceReview": 80,
+      "records": 92,
+      "readyForEvidenceReview": 84,
       "duplicateOrContinuityReview": 5,
-      "blockedUntilRepairOrRecapture": 0,
+      "blockedUntilRepairOrRecapture": 3,
       "fullProductionVerificationBlocked": true,
       "openCaptureRequests": 10
     },
@@ -908,6 +1053,32 @@
           "NO_CATALOG_MANAGER_APPROVAL",
           "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
           "ENVIRONMENT_UNRESOLVED",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ]
+      },
+      {
+        "candidateID": "CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE",
+        "category": "Chin",
+        "nativeOrder": 2,
+        "nativeVisibleLabelOrIndex": "Square",
+        "primaryReviewStatus": "PRIMARY_APPROVED_WITH_NOTES",
+        "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+        "sourceTimestampRange": "230-240.24",
+        "evidenceIDs": [
+          "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-011"
+        ],
+        "verifierAction": "REVIEW_EVIDENCE_AFTER_INDEPENDENT_COUNT",
+        "mustNotAssume": [
+          "Do not infer missing selector totals.",
+          "Do not treat primary review as verification.",
+          "Do not mark VERIFIED without independent evidence review and sign-off."
+        ],
+        "productionBlockedBy": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
           "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
         ]
       },
@@ -1313,6 +1484,110 @@
         "sourceTimestampRange": "20-24.93",
         "evidenceIDs": [
           "phase0-frame-video-006-tl-006"
+        ],
+        "verifierAction": "REVIEW_EVIDENCE_AFTER_INDEPENDENT_COUNT",
+        "mustNotAssume": [
+          "Do not infer missing selector totals.",
+          "Do not treat primary review as verification.",
+          "Do not mark VERIFIED without independent evidence review and sign-off."
+        ],
+        "productionBlockedBy": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ]
+      },
+      {
+        "candidateID": "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+        "category": "Facial-hair colors",
+        "nativeOrder": null,
+        "nativeVisibleLabelOrIndex": "Purple",
+        "primaryReviewStatus": "ORDER_UNRESOLVED",
+        "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+        "sourceTimestampRange": "225-235.35",
+        "evidenceIDs": [
+          "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-005"
+        ],
+        "verifierAction": "BLOCKED_UNTIL_REPAIR_OR_RECAPTURE",
+        "mustNotAssume": [
+          "Do not infer missing selector totals.",
+          "Do not treat primary review as verification.",
+          "Do not mark VERIFIED without independent evidence review and sign-off."
+        ],
+        "productionBlockedBy": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ]
+      },
+      {
+        "candidateID": "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+        "category": "Facial hair",
+        "nativeOrder": null,
+        "nativeVisibleLabelOrIndex": "Mutton Chops",
+        "primaryReviewStatus": "ORDER_UNRESOLVED",
+        "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+        "sourceTimestampRange": "175-224",
+        "evidenceIDs": [
+          "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-004"
+        ],
+        "verifierAction": "BLOCKED_UNTIL_REPAIR_OR_RECAPTURE",
+        "mustNotAssume": [
+          "Do not infer missing selector totals.",
+          "Do not treat primary review as verification.",
+          "Do not mark VERIFIED without independent evidence review and sign-off."
+        ],
+        "productionBlockedBy": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ]
+      },
+      {
+        "candidateID": "CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN",
+        "category": "Hair colors",
+        "nativeOrder": null,
+        "nativeVisibleLabelOrIndex": "Light Brown",
+        "primaryReviewStatus": "ORDER_UNRESOLVED",
+        "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+        "sourceTimestampRange": "100-174",
+        "evidenceIDs": [
+          "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-003"
+        ],
+        "verifierAction": "BLOCKED_UNTIL_REPAIR_OR_RECAPTURE",
+        "mustNotAssume": [
+          "Do not infer missing selector totals.",
+          "Do not treat primary review as verification.",
+          "Do not mark VERIFIED without independent evidence review and sign-off."
+        ],
+        "productionBlockedBy": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ]
+      },
+      {
+        "candidateID": "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY",
+        "category": "Hairstyles",
+        "nativeOrder": 1,
+        "nativeVisibleLabelOrIndex": "Short Curly",
+        "primaryReviewStatus": "PRIMARY_APPROVED_WITH_NOTES",
+        "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+        "sourceTimestampRange": "5-99",
+        "evidenceIDs": [
+          "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-002"
         ],
         "verifierAction": "REVIEW_EVIDENCE_AFTER_INDEPENDENT_COUNT",
         "mustNotAssume": [
@@ -1993,6 +2268,58 @@
         "sourceTimestampRange": "110-119",
         "evidenceIDs": [
           "phase0-frame-video-003-tl-013"
+        ],
+        "verifierAction": "REVIEW_EVIDENCE_AFTER_INDEPENDENT_COUNT",
+        "mustNotAssume": [
+          "Do not infer missing selector totals.",
+          "Do not treat primary review as verification.",
+          "Do not mark VERIFIED without independent evidence review and sign-off."
+        ],
+        "productionBlockedBy": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ]
+      },
+      {
+        "candidateID": "CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE",
+        "category": "Jaw Shape",
+        "nativeOrder": 2,
+        "nativeVisibleLabelOrIndex": "Square",
+        "primaryReviewStatus": "PRIMARY_APPROVED_WITH_NOTES",
+        "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+        "sourceTimestampRange": "220-229",
+        "evidenceIDs": [
+          "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-010"
+        ],
+        "verifierAction": "REVIEW_EVIDENCE_AFTER_INDEPENDENT_COUNT",
+        "mustNotAssume": [
+          "Do not infer missing selector totals.",
+          "Do not treat primary review as verification.",
+          "Do not mark VERIFIED without independent evidence review and sign-off."
+        ],
+        "productionBlockedBy": [
+          "NOT_SECOND_VERIFIED",
+          "NO_CATALOG_MANAGER_APPROVAL",
+          "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+          "ENVIRONMENT_UNRESOLVED",
+          "CATEGORY_INCOMPLETE",
+          "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+        ]
+      },
+      {
+        "candidateID": "CF27_XBOXUNKNOWN_RTG_MOUTHSHAPE_HEAVY",
+        "category": "Mouth Shape",
+        "nativeOrder": 7,
+        "nativeVisibleLabelOrIndex": "Heavy",
+        "primaryReviewStatus": "PRIMARY_APPROVED_WITH_NOTES",
+        "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+        "sourceTimestampRange": "210-219",
+        "evidenceIDs": [
+          "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-009"
         ],
         "verifierAction": "REVIEW_EVIDENCE_AFTER_INDEPENDENT_COUNT",
         "mustNotAssume": [
@@ -3387,6 +3714,83 @@
       "readyForProductionVerification": false
     },
     {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE",
+      "category": "Chin",
+      "categoryID": "chin",
+      "nativeOrder": 2,
+      "nativeVisibleLabelOrIndex": "Square",
+      "platform": "Xbox",
+      "gameVersion": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "sourceVideoFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceVideoSha256": "bdd75f0ce953aaf9fda0cb187658b9314ae7f6c21f5ab30d7e474549841037d5",
+      "sourceTimestamp": 235,
+      "sourceTimestampRange": "230-240.24",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-011"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_011_chin_235p0s.png"
+      ],
+      "selectedValueVisible": true,
+      "categoryVisible": true,
+      "optionTransitionObservable": true,
+      "neighboringOptionsEstablishOrdering": "VISIBLE_GRID_ORDER_SUPPORTS_SELECTED_VALUE_ORDER_WITHIN_OBSERVED_VIEW",
+      "firstSelectorOptionKnown": true,
+      "finalSelectorOptionKnown": true,
+      "selectorWrapKnown": false,
+      "framingSufficient": false,
+      "visualFeaturesUnobstructed": false,
+      "evidenceConditionsConsistent": false,
+      "duplicated": false,
+      "ambiguous": false,
+      "unsupportedInterpretation": false,
+      "evidenceResolved": true,
+      "timelineResolved": true,
+      "sourceVideoResolved": true,
+      "environmentResolved": false,
+      "unresolvedEnvironmentFields": [
+        "gameVersion",
+        "patchVersion",
+        "consoleModel",
+        "consoleOSVersion",
+        "edition",
+        "storefrontRegion",
+        "copyType",
+        "entitlementStatus"
+      ],
+      "productionEligible": false,
+      "productionRecommendationsEnabled": false,
+      "secondVerificationStatus": "NOT_VERIFIED",
+      "catalogManagerDisposition": "NOT_REVIEWED",
+      "sortKey": "chin:0002:CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE",
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame.",
+        "Supplemental August 2026 intake observation is primary research only.",
+        "The selected native value is directly readable in the cited frame, but complete selector boundaries and second verification remain unresolved.",
+        "No supplemental record is eligible for production recommendations."
+      ],
+      "primaryReviewStatus": "PRIMARY_APPROVED_WITH_NOTES",
+      "primaryReviewReasons": [
+        "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+      ],
+      "publicationBlockers": [
+        "NOT_SECOND_VERIFIED",
+        "NO_CATALOG_MANAGER_APPROVAL",
+        "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+        "ENVIRONMENT_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+      ],
+      "readyForPrimaryApproval": true,
+      "readyForVerifierEvidenceReview": true,
+      "readyForProductionVerification": false
+    },
+    {
       "candidateID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_001",
       "category": "Ear Shape",
       "categoryID": "ear-shape",
@@ -4588,6 +4992,314 @@
         "Eye Shape selector boundaries, default, wrap behavior, and total count are not fully proven.",
         "Current evidence is primary research only and not standardized for production comparison.",
         "Second-person verification has not occurred."
+      ],
+      "primaryReviewStatus": "PRIMARY_APPROVED_WITH_NOTES",
+      "primaryReviewReasons": [
+        "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+      ],
+      "publicationBlockers": [
+        "NOT_SECOND_VERIFIED",
+        "NO_CATALOG_MANAGER_APPROVAL",
+        "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+        "ENVIRONMENT_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+      ],
+      "readyForPrimaryApproval": true,
+      "readyForVerifierEvidenceReview": true,
+      "readyForProductionVerification": false
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+      "category": "Facial-hair colors",
+      "categoryID": "facial-hair-colors",
+      "nativeOrder": null,
+      "nativeVisibleLabelOrIndex": "Purple",
+      "platform": "Xbox",
+      "gameVersion": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceVideoFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceVideoSha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+      "sourceTimestamp": 225.5,
+      "sourceTimestampRange": "225-235.35",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-005"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_005_facial_hair_color_225p5s.png"
+      ],
+      "selectedValueVisible": true,
+      "categoryVisible": true,
+      "optionTransitionObservable": true,
+      "neighboringOptionsEstablishOrdering": "VISIBLE_NEIGHBORS_BUT_SCROLLED_ORDER_UNRESOLVED",
+      "firstSelectorOptionKnown": false,
+      "finalSelectorOptionKnown": false,
+      "selectorWrapKnown": false,
+      "framingSufficient": false,
+      "visualFeaturesUnobstructed": false,
+      "evidenceConditionsConsistent": false,
+      "duplicated": false,
+      "ambiguous": true,
+      "unsupportedInterpretation": false,
+      "evidenceResolved": true,
+      "timelineResolved": true,
+      "sourceVideoResolved": true,
+      "environmentResolved": false,
+      "unresolvedEnvironmentFields": [
+        "gameVersion",
+        "patchVersion",
+        "consoleModel",
+        "consoleOSVersion",
+        "edition",
+        "storefrontRegion",
+        "copyType",
+        "entitlementStatus"
+      ],
+      "productionEligible": false,
+      "productionRecommendationsEnabled": false,
+      "secondVerificationStatus": "NOT_VERIFIED",
+      "catalogManagerDisposition": "NOT_REVIEWED",
+      "sortKey": "facial-hair-colors:9999:CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame.",
+        "Supplemental August 2026 intake observation is primary research only.",
+        "The selected native value is directly readable in the cited frame, but complete selector boundaries and second verification remain unresolved.",
+        "No supplemental record is eligible for production recommendations."
+      ],
+      "primaryReviewStatus": "ORDER_UNRESOLVED",
+      "primaryReviewReasons": [
+        "ORDER_UNRESOLVED"
+      ],
+      "publicationBlockers": [
+        "NOT_SECOND_VERIFIED",
+        "NO_CATALOG_MANAGER_APPROVAL",
+        "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+        "ENVIRONMENT_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+      ],
+      "readyForPrimaryApproval": false,
+      "readyForVerifierEvidenceReview": false,
+      "readyForProductionVerification": false
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+      "category": "Facial hair",
+      "categoryID": "facial-hair",
+      "nativeOrder": null,
+      "nativeVisibleLabelOrIndex": "Mutton Chops",
+      "platform": "Xbox",
+      "gameVersion": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceVideoFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceVideoSha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+      "sourceTimestamp": 175.5,
+      "sourceTimestampRange": "175-224",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-004"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_004_facial_hair_style_175p5s.png"
+      ],
+      "selectedValueVisible": true,
+      "categoryVisible": true,
+      "optionTransitionObservable": true,
+      "neighboringOptionsEstablishOrdering": "VISIBLE_NEIGHBORS_BUT_SCROLLED_ORDER_UNRESOLVED",
+      "firstSelectorOptionKnown": false,
+      "finalSelectorOptionKnown": false,
+      "selectorWrapKnown": false,
+      "framingSufficient": false,
+      "visualFeaturesUnobstructed": false,
+      "evidenceConditionsConsistent": false,
+      "duplicated": false,
+      "ambiguous": true,
+      "unsupportedInterpretation": false,
+      "evidenceResolved": true,
+      "timelineResolved": true,
+      "sourceVideoResolved": true,
+      "environmentResolved": false,
+      "unresolvedEnvironmentFields": [
+        "gameVersion",
+        "patchVersion",
+        "consoleModel",
+        "consoleOSVersion",
+        "edition",
+        "storefrontRegion",
+        "copyType",
+        "entitlementStatus"
+      ],
+      "productionEligible": false,
+      "productionRecommendationsEnabled": false,
+      "secondVerificationStatus": "NOT_VERIFIED",
+      "catalogManagerDisposition": "NOT_REVIEWED",
+      "sortKey": "facial-hair:9999:CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame.",
+        "Supplemental August 2026 intake observation is primary research only.",
+        "The selected native value is directly readable in the cited frame, but complete selector boundaries and second verification remain unresolved.",
+        "No supplemental record is eligible for production recommendations."
+      ],
+      "primaryReviewStatus": "ORDER_UNRESOLVED",
+      "primaryReviewReasons": [
+        "ORDER_UNRESOLVED"
+      ],
+      "publicationBlockers": [
+        "NOT_SECOND_VERIFIED",
+        "NO_CATALOG_MANAGER_APPROVAL",
+        "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+        "ENVIRONMENT_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+      ],
+      "readyForPrimaryApproval": false,
+      "readyForVerifierEvidenceReview": false,
+      "readyForProductionVerification": false
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN",
+      "category": "Hair colors",
+      "categoryID": "hair-colors",
+      "nativeOrder": null,
+      "nativeVisibleLabelOrIndex": "Light Brown",
+      "platform": "Xbox",
+      "gameVersion": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceVideoFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceVideoSha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+      "sourceTimestamp": 100.5,
+      "sourceTimestampRange": "100-174",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-003"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_003_hair_color_100p5s.png"
+      ],
+      "selectedValueVisible": true,
+      "categoryVisible": true,
+      "optionTransitionObservable": true,
+      "neighboringOptionsEstablishOrdering": "VISIBLE_NEIGHBORS_BUT_SCROLLED_ORDER_UNRESOLVED",
+      "firstSelectorOptionKnown": false,
+      "finalSelectorOptionKnown": false,
+      "selectorWrapKnown": false,
+      "framingSufficient": false,
+      "visualFeaturesUnobstructed": false,
+      "evidenceConditionsConsistent": false,
+      "duplicated": false,
+      "ambiguous": true,
+      "unsupportedInterpretation": false,
+      "evidenceResolved": true,
+      "timelineResolved": true,
+      "sourceVideoResolved": true,
+      "environmentResolved": false,
+      "unresolvedEnvironmentFields": [
+        "gameVersion",
+        "patchVersion",
+        "consoleModel",
+        "consoleOSVersion",
+        "edition",
+        "storefrontRegion",
+        "copyType",
+        "entitlementStatus"
+      ],
+      "productionEligible": false,
+      "productionRecommendationsEnabled": false,
+      "secondVerificationStatus": "NOT_VERIFIED",
+      "catalogManagerDisposition": "NOT_REVIEWED",
+      "sortKey": "hair-colors:9999:CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN",
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame.",
+        "Supplemental August 2026 intake observation is primary research only.",
+        "The selected native value is directly readable in the cited frame, but complete selector boundaries and second verification remain unresolved.",
+        "No supplemental record is eligible for production recommendations."
+      ],
+      "primaryReviewStatus": "ORDER_UNRESOLVED",
+      "primaryReviewReasons": [
+        "ORDER_UNRESOLVED"
+      ],
+      "publicationBlockers": [
+        "NOT_SECOND_VERIFIED",
+        "NO_CATALOG_MANAGER_APPROVAL",
+        "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+        "ENVIRONMENT_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+      ],
+      "readyForPrimaryApproval": false,
+      "readyForVerifierEvidenceReview": false,
+      "readyForProductionVerification": false
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY",
+      "category": "Hairstyles",
+      "categoryID": "hairstyles",
+      "nativeOrder": 1,
+      "nativeVisibleLabelOrIndex": "Short Curly",
+      "platform": "Xbox",
+      "gameVersion": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceVideoFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceVideoSha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+      "sourceTimestamp": 5.5,
+      "sourceTimestampRange": "5-99",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-002"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_002_hair_style_5p5s.png"
+      ],
+      "selectedValueVisible": true,
+      "categoryVisible": true,
+      "optionTransitionObservable": true,
+      "neighboringOptionsEstablishOrdering": "VISIBLE_GRID_ORDER_SUPPORTS_SELECTED_VALUE_ORDER_WITHIN_OBSERVED_VIEW",
+      "firstSelectorOptionKnown": true,
+      "finalSelectorOptionKnown": false,
+      "selectorWrapKnown": false,
+      "framingSufficient": false,
+      "visualFeaturesUnobstructed": false,
+      "evidenceConditionsConsistent": false,
+      "duplicated": false,
+      "ambiguous": false,
+      "unsupportedInterpretation": false,
+      "evidenceResolved": true,
+      "timelineResolved": true,
+      "sourceVideoResolved": true,
+      "environmentResolved": false,
+      "unresolvedEnvironmentFields": [
+        "gameVersion",
+        "patchVersion",
+        "consoleModel",
+        "consoleOSVersion",
+        "edition",
+        "storefrontRegion",
+        "copyType",
+        "entitlementStatus"
+      ],
+      "productionEligible": false,
+      "productionRecommendationsEnabled": false,
+      "secondVerificationStatus": "NOT_VERIFIED",
+      "catalogManagerDisposition": "NOT_REVIEWED",
+      "sortKey": "hairstyles:0001:CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY",
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame.",
+        "Supplemental August 2026 intake observation is primary research only.",
+        "The selected native value is directly readable in the cited frame, but complete selector boundaries and second verification remain unresolved.",
+        "No supplemental record is eligible for production recommendations."
       ],
       "primaryReviewStatus": "PRIMARY_APPROVED_WITH_NOTES",
       "primaryReviewReasons": [
@@ -6570,6 +7282,160 @@
         "Head category count/order is incomplete.",
         "Current head footage is valid menu/order research evidence but requires standardized recapture for production comparison.",
         "Eye black, hair/facial-hair state, zoom, framing, and final selector boundary are not production locked."
+      ],
+      "primaryReviewStatus": "PRIMARY_APPROVED_WITH_NOTES",
+      "primaryReviewReasons": [
+        "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+      ],
+      "publicationBlockers": [
+        "NOT_SECOND_VERIFIED",
+        "NO_CATALOG_MANAGER_APPROVAL",
+        "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+        "ENVIRONMENT_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+      ],
+      "readyForPrimaryApproval": true,
+      "readyForVerifierEvidenceReview": true,
+      "readyForProductionVerification": false
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE",
+      "category": "Jaw Shape",
+      "categoryID": "jaw-shape",
+      "nativeOrder": 2,
+      "nativeVisibleLabelOrIndex": "Square",
+      "platform": "Xbox",
+      "gameVersion": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "sourceVideoFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceVideoSha256": "bdd75f0ce953aaf9fda0cb187658b9314ae7f6c21f5ab30d7e474549841037d5",
+      "sourceTimestamp": 225.5,
+      "sourceTimestampRange": "220-229",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-010"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_010_jaw_shape_225p5s.png"
+      ],
+      "selectedValueVisible": true,
+      "categoryVisible": true,
+      "optionTransitionObservable": true,
+      "neighboringOptionsEstablishOrdering": "VISIBLE_GRID_ORDER_SUPPORTS_SELECTED_VALUE_ORDER_WITHIN_OBSERVED_VIEW",
+      "firstSelectorOptionKnown": true,
+      "finalSelectorOptionKnown": true,
+      "selectorWrapKnown": false,
+      "framingSufficient": false,
+      "visualFeaturesUnobstructed": false,
+      "evidenceConditionsConsistent": false,
+      "duplicated": false,
+      "ambiguous": false,
+      "unsupportedInterpretation": false,
+      "evidenceResolved": true,
+      "timelineResolved": true,
+      "sourceVideoResolved": true,
+      "environmentResolved": false,
+      "unresolvedEnvironmentFields": [
+        "gameVersion",
+        "patchVersion",
+        "consoleModel",
+        "consoleOSVersion",
+        "edition",
+        "storefrontRegion",
+        "copyType",
+        "entitlementStatus"
+      ],
+      "productionEligible": false,
+      "productionRecommendationsEnabled": false,
+      "secondVerificationStatus": "NOT_VERIFIED",
+      "catalogManagerDisposition": "NOT_REVIEWED",
+      "sortKey": "jaw-shape:0002:CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE",
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame.",
+        "Supplemental August 2026 intake observation is primary research only.",
+        "The selected native value is directly readable in the cited frame, but complete selector boundaries and second verification remain unresolved.",
+        "No supplemental record is eligible for production recommendations."
+      ],
+      "primaryReviewStatus": "PRIMARY_APPROVED_WITH_NOTES",
+      "primaryReviewReasons": [
+        "VISIBLE_RESEARCH_OBSERVATION_ACCEPTED_WITH_NOTES"
+      ],
+      "publicationBlockers": [
+        "NOT_SECOND_VERIFIED",
+        "NO_CATALOG_MANAGER_APPROVAL",
+        "NOT_IN_APPROVED_IMMUTABLE_PRODUCTION_RELEASE",
+        "ENVIRONMENT_UNRESOLVED",
+        "CATEGORY_INCOMPLETE",
+        "RECAPTURE_REQUIRED_FOR_PRODUCTION_COMPARISON"
+      ],
+      "readyForPrimaryApproval": true,
+      "readyForVerifierEvidenceReview": true,
+      "readyForProductionVerification": false
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_MOUTHSHAPE_HEAVY",
+      "category": "Mouth Shape",
+      "categoryID": "mouth-shape",
+      "nativeOrder": 7,
+      "nativeVisibleLabelOrIndex": "Heavy",
+      "platform": "Xbox",
+      "gameVersion": null,
+      "patch": null,
+      "mode": "Road to Glory",
+      "creationPath": "Main interface > Road to Glory > Road to Glory Setup > Journey type cards > Choose Your Position > QB > Create Player > Player > Appearance > Head & Skin visible",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "sourceVideoFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceVideoSha256": "bdd75f0ce953aaf9fda0cb187658b9314ae7f6c21f5ab30d7e474549841037d5",
+      "sourceTimestamp": 215.5,
+      "sourceTimestampRange": "210-219",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-009"
+      ],
+      "evidenceFiles": [
+        "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_009_mouth_shape_215p5s.png"
+      ],
+      "selectedValueVisible": true,
+      "categoryVisible": true,
+      "optionTransitionObservable": true,
+      "neighboringOptionsEstablishOrdering": "VISIBLE_GRID_ORDER_SUPPORTS_SELECTED_VALUE_ORDER_WITHIN_OBSERVED_VIEW",
+      "firstSelectorOptionKnown": true,
+      "finalSelectorOptionKnown": true,
+      "selectorWrapKnown": false,
+      "framingSufficient": false,
+      "visualFeaturesUnobstructed": false,
+      "evidenceConditionsConsistent": false,
+      "duplicated": false,
+      "ambiguous": false,
+      "unsupportedInterpretation": false,
+      "evidenceResolved": true,
+      "timelineResolved": true,
+      "sourceVideoResolved": true,
+      "environmentResolved": false,
+      "unresolvedEnvironmentFields": [
+        "gameVersion",
+        "patchVersion",
+        "consoleModel",
+        "consoleOSVersion",
+        "edition",
+        "storefrontRegion",
+        "copyType",
+        "entitlementStatus"
+      ],
+      "productionEligible": false,
+      "productionRecommendationsEnabled": false,
+      "secondVerificationStatus": "NOT_VERIFIED",
+      "catalogManagerDisposition": "NOT_REVIEWED",
+      "sortKey": "mouth-shape:0007:CF27_XBOXUNKNOWN_RTG_MOUTHSHAPE_HEAVY",
+      "notes": [
+        "Directly selected native label is readable in the cited August 2026 frame.",
+        "Supplemental August 2026 intake observation is primary research only.",
+        "The selected native value is directly readable in the cited frame, but complete selector boundaries and second verification remain unresolved.",
+        "No supplemental record is eligible for production recommendations."
       ],
       "primaryReviewStatus": "PRIMARY_APPROVED_WITH_NOTES",
       "primaryReviewReasons": [

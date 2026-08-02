@@ -510,8 +510,8 @@ function field(name, required, description) {
 
 function validateClosurePackage({ plan, traceability, intakeTemplate }) {
   const errors = [];
-  if (plan.sourceCounts.totalResearchCandidates !== 85) errors.push(`Expected 85 current research candidates, found ${plan.sourceCounts.totalResearchCandidates}.`);
-  if (plan.sourceCounts.primaryApprovedWithNotes !== 80) errors.push(`Expected 80 PRIMARY_APPROVED_WITH_NOTES candidates, found ${plan.sourceCounts.primaryApprovedWithNotes}.`);
+  if (plan.sourceCounts.totalResearchCandidates !== 92) errors.push(`Expected 92 current research candidates after August 2026 intake, found ${plan.sourceCounts.totalResearchCandidates}.`);
+  if (plan.sourceCounts.primaryApprovedWithNotes !== 84) errors.push(`Expected 84 PRIMARY_APPROVED_WITH_NOTES candidates after August 2026 intake, found ${plan.sourceCounts.primaryApprovedWithNotes}.`);
   if (plan.sourceCounts.duplicateReviewRequired !== 5) errors.push(`Expected 5 DUPLICATE_REVIEW_REQUIRED candidates, found ${plan.sourceCounts.duplicateReviewRequired}.`);
   if (plan.sourceCounts.secondVerified !== 0) errors.push(`Expected 0 second-verified records, found ${plan.sourceCounts.secondVerified}.`);
   if (plan.sourceCounts.productionApproved !== 0 || plan.sourceCounts.productionRecords !== 0) errors.push("Production catalog must remain empty for this closure package.");

@@ -11,14 +11,14 @@ This checkpoint moves the current 85 evidence-backed research candidates into an
 
 | Funnel stage | Count |
 | --- | ---: |
-| Total research candidates | 85 |
+| Total research candidates | 92 |
 | Primary approved | 0 |
-| Primary approved with notes | 80 |
+| Primary approved with notes | 84 |
 | Duplicate review required | 5 |
 | Recapture required as primary status | 0 |
 | Missing evidence | 0 |
 | Label unresolved | 0 |
-| Order unresolved | 0 |
+| Order unresolved | 3 |
 | Category incomplete as primary status | 0 |
 | Environment unresolved as primary status | 0 |
 | Not reviewed | 0 |
@@ -30,7 +30,7 @@ This checkpoint moves the current 85 evidence-backed research candidates into an
 - Canonical Phase 0 machine-readable artifacts are under `data/phase-zero/`.
 - Older `data/research/cf27/exports/partial-research-catalog-current/` and `docs/catalog/` files are preserved for provenance but are not the current count authority.
 - Current normalized candidate count is 85: 26 heads, 54 additional appearance controls, and 5 body/context records.
-- Current evidence manifest has 96 entries and current video inventory has 11 rows.
+- Current evidence manifest has 118 entries and current video inventory has 14 rows.
 - Conflicting older count noted: older partial exports reported 86 research records; this primary review uses the canonical 85 candidates from `data/phase-zero`.
 - Broken evidence paths found by this primary-review layer: 0.
 - Fixture or placeholder asset references in candidate evidence: 0.
@@ -48,30 +48,36 @@ This checkpoint moves the current 85 evidence-backed research candidates into an
 | Additional sliders/toggles/colors/presets | 0 | 0 | 0 |  | 1 | 0 | 1 | 0 | false | false |
 | Appearance menu hierarchy | 93 | 93 | 0 |  | 13 | 0 | 13 | 0 | true | false |
 | Body-related appearance controls | 5 | 5 | 5 | 0 | 5 | 0 | 0 | 0 | true | false |
+| Chin | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | true | false |
 | Creation paths | 1 | 1 | 1 |  | 1 | 0 | 0 | 0 | true | false |
 | Ear Shape | 4 | 4 | 3 | 1 | 4 | 0 | 4 | 0 | true | false |
 | Eye Color | 7 | 7 | 7 | 0 | 7 | 0 | 7 | 0 | true | false |
 | Eye Shape | 5 | 5 | 5 | 0 | 5 | 0 | 5 | 0 | true | false |
 | Eyebrows | 0 | 0 | 0 |  | 1 | 0 | 1 | 0 | false | false |
-| Facial hair | 0 | 0 | 0 |  | 1 | 0 | 1 | 0 | false | false |
-| Facial-hair colors | 0 | 0 | 0 |  | 1 | 0 | 1 | 0 | false | false |
-| Hair colors | 0 | 0 | 0 |  | 1 | 0 | 1 | 0 | false | false |
-| Hairstyles | 0 | 0 | 0 |  | 1 | 0 | 1 | 0 | false | false |
+| Facial hair | 1 | 1 | 0 | 0 | 1 | 0 | 1 | 0 | false | false |
+| Facial-hair colors | 1 | 1 | 0 | 0 | 1 | 0 | 1 | 0 | false | false |
+| Hair colors | 1 | 1 | 0 | 0 | 1 | 0 | 1 | 0 | false | false |
+| Hairstyles | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | true | false |
 | Heads | 26 | 26 | 24 | 2 | 26 | 0 | 26 | 0 | true | false |
+| Jaw Shape | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | true | false |
+| Mouth Shape | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 0 | true | false |
 | Nose | 7 | 7 | 6 | 1 | 7 | 0 | 7 | 0 | true | false |
 | Skin Details | 10 | 10 | 10 | 0 | 10 | 0 | 10 | 0 | true | false |
 | Skin Tone | 21 | 21 | 20 | 1 | 21 | 0 | 21 | 0 | true | false |
 
 ## Video Traceability
 
-- Source video inventory rows: 11.
-- Fully traced unique source videos: 9.
+- Source video inventory rows: 14.
+- Fully traced unique source videos: 12.
 - Documented duplicate source files: 2.
 - Partially traced videos: 0.
 - Candidates without valid source timestamp: 0.
 
 | Video ID | Canonical filename | Ingest | Extraction | Categories | Candidates | Traceability | Full traversal |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| CF27_XBOX_SOURCE_2026_08_02_001 | EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4 | opens | EVIDENCE_INDEXED | Chin; Jaw Shape; Mouth Shape | 3 | TRACEABLE | false |
+| CF27_XBOX_SOURCE_2026_08_02_002 | EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4 | opens | EVIDENCE_INDEXED | Facial-hair colors; Facial hair; Hair colors; Hairstyles | 4 | TRACEABLE | false |
+| CF27_XBOX_SOURCE_2026_08_02_003 | EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4 | opens | EVIDENCE_INDEXED |  | 0 | TRACEABLE | false |
 | phase0-video-001 | 01_Environment_and_Creation_Path.mp4 | opens | EVIDENCE_INDEXED | Body-related appearance controls | 5 | TRACEABLE | false |
 | phase0-video-002 | 02_Head_Templates_Faces_01-12.mov | opens | EVIDENCE_INDEXED | Heads | 11 | TRACEABLE | false |
 | phase0-video-003 | 03_Head_Templates_Faces_12-29.mov | opens | EVIDENCE_INDEXED | Heads | 15 | TRACEABLE | false |

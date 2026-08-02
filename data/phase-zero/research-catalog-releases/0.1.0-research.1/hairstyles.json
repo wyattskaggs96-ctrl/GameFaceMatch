@@ -1,12 +1,12 @@
 {
   "schemaVersion": "cf27-hairstyle-research-catalog-v1",
-  "generatedAt": "2026-07-14T02:30:00-04:00",
+  "generatedAt": "2026-08-02T22:50:00-04:00",
   "project": "GameFace Match",
   "game": "EA SPORTS College Football 27",
   "dataClass": "PHASE_ZERO_HAIRSTYLE_RESEARCH_CATALOG",
   "sourceType": "shippingGameVideoResearch",
   "productionStatus": "NOT_PRODUCTION_DATA",
-  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
   "productionRecommendationsEnabled": false,
   "sourceMenuMap": "data/phase-zero/menu_map.research.json",
   "sourceCaptureRequests": "data/phase-zero/capture_requests.json",
@@ -17,18 +17,18 @@
     "Researcher-applied visual metadata must remain separate from native game labels."
   ],
   "summary": {
-    "recordCount": 0,
+    "recordCount": 1,
     "productionEligibleRecords": 0,
     "hairMenuRowObserved": true,
     "hairstyleSelectorOpened": false,
     "hairstyleNativeValuesObserved": false,
     "completeSelectorDoubleCountAvailable": false,
-    "nativeOrderStatus": "NOT_OBSERVED",
+    "nativeOrderStatus": "PARTIAL_ORDER_OBSERVED",
     "countStatus": "COUNT_UNKNOWN",
     "noneShavedOrShortestOptionStatus": "NOT_IDENTIFIED_NO_SELECTOR_EVIDENCE",
-    "evidenceExtractionStatus": "NO_HAIRSTYLE_OPTION_FRAMES_AVAILABLE",
+    "evidenceExtractionStatus": "PARTIAL_AUGUST_2026_SELECTED_VALUE_EVIDENCE_AVAILABLE",
     "recaptureRequired": true,
-    "blocker": "Current evidence shows the Hair submenu row only. It does not open a hairstyle control or select hairstyle values."
+    "blocker": "August 2026 source recordings provide directly selected values, but complete selector boundaries, repeat counts, dependencies, and second verification remain unresolved."
   },
   "canonicalContext": {
     "canonicalHead": "UNCONFIRMED_NOT_CAPTURED",
@@ -116,7 +116,19 @@
         "Rear view is included for hair shape/length."
       ]
     },
-    "hairstyleOptionEvidence": []
+    "hairstyleOptionEvidence": [],
+    "august2026SourceRecordings": [
+      {
+        "candidateID": "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY",
+        "evidenceIDs": [
+          "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-002"
+        ],
+        "evidenceFiles": [
+          "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_002_hair_style_5p5s.png"
+        ],
+        "sourceTimestampRange": "5-99"
+      }
+    ]
   },
   "viewCoverage": {
     "requiredViews": [
@@ -163,5 +175,28 @@
     ],
     "separationRule": "Any future visual tags must be stored under researcherAppliedVisualMetadata, separate from nativeGameLabel."
   },
-  "records": []
+  "records": [
+    {
+      "stableResearchID": "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY",
+      "nativeOrder": 1,
+      "nativeGameLabel": "Short Curly",
+      "nativeIndex": null,
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceTimestamp": 5.5,
+      "menuEvidencePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_002_hair_style_5p5s.png",
+      "frontEvidencePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_002_hair_style_5p5s.png",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-002"
+      ],
+      "selectedValueVisible": true,
+      "selectorBoundaryStatus": "BOUNDARIES_UNKNOWN",
+      "selectorWrapStatus": "NOT_DEMONSTRATED",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "dependencyObservations": "UNKNOWN_NOT_TESTED",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "productionRecommendationsEnabled": false,
+      "recaptureStatus": "RECAPTURE_REQUIRED_FOR_COMPLETE_SELECTOR_AND_PRODUCTION_STANDARDIZATION"
+    }
+  ]
 }

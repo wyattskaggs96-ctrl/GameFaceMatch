@@ -1,6 +1,6 @@
 {
   "schemaVersion": "cf27-detailed-facial-controls-research-catalog-v1",
-  "generatedAt": "2026-07-14T01:15:00-04:00",
+  "generatedAt": "2026-08-02T22:50:00-04:00",
   "project": "GameFace Match",
   "game": "EA SPORTS College Football 27",
   "dataClass": "RESEARCH_CANDIDATE",
@@ -13,7 +13,7 @@
     "directlyObservedControlCount": 6,
     "menuOnlyObservedControlCount": 3,
     "requestedTermCount": 22,
-    "directlyObservedValueCount": 54,
+    "directlyObservedValueCount": 57,
     "productionEligibleRecordCount": 0,
     "observedNativeControls": [
       "Skin Tone",
@@ -51,7 +51,8 @@
       "Blends",
       "Sliders",
       "Fine-Tuning Controls"
-    ]
+    ],
+    "august2026SupplementalValues": 3
   },
   "rules": [
     "This catalog preserves only directly observed native labels and values.",
@@ -4377,6 +4378,72 @@
       "evidenceFramePath": "data/research/cf27/generated/full-resolution-frames/ear-shape-options-001-004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004/CF27_XBOXUNKNOWN_RTG_EARSHAPE_004_MENU_EVIDENCE_video-009_26p00s.png",
       "sourceTimestampRange": "26-30.21",
       "recommendationSuitability": "UNSUITABLE_RESEARCH_ONLY_NOT_VERIFIED"
+    },
+    {
+      "detailedControlID": "CF27_XBOXUNKNOWN_RTG_MOUTHSHAPE_HEAVY",
+      "nativeControlLabel": "Mouth Shape",
+      "nativeDisplayLabel": "Heavy",
+      "nativeOptionNumber": null,
+      "nativeOrder": 7,
+      "valueKind": "named_geometry_option",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "evidenceFramePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_009_mouth_shape_215p5s.png",
+      "sourceTimestampRange": "210-219",
+      "recommendationSuitability": "UNSUITABLE_RESEARCH_ONLY_NOT_VERIFIED",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-009"
+      ],
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "notes": "August 2026 selected-value evidence; production remains blocked."
+      }
+    },
+    {
+      "detailedControlID": "CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE",
+      "nativeControlLabel": "Jaw Shape",
+      "nativeDisplayLabel": "Square",
+      "nativeOptionNumber": null,
+      "nativeOrder": 2,
+      "valueKind": "named_geometry_option",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "evidenceFramePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_010_jaw_shape_225p5s.png",
+      "sourceTimestampRange": "220-229",
+      "recommendationSuitability": "UNSUITABLE_RESEARCH_ONLY_NOT_VERIFIED",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-010"
+      ],
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "notes": "August 2026 selected-value evidence; production remains blocked."
+      }
+    },
+    {
+      "detailedControlID": "CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE",
+      "nativeControlLabel": "Chin",
+      "nativeDisplayLabel": "Square",
+      "nativeOptionNumber": null,
+      "nativeOrder": 2,
+      "valueKind": "named_geometry_option",
+      "dataClass": "RESEARCH_CANDIDATE",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "evidenceFramePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_011_chin_235p0s.png",
+      "sourceTimestampRange": "230-240.24",
+      "recommendationSuitability": "UNSUITABLE_RESEARCH_ONLY_NOT_VERIFIED",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-011"
+      ],
+      "primaryReview": {
+        "status": "PRIMARY_APPROVED_WITH_NOTES",
+        "notes": "August 2026 selected-value evidence; production remains blocked."
+      }
     }
   ]
 }

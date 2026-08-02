@@ -12,6 +12,7 @@ const paths = {
   heads: "data/phase-zero/heads.research.json",
   additionalAttributes: "data/phase-zero/additional_attributes.research.json",
   bodyControls: "data/phase-zero/body_controls.research.json",
+  supplementalCandidates: "data/phase-zero/august_2026_intake_candidates.json",
   environment: "data/phase-zero/environment_manifest.research.json",
   creationPaths: "data/phase-zero/creation_paths.research.json",
   menuMap: "data/phase-zero/menu_map.research.json",
@@ -52,6 +53,7 @@ export function generatePrimaryReviewStatus(options = {}) {
   const heads = readJson(root, paths.heads);
   const additionalAttributes = readJson(root, paths.additionalAttributes);
   const bodyControls = readJson(root, paths.bodyControls);
+  const supplementalCandidates = readOptionalJson(root, paths.supplementalCandidates, { candidates: [] });
   const environment = readJson(root, paths.environment);
   const creationPaths = readJson(root, paths.creationPaths);
   const menuMap = readJson(root, paths.menuMap);
@@ -91,7 +93,8 @@ export function generatePrimaryReviewStatus(options = {}) {
       const category = categoryByLabel.get(record.category) ?? {};
       return candidateFromAdditionalAttribute(record, category, environment, environmentStatus, evidenceById, timelineById, videoById);
     }),
-    ...(bodyControls.records ?? []).map((record) => candidateFromBodyControl(record, environment, environmentStatus, evidenceById, timelineById, videoById))
+    ...(bodyControls.records ?? []).map((record) => candidateFromBodyControl(record, environment, environmentStatus, evidenceById, timelineById, videoById)),
+    ...(supplementalCandidates.candidates ?? []).map((record) => candidateFromSupplementalIntake(record, environment, environmentStatus, evidenceById, timelineById, videoById))
   ].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
 
   const reviewedHeads = attachPrimaryReview(heads, candidates);
@@ -148,7 +151,7 @@ export function generatePrimaryReviewStatus(options = {}) {
     },
     summary: summarizeCandidates(candidates),
     environmentStatus,
-    artifactReconciliation: buildArtifactReconciliation({ heads, additionalAttributes, bodyControls, evidenceManifest, videoInventory, videoTimeline, issues, gapMatrix }),
+    artifactReconciliation: buildArtifactReconciliation({ heads, additionalAttributes, bodyControls, supplementalCandidates, evidenceManifest, videoInventory, videoTimeline, issues, gapMatrix }),
     categoryStatus,
     videoTraceability,
     verifierQueue,
@@ -387,6 +390,69 @@ function candidateFromBodyControl(record, environment, environmentStatus, eviden
     "Dependency effects on head, hair, facial hair, body, and camera framing are not tested.",
     "Second-person verification has not occurred."
   ]);
+}
+
+function candidateFromSupplementalIntake(record, environment, environmentStatus, evidenceById, timelineById, videoById) {
+  const evidenceIDs = unique((record.evidenceIDs ?? []).filter(Boolean));
+  const evidenceFiles = unique((record.evidenceFiles ?? []).filter(Boolean));
+  const sourceObservations = (record.sourceObservations ?? []).length
+    ? record.sourceObservations
+    : [
+        {
+          timelineRecordID: record.timelineRecordID,
+          evidenceID: evidenceIDs[0],
+          evidenceFramePath: evidenceFiles[0]
+        }
+      ].filter((item) => item.timelineRecordID || item.evidenceID || item.evidenceFramePath);
+  const candidate = baseCandidate({
+    candidateID: record.candidateID,
+    category: record.category,
+    categoryID: record.categoryID,
+    nativeOrder: record.nativeOrder,
+    nativeVisibleLabelOrIndex: record.nativeVisibleLabelOrIndex,
+    platform: record.platform ?? environment.platform,
+    gameVersion: record.gameVersion ?? environment.gameVersion,
+    patch: record.patch ?? environment.patchVersion,
+    mode: record.mode ?? environment.gameMode,
+    creationPath: record.creationPath ?? environment.roadToGloryPath,
+    sourceVideoID: record.sourceVideoID,
+    sourceVideoFilename: record.sourceVideoFilename,
+    originalFilename: record.originalFilename,
+    sourceTimestamp: record.sourceTimestamp,
+    sourceTimestampRange: record.sourceTimestampRange,
+    evidenceIDs,
+    evidenceFiles,
+    selectedValueVisible: record.selectedValueVisible ?? true,
+    categoryVisible: record.categoryVisible ?? true,
+    optionTransitionObservable: record.optionTransitionObservable ?? true,
+    neighboringOptionsEstablishOrdering: record.neighboringOptionsEstablishOrdering ?? "PARTIAL_NEIGHBORING_THUMBNAILS_VISIBLE_NOT_COMPLETE_ORDER_PROOF",
+    firstSelectorOptionKnown: record.firstSelectorOptionKnown ?? false,
+    finalSelectorOptionKnown: record.finalSelectorOptionKnown ?? false,
+    selectorWrapKnown: record.selectorWrapKnown ?? false,
+    framingSufficient: record.framingSufficient ?? false,
+    visualFeaturesUnobstructed: record.visualFeaturesUnobstructed ?? false,
+    evidenceConditionsConsistent: record.evidenceConditionsConsistent ?? false,
+    duplicated: record.duplicated ?? false,
+    ambiguous: record.ambiguous ?? false,
+    unsupportedInterpretation: record.unsupportedInterpretation ?? false,
+    environmentStatus,
+    sourceRecord: { sourceObservations },
+    evidenceById,
+    timelineById,
+    videoById
+  });
+  return finalizeCandidate(candidate, [
+    ...(record.notes ?? []),
+    "Supplemental August 2026 intake observation is primary research only.",
+    "The selected native value is directly readable in the cited frame, but complete selector boundaries and second verification remain unresolved.",
+    "No supplemental record is eligible for production recommendations."
+  ]);
+}
+
+function readOptionalJson(root, relativePath, fallback) {
+  const absolutePath = path.join(root, relativePath);
+  if (!fs.existsSync(absolutePath)) return fallback;
+  return JSON.parse(fs.readFileSync(absolutePath, "utf8"));
 }
 
 function baseCandidate({
@@ -720,12 +786,13 @@ function summarizeCandidates(candidates) {
   };
 }
 
-function buildArtifactReconciliation({ heads, additionalAttributes, bodyControls, evidenceManifest, videoInventory, videoTimeline, issues, gapMatrix }) {
+function buildArtifactReconciliation({ heads, additionalAttributes, bodyControls, supplementalCandidates, evidenceManifest, videoInventory, videoTimeline, issues, gapMatrix }) {
   return {
     canonicalArtifacts: [
       paths.heads,
       paths.additionalAttributes,
       paths.bodyControls,
+      paths.supplementalCandidates,
       paths.evidenceManifest,
       paths.videoInventory,
       paths.videoTimeline,
@@ -754,6 +821,7 @@ function buildArtifactReconciliation({ heads, additionalAttributes, bodyControls
       headCandidates: heads.records?.length ?? 0,
       additionalAttributeCandidates: additionalAttributes.records?.length ?? 0,
       bodyContextCandidates: bodyControls.records?.length ?? 0,
+      supplementalIntakeCandidates: supplementalCandidates.candidates?.length ?? 0,
       evidenceEntries: evidenceManifest.entries?.length ?? 0,
       videoInventoryRows: videoInventory.inventory?.length ?? 0,
       timelineRecords: videoTimeline.records?.length ?? 0,

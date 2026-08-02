@@ -1,6 +1,6 @@
 {
   "schemaVersion": "cf27-video-source-inventory-v1",
-  "generatedAt": "2026-07-13T21:32:00-04:00",
+  "generatedAt": "2026-08-02T22:50:00-04:00",
   "project": "GameFace Match",
   "game": "EA SPORTS College Football 27",
   "dataClass": "SOURCE_VIDEO_INVENTORY",
@@ -21,17 +21,182 @@
   },
   "summary": {
     "manifestRows": 9,
-    "inventoryRows": 11,
-    "filesFound": 11,
-    "filesOpenSuccessfully": 11,
+    "inventoryRows": 14,
+    "filesFound": 14,
+    "filesOpenSuccessfully": 14,
     "missingManifestFiles": 0,
-    "uniqueVideoFiles": 9,
+    "uniqueVideoFiles": 12,
     "exactDuplicateFiles": 2,
     "likelyDuplicateFiles": 0,
-    "totalUniqueDurationSeconds": 517.85,
+    "totalUniqueDurationSeconds": 1157.24,
     "productionQualityCatalogImageryFiles": 0
   },
   "inventory": [
+    {
+      "inventoryId": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "durationSeconds": 240.24,
+      "creationTimeUtc": "2026-08-02T21:09:02.000000Z",
+      "fileModifiedAtLocal": "2026-08-02T17:13:02-04:00",
+      "expectedContent": "New College Football 27 Head & Skin source recording covering Head Template, Skin Tone, Skin Details, Eye Shape, Eye Color, Nose, Ear Shape, Mouth Shape, Jaw Shape, and Chin.",
+      "observedContent": "Create Player > Player appearance menus; direct title/footer confirms EA SPORTS College Football 27. Includes Head & Skin tab traversal and partial selected values for skin, eye, nose, ear, mouth, jaw, and chin controls.",
+      "manifestSequence": null,
+      "discoveredFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceLocation": {
+        "rootToken": "REPOSITORY_IGNORED_SOURCE_MEDIA",
+        "portableRelativeEvidencePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Developer/GameFaceMatch/source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4"
+      },
+      "manifestMatch": {
+        "status": "new_august_2026_owner_recording_not_in_relabeled_manifest",
+        "expectedDurationSeconds": 240.24,
+        "manifestNotes": "Physical folder is source-media/NCAA 26, but filename/content show College Football 27."
+      },
+      "sha256": "bdd75f0ce953aaf9fda0cb187658b9314ae7f6c21f5ab30d7e474549841037d5",
+      "fileSizeBytes": 573576743,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.96,
+      "mimeType": "video/mp4",
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": false,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "conditionAssessment": "opens_successfully_new_owner_recording_partial_catalog_scope",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": true,
+        "orderingEvidence": true,
+        "visualComparison": true,
+        "productionQualityCatalogImagery": false
+      },
+      "productionUseStatus": "NOT_PRODUCTION_DATA_RESEARCH_ONLY",
+      "gitTrackingStatus": "ignored_untracked_source_media",
+      "sourceFolderMismatch": {
+        "physicalFolder": "source-media/NCAA 26",
+        "contentGame": "EA SPORTS College Football 27",
+        "note": "Do not relabel physical source path as College Football 26 or NCAA 26."
+      }
+    },
+    {
+      "inventoryId": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "durationSeconds": 235.35,
+      "creationTimeUtc": "2026-08-02T21:14:19.000000Z",
+      "fileModifiedAtLocal": "2026-08-02T17:18:14-04:00",
+      "expectedContent": "New College Football 27 Hair source recording covering Hair Style, Hair Color, Facial Hair Style, and Facial Hair Color.",
+      "observedContent": "Create Player > Player > Hair tabs are directly visible. Selected native labels are readable for Short Curly, Light Brown, Mutton Chops, and Purple in extracted full-screen frames.",
+      "manifestSequence": null,
+      "discoveredFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceLocation": {
+        "rootToken": "REPOSITORY_IGNORED_SOURCE_MEDIA",
+        "portableRelativeEvidencePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Developer/GameFaceMatch/source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4"
+      },
+      "manifestMatch": {
+        "status": "new_august_2026_owner_recording_not_in_relabeled_manifest",
+        "expectedDurationSeconds": 235.35,
+        "manifestNotes": "Physical folder is source-media/NCAA 26, but filename/content show College Football 27."
+      },
+      "sha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+      "fileSizeBytes": 548140709,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.96,
+      "mimeType": "video/mp4",
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": false,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "conditionAssessment": "opens_successfully_new_owner_recording_partial_catalog_scope",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": true,
+        "orderingEvidence": true,
+        "visualComparison": true,
+        "productionQualityCatalogImagery": false
+      },
+      "productionUseStatus": "NOT_PRODUCTION_DATA_RESEARCH_ONLY",
+      "gitTrackingStatus": "ignored_untracked_source_media",
+      "sourceFolderMismatch": {
+        "physicalFolder": "source-media/NCAA 26",
+        "contentGame": "EA SPORTS College Football 27",
+        "note": "Do not relabel physical source path as College Football 26 or NCAA 26."
+      }
+    },
+    {
+      "inventoryId": "CF27_XBOX_SOURCE_2026_08_02_003",
+      "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+      "durationSeconds": 163.8,
+      "creationTimeUtc": "2026-08-02T21:18:33.000000Z",
+      "fileModifiedAtLocal": "2026-08-02T17:21:16-04:00",
+      "expectedContent": "New College Football 27 body/style context recording.",
+      "observedContent": "Create Player > Player > Styles screen with QB Throw Style and body/context style rows. This is context/dependency evidence, not facial appearance production evidence.",
+      "manifestSequence": null,
+      "discoveredFilename": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+      "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+      "sourceLocation": {
+        "rootToken": "REPOSITORY_IGNORED_SOURCE_MEDIA",
+        "portableRelativeEvidencePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+        "absoluteDiscoveryPathInternal": "/Users/skaggssystems/Developer/GameFaceMatch/source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4"
+      },
+      "manifestMatch": {
+        "status": "new_august_2026_owner_recording_not_in_relabeled_manifest",
+        "expectedDurationSeconds": 163.8,
+        "manifestNotes": "Physical folder is source-media/NCAA 26, but filename/content show College Football 27."
+      },
+      "sha256": "90a29684f972dff7f41c33fb6457ee545a65c94292647ff9d91be1f1bc168586",
+      "fileSizeBytes": 357653157,
+      "mediaContainer": "MP4",
+      "mediaContainerRaw": "mov,mp4,m4a,3gp,3g2,mj2",
+      "videoCodec": "h264 (Main) (avc1 / 0x31637661)",
+      "audioCodec": "aac (LC) (mp4a / 0x6134706D)",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "frameRate": 58.96,
+      "mimeType": "video/mp4",
+      "fileOpenStatus": "opens",
+      "ffmpegStatus": "opens",
+      "matchedManifestRow": false,
+      "exactDuplicate": false,
+      "exactDuplicateOf": null,
+      "likelyDuplicateOf": null,
+      "conditionAssessment": "opens_successfully_new_owner_recording_partial_catalog_scope",
+      "suitability": {
+        "menuEvidence": true,
+        "countEvidence": false,
+        "orderingEvidence": false,
+        "visualComparison": true,
+        "productionQualityCatalogImagery": false
+      },
+      "productionUseStatus": "NOT_PRODUCTION_DATA_RESEARCH_ONLY",
+      "gitTrackingStatus": "ignored_untracked_source_media",
+      "sourceFolderMismatch": {
+        "physicalFolder": "source-media/NCAA 26",
+        "contentGame": "EA SPORTS College Football 27",
+        "note": "Do not relabel physical source path as College Football 26 or NCAA 26."
+      }
+    },
     {
       "inventoryId": "phase0-video-001",
       "manifestSequence": 1,

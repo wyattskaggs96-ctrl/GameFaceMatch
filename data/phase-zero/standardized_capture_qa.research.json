@@ -89,14 +89,14 @@
     "recaptureQueueRule": "Only material inconsistencies that block visual/geometric comparison are queued. Context-only and presentation-only evidence remains comparison-limited without a material recapture item."
   },
   "summary": {
-    "totalAssessments": 96,
-    "videoAssessments": 11,
+    "totalAssessments": 99,
+    "videoAssessments": 14,
     "catalogImageAssessments": 80,
     "contextAssessments": 5,
     "classificationCounts": {
       "CONSISTENT": 0,
       "CONSISTENT_WITH_NOTES": 0,
-      "COMPARISON_LIMITED": 54,
+      "COMPARISON_LIMITED": 57,
       "RECAPTURE_REQUIRED": 42,
       "UNUSABLE": 0
     },
@@ -106,6 +106,285 @@
     "productionGateStatus": "BLOCKED_NO_STANDARDIZED_VERIFIED_COMPARISON_IMAGES"
   },
   "assessments": [
+    {
+      "itemID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "itemType": "SOURCE_VIDEO",
+      "nativeLabel": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "category": "Source Video",
+      "classification": "COMPARISON_LIMITED",
+      "materialInconsistency": false,
+      "geometricMatchingEligible": false,
+      "geometricMatchingGate": "NOT_GEOMETRIC_MATCHING_INPUT",
+      "promptState": {
+        "gameMode": "Road to Glory",
+        "position": "QB",
+        "archetype": "CONTRIBUTOR",
+        "head": null,
+        "skinTone": "UNKNOWN_NOT_LOCKED",
+        "skinDetails": "UNKNOWN_NOT_LOCKED",
+        "hairstyle": "UNKNOWN_NOT_LOCKED",
+        "hairColor": "UNKNOWN_NOT_LOCKED",
+        "facialHair": "UNKNOWN_NOT_LOCKED",
+        "facialHairColor": "UNKNOWN_NOT_LOCKED",
+        "bodyType": "UNKNOWN_NOT_CAPTURED",
+        "height": "UNKNOWN_NOT_CAPTURED",
+        "weight": "UNKNOWN_NOT_CAPTURED",
+        "uniform": "UNKNOWN_NOT_LOCKED",
+        "equipment": "UNKNOWN_NOT_LOCKED",
+        "lighting": "GAME_MENU_LIGHTING_NOT_STANDARDIZED",
+        "background": "GAME_MENU_BACKGROUND_NOT_STANDARDIZED",
+        "zoom": "UNKNOWN_NOT_LOCKED",
+        "cameraAngle": "UNKNOWN_NOT_VERIFIED",
+        "cameraDistance": "UNKNOWN_NOT_LOCKED",
+        "resolution": "1920x1080",
+        "hdrState": "UNKNOWN_NOT_VISIBLE",
+        "loadingCompletion": "VIDEO_OPENS_TECHNICALLY",
+        "animationCompletion": "NOT_APPLICABLE_SOURCE_VIDEO"
+      },
+      "fingerprintSource": {
+        "itemID": "CF27_XBOX_SOURCE_2026_08_02_001",
+        "itemType": "SOURCE_VIDEO",
+        "category": "Source Video",
+        "nativeLabel": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+        "promptState": {
+          "gameMode": "Road to Glory",
+          "position": "QB",
+          "archetype": "CONTRIBUTOR",
+          "head": null,
+          "skinTone": "UNKNOWN_NOT_LOCKED",
+          "skinDetails": "UNKNOWN_NOT_LOCKED",
+          "hairstyle": "UNKNOWN_NOT_LOCKED",
+          "hairColor": "UNKNOWN_NOT_LOCKED",
+          "facialHair": "UNKNOWN_NOT_LOCKED",
+          "facialHairColor": "UNKNOWN_NOT_LOCKED",
+          "bodyType": "UNKNOWN_NOT_CAPTURED",
+          "height": "UNKNOWN_NOT_CAPTURED",
+          "weight": "UNKNOWN_NOT_CAPTURED",
+          "uniform": "UNKNOWN_NOT_LOCKED",
+          "equipment": "UNKNOWN_NOT_LOCKED",
+          "lighting": "GAME_MENU_LIGHTING_NOT_STANDARDIZED",
+          "background": "GAME_MENU_BACKGROUND_NOT_STANDARDIZED",
+          "zoom": "UNKNOWN_NOT_LOCKED",
+          "cameraAngle": "UNKNOWN_NOT_VERIFIED",
+          "cameraDistance": "UNKNOWN_NOT_LOCKED",
+          "resolution": "1920x1080",
+          "hdrState": "UNKNOWN_NOT_VISIBLE",
+          "loadingCompletion": "VIDEO_OPENS_TECHNICALLY",
+          "animationCompletion": "NOT_APPLICABLE_SOURCE_VIDEO"
+        },
+        "sourceEvidence": [
+          {
+            "evidenceID": "CF27_XBOX_SOURCE_2026_08_02_001",
+            "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+            "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+            "sha256": "bdd75f0ce953aaf9fda0cb187658b9314ae7f6c21f5ab30d7e474549841037d5",
+            "portableRelativeEvidencePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4"
+          }
+        ]
+      },
+      "sourceEvidence": [
+        {
+          "evidenceID": "CF27_XBOX_SOURCE_2026_08_02_001",
+          "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+          "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+          "sha256": "bdd75f0ce953aaf9fda0cb187658b9314ae7f6c21f5ab30d7e474549841037d5",
+          "portableRelativeEvidencePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4"
+        }
+      ],
+      "blockingReasons": [],
+      "warnings": [
+        "Source video is not production-quality standardized catalog imagery."
+      ],
+      "requiredAction": "Keep as preserved source evidence. Use derivative standardized captures before visual comparison.",
+      "existingEvidenceUse": "Menu, count, ordering, and provenance evidence where the source inventory marks it suitable.",
+      "consistencyFingerprint": "61b8dfef436459fa995a6f717f943ed74f623b9998068f34382ffd8784a83312"
+    },
+    {
+      "itemID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "itemType": "SOURCE_VIDEO",
+      "nativeLabel": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "category": "Source Video",
+      "classification": "COMPARISON_LIMITED",
+      "materialInconsistency": false,
+      "geometricMatchingEligible": false,
+      "geometricMatchingGate": "NOT_GEOMETRIC_MATCHING_INPUT",
+      "promptState": {
+        "gameMode": "Road to Glory",
+        "position": "QB",
+        "archetype": "CONTRIBUTOR",
+        "head": null,
+        "skinTone": "UNKNOWN_NOT_LOCKED",
+        "skinDetails": "UNKNOWN_NOT_LOCKED",
+        "hairstyle": "UNKNOWN_NOT_LOCKED",
+        "hairColor": "UNKNOWN_NOT_LOCKED",
+        "facialHair": "UNKNOWN_NOT_LOCKED",
+        "facialHairColor": "UNKNOWN_NOT_LOCKED",
+        "bodyType": "UNKNOWN_NOT_CAPTURED",
+        "height": "UNKNOWN_NOT_CAPTURED",
+        "weight": "UNKNOWN_NOT_CAPTURED",
+        "uniform": "UNKNOWN_NOT_LOCKED",
+        "equipment": "UNKNOWN_NOT_LOCKED",
+        "lighting": "GAME_MENU_LIGHTING_NOT_STANDARDIZED",
+        "background": "GAME_MENU_BACKGROUND_NOT_STANDARDIZED",
+        "zoom": "UNKNOWN_NOT_LOCKED",
+        "cameraAngle": "UNKNOWN_NOT_VERIFIED",
+        "cameraDistance": "UNKNOWN_NOT_LOCKED",
+        "resolution": "1920x1080",
+        "hdrState": "UNKNOWN_NOT_VISIBLE",
+        "loadingCompletion": "VIDEO_OPENS_TECHNICALLY",
+        "animationCompletion": "NOT_APPLICABLE_SOURCE_VIDEO"
+      },
+      "fingerprintSource": {
+        "itemID": "CF27_XBOX_SOURCE_2026_08_02_002",
+        "itemType": "SOURCE_VIDEO",
+        "category": "Source Video",
+        "nativeLabel": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+        "promptState": {
+          "gameMode": "Road to Glory",
+          "position": "QB",
+          "archetype": "CONTRIBUTOR",
+          "head": null,
+          "skinTone": "UNKNOWN_NOT_LOCKED",
+          "skinDetails": "UNKNOWN_NOT_LOCKED",
+          "hairstyle": "UNKNOWN_NOT_LOCKED",
+          "hairColor": "UNKNOWN_NOT_LOCKED",
+          "facialHair": "UNKNOWN_NOT_LOCKED",
+          "facialHairColor": "UNKNOWN_NOT_LOCKED",
+          "bodyType": "UNKNOWN_NOT_CAPTURED",
+          "height": "UNKNOWN_NOT_CAPTURED",
+          "weight": "UNKNOWN_NOT_CAPTURED",
+          "uniform": "UNKNOWN_NOT_LOCKED",
+          "equipment": "UNKNOWN_NOT_LOCKED",
+          "lighting": "GAME_MENU_LIGHTING_NOT_STANDARDIZED",
+          "background": "GAME_MENU_BACKGROUND_NOT_STANDARDIZED",
+          "zoom": "UNKNOWN_NOT_LOCKED",
+          "cameraAngle": "UNKNOWN_NOT_VERIFIED",
+          "cameraDistance": "UNKNOWN_NOT_LOCKED",
+          "resolution": "1920x1080",
+          "hdrState": "UNKNOWN_NOT_VISIBLE",
+          "loadingCompletion": "VIDEO_OPENS_TECHNICALLY",
+          "animationCompletion": "NOT_APPLICABLE_SOURCE_VIDEO"
+        },
+        "sourceEvidence": [
+          {
+            "evidenceID": "CF27_XBOX_SOURCE_2026_08_02_002",
+            "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+            "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+            "sha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+            "portableRelativeEvidencePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4"
+          }
+        ]
+      },
+      "sourceEvidence": [
+        {
+          "evidenceID": "CF27_XBOX_SOURCE_2026_08_02_002",
+          "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+          "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+          "sha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+          "portableRelativeEvidencePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4"
+        }
+      ],
+      "blockingReasons": [],
+      "warnings": [
+        "Source video is not production-quality standardized catalog imagery."
+      ],
+      "requiredAction": "Keep as preserved source evidence. Use derivative standardized captures before visual comparison.",
+      "existingEvidenceUse": "Menu, count, ordering, and provenance evidence where the source inventory marks it suitable.",
+      "consistencyFingerprint": "821f34d24eb6b64d9d1651ae4b71d15646b598c200289806278c13648d6862ce"
+    },
+    {
+      "itemID": "CF27_XBOX_SOURCE_2026_08_02_003",
+      "itemType": "SOURCE_VIDEO",
+      "nativeLabel": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+      "category": "Source Video",
+      "classification": "COMPARISON_LIMITED",
+      "materialInconsistency": false,
+      "geometricMatchingEligible": false,
+      "geometricMatchingGate": "NOT_GEOMETRIC_MATCHING_INPUT",
+      "promptState": {
+        "gameMode": "Road to Glory",
+        "position": "QB",
+        "archetype": "CONTRIBUTOR",
+        "head": null,
+        "skinTone": "UNKNOWN_NOT_LOCKED",
+        "skinDetails": "UNKNOWN_NOT_LOCKED",
+        "hairstyle": "UNKNOWN_NOT_LOCKED",
+        "hairColor": "UNKNOWN_NOT_LOCKED",
+        "facialHair": "UNKNOWN_NOT_LOCKED",
+        "facialHairColor": "UNKNOWN_NOT_LOCKED",
+        "bodyType": "UNKNOWN_NOT_CAPTURED",
+        "height": "UNKNOWN_NOT_CAPTURED",
+        "weight": "UNKNOWN_NOT_CAPTURED",
+        "uniform": "UNKNOWN_NOT_LOCKED",
+        "equipment": "UNKNOWN_NOT_LOCKED",
+        "lighting": "GAME_MENU_LIGHTING_NOT_STANDARDIZED",
+        "background": "GAME_MENU_BACKGROUND_NOT_STANDARDIZED",
+        "zoom": "UNKNOWN_NOT_LOCKED",
+        "cameraAngle": "UNKNOWN_NOT_VERIFIED",
+        "cameraDistance": "UNKNOWN_NOT_LOCKED",
+        "resolution": "1920x1080",
+        "hdrState": "UNKNOWN_NOT_VISIBLE",
+        "loadingCompletion": "VIDEO_OPENS_TECHNICALLY",
+        "animationCompletion": "NOT_APPLICABLE_SOURCE_VIDEO"
+      },
+      "fingerprintSource": {
+        "itemID": "CF27_XBOX_SOURCE_2026_08_02_003",
+        "itemType": "SOURCE_VIDEO",
+        "category": "Source Video",
+        "nativeLabel": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+        "promptState": {
+          "gameMode": "Road to Glory",
+          "position": "QB",
+          "archetype": "CONTRIBUTOR",
+          "head": null,
+          "skinTone": "UNKNOWN_NOT_LOCKED",
+          "skinDetails": "UNKNOWN_NOT_LOCKED",
+          "hairstyle": "UNKNOWN_NOT_LOCKED",
+          "hairColor": "UNKNOWN_NOT_LOCKED",
+          "facialHair": "UNKNOWN_NOT_LOCKED",
+          "facialHairColor": "UNKNOWN_NOT_LOCKED",
+          "bodyType": "UNKNOWN_NOT_CAPTURED",
+          "height": "UNKNOWN_NOT_CAPTURED",
+          "weight": "UNKNOWN_NOT_CAPTURED",
+          "uniform": "UNKNOWN_NOT_LOCKED",
+          "equipment": "UNKNOWN_NOT_LOCKED",
+          "lighting": "GAME_MENU_LIGHTING_NOT_STANDARDIZED",
+          "background": "GAME_MENU_BACKGROUND_NOT_STANDARDIZED",
+          "zoom": "UNKNOWN_NOT_LOCKED",
+          "cameraAngle": "UNKNOWN_NOT_VERIFIED",
+          "cameraDistance": "UNKNOWN_NOT_LOCKED",
+          "resolution": "1920x1080",
+          "hdrState": "UNKNOWN_NOT_VISIBLE",
+          "loadingCompletion": "VIDEO_OPENS_TECHNICALLY",
+          "animationCompletion": "NOT_APPLICABLE_SOURCE_VIDEO"
+        },
+        "sourceEvidence": [
+          {
+            "evidenceID": "CF27_XBOX_SOURCE_2026_08_02_003",
+            "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+            "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+            "sha256": "90a29684f972dff7f41c33fb6457ee545a65c94292647ff9d91be1f1bc168586",
+            "portableRelativeEvidencePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4"
+          }
+        ]
+      },
+      "sourceEvidence": [
+        {
+          "evidenceID": "CF27_XBOX_SOURCE_2026_08_02_003",
+          "canonicalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+          "originalFilename": "EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+          "sha256": "90a29684f972dff7f41c33fb6457ee545a65c94292647ff9d91be1f1bc168586",
+          "portableRelativeEvidencePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4"
+        }
+      ],
+      "blockingReasons": [],
+      "warnings": [
+        "Source video is not production-quality standardized catalog imagery."
+      ],
+      "requiredAction": "Keep as preserved source evidence. Use derivative standardized captures before visual comparison.",
+      "existingEvidenceUse": "Menu, count, ordering, and provenance evidence where the source inventory marks it suitable.",
+      "consistencyFingerprint": "68441cdaeda29a89be2c9818e194b360694e50e120336d614199be015bdc2886"
+    },
     {
       "itemID": "phase0-video-001",
       "itemType": "SOURCE_VIDEO",

@@ -116,6 +116,7 @@ describe("repository hygiene tooling", () => {
     expect(script).toContain("getGitStatusEntries");
     expect(script).toContain("findProductionFixtureWarnings");
     expect(script).toContain("findRawMediaWarnings");
+    expect(script).toContain("phaseZeroDerivativeEvidencePattern");
     expect(script).toContain("--strict");
     expect(workflow).toContain("node scripts/repository-status.mjs");
     expect(workflow).toContain("Do not run `git reset --hard`");

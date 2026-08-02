@@ -2,18 +2,18 @@
   "schemaVersion": "cf27-second-verifier-execution-package-v1-dashboard",
   "generatedAt": "2026-07-21T05:00:00-04:00",
   "status": "AWAITING_REAL_SECOND_VERIFIER",
-  "assigned": 85,
+  "assigned": 92,
   "completed": 0,
   "disagreement": 0,
   "recaptureRequired": 0,
-  "blocked": 85,
+  "blocked": 92,
   "productionEligible": 0,
   "secondVerifiedRecords": 0,
   "productionApprovedRecords": 0,
   "primaryReviewAloneCanPublish": false,
   "candidateGate": {
     "completenessDecision": "BLOCKED_NOT_READY_TO_FREEZE",
-    "blockerCount": 34
+    "blockerCount": 39
   },
   "openCaptureAssignments": 15,
   "openIssues": 44,
@@ -27,6 +27,16 @@
       "blocked": 5,
       "productionEligible": 0,
       "secondaryAngleSample": 2
+    },
+    {
+      "category": "Chin",
+      "assigned": 1,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 1,
+      "productionEligible": 0,
+      "secondaryAngleSample": 1
     },
     {
       "category": "Ear Shape",
@@ -59,6 +69,46 @@
       "secondaryAngleSample": 2
     },
     {
+      "category": "Facial hair",
+      "assigned": 1,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 1,
+      "productionEligible": 0,
+      "secondaryAngleSample": 0
+    },
+    {
+      "category": "Facial-hair colors",
+      "assigned": 1,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 1,
+      "productionEligible": 0,
+      "secondaryAngleSample": 0
+    },
+    {
+      "category": "Hair colors",
+      "assigned": 1,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 1,
+      "productionEligible": 0,
+      "secondaryAngleSample": 0
+    },
+    {
+      "category": "Hairstyles",
+      "assigned": 1,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 1,
+      "productionEligible": 0,
+      "secondaryAngleSample": 1
+    },
+    {
       "category": "Heads",
       "assigned": 26,
       "completed": 0,
@@ -67,6 +117,26 @@
       "blocked": 26,
       "productionEligible": 0,
       "secondaryAngleSample": 6
+    },
+    {
+      "category": "Jaw Shape",
+      "assigned": 1,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 1,
+      "productionEligible": 0,
+      "secondaryAngleSample": 1
+    },
+    {
+      "category": "Mouth Shape",
+      "assigned": 1,
+      "completed": 0,
+      "disagreement": 0,
+      "recaptureRequired": 0,
+      "blocked": 1,
+      "productionEligible": 0,
+      "secondaryAngleSample": 1
     },
     {
       "category": "Nose",

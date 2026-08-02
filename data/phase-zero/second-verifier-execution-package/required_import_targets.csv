@@ -36,6 +36,7 @@ CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_CONTRIBUTOR,Body-related appearance controls,ca
 CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_ELITE,Body-related appearance controls,catalogItem,CANDIDATE_RECORD,false,false,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_UNDERDOG,Body-related appearance controls,catalogItem,CANDIDATE_RECORD,false,false,true,true,true,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_POSITION_QB,Body-related appearance controls,catalogItem,CANDIDATE_RECORD,false,false,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
+CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE,Chin,catalogItem,CANDIDATE_RECORD,false,true,true,true,true,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_EARSHAPE_001,Ear Shape,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_EARSHAPE_002,Ear Shape,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,true,false,false,Duplicate or ambiguous record requires explicit exception review.
 CF27_XBOXUNKNOWN_RTG_EARSHAPE_003,Ear Shape,catalogItem,CANDIDATE_RECORD,false,true,true,true,true,false,false,false,Record-level review happens only after independent counts are complete.
@@ -52,6 +53,10 @@ CF27_XBOXUNKNOWN_RTG_EYESHAPE_002,Eye Shape,catalogItem,CANDIDATE_RECORD,false,t
 CF27_XBOXUNKNOWN_RTG_EYESHAPE_003,Eye Shape,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_EYESHAPE_004,Eye Shape,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_EYESHAPE_005,Eye Shape,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
+CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE,Facial-hair colors,catalogItem,CANDIDATE_RECORD,false,false,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
+CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS,Facial hair,catalogItem,CANDIDATE_RECORD,false,false,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
+CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN,Hair colors,catalogItem,CANDIDATE_RECORD,false,false,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
+CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY,Hairstyles,catalogItem,CANDIDATE_RECORD,false,true,true,true,true,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_HEAD_001,Heads,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_HEAD_002,Heads,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_HEAD_003,Heads,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
@@ -78,6 +83,8 @@ CF27_XBOXUNKNOWN_RTG_HEAD_028,Heads,catalogItem,CANDIDATE_RECORD,false,true,true
 CF27_XBOXUNKNOWN_RTG_HEAD_029,Heads,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_HEAD_030,Heads,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_HEAD_031,Heads,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
+CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE,Jaw Shape,catalogItem,CANDIDATE_RECORD,false,true,true,true,true,false,false,false,Record-level review happens only after independent counts are complete.
+CF27_XBOXUNKNOWN_RTG_MOUTHSHAPE_HEAVY,Mouth Shape,catalogItem,CANDIDATE_RECORD,false,true,true,true,true,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_NOSE_001,Nose,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_NOSE_002,Nose,catalogItem,CANDIDATE_RECORD,false,true,true,true,false,false,false,false,Record-level review happens only after independent counts are complete.
 CF27_XBOXUNKNOWN_RTG_NOSE_003,Nose,catalogItem,CANDIDATE_RECORD,false,true,true,true,true,false,false,false,Record-level review happens only after independent counts are complete.

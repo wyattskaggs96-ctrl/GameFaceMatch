@@ -39,8 +39,8 @@ describe("CF27 standardized capture QA", () => {
     const report = generateStandardizedCaptureQA({ root: repositoryRoot, generatedAt }) as StandardizedCaptureQAReport;
 
     expect(report.summary).toMatchObject({
-      totalAssessments: 96,
-      videoAssessments: 11,
+      totalAssessments: 99,
+      videoAssessments: 14,
       catalogImageAssessments: 80,
       contextAssessments: 5,
       geometricMatchingEligibleCount: 0,
@@ -51,7 +51,7 @@ describe("CF27 standardized capture QA", () => {
     expect(report.summary.classificationCounts).toEqual({
       CONSISTENT: 0,
       CONSISTENT_WITH_NOTES: 0,
-      COMPARISON_LIMITED: 54,
+      COMPARISON_LIMITED: 57,
       RECAPTURE_REQUIRED: 42,
       UNUSABLE: 0
     });
@@ -140,7 +140,7 @@ describe("CF27 standardized capture QA", () => {
     const recapture = JSON.parse(fs.readFileSync(path.join(root, "data/phase-zero/standardized_capture_recapture_queue.research.json"), "utf8")) as { recaptureQueue: Array<{ itemID: string }> };
     const markdown = fs.readFileSync(path.join(root, "docs/phase-zero/STANDARDIZED_CAPTURE_QA_REPORT.md"), "utf8");
 
-    expect(json.summary.totalAssessments).toBe(96);
+    expect(json.summary.totalAssessments).toBe(99);
     expect(csv).toContain("itemID,itemType,category,nativeLabel,classification,consistencyFingerprint");
     expect(recapture.recaptureQueue).toHaveLength(42);
     expect(markdown).toContain("No current research catalog image is eligible for geometric matching.");

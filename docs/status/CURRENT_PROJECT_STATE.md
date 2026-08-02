@@ -2,8 +2,8 @@
 
 **Status:** AUTHORITATIVE CURRENT OPERATIONAL STATUS  
 **Last reconciled:** 2026-08-02
-**Repository checkpoint reviewed:** `43f75cabe8f41384572ddef93726bc5ff07daec8` (`feat(catalog): harden independent verifier workflow`)
-**Status checkpoint:** the commit containing this document (`docs(status): verify guided capture readiness queue`)
+**Repository checkpoint reviewed:** `829806e50bfc714e5332259c223d205959a00bd4` (`docs(status): verify guided capture readiness queue`)
+**Status checkpoint:** this August 2026 CF27 source-recording intake revision.
 **Active product direction:** responsive web MVP under `web/`  
 **Native iOS status:** preserved future premium TrueDepth client under `ios/`  
 **Readiness gate registry:** `data/status/current_gate_registry.json`
@@ -14,7 +14,7 @@ This document is the single current operating status source for GameFace Match. 
 ```json
 {
   "schemaVersion": "current-project-state-v2",
-  "repositoryCheckpoint": "43f75cabe8f41384572ddef93726bc5ff07daec8",
+  "repositoryCheckpoint": "829806e50bfc714e5332259c223d205959a00bd4",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -38,7 +38,7 @@ This document is the single current operating status source for GameFace Match. 
 
 ## Verified Working Capabilities
 
-Verified by `npm run verify:clean` on 2026-08-02 against `43f75cabe8f41384572ddef93726bc5ff07daec8`; this status/gate-registry checkpoint is the commit containing this document and was revalidated after commit.
+Verified on 2026-08-02 by the repository verification suite plus local-server and native checks. The normal `npm run verify` path passed through production build and was supplemented with escalated local Playwright/iOS runs where sandbox permissions would otherwise block local server and CoreSimulator access.
 
 - Web onboarding, product explanation, independent-app disclaimer, layered consent, privacy summary, mobile scan entry, preparation flow, guided RGB capture/upload fallback, quality review, selective retake, attribute confirmation, profile review, catalog-unavailable result state, saved-build empty state, screenshot-refinement intake scaffold, privacy center, and delete-local-data flows.
 - Circular guided capture interface with positioning, first pass, second pass, coverage review, selective retake affordance, assisted five-angle fallback, reduced-motion support, and no camera start from the purchase/consent entry screen.
@@ -60,6 +60,8 @@ Current machine-readable authorities:
 - Capture log: `data/phase-zero/capture_log.json`
 - Issue register: `data/phase-zero/issues_register.research.json`
 - Owner capture closure package: `data/phase-zero/capture-closure/owner-capture-plan.json`
+- August 2026 source-recording ingest: `data/phase-zero/august_2026_source_recordings_ingest.json`
+- August 2026 supplemental candidates: `data/phase-zero/august_2026_intake_candidates.json`
 - Second-verifier execution package: `data/phase-zero/second-verifier-execution-package/second_verifier_execution_package.json`
 - Gate registry: `data/status/current_gate_registry.json`
 
@@ -69,30 +71,30 @@ The current research artifacts are primary research only. They are not second ve
 
 | Metric | Current value | Source |
 | --- | ---: | --- |
-| Video inventory rows | 11 | `data/phase-zero/video_inventory.json` |
-| Unique source videos | 9 | `data/phase-zero/video_inventory.json` |
+| Video inventory rows | 14 | `data/phase-zero/video_inventory.json` |
+| Unique source videos | 12 | `data/phase-zero/video_inventory.json` |
 | Documented exact duplicate source references | 2 | `data/phase-zero/video_inventory.json` |
-| Files open successfully | 11 | `data/phase-zero/video_inventory.json` |
-| Total unique duration | 517.85 seconds | `data/phase-zero/video_inventory.json` |
-| Evidence entries | 96 | `data/phase-zero/evidence_manifest.json` |
-| Evidence entries with SHA-256 | 96 | `data/phase-zero/evidence_manifest.json` |
+| Files open successfully | 14 | `data/phase-zero/video_inventory.json` |
+| Total unique duration | 1157.24 seconds | `data/phase-zero/video_inventory.json` |
+| Evidence entries | 118 | `data/phase-zero/evidence_manifest.json` |
+| Evidence entries with SHA-256 | 118 | `data/phase-zero/evidence_manifest.json` |
 | Candidates without valid source timestamp | 0 | `data/phase-zero/primary_review_status.json` |
 | Issue register entries | 44 | `data/phase-zero/issues_register.research.json` |
 
-The current videos support research observations, menu/order evidence, primary review, and recapture planning. They do not establish a production-ready catalog because environment/version metadata, major missing appearance categories, standardized visual conditions, duplicate review, and second verification remain unresolved.
+The current videos support research observations, menu/order evidence, primary review, and recapture planning. The August 2026 recordings directly add partial Hair Style, Hair Color, Facial Hair Style, Facial Hair Color, Mouth Shape, Jaw Shape, and Chin observations. They do not establish a production-ready catalog because environment/version metadata, complete selector boundaries, standardized visual conditions, duplicate review, and second verification remain unresolved.
 
 ## Research Candidate Counts
 
 | Funnel stage | Count |
 | --- | ---: |
-| Total current research candidates | 85 |
+| Total current research candidates | 92 |
 | Primary approved | 0 |
-| Primary approved with notes | 80 |
+| Primary approved with notes | 84 |
 | Duplicate review required | 5 |
 | Recapture required as candidate-level primary status | 0 |
 | Missing evidence as candidate-level primary status | 0 |
 | Label unresolved as candidate-level primary status | 0 |
-| Order unresolved as candidate-level primary status | 0 |
+| Order unresolved as candidate-level primary status | 3 |
 | Category incomplete as candidate-level primary status | 0 |
 | Environment unresolved as candidate-level primary status | 0 |
 | Not reviewed | 0 |
@@ -100,7 +102,7 @@ The current videos support research observations, menu/order evidence, primary r
 | Production approved | 0 |
 | Records allowed in production recommendations | 0 |
 
-Older partial exports may mention different counts. The current normalized primary-review authority is 85 candidates in `data/phase-zero/primary_review_status.json`.
+Older partial exports may mention different counts. The current normalized primary-review authority is 92 candidates in `data/phase-zero/primary_review_status.json`.
 
 ## Category Status
 
@@ -116,10 +118,10 @@ Older partial exports may mention different counts. The current normalized prima
 | Nose | 7 | 6 approved with notes; 1 duplicate review | Evidence review material exists | Blocked |
 | Ear Shape | 4 | 3 approved with notes; 1 duplicate review | Evidence review material exists | Blocked |
 | Body/context controls | 5 | 5 approved with notes | Evidence review material exists | Blocked |
-| Hairstyles | 0 | Not captured | Not ready | Blocked |
-| Hair colors | 0 | Not captured | Not ready | Blocked |
-| Facial hair | 0 | Not captured | Not ready | Blocked |
-| Facial-hair colors | 0 | Not captured | Not ready | Blocked |
+| Hairstyles | 1 | 1 approved with notes; complete selector still missing | Partial evidence review material exists | Blocked |
+| Hair colors | 1 | 1 order unresolved | Not ready | Blocked |
+| Facial hair | 1 | 1 order unresolved | Not ready | Blocked |
+| Facial-hair colors | 1 | 1 order unresolved | Not ready | Blocked |
 | Eyebrows | 0 | Not captured | Not ready | Blocked |
 | Additional sliders/toggles/colors/presets | 0 | Not captured | Not ready | Blocked |
 
@@ -301,13 +303,16 @@ Prompts 082 and 083 added the circular guided capture interaction.
 
 ## Verification Results
 
-Latest complete command:
+Latest verification commands:
 
 ```bash
-npm run verify:clean
+GAMEFACE_VERIFY_SKIP_E2E=1 GAMEFACE_VERIFY_SKIP_IOS=1 npm run verify
+npm --prefix web run test:e2e
+npm --prefix web run test:e2e:phase0
+xcodebuild test -project ios/GameFaceMatch.xcodeproj -scheme GameFaceMatch -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5' CODE_SIGNING_ALLOWED=NO
 ```
 
-Result on 2026-08-02: PASS.
+Result on 2026-08-02: PASS. The first full `npm run verify` attempt reached the Playwright stage and failed only because the sandbox blocked local server binding to `127.0.0.1:3100`; the Playwright stages passed when rerun with local server permission. The first sandboxed iOS command failed on CoreSimulator/DerivedData access and unavailable generic destinations; the same concrete simulator test passed with local Xcode/CoreSimulator permission.
 
 Included checks:
 

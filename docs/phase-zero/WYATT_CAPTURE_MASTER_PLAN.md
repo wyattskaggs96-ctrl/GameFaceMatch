@@ -6,8 +6,8 @@ This plan is the current Phase 0 evidence-coverage control center for GameFace M
 
 ## Current Coverage
 
-- Research candidates: 85
-- Primary approved with notes: 80
+- Research candidates: 92
+- Primary approved with notes: 84
 - Duplicate review required: 5
 - Second-verified records: 0
 - Production-approved records: 0
@@ -205,7 +205,7 @@ This plan is the current Phase 0 evidence-coverage control center for GameFace M
 - Filename pattern: GFM-CAP-006_HEADSKIN_GEOMETRY_CONTROLS_YYYYMMDD_partNN.mp4
 - Acceptance criteria: Nose boundaries are directly shown. | Ear Shape boundaries are directly shown. | Mouth, Jaw, and Chin controls are opened only if directly visible. | Absent controls are not claimed absent unless menu boundary proof supports it.
 - Recapture triggers: Selector boundary missing. | Native label/index hidden. | Control inferred from requirements rather than visible game menu.
-- Existing evidence summary: 17 research candidate(s) exist for related categories, with 18 incomplete evidence marker(s).
+- Existing evidence summary: 19 research candidate(s) exist for related categories, with 20 incomplete evidence marker(s).
 
 ### GFM-CAP-007 — Hair menu hierarchy: Hair submenu child controls
 
@@ -222,7 +222,7 @@ This plan is the current Phase 0 evidence-coverage control center for GameFace M
 - Filename pattern: GFM-CAP-007_HAIR_SUBMENU_BOUNDARY_YYYYMMDD_partNN.mp4
 - Acceptance criteria: Hair child controls are directly observed. | Unknown child controls remain unknown if no boundary proof exists. | No hairstyle, hair-color, facial-hair, or facial-hair-color value is created from this hierarchy-only capture.
 - Recapture triggers: Hair submenu not opened. | Child rows unreadable. | Scroll boundary hidden.
-- Existing evidence summary: 105 research candidate(s) exist for related categories, with 30 incomplete evidence marker(s).
+- Existing evidence summary: 109 research candidate(s) exist for related categories, with 30 incomplete evidence marker(s).
 
 ### GFM-CAP-008 — Hairstyles: Hairstyle selector values
 
@@ -239,7 +239,7 @@ This plan is the current Phase 0 evidence-coverage control center for GameFace M
 - Filename pattern: GFM-CAP-008_HAIRSTYLES_YYYYMMDD_partNN.mp4
 - Acceptance criteria: The hairstyle control is direct evidence, not assumed. | Native order is preserved. | Researcher visual metadata stays separate from native labels.
 - Recapture triggers: Hairstyle control label absent. | Rear/side evidence missing where required. | Selected value skipped.
-- Existing evidence summary: 1 gap row(s) currently map to GFM-CAP-008; direct selector/category coverage remains incomplete.
+- Existing evidence summary: 1 research candidate(s) exist for related categories, with 2 incomplete evidence marker(s).
 
 ### GFM-CAP-009 — Hair colors: Hair-color selector values
 
@@ -256,7 +256,7 @@ This plan is the current Phase 0 evidence-coverage control center for GameFace M
 - Filename pattern: GFM-CAP-009_HAIR_COLORS_YYYYMMDD_partNN.mp4
 - Acceptance criteria: Native labels or indices are preserved. | No generic color name replaces an unreadable native value. | Automatic dependency claims are supported by visible evidence.
 - Recapture triggers: Color label/index unreadable. | Default or boundary not shown. | Dependency inferred.
-- Existing evidence summary: 7 research candidate(s) exist for related categories, with 12 incomplete evidence marker(s).
+- Existing evidence summary: 9 research candidate(s) exist for related categories, with 12 incomplete evidence marker(s).
 
 ### GFM-CAP-010 — Facial hair: Facial-hair and facial-hair-color selector values
 
@@ -273,7 +273,7 @@ This plan is the current Phase 0 evidence-coverage control center for GameFace M
 - Filename pattern: GFM-CAP-010_FACIAL_HAIR_AND_COLORS_YYYYMMDD_partNN.mp4
 - Acceptance criteria: None is recorded only if directly present. | Coverage metadata is researcher-applied and separate from native labels. | Facial-hair color dependencies are directly shown or left unresolved.
 - Recapture triggers: Control not visible. | None option unclear. | Side/profile evidence missing. | Color relationship inferred.
-- Existing evidence summary: 12 research candidate(s) exist for related categories, with 15 incomplete evidence marker(s).
+- Existing evidence summary: 15 research candidate(s) exist for related categories, with 15 incomplete evidence marker(s).
 
 ### GFM-CAP-014 — Dependencies: Head and skin dependency tests
 

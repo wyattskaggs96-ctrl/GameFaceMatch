@@ -7,8 +7,8 @@ describe("Phase 0 evidence coverage control center", () => {
     const report = buildEvidenceCoverageControlCenter();
 
     expect(report.summary).toMatchObject({
-      researchCandidates: 85,
-      primaryApprovedWithNotes: 80,
+      researchCandidates: 92,
+      primaryApprovedWithNotes: 84,
       duplicateReviewRequired: 5,
       secondVerifiedRecords: 0,
       productionApprovedRecords: 0,
@@ -23,7 +23,7 @@ describe("Phase 0 evidence coverage control center", () => {
       productionApprovedRecords: 0
     });
     expect(report.categoryCoverage.find((category: Record<string, unknown>) => category.categoryID === "hairstyles")).toMatchObject({
-      observedCandidateRecords: 0,
+      observedCandidateRecords: 1,
       status: "INCOMPLETE_EVIDENCE",
       productionReady: false
     });

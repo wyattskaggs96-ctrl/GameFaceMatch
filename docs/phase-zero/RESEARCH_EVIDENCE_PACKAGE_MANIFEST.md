@@ -10,11 +10,11 @@ This package is a local research-evidence integrity checkpoint. It does not appr
 
 - Generated at: 2026-07-14T02:45:00-04:00
 - Release-candidate status: PASS_RESEARCH_PACKAGE_RC_PATH_RESOLUTION
-- Source masters in inventory: 11
-- Unique source masters in canonical evidence manifest: 9
-- Derivative evidence entries: 87
+- Source masters in inventory: 14
+- Unique source masters in canonical evidence manifest: 12
+- Derivative evidence entries: 106
 - Exact duplicate source files documented: 2
-- Catalog rows checked: 139
+- Catalog rows checked: 146
 - Catalog rows with invalid evidence: 0
 - Missing resolved files: 0
 - Capture log chronological: yes
@@ -29,12 +29,12 @@ This package is a local research-evidence integrity checkpoint. It does not appr
 
 ## Integrity Checks
 
-- PASSED sourceMastersPreservedAndHashed: 11 source inventory master(s) checked; 9 unique master reference(s) in canonical evidence manifest.
-- PASSED derivativesHaveMasterTimestampAndMetadata: 87 derivative evidence entry/entries checked for master linkage, source timestamp, checksum, file size, and MIME type.
-- PASSED completePathResolution: 98 path reference(s) checked; 0 missing file(s), 0 unsafe path(s), 0 absolute-only evidence entry/entries.
+- PASSED sourceMastersPreservedAndHashed: 14 source inventory master(s) checked; 12 unique master reference(s) in canonical evidence manifest.
+- PASSED derivativesHaveMasterTimestampAndMetadata: 106 derivative evidence entry/entries checked for master linkage, source timestamp, checksum, file size, and MIME type.
+- PASSED completePathResolution: 120 path reference(s) checked; 0 missing file(s), 0 unsafe path(s), 0 absolute-only evidence entry/entries.
 - PASSED duplicateEvidenceDocumented: 2 exact duplicate group(s) documented in video inventory.
-- PASSED catalogRowsPointToValidEvidence: 139 catalog row(s) checked across canonical research catalogs; 0 invalid evidence linkage row(s).
-- PASSED captureLogChronologicalAndEvidenceLinked: 106 capture event(s) checked; 0 out of chronological order, 0 missing generated evidence reference(s).
+- PASSED catalogRowsPointToValidEvidence: 146 catalog row(s) checked across canonical research catalogs; 0 invalid evidence linkage row(s).
+- PASSED captureLogChronologicalAndEvidenceLinked: 127 capture event(s) checked; 0 out of chronological order, 0 missing generated evidence reference(s).
 - PASSED issuesAndExceptionsLinked: 44 issue(s) checked; 0 issue(s) lack affected records, affected evidence, related issues, or a recapture request.
 
 ## Duplicate Evidence

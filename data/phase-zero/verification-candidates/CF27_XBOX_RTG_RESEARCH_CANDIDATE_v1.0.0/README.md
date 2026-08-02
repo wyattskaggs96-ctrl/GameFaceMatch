@@ -6,11 +6,11 @@ This directory contains the validation report for the proposed verification-cand
 
 ## Summary
 
-- Candidate records: 85
-- Source videos: 11
-- Evidence entries: 96
+- Candidate records: 89
+- Source videos: 14
+- Evidence entries: 118
 - Open capture assignments: 15
-- Blockers: 34
+- Blockers: 39
 - Production catalog records: 0
 
 ## Highest Priority Recaptures

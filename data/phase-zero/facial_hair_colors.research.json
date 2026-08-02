@@ -1,12 +1,12 @@
 {
   "schemaVersion": "cf27-facial-hair-color-research-catalog-v1",
-  "generatedAt": "2026-07-14T04:10:00-04:00",
+  "generatedAt": "2026-08-02T22:50:00-04:00",
   "project": "GameFace Match",
   "game": "EA SPORTS College Football 27",
   "dataClass": "PHASE_ZERO_FACIAL_HAIR_COLOR_RESEARCH_CATALOG",
   "sourceType": "shippingGameVideoResearch",
   "productionStatus": "NOT_PRODUCTION_DATA",
-  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
   "productionRecommendationsEnabled": false,
   "sourceMenuMap": "data/phase-zero/menu_map.research.json",
   "sourceCaptureRequests": "data/phase-zero/capture_requests.json",
@@ -18,20 +18,20 @@
     "Do not assume every facial-hair style supports every color unless directly tested."
   ],
   "summary": {
-    "recordCount": 0,
+    "recordCount": 1,
     "productionEligibleRecords": 0,
     "hairMenuRowObserved": true,
     "facialHairColorControlObserved": false,
     "facialHairColorNativeValuesObserved": false,
     "totalObservedCount": 0,
-    "nativeOrderStatus": "NOT_OBSERVED",
+    "nativeOrderStatus": "PARTIAL_ORDER_UNRESOLVED",
     "countStatus": "COUNT_UNKNOWN",
     "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
     "selectorBoundaryStatus": "BOUNDARIES_UNKNOWN",
     "selectorWrapStatus": "NOT_OBSERVED",
-    "evidenceExtractionStatus": "NO_FACIAL_HAIR_COLOR_OPTION_FRAMES_AVAILABLE",
+    "evidenceExtractionStatus": "PARTIAL_AUGUST_2026_SELECTED_VALUE_EVIDENCE_AVAILABLE",
     "recaptureRequired": true,
-    "blocker": "Current evidence shows the Hair submenu row only. It does not open Hair or show any facial-hair-color control or selected facial-hair-color values."
+    "blocker": "August 2026 source recordings provide directly selected values, but complete selector boundaries, repeat counts, dependencies, and second verification remain unresolved."
   },
   "canonicalContext": {
     "selectedCanonicalFacialHairStyle": "UNCONFIRMED_NOT_CAPTURED",
@@ -118,7 +118,19 @@
         "Facial-hair color is not assumed to exist unless shown."
       ]
     },
-    "facialHairColorOptionEvidence": []
+    "facialHairColorOptionEvidence": [],
+    "august2026SourceRecordings": [
+      {
+        "candidateID": "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+        "evidenceIDs": [
+          "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-005"
+        ],
+        "evidenceFiles": [
+          "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_005_facial_hair_color_225p5s.png"
+        ],
+        "sourceTimestampRange": "225-235.35"
+      }
+    ]
   },
   "viewCoverage": {
     "requiredViews": [
@@ -157,5 +169,28 @@
     "separationRule": "Any future approximate color-family notes must be stored under researcherAppliedColorMetadata, separate from nativeGameLabel and nativeIndex.",
     "prohibitedReplacementRule": "Do not replace native labels or indices with guessed color names."
   },
-  "records": []
+  "records": [
+    {
+      "stableResearchID": "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+      "nativeOrder": null,
+      "nativeGameLabel": "Purple",
+      "nativeIndex": null,
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceTimestamp": 225.5,
+      "menuEvidencePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_005_facial_hair_color_225p5s.png",
+      "frontEvidencePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_005_facial_hair_color_225p5s.png",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-005"
+      ],
+      "selectedValueVisible": true,
+      "selectorBoundaryStatus": "BOUNDARIES_UNKNOWN",
+      "selectorWrapStatus": "NOT_DEMONSTRATED",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "dependencyObservations": "UNKNOWN_NOT_TESTED",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "productionRecommendationsEnabled": false,
+      "recaptureStatus": "RECAPTURE_REQUIRED_FOR_COMPLETE_SELECTOR_AND_PRODUCTION_STANDARDIZATION"
+    }
+  ]
 }

@@ -17,9 +17,9 @@
     "productionManifest": "data/catalog/production/catalog_manifest.json"
   },
   "sourceCounts": {
-    "totalResearchCandidates": 85,
+    "totalResearchCandidates": 92,
     "primaryApproved": 0,
-    "primaryApprovedWithNotes": 80,
+    "primaryApprovedWithNotes": 84,
     "duplicateReviewRequired": 5,
     "secondVerified": 0,
     "productionApproved": 0,
@@ -27,9 +27,9 @@
     "recordsAllowedInProductionRecommendations": 0,
     "openIssues": 44,
     "openBlockingIssues": 35,
-    "evidenceEntries": 96,
-    "videoInventoryRows": 11,
-    "uniqueSourceVideos": 9,
+    "evidenceEntries": 118,
+    "videoInventoryRows": 14,
+    "uniqueSourceVideos": 12,
     "duplicateSourceVideos": 2,
     "gapRows": 22
   },

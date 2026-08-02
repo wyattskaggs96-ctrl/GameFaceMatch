@@ -1,8 +1,8 @@
 check,status,blocking,warnings,details
-sourceMastersPreservedAndHashed,passed,0,0,11 source inventory master(s) checked; 9 unique master reference(s) in canonical evidence manifest.
-derivativesHaveMasterTimestampAndMetadata,passed,0,0,"87 derivative evidence entry/entries checked for master linkage, source timestamp, checksum, file size, and MIME type."
-completePathResolution,passed,0,0,"98 path reference(s) checked; 0 missing file(s), 0 unsafe path(s), 0 absolute-only evidence entry/entries."
+sourceMastersPreservedAndHashed,passed,0,3,14 source inventory master(s) checked; 12 unique master reference(s) in canonical evidence manifest.
+derivativesHaveMasterTimestampAndMetadata,passed,0,0,"106 derivative evidence entry/entries checked for master linkage, source timestamp, checksum, file size, and MIME type."
+completePathResolution,passed,0,0,"120 path reference(s) checked; 0 missing file(s), 0 unsafe path(s), 0 absolute-only evidence entry/entries."
 duplicateEvidenceDocumented,passed,0,0,2 exact duplicate group(s) documented in video inventory.
-catalogRowsPointToValidEvidence,passed,0,0,139 catalog row(s) checked across canonical research catalogs; 0 invalid evidence linkage row(s).
-captureLogChronologicalAndEvidenceLinked,passed,0,0,"106 capture event(s) checked; 0 out of chronological order, 0 missing generated evidence reference(s)."
+catalogRowsPointToValidEvidence,passed,0,0,146 catalog row(s) checked across canonical research catalogs; 0 invalid evidence linkage row(s).
+captureLogChronologicalAndEvidenceLinked,passed,0,0,"127 capture event(s) checked; 0 out of chronological order, 0 missing generated evidence reference(s)."
 issuesAndExceptionsLinked,passed,0,0,"44 issue(s) checked; 0 issue(s) lack affected records, affected evidence, related issues, or a recapture request."

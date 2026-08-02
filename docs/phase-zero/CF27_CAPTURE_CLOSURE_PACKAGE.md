@@ -6,14 +6,14 @@ Generated from machine-readable Phase 0 artifacts at `2026-08-02T00:00:00-04:00`
 
 ## Recalculated Counts
 
-- Research candidates: 85
+- Research candidates: 92
 - Primary approved: 0
-- Primary approved with notes: 80
+- Primary approved with notes: 84
 - Duplicate review required: 5
 - Open issues: 44 (35 blocking)
-- Evidence entries: 96
-- Source-video inventory rows: 11
-- Unique source videos: 9
+- Evidence entries: 118
+- Source-video inventory rows: 14
+- Unique source videos: 12
 - Second verified: 0
 - Production approved: 0
 - Production catalog records: 0

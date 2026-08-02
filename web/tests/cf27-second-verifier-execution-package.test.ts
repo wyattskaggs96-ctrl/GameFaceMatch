@@ -70,7 +70,7 @@ const {
 };
 
 describe("CF27 second-verifier execution package", () => {
-  it("builds an executable non-production package for the current 85-record verifier queue", () => {
+  it("builds an executable non-production package for the current 92-record verifier queue", () => {
     const pkg = buildSecondVerifierExecutionPackage({
       root: repositoryRoot(),
       verifierID: "second-verifier-test-only"
@@ -87,7 +87,7 @@ describe("CF27 second-verifier execution package", () => {
       primaryReviewConclusionsWithheldForBlindPhase: true
     });
     expect(pkg.packageData.dashboard).toMatchObject({
-      assigned: 85,
+      assigned: 92,
       completed: 0,
       disagreement: 0,
       productionEligible: 0,

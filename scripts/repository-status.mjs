@@ -46,6 +46,7 @@ const localEvidencePathPattern = /(^|[/_-])(local-evidence|evidence-master|evide
 const cf27ResearchPathPattern = /^data\/research\/cf27\//;
 const cf27ResearchGeneratedMediaPattern = /^data\/research\/cf27\/generated\/(contact-sheets|full-resolution-frames|cropped-measurement-derivatives)\//;
 const cf27ResearchSourceVideoPattern = /^data\/research\/cf27\/(source-video-references|imports)\//;
+const phaseZeroDerivativeEvidencePattern = /^data\/phase-zero\/derivative-frames\//;
 const approvedTemporaryPathPatterns = [
   /^web\/test-results\//,
   /^web\/playwright-report\//,
@@ -175,7 +176,7 @@ function findRawMediaWarnings(files) {
     if (videoExtensions.has(extension) && /game|cfb|college-football|road-to-glory|audit|evidence/i.test(normalized)) {
       warnings.push(`Raw game video should stay outside git or in private evidence storage: ${normalized}`);
     }
-    if (riskyFacePathPattern.test(normalized)) {
+    if (riskyFacePathPattern.test(normalized) && !phaseZeroDerivativeEvidencePattern.test(normalized)) {
       warnings.push(`Possible raw facial media outside approved temporary directories: ${normalized}`);
     }
   }

@@ -63,6 +63,7 @@
     "cf27:xbox-runbook": "node scripts/cf27-tomorrows-xbox-recording-runbook.mjs",
     "cf27:video-inventory": "node scripts/cf27-video-source-inventory.mjs",
     "cf27:evidence-intake": "node scripts/cf27-evidence-intake-agent.mjs",
+    "cf27:august-source-ingest": "node scripts/cf27-august-source-recordings-ingest.mjs",
     "phase-zero:intake": "node scripts/phase-zero-intake.mjs",
     "phase-zero:coverage": "node scripts/phase-zero-evidence-coverage.mjs",
     "phase-zero:coverage:check": "node scripts/phase-zero-evidence-coverage.mjs --check",

@@ -112,26 +112,26 @@ describe("Phase 0 completion dashboard", () => {
     expect(facialHair).toMatchObject({
       required: true,
       evidenceAvailable: 0,
-      observed: 0,
-      cataloged: 0,
+      observed: 1,
+      cataloged: 1,
       independentlyVerified: 0,
       productionApproved: 0,
-      status: "notStarted"
+      status: "qaReviewed"
     });
-    expect(facialHair?.sourceSummary).toMatch(/Facial-hair research catalog exists with 0 record/);
-    expect(facialHair?.sourceSummary).toMatch(/does not open Hair/);
+    expect(facialHair?.sourceSummary).toMatch(/Facial-hair research catalog exists with 1 record/);
+    expect(facialHair?.sourceSummary).toMatch(/complete selector boundaries/);
     expect(facialHair?.nextAction).toMatch(/GFM-CAP-007 and GFM-CAP-010/);
     expect(facialHairColors).toMatchObject({
       required: true,
       evidenceAvailable: 0,
-      observed: 0,
-      cataloged: 0,
+      observed: 1,
+      cataloged: 1,
       independentlyVerified: 0,
       productionApproved: 0,
-      status: "notStarted"
+      status: "qaReviewed"
     });
-    expect(facialHairColors?.sourceSummary).toMatch(/Facial-hair-color research catalog exists with 0 record/);
-    expect(facialHairColors?.sourceSummary).toMatch(/does not open Hair/);
+    expect(facialHairColors?.sourceSummary).toMatch(/Facial-hair-color research catalog exists with 1 record/);
+    expect(facialHairColors?.sourceSummary).toMatch(/complete selector boundaries/);
     expect(facialHairColors?.nextAction).toMatch(/GFM-CAP-007 and GFM-CAP-010/);
   });
 

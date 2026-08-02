@@ -4,14 +4,44 @@
   "productionStatus": "NOT_PRODUCTION_DATA",
   "releaseCandidateStatus": "PASS_RESEARCH_PACKAGE_RC_PATH_RESOLUTION",
   "summary": {
-    "entriesChecked": 98,
-    "resolvedRepositoryDerivativeFiles": 87,
-    "externalMasterReferences": 11,
+    "entriesChecked": 120,
+    "resolvedRepositoryDerivativeFiles": 106,
+    "externalMasterReferences": 14,
     "missingFiles": 0,
     "unsafePaths": 0,
     "absoluteOnlyEvidenceEntries": 0
   },
   "records": [
+    {
+      "id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "kind": "master",
+      "relativePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "pathStatus": "portable_external_master_reference",
+      "fileResolutionStatus": "external_owner_master_reference_not_repository_file",
+      "sha256": "bdd75f0ce953aaf9fda0cb187658b9314ae7f6c21f5ab30d7e474549841037d5",
+      "sizeBytes": 573576743,
+      "note": "Source masters are preserved outside the repository; the release candidate stores portable OWNER_DOWNLOADS references plus checksums."
+    },
+    {
+      "id": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "kind": "master",
+      "relativePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "pathStatus": "portable_external_master_reference",
+      "fileResolutionStatus": "external_owner_master_reference_not_repository_file",
+      "sha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+      "sizeBytes": 548140709,
+      "note": "Source masters are preserved outside the repository; the release candidate stores portable OWNER_DOWNLOADS references plus checksums."
+    },
+    {
+      "id": "CF27_XBOX_SOURCE_2026_08_02_003",
+      "kind": "master",
+      "relativePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+      "pathStatus": "portable_external_master_reference",
+      "fileResolutionStatus": "external_owner_master_reference_not_repository_file",
+      "sha256": "90a29684f972dff7f41c33fb6457ee545a65c94292647ff9d91be1f1bc168586",
+      "sizeBytes": 357653157,
+      "note": "Source masters are preserved outside the repository; the release candidate stores portable OWNER_DOWNLOADS references plus checksums."
+    },
     {
       "id": "phase0-video-001",
       "kind": "master",
@@ -121,6 +151,215 @@
       "sha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
       "sizeBytes": 128477357,
       "note": "Source masters are preserved outside the repository; the release candidate stores portable OWNER_DOWNLOADS references plus checksums."
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-001",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_001_appearance_menu_0p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1165053,
+      "actualSizeBytes": 1165053,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 0.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-002",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_002_head_template_5p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 686187,
+      "actualSizeBytes": 686187,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 5.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-003",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_003_skin_tone_82p0s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1374349,
+      "actualSizeBytes": 1374349,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 82
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-004",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_004_skin_details_125p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1353655,
+      "actualSizeBytes": 1353655,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 125.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-005",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_005_eye_shape_155p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1413945,
+      "actualSizeBytes": 1413945,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 155.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-006",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_006_eye_color_170p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1410920,
+      "actualSizeBytes": 1410920,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 170.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-007",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_007_nose_190p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1356678,
+      "actualSizeBytes": 1356678,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 190.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-008",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_008_ear_shape_205p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1301517,
+      "actualSizeBytes": 1301517,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 205.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-009",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_009_mouth_shape_215p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1481269,
+      "actualSizeBytes": 1481269,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 215.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-010",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_010_jaw_shape_225p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1331703,
+      "actualSizeBytes": 1331703,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 225.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-011",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_011_chin_235p0s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1384325,
+      "actualSizeBytes": 1384325,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 235
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-002",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_002_hair_style_5p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1404638,
+      "actualSizeBytes": 1404638,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceTimestamp": 5.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-003",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_003_hair_color_100p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1668341,
+      "actualSizeBytes": 1668341,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceTimestamp": 100.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-004",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_004_facial_hair_style_175p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1614823,
+      "actualSizeBytes": 1614823,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceTimestamp": 175.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-005",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_005_facial_hair_color_225p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1745454,
+      "actualSizeBytes": 1745454,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceTimestamp": 225.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_003-tl-002",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_003_tl_002_styles_throw_style_5p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1124739,
+      "actualSizeBytes": 1124739,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+      "sourceTimestamp": 5.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_003-tl-003",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_003_tl_003_styles_run_style_75p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1124523,
+      "actualSizeBytes": 1124523,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+      "sourceTimestamp": 75.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_003-tl-004",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_003_tl_004_styles_under_center_stance_125p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1169182,
+      "actualSizeBytes": 1169182,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+      "sourceTimestamp": 125.5
+    },
+    {
+      "id": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_003-tl-005",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_003_tl_005_styles_point_stance_155p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1178555,
+      "actualSizeBytes": 1178555,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
+      "sourceTimestamp": 155.5
     },
     {
       "id": "phase0-frame-video-001-tl-011",

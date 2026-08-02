@@ -1,12 +1,12 @@
 {
   "schemaVersion": "cf27-facial-hair-research-catalog-v1",
-  "generatedAt": "2026-07-14T03:45:00-04:00",
+  "generatedAt": "2026-08-02T22:50:00-04:00",
   "project": "GameFace Match",
   "game": "EA SPORTS College Football 27",
   "dataClass": "PHASE_ZERO_FACIAL_HAIR_RESEARCH_CATALOG",
   "sourceType": "shippingGameVideoResearch",
   "productionStatus": "NOT_PRODUCTION_DATA",
-  "verificationStatus": "REQUESTED_NOT_CAPTURED",
+  "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
   "productionRecommendationsEnabled": false,
   "sourceMenuMap": "data/phase-zero/menu_map.research.json",
   "sourceCaptureRequests": "data/phase-zero/capture_requests.json",
@@ -18,7 +18,7 @@
     "Do not use cultural, lifestyle, personality, race, ethnicity, attractiveness, identity, or real-person resemblance labels."
   ],
   "summary": {
-    "recordCount": 0,
+    "recordCount": 1,
     "productionEligibleRecords": 0,
     "hairMenuRowObserved": true,
     "facialHairControlObserved": false,
@@ -26,13 +26,13 @@
     "noneOptionObserved": false,
     "totalObservedCount": 0,
     "countStatus": "COUNT_UNKNOWN",
-    "nativeOrderStatus": "NOT_OBSERVED",
+    "nativeOrderStatus": "PARTIAL_ORDER_UNRESOLVED",
     "completeSelectorDoubleCountAvailable": false,
     "selectorWrapStatus": "NOT_OBSERVED",
     "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
-    "evidenceExtractionStatus": "NO_FACIAL_HAIR_OPTION_FRAMES_AVAILABLE",
+    "evidenceExtractionStatus": "PARTIAL_AUGUST_2026_SELECTED_VALUE_EVIDENCE_AVAILABLE",
     "recaptureRequired": true,
-    "blocker": "Current evidence shows the Hair submenu row only. It does not open Hair or show any facial-hair control, None option, facial-hair color, or selected facial-hair values."
+    "blocker": "August 2026 source recordings provide directly selected values, but complete selector boundaries, repeat counts, dependencies, and second verification remain unresolved."
   },
   "canonicalContext": {
     "canonicalHead": "UNCONFIRMED_NOT_CAPTURED",
@@ -120,7 +120,19 @@
         "Facial-hair color is not assumed to exist unless shown."
       ]
     },
-    "facialHairOptionEvidence": []
+    "facialHairOptionEvidence": [],
+    "august2026SourceRecordings": [
+      {
+        "candidateID": "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+        "evidenceIDs": [
+          "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-004"
+        ],
+        "evidenceFiles": [
+          "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_004_facial_hair_style_175p5s.png"
+        ],
+        "sourceTimestampRange": "175-224"
+      }
+    ]
   },
   "viewCoverage": {
     "requiredViews": [
@@ -178,5 +190,28 @@
       "Facial-hair dependencies cannot be assessed until GFM-CAP-007 maps visible Hair controls and GFM-CAP-010 captures facial-hair controls if present."
     ]
   },
-  "records": []
+  "records": [
+    {
+      "stableResearchID": "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+      "nativeOrder": null,
+      "nativeGameLabel": "Mutton Chops",
+      "nativeIndex": null,
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceTimestamp": 175.5,
+      "menuEvidencePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_004_facial_hair_style_175p5s.png",
+      "frontEvidencePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_004_facial_hair_style_175p5s.png",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-004"
+      ],
+      "selectedValueVisible": true,
+      "selectorBoundaryStatus": "BOUNDARIES_UNKNOWN",
+      "selectorWrapStatus": "NOT_DEMONSTRATED",
+      "defaultStatus": "DEFAULT_NOT_DEMONSTRATED",
+      "dependencyObservations": "UNKNOWN_NOT_TESTED",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
+      "productionStatus": "NOT_PRODUCTION_DATA",
+      "productionRecommendationsEnabled": false,
+      "recaptureStatus": "RECAPTURE_REQUIRED_FOR_COMPLETE_SELECTOR_AND_PRODUCTION_STANDARDIZATION"
+    }
+  ]
 }

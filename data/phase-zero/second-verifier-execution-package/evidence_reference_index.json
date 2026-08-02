@@ -4,6 +4,69 @@
   "productionStatus": "NOT_PRODUCTION_DATA",
   "entries": [
     {
+      "evidenceID": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-009",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_009_mouth_shape_215p5s.png",
+      "fileRole": "phase_zero_august_2026_timeline_derivative",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "timestamp": 215.5,
+      "sha256": "790729aca3f91ad31a6737e3c911d125ceac45fdc207cb0993cda90587a2ddcd",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "evidenceID": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-010",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_010_jaw_shape_225p5s.png",
+      "fileRole": "phase_zero_august_2026_timeline_derivative",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "timestamp": 225.5,
+      "sha256": "564f7d72ed8584317d8053ca283255142f003f05fc215e5bce49c1d05a3b6b50",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "evidenceID": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-011",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_001_tl_011_chin_235p0s.png",
+      "fileRole": "phase_zero_august_2026_timeline_derivative",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "timestamp": 235,
+      "sha256": "d356192ef70b8d00c55a6ec7b40ce6c7e7765b712b7451ebad530226913d75d6",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "evidenceID": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-002",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_002_hair_style_5p5s.png",
+      "fileRole": "phase_zero_august_2026_timeline_derivative",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "timestamp": 5.5,
+      "sha256": "8c3b122c6c72ef71f6c87e1b1c84f409e239ff4b286957895666aa8beacaa5f9",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "evidenceID": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-003",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_003_hair_color_100p5s.png",
+      "fileRole": "phase_zero_august_2026_timeline_derivative",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "timestamp": 100.5,
+      "sha256": "56944bc2f21fe8896abaf058dd39d7237544de19ac61cb480bfa89ec791c6987",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "evidenceID": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-004",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_004_facial_hair_style_175p5s.png",
+      "fileRole": "phase_zero_august_2026_timeline_derivative",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "timestamp": 175.5,
+      "sha256": "5dee8cc3e1db3ef0bbb15725e5a86e9da860bad5585a8ef251a7311ef4c29ebb",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
+      "evidenceID": "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-005",
+      "relativePath": "data/phase-zero/derivative-frames/august-2026-source-recordings/CF27_XBOX_SOURCE_2026_08_02_002_tl_005_facial_hair_color_225p5s.png",
+      "fileRole": "phase_zero_august_2026_timeline_derivative",
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "timestamp": 225.5,
+      "sha256": "7970eadcd64b2fed2f31abd5948934eef23f6c5b8ed4f18c1476e7ebf935761f",
+      "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
+    },
+    {
       "evidenceID": "phase0-frame-video-002-tl-004",
       "relativePath": "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_001/CF27_XBOXUNKNOWN_RTG_HEAD_001_MENU_video-002_11p68s.png",
       "fileRole": "existing_research_derivative",

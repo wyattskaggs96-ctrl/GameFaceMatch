@@ -74,15 +74,15 @@ describe("CF27 catalog count and native-order audit", () => {
     }
   });
 
-  it("keeps uncaptured categories incomplete instead of treating zero records as completion", () => {
+  it("keeps newly observed hair categories incomplete when boundaries and totals are unproven", () => {
     for (const categoryID of ["hairstyle", "hairColor", "facialHair", "facialHairColor"]) {
-      const emptyCategory = category(categoryID);
+      const observedButIncompleteCategory = category(categoryID);
 
-      expect(emptyCategory.recordCount).toBe(0);
-      expect(emptyCategory.categoryCompletionStatus).toBe("INCOMPLETE");
-      expect(emptyCategory.checks.beginningBoundary.status).toBe("NOT_PROVEN");
-      expect(emptyCategory.checks.nativeOrderContinuity.status).toBe("UNKNOWN");
-      expect(emptyCategory.checks.evidenceForEveryClaimedOption.status).toBe("UNKNOWN");
+      expect(observedButIncompleteCategory.recordCount).toBe(1);
+      expect(observedButIncompleteCategory.categoryCompletionStatus).toBe("INCOMPLETE");
+      expect(observedButIncompleteCategory.checks.beginningBoundary.status).toBe("NOT_PROVEN");
+      expect(observedButIncompleteCategory.checks.nativeOrderContinuity.status).toBe("UNKNOWN");
+      expect(observedButIncompleteCategory.checks.evidenceForEveryClaimedOption.status).toBe("PASS");
     }
   });
 

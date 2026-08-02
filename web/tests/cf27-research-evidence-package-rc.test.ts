@@ -18,9 +18,9 @@ describe("CF27 research evidence package release candidate", () => {
     expect(manifest.productionStatus).toBe("NOT_PRODUCTION_DATA");
     expect(manifest.productionRecommendationsEnabled).toBe(false);
     expect(manifest.releaseCandidateStatus).toBe("PASS_RESEARCH_PACKAGE_RC_PATH_RESOLUTION");
-    expect(manifest.summary.sourceMastersInInventory).toBe(11);
-    expect(manifest.summary.uniqueSourceMastersInEvidenceManifest).toBe(9);
-    expect(manifest.summary.derivativeEvidenceEntries).toBe(87);
+    expect(manifest.summary.sourceMastersInInventory).toBe(14);
+    expect(manifest.summary.uniqueSourceMastersInEvidenceManifest).toBe(12);
+    expect(manifest.summary.derivativeEvidenceEntries).toBe(106);
     expect(manifest.summary.exactDuplicateSourceFilesDocumented).toBe(2);
     expect(manifest.summary.catalogRowsWithInvalidEvidence).toBe(0);
     expect(manifest.summary.missingResolvedFiles).toBe(0);
@@ -34,7 +34,7 @@ describe("CF27 research evidence package release candidate", () => {
     const manifest = generateResearchEvidencePackageManifest({ root: repositoryRoot });
 
     for (const master of manifest.masterInventory) {
-      expect(master.portableRelativeEvidencePath, master.inventoryId).toMatch(/^OWNER_DOWNLOADS\//);
+      expect(master.portableRelativeEvidencePath, master.inventoryId).toMatch(/^(OWNER_DOWNLOADS|source-media\/NCAA 26)\//);
       expect(master.sha256, master.inventoryId).toMatch(/^[a-f0-9]{64}$/);
       expect(master.fileSizeBytes, master.inventoryId).toBeGreaterThan(0);
       expect(master.hasMediaType, master.inventoryId).toBe(true);

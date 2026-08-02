@@ -1,6 +1,6 @@
 {
   "schemaVersion": "cf27-video-timeline-map-v1-capture-log",
-  "generatedAt": "2026-07-13T21:41:00-04:00",
+  "generatedAt": "2026-08-02T22:50:00-04:00",
   "project": "GameFace Match",
   "game": "EA SPORTS College Football 27",
   "dataClass": "PHASE_ZERO_TIMELINE_CAPTURE_LOG",
@@ -8,11 +8,421 @@
   "productionStatus": "NOT_PRODUCTION_DATA",
   "verificationStatus": "OBSERVED_PENDING_VERIFICATION",
   "summary": {
-    "events": 106,
-    "eventsWithEvidence": 87,
-    "eventsWithIssues": 41
+    "events": 127,
+    "eventsWithEvidence": 106,
+    "eventsWithIssues": 47
   },
   "events": [
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-001",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-001",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 0,
+      "end_timestamp": 4,
+      "category": "Appearance menu / Head & Skin row",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-001"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Appearance menu visible before Head & Skin traversal.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-002",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-002",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 5,
+      "end_timestamp": 64,
+      "category": "Head Template",
+      "native_option": "Face values visible during traversal",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-002"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Head Template selector is traversed; new clip reinforces existing head/menu evidence but does not independently resolve complete count or duplicate review.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-003",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-003",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 65,
+      "end_timestamp": 119,
+      "category": "Skin Tone",
+      "native_option": "Skin Tone 20",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-003"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Skin Tone selector is directly visible; selected Skin Tone 20 frame is useful as supplemental evidence only because prior category completeness still requires boundary verification.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-004",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-004",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 120,
+      "end_timestamp": 144,
+      "category": "Skin Details",
+      "native_option": "Selected skin-detail labels visible in recording; representative frame only.",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-004"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Skin Details traversal is present but this ingest does not replace the existing category catalog without per-label review.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-005",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-005",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 145,
+      "end_timestamp": 159,
+      "category": "Eye Shape",
+      "native_option": "Selected eye-shape label visible in recording; representative frame only.",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-005"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Eye Shape traversal is present but boundaries and every selected value still require normal category review.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-006",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-006",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 160,
+      "end_timestamp": 184,
+      "category": "Eye Color",
+      "native_option": "Selected eye-color labels visible in recording; representative frame only.",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-006"
+      ],
+      "issue_detected": [
+        "PARTIAL_SELECTOR_BOUNDARY_STILL_REQUIRED"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Eye Color traversal is present. This clip supplements but does not replace existing category evidence review.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-007",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-007",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 185,
+      "end_timestamp": 199,
+      "category": "Nose",
+      "native_option": "Selected nose labels visible in recording; representative frame only.",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-007"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Nose traversal is present but duplicate/order concerns remain a later review task.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-008",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-008",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 200,
+      "end_timestamp": 209,
+      "category": "Ear Shape",
+      "native_option": "Selected ear-shape label visible in recording; representative frame only.",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-008"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Ear Shape appears briefly; frame is useful for menu/category traceability but does not prove both ears or full category completion.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-009",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-009",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 210,
+      "end_timestamp": 219,
+      "category": "Mouth Shape",
+      "native_option": "Heavy",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-009"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Mouth Shape label Heavy is directly readable; grid appears fully visible, but production still needs second verification.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-010",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-010",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 220,
+      "end_timestamp": 229,
+      "category": "Jaw Shape",
+      "native_option": "Square",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-010"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Jaw Shape label Square is directly readable; grid appears fully visible, but production still needs second verification.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_001-tl-011",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_001-tl-011",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "start_timestamp": 230,
+      "end_timestamp": 240.24,
+      "category": "Chin",
+      "native_option": "Square",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-011"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Chin label Square is directly readable; grid appears fully visible, but production still needs second verification.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_002-tl-001",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_002-tl-001",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "start_timestamp": 0,
+      "end_timestamp": 4,
+      "category": "Appearance menu / Hair row",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [],
+      "issue_detected": [
+        "PARTIAL_SELECTOR_BOUNDARY_STILL_REQUIRED"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Appearance menu begins on Hair row before opening Hair controls.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_002-tl-002",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_002-tl-002",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "start_timestamp": 5,
+      "end_timestamp": 99,
+      "category": "Hair Style",
+      "native_option": "Short Curly",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-002"
+      ],
+      "issue_detected": [
+        "PARTIAL_SELECTOR_BOUNDARY_STILL_REQUIRED"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Hair Style label Short Curly is directly readable. Broader traversal is visible but not all labels are cataloged by this intake.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_002-tl-003",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_002-tl-003",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "start_timestamp": 100,
+      "end_timestamp": 174,
+      "category": "Hair Color",
+      "native_option": "Light Brown",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-003"
+      ],
+      "issue_detected": [
+        "PARTIAL_SELECTOR_BOUNDARY_STILL_REQUIRED",
+        "ORDER_UNRESOLVED_SCROLLED_SELECTOR"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Hair Color label Light Brown is directly readable, but the selector is scrolled so native order remains unresolved.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_002-tl-004",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_002-tl-004",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "start_timestamp": 175,
+      "end_timestamp": 224,
+      "category": "Facial Hair Style",
+      "native_option": "Mutton Chops",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-004"
+      ],
+      "issue_detected": [
+        "PARTIAL_SELECTOR_BOUNDARY_STILL_REQUIRED",
+        "ORDER_UNRESOLVED_SCROLLED_SELECTOR"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Facial Hair Style label Mutton Chops is directly readable, but the selector is scrolled so native order remains unresolved.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_002-tl-005",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_002-tl-005",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "start_timestamp": 225,
+      "end_timestamp": 235.35,
+      "category": "Facial Hair Color",
+      "native_option": "Purple",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-005"
+      ],
+      "issue_detected": [
+        "PARTIAL_SELECTOR_BOUNDARY_STILL_REQUIRED",
+        "ORDER_UNRESOLVED_SCROLLED_SELECTOR"
+      ],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Selected native Facial Hair Color label Purple is directly readable, but the selector is scrolled so native order remains unresolved.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_003-tl-001",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_003-tl-001",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_003",
+      "start_timestamp": 0,
+      "end_timestamp": 4,
+      "category": "Player body / Styles entry",
+      "native_option": null,
+      "action": "timeline_observation",
+      "evidence_generated": [],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Recording begins in Player context before Styles row review.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_003-tl-002",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_003-tl-002",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_003",
+      "start_timestamp": 5,
+      "end_timestamp": 74,
+      "category": "QB Throw Style",
+      "native_option": "Over the Top 2",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_003-tl-002"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Styles screen visible with QB Throw Style and other body/context rows. This is not facial-appearance catalog evidence.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_003-tl-003",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_003-tl-003",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_003",
+      "start_timestamp": 75,
+      "end_timestamp": 124,
+      "category": "Run Style",
+      "native_option": "Default / visible style values",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_003-tl-003"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Run Style and related rows appear during traversal; used for context/dependency gap tracking only.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_003-tl-004",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_003-tl-004",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_003",
+      "start_timestamp": 125,
+      "end_timestamp": 154,
+      "category": "QB Under Center Stance",
+      "native_option": "Visible stance values",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_003-tl-004"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Under-center stance options are visible; no facial recommendation should use this evidence.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
+    {
+      "capture_event_id": "capture-CF27_XBOX_SOURCE_2026_08_02_003-tl-005",
+      "timeline_record_id": "CF27_XBOX_SOURCE_2026_08_02_003-tl-005",
+      "video_id": "CF27_XBOX_SOURCE_2026_08_02_003",
+      "start_timestamp": 155,
+      "end_timestamp": 163.8,
+      "category": "2-Point Stance rows",
+      "native_option": "Visible stance values",
+      "action": "selected_option_observed_or_traversed",
+      "evidence_generated": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_003-tl-005"
+      ],
+      "issue_detected": [],
+      "verification_state": "OBSERVED_PENDING_VERIFICATION",
+      "notes": "Two-point stance rows are visible; no facial recommendation should use this evidence.",
+      "head_research_catalog_id": "",
+      "head_native_option_number": "",
+      "head_research_flags": []
+    },
     {
       "capture_event_id": "capture-phase0-video-001-tl-001",
       "timeline_record_id": "phase0-video-001-tl-001",
@@ -2033,7 +2443,7 @@
       "notes": "Selected native Ear Shape label is directly readable; neighboring ear thumbnails are non-selected."
     }
   ],
-  "updatedAt": "2026-07-14T00:30:00-04:00",
+  "updatedAt": "2026-08-02T22:50:00-04:00",
   "headTemplateResearchCatalog": {
     "generatedAt": "2026-07-14T00:30:00-04:00",
     "catalogPath": "data/phase-zero/heads.research.json",

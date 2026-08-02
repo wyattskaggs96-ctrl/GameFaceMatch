@@ -58,14 +58,14 @@ describe("CF27 research catalog release", () => {
     expect(sourceExports.get("heads")).toBe(26);
     expect(sourceExports.get("additional_attributes")).toBe(54);
     expect(sourceExports.get("dependency_tests")).toBe(16);
-    expect(sourceExports.get("evidence_manifest")).toBe(96);
-    expect(sourceExports.get("capture_log")).toBe(106);
+    expect(sourceExports.get("evidence_manifest")).toBe(118);
+    expect(sourceExports.get("capture_log")).toBe(127);
     expect(sourceExports.get("issues_and_exceptions")).toBe(44);
     expect(sourceExports.get("recapture_requests")).toBe(10);
-    expect(sourceExports.get("hairstyles")).toBe(0);
-    expect(sourceExports.get("hair_colors")).toBe(0);
-    expect(sourceExports.get("facial_hair")).toBe(0);
-    expect(sourceExports.get("facial_hair_colors")).toBe(0);
+    expect(sourceExports.get("hairstyles")).toBe(1);
+    expect(sourceExports.get("hair_colors")).toBe(1);
+    expect(sourceExports.get("facial_hair")).toBe(1);
+    expect(sourceExports.get("facial_hair_colors")).toBe(1);
   });
 
   it("writes only inside the Phase 0 research-catalog release namespace", () => {

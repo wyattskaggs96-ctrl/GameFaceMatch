@@ -17,9 +17,10 @@ describe("CF27 Phase 0 primary review status", () => {
     expect(status.schemaVersion).toBe(CF27_PRIMARY_REVIEW_SCHEMA_VERSION);
     expect(status.productionStatus).toBe("NOT_PRODUCTION_DATA");
     expect(status.productionRecommendationsEnabled).toBe(false);
-    expect(status.summary.totalResearchCandidates).toBe(85);
+    expect(status.summary.totalResearchCandidates).toBe(92);
     expect(status.summary.primaryApproved).toBe(0);
-    expect(status.summary.primaryApprovedWithNotes).toBe(80);
+    expect(status.summary.primaryApprovedWithNotes).toBe(84);
+    expect(status.summary.orderUnresolved).toBe(3);
     expect(status.summary.duplicateReviewRequired).toBe(5);
     expect(status.summary.secondVerified).toBe(0);
     expect(status.summary.productionApproved).toBe(0);
@@ -31,7 +32,7 @@ describe("CF27 Phase 0 primary review status", () => {
 
     expect(status.videoTraceability.summary.candidatesWithoutValidSourceTimestamp).toBe(0);
     for (const candidate of status.candidates) {
-      expect(candidate.sourceVideoID, candidate.candidateID).toMatch(/^phase0-video-/);
+      expect(candidate.sourceVideoID, candidate.candidateID).toMatch(/^(phase0-video-|CF27_XBOX_SOURCE_2026_08_02_)/);
       expect(candidate.sourceVideoResolved, candidate.candidateID).toBe(true);
       expect(candidate.timelineResolved, candidate.candidateID).toBe(true);
       expect(candidate.evidenceResolved, candidate.candidateID).toBe(true);
@@ -42,8 +43,8 @@ describe("CF27 Phase 0 primary review status", () => {
   it("separates verifier evidence review from production verification", () => {
     const { status } = generatePrimaryReviewStatus({ root: repositoryRoot });
 
-    expect(status.verifierQueue.summary.records).toBe(85);
-    expect(status.verifierQueue.summary.readyForEvidenceReview).toBe(80);
+    expect(status.verifierQueue.summary.records).toBe(92);
+    expect(status.verifierQueue.summary.readyForEvidenceReview).toBe(84);
     expect(status.verifierQueue.summary.duplicateOrContinuityReview).toBe(5);
     expect(status.verifierQueue.summary.fullProductionVerificationBlocked).toBe(true);
     expect(status.productionGate.primaryApprovalAloneCanPublish).toBe(false);
@@ -69,12 +70,14 @@ describe("CF27 Phase 0 primary review status", () => {
       duplicateReviewRequiredCount: 1
     });
     expect(byCategory.get("Hairstyles")).toMatchObject({
-      observedCandidateCount: 0,
-      canBeHandedToVerifier: false,
+      observedCandidateCount: 1,
+      approvedWithNotesCount: 1,
+      canBeHandedToVerifier: true,
       couldBecomeProductionEligibleAfterVerification: false
     });
     expect(byCategory.get("Facial hair")).toMatchObject({
-      observedCandidateCount: 0,
+      observedCandidateCount: 1,
+      unresolvedOrderCount: 1,
       canBeHandedToVerifier: false
     });
   });
@@ -94,7 +97,8 @@ describe("CF27 Phase 0 primary review status", () => {
       "data/phase-zero/issues_register.research.json",
       "data/phase-zero/capture_requests.json",
       "data/phase-zero/catalog_count_order_audit.research.json",
-      "data/phase-zero/appearance_menu_gap_matrix.json"
+      "data/phase-zero/appearance_menu_gap_matrix.json",
+      "data/phase-zero/august_2026_intake_candidates.json"
     ]);
 
     const generated = generatePrimaryReviewStatus({
@@ -107,8 +111,8 @@ describe("CF27 Phase 0 primary review status", () => {
     const queue = JSON.parse(fs.readFileSync(path.join(root, "data/phase-zero/verifier_candidate_queue.json"), "utf8"));
     const doc = fs.readFileSync(path.join(root, "docs/status/PHASE_ZERO_PRIMARY_REVIEW_STATUS.md"), "utf8");
 
-    expect(review.summary.totalResearchCandidates).toBe(85);
-    expect(queue.summary.readyForEvidenceReview).toBe(80);
+    expect(review.summary.totalResearchCandidates).toBe(92);
+    expect(queue.summary.readyForEvidenceReview).toBe(84);
     expect(doc).toContain("PRIMARY REVIEW ONLY - NOT SECOND VERIFIED");
     expect(doc).toContain("Production records: 0");
   });

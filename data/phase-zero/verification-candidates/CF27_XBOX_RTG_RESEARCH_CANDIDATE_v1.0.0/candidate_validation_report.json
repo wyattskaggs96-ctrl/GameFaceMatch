@@ -13,17 +13,17 @@
   "releasePackageLocation": null,
   "blockedPackageLocation": "data/phase-zero/verification-candidates/CF27_XBOX_RTG_RESEARCH_CANDIDATE_v1.0.0",
   "summary": {
-    "candidateRecords": 85,
-    "evidenceEntries": 96,
-    "sourceVideos": 11,
+    "candidateRecords": 89,
+    "evidenceEntries": 118,
+    "sourceVideos": 14,
     "primaryApproved": 0,
-    "primaryApprovedWithNotes": 80,
+    "primaryApprovedWithNotes": 84,
     "duplicateReviewRequired": 5,
     "secondVerifiedRecords": 0,
     "productionApprovedRecords": 0,
     "productionCatalogRecords": 0,
     "openCaptureAssignments": 15,
-    "blockerCount": 34,
+    "blockerCount": 39,
     "warningCount": 1
   },
   "categorySummaries": [
@@ -253,76 +253,86 @@
       "categoryID": "hairstyles",
       "category": "Hairstyles",
       "required": true,
-      "recordCount": 0,
-      "observedCandidateRecords": 0,
-      "primaryReviewedRecords": 0,
+      "recordCount": 1,
+      "observedCandidateRecords": 1,
+      "primaryReviewedRecords": 1,
       "productionApprovedRecords": 0,
-      "verifierReady": false,
+      "verifierReady": true,
       "beginningProof": false,
       "endingProof": false,
       "productionReady": false,
-      "nativeOrderValues": [],
+      "nativeOrderValues": [
+        1
+      ],
       "duplicateNativeOrders": [],
-      "missingEvidenceRecordIDs": [],
-      "explicitReviewStatusRecords": 0,
-      "blocker": "Hairstyles has no directly cataloged candidate records in current evidence.",
+      "missingEvidenceRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY"
+      ],
+      "explicitReviewStatusRecords": 1,
+      "blocker": "Hairstyles has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
       "status": "INCOMPLETE_EVIDENCE"
     },
     {
       "categoryID": "hair_colors",
       "category": "Hair colors",
       "required": true,
-      "recordCount": 0,
-      "observedCandidateRecords": 0,
+      "recordCount": 1,
+      "observedCandidateRecords": 1,
       "primaryReviewedRecords": 0,
       "productionApprovedRecords": 0,
-      "verifierReady": false,
+      "verifierReady": true,
       "beginningProof": false,
       "endingProof": false,
       "productionReady": false,
       "nativeOrderValues": [],
       "duplicateNativeOrders": [],
-      "missingEvidenceRecordIDs": [],
-      "explicitReviewStatusRecords": 0,
-      "blocker": "Hair colors has no directly cataloged candidate records in current evidence.",
+      "missingEvidenceRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN"
+      ],
+      "explicitReviewStatusRecords": 1,
+      "blocker": "Hair colors has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
       "status": "INCOMPLETE_EVIDENCE"
     },
     {
       "categoryID": "facial_hair",
       "category": "Facial hair",
       "required": true,
-      "recordCount": 0,
-      "observedCandidateRecords": 0,
+      "recordCount": 1,
+      "observedCandidateRecords": 1,
       "primaryReviewedRecords": 0,
       "productionApprovedRecords": 0,
-      "verifierReady": false,
+      "verifierReady": true,
       "beginningProof": false,
       "endingProof": false,
       "productionReady": false,
       "nativeOrderValues": [],
       "duplicateNativeOrders": [],
-      "missingEvidenceRecordIDs": [],
-      "explicitReviewStatusRecords": 0,
-      "blocker": "Facial hair has no directly cataloged candidate records in current evidence.",
+      "missingEvidenceRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS"
+      ],
+      "explicitReviewStatusRecords": 1,
+      "blocker": "Facial hair has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
       "status": "INCOMPLETE_EVIDENCE"
     },
     {
       "categoryID": "facial_hair_colors",
       "category": "Facial-hair colors",
       "required": true,
-      "recordCount": 0,
-      "observedCandidateRecords": 0,
+      "recordCount": 1,
+      "observedCandidateRecords": 1,
       "primaryReviewedRecords": 0,
       "productionApprovedRecords": 0,
-      "verifierReady": false,
+      "verifierReady": true,
       "beginningProof": false,
       "endingProof": false,
       "productionReady": false,
       "nativeOrderValues": [],
       "duplicateNativeOrders": [],
-      "missingEvidenceRecordIDs": [],
-      "explicitReviewStatusRecords": 0,
-      "blocker": "Facial-hair colors has no directly cataloged candidate records in current evidence.",
+      "missingEvidenceRecordIDs": [
+        "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE"
+      ],
+      "explicitReviewStatusRecords": 1,
+      "blocker": "Facial-hair colors has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
       "status": "INCOMPLETE_EVIDENCE"
     },
     {
@@ -469,8 +479,8 @@
       "name": "primaryReviewExplicitForEveryCandidate",
       "status": "BLOCKED",
       "details": {
-        "total": 85,
-        "reviewed": 85,
+        "total": 92,
+        "reviewed": 92,
         "duplicateReviewRequired": 5
       }
     },
@@ -520,19 +530,24 @@
       "name": "stableIDUniqueness",
       "status": "PASS",
       "details": {
-        "records": 85,
+        "records": 89,
         "missingIDs": 0,
         "duplicateIDs": []
       }
     },
     {
       "name": "evidenceIntegrity",
-      "status": "PASS",
+      "status": "BLOCKED",
       "details": {
-        "entries": 96,
+        "entries": 118,
         "missingHashes": [],
         "absoluteOnly": [],
-        "candidateMissingEvidence": []
+        "candidateMissingEvidence": [
+          "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY",
+          "CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN",
+          "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+          "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE"
+        ]
       }
     },
     {
@@ -583,17 +598,19 @@
     },
     {
       "name": "noFixturePlaceholderOrCF26Contamination",
-      "status": "PASS",
+      "status": "BLOCKED",
       "details": {
-        "findings": []
+        "findings": [
+          "videoInventory:placeholderOrCF26"
+        ]
       }
     },
     {
       "name": "verifierQueuePresent",
       "status": "PASS",
       "details": {
-        "records": 85,
-        "readyForEvidenceReview": 80,
+        "records": 92,
+        "readyForEvidenceReview": 84,
         "duplicateOrContinuityReview": 5
       }
     }
@@ -722,25 +739,25 @@
     {
       "code": "categoryIncomplete",
       "target": "hairstyles",
-      "message": "Hairstyles is not complete enough for v1 verification-candidate freeze: Hairstyles has no directly cataloged candidate records in current evidence.",
+      "message": "Hairstyles is not complete enough for v1 verification-candidate freeze: Hairstyles has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
       "severity": "BLOCKER"
     },
     {
       "code": "categoryIncomplete",
       "target": "hair_colors",
-      "message": "Hair colors is not complete enough for v1 verification-candidate freeze: Hair colors has no directly cataloged candidate records in current evidence.",
+      "message": "Hair colors is not complete enough for v1 verification-candidate freeze: Hair colors has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
       "severity": "BLOCKER"
     },
     {
       "code": "categoryIncomplete",
       "target": "facial_hair",
-      "message": "Facial hair is not complete enough for v1 verification-candidate freeze: Facial hair has no directly cataloged candidate records in current evidence.",
+      "message": "Facial hair is not complete enough for v1 verification-candidate freeze: Facial hair has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
       "severity": "BLOCKER"
     },
     {
       "code": "categoryIncomplete",
       "target": "facial_hair_colors",
-      "message": "Facial-hair colors is not complete enough for v1 verification-candidate freeze: Facial-hair colors has no directly cataloged candidate records in current evidence.",
+      "message": "Facial-hair colors is not complete enough for v1 verification-candidate freeze: Facial-hair colors has incomplete evidence, boundary, default, wrap, view, or stable-condition requirements.",
       "severity": "BLOCKER"
     },
     {
@@ -759,6 +776,30 @@
       "code": "categoryIncomplete",
       "target": "dependency_tests",
       "message": "Dependency observations is not complete enough for v1 verification-candidate freeze: dependencyTests has no explicit completion blocker in the source artifact.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "candidateEvidenceUnresolved",
+      "target": "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY",
+      "message": "CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY does not resolve to canonical evidence manifest IDs.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "candidateEvidenceUnresolved",
+      "target": "CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN",
+      "message": "CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN does not resolve to canonical evidence manifest IDs.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "candidateEvidenceUnresolved",
+      "target": "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+      "message": "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS does not resolve to canonical evidence manifest IDs.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "candidateEvidenceUnresolved",
+      "target": "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+      "message": "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE does not resolve to canonical evidence manifest IDs.",
       "severity": "BLOCKER"
     },
     {
@@ -801,6 +842,12 @@
       "code": "dependencyTestsNotExecuted",
       "target": "dependency tests",
       "message": "16 dependency test(s) are not executed from controlled evidence.",
+      "severity": "BLOCKER"
+    },
+    {
+      "code": "forbiddenContamination",
+      "target": "videoInventory:placeholderOrCF26",
+      "message": "videoInventory:placeholderOrCF26 was detected in candidate source artifacts.",
       "severity": "BLOCKER"
     }
   ],

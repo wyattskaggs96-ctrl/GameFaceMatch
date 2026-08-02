@@ -8,8 +8,8 @@ This report audits current research catalog images and source videos against the
 
 ## Summary
 
-- Total assessments: 96
-- Source videos assessed: 11
+- Total assessments: 99
+- Source videos assessed: 14
 - Catalog image records assessed: 80
 - Context records assessed: 5
 - Geometric matching eligible: 0
@@ -23,7 +23,7 @@ This report audits current research catalog images and source videos against the
 | --- | ---: |
 | CONSISTENT | 0 |
 | CONSISTENT_WITH_NOTES | 0 |
-| COMPARISON_LIMITED | 54 |
+| COMPARISON_LIMITED | 57 |
 | RECAPTURE_REQUIRED | 42 |
 | UNUSABLE | 0 |
 

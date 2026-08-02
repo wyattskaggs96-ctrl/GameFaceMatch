@@ -24,10 +24,10 @@
 
 ## Candidate Queue
 
-- Total candidate records: 85.
-- Ready for evidence review after independent count: 80.
+- Total candidate records: 92.
+- Ready for evidence review after independent count: 84.
 - Duplicate or continuity review required: 5.
-- Blocked until repair or recapture: 0.
+- Blocked until repair or recapture: 3.
 - Full production verification blocked: true.
 
 The machine-readable queue is `data/phase-zero/verifier_candidate_queue.json`.

@@ -10,8 +10,8 @@ describe("CF27 verification candidate v1 gate", () => {
     expect(gate.report.completenessDecision).toBe("BLOCKED_NOT_READY_TO_FREEZE");
     expect(gate.report.releasePackageCreated).toBe(false);
     expect(gate.report.summary).toMatchObject({
-      candidateRecords: 85,
-      primaryApprovedWithNotes: 80,
+      candidateRecords: 89,
+      primaryApprovedWithNotes: 84,
       duplicateReviewRequired: 5,
       secondVerifiedRecords: 0,
       productionApprovedRecords: 0,

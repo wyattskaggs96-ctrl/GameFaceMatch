@@ -19,7 +19,26 @@ describe("CF27 appearance-control research catalog", () => {
 
     expect(catalog.summary.directlyObservedUniqueValues).toBe(54);
     expect(catalog.summary.selectedObservations).toBe(57);
-    expect(catalog.summary.unconfiguredDirectlyObservedCategoryLabels).toEqual([]);
+    expect(catalog.summary.unconfiguredDirectlyObservedCategoryLabels).toEqual([
+      "2-Point Stance rows",
+      "Chin",
+      "Ear Shape",
+      "Eye Color",
+      "Eye Shape",
+      "Facial Hair Color",
+      "Facial Hair Style",
+      "Hair Color",
+      "Hair Style",
+      "Head Template",
+      "Jaw Shape",
+      "Mouth Shape",
+      "Nose",
+      "QB Throw Style",
+      "QB Under Center Stance",
+      "Run Style",
+      "Skin Details",
+      "Skin Tone"
+    ]);
     expect(catalog.menuOnlyObservedCategories.map((item) => `${item.nativeOrder}:${item.displayedCategoryLabel}`)).toEqual(["8:Mouth Shape", "9:Jaw Shape", "10:Chin"]);
     expect(skinToneLabels).toContain("Skin Tone 29");
     expect(skinToneLabels).not.toContain("Skin Tone 05");

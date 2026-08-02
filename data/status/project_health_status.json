@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "gameface-project-health-status-v1",
+  "generatedAt": "2026-08-02T23:59:00-04:00",
+  "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
+  "branch": "main",
+  "head": "2ba2289461edaf87afc8bfb711f6699ef8b6f511",
+  "outcome": "HOLD_OWNER",
+  "productionReadiness": "BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS",
+  "productionRecommendationsEnabled": false,
+  "approvedBusinessDirection": {
+    "launchPack": {
+      "priceUsd": "4.99",
+      "purchaseType": "one_time",
+      "coveredLaunchGames": [
+        "EA SPORTS College Football 27",
+        "NBA 2K26",
+        "Madden NFL 26",
+        "EA SPORTS PGA TOUR",
+        "PBA Pro Bowling 2026"
+      ]
+    },
+    "allAccess": {
+      "priceUsd": "9.99",
+      "purchaseType": "annual_subscription"
+    }
+  },
+  "counts": {
+    "productionCatalogRecords": 0,
+    "secondVerificationDecisions": 0,
+    "manualMatchingStudyValidParticipants": 0,
+    "cf27ResearchCandidates": 92,
+    "cf27PrimaryApprovedWithNotes": 84,
+    "cf27DuplicateReviewRequired": 5,
+    "cf27OrderUnresolved": 3,
+    "cf27EvidenceManifestEntries": 118,
+    "cf27VideoInventoryRows": 14,
+    "fc26ResearchControls": 28
+  },
+  "gameStatus": {
+    "college-football-27": "research_evidence_exists_production_catalog_empty",
+    "nba-2k26": "not_started",
+    "madden-nfl-26": "not_started",
+    "ea-sports-pga-tour": "not_started",
+    "pba-pro-bowling-2026": "not_started",
+    "ea-sports-fc-26": "research_only_non_launch"
+  },
+  "systems": {
+    "webProductShell": "implemented_not_production_validated",
+    "faceCapture": "implemented_not_production_validated",
+    "matchingEngine": "implemented_without_real_catalog_validation",
+    "supabase": "schema_designed_not_connected",
+    "payments": "scaffold_only",
+    "creatorProgram": "documented_only",
+    "creatorPayouts": "not_started",
+    "athleteComparisons": "idea_only"
+  },
+  "nextAction": {
+    "path": "docs/status/NEXT_ACTION.md",
+    "title": "GFM | MASTER | PROMPT 090 | ALIGN APPROVED LAUNCH PRICING AND GAME SUPPORT GATES"
+  }
+}
+

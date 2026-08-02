@@ -3,6 +3,16 @@ export const ANALYTICS_SCHEMA_VERSION = "privacy-safe-analytics-v1";
 export type AnalyticsEventName =
   | "appSessionStarted"
   | "onboardingCompleted"
+  | "scanEntryViewed"
+  | "scanPlanSelected"
+  | "scanConsentChanged"
+  | "scanStartTapped"
+  | "scanPurchaseStarted"
+  | "scanPurchaseCompleted"
+  | "scanPurchaseCanceled"
+  | "scanPurchaseFailed"
+  | "scanEntryBlocked"
+  | "scanPreparationOpened"
   | "permissionAccepted"
   | "captureStarted"
   | "captureCompleted"
@@ -63,6 +73,16 @@ export type AnalyticsErrorCategory =
   | "unknown";
 export type AnalyticsLatencyOperation = "captureSession" | "profileCreation" | "resultGeneration" | "screenshotRefinement" | "catalogLoad";
 export type AnalyticsCrashCategory = "unhandledError" | "unhandledRejection" | "renderFailure" | "unknown";
+export type AnalyticsScanPlan = "single_scan" | "monthly";
+export type AnalyticsScanEntryGate =
+  | "ready"
+  | "missingPlan"
+  | "missingConsent"
+  | "billingNotConfigured"
+  | "catalogUnavailable"
+  | "previewNotAllowedInProduction"
+  | "purchaseCancelled"
+  | "purchaseFailed";
 
 export interface AnalyticsPayload {
   onboardingStepCount?: number;
@@ -94,6 +114,10 @@ export interface AnalyticsPayload {
   crashCategory?: AnalyticsCrashCategory;
   usedUploadFallback?: boolean;
   usedExtendedHold?: boolean;
+  selectedScanPlan?: AnalyticsScanPlan;
+  scanEntryGate?: AnalyticsScanEntryGate;
+  consentKind?: AnalyticsPermissionKind | "ageEligibility" | "subjectPermission";
+  consentGranted?: boolean;
 }
 
 export interface AnalyticsEvent {
@@ -174,7 +198,11 @@ const allowedPayloadKeys = new Set<keyof AnalyticsPayload>([
   "latencyMs",
   "crashCategory",
   "usedUploadFallback",
-  "usedExtendedHold"
+  "usedExtendedHold",
+  "selectedScanPlan",
+  "scanEntryGate",
+  "consentKind",
+  "consentGranted"
 ]);
 
 const prohibitedKeyPatterns = [
@@ -363,6 +391,16 @@ function isAllowedEventName(name: string): name is AnalyticsEventName {
   return [
     "appSessionStarted",
     "onboardingCompleted",
+    "scanEntryViewed",
+    "scanPlanSelected",
+    "scanConsentChanged",
+    "scanStartTapped",
+    "scanPurchaseStarted",
+    "scanPurchaseCompleted",
+    "scanPurchaseCanceled",
+    "scanPurchaseFailed",
+    "scanEntryBlocked",
+    "scanPreparationOpened",
     "permissionAccepted",
     "captureStarted",
     "captureCompleted",

@@ -232,12 +232,26 @@ Hard dependencies:
 
 ## Next Milestone
 
-The next milestone is not UI polish. It is completing the Phase 0 evidence path from primary review to verifier-ready package:
+The next milestone remains completing the Phase 0 evidence path from primary review to verifier-ready package:
 
 1. Wyatt records the required recapture set.
 2. Codex ingests the new evidence and updates research candidates.
 3. Codex regenerates the research package and primary-review status.
 4. A second human verifier independently reviews counts, order, evidence, and discrepancies.
+
+## Current Web Entry Screen
+
+Prompt 080 adds a mobile-first scan-entry route at `#start`.
+
+- Branding: `GameFace Match` with `From reality to game face.`
+- Purchase plan IDs: `single_scan` (`$0.99`) and `monthly` (`$1.99/month`)
+- Consent version: `scan-entry-consent-v1`, layered on top of the existing `web-mvp-consent-v1` capture consent records
+- Billing status: provider unavailable; checkout and restoration remain disabled
+- Entitlement status: visual plan selection is not treated as payment
+- Capture start status: production scans remain blocked until verified entitlement exists; the existing preparation, lighting, capability, and upload/capture routes are preserved for local validation
+- Guided scan strategy: the UI follows a quiet entry plus preparation pattern; circular coverage progress is represented by a typed state contract that accepts only real quality-passing, non-duplicate coverage frames and blocks simulated progress in production
+- Privacy behavior: no live camera starts on the entry screen, and raw-media deletion behavior is unchanged
+- Analytics events added using the existing camelCase event convention: `scanEntryViewed`, `scanPlanSelected`, `scanConsentChanged`, `scanStartTapped`, `scanPurchaseStarted`, `scanPurchaseCompleted`, `scanPurchaseCanceled`, `scanPurchaseFailed`, `scanEntryBlocked`, and `scanPreparationOpened`
 
 ## Completion Percentages
 
@@ -288,4 +302,3 @@ These percentages are conservative operating estimates. They do not give product
 ## Historical Report Handling
 
 Older documents should be read as snapshots of the repository at the time they were created. They may contain stale percentages, stale candidate counts, or pre-video blocker descriptions. Use them for audit history and rationale, but use this file plus the machine-readable `data/phase-zero/primary_review_status.json` artifact for current operating status.
-

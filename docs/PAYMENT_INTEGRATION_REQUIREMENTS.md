@@ -8,17 +8,25 @@ No live payment credentials, checkout sessions, webhooks, or provider SDKs are p
 
 ## Selected offer to support
 
-The approved first paid product model is a low-cost one-time College Football 27 one-game pack after verified catalog and beta-readiness gates pass.
+Prompt 080 sets the current scan-entry plans. The earlier `$4.99` College Football 27 pack draft is superseded.
 
-Current draft configuration:
+Current scan-entry configuration:
 
-- Product: College Football 27 one-game pack
-- Price: $4.99 USD
-- Purchase type: one-time one-game purchase
-- Entitlements: top-three results, detailed build guide, and screenshot-refinement access only when verified refinement logic is available
+- Product: One Scan
+- Internal plan identifier: `single_scan`
+- Price: `$0.99 USD`
+- Purchase type: one completed scan
+- Entitlements: one completed game-specific appearance match and build guide, with completion retakes not consuming a second purchase
+
+- Product: Monthly
+- Internal plan identifier: `monthly`
+- Price: `$1.99/month USD`
+- Purchase type: subscription
+- Entitlements: repeat scans and screenshot refinements while active
+
 - Checkout state: disabled until provider setup, receipt handling, purchase restoration, refund/support policy, tax approach, and legal review are complete
 
-The free beta remains the pre-purchase validation path. A future multi-game suite is separate and must not be implied by the one-game purchase.
+A future multi-game suite is separate and must not be implied by either scan-entry plan.
 
 ## Provider selection
 
@@ -47,8 +55,7 @@ Provider evaluation must cover:
 - Terms of purchase approval
 - Tax collection decision
 - Target launch countries
-- Confirmation or revision of the College Football 27 one-game pack name and $4.99 USD draft price
-- Whether purchases are one-time, subscription, or beta-only
+- Confirmation of final support and refund terms for `single_scan` and `monthly`
 - Whether accounts are required for paid access
 - Provider preference or constraints
 

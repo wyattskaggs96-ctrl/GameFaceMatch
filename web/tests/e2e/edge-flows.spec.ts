@@ -16,8 +16,10 @@ test.describe("GameFace Match E2E edge flows", () => {
     await completeOnboarding(page);
     await acceptRequiredConsent(page);
     await page.getByRole("button", { name: "Start" }).first().click();
-    await page.getByRole("button", { name: "Prepare capture" }).click();
-    await page.getByRole("button", { name: "Continue to lighting check" }).click();
+    await expect(page.getByRole("heading", { name: "Build yourself in the game." })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Start face scan/ })).toBeDisabled();
+    await page.goto("/#preparation");
+    await page.getByRole("button", { name: "Get Started" }).click();
 
     await expect(page.getByRole("heading", { name: "Confirm lighting before capture" })).toBeVisible();
     await expect(page.getByText("0 of 5 lighting checks confirmed.")).toBeVisible();
@@ -121,6 +123,29 @@ test.describe("GameFace Match E2E edge flows", () => {
     expect(prefersReducedMotion).toBe(true);
     await page.getByRole("button", { name: "Start walkthrough" }).click();
     await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
+  });
+
+  test("renders the mobile scan entry without horizontal overflow at supported widths", async ({ page }) => {
+    await completeOnboarding(page);
+    await acceptRequiredConsent(page);
+    for (const viewport of [
+      { width: 375, height: 667 },
+      { width: 390, height: 844 },
+      { width: 430, height: 932 },
+      { width: 1440, height: 900 }
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto("/#start");
+      await expect(page.getByRole("heading", { name: "Build yourself in the game." })).toBeVisible();
+      await page.getByRole("radio", { name: /One Scan/ }).click();
+      await expect(page.getByRole("radio", { name: /One Scan/ })).toHaveAttribute("aria-checked", "true");
+      await expect(page.getByRole("radio", { name: /Monthly/ })).toHaveAttribute("aria-checked", "false");
+      await page.getByRole("radio", { name: /Monthly/ }).click();
+      await expect(page.getByRole("radio", { name: /Monthly/ })).toHaveAttribute("aria-checked", "true");
+      await expect(page.getByRole("button", { name: /Start face scan/ })).toBeDisabled();
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+      expect(overflow, `${viewport.width}x${viewport.height}`).toBe(false);
+    }
   });
 
   test("loads the FC 26 recipe workflow independently from College Football catalog results", async ({ page }) => {

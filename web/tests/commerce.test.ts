@@ -9,11 +9,14 @@ import {
   createUnavailablePaymentProvider
 } from "@/lib/payments/payment-provider";
 import {
+  MONTHLY_SCAN_OFFER_ID,
+  MONTHLY_SCAN_PRICE_ID,
   PRICING_OPTIONS,
   SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
   SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
   canMakePaidRecommendationClaims,
   createCheckoutUnavailableCopy,
+  getScanEntryPricingOptions,
   getSelectedCollegeFootball27Offer,
   validatePricingConfiguration
 } from "@/lib/payments/pricing";
@@ -120,34 +123,37 @@ describe("pricing configuration", () => {
     expect(PRICING_OPTIONS.every((option) => !option.product.providerProductID && !option.price.providerPriceID)).toBe(true);
   });
 
-  it("configures the approved low-cost one-game purchase offer transparently", () => {
+  it("configures the approved One Scan offer transparently", () => {
     const offer = getSelectedCollegeFootball27Offer();
     expect(offer).toBeDefined();
     expect(offer?.product).toMatchObject({
       id: SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
-      name: "College Football 27 one-game pack",
-      purchaseType: "oneTime",
+      name: "One Scan",
+      purchaseType: "consumable",
       active: true
     });
     expect(offer?.price).toMatchObject({
       id: SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
-      amountMinor: 499,
-      displayAmount: "$4.99",
+      amountMinor: 99,
+      displayAmount: "$0.99",
       currency: "USD",
       active: true
     });
     expect(offer?.recommendedForLaunch).toBe(true);
     expect(offer?.checkoutEnabled).toBe(false);
     expect(offer?.product.entitlementIDs).toEqual(expect.arrayContaining(["topThreeResults", "detailedBuildGuide"]));
+    expect(offer?.featureList.join(" ")).toContain("Retakes");
   });
 
-  it("keeps free beta available as pre-purchase validation, not the selected paid offer", () => {
+  it("exposes exactly the two scan-entry purchase plans", () => {
     const recommended = PRICING_OPTIONS.filter((option) => option.recommendedForLaunch);
     expect(recommended.map((option) => option.product.id)).toContain(SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID);
-    const freeBeta = PRICING_OPTIONS.find((option) => option.product.id === "free-beta");
-    expect(freeBeta?.offerState).toBe("freeBeta");
-    expect(freeBeta?.product.purchaseType).toBe("free");
-    expect(freeBeta?.price.amountMinor).toBe(0);
+    expect(getScanEntryPricingOptions().map((option) => option.product.id)).toEqual([SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID, MONTHLY_SCAN_OFFER_ID]);
+    const monthly = PRICING_OPTIONS.find((option) => option.product.id === MONTHLY_SCAN_OFFER_ID);
+    expect(monthly?.price.id).toBe(MONTHLY_SCAN_PRICE_ID);
+    expect(monthly?.price.displayAmount).toBe("$1.99/month");
+    expect(monthly?.product.purchaseType).toBe("subscription");
+    expect(monthly?.checkoutEnabled).toBe(false);
   });
 
   it("does not create fake purchase state", () => {

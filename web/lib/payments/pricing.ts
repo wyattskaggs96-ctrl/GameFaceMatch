@@ -1,7 +1,7 @@
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
 import type { CurrencyCode, EntitlementAccess, Price, Product, PurchaseType } from "@/types/domain";
 
-export type OfferAvailabilityState = "availableAfterCatalogVerification" | "providerUnavailable" | "futureSuite" | "freeBeta";
+export type OfferAvailabilityState = "availableAfterCatalogVerification" | "providerUnavailable" | "futureSuite";
 
 export interface PricingOption {
   product: Product;
@@ -53,51 +53,57 @@ const defaultPrivacyCommitments = [
   "The payment provider must never receive raw face images, landmarks, or precise facial measurements."
 ];
 
-export const SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID = "cf27-one-game-pack";
-export const SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID = "cf27-one-game-pack-usd-499";
+export const SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID = "single_scan";
+export const SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID = "single_scan-usd-099";
+export const MONTHLY_SCAN_OFFER_ID = "monthly";
+export const MONTHLY_SCAN_PRICE_ID = "monthly-usd-199";
 
 const pricingInputs: PricingInput[] = [
   {
-    id: "free-beta",
-    name: "Free beta",
-    description: "Validate capture, privacy, and catalog-unavailable flow before charging.",
-    purchaseType: "free",
-    entitlementIDs: ["basicFreeMatch"],
-    amountMinor: 0,
-    displayAmount: "$0",
-    offerState: "freeBeta",
-    featureList: [
-      "Guided RGB capture or upload fallback.",
-      "Privacy center and local deletion controls.",
-      "Catalog-unavailable preview without fake recommendations."
-    ],
-    supportGuidance: "Use during internal validation and pre-purchase beta testing.",
-    restoreGuidance: "No purchase restoration is needed for free beta access.",
-    resultPreview: "Shows capture readiness and catalog status only while verified recommendations are unavailable."
-  },
-  {
     id: SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID,
     priceID: SELECTED_COLLEGE_FOOTBALL_27_PRICE_ID,
-    name: "College Football 27 one-game pack",
-    description: "One-time access for verified College Football 27 top-three recommendations and build guides after the production catalog is approved.",
-    purchaseType: "oneTime",
+    name: "One Scan",
+    description: "One completed game-specific appearance match and build guide.",
+    purchaseType: "consumable",
     entitlementIDs: ["topThreeResults", "detailedBuildGuide", "screenshotRefinement"],
-    amountMinor: 499,
-    displayAmount: "$4.99",
+    amountMinor: 99,
+    displayAmount: "$0.99",
     recommendedForLaunch: true,
     productActive: true,
     priceActive: true,
     offerState: "availableAfterCatalogVerification",
     featureList: [
-      "Top-three College Football 27 appearance recommendations from verified catalog records.",
+      "One completed game-specific appearance match from verified catalog records.",
       "Detailed manual build guide using verified menu paths.",
-      "Catalog version, platform, mode, and creation-path traceability.",
-      "Screenshot-refinement intake when verified refinement logic is available."
+      "Retakes required to successfully complete the same purchased scan do not consume an additional purchase.",
+      "Catalog version, platform, mode, and creation-path traceability."
     ],
     supportGuidance: "Refund and support requests must use the owner-approved support path before checkout is enabled.",
     restoreGuidance: "Purchase restoration will be available only through the selected payment provider after receipt handling is implemented.",
     resultPreview:
       "Before purchase, the app may preview capture quality, catalog availability, and what the pack unlocks. It must not show fake head, hair, facial-hair, or menu values."
+  },
+  {
+    id: MONTHLY_SCAN_OFFER_ID,
+    priceID: MONTHLY_SCAN_PRICE_ID,
+    name: "Monthly",
+    description: "Repeat scans and screenshot refinements while your subscription is active.",
+    purchaseType: "subscription",
+    entitlementIDs: ["topThreeResults", "detailedBuildGuide", "screenshotRefinement", "savedProfiles"],
+    amountMinor: 199,
+    displayAmount: "$1.99/month",
+    productActive: true,
+    priceActive: true,
+    offerState: "availableAfterCatalogVerification",
+    featureList: [
+      "Repeat scans while the subscription is active.",
+      "Screenshot refinements when verified refinement logic and catalog data are available.",
+      "Manual build guides from verified menu paths."
+    ],
+    supportGuidance: "Subscription support, cancellation, refund, tax, and provider receipt handling must be finalized before checkout is enabled.",
+    restoreGuidance: "Subscription restoration will be available only through the selected payment provider after receipt handling is implemented.",
+    resultPreview:
+      "Before purchase, the app may preview capture quality, catalog availability, and what monthly access unlocks. It must not show fake head, hair, facial-hair, or menu values."
   },
   {
     id: "screenshot-refinement",
@@ -185,14 +191,18 @@ export function validatePricingConfiguration(options: PricingOption[] = PRICING_
       errors.push(`Paid offer ${option.product.id} must show a transparent positive price.`);
     }
     if (option.product.id === SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID) {
-      if (option.product.purchaseType !== "oneTime") errors.push("College Football 27 pack must be a one-time purchase.");
-      if (!option.product.entitlementIDs.includes("topThreeResults")) errors.push("College Football 27 pack must include top-three results.");
-      if (!option.product.entitlementIDs.includes("detailedBuildGuide")) errors.push("College Football 27 pack must include detailed build guide.");
-      if (!option.resultPreview.toLowerCase().includes("must not show fake")) errors.push("College Football 27 pack must prohibit fake result previews.");
-      if (!option.privacyCommitments.some((commitment) => commitment.toLowerCase().includes("not sold"))) errors.push("College Football 27 pack must state face data is not sold.");
+      if (option.product.purchaseType !== "consumable") errors.push("One Scan must be configured as the one-completed-scan consumable plan.");
+      if (!option.product.entitlementIDs.includes("topThreeResults")) errors.push("One Scan must include top-three results.");
+      if (!option.product.entitlementIDs.includes("detailedBuildGuide")) errors.push("One Scan must include detailed build guide.");
+      if (!option.resultPreview.toLowerCase().includes("must not show fake")) errors.push("One Scan must prohibit fake result previews.");
+      if (!option.featureList.some((feature) => feature.toLowerCase().includes("retakes"))) errors.push("One Scan must preserve same-purchase completion retakes.");
+      if (!option.privacyCommitments.some((commitment) => commitment.toLowerCase().includes("not sold"))) errors.push("One Scan must state face data is not sold.");
       if (!option.privacyCommitments.some((commitment) => commitment.toLowerCase().includes("biometric advertising"))) {
-        errors.push("College Football 27 pack must prohibit biometric advertising.");
+        errors.push("One Scan must prohibit biometric advertising.");
       }
+    }
+    if (option.product.id === MONTHLY_SCAN_OFFER_ID && option.product.purchaseType !== "subscription") {
+      errors.push("Monthly must be configured as a subscription plan.");
     }
   }
   return { valid: errors.length === 0, errors };
@@ -207,6 +217,10 @@ export function canMakePaidRecommendationClaims(catalogIsEmpty: boolean) {
 
 export function getSelectedCollegeFootball27Offer(options: PricingOption[] = PRICING_OPTIONS) {
   return options.find((option) => option.product.id === SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID);
+}
+
+export function getScanEntryPricingOptions(options: PricingOption[] = PRICING_OPTIONS) {
+  return options.filter((option) => option.product.id === SELECTED_COLLEGE_FOOTBALL_27_OFFER_ID || option.product.id === MONTHLY_SCAN_OFFER_ID);
 }
 
 export function createCheckoutUnavailableCopy(option: PricingOption, catalogIsEmpty: boolean) {

@@ -8,10 +8,10 @@ export function PricingScaffold({ catalogIsEmpty }: { catalogIsEmpty: boolean })
   const selectedOffer = getSelectedCollegeFootball27Offer();
   return (
     <section className="screen-stack" aria-labelledby="pricing-title">
-      <ScreenHeader eyebrow="Purchase readiness" title="College Football 27 one-game purchase" id="pricing-title">
+      <ScreenHeader eyebrow="Purchase readiness" title="GameFace Match scan access" id="pricing-title">
         <p>
-          The selected paid model is a low-cost one-game purchase for College Football 27. Checkout remains safely disabled until the verified catalog,
-          provider account setup, receipt handling, purchase restoration, refund support, and legal review are complete.
+          The selected Prompt 080 plans are One Scan and Monthly access. Checkout remains safely disabled until the verified catalog, provider account setup,
+          receipt handling, purchase restoration, refund support, and legal review are complete.
         </p>
       </ScreenHeader>
       <Alert title="Transparent selected offer" tone="info">
@@ -65,8 +65,8 @@ export function PricingScaffold({ catalogIsEmpty }: { catalogIsEmpty: boolean })
           <Alert title="Result preview rules" tone="info">
             {selectedOffer.resultPreview}
           </Alert>
-          <Alert title="No trial or subscription terms" tone="info">
-            This offer is modeled as a one-time purchase. No trial period, recurring renewal, countdown, customer quote, or pressure claim is active.
+          <Alert title="No completed payment state" tone="info">
+            This offer is modeled as one completed scan. Checkout, restoration, provider receipts, and subscription management are not connected.
           </Alert>
           <Alert title="Checkout unavailable" tone="warning">
             {createCheckoutUnavailableCopy(selectedOffer, catalogIsEmpty)}
@@ -119,10 +119,10 @@ export function PricingScaffold({ catalogIsEmpty }: { catalogIsEmpty: boolean })
         ))}
       </div>
       <Card>
-        <h2>One-game purchase versus future suite</h2>
+        <h2>Scan access versus future suite</h2>
         <p className="supporting">
-          The College Football 27 pack is scoped to one game catalog. A future multi-game suite would require separate verified catalogs, entitlement rules,
-          support language, and owner approval.
+          One Scan and Monthly access can only deliver verified settings for supported game catalogs. A future multi-game suite would require separate verified
+          catalogs, entitlement rules, support language, and owner approval.
         </p>
       </Card>
       <Card>

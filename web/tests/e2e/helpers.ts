@@ -38,13 +38,16 @@ export function consentCard(page: Page, name: string): Locator {
 
 export async function navigateToCapture(page: Page) {
   await page.getByRole("button", { name: "Start" }).first().click();
-  await expect(page.getByRole("heading", { name: "Start a face match" })).toBeVisible();
-  await page.getByRole("button", { name: "Prepare capture" }).click();
-  await expect(page.getByRole("heading", { name: "Five clean RGB angles" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Build yourself in the game." })).toBeVisible();
+  await expect(page.getByText("One scan • $0.99")).toBeVisible();
+  await expect(page.getByText("Purchase verification is not connected yet")).toBeVisible();
+  await expect(page.getByRole("button", { name: /Start face scan/ })).toBeDisabled();
+  await page.goto("/#preparation");
+  await expect(page.getByRole("heading", { name: "Get ready for your face scan" })).toBeVisible();
   await expect(page.getByText("Browser capture uses guided RGB images only.")).toBeVisible();
-  await expect(page.getByText("Keep one person in frame")).toBeVisible();
-  await expect(page.getByText("Hold the phone around arm's length.")).toBeVisible();
-  await page.getByRole("button", { name: "Continue to lighting check" }).click();
+  await expect(page.getByText("Hold the phone at eye level.")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Use assisted capture" })).toBeVisible();
+  await page.getByRole("button", { name: "Get Started" }).click();
   await expect(page.getByRole("heading", { name: "Confirm lighting before capture" })).toBeVisible();
   await expect(page.getByText("This is a manual readiness checkpoint for the web RGB workflow.")).toBeVisible();
   await expect(page.getByRole("button", { name: "Continue to browser capability" })).toBeDisabled();

@@ -13,6 +13,7 @@ import { GuidedCaptureFlow } from "@/features/capture/GuidedCaptureFlow";
 import { GameCatalogStatus } from "@/features/catalog/GameCatalogStatus";
 import { PricingScaffold } from "@/features/commerce/PricingScaffold";
 import { Fc26FaceMatchingMvp } from "@/features/fc26/Fc26FaceMatchingMvp";
+import { ScanEntryScreen } from "@/features/onboarding/ScanEntryScreen";
 import { ProfileReview } from "@/features/profile/ProfileReview";
 import { ConsentPanel } from "@/features/privacy/ConsentPanel";
 import { PrivacyCenter } from "@/features/privacy/PrivacyCenter";
@@ -73,6 +74,7 @@ import { createInitialAttributeConfirmation, type AttributeConfirmationState } f
 import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { createInitialScreenshotRefinementSession, deleteScreenshotRefinementSession } from "@/lib/refinement/screenshot-refinement";
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
+import { getScanEntryEnvironment } from "@/lib/onboarding/scan-entry";
 import { createBuildInstructions } from "@/lib/results/results-experience";
 import { isProductionCatalogEmpty, shouldShowDevelopmentCatalogBanner } from "@/lib/ui/catalog-status";
 import { CATALOG_UNAVAILABLE_MESSAGE, INDEPENDENT_APP_DISCLAIMER, PRODUCT_EXPLANATION } from "@/lib/product-copy";
@@ -182,6 +184,8 @@ export default function HomePage() {
   );
   const catalogIsEmpty = isProductionCatalogEmpty(productionCatalogManifest);
   const isDevelopment = process.env.NODE_ENV !== "production";
+  const scanEntryEnvironment = getScanEntryEnvironment(process.env.NODE_ENV);
+  const scanEntryPreviewModeEnabled = process.env.NEXT_PUBLIC_GAMEFACE_SCAN_ENTRY_PREVIEW === "1";
   const consentReady = hasRequiredCaptureConsent(consentState);
   const navItems = isDevelopment
     ? [
@@ -813,20 +817,21 @@ export default function HomePage() {
         return <Dashboard completedAngles={completedAngles} requiredAngles={requiredAngles} onNavigate={navigate} />;
       case "start":
         return (
-          <InfoScreen
-            eyebrow="Start match"
-            title="Start a face match"
-            body="You will capture five RGB reference angles: straight-on, left 45 degrees, right 45 degrees, left profile, and right profile. Matching remains unavailable until the verified catalog is loaded."
-            detail="This walkthrough is structured for use near a TV or game console: short steps, clear states, and manual upload fallback."
-            actionLabel="Prepare capture"
-            onAction={() => {
+          <ScanEntryScreen
+            consentState={consentState}
+            onConsentChange={handleConsentChange}
+            catalogAvailable={!catalogIsEmpty}
+            environment={scanEntryEnvironment}
+            previewModeEnabled={scanEntryPreviewModeEnabled}
+            onAnalytics={trackAnalytics}
+            onReadyToPrepare={() => {
               trackAnalytics("captureStarted", { captureMode: "webRgbGuided", requiredAngleCount: requiredAngles });
               navigate("preparation");
             }}
           />
         );
       case "preparation":
-        return <CapturePreparation onContinue={() => navigate("lighting")} />;
+        return <CapturePreparation onContinue={() => navigate("lighting")} onAssistedCapture={() => navigate("capture")} />;
       case "lighting":
         return <CaptureLightingCheck onContinue={() => navigate("capability")} />;
       case "capability":

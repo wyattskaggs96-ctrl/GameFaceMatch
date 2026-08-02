@@ -81,6 +81,7 @@ describe("mobile scan entry gate", () => {
   it("does not contain reserved platform terminology or authentication claims in the new entry source", () => {
     const source = [
       "features/onboarding/ScanEntryScreen.tsx",
+      "features/capture/GuidedCaptureFlow.tsx",
       "lib/capture/guided-scan-strategy.ts",
       "lib/onboarding/scan-entry.ts"
     ]
@@ -176,6 +177,15 @@ describe("guided circular scan coverage contract", () => {
     expect(isDevelopmentGuidedScanSimulationAllowed("development", true)).toBe(true);
     expect(isDevelopmentGuidedScanSimulationAllowed("test", true)).toBe(true);
     expect(isDevelopmentGuidedScanSimulationAllowed("production", true)).toBe(false);
+  });
+
+  it("keeps circular guided UI honest until accepted live coverage is connected", () => {
+    const source = fs.readFileSync(path.join(process.cwd(), "features/capture/GuidedCaptureFlow.tsx"), "utf8");
+    expect(source).toContain("Circular progress is locked until accepted live pose-coverage frames are connected.");
+    expect(source).toContain("Use assisted five-angle capture");
+    expect(source).toContain("Create my game face");
+    expect(source).toContain("Move your head slowly to complete the circle");
+    expect(source).not.toMatch(/setTimeout\([^)]*complete|elapsed.*complete|fake progress/i);
   });
 });
 

@@ -148,6 +148,24 @@ test.describe("GameFace Match E2E edge flows", () => {
     }
   });
 
+  test("renders the circular guided capture interface without horizontal overflow", async ({ page }) => {
+    for (const viewport of [
+      { width: 375, height: 667 },
+      { width: 390, height: 844 },
+      { width: 430, height: 932 },
+      { width: 1440, height: 900 }
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto("/#capture");
+      await expect(page.getByRole("heading", { name: "Position your face inside the circle" })).toBeVisible();
+      await expect(page.getByText("Circular progress is locked until accepted live pose-coverage frames are connected.")).toBeVisible();
+      await expect(page.getByRole("button", { name: "Use assisted five-angle capture" }).first()).toBeVisible();
+      await expect(page.getByRole("button", { name: "Create my game face" })).toBeDisabled();
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+      expect(overflow, `${viewport.width}x${viewport.height}`).toBe(false);
+    }
+  });
+
   test("loads the FC 26 recipe workflow independently from College Football catalog results", async ({ page }) => {
     await page.goto("/#fc26");
 

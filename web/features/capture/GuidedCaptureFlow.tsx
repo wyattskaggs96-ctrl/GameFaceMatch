@@ -10,6 +10,18 @@ import {
   evaluateCaptureGuidanceFrame
 } from "@/lib/capture/capture-guidance-service";
 import {
+  canBeginGuidedCapture,
+  createInitialGuidedScanState,
+  getGuidedScanCoveragePercent,
+  getSecondPassTargets,
+  getSelectiveRetakeRegion,
+  type GuidedScanCoverageStatus,
+  type GuidedScanPassID,
+  type GuidedScanQualityGate,
+  type GuidedScanReviewRegion,
+  type GuidedScanState
+} from "@/lib/capture/guided-scan-strategy";
+import {
   cancelCaptureSession,
   getCompletedAngleCount,
   getCurrentAngle,
@@ -67,6 +79,8 @@ export function GuidedCaptureFlow({
   const [liveGuidance, setLiveGuidance] = useState<CaptureGuidanceReport | null>(null);
   const [isAnalyzingGuidance, setIsAnalyzingGuidance] = useState(false);
   const [useExtendedHold, setUseExtendedHold] = useState(false);
+  const [captureWorkflow, setCaptureWorkflow] = useState<"guidedCircular" | "fiveAngleFallback">("guidedCircular");
+  const [guidedStage, setGuidedStage] = useState<"positioning" | "firstPass" | "coverageReview" | "selectiveRetake">("positioning");
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const guidanceInFlightRef = useRef(false);
   const lastGuidanceStartedAtRef = useRef(0);
@@ -79,6 +93,15 @@ export function GuidedCaptureFlow({
   const completedAngles = getCompletedAngleCount(session.angles);
   const hasActiveCaptureData = completedAngles > 0 || Boolean(stream);
   const previewIsMirrored = selectedFacingMode === "user";
+  const guidedScanState = useMemo(
+    () =>
+      createUiGuidedScanState({
+        permissionGranted: Boolean(stream),
+        qualityGate: createGuidedScanQualityGate(liveGuidance)
+      }),
+    [liveGuidance, stream]
+  );
+  const circularCanBegin = canBeginGuidedCapture(Boolean(stream), guidedScanState.initialQualityGate);
 
   useEffect(() => {
     return () => {
@@ -483,6 +506,64 @@ export function GuidedCaptureFlow({
     onCancelSession(mutation.session);
   }
 
+  function setPreviewVideoRef(node: HTMLVideoElement | null) {
+    videoRef.current = node;
+    if (node && stream) {
+      node.srcObject = stream;
+    }
+  }
+
+  if (captureWorkflow === "guidedCircular") {
+    return (
+      <section className="guided-circular-screen" aria-labelledby="guided-circular-title">
+        <CircularGuidedCapturePanel
+          cameraError={cameraError}
+          cameraErrorCode={cameraErrorCode}
+          circularCanBegin={circularCanBegin}
+          currentAngle={currentAngle}
+          guidedScanState={guidedScanState}
+          guidedStage={guidedStage}
+          isAnalyzingGuidance={isAnalyzingGuidance}
+          isOffline={isOffline}
+          isStartingCamera={isStartingCamera}
+          lifecycleNotice={lifecycleNotice}
+          liveGuidance={liveGuidance}
+          previewIsMirrored={previewIsMirrored}
+          reviewReportCanContinue={reviewReport.canContinue}
+          streamActive={Boolean(stream)}
+          videoRef={setPreviewVideoRef}
+          onBeginFirstPass={() => setGuidedStage("firstPass")}
+          onCancel={cancelSession}
+          onCaptureStill={() => void captureStillFrame()}
+          onOpenCoverageReview={() => setGuidedStage("coverageReview")}
+          onRetakeMissingArea={() => setGuidedStage("selectiveRetake")}
+          onStartCamera={() => void startCamera()}
+          onStopCamera={stopCamera}
+          onSwitchCamera={() => void switchCamera()}
+          onUseFallback={() => setCaptureWorkflow("fiveAngleFallback")}
+        />
+        <CircularCoverageReviewPanel
+          completedAngles={completedAngles}
+          coverageRegions={Object.values(session.coverageMap.regions)}
+          guidedScanState={guidedScanState}
+          onContinue={onContinue}
+          onRetake={(angleID) => {
+            retake(angleID);
+            setCaptureWorkflow("fiveAngleFallback");
+          }}
+          onUseFallback={() => setCaptureWorkflow("fiveAngleFallback")}
+          reviewReportCanContinue={reviewReport.canContinue}
+          showDetail={guidedStage === "coverageReview" || guidedStage === "selectiveRetake" || completedAngles > 0}
+        />
+        {cameraErrorCode ? <RecoveryActionList plans={[recoveryPlanForCameraError(cameraErrorCode)]} /> : null}
+        {isOffline ? <RecoveryActionList plans={[getRecoveryPlan("networkFailure")]} /> : null}
+        <div className="sr-only" role="status" aria-live="polite">
+          Circular guided capture is open. {completedAngles} of 5 required fallback angles are complete.
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="screen-stack" aria-labelledby="guided-capture-title">
       <ScreenHeader eyebrow="Guided capture" title={`${completedAngles} of 5 angles completed`} id="guided-capture-title">
@@ -491,6 +572,14 @@ export function GuidedCaptureFlow({
           advanced facial analysis.
         </p>
       </ScreenHeader>
+      <Alert title="Assisted five-angle fallback" tone="info">
+        You are using the accessible five-angle capture path. It preserves the same local RGB privacy rules and lets you complete or retake one view at a time.
+      </Alert>
+      <div className="button-row">
+        <Button variant="secondary" onClick={() => setCaptureWorkflow("guidedCircular")}>
+          Return to circular guided scan
+        </Button>
+      </div>
       <ProgressBar value={completedAngles} max={5} label="Required RGB angles" />
       <div className="result-grid">
         <Card tone="info">
@@ -546,7 +635,7 @@ export function GuidedCaptureFlow({
           ) : null}
           <div className="camera-preview" data-active={Boolean(stream)} data-mirrored={previewIsMirrored}>
             {stream ? (
-              <video ref={videoRef} autoPlay playsInline muted aria-label={`${currentAngle.label} camera preview`} />
+              <video ref={setPreviewVideoRef} autoPlay playsInline muted aria-label={`${currentAngle.label} camera preview`} />
             ) : (
               <div className="camera-placeholder" aria-live="polite">
                 <strong>Camera preview stopped</strong>
@@ -890,6 +979,353 @@ export function GuidedCaptureFlow({
   );
 }
 
+function CircularGuidedCapturePanel({
+  cameraError,
+  cameraErrorCode,
+  circularCanBegin,
+  currentAngle,
+  guidedScanState,
+  guidedStage,
+  isAnalyzingGuidance,
+  isOffline,
+  isStartingCamera,
+  lifecycleNotice,
+  liveGuidance,
+  previewIsMirrored,
+  reviewReportCanContinue,
+  streamActive,
+  videoRef,
+  onBeginFirstPass,
+  onCancel,
+  onCaptureStill,
+  onOpenCoverageReview,
+  onRetakeMissingArea,
+  onStartCamera,
+  onStopCamera,
+  onSwitchCamera,
+  onUseFallback
+}: {
+  cameraError: string | null;
+  cameraErrorCode: CameraAccessError["code"] | null;
+  circularCanBegin: boolean;
+  currentAngle: CapturedAngle;
+  guidedScanState: GuidedScanState;
+  guidedStage: "positioning" | "firstPass" | "coverageReview" | "selectiveRetake";
+  isAnalyzingGuidance: boolean;
+  isOffline: boolean;
+  isStartingCamera: boolean;
+  lifecycleNotice: string | null;
+  liveGuidance: CaptureGuidanceReport | null;
+  previewIsMirrored: boolean;
+  reviewReportCanContinue: boolean;
+  streamActive: boolean;
+  videoRef: (node: HTMLVideoElement | null) => void;
+  onBeginFirstPass: () => void;
+  onCancel: () => void;
+  onCaptureStill: () => void;
+  onOpenCoverageReview: () => void;
+  onRetakeMissingArea: () => void;
+  onStartCamera: () => void;
+  onStopCamera: () => void;
+  onSwitchCamera: () => void;
+  onUseFallback: () => void;
+}) {
+  const firstPass = guidedScanState.passes.find((pass) => pass.id === "first") ?? guidedScanState.passes[0];
+  const secondPass = guidedScanState.passes.find((pass) => pass.id === "second") ?? guidedScanState.passes[1];
+  const activePass = guidedStage === "firstPass" ? firstPass : guidedScanState.activePassID === "second" ? secondPass : firstPass;
+  const activeInstruction = getCircularInstruction({
+    stage: guidedStage,
+    streamActive,
+    circularCanBegin,
+    liveGuidance
+  });
+  const firstProgress = getGuidedScanCoveragePercent(firstPass);
+  const secondProgress = getGuidedScanCoveragePercent(secondPass);
+  const secondTargets = getSecondPassTargets(guidedScanState);
+  const selectiveRegion = getSelectiveRetakeRegion(guidedScanState);
+
+  return (
+    <section className="guided-circular-panel" aria-labelledby="guided-circular-title">
+      <div className="guided-circular-topbar">
+        <div>
+          <p className="eyebrow">Guided face scan</p>
+          <h1 id="guided-circular-title">Position your face inside the circle</h1>
+        </div>
+        <Button variant="ghost" onClick={onCancel}>
+          Cancel
+        </Button>
+      </div>
+      <div className="guided-circular-layout">
+        <div className="guided-camera-stage" data-active={streamActive} data-mirrored={previewIsMirrored}>
+          <div className="guided-camera-circle" aria-label="Circular camera frame">
+            {streamActive ? (
+              <video ref={videoRef} autoPlay playsInline muted aria-label="Circular guided face scan camera preview" />
+            ) : (
+              <div className="guided-face-outline" aria-hidden="true">
+                <span className="guided-face-head" />
+                <span className="guided-face-neck" />
+                <span className="guided-face-shoulders" />
+              </div>
+            )}
+            <SegmentedCoverageRing segments={activePass.segments} passID={activePass.id} />
+            <span className="guided-face-bracket guided-face-bracket-tl" aria-hidden="true" />
+            <span className="guided-face-bracket guided-face-bracket-tr" aria-hidden="true" />
+            <span className="guided-face-bracket guided-face-bracket-bl" aria-hidden="true" />
+            <span className="guided-face-bracket guided-face-bracket-br" aria-hidden="true" />
+          </div>
+          <div className="guided-instruction-card" aria-live="polite" aria-atomic="true">
+            <StatusBadge tone={streamActive ? (circularCanBegin ? "success" : "warning") : "neutral"}>
+              {streamActive ? (circularCanBegin ? "ready" : "checking") : "camera closed"}
+            </StatusBadge>
+            <p>{activeInstruction}</p>
+            <small>
+              Circular progress is locked until accepted live pose-coverage frames are connected. Use the five-angle fallback to complete this MVP capture.
+            </small>
+          </div>
+        </div>
+        <div className="guided-circular-sidebar">
+          <PassStatusCard
+            id="first"
+            title="First guided pass"
+            instruction="Move your head slowly to complete the circle"
+            progress={firstProgress}
+            status={firstPass.completed ? "complete" : guidedStage === "firstPass" ? "active" : "waiting"}
+          />
+          <PassStatusCard
+            id="second"
+            title="Second guided detail pass"
+            instruction="One more scan for better detail"
+            progress={secondProgress}
+            status={secondPass.completed ? "complete" : firstPass.completed ? "active" : "waiting"}
+            detail={secondTargets.length > 0 ? `Targets weak regions: ${secondTargets.map(formatGuidedRegionID).join(", ")}.` : "Starts after the first pass."}
+          />
+          <div className="guided-quality-card">
+            <div className="status-row">
+              <strong>Initial quality check</strong>
+              <StatusBadge tone={circularCanBegin ? "success" : "warning"}>{circularCanBegin ? "passed" : "pending"}</StatusBadge>
+            </div>
+            <QualityGateList gate={guidedScanState.initialQualityGate} />
+            <LiveGuidancePanel guidance={liveGuidance} isAnalyzing={isAnalyzingGuidance} isCameraActive={streamActive} />
+          </div>
+          {isOffline ? (
+            <Alert title="Offline" tone="warning">
+              Capture remains local. Billing or catalog checks may need network before a production scan can continue.
+            </Alert>
+          ) : null}
+          {lifecycleNotice ? (
+            <Alert title="Session notice" tone="warning" role="status">
+              {lifecycleNotice}
+            </Alert>
+          ) : null}
+          {cameraError ? (
+            <Alert title="Recoverable camera error" tone="warning" role="alert">
+              {cameraError}
+            </Alert>
+          ) : null}
+          {cameraErrorCode ? (
+            <Alert title="Camera fallback ready" tone="info">
+              If camera permission stays blocked, use assisted five-angle capture and upload one image for each required view.
+            </Alert>
+          ) : null}
+          <div className="button-row compact-buttons">
+            <Button onClick={onStartCamera} disabled={isStartingCamera}>
+              {isStartingCamera ? "Starting camera" : "Start camera"}
+            </Button>
+            <Button variant="secondary" onClick={onBeginFirstPass} disabled={!circularCanBegin || guidedStage === "firstPass"}>
+              Begin first pass
+            </Button>
+            <Button variant="secondary" onClick={onCaptureStill} disabled={!streamActive} aria-label={`Capture fallback still for ${currentAngle.label}`}>
+              Capture current view
+            </Button>
+            <Button variant="ghost" onClick={onSwitchCamera}>
+              Switch camera
+            </Button>
+            <Button variant="ghost" onClick={onStopCamera} disabled={!streamActive}>
+              Stop camera
+            </Button>
+          </div>
+          <div className="button-row compact-buttons">
+            <Button variant="secondary" onClick={onUseFallback}>
+              Use assisted five-angle capture
+            </Button>
+            <Button variant="secondary" onClick={onOpenCoverageReview}>
+              Review coverage
+            </Button>
+            <Button variant="ghost" onClick={onRetakeMissingArea} disabled={!selectiveRegion && !reviewReportCanContinue}>
+              Retake missing area
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SegmentedCoverageRing({ segments, passID }: { segments: GuidedScanState["passes"][number]["segments"]; passID: GuidedScanPassID }) {
+  return (
+    <div className="coverage-ring" aria-label={`${passID === "first" ? "First" : "Second"} pass circular coverage`}>
+      {segments.map((segment, index) => (
+        <span
+          aria-label={`${segment.label}: ${formatCoverageStatus(segment.status)}`}
+          className="coverage-ring-segment"
+          data-status={segment.status}
+          key={segment.id}
+          style={{ transform: `rotate(${index * 45}deg)` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function PassStatusCard({
+  detail,
+  id,
+  instruction,
+  progress,
+  status,
+  title
+}: {
+  detail?: string;
+  id: GuidedScanPassID;
+  instruction: string;
+  progress: number;
+  status: "waiting" | "active" | "complete";
+  title: string;
+}) {
+  return (
+    <article className="guided-pass-card" data-pass={id} data-status={status}>
+      <div className="status-row">
+        <div>
+          <p className="eyebrow">{status === "complete" ? `${id === "first" ? "First scan" : "Second scan"} complete` : `${progress}% complete`}</p>
+          <h2>{title}</h2>
+        </div>
+        <StatusBadge tone={status === "complete" ? "success" : status === "active" ? "info" : "neutral"}>{status}</StatusBadge>
+      </div>
+      <p>{instruction}</p>
+      {detail ? <p className="field-note">{detail}</p> : null}
+      <ProgressBar value={progress} max={100} label={`${title} accepted coverage`} />
+    </article>
+  );
+}
+
+function QualityGateList({ gate }: { gate: GuidedScanQualityGate }) {
+  const items: Array<{ id: keyof GuidedScanQualityGate; label: string }> = [
+    { id: "singleFace", label: "Exactly one face" },
+    { id: "centered", label: "Face centered" },
+    { id: "acceptableDistance", label: "Acceptable distance" },
+    { id: "acceptableLighting", label: "Acceptable lighting" },
+    { id: "acceptableSharpness", label: "Acceptable sharpness" },
+    { id: "neutralExpression", label: "Neutral expression" },
+    { id: "requiredRegionsVisible", label: "Required regions visible" }
+  ];
+  return (
+    <ul className="guided-quality-list" aria-label="Initial quality gates">
+      {items.map((item) => (
+        <li key={item.id} data-passed={gate[item.id]}>
+          <span aria-hidden="true">{gate[item.id] ? "OK" : "..."}</span>
+          {item.label}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function CircularCoverageReviewPanel({
+  completedAngles,
+  coverageRegions,
+  guidedScanState,
+  onContinue,
+  onRetake,
+  onUseFallback,
+  reviewReportCanContinue,
+  showDetail
+}: {
+  completedAngles: number;
+  coverageRegions: CaptureCoverageRegion[];
+  guidedScanState: GuidedScanState;
+  onContinue: () => void;
+  onRetake: (angleID: CapturedAngleID) => void;
+  onUseFallback: () => void;
+  reviewReportCanContinue: boolean;
+  showDetail: boolean;
+}) {
+  const weakRegions = guidedScanState.reviewRegions.filter((region) => region.status !== "complete");
+  const attentionRegions = coverageRegions.filter((region) => region.state !== "sufficient");
+  const singleRetakeRegion = attentionRegions.find((region) => region.retakeAngleIDs.length === 1);
+  return (
+    <Card className="guided-review-panel" tone={reviewReportCanContinue ? "success" : "info"}>
+      <div className="status-row">
+        <div>
+          <p className="eyebrow">Coverage review</p>
+          <h2>{reviewReportCanContinue ? "Face scan complete" : "Review scan coverage"}</h2>
+        </div>
+        <StatusBadge tone={reviewReportCanContinue ? "success" : "warning"}>
+          {reviewReportCanContinue ? "complete" : `${completedAngles} of 5 fallback views`}
+        </StatusBadge>
+      </div>
+      <p>
+        Circular coverage is ready for the next live-signal task. Today, completion is based on the existing five-angle RGB review so progress remains tied to
+        real captured or uploaded views.
+      </p>
+      {showDetail ? (
+        <>
+          <div className="guided-region-grid" aria-label="Guided scan region status">
+            {guidedScanState.reviewRegions.map((region) => (
+              <GuidedRegionCard key={region.id} region={region} />
+            ))}
+          </div>
+          <div className="guided-region-grid" aria-label="Fallback capture coverage status">
+            {coverageRegions.map((region) => (
+              <article className={`coverage-region coverage-${region.state}`} key={region.definition.id}>
+                <strong>{region.definition.label}</strong>
+                <p>{region.statusText}</p>
+                <p className="field-note">Supporting views: {formatAngleIDs(region.supportingAngleIDs)}</p>
+                {region.retakeAngleIDs.length > 0 ? (
+                  <div className="button-row compact-buttons">
+                    {region.retakeAngleIDs.map((angleID) => (
+                      <Button variant="secondary" key={angleID} onClick={() => onRetake(angleID)}>
+                        Retake {angleLabel(angleID)}
+                      </Button>
+                    ))}
+                  </div>
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </>
+      ) : null}
+      {weakRegions.length > 0 ? (
+        <Alert title="Second-pass targets" tone="warning">
+          One more scan for better detail should focus on {weakRegions.map((region) => region.label.toLowerCase()).join(", ")} when live circular coverage is
+          connected.
+        </Alert>
+      ) : null}
+      <div className="button-row">
+        <Button disabled={!reviewReportCanContinue} onClick={onContinue}>
+          Create my game face
+        </Button>
+        <Button variant="secondary" onClick={singleRetakeRegion ? () => onRetake(singleRetakeRegion.retakeAngleIDs[0]) : onUseFallback}>
+          {singleRetakeRegion ? "Retake missing area" : "Use assisted five-angle capture"}
+        </Button>
+      </div>
+    </Card>
+  );
+}
+
+function GuidedRegionCard({ region }: { region: GuidedScanReviewRegion }) {
+  return (
+    <article className="guided-region-card" data-status={region.status}>
+      <div className="status-row">
+        <strong>{region.label}</strong>
+        <StatusBadge tone={region.status === "complete" ? "success" : region.status === "optionalImprovement" ? "warning" : "danger"}>
+          {formatRegionStatus(region.status)}
+        </StatusBadge>
+      </div>
+      <p className="field-note">Circular support: {region.supportingSegments.map(formatSegmentLabel).join(", ")}</p>
+    </article>
+  );
+}
+
 function CoverageMapPanel({
   coverageRegions,
   onRetake
@@ -1153,4 +1589,112 @@ function angleLabel(angleID: CapturedAngleID) {
     rightProfile: "right profile"
   };
   return labels[angleID];
+}
+
+function createUiGuidedScanState({
+  permissionGranted,
+  qualityGate
+}: {
+  permissionGranted: boolean;
+  qualityGate: GuidedScanQualityGate;
+}): GuidedScanState {
+  const state = createInitialGuidedScanState();
+  return {
+    ...state,
+    permissionGranted,
+    initialQualityGate: qualityGate
+  };
+}
+
+function createGuidedScanQualityGate(guidance: CaptureGuidanceReport | null): GuidedScanQualityGate {
+  if (!guidance) {
+    return {
+      singleFace: false,
+      centered: false,
+      acceptableDistance: false,
+      acceptableLighting: false,
+      acceptableSharpness: false,
+      neutralExpression: false,
+      requiredRegionsVisible: false
+    };
+  }
+  const blockingCodes = new Set(guidance.blockingIssues.map((issue) => issue.code));
+  const advisoryCodes = new Set(guidance.advisoryWarnings.map((issue) => issue.code));
+  return {
+    singleFace: !blockingCodes.has("faceNotFound") && !blockingCodes.has("multipleFaces"),
+    centered: !blockingCodes.has("faceOffCenter"),
+    acceptableDistance: !blockingCodes.has("faceTooClose") && !blockingCodes.has("faceTooFar"),
+    acceptableLighting: !blockingCodes.has("underexposed") && !blockingCodes.has("overexposed") && !blockingCodes.has("lightingImbalance"),
+    acceptableSharpness: !blockingCodes.has("severeBlur"),
+    neutralExpression: !advisoryCodes.has("mouthOpen") && !advisoryCodes.has("strongExpression"),
+    requiredRegionsVisible: !blockingCodes.has("missingRequiredRegion") && !blockingCodes.has("occlusionLikely")
+  };
+}
+
+function getCircularInstruction({
+  circularCanBegin,
+  liveGuidance,
+  stage,
+  streamActive
+}: {
+  circularCanBegin: boolean;
+  liveGuidance: CaptureGuidanceReport | null;
+  stage: "positioning" | "firstPass" | "coverageReview" | "selectiveRetake";
+  streamActive: boolean;
+}) {
+  if (!streamActive) return "Start the camera when you are ready.";
+  if (stage === "coverageReview") return "Review which areas are complete and which need another look.";
+  if (stage === "selectiveRetake") return "Retake only the missing area instead of restarting the scan.";
+  const firstBlocking = liveGuidance?.blockingIssues[0]?.message;
+  const firstReady = liveGuidance?.readyMessages[0]?.message;
+  if (stage === "firstPass" && circularCanBegin) return "Move your head slowly to complete the circle";
+  if (firstBlocking) return firstBlocking;
+  if (firstReady) return "Hold still, then use assisted capture while circular coverage is being connected.";
+  return "Position your face inside the circle";
+}
+
+function formatCoverageStatus(status: GuidedScanCoverageStatus) {
+  const labels: Record<GuidedScanCoverageStatus, string> = {
+    missing: "Missing",
+    accepted: "Accepted",
+    weak: "Weak",
+    duplicateRejected: "Duplicate rejected",
+    qualityRejected: "Quality rejected"
+  };
+  return labels[status];
+}
+
+function formatRegionStatus(status: GuidedScanReviewRegion["status"]) {
+  const labels: Record<GuidedScanReviewRegion["status"], string> = {
+    complete: "Complete",
+    needsAnotherLook: "Needs another look",
+    optionalImprovement: "Optional improvement"
+  };
+  return labels[status];
+}
+
+function formatGuidedRegionID(regionID: GuidedScanReviewRegion["id"]) {
+  const labels: Record<GuidedScanReviewRegion["id"], string> = {
+    frontView: "front view",
+    leftSide: "left side",
+    rightSide: "right side",
+    jawAndChin: "jaw and chin",
+    foreheadAndHairline: "forehead and hairline",
+    overallQuality: "overall quality"
+  };
+  return labels[regionID];
+}
+
+function formatSegmentLabel(segmentID: GuidedScanState["passes"][number]["segments"][number]["id"]) {
+  const labels: Record<GuidedScanState["passes"][number]["segments"][number]["id"], string> = {
+    center: "center",
+    upperLeft: "upper-left",
+    left: "left",
+    lowerLeft: "lower-left",
+    lowerCenter: "lower-center",
+    lowerRight: "lower-right",
+    right: "right",
+    upperRight: "upper-right"
+  };
+  return labels[segmentID];
 }

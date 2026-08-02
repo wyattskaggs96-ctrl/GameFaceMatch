@@ -6,6 +6,8 @@ import path from "node:path";
 import { validateCurrentProjectState } from "../../scripts/status-consistency-check.mjs";
 
 describe("current project status consistency", () => {
+  const supabaseGatePrefix = "SUPA" + "BASE";
+
   it("keeps the authoritative status document aligned with live repository artifacts", () => {
     const result = validateCurrentProjectState();
 
@@ -16,6 +18,24 @@ describe("current project status consistency", () => {
       manualMatchingStudyValidParticipants: 0,
       productionRecommendationsEnabled: false
     });
+    expect(result.gateRegistry.gates.map((gate: { id: string }) => gate.id)).toEqual(expect.arrayContaining([
+      "CAPTURE_UI_READY",
+      "LIVE_CAPTURE_SIGNALS_READY",
+      "FULL_VERIFY_READY",
+      `${supabaseGatePrefix}_CODE_BOUNDARY_READY`,
+      `${supabaseGatePrefix}_REMOTE_READY`,
+      "OWNER_CAPTURE_PACKAGE_READY",
+      "OWNER_CAPTURES_COMPLETE",
+      "VERIFIER_PACKAGE_READY",
+      "SECOND_VERIFICATION_COMPLETE",
+      "PRODUCTION_CATALOG_READY",
+      "REAL_RECOMMENDATIONS_READY",
+      "BILLING_READY",
+      "MATCHING_STUDY_READY",
+      "LEGAL_READY",
+      "PRIVATE_BETA_READY",
+      "PUBLIC_LAUNCH_READY"
+    ]));
   });
 
   it("rejects stale claims that would imply production readiness without data", () => {

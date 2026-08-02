@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "gameface-current-gate-registry-v1",
+  "generatedAt": "2026-08-02T18:31:53-04:00",
+  "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
+  "branch": "main",
+  "head": "43f75cabe8f41384572ddef93726bc5ff07daec8",
+  "statusCheckpoint": "commit-containing-this-file",
+  "productionRecommendationsEnabled": false,
+  "sourceArtifacts": {
+    "currentProjectState": "docs/status/CURRENT_PROJECT_STATE.md",
+    "primaryReviewStatus": "data/phase-zero/primary_review_status.json",
+    "productionCatalogManifest": "data/catalog/production/catalog_manifest.json",
+    "ownerCapturePlan": "data/phase-zero/capture-closure/owner-capture-plan.json",
+    "secondVerifierExecutionPackage": "data/phase-zero/second-verifier-execution-package/second_verifier_execution_package.json",
+    "nonMutatingVerificationRunner": "scripts/verify-non-mutating.mjs"
+  },
+  "gates": [
+    {
+      "id": "CAPTURE_UI_READY",
+      "status": "READY",
+      "evidence": [
+        "web/features/onboarding/ScanEntryScreen.tsx",
+        "web/features/capture/GuidedCaptureFlow.tsx",
+        "web/tests/scan-entry.test.ts",
+        "web/tests/capture.test.ts",
+        "tests/e2e/edge-flows.spec.ts"
+      ],
+      "blocker": null,
+      "owner": "Codex",
+      "releaseCondition": "Keep passing web unit/E2E checks and real-device QA before broad beta.",
+      "nextPrompt": "089"
+    },
+    {
+      "id": "LIVE_CAPTURE_SIGNALS_READY",
+      "status": "READY_WITH_LIMITATIONS",
+      "evidence": [
+        "web/lib/capture/guided-live-coverage.ts",
+        "web/lib/capture/guided-scan-strategy.ts",
+        "web/lib/capture/capture-coverage.ts",
+        "web/tests/guided-live-coverage.test.ts"
+      ],
+      "blocker": "Live signals are implemented and tested with local/synthetic inputs; real-device capture QA is still required before broad release claims.",
+      "owner": "Codex",
+      "releaseCondition": "Real-device browser QA confirms accepted coverage behaves consistently on supported phones.",
+      "nextPrompt": "089"
+    },
+    {
+      "id": "FULL_VERIFY_READY",
+      "status": "READY",
+      "evidence": [
+        "scripts/verify-non-mutating.mjs",
+        "web/tests/non-mutating-verification.test.ts",
+        "npm run verify:clean passed on 2026-08-02"
+      ],
+      "blocker": null,
+      "owner": "Codex",
+      "releaseCondition": "Continue using npm run verify:clean for release-level checks from a clean worktree.",
+      "nextPrompt": "089"
+    },
+    {
+      "id": "SUPABASE_CODE_BOUNDARY_READY",
+      "status": "READY_WITH_LIMITATIONS",
+      "evidence": [
+        "web/lib/supabase/runtime-config.ts",
+        "web/lib/supabase/repository-contracts.ts",
+        "web/lib/supabase/storage-contracts.ts",
+        "web/lib/supabase/deletion-contracts.ts",
+        "web/tests/supabase-runtime-boundary.test.ts",
+        "scripts/supabase-schema-check.mjs"
+      ],
+      "blocker": "Code boundary exists, but remote database, auth, storage, migrations, RLS policies, and app connection are not deployed.",
+      "owner": "Codex",
+      "releaseCondition": "Supabase migrations, storage buckets, RLS tests, and runtime health/schema checks pass without exposing secrets.",
+      "nextPrompt": "089"
+    },
+    {
+      "id": "SUPABASE_REMOTE_READY",
+      "status": "BLOCKED_EXTERNAL",
+      "evidence": [
+        "docs/status/SUPABASE_IMPLEMENTATION_STATUS.md",
+        "web/lib/supabase/runtime-config.ts"
+      ],
+      "blocker": "Supabase project exists externally, but no repository-managed remote schema/storage/auth deployment has been performed.",
+      "owner": "Wyatt and Codex",
+      "releaseCondition": "User stores credentials outside the repo, Codex applies migrations through approved workflow, and RLS/storage verification passes.",
+      "nextPrompt": "089"
+    },
+    {
+      "id": "OWNER_CAPTURE_PACKAGE_READY",
+      "status": "READY",
+      "evidence": [
+        "docs/phase-zero/CF27_CAPTURE_CLOSURE_PACKAGE.md",
+        "data/phase-zero/capture-closure/owner-capture-plan.json",
+        "data/phase-zero/capture-closure/issue-to-capture-traceability.json",
+        "npm run cf27:capture-closure-package:check"
+      ],
+      "blocker": null,
+      "owner": "Codex",
+      "releaseCondition": "Wyatt records the listed capture sessions and places them in the approved intake location.",
+      "nextPrompt": "089"
+    },
+    {
+      "id": "OWNER_CAPTURES_COMPLETE",
+      "status": "BLOCKED_OWNER",
+      "evidence": [
+        "data/phase-zero/capture-closure/owner-capture-plan.json"
+      ],
+      "blocker": "Required Xbox captures for environment/version, complete menus, Hair, facial hair, remaining face controls, and standardized recaptures are not present.",
+      "owner": "Wyatt",
+      "releaseCondition": "Required capture files are supplied, ingested, hashed, traced, and accepted without invented data.",
+      "nextPrompt": "089"
+    },
+    {
+      "id": "VERIFIER_PACKAGE_READY",
+      "status": "READY_WITH_LIMITATIONS",
+      "evidence": [
+        "docs/phase-zero/SECOND_VERIFIER_EXECUTION_GUIDE.md",
+        "data/phase-zero/second-verifier-execution-package/second_verifier_execution_package.json",
+        "data/phase-zero/second-verifier-execution-package/verifier_dashboard.json",
+        "npm run cf27:second-verifier-execution-package:check"
+      ],
+      "blocker": "Package is executable, but candidate gate remains blocked until owner captures close missing evidence gaps.",
+      "owner": "Codex",
+      "releaseCondition": "Verifier uses the package after the candidate set is complete enough for independent review.",
+      "nextPrompt": "089"
+    },
+    {
+      "id": "SECOND_VERIFICATION_COMPLETE",
+      "status": "BLOCKED_SECOND_VERIFIER",
+      "evidence": [
+        "data/phase-zero/second-verifier-execution-package/verifier_dashboard.json"
+      ],
+      "blocker": "No real second-human verifier submission exists; dashboard reports 85 assigned and 0 completed.",
+      "owner": "Second human verifier",
+      "releaseCondition": "Verifier submits required worksheets/results and discrepancies are resolved from direct evidence.",
+      "nextPrompt": "after owner captures and candidate package freeze"
+    },
+    {
+      "id": "PRODUCTION_CATALOG_READY",
+      "status": "BLOCKED_DATA_VERIFICATION",
+      "evidence": [
+        "data/catalog/production/catalog_manifest.json",
+        "data/catalog/production-releases/cf27-production-empty-2026-07-14/production_readiness_decision.json"
+      ],
+      "blocker": "Production catalog has 0 records and production readiness decision is BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS.",
+      "owner": "Codex, Wyatt, second verifier, catalog manager",
+      "releaseCondition": "Records have direct evidence, required metadata, second verification, resolved discrepancies, and catalog-manager approval.",
+      "nextPrompt": "after second verification"
+    },
+    {
+      "id": "REAL_RECOMMENDATIONS_READY",
+      "status": "BLOCKED_PRODUCTION_CATALOG",
+      "evidence": [
+        "data/catalog/production/catalog_manifest.json",
+        "web/tests/matching-engine.test.ts"
+      ],
+      "blocker": "No verified production catalog records exist, so the correct behavior is catalog unavailable.",
+      "owner": "Codex after production catalog approval",
+      "releaseCondition": "Nonempty production catalog is released and matcher tests prove only verified production records are returned.",
+      "nextPrompt": "after production catalog release"
+    },
+    {
+      "id": "BILLING_READY",
+      "status": "BLOCKED_EXTERNAL",
+      "evidence": [
+        "web/tests/commerce.test.ts",
+        "web/features/onboarding/ScanEntryScreen.tsx"
+      ],
+      "blocker": "Plan selection exists, but no payment provider, server-side entitlement verification, or production checkout is configured.",
+      "owner": "Wyatt and Codex",
+      "releaseCondition": "Provider sandbox/live credentials are configured outside the repo and server-authoritative entitlement checks pass.",
+      "nextPrompt": "after catalog path is closer or when monetization setup is prioritized"
+    },
+    {
+      "id": "MATCHING_STUDY_READY",
+      "status": "BLOCKED_DEPENDENCY",
+      "evidence": [
+        "data/phase-zero/manual_matching_accuracy_analysis.json",
+        "docs/phase-zero/MANUAL_MATCHING_FEASIBILITY_PROTOCOL.md"
+      ],
+      "blocker": "No verified production catalog and no real participant records exist.",
+      "owner": "Wyatt and study reviewers",
+      "releaseCondition": "Verified catalog, real recommendations, consent flow, and 10-20 consenting participant results are available.",
+      "nextPrompt": "after real recommendations"
+    },
+    {
+      "id": "LEGAL_READY",
+      "status": "BLOCKED_EXTERNAL",
+      "evidence": [
+        "docs/legal/LEGAL_REVIEW_PACKAGE.md",
+        "scripts/legal-copy-guard.mjs"
+      ],
+      "blocker": "Legal-copy guard passes, but licensed counsel has not approved trademark, biometric privacy, paid claims, or public-launch materials.",
+      "owner": "Wyatt and licensed counsel",
+      "releaseCondition": "Counsel completes review and required product/copy changes are implemented.",
+      "nextPrompt": "after private beta scope and claims are stable"
+    },
+    {
+      "id": "PRIVATE_BETA_READY",
+      "status": "BLOCKED_DEPENDENCY",
+      "evidence": [
+        "docs/status/CURRENT_PROJECT_STATE.md",
+        "data/status/current_gate_registry.json"
+      ],
+      "blocker": "Real recommendations, production catalog, billing/entitlement, Supabase remote setup, legal/privacy review, and real-device QA are incomplete.",
+      "owner": "Codex, Wyatt, second verifier, external services",
+      "releaseCondition": "Verified production catalog, safe payments/entitlements, privacy/security checks, and private-beta smoke tests pass.",
+      "nextPrompt": "after production catalog and matching gates"
+    },
+    {
+      "id": "PUBLIC_LAUNCH_READY",
+      "status": "BLOCKED_DEPENDENCY",
+      "evidence": [
+        "docs/status/FINAL_PRODUCTION_READINESS_BOARD.md",
+        "docs/status/CURRENT_PROJECT_STATE.md"
+      ],
+      "blocker": "Private beta is not ready; public launch also needs legal, security, accessibility, support, deployment, payment, monitoring, and matching validation approvals.",
+      "owner": "Wyatt, Codex, counsel, support/operations",
+      "releaseCondition": "Final readiness board returns an approval status after all mandatory human and external gates are complete.",
+      "nextPrompt": "after private beta evidence"
+    }
+  ]
+}

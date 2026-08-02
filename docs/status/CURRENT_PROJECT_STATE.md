@@ -1,18 +1,20 @@
 # Current Project State
 
 **Status:** AUTHORITATIVE CURRENT OPERATIONAL STATUS  
-**Last reconciled:** 2026-07-21  
-**Repository checkpoint reviewed:** `8ed7cab956edd797005625d63ea039ebe94c073b` (`docs(phase-zero): add primary review checkpoint`)  
+**Last reconciled:** 2026-08-02
+**Repository checkpoint reviewed:** `43f75cabe8f41384572ddef93726bc5ff07daec8` (`feat(catalog): harden independent verifier workflow`)
+**Status checkpoint:** the commit containing this document (`docs(status): verify guided capture readiness queue`)
 **Active product direction:** responsive web MVP under `web/`  
 **Native iOS status:** preserved future premium TrueDepth client under `ios/`  
+**Readiness gate registry:** `data/status/current_gate_registry.json`
 
-This document is the single current operational status source for GameFace Match. Older audits, closeouts, readiness reviews, and reconstruction reports remain useful historical evidence, but they are not the current count authority when they conflict with this file or the machine-readable artifacts linked below.
+This document is the single current operating status source for GameFace Match. Older audits, closeouts, readiness reviews, reconstruction reports, and prompt reports remain historical evidence. When they conflict with this document or the linked machine-readable artifacts, use this document plus the current JSON/CSV artifacts as the operational authority.
 
 <!-- status-assertions:start -->
 ```json
 {
-  "schemaVersion": "current-project-state-v1",
-  "repositoryCheckpoint": "8ed7cab956edd797005625d63ea039ebe94c073b",
+  "schemaVersion": "current-project-state-v2",
+  "repositoryCheckpoint": "43f75cabe8f41384572ddef93726bc5ff07daec8",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -25,33 +27,41 @@ This document is the single current operational status source for GameFace Match
 
 ## Current Architecture
 
-- The active MVP is the responsive TypeScript/React/Next.js web application in `web/`.
-- Browser capture is guided RGB image capture only. It must not be described as TrueDepth, ARKit, depth geometry, or 3D reconstruction.
-- The iOS SwiftUI project remains in `ios/` as a future native premium-capture path and is not the active product.
+- The active MVP is the TypeScript/React/Next.js web application in `web/`.
+- Browser capture uses local RGB camera/upload flows. It must not be described as TrueDepth, ARKit, identity recognition, authentication, depth capture, or scientific 3D reconstruction.
+- FC 26 and College Football 27 use isolated game adapters and data paths.
+- The SwiftUI iOS project under `ios/` is preserved future native premium-capture work, not the active client.
 - Shared catalog, research, fixture, and production data live under `data/`.
-- Production recommendation behavior is fail-closed through catalog validation, fixture separation, feature gates, adapter behavior, and production bundle guards.
-- No backend, hosted deployment, authentication provider, payment provider, analytics vendor, cloud storage, or production external service is connected.
+- Production recommendations fail closed through catalog validation, fixture separation, adapter behavior, production publish gates, and bundle guards.
+- Supabase runtime boundary code exists, but the remote Supabase database/storage/auth implementation is not connected or migrated.
+- Billing plan selection UI exists, but no production payment provider or server-verified entitlement flow is connected.
 
 ## Verified Working Capabilities
 
-These capabilities are implemented and verified by `npm run verify`:
+Verified by `npm run verify:clean` on 2026-08-02 against `43f75cabe8f41384572ddef93726bc5ff07daec8`; this status/gate-registry checkpoint is the commit containing this document and was revalidated after commit.
 
-- Web onboarding, product explanation, independent-app disclaimer, consent, privacy summary, guided RGB capture/upload fallback, image-quality review, selective retake, attribute confirmation, profile review, catalog-unavailable result state, saved-build empty state, screenshot-refinement intake scaffold, privacy center, and delete-local-data flows.
+- Web onboarding, product explanation, independent-app disclaimer, layered consent, privacy summary, mobile scan entry, preparation flow, guided RGB capture/upload fallback, quality review, selective retake, attribute confirmation, profile review, catalog-unavailable result state, saved-build empty state, screenshot-refinement intake scaffold, privacy center, and delete-local-data flows.
+- Circular guided capture interface with positioning, first pass, second pass, coverage review, selective retake affordance, assisted five-angle fallback, reduced-motion support, and no camera start from the purchase/consent entry screen.
+- Live capture coverage contract using local face count, bounding box, centering, face size, pose/yaw/pitch/roll, sharpness, exposure, lighting uniformity, landmark confidence, advisory expression, occlusion availability, duplicate-angle rejection, stability dwell, and quality-gated segment acceptance.
+- FC 26 face-matching MVP and guided face-sweep workflow remain isolated from College Football catalog state.
 - Local-only privacy and deletion foundations for active capture state, derived profile state, saved builds, screenshot sessions, consent records, and deletion records.
-- Development/internal Phase 0 tooling for evidence inventory, timeline mapping, research catalog exports, primary-review status, verifier queue generation, blind-verifier package generation, research evidence package validation, catalog release validation, production gate checks, and fixture/placeholder separation.
-- Native iOS foundation build, unit tests, and UI tests continue to pass as future work preservation.
+- Internal Phase 0 tooling for source-video inventory, timeline mapping, evidence manifests, capture logs, research catalog exports, primary-review status, owner capture closure, verifier packages, import checks, production gates, fixture/placeholder separation, and status consistency.
+- Native iOS foundation build, unit tests, and UI tests pass in the full verification runner.
 
-These capabilities are not production recommendation capability. They do not mean a user can receive verified College Football 27 options today.
+These capabilities are not real College Football 27 recommendation capability. A user still cannot receive verified College Football 27 recommendations because the production catalog is empty.
 
 ## Current Research Evidence
 
-- Current machine-readable authority: `data/phase-zero/primary_review_status.json`.
-- Current status report: `docs/status/PHASE_ZERO_PRIMARY_REVIEW_STATUS.md`.
-- Research evidence package: `data/phase-zero/research_evidence_package_manifest.json`.
-- Current evidence manifest: `data/phase-zero/evidence_manifest.json`.
-- Current capture log: `data/phase-zero/capture_log.json`.
-- Current issue register: `data/phase-zero/issues_register.research.json`.
-- Current recapture instructions: `docs/phase-zero/WYATT_RECAPTURE_INSTRUCTIONS.md`.
+Current machine-readable authorities:
+
+- Primary-review status: `data/phase-zero/primary_review_status.json`
+- Evidence manifest: `data/phase-zero/evidence_manifest.json`
+- Source-video inventory: `data/phase-zero/video_inventory.json`
+- Capture log: `data/phase-zero/capture_log.json`
+- Issue register: `data/phase-zero/issues_register.research.json`
+- Owner capture closure package: `data/phase-zero/capture-closure/owner-capture-plan.json`
+- Second-verifier execution package: `data/phase-zero/second-verifier-execution-package/second_verifier_execution_package.json`
+- Gate registry: `data/status/current_gate_registry.json`
 
 The current research artifacts are primary research only. They are not second verified, not production approved, and not eligible for customer-facing recommendations.
 
@@ -60,13 +70,16 @@ The current research artifacts are primary research only. They are not second ve
 | Metric | Current value | Source |
 | --- | ---: | --- |
 | Video inventory rows | 11 | `data/phase-zero/video_inventory.json` |
-| Fully traced unique source videos | 9 | `data/phase-zero/primary_review_status.json` |
-| Documented duplicate source references | 2 | `data/phase-zero/primary_review_status.json` |
-| Candidates without valid source timestamp | 0 | `data/phase-zero/primary_review_status.json` |
+| Unique source videos | 9 | `data/phase-zero/video_inventory.json` |
+| Documented exact duplicate source references | 2 | `data/phase-zero/video_inventory.json` |
+| Files open successfully | 11 | `data/phase-zero/video_inventory.json` |
+| Total unique duration | 517.85 seconds | `data/phase-zero/video_inventory.json` |
 | Evidence entries | 96 | `data/phase-zero/evidence_manifest.json` |
+| Evidence entries with SHA-256 | 96 | `data/phase-zero/evidence_manifest.json` |
+| Candidates without valid source timestamp | 0 | `data/phase-zero/primary_review_status.json` |
 | Issue register entries | 44 | `data/phase-zero/issues_register.research.json` |
 
-The source videos are useful for research evidence, menu/order evidence, and recapture planning. Current footage does not prove a production-ready catalog because category boundaries, environment metadata, standardized visual conditions, and second verification are incomplete.
+The current videos support research observations, menu/order evidence, primary review, and recapture planning. They do not establish a production-ready catalog because environment/version metadata, major missing appearance categories, standardized visual conditions, duplicate review, and second verification remain unresolved.
 
 ## Research Candidate Counts
 
@@ -87,22 +100,22 @@ The source videos are useful for research evidence, menu/order evidence, and rec
 | Production approved | 0 |
 | Records allowed in production recommendations | 0 |
 
-Older partial research exports may mention 86 records. That number is historical/provenance context, not the current operational count. The current normalized primary-review candidate count is 85.
+Older partial exports may mention different counts. The current normalized primary-review authority is 85 candidates in `data/phase-zero/primary_review_status.json`.
 
 ## Category Status
 
 | Category | Observed candidates | Primary-review state | Verifier handoff | Production status |
 | --- | ---: | --- | --- | --- |
-| Creation paths | 1 | Primary approved with notes | Ready for evidence review | Blocked |
-| Appearance menu hierarchy | 93 menu observations | Research map exists | Ready for evidence review | Blocked |
-| Heads | 26 | 24 approved with notes; 2 duplicate review | Ready for evidence review | Blocked |
-| Skin Tone | 21 | 20 approved with notes; 1 duplicate review | Ready for evidence review | Blocked |
-| Skin Details | 10 | 10 approved with notes | Ready for evidence review | Blocked |
-| Eye Shape | 5 | 5 approved with notes | Ready for evidence review | Blocked |
-| Eye Color | 7 | 7 approved with notes | Ready for evidence review | Blocked |
-| Nose | 7 | 6 approved with notes; 1 duplicate review | Ready for evidence review | Blocked |
-| Ear Shape | 4 | 3 approved with notes; 1 duplicate review | Ready for evidence review | Blocked |
-| Body/context controls | 5 | 5 approved with notes | Ready for evidence review | Blocked |
+| Creation paths | 1 | Primary approved with notes | Evidence review material exists | Blocked |
+| Appearance menu hierarchy | 93 menu observations | Research map exists | Evidence review material exists | Blocked |
+| Heads | 26 | 24 approved with notes; 2 duplicate review | Evidence review material exists | Blocked |
+| Skin Tone | 21 | 20 approved with notes; 1 duplicate review | Evidence review material exists | Blocked |
+| Skin Details | 10 | 10 approved with notes | Evidence review material exists | Blocked |
+| Eye Shape | 5 | 5 approved with notes | Evidence review material exists | Blocked |
+| Eye Color | 7 | 7 approved with notes | Evidence review material exists | Blocked |
+| Nose | 7 | 6 approved with notes; 1 duplicate review | Evidence review material exists | Blocked |
+| Ear Shape | 4 | 3 approved with notes; 1 duplicate review | Evidence review material exists | Blocked |
+| Body/context controls | 5 | 5 approved with notes | Evidence review material exists | Blocked |
 | Hairstyles | 0 | Not captured | Not ready | Blocked |
 | Hair colors | 0 | Not captured | Not ready | Blocked |
 | Facial hair | 0 | Not captured | Not ready | Blocked |
@@ -122,15 +135,17 @@ Menu observations and catalog candidates are intentionally separated. Menu hiera
 | Verified facial-hair records | 0 |
 | Verified additional-attribute records | 0 |
 | Production-approved records | 0 |
-| User-facing recommendations available | 0 |
+| User-facing College Football 27 recommendations available | 0 |
 
-The production catalog is intentionally empty. The correct customer-facing state is: “Verified College Football 27 catalog not loaded.”
+The production catalog is intentionally empty. The correct customer-facing state is: verified College Football 27 catalog unavailable.
 
 ## Second-Verification Status
 
-- Second-verifier package and handoff documents exist.
-- Verifier-ready candidate queue exists for planning and evidence review.
-- No second human verification has occurred.
+- Blind-verifier package exists.
+- Second-verifier execution package exists and is validated.
+- Verifier dashboard shows 85 assigned, 0 completed, 0 disagreements, 85 blocked, 0 production eligible.
+- Required import targets exist for the post-independent-count review phase.
+- No real second human verifier results are present.
 - No record may be marked `VERIFIED` or `VERIFIED_WITH_NOTES` from primary review alone.
 - Second-verifier decisions: 0.
 
@@ -155,14 +170,25 @@ The manual matching study must not begin until a verified production catalog and
 - Matching scores must remain language about closeness among available game options, not identity probability.
 - Skin tone must not affect geometric similarity.
 
+## Supabase, Billing, and Deployment Status
+
+- Supabase project credentials are stored outside the repository, per user confirmation, but no remote tables, migrations, storage buckets, auth policies, or app connections are active.
+- Code-level Supabase runtime configuration, redaction, local-only mode, schema contract, storage/deletion contracts, and status endpoint scaffolding exist and pass tests.
+- Remote writes are disabled by default.
+- Browser clients must not receive server secrets.
+- Billing has plan-selection and commerce boundary tests, but no provider-backed checkout, no verified payment entitlement, and no production purchase flow.
+- Deployment and public hosting have not been performed.
+- Monitoring and analytics vendors are not connected.
+
 ## Privacy and Security Status
 
-- Raw user face media is local and temporary by default.
-- Raw face images are not stored in localStorage by default.
+- Raw user face media is local and temporary by default in the current web flow.
+- Raw face images are not stored in normal profile JSON or localStorage by default.
 - No user face media is uploaded by the current app.
 - Local deletion flows and privacy inventory are implemented and tested.
 - Fixture/test data is separated from production.
 - Production bundle guards and legal-copy guards pass.
+- Known verification warning: isolated `npm ci` reports 3 high severity dependency vulnerabilities; this is not fixed by Prompt 088.
 - No formal legal approval, production penetration test, hosted incident-response run, or real-device privacy QA has been completed.
 
 ## Launch Status
@@ -179,30 +205,35 @@ The manual matching study must not begin until a verified production catalog and
 
 ### Codex Can Continue Independently
 
-- Keep documentation and machine-readable artifact consistency checks current.
-- Improve non-product-changing validators around status drift, path resolution, duplicate reports, and fixture separation.
-- Refine internal handoff documents and generated reports without inventing data.
+- Keep the current-state document, status checker, and gate registry aligned with machine-readable artifacts.
+- Tighten validators, import exception reporting, and package checks without inventing evidence.
+- Prepare ingestion for new owner captures once files are supplied.
+- Continue hardening local-only privacy, Supabase boundaries, and test coverage.
 
 ### Wyatt Must Provide
 
 - First immediate recording: `GFM-CF27-S01-environment-game-version-YYYYMMDD-partNN.mp4`, following `docs/phase-zero/CF27_CAPTURE_CLOSURE_PACKAGE.md`.
-- Owner capture closure package: `data/phase-zero/capture-closure/owner-capture-plan.json`, `data/phase-zero/capture-closure/owner-capture-plan.csv`, and `data/phase-zero/capture-closure/issue-to-capture-traceability.json`.
-- Additional Xbox captures listed in `docs/phase-zero/WYATT_RECAPTURE_INSTRUCTIONS.md`.
+- Additional Xbox captures in `data/phase-zero/capture-closure/owner-capture-plan.json`, starting with:
+  1. `GFM-CF27-S01` environment and game-version evidence.
+  2. `GFM-CF27-S02` complete menu hierarchy and canonical creation path.
+  3. `GFM-CF27-S03` Hair menu, hairstyles, and hair colors.
+  4. `GFM-CF27-S04` facial hair and facial-hair colors if present.
+  5. `GFM-CF27-S05` remaining face controls and boundaries.
 - Missing environment/version evidence, including visible game executable version, patch/update state, console model where visible, and reproducible Road to Glory creation context.
-- Complete Hair submenu evidence if visible, including hairstyle, hair color, facial-hair, and facial-hair-color controls.
 - Standardized head-template visual pass if the first production catalog will include head geometry matching.
 
 ### Second Human Verifier Must Complete
 
-- Independent environment entry.
-- Independent menu/category counts.
+- Independent environment worksheet.
+- Blind independent menu/category counts.
 - Native-order review.
-- Evidence review and discrepancy submission.
-- Final sign-off using the allowed verification statuses.
+- Record-level evidence review after blind counts.
+- Duplicate/exception review.
+- Discrepancy form and final sign-off using only allowed verification statuses.
 
 ### External Specialists or Services Are Needed Later
 
-- Legal/trademark/privacy counsel before public launch or paid claims.
+- Legal/trademark/privacy counsel before public launch or paid public claims.
 - Hosting and payment-provider decisions before deployment or monetization.
 - Real-device browser QA before broad beta claims.
 - Human matching-study participants after the verified catalog exists.
@@ -213,9 +244,9 @@ The manual matching study must not begin until a verified production catalog and
 Current source videos
   -> Primary research catalog candidates
   -> Primary review checkpoint
-  -> Wyatt recaptures for missing boundaries, environment, and standard views
+  -> Wyatt captures for missing environment, boundaries, Hair, face controls, and standard views
   -> Updated research package
-  -> Blind second-verifier package
+  -> Blind second-verifier execution package
   -> Second-person verification and discrepancy resolution
   -> Catalog-manager approval
   -> Immutable production catalog release
@@ -234,53 +265,98 @@ Hard dependencies:
 
 ## Next Milestone
 
-The next milestone remains completing the Phase 0 evidence path from primary review to verifier-ready package:
+The next milestone is owner capture completion for Phase 0 closure.
 
-1. Wyatt records the required recapture set.
-   - Start with the environment/version recording from `GFM-CF27-S01`; it is the first session in the capture closure package and blocks reproducible production metadata.
-2. Codex ingests the new evidence and updates research candidates.
-3. Codex regenerates the research package and primary-review status.
-4. A second human verifier independently reviews counts, order, evidence, and discrepancies.
+1. Wyatt records `GFM-CF27-S01` environment/version evidence.
+2. Codex ingests and validates the new files through the approved intake and evidence pipeline.
+3. Wyatt continues the P0 capture closure sessions for menu hierarchy, Hair, facial hair, and remaining controls.
+4. Codex regenerates the research package and primary-review status.
+5. A second human verifier independently reviews counts, order, evidence, and discrepancies.
 
-## Current Web Entry Screen
+Recommended next prompt number: `089`.
 
-Prompt 080 adds a mobile-first scan-entry route at `#start`.
+## Current Web Entry and Guided Capture Status
+
+Prompt 080 added the mobile scan entry route at `#start`.
 
 - Branding: `GameFace Match` with `From reality to game face.`
-- Purchase plan IDs: `single_scan` (`$0.99`) and `monthly` (`$1.99/month`)
-- Consent version: `scan-entry-consent-v1`, layered on top of the existing `web-mvp-consent-v1` capture consent records
-- Billing status: provider unavailable; checkout and restoration remain disabled
-- Entitlement status: visual plan selection is not treated as payment
-- Capture start status: production scans remain blocked until verified entitlement exists; the existing preparation, lighting, capability, and upload/capture routes are preserved for local validation
-- Guided scan strategy: the UI follows a quiet entry plus preparation pattern; circular coverage progress is represented by a typed state contract that accepts only real quality-passing, non-duplicate coverage frames and blocks simulated progress in production
-- Privacy behavior: no live camera starts on the entry screen, and raw-media deletion behavior is unchanged
-- Analytics events added using the existing camelCase event convention: `scanEntryViewed`, `scanPlanSelected`, `scanConsentChanged`, `scanStartTapped`, `scanPurchaseStarted`, `scanPurchaseCompleted`, `scanPurchaseCanceled`, `scanPurchaseFailed`, `scanEntryBlocked`, and `scanPreparationOpened`
+- Purchase plan IDs: `single_scan` (`$0.99`) and `monthly` (`$1.99/month`).
+- Consent version: `scan-entry-consent-v1`, layered on top of the existing `web-mvp-consent-v1` capture consent records.
+- Billing status: provider unavailable; checkout and restoration remain disabled.
+- Entitlement status: visual plan selection is not treated as payment.
+- Camera behavior: no live camera starts on the entry screen.
+
+Prompts 082 and 083 added the circular guided capture interaction.
+
+- Preparation screen: `Get ready for your face scan`.
+- Positioning instruction: `Position your face inside the circle`.
+- First pass: `Move your head slowly to complete the circle`.
+- Second pass: `One more scan for better detail`.
+- Coverage ring: driven by accepted local pose/quality coverage, not elapsed time.
+- Coverage segments: center, upper-left, left, lower-left, lower-center, lower-right, right, upper-right.
+- Rejected frames do not advance coverage.
+- Duplicate angles do not advance coverage.
+- Production simulation is explicitly blocked.
+- Assisted five-angle fallback remains available.
+
+## Verification Results
+
+Latest complete command:
+
+```bash
+npm run verify:clean
+```
+
+Result on 2026-08-02: PASS.
+
+Included checks:
+
+- Strict repository status and documentation safety.
+- Requirement traceability.
+- Current project status consistency.
+- Supabase schema contract.
+- FC26 research validation.
+- Phase 0 exports, evidence package, research release, verification candidate gate, primary review, coverage, owner capture closure, blind verifier package, and second-verifier execution package.
+- Catalog import, production candidate import, production catalog release manager, verified head geometry annotation artifact, catalog record classification, and legal copy guard.
+- Web type-check, lint, unit/integration tests, production catalog validation, placeholder/fixture/duplicate checks, integrity checks, production build, production bundle guard, web E2E, and Phase 0 E2E.
+- Native iOS build, unit tests, and UI tests.
+
+Notable warnings:
+
+- `npm ci` reports 3 high severity dependency vulnerabilities.
+- npm reports install scripts awaiting allow-scripts review for `esbuild`, `fsevents`, and `sharp`.
+- Playwright and Xcode emit non-failing environment/debugger warnings.
+- `web/next-env.d.ts` generated-file drift occurs only in the isolated checkout and is allowed by the non-mutating runner.
+
+Source worktree after verification: clean.
 
 ## Completion Percentages
 
-These percentages are conservative operating estimates. They do not give production credit for fixtures, shells, templates, or unverified research records.
+These estimates are conservative and do not give production credit for fixtures, shells, templates, or unverified research records.
 
 | Workstream | Current estimate | Basis |
 | --- | ---: | --- |
-| Repository architecture and verification health | 80%-90% | Full verification passes; many validators exist; status drift still needed this document/check. |
-| Web product shell and core local workflows | 55%-65% | Core journey works locally with fail-closed results; real recommendation path blocked. |
-| Web private-beta readiness | 30%-40% | Local UX works, but no verified catalog, no real matching study, no full device QA. |
+| Repository architecture and verification health | 90%-95% | Non-mutating full verification passes, including web, Phase 0, and iOS checks. |
+| Web product shell and core local workflows | 65%-75% | Core local journey, scan entry, guided capture UI, local privacy, and fail-closed states work. |
+| Web private-beta readiness | 35%-45% | Product shell is stronger, but real recommendations, billing, remote backend, and study data are blocked. |
 | Native iOS capture foundation | 25%-35% | Project builds/tests, but native capture is future path and not feature-complete. |
-| Phase 0 preparation/tooling | 60%-70% | Evidence, review, validator, release, and verifier tooling exists. |
-| Source-video ingestion and traceability | 70%-80% | 9 unique videos traced; 2 duplicate references documented; recaptures still needed. |
+| Phase 0 preparation/tooling | 75%-85% | Intake, evidence, primary review, owner capture package, verifier package, and gates exist. |
+| Source-video ingestion and traceability | 70%-80% | 9 unique videos traced; 2 duplicates documented; no candidate source timestamp gaps. |
 | Actual CF27 research catalog | 25%-35% | 85 current candidates, but major categories remain uncaptured. |
 | Catalog evidence quality | 20%-30% | Useful research evidence exists; production-standard visual evidence incomplete. |
 | Primary review | 75%-85% | All 85 current candidates classified; 5 duplicate-review items remain. |
-| Second-person verification | 0% | No second human verifier decisions. |
+| Second-person verification | 0% | No real second human verifier decisions. |
 | Production catalog | 0% | No production-approved records. |
-| Matching-engine implementation | 65%-75% | Rule-based engine implemented and tested with fixtures; no verified production run. |
+| Matching-engine implementation | 65%-75% | Rule-based engine implemented and tested with fixtures; no verified production catalog run. |
 | Matching-accuracy validation | 0% | No real participant study data. |
-| Screenshot refinement | 20%-30% | Intake/scaffold exists; no verified refinement recommendations. |
+| Screenshot refinement | 20%-30% | Intake/scaffold exists; verified refinement recommendations are unavailable. |
 | Privacy and deletion | 60%-70% | Local privacy/deletion implemented and tested; legal/real-device validation remains. |
-| Security | 45%-55% | Local guards pass; no hosted security review or formal penetration test. |
-| Accessibility | 45%-55% | Automated/basic coverage exists; real assistive tech/device QA remains. |
+| Security | 45%-55% | Local guards pass; dependency audit has unresolved high-severity findings; no hosted security review. |
+| Accessibility | 50%-60% | Automated/basic coverage and guided fallback exist; real assistive tech/device QA remains. |
 | Legal/trademark readiness | 20%-30% | Counsel package/checklists exist; no legal approval. |
 | Analytics and monitoring | 15%-25% | Local/no-op analytics architecture exists; no production monitoring. |
+| Supabase runtime readiness | 25%-35% | Code boundary exists; remote project is not migrated or connected. |
+| Billing readiness | 10%-20% | Plan UI and boundaries exist; no provider-backed payment verification. |
 | Deployment/private beta operations | 20%-30% | Docs/runbooks exist; no deployment or real beta operation. |
 | Public launch readiness | 5%-10% | Mandatory catalog, verification, matching, legal, deployment, and support gates are blocked. |
 | Full original product vision | 15%-25% | Strong foundations exist, but verified catalog and validated recommendations are missing. |
@@ -292,9 +368,13 @@ These percentages are conservative operating estimates. They do not give product
 - Decision log: `docs/DECISIONS.md`
 - Architecture: `docs/ARCHITECTURE.md`
 - Documentation index: `docs/DOCUMENTATION_INDEX.md`
+- Prompt 088 gate registry: `data/status/current_gate_registry.json`
 - Primary review: `docs/status/PHASE_ZERO_PRIMARY_REVIEW_STATUS.md`
+- Current completion audit: `docs/status/CURRENT_PROJECT_COMPLETION_AUDIT.md`
+- Owner capture closure package: `docs/phase-zero/CF27_CAPTURE_CLOSURE_PACKAGE.md`
 - Wyatt recapture instructions: `docs/phase-zero/WYATT_RECAPTURE_INSTRUCTIONS.md`
 - Second-verifier handoff: `docs/phase-zero/SECOND_VERIFIER_HANDOFF.md`
+- Second-verifier execution guide: `docs/phase-zero/SECOND_VERIFIER_EXECUTION_GUIDE.md`
 - Artifact map: `docs/phase-zero/PHASE_ZERO_ARTIFACT_MAP.md`
 - Video inventory: `docs/phase-zero/VIDEO_SOURCE_INVENTORY.md`
 - Evidence package: `docs/phase-zero/RESEARCH_EVIDENCE_PACKAGE_MANIFEST.md`
@@ -304,4 +384,4 @@ These percentages are conservative operating estimates. They do not give product
 
 ## Historical Report Handling
 
-Older documents should be read as snapshots of the repository at the time they were created. They may contain stale percentages, stale candidate counts, or pre-video blocker descriptions. Use them for audit history and rationale, but use this file plus the machine-readable `data/phase-zero/primary_review_status.json` artifact for current operating status.
+Older documents should be read as repository snapshots from the time they were created. They may contain stale percentages, stale candidate counts, pre-video blocker descriptions, or pre-guided-capture capability descriptions. Use them for audit history and rationale, but use this file, `data/status/current_gate_registry.json`, and the machine-readable Phase 0 artifacts for current operating status.

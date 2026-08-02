@@ -1,0 +1,670 @@
+{
+  "schemaVersion": "cf27-issue-to-capture-traceability-v1",
+  "generatedAt": "2026-08-02T00:00:00-04:00",
+  "sourceIssues": "data/phase-zero/issues_register.research.json",
+  "issueCount": 44,
+  "blockingIssueCount": 35,
+  "mappedIssueCount": 44,
+  "unmappedBlockingIssues": [],
+  "categoryToSessions": {
+    "Environment metadata": [
+      "GFM-CF27-S01"
+    ],
+    "Production path prerequisites": [
+      "GFM-CF27-S01"
+    ],
+    "Creation paths": [
+      "GFM-CF27-S02"
+    ],
+    "Appearance menu hierarchy": [
+      "GFM-CF27-S02"
+    ],
+    "Menu boundary issues": [
+      "GFM-CF27-S02"
+    ],
+    "Hairstyles": [
+      "GFM-CF27-S03"
+    ],
+    "Hair colors": [
+      "GFM-CF27-S03"
+    ],
+    "Hair submenu child controls": [
+      "GFM-CF27-S03"
+    ],
+    "Facial hair": [
+      "GFM-CF27-S04"
+    ],
+    "Facial-hair colors": [
+      "GFM-CF27-S04"
+    ],
+    "Eyebrows": [
+      "GFM-CF27-S05"
+    ],
+    "Mouth Shape": [
+      "GFM-CF27-S05"
+    ],
+    "Jaw Shape": [
+      "GFM-CF27-S05"
+    ],
+    "Chin": [
+      "GFM-CF27-S05"
+    ],
+    "Additional sliders/toggles/colors/presets": [
+      "GFM-CF27-S05"
+    ],
+    "Nose": [
+      "GFM-CF27-S05"
+    ],
+    "Ear Shape": [
+      "GFM-CF27-S05"
+    ],
+    "Eye Shape": [
+      "GFM-CF27-S05"
+    ],
+    "Eye Color": [
+      "GFM-CF27-S05"
+    ],
+    "Skin Tone": [
+      "GFM-CF27-S05"
+    ],
+    "Skin Details": [
+      "GFM-CF27-S05"
+    ],
+    "Duplicate review records": [
+      "GFM-CF27-S06"
+    ],
+    "Production-standard imagery gaps": [
+      "GFM-CF27-S07"
+    ],
+    "Current captured category recaptures": [
+      "GFM-CF27-S07"
+    ],
+    "Dependency tests": [
+      "GFM-CF27-S08"
+    ],
+    "Patch/version compatibility blockers": [
+      "GFM-CF27-S08"
+    ],
+    "Appearance": [
+      "GFM-CF27-S02"
+    ],
+    "Head & Skin": [],
+    "Head Template": [],
+    "Hair": [
+      "GFM-CF27-S03",
+      "GFM-CF27-S04"
+    ],
+    "Body/height/weight/physique": [],
+    "Additional Appearance rows beyond visible Head & Skin and Hair": [],
+    "Additional Head & Skin rows beyond visible Chin": [
+      "GFM-CF27-S05"
+    ]
+  },
+  "duplicateReviewCandidates": [
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "category": "Ear Shape",
+      "nativeOrder": 2,
+      "nativeVisibleLabelOrIndex": "None",
+      "captureSessionID": "GFM-CF27-S06"
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "category": "Heads",
+      "nativeOrder": 12,
+      "nativeVisibleLabelOrIndex": "Face 12",
+      "captureSessionID": "GFM-CF27-S06"
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+      "category": "Heads",
+      "nativeOrder": 16,
+      "nativeVisibleLabelOrIndex": "Face 16",
+      "captureSessionID": "GFM-CF27-S06"
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_005",
+      "category": "Nose",
+      "nativeOrder": 5,
+      "nativeVisibleLabelOrIndex": "Aquiline",
+      "captureSessionID": "GFM-CF27-S06"
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_010",
+      "category": "Skin Tone",
+      "nativeOrder": 10,
+      "nativeVisibleLabelOrIndex": "Skin Tone 10",
+      "captureSessionID": "GFM-CF27-S06"
+    }
+  ],
+  "issueToCapture": {
+    "issue-phase0-appearance-control-ear-shape-recapture": {
+      "issueID": "issue-phase0-appearance-control-ear-shape-recapture",
+      "issueKind": "recaptureRequired",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Complete Ear Shape selector evidence",
+      "affectedRecordCount": 4,
+      "captureSessionID": "GFM-CF27-S07",
+      "captureSessionTitle": "Required recaptures and weak production evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-appearance-control-eye-color-recapture": {
+      "issueID": "issue-phase0-appearance-control-eye-color-recapture",
+      "issueKind": "recaptureRequired",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Complete Eye Color selector evidence",
+      "affectedRecordCount": 7,
+      "captureSessionID": "GFM-CF27-S07",
+      "captureSessionTitle": "Required recaptures and weak production evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-appearance-control-eye-shape-recapture": {
+      "issueID": "issue-phase0-appearance-control-eye-shape-recapture",
+      "issueKind": "recaptureRequired",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Complete Eye Shape selector evidence",
+      "affectedRecordCount": 5,
+      "captureSessionID": "GFM-CF27-S07",
+      "captureSessionTitle": "Required recaptures and weak production evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-appearance-control-nose-recapture": {
+      "issueID": "issue-phase0-appearance-control-nose-recapture",
+      "issueKind": "recaptureRequired",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Complete Nose selector evidence",
+      "affectedRecordCount": 7,
+      "captureSessionID": "GFM-CF27-S07",
+      "captureSessionTitle": "Required recaptures and weak production evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-appearance-control-skin-details-recapture": {
+      "issueID": "issue-phase0-appearance-control-skin-details-recapture",
+      "issueKind": "recaptureRequired",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Complete Skin Details selector evidence",
+      "affectedRecordCount": 10,
+      "captureSessionID": "GFM-CF27-S07",
+      "captureSessionTitle": "Required recaptures and weak production evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-appearance-control-skin-tone-recapture": {
+      "issueID": "issue-phase0-appearance-control-skin-tone-recapture",
+      "issueKind": "recaptureRequired",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Complete Skin Tone selector evidence",
+      "affectedRecordCount": 21,
+      "captureSessionID": "GFM-CF27-S07",
+      "captureSessionTitle": "Required recaptures and weak production evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-appearance-editable-later": {
+      "issueID": "issue-phase0-env-appearance-editable-later",
+      "issueKind": "dependencyUncertainty",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: appearanceEditableLater",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-archetype": {
+      "issueID": "issue-phase0-env-archetype",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: archetype",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-body-type": {
+      "issueID": "issue-phase0-env-body-type",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: bodyType",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-console-model": {
+      "issueID": "issue-phase0-env-console-model",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: consoleModel",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-console-osversion": {
+      "issueID": "issue-phase0-env-console-osversion",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: consoleOSVersion",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-copy-type": {
+      "issueID": "issue-phase0-env-copy-type",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: copyType",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-display-model": {
+      "issueID": "issue-phase0-env-display-model",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: displayModel",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-ea-account-requirement": {
+      "issueID": "issue-phase0-env-ea-account-requirement",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: eaAccountRequirement",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-edition": {
+      "issueID": "issue-phase0-env-edition",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: edition",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-entitlement-status": {
+      "issueID": "issue-phase0-env-entitlement-status",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: entitlementStatus",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-game-version": {
+      "issueID": "issue-phase0-env-game-version",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: gameVersion",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-hair-visible-not-opened": {
+      "issueID": "issue-phase0-env-hair-visible-not-opened",
+      "issueKind": "missingEvidence",
+      "severity": "warning",
+      "status": "open",
+      "title": "Hair menu visible but not opened in environment video",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S03",
+      "captureSessionTitle": "Missing hairstyles and hair colors",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-handedness": {
+      "issueID": "issue-phase0-env-handedness",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: handedness",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-hdr-state": {
+      "issueID": "issue-phase0-env-hdr-state",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: hdrState",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-height": {
+      "issueID": "issue-phase0-env-height",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: height",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-online-state": {
+      "issueID": "issue-phase0-env-online-state",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: onlineState",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-output-resolution": {
+      "issueID": "issue-phase0-env-output-resolution",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: outputResolution",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-patch-version": {
+      "issueID": "issue-phase0-env-patch-version",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: patchVersion",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-player-base-selection": {
+      "issueID": "issue-phase0-env-player-base-selection",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: playerBaseSelection",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-storefront-region": {
+      "issueID": "issue-phase0-env-storefront-region",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: storefrontRegion",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-env-weight": {
+      "issueID": "issue-phase0-env-weight",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Missing environment/path evidence: weight",
+      "affectedRecordCount": 2,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-appearance": {
+      "issueID": "issue-phase0-menu-appearance",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Appearance",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S02",
+      "captureSessionTitle": "Complete menu hierarchy and canonical creation path",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-chin": {
+      "issueID": "issue-phase0-menu-chin",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Chin",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S05",
+      "captureSessionTitle": "Missing eyebrows and remaining face controls",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-ear-shape": {
+      "issueID": "issue-phase0-menu-ear-shape",
+      "issueKind": "missingEvidence",
+      "severity": "warning",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Ear Shape",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S08",
+      "captureSessionTitle": "Dependency checks",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-eye-color": {
+      "issueID": "issue-phase0-menu-eye-color",
+      "issueKind": "missingEvidence",
+      "severity": "warning",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Eye Color",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S08",
+      "captureSessionTitle": "Dependency checks",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-eye-shape": {
+      "issueID": "issue-phase0-menu-eye-shape",
+      "issueKind": "missingEvidence",
+      "severity": "warning",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Eye Shape",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S08",
+      "captureSessionTitle": "Dependency checks",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-hair": {
+      "issueID": "issue-phase0-menu-hair",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Hair",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S05",
+      "captureSessionTitle": "Missing eyebrows and remaining face controls",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-head-skin": {
+      "issueID": "issue-phase0-menu-head-skin",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Head & Skin",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S02",
+      "captureSessionTitle": "Complete menu hierarchy and canonical creation path",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-head-template": {
+      "issueID": "issue-phase0-menu-head-template",
+      "issueKind": "missingEvidence",
+      "severity": "warning",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Head Template",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S08",
+      "captureSessionTitle": "Dependency checks",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-jaw-shape": {
+      "issueID": "issue-phase0-menu-jaw-shape",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Jaw Shape",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S05",
+      "captureSessionTitle": "Missing eyebrows and remaining face controls",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-mouth-shape": {
+      "issueID": "issue-phase0-menu-mouth-shape",
+      "issueKind": "missingEvidence",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Mouth Shape",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S05",
+      "captureSessionTitle": "Missing eyebrows and remaining face controls",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-nose": {
+      "issueID": "issue-phase0-menu-nose",
+      "issueKind": "missingEvidence",
+      "severity": "warning",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Nose",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S08",
+      "captureSessionTitle": "Dependency checks",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-skin-details": {
+      "issueID": "issue-phase0-menu-skin-details",
+      "issueKind": "missingEvidence",
+      "severity": "warning",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Skin Details",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S08",
+      "captureSessionTitle": "Dependency checks",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-menu-skin-tone": {
+      "issueID": "issue-phase0-menu-skin-tone",
+      "issueKind": "missingEvidence",
+      "severity": "warning",
+      "status": "open",
+      "title": "Incomplete appearance menu capture: Skin Tone",
+      "affectedRecordCount": 1,
+      "captureSessionID": "GFM-CF27-S08",
+      "captureSessionTitle": "Dependency checks",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-primary-review-category-incomplete": {
+      "issueID": "issue-phase0-primary-review-category-incomplete",
+      "issueKind": "categoryIncomplete",
+      "severity": "blocking",
+      "status": "open",
+      "title": "No current appearance category is production complete after primary review",
+      "affectedRecordCount": 85,
+      "captureSessionID": "GFM-CF27-S05",
+      "captureSessionTitle": "Missing eyebrows and remaining face controls",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-primary-review-duplicate-observations": {
+      "issueID": "issue-phase0-primary-review-duplicate-observations",
+      "issueKind": "duplicateReviewRequired",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Primary review preserved duplicate or continuity observations for human review",
+      "affectedRecordCount": 5,
+      "captureSessionID": "GFM-CF27-S06",
+      "captureSessionTitle": "Duplicate and ambiguity resolution",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-primary-review-environment-unresolved": {
+      "issueID": "issue-phase0-primary-review-environment-unresolved",
+      "issueKind": "environmentUnresolved",
+      "severity": "blocking",
+      "status": "open",
+      "title": "Primary-reviewed records cannot publish until environment metadata is resolved",
+      "affectedRecordCount": 85,
+      "captureSessionID": "GFM-CF27-S01",
+      "captureSessionTitle": "Environment and game-version evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    },
+    "issue-phase0-wyatt-next-capture-plan": {
+      "issueID": "issue-phase0-wyatt-next-capture-plan",
+      "issueKind": "recaptureRequired",
+      "severity": "info",
+      "status": "open",
+      "title": "Wyatt appearance-menu recording script is ready for execution",
+      "affectedRecordCount": 10,
+      "captureSessionID": "GFM-CF27-S07",
+      "captureSessionTitle": "Required recaptures and weak production evidence",
+      "mappingBasis": "Keyword/category mapping from current issue register plus prompt-required eight-session closure plan.",
+      "nonCaptureDecision": null
+    }
+  }
+}

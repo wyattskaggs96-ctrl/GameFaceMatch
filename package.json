@@ -40,6 +40,8 @@
     "cf27:production-candidate-import:check": "node scripts/cf27-production-candidate-import-validator.mjs --check",
     "cf27:production-catalog-release": "node scripts/cf27-production-catalog-release-manager.mjs",
     "cf27:production-catalog-release:check": "node scripts/cf27-production-catalog-release-manager.mjs --check",
+    "cf27:capture-closure-package": "node scripts/cf27-capture-closure-package.mjs",
+    "cf27:capture-closure-package:check": "node scripts/cf27-capture-closure-package.mjs --check",
     "cf27:verified-head-geometry-annotations:check": "node scripts/validate-verified-head-geometry-annotations.mjs --check",
     "media:inspect": "node scripts/cf27-media-inspect.mjs",
     "head-template:extract-frames": "node scripts/cf27-head-template-frame-extract.mjs",

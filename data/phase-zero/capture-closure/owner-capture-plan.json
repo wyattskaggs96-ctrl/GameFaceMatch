@@ -1,0 +1,709 @@
+{
+  "schemaVersion": "cf27-owner-capture-closure-package-v1",
+  "generatedAt": "2026-08-02T00:00:00-04:00",
+  "project": "GameFace Match",
+  "game": "EA SPORTS College Football 27",
+  "dataClass": "owner_capture_closure_plan",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "verificationStatus": "NOT_SECOND_VERIFIED",
+  "sourceArtifacts": {
+    "primaryReview": "data/phase-zero/primary_review_status.json",
+    "issues": "data/phase-zero/issues_register.research.json",
+    "evidenceManifest": "data/phase-zero/evidence_manifest.json",
+    "videoInventory": "data/phase-zero/video_inventory.json",
+    "captureRequests": "data/phase-zero/capture_requests.json",
+    "gapMatrix": "data/phase-zero/appearance_menu_gap_matrix.json",
+    "environmentManifest": "data/phase-zero/environment_manifest.research.json",
+    "productionManifest": "data/catalog/production/catalog_manifest.json"
+  },
+  "sourceCounts": {
+    "totalResearchCandidates": 85,
+    "primaryApproved": 0,
+    "primaryApprovedWithNotes": 80,
+    "duplicateReviewRequired": 5,
+    "secondVerified": 0,
+    "productionApproved": 0,
+    "productionRecords": 0,
+    "recordsAllowedInProductionRecommendations": 0,
+    "openIssues": 44,
+    "openBlockingIssues": 35,
+    "evidenceEntries": 96,
+    "videoInventoryRows": 11,
+    "uniqueSourceVideos": 9,
+    "duplicateSourceVideos": 2,
+    "gapRows": 22
+  },
+  "policy": {
+    "preserveMasters": true,
+    "noProductionPromotion": true,
+    "noSecondVerificationClaim": true,
+    "noExpectedCountFabrication": true,
+    "nativeOrderMustBePreserved": true,
+    "allNewEvidenceStartsAs": "research_or_unreviewed_evidence"
+  },
+  "firstRecordingSessionID": "GFM-CF27-S01",
+  "sessions": [
+    {
+      "sessionID": "GFM-CF27-S01",
+      "priority": "P0",
+      "title": "Environment and game-version evidence",
+      "objective": "Resolve the publication-blocking Xbox, game version, patch, edition, entitlement, online, display, and capture-method fields that are currently null.",
+      "startingGameLocation": "Xbox dashboard or College Football 27 title/main screen before entering Road to Glory.",
+      "navigationPathWhenKnown": "Use the least-private Xbox or in-game screens that visibly show game info, update status, version/build, and console context.",
+      "preconditions": [
+        "Do not expose account email, serial number, payment details, or credentials.",
+        "Do not change game settings."
+      ],
+      "constantCharacterSettings": [
+        "Not applicable. This is environment and version evidence only."
+      ],
+      "whatToRecord": [
+        "Title screen",
+        "Game info/update/version screen when available",
+        "Console model/platform screen when safe",
+        "Online/EA account/entitlement state only when visible without private details",
+        "Display/HDR/output context only if visible"
+      ],
+      "cameraRotationRequirements": [
+        "None"
+      ],
+      "pauseInstructions": "Pause 3-5 seconds on every environment/version field so text is readable.",
+      "beginningEvidence": "Xbox dashboard, game tile, title screen, or main menu visible before opening details.",
+      "endingEvidence": "Return to College Football 27 title/main screen or Road to Glory entry without changing settings.",
+      "categoriesOrRecordsClosed": [
+        "Environment metadata",
+        "Production path prerequisites"
+      ],
+      "fileNaming": "GFM-CF27-S01-environment-game-version-YYYYMMDD-partNN.mp4",
+      "estimatedDuration": "5-10 minutes",
+      "whatNotToChange": [
+        "Do not change game settings.",
+        "Do not show private account/payment/serial information."
+      ],
+      "factBoundary": "Direct fact only when visible on screen; otherwise remains unresolved.",
+      "owner": "Wyatt",
+      "status": "OPEN_REQUIRED_CAPTURE",
+      "nativeOrderInstruction": "Preserve native menu order exactly. Do not infer skipped or hidden values.",
+      "masterEvidenceRule": "Record a new master video/screenshot and preserve it unchanged. Any extracted image or renamed copy is derivative evidence.",
+      "acceptanceCriteria": [
+        "All visible labels/indices needed for the session are readable.",
+        "The beginning and ending evidence requirements are satisfied.",
+        "No values, counts, ranges, dependencies, or menu paths are inferred from memory.",
+        "The original master file remains unchanged and can be hashed after intake."
+      ],
+      "linkedIssueIDs": [
+        "issue-phase0-env-appearance-editable-later",
+        "issue-phase0-env-archetype",
+        "issue-phase0-env-body-type",
+        "issue-phase0-env-console-model",
+        "issue-phase0-env-console-osversion",
+        "issue-phase0-env-copy-type",
+        "issue-phase0-env-display-model",
+        "issue-phase0-env-ea-account-requirement",
+        "issue-phase0-env-edition",
+        "issue-phase0-env-entitlement-status",
+        "issue-phase0-env-game-version",
+        "issue-phase0-env-handedness",
+        "issue-phase0-env-hdr-state",
+        "issue-phase0-env-height",
+        "issue-phase0-env-online-state",
+        "issue-phase0-env-output-resolution",
+        "issue-phase0-env-patch-version",
+        "issue-phase0-env-player-base-selection",
+        "issue-phase0-env-storefront-region",
+        "issue-phase0-env-weight",
+        "issue-phase0-primary-review-environment-unresolved"
+      ]
+    },
+    {
+      "sessionID": "GFM-CF27-S02",
+      "priority": "P0",
+      "title": "Complete menu hierarchy and canonical creation path",
+      "objective": "Re-record the Road to Glory creation path and prove Appearance, Head & Skin, and Hair menu boundaries without assuming hidden rows.",
+      "startingGameLocation": "College Football 27 main interface before Road to Glory.",
+      "navigationPathWhenKnown": "Road to Glory > setup > journey type > position > QB > Create Player > Player > Appearance > Head & Skin and Hair.",
+      "preconditions": [
+        "Use the same intended RTG Custom/QB research path.",
+        "Do not skip transition screens."
+      ],
+      "constantCharacterSettings": [
+        "Do not change appearance values during the boundary pass."
+      ],
+      "whatToRecord": [
+        "Every meaningful transition to Appearance",
+        "Appearance root",
+        "Head & Skin root",
+        "Hair row/root if accessible",
+        "First and final visible rows for each menu",
+        "Any scroll continuation or lack of continuation"
+      ],
+      "cameraRotationRequirements": [
+        "None; menu labels take priority."
+      ],
+      "pauseInstructions": "Pause 3 seconds on each transition, menu heading, and row before moving.",
+      "beginningEvidence": "Road to Glory entry visible from the main game interface.",
+      "endingEvidence": "Appearance, Head & Skin, Hair, and final visible menu boundaries shown.",
+      "categoriesOrRecordsClosed": [
+        "Creation paths",
+        "Appearance menu hierarchy",
+        "Menu boundary issues"
+      ],
+      "existingCaptureRequestIDs": [
+        "GFM-CAP-001",
+        "GFM-CAP-013"
+      ],
+      "fileNaming": "GFM-CF27-S02-creation-path-menu-boundaries-YYYYMMDD-partNN.mp4",
+      "estimatedDuration": "15-25 minutes",
+      "whatNotToChange": [
+        "Do not infer categories from prior games.",
+        "Do not count thumbnail-only options as selected values."
+      ],
+      "factBoundary": "Menu labels/paths are facts only where they are visible and readable.",
+      "owner": "Wyatt",
+      "status": "OPEN_REQUIRED_CAPTURE",
+      "nativeOrderInstruction": "Preserve native menu order exactly. Do not infer skipped or hidden values.",
+      "masterEvidenceRule": "Record a new master video/screenshot and preserve it unchanged. Any extracted image or renamed copy is derivative evidence.",
+      "acceptanceCriteria": [
+        "All visible labels/indices needed for the session are readable.",
+        "The beginning and ending evidence requirements are satisfied.",
+        "No values, counts, ranges, dependencies, or menu paths are inferred from memory.",
+        "The original master file remains unchanged and can be hashed after intake."
+      ],
+      "linkedIssueIDs": [
+        "issue-phase0-menu-appearance",
+        "issue-phase0-menu-head-skin"
+      ]
+    },
+    {
+      "sessionID": "GFM-CF27-S03",
+      "priority": "P0",
+      "title": "Missing hairstyles and hair colors",
+      "objective": "Open the Hair menu and record directly selected hairstyle and hair-color controls if present.",
+      "startingGameLocation": "Create Player > Player > Appearance > Hair.",
+      "navigationPathWhenKnown": "Appearance > Hair, then child controls visible inside Hair. Specific children are unknown until opened.",
+      "preconditions": [
+        "Use the canonical character setup from the current research path.",
+        "Keep head, skin, body, and facial hair constant unless the Hair menu requires a change."
+      ],
+      "constantCharacterSettings": [
+        "Canonical head",
+        "Canonical skin setting",
+        "No facial hair where supported",
+        "Consistent lighting/framing"
+      ],
+      "whatToRecord": [
+        "Hair menu child controls",
+        "Hairstyle selector if present",
+        "Hair-color selector if present",
+        "First value",
+        "Every selected value",
+        "Final value",
+        "Wrap/no-wrap proof",
+        "Native labels or indices"
+      ],
+      "cameraRotationRequirements": [
+        "Front, left three-quarter, left profile, rear if hair is visible from rear, right profile, right three-quarter for hairstyle values where available"
+      ],
+      "pauseInstructions": "Pause on each selected value until label/index and preview are stable.",
+      "beginningEvidence": "Hair menu title and first child control/value visible.",
+      "endingEvidence": "Final hairstyle and hair-color values, plus boundary/wrap proof, if those controls exist.",
+      "categoriesOrRecordsClosed": [
+        "Hairstyles",
+        "Hair colors",
+        "Hair submenu child controls"
+      ],
+      "existingCaptureRequestIDs": [
+        "GFM-CAP-007",
+        "GFM-CAP-008",
+        "GFM-CAP-009"
+      ],
+      "fileNaming": "GFM-CF27-S03-hair-hairstyles-colors-YYYYMMDD-partNN.mp4",
+      "estimatedDuration": "30-75 minutes depending on unknown counts",
+      "whatNotToChange": [
+        "Do not create expected hairstyle or color counts until boundaries are shown.",
+        "Do not use cultural, ethnic, or lifestyle labels."
+      ],
+      "factBoundary": "Hair controls are suspected/not observed until this session directly opens them.",
+      "owner": "Wyatt",
+      "status": "OPEN_REQUIRED_CAPTURE",
+      "nativeOrderInstruction": "Preserve native menu order exactly. Do not infer skipped or hidden values.",
+      "masterEvidenceRule": "Record a new master video/screenshot and preserve it unchanged. Any extracted image or renamed copy is derivative evidence.",
+      "acceptanceCriteria": [
+        "All visible labels/indices needed for the session are readable.",
+        "The beginning and ending evidence requirements are satisfied.",
+        "No values, counts, ranges, dependencies, or menu paths are inferred from memory.",
+        "The original master file remains unchanged and can be hashed after intake."
+      ],
+      "linkedIssueIDs": [
+        "issue-phase0-env-hair-visible-not-opened"
+      ]
+    },
+    {
+      "sessionID": "GFM-CF27-S04",
+      "priority": "P0",
+      "title": "Missing facial hair and facial-hair colors",
+      "objective": "Record facial-hair style and facial-hair color controls if the Hair menu exposes them.",
+      "startingGameLocation": "Create Player > Player > Appearance > Hair.",
+      "navigationPathWhenKnown": "Appearance > Hair, then facial-hair child controls if visible.",
+      "preconditions": [
+        "Use one canonical head, hairstyle, skin setting, and body setting.",
+        "Confirm None if the game presents it."
+      ],
+      "constantCharacterSettings": [
+        "Canonical head",
+        "Canonical hairstyle",
+        "Canonical skin",
+        "Canonical facial-hair color when style values are captured"
+      ],
+      "whatToRecord": [
+        "Facial-hair style selector if present",
+        "Facial-hair color selector if present",
+        "None option if present",
+        "First/final values",
+        "Wrap/no-wrap proof",
+        "Whether None affects color availability"
+      ],
+      "cameraRotationRequirements": [
+        "Front",
+        "Left three-quarter",
+        "Right three-quarter",
+        "Profile where available"
+      ],
+      "pauseInstructions": "Pause on every selected style/color value until label/index and preview are stable.",
+      "beginningEvidence": "Facial-hair control title or visible absence inside Hair menu.",
+      "endingEvidence": "Final facial-hair style/color boundary proof or direct unavailable evidence.",
+      "categoriesOrRecordsClosed": [
+        "Facial hair",
+        "Facial-hair colors"
+      ],
+      "existingCaptureRequestIDs": [
+        "GFM-CAP-007",
+        "GFM-CAP-010"
+      ],
+      "fileNaming": "GFM-CF27-S04-facial-hair-colors-YYYYMMDD-partNN.mp4",
+      "estimatedDuration": "30-75 minutes depending on unknown counts",
+      "whatNotToChange": [
+        "Do not infer beard coverage from labels alone.",
+        "Do not use cultural, ethnic, lifestyle, or personality labels."
+      ],
+      "factBoundary": "Facial-hair controls remain unobserved unless visible in this session.",
+      "owner": "Wyatt",
+      "status": "OPEN_REQUIRED_CAPTURE",
+      "nativeOrderInstruction": "Preserve native menu order exactly. Do not infer skipped or hidden values.",
+      "masterEvidenceRule": "Record a new master video/screenshot and preserve it unchanged. Any extracted image or renamed copy is derivative evidence.",
+      "acceptanceCriteria": [
+        "All visible labels/indices needed for the session are readable.",
+        "The beginning and ending evidence requirements are satisfied.",
+        "No values, counts, ranges, dependencies, or menu paths are inferred from memory.",
+        "The original master file remains unchanged and can be hashed after intake."
+      ],
+      "linkedIssueIDs": []
+    },
+    {
+      "sessionID": "GFM-CF27-S05",
+      "priority": "P0",
+      "title": "Missing eyebrows and remaining face controls",
+      "objective": "Record any remaining visible face controls, especially eyebrows, mouth, jaw, chin, cheeks, sliders, toggles, and additional presets.",
+      "startingGameLocation": "Create Player > Player > Appearance > Head & Skin.",
+      "navigationPathWhenKnown": "Head & Skin visible controls through Chin; rows after Chin are unknown until boundary evidence proves them.",
+      "preconditions": [
+        "Use canonical character settings.",
+        "Change one control at a time."
+      ],
+      "constantCharacterSettings": [
+        "Canonical head",
+        "Canonical skin",
+        "Canonical hairstyle",
+        "No facial hair where supported",
+        "Constant body/height/weight"
+      ],
+      "whatToRecord": [
+        "Eyebrows if present",
+        "Mouth Shape",
+        "Jaw Shape",
+        "Chin",
+        "Cheeks or additional rows if present",
+        "Any sliders/toggles/presets/colors visible beyond current records"
+      ],
+      "cameraRotationRequirements": [
+        "Front for labels and visible changes",
+        "Three-quarter/profile for nose, jaw, chin, and ear controls where useful"
+      ],
+      "pauseInstructions": "Pause on every control heading and selected value; keep native label/index visible.",
+      "beginningEvidence": "Head & Skin menu title and first control in scope visible.",
+      "endingEvidence": "Final value and boundary/wrap proof for each control; explicit no-more-rows proof where applicable.",
+      "categoriesOrRecordsClosed": [
+        "Eyebrows",
+        "Mouth Shape",
+        "Jaw Shape",
+        "Chin",
+        "Additional sliders/toggles/colors/presets",
+        "Nose",
+        "Ear Shape",
+        "Eye Shape",
+        "Eye Color",
+        "Skin Tone",
+        "Skin Details"
+      ],
+      "existingCaptureRequestIDs": [
+        "GFM-CAP-005",
+        "GFM-CAP-006"
+      ],
+      "fileNaming": "GFM-CF27-S05-face-controls-boundaries-YYYYMMDD-partNN.mp4",
+      "estimatedDuration": "45-90 minutes depending on unknown counts",
+      "whatNotToChange": [
+        "Do not infer intermediate values.",
+        "Do not describe controls with subjective identity, attractiveness, or ethnicity labels."
+      ],
+      "factBoundary": "Counts and ranges are unknown until first/final values and wrap/no-wrap proof are recorded.",
+      "owner": "Wyatt",
+      "status": "OPEN_REQUIRED_CAPTURE",
+      "nativeOrderInstruction": "Preserve native menu order exactly. Do not infer skipped or hidden values.",
+      "masterEvidenceRule": "Record a new master video/screenshot and preserve it unchanged. Any extracted image or renamed copy is derivative evidence.",
+      "acceptanceCriteria": [
+        "All visible labels/indices needed for the session are readable.",
+        "The beginning and ending evidence requirements are satisfied.",
+        "No values, counts, ranges, dependencies, or menu paths are inferred from memory.",
+        "The original master file remains unchanged and can be hashed after intake."
+      ],
+      "linkedIssueIDs": [
+        "issue-phase0-menu-chin",
+        "issue-phase0-menu-hair",
+        "issue-phase0-menu-jaw-shape",
+        "issue-phase0-menu-mouth-shape",
+        "issue-phase0-primary-review-category-incomplete"
+      ]
+    },
+    {
+      "sessionID": "GFM-CF27-S06",
+      "priority": "P1",
+      "title": "Duplicate and ambiguity resolution",
+      "objective": "Record focused evidence for the five duplicate-review candidates without merging records prematurely.",
+      "startingGameLocation": "Relevant selector for each duplicate-review candidate.",
+      "navigationPathWhenKnown": "Head Template for Face 12 and Face 16; Skin Tone for Skin Tone 10; Nose for Aquiline; Ear Shape for None.",
+      "preconditions": [
+        "Keep the candidate value label/index visible.",
+        "Preserve both old and new observations in notes."
+      ],
+      "constantCharacterSettings": [
+        "Same canonical slate used for the category capture"
+      ],
+      "whatToRecord": [
+        "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002: None at Ear Shape",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_012: Face 12 at Heads",
+        "CF27_XBOXUNKNOWN_RTG_HEAD_016: Face 16 at Heads",
+        "CF27_XBOXUNKNOWN_RTG_NOSE_005: Aquiline at Nose",
+        "CF27_XBOXUNKNOWN_RTG_SKINTONE_010: Skin Tone 10 at Skin Tone"
+      ],
+      "cameraRotationRequirements": [
+        "Menu proof first; visual view only where needed to resolve association/continuity."
+      ],
+      "pauseInstructions": "Pause before, on, and after each duplicate candidate to show neighboring selected values.",
+      "beginningEvidence": "Neighboring option before the duplicate candidate is visible.",
+      "endingEvidence": "Neighboring option after the duplicate candidate is visible.",
+      "categoriesOrRecordsClosed": [
+        "Duplicate review records"
+      ],
+      "fileNaming": "GFM-CF27-S06-duplicate-review-YYYYMMDD-partNN.mp4",
+      "estimatedDuration": "15-30 minutes",
+      "whatNotToChange": [
+        "Do not delete duplicates.",
+        "Do not silently merge visually similar options.",
+        "Do not mark verified."
+      ],
+      "factBoundary": "This session can support primary duplicate resolution only; second verification is still required.",
+      "owner": "Wyatt",
+      "status": "OPEN_REQUIRED_CAPTURE",
+      "nativeOrderInstruction": "Preserve native menu order exactly. Do not infer skipped or hidden values.",
+      "masterEvidenceRule": "Record a new master video/screenshot and preserve it unchanged. Any extracted image or renamed copy is derivative evidence.",
+      "acceptanceCriteria": [
+        "All visible labels/indices needed for the session are readable.",
+        "The beginning and ending evidence requirements are satisfied.",
+        "No values, counts, ranges, dependencies, or menu paths are inferred from memory.",
+        "The original master file remains unchanged and can be hashed after intake."
+      ],
+      "linkedIssueIDs": [
+        "issue-phase0-primary-review-duplicate-observations"
+      ]
+    },
+    {
+      "sessionID": "GFM-CF27-S07",
+      "priority": "P1",
+      "title": "Required recaptures and weak production evidence",
+      "objective": "Recapture currently observed categories under standardized, stable conditions for future production comparison.",
+      "startingGameLocation": "Create Player > Player > Appearance > Head & Skin.",
+      "navigationPathWhenKnown": "Current observed categories: Head Template, Skin Tone, Skin Details, Eye Shape, Eye Color, Nose, Ear Shape.",
+      "preconditions": [
+        "Run after environment and canonical slate are documented.",
+        "Use consistent zoom, lighting, body, head, skin, hair, and facial-hair settings."
+      ],
+      "constantCharacterSettings": [
+        "Canonical slate from GFM-CAP-003",
+        "Eye black removed/absent where supported",
+        "Hair and facial hair controlled where supported"
+      ],
+      "whatToRecord": [
+        "Stable front/menu evidence for every currently observed option",
+        "Required side/three-quarter/profile views where useful",
+        "Loading completion before each representative frame",
+        "Obstructions and missing views as explicit notes"
+      ],
+      "cameraRotationRequirements": [
+        "MENU",
+        "FRONT",
+        "LEFT_3Q",
+        "LEFT_PROFILE",
+        "RIGHT_3Q",
+        "RIGHT_PROFILE",
+        "REAR_IF_AVAILABLE"
+      ],
+      "pauseInstructions": "Wait for loading/animation to finish before rotating or changing options.",
+      "beginningEvidence": "Canonical slate visible before category recapture begins.",
+      "endingEvidence": "Final recaptured category value and completion slate visible.",
+      "categoriesOrRecordsClosed": [
+        "Production-standard imagery gaps",
+        "Current captured category recaptures"
+      ],
+      "fileNaming": "GFM-CF27-S07-standardized-recaptures-YYYYMMDD-partNN.mp4",
+      "estimatedDuration": "60-120 minutes depending on category counts",
+      "whatNotToChange": [
+        "Do not reject current footage for menu/order evidence.",
+        "Do not hide missing views.",
+        "Do not alter game imagery."
+      ],
+      "factBoundary": "This creates better primary evidence but does not create second verification or production approval.",
+      "owner": "Wyatt",
+      "status": "OPEN_REQUIRED_CAPTURE",
+      "nativeOrderInstruction": "Preserve native menu order exactly. Do not infer skipped or hidden values.",
+      "masterEvidenceRule": "Record a new master video/screenshot and preserve it unchanged. Any extracted image or renamed copy is derivative evidence.",
+      "acceptanceCriteria": [
+        "All visible labels/indices needed for the session are readable.",
+        "The beginning and ending evidence requirements are satisfied.",
+        "No values, counts, ranges, dependencies, or menu paths are inferred from memory.",
+        "The original master file remains unchanged and can be hashed after intake."
+      ],
+      "linkedIssueIDs": [
+        "issue-phase0-appearance-control-ear-shape-recapture",
+        "issue-phase0-appearance-control-eye-color-recapture",
+        "issue-phase0-appearance-control-eye-shape-recapture",
+        "issue-phase0-appearance-control-nose-recapture",
+        "issue-phase0-appearance-control-skin-details-recapture",
+        "issue-phase0-appearance-control-skin-tone-recapture",
+        "issue-phase0-wyatt-next-capture-plan"
+      ]
+    },
+    {
+      "sessionID": "GFM-CF27-S08",
+      "priority": "P2",
+      "title": "Dependency checks",
+      "objective": "Change one variable at a time to determine whether option counts, order, labels, geometry, or availability change.",
+      "startingGameLocation": "Known stable creation path and relevant Appearance selector.",
+      "navigationPathWhenKnown": "Use the verified canonical path after Sessions 1-5 establish it.",
+      "preconditions": [
+        "Run after baseline count/order captures.",
+        "Record baseline before changing a variable."
+      ],
+      "constantCharacterSettings": [
+        "Change exactly one tested variable when practical."
+      ],
+      "whatToRecord": [
+        "Position",
+        "Archetype",
+        "Height",
+        "Weight",
+        "Body type",
+        "Selected head",
+        "Skin tone",
+        "Hairstyle",
+        "Facial hair",
+        "Online/offline",
+        "EA account state",
+        "Edition/entitlement",
+        "Platform/patch where feasible"
+      ],
+      "cameraRotationRequirements": [
+        "Menu/count evidence; visual evidence only where a dependency changes rendering."
+      ],
+      "pauseInstructions": "Pause on baseline, changed variable, and affected selector before recording result.",
+      "beginningEvidence": "Baseline environment and selector count/order shown.",
+      "endingEvidence": "Changed-variable result and whether count/order/label/rendering changed.",
+      "categoriesOrRecordsClosed": [
+        "Dependency tests",
+        "Patch/version compatibility blockers"
+      ],
+      "fileNaming": "GFM-CF27-S08-dependency-checks-YYYYMMDD-partNN.mp4",
+      "estimatedDuration": "30-90 minutes; can wait until primary catalog evidence is complete",
+      "whatNotToChange": [
+        "Do not mark unexecuted tests passed.",
+        "Do not combine multiple variable changes in one conclusion."
+      ],
+      "factBoundary": "Dependency status remains unknown for tests not directly executed.",
+      "owner": "Wyatt",
+      "status": "OPEN_REQUIRED_CAPTURE",
+      "nativeOrderInstruction": "Preserve native menu order exactly. Do not infer skipped or hidden values.",
+      "masterEvidenceRule": "Record a new master video/screenshot and preserve it unchanged. Any extracted image or renamed copy is derivative evidence.",
+      "acceptanceCriteria": [
+        "All visible labels/indices needed for the session are readable.",
+        "The beginning and ending evidence requirements are satisfied.",
+        "No values, counts, ranges, dependencies, or menu paths are inferred from memory.",
+        "The original master file remains unchanged and can be hashed after intake."
+      ],
+      "linkedIssueIDs": [
+        "issue-phase0-menu-ear-shape",
+        "issue-phase0-menu-eye-color",
+        "issue-phase0-menu-eye-shape",
+        "issue-phase0-menu-head-template",
+        "issue-phase0-menu-nose",
+        "issue-phase0-menu-skin-details",
+        "issue-phase0-menu-skin-tone"
+      ]
+    }
+  ],
+  "missingCategoriesCovered": [
+    {
+      "category": "Hairstyles",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "currentObservedCandidateCount": 0,
+      "expectedRecordCount": null,
+      "expectedRecordCountReason": "Unknown until direct selector boundary evidence is recorded.",
+      "captureSessionIDs": [
+        "GFM-CF27-S03"
+      ]
+    },
+    {
+      "category": "Hair colors",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "currentObservedCandidateCount": 0,
+      "expectedRecordCount": null,
+      "expectedRecordCountReason": "Unknown until direct selector boundary evidence is recorded.",
+      "captureSessionIDs": [
+        "GFM-CF27-S03"
+      ]
+    },
+    {
+      "category": "Facial hair",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "currentObservedCandidateCount": 0,
+      "expectedRecordCount": null,
+      "expectedRecordCountReason": "Unknown until direct selector boundary evidence is recorded.",
+      "captureSessionIDs": [
+        "GFM-CF27-S04"
+      ]
+    },
+    {
+      "category": "Facial-hair colors",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "currentObservedCandidateCount": 0,
+      "expectedRecordCount": null,
+      "expectedRecordCountReason": "Unknown until direct selector boundary evidence is recorded.",
+      "captureSessionIDs": [
+        "GFM-CF27-S04"
+      ]
+    },
+    {
+      "category": "Eyebrows",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "currentObservedCandidateCount": 0,
+      "expectedRecordCount": null,
+      "expectedRecordCountReason": "Unknown until direct selector boundary evidence is recorded.",
+      "captureSessionIDs": [
+        "GFM-CF27-S05"
+      ]
+    },
+    {
+      "category": "Body/height/weight/physique",
+      "classification": "SUSPECTED_NOT_OBSERVED",
+      "captureStatus": "NOT_CAPTURED",
+      "currentObservedCandidateCount": 0,
+      "expectedRecordCount": null,
+      "expectedRecordCountReason": "Unknown until direct selector boundary evidence is recorded.",
+      "captureSessionIDs": []
+    },
+    {
+      "category": "Additional Appearance rows beyond visible Head & Skin and Hair",
+      "classification": "UNKNOWN_MENU_NOT_FULLY_INSPECTED",
+      "captureStatus": "UNKNOWN_NOT_FULLY_INSPECTED",
+      "currentObservedCandidateCount": 0,
+      "expectedRecordCount": null,
+      "expectedRecordCountReason": "Unknown until direct selector boundary evidence is recorded.",
+      "captureSessionIDs": []
+    },
+    {
+      "category": "Additional Head & Skin rows beyond visible Chin",
+      "classification": "UNKNOWN_MENU_NOT_FULLY_INSPECTED",
+      "captureStatus": "UNKNOWN_NOT_FULLY_INSPECTED",
+      "currentObservedCandidateCount": 0,
+      "expectedRecordCount": null,
+      "expectedRecordCountReason": "Unknown until direct selector boundary evidence is recorded.",
+      "captureSessionIDs": [
+        "GFM-CF27-S05"
+      ]
+    },
+    {
+      "category": "Hair submenu child controls",
+      "classification": "UNKNOWN_MENU_NOT_FULLY_INSPECTED",
+      "captureStatus": "UNKNOWN_NOT_FULLY_INSPECTED",
+      "currentObservedCandidateCount": 0,
+      "expectedRecordCount": null,
+      "expectedRecordCountReason": "Unknown until direct selector boundary evidence is recorded.",
+      "captureSessionIDs": [
+        "GFM-CF27-S03"
+      ]
+    }
+  ],
+  "duplicateReviewPlan": {
+    "duplicateReviewRequiredCount": 5,
+    "candidateIDs": [
+      "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+      "CF27_XBOXUNKNOWN_RTG_NOSE_005",
+      "CF27_XBOXUNKNOWN_RTG_SKINTONE_010"
+    ],
+    "captureSessionID": "GFM-CF27-S06",
+    "rule": "Preserve both observations and record direct continuity/duplicate-resolution evidence. Do not merge duplicate-looking options from video alone."
+  },
+  "environmentEvidencePlan": {
+    "captureSessionID": "GFM-CF27-S01",
+    "unresolvedFields": [
+      "gameVersion",
+      "patchVersion",
+      "consoleModel",
+      "consoleOSVersion",
+      "edition",
+      "storefrontRegion",
+      "copyType",
+      "entitlementStatus"
+    ],
+    "requestedEvidence": [
+      "Game title screen",
+      "Console game info screen",
+      "Executable/version/update screen when available",
+      "Xbox platform and console model where visible without exposing private account or serial details",
+      "Edition, region, online state, EA account requirement, and entitlement state only where visible",
+      "Display output, HDR, and capture conditions where visible",
+      "Mode, creation path, position, archetype, handedness, height, weight, and body settings where visible"
+    ],
+    "rule": "Leave any field null when the recording cannot show it safely and directly."
+  },
+  "intakeInstructions": {
+    "approvedPendingFolder": "data/phase-zero/intake/pending/",
+    "commandAfterCopy": "npm run phase-zero:intake -- --path data/phase-zero/intake/pending",
+    "preserveOriginalFilename": true,
+    "doNotRenameMasters": true,
+    "doNotEditVideos": true,
+    "acceptedExtensions": [
+      "mp4",
+      "mov",
+      "png",
+      "jpg",
+      "jpeg"
+    ],
+    "namingPattern": "Use the session filename pattern exactly, with YYYYMMDD and partNN."
+  }
+}

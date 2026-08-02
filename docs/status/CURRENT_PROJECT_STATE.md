@@ -185,6 +185,8 @@ The manual matching study must not begin until a verified production catalog and
 
 ### Wyatt Must Provide
 
+- First immediate recording: `GFM-CF27-S01-environment-game-version-YYYYMMDD-partNN.mp4`, following `docs/phase-zero/CF27_CAPTURE_CLOSURE_PACKAGE.md`.
+- Owner capture closure package: `data/phase-zero/capture-closure/owner-capture-plan.json`, `data/phase-zero/capture-closure/owner-capture-plan.csv`, and `data/phase-zero/capture-closure/issue-to-capture-traceability.json`.
 - Additional Xbox captures listed in `docs/phase-zero/WYATT_RECAPTURE_INSTRUCTIONS.md`.
 - Missing environment/version evidence, including visible game executable version, patch/update state, console model where visible, and reproducible Road to Glory creation context.
 - Complete Hair submenu evidence if visible, including hairstyle, hair color, facial-hair, and facial-hair-color controls.
@@ -235,6 +237,7 @@ Hard dependencies:
 The next milestone remains completing the Phase 0 evidence path from primary review to verifier-ready package:
 
 1. Wyatt records the required recapture set.
+   - Start with the environment/version recording from `GFM-CF27-S01`; it is the first session in the capture closure package and blocks reproducible production metadata.
 2. Codex ingests the new evidence and updates research candidates.
 3. Codex regenerates the research package and primary-review status.
 4. A second human verifier independently reviews counts, order, evidence, and discrepancies.

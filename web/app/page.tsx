@@ -12,6 +12,7 @@ import { CapturePreparation } from "@/features/capture/CapturePreparation";
 import { GuidedCaptureFlow } from "@/features/capture/GuidedCaptureFlow";
 import { GameCatalogStatus } from "@/features/catalog/GameCatalogStatus";
 import { PricingScaffold } from "@/features/commerce/PricingScaffold";
+import { Fc26FaceMatchingMvp } from "@/features/fc26/Fc26FaceMatchingMvp";
 import { ProfileReview } from "@/features/profile/ProfileReview";
 import { ConsentPanel } from "@/features/privacy/ConsentPanel";
 import { PrivacyCenter } from "@/features/privacy/PrivacyCenter";
@@ -977,6 +978,8 @@ export default function HomePage() {
         );
       case "catalog":
         return <GameCatalogStatus />;
+      case "fc26":
+        return <Fc26FaceMatchingMvp />;
       case "audit":
         return isDevelopment && DevelopmentCatalogAuditInspector ? <DevelopmentCatalogAuditInspector manifest={productionCatalogManifest} /> : <GameCatalogStatus />;
       case "evidence-gallery":
@@ -1174,6 +1177,13 @@ function Dashboard({
       body: CATALOG_UNAVAILABLE_MESSAGE,
       action: "View",
       target: "catalog"
+    },
+    {
+      title: "EA SPORTS FC 26 recipe MVP",
+      body: "Upload three reference photos, generate a local human-in-the-loop recipe, and compare FC 26 screenshots without mixing College Football data.",
+      action: "Open FC 26",
+      target: "fc26",
+      tone: "info"
     },
     {
       title: "Saved builds",

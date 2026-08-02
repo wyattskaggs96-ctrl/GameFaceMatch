@@ -123,6 +123,17 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
   });
 
+  test("loads the FC 26 recipe workflow independently from College Football catalog results", async ({ page }) => {
+    await page.goto("/#fc26");
+
+    await expect(page.getByRole("heading", { name: "Build an FC 26 face recipe" })).toBeVisible();
+    await expect(page.getByText("EA SPORTS FC 26").first()).toBeVisible();
+    await expect(page.getByText("Research-only FC 26 workflow")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Observed FC 26 controls" })).toBeVisible();
+    await expect(page.getByText("EA SPORTS College Football 27").first()).toHaveCount(0);
+    await expect(page.getByText("Verified College Football 27 catalog not loaded.")).toHaveCount(0);
+  });
+
   test("keeps development-only audit and fixture approval paths out of the production app", async ({ page }) => {
     await page.goto("/#phase-0");
 

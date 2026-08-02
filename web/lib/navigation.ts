@@ -41,6 +41,7 @@ export const HARDENED_E2E_FLOW = [
 export const APP_SCREENS = [
   ...KEY_NAVIGATION_FLOW,
   "catalog",
+  "fc26",
   "saved",
   "refinement",
   "pricing",
@@ -70,6 +71,7 @@ export interface NavigationItem {
 export const PRIMARY_NAV_ITEMS: NavigationItem[] = [
   { id: "home", label: "Home" },
   { id: "start", label: "Start match", shortLabel: "Start" },
+  { id: "fc26", label: "FC 26 recipe", shortLabel: "FC26" },
   { id: "catalog", label: "Catalog" },
   { id: "saved", label: "Saved builds", shortLabel: "Saved" },
   { id: "privacy-center", label: "Privacy" },

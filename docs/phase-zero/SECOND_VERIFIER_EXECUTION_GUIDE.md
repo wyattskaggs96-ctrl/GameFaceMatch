@@ -47,6 +47,8 @@ After blind counts are complete, open:
 
 Check the listed evidence, source timestamps, native order, front-view availability, sampled secondary angles, duplicates, and exceptions.
 
+`required_import_targets.csv` is the machine-readable checklist used by the import validator. Every row in `verifier_import_template.csv` corresponds to one required target and scope from that file. Do not delete rows. If a target cannot be verified, keep the row and use the appropriate unresolved status with notes and evidence references.
+
 ## Secondary-Angle Sample
 
 Method: `deterministic-sha256-environment-verifier-catalog-category-quartile-v1`
@@ -68,6 +70,8 @@ The tool combines environment ID, verifier ID, catalog version, category, and ca
 ## Submit Results
 
 Fill `verifier_import_template.csv` and create `submission_metadata.json` under `data/phase-zero/second-verifier-submissions/`.
+
+The submission metadata sign-off must confirm that independent counts, environment review, front-view checks, the deterministic secondary-angle sample, duplicate/exception review, evidence review, and discrepancy logging are complete. Missing sign-off blocks import.
 
 Then Codex can run:
 

@@ -169,6 +169,7 @@ export function validateSecondVerifierExecutionPackage({ packageData, files, can
     `${defaultExecutionPackageDirectory}/discrepancy_form.csv`,
     `${defaultExecutionPackageDirectory}/sign_off_form.csv`,
     `${defaultExecutionPackageDirectory}/verifier_import_template.csv`,
+    `${defaultExecutionPackageDirectory}/required_import_targets.csv`,
     `${defaultExecutionPackageDirectory}/verifier_dashboard.json`
   ]) {
     if (!paths.has(requiredPath)) errors.push(issue("missingExecutionPackageFile", `${requiredPath} is missing.`));
@@ -264,6 +265,7 @@ function createPackageFiles({ packageData, assignment, candidates, sample, dupli
     package_id: packageData.packageID,
     phase: blindPhase,
     worksheet_row: String(index + 1),
+    target_stable_id: stringValue(row.stableMenuID ?? `menu-row-${index + 1}`),
     menu_area: stringValue(row.menu_area ?? row.area ?? row.target_label),
     displayed_label_to_find: stringValue(row.displayed_label_to_find ?? row.displayLabel ?? row.label),
     verifier_observed_label: "",
@@ -346,37 +348,24 @@ function createPackageFiles({ packageData, assignment, candidates, sample, dupli
     completed_record_review: "",
     completed_front_view_checks: "",
     completed_secondary_angle_sample: "",
+    completed_duplicate_exception_review: "",
     logged_all_disagreements: "",
     no_primary_counts_used_before_blind_counts: "",
     signed_by: "",
     signed_at: "",
     notes: ""
   }];
-  const importRows = [{
-    assignment_id: stringValue(assignment.assignmentID),
-    verifier_id: "",
-    target_stable_id: "",
-    category: "",
-    verification_scope: "",
-    verifier_native_order: "",
-    verifier_native_label: "",
-    verifier_count: "",
-    evidence_exists: "",
-    front_view_exists: "",
-    secondary_angle_sample_included: "",
-    native_order_status: "notChecked",
-    record_fields_status: "notChecked",
-    evidence_files_status: "notChecked",
-    front_view_status: "notChecked",
-    secondary_angle_status: "notChecked",
-    dependency_status: "notApplicable",
-    exception_status: "notApplicable",
-    final_disposition: "NOT_VERIFIED",
-    discrepancy_type: "none",
-    resolution_action: "",
-    resolution_evidence_ids: "",
-    notes: ""
-  }];
+  const requiredImportTargets = createRequiredImportTargets({
+    countRows,
+    menuRows,
+    candidates,
+    sample,
+    duplicateRows
+  });
+  const importRows = createVerifierImportRows({
+    assignmentID: stringValue(assignment.assignmentID),
+    requiredImportTargets
+  });
   const files = [
     jsonFile("second_verifier_execution_package.json", packageData),
     jsonFile("environment_worksheet.json", { phase: blindPhase, rows: environmentRows }),
@@ -401,6 +390,8 @@ function createPackageFiles({ packageData, assignment, candidates, sample, dupli
     csvFile("sign_off_form.csv", signOffRows),
     jsonFile("verifier_import_template.json", { rows: importRows }),
     csvFile("verifier_import_template.csv", importRows),
+    jsonFile("required_import_targets.json", { phase: postCountPhase, rows: requiredImportTargets }),
+    csvFile("required_import_targets.csv", requiredImportTargets),
     jsonFile("verifier_dashboard.json", dashboard),
     csvFile("verifier_dashboard.csv", [dashboard]),
     jsonFile("evidence_reference_index.json", createEvidenceReferenceIndex(evidenceManifest, candidates)),
@@ -408,6 +399,88 @@ function createPackageFiles({ packageData, assignment, candidates, sample, dupli
     markdownFile("README.md", formatPackageReadme(packageData))
   ];
   return files.map((file) => ({ ...file, relativePath: `${defaultExecutionPackageDirectory}/${file.fileName}` }));
+}
+
+function createRequiredImportTargets({ countRows, menuRows, candidates, sample, duplicateRows }) {
+  const sampleIDs = new Set(sample.rows.map((row) => row.candidateID));
+  const duplicateIDs = new Set(duplicateRows.map((row) => row.candidateID));
+  return [
+    ...countRows.map((row) => ({
+      target_stable_id: row.target_id,
+      category: row.target_label,
+      verification_scope: "independentCount",
+      requirement_type: "MENU_COUNT",
+      requires_count: true,
+      requires_native_order: false,
+      requires_evidence_reference: true,
+      requires_front_view: false,
+      requires_secondary_angle_sample: false,
+      requires_duplicate_exception_review: false,
+      requires_production_candidate_review: false,
+      blind_phase_required: true,
+      notes: "Verifier must independently count this target before opening primary comparison worksheets."
+    })),
+    ...menuRows.map((row) => ({
+      target_stable_id: row.target_stable_id,
+      category: row.displayed_label_to_find || row.menu_area,
+      verification_scope: "menuMap",
+      requirement_type: "MENU_MAP",
+      requires_count: false,
+      requires_native_order: true,
+      requires_evidence_reference: true,
+      requires_front_view: false,
+      requires_secondary_angle_sample: false,
+      requires_duplicate_exception_review: false,
+      requires_production_candidate_review: false,
+      blind_phase_required: true,
+      notes: "Verifier must independently confirm the menu row, parent, order, and boundary state."
+    })),
+    ...candidates.map((candidate) => ({
+      target_stable_id: candidate.candidateID,
+      category: candidate.category,
+      verification_scope: "catalogItem",
+      requirement_type: "CANDIDATE_RECORD",
+      requires_count: false,
+      requires_native_order: candidate.nativeOrder !== null,
+      requires_evidence_reference: true,
+      requires_front_view: true,
+      requires_secondary_angle_sample: sampleIDs.has(candidate.candidateID),
+      requires_duplicate_exception_review: duplicateIDs.has(candidate.candidateID),
+      requires_production_candidate_review: false,
+      blind_phase_required: false,
+      notes: duplicateIDs.has(candidate.candidateID)
+        ? "Duplicate or ambiguous record requires explicit exception review."
+        : "Record-level review happens only after independent counts are complete."
+    }))
+  ];
+}
+
+function createVerifierImportRows({ assignmentID, requiredImportTargets }) {
+  return requiredImportTargets.map((target) => ({
+    assignment_id: assignmentID,
+    verifier_id: "",
+    target_stable_id: target.target_stable_id,
+    category: target.category,
+    verification_scope: target.verification_scope,
+    verifier_native_order: "",
+    verifier_native_label: "",
+    verifier_count: "",
+    evidence_exists: "",
+    front_view_exists: target.requires_front_view ? "" : "notApplicable",
+    secondary_angle_sample_included: target.requires_secondary_angle_sample ? "" : "notApplicable",
+    native_order_status: target.requires_native_order ? "notChecked" : "notApplicable",
+    record_fields_status: "notChecked",
+    evidence_files_status: "notChecked",
+    front_view_status: target.requires_front_view ? "notChecked" : "notApplicable",
+    secondary_angle_status: target.requires_secondary_angle_sample ? "notChecked" : "notApplicable",
+    dependency_status: "notApplicable",
+    exception_status: target.requires_duplicate_exception_review ? "notChecked" : "notApplicable",
+    final_disposition: "NOT_VERIFIED",
+    discrepancy_type: "none",
+    resolution_action: "",
+    resolution_evidence_ids: "",
+    notes: target.notes
+  }));
 }
 
 function normalizeCandidates(primaryCandidates, queueRecords) {
@@ -484,15 +557,15 @@ function createVerifierDashboard({ candidates, sample, coverage, blockedCandidat
 function createEvidenceReferenceIndex(evidenceManifest, candidates) {
   const wantedEvidence = new Set(candidates.flatMap((candidate) => candidate.evidenceIDs));
   const entries = (evidenceManifest.entries ?? [])
-    .filter((entry) => wantedEvidence.has(entry.stableEvidenceID))
+    .filter((entry) => wantedEvidence.has(entry.stableEvidenceID ?? entry.evidence_id ?? entry.evidenceID))
     .map((entry) => ({
-      evidenceID: entry.stableEvidenceID,
-      relativePath: entry.relativePath,
-      fileRole: entry.fileRole,
-      sourceVideoID: entry.sourceVideoID,
+      evidenceID: entry.stableEvidenceID ?? entry.evidence_id ?? entry.evidenceID,
+      relativePath: entry.relativePath ?? entry.relative_path,
+      fileRole: entry.fileRole ?? entry.file_role,
+      sourceVideoID: entry.sourceVideoID ?? entry.video_id,
       timestamp: entry.timestamp,
       sha256: entry.sha256,
-      verificationStatus: entry.verificationStatus
+      verificationStatus: entry.verificationStatus ?? entry.verification_state
     }));
   return {
     schemaVersion: `${CF27_SECOND_VERIFIER_EXECUTION_PACKAGE_SCHEMA_VERSION}-evidence-index`,
@@ -515,6 +588,7 @@ function createPackageContents() {
     "discrepancy_form.csv/json",
     "sign_off_form.csv/json",
     "verifier_import_template.csv/json",
+    "required_import_targets.csv/json",
     "verifier_dashboard.csv/json"
   ];
 }
@@ -593,6 +667,8 @@ After blind counts are complete, open:
 
 Check the listed evidence, source timestamps, native order, front-view availability, sampled secondary angles, duplicates, and exceptions.
 
+\`required_import_targets.csv\` is the machine-readable checklist used by the import validator. Every row in \`verifier_import_template.csv\` corresponds to one required target and scope from that file. Do not delete rows. If a target cannot be verified, keep the row and use the appropriate unresolved status with notes and evidence references.
+
 ## Secondary-Angle Sample
 
 Method: \`${packageData.samplingMethod.methodID}\`
@@ -606,6 +682,8 @@ ${allowedSecondVerifierStatuses.map((status) => `- \`${status}\``).join("\n")}
 ## Submit Results
 
 Fill \`verifier_import_template.csv\` and create \`submission_metadata.json\` under \`data/phase-zero/second-verifier-submissions/\`.
+
+The submission metadata sign-off must confirm that independent counts, environment review, front-view checks, the deterministic secondary-angle sample, duplicate/exception review, evidence review, and discrepancy logging are complete. Missing sign-off blocks import.
 
 Then Codex can run:
 

@@ -71,10 +71,12 @@ export function buildSecondVerifierResultsIntake({
 } = {}) {
   const normalizedRoot = path.resolve(root);
   const assignment = readJSON(path.join(normalizedRoot, "data/phase-zero/verification_assignment.json"));
+  const primaryReview = readJSON(path.join(normalizedRoot, "data/phase-zero/primary_review_status.json"));
   const primaryEnvironment = readJSON(path.join(normalizedRoot, "data/phase-zero/environment_manifest.research.json"));
   const menuMap = readJSON(path.join(normalizedRoot, "data/phase-zero/menu_map.research.json"));
   const heads = readJSON(path.join(normalizedRoot, "data/phase-zero/heads.research.json"));
   const attributes = readJSON(path.join(normalizedRoot, "data/phase-zero/additional_attributes.research.json"));
+  const requiredImportTargets = readOptionalJSON(path.join(normalizedRoot, "data/phase-zero/second-verifier-execution-package/required_import_targets.json"))?.rows ?? [];
 
   const errors = [];
   const warnings = [];
@@ -84,7 +86,7 @@ export function buildSecondVerifierResultsIntake({
   const parsed = parseResultsCSV(resultsCSV ?? "");
   errors.push(...parsed.errors);
   warnings.push(...parsed.warnings);
-  const targetIndex = createPrimaryTargetIndex({ assignment, menuMap, heads, attributes });
+  const targetIndex = createPrimaryTargetIndex({ assignment, menuMap, heads, attributes, primaryReview });
   const assignmentID = stringValue(assignment.assignmentID);
   const expectedVerifierID = stringValue(metadata.verifierID);
   const records = [];
@@ -122,6 +124,11 @@ export function buildSecondVerifierResultsIntake({
       importedAt
     }));
   });
+  errors.push(...validateRequiredCoverage({
+    rows: parsed.rows,
+    requiredImportTargets,
+    targetIndex
+  }));
 
   const metadataDiscrepancies = compareEnvironment(metadata, primaryEnvironment, importedAt);
   discrepancies.push(...metadataDiscrepancies);
@@ -281,14 +288,53 @@ function validateResultRowShape(row, rowNumber, errors, warnings) {
   if (!yes(row.evidence_exists)) warnings.push(issue("rowMissingEvidence", `Row ${rowNumber} says evidence is not present.`, row.target_stable_id));
 }
 
+function validateRequiredCoverage({ rows, requiredImportTargets, targetIndex }) {
+  const errors = [];
+  if (!Array.isArray(requiredImportTargets) || requiredImportTargets.length === 0) {
+    errors.push(issue("missingRequiredImportTargets", "Second-verifier execution package required_import_targets.json is missing or empty."));
+    return errors;
+  }
+  const rowByTargetAndScope = new Map(rows.map((row) => [`${row.target_stable_id}|${row.verification_scope}`, row]));
+  for (const target of requiredImportTargets) {
+    const key = `${target.target_stable_id}|${target.verification_scope}`;
+    const row = rowByTargetAndScope.get(key);
+    if (!row) {
+      errors.push(issue("missingRequiredVerificationTarget", `Missing required verifier row for ${key}.`, target.target_stable_id));
+      continue;
+    }
+    if (!targetIndex.has(target.target_stable_id)) {
+      errors.push(issue("unknownRequiredVerificationTarget", `Required verifier target ${target.target_stable_id} is not present in the primary target index.`, target.target_stable_id));
+    }
+    if (target.requires_count && !hasUsableText(row.verifier_count)) {
+      errors.push(issue("missingRequiredCountCompletion", `Required count target ${target.target_stable_id} is missing verifier_count.`, target.target_stable_id));
+    }
+    if (target.requires_native_order && (!hasUsableText(row.verifier_native_order) || row.native_order_status === "notChecked")) {
+      errors.push(issue("missingNativeOrderCompletion", `Required native-order target ${target.target_stable_id} is incomplete.`, target.target_stable_id));
+    }
+    if (target.requires_evidence_reference && (!yes(row.evidence_exists) || !hasUsableText(row.resolution_evidence_ids))) {
+      errors.push(issue("missingEvidenceReferenceCompletion", `Required target ${target.target_stable_id} lacks evidence_exists=yes and resolution_evidence_ids.`, target.target_stable_id));
+    }
+    if (target.requires_front_view && (!yes(row.front_view_exists) || row.front_view_status === "notChecked")) {
+      errors.push(issue("missingFrontViewCompletion", `Required front-view target ${target.target_stable_id} is incomplete.`, target.target_stable_id));
+    }
+    if (target.requires_secondary_angle_sample && (!yes(row.secondary_angle_sample_included) || row.secondary_angle_status === "notChecked")) {
+      errors.push(issue("missingSecondaryAngleSampleCompletion", `Required secondary-angle sample ${target.target_stable_id} is incomplete.`, target.target_stable_id));
+    }
+    if (target.requires_duplicate_exception_review && row.exception_status === "notChecked") {
+      errors.push(issue("duplicateReviewIncomplete", `Duplicate or ambiguous target ${target.target_stable_id} requires explicit exception_status.`, target.target_stable_id));
+    }
+    if (target.requires_production_candidate_review && row.final_disposition === "NOT_VERIFIED") {
+      errors.push(issue("missingProductionCandidateCompletion", `Production-candidate target ${target.target_stable_id} was not completed.`, target.target_stable_id));
+    }
+  }
+  return errors;
+}
+
 function requiresIndependentCount(row) {
   const target = stringValue(row.target_stable_id).toLowerCase();
   const scope = stringValue(row.verification_scope).toLowerCase();
   return target.startsWith("count-") ||
-    scope.includes("count") ||
-    scope === "menumap" ||
-    scope === "menu_map" ||
-    scope === "native_order";
+    scope.includes("count");
 }
 
 function compareVerifierRowToPrimary({ row, rowNumber, target, metadata, importedAt }) {
@@ -351,7 +397,7 @@ function compareVerifierRowToPrimary({ row, rowNumber, target, metadata, importe
       }));
     }
   }
-  if (!yes(row.evidence_exists) || !yes(row.front_view_exists) || !yes(row.secondary_angle_sample_included)) {
+  if (!yes(row.evidence_exists) || !yesOrNotApplicable(row.front_view_exists) || !yesOrNotApplicable(row.secondary_angle_sample_included)) {
     findings.push(discrepancy({
       targetStableID: row.target_stable_id,
       rowNumber,
@@ -422,8 +468,17 @@ function createImportedRecord({ row, rowNumber, target, rowDiscrepancies, import
   };
 }
 
-function createPrimaryTargetIndex({ assignment, menuMap, heads, attributes }) {
+function createPrimaryTargetIndex({ assignment, menuMap, heads, attributes, primaryReview }) {
   const index = new Map();
+  for (const candidate of primaryReview.candidates ?? []) {
+    index.set(candidate.candidateID, {
+      sourceClass: "primaryReviewCandidate",
+      primaryCount: null,
+      primaryNativeOrder: numberOrNull(candidate.nativeOrder),
+      primaryLabel: stringValue(candidate.nativeVisibleLabelOrIndex),
+      primarySummary: `${candidate.category ?? "Candidate"} ${candidate.nativeVisibleLabelOrIndex ?? candidate.candidateID}; primary review ${candidate.primaryReviewStatus ?? "unknown"}.`
+    });
+  }
   for (const record of menuMap.records ?? []) {
     if (record.recordType !== "menu") continue;
     index.set(record.stableMenuID, {
@@ -492,6 +547,8 @@ function createIntakeFiles(intakeState) {
       "status",
       "severity",
       "evidenceIDs",
+      "requiresNewShippingGameRecapture",
+      "resolutionAction",
       "notes"
     ]),
     csvFile("verification_imported_records.csv", intakeState.importedRecords, [
@@ -519,9 +576,30 @@ function discrepancy({ targetStableID, rowNumber, type, primaryValue, verifierVa
     severity: type === "missing_evidence" || type === "version_mismatch" || type === "environment_mismatch" ? "blocking" : "blocking",
     evidenceIDs: unique(idsFrom(evidenceIDs, [])),
     openedAt: importedAt,
-    resolutionAction: null,
+    resolutionAction: resolutionActionForDiscrepancy(type),
+    requiresNewShippingGameRecapture: requiresRecaptureForDiscrepancy(type),
+    primaryObservationPreserved: true,
+    verifierObservationPreserved: true,
+    supersededEvidencePolicy: "Preserve both primary and verifier observations. Do not overwrite or delete source evidence while the discrepancy is open.",
     notes
   };
+}
+
+function resolutionActionForDiscrepancy(type) {
+  if (requiresRecaptureForDiscrepancy(type)) return "RECAPTURE_REQUIRED_UNLESS_EXISTING_DIRECT_EVIDENCE_RESOLVES_DISAGREEMENT";
+  return "HUMAN_REVIEW_REQUIRED";
+}
+
+function requiresRecaptureForDiscrepancy(type) {
+  return new Set([
+    "count_mismatch",
+    "order_mismatch",
+    "missing_evidence",
+    "version_mismatch",
+    "environment_mismatch",
+    "dependency_mismatch",
+    "menu_mismatch"
+  ]).has(type);
 }
 
 function dedupeDiscrepancies(items) {
@@ -554,11 +632,20 @@ function hasRequiredSignOff(metadata) {
   const signOff = asRecord(metadata.signOff);
   if (!signOff) return false;
   return signOff.completedIndependentCounts === true &&
+    signOff.completedEnvironmentWorksheet === true &&
+    signOff.completedFrontViewChecks === true &&
+    signOff.completedSecondaryAngleSample === true &&
+    signOff.completedDuplicateExceptionReview === true &&
     signOff.evidenceReviewed === true &&
     signOff.discrepanciesLogged === true &&
     hasUsableText(signOff.signedBy) &&
     hasUsableText(signOff.signedAt) &&
     !Number.isNaN(Date.parse(signOff.signedAt));
+}
+
+function yesOrNotApplicable(value) {
+  const normalized = stringValue(value).trim().toLowerCase();
+  return yes(value) || normalized === "notapplicable" || normalized === "not_applicable";
 }
 
 function sanitizeMetadata(metadata) {
@@ -657,6 +744,11 @@ function csvEscape(value) {
 
 function readJSON(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function readOptionalJSON(filePath) {
+  if (!fs.existsSync(filePath)) return null;
+  return readJSON(filePath);
 }
 
 function writeText(root, relativePath, content) {

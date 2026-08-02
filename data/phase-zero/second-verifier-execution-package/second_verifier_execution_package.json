@@ -45,6 +45,7 @@
     "discrepancy_form.csv/json",
     "sign_off_form.csv/json",
     "verifier_import_template.csv/json",
+    "required_import_targets.csv/json",
     "verifier_dashboard.csv/json"
   ],
   "samplingMethod": {

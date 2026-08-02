@@ -28,32 +28,11 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Type-check
-        run: npm run typecheck
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Unit tests
-        run: npm run test
-
-      - name: Production build
-        run: npm run build
-
-      - name: Production bundle guard
-        run: npm run build:guard
-
-      - name: Catalog validation
-        run: npm run catalog:validate
-
-      - name: Repository integrity
-        run: npm run integrity
-
-      - name: End-to-end tests
-        run: npm run test:e2e
-
-      - name: Development-only Phase 0 end-to-end tests
-        run: npm run test:e2e:phase0
+      - name: Non-mutating full repository verification
+        working-directory: .
+        env:
+          GAMEFACE_VERIFY_SKIP_IOS: "1"
+        run: npm run verify:clean
 
       - name: Upload Playwright report on failure
         if: failure()

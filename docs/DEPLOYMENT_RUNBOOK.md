@@ -13,7 +13,7 @@ Use a dedicated HTTPS app origin for the responsive web MVP while the Skaggs Sys
 3. Confirm no fixture, research, placeholder, or demo records are bundled.
 4. Confirm required public URLs are final and HTTPS.
 5. Confirm no live secrets are present in source, `.env.example`, docs, or browser bundles.
-6. Run `npm run verify`.
+6. Run `npm run verify:clean` from the repository root for release/audit validation. This runs the full suite in an isolated temporary worktree and fails if the source checkout is dirty or mutated.
 
 ## Required Configuration
 
@@ -45,7 +45,7 @@ Never put live values in chat, Git, screenshots, issue trackers, or public docs.
 From the repository root:
 
 ```sh
-npm run verify
+npm run verify:clean
 ```
 
 For a web-only production build from `web/`:

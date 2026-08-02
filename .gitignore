@@ -31,6 +31,7 @@ Package.resolved
 build-artifacts/*
 !build-artifacts/.gitkeep
 data/catalog/production/*.generated.json
+.verification-worktrees/
 
 # Local evidence and raw media are private by default
 local-evidence/

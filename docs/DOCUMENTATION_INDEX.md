@@ -63,6 +63,7 @@ These documents are preserved as audit history. They may contain stale counts, s
 | `docs/SECOND_VERIFIER_RUNBOOK.md` | Independent verification process. |
 | `docs/CATALOG_MANAGER_RUNBOOK.md` | Catalog-manager review and release workflow. |
 | `docs/CATALOG_PUBLISHING_RUNBOOK.md` | Production publication workflow. |
+| `docs/NON_MUTATING_VERIFICATION.md` | Audit-safe full verification command and generated-file mutation policy. |
 | `docs/MOBILE_BROWSER_QA.md` | Mobile browser QA plan. |
 | `docs/REAL_DEVICE_TEST_MATRIX.md` | Manual device matrix. |
 | `docs/PRIVATE_BETA_RUNBOOK.md` | Private-beta operations plan. |
@@ -106,4 +107,3 @@ When a document conflicts with current counts or readiness, follow this order:
 5. `docs/status/CURRENT_PROJECT_STATE.md`
 6. Machine-readable artifacts referenced by `docs/status/CURRENT_PROJECT_STATE.md`
 7. Historical audits and generated reports as supporting context only
-

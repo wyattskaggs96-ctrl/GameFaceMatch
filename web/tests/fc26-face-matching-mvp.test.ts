@@ -14,8 +14,17 @@ import {
   serializeFc26Profile,
   validateFc26Photo,
   type Fc26Measurement,
-  type Fc26ResearchData
+  type Fc26ResearchData,
+  type Fc26SweepViewID
 } from "@/lib/fc26/fc26-face-matching";
+import {
+  classifyFc26SweepFrame,
+  fuseFc26SweepMeasurements,
+  metadataForFc26SweepProfile,
+  selectBestFc26SweepFrames,
+  validateFc26SweepVideo,
+  type Fc26SweepFrameCandidate
+} from "@/lib/fc26/fc26-guided-sweep";
 import { createInitialCaptureSession } from "@/lib/capture/capture-session";
 import { createInitialAttributeConfirmation } from "@/lib/profile/attribute-confirmation";
 import { createStandardFaceProfile, serializeProfile } from "@/lib/profile/standard-face-profile";
@@ -195,6 +204,113 @@ describe("FC 26 face matching MVP", () => {
   it("returns removable object URLs without touching non-object references", () => {
     expect(removeFc26TemporaryPhotoObjectUrls(["blob:front", "https://example.test/image.jpg", "blob:side"])).toEqual(["blob:front", "blob:side"]);
   });
+
+  it("validates guided sweep video metadata without hard-failing short usable clips", () => {
+    const short = validateFc26SweepVideo({
+      fileName: "short.mp4",
+      fileType: "video/mp4",
+      fileSizeBytes: 2_000_000,
+      durationSeconds: 7.5,
+      width: 1080,
+      height: 1920
+    });
+    expect(short.status).toBe("needs_review");
+    expect(short.advisoryMessages.join(" ")).toMatch(/short/i);
+
+    const unsupported = validateFc26SweepVideo({
+      fileName: "sweep.gif",
+      fileType: "image/gif",
+      fileSizeBytes: 200_000_000,
+      durationSeconds: 2,
+      width: 320,
+      height: 240
+    });
+    expect(unsupported.status).toBe("blocked");
+    expect(unsupported.blockingMessages.join(" ")).toMatch(/Unsupported video type/i);
+    expect(unsupported.blockingMessages.join(" ")).toMatch(/too short/i);
+  });
+
+  it("classifies and selects best guided sweep frames across five views", () => {
+    const candidates = sweepCandidates([
+      ["leftProfile", -70, 0.84],
+      ["leftThreeQuarter", -35, 0.9],
+      ["front", 2, 0.92],
+      ["rightThreeQuarter", 36, 0.88],
+      ["rightProfile", 72, 0.82]
+    ]);
+    expect(classifyFc26SweepFrame(candidates[0])).toBe("leftProfile");
+    const result = selectBestFc26SweepFrames(candidates);
+    expect(result.missingViews).toEqual([]);
+    expect(Object.keys(result.selectedFrames)).toHaveLength(5);
+    expect(result.blockingMessages).toEqual([]);
+  });
+
+  it("rejects duplicate, blurry, missing-front, and multiple-face sweep frames honestly", () => {
+    const result = selectBestFc26SweepFrames([
+      sweepCandidate("leftProfile", -70, 0.9),
+      sweepCandidate("leftProfileDuplicate", -68, 0.9, { duplicateSimilarityScore: 0.99 }),
+      sweepCandidate("frontBlurry", 0, 0.1),
+      sweepCandidate("rightProfileMulti", 70, 0.8, { report: report([face({ yaw: 70 }), face({ yaw: 72, xOffset: 0.1 })]) })
+    ]);
+    expect(result.selectedFrames.leftProfile).toBeTruthy();
+    expect(result.selectedFrames.front).toBeFalsy();
+    expect(result.blockingMessages.join(" ")).toMatch(/front view/i);
+    expect(result.blockingMessages.join(" ")).toMatch(/More than one face/i);
+    expect(result.reviewedFrames.some((frame) => frame.rejectionReason?.match(/blurry/i))).toBe(true);
+  });
+
+  it("fuses guided sweep measurements and marks multi-view recommendation evidence", () => {
+    const selected = selectBestFc26SweepFrames(
+      sweepCandidates([
+        ["leftProfile", -70, 0.84],
+        ["leftThreeQuarter", -35, 0.9],
+        ["front", 0, 0.92],
+        ["rightThreeQuarter", 35, 0.88],
+        ["rightProfile", 70, 0.82]
+      ])
+    ).selectedFrames;
+    const fusion = fuseFc26SweepMeasurements(selected);
+    const jaw = fusion.measurements.find((item) => item.id === "jaw_to_cheek_ratio");
+    expect(fusion.selectedViewIDs).toHaveLength(5);
+    expect(jaw?.contributingViews).toContain("front");
+    expect(jaw?.contributingViews).toContain("leftThreeQuarter");
+    expect(jaw?.fusionMethod).toBe("confidence_weighted");
+    expect(jaw?.reliableForRecommendation).toBe(true);
+
+    const recipe = generateFc26Recipe(fusion.measurements, fc26Controls(), new Date("2026-08-01T00:00:00.000Z"));
+    expect(recipe.controls.find((control) => control.controlID === "FC26_HEAD_JAW")?.reason).toMatch(/views/i);
+  });
+
+  it("serializes guided-sweep FC 26 profiles without raw video or frame URLs", () => {
+    const selection = selectBestFc26SweepFrames(
+      sweepCandidates([
+        ["leftProfile", -70, 0.84],
+        ["leftThreeQuarter", -35, 0.9],
+        ["front", 0, 0.92],
+        ["rightThreeQuarter", 35, 0.88],
+        ["rightProfile", 70, 0.82]
+      ])
+    );
+    const fusion = fuseFc26SweepMeasurements(selection.selectedFrames);
+    const recipe = generateFc26Recipe(fusion.measurements, fc26Controls(), new Date("2026-08-01T00:00:00.000Z"));
+    const profile = createFc26Profile({
+      profileName: "Sweep profile",
+      measurements: fusion.measurements,
+      qualityReports: [],
+      recipe,
+      captureMethod: "guided_sweep",
+      selectedFrameMetadata: metadataForFc26SweepProfile(selection.selectedFrames),
+      qualityWarnings: fusion.warnings,
+      now: new Date("2026-08-01T00:00:00.000Z")
+    });
+    const serialized = serializeFc26Profile(profile);
+    expect(serialized).not.toMatch(/blob:|data:image|base64|raw video/i);
+    expect(deserializeFc26Profile(serialized)).toMatchObject({
+      gameID: FC26_GAME_ID,
+      captureMethod: "guided_sweep",
+      selectedFrameMetadata: expect.arrayContaining([expect.objectContaining({ viewID: "front" })])
+    });
+  });
 });
 
 function measurement(id: string, displayLabel: string, normalizedValue: number): Fc26Measurement {
@@ -223,7 +339,34 @@ function report(faces: DetectedFaceLandmarks[]): FaceLandmarkReport {
   };
 }
 
-function face(options: { wideJaw?: boolean; profile?: boolean; xOffset?: number } = {}): DetectedFaceLandmarks {
+function sweepCandidates(entries: Array<[Fc26SweepViewID, number, number]>) {
+  return entries.map(([id, yaw, blurScore], index) => sweepCandidate(id, yaw, blurScore, { timestampSeconds: index * 3 }));
+}
+
+function sweepCandidate(
+  frameID: string,
+  yaw: number,
+  blurScore: number,
+  options: { timestampSeconds?: number; duplicateSimilarityScore?: number | null; report?: FaceLandmarkReport } = {}
+): Fc26SweepFrameCandidate {
+  const landmarkReport = options.report ?? report([face({ yaw, profile: Math.abs(yaw) > 55 })]);
+  const faceBox = landmarkReport.faces[0]?.boundingBox;
+  return {
+    frameID,
+    timestampSeconds: options.timestampSeconds ?? 0,
+    report: landmarkReport,
+    estimatedYawDegrees: yaw,
+    estimatedPitchDegrees: 0,
+    estimatedRollDegrees: 0,
+    faceBoxSize: faceBox ? Math.max(faceBox.width, faceBox.height) : null,
+    landmarkConfidence: landmarkReport.faces[0]?.confidence.label ?? "unavailable",
+    blurScore,
+    duplicateSimilarityScore: options.duplicateSimilarityScore ?? null,
+    warnings: []
+  };
+}
+
+function face(options: { wideJaw?: boolean; profile?: boolean; xOffset?: number; yaw?: number } = {}): DetectedFaceLandmarks {
   const xOffset = options.xOffset ?? 0;
   const jawLeft = options.wideJaw ? 0.26 : 0.32;
   const jawRight = options.wideJaw ? 0.74 : 0.68;
@@ -262,7 +405,7 @@ function face(options: { wideJaw?: boolean; profile?: boolean; xOffset?: number 
       point("right brow", 0.6 + xOffset, 0.26)
     ],
     approximateHeadPose: {
-      yawDegrees: options.profile ? 70 : 0,
+      yawDegrees: options.yaw ?? (options.profile ? 70 : 0),
       pitchDegrees: 0,
       rollDegrees: 0,
       confidence: { score: 0.7, label: "medium", evidence: "estimated" },

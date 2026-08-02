@@ -8,12 +8,14 @@ GameFace Match handles face images as temporary local inputs by default.
 
 The FC 26 face-recipe workflow:
 
+- can process one guided face-sweep video or separate reference photos;
 - processes reference photos and FC 26 screenshots in the browser;
+- samples guided-sweep video frames locally and keeps only temporary review thumbnails during the active session;
 - uses temporary object URLs for previews;
 - attempts local landmark detection with the existing MediaPipe Face Landmarker provider;
-- stores normalized measurements, quality warnings, recipe settings, notes, and timestamps;
-- does not serialize raw images, object URLs, base64 media, crops, or screenshots into the FC 26 profile;
-- lets the user remove all active photo previews;
+- stores normalized measurements, selected-frame metadata, quality warnings, recipe settings, notes, and timestamps;
+- does not serialize raw images, raw video, object URLs, base64 media, crops, extracted frames, or screenshots into the FC 26 profile;
+- lets the user remove all active photo, video, and extracted-frame previews;
 - saves only derived non-image profile JSON in browser session storage.
 
 ## Prohibited Data Use
@@ -28,8 +30,8 @@ The workflow must not:
 
 ## Deletion Behavior
 
-Removing a photo revokes its browser object URL. Removing all photos clears the active FC 26 reference and screenshot slots, generated measurements, recipe, and comparison state. Saved FC 26 profiles remain non-image derived records unless the user deletes browser session storage.
+Removing a photo or sweep video revokes its browser object URL. Removing all media clears the active FC 26 reference slots, sweep video, extracted-frame thumbnails, screenshot slots, generated measurements, recipe, and comparison state. Saved FC 26 profiles remain non-image derived records unless the user deletes browser session storage.
 
 ## Current Limitations
 
-Browser memory is managed by object URL revocation and state clearing, but the browser controls final garbage collection timing. The MVP does not provide cloud backup or account sync for FC 26 recipe profiles.
+Browser memory is managed by object URL revocation and state clearing, but the browser controls final garbage collection timing. The guided sweep does not create a 3D face model or identity template. The MVP does not provide cloud backup or account sync for FC 26 recipe profiles.

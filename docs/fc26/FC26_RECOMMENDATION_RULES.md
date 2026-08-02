@@ -4,6 +4,8 @@ Last updated: 2026-08-01
 
 The FC 26 MVP uses deterministic, rule-based recipe guidance. The rules consume normalized measurements and the observed controls from `data/research/fc26/player_creator_research.json`.
 
+The rules accept measurements from either the three-photo fallback or the guided face sweep. Guided-sweep measurements may reference multiple contributing views in the explanation, but they still produce only directional FC 26 guidance unless exact game values are verified.
+
 ## Rule Principles
 
 - Do not invent FC 26 controls.
@@ -12,6 +14,7 @@ The FC 26 MVP uses deterministic, rule-based recipe guidance. The rules consume 
 - Keep appearance controls manual unless the user confirms a value.
 - Label all automatic outputs as directional guidance or manual selection.
 - Preserve source traceability from measurement to rule to FC 26 control.
+- Ignore measurements marked unreliable for recommendation use.
 
 ## Directional Rules
 

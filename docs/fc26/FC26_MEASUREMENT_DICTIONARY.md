@@ -43,3 +43,21 @@ Every measurement output includes:
 - confidence;
 - quality warnings;
 - plain-language explanation.
+
+Guided-sweep measurements additionally include:
+
+- contributing sweep views;
+- fusion method;
+- whether the measurement is reliable enough for recipe-rule use.
+
+The current fusion methods are:
+
+| Fusion method | Meaning |
+| --- | --- |
+| `single_view` | One selected sweep frame supports the measurement. |
+| `front_dominant` | The front frame supplies the value, with angle frames used as quality context. |
+| `confidence_weighted` | A front measurement is reviewed with supporting three-quarter or profile evidence. |
+| `profile_supported` | A projection estimate uses profile or three-quarter evidence. |
+| `unavailable` | No reliable selected view supports the measurement. |
+
+The guided sweep records warnings when left and right profile evidence disagree significantly. These warnings are treated as capture-quality uncertainty, not hidden by averaging incompatible views.

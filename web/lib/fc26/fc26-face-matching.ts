@@ -6,6 +6,8 @@ export const FC26_FACE_ANALYSIS_VERSION = "fc26-face-analysis-mvp-v1";
 export const FC26_RECIPE_RULE_VERSION = "fc26-rule-recipe-mvp-v1";
 
 export type Fc26ReferenceViewID = "front" | "threeQuarter" | "sideProfile";
+export type Fc26SweepViewID = "leftProfile" | "leftThreeQuarter" | "front" | "rightThreeQuarter" | "rightProfile";
+export type Fc26CaptureMethod = "three_photo" | "guided_sweep";
 export type Fc26ConfidenceLabel = "high" | "medium" | "low" | "unavailable";
 export type Fc26RecommendationStatus = "directional_adjustment" | "manual_selection_required" | "unsupported";
 export type Fc26RecipeControlState = "accepted" | "edited" | "tested" | "unresolved";
@@ -57,10 +59,13 @@ export interface Fc26Measurement {
   id: string;
   displayLabel: string;
   normalizedValue: number | null;
-  sourceView: Fc26ReferenceViewID | "combined";
+  sourceView: Fc26ReferenceViewID | Fc26SweepViewID | "combined";
   confidence: Fc26ConfidenceLabel;
   qualityWarnings: string[];
   explanation: string;
+  contributingViews?: Fc26SweepViewID[];
+  fusionMethod?: "single_view" | "confidence_weighted" | "front_dominant" | "profile_supported" | "unavailable";
+  reliableForRecommendation?: boolean;
 }
 
 export interface Fc26RecipeRecommendation {
@@ -105,12 +110,25 @@ export interface Fc26FaceProfile {
   profileName: string;
   createdAt: string;
   updatedAt: string;
+  captureMethod?: Fc26CaptureMethod;
+  scanStatus?: "complete" | "partial" | "blocked";
+  selectedFrameMetadata?: Fc26SelectedSweepFrameMetadata[];
   photoAnalysisStatus: "complete" | "partial" | "blocked";
   measurements: Fc26Measurement[];
   qualityWarnings: string[];
   recipe: Fc26Recipe;
   iterationNumber: number;
   userNotes: string;
+}
+
+export interface Fc26SelectedSweepFrameMetadata {
+  viewID: Fc26SweepViewID;
+  timestampSeconds: number;
+  yawDegrees: number | null;
+  pitchDegrees: number | null;
+  rollDegrees: number | null;
+  landmarkConfidence: Fc26ConfidenceLabel;
+  qualityWarnings: string[];
 }
 
 export interface Fc26MeasurementDifference {
@@ -182,6 +200,14 @@ export const FC26_REQUIRED_REFERENCE_VIEWS: Array<{
     label: "Side profile",
     instruction: "Use a side profile where the nose, lips, chin, and jawline are visible."
   }
+];
+
+export const FC26_SWEEP_VIEWS: Array<{ id: Fc26SweepViewID; label: string; targetYawDegrees: number }> = [
+  { id: "leftProfile", label: "Left profile", targetYawDegrees: -70 },
+  { id: "leftThreeQuarter", label: "Left three-quarter", targetYawDegrees: -35 },
+  { id: "front", label: "Front", targetYawDegrees: 0 },
+  { id: "rightThreeQuarter", label: "Right three-quarter", targetYawDegrees: 35 },
+  { id: "rightProfile", label: "Right profile", targetYawDegrees: 70 }
 ];
 
 const supportedImageTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
@@ -383,6 +409,9 @@ export function createFc26Profile(input: {
   measurements: Fc26Measurement[];
   qualityReports: Fc26PhotoQualityReport[];
   recipe: Fc26Recipe;
+  captureMethod?: Fc26CaptureMethod;
+  selectedFrameMetadata?: Fc26SelectedSweepFrameMetadata[];
+  qualityWarnings?: string[];
   iterationNumber?: number;
   userNotes?: string;
   now?: Date;
@@ -397,9 +426,12 @@ export function createFc26Profile(input: {
     profileName: input.profileName.trim() || "FC 26 face recipe",
     createdAt: now.toISOString(),
     updatedAt: now.toISOString(),
+    captureMethod: input.captureMethod ?? "three_photo",
+    scanStatus: blockingCount > 0 ? "blocked" : completeMeasurements.length >= 10 ? "complete" : "partial",
+    selectedFrameMetadata: input.selectedFrameMetadata ?? [],
     photoAnalysisStatus: blockingCount > 0 ? "blocked" : completeMeasurements.length >= 10 ? "complete" : "partial",
     measurements: input.measurements,
-    qualityWarnings: unique(input.qualityReports.flatMap((report) => [...report.blockingMessages, ...report.advisoryMessages])),
+    qualityWarnings: unique([...input.qualityReports.flatMap((report) => [...report.blockingMessages, ...report.advisoryMessages]), ...(input.qualityWarnings ?? [])]),
     recipe: input.recipe,
     iterationNumber: input.iterationNumber ?? 1,
     userNotes: input.userNotes ?? ""
@@ -543,7 +575,17 @@ function recommendationForControl(
 
 function directionalRule(controlID: string, measurements: Fc26Measurement[]) {
   const value = (id: string) =>
-    measurements.find((measurement) => measurement.id === id && measurement.normalizedValue !== null && Number.isFinite(measurement.normalizedValue));
+    measurements.find(
+      (measurement) =>
+        measurement.id === id &&
+        measurement.normalizedValue !== null &&
+        Number.isFinite(measurement.normalizedValue) &&
+        measurement.reliableForRecommendation !== false
+    );
+  const evidenceText = (measurement: Fc26Measurement) =>
+    measurement.contributingViews && measurement.contributingViews.length > 1
+      ? ` across the ${measurement.contributingViews.map(formatSweepViewLabel).join(", ")} views`
+      : "";
   if (controlID === "FC26_HEAD_JAW") {
     const jaw = value("jaw_to_cheek_ratio");
     if (!jaw) return null;
@@ -553,8 +595,8 @@ function directionalRule(controlID: string, measurements: Fc26Measurement[]) {
       confidence: jaw.confidence,
       reason:
         jaw.normalizedValue! >= 0.72
-          ? "Jaw width is high relative to cheek width, so start with a broader jaw preset."
-          : "Jaw width is modest relative to cheek width, so start with a narrower jaw preset.",
+          ? `Jaw width is high relative to cheek width${evidenceText(jaw)}, so start with a broader jaw preset.`
+          : `Jaw width is modest relative to cheek width${evidenceText(jaw)}, so start with a narrower jaw preset.`,
       measurementIDs: ["jaw_to_cheek_ratio"]
     };
   }
@@ -567,7 +609,7 @@ function directionalRule(controlID: string, measurements: Fc26Measurement[]) {
       ruleID: "fc26-chin-direction",
       direction: (basis.normalizedValue ?? 0) >= 0.18 ? "longer or more projected" : "shorter or less projected",
       confidence: basis.confidence,
-      reason: "Chin proportion is available, so use it only as a directional starting point.",
+      reason: `Chin proportion is available${evidenceText(basis)}, so use it only as a directional starting point.`,
       measurementIDs: [basis.id]
     };
   }
@@ -586,7 +628,7 @@ function directionalRule(controlID: string, measurements: Fc26Measurement[]) {
           ? "wider"
           : "narrower",
       confidence: basis.confidence,
-      reason: "Nose proportions support a directional edit, but not an exact FC 26 preset.",
+      reason: `Nose proportions support a directional edit${evidenceText(basis)}, but not an exact FC 26 preset.`,
       measurementIDs: [basis.id]
     };
   }
@@ -597,7 +639,7 @@ function directionalRule(controlID: string, measurements: Fc26Measurement[]) {
       ruleID: "fc26-eye-spacing-direction",
       direction: (spacing.normalizedValue ?? 0) >= 0.24 ? "wider eye spacing" : "narrower eye spacing",
       confidence: spacing.confidence,
-      reason: "Eye spacing is measurable from the front view and can guide the Eyes preset family direction.",
+      reason: `Eye spacing is measurable${evidenceText(spacing) || " from the front view"} and can guide the Eyes preset family direction.`,
       measurementIDs: ["eye_spacing"]
     };
   }
@@ -608,7 +650,7 @@ function directionalRule(controlID: string, measurements: Fc26Measurement[]) {
       ruleID: "fc26-brow-position-direction",
       direction: (brow.normalizedValue ?? 0) >= 0.12 ? "higher brow position" : "lower brow position",
       confidence: brow.confidence,
-      reason: "Brow position can guide manual eyebrow preset review.",
+      reason: `Brow position${evidenceText(brow)} can guide manual eyebrow preset review.`,
       measurementIDs: ["eyebrow_height"]
     };
   }
@@ -619,7 +661,7 @@ function directionalRule(controlID: string, measurements: Fc26Measurement[]) {
       ruleID: "fc26-mouth-width-direction",
       direction: (mouth.normalizedValue ?? 0) >= 0.42 ? "wider mouth" : "narrower mouth",
       confidence: mouth.confidence,
-      reason: "Mouth width relative to face width supports a directional manual edit.",
+      reason: `Mouth width relative to face width${evidenceText(mouth)} supports a directional manual edit.`,
       measurementIDs: ["mouth_to_face_width_ratio"]
     };
   }
@@ -630,7 +672,7 @@ function directionalRule(controlID: string, measurements: Fc26Measurement[]) {
       ruleID: "fc26-forehead-height-direction",
       direction: (forehead.normalizedValue ?? 0) >= 0.34 ? "taller upper face" : "shorter upper face",
       confidence: forehead.confidence,
-      reason: "Upper-face proportion can guide the Forehead preset direction.",
+      reason: `Upper-face proportion${evidenceText(forehead)} can guide the Forehead preset direction.`,
       measurementIDs: ["forehead_height"]
     };
   }
@@ -641,7 +683,7 @@ function directionalRule(controlID: string, measurements: Fc26Measurement[]) {
       ruleID: "fc26-cheek-width-direction",
       direction: (cheek.normalizedValue ?? 0) >= 0.9 ? "broader cheek structure" : "narrower cheek structure",
       confidence: cheek.confidence,
-      reason: "Cheek width is only a coarse front-view cue, so use it for manual review.",
+      reason: `Cheek width is only a coarse cue${evidenceText(cheek)}, so use it for manual review.`,
       measurementIDs: ["cheekbone_width"]
     };
   }
@@ -793,6 +835,10 @@ function lowerConfidence(first: Fc26ConfidenceLabel, second: Fc26ConfidenceLabel
 
 function isReferenceView(value: unknown): value is Fc26ReferenceViewID {
   return value === "front" || value === "threeQuarter" || value === "sideProfile";
+}
+
+function formatSweepViewLabel(viewID: Fc26SweepViewID) {
+  return FC26_SWEEP_VIEWS.find((view) => view.id === viewID)?.label.toLowerCase() ?? viewID;
 }
 
 function isNumber(value: unknown): value is number {

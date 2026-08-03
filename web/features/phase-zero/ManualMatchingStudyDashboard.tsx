@@ -78,6 +78,34 @@ export function ManualMatchingStudyDashboard() {
             <p className="muted">Compares repeat-scan top-three outputs after real repeat scans are submitted.</p>
           </div>
         </Card>
+        <Card>
+          <div className="stack-sm">
+            <h3>Scan completion</h3>
+            <p className="metric-value">{formatMetric(dashboard.scanCompletion)}</p>
+            <p className="muted">Target: at least 80% after real participant rows are complete.</p>
+          </div>
+        </Card>
+        <Card>
+          <div className="stack-sm">
+            <h3>Quality pass</h3>
+            <p className="metric-value">{formatMetric(dashboard.qualityPassWithoutFullRestart)}</p>
+            <p className="muted">Counts scans that pass without requiring a full restart.</p>
+          </div>
+        </Card>
+        <Card>
+          <div className="stack-sm">
+            <h3>Screenshot refinement</h3>
+            <p className="metric-value">{formatMetric(dashboard.screenshotRefinementCompletion)}</p>
+            <p className="muted">Tracks completed refinement loops without retaining screenshot media by default.</p>
+          </div>
+        </Card>
+        <Card>
+          <div className="stack-sm">
+            <h3>Deletion success</h3>
+            <p className="metric-value">{formatMetric(dashboard.deletionSuccess)}</p>
+            <p className="muted">Target: 100% raw media, screenshot media, and derived-profile deletion confirmation.</p>
+          </div>
+        </Card>
       </div>
       <Card>
         <div className="stack-md">

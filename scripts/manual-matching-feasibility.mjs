@@ -8,7 +8,10 @@ export const PRIVATE_BETA_MATCHING_TARGETS = {
   minimumCompletedParticipants: 10,
   maximumCompletedParticipants: 20,
   topThreeUsefulMatchRate: 0.8,
-  topOneAcceptanceRate: 0.5
+  topOneAcceptanceRate: 0.5,
+  captureCompletionRate: 0.8,
+  qualityPassWithoutFullRestartRate: 0.75,
+  rawDataDeletionConfirmationRate: 1
 };
 export const BASELINE_MATCHING_MODEL_VERSION = "rule-based-web-mvp-v2-rgb-geometry";
 
@@ -25,6 +28,8 @@ export const subjectColumns = [
   "consent_future_contact_optional",
   "capture_mode",
   "capture_device_label",
+  "capture_device_type",
+  "lighting_condition",
   "straight_on_present",
   "left45_present",
   "right45_present",
@@ -87,6 +92,7 @@ export const resultColumns = [
   "capture_quality_state",
   "capture_quality_score",
   "capture_failure_flag",
+  "quality_pass_without_full_restart",
   "reviewer_a_id",
   "reviewer_b_id",
   "reviewers_agreed_top_choice",
@@ -104,6 +110,10 @@ export const resultColumns = [
   "repeat_scan_same_top_choice",
   "repeat_scan_overlap_count",
   "confidence_perception_1_to_5",
+  "screenshot_refinement_completed",
+  "screenshot_refinement_result",
+  "screenshot_refinement_improved",
+  "screenshot_media_deleted_confirmed",
   "disagreement_logged",
   "mismatch_reason_codes",
   "raw_media_deleted_confirmed",
@@ -328,10 +338,13 @@ export function calculateManualMatchingMetrics(resultRows, repeatabilityRows = [
   ].filter((value) => Number.isFinite(value));
   const confidencePerceptionRatings = completed.map((row) => Number(row.confidence_perception_1_to_5)).filter((value) => Number.isInteger(value) && value >= 1 && value <= 5);
   const confidenceCalibration = calculateConfidenceCalibration(completed);
+  const screenshotCompleted = completed.filter((row) => yes(row.screenshot_refinement_completed));
   return {
     actualInputCount: actualRows.length,
     fixtureRowsExcluded: resultRows.length - actualRows.length,
     completedResultCount: completed.length,
+    scanCompletion: rate(completed.length, actualRows.length),
+    qualityPassWithoutFullRestart: rate(completed.filter((row) => yes(row.quality_pass_without_full_restart)).length, completed.length),
     topOneAcceptance: rate(topOneAccepted, completed.length),
     topThreeUsefulness: rate(topThreeUseful, completed.length),
     rankSelectedDistribution: distribution(completed.map((row) => normalizeRank(row.participant_selected_rank))),
@@ -341,7 +354,7 @@ export function calculateManualMatchingMetrics(resultRows, repeatabilityRows = [
     reviewerTopThreeSetAgreement: yesRate(completed.map((row) => row.reviewers_agreed_top_three_set)),
     disagreementCount,
     mismatchReasonCounts: distribution(completed.flatMap((row) => splitReasons(row.mismatch_reason_codes))),
-    deletionConfirmation: rate(completed.filter((row) => yes(row.raw_media_deleted_confirmed) && yes(row.profile_deleted_confirmed)).length, completed.length),
+    deletionConfirmation: rate(completed.filter((row) => yes(row.raw_media_deleted_confirmed) && yes(row.profile_deleted_confirmed) && yes(row.screenshot_media_deleted_confirmed)).length, completed.length),
     captureFailureRate: rate(captureFailureCount, actualRows.length),
     captureQualityEffect: buildGroupedRates(completed, (row) => row.capture_quality_state || "unknown"),
     repeatability: {
@@ -349,6 +362,8 @@ export function calculateManualMatchingMetrics(resultRows, repeatabilityRows = [
       sameTopChoiceRate: rate(repeatSameTopChoiceCount, repeatScanCount),
       averageTopThreeOverlap: average(repeatScanOverlaps)
     },
+    screenshotRefinementCompletion: rate(screenshotCompleted.length, completed.length),
+    screenshotRefinementImprovement: rate(screenshotCompleted.filter((row) => yes(row.screenshot_refinement_improved)).length, screenshotCompleted.length),
     confidenceCalibration,
     averageConfidencePerceptionRating: average(confidencePerceptionRatings)
   };
@@ -362,8 +377,11 @@ export function compareManualMatchingTargets(metrics) {
       actual: metrics.completedResultCount,
       status: enoughCompletedRows && metrics.completedResultCount <= PRIVATE_BETA_MATCHING_TARGETS.maximumCompletedParticipants ? "pass" : "notMeasured"
     },
+    captureCompletion: compareRateToTarget(metrics.scanCompletion, PRIVATE_BETA_MATCHING_TARGETS.captureCompletionRate, enoughCompletedRows),
+    qualityPassWithoutFullRestart: compareRateToTarget(metrics.qualityPassWithoutFullRestart, PRIVATE_BETA_MATCHING_TARGETS.qualityPassWithoutFullRestartRate, enoughCompletedRows),
     topOneAcceptance: compareRateToTarget(metrics.topOneAcceptance, PRIVATE_BETA_MATCHING_TARGETS.topOneAcceptanceRate, enoughCompletedRows),
-    topThreeUsefulness: compareRateToTarget(metrics.topThreeUsefulness, PRIVATE_BETA_MATCHING_TARGETS.topThreeUsefulMatchRate, enoughCompletedRows)
+    topThreeUsefulness: compareRateToTarget(metrics.topThreeUsefulness, PRIVATE_BETA_MATCHING_TARGETS.topThreeUsefulMatchRate, enoughCompletedRows),
+    rawDataDeletionConfirmation: compareRateToTarget(metrics.deletionConfirmation, PRIVATE_BETA_MATCHING_TARGETS.rawDataDeletionConfirmationRate, enoughCompletedRows)
   };
 }
 
@@ -422,10 +440,15 @@ export function createManualMatchingStudyDashboard({ rows, metrics, targetCompar
     fixtureRowsExcluded: metrics.fixtureRowsExcluded,
     topOneAcceptance: notMeasuredUntilEnough(metrics.topOneAcceptance, enoughObservations),
     topThreeUsefulness: notMeasuredUntilEnough(metrics.topThreeUsefulness, enoughObservations),
+    scanCompletion: notMeasuredUntilEnough(metrics.scanCompletion, enoughObservations),
+    qualityPassWithoutFullRestart: notMeasuredUntilEnough(metrics.qualityPassWithoutFullRestart, enoughObservations),
     rankDistribution: enoughObservations ? metrics.rankSelectedDistribution : "not measured",
     repeatability: enoughObservations ? metrics.repeatability : "not measured",
     captureFailure: enoughObservations ? metrics.captureFailureRate : "not measured",
     captureQualityEffect: enoughObservations ? metrics.captureQualityEffect : "not measured",
+    screenshotRefinementCompletion: enoughObservations ? metrics.screenshotRefinementCompletion : "not measured",
+    screenshotRefinementImprovement: enoughObservations ? metrics.screenshotRefinementImprovement : "not measured",
+    deletionSuccess: enoughObservations ? metrics.deletionConfirmation : "not measured",
     targetComparison,
     calibrationDecision,
     reviewerAgreement: enoughObservations
@@ -592,7 +615,7 @@ function validateSubjectRows(rows, errors, warnings) {
   const ids = new Set();
   for (const [index, row] of rows.entries()) {
     const rowNumber = index + 2;
-    requireFields(row, ["study_id", "study_version", "participant_id", "consent_version", "capture_mode"], "subjects", rowNumber, errors);
+    requireFields(row, ["study_id", "study_version", "participant_id", "consent_version", "capture_mode", "capture_device_label", "capture_device_type", "lighting_condition"], "subjects", rowNumber, errors);
     rejectPlaceholders(row, "subjects", rowNumber, errors);
     if (ids.has(row.participant_id)) errors.push(issue("duplicateParticipant", `Duplicate participant_id ${row.participant_id}.`, rowNumber));
     ids.add(row.participant_id);
@@ -647,7 +670,7 @@ function validateResultRows(rows, subjectRows, reviewRows, errors, warnings) {
     if (reviewRows.length > 0 && (!reviewers.has(row.reviewer_a_id) || !reviewers.has(row.reviewer_b_id))) {
       errors.push(issue("resultReviewerMissingReview", `${row.participant_id} result references reviewer without matching review row.`, rowNumber));
     }
-    for (const field of ["reviewers_agreed_top_choice", "reviewers_agreed_top_three_set", "top_one_accepted", "top_three_useful", "capture_failure_flag", "repeat_scan_completed", "repeat_scan_same_top_choice", "disagreement_logged", "raw_media_deleted_confirmed", "profile_deleted_confirmed"]) {
+    for (const field of ["reviewers_agreed_top_choice", "reviewers_agreed_top_three_set", "top_one_accepted", "top_three_useful", "capture_failure_flag", "quality_pass_without_full_restart", "repeat_scan_completed", "repeat_scan_same_top_choice", "screenshot_refinement_completed", "screenshot_refinement_improved", "screenshot_media_deleted_confirmed", "disagreement_logged", "raw_media_deleted_confirmed", "profile_deleted_confirmed"]) {
       validateYesNo(row[field], `results.${field}`, rowNumber, errors);
     }
     if (row.participant_selected_rank && !["1", "2", "3"].includes(row.participant_selected_rank)) {

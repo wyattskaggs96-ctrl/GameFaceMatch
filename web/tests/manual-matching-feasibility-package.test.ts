@@ -118,6 +118,8 @@ describe("manual matching feasibility package", () => {
     expect(report.metrics.fixtureRowsExcluded).toBe(1);
     expect(report.metrics.completedResultCount).toBe(0);
     expect(report.dashboard.status).toBe("notMeasured");
+    expect(report.dashboard.scanCompletion).toBe("not measured");
+    expect(report.dashboard.screenshotRefinementCompletion).toBe("not measured");
     expect(report.calibrationDecision.fixtureDataUsedForTuning).toBe(false);
     expect(report.calibrationDecision.beforeAfterEvaluation.after).toBeNull();
     expect(exportResult.rawMediaIncluded).toBe(false);
@@ -178,6 +180,24 @@ describe("manual matching feasibility package", () => {
     });
   });
 
+  it("tracks private-beta capture, screenshot-refinement, and deletion targets without treating them as achieved early", () => {
+    const metrics = calculateManualMatchingMetrics([
+      resultRow({ participant_id: "participant-001", quality_pass_without_full_restart: "yes", screenshot_refinement_completed: "yes", screenshot_refinement_improved: "yes", screenshot_media_deleted_confirmed: "yes" }),
+      resultRow({ participant_id: "participant-002", quality_pass_without_full_restart: "no", screenshot_refinement_completed: "yes", screenshot_refinement_improved: "no", screenshot_media_deleted_confirmed: "yes" }),
+      resultRow({ participant_id: "participant-003", capture_failure_flag: "yes", capture_quality_state: "failed", quality_pass_without_full_restart: "no", raw_media_deleted_confirmed: "no", profile_deleted_confirmed: "no", screenshot_media_deleted_confirmed: "no" })
+    ]);
+    const targets = compareManualMatchingTargets(metrics);
+
+    expect(metrics.scanCompletion).toMatchObject({ numerator: 2, denominator: 3 });
+    expect(metrics.qualityPassWithoutFullRestart).toMatchObject({ numerator: 1, denominator: 2 });
+    expect(metrics.screenshotRefinementCompletion).toMatchObject({ numerator: 2, denominator: 2 });
+    expect(metrics.screenshotRefinementImprovement).toMatchObject({ numerator: 1, denominator: 2 });
+    expect(metrics.deletionConfirmation).toMatchObject({ numerator: 2, denominator: 2 });
+    expect(targets.captureCompletion.status).toBe("notMeasured");
+    expect(targets.qualityPassWithoutFullRestart.status).toBe("notMeasured");
+    expect(targets.rawDataDeletionConfirmation.status).toBe("notMeasured");
+  });
+
   it("fails private-beta targets when a sufficiently sized actual study misses the thresholds", () => {
     const metrics = calculateManualMatchingMetrics(
       Array.from({ length: 10 }, (_, index) => resultRow({
@@ -201,6 +221,15 @@ describe("manual matching feasibility package", () => {
 
   it("documents the study protocol without implying the study has run", () => {
     const protocol = fs.readFileSync(path.resolve(process.cwd(), "../docs/phase-zero/MANUAL_MATCHING_FEASIBILITY_PROTOCOL.md"), "utf8");
+    const cf27Protocol = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), "../data/phase-zero/cf27_matching_study_protocol.json"), "utf8"));
+    const requiredDocs = [
+      "CF27_MATCHING_STUDY_OPERATOR_GUIDE.md",
+      "CF27_MATCHING_STUDY_PARTICIPANT_CHECKLIST.md",
+      "CF27_MATCHING_STUDY_REVIEWER_CHECKLIST.md",
+      "CF27_MATCHING_STUDY_DATA_DICTIONARY.md",
+      "CF27_MATCHING_STUDY_RESULTS_REPORT_TEMPLATE.md",
+      "CF27_MATCHING_STUDY_GO_NO_GO_DECISION_TEMPLATE.md"
+    ];
 
     expect(protocol).toContain("Study status:** NOT STARTED");
     expect(protocol).toContain("10-20 consenting subjects");
@@ -208,6 +237,26 @@ describe("manual matching feasibility package", () => {
     expect(protocol).toContain("Top-one acceptance");
     expect(protocol).toContain("Top-three usefulness");
     expect(protocol).toContain("This protocol does not mark Phase 0 complete");
+    expect(cf27Protocol).toMatchObject({
+      status: "NOT_STARTED",
+      productionStatus: "NOT_PRODUCTION_DATA",
+      targets: {
+        topThreeUsefulMatchRate: 0.8,
+        topOneAcceptanceRate: 0.5,
+        captureCompletionRate: 0.8,
+        qualityPassWithoutFullRestartRate: 0.75,
+        rawDataDeletionConfirmationRate: 1
+      }
+    });
+    expect(cf27Protocol.dataClasses.find((entry: { id: string }) => entry.id === "raw_capture_media")).toMatchObject({
+      committedToRepository: false,
+      metricEligible: false
+    });
+    for (const doc of requiredDocs) {
+      const content = fs.readFileSync(path.resolve(process.cwd(), "../docs/phase-zero", doc), "utf8");
+      expect(content).toContain("Study status:");
+      expect(content).not.toContain("APPROVED_FOR_PUBLIC_LAUNCH");
+    }
   });
 });
 
@@ -252,6 +301,8 @@ function subjectRow(index: number) {
     consent_future_contact_optional: "no",
     capture_mode: "webRgbGuided",
     capture_device_label: "test-only-device",
+    capture_device_type: "mobile-browser",
+    lighting_condition: "soft-even-light",
     straight_on_present: "yes",
     left45_present: "yes",
     right45_present: "yes",
@@ -318,6 +369,7 @@ function resultRow(overrides: Partial<Record<(typeof resultColumns)[number], str
     capture_quality_state: "passed",
     capture_quality_score: "0.9",
     capture_failure_flag: "no",
+    quality_pass_without_full_restart: "yes",
     reviewer_a_id: "reviewer-a",
     reviewer_b_id: "reviewer-b",
     reviewers_agreed_top_choice: "yes",
@@ -335,6 +387,10 @@ function resultRow(overrides: Partial<Record<(typeof resultColumns)[number], str
     repeat_scan_same_top_choice: "yes",
     repeat_scan_overlap_count: "3",
     confidence_perception_1_to_5: "4",
+    screenshot_refinement_completed: "yes",
+    screenshot_refinement_result: "keep-current-recommendation",
+    screenshot_refinement_improved: "yes",
+    screenshot_media_deleted_confirmed: "yes",
     disagreement_logged: "no",
     mismatch_reason_codes: "jawMismatch",
     raw_media_deleted_confirmed: "yes",

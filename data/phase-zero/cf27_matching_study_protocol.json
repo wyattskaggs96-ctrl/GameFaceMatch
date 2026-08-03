@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "cf27-matching-study-protocol-v1",
+  "status": "NOT_STARTED",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "studyScope": "College Football 27 top-three matching feasibility study",
+  "participantTarget": {
+    "minimum": 10,
+    "maximum": 20
+  },
+  "prerequisites": [
+    {
+      "id": "verified-production-catalog",
+      "required": true,
+      "currentStatus": "BLOCKED",
+      "reason": "The study must not begin until a nonempty verified production CF27 catalog can generate real top-three recommendations."
+    },
+    {
+      "id": "privacy-consent-review",
+      "required": true,
+      "currentStatus": "REQUIRED_BEFORE_COLLECTION",
+      "reason": "Consent text must be reviewed for the actual study context before collecting participant media."
+    },
+    {
+      "id": "local-deletion-dry-run",
+      "required": true,
+      "currentStatus": "REQUIRED_BEFORE_COLLECTION",
+      "reason": "The operator must prove raw-media, screenshot-media, and derived-profile deletion before accepting real participant records."
+    }
+  ],
+  "allowedSourceTypes": {
+    "realStudyRows": ["actualStudy"],
+    "excludedFromRealMetrics": ["testFixture", "synthetic", "fixture", "demoData", "localDeveloperSample"]
+  },
+  "dataClasses": [
+    {
+      "id": "raw_capture_media",
+      "retentionDefault": "delete_after_profile_or_review",
+      "committedToRepository": false,
+      "metricEligible": false
+    },
+    {
+      "id": "derived_face_profile",
+      "retentionDefault": "local_only_until_study_record_finalized_or_deleted",
+      "committedToRepository": false,
+      "metricEligible": false
+    },
+    {
+      "id": "recommendation_record",
+      "retentionDefault": "non_image_study_record",
+      "committedToRepository": true,
+      "metricEligible": true
+    },
+    {
+      "id": "study_response",
+      "retentionDefault": "pseudonymous_non_image_study_record",
+      "committedToRepository": true,
+      "metricEligible": true
+    },
+    {
+      "id": "screenshot_refinement_media",
+      "retentionDefault": "delete_after_refinement_review",
+      "committedToRepository": false,
+      "metricEligible": false
+    }
+  ],
+  "targets": {
+    "captureCompletionRate": 0.8,
+    "qualityPassWithoutFullRestartRate": 0.75,
+    "topOneAcceptanceRate": 0.5,
+    "topThreeUsefulMatchRate": 0.8,
+    "rawDataDeletionConfirmationRate": 1
+  },
+  "requiredTemplates": [
+    "data/phase-zero/manual_matching_subjects.template.csv",
+    "data/phase-zero/manual_matching_reviews.template.csv",
+    "data/phase-zero/manual_matching_results.template.csv",
+    "data/phase-zero/manual_matching_repeatability.template.csv"
+  ],
+  "analysisCommand": "npm run phase-zero:manual-matching -- analyze",
+  "rules": [
+    "Do not run the study until the verified production catalog prerequisite is satisfied.",
+    "Do not store participant names or direct identifiers in committed study rows.",
+    "Do not treat fixture rows as completed real subjects.",
+    "Do not use study rows as production catalog evidence.",
+    "Do not retain raw face media by default.",
+    "Do not claim the target metrics are achieved until 10 or more complete real participant records exist."
+  ]
+}

@@ -16,6 +16,7 @@ import {
   recordOriginalTopThreeRecommendations,
   recordParticipantPreference,
   recordRepeatScanResult,
+  recordScreenshotRefinementResult,
   validateManualMatchingStudyOperation,
   type Phase0ManualMatchingStudyOperation,
   type Phase0ManualStudyIndependentReview,
@@ -128,6 +129,23 @@ describe("Phase 0 manual matching study operational module", () => {
     expect(serialized).not.toContain("faceImage");
     expect(report.publicSharingEnabled).toBe(false);
   });
+
+  it("blocks completed screenshot-refinement rows until screenshot media deletion is confirmed", () => {
+    const operation = completeParticipantWorkflow();
+    const participant = {
+      ...(operation.participants[0] as Phase0ManualStudyParticipant),
+      screenshotRefinementResult: {
+        completed: true,
+        improvedResult: true,
+        screenshotMediaDeleted: false,
+        notes: "Synthetic screenshot refinement result with deletion intentionally missing."
+      }
+    };
+
+    const issues = validateManualMatchingStudyOperation({ ...operation, participants: [participant] });
+
+    expect(issues.map((issue) => issue.code)).toContain("screenshotMediaDeletionNotConfirmed");
+  });
 });
 
 function completeParticipantWorkflow(): Phase0ManualMatchingStudyOperation {
@@ -200,6 +218,12 @@ function completeParticipantWorkflow(): Phase0ManualMatchingStudyOperation {
     topThreeOverlapCount: 2,
     notes: "Synthetic repeat scan comparison."
   }, "2026-07-13T01:32:00.000Z");
+  participant = recordScreenshotRefinementResult(participant, {
+    completed: true,
+    improvedResult: true,
+    screenshotMediaDeleted: true,
+    notes: "Synthetic screenshot refinement loop completed and temporary screenshot media was deleted."
+  }, "2026-07-13T01:33:00.000Z");
   participant = confirmRawMediaDeletion(participant, {
     completedAt: "2026-07-13T01:35:00.000Z",
     verifiedBy: "synthetic-privacy-reviewer"

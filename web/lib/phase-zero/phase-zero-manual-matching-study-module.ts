@@ -2,6 +2,7 @@ import type { CapturedAngleID, CaptureMode, DataSourceType, ISODateString } from
 import type { Phase0EntityID, Phase0VersionID } from "./phase-zero-domain";
 import {
   evaluatePhase0ManualMatchingStudy,
+  type Phase0RateMetric,
   type Phase0ManualMatchingEvaluationReport
 } from "./phase-zero-manual-matching-evaluation";
 import {
@@ -47,6 +48,13 @@ export interface Phase0ManualStudyReferenceImageCheck {
 
 export type Phase0ManualStudyReferenceImageChecklist = Record<CapturedAngleID, Phase0ManualStudyReferenceImageCheck>;
 
+export interface Phase0ManualStudyScreenshotRefinementResult {
+  completed: boolean;
+  improvedResult: boolean | null;
+  screenshotMediaDeleted: boolean;
+  notes: string;
+}
+
 export interface Phase0ManualStudyConsentCheckpoint extends Phase0ManualStudyConsentRecord {
   allowsPublicSharing: boolean;
   publicSharingDefault: false;
@@ -68,7 +76,10 @@ export interface Phase0ManualStudyParticipant {
   consentCheckpoint: Phase0ManualStudyConsentCheckpoint | null;
   captureMode: CaptureMode;
   captureDeviceLabel: string;
+  captureDeviceType: string;
+  lightingCondition: string;
   captureQualitySummary: Phase0StudyCaptureQualitySummary;
+  qualityPassedWithoutFullRestart: boolean | null;
   referenceImageChecklist: Phase0ManualStudyReferenceImageChecklist;
   originalTopThreeRecommendations: Phase0OriginalRecommendationSnapshot[];
   assignedReviewerIDs: string[];
@@ -78,6 +89,7 @@ export interface Phase0ManualStudyParticipant {
   finalInGameSelection: Phase0FinalInGameSelection | null;
   resemblanceRating: number | null;
   repeatScanResult: Phase0RepeatScanResult | null;
+  screenshotRefinementResult: Phase0ManualStudyScreenshotRefinementResult | null;
   mainMismatchReasons: Phase0ManualMismatchReason[];
   rawMediaDeletionState: Phase0RawMediaDeletionState;
   createdAt: ISODateString;
@@ -141,10 +153,15 @@ export interface Phase0ManualMatchingStudyDashboard {
     sameTopChoiceCount: number;
     averageTopThreeOverlap: number | null;
   } | "not measured";
+  scanCompletion: Phase0RateMetric | "not measured";
+  qualityPassWithoutFullRestart: Phase0RateMetric | "not measured";
   captureFailure: {
     failedCaptureCount: number;
     denominator: number;
   } | "not measured";
+  screenshotRefinementCompletion: Phase0RateMetric | "not measured";
+  screenshotRefinementImprovement: Phase0RateMetric | "not measured";
+  deletionSuccess: Phase0RateMetric | "not measured";
   reviewerAgreement: Phase0ManualMatchingEvaluationReport["interReviewerAgreement"] | "not measured";
   confidenceCalibration: Phase0ManualMatchingEvaluationReport["confidenceCalibration"] | "not measured";
 }
@@ -204,6 +221,8 @@ export function addManualStudyParticipant(
   input: {
     captureMode: CaptureMode;
     captureDeviceLabel: string;
+    captureDeviceType?: string;
+    lightingCondition?: string;
     createdAt: ISODateString;
     participantID?: Phase0EntityID;
     referenceImageChecklist?: Phase0ManualStudyReferenceImageChecklist;
@@ -218,6 +237,8 @@ export function addManualStudyParticipant(
     consentCheckpoint: null,
     captureMode: input.captureMode,
     captureDeviceLabel: input.captureDeviceLabel.trim() || "unknown-capture-device",
+    captureDeviceType: input.captureDeviceType?.trim() || "unknown-device-type",
+    lightingCondition: input.lightingCondition?.trim() || "unknown-lighting",
     captureQualitySummary: {
       qualityState: "notRecorded",
       overallScore: null,
@@ -225,6 +246,7 @@ export function addManualStudyParticipant(
       advisoryIssueCount: 0,
       notes: "Capture quality has not been recorded for this participant."
     },
+    qualityPassedWithoutFullRestart: null,
     referenceImageChecklist: input.referenceImageChecklist ?? createReferenceImageChecklist(),
     originalTopThreeRecommendations: [],
     assignedReviewerIDs: [],
@@ -234,6 +256,7 @@ export function addManualStudyParticipant(
     finalInGameSelection: null,
     resemblanceRating: null,
     repeatScanResult: null,
+    screenshotRefinementResult: null,
     mainMismatchReasons: [],
     rawMediaDeletionState: {
       status: "pendingDeletion",
@@ -264,11 +287,13 @@ export function recordOriginalTopThreeRecommendations(
 export function recordCaptureQualitySummary(
   participant: Phase0ManualStudyParticipant,
   captureQualitySummary: Phase0StudyCaptureQualitySummary,
-  updatedAt: ISODateString
+  updatedAt: ISODateString,
+  qualityPassedWithoutFullRestart: boolean | null = participant.qualityPassedWithoutFullRestart
 ): Phase0ManualStudyParticipant {
   return {
     ...participant,
     captureQualitySummary,
+    qualityPassedWithoutFullRestart,
     updatedAt
   };
 }
@@ -341,6 +366,18 @@ export function recordRepeatScanResult(
   return {
     ...participant,
     repeatScanResult,
+    updatedAt
+  };
+}
+
+export function recordScreenshotRefinementResult(
+  participant: Phase0ManualStudyParticipant,
+  screenshotRefinementResult: Phase0ManualStudyScreenshotRefinementResult,
+  updatedAt: ISODateString
+): Phase0ManualStudyParticipant {
+  return {
+    ...participant,
+    screenshotRefinementResult,
     updatedAt
   };
 }
@@ -473,9 +510,12 @@ export function createManualMatchingStudyDashboard(
   const enoughObservations = operation.sourceType !== "testFixture" && participantsCompleted >= MANUAL_STUDY_MIN_PARTICIPANTS;
   const repeatScans = operation.participants.map((participant) => participant.repeatScanResult).filter((repeat): repeat is Phase0RepeatScanResult => Boolean(repeat?.completed));
   const failedCaptures = operation.participants.filter((participant) => participant.captureQualitySummary.qualityState === "failed").length;
+  const completedParticipants = operation.participants.filter((participant) => participant.status === "complete");
+  const screenshotRefinements = completedParticipants.map((participant) => participant.screenshotRefinementResult).filter((result): result is Phase0ManualStudyScreenshotRefinementResult => Boolean(result?.completed));
+  const dashboardLabel = "Calculated from complete real submitted study records.";
   return {
     status: enoughObservations ? "measured" : "notMeasured",
-    measurementLabel: enoughObservations ? "Calculated from complete real submitted study records." : "Not measured until at least 10 complete real participant records exist.",
+    measurementLabel: enoughObservations ? dashboardLabel : "Not measured until at least 10 complete real participant records exist.",
     participantsCompleted,
     participantTargetRange: operation.participantTargetRange,
     topOneAcceptance: enoughObservations ? evaluation.topOneUsefulMatchRate : "not measured",
@@ -488,11 +528,24 @@ export function createManualMatchingStudyDashboard(
           averageTopThreeOverlap: average(repeatScans.map((repeat) => repeat.topThreeOverlapCount).filter((value): value is number => typeof value === "number"))
         }
       : "not measured",
+    scanCompletion: enoughObservations ? dashboardRate(participantsCompleted, operation.participants.length, operation.sourceType === "testFixture", dashboardLabel) : "not measured",
+    qualityPassWithoutFullRestart: enoughObservations
+      ? dashboardRate(completedParticipants.filter((participant) => participant.qualityPassedWithoutFullRestart).length, completedParticipants.length, operation.sourceType === "testFixture", dashboardLabel)
+      : "not measured",
     captureFailure: enoughObservations
       ? {
           failedCaptureCount: failedCaptures,
           denominator: operation.participants.length
         }
+      : "not measured",
+    screenshotRefinementCompletion: enoughObservations
+      ? dashboardRate(screenshotRefinements.length, completedParticipants.length, operation.sourceType === "testFixture", dashboardLabel)
+      : "not measured",
+    screenshotRefinementImprovement: enoughObservations
+      ? dashboardRate(screenshotRefinements.filter((result) => result.improvedResult).length, screenshotRefinements.length, operation.sourceType === "testFixture", dashboardLabel)
+      : "not measured",
+    deletionSuccess: enoughObservations
+      ? dashboardRate(completedParticipants.filter((participant) => participant.rawMediaDeletionState.status === "deleted" && (participant.screenshotRefinementResult?.screenshotMediaDeleted ?? true)).length, completedParticipants.length, operation.sourceType === "testFixture", dashboardLabel)
       : "not measured",
     reviewerAgreement: enoughObservations ? evaluation.interReviewerAgreement : "not measured",
     confidenceCalibration: enoughObservations ? evaluation.confidenceCalibration : "not measured"
@@ -533,6 +586,9 @@ function validateParticipant(participant: Phase0ManualStudyParticipant): Phase0M
   }
   if (participant.rawMediaDeletionState.status !== "deleted" || !participant.rawMediaDeletionState.completedAt || !participant.rawMediaDeletionState.verifiedBy) {
     issues.push({ code: "rawMediaDeletionNotConfirmed", message: "Raw-media deletion must be confirmed before the participant result is complete.", severity: "blocking", participantID: participant.participantID });
+  }
+  if (participant.screenshotRefinementResult?.completed && !participant.screenshotRefinementResult.screenshotMediaDeleted) {
+    issues.push({ code: "screenshotMediaDeletionNotConfirmed", message: "Screenshot-refinement media must be deleted before the participant result is complete.", severity: "blocking", participantID: participant.participantID });
   }
   return issues;
 }
@@ -602,4 +658,14 @@ function averageOriginalRecommendationConfidence(recommendations: Phase0Original
 
 function average(values: number[]) {
   return values.length > 0 ? values.reduce((total, value) => total + value, 0) / values.length : null;
+}
+
+function dashboardRate(numerator: number, denominator: number, fixtureDerived: boolean, label: string): Phase0RateMetric {
+  return {
+    numerator,
+    denominator,
+    rate: denominator > 0 ? numerator / denominator : null,
+    fixtureDerived,
+    label
+  };
 }

@@ -2,9 +2,20 @@
 
 ## Immediate Next Prompt
 
-`GFM | Q04 | PROMPT 098 | PHASE 04 | Ingest CF27 minimum recaptures and import second-verifier results`
+`GFM | Q04 | PROMPT 101 | PHASE 03 | Classify locked media baseline into supported catalog subset`
 
-Purpose: after Wyatt supplies the minimum genuine recapture recordings and a real second human returns completed verifier files, ingest and reconcile that evidence, import verifier decisions, create discrepancy records, refresh the evidence/queue artifacts, and run the production promotion gate without promoting incomplete or disputed records.
+Purpose: use `OWNER_MEDIA_BASELINE_LOCKED` to classify every visible option/category into explicit evidence-support states, reclassify historical recapture tasks as limitations/verifier/post-launch work, and create a supported-subset verification package without requiring additional owner recordings.
+
+## Owner Media Baseline Decision
+
+- Decision: `OWNER_MEDIA_BASELINE_LOCKED`
+- Owner: Wyatt Skaggs
+- Date: 2026-08-03
+- Locked videos: 15 total, 12 unique, 3 exact duplicates
+- Games represented: EA Sports FC player creator footage, NBA 2K26 Create A Player footage, College Football 27 create-player footage
+- Additional owner media required for initial launch: no
+- Historical recapture queues remain preserved as evidence-quality references, not owner launch blockers.
+- Production facts remain unchanged: second-verified records 0, production-approved records 0, production catalog records 0.
 
 ## Prompt 090 Result
 
@@ -85,19 +96,18 @@ Purpose: after Wyatt supplies the minimum genuine recapture recordings and a rea
 - Fixture/test participants are excluded from real study reporting.
 - Study status remains `NOT_STARTED`: 0 valid participants, 0 completed trials, no measured top-one acceptance, no measured top-three usefulness, and no measured matching accuracy.
 
-## Prompt 098 Acceptance
+## Prompt 101 Acceptance
 
-- New owner recapture files are preserved as immutable source masters.
-- Every new master is hashed, inventoried, and linked to a recapture task.
-- Only directly observed facts update evidence, timeline, candidate, and issue records.
-- Completed verifier files are imported only after a real second human supplies them.
-- Disagreements preserve primary and verifier observations and create discrepancy records.
-- The production-verification queue and promotion gate are regenerated.
-- No record is promoted unless every Prompt 095 production gate passes.
+- Every current CF27 candidate receives one allowed evidence-support state.
+- Historical recapture tasks are reclassified as limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch opportunities, or unsupported gaps.
+- Only `SUPPORTED`, `SUPPORTED_WITH_NOTES`, and `USER_CONFIRMATION_REQUIRED` records may enter the supported-subset verifier queue.
+- `LIMITED_EVIDENCE`, `UNSUPPORTED`, `DEPRECATED`, and `VERSION_MISMATCH` records remain unavailable for customer recommendations.
+- NBA 2K26 media is acknowledged as source evidence, but no production support is claimed.
+- No record is promoted unless every production gate passes after real second verification and catalog-manager approval.
 
 ## Later Production Path
 
-1. Resolve all verifier disagreements and recapture blockers.
+1. Classify the locked media baseline into supported, supported-with-notes, user-confirmation-required, limited, unsupported, deprecated, and version-mismatch states.
 2. Publish a nonempty verified production catalog only if all release gates pass.
 3. Connect server-authoritative paid access in test mode.
 4. Deploy Supabase/Auth/Storage/RLS through the approved credential workflow.

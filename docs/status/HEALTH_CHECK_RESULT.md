@@ -7,7 +7,7 @@
 
 ## Final Result
 
-`HOLD_OWNER`
+`HOLD_VERIFICATION`
 
 The repository now has one consolidated production-readiness health-check layer plus a post-Prompt-096 verification-readiness handoff, but the product is not production-ready.
 
@@ -25,6 +25,7 @@ The repository now has one consolidated production-readiness health-check layer 
 - Creator payouts: not started.
 - Athlete-comparison features: idea/product direction only.
 - Matching-study workflow: implemented for future use; 0 real participants.
+- Owner media baseline: locked for initial launch; no additional Wyatt recordings are required as an initial-launch prerequisite.
 
 ## Pricing Alignment Status
 
@@ -48,6 +49,10 @@ The CF27 evidence recapture package is now generated deterministically from the 
 
 Prompt 094 has also been steered with an exact existing-media verification gap audit. That audit exhausts current source videos, source-media records, derivative frames, timelines, candidates, primary-review artifacts, duplicate-review artifacts, and verifier queue data before requesting new capture. It reports 138 audit rows, 14 video-file rows, 92 candidate rows, 32 evidence-requirement rows, 3 locally opened source videos, 12 unique master videos, 2 duplicate uploads, 7 frame-reextraction requirements, 100 second-verifier confirmation rows, and 21 genuine recapture requirements. The minimum recapture queue is `data/phase-zero/cf27_minimum_recapture_queue.json`.
 
+## Owner Media Baseline Status
+
+Decision `OWNER_MEDIA_BASELINE_LOCKED` makes the current source-media inventory the final owner-provided media baseline for the initial product launch. Historical recapture queues remain preserved as evidence-quality records, but they are no longer mandatory owner launch blockers. Remaining gaps must be classified as supported, supported-with-notes, user-confirmation-required, limited, unsupported, deprecated, version-mismatch, verifier-confirmation, user-feedback, or post-launch improvement work.
+
 ## Frame Re-Extraction Packet Status
 
 The recoverable frame gaps identified by the existing-media audit now have a dedicated packet in `data/phase-zero/cf27_frame_reextractions.json`. It records 7 derivative frames across Eye color, Eye shape, Facial-hair colors, Hair colors, Mouth shape, Skin details, and Skin tone. These files are derivative evidence only; they do not create production records and do not replace second-human verification.
@@ -62,8 +67,8 @@ The privacy-safe manual matching study workflow exists for a future 10-20 partic
 
 ## Production Decision
 
-Do not launch publicly or privately as a paid production product yet. The product must first complete verified catalog data, connect server-authoritative paid access, validate matching usefulness, and complete legal/security/deployment gates.
+Do not launch publicly or privately as a paid production product yet. The product must first classify the locked media baseline into a supported subset, complete verified catalog data for that subset, connect server-authoritative paid access, validate matching usefulness, and complete legal/security/deployment gates.
 
 ## Authoritative Next Action
 
-Run `docs/status/NEXT_ACTION.md` for Prompt 098 after Wyatt supplies the minimum CF27 recapture recordings and a real second human returns completed verifier files.
+Run `docs/status/NEXT_ACTION.md` for Prompt 101 to classify the locked media baseline into supported catalog states and prepare the supported-subset verifier package.

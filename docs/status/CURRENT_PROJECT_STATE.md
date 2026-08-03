@@ -7,7 +7,7 @@
 **Repository checkpoint reviewed:** Prompt 097 verification-readiness handoff after Prompts 090-096
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
-**Current active phase:** CF27 owner recapture, second-human verification, and production-catalog gatekeeping
+**Current active phase:** locked owner media baseline, supported-subset evidence classification, second-human verification, and production-catalog gatekeeping
 **Exact next action:** `docs/status/NEXT_ACTION.md`
 
 This is the single current operational status source. Older audits, readiness reports, prompt reports, and closeouts are historical unless this document or the machine-readable files linked below explicitly cite them as current evidence.
@@ -16,7 +16,7 @@ This is the single current operational status source. Older audits, readiness re
 ```json
 {
   "schemaVersion": "current-project-state-v3",
-  "repositoryCheckpoint": "1411a9dac4cc5e110147af69dd0a54cb8dbb05d1",
+  "repositoryCheckpoint": "83c72f9b94d391955c9de023409160dd44430359",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -47,6 +47,8 @@ Creator Program source/planning material has been committed as project documenta
 
 Prompt 097 independently confirms that Prompts 090-096 left the repository in a fail-closed state: approved Launch Pack and All Access pricing are configured but checkout remains disabled, five launch targets are registered without false support claims, CF27 has a 92-record non-production verification queue, second verification remains at 0 decisions, the production catalog remains empty, and the matching-study workflow exists but has 0 real participants.
 
+Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media inventory as the final owner-provided media baseline for the initial product launch. Additional Wyatt recordings are no longer an initial-launch prerequisite. Historical recapture audits remain useful evidence-quality references, but remaining recapture tasks are reclassified as known evidence limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch improvements, or unsupported option/category gaps where evidence is insufficient.
+
 ## Actually Working
 
 - Next.js/React/TypeScript web app builds and has extensive tested local flows.
@@ -56,9 +58,11 @@ Prompt 097 independently confirms that Prompts 090-096 left the repository in a 
 - College Football 27 Phase 0 tooling exists for source-video inventory, evidence manifests, timelines, research candidates, primary review, verifier packages, production gates, and fail-closed publication checks.
 - College Football 27 production-verification queue exists as a machine-readable and human-readable non-production worklist; it contains 92 research candidates and assigns no second-verifier or production approval.
 - College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
-- College Football 27 evidence recapture package exists as a deterministic owner/verifier worklist. A follow-on existing-media verification gap audit now exhausts the current videos, source-media records, derivative frames, timelines, and queue records before asking for new recordings. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements required frame re-extraction instead of new capture, and 21 requirements are classified as genuine recapture requirements.
+- College Football 27 evidence recapture package exists as a deterministic historical owner/verifier worklist. A follow-on existing-media verification gap audit exhausts the current videos, source-media records, derivative frames, timelines, and queue records. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements required frame re-extraction instead of new capture, and historical minimum recapture tasks are now evidence limitations or post-launch improvement opportunities rather than owner launch prerequisites.
 - College Football 27 frame re-extraction packet exists for the 7 recoverable requirements from the existing-media audit. These derivative frames are marked `NOT_PRODUCTION_DATA` and `OBSERVED_PENDING_VERIFICATION`; they reduce unnecessary recapture but do not replace human verification.
+- Owner media baseline lock exists in `docs/status/OWNER_MEDIA_BASELINE_LOCKED.md` and `data/status/owner_media_baseline_lock.json`. It records 15 total source-media videos, 12 unique masters, 3 exact duplicates, three represented game contexts, evidence limitations, and the day-1 supported-subset policy.
 - College Football 27 production promotion now has an explicit fail-closed release-manager contract. A record cannot be promoted unless it has stable/native identity, complete platform/version/patch/mode/path/environment metadata, required evidence, primary-review attribution, second-verifier identity/date, an allowed final verifier status, catalog-manager disposition, duplicate/dependency resolution, production catalog version, and last-checked date. `VERIFIED_WITH_NOTES` also requires explicit catalog-manager acceptance. Current research records still fail closed.
+- Self-improving feedback-loop domain contract exists. It records a versioned `buildPassThreshold = 90`, final confirmed settings, same-profile personal preferences, consent-gated global-learning review candidates, and no automatic retraining.
 - Manual matching-study protocol, data dictionary, templates, privacy/deletion controls, and metric calculations exist for a future 10-20 person study. The study is `NOT_STARTED` because there is no verified production catalog or real top-three recommendation set.
 - The production College Football 27 catalog is intentionally empty and recommendations fail closed.
 - Supabase runtime/config/schema contracts exist locally and fail closed; no remote persistence is active.
@@ -77,8 +81,8 @@ Prompt 097 independently confirms that Prompts 090-096 left the repository in a 
 
 - Production recommendations: blocked by 0 production catalog records.
 - Second-verifier completion: blocked until a real second human uses the verifier workspace and submits attributable decisions.
-- CF27 production eligibility: blocked until owner records only the genuine recapture tasks listed in `data/phase-zero/cf27_minimum_recapture_queue.json`, Codex ingests those new recordings, and a second human verifies the existing 92 candidate observations plus any recapture-derived updates.
-- Five-game launch catalog: only CF27 and FC 26 have research material; NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026 have no verified catalog data.
+- CF27 production eligibility: blocked until existing locked-baseline evidence is classified into explicit support states, a second human verifies supported observations, unresolved limitations are either accepted with notes or excluded, duplicate/order/environment gaps are resolved for the supported subset, and catalog-manager approval creates an immutable release candidate.
+- Five-game launch catalog: CF27 and NBA 2K26 have source-media evidence; FC 26 has research material but is non-launch. Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026 have no verified catalog data.
 - Stripe Checkout, Stripe Billing, customer subscriptions, creator Stripe Connect onboarding, commission ledger, payout batches, and transfers are not implemented.
 - Launch game registry entries exist for College Football 27, NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026, but every launch game remains recommendation-unavailable until a verified production catalog exists.
 - Supabase remote database/storage/auth/RLS/Edge Functions/Cron are not deployed from this repo.
@@ -89,7 +93,7 @@ Prompt 097 independently confirms that Prompts 090-096 left the repository in a 
 
 1. No nonempty verified production catalog for any launch game.
 2. No second-person verification or catalog-manager production approval.
-3. CF27 production promotion is blocked until every candidate satisfies the Prompt 095 fail-closed contract and an approved nonempty release candidate exists.
+3. CF27 production promotion is blocked until a supported subset satisfies the fail-closed production contract and an approved nonempty release candidate exists.
 4. No production payment/subscription/entitlement implementation for the approved `$4.99` / `$9.99/year` model.
 5. No remote Supabase persistence, Auth, Storage, RLS, or scheduled-job deployment.
 6. No real user matching-validation study.
@@ -117,15 +121,18 @@ Prompt 097 independently confirms that Prompts 090-096 left the repository in a 
 | CF27 existing-media audit video rows | 14 | `data/phase-zero/cf27_existing_media_verification_gap_audit.json` |
 | CF27 existing-media audit frame-reextraction requirements | 7 | `data/phase-zero/cf27_existing_media_verification_gap_audit.json` |
 | CF27 completed frame re-extractions | 7 | `data/phase-zero/cf27_frame_reextractions.json` |
-| CF27 minimum genuine recapture tasks | 21 | `data/phase-zero/cf27_minimum_recapture_queue.json` |
+| CF27 historical minimum recapture tasks, now reclassified | 21 | `data/phase-zero/cf27_minimum_recapture_queue.json`, `data/status/owner_media_baseline_lock.json` |
+| Locked source-media videos | 15 | `data/status/owner_media_baseline_lock.json` |
+| Locked unique source masters | 12 | `data/status/owner_media_baseline_lock.json` |
+| Locked duplicate uploads | 3 | `data/status/owner_media_baseline_lock.json` |
 | CF27 second verified | 0 | `data/phase-zero/primary_review_status.json` |
 | CF27 production approved | 0 | `data/phase-zero/primary_review_status.json` |
 | Production catalog records | 0 | `data/catalog/production/catalog_manifest.json` |
 | CF27 source-video inventory rows | 14 | `data/phase-zero/video_inventory.json` |
 | CF27 unique source videos | 12 | `data/phase-zero/video_inventory.json` |
 | CF27 evidence manifest entries | 118 | `data/phase-zero/evidence_manifest.json` |
-| Generic source-media files inventoried | 8 | `data/source-media-index/source_media_manifest.json` |
-| Generic source-media processed files | 5 | `data/source-media-index/source_media_manifest.json` |
+| Direct all-video source-media files inventoried | 15 | `data/media-audit/all_video_inventory.json` |
+| Direct all-video unique source masters | 12 | `data/media-audit/all_video_inventory.json` |
 | FC 26 research controls | 28 | `data/research/fc26/player_creator_research.json` |
 | Real matching-study participants | 0 | `data/phase-zero/manual_matching_accuracy_analysis.json` |
 | Manual matching-study status | 0 participants / not started | `data/phase-zero/cf27_matching_study_protocol.json` |
@@ -138,5 +145,6 @@ Prompt 097 independently confirms that Prompts 090-096 left the repository in a 
 - Blocker register: `docs/status/PRODUCTION_BLOCKER_REGISTER.md`
 - Master completion plan: `docs/status/MASTER_COMPLETION_PLAN.md`
 - Evidence index: `docs/status/CODE_AND_FEATURE_EVIDENCE_INDEX.md`
+- Owner media baseline lock: `docs/status/OWNER_MEDIA_BASELINE_LOCKED.md`
 - Machine-readable health status: `data/status/project_health_status.json`
 - Next action: `docs/status/NEXT_ACTION.md`

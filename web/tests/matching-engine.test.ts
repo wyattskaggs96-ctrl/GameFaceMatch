@@ -334,6 +334,49 @@ describe("rule-based matching engine", () => {
     expect(engine().matchTopThree({ profile: syntheticProfile(), catalog: unverified })).toEqual([]);
   });
 
+  it("uses only recommendation-eligible evidence support states in production matching", async () => {
+    const catalog = productionStyleCatalog();
+    const evidenceScoped = await checksumCatalog({
+      ...catalog,
+      items: [
+        {
+          ...catalog.items[0],
+          stableInternalID: "unit-test-supported-with-notes",
+          evidenceSupportState: "SUPPORTED_WITH_NOTES" as const,
+          evidenceSupportNotes: ["Short pause duration; user confirmation recommended."]
+        },
+        {
+          ...catalog.items[1],
+          stableInternalID: "unit-test-user-confirmation-required",
+          evidenceSupportState: "USER_CONFIRMATION_REQUIRED" as const,
+          evidenceSupportNotes: ["Final user screenshot is required before personal success is recorded."]
+        },
+        {
+          ...catalog.items[2],
+          stableInternalID: "unit-test-limited-evidence",
+          evidenceSupportState: "LIMITED_EVIDENCE" as const,
+          evidenceSupportNotes: ["Visible internally only."]
+        }
+      ],
+      releaseNotes: {
+        summary: "Unit-test approved production-style catalog with explicit evidence support states.",
+        createdAt: "2026-07-10T00:00:00.000Z",
+        author: "unit-test",
+        changes: []
+      }
+    });
+    const matches = engine().matchTopThree({ profile: syntheticProfile(), catalog: evidenceScoped });
+
+    expect(matches.map((match) => match.catalogItem.stableInternalID)).toEqual([
+      "unit-test-supported-with-notes",
+      "unit-test-user-confirmation-required"
+    ]);
+    expect(matches.map((match) => match.evidenceSupportState)).toEqual(["SUPPORTED_WITH_NOTES", "USER_CONFIRMATION_REQUIRED"]);
+    expect(matches[0].explanation.uncertaintyNotes.join(" ")).toMatch(/Short pause duration/);
+    expect(matches[1].explanation.uncertaintyNotes.join(" ")).toMatch(/Final user screenshot/);
+    expect(matches[1].confidence.score).toBeLessThan(matches[0].confidence.score);
+  });
+
   it("generates explanations and traceability metadata", () => {
     const match = engine().matchTopThree({ profile: syntheticProfile(), catalog: fixtureCatalog, allowTestFixtures: true })[0];
     expect(match.scoreLabel).toBe("Match score based on the game’s available appearance options.");

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "owner-media-baseline-lock-v1",
+  "decisionID": "OWNER_MEDIA_BASELINE_LOCKED",
+  "decisionOwner": "Wyatt Skaggs",
+  "decisionDate": "2026-08-03",
+  "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
+  "lockedInventoryArtifact": "data/media-audit/all_video_inventory.json",
+  "lockedCoverageArtifact": "data/media-audit/game_video_coverage_map.json",
+  "lockedTimelineArtifact": "data/media-audit/all_video_timeline_map.json",
+  "historicalMissingRecordingArtifact": "data/media-audit/exact_missing_recordings.json",
+  "historicalCf27MinimumRecaptureQueue": "data/phase-zero/cf27_minimum_recapture_queue.json",
+  "sourceMediaSummary": {
+    "totalVideos": 15,
+    "uniqueMasters": 12,
+    "duplicateUploads": 3,
+    "openedSuccessfully": 15,
+    "fullDurationReadable": 15,
+    "sourceVideosModified": false,
+    "foldersInspected": [
+      "source-media/Fc26/player-creator",
+      "source-media/NBA2k 2026",
+      "source-media/NCAA 26"
+    ]
+  },
+  "gamesRepresented": [
+    {
+      "game": "EA Sports FC player creator footage",
+      "inventoryIDs": [
+        "MEDIA-001",
+        "MEDIA-002"
+      ],
+      "coverageSummary": "Skin, Head, Face, Hair, and facial-hair creator controls are visible with limitations; title/version/platform and complete selector boundaries are not proven."
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "inventoryIDs": [
+        "MEDIA-003",
+        "MEDIA-005",
+        "MEDIA-007",
+        "MEDIA-009",
+        "MEDIA-010",
+        "MEDIA-011",
+        "MEDIA-012"
+      ],
+      "duplicateInventoryIDs": [
+        "MEDIA-004",
+        "MEDIA-006",
+        "MEDIA-008"
+      ],
+      "coverageSummary": "Head selection, hair, skull, brow, ears, eyes, nose, cheeks, mouth, facial hair, chin, skin, body, and signature editor footage are visible with limitations; production-ready boundary and environment proof are not complete."
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "inventoryIDs": [
+        "MEDIA-013",
+        "MEDIA-014",
+        "MEDIA-015"
+      ],
+      "coverageSummary": "Head & Skin, Hair, and Styles menus are visible; environment/version/path proof, complete selector boundaries, some profile angles, and dependency tests remain limitations rather than owner recapture prerequisites."
+    }
+  ],
+  "currentEvidenceCoverage": {
+    "coverageRows": 54,
+    "byState": {
+      "CAPTURED_WITH_LIMITATIONS": 21,
+      "PARTIALLY_CAPTURED": 27,
+      "VISIBLE_BUT_NOT_OPENED": 1,
+      "NOT_SEEN_IN_ANY_VIDEO": 4,
+      "UNDETERMINED": 1
+    }
+  },
+  "knownEvidenceLimitations": [
+    "Some game title, platform, version, patch, and exact creation-path proof is not visible in source-media footage.",
+    "Some selector first/final/wrap boundaries and complete native counts are not proven by existing footage.",
+    "Some categories have limited profile or secondary-angle coverage.",
+    "Some settings are visible only briefly or with non-ideal framing.",
+    "Some dependency tests are not present as controlled one-variable tests.",
+    "Current media is research evidence until human verification and catalog-manager approval classify supported options."
+  ],
+  "existingUnresolvedBoundaries": [
+    "Do not infer missing native labels, indices, counts, menu paths, or slider ranges from incomplete footage.",
+    "Do not treat exact duplicate uploads as new evidence coverage.",
+    "Do not use limited or unsupported options as high-confidence recommendations.",
+    "Do not promote records without second-person verification and catalog-manager approval."
+  ],
+  "ownerMediaRequirement": {
+    "additionalOwnerMediaRequiredForInitialLaunch": false,
+    "additionalOwnerMediaMayImproveFutureVersions": true,
+    "voluntaryFutureMediaAllowed": true,
+    "userGeneratedEvidenceMayImproveProduct": true,
+    "recaptureAuditsPreservedAsHistoricalEvidence": true
+  },
+  "reclassificationPolicy": {
+    "mandatoryOwnerRecaptureLaunchBlocker": false,
+    "remainingRecaptureTasksBecome": [
+      "Known evidence limitation",
+      "Verifier-confirmation task",
+      "User-feedback learning opportunity",
+      "Post-launch improvement opportunity",
+      "Unsupported option/category where evidence is insufficient"
+    ],
+    "unsupportedOrInsufficientEvidenceBehavior": "Disable or omit the affected option/category rather than inventing it or blocking the entire product.",
+    "supportedSubsetBehavior": "Recommendations may use only sufficiently supported, version-compatible, non-fixture options from the locked baseline after verification and approval gates pass."
+  },
+  "dayOneProductTargets": {
+    "buildPassThreshold": 90,
+    "scoreRange": "0-100",
+    "scoreInterpretation": "Product build-match score based on available in-game controls, not identity probability or scientific certainty.",
+    "firstAttemptGuarantee": false,
+    "requiresScreenshotConfirmationLoop": true,
+    "requiresConsentedGlobalLearningReview": true,
+    "automaticRetrainingAllowed": false
+  },
+  "productionStatus": {
+    "productionCatalogRecords": 0,
+    "secondVerificationDecisions": 0,
+    "productionRecommendationsEnabled": false,
+    "notes": "The owner media baseline is locked, but production promotion still requires supported evidence classification, second-human verification, catalog-manager approval, and fail-closed release validation."
+  }
+}

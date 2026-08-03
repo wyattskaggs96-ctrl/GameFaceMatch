@@ -5,7 +5,7 @@
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`  
 **Branch:** `main`  
 **HEAD reviewed:** `1411a9dac4cc5e110147af69dd0a54cb8dbb05d1`
-**Outcome:** `HOLD_OWNER` for production launch; Prompt 097 readiness handoff records complete.
+**Outcome:** `HOLD_VERIFICATION` for production launch; owner media baseline is locked and Prompt 097 readiness handoff records complete.
 
 ## Executive Finding
 
@@ -31,7 +31,7 @@ Current controlling hierarchy:
 5. `docs/status/CURRENT_PROJECT_STATE.md`
 6. Domain-specific runbooks and machine-readable artifacts.
 
-The Creator Program source is now treated as the governing source for creator-program planning. Prompt 090 aligns active product/pricing configuration to the `$4.99` Launch Pack and `$9.99/year` All Access model while preserving checkout-disabled behavior. Prompt 097 confirms the subsequent CF27 verification queue, verifier workspace, evidence/recapture package, production gate, and matching-study workflow remain non-production and fail closed.
+The Creator Program source is now treated as the governing source for creator-program planning. Prompt 090 aligns active product/pricing configuration to the `$4.99` Launch Pack and `$9.99/year` All Access model while preserving checkout-disabled behavior. Prompt 097 confirms the subsequent CF27 verification queue, verifier workspace, evidence/recapture package, production gate, and matching-study workflow remain non-production and fail closed. Decision `OWNER_MEDIA_BASELINE_LOCKED` now makes the current source-media inventory the final owner-provided initial-launch baseline; additional Wyatt recordings are not an initial-launch prerequisite.
 
 ## Architecture Summary
 
@@ -90,7 +90,7 @@ Limitations:
 | --- | --- | --- |
 | EA SPORTS College Football 27 | Research evidence pipeline with 92 candidates; 0 production records. | Missing complete verified catalog, second verification, production approval, matching study. |
 | EA SPORTS FC 26 | Research-only player-creator data with 2 source videos and 28 controls; MVP recipe workflow exists. | Not one of the five launch games in current direction; no production catalog or verification. |
-| NBA 2K26 | Not started. | No source recordings, research catalog, verification, or adapter. |
+| NBA 2K26 | Source-media evidence exists from the direct all-video audit; no production catalog or adapter support. | No verified catalog, no production adapter path, no verification, and recommendations remain unavailable. |
 | Madden NFL 26 | Not started. | No source recordings, research catalog, verification, or adapter. |
 | EA SPORTS PGA TOUR | Not started. | No source recordings, research catalog, verification, or adapter. |
 | PBA Pro Bowling 2026 | Not started. | No source recordings, research catalog, verification, or adapter. |
@@ -213,7 +213,7 @@ It did not make production catalog records, second-verifier decisions, or produc
 - Prompt 090: active pricing is `launch_pack` at `$4.99` one-time and `all_access_annual` at `$9.99/year`; checkout remains disabled.
 - Prompt 092: canonical CF27 production-verification queue contains 92 non-production records, 92 evidence-linked records, 5 duplicate/near-duplicate records, 3 order-unresolved records, and 0 production-eligible records.
 - Prompt 093: second-verifier workspace and deterministic 25% secondary-angle sampling exist; local drafts cannot promote records.
-- Prompt 094: evidence recapture package and existing-media gap audit exist; the minimum genuine recapture queue contains 21 tasks.
+- Prompt 094: evidence recapture package and existing-media gap audit exist; the historical minimum genuine recapture queue contains 21 tasks, now reclassified by `OWNER_MEDIA_BASELINE_LOCKED` as limitations, verifier work, user-feedback opportunities, post-launch improvements, or unsupported gaps rather than mandatory owner recording blockers.
 - Frame re-extraction packet: 7 recoverable frame requirements were extracted from existing masters and remain `NOT_PRODUCTION_DATA`.
 - Prompt 095: production promotion gate requires explicit second verification, catalog-manager disposition, evidence/version/environment completeness, duplicate/dependency resolution, and immutable release versioning.
 - Prompt 096: privacy-safe matching-study workflow exists, but it is `NOT_STARTED` with 0 real participants and cannot run until a verified production catalog and real recommendations exist.
@@ -222,4 +222,4 @@ It did not make production catalog records, second-verifier decisions, or produc
 
 `BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS`
 
-The shortest safe path is to complete at least one verified production game catalog, then connect server-authoritative paid access, then run human validation.
+The shortest safe path is to classify the locked media baseline into a supported subset, complete real second-human verification and catalog-manager approval for that subset, release at least one nonempty production game catalog, then connect server-authoritative paid access and run human validation.

@@ -2,6 +2,7 @@ import type {
   AppearanceAttribute,
   AppearanceRecommendationCategory,
   CatalogFacialMeasurement,
+  EvidenceSupportState,
   FacialMeasurement,
   GameAppearanceMatch,
   GameCatalogItem,
@@ -16,6 +17,12 @@ import type {
   VerifiedAppearanceRecommendation
 } from "@/types/domain";
 import { classifyCatalogRecord } from "@/lib/catalog/catalog-record-classification";
+import {
+  evidenceSupportConfidenceMultiplier,
+  evidenceSupportLimitations,
+  getEvidenceSupportState,
+  isRecommendationEligibleEvidenceSupportState
+} from "@/lib/catalog/evidence-support-state";
 
 export interface MatchingEngine {
   readonly modelVersion: string;
@@ -213,7 +220,9 @@ function scoreCatalogItem(input: {
   const averageReliability = included.length > 0 ? included.reduce((total, contribution) => total + contribution.reliability, 0) / included.length : 0;
   const preferenceAdjustment = calculatePreferenceAdjustment(input.profile, input.item, input.preferences);
   const score = clamp(round((1 - weightedDistance) * 100 + preferenceAdjustment * 5), 0, 100);
-  const confidenceScore = clamp(round(evidenceCoverage * averageReliability), 0, 1);
+  const evidenceSupportState = getEvidenceSupportState(input.item);
+  const evidenceSupportNotes = evidenceSupportLimitations(input.item);
+  const confidenceScore = clamp(round(evidenceCoverage * averageReliability * evidenceSupportConfidenceMultiplier(evidenceSupportState)), 0, 1);
 
   return {
     id: `${input.item.stableInternalID}-${input.modelVersion}`,
@@ -222,11 +231,13 @@ function scoreCatalogItem(input: {
     score,
     scoreLabel,
     confidence: confidenceFromScore(confidenceScore),
-    explanation: buildExplanation(input.item, score, contributions, evidenceCoverage, averageReliability),
+    explanation: buildExplanation(input.item, score, contributions, evidenceCoverage, averageReliability, evidenceSupportState, evidenceSupportNotes),
     catalogVersion: input.item.catalogVersion ?? input.catalog.catalogVersion,
     modelVersion: input.modelVersion,
     featureContributions: contributions,
-    appearanceRecommendations: buildAppearanceRecommendations(input.profile, input.item, input.catalog)
+    appearanceRecommendations: buildAppearanceRecommendations(input.profile, input.item, input.catalog),
+    evidenceSupportState,
+    evidenceSupportNotes
   };
 }
 
@@ -493,7 +504,15 @@ function baseIntendedWeight(
   return appearanceFeature ? appearanceFeature.weight * preferenceForGroup(appearanceFeature.group, preferences) : 0;
 }
 
-function buildExplanation(item: GameCatalogItem, score: number, contributions: MatchFeatureContribution[], evidenceCoverage: number, averageReliability: number) {
+function buildExplanation(
+  item: GameCatalogItem,
+  score: number,
+  contributions: MatchFeatureContribution[],
+  evidenceCoverage: number,
+  averageReliability: number,
+  evidenceSupportState: EvidenceSupportState,
+  evidenceSupportNotes: string[]
+) {
   const included = contributions.filter((contribution) => contribution.included);
   const geometryIncluded = included.filter((contribution) => contribution.group === "geometry").length;
   const appearanceIncluded = included.filter((contribution) => contribution.group === "appearance").length;
@@ -512,6 +531,7 @@ function buildExplanation(item: GameCatalogItem, score: number, contributions: M
     .map((contribution) => `${String(contribution.featureID)} was not used: ${contribution.reason}`);
   if (evidenceCoverage < 0.75) uncertaintyNotes.push("Overall confidence is reduced because reliable feature evidence is incomplete.");
   if (averageReliability < 0.75) uncertaintyNotes.push("Overall confidence is reduced because profile or catalog measurement confidence is incomplete.");
+  if (evidenceSupportState !== "SUPPORTED") uncertaintyNotes.push(...evidenceSupportNotes);
   if (geometryIncluded === 0) uncertaintyNotes.push("No reliable geometry measurements were available for this catalog option.");
   if (appearanceIncluded === 0) uncertaintyNotes.push("Appearance selection was not used because catalog annotations or user-confirmed attributes were incomplete.");
 
@@ -684,6 +704,7 @@ function hasVerifiedMenuInstructions(item: GameCatalogItem, allowTestFixtures: b
 function isMatchableCatalogItem(item: GameCatalogItem, catalog: GameCatalogManifest, allowTestFixtures: boolean) {
   if (item.verificationState !== "verified") return false;
   if (!hasAllowedSourceType(item, allowTestFixtures)) return false;
+  if (!isRecommendationEligibleEvidenceSupportState(getEvidenceSupportState(item))) return false;
   if (allowTestFixtures) return true;
   if (!classifyCatalogRecord(item).productionAccessAllowed) return false;
   if (item.catalogVersion.identifier !== catalog.catalogVersion.identifier) return false;

@@ -22,6 +22,7 @@ describe("current project status consistency", () => {
       "CAPTURE_UI_READY",
       "LIVE_CAPTURE_SIGNALS_READY",
       "FULL_VERIFY_READY",
+      "OWNER_MEDIA_BASELINE_LOCKED",
       `${supabaseGatePrefix}_CODE_BOUNDARY_READY`,
       `${supabaseGatePrefix}_REMOTE_READY`,
       "OWNER_CAPTURE_PACKAGE_READY",
@@ -36,6 +37,20 @@ describe("current project status consistency", () => {
       "PRIVATE_BETA_READY",
       "PUBLIC_LAUNCH_READY"
     ]));
+    expect(result.ownerMediaBaselineLock).toMatchObject({
+      decisionID: "OWNER_MEDIA_BASELINE_LOCKED",
+      decisionOwner: "Wyatt Skaggs",
+      ownerMediaRequirement: {
+        additionalOwnerMediaRequiredForInitialLaunch: false
+      },
+      sourceMediaSummary: {
+        totalVideos: 15,
+        uniqueMasters: 12,
+        duplicateUploads: 3
+      }
+    });
+    expect(result.gateRegistry.gates.find((gate: { id: string }) => gate.id === "OWNER_CAPTURES_COMPLETE")?.status)
+      .not.toBe("BLOCKED_OWNER");
   });
 
   it("rejects stale claims that would imply production readiness without data", () => {

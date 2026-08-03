@@ -6,6 +6,15 @@ import type { SupportedGameID } from "@/lib/adapters/game-registry";
 export const SELF_IMPROVING_FEEDBACK_LOOP_VERSION = "self-improving-feedback-loop-v1";
 export const DEFAULT_BUILD_MATCH_PASSING_SCORE = 90;
 export const GLOBAL_LEARNING_REVIEW_MODEL_VERSION = "global-learning-review-queue-v1";
+export const DAY1_BUILD_MATCH_SCORE_CONFIG = {
+  schemaVersion: "build-match-score-config-v1",
+  configID: "day-1-build-match-threshold-v1",
+  buildPassThreshold: DEFAULT_BUILD_MATCH_PASSING_SCORE,
+  scoreRange: { min: 0, max: 100 },
+  customerFacingLabel: "Build match: {score}/100 based on the appearance options available in this game.",
+  interpretation:
+    "A score at or above the threshold passes the configured build-match target; it is not identity probability, scientific certainty, or a first-attempt guarantee."
+} as const;
 
 export type BuildMatchStatus = "passed" | "needsRefinement" | "blocked";
 export type FeedbackLoopStage =
@@ -26,6 +35,7 @@ export type GlobalLearningCandidateStatus =
 
 export interface BuildMatchScoreConfig {
   passingScore?: number;
+  buildPassThreshold?: number;
 }
 
 export interface BuildMatchScore {
@@ -202,7 +212,7 @@ export function completeSelfImprovingFeedbackLoop(input: FeedbackLoopInput): Fee
 }
 
 export function calculateBuildMatchScore(refinementResult: RefinementResult | null, config: BuildMatchScoreConfig = {}): BuildMatchScore {
-  const passingScore = config.passingScore ?? DEFAULT_BUILD_MATCH_PASSING_SCORE;
+  const passingScore = config.buildPassThreshold ?? config.passingScore ?? DAY1_BUILD_MATCH_SCORE_CONFIG.buildPassThreshold;
   const comparison = refinementResult?.comparisonReport;
   const profileComparison = comparison?.originalProfileComparison;
   const currentRecommendation = comparison?.currentRecommendation;

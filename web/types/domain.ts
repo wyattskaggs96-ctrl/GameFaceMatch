@@ -37,6 +37,14 @@ export type CaptureCapabilityStatus =
   | "unknownError";
 
 export type CatalogVerificationStatus = "verified" | "unverified" | "rejected" | "archived";
+export type EvidenceSupportState =
+  | "SUPPORTED"
+  | "SUPPORTED_WITH_NOTES"
+  | "USER_CONFIRMATION_REQUIRED"
+  | "LIMITED_EVIDENCE"
+  | "UNSUPPORTED"
+  | "DEPRECATED"
+  | "VERSION_MISMATCH";
 export type DataSourceType =
   | "production"
   | "research"
@@ -520,6 +528,8 @@ export interface GameCatalogItem {
     retiredReason?: string;
   };
   catalogManagerDisposition?: "approved" | "approvedWithNotes" | "rejected" | "repairRequested";
+  evidenceSupportState?: EvidenceSupportState;
+  evidenceSupportNotes?: string[];
   navigationInstructions?: NavigationInstruction[];
   catalogVersion: GameCatalogVersion;
   isTestFixture: boolean;
@@ -564,6 +574,8 @@ export interface GameAppearanceMatch {
   tieGroup?: number;
   featureContributions: MatchFeatureContribution[];
   appearanceRecommendations?: VerifiedAppearanceRecommendation[];
+  evidenceSupportState: EvidenceSupportState;
+  evidenceSupportNotes: string[];
 }
 
 export type AppearanceRecommendationCategory =

@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gameface-current-gate-registry-v1",
-  "generatedAt": "2026-08-02T18:31:53-04:00",
+  "generatedAt": "2026-08-03T00:30:00-04:00",
   "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
   "branch": "main",
-  "head": "43f75cabe8f41384572ddef93726bc5ff07daec8",
+  "head": "83c72f9b94d391955c9de023409160dd44430359",
   "statusCheckpoint": "commit-containing-this-file",
   "productionRecommendationsEnabled": false,
   "sourceArtifacts": {
@@ -12,6 +12,7 @@
     "productionCatalogManifest": "data/catalog/production/catalog_manifest.json",
     "ownerCapturePlan": "data/phase-zero/capture-closure/owner-capture-plan.json",
     "secondVerifierExecutionPackage": "data/phase-zero/second-verifier-execution-package/second_verifier_execution_package.json",
+    "ownerMediaBaselineLock": "data/status/owner_media_baseline_lock.json",
     "nonMutatingVerificationRunner": "scripts/verify-non-mutating.mjs"
   },
   "gates": [
@@ -86,29 +87,45 @@
       "nextPrompt": "089"
     },
     {
-      "id": "OWNER_CAPTURE_PACKAGE_READY",
+      "id": "OWNER_MEDIA_BASELINE_LOCKED",
       "status": "READY",
+      "evidence": [
+        "docs/status/OWNER_MEDIA_BASELINE_LOCKED.md",
+        "data/status/owner_media_baseline_lock.json",
+        "data/media-audit/all_video_inventory.json",
+        "docs/status/DIRECT_ALL_VIDEO_CONTENT_AUDIT.md"
+      ],
+      "blocker": null,
+      "owner": "Wyatt",
+      "releaseCondition": "Use the locked media baseline for the initial launch path; classify limitations into supported-subset states instead of requiring additional owner recordings.",
+      "nextPrompt": "101"
+    },
+    {
+      "id": "OWNER_CAPTURE_PACKAGE_READY",
+      "status": "READY_WITH_LIMITATIONS",
       "evidence": [
         "docs/phase-zero/CF27_CAPTURE_CLOSURE_PACKAGE.md",
         "data/phase-zero/capture-closure/owner-capture-plan.json",
         "data/phase-zero/capture-closure/issue-to-capture-traceability.json",
         "npm run cf27:capture-closure-package:check"
       ],
-      "blocker": null,
+      "blocker": "Historical owner-capture package is preserved for evidence-quality context, but OWNER_MEDIA_BASELINE_LOCKED supersedes additional owner recording as an initial-launch prerequisite.",
       "owner": "Codex",
-      "releaseCondition": "Wyatt records the listed capture sessions and places them in the approved intake location.",
-      "nextPrompt": "089"
+      "releaseCondition": "Do not treat historical recapture tasks as owner launch blockers; reclassify them as limitations, verifier tasks, user-feedback opportunities, post-launch improvements, or unsupported gaps.",
+      "nextPrompt": "101"
     },
     {
       "id": "OWNER_CAPTURES_COMPLETE",
-      "status": "BLOCKED_OWNER",
+      "status": "SUPERSEDED_BY_OWNER_DECISION",
       "evidence": [
+        "docs/status/OWNER_MEDIA_BASELINE_LOCKED.md",
+        "data/status/owner_media_baseline_lock.json",
         "data/phase-zero/capture-closure/owner-capture-plan.json"
       ],
-      "blocker": "Required Xbox captures for environment/version, complete menus, Hair, facial hair, remaining face controls, and standardized recaptures are not present.",
+      "blocker": "Additional owner captures are no longer a mandatory initial-launch gate. Existing limitations must be handled through evidence-support states, second-verifier review, user confirmation, refinement, or unsupported-category exclusion.",
       "owner": "Wyatt",
-      "releaseCondition": "Required capture files are supplied, ingested, hashed, traced, and accepted without invented data.",
-      "nextPrompt": "089"
+      "releaseCondition": "Not applicable for initial-launch baseline after OWNER_MEDIA_BASELINE_LOCKED.",
+      "nextPrompt": "101"
     },
     {
       "id": "VERIFIER_PACKAGE_READY",
@@ -119,10 +136,10 @@
         "data/phase-zero/second-verifier-execution-package/verifier_dashboard.json",
         "npm run cf27:second-verifier-execution-package:check"
       ],
-      "blocker": "Package is executable, but candidate gate remains blocked until owner captures close missing evidence gaps.",
+      "blocker": "Package is executable, but production remains blocked until the locked baseline is classified into support states and a real second verifier submits attributable decisions.",
       "owner": "Codex",
-      "releaseCondition": "Verifier uses the package after the candidate set is complete enough for independent review.",
-      "nextPrompt": "089"
+      "releaseCondition": "Verifier uses the supported-subset package after evidence-support classification identifies which records are reviewable now and which records must remain limited or unsupported.",
+      "nextPrompt": "101"
     },
     {
       "id": "SECOND_VERIFICATION_COMPLETE",
@@ -130,10 +147,10 @@
       "evidence": [
         "data/phase-zero/second-verifier-execution-package/verifier_dashboard.json"
       ],
-      "blocker": "No real second-human verifier submission exists; dashboard reports 85 assigned and 0 completed.",
+      "blocker": "No real second-human verifier submission exists; dashboard reports 92 assigned and 0 completed.",
       "owner": "Second human verifier",
       "releaseCondition": "Verifier submits required worksheets/results and discrepancies are resolved from direct evidence.",
-      "nextPrompt": "after owner captures and candidate package freeze"
+      "nextPrompt": "after supported-subset classification and verifier package update"
     },
     {
       "id": "PRODUCTION_CATALOG_READY",

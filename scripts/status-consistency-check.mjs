@@ -6,6 +6,8 @@ import { fileURLToPath } from "node:url";
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const defaultStatusPath = "docs/status/CURRENT_PROJECT_STATE.md";
 const defaultGateRegistryPath = "data/status/current_gate_registry.json";
+const defaultOwnerMediaBaselineLockPath = "data/status/owner_media_baseline_lock.json";
+const defaultAllVideoInventoryPath = "data/media-audit/all_video_inventory.json";
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const statusPath = cliValue("--status") ?? defaultStatusPath;
@@ -25,6 +27,8 @@ export function validateCurrentProjectState({ root = repositoryRoot, statusPath 
   const assertions = extractStatusAssertions(statusDocument);
   const actual = readActualStatus(root);
   const gateRegistry = readJson(path.join(root, defaultGateRegistryPath));
+  const ownerMediaBaselineLock = readJson(path.join(root, defaultOwnerMediaBaselineLockPath));
+  const allVideoInventory = readJson(path.join(root, defaultAllVideoInventoryPath));
   const errors = [];
   const checks = [];
 
@@ -61,6 +65,7 @@ export function validateCurrentProjectState({ root = repositoryRoot, statusPath 
   });
 
   validateGateRegistry(errors, checks, gateRegistry, actual);
+  validateOwnerMediaBaselineLock(errors, checks, ownerMediaBaselineLock, allVideoInventory, gateRegistry);
 
   return {
     ok: errors.length === 0,
@@ -68,6 +73,7 @@ export function validateCurrentProjectState({ root = repositoryRoot, statusPath 
     checks,
     assertions,
     gateRegistry,
+    ownerMediaBaselineLock,
     actual
   };
 }
@@ -112,6 +118,7 @@ function validateGateRegistry(errors, checks, gateRegistry, actual) {
     "CAPTURE_UI_READY",
     "LIVE_CAPTURE_SIGNALS_READY",
     "FULL_VERIFY_READY",
+    "OWNER_MEDIA_BASELINE_LOCKED",
     "SUPABASE_CODE_BOUNDARY_READY",
     "SUPABASE_REMOTE_READY",
     "OWNER_CAPTURE_PACKAGE_READY",
@@ -167,6 +174,52 @@ function validateGateRegistry(errors, checks, gateRegistry, actual) {
     }
     return null;
   });
+
+  checkGateStatus(errors, checks, gates, "OWNER_MEDIA_BASELINE_LOCKED", (status) => {
+    if (!isReadyStatus(status)) return "Gate registry does not mark OWNER_MEDIA_BASELINE_LOCKED ready.";
+    return null;
+  });
+  checkGateStatus(errors, checks, gates, "OWNER_CAPTURES_COMPLETE", (status) => {
+    if (String(status) === "BLOCKED_OWNER") {
+      return "Gate registry still marks OWNER_CAPTURES_COMPLETE as BLOCKED_OWNER after OWNER_MEDIA_BASELINE_LOCKED.";
+    }
+    return null;
+  });
+}
+
+function validateOwnerMediaBaselineLock(errors, checks, ownerMediaBaselineLock, allVideoInventory, gateRegistry) {
+  checks.push({
+    name: "ownerMediaBaselineLock:decision",
+    decisionID: ownerMediaBaselineLock.decisionID,
+    decisionOwner: ownerMediaBaselineLock.decisionOwner,
+    additionalOwnerMediaRequiredForInitialLaunch:
+      ownerMediaBaselineLock.ownerMediaRequirement?.additionalOwnerMediaRequiredForInitialLaunch
+  });
+
+  if (ownerMediaBaselineLock.decisionID !== "OWNER_MEDIA_BASELINE_LOCKED") {
+    errors.push(`${defaultOwnerMediaBaselineLockPath} must record decisionID OWNER_MEDIA_BASELINE_LOCKED.`);
+  }
+  if (ownerMediaBaselineLock.decisionOwner !== "Wyatt Skaggs") {
+    errors.push(`${defaultOwnerMediaBaselineLockPath} must record Wyatt Skaggs as decision owner.`);
+  }
+  if (ownerMediaBaselineLock.ownerMediaRequirement?.additionalOwnerMediaRequiredForInitialLaunch !== false) {
+    errors.push(`${defaultOwnerMediaBaselineLockPath} must state additional owner media is not required for initial launch.`);
+  }
+
+  const baselineSummary = ownerMediaBaselineLock.sourceMediaSummary ?? {};
+  const inventorySummary = allVideoInventory.summary ?? {};
+  checkEqual(errors, checks, "ownerMediaBaseline.totalVideos", baselineSummary.totalVideos, inventorySummary.totalVideos);
+  checkEqual(errors, checks, "ownerMediaBaseline.uniqueMasters", baselineSummary.uniqueMasters, inventorySummary.uniqueVideos);
+  checkEqual(errors, checks, "ownerMediaBaseline.duplicateUploads", baselineSummary.duplicateUploads, inventorySummary.duplicateVideos);
+  checkEqual(errors, checks, "ownerMediaBaseline.openedSuccessfully", baselineSummary.openedSuccessfully, inventorySummary.videosOpened);
+  checkEqual(errors, checks, "ownerMediaBaseline.fullDurationReadable", baselineSummary.fullDurationReadable, inventorySummary.videosFullDurationReadable);
+  checkEqual(errors, checks, "ownerMediaBaseline.sourceVideosModified", baselineSummary.sourceVideosModified, inventorySummary.sourceVideosModified);
+
+  const gates = new Map((gateRegistry.gates ?? []).map((gate) => [gate.id, gate]));
+  const ownerCaptureGate = gates.get("OWNER_CAPTURES_COMPLETE");
+  if (ownerMediaBaselineLock.decisionID === "OWNER_MEDIA_BASELINE_LOCKED" && ownerCaptureGate?.status === "BLOCKED_OWNER") {
+    errors.push("OWNER_CAPTURES_COMPLETE cannot remain BLOCKED_OWNER after the owner media baseline is locked.");
+  }
 }
 
 function checkGateStatus(errors, checks, gates, gateID, validate) {

@@ -44,7 +44,13 @@ describe("game adapter isolation", () => {
       expect(definition.entitlementEligibility).toBe("eligibleWhenProductionSupported");
       expect(definition.customerFacingSupportState).not.toBe("supported");
     }
-    expect(getSupportedGameDefinition("nba-2k26").researchStatus).toBe("notStarted");
+    expect(getSupportedGameDefinition("nba-2k26")).toMatchObject({
+      researchStatus: "researchEvidenceExists",
+      productionCatalogAvailability: "empty",
+      recommendationAvailability: "unavailableNoProductionCatalog",
+      recommendationsEnabled: false,
+      customerFacingSupportState: "researchEvidenceCatalogUnavailable"
+    });
     expect(getSupportedGameDefinition("madden-nfl-26").recommendationAvailability).toBe("unavailableNotStarted");
     expect(getSupportedGameDefinition("ea-sports-pga-tour").productionCatalogNamespace).toBe("data/catalog/production/ea-sports-pga-tour");
     expect(getSupportedGameDefinition("pba-pro-bowling-2026").customerFacingSupportState).toBe("notStartedUnavailable");

@@ -7,7 +7,7 @@
 | Blocker | Why it matters | Owner | Required input/action |
 | --- | --- | --- | --- |
 | No verified production catalog records | Product cannot return real game settings. | Wyatt, Codex, second verifier | Complete evidence, verification, catalog-manager approval. Current production catalog count is 0. |
-| CF27 production promotion contract not yet satisfiable by any current record | Prevents research or partially verified records from becoming customer-facing data. | Wyatt, Codex, second verifier, catalog manager | Complete the 21 minimum owner recapture tasks, ingest new evidence, obtain real second-human decisions for the 92-record queue, resolve duplicates/order/environment gaps, record explicit manager acceptance, and create a release-candidate package. |
+| CF27 production promotion contract not yet satisfiable by any current record | Prevents research or partially verified records from becoming customer-facing data. | Codex, second verifier, catalog manager | Use the locked owner media baseline, classify every option/category into explicit evidence-support states, exclude unsupported/limited/version-mismatched records from customer recommendations, obtain real second-human decisions for supported records, resolve duplicates/order/environment gaps for the supported subset, record explicit manager acceptance, and create a release-candidate package. |
 | No production payment/subscription stack | Approved Launch Pack and All Access are configured but cannot collect money or grant entitlements. | Wyatt + Codex + Stripe | Implement test-mode Stripe Checkout/Billing/webhooks only after catalog and server-authoritative entitlement gates are ready. |
 | No server-authoritative entitlements | Customers cannot be safely granted paid access. | Codex | Supabase/Auth/payment integration with fail-closed checks. |
 | No real matching validation | Product promise is not measured. | Wyatt + study reviewers | Study workflow exists, but the 10-20 participant study must wait until verified catalog records and real top-three outputs exist. |
@@ -37,8 +37,9 @@
 | Offline/PWA service worker | Current docs intentionally avoid offline claims. |
 | Advanced creator analytics | Defer until creator payouts are trustworthy. |
 
-## HOLD_OWNER
+## HOLD_OWNER_DECISION
 
+- No additional owner source-media recording is required for the initial launch baseline. `OWNER_MEDIA_BASELINE_LOCKED` supersedes prior owner-recapture launch blockers.
 - Approve account requirement for paid Launch Pack and All Access purchases.
 - Approve account requirement for paid purchases.
 - Approve supported countries/currencies.

@@ -1,82 +1,62 @@
 # Next Action
 
-`GFM | Q04 | PROMPT 098 | PHASE 04 | Ingest CF27 minimum recaptures and import second-verifier results`
+`GFM | Q04 | PROMPT 101 | PHASE 03 | Classify locked media baseline into supported catalog subset`
 
 Repository:
 `/Users/skaggssystems/Developer/GameFaceMatch`
 
 Run after:
-`GFM | Q04 | PROMPT 097 | PHASE 04 | Verify queue and create production handoff`
+`GFM | OWNER DECISION | LOCK FINAL MEDIA BASELINE AND BUILD SELF-IMPROVING DAY-1 PRODUCT`
 
 ## Objective
 
-After Wyatt supplies only the minimum CF27 recapture recordings and a real second human completes the verifier package, ingest the new media and verifier files, reconcile them against the canonical queue, and regenerate the production-verification artifacts without promoting any disputed or incomplete record.
+Use the locked owner media baseline to classify every visible game option/category into explicit evidence-support states, then create a supported-subset verification package that can move toward day-1 recommendations without requiring additional owner recordings.
 
 ## Current Queue State
 
-- Current repository checkpoint before this handoff: `1411a9dac4cc5e110147af69dd0a54cb8dbb05d1`
-- Queue file: `data/phase-zero/production_verification_queue.json`
-- Human summary: `docs/phase-zero/CF27_PRODUCTION_VERIFICATION_QUEUE.md`
-- Internal workspace: Phase 0 status panel, second-verifier workspace
-- Verifier execution package: `data/phase-zero/second-verifier-execution-package/`
-- Evidence package: `data/phase-zero/evidence-recapture-package/evidence_quality_report.json`
-- Existing-media gap audit: `data/phase-zero/cf27_existing_media_verification_gap_audit.json`
-- Completed frame re-extractions: `data/phase-zero/cf27_frame_reextractions.json`
-- Minimum genuine recapture queue: `data/phase-zero/cf27_minimum_recapture_queue.json`
+- Owner media baseline decision: `OWNER_MEDIA_BASELINE_LOCKED`
+- Decision record: `data/status/owner_media_baseline_lock.json`
+- Human-readable lock: `docs/status/OWNER_MEDIA_BASELINE_LOCKED.md`
+- Direct all-video inventory: `data/media-audit/all_video_inventory.json`
+- Direct all-video timeline: `data/media-audit/all_video_timeline_map.json`
+- Direct all-video coverage map: `data/media-audit/game_video_coverage_map.json`
+- Historical missing-recording list: `data/media-audit/exact_missing_recordings.json`
+- Historical CF27 minimum recapture queue: `data/phase-zero/cf27_minimum_recapture_queue.json`
 - Production promotion gate: `scripts/cf27-production-catalog-release-manager.mjs`
 - Research candidates: 92
 - Evidence-linked queue records: 92
-- Review-ready records from current evidence: 92
-- Completed frame re-extractions: 7
-- Genuine recapture tasks still requiring new Xbox recording: 21
-- Duplicate or near-duplicate records: 5
-- Order-unresolved records: 3
-- Records with missing required production views: 87
-- Version/environment-gap records: 92
 - Second-verified records: 0
 - Production-approved records: 0
-- Production-eligible records: 0
 - Production catalog records: 0
 - Matching-study participants: 0
 
-## Required Owner Action
+## Evidence Support States
 
-Wyatt must provide the minimum new console recordings from `data/phase-zero/cf27_minimum_recapture_queue.json`. The source masters must be placed unchanged in the approved Phase 0 intake location and must not be renamed, trimmed, recompressed, or edited.
+Use only:
 
-Each recording should:
+- `SUPPORTED`
+- `SUPPORTED_WITH_NOTES`
+- `USER_CONFIRMATION_REQUIRED`
+- `LIMITED_EVIDENCE`
+- `UNSUPPORTED`
+- `DEPRECATED`
+- `VERSION_MISMATCH`
 
-1. Use the recommended filename where practical.
-2. Show the exact menu/category/range requested by the recapture queue.
-3. Keep native labels, indices, selected values, and menu paths visible.
-4. Show environment/version/patch evidence where requested.
-5. Preserve canonical settings required by the recapture instruction.
-6. Avoid exposing private account, payment, serial-number, or credential data.
-
-## Required Second-Human Action
-
-A real second verifier must complete the package in `data/phase-zero/second-verifier-execution-package/` and return the completed import files. Codex must not simulate this work.
-
-The verifier must provide:
-
-1. Verifier identity or verifier ID.
-2. Verification date.
-3. Environment/platform/version/mode/path metadata.
-4. Independent counts and native-order observations.
-5. Required front-view confirmations.
-6. Deterministic secondary-angle sample decisions.
-7. Notes for every non-clean decision.
-8. Final sign-off.
+Only `SUPPORTED`, `SUPPORTED_WITH_NOTES`, and `USER_CONFIRMATION_REQUIRED` can participate in customer recommendation candidates after all production verification gates pass.
 
 ## Codex Can Do Next
 
-- Ingest supplied recapture masters through the evidence intake pipeline.
-- Hash, inventory, segment, and extract necessary derivative evidence.
-- Import verifier decisions after a real second human submits them.
-- Preserve both primary and verifier observations.
-- Create discrepancy records for count/order/environment/evidence disagreements.
-- Regenerate the existing-media audit, evidence recapture package, verifier queue, and production-verification queue.
-- Run the fail-closed production promotion gate and leave the catalog empty unless all required human gates are satisfied.
+1. Build the locked-baseline support-state classifier and reports.
+2. Map every existing CF27 candidate to one evidence-support state.
+3. Map visible NBA 2K26 media into research-only coverage without enabling recommendations.
+4. Convert historical recapture queues into limitation/verifier/post-launch categories.
+5. Generate a verifier package focused on supported and supported-with-notes subsets.
+6. Keep second verification, catalog-manager approval, and production release gates fail-closed.
+
+## Required Human Action
+
+A real second verifier is still required before production catalog publication. Wyatt is not required to provide additional source-media recordings for the initial launch baseline.
 
 ## Stop Point
 
-Do not publish a production catalog, run real recommendations, connect Stripe, connect remote Supabase, start a participant study, or claim matching accuracy during the next action. Production promotion remains blocked until second verification, discrepancy resolution, catalog-manager disposition, and all evidence/version/environment gates pass.
+Do not publish a production catalog, run paid checkout, claim matching accuracy, or mark records second-verified during Prompt 101. The output should be a supported-subset classification and verifier-ready package, not a production release.

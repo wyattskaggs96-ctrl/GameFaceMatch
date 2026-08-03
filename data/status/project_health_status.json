@@ -3,8 +3,8 @@
   "generatedAt": "2026-08-03T00:30:00-04:00",
   "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
   "branch": "main",
-  "head": "1411a9dac4cc5e110147af69dd0a54cb8dbb05d1",
-  "outcome": "HOLD_OWNER",
+  "head": "83c72f9b94d391955c9de023409160dd44430359",
+  "outcome": "HOLD_VERIFICATION",
   "productionReadiness": "BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS",
   "productionRecommendationsEnabled": false,
   "approvedBusinessDirection": {
@@ -47,15 +47,25 @@
     "cf27MinimumGenuineRecaptureTasks": 21,
     "cf27EvidenceManifestEntries": 118,
     "cf27VideoInventoryRows": 14,
+    "lockedSourceMediaVideos": 15,
+    "lockedUniqueSourceMasters": 12,
+    "lockedDuplicateUploads": 3,
     "fc26ResearchControls": 28
   },
   "gameStatus": {
     "college-football-27": "research_evidence_exists_production_catalog_empty",
-    "nba-2k26": "not_started",
+    "nba-2k26": "source_media_evidence_exists_production_catalog_empty",
     "madden-nfl-26": "not_started",
     "ea-sports-pga-tour": "not_started",
     "pba-pro-bowling-2026": "not_started",
     "ea-sports-fc-26": "research_only_non_launch"
+  },
+  "ownerMediaBaseline": {
+    "decisionID": "OWNER_MEDIA_BASELINE_LOCKED",
+    "decisionOwner": "Wyatt Skaggs",
+    "decisionDate": "2026-08-03",
+    "additionalOwnerMediaRequiredForInitialLaunch": false,
+    "source": "data/status/owner_media_baseline_lock.json"
   },
   "systems": {
     "webProductShell": "implemented_not_production_validated",
@@ -70,6 +80,6 @@
   },
   "nextAction": {
     "path": "docs/status/NEXT_ACTION.md",
-    "title": "GFM | Q04 | PROMPT 098 | PHASE 04 | Ingest CF27 minimum recaptures and import second-verifier results"
+    "title": "GFM | Q04 | PROMPT 101 | PHASE 03 | Classify locked media baseline into supported catalog subset"
   }
 }

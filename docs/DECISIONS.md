@@ -52,6 +52,10 @@ Reason: The owner has an existing Squarespace marketing site, but the GameFace M
 Status: Accepted
 Reason: Google MediaPipe Face Landmarker is an official, actively maintained, browser-compatible local landmark implementation with an Apache-2.0 runtime. It stays behind `FaceLandmarkProvider`, lazy-loads during capture analysis, uses a worker when practical, and must return unavailable/error states rather than fabricated landmarks when the reviewed local model asset is absent or fails.
 
+## D-014 — Owner media baseline locked for initial launch
+Status: Accepted
+Reason: Wyatt Skaggs has locked the current repository source-media inventory as the final owner-provided media baseline for the initial product launch. Additional owner recordings are no longer a prerequisite for completing the initial product. Existing media limitations must be preserved through evidence support states, confidence, verifier review, user confirmation, screenshot refinement, and post-launch improvement queues. This decision does not permit invented game options, fixture leakage, cross-version recommendations, skipped second verification, or production promotion without catalog-manager approval.
+
 ## Architecture Decision Records
 
 Detailed ADRs live under `docs/adr/` and clarify the current architecture without replacing this concise decision log. Where an ADR documents a gap, treat it as a follow-up implementation or validation task rather than silent permission to work around permanent rules.

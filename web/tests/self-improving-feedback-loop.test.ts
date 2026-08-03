@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   DEFAULT_BUILD_MATCH_PASSING_SCORE,
+  DAY1_BUILD_MATCH_SCORE_CONFIG,
   calculateBuildMatchScore,
   completeSelfImprovingFeedbackLoop,
   validateGlobalLearningApproval,
@@ -34,6 +35,8 @@ describe("self-improving feedback loop", () => {
 
     expect(score.score).toBe(94);
     expect(score.passingScore).toBe(DEFAULT_BUILD_MATCH_PASSING_SCORE);
+    expect(score.passingScore).toBe(DAY1_BUILD_MATCH_SCORE_CONFIG.buildPassThreshold);
+    expect(DAY1_BUILD_MATCH_SCORE_CONFIG.customerFacingLabel).toBe("Build match: {score}/100 based on the appearance options available in this game.");
     expect(score.status).toBe("passed");
     expect(score.scoreLabel).toMatch(/not identity probability/i);
   });
@@ -242,7 +245,9 @@ function matchFixture(input: { rank: 1 | 2 | 3; catalogItemID: string }): GameAp
     },
     catalogVersion,
     modelVersion: "unit-matcher-v1",
-    featureContributions: []
+    featureContributions: [],
+    evidenceSupportState: "SUPPORTED",
+    evidenceSupportNotes: []
   };
 }
 

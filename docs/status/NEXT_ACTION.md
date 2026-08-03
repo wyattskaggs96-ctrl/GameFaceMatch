@@ -1,14 +1,14 @@
-GFM | Q04 | PROMPT 095 | PHASE 02 | Ingest CF27 recapture recordings and refresh verification queue
+GFM | Q04 | PROMPT 096 | PHASE 03 | Re-extract recoverable CF27 frames, then ingest minimum recapture recordings
 
 Repository:
 `/Users/skaggssystems/Developer/GameFaceMatch`
 
 Run after:
-`GFM | Q04 | PROMPT 094 | PHASE 02 | Generate CF27 evidence and recapture package`
+`GFM | Q04 | PROMPT 095 | PHASE 03 | Enforce CF27 production promotion gate`
 
 ## Objective
 
-After Wyatt supplies only the genuine new console recordings requested by the existing-media verification gap audit, ingest those files, validate media metadata and hashes, extract direct observations, update evidence and candidate records, refresh the gap audit and recapture package, and regenerate the production-verification queue without promoting records.
+Attempt every frame-reextraction task identified by the existing-media verification gap audit, then after Wyatt supplies only the genuine new console recordings requested by that audit, ingest those files, validate media metadata and hashes, extract direct observations, update evidence and candidate records, refresh the gap audit and recapture package, and regenerate the production-verification queue without promoting records.
 
 ## Current Queue State
 
@@ -19,6 +19,7 @@ After Wyatt supplies only the genuine new console recordings requested by the ex
 - Owner checklist: `docs/phase-zero/CF27_OWNER_RECAPTURE_CHECKLIST.md`
 - Existing-media gap audit: `data/phase-zero/cf27_existing_media_verification_gap_audit.json`
 - Minimum genuine recapture queue: `data/phase-zero/cf27_minimum_recapture_queue.json`
+- Production promotion gate: `scripts/cf27-production-catalog-release-manager.mjs`
 - Queue records: 92
 - Evidence-linked records: 92
 - Missing-evidence records: 0
@@ -34,6 +35,7 @@ After Wyatt supplies only the genuine new console recordings requested by the ex
 - Second-verified records: 0
 - Production-approved records: 0
 - Production-eligible records: 0
+- Production catalog records: 0
 
 ## Required Owner Action
 
@@ -58,4 +60,4 @@ Recordings must:
 
 ## Stop Point
 
-Do not promote records, publish a production catalog, run real recommendations, connect Stripe, or connect remote Supabase during this next action. Prompt 095 can start with frame re-extraction work immediately, but new-media intake remains blocked until Wyatt supplies the minimum recapture recordings.
+Do not promote records, publish a production catalog, run real recommendations, connect Stripe, or connect remote Supabase during this next action. Prompt 096 can start with frame re-extraction work immediately, but new-media intake remains blocked until Wyatt supplies the minimum recapture recordings.

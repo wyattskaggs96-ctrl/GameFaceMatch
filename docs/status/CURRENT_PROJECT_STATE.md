@@ -4,7 +4,7 @@
 **Last reconciled:** 2026-08-02
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 094 existing-media verification gap audit after Prompt 093 second-verifier workspace
+**Repository checkpoint reviewed:** Prompt 095 CF27 production promotion gate after Prompt 094 existing-media verification gap audit
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
 **Current active phase:** CF27 evidence recapture, owner capture, and real human verification handoff
@@ -55,6 +55,7 @@ Creator Program source/planning material has been committed as project documenta
 - College Football 27 production-verification queue exists as a machine-readable and human-readable non-production worklist; it contains 92 research candidates and assigns no second-verifier or production approval.
 - College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
 - College Football 27 evidence recapture package exists as a deterministic owner/verifier worklist. A follow-on existing-media verification gap audit now exhausts the current videos, source-media records, derivative frames, timelines, and queue records before asking for new recordings. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements require frame re-extraction instead of new capture, and only 19 requirements are classified as genuine recapture requirements.
+- College Football 27 production promotion now has an explicit fail-closed release-manager contract. A record cannot be promoted unless it has stable/native identity, complete platform/version/patch/mode/path/environment metadata, required evidence, primary-review attribution, second-verifier identity/date, an allowed final verifier status, catalog-manager disposition, duplicate/dependency resolution, production catalog version, and last-checked date. `VERIFIED_WITH_NOTES` also requires explicit catalog-manager acceptance. Current research records still fail closed.
 - The production College Football 27 catalog is intentionally empty and recommendations fail closed.
 - Supabase runtime/config/schema contracts exist locally and fail closed; no remote persistence is active.
 - Payment/entitlement interfaces expose the approved Launch Pack and All Access products, but checkout remains unavailable and no client state can grant paid access.
@@ -84,11 +85,12 @@ Creator Program source/planning material has been committed as project documenta
 
 1. No nonempty verified production catalog for any launch game.
 2. No second-person verification or catalog-manager production approval.
-3. No production payment/subscription/entitlement implementation for the approved `$4.99` / `$9.99/year` model.
-4. No remote Supabase persistence, Auth, Storage, RLS, or scheduled-job deployment.
-5. No real user matching-validation study.
-6. No legal/tax/accounting approval for paid launch and creator payouts.
-7. No production deployment, monitoring, support, or incident-response operation.
+3. CF27 production promotion is blocked until every candidate satisfies the Prompt 095 fail-closed contract and an approved nonempty release candidate exists.
+4. No production payment/subscription/entitlement implementation for the approved `$4.99` / `$9.99/year` model.
+5. No remote Supabase persistence, Auth, Storage, RLS, or scheduled-job deployment.
+6. No real user matching-validation study.
+7. No legal/tax/accounting approval for paid launch and creator payouts.
+8. No production deployment, monitoring, support, or incident-response operation.
 
 ## Current Evidence Counts
 

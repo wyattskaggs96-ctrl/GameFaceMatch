@@ -108,7 +108,134 @@ describe("CF27 production catalog release manager", () => {
     fs.rmSync(root, { recursive: true, force: true });
     fs.rmSync(packageRoot, { recursive: true, force: true });
   });
+
+  it("rejects every non-publishable second-verifier final status", () => {
+    const blockedStatuses = [
+      "RECAPTURE_REQUIRED",
+      "VERSION_MISMATCH",
+      "MISSING_EVIDENCE",
+      "COUNT_MISMATCH",
+      "ORDER_MISMATCH",
+      "DEPENDENCY_UNRESOLVED",
+      "NOT_VERIFIED"
+    ];
+
+    for (const status of blockedStatuses) {
+      const { snapshot, cleanup } = snapshotForRecord((record) => {
+        record.verificationStatus = status;
+      });
+
+      expect(snapshot.promotedItems).toHaveLength(0);
+      expect(snapshot.promotionResults[0].reasons).toEqual(expect.arrayContaining([`blockedFinalVerificationStatus:${status}`]));
+      expect(snapshot.manifest.items).toHaveLength(0);
+
+      cleanup();
+    }
+  });
+
+  it("requires second-verifier attribution and date before promotion", () => {
+    const { snapshot, cleanup } = snapshotForRecord((record) => {
+      record.secondVerifierID = "";
+      record.secondVerificationDate = "";
+    });
+
+    expect(snapshot.promotedItems).toHaveLength(0);
+    expect(snapshot.promotionResults[0].reasons).toEqual(expect.arrayContaining([
+      "missing:secondVerifierID",
+      "missing:secondVerificationDate"
+    ]));
+
+    cleanup();
+  });
+
+  it("requires production version, environment, and last-checked metadata before promotion", () => {
+    const { snapshot, cleanup } = snapshotForRecord((record) => {
+      record.environmentID = "";
+      record.productionCatalogVersion = "";
+      record.lastCheckedDate = "";
+      record.catalogVersion.identifier = "";
+      record.catalogVersion.verifiedAt = null;
+    });
+
+    expect(snapshot.promotedItems).toHaveLength(0);
+    expect(snapshot.promotionResults[0].reasons).toEqual(expect.arrayContaining([
+      "missing:environmentID",
+      "missing:productionCatalogVersion",
+      "missing:lastCheckedDate",
+      "missing:catalogVersion.identifier",
+      "missing:catalogVersion.verifiedAt"
+    ]));
+
+    cleanup();
+  });
+
+  it("requires explicit catalog-manager acceptance for VERIFIED_WITH_NOTES", () => {
+    const blocked = snapshotForRecord((record) => {
+      record.verificationStatus = "VERIFIED_WITH_NOTES";
+      record.catalogManagerDisposition = "approved";
+      record.catalogManagerVerifiedWithNotesAcceptance = "";
+      record.verifiedWithNotesAcceptedByCatalogManager = false;
+    });
+
+    expect(blocked.snapshot.promotedItems).toHaveLength(0);
+    expect(blocked.snapshot.promotionResults[0].reasons).toContain("verifiedWithNotesNotAcceptedByCatalogManager");
+    blocked.cleanup();
+
+    const accepted = snapshotForRecord((record) => {
+      record.verificationStatus = "VERIFIED_WITH_NOTES";
+      record.catalogManagerDisposition = "approvedWithNotes";
+      record.catalogManagerVerifiedWithNotesAcceptance = "Catalog manager accepts the verifier notes for production v1 test-only release.";
+    });
+
+    expect(accepted.snapshot.promotedItems).toHaveLength(1);
+    accepted.cleanup();
+  });
+
+  it("rejects unresolved duplicates, dependencies, and wrong-game records", () => {
+    const { snapshot, cleanup } = snapshotForRecord((record) => {
+      record.game = "EA SPORTS College Football 26";
+      record.duplicateResolution = { status: "DUPLICATE_REVIEW_REQUIRED" };
+      record.dependencyResolution = { status: "DEPENDENCY_UNRESOLVED" };
+      record.dependencies = [{ dependencyID: "dep-platform", status: "DEPENDENCY_UNRESOLVED", evidenceIDs: [] }];
+    });
+
+    expect(snapshot.promotedItems).toHaveLength(0);
+    expect(snapshot.promotionResults[0].reasons).toEqual(expect.arrayContaining([
+      "unsupportedOrWrongGame",
+      "duplicateResolutionUnresolved",
+      "dependencyResolutionUnresolved",
+      "unresolvedDependency:dep-platform"
+    ]));
+
+    cleanup();
+  });
 });
+
+function snapshotForRecord(mutator: (record: Record<string, any>) => void) {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "gameface-release-mutated-"));
+  const { packageRoot, candidatePackage } = createProductionCatalogReleaseSelfCheckPackage();
+  mutator(candidatePackage.records[0]);
+  candidatePackage.items = candidatePackage.records;
+  candidatePackage.manifest.items = candidatePackage.records;
+  const activePath = writeJSON(root, "catalog_manifest.json", emptyActiveProduction());
+  const candidatePath = writeJSON(packageRoot, "candidate.json", candidatePackage);
+  const snapshot = buildProductionCatalogReleaseSnapshot({
+    repositoryRoot: root,
+    productionCatalogPath: activePath,
+    candidatePackagePath: candidatePath,
+    candidateImportReportPath: "missing-report.json",
+    releaseVersion: "cf27-test-only-production-candidate",
+    generatedAt
+  });
+
+  return {
+    snapshot,
+    cleanup() {
+      fs.rmSync(root, { recursive: true, force: true });
+      fs.rmSync(packageRoot, { recursive: true, force: true });
+    }
+  };
+}
 
 function emptyActiveProduction() {
   return {

@@ -7,6 +7,7 @@
 | Blocker | Why it matters | Owner | Required input/action |
 | --- | --- | --- | --- |
 | No verified production catalog records | Product cannot return real game settings. | Wyatt, Codex, second verifier | Complete evidence, verification, catalog-manager approval. |
+| CF27 production promotion contract not yet satisfiable by any current record | Prevents research or partially verified records from becoming customer-facing data. | Wyatt, Codex, second verifier, catalog manager | Complete the remaining evidence work, second verification, discrepancy resolution, explicit manager acceptance, and release-candidate package. |
 | No production payment/subscription stack | Approved Launch Pack and All Access are configured but cannot collect money or grant entitlements. | Wyatt + Codex + Stripe | Implement test-mode Stripe Checkout/Billing/webhooks only after catalog and server-authoritative entitlement gates are ready. |
 | No server-authoritative entitlements | Customers cannot be safely granted paid access. | Codex | Supabase/Auth/payment integration with fail-closed checks. |
 | No real matching validation | Product promise is not measured. | Wyatt + study reviewers | 10-20 participant study after verified catalog. |

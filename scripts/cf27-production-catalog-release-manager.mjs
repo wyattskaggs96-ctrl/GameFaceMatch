@@ -22,16 +22,36 @@ export const defaultGeneratedAt = "2026-07-14T00:00:00.000Z";
 const requiredPromotionFields = [
   "stableInternalID",
   "nativeOrder",
+  "visibleGameLabelOrIndex",
   "gameVersion",
   "patchVersion",
   "platform",
   "gameMode",
   "creationPath",
+  "environmentID",
+  "primaryResearcher",
+  "primaryReviewDecision",
+  "secondVerifierID",
+  "secondVerificationDate",
+  "productionCatalogVersion",
+  "lastCheckedDate",
   "catalogManagerDisposition",
-  "verificationState",
+  "verificationStatus",
   "sourceType"
 ];
 const requiredAngles = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"];
+const supportedProductionGame = "EA SPORTS College Football 27";
+const allowedPrimaryReviewDecisions = new Set(["PRIMARY_APPROVED", "PRIMARY_APPROVED_WITH_NOTES"]);
+const allowedFinalVerificationStatuses = new Set(["VERIFIED", "VERIFIED_WITH_NOTES"]);
+const blockedFinalVerificationStatuses = new Set([
+  "RECAPTURE_REQUIRED",
+  "VERSION_MISMATCH",
+  "MISSING_EVIDENCE",
+  "COUNT_MISMATCH",
+  "ORDER_MISMATCH",
+  "DEPENDENCY_UNRESOLVED",
+  "NOT_VERIFIED"
+]);
 const productionBlockedSourceTypes = new Set(["research", "researchDraft", "researchCandidate", "shippingGameVideoResearch", "publicSourceOnly", "testFixture", "demoData", "localDeveloperSample"]);
 const placeholderPattern = /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK|UNKNOWN_ORIGIN|XBOXUNKNOWN)\b/i;
 
@@ -148,20 +168,35 @@ export function createProductionCatalogReleaseSelfCheckPackage() {
     fs.writeFileSync(absolutePath, `${assetID}:${angle}`);
     return { assetID, evidenceID: assetID, angle, role: angle, relativePath, sha256: sha256File(absolutePath), capturedAt: "2026-07-14T00:00:00.000Z" };
   });
+  const environment = {
+    environmentID: "CF27_TESTONLY_ENV",
+    platform: "test-only-platform",
+    gameVersion: "test-only-game-version",
+    patch: "test-only-patch",
+    mode: "Road to Glory",
+    creationPath: "test-only creation path"
+  };
   const item = {
     sourceType: "production",
     stableInternalID: "CF27_TESTONLY_RTG_HEAD_001",
     nativeOrder: 1,
     game: "EA SPORTS College Football 27",
-    gameVersion: "test-only-game-version",
-    patchVersion: "test-only-patch",
-    platform: "test-only-platform",
-    gameMode: "Road to Glory",
-    creationPath: "test-only creation path",
+    gameVersion: environment.gameVersion,
+    patchVersion: environment.patch,
+    platform: environment.platform,
+    gameMode: environment.mode,
+    creationPath: environment.creationPath,
+    environmentID: environment.environmentID,
     category: "head",
     visibleGameLabelOrIndex: "test-only verified visible label",
     verificationState: "verified",
     verificationStatus: "VERIFIED",
+    primaryResearcher: "test-primary-researcher",
+    primaryReviewDecision: "PRIMARY_APPROVED_WITH_NOTES",
+    secondVerifierID: "test-second-verifier",
+    secondVerificationDate: "2026-07-14T00:00:00.000Z",
+    productionCatalogVersion: "cf27-test-only-production-candidate",
+    lastCheckedDate: "2026-07-14T00:00:00.000Z",
     capturedDate: "2026-07-14T00:00:00.000Z",
     verifiedDate: "2026-07-14T00:00:00.000Z",
     sourceImageReferences: assets.map((asset) => asset.assetID),
@@ -177,20 +212,14 @@ export function createProductionCatalogReleaseSelfCheckPackage() {
     humanAnnotations: { note: "synthetic test-only release manager record" },
     catalogManagerDisposition: "approved",
     navigationInstructions: [{ sequenceNumber: 1, instruction: "test-only verified instruction", evidenceAssetID: "asset-navigation" }],
-    catalogVersion: { identifier: "cf27-test-only-production-candidate", gameVersion: "test-only-game-version", platform: "test-only-platform", verifiedAt: "2026-07-14T00:00:00.000Z" },
+    catalogVersion: { identifier: "cf27-test-only-production-candidate", gameVersion: environment.gameVersion, platform: environment.platform, verifiedAt: "2026-07-14T00:00:00.000Z" },
     isTestFixture: false,
     visualConditions: { status: "APPROVED_STANDARD_CAPTURE" },
     reproducibility: { status: "REPRODUCIBLE_IN_GAME", menuPathVerified: true },
     dependencies: [],
-    duplicateObservations: []
-  };
-  const environment = {
-    environmentID: "CF27_TESTONLY_ENV",
-    platform: item.platform,
-    gameVersion: item.gameVersion,
-    patch: item.patchVersion,
-    mode: item.gameMode,
-    creationPath: item.creationPath
+    duplicateObservations: [],
+    duplicateResolution: { status: "RESOLVED", resolvedAt: "2026-07-14T00:00:00.000Z", evidenceIDs: ["asset-navigation"] },
+    dependencyResolution: { status: "RESOLVED", resolvedAt: "2026-07-14T00:00:00.000Z", evidenceIDs: ["asset-navigation"] }
   };
   const candidatePackage = {
     packageID: "test-only-production-release-package",
@@ -217,10 +246,25 @@ function evaluatePromotionRecord(record, evidence, candidateImportReport) {
   for (const field of requiredPromotionFields) {
     if (!hasText(record?.[field]) && !(field === "nativeOrder" && Number.isInteger(record?.nativeOrder))) reasons.push(`missing:${field}`);
   }
+  if (!hasText(record?.catalogVersion?.identifier)) reasons.push("missing:catalogVersion.identifier");
+  if (!hasText(record?.catalogVersion?.gameVersion)) reasons.push("missing:catalogVersion.gameVersion");
+  if (!hasText(record?.catalogVersion?.platform)) reasons.push("missing:catalogVersion.platform");
+  if (!hasText(record?.catalogVersion?.verifiedAt)) reasons.push("missing:catalogVersion.verifiedAt");
+  if (record?.productionCatalogVersion !== record?.catalogVersion?.identifier) reasons.push("productionCatalogVersionMismatch");
+  if (record?.catalogVersion?.gameVersion !== record?.gameVersion) reasons.push("catalogVersionGameVersionMismatch");
+  if (record?.catalogVersion?.platform !== record?.platform) reasons.push("catalogVersionPlatformMismatch");
+  if (record?.game !== supportedProductionGame) reasons.push("unsupportedOrWrongGame");
+  if (!allowedPrimaryReviewDecisions.has(normalizeFinalVerificationStatus(record?.primaryReviewDecision))) reasons.push("primaryReviewDecisionNotApproved");
   if (record?.sourceType !== "production" || productionBlockedSourceTypes.has(record?.sourceType)) reasons.push("nonProductionOrBlockedSourceType");
   if (record?.fixture === true || record?.isTestFixture === true) reasons.push("fixtureOrigin");
-  if (record?.verificationState !== "verified" && record?.verificationStatus !== "VERIFIED" && record?.verificationStatus !== "VERIFIED_WITH_NOTES") reasons.push("missingSecondPersonVerification");
+  const finalVerificationStatus = normalizeFinalVerificationStatus(record?.verificationStatus ?? record?.finalVerificationStatus ?? record?.verificationState);
+  if (blockedFinalVerificationStatuses.has(finalVerificationStatus)) reasons.push(`blockedFinalVerificationStatus:${finalVerificationStatus}`);
+  if (!allowedFinalVerificationStatuses.has(finalVerificationStatus)) reasons.push("missingSecondPersonVerification");
+  if (finalVerificationStatus === "VERIFIED_WITH_NOTES" && !hasVerifiedWithNotesManagerAcceptance(record)) reasons.push("verifiedWithNotesNotAcceptedByCatalogManager");
+  if (record?.verificationState !== "verified") reasons.push("missingProductionVerificationState");
   if (!["approved", "approvedWithNotes"].includes(record?.catalogManagerDisposition)) reasons.push("missingCatalogManagerApproval");
+  if (!hasResolvedDisposition(record?.duplicateResolution)) reasons.push("duplicateResolutionUnresolved");
+  if (!hasResolvedDisposition(record?.dependencyResolution)) reasons.push("dependencyResolutionUnresolved");
   if (placeholderPattern.test(JSON.stringify(record))) reasons.push("placeholderData");
   for (const angle of requiredAngles) {
     const assetID = record?.requiredAngles?.[angle];
@@ -243,6 +287,26 @@ function evaluatePromotionRecord(record, evidence, candidateImportReport) {
     reasons,
     item: reasons.length === 0 ? toProductionCatalogItem(record) : null
   };
+}
+
+function normalizeFinalVerificationStatus(value) {
+  if (!hasText(value)) return "";
+  return String(value).trim().replaceAll("-", "_").replaceAll(" ", "_").toUpperCase();
+}
+
+function hasVerifiedWithNotesManagerAcceptance(record) {
+  return (
+    record?.catalogManagerDisposition === "approvedWithNotes" &&
+    (record?.verifiedWithNotesAcceptedByCatalogManager === true || hasText(record?.catalogManagerVerifiedWithNotesAcceptance))
+  );
+}
+
+function hasResolvedDisposition(value) {
+  if (value === undefined || value === null) return false;
+  if (Array.isArray(value)) return value.every(hasResolvedDisposition);
+  if (typeof value === "string") return normalizeFinalVerificationStatus(value) === "RESOLVED";
+  if (typeof value === "object") return normalizeFinalVerificationStatus(value.status ?? value.disposition ?? value.verificationStatus) === "RESOLVED";
+  return false;
 }
 
 function toProductionCatalogItem(record) {

@@ -2,7 +2,7 @@
 
 ## Immediate Next Prompt
 
-`GFM | Q04 | PROMPT 095 | PHASE 02 | Re-extract recoverable CF27 frames, then ingest minimum recapture recordings`
+`GFM | Q04 | PROMPT 096 | PHASE 03 | Re-extract recoverable CF27 frames, then ingest minimum recapture recordings`
 
 Purpose: exhaust frame re-extraction tasks identified by the existing-media audit, then after Wyatt supplies only the minimum genuine recapture recordings, ingest the new media, update evidence/candidate records, refresh gap/recapture/discrepancy reports, and regenerate the production-verification queue without promoting records.
 
@@ -50,7 +50,16 @@ Purpose: exhaust frame re-extraction tasks identified by the existing-media audi
 - Production-approved records: 0
 - Production catalog records: 0
 
-## Prompt 095 Acceptance
+## Prompt 095 Result
+
+- CF27 production promotion gate is explicit, versioned, attributable, and fail-closed.
+- Required promotion fields include stable/native identity, platform/version/patch/mode/path/environment metadata, primary-review attribution, second-verifier identity/date, final verifier status, catalog-manager disposition, duplicate/dependency resolution, production catalog version, last-checked date, and evidence references.
+- Allowed final verifier statuses are only `VERIFIED` and `VERIFIED_WITH_NOTES`; `VERIFIED_WITH_NOTES` requires explicit catalog-manager acceptance.
+- `RECAPTURE_REQUIRED`, `VERSION_MISMATCH`, `MISSING_EVIDENCE`, `COUNT_MISMATCH`, `ORDER_MISMATCH`, `DEPENDENCY_UNRESOLVED`, and `NOT_VERIFIED` are blocked.
+- Current production records: 0.
+- Current release-candidate result: empty rejected release snapshot; recommendations remain disabled.
+
+## Prompt 096 Acceptance
 
 - Existing source videos are re-extracted where the audit says frame extraction can solve the gap.
 - Newly supplied recapture media is inventoried, hashed, and preserved.

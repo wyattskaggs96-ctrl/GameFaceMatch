@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "cf27-21-target-existing-video-reuse-audit-v1-master-restore-queue",
+  "generatedAt": "2026-08-02T23:35:00-04:00",
+  "productionStatus": "NOT_PRODUCTION_DATA",
+  "summary": {
+    "totalRestoreTasks": 0,
+    "ownerDownloadMastersReferenced": 11,
+    "ownerDownloadMastersResolvableLocally": 11,
+    "sourceMediaMastersInRepository": 3,
+    "duplicateUploadsDocumented": 2
+  },
+  "tasks": []
+}

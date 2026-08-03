@@ -84,6 +84,18 @@ const stages = [
     cwd: repositoryRoot
   },
   {
+    name: "Phase 0 existing-media gap audit check",
+    command: "node",
+    args: ["scripts/cf27-existing-media-verification-gap-audit.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
+    name: "Phase 0 21-target video reuse audit check",
+    command: "node",
+    args: ["scripts/cf27-21-target-existing-video-reuse-audit.mjs", "--check"],
+    cwd: repositoryRoot
+  },
+  {
     name: "Phase 0 evidence coverage control center check",
     command: "node",
     args: ["scripts/phase-zero-evidence-coverage.mjs", "--check"],

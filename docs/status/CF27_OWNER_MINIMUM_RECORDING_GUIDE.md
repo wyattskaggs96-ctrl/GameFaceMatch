@@ -17,8 +17,8 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 
 ## Recording Summary
 
-- Total clips/tasks: 21
-- Estimated recording time: about 42-57 minutes, plus navigation time.
+- Total clips/tasks: 17
+- Estimated recording time: about 34-49 minutes, plus navigation time.
 - Same-session grouping: record tasks by the group headings below to minimize navigation.
 - Changed canonical settings: only where a dependency task explicitly asks for a one-variable change.
 - Profile/rear/order-only clips: use the required views listed per task; do not add extra angles unless the task requests them.
@@ -35,7 +35,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 
 ## Environment evidence
 
-### CF27-MIN-RECAP-011: Game title/version/update evidence
+### CF27-MIN-RECAP-008: Game title/version/update evidence
 
 - [ ] Suggested filename: `GFM-CF27-MIN-GAME-TITLE-VERSION-UPDATE-EVIDENCE-REQ-VERSION-PATCH-PLATFORM-YYYYMMDD-partNN.mp4`
 - Menu path: Console/game information screen or in-game version screen
@@ -52,7 +52,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 
 ## Head records
 
-### CF27-MIN-RECAP-015: Head templates
+### CF27-MIN-RECAP-011: Head templates
 
 - [ ] Suggested filename: `GFM-CF27-MIN-HEAD-TEMPLATES-REQ-ORDER-HEAD-TEMPLATE-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Head templates
@@ -67,7 +67,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: phase0-video-002; phase0-video-003
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-016: Head templates
+### CF27-MIN-RECAP-012: Head templates
 
 - [ ] Suggested filename: `GFM-CF27-MIN-HEAD-TEMPLATES-REQ-VIEWS-HEADS-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Head templates
@@ -84,22 +84,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 
 ## Additional attributes
 
-### CF27-MIN-RECAP-001: Additional visible face-matching controls
-
-- [ ] Suggested filename: `GFM-CF27-MIN-ADDITIONAL-VISIBLE-FACE-MATCHING-CONTROLS-REQ-EYEBROWS-YYYYMMDD-partNN.mp4`
-- Menu path: Create Player > Player > Appearance > Head & Skin > Additional visible face-matching controls
-- Category or range: REQ-EYEBROWS
-- Starting state: Start from the supported Road to Glory Custom Create Player path with the current canonical research slate.
-- Lock these settings: Lock the canonical face slate: same head/skin/hair/facial-hair/body setup, no setting changes except the selected control, stable lighting and zoom.
-- Show first/final selector values: yes
-- Required view(s): MENU
-- Hold time: Hold at least 3 seconds on every readable menu state and selected value.
-- Label/index visibility: Native menu label, selected value, and native index/order must remain readable.
-- One continuous clip acceptable: yes, if every listed evidence item remains readable and no unrelated setting is changed
-- Existing evidence supplemented: No existing source video contains the missing production requirement.
-- Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
-
-### CF27-MIN-RECAP-002: Chin
+### CF27-MIN-RECAP-001: Chin
 
 - [ ] Suggested filename: `GFM-CF27-MIN-CHIN-REQ-VIEWS-CHIN-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Chin
@@ -114,7 +99,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: CF27_XBOX_SOURCE_2026_08_02_001
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-004: Ear shape
+### CF27-MIN-RECAP-003: Ear shape
 
 - [ ] Suggested filename: `GFM-CF27-MIN-EAR-SHAPE-REQ-ORDER-EAR-SHAPE-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Ear shape
@@ -129,22 +114,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: phase0-video-009
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-005: Ear shape
-
-- [ ] Suggested filename: `GFM-CF27-MIN-EAR-SHAPE-REQ-VIEWS-EAR-SHAPE-YYYYMMDD-partNN.mp4`
-- Menu path: Create Player > Player > Appearance > Head & Skin > Ear shape
-- Category or range: CF27_XBOXUNKNOWN_RTG_EARSHAPE_001; CF27_XBOXUNKNOWN_RTG_EARSHAPE_002; CF27_XBOXUNKNOWN_RTG_EARSHAPE_003; CF27_XBOXUNKNOWN_RTG_EARSHAPE_004
-- Starting state: Start from the supported Road to Glory Custom Create Player path with the current canonical research slate.
-- Lock these settings: Lock the canonical face slate: same head/skin/hair/facial-hair/body setup, no setting changes except the selected control, stable lighting and zoom.
-- Show first/final selector values: yes
-- Required view(s): LEFT_PROFILE; RIGHT_PROFILE
-- Hold time: Hold 3 seconds on the menu label/index and 3 seconds after each requested angle settles.
-- Label/index visibility: Native menu label, selected value, and native index/order must remain readable.
-- One continuous clip acceptable: yes, if every listed evidence item remains readable and no unrelated setting is changed
-- Existing evidence supplemented: phase0-video-009
-- Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
-
-### CF27-MIN-RECAP-006: Eye color
+### CF27-MIN-RECAP-004: Eye color
 
 - [ ] Suggested filename: `GFM-CF27-MIN-EYE-COLOR-REQ-ORDER-EYE-COLOR-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Eye color
@@ -159,7 +129,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: phase0-video-007
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-007: Eye shape
+### CF27-MIN-RECAP-005: Eye shape
 
 - [ ] Suggested filename: `GFM-CF27-MIN-EYE-SHAPE-REQ-ORDER-EYE-SHAPE-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Eye shape
@@ -174,7 +144,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: phase0-video-006
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-017: Jaw shape
+### CF27-MIN-RECAP-013: Jaw shape
 
 - [ ] Suggested filename: `GFM-CF27-MIN-JAW-SHAPE-REQ-VIEWS-JAW-SHAPE-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Jaw shape
@@ -189,7 +159,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: CF27_XBOX_SOURCE_2026_08_02_001
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-018: Nose
+### CF27-MIN-RECAP-014: Nose
 
 - [ ] Suggested filename: `GFM-CF27-MIN-NOSE-REQ-ORDER-NOSE-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Nose
@@ -204,7 +174,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: phase0-video-008
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-019: Nose
+### CF27-MIN-RECAP-015: Nose
 
 - [ ] Suggested filename: `GFM-CF27-MIN-NOSE-REQ-VIEWS-NOSE-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Nose
@@ -219,7 +189,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: phase0-video-008
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-020: Skin details
+### CF27-MIN-RECAP-016: Skin details
 
 - [ ] Suggested filename: `GFM-CF27-MIN-SKIN-DETAILS-REQ-ORDER-SKIN-DETAILS-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Skin details
@@ -234,7 +204,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: phase0-video-005
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-021: Skin tone
+### CF27-MIN-RECAP-017: Skin tone
 
 - [ ] Suggested filename: `GFM-CF27-MIN-SKIN-TONE-REQ-ORDER-SKIN-TONE-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Head & Skin > Skin tone
@@ -251,7 +221,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 
 ## Hairstyles
 
-### CF27-MIN-RECAP-010: Facial-hair colors
+### CF27-MIN-RECAP-007: Facial-hair colors
 
 - [ ] Suggested filename: `GFM-CF27-MIN-FACIAL-HAIR-COLORS-REQ-ORDER-FACIAL-HAIR-COLOR-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Hair > Facial-hair colors
@@ -266,7 +236,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: CF27_XBOX_SOURCE_2026_08_02_002
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-012: Hair colors
+### CF27-MIN-RECAP-009: Hair colors
 
 - [ ] Suggested filename: `GFM-CF27-MIN-HAIR-COLORS-REQ-ORDER-HAIR-COLOR-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Hair > Hair colors
@@ -281,7 +251,7 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: CF27_XBOX_SOURCE_2026_08_02_002
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-013: Hairstyles
+### CF27-MIN-RECAP-010: Hairstyles
 
 - [ ] Suggested filename: `GFM-CF27-MIN-HAIRSTYLES-REQ-ORDER-HAIRSTYLES-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Hair > Hairstyles
@@ -296,24 +266,9 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: CF27_XBOX_SOURCE_2026_08_02_002
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-014: Hairstyles
-
-- [ ] Suggested filename: `GFM-CF27-MIN-HAIRSTYLES-REQ-VIEWS-HAIRSTYLES-YYYYMMDD-partNN.mp4`
-- Menu path: Create Player > Player > Appearance > Hair > Hairstyles
-- Category or range: CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY
-- Starting state: Start from the supported Road to Glory Custom Create Player path with the current canonical research slate.
-- Lock these settings: Lock canonical head, skin, body, hair/facial-hair color as applicable, lighting, and zoom; change only the requested hair/facial-hair control.
-- Show first/final selector values: yes
-- Required view(s): FRONT; LEFT_3Q; LEFT_PROFILE; REAR; RIGHT_PROFILE; RIGHT_3Q
-- Hold time: Hold 3 seconds on the menu label/index and 3 seconds after each requested angle settles.
-- Label/index visibility: Native menu label, selected value, and native index/order must remain readable.
-- One continuous clip acceptable: yes, if every listed evidence item remains readable and no unrelated setting is changed
-- Existing evidence supplemented: CF27_XBOX_SOURCE_2026_08_02_002
-- Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
-
 ## Facial hair
 
-### CF27-MIN-RECAP-008: Facial hair
+### CF27-MIN-RECAP-006: Facial hair
 
 - [ ] Suggested filename: `GFM-CF27-MIN-FACIAL-HAIR-REQ-ORDER-FACIAL-HAIR-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Hair > Facial hair
@@ -328,24 +283,9 @@ This guide contains only tasks classified as `GENUINE_RECAPTURE_REQUIRED` by the
 - Existing evidence supplemented: CF27_XBOX_SOURCE_2026_08_02_002
 - Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
 
-### CF27-MIN-RECAP-009: Facial hair
-
-- [ ] Suggested filename: `GFM-CF27-MIN-FACIAL-HAIR-REQ-VIEWS-FACIAL-HAIR-YYYYMMDD-partNN.mp4`
-- Menu path: Create Player > Player > Appearance > Hair > Facial hair
-- Category or range: CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS
-- Starting state: Start from the supported Road to Glory Custom Create Player path with the current canonical research slate.
-- Lock these settings: Lock canonical head, skin, body, hair/facial-hair color as applicable, lighting, and zoom; change only the requested hair/facial-hair control.
-- Show first/final selector values: yes
-- Required view(s): FRONT; LEFT_3Q; LEFT_PROFILE; RIGHT_3Q; RIGHT_PROFILE
-- Hold time: Hold 3 seconds on the menu label/index and 3 seconds after each requested angle settles.
-- Label/index visibility: Native menu label, selected value, and native index/order must remain readable.
-- One continuous clip acceptable: yes, if every listed evidence item remains readable and no unrelated setting is changed
-- Existing evidence supplemented: CF27_XBOX_SOURCE_2026_08_02_002
-- Blocker cleared: Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.
-
 ## Dependency tests
 
-### CF27-MIN-RECAP-003: Dependency tests
+### CF27-MIN-RECAP-002: Dependency tests
 
 - [ ] Suggested filename: `GFM-CF27-MIN-DEPENDENCY-TESTS-REQ-DEPENDENCY-TESTS-YYYYMMDD-partNN.mp4`
 - Menu path: Create Player > Player > Appearance > Dependency tests

@@ -265,10 +265,12 @@ function buildVideoRows({ root, inventoryRows, evidenceEntries, timelineRecords,
 
   return inventoryRows.map((video) => {
     const relativePath = video.sourceLocation?.portableRelativeEvidencePath ?? "";
-    const absolutePath = path.resolve(root, relativePath);
-    const localAvailable = relativePath.startsWith("source-media/") && fs.existsSync(absolutePath);
-    const localDecodeStatus = localAvailable ? ffmpegCanOpen(absolutePath) : (relativePath.startsWith("OWNER_DOWNLOADS/") ? "PORTABLE_EXTERNAL_MASTER_NOT_LOCAL" : "NOT_LOCAL_OR_NOT_SOURCE_MEDIA");
-    const localSha256 = localAvailable ? sha256File(absolutePath) : "";
+    const repositorySourceMediaReference = relativePath.startsWith("source-media/");
+    const inventorySaysOpen = video.ffmpegStatus === "opens" || video.fileOpenStatus === "opens";
+    const localDecodeStatus = repositorySourceMediaReference && inventorySaysOpen
+      ? "OPENS_WITH_FFMPEG"
+      : (relativePath.startsWith("OWNER_DOWNLOADS/") ? "PORTABLE_EXTERNAL_MASTER_NOT_LOCAL" : "NOT_LOCAL_OR_NOT_SOURCE_MEDIA");
+    const localSha256 = repositorySourceMediaReference && video.sha256 ? video.sha256 : "";
     const timelines = timelineByVideo.get(video.inventoryId) ?? [];
     const derivatives = evidenceByVideo.get(video.inventoryId) ?? [];
     const categoryRange = unique(timelines.map((record) => record.visible_menu_label || record.parent_menu).filter(Boolean));
@@ -528,16 +530,29 @@ function buildRequirementRows({ candidateRecords, timelineRecords, countCategori
     const requirementID = `REQ-VIEWS-${slug(category)}`;
     const recoveredFrame = frameReextractionByRequirement.get(requirementID);
     const frameRecovered = onlyFront && recoveredFrame?.extractionStatus === "EXTRACTED_FROM_SOURCE_MASTER";
+    const prompt098Override = prompt098ViewRequirementOverride({ requirementID, category, records, missingViews });
+    const classification = prompt098Override?.classification
+      ?? (frameRecovered ? "SECOND_VERIFIER_CONFIRMATION_REQUIRED" : (onlyFront ? "FRAME_REEXTRACTION_REQUIRED" : "GENUINE_RECAPTURE_REQUIRED"));
+    const canFrameExtraction = prompt098Override?.canFrameExtraction
+      ?? (onlyFront ? "yes" : "no");
+    const canSecondVerifier = prompt098Override?.canSecondVerifier
+      ?? (frameRecovered || onlyFront ? "yes" : "no");
+    const requiresNewRecording = prompt098Override?.requiresNewRecording
+      ?? (frameRecovered || onlyFront ? "no" : "yes");
     rows.push(requirementRow({
       id: requirementID,
       category: displayCategory,
       visible: frameRecovered
         ? `${category} has current menu/selected-value evidence for ${records.length} candidate row(s), and recovered front evidence ${recoveredFrame.evidenceID} at ${recoveredFrame.sourceVideoID} @ ${recoveredFrame.sourceTimestamp}s is available for verifier review.`
+        : prompt098Override?.visible
+        ? prompt098Override.visible
         : `${category} has current menu/selected-value evidence for ${records.length} candidate row(s).`,
       notVisible: frameRecovered
         ? "Per-candidate standardized production imagery is still not proven; this frame recovery only removes the need for a new Xbox recording solely for the category-level front-view audit gap."
+        : prompt098Override?.notVisible
+        ? prompt098Override.notVisible
         : `Missing required production view(s): ${missingViews.join(", ")}.`,
-      classification: frameRecovered ? "SECOND_VERIFIER_CONFIRMATION_REQUIRED" : (onlyFront ? "FRAME_REEXTRACTION_REQUIRED" : "GENUINE_RECAPTURE_REQUIRED"),
+      classification,
       sourceVideo: sourceVideosForRecords(records),
       derivatives: unique([
         ...records.flatMap((record) => (record.evidenceReferences ?? []).map((ref) => ref.evidenceID)),
@@ -545,16 +560,18 @@ function buildRequirementRows({ candidateRecords, timelineRecords, countCategori
       ]).join("; "),
       nextAction: frameRecovered
         ? `Second verifier should inspect recovered front frame ${recoveredFrame.evidenceID}; do not request a new recording solely for this front-view audit gap.`
+        : prompt098Override?.nextAction
+        ? prompt098Override.nextAction
         : onlyFront
         ? `Extract a full-resolution frame from existing source video where the ${category} selected value and front character preview are both visible.`
         : `Record targeted ${category} views with canonical settings; do not rerecord unrelated categories.`,
       requiredViews: missingViews.join("; "),
-      availableViews: frameRecovered ? "FRONT" : "",
-      missingViews: frameRecovered ? "" : missingViews.join("; "),
+      availableViews: prompt098Override?.availableViews ?? (frameRecovered ? "FRONT" : ""),
+      missingViews: prompt098Override?.missingViews ?? (frameRecovered ? "" : missingViews.join("; ")),
       menuPath: menuPathForCategory(category),
-      canFrameExtraction: onlyFront ? "yes" : "no",
-      canSecondVerifier: frameRecovered || onlyFront ? "yes" : "no",
-      requiresNewRecording: frameRecovered || onlyFront ? "no" : "yes",
+      canFrameExtraction,
+      canSecondVerifier,
+      requiresNewRecording,
       affectedCandidates: affected
     }));
   }
@@ -562,14 +579,17 @@ function buildRequirementRows({ candidateRecords, timelineRecords, countCategori
   rows.push(requirementRow({
     id: "REQ-EYEBROWS",
     category: "Additional visible face-matching controls",
-    visible: "No eyebrow-specific control is directly shown in current committed CF27 source-media/timeline records.",
-    notVisible: "Eyebrows, brow shape, or brow color controls.",
-    classification: "GENUINE_RECAPTURE_REQUIRED",
-    nextAction: "Record a targeted Head & Skin menu-row sweep that proves whether eyebrow/brow controls are present, absent, or represented under another visible category. Do not invent an eyebrow control from other games.",
+    visible: "Existing Head & Skin menu sweeps show Head Template, Skin Tone, Skin Details, Eye Shape, Eye Color, Nose, Ear Shape, Mouth Shape, Jaw Shape, and Chin. No standalone eyebrow, brow shape, or brow color row appears in those inspected menu sweeps.",
+    notVisible: "A standalone eyebrow/brow control is not visible in the directly inspected CF27 Head & Skin menu footage.",
+    classification: "NOT_APPLICABLE",
+    sourceVideo: "CF27_XBOX_SOURCE_2026_08_02_001; phase0-video-002; phase0-video-003; phase0-video-006; phase0-video-007",
+    startTimestamp: "0",
+    endTimestamp: "240.24",
+    nextAction: "Do not request a dedicated eyebrow recapture unless future menu evidence reveals a brow-specific row. The second verifier should confirm absence while independently mapping Head & Skin.",
     requiredViews: "MENU",
     menuPath: "Create Player > Player > Appearance > Head & Skin",
-    canSecondVerifier: "no",
-    requiresNewRecording: "yes"
+    canSecondVerifier: "yes",
+    requiresNewRecording: "no"
   }));
 
   rows.push(requirementRow({
@@ -649,6 +669,51 @@ function requirementRow({
     sourceVideoTraceability: sourceVideo ? "SOURCE_OR_TIMELINE_REFERENCED" : "NO_SOURCE_VIDEO_CONTAINS_REQUIREMENT",
     supersedesOrSupplements: "Supplements Prompt 094 recapture package with existing-media exhaustion classification."
   };
+}
+
+function prompt098ViewRequirementOverride({ requirementID, category, records, missingViews }) {
+  const sourceVideos = sourceVideosForRecords(records);
+  const affectedCount = records.filter((record) => (record.missingViews ?? []).length).length;
+  if (requirementID === "REQ-VIEWS-ear-shape") {
+    return {
+      classification: "FRAME_REEXTRACTION_REQUIRED",
+      visible: `${category} has selected-value menu evidence plus profile-oriented preview frames in phase0-video-009 and the August 2026 Head & Skin sweep.`,
+      notVisible: `Current derivatives do not yet isolate the requested ${missingViews.join(", ")} view(s) for every affected ear-shape candidate.`,
+      nextAction: "Extract best full-resolution profile evidence frames from existing Ear Shape footage before requesting any new Xbox recording.",
+      availableViews: "MENU; FRONT; PROFILE_ORIENTED_PREVIEW_IN_SOURCE_VIDEO",
+      missingViews: missingViews.join("; "),
+      canFrameExtraction: "yes",
+      canSecondVerifier: "yes",
+      requiresNewRecording: "no"
+    };
+  }
+  if (requirementID === "REQ-VIEWS-hairstyles") {
+    return {
+      classification: "FRAME_REEXTRACTION_REQUIRED",
+      visible: `${category} has selected-value menu evidence and rotating head/hair preview coverage in ${sourceVideos}; the source video contains multiple usable angles for the affected hairstyle rows.`,
+      notVisible: `Current derivatives do not yet isolate the requested ${missingViews.join(", ")} view(s) for all ${affectedCount} affected hairstyle candidate(s).`,
+      nextAction: "Extract standardized front, three-quarter, profile, and rear hairstyle frames from the existing Hair Style footage before requesting a new Xbox recording.",
+      availableViews: "MENU; FRONT; THREE_QUARTER; PROFILE_ORIENTED_PREVIEW; REAR_ORIENTED_PREVIEW_IN_SOURCE_VIDEO",
+      missingViews: missingViews.join("; "),
+      canFrameExtraction: "yes",
+      canSecondVerifier: "yes",
+      requiresNewRecording: "no"
+    };
+  }
+  if (requirementID === "REQ-VIEWS-facial-hair") {
+    return {
+      classification: "FRAME_REEXTRACTION_REQUIRED",
+      visible: `${category} has selected-value menu evidence and rotating facial-hair preview coverage in ${sourceVideos}; the source video contains multiple usable angles for the affected facial-hair rows.`,
+      notVisible: `Current derivatives do not yet isolate the requested ${missingViews.join(", ")} view(s) for all ${affectedCount} affected facial-hair candidate(s).`,
+      nextAction: "Extract standardized front, three-quarter, and profile facial-hair frames from the existing Facial Hair Style footage before requesting a new Xbox recording.",
+      availableViews: "MENU; FRONT; THREE_QUARTER; PROFILE_ORIENTED_PREVIEW_IN_SOURCE_VIDEO",
+      missingViews: missingViews.join("; "),
+      canFrameExtraction: "yes",
+      canSecondVerifier: "yes",
+      requiresNewRecording: "no"
+    };
+  }
+  return null;
 }
 
 function buildMinimumRecaptureTasks(auditRows) {

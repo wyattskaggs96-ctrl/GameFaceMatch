@@ -16,6 +16,8 @@ GameFace Match is a strong internal prototype with a broad tested web shell, loc
 
 The owner media baseline is locked and additional owner recordings are not an initial-launch prerequisite. The next responsible path is to classify the locked evidence into a supported catalog subset, keep unsupported options unavailable, complete second-human verification for the supported subset, publish an immutable nonempty production catalog only if the promotion gate passes, and then validate customer usefulness.
 
+Prompt 101 now completes the supported-subset classification step. The current next responsible path is second-human verification of the proposed 76-record CF27 supported subset, with 16 limited-evidence records excluded from the initial subset and no production/recommendation eligibility granted.
+
 **Final GO / NO-GO decision:** NO-GO for paid public launch.
 
 ## Completion Percentages
@@ -236,8 +238,8 @@ The smallest useful launch scope is a **single-game CF27 supported-subset privat
 
 A. READY NOW - Codex can execute immediately:
 
-1. Classify locked CF27 media into supported catalog subset states.
-2. Generate second-verifier packet limited to supported/subset candidates and explicit exclusions.
+1. Execute real second-human verification for the 76-record CF27 supported subset.
+2. Import and reconcile verifier decisions without promoting disputed records.
 3. Tighten customer-facing disabled/limited-category messaging around supported subset.
 4. Run real-device mobile QA checklist and record results.
 5. Triage npm audit/allow-scripts warnings.

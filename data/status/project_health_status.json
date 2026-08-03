@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gameface-project-health-status-v1",
-  "generatedAt": "2026-08-03T00:30:00-04:00",
+  "generatedAt": "2026-08-03T04:15:00-04:00",
   "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
   "branch": "main",
-  "head": "83c72f9b94d391955c9de023409160dd44430359",
+  "head": "PROMPT_101_SUPPORTED_SUBSET_CLASSIFICATION",
   "outcome": "HOLD_VERIFICATION",
   "productionReadiness": "BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS",
   "productionRecommendationsEnabled": false,
@@ -47,6 +47,12 @@
     "cf27MinimumGenuineRecaptureTasks": 21,
     "cf27EvidenceManifestEntries": 118,
     "cf27VideoInventoryRows": 14,
+    "cf27SupportedSubsetClassifiedCandidates": 92,
+    "cf27SupportedSubsetVerifierQueueRecords": 76,
+    "cf27SupportedSubsetSupportedWithNotes": 39,
+    "cf27SupportedSubsetUserConfirmationRequired": 37,
+    "cf27SupportedSubsetLimitedEvidence": 16,
+    "cf27SupportedSubsetSecondaryAngleSample": 24,
     "lockedSourceMediaVideos": 15,
     "lockedUniqueSourceMasters": 12,
     "lockedDuplicateUploads": 3,
@@ -71,6 +77,7 @@
     "webProductShell": "implemented_not_production_validated",
     "faceCapture": "implemented_not_production_validated",
     "matchingEngine": "implemented_without_real_catalog_validation",
+    "cf27SupportedSubsetClassification": "complete_non_production_verifier_ready",
     "matchingStudyWorkflow": "implemented_not_started",
     "supabase": "schema_designed_not_connected",
     "payments": "launch_pack_all_access_scaffold_only",
@@ -80,6 +87,6 @@
   },
   "nextAction": {
     "path": "docs/status/NEXT_ACTION.md",
-    "title": "GFM | Q04 | PROMPT 101 | PHASE 03 | Classify locked media baseline into supported catalog subset"
+    "title": "GFM | Q04 | PROMPT 102 | PHASE 03 | Execute CF27 supported-subset second verification"
   }
 }

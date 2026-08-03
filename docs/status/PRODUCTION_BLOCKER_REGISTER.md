@@ -7,7 +7,7 @@
 | Blocker | Why it matters | Owner | Required input/action |
 | --- | --- | --- | --- |
 | No verified production catalog records | Product cannot return real game settings. | Wyatt, Codex, second verifier | Complete evidence, verification, catalog-manager approval. Current production catalog count is 0. |
-| CF27 production promotion contract not yet satisfiable by any current record | Prevents research or partially verified records from becoming customer-facing data. | Codex, second verifier, catalog manager | Use the locked owner media baseline, classify every option/category into explicit evidence-support states, exclude unsupported/limited/version-mismatched records from customer recommendations, obtain real second-human decisions for supported records, resolve duplicates/order/environment gaps for the supported subset, record explicit manager acceptance, and create a release-candidate package. |
+| CF27 supported subset requires real second-human verification | Prevents research or partially verified records from becoming customer-facing data. | Second verifier, Codex, catalog manager | Prompt 101 classified all 92 candidates and produced a 76-record supported-subset verifier queue. A real verifier must review the subset, record attributable decisions, and leave conflicts blocked before catalog-manager production consideration. |
 | No production payment/subscription stack | Approved Launch Pack and All Access are configured but cannot collect money or grant entitlements. | Wyatt + Codex + Stripe | Implement test-mode Stripe Checkout/Billing/webhooks only after catalog and server-authoritative entitlement gates are ready. |
 | No server-authoritative entitlements | Customers cannot be safely granted paid access. | Codex | Supabase/Auth/payment integration with fail-closed checks. |
 | No real matching validation | Product promise is not measured. | Wyatt + study reviewers | Study workflow exists, but the 10-20 participant study must wait until verified catalog records and real top-three outputs exist. |
@@ -40,6 +40,7 @@
 ## HOLD_OWNER_DECISION
 
 - No additional owner source-media recording is required for the initial launch baseline. `OWNER_MEDIA_BASELINE_LOCKED` supersedes prior owner-recapture launch blockers.
+- Prompt 101 supported-subset classification is complete: 76 records are ready for second-verifier review, 16 remain limited evidence, and 0 records are production-approved or recommendation-eligible.
 - Approve account requirement for paid Launch Pack and All Access purchases.
 - Approve account requirement for paid purchases.
 - Approve supported countries/currencies.

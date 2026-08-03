@@ -3,7 +3,7 @@
 **Date:** 2026-08-03
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`  
 **Branch:** `main`  
-**HEAD reviewed:** `1411a9dac4cc5e110147af69dd0a54cb8dbb05d1`
+**HEAD reviewed:** Prompt 101 supported-subset classification checkpoint
 
 ## Final Result
 
@@ -53,6 +53,22 @@ Prompt 094 has also been steered with an exact existing-media verification gap a
 
 Decision `OWNER_MEDIA_BASELINE_LOCKED` makes the current source-media inventory the final owner-provided media baseline for the initial product launch. Historical recapture queues remain preserved as evidence-quality records, but they are no longer mandatory owner launch blockers. Remaining gaps must be classified as supported, supported-with-notes, user-confirmation-required, limited, unsupported, deprecated, version-mismatch, verifier-confirmation, user-feedback, or post-launch improvement work.
 
+## Prompt 101 Status
+
+The CF27 supported-subset classification is now generated in `data/phase-zero/cf27_supported_subset_classification.json`. It classifies all 92 current CF27 research candidates exactly once:
+
+- `SUPPORTED_WITH_NOTES`: 39
+- `USER_CONFIRMATION_REQUIRED`: 37
+- `LIMITED_EVIDENCE`: 16
+- `SUPPORTED`: 0
+- `UNSUPPORTED`: 0
+- `DEPRECATED`: 0
+- `VERSION_MISMATCH`: 0
+
+The proposed supported-subset verifier queue contains 76 non-production records and a deterministic 24-record secondary-angle sample. The subset includes 24 head candidates and 1 hairstyle candidate, so it is viable for second-verifier review. Facial-hair support remains unavailable in the initial subset because current facial-hair/hair-color rows are order-unresolved or limited evidence.
+
+Prompt 101 did not create second-verifier decisions, production approvals, production records, recommendation eligibility, or a production catalog.
+
 ## Frame Re-Extraction Packet Status
 
 The recoverable frame gaps identified by the existing-media audit now have a dedicated packet in `data/phase-zero/cf27_frame_reextractions.json`. It records 7 derivative frames across Eye color, Eye shape, Facial-hair colors, Hair colors, Mouth shape, Skin details, and Skin tone. These files are derivative evidence only; they do not create production records and do not replace second-human verification.
@@ -67,8 +83,8 @@ The privacy-safe manual matching study workflow exists for a future 10-20 partic
 
 ## Production Decision
 
-Do not launch publicly or privately as a paid production product yet. The product must first classify the locked media baseline into a supported subset, complete verified catalog data for that subset, connect server-authoritative paid access, validate matching usefulness, and complete legal/security/deployment gates.
+Do not launch publicly or privately as a paid production product yet. The product must first complete real second-human verification for the supported subset, resolve disagreements, publish verified catalog data only if all production gates pass, connect server-authoritative paid access, validate matching usefulness, and complete legal/security/deployment gates.
 
 ## Authoritative Next Action
 
-Run `docs/status/NEXT_ACTION.md` for Prompt 101 to classify the locked media baseline into supported catalog states and prepare the supported-subset verifier package.
+Run `docs/status/NEXT_ACTION.md` for Prompt 102 to complete real-human second-verifier package execution and import planning for the proposed supported subset.

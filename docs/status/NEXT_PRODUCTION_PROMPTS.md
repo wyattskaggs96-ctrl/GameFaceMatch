@@ -2,9 +2,9 @@
 
 ## Immediate Next Prompt
 
-`GFM | Q04 | PROMPT 101 | PHASE 03 | Classify locked media baseline into supported catalog subset`
+`GFM | Q04 | PROMPT 102 | PHASE 03 | Execute CF27 supported-subset second verification`
 
-Purpose: use `OWNER_MEDIA_BASELINE_LOCKED` to classify every visible option/category into explicit evidence-support states, reclassify historical recapture tasks as limitations/verifier/post-launch work, and create a supported-subset verification package without requiring additional owner recordings.
+Purpose: have a real independent second verifier review the Prompt 101 supported-subset package, then import and reconcile attributable decisions without promoting disputed records or enabling recommendations.
 
 ## Owner Media Baseline Decision
 
@@ -98,16 +98,29 @@ Purpose: use `OWNER_MEDIA_BASELINE_LOCKED` to classify every visible option/cate
 
 ## Prompt 101 Acceptance
 
+Prompt 101 is complete.
+
 - Every current CF27 candidate receives one allowed evidence-support state.
-- Historical recapture tasks are reclassified as limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch opportunities, or unsupported gaps.
-- Only `SUPPORTED`, `SUPPORTED_WITH_NOTES`, and `USER_CONFIRMATION_REQUIRED` records may enter the supported-subset verifier queue.
-- `LIMITED_EVIDENCE`, `UNSUPPORTED`, `DEPRECATED`, and `VERSION_MISMATCH` records remain unavailable for customer recommendations.
-- NBA 2K26 media is acknowledged as source evidence, but no production support is claimed.
-- No record is promoted unless every production gate passes after real second verification and catalog-manager approval.
+- Classification totals: 39 `SUPPORTED_WITH_NOTES`, 37 `USER_CONFIRMATION_REQUIRED`, 16 `LIMITED_EVIDENCE`, 0 `SUPPORTED`, 0 `UNSUPPORTED`, 0 `DEPRECATED`, 0 `VERSION_MISMATCH`.
+- Supported-subset verifier queue records: 76.
+- Deterministic secondary-angle sample records: 24.
+- Duplicate-review records preserved and excluded from the supported subset: 5.
+- Order-unresolved records preserved and excluded from the supported subset: 3.
+- Production-approved records: 0.
+- Production catalog records: 0.
+- Recommendation-eligible records: 0.
+- Additional Wyatt recordings remain optional post-launch improvement, not an initial-launch blocker.
+
+## Prompt 102 Acceptance
+
+- A real second verifier, not Codex, records attributable decisions for the 76-record supported subset.
+- Verifier identity, date, environment, independent observation, native-order confirmation, evidence-file confirmation, front-view confirmation, and secondary-angle sample completion are validated.
+- Disagreements, count/order mismatches, version mismatches, missing evidence, dependency issues, and recapture-needed findings remain blocked.
+- No record is production-approved unless later catalog-manager release gates pass.
 
 ## Later Production Path
 
-1. Classify the locked media baseline into supported, supported-with-notes, user-confirmation-required, limited, unsupported, deprecated, and version-mismatch states.
+1. Complete real second-human verification for the supported subset.
 2. Publish a nonempty verified production catalog only if all release gates pass.
 3. Connect server-authoritative paid access in test mode.
 4. Deploy Supabase/Auth/Storage/RLS through the approved credential workflow.

@@ -4,7 +4,7 @@
 **Last reconciled:** 2026-08-03
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 097 verification-readiness handoff after Prompts 090-096
+**Repository checkpoint reviewed:** `64c20a9785655329ec05bc00015a8cba0051d738` plus Prompt 083 public-launch completion audit
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
 **Current active phase:** locked owner media baseline, supported-subset evidence classification, second-human verification, and production-catalog gatekeeping
@@ -16,7 +16,7 @@ This is the single current operational status source. Older audits, readiness re
 ```json
 {
   "schemaVersion": "current-project-state-v3",
-  "repositoryCheckpoint": "83c72f9b94d391955c9de023409160dd44430359",
+  "repositoryCheckpoint": "64c20a9785655329ec05bc00015a8cba0051d738",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -46,6 +46,8 @@ The older Prompt 080 `$0.99` One Scan and `$1.99/month` Monthly scan-entry model
 Creator Program source/planning material has been committed as project documentation. No creator-program runtime behavior, checkout, payout, or commission processing exists.
 
 Prompt 097 independently confirms that Prompts 090-096 left the repository in a fail-closed state: approved Launch Pack and All Access pricing are configured but checkout remains disabled, five launch targets are registered without false support claims, CF27 has a 92-record non-production verification queue, second verification remains at 0 decisions, the production catalog remains empty, and the matching-study workflow exists but has 0 real participants.
+
+Prompt 083 public-launch completion audit sets current **PUBLIC PAID-LAUNCH READINESS** at **34%** and a **NO-GO** decision for paid public launch. The score is weighted against customer onboarding/capture, face processing, verified production data, matching, build/refinement, privacy/security, backend, payments, reliability, and launch operations. The score is low primarily because no game has a nonempty verified production catalog, payments are disabled, Supabase is not deployed, no real matching study has run, and legal/support/deployment operations are incomplete.
 
 Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media inventory as the final owner-provided media baseline for the initial product launch. Additional Wyatt recordings are no longer an initial-launch prerequisite. Historical recapture audits remain useful evidence-quality references, but remaining recapture tasks are reclassified as known evidence limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch improvements, or unsupported option/category gaps where evidence is insufficient.
 
@@ -145,6 +147,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Blocker register: `docs/status/PRODUCTION_BLOCKER_REGISTER.md`
 - Master completion plan: `docs/status/MASTER_COMPLETION_PLAN.md`
 - Evidence index: `docs/status/CODE_AND_FEATURE_EVIDENCE_INDEX.md`
+- Public launch completion audit: `docs/status/PUBLIC_LAUNCH_COMPLETION_AUDIT.md`
 - Owner media baseline lock: `docs/status/OWNER_MEDIA_BASELINE_LOCKED.md`
 - Machine-readable health status: `data/status/project_health_status.json`
 - Next action: `docs/status/NEXT_ACTION.md`

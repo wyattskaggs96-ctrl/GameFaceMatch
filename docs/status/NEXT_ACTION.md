@@ -1,19 +1,20 @@
-GFM | Q04 | PROMPT 093 | PHASE 02 | Hand off CF27 production verification queue to second verifier
+GFM | Q04 | PROMPT 094 | PHASE 02 | Complete real CF27 second-verifier review and import decisions
 
 Repository:
 `/Users/skaggssystems/Developer/GameFaceMatch`
 
 Run after:
-`GFM | Q04 | PROMPT 092 | PHASE 02 | Build CF27 production verification queue`
+`GFM | Q04 | PROMPT 093 | PHASE 02 | Build second-verifier decision workspace`
 
 ## Objective
 
-Use the canonical CF27 production-verification queue to prepare the next real human action: a second verifier must independently inspect the queue, source videos, timestamps, evidence frames, menu counts, native ordering, duplicate/ambiguous records, missing views, and environment/version gaps.
+Use the internal second-verifier workspace and canonical CF27 production-verification queue to complete the next real human action: a second verifier must independently inspect the queue, source videos, timestamps, evidence frames, menu counts, native ordering, duplicate/ambiguous records, missing views, and environment/version gaps, then submit attributable verifier decisions for import.
 
 ## Current Queue State
 
 - Queue file: `data/phase-zero/production_verification_queue.json`
 - Human summary: `docs/phase-zero/CF27_PRODUCTION_VERIFICATION_QUEUE.md`
+- Internal workspace: Phase 0 status panel, second-verifier workspace
 - Queue records: 92
 - Evidence-linked records: 92
 - Missing-evidence records: 0
@@ -37,13 +38,14 @@ The verifier must:
 4. Review duplicate and ambiguous records explicitly.
 5. Record missing evidence, count mismatch, order mismatch, version mismatch, dependency unresolved, or recapture required statuses where appropriate.
 6. Sign off only on records directly supported by independent evidence.
+7. Export or submit the completed verifier decisions using the approved decision statuses only.
 
 ## Codex Can Still Do
 
-- Refine verifier import tooling if the real submission format changes.
-- Generate a concise handoff packet from the queue.
-- Validate completed verifier files after Wyatt supplies them.
+- Validate completed verifier decision files after Wyatt supplies them.
+- Import decisions only through the verifier-intake validation tooling.
+- Produce discrepancy and recapture records for disagreements without resolving them by guesswork.
 
 ## Stop Point
 
-Do not promote records, publish a production catalog, run real recommendations, connect Stripe, or connect remote Supabase during this next action.
+Do not promote records, publish a production catalog, run real recommendations, connect Stripe, or connect remote Supabase during this next action. Prompt 094 is blocked until a real second verifier has completed decisions.

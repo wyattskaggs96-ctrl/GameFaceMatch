@@ -1,670 +1,498 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Alert, Button, Card, SelectField, StatusBadge, TextField } from "@/components/design-system";
+import { useEffect, useMemo, useState } from "react";
+import { Alert, Button, Card, LoadingState, ProgressBar, SelectField, StatusBadge, TextField } from "@/components/design-system";
 import {
-  addSecondVerifierRecordCheck,
-  acknowledgeDiscrepancyResolution,
-  applySecondaryAngleSampleToWorkspace,
   createDeterministicSecondaryAngleSample,
-  createEmptySecondVerifierWorkspace,
-  createSecondVerifierCountCheck,
-  createSecondVerifierRecordCheck,
-  exportDiscrepancyResolutionRecords,
-  exportSecondPersonVerificationRecords,
-  getAllowedSecondVerifierStatuses,
-  linkDiscrepancyResolutionEvidence,
-  openDiscrepancyResolutionWorkflow,
-  recordDiscrepancyFinalResolution,
-  signOffSecondVerifierWorkspace,
-  upsertDiscrepancyResolutionWorkflow,
-  validateSecondVerifierWorkspace,
-  type Phase0DiscrepancyResolutionWorkflow,
-  type Phase0VerifierCheckStatus
+  type Phase0SecondaryAngleSampleReport
 } from "@/lib/phase-zero/phase-zero-second-verifier-workspace";
-import type { Phase0ApprovedVerificationStatus, Phase0ResolutionAction } from "@/lib/phase-zero/phase-zero-verification";
-import type { Phase0VerificationState } from "@/lib/phase-zero/phase-zero-domain";
 import {
-  validateSecondVerifierAssignmentPackage,
-  validateSecondVerifierResultsImport,
-  type Phase0VerifierResultsImportReport
-} from "@/lib/phase-zero/phase-zero-verifier-package";
+  createVerifierDecisionDraft,
+  defaultCf27VerifierQueueFilters,
+  exportVerifierDecisionDrafts,
+  filterVerificationQueueRecords,
+  getAllowedCf27VerifierDecisionStatuses,
+  getNextUnresolvedCandidate,
+  getVerifierProgressCounts,
+  importVerifierDecisionDrafts,
+  queueRecordsForSecondaryAngleSampling,
+  validateVerifierDecisionDraft,
+  validateVerifierDecisionSet,
+  type Cf27ProductionVerificationQueue,
+  type Cf27ProductionVerificationQueueRecord,
+  type Cf27VerifierDecisionDraft,
+  type Cf27VerifierDecisionStatus,
+  type Cf27VerifierQueueFilters
+} from "@/lib/phase-zero/cf27-production-verification-queue";
 
-interface RecordDraft {
-  recordID: string;
-  stableInternalID: string;
-  primaryObserverID: string;
-  primarySummary: string;
-  verifierObserverID: string;
-  verifierSummary: string;
-  evidenceIDs: string;
-  nativeOrderStatus: Phase0VerifierCheckStatus;
-  recordFieldsStatus: Phase0VerifierCheckStatus;
-  evidenceFilesStatus: Phase0VerifierCheckStatus;
-  frontViewStatus: Phase0VerifierCheckStatus;
-  secondaryAngleStatus: Phase0VerifierCheckStatus;
-  dependencyStatus: Phase0VerifierCheckStatus;
-  exceptionStatus: Phase0VerifierCheckStatus;
-  randomizationMethod: string;
-  finalDisposition: Phase0ApprovedVerificationStatus;
-  notes: string;
-}
-
-const now = () => new Date().toISOString();
-const checkStatuses: Phase0VerifierCheckStatus[] = ["confirmed", "mismatch", "notChecked", "notApplicable"];
-const allowedStatuses = getAllowedSecondVerifierStatuses();
-const defaultEligibleCatalogIDs = [
-  "CF27_TESTONLY_SECOND_HEAD_001,head",
-  "CF27_TESTONLY_SECOND_HEAD_002,head",
-  "CF27_TESTONLY_SECOND_HEAD_003,head",
-  "CF27_TESTONLY_SECOND_HEAD_004,head",
-  "CF27_TESTONLY_SECOND_HAIR_001,hairstyle",
-  "CF27_TESTONLY_SECOND_HAIR_002,hairstyle",
-  "CF27_TESTONLY_SECOND_HAIR_003,hairstyle",
-  "CF27_TESTONLY_SECOND_HAIR_004,hairstyle"
-].join("\n");
-
-const initialDraft: RecordDraft = {
-  recordID: "second-review-record-synthetic",
-  stableInternalID: "CF27_TESTONLY_SECOND_REVIEW_RECORD",
-  primaryObserverID: "primary-researcher-synthetic",
-  primarySummary: "Primary observation summary from the first review record.",
-  verifierObserverID: "second-verifier-synthetic",
-  verifierSummary: "Independent verifier observation from retained evidence or live re-walk.",
-  evidenceIDs: "evidence-front-synthetic,evidence-angle-synthetic",
-  nativeOrderStatus: "confirmed",
-  recordFieldsStatus: "confirmed",
-  evidenceFilesStatus: "confirmed",
-  frontViewStatus: "confirmed",
-  secondaryAngleStatus: "confirmed",
-  dependencyStatus: "notApplicable",
-  exceptionStatus: "notApplicable",
-  randomizationMethod: "Synthetic deterministic secondary-angle sampling list.",
-  finalDisposition: "VERIFIED",
-  notes: "Synthetic second-review note for workflow structure only."
-};
+const allowedStatuses = getAllowedCf27VerifierDecisionStatuses();
+const loadingCopy = "Loading CF27 production-verification queue";
 
 export function SecondVerifierWorkspace() {
-  const [workspace, setWorkspace] = useState(() => {
-    const createdAt = now();
-    return createEmptySecondVerifierWorkspace({
-      workspaceID: "phase-zero-local-second-verifier-workspace",
-      verifierID: "second-verifier-synthetic",
-      nowISO: createdAt
-    });
-  });
-  const [draft, setDraft] = useState<RecordDraft>(initialDraft);
-  const [menuLabel, setMenuLabel] = useState("Head menu count");
-  const [menuPrimaryCount, setMenuPrimaryCount] = useState("0");
-  const [menuVerifierCount, setMenuVerifierCount] = useState("0");
-  const [catalogLabel, setCatalogLabel] = useState("Head catalog count");
-  const [catalogPrimaryCount, setCatalogPrimaryCount] = useState("0");
-  const [catalogVerifierCount, setCatalogVerifierCount] = useState("0");
-  const [catalogVersion, setCatalogVersion] = useState("catalog-version-synthetic");
-  const [eligibleCatalogIDs, setEligibleCatalogIDs] = useState(defaultEligibleCatalogIDs);
-  const [signOffNotes, setSignOffNotes] = useState("");
-  const [directEvidenceIDs, setDirectEvidenceIDs] = useState("new-direct-evidence-synthetic");
-  const [recaptureFileIDs, setRecaptureFileIDs] = useState("recapture-front-synthetic");
-  const [supersededEvidenceIDs, setSupersededEvidenceIDs] = useState("superseded-original-evidence-synthetic");
-  const [finalResolution, setFinalResolution] = useState("Document how new direct evidence resolved the disagreement without averaging observations.");
-  const [resolutionAction, setResolutionAction] = useState<Phase0ResolutionAction>("recaptureEvidence");
-  const [resolutionDisposition, setResolutionDisposition] = useState<Phase0ApprovedVerificationStatus>("VERIFIED_WITH_NOTES");
-  const [resolutionState, setResolutionState] = useState<Phase0VerificationState>("verified");
-  const [assignmentPackageText, setAssignmentPackageText] = useState("");
-  const [verifierResultsText, setVerifierResultsText] = useState("");
-  const [verifierImportReport, setVerifierImportReport] = useState<Phase0VerifierResultsImportReport | null>(null);
-  const validation = useMemo(() => validateSecondVerifierWorkspace(workspace), [workspace]);
-  const exportedRecords = useMemo(() => exportSecondPersonVerificationRecords(workspace), [workspace]);
-  const exportedDiscrepancies = useMemo(() => exportDiscrepancyResolutionRecords(workspace), [workspace]);
+  const [queue, setQueue] = useState<Cf27ProductionVerificationQueue | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [filters, setFilters] = useState<Cf27VerifierQueueFilters>(defaultCf27VerifierQueueFilters);
+  const [selectedCandidateID, setSelectedCandidateID] = useState<string | null>(null);
+  const [drafts, setDrafts] = useState<Record<string, Cf27VerifierDecisionDraft>>({});
+  const [activeDraft, setActiveDraft] = useState<Cf27VerifierDecisionDraft | null>(null);
+  const [draftNotice, setDraftNotice] = useState<string | null>(null);
+  const [importText, setImportText] = useState("");
+  const [importMessage, setImportMessage] = useState<string | null>(null);
+  const [secondaryAngleSample, setSecondaryAngleSample] = useState<Phase0SecondaryAngleSampleReport | null>(null);
 
-  function updateDraft<Key extends keyof RecordDraft>(key: Key, value: RecordDraft[Key]) {
-    setDraft((currentDraft) => ({ ...currentDraft, [key]: value }));
-  }
-
-  function addMenuCountCheck() {
-    setWorkspace((currentWorkspace) => ({
-      ...currentWorkspace,
-      updatedAt: now(),
-      menuCountChecks: [
-        ...currentWorkspace.menuCountChecks,
-        createSecondVerifierCountCheck({
-          checkID: `menu-count-${currentWorkspace.menuCountChecks.length + 1}`,
-          label: menuLabel,
-          primaryCount: Number(menuPrimaryCount),
-          verifierCount: Number(menuVerifierCount),
-          notes: "Entered by second-verifier workspace."
-        })
-      ],
-      signedOffAt: null,
-      signOffVerifierID: null,
-      signOffNotes: ""
-    }));
-  }
-
-  function addCatalogCountCheck() {
-    setWorkspace((currentWorkspace) => ({
-      ...currentWorkspace,
-      updatedAt: now(),
-      catalogCountChecks: [
-        ...currentWorkspace.catalogCountChecks,
-        createSecondVerifierCountCheck({
-          checkID: `catalog-count-${currentWorkspace.catalogCountChecks.length + 1}`,
-          label: catalogLabel,
-          primaryCount: Number(catalogPrimaryCount),
-          verifierCount: Number(catalogVerifierCount),
-          notes: "Entered by second-verifier workspace."
-        })
-      ],
-      signedOffAt: null,
-      signOffVerifierID: null,
-      signOffNotes: ""
-    }));
-  }
-
-  async function generateSecondaryAngleSample() {
-    const timestamp = now();
-    const sample = await createDeterministicSecondaryAngleSample({
-      seed: {
-        environmentID: workspace.environment.verifierEnvironmentID,
-        verifierID: workspace.environment.verifierID,
-        catalogVersion
-      },
-      eligibleRecords: parseEligibleCatalogIDs(eligibleCatalogIDs)
-    });
-    setWorkspace((currentWorkspace) => applySecondaryAngleSampleToWorkspace({
-      workspace: currentWorkspace,
-      sample,
-      updatedAt: timestamp
-    }));
-    setDraft((currentDraft) => ({
-      ...currentDraft,
-      randomizationMethod: `${sample.methodID}; seed=${sample.seedInput}`
-    }));
-  }
-
-  function addRecordCheck() {
-    const timestamp = now();
-    const recordCheck = createSecondVerifierRecordCheck({
-      recordID: draft.recordID,
-      stableInternalID: draft.stableInternalID,
-      primaryObserverID: draft.primaryObserverID,
-      primarySummary: draft.primarySummary,
-      verifierObserverID: draft.verifierObserverID,
-      verifierSummary: draft.verifierSummary,
-      evidenceIDs: splitList(draft.evidenceIDs),
-      observedAt: timestamp,
-      statuses: {
-        nativeOrderStatus: draft.nativeOrderStatus,
-        recordFieldsStatus: draft.recordFieldsStatus,
-        evidenceFilesStatus: draft.evidenceFilesStatus,
-        frontViewStatus: draft.frontViewStatus,
-        secondaryAngleStatus: draft.secondaryAngleStatus,
-        dependencyStatus: draft.dependencyStatus,
-        exceptionStatus: draft.exceptionStatus
-      },
-      randomizationMethod: draft.randomizationMethod,
-      finalDisposition: draft.finalDisposition,
-      notes: draft.notes,
-      primaryAcknowledgedAt: timestamp,
-      verifierAcknowledgedAt: timestamp
-    });
-    setWorkspace((currentWorkspace) => addSecondVerifierRecordCheck(currentWorkspace, recordCheck, timestamp));
-  }
-
-  function signOff() {
-    const timestamp = now();
-    setWorkspace((currentWorkspace) =>
-      signOffSecondVerifierWorkspace({
-        workspace: currentWorkspace,
-        verifierID: currentWorkspace.environment.verifierID,
-        notes: signOffNotes || "Second-verifier local sign-off.",
-        signedOffAt: timestamp
+  useEffect(() => {
+    let active = true;
+    fetch("/api/internal/cf27-production-verification-queue", { cache: "no-store" })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Queue endpoint returned ${response.status}`);
+        return response.json() as Promise<Cf27ProductionVerificationQueue>;
       })
+      .then((data) => {
+        if (!active) return;
+        setQueue(data);
+        setSelectedCandidateID(data.records[0]?.stableCandidateID ?? null);
+        setLoadError(null);
+      })
+      .catch((error: unknown) => {
+        if (!active) return;
+        setLoadError(error instanceof Error ? error.message : "Unable to load the CF27 production-verification queue.");
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const filteredRecords = useMemo(() => queue ? filterVerificationQueueRecords(queue.records, filters, drafts) : [], [queue, filters, drafts]);
+  const selectedRecord = useMemo(() => {
+    if (!queue) return null;
+    return queue.records.find((record) => record.stableCandidateID === selectedCandidateID) ?? filteredRecords[0] ?? queue.records[0] ?? null;
+  }, [filteredRecords, queue, selectedCandidateID]);
+  const progress = useMemo(() => queue ? getVerifierProgressCounts(queue, drafts) : null, [queue, drafts]);
+  const decisionSetValidation = useMemo(() => queue ? validateVerifierDecisionSet(queue, drafts) : null, [queue, drafts]);
+  const draftValidation = useMemo(
+    () => selectedRecord && activeDraft ? validateVerifierDecisionDraft(activeDraft, selectedRecord) : null,
+    [activeDraft, selectedRecord]
+  );
+
+  useEffect(() => {
+    if (!selectedRecord) {
+      setActiveDraft(null);
+      return;
+    }
+    setActiveDraft(drafts[selectedRecord.stableCandidateID] ?? createVerifierDecisionDraft(selectedRecord));
+  }, [drafts, selectedRecord]);
+
+  if (loadError) {
+    return (
+      <section className="screen-stack" aria-labelledby="second-verifier-title">
+        <div className="status-row">
+          <div>
+            <p className="eyebrow">Internal verification tool</p>
+            <h2 id="second-verifier-title">Second-verifier decision workspace</h2>
+          </div>
+          <StatusBadge tone="danger">queue unavailable</StatusBadge>
+        </div>
+        <Alert title="Queue could not be loaded" tone="danger" role="alert">{loadError}</Alert>
+      </section>
     );
   }
 
-  function openFirstMismatchDiscrepancy() {
-    const mismatch = workspace.mismatchReports[0];
-    if (!mismatch) return;
-    const timestamp = now();
-    setWorkspace((currentWorkspace) => openDiscrepancyResolutionWorkflow({
-      workspace: currentWorkspace,
-      mismatchID: mismatch.mismatchID,
-      openedBy: currentWorkspace.environment.verifierID || "catalog-manager-synthetic",
-      openedAt: timestamp
-    }));
+  if (!queue || !progress || !decisionSetValidation) {
+    return (
+      <section className="screen-stack" aria-labelledby="second-verifier-title">
+        <h2 id="second-verifier-title">Second-verifier decision workspace</h2>
+        <LoadingState label={loadingCopy} />
+      </section>
+    );
+  }
+  const activeQueue = queue;
+
+  function updateFilter<Key extends keyof Cf27VerifierQueueFilters>(key: Key, value: Cf27VerifierQueueFilters[Key]) {
+    setFilters((current) => ({ ...current, [key]: value }));
   }
 
-  function updateWorkflow(workflow: Phase0DiscrepancyResolutionWorkflow) {
-    setWorkspace((currentWorkspace) => upsertDiscrepancyResolutionWorkflow({
-      workspace: currentWorkspace,
-      workflow,
-      updatedAt: now()
-    }));
+  function updateDraft<Key extends keyof Cf27VerifierDecisionDraft>(key: Key, value: Cf27VerifierDecisionDraft[Key]) {
+    setActiveDraft((current) => current ? { ...current, [key]: value } : current);
+    setDraftNotice(null);
   }
 
-  function attachEvidence(workflow: Phase0DiscrepancyResolutionWorkflow) {
-    updateWorkflow(linkDiscrepancyResolutionEvidence({
-      workflow,
-      actorID: workspace.environment.verifierID || "catalog-manager-synthetic",
-      occurredAt: now(),
-      directEvidenceIDs: splitList(directEvidenceIDs),
-      recaptureFileIDs: splitList(recaptureFileIDs),
-      supersededEvidenceFileIDs: splitList(supersededEvidenceIDs)
-    }));
+  function selectRecord(record: Cf27ProductionVerificationQueueRecord) {
+    setSelectedCandidateID(record.stableCandidateID);
+    setDraftNotice(null);
   }
 
-  function recordResolution(workflow: Phase0DiscrepancyResolutionWorkflow) {
-    updateWorkflow(recordDiscrepancyFinalResolution({
-      workflow,
-      actorID: workspace.environment.verifierID || "catalog-manager-synthetic",
-      occurredAt: now(),
-      resolutionAction,
-      finalResolution,
-      finalDisposition: resolutionDisposition,
-      verificationState: resolutionState
-    }));
+  function saveDraft() {
+    if (!selectedRecord || !activeDraft) return;
+    const savedDraft: Cf27VerifierDecisionDraft = {
+      ...activeDraft,
+      stableCandidateID: selectedRecord.stableCandidateID,
+      queueRecordID: selectedRecord.queueRecordID,
+      savedAt: new Date().toISOString(),
+      productionPromotionAttempted: false,
+      productionEligibleAfterDraft: false
+    };
+    setDrafts((current) => ({ ...current, [selectedRecord.stableCandidateID]: savedDraft }));
+    setActiveDraft(savedDraft);
+    setDraftNotice("Draft saved locally. No production record was created.");
   }
 
-  function acknowledge(workflow: Phase0DiscrepancyResolutionWorkflow, party: "primary" | "verifier") {
-    updateWorkflow(acknowledgeDiscrepancyResolution({
-      workflow,
-      party,
-      actorID: party === "primary" ? workflow.primaryObservation.observerID : workflow.verifierObservation.observerID,
-      occurredAt: now()
-    }));
+  function jumpToNextUnresolved() {
+    const next = getNextUnresolvedCandidate(activeQueue.records, drafts);
+    if (next) selectRecord(next);
   }
 
-  function importVerifierResults() {
-    try {
-      const assignment = JSON.parse(assignmentPackageText);
-      setVerifierImportReport(validateSecondVerifierResultsImport(verifierResultsText, assignment));
-    } catch {
-      const assignmentReport = validateSecondVerifierAssignmentPackage(null);
-      setVerifierImportReport({
-        ...assignmentReport,
-        ok: false,
-        importable: false,
-        rowCount: 0,
-        rows: [],
-        errors: [
-          ...assignmentReport.errors,
-          { code: "invalidAssignmentJSON", message: "Assignment package JSON could not be parsed." }
-        ]
-      });
+  async function generateSample() {
+    const sample = await createDeterministicSecondaryAngleSample({
+      seed: {
+        environmentID: selectedRecord?.environmentID ?? "CF27_ENVIRONMENT_UNRESOLVED",
+        verifierID: activeDraft?.verifierID || "UNASSIGNED_SECOND_VERIFIER",
+        catalogVersion: activeQueue.generatedAt
+      },
+      eligibleRecords: queueRecordsForSecondaryAngleSampling(activeQueue)
+    });
+    setSecondaryAngleSample(sample);
+  }
+
+  function exportDrafts() {
+    const csv = exportVerifierDecisionDrafts(drafts);
+    setImportText(csv);
+    setImportMessage(`Export prepared with ${Object.keys(drafts).length} draft decision row(s).`);
+  }
+
+  function importDrafts() {
+    const result = importVerifierDecisionDrafts(importText, activeQueue);
+    if (result.importable) {
+      setDrafts((current) => ({ ...current, ...result.drafts }));
+      setImportMessage(`Imported ${Object.keys(result.drafts).length} validated draft decision row(s). No records were promoted.`);
+    } else {
+      setImportMessage(`Import blocked with ${result.errors.length} error(s): ${result.errors.slice(0, 3).map((error) => error.message).join(" ")}`);
     }
   }
 
-  async function readAssignmentFile(file: File | undefined) {
-    if (!file) return;
-    setAssignmentPackageText(await file.text());
-    setVerifierImportReport(null);
-  }
-
-  async function readResultsFile(file: File | undefined) {
-    if (!file) return;
-    setVerifierResultsText(await file.text());
-    setVerifierImportReport(null);
-  }
+  const categories = ["all", ...activeQueue.categoryCounts.map((category) => category.category)];
 
   return (
     <section className="screen-stack" aria-labelledby="second-verifier-title">
       <div className="status-row">
         <div>
           <p className="eyebrow">Internal verification tool</p>
-          <h2 id="second-verifier-title">Second-verifier workspace</h2>
+          <h2 id="second-verifier-title">Second-verifier decision workspace</h2>
         </div>
-        <StatusBadge tone={validation.signOffReady ? "success" : "danger"}>
-          {validation.signOffReady ? "sign-off ready" : "verification blocked"}
-        </StatusBadge>
+        <StatusBadge tone="danger">production blocked</StatusBadge>
       </div>
       <p className="supporting">
-        Record an independent verifier environment, menu counts, catalog counts, record checks, evidence checks, secondary-angle sampling, mismatch
-        reports, and sign-off. Primary and verifier observations stay visually separated.
+        Work through the canonical CF27 production-verification queue from Prompt 092. Draft decisions are attributed and exportable, but they never
+        grant production approval or enable recommendations.
       </p>
-      <Alert title="Independent review required" tone="warning">
-        The second verifier must re-check evidence or the live menu path and cannot simply reuse the primary researcher identity or conclusions.
+      <Alert title="Fail-closed queue" tone="warning">
+        Primary review, verifier drafts, and client-side state cannot publish records. Production remains blocked until validated second-verifier
+        files, discrepancy resolution, catalog-manager approval, and release gates pass.
       </Alert>
 
       <div className="card-grid">
         <Card>
-          <h3>Verifier environment</h3>
-          <div className="form-stack">
-            <TextField label="Verifier ID" value={workspace.environment.verifierID} onChange={(event) => updateEnvironment("verifierID", event.currentTarget.value)} />
-            <TextField label="Platform" value={workspace.environment.platform} onChange={(event) => updateEnvironment("platform", event.currentTarget.value)} />
-            <TextField label="Game version" value={workspace.environment.gameVersion} onChange={(event) => updateEnvironment("gameVersion", event.currentTarget.value)} />
-            <TextField label="Patch version" value={workspace.environment.patchVersion} onChange={(event) => updateEnvironment("patchVersion", event.currentTarget.value)} />
-            <TextField label="Mode" value={workspace.environment.gameMode} onChange={(event) => updateEnvironment("gameMode", event.currentTarget.value)} />
-            <TextField label="Creation path" value={workspace.environment.creationPath} onChange={(event) => updateEnvironment("creationPath", event.currentTarget.value)} />
-            <TextField label="Environment evidence IDs" value={workspace.environment.evidenceFileIDs.join(",")} onChange={(event) => updateEnvironmentEvidence(event.currentTarget.value)} />
-          </div>
-        </Card>
-        <Card>
-          <h3>Independent counts</h3>
-          <div className="form-stack">
-            <TextField label="Menu count label" value={menuLabel} onChange={(event) => setMenuLabel(event.currentTarget.value)} />
-            <TextField label="Primary menu count" inputMode="numeric" value={menuPrimaryCount} onChange={(event) => setMenuPrimaryCount(event.currentTarget.value)} />
-            <TextField label="Verifier menu count" inputMode="numeric" value={menuVerifierCount} onChange={(event) => setMenuVerifierCount(event.currentTarget.value)} />
-            <Button variant="secondary" onClick={addMenuCountCheck}>Add menu count</Button>
-            <TextField label="Catalog count label" value={catalogLabel} onChange={(event) => setCatalogLabel(event.currentTarget.value)} />
-            <TextField label="Primary catalog count" inputMode="numeric" value={catalogPrimaryCount} onChange={(event) => setCatalogPrimaryCount(event.currentTarget.value)} />
-            <TextField label="Verifier catalog count" inputMode="numeric" value={catalogVerifierCount} onChange={(event) => setCatalogVerifierCount(event.currentTarget.value)} />
-            <Button variant="secondary" onClick={addCatalogCountCheck}>Add catalog count</Button>
-          </div>
-        </Card>
-        <Card>
-          <h3>Deterministic secondary-angle sample</h3>
-          <p className="supporting">
-            The sample uses environment ID + verifier ID + catalog version, hashed with each eligible catalog ID, then selects the first quartile per category.
-          </p>
-          <div className="form-stack">
-            <TextField label="Catalog version" value={catalogVersion} onChange={(event) => setCatalogVersion(event.currentTarget.value)} />
-            <label className="form-field" htmlFor="second-verifier-eligible-ids">
-              <span>Eligible catalog IDs and categories</span>
-              <textarea
-                id="second-verifier-eligible-ids"
-                rows={8}
-                value={eligibleCatalogIDs}
-                onChange={(event) => setEligibleCatalogIDs(event.currentTarget.value)}
-              />
-              <span className="field-note">One record per line: stableInternalID,category. Use only audit records backed by evidence.</span>
-            </label>
-            <Button variant="secondary" onClick={() => void generateSecondaryAngleSample()}>Generate sample</Button>
-          </div>
-        </Card>
-        <Card tone={validation.signOffReady ? "success" : "danger"}>
-          <h3>Verification summary</h3>
+          <h3>Queue progress</h3>
+          <ProgressBar value={progress.draftSaved} max={progress.total} label="Verifier drafts saved" />
           <dl className="metadata-list">
-            <div><dt>Records checked</dt><dd>{validation.summary.independentlyCheckedRecords}/{validation.summary.recordCount}</dd></div>
-            <div><dt>Count mismatches</dt><dd>{validation.summary.countMismatches}</dd></div>
-            <div><dt>Record mismatches</dt><dd>{validation.summary.recordMismatches}</dd></div>
-            <div><dt>Evidence failures</dt><dd>{validation.summary.evidenceFailures}</dd></div>
-            <div><dt>Front-view failures</dt><dd>{validation.summary.frontViewFailures}</dd></div>
-            <div><dt>Secondary-angle failures</dt><dd>{validation.summary.secondaryAngleFailures}</dd></div>
+            <div><dt>Total records</dt><dd>{progress.total}</dd></div>
+            <div><dt>Not verified</dt><dd>{progress.notVerified}</dd></div>
+            <div><dt>Missing views</dt><dd>{progress.missingViews}</dd></div>
+            <div><dt>Duplicate or ambiguous</dt><dd>{progress.duplicateOrAmbiguous}</dd></div>
+            <div><dt>Environment gaps</dt><dd>{progress.environmentGaps}</dd></div>
+            <div><dt>Production eligible</dt><dd>{progress.productionEligible}</dd></div>
+          </dl>
+        </Card>
+        <Card tone="warning">
+          <h3>Mandatory production depth</h3>
+          <ul className="compact-list">
+            <li>100% catalog IDs, indices, menu counts, evidence files, required front views, exceptions, duplicates, and proposed production records must be reviewed.</li>
+            <li>At least 25% of secondary angles must be sampled by deterministic method.</li>
+            <li>Missing environment metadata, evidence gaps, conflicts, and recapture needs keep records blocked.</li>
+          </ul>
+        </Card>
+        <Card tone={decisionSetValidation.completed === queue.records.length && decisionSetValidation.ok ? "success" : "danger"}>
+          <h3>Decision-set validation</h3>
+          <dl className="metadata-list">
+            <div><dt>Valid drafts</dt><dd>{decisionSetValidation.completed}/{decisionSetValidation.total}</dd></div>
+            <div><dt>Errors</dt><dd>{decisionSetValidation.errors.length}</dd></div>
+            <div><dt>Warnings</dt><dd>{decisionSetValidation.warnings.length}</dd></div>
+            <div><dt>Production eligible</dt><dd>{decisionSetValidation.productionEligible ? "yes" : "no"}</dd></div>
           </dl>
         </Card>
       </div>
 
-      {workspace.secondaryAngleSample ? (
+      <Card>
+        <h3>Queue filters</h3>
+        <div className="form-grid">
+          <SelectField label="Category" value={filters.category} onChange={(event) => updateFilter("category", event.currentTarget.value)}>
+            {categories.map((category) => <option key={category} value={category}>{category}</option>)}
+          </SelectField>
+          <SelectField label="Verifier status" value={filters.verifierStatus} onChange={(event) => updateFilter("verifierStatus", event.currentTarget.value as Cf27VerifierQueueFilters["verifierStatus"])}>
+            <option value="all">all</option>
+            {allowedStatuses.map((status) => <option key={status} value={status}>{status}</option>)}
+          </SelectField>
+          <SelectField label="Evidence completeness" value={filters.evidenceCompleteness} onChange={(event) => updateFilter("evidenceCompleteness", event.currentTarget.value as Cf27VerifierQueueFilters["evidenceCompleteness"])}>
+            <option value="all">all</option>
+            <option value="EVIDENCE_LINKED">EVIDENCE_LINKED</option>
+            <option value="MISSING_EVIDENCE">MISSING_EVIDENCE</option>
+          </SelectField>
+          <BooleanFilter label="Missing views" value={filters.missingViews} onChange={(value) => updateFilter("missingViews", value)} />
+          <BooleanFilter label="Duplicate or ambiguity" value={filters.duplicateOrAmbiguous} onChange={(value) => updateFilter("duplicateOrAmbiguous", value)} />
+          <BooleanFilter label="Environment/version gap" value={filters.environmentGap} onChange={(value) => updateFilter("environmentGap", value)} />
+          <TextField label="Candidate search" value={filters.search} onChange={(event) => updateFilter("search", event.currentTarget.value)} />
+        </div>
+        <div className="button-row">
+          <Button variant="secondary" onClick={jumpToNextUnresolved}>Next unresolved candidate</Button>
+          <Button variant="secondary" onClick={() => void generateSample()}>Generate 25% secondary-angle sample</Button>
+        </div>
+      </Card>
+
+      {secondaryAngleSample ? (
         <Card>
-          <h3>Secondary-angle sample report</h3>
+          <h3>Deterministic secondary-angle sample</h3>
           <dl className="metadata-list">
-            <div><dt>Method</dt><dd>{workspace.secondaryAngleSample.methodID}</dd></div>
-            <div><dt>Seed input</dt><dd>{workspace.secondaryAngleSample.seedInput}</dd></div>
-            <div><dt>Selected</dt><dd>{workspace.secondaryAngleSample.selectedCount}/{workspace.secondaryAngleSample.eligibleCount}</dd></div>
+            <div><dt>Method</dt><dd>{secondaryAngleSample.methodID}</dd></div>
+            <div><dt>Selected</dt><dd>{secondaryAngleSample.selectedCount}/{secondaryAngleSample.eligibleCount}</dd></div>
+            <div><dt>Seed</dt><dd>{secondaryAngleSample.seedInput}</dd></div>
           </dl>
-          <pre className="code-block" aria-label="Deterministic secondary-angle sample report">
-            {workspace.secondaryAngleSample.humanReadableReport}
-          </pre>
+          <pre className="code-block" aria-label="CF27 deterministic secondary-angle sample report">{secondaryAngleSample.humanReadableReport}</pre>
         </Card>
       ) : null}
 
-      <Card tone={verifierImportReport?.importable ? "success" : verifierImportReport ? "warning" : "neutral"}>
-        <h3>Import verifier results</h3>
-        <p className="supporting">
-          Import a verifier assignment JSON and completed CSV results for validation. This only checks the package locally; it does not assign VERIFIED
-          status, publish records, or enable recommendations.
-        </p>
-        <div className="form-grid">
-          <label className="form-field" htmlFor="second-verifier-assignment-file">
-            <span>Verifier assignment JSON</span>
-            <input
-              className="file-input"
-              id="second-verifier-assignment-file"
-              type="file"
-              accept="application/json,.json"
-              onChange={(event) => void readAssignmentFile(event.currentTarget.files?.[0])}
-            />
-          </label>
-          <label className="form-field" htmlFor="second-verifier-results-file">
-            <span>Verifier results CSV</span>
-            <input
-              className="file-input"
-              id="second-verifier-results-file"
-              type="file"
-              accept="text/csv,.csv"
-              onChange={(event) => void readResultsFile(event.currentTarget.files?.[0])}
-            />
-          </label>
-        </div>
-        <div className="button-row">
-          <Button variant="secondary" onClick={importVerifierResults} disabled={!assignmentPackageText || !verifierResultsText}>
-            Validate import
-          </Button>
-        </div>
-        {verifierImportReport ? (
-          <div className="stack" aria-live="polite">
-            <dl className="metadata-list">
-              <div><dt>Rows</dt><dd>{verifierImportReport.rowCount}</dd></div>
-              <div><dt>Importable</dt><dd>{verifierImportReport.importable ? "yes" : "no"}</dd></div>
-              <div><dt>Errors</dt><dd>{verifierImportReport.errors.length}</dd></div>
-              <div><dt>Warnings</dt><dd>{verifierImportReport.warnings.length}</dd></div>
-            </dl>
-            {verifierImportReport.errors.length > 0 ? (
-              <Alert title="Import blocked" tone="danger">
-                <ul className="compact-list">
-                  {verifierImportReport.errors.slice(0, 6).map((error, index) => (
-                    <li key={`${error.code}-${index}`}>{error.message}</li>
-                  ))}
-                </ul>
-              </Alert>
-            ) : null}
-            {verifierImportReport.warnings.length > 0 ? (
-              <Alert title="Import warnings" tone="warning">
-                <ul className="compact-list">
-                  {verifierImportReport.warnings.slice(0, 6).map((warning, index) => (
-                    <li key={`${warning.code}-${index}`}>{warning.message}</li>
-                  ))}
-                </ul>
-              </Alert>
-            ) : null}
-          </div>
-        ) : null}
-      </Card>
-
-      <Card>
-        <h3>Record-by-record verification</h3>
-        <div className="form-grid">
-          <TextField label="Record ID" value={draft.recordID} onChange={(event) => updateDraft("recordID", event.currentTarget.value)} />
-          <TextField label="Stable internal ID" value={draft.stableInternalID} onChange={(event) => updateDraft("stableInternalID", event.currentTarget.value)} />
-        </div>
-        <div className="verifier-comparison-grid" aria-label="Primary and verifier observations">
-          <div className="verifier-observation verifier-observation-primary">
-            <h4>Primary researcher observation</h4>
-            <TextField label="Primary observer ID" value={draft.primaryObserverID} onChange={(event) => updateDraft("primaryObserverID", event.currentTarget.value)} />
-            <label className="form-field" htmlFor="second-verifier-primary-summary">
-              <span>Primary summary</span>
-              <textarea id="second-verifier-primary-summary" rows={4} value={draft.primarySummary} onChange={(event) => updateDraft("primarySummary", event.currentTarget.value)} />
-            </label>
-          </div>
-          <div className="verifier-observation verifier-observation-second">
-            <h4>Second-verifier observation</h4>
-            <TextField label="Verifier observer ID" value={draft.verifierObserverID} onChange={(event) => updateDraft("verifierObserverID", event.currentTarget.value)} />
-            <label className="form-field" htmlFor="second-verifier-summary">
-              <span>Verifier summary</span>
-              <textarea id="second-verifier-summary" rows={4} value={draft.verifierSummary} onChange={(event) => updateDraft("verifierSummary", event.currentTarget.value)} />
-            </label>
-          </div>
-        </div>
-        <div className="form-grid">
-          <TextField label="Evidence IDs" value={draft.evidenceIDs} onChange={(event) => updateDraft("evidenceIDs", event.currentTarget.value)} />
-          <TextField label="Secondary-angle sampling method" value={draft.randomizationMethod} onChange={(event) => updateDraft("randomizationMethod", event.currentTarget.value)} />
-          <VerifierStatusField label="Native order" value={draft.nativeOrderStatus} onChange={(value) => updateDraft("nativeOrderStatus", value)} />
-          <VerifierStatusField label="Record fields" value={draft.recordFieldsStatus} onChange={(value) => updateDraft("recordFieldsStatus", value)} />
-          <VerifierStatusField label="Evidence files" value={draft.evidenceFilesStatus} onChange={(value) => updateDraft("evidenceFilesStatus", value)} />
-          <VerifierStatusField label="Front view" value={draft.frontViewStatus} onChange={(value) => updateDraft("frontViewStatus", value)} />
-          <VerifierStatusField label="Secondary angle sample" value={draft.secondaryAngleStatus} onChange={(value) => updateDraft("secondaryAngleStatus", value)} />
-          <VerifierStatusField label="Dependency review" value={draft.dependencyStatus} onChange={(value) => updateDraft("dependencyStatus", value)} />
-          <VerifierStatusField label="Exception review" value={draft.exceptionStatus} onChange={(value) => updateDraft("exceptionStatus", value)} />
-          <SelectField label="Final disposition" value={draft.finalDisposition} onChange={(event) => updateDraft("finalDisposition", event.currentTarget.value as Phase0ApprovedVerificationStatus)}>
-            {allowedStatuses.map((status) => <option key={status} value={status}>{status}</option>)}
-          </SelectField>
-        </div>
-        <label className="form-field" htmlFor="second-verifier-notes">
-          <span>Record notes</span>
-          <textarea id="second-verifier-notes" rows={3} value={draft.notes} onChange={(event) => updateDraft("notes", event.currentTarget.value)} />
-        </label>
-        <Button onClick={addRecordCheck}>Add or replace record check</Button>
-      </Card>
-
-      <div className="result-grid">
-        <Card tone={validation.errors.length > 0 ? "danger" : "success"}>
-          <h3>Validation</h3>
-          {validation.errors.length === 0 ? (
-            <p className="supporting">Second-verifier workspace is structurally valid.</p>
-          ) : (
-            <ul className="compact-list">
-              {validation.errors.slice(0, 8).map((error, index) => <li key={`${error.code}-${error.entityID ?? error.message}-${index}`}>{error.message}</li>)}
-            </ul>
-          )}
-        </Card>
-        <Card tone={workspace.mismatchReports.length > 0 ? "danger" : "success"}>
-          <h3>Mismatch reports</h3>
-          {workspace.mismatchReports.length === 0 ? (
-            <p className="supporting">No mismatch reports from current record checks.</p>
-          ) : (
-            <ul className="compact-list">
-              {workspace.mismatchReports.slice(0, 8).map((report) => (
-                <li key={report.mismatchID}>{report.stableInternalID}: {report.kind} · {report.notes}</li>
-              ))}
-            </ul>
-          )}
-        </Card>
+      <div className="data-table-scroll" role="region" aria-label="CF27 verifier candidate queue" tabIndex={0}>
+        <table className="data-table">
+          <caption>Filtered production-verification queue candidates</caption>
+          <thead>
+            <tr>
+              <th scope="col">Candidate</th>
+              <th scope="col">Category</th>
+              <th scope="col">Native order</th>
+              <th scope="col">Draft status</th>
+              <th scope="col">Flags</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredRecords.map((record) => {
+              const status = drafts[record.stableCandidateID]?.decisionStatus ?? record.secondVerifierStatus;
+              return (
+                <tr key={record.stableCandidateID}>
+                  <th scope="row">
+                    <button className="link-button" type="button" onClick={() => selectRecord(record)}>
+                      {record.stableCandidateID}
+                    </button>
+                    <small>{record.nativeOptionLabelOrIndex || "label unresolved"}</small>
+                  </th>
+                  <td>{record.category}</td>
+                  <td>{record.nativeOrder ?? "unresolved"}</td>
+                  <td>{status}</td>
+                  <td>{queueFlags(record).join(", ") || "none"}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
 
-      <Card tone={workspace.discrepancyWorkflows.length > 0 ? "warning" : "neutral"}>
-        <h3>Discrepancy resolution</h3>
-        <p className="supporting">
-          Disagreements keep both observations intact, require new direct evidence and recapture links, preserve superseded evidence, and need both-party acknowledgment.
-        </p>
-        <Button variant="secondary" onClick={openFirstMismatchDiscrepancy} disabled={workspace.mismatchReports.length === 0}>
-          Open first mismatch discrepancy
-        </Button>
-        <div className="form-grid">
-          <TextField label="New direct evidence IDs" value={directEvidenceIDs} onChange={(event) => setDirectEvidenceIDs(event.currentTarget.value)} />
-          <TextField label="Recapture file IDs" value={recaptureFileIDs} onChange={(event) => setRecaptureFileIDs(event.currentTarget.value)} />
-          <TextField label="Superseded evidence IDs" value={supersededEvidenceIDs} onChange={(event) => setSupersededEvidenceIDs(event.currentTarget.value)} />
-          <SelectField label="Resolution action" value={resolutionAction} onChange={(event) => setResolutionAction(event.currentTarget.value as Phase0ResolutionAction)}>
-            {["acceptPrimaryObservation", "acceptVerifierObservation", "recaptureEvidence", "splitByVersion", "correctDraftRecord", "markNotVerified", "holdForResearch", "retireRecord"].map((action) => (
-              <option key={action} value={action}>{action}</option>
+      {filteredRecords.length === 0 ? (
+        <Alert title="No candidates match filters" tone="info">Clear a filter or use search to locate a specific stable ID.</Alert>
+      ) : null}
+
+      {selectedRecord && activeDraft ? (
+        <CandidateDetail
+          record={selectedRecord}
+          draft={activeDraft}
+          draftValidation={draftValidation}
+          draftNotice={draftNotice}
+          updateDraft={updateDraft}
+          saveDraft={saveDraft}
+        />
+      ) : null}
+
+      <Card>
+        <h3>Draft export and import</h3>
+        <p className="supporting">CSV export/import is for verifier decision drafts only. It cannot create production records or alter catalog-manager disposition.</p>
+        <div className="button-row">
+          <Button variant="secondary" onClick={exportDrafts}>Prepare CSV export</Button>
+          <Button variant="secondary" onClick={importDrafts} disabled={!importText.trim()}>Validate and import CSV</Button>
+        </div>
+        <label className="form-field" htmlFor="cf27-verifier-draft-csv">
+          <span>Verifier draft CSV</span>
+          <textarea id="cf27-verifier-draft-csv" rows={8} value={importText} onChange={(event) => setImportText(event.currentTarget.value)} />
+        </label>
+        {importMessage ? <Alert title="Draft import/export status" tone="info">{importMessage}</Alert> : null}
+      </Card>
+    </section>
+  );
+}
+
+function CandidateDetail({
+  record,
+  draft,
+  draftValidation,
+  draftNotice,
+  updateDraft,
+  saveDraft
+}: {
+  record: Cf27ProductionVerificationQueueRecord;
+  draft: Cf27VerifierDecisionDraft;
+  draftValidation: ReturnType<typeof validateVerifierDecisionDraft> | null;
+  draftNotice: string | null;
+  updateDraft: <Key extends keyof Cf27VerifierDecisionDraft>(key: Key, value: Cf27VerifierDecisionDraft[Key]) => void;
+  saveDraft: () => void;
+}) {
+  return (
+    <section className="screen-stack" aria-labelledby={`candidate-detail-${record.stableCandidateID}`}>
+      <div className="status-row">
+        <div>
+          <p className="eyebrow">Candidate detail</p>
+          <h3 id={`candidate-detail-${record.stableCandidateID}`}>{record.stableCandidateID}</h3>
+        </div>
+        <StatusBadge tone={record.currentProductionEligibility === "NOT_ELIGIBLE" ? "danger" : "warning"}>{record.currentProductionEligibility}</StatusBadge>
+      </div>
+      <div className="result-grid">
+        <Card>
+          <h4>Native and environment metadata</h4>
+          <dl className="metadata-list">
+            <div><dt>Category</dt><dd>{record.category}</dd></div>
+            <div><dt>Native label/index</dt><dd>{record.nativeOptionLabelOrIndex || "unresolved"}</dd></div>
+            <div><dt>Native order</dt><dd>{record.nativeOrder ?? "unresolved"}</dd></div>
+            <div><dt>Platform</dt><dd>{record.platform ?? "unresolved"}</dd></div>
+            <div><dt>Game version</dt><dd>{record.gameVersion ?? "unresolved"}</dd></div>
+            <div><dt>Patch</dt><dd>{record.patch ?? "unresolved"}</dd></div>
+            <div><dt>Mode</dt><dd>{record.mode ?? "unresolved"}</dd></div>
+            <div><dt>Creation path</dt><dd>{record.creationPath ?? "unresolved"}</dd></div>
+          </dl>
+        </Card>
+        <Card>
+          <h4>Primary observation</h4>
+          <dl className="metadata-list">
+            <div><dt>Primary status</dt><dd>{record.primaryReviewStatus}</dd></div>
+            <div><dt>Selected visible</dt><dd>{record.selectedValueVisible ? "yes" : "no"}</dd></div>
+            <div><dt>Category visible</dt><dd>{record.categoryVisible ? "yes" : "no"}</dd></div>
+            <div><dt>Transition</dt><dd>{record.optionTransitionObservable}</dd></div>
+            <div><dt>Neighbor ordering</dt><dd>{record.neighboringOptionsEstablishOrdering}</dd></div>
+          </dl>
+          <ul className="compact-list">
+            {record.notes.slice(0, 4).map((note) => <li key={note}>{note}</li>)}
+          </ul>
+        </Card>
+      </div>
+      <div className="result-grid">
+        <Card tone={record.missingViews.length > 0 ? "warning" : "success"}>
+          <h4>Evidence and views</h4>
+          <dl className="metadata-list">
+            <div><dt>Evidence status</dt><dd>{record.evidenceCompletenessStatus}</dd></div>
+            <div><dt>Available views</dt><dd>{record.availableViews.join(", ") || "none"}</dd></div>
+            <div><dt>Missing views</dt><dd>{record.missingViews.join(", ") || "none"}</dd></div>
+            <div><dt>Framing</dt><dd>{record.framingConsistencyResult}</dd></div>
+            <div><dt>Lighting</dt><dd>{record.lightingConsistencyResult}</dd></div>
+            <div><dt>Canonical settings</dt><dd>{record.canonicalSettingsConsistencyResult}</dd></div>
+          </dl>
+          <ul className="compact-list">
+            {record.evidenceReferences.map((evidence) => (
+              <li key={`${record.stableCandidateID}-${evidence.evidenceID}`}>
+                {evidence.evidenceID} · {evidence.view ?? "view unknown"} · {evidence.relativePath ?? evidence.path ?? "path unresolved"}
+              </li>
             ))}
-          </SelectField>
-          <SelectField label="Final disposition" value={resolutionDisposition} onChange={(event) => setResolutionDisposition(event.currentTarget.value as Phase0ApprovedVerificationStatus)}>
+          </ul>
+        </Card>
+        <Card tone={record.blockingReasons.length > 0 ? "danger" : "neutral"}>
+          <h4>Blocking facts</h4>
+          <dl className="metadata-list">
+            <div><dt>Duplicate flag</dt><dd>{record.duplicateOrNearDuplicateFlag ? "yes" : "no"}</dd></div>
+            <div><dt>Dependency flag</dt><dd>{record.dependencyFlag ? "yes" : "no"}</dd></div>
+            <div><dt>Environment/version gap</dt><dd>{record.versionOrEnvironmentGap ? "yes" : "no"}</dd></div>
+            <div><dt>Recommended verifier action</dt><dd>{record.recommendedVerifierAction}</dd></div>
+            <div><dt>Recommended recapture action</dt><dd>{record.recommendedRecaptureAction}</dd></div>
+          </dl>
+          <ul className="compact-list">
+            {record.blockingReasons.slice(0, 8).map((reason) => <li key={reason}>{reason}</li>)}
+          </ul>
+        </Card>
+      </div>
+      <Card>
+        <h4>Verifier draft decision</h4>
+        <div className="form-grid">
+          <TextField label="Verifier ID" value={draft.verifierID} onChange={(event) => updateDraft("verifierID", event.currentTarget.value)} />
+          <TextField label="Verification date" type="date" value={draft.verificationDate} onChange={(event) => updateDraft("verificationDate", event.currentTarget.value)} />
+          <TextField label="Verifier environment" value={draft.verifierEnvironment} onChange={(event) => updateDraft("verifierEnvironment", event.currentTarget.value)} />
+          <SelectField label="Decision status" value={draft.decisionStatus} onChange={(event) => updateDraft("decisionStatus", event.currentTarget.value as Cf27VerifierDecisionStatus)}>
             {allowedStatuses.map((status) => <option key={status} value={status}>{status}</option>)}
           </SelectField>
-          <SelectField label="Verification state" value={resolutionState} onChange={(event) => setResolutionState(event.currentTarget.value as Phase0VerificationState)}>
-            {["secondReviewPending", "verified", "rejected", "retired"].map((state) => <option key={state} value={state}>{state}</option>)}
-          </SelectField>
         </div>
-        <label className="form-field" htmlFor="second-verifier-final-resolution">
-          <span>Final resolution</span>
-          <textarea id="second-verifier-final-resolution" rows={3} value={finalResolution} onChange={(event) => setFinalResolution(event.currentTarget.value)} />
+        <label className="form-field" htmlFor={`independent-observation-${record.stableCandidateID}`}>
+          <span>Independent observation</span>
+          <textarea id={`independent-observation-${record.stableCandidateID}`} rows={4} value={draft.independentObservation} onChange={(event) => updateDraft("independentObservation", event.currentTarget.value)} />
         </label>
-        {workspace.discrepancyWorkflows.length === 0 ? (
-          <p className="supporting">No discrepancy workflows have been opened from mismatch reports.</p>
-        ) : (
-          <div className="stack">
-            {workspace.discrepancyWorkflows.map((workflow) => (
-              <Card key={workflow.workflowID} tone={workflow.status === "acknowledged" ? "success" : "warning"}>
-                <h4>{workflow.affectedStableInternalIDs.join(", ")}</h4>
-                <dl className="metadata-list">
-                  <div><dt>Status</dt><dd>{workflow.status}</dd></div>
-                  <div><dt>Type</dt><dd>{workflow.discrepancyType}</dd></div>
-                  <div><dt>New evidence</dt><dd>{workflow.requiredDirectEvidenceIDs.length}</dd></div>
-                  <div><dt>Recaptures</dt><dd>{workflow.linkedRecaptureFileIDs.length}</dd></div>
-                  <div><dt>Superseded evidence</dt><dd>{workflow.supersededEvidenceFileIDs.length}</dd></div>
-                  <div><dt>Audit events</dt><dd>{workflow.auditHistory.length}</dd></div>
-                </dl>
-                <div className="verifier-comparison-grid">
-                  <div className="verifier-observation verifier-observation-primary">
-                    <h5>Primary observation</h5>
-                    <p>{workflow.primaryObservation.summary}</p>
-                  </div>
-                  <div className="verifier-observation verifier-observation-second">
-                    <h5>Verifier observation</h5>
-                    <p>{workflow.verifierObservation.summary}</p>
-                  </div>
-                </div>
-                <div className="button-row">
-                  <Button variant="secondary" onClick={() => attachEvidence(workflow)}>Link evidence</Button>
-                  <Button variant="secondary" onClick={() => recordResolution(workflow)}>Record resolution</Button>
-                  <Button variant="secondary" onClick={() => acknowledge(workflow, "primary")}>Primary acknowledge</Button>
-                  <Button variant="secondary" onClick={() => acknowledge(workflow, "verifier")}>Verifier acknowledge</Button>
-                </div>
-              </Card>
-            ))}
-          </div>
-        )}
-        <p className="supporting">Exported discrepancy-resolution records: {exportedDiscrepancies.length}.</p>
-      </Card>
-
-      <Card tone={validation.signOffReady ? "success" : "warning"}>
-        <h3>Sign-off and export</h3>
-        <label className="form-field" htmlFor="second-verifier-signoff-notes">
-          <span>Sign-off notes</span>
-          <textarea id="second-verifier-signoff-notes" rows={3} value={signOffNotes} onChange={(event) => setSignOffNotes(event.currentTarget.value)} />
+        <div className="form-grid">
+          <CheckboxField label="Evidence files exist" checked={draft.evidenceConfirmed} onChange={(checked) => updateDraft("evidenceConfirmed", checked)} />
+          <CheckboxField label="Native order checked" checked={draft.nativeOrderConfirmed} onChange={(checked) => updateDraft("nativeOrderConfirmed", checked)} />
+          <CheckboxField label="Required front view checked" checked={draft.frontViewConfirmed} onChange={(checked) => updateDraft("frontViewConfirmed", checked)} />
+          <CheckboxField label="Secondary angle sample checked" checked={draft.secondaryAngleConfirmed} onChange={(checked) => updateDraft("secondaryAngleConfirmed", checked)} />
+          <CheckboxField label="Duplicate or exception reviewed" checked={draft.exceptionReviewed} onChange={(checked) => updateDraft("exceptionReviewed", checked)} />
+        </div>
+        <label className="form-field" htmlFor={`verifier-notes-${record.stableCandidateID}`}>
+          <span>Verifier notes</span>
+          <textarea id={`verifier-notes-${record.stableCandidateID}`} rows={3} value={draft.notes} onChange={(event) => updateDraft("notes", event.currentTarget.value)} />
+          <span className="field-note">Required for every non-clean decision. A saved draft still cannot publish a record.</span>
         </label>
-        <Button onClick={signOff} disabled={!validation.signOffReady}>Sign off second verification</Button>
-        <p className="supporting">
-          Exported second-person verification records: {exportedRecords.length}. These records still require catalog-manager review and package validation.
-        </p>
-        {workspace.signedOffAt ? (
-          <Alert title="Signed off" tone="success">
-            {workspace.signOffVerifierID} signed off at {workspace.signedOffAt}.
+        <div className="button-row">
+          <Button onClick={saveDraft}>Save verifier draft</Button>
+        </div>
+        {draftNotice ? <Alert title="Draft saved" tone="success">{draftNotice}</Alert> : null}
+        {draftValidation ? (
+          <Alert title={draftValidation.ok ? "Draft complete enough to export" : "Draft blocked"} tone={draftValidation.ok ? "success" : "warning"}>
+            {draftValidation.ok
+              ? "Draft can be exported for validated intake, but production eligibility remains false."
+              : draftValidation.errors.slice(0, 4).map((error) => error.message).join(" ")}
           </Alert>
         ) : null}
       </Card>
     </section>
   );
-
-  function updateEnvironment<Key extends keyof typeof workspace.environment>(key: Key, value: (typeof workspace.environment)[Key]) {
-    const timestamp = now();
-    setWorkspace((currentWorkspace) => ({
-      ...currentWorkspace,
-      updatedAt: timestamp,
-      environment: {
-        ...currentWorkspace.environment,
-        [key]: value,
-        observedAt: timestamp
-      },
-      signedOffAt: null,
-      signOffVerifierID: null,
-      signOffNotes: ""
-    }));
-  }
-
-  function updateEnvironmentEvidence(value: string) {
-    updateEnvironment("evidenceFileIDs", splitList(value));
-  }
 }
 
-function VerifierStatusField({
+function BooleanFilter({
   label,
   value,
   onChange
 }: {
   label: string;
-  value: Phase0VerifierCheckStatus;
-  onChange: (value: Phase0VerifierCheckStatus) => void;
+  value: "all" | "yes" | "no";
+  onChange: (value: "all" | "yes" | "no") => void;
 }) {
   return (
-    <SelectField label={label} value={value} onChange={(event) => onChange(event.currentTarget.value as Phase0VerifierCheckStatus)}>
-      {checkStatuses.map((status) => <option key={status} value={status}>{status}</option>)}
+    <SelectField label={label} value={value} onChange={(event) => onChange(event.currentTarget.value as "all" | "yes" | "no")}>
+      <option value="all">all</option>
+      <option value="yes">yes</option>
+      <option value="no">no</option>
     </SelectField>
   );
 }
 
-function splitList(value: string) {
-  return value.split(",").map((item) => item.trim()).filter(Boolean);
+function CheckboxField({
+  label,
+  checked,
+  onChange
+}: {
+  label: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}) {
+  return (
+    <label className="form-field checkbox-field">
+      <span>{label}</span>
+      <input type="checkbox" checked={checked} onChange={(event) => onChange(event.currentTarget.checked)} />
+    </label>
+  );
 }
 
-function parseEligibleCatalogIDs(value: string) {
-  return value
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => {
-      const [stableInternalID, category = "uncategorized"] = line.split(",").map((item) => item.trim());
-      return { stableInternalID, category };
-    });
+function queueFlags(record: Cf27ProductionVerificationQueueRecord) {
+  return [
+    record.missingViews.length > 0 ? "missing views" : "",
+    record.duplicateOrNearDuplicateFlag ? "duplicate" : "",
+    record.dependencyFlag ? "dependency" : "",
+    record.versionOrEnvironmentGap ? "environment gap" : "",
+    record.primaryReviewStatus === "ORDER_UNRESOLVED" ? "order unresolved" : ""
+  ].filter(Boolean);
 }

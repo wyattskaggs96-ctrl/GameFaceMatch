@@ -2,9 +2,9 @@
 
 ## Immediate Next Prompt
 
-`GFM | Q04 | PROMPT 093 | PHASE 02 | Hand off CF27 production verification queue to second verifier`
+`GFM | Q04 | PROMPT 094 | PHASE 02 | Complete real CF27 second-verifier review and import decisions`
 
-Purpose: use the canonical CF27 production-verification queue to hand off concrete second-verifier work without promoting records.
+Purpose: use the completed second-verifier workspace and canonical CF27 production-verification queue to collect, validate, and import real second-human decisions without promoting records automatically.
 
 ## Prompt 092 Result
 
@@ -19,13 +19,21 @@ Purpose: use the canonical CF27 production-verification queue to hand off concre
 - Second-verified records: 0
 - Production-approved records: 0
 
-## Prompt 093 Acceptance
+## Prompt 093 Result
 
-- A real second-verifier handoff packet is ready.
-- The verifier can follow the queue without reading repository internals.
-- Blind independent counts remain protected from primary-review conclusions.
-- No record is marked verified or production-approved.
-- Completed verifier submissions can be imported only through validation tooling.
+- Internal second-verifier workspace loads the canonical 92-record queue.
+- The verifier can filter by category, status, evidence completeness, missing views, duplicates/ambiguity, environment/version gaps, and search terms.
+- Candidate details show native order, environment metadata, primary observations, evidence lists, missing views, duplicate/dependency flags, and blocker reasons.
+- Draft decisions use only the approved verifier statuses and require verifier identity, date, environment, independent observation, evidence confirmation, native-order confirmation, front-view confirmation, and notes when needed.
+- Deterministic 25% secondary-angle sampling is available.
+- Draft decisions remain non-production and cannot grant production approval.
+
+## Prompt 094 Acceptance
+
+- A real second verifier has completed attributable decisions.
+- Submitted decisions validate against the approved schema and statuses.
+- Disagreements, recapture requests, version mismatches, count mismatches, and order mismatches are preserved as unresolved blockers.
+- No record is marked production-approved by verifier import alone.
 
 ## Later Production Path
 

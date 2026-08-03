@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   addSecondVerifierRecordCheck,
@@ -19,9 +21,25 @@ import {
   validateSecondVerifierWorkspace,
   type Phase0SecondVerifierWorkspace
 } from "@/lib/phase-zero/phase-zero-second-verifier-workspace";
+import {
+  createVerifierDecisionDraft,
+  defaultCf27VerifierQueueFilters,
+  exportVerifierDecisionDrafts,
+  filterVerificationQueueRecords,
+  getAllowedCf27VerifierDecisionStatuses,
+  getNextUnresolvedCandidate,
+  getVerifierProgressCounts,
+  importVerifierDecisionDrafts,
+  queueRecordsForSecondaryAngleSampling,
+  validateVerifierDecisionDraft,
+  validateVerifierDecisionSet,
+  type Cf27VerifierDecisionDraft,
+  type Cf27ProductionVerificationQueue
+} from "@/lib/phase-zero/cf27-production-verification-queue";
 import { approvedPhase0VerificationStatuses, validatePhase0DiscrepancyResolution, validatePhase0SecondPersonVerification } from "@/lib/phase-zero/phase-zero-verification";
 
 const now = "2026-07-12T00:00:00.000Z";
+const currentQueue = readCurrentProductionVerificationQueue();
 
 describe("Phase 0 second-verifier workspace", () => {
   it("requires a verifier environment before sign-off", () => {
@@ -336,6 +354,141 @@ describe("Phase 0 second-verifier workspace", () => {
       "auditHistoryNotChronological"
     ]));
   });
+
+  it("loads the real Prompt 092 queue without treating records as production eligible", () => {
+    const progress = getVerifierProgressCounts(currentQueue);
+
+    expect(currentQueue.records).toHaveLength(92);
+    expect(progress).toMatchObject({
+      total: 92,
+      draftSaved: 0,
+      notVerified: 92,
+      missingViews: 87,
+      duplicateOrAmbiguous: 5,
+      environmentGaps: 92,
+      productionEligible: 0
+    });
+    expect(getAllowedCf27VerifierDecisionStatuses()).toEqual([...approvedPhase0VerificationStatuses]);
+    expect(currentQueue.records.every((record) => record.currentProductionEligibility === "NOT_ELIGIBLE")).toBe(true);
+  });
+
+  it("filters the production-verification queue by category, missing views, duplicates, environment gaps, status, and search", () => {
+    const headRows = filterVerificationQueueRecords(currentQueue.records, { ...defaultCf27VerifierQueueFilters, category: "Heads" });
+    const duplicateRows = filterVerificationQueueRecords(currentQueue.records, { ...defaultCf27VerifierQueueFilters, duplicateOrAmbiguous: "yes" });
+    const missingViewRows = filterVerificationQueueRecords(currentQueue.records, { ...defaultCf27VerifierQueueFilters, missingViews: "yes" });
+    const noEnvironmentGapRows = filterVerificationQueueRecords(currentQueue.records, { ...defaultCf27VerifierQueueFilters, environmentGap: "no" });
+    const searchRows = filterVerificationQueueRecords(currentQueue.records, { ...defaultCf27VerifierQueueFilters, search: "skin tone" });
+
+    expect(headRows).toHaveLength(26);
+    expect(duplicateRows).toHaveLength(5);
+    expect(missingViewRows).toHaveLength(87);
+    expect(noEnvironmentGapRows).toHaveLength(0);
+    expect(searchRows.every((record) => /skin tone/i.test(record.category))).toBe(true);
+    expect(getNextUnresolvedCandidate(currentQueue.records)?.secondVerifierStatus).toBe("NOT_VERIFIED");
+  });
+
+  it("requires attributable verifier decisions and notes for non-clean decisions", () => {
+    const record = currentQueue.records.find((candidate) => candidate.primaryReviewStatus === "DUPLICATE_REVIEW_REQUIRED") ?? currentQueue.records[0];
+    const incomplete = validateVerifierDecisionDraft(createVerifierDecisionDraft(record), record);
+    const recaptureWithoutNotes = validateVerifierDecisionDraft(createVerifierDecisionDraft(record, {
+      verifierID: "second-verifier-test-only",
+      verificationDate: "2026-08-02",
+      verifierEnvironment: "Xbox test-only environment",
+      independentObservation: "Independent test-only observation.",
+      evidenceConfirmed: true,
+      nativeOrderConfirmed: true,
+      frontViewConfirmed: true,
+      secondaryAngleConfirmed: true,
+      exceptionReviewed: true,
+      decisionStatus: "RECAPTURE_REQUIRED"
+    }), record);
+
+    expect(incomplete.ok).toBe(false);
+    expect(incomplete.errors.map((error) => error.code)).toEqual(expect.arrayContaining([
+      "missingVerifierID",
+      "missingVerificationDate",
+      "missingVerifierEnvironment",
+      "missingIndependentObservation",
+      "evidenceNotConfirmed",
+      "nativeOrderNotConfirmed",
+      "frontViewNotConfirmed",
+      "secondaryAngleNotConfirmed"
+    ]));
+    expect(recaptureWithoutNotes.ok).toBe(false);
+    expect(recaptureWithoutNotes.errors.map((error) => error.code)).toContain("missingNonCleanDecisionNotes");
+  });
+
+  it("allows draft export/import without production promotion", () => {
+    const record = currentQueue.records[0];
+    const draft = createVerifierDecisionDraft(record, {
+      verifierID: "second-verifier-test-only",
+      verificationDate: "2026-08-02",
+      verifierEnvironment: "Xbox Series test-only environment",
+      independentObservation: "Independent evidence check completed in test-only workflow.",
+      evidenceConfirmed: true,
+      nativeOrderConfirmed: true,
+      frontViewConfirmed: true,
+      secondaryAngleConfirmed: true,
+      exceptionReviewed: true,
+      decisionStatus: "VERIFIED",
+      savedAt: "2026-08-02T00:00:00.000Z"
+    });
+    const csv = exportVerifierDecisionDrafts({ [record.stableCandidateID]: draft });
+    const imported = importVerifierDecisionDrafts(csv, currentQueue);
+    const setValidation = validateVerifierDecisionSet(currentQueue, imported.drafts);
+
+    expect(imported.importable).toBe(true);
+    expect(imported.drafts[record.stableCandidateID]).toMatchObject({
+      verifierID: "second-verifier-test-only",
+      decisionStatus: "VERIFIED",
+      productionPromotionAttempted: false,
+      productionEligibleAfterDraft: false
+    });
+    expect(setValidation.productionEligible).toBe(false);
+    expect(getVerifierProgressCounts(currentQueue, imported.drafts).productionEligible).toBe(0);
+  });
+
+  it("rejects client-side draft manipulation that attempts production promotion", () => {
+    const record = currentQueue.records[0];
+    const manipulated = {
+      ...createVerifierDecisionDraft(record, {
+      verifierID: "second-verifier-test-only",
+      verificationDate: "2026-08-02",
+      verifierEnvironment: "Xbox test-only environment",
+      independentObservation: "Independent test-only observation.",
+      evidenceConfirmed: true,
+      nativeOrderConfirmed: true,
+      frontViewConfirmed: true,
+      secondaryAngleConfirmed: true,
+      exceptionReviewed: true,
+      decisionStatus: "VERIFIED"
+      }),
+      productionPromotionAttempted: true,
+      productionEligibleAfterDraft: true
+    } as unknown as Cf27VerifierDecisionDraft;
+
+    const report = validateVerifierDecisionDraft(manipulated, record);
+
+    expect(report.ok).toBe(false);
+    expect(report.productionEligible).toBe(false);
+    expect(report.errors.map((error) => error.code)).toContain("draftAttemptedPromotion");
+  });
+
+  it("creates a deterministic secondary-angle sample from real queue records", async () => {
+    const eligible = queueRecordsForSecondaryAngleSampling(currentQueue);
+    const sample = await createDeterministicSecondaryAngleSample({
+      seed: {
+        environmentID: "cf27-test-only-environment",
+        verifierID: "second-verifier-test-only",
+        catalogVersion: currentQueue.generatedAt
+      },
+      eligibleRecords: eligible
+    });
+
+    expect(eligible.length).toBeGreaterThan(0);
+    expect(sample.selectedCount).toBeGreaterThanOrEqual(Math.ceil(eligible.length / 4));
+    expect(sample.selectedRecords.every((record) => eligible.some((eligibleRecord) => eligibleRecord.stableInternalID === record.stableInternalID))).toBe(true);
+  });
 });
 
 function validWorkspace(): Phase0SecondVerifierWorkspace {
@@ -481,4 +634,9 @@ function eligibleRecords() {
     { stableInternalID: "CF27_TESTONLY_HAIR_004", category: "hairstyle" },
     { stableInternalID: "CF27_TESTONLY_FACIAL_HAIR_001", category: "facialHair" }
   ];
+}
+
+function readCurrentProductionVerificationQueue(): Cf27ProductionVerificationQueue {
+  const queuePath = path.resolve(process.cwd(), "../data/phase-zero/production_verification_queue.json");
+  return JSON.parse(fs.readFileSync(queuePath, "utf8")) as Cf27ProductionVerificationQueue;
 }

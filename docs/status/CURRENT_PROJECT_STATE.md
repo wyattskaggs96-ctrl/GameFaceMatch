@@ -4,10 +4,10 @@
 **Last reconciled:** 2026-08-02
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 092 CF27 production-verification queue preparation after `5c695c73b5e287639d5f73af99b506919abc74c4`
+**Repository checkpoint reviewed:** Prompt 093 CF27 second-verifier decision workspace after Prompt 092 queue preparation
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
-**Current active phase:** CF27 production-verification queue and second-verifier handoff
+**Current active phase:** CF27 second-verifier decision workspace and real human verification handoff
 **Exact next action:** `docs/status/NEXT_ACTION.md`
 
 This is the single current operational status source. Older audits, readiness reports, prompt reports, and closeouts are historical unless this document or the machine-readable files linked below explicitly cite them as current evidence.
@@ -53,6 +53,7 @@ Creator Program source/planning material has been committed as project documenta
 - FC 26 research observations are structured in `data/research/fc26/player_creator_research.json`, but remain research-only.
 - College Football 27 Phase 0 tooling exists for source-video inventory, evidence manifests, timelines, research candidates, primary review, verifier packages, production gates, and fail-closed publication checks.
 - College Football 27 production-verification queue exists as a machine-readable and human-readable non-production worklist; it contains 92 research candidates and assigns no second-verifier or production approval.
+- College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
 - The production College Football 27 catalog is intentionally empty and recommendations fail closed.
 - Supabase runtime/config/schema contracts exist locally and fail closed; no remote persistence is active.
 - Payment/entitlement interfaces expose the approved Launch Pack and All Access products, but checkout remains unavailable and no client state can grant paid access.
@@ -69,6 +70,7 @@ Creator Program source/planning material has been committed as project documenta
 ## Not Working Or Not Started
 
 - Production recommendations: blocked by 0 production catalog records.
+- Second-verifier completion: blocked until a real second human uses the verifier workspace and submits attributable decisions.
 - Five-game launch catalog: only CF27 and FC 26 have research material; NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026 have no verified catalog data.
 - Stripe Checkout, Stripe Billing, customer subscriptions, creator Stripe Connect onboarding, commission ledger, payout batches, and transfers are not implemented.
 - Launch game registry entries exist for College Football 27, NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026, but every launch game remains recommendation-unavailable until a verified production catalog exists.

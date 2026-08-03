@@ -107,43 +107,36 @@ test.describe("GameFace Match Phase 0 internal audit E2E", () => {
     await expect(dashboard.getByText("blocked").first()).toBeVisible();
   });
 
-  test("records verifier mismatch and recapture-based discrepancy resolution", async ({ page }) => {
+  test("records a second-verifier draft without production promotion", async ({ page }) => {
     await openPhaseZero(page);
 
-    const verifier = sectionByHeading(page, "Second-verifier workspace");
-    await verifier.locator("#field-verifier-id").fill("second-verifier-testonly");
-    await verifier.locator("#field-platform").fill("TESTONLY Platform");
-    await verifier.locator("#field-game-version").fill("testonly-version");
-    await verifier.locator("#field-patch-version").fill("testonly-patch");
-    await verifier.locator("#field-mode").fill("TESTONLY Mode");
-    await verifier.locator("#field-creation-path").fill("TESTONLY Creation Path");
-    await verifier.locator("#field-environment-evidence-ids").fill("evidence-environment-testonly");
+    const verifier = sectionByHeading(page, "Second-verifier decision workspace");
+    await expect(verifier.getByText("Queue progress")).toBeVisible();
+    await expect(verifier.getByText("Production eligible").first()).toBeVisible();
 
-    await verifier.locator("#field-primary-menu-count").fill("1");
-    await verifier.locator("#field-verifier-menu-count").fill("2");
-    await verifier.getByRole("button", { name: "Add menu count" }).click();
-    await verifier.locator("#field-primary-catalog-count").fill("1");
-    await verifier.locator("#field-verifier-catalog-count").fill("1");
-    await verifier.getByRole("button", { name: "Add catalog count" }).click();
+    await verifier.getByRole("button", { name: "Generate 25% secondary-angle sample" }).click();
+    await expect(verifier.getByLabel("CF27 deterministic secondary-angle sample report")).toContainText("deterministic-sha256-category-quartile-v1");
 
-    await verifier.getByRole("button", { name: "Generate sample" }).click();
-    await expect(verifier.getByLabel("Deterministic secondary-angle sample report")).toContainText("deterministic-sha256-category-quartile-v1");
+    await verifier.getByLabel("Verifier ID").fill("second-verifier-testonly");
+    await verifier.getByLabel("Verification date").fill("2026-08-02");
+    await verifier.getByLabel("Verifier environment").fill("TESTONLY Xbox environment");
+    await verifier.getByLabel("Decision status").selectOption("VERIFIED_WITH_NOTES");
+    await verifier.getByLabel("Independent observation").fill("TESTONLY independent observation from source evidence.");
+    await verifier.getByLabel("Evidence files exist").check();
+    await verifier.getByLabel("Native order checked").check();
+    await verifier.getByLabel("Required front view checked").check();
+    await verifier.getByLabel("Secondary angle sample checked").check();
+    await verifier.getByLabel("Duplicate or exception reviewed").check();
+    await verifier.getByLabel("Verifier notes").fill("TESTONLY notes keep this draft non-production pending validated import.");
+    await verifier.getByRole("button", { name: "Save verifier draft" }).click();
 
-    await verifier.locator("#field-evidence-files").selectOption("mismatch");
-    await verifier.locator("#field-front-view").selectOption("confirmed");
-    await verifier.locator("#field-secondary-angle-sample").selectOption("confirmed");
-    await verifier.getByRole("button", { name: "Add or replace record check" }).click();
-    await expect(verifier.getByText("evidenceMismatch")).toBeVisible();
+    await expect(verifier.getByText("Draft saved locally. No production record was created.")).toBeVisible();
+    await expect(verifier.getByText("Draft can be exported for validated intake, but production eligibility remains false.")).toBeVisible();
 
-    await verifier.getByRole("button", { name: "Open first mismatch discrepancy" }).click();
-    await expect(verifier.getByRole("heading", { name: "Primary observation" })).toBeVisible();
-    await expect(verifier.getByRole("heading", { name: "Verifier observation", exact: true })).toBeVisible();
-    await verifier.getByRole("button", { name: "Link evidence" }).click();
-    await verifier.getByRole("button", { name: "Record resolution" }).click();
-    await verifier.getByRole("button", { name: "Primary acknowledge" }).click();
-    await verifier.getByRole("button", { name: "Verifier acknowledge" }).click();
-    await expect(verifier.getByText("Exported discrepancy-resolution records: 1.")).toBeVisible();
-    await expect(verifier.getByText("acknowledged")).toBeVisible();
+    await verifier.getByRole("button", { name: "Prepare CSV export" }).click();
+    await expect(verifier.getByLabel("Verifier draft CSV")).toContainText("second-verifier-testonly");
+    await verifier.getByRole("button", { name: "Validate and import CSV" }).click();
+    await expect(verifier.getByText("No records were promoted.")).toBeVisible();
   });
 });
 

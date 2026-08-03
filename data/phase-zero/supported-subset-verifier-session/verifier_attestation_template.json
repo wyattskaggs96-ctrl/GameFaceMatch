@@ -1,0 +1,15 @@
+{
+  "attestationVersion": "cf27-supported-subset-verifier-attestation-v1",
+  "verifierId": "",
+  "attestationTimestamp": "",
+  "attestationAccepted": false,
+  "realSecondPerson": false,
+  "independentlyAccessedShippingGame": false,
+  "didNotMerelyApprovePrimarySummary": false,
+  "reviewedCandidateAndEvidencePresented": false,
+  "recordedDisagreementsHonestly": false,
+  "didNotGuessMissingLabelsOrderCountsOrViews": false,
+  "understandsNotPublishingCatalog": false,
+  "understandsCatalogManagerApprovalSeparate": false,
+  "notes": ""
+}

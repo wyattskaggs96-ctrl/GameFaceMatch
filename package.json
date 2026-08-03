@@ -40,6 +40,8 @@
   "cf27:21-target-video-reuse-audit:check": "node scripts/cf27-21-target-existing-video-reuse-audit.mjs --check",
   "cf27:supported-subset": "node scripts/cf27-supported-subset-classification.mjs",
   "cf27:supported-subset:check": "node scripts/cf27-supported-subset-classification.mjs --check",
+  "cf27:supported-subset-verifier-session": "node scripts/cf27-supported-subset-verifier-session.mjs",
+  "cf27:supported-subset-verifier-session:check": "node scripts/cf27-supported-subset-verifier-session.mjs --check",
   "media-audit:all-videos": "node scripts/direct-all-video-content-audit.mjs",
   "media-audit:all-videos:check": "node scripts/direct-all-video-content-audit.mjs --check",
   "cf27:primary-review": "node scripts/cf27-primary-review-status.mjs",

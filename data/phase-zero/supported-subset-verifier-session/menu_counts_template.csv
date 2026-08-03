@@ -1,0 +1,12 @@
+targetID,category,representedInSupportedSubset,independentVerifierCount,firstVisibleValue,finalVisibleValue,boundaryOrWrapObserved,evidenceReference,countConfirmed,notes
+cf27-supported-subset-count-heads,Heads,yes,,,,,,,Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status.
+cf27-supported-subset-count-hairstyles,Hairstyles,yes,,,,,,,Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status.
+cf27-supported-subset-count-facial-hair,Facial hair,no,,,,,,,Facial Hair is excluded from the supported subset; count inspection may document the limitation but must not add it to the subset.
+cf27-supported-subset-count-nose,Nose,yes,,,,,,,Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status.
+cf27-supported-subset-count-eye-shape,Eye Shape,yes,,,,,,,Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status.
+cf27-supported-subset-count-eye-color,Eye Color,yes,,,,,,,Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status.
+cf27-supported-subset-count-skin-details,Skin Details,yes,,,,,,,Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status.
+cf27-supported-subset-count-skin-tone,Skin Tone,yes,,,,,,,Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status.
+cf27-supported-subset-count-chin,Chin,yes,,,,,,,Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status.
+cf27-supported-subset-count-jaw-shape,Jaw Shape,yes,,,,,,,Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status.
+cf27-supported-subset-count-mouth-shape,Mouth Shape,yes,,,,,,,Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status.

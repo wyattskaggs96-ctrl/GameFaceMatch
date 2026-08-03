@@ -1,0 +1,92 @@
+{
+  "rows": [
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_EARSHAPE_002",
+      "category": "Ear Shape",
+      "evidenceSupportState": "LIMITED_EVIDENCE",
+      "duplicateFlag": true,
+      "orderUnresolvedFlag": false,
+      "includedInSupportedSubset": false,
+      "requiredHumanAction": "Preserve duplicate relationship for later catalog-manager disposition; do not merge or recommend.",
+      "productionEligibilityState": "NOT_ELIGIBLE",
+      "notes": "Excluded from the 76-record supported subset because evidence remains limited. This is not an owner recording request."
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE",
+      "category": "Facial-hair colors",
+      "evidenceSupportState": "LIMITED_EVIDENCE",
+      "duplicateFlag": false,
+      "orderUnresolvedFlag": true,
+      "includedInSupportedSubset": false,
+      "requiredHumanAction": "Independently inspect native order if this excluded record is reconsidered later; do not infer order.",
+      "productionEligibilityState": "NOT_ELIGIBLE",
+      "notes": "Excluded from the 76-record supported subset because evidence remains limited. This is not an owner recording request."
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS",
+      "category": "Facial hair",
+      "evidenceSupportState": "LIMITED_EVIDENCE",
+      "duplicateFlag": false,
+      "orderUnresolvedFlag": true,
+      "includedInSupportedSubset": false,
+      "requiredHumanAction": "Independently inspect native order if this excluded record is reconsidered later; do not infer order.",
+      "productionEligibilityState": "NOT_ELIGIBLE",
+      "notes": "Excluded from the 76-record supported subset because evidence remains limited. This is not an owner recording request."
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN",
+      "category": "Hair colors",
+      "evidenceSupportState": "LIMITED_EVIDENCE",
+      "duplicateFlag": false,
+      "orderUnresolvedFlag": true,
+      "includedInSupportedSubset": false,
+      "requiredHumanAction": "Independently inspect native order if this excluded record is reconsidered later; do not infer order.",
+      "productionEligibilityState": "NOT_ELIGIBLE",
+      "notes": "Excluded from the 76-record supported subset because evidence remains limited. This is not an owner recording request."
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_012",
+      "category": "Heads",
+      "evidenceSupportState": "LIMITED_EVIDENCE",
+      "duplicateFlag": true,
+      "orderUnresolvedFlag": false,
+      "includedInSupportedSubset": false,
+      "requiredHumanAction": "Preserve duplicate relationship for later catalog-manager disposition; do not merge or recommend.",
+      "productionEligibilityState": "NOT_ELIGIBLE",
+      "notes": "Excluded from the 76-record supported subset because evidence remains limited. This is not an owner recording request."
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_HEAD_016",
+      "category": "Heads",
+      "evidenceSupportState": "LIMITED_EVIDENCE",
+      "duplicateFlag": true,
+      "orderUnresolvedFlag": false,
+      "includedInSupportedSubset": false,
+      "requiredHumanAction": "Preserve duplicate relationship for later catalog-manager disposition; do not merge or recommend.",
+      "productionEligibilityState": "NOT_ELIGIBLE",
+      "notes": "Excluded from the 76-record supported subset because evidence remains limited. This is not an owner recording request."
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_NOSE_005",
+      "category": "Nose",
+      "evidenceSupportState": "LIMITED_EVIDENCE",
+      "duplicateFlag": true,
+      "orderUnresolvedFlag": false,
+      "includedInSupportedSubset": false,
+      "requiredHumanAction": "Preserve duplicate relationship for later catalog-manager disposition; do not merge or recommend.",
+      "productionEligibilityState": "NOT_ELIGIBLE",
+      "notes": "Excluded from the 76-record supported subset because evidence remains limited. This is not an owner recording request."
+    },
+    {
+      "candidateID": "CF27_XBOXUNKNOWN_RTG_SKINTONE_010",
+      "category": "Skin Tone",
+      "evidenceSupportState": "LIMITED_EVIDENCE",
+      "duplicateFlag": true,
+      "orderUnresolvedFlag": false,
+      "includedInSupportedSubset": false,
+      "requiredHumanAction": "Preserve duplicate relationship for later catalog-manager disposition; do not merge or recommend.",
+      "productionEligibilityState": "NOT_ELIGIBLE",
+      "notes": "Excluded from the 76-record supported subset because evidence remains limited. This is not an owner recording request."
+    }
+  ]
+}

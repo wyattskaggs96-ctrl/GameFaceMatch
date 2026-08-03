@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "cf27-supported-subset-verifier-session-v1-import-status",
+  "generatedAt": "2026-08-03T05:30:00-04:00",
+  "humanExecutionStatus": "READY_FOR_HUMAN_VERIFIER",
+  "importState": "NOT_STARTED",
+  "secondVerifierDecisionCount": 0,
+  "secondVerifiedRecords": 0,
+  "productionApprovedRecords": 0,
+  "productionCatalogRecords": 0,
+  "recommendationEligibleRecords": 0
+}

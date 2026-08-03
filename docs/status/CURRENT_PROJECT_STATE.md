@@ -4,10 +4,10 @@
 **Last reconciled:** 2026-08-03
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 101 supported-subset classification checkpoint
+**Repository checkpoint reviewed:** Prompt 102 supported-subset verifier-session checkpoint
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
-**Current active phase:** supported-subset second-human verification and production-catalog gatekeeping
+**Current active phase:** supported-subset human verifier execution and production-catalog gatekeeping
 **Exact next action:** `docs/status/NEXT_ACTION.md`
 
 This is the single current operational status source. Older audits, readiness reports, prompt reports, and closeouts are historical unless this document or the machine-readable files linked below explicitly cite them as current evidence.
@@ -16,7 +16,7 @@ This is the single current operational status source. Older audits, readiness re
 ```json
 {
   "schemaVersion": "current-project-state-v3",
-  "repositoryCheckpoint": "PROMPT_101_SUPPORTED_SUBSET_CLASSIFICATION",
+  "repositoryCheckpoint": "PROMPT_102_SUPPORTED_SUBSET_VERIFIER_SESSION",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -51,6 +51,8 @@ Prompt 083 public-launch completion audit sets current **PUBLIC PAID-LAUNCH READ
 
 Prompt 101 classifies all 92 current CF27 research candidates into explicit evidence-support states from the locked owner media baseline. The proposed supported-subset verifier queue contains 76 non-production records: 39 `SUPPORTED_WITH_NOTES` records and 37 `USER_CONFIRMATION_REQUIRED` records. Sixteen records remain `LIMITED_EVIDENCE`; these include body/context rows, ear-shape rows, duplicate-review records, order-unresolved rows, and categories excluded from the initial supported subset. Production-approved records, production catalog records, recommendation-eligible records, second-verifier decisions, and second-verified records all remain 0.
 
+Prompt 102 operationalizes the 76-record supported-subset package for a real independent human verifier. It creates a resumable session template, verifier environment and attestation templates, record-decision templates, menu-count templates, a deterministic 24-record secondary-angle review file, excluded duplicate/order limitation review rows, a strict non-production import validator, a runbook, and an owner checkpoint. Human execution status is `READY_FOR_HUMAN_VERIFIER`. Codex created 0 human decisions, 0 second-verified records, 0 production approvals, 0 production catalog records, and 0 recommendation-eligible records.
+
 Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media inventory as the final owner-provided media baseline for the initial product launch. Additional Wyatt recordings are no longer an initial-launch prerequisite. Historical recapture audits remain useful evidence-quality references, but remaining recapture tasks are reclassified as known evidence limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch improvements, or unsupported option/category gaps where evidence is insufficient.
 
 ## Actually Working
@@ -62,6 +64,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - College Football 27 Phase 0 tooling exists for source-video inventory, evidence manifests, timelines, research candidates, primary review, verifier packages, production gates, and fail-closed publication checks.
 - College Football 27 production-verification queue exists as a machine-readable and human-readable non-production worklist; it contains 92 research candidates and assigns no second-verifier or production approval.
 - College Football 27 supported-subset classification exists in `data/phase-zero/cf27_supported_subset_classification.json`. It classifies all 92 candidates exactly once, proposes 76 records for supported-subset second-verifier review, generates a deterministic 24-record secondary-angle sample, and keeps every record non-production.
+- College Football 27 supported-subset verifier session exists in `data/phase-zero/supported-subset-verifier-session/`. It is ready for a real second human to complete without editing source files, and it keeps all returned decisions non-production until later import, discrepancy handling, catalog-manager approval, and release gates.
 - College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
 - College Football 27 evidence recapture package exists as a deterministic historical owner/verifier worklist. A follow-on existing-media verification gap audit exhausts the current videos, source-media records, derivative frames, timelines, and queue records. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements required frame re-extraction instead of new capture, and historical minimum recapture tasks are now evidence limitations or post-launch improvement opportunities rather than owner launch prerequisites.
 - College Football 27 frame re-extraction packet exists for the 7 recoverable requirements from the existing-media audit. These derivative frames are marked `NOT_PRODUCTION_DATA` and `OBSERVED_PENDING_VERIFICATION`; they reduce unnecessary recapture but do not replace human verification.
@@ -85,7 +88,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 ## Not Working Or Not Started
 
 - Production recommendations: blocked by 0 production catalog records.
-- Second-verifier completion: blocked until a real second human uses the verifier workspace and submits attributable decisions.
+- Second-verifier completion: blocked until a real second human completes and returns the Prompt 102 supported-subset verifier package.
 - CF27 production eligibility: blocked until a real second human verifies the supported subset, unresolved limitations are either accepted with notes or excluded, duplicate/order/environment gaps are resolved for the supported subset, and catalog-manager approval creates an immutable release candidate.
 - Five-game launch catalog: CF27 and NBA 2K26 have source-media evidence; FC 26 has research material but is non-launch. Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026 have no verified catalog data.
 - Stripe Checkout, Stripe Billing, customer subscriptions, creator Stripe Connect onboarding, commission ledger, payout batches, and transfers are not implemented.
@@ -124,6 +127,9 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 | CF27 supported-subset user confirmation required | 37 | `data/phase-zero/cf27_supported_subset_summary.json` |
 | CF27 supported-subset limited evidence | 16 | `data/phase-zero/cf27_supported_subset_summary.json` |
 | CF27 supported-subset deterministic secondary-angle sample | 24 | `data/phase-zero/cf27_supported_subset_summary.json` |
+| CF27 supported-subset verifier session records | 76 | `data/phase-zero/supported-subset-verifier-session/session_manifest.json` |
+| CF27 supported-subset verifier session sampled-angle rows | 24 | `data/phase-zero/supported-subset-verifier-session/session_manifest.json` |
+| CF27 supported-subset verifier human decisions | 0 | `data/phase-zero/supported-subset-verifier-session/session_manifest.json` |
 | CF27 evidence recapture package review-ready records | 92 | `data/phase-zero/evidence-recapture-package/evidence_quality_report.json` |
 | CF27 evidence recapture package recapture-required records | 92 | `data/phase-zero/evidence-recapture-package/evidence_quality_report.json` |
 | CF27 evidence recapture package tasks | 104 | `data/phase-zero/evidence-recapture-package/recapture_queue.json` |
@@ -159,6 +165,8 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Public launch completion audit: `docs/status/PUBLIC_LAUNCH_COMPLETION_AUDIT.md`
 - CF27 supported subset classification: `docs/status/CF27_SUPPORTED_SUBSET_CLASSIFICATION.md`
 - CF27 supported subset verifier handoff: `docs/status/CF27_SUPPORTED_SUBSET_VERIFIER_HANDOFF.md`
+- CF27 supported subset verifier runbook: `docs/status/CF27_SUPPORTED_SUBSET_VERIFIER_RUNBOOK.md`
+- CF27 supported subset human verification status: `docs/status/CF27_SUPPORTED_SUBSET_HUMAN_VERIFICATION_STATUS.md`
 - Owner media baseline lock: `docs/status/OWNER_MEDIA_BASELINE_LOCKED.md`
 - Machine-readable health status: `data/status/project_health_status.json`
 - Next action: `docs/status/NEXT_ACTION.md`

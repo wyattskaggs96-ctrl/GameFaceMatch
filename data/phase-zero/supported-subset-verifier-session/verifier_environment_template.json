@@ -1,0 +1,20 @@
+{
+  "verifierId": "",
+  "verificationDate": "",
+  "gameTitleDisplayed": "",
+  "platform": "",
+  "consoleModel": "",
+  "gameEdition": "unknown",
+  "region": "unknown",
+  "gameVersion": "unknown",
+  "patchOrInstalledUpdate": "unknown",
+  "mode": "",
+  "creationPath": "",
+  "accountState": "unknown",
+  "onlineState": "unknown",
+  "sameEnvironmentAsPrimaryResearcher": "unknown",
+  "environmentDifference": "",
+  "independentlyAccessedShippingGame": false,
+  "environmentEvidenceReference": "",
+  "notes": ""
+}

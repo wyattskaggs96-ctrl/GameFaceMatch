@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gameface-project-health-status-v1",
-  "generatedAt": "2026-08-03T04:15:00-04:00",
+  "generatedAt": "2026-08-03T05:30:00-04:00",
   "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
   "branch": "main",
-  "head": "PROMPT_101_SUPPORTED_SUBSET_CLASSIFICATION",
+  "head": "PROMPT_102_SUPPORTED_SUBSET_VERIFIER_SESSION",
   "outcome": "HOLD_VERIFICATION",
   "productionReadiness": "BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS",
   "productionRecommendationsEnabled": false,
@@ -53,6 +53,9 @@
     "cf27SupportedSubsetUserConfirmationRequired": 37,
     "cf27SupportedSubsetLimitedEvidence": 16,
     "cf27SupportedSubsetSecondaryAngleSample": 24,
+    "cf27SupportedSubsetVerifierSessionRecords": 76,
+    "cf27SupportedSubsetVerifierSessionSampleRows": 24,
+    "cf27SupportedSubsetVerifierHumanDecisions": 0,
     "lockedSourceMediaVideos": 15,
     "lockedUniqueSourceMasters": 12,
     "lockedDuplicateUploads": 3,
@@ -78,6 +81,7 @@
     "faceCapture": "implemented_not_production_validated",
     "matchingEngine": "implemented_without_real_catalog_validation",
     "cf27SupportedSubsetClassification": "complete_non_production_verifier_ready",
+    "cf27SupportedSubsetVerifierSession": "ready_for_human_verifier",
     "matchingStudyWorkflow": "implemented_not_started",
     "supabase": "schema_designed_not_connected",
     "payments": "launch_pack_all_access_scaffold_only",
@@ -87,6 +91,6 @@
   },
   "nextAction": {
     "path": "docs/status/NEXT_ACTION.md",
-    "title": "GFM | Q04 | PROMPT 102 | PHASE 03 | Execute CF27 supported-subset second verification"
+    "title": "HUMAN ACTION | Complete CF27 supported-subset second verification"
   }
 }

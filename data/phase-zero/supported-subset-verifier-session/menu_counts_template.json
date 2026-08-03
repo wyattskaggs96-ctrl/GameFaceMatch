@@ -1,0 +1,136 @@
+{
+  "rows": [
+    {
+      "targetID": "cf27-supported-subset-count-heads",
+      "category": "Heads",
+      "representedInSupportedSubset": "yes",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status."
+    },
+    {
+      "targetID": "cf27-supported-subset-count-hairstyles",
+      "category": "Hairstyles",
+      "representedInSupportedSubset": "yes",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status."
+    },
+    {
+      "targetID": "cf27-supported-subset-count-facial-hair",
+      "category": "Facial hair",
+      "representedInSupportedSubset": "no",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Facial Hair is excluded from the supported subset; count inspection may document the limitation but must not add it to the subset."
+    },
+    {
+      "targetID": "cf27-supported-subset-count-nose",
+      "category": "Nose",
+      "representedInSupportedSubset": "yes",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status."
+    },
+    {
+      "targetID": "cf27-supported-subset-count-eye-shape",
+      "category": "Eye Shape",
+      "representedInSupportedSubset": "yes",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status."
+    },
+    {
+      "targetID": "cf27-supported-subset-count-eye-color",
+      "category": "Eye Color",
+      "representedInSupportedSubset": "yes",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status."
+    },
+    {
+      "targetID": "cf27-supported-subset-count-skin-details",
+      "category": "Skin Details",
+      "representedInSupportedSubset": "yes",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status."
+    },
+    {
+      "targetID": "cf27-supported-subset-count-skin-tone",
+      "category": "Skin Tone",
+      "representedInSupportedSubset": "yes",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status."
+    },
+    {
+      "targetID": "cf27-supported-subset-count-chin",
+      "category": "Chin",
+      "representedInSupportedSubset": "yes",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status."
+    },
+    {
+      "targetID": "cf27-supported-subset-count-jaw-shape",
+      "category": "Jaw Shape",
+      "representedInSupportedSubset": "yes",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status."
+    },
+    {
+      "targetID": "cf27-supported-subset-count-mouth-shape",
+      "category": "Mouth Shape",
+      "representedInSupportedSubset": "yes",
+      "independentVerifierCount": "",
+      "firstVisibleValue": "",
+      "finalVisibleValue": "",
+      "boundaryOrWrapObserved": "",
+      "evidenceReference": "",
+      "countConfirmed": "",
+      "notes": "Record the independent count where observable in the shipping game. Unknown is acceptable only with notes and a blocking status."
+    }
+  ]
+}

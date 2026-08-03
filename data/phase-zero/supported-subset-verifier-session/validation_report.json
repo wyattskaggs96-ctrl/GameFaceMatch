@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "cf27-supported-subset-verifier-session-v1-validation",
+  "generatedAt": "2026-08-03T05:30:00-04:00",
+  "ok": true,
+  "errors": [],
+  "summary": {
+    "verifierQueueCount": 76,
+    "secondaryAngleSampleCount": 24,
+    "excludedDuplicateOrOrderRows": 8,
+    "humanDecisionCount": 0,
+    "productionApprovedRecords": 0,
+    "productionCatalogRecords": 0,
+    "recommendationEligibleRecords": 0,
+    "humanExecutionStatus": "READY_FOR_HUMAN_VERIFIER"
+  }
+}

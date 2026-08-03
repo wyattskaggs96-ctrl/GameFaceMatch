@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "cf27-supported-subset-verifier-session-v1-owner-checkpoint",
+  "generatedAt": "2026-08-03T05:30:00-04:00",
+  "status": "READY_FOR_HUMAN_VERIFIER",
+  "supportedSubsetQueueRecords": 76,
+  "deterministicSecondaryAngleSampleRecords": 24,
+  "noAdditionalOwnerMediaRequired": true,
+  "exactWyattAction": "Give the runbook and generated verifier package to a real second verifier. Do not record more game footage by default.",
+  "exactVerifierAction": "Complete the generated environment, attestation, menu-count, record-decision, and secondary-angle templates from independent shipping-game inspection."
+}

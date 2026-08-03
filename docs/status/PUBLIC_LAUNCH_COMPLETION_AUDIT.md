@@ -6,7 +6,7 @@
 **Audited HEAD:** `64c20a9785655329ec05bc00015a8cba0051d738` (`chore(product): lock owner media baseline`)
 **Starting worktree:** clean
 **Prompt label:** `GFM | Q04 | PROMPT 083 | PHASE 01 | Audit public launch completion`
-**Prompt-number guard:** no existing repository assignment for Prompt 083 was found. Current queue records point to Prompt 101 as the next implementation prompt.
+**Prompt-number guard:** no existing repository assignment for Prompt 083 was found during the audit. Current queue records now point to human completion of the Prompt 102 supported-subset verifier package.
 
 ## Executive Verdict
 
@@ -14,9 +14,9 @@
 
 GameFace Match is a strong internal prototype with a broad tested web shell, local face-capture flows, privacy/deletion scaffolding, research-media tooling, game adapters, fail-closed catalog gates, and a locked owner-media baseline. It is not ready for paid public launch because there are still zero production catalog records, zero second-verifier decisions, zero production-approved records, zero real matching-study participants, no live payment provider, no server-authoritative paid entitlement path, no deployed Supabase persistence/storage/auth runtime, no production deployment, and no completed legal/support/monitoring launch operation.
 
-The owner media baseline is locked and additional owner recordings are not an initial-launch prerequisite. The next responsible path is to classify the locked evidence into a supported catalog subset, keep unsupported options unavailable, complete second-human verification for the supported subset, publish an immutable nonempty production catalog only if the promotion gate passes, and then validate customer usefulness.
+The owner media baseline is locked and additional owner recordings are not an initial-launch prerequisite. The next responsible path is to complete real second-human verification for the supported subset, keep unsupported options unavailable, publish an immutable nonempty production catalog only if the promotion gate passes, and then validate customer usefulness.
 
-Prompt 101 now completes the supported-subset classification step. The current next responsible path is second-human verification of the proposed 76-record CF27 supported subset, with 16 limited-evidence records excluded from the initial subset and no production/recommendation eligibility granted.
+Prompt 101 completed the supported-subset classification step. Prompt 102 created the verifier-session package and runbook for the 76-record CF27 supported subset. The current next responsible path is human completion of that package, with 16 limited-evidence records excluded from the initial subset and no production/recommendation eligibility granted.
 
 **Final GO / NO-GO decision:** NO-GO for paid public launch.
 
@@ -50,7 +50,7 @@ Prompt 101 now completes the supported-subset classification step. The current n
 
 | Game | Current state | Readiness | Notes |
 | --- | --- | ---: | --- |
-| EA SPORTS College Football 27 | Research evidence exists; 92 non-production candidates; 0 production records. | 33% | Best positioned for first supported catalog, but still needs supported-subset classification, second-human verification, catalog-manager approval, and immutable production release. |
+| EA SPORTS College Football 27 | Research evidence exists; 92 non-production candidates; 76-record verifier package ready; 0 production records. | 33% | Best positioned for first supported catalog, but still needs real second-human completion, import/reconciliation, catalog-manager approval, and immutable production release. |
 | NBA 2K26 | Source-media evidence exists from locked baseline; no production catalog. | 8% | Media inventory exists, but no validated production catalog or matching support. |
 | Madden NFL 26 | Launch target registered; not started. | 2% | No source evidence or catalog. |
 | EA SPORTS PGA TOUR | Launch target registered; not started. | 2% | No source evidence or catalog. |
@@ -192,7 +192,7 @@ Additional inspection commands:
 - Responsive web MVP under `web/` with local Next.js build.
 - Mobile scan-entry, consent, disclaimer, guided preparation, circular guided capture, upload fallback, quality warnings, selective retakes, catalog-unavailable results, privacy center, saved-profile/build local storage, and local delete-all behavior.
 - FC26 research data and local MVP modules remain isolated from CF27 and the launch entitlement definition.
-- CF27 research evidence, direct-media inventory, source-video tooling, production-verification queue, second-verifier workspace, evidence/recapture package, frame re-extraction packet, and fail-closed production promotion contract exist.
+- CF27 research evidence, direct-media inventory, source-video tooling, production-verification queue, second-verifier workspace, supported-subset verifier-session package, evidence/recapture package, frame re-extraction packet, and fail-closed production promotion contract exist.
 - Owner media baseline is locked; additional owner recordings are not required for initial launch.
 - Payments have typed product definitions for Launch Pack and All Access but stay disabled.
 - Supabase has schema/runtime/storage/deletion/RLS contracts but no live remote runtime.
@@ -203,8 +203,8 @@ Additional inspection commands:
 
 | Blocker | Why it blocks launch | Evidence | Owner | Smallest acceptable resolution | Parallel work |
 | --- | --- | --- | --- | --- | --- |
-| Zero production catalog records | No verified game recommendations can be generated. | `data/catalog/production/catalog_manifest.json` has empty `items`. | Codex plus second verifier plus catalog manager | Classify supported subset, complete second-human verification, resolve blockers, publish immutable nonempty catalog only if promotion gate passes. | Yes |
-| Zero second-verifier decisions | Primary research cannot become production data alone. | `primary_review_status.json` and health status report 0. | Second human verifier | Real verifier completes queue for supported subset with identity/date/environment. | Yes |
+| Zero production catalog records | No verified game recommendations can be generated. | `data/catalog/production/catalog_manifest.json` has empty `items`. | Codex plus second verifier plus catalog manager | Complete second-human verification, import/reconcile decisions, resolve blockers, publish immutable nonempty catalog only if promotion gate passes. | Yes |
+| Zero second-verifier decisions | Primary research cannot become production data alone. | `primary_review_status.json` and health status report 0. | Second human verifier | Real verifier completes the Prompt 102 supported-subset package with identity/date/environment. | Yes |
 | No real matching validation | Product usefulness target is unmeasured. | Manual matching analysis has 0 valid participants. | Wyatt plus testers | Run 10-20 person study after verified catalog exists. | Preparation yes, execution after catalog |
 | Payment disabled | Paid public launch cannot charge or enforce access. | `pricing.ts` checkout disabled; payment provider unavailable. | Wyatt plus Codex plus payment provider | Select/configure provider, implement server checkout/webhooks/receipts/refunds, verify entitlements. | Yes after catalog path |
 | Supabase remote not deployed | Persistent accounts, cloud deletion, protected assets, and audit events are not production-backed. | Supabase docs/contracts only; runtime not ready. | Wyatt plus Codex | Configure env, deploy migrations/RLS/storage, test remote access and deletion. | Yes |
@@ -238,8 +238,8 @@ The smallest useful launch scope is a **single-game CF27 supported-subset privat
 
 A. READY NOW - Codex can execute immediately:
 
-1. Execute real second-human verification for the 76-record CF27 supported subset.
-2. Import and reconcile verifier decisions without promoting disputed records.
+1. Human verifier completes the Prompt 102 76-record CF27 supported-subset package.
+2. Codex imports and reconciles verifier decisions without promoting disputed records.
 3. Tighten customer-facing disabled/limited-category messaging around supported subset.
 4. Run real-device mobile QA checklist and record results.
 5. Triage npm audit/allow-scripts warnings.
@@ -303,6 +303,6 @@ C. EXTERNAL ACTION:
 
 ## Recommended Next Prompt
 
-`GFM | Q04 | PROMPT 101 | PHASE 03 | Classify locked media baseline into supported catalog subset`
+`GFM | Q04 | PROMPT 103 | PHASE 03 | Import and reconcile CF27 supported-subset verifier decisions`
 
-Objective: convert the locked owner-media baseline into explicit per-option support states: `SUPPORTED`, `SUPPORTED_WITH_NOTES`, `USER_CONFIRMATION_REQUIRED`, `LIMITED_EVIDENCE`, `UNSUPPORTED`, `DEPRECATED`, or `VERSION_MISMATCH`. This should not promote anything to production. It should produce the smallest honest CF27 subset that can move to second-human verification without asking Wyatt for more recordings.
+Objective: after a real human returns the completed Prompt 102 package, validate verifier identity, environment, attestation, all 76 decisions, all 24 sample rows, notes, and discrepancies. Import valid decisions as non-production, preserve disagreements, and keep production promotion blocked until catalog-manager approval.

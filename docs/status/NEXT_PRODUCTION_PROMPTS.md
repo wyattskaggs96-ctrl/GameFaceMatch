@@ -2,9 +2,9 @@
 
 ## Immediate Next Prompt
 
-`GFM | Q04 | PROMPT 102 | PHASE 03 | Execute CF27 supported-subset second verification`
+`HUMAN ACTION | Complete CF27 supported-subset second verification`
 
-Purpose: have a real independent second verifier review the Prompt 101 supported-subset package, then import and reconcile attributable decisions without promoting disputed records or enabling recommendations.
+Purpose: have a real independent second verifier complete the Prompt 102 supported-subset verifier package. Codex must wait for the returned package before importing or reconciling decisions.
 
 ## Owner Media Baseline Decision
 
@@ -113,19 +113,35 @@ Prompt 101 is complete.
 
 ## Prompt 102 Acceptance
 
-- A real second verifier, not Codex, records attributable decisions for the 76-record supported subset.
-- Verifier identity, date, environment, independent observation, native-order confirmation, evidence-file confirmation, front-view confirmation, and secondary-angle sample completion are validated.
-- Disagreements, count/order mismatches, version mismatches, missing evidence, dependency issues, and recapture-needed findings remain blocked.
-- No record is production-approved unless later catalog-manager release gates pass.
+Prompt 102 is complete as a tooling milestone.
+
+- Supported-subset verifier session package: `data/phase-zero/supported-subset-verifier-session/`
+- Verifier runbook: `docs/status/CF27_SUPPORTED_SUBSET_VERIFIER_RUNBOOK.md`
+- Human execution status: `READY_FOR_HUMAN_VERIFIER`
+- Required human decisions: 76
+- Required deterministic secondary-angle checks: 24
+- Human verifier decisions currently imported: 0
+- Second-verified records: 0
+- Production-approved records: 0
+- Production catalog records: 0
+- Recommendation-eligible records: 0
+- Additional Wyatt recordings remain optional post-launch improvement, not an initial-launch blocker.
+
+## Prompt 103 - Conditional Next Codex Prompt
+
+`GFM | Q04 | PROMPT 103 | PHASE 03 | Import and reconcile CF27 supported-subset verifier decisions`
+
+Run only after Wyatt provides a completed human verifier package. Prompt 103 should validate verifier identity, environment, attestation, all 76 decisions, all 24 sample rows, notes requirements, duplicate/order limitation review, and discrepancies. Valid imports must remain `IMPORTED_NON_PRODUCTION` until catalog-manager release gates pass.
 
 ## Later Production Path
 
 1. Complete real second-human verification for the supported subset.
-2. Publish a nonempty verified production catalog only if all release gates pass.
-3. Connect server-authoritative paid access in test mode.
-4. Deploy Supabase/Auth/Storage/RLS through the approved credential workflow.
-5. Run real manual matching validation.
-6. Complete legal, security, privacy, accessibility, deployment, and support gates.
+2. Import and reconcile the returned verifier package without production promotion.
+3. Publish a nonempty verified production catalog only if all release gates pass.
+4. Connect server-authoritative paid access in test mode.
+5. Deploy Supabase/Auth/Storage/RLS through the approved credential workflow.
+6. Run real manual matching validation.
+7. Complete legal, security, privacy, accessibility, deployment, and support gates.
 
 ## Explicitly Not Next
 

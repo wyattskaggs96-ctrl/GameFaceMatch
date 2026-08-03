@@ -3,7 +3,7 @@
 **Date:** 2026-08-03
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`  
 **Branch:** `main`  
-**HEAD reviewed:** Prompt 101 supported-subset classification checkpoint
+**HEAD reviewed:** Prompt 102 supported-subset verifier-session checkpoint
 
 ## Final Result
 
@@ -69,6 +69,12 @@ The proposed supported-subset verifier queue contains 76 non-production records 
 
 Prompt 101 did not create second-verifier decisions, production approvals, production records, recommendation eligibility, or a production catalog.
 
+## Prompt 102 Status
+
+The CF27 supported-subset verifier session package is now generated in `data/phase-zero/supported-subset-verifier-session/`. It contains templates and references for a real independent verifier to record environment metadata, attestation, 76 record decisions, menu counts, a deterministic 24-record secondary-angle sample, and excluded duplicate/order limitation review.
+
+Human execution status is `READY_FOR_HUMAN_VERIFIER`. Prompt 102 did not create verifier decisions, second-verified records, production approvals, production catalog records, recommendation eligibility, or catalog-manager approval.
+
 ## Frame Re-Extraction Packet Status
 
 The recoverable frame gaps identified by the existing-media audit now have a dedicated packet in `data/phase-zero/cf27_frame_reextractions.json`. It records 7 derivative frames across Eye color, Eye shape, Facial-hair colors, Hair colors, Mouth shape, Skin details, and Skin tone. These files are derivative evidence only; they do not create production records and do not replace second-human verification.
@@ -87,4 +93,4 @@ Do not launch publicly or privately as a paid production product yet. The produc
 
 ## Authoritative Next Action
 
-Run `docs/status/NEXT_ACTION.md` for Prompt 102 to complete real-human second-verifier package execution and import planning for the proposed supported subset.
+Run `docs/status/NEXT_ACTION.md` for the human verifier handoff. The next Codex prompt should wait until Wyatt provides a completed verifier package.

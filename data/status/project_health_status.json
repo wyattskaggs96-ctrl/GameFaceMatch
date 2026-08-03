@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gameface-project-health-status-v1",
-  "generatedAt": "2026-08-02T23:59:00-04:00",
+  "generatedAt": "2026-08-03T00:30:00-04:00",
   "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
   "branch": "main",
-  "head": "5c695c73b5e287639d5f73af99b506919abc74c4",
+  "head": "1411a9dac4cc5e110147af69dd0a54cb8dbb05d1",
   "outcome": "HOLD_OWNER",
   "productionReadiness": "BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS",
   "productionRecommendationsEnabled": false,
@@ -43,7 +43,8 @@
     "cf27ExistingMediaGapAuditRows": 138,
     "cf27ExistingMediaGapAuditVideoRows": 14,
     "cf27ExistingMediaFrameReextractionRequirements": 7,
-    "cf27MinimumGenuineRecaptureTasks": 19,
+    "cf27CompletedFrameReextractions": 7,
+    "cf27MinimumGenuineRecaptureTasks": 21,
     "cf27EvidenceManifestEntries": 118,
     "cf27VideoInventoryRows": 14,
     "fc26ResearchControls": 28
@@ -60,6 +61,7 @@
     "webProductShell": "implemented_not_production_validated",
     "faceCapture": "implemented_not_production_validated",
     "matchingEngine": "implemented_without_real_catalog_validation",
+    "matchingStudyWorkflow": "implemented_not_started",
     "supabase": "schema_designed_not_connected",
     "payments": "launch_pack_all_access_scaffold_only",
     "creatorProgram": "documented_only",
@@ -68,6 +70,6 @@
   },
   "nextAction": {
     "path": "docs/status/NEXT_ACTION.md",
-    "title": "GFM | Q04 | PROMPT 095 | PHASE 02 | Ingest CF27 recapture recordings and refresh verification queue"
+    "title": "GFM | Q04 | PROMPT 098 | PHASE 04 | Ingest CF27 minimum recaptures and import second-verifier results"
   }
 }

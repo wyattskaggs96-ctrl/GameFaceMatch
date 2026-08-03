@@ -23,10 +23,10 @@ Scores use: 0 not started, 1 documented/conceptual, 2 scaffolded/mocked, 3 imple
 | Athlete-comparison features | 0 | Business direction only | Idea only. | No datasets/legal/engine. | Defer until core launch works. |
 | Privacy and consent | 3 | `web/lib/privacy/*`, legal docs | Local consent/deletion implemented. | No legal approval or hosted retention proof. | Legal/privacy review before launch. |
 | Security | 3 | `web/next.config.ts`, `web/lib/security/*` | Headers/guards/contracts exist. | No hosted security review; dependency warnings remain. | Security audit before beta/public. |
-| Testing | 4 | Large `web/tests/` suite, `npm run verify` | Extensive automated coverage. | Some coverage is fixture/synthetic; real device/human validation missing. | Continue full verification and manual QA. |
+| Testing | 4 | Large `web/tests/` suite, `npm run verify` | Extensive automated coverage, including pricing/support gates, CF27 promotion gates, verifier workflow, frame re-extraction metadata, and manual-study metric guards. | Some coverage is fixture/synthetic; real device/human validation missing. | Continue full verification and manual QA. |
 | Deployment | 2 | `docs/DEPLOYMENT_READINESS.md`, health routes | Prepared docs/contracts. | No host/CI/remote env live. | Select host and deploy staging. |
 | Monitoring and operations | 2 | health routes, runbooks | Documented/scaffolded. | No provider connected. | Add monitoring/log redaction after deployment target. |
 | Legal-launch readiness | 1 | legal docs/checklists | Drafts/checklists only. | No counsel approval. | External legal review. |
 | Customer-support readiness | 2 | support docs/page | Playbooks exist. | No staffed support/contact operations. | Owner selects support channel/process. |
 
-Overall production readiness: blocked. The most important score is production catalog availability: 0 production records.
+Overall production readiness: blocked. The most important score is production catalog availability: 0 production records. Prompt 097 confirms that study tooling and production gates are in place, but the product remains blocked by owner recapture, second-human verification, catalog-manager approval, payment/server integration, legal review, and real matching validation.

@@ -1,13 +1,13 @@
 # Current Project State
 
 **Status:** AUTHORITATIVE CURRENT OPERATIONAL STATUS
-**Last reconciled:** 2026-08-02
+**Last reconciled:** 2026-08-03
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 095 CF27 production promotion gate after Prompt 094 existing-media verification gap audit
+**Repository checkpoint reviewed:** Prompt 097 verification-readiness handoff after Prompts 090-096
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
-**Current active phase:** CF27 evidence recapture, owner capture, and real human verification handoff
+**Current active phase:** CF27 owner recapture, second-human verification, and production-catalog gatekeeping
 **Exact next action:** `docs/status/NEXT_ACTION.md`
 
 This is the single current operational status source. Older audits, readiness reports, prompt reports, and closeouts are historical unless this document or the machine-readable files linked below explicitly cite them as current evidence.
@@ -16,7 +16,7 @@ This is the single current operational status source. Older audits, readiness re
 ```json
 {
   "schemaVersion": "current-project-state-v3",
-  "repositoryCheckpoint": "2ba2289461edaf87afc8bfb711f6699ef8b6f511",
+  "repositoryCheckpoint": "1411a9dac4cc5e110147af69dd0a54cb8dbb05d1",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -45,6 +45,8 @@ The older Prompt 080 `$0.99` One Scan and `$1.99/month` Monthly scan-entry model
 
 Creator Program source/planning material has been committed as project documentation. No creator-program runtime behavior, checkout, payout, or commission processing exists.
 
+Prompt 097 independently confirms that Prompts 090-096 left the repository in a fail-closed state: approved Launch Pack and All Access pricing are configured but checkout remains disabled, five launch targets are registered without false support claims, CF27 has a 92-record non-production verification queue, second verification remains at 0 decisions, the production catalog remains empty, and the matching-study workflow exists but has 0 real participants.
+
 ## Actually Working
 
 - Next.js/React/TypeScript web app builds and has extensive tested local flows.
@@ -54,8 +56,10 @@ Creator Program source/planning material has been committed as project documenta
 - College Football 27 Phase 0 tooling exists for source-video inventory, evidence manifests, timelines, research candidates, primary review, verifier packages, production gates, and fail-closed publication checks.
 - College Football 27 production-verification queue exists as a machine-readable and human-readable non-production worklist; it contains 92 research candidates and assigns no second-verifier or production approval.
 - College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
-- College Football 27 evidence recapture package exists as a deterministic owner/verifier worklist. A follow-on existing-media verification gap audit now exhausts the current videos, source-media records, derivative frames, timelines, and queue records before asking for new recordings. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements require frame re-extraction instead of new capture, and only 19 requirements are classified as genuine recapture requirements.
+- College Football 27 evidence recapture package exists as a deterministic owner/verifier worklist. A follow-on existing-media verification gap audit now exhausts the current videos, source-media records, derivative frames, timelines, and queue records before asking for new recordings. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements required frame re-extraction instead of new capture, and 21 requirements are classified as genuine recapture requirements.
+- College Football 27 frame re-extraction packet exists for the 7 recoverable requirements from the existing-media audit. These derivative frames are marked `NOT_PRODUCTION_DATA` and `OBSERVED_PENDING_VERIFICATION`; they reduce unnecessary recapture but do not replace human verification.
 - College Football 27 production promotion now has an explicit fail-closed release-manager contract. A record cannot be promoted unless it has stable/native identity, complete platform/version/patch/mode/path/environment metadata, required evidence, primary-review attribution, second-verifier identity/date, an allowed final verifier status, catalog-manager disposition, duplicate/dependency resolution, production catalog version, and last-checked date. `VERIFIED_WITH_NOTES` also requires explicit catalog-manager acceptance. Current research records still fail closed.
+- Manual matching-study protocol, data dictionary, templates, privacy/deletion controls, and metric calculations exist for a future 10-20 person study. The study is `NOT_STARTED` because there is no verified production catalog or real top-three recommendation set.
 - The production College Football 27 catalog is intentionally empty and recommendations fail closed.
 - Supabase runtime/config/schema contracts exist locally and fail closed; no remote persistence is active.
 - Payment/entitlement interfaces expose the approved Launch Pack and All Access products, but checkout remains unavailable and no client state can grant paid access.
@@ -73,7 +77,7 @@ Creator Program source/planning material has been committed as project documenta
 
 - Production recommendations: blocked by 0 production catalog records.
 - Second-verifier completion: blocked until a real second human uses the verifier workspace and submits attributable decisions.
-- CF27 production eligibility: blocked until owner records only the genuine recapture tasks listed in `data/phase-zero/cf27_minimum_recapture_queue.json`, Codex attempts the 7 frame-reextraction tasks, and a second human verifies the existing 92 candidate observations.
+- CF27 production eligibility: blocked until owner records only the genuine recapture tasks listed in `data/phase-zero/cf27_minimum_recapture_queue.json`, Codex ingests those new recordings, and a second human verifies the existing 92 candidate observations plus any recapture-derived updates.
 - Five-game launch catalog: only CF27 and FC 26 have research material; NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026 have no verified catalog data.
 - Stripe Checkout, Stripe Billing, customer subscriptions, creator Stripe Connect onboarding, commission ledger, payout batches, and transfers are not implemented.
 - Launch game registry entries exist for College Football 27, NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026, but every launch game remains recommendation-unavailable until a verified production catalog exists.
@@ -112,7 +116,8 @@ Creator Program source/planning material has been committed as project documenta
 | CF27 existing-media audit rows | 138 | `data/phase-zero/cf27_existing_media_verification_gap_audit.json` |
 | CF27 existing-media audit video rows | 14 | `data/phase-zero/cf27_existing_media_verification_gap_audit.json` |
 | CF27 existing-media audit frame-reextraction requirements | 7 | `data/phase-zero/cf27_existing_media_verification_gap_audit.json` |
-| CF27 minimum genuine recapture tasks | 19 | `data/phase-zero/cf27_minimum_recapture_queue.json` |
+| CF27 completed frame re-extractions | 7 | `data/phase-zero/cf27_frame_reextractions.json` |
+| CF27 minimum genuine recapture tasks | 21 | `data/phase-zero/cf27_minimum_recapture_queue.json` |
 | CF27 second verified | 0 | `data/phase-zero/primary_review_status.json` |
 | CF27 production approved | 0 | `data/phase-zero/primary_review_status.json` |
 | Production catalog records | 0 | `data/catalog/production/catalog_manifest.json` |
@@ -123,6 +128,7 @@ Creator Program source/planning material has been committed as project documenta
 | Generic source-media processed files | 5 | `data/source-media-index/source_media_manifest.json` |
 | FC 26 research controls | 28 | `data/research/fc26/player_creator_research.json` |
 | Real matching-study participants | 0 | `data/phase-zero/manual_matching_accuracy_analysis.json` |
+| Manual matching-study status | 0 participants / not started | `data/phase-zero/cf27_matching_study_protocol.json` |
 
 ## Links To Current Control Records
 

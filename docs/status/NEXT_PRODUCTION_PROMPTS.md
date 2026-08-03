@@ -2,9 +2,17 @@
 
 ## Immediate Next Prompt
 
-`GFM | Q04 | PROMPT 096 | PHASE 03 | Re-extract recoverable CF27 frames, then ingest minimum recapture recordings`
+`GFM | Q04 | PROMPT 098 | PHASE 04 | Ingest CF27 minimum recaptures and import second-verifier results`
 
-Purpose: exhaust frame re-extraction tasks identified by the existing-media audit, then after Wyatt supplies only the minimum genuine recapture recordings, ingest the new media, update evidence/candidate records, refresh gap/recapture/discrepancy reports, and regenerate the production-verification queue without promoting records.
+Purpose: after Wyatt supplies the minimum genuine recapture recordings and a real second human returns completed verifier files, ingest and reconcile that evidence, import verifier decisions, create discrepancy records, refresh the evidence/queue artifacts, and run the production promotion gate without promoting incomplete or disputed records.
+
+## Prompt 090 Result
+
+- Active products are `launch_pack` at `$4.99` one-time and `all_access_annual` at `$9.99/year`.
+- Checkout remains disabled.
+- No client state, query parameter, local storage value, fixture, or mock grants paid access.
+- Five launch targets are registered without false production-support claims.
+- FC 26 remains research-only and outside the five-game launch entitlement.
 
 ## Prompt 092 Result
 
@@ -15,6 +23,7 @@ Purpose: exhaust frame re-extraction tasks identified by the existing-media audi
 - Duplicate or near-duplicate records: 5
 - Order-unresolved records: 3
 - Records with missing required production views: 87
+- Version/environment-gap records: 92
 - Production-eligible records: 0
 - Second-verified records: 0
 - Production-approved records: 0
@@ -39,7 +48,7 @@ Purpose: exhaust frame re-extraction tasks identified by the existing-media audi
 - Existing-media audit rows: 138
 - Candidate rows requiring second-verifier confirmation: 92
 - Frame-reextraction requirements: 7
-- Genuine recapture requirements: 19
+- Genuine recapture requirements: 21
 - Missing-evidence records: 0
 - Missing required production-view records: 87
 - Duplicate-dispute records: 5
@@ -50,6 +59,15 @@ Purpose: exhaust frame re-extraction tasks identified by the existing-media audi
 - Production-approved records: 0
 - Production catalog records: 0
 
+## Frame Re-Extraction Packet Result
+
+- Completed packet: `data/phase-zero/cf27_frame_reextractions.json`
+- Completed frame re-extractions: 7
+- Categories: Eye color, Eye shape, Facial-hair colors, Hair colors, Mouth shape, Skin details, Skin tone
+- Production status: `NOT_PRODUCTION_DATA`
+- Verification status: `OBSERVED_PENDING_VERIFICATION`
+- These derivatives reduce unnecessary recapture but still require second-human confirmation before any production use.
+
 ## Prompt 095 Result
 
 - CF27 production promotion gate is explicit, versioned, attributable, and fail-closed.
@@ -59,18 +77,27 @@ Purpose: exhaust frame re-extraction tasks identified by the existing-media audi
 - Current production records: 0.
 - Current release-candidate result: empty rejected release snapshot; recommendations remain disabled.
 
-## Prompt 096 Acceptance
+## Prompt 096 Result
 
-- Existing source videos are re-extracted where the audit says frame extraction can solve the gap.
-- Newly supplied recapture media is inventoried, hashed, and preserved.
-- Evidence and timeline records are updated only for directly observed facts.
-- Recapture tasks are closed only when acceptance criteria are met.
-- The existing-media audit, evidence recapture package, and production-verification queue are regenerated.
-- No record is marked second-verified or production-approved.
+- Privacy-safe manual matching-study workflow exists.
+- Protocol, participant/reviewer checklists, data dictionary, result templates, go/no-go decision template, and metric calculations are in place.
+- Raw capture media, derived profile, recommendation record, study response, and screenshot-refinement media are separated by policy.
+- Fixture/test participants are excluded from real study reporting.
+- Study status remains `NOT_STARTED`: 0 valid participants, 0 completed trials, no measured top-one acceptance, no measured top-three usefulness, and no measured matching accuracy.
+
+## Prompt 098 Acceptance
+
+- New owner recapture files are preserved as immutable source masters.
+- Every new master is hashed, inventoried, and linked to a recapture task.
+- Only directly observed facts update evidence, timeline, candidate, and issue records.
+- Completed verifier files are imported only after a real second human supplies them.
+- Disagreements preserve primary and verifier observations and create discrepancy records.
+- The production-verification queue and promotion gate are regenerated.
+- No record is promoted unless every Prompt 095 production gate passes.
 
 ## Later Production Path
 
-1. Complete second-human verification and discrepancy resolution.
+1. Resolve all verifier disagreements and recapture blockers.
 2. Publish a nonempty verified production catalog only if all release gates pass.
 3. Connect server-authoritative paid access in test mode.
 4. Deploy Supabase/Auth/Storage/RLS through the approved credential workflow.

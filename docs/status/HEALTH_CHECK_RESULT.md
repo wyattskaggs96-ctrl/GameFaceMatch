@@ -1,15 +1,15 @@
 # Health Check Result
 
-**Date:** 2026-08-02  
+**Date:** 2026-08-03
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`  
 **Branch:** `main`  
-**HEAD:** `5c695c73b5e287639d5f73af99b506919abc74c4`
+**HEAD reviewed:** `1411a9dac4cc5e110147af69dd0a54cb8dbb05d1`
 
 ## Final Result
 
 `HOLD_OWNER`
 
-The repository now has one consolidated production-readiness health-check layer, but the product is not production-ready.
+The repository now has one consolidated production-readiness health-check layer plus a post-Prompt-096 verification-readiness handoff, but the product is not production-ready.
 
 ## Current Truth
 
@@ -24,6 +24,7 @@ The repository now has one consolidated production-readiness health-check layer,
 - Creator Program: source and planning only.
 - Creator payouts: not started.
 - Athlete-comparison features: idea/product direction only.
+- Matching-study workflow: implemented for future use; 0 real participants.
 
 ## Pricing Alignment Status
 
@@ -45,7 +46,19 @@ The internal second-verifier decision workspace now loads the canonical 92-recor
 
 The CF27 evidence recapture package is now generated deterministically from the production-verification queue, evidence manifest, source-video inventory, primary-review records, issue register, capture requests, and count/order audit. It reports 92 review-ready records from current evidence, 92 recapture-required records before production, 0 missing-evidence records, 87 records missing required production views, 5 duplicate-dispute records, 58 ordering-dispute records, 92 environment/version-gap records, 104 recapture tasks, 166 verifier discrepancy rows, and 0 production-eligible records.
 
-Prompt 094 has also been steered with an exact existing-media verification gap audit. That audit exhausts current source videos, source-media records, derivative frames, timelines, candidates, primary-review artifacts, duplicate-review artifacts, and verifier queue data before requesting new capture. It reports 138 audit rows, 14 video-file rows, 92 candidate rows, 32 evidence-requirement rows, 3 locally opened source videos, 12 unique master videos, 2 duplicate uploads, 7 frame-reextraction requirements, 93 second-verifier confirmation rows including the creation path plus all candidates, and 19 genuine recapture requirements. The minimum recapture queue is `data/phase-zero/cf27_minimum_recapture_queue.json`.
+Prompt 094 has also been steered with an exact existing-media verification gap audit. That audit exhausts current source videos, source-media records, derivative frames, timelines, candidates, primary-review artifacts, duplicate-review artifacts, and verifier queue data before requesting new capture. It reports 138 audit rows, 14 video-file rows, 92 candidate rows, 32 evidence-requirement rows, 3 locally opened source videos, 12 unique master videos, 2 duplicate uploads, 7 frame-reextraction requirements, 100 second-verifier confirmation rows, and 21 genuine recapture requirements. The minimum recapture queue is `data/phase-zero/cf27_minimum_recapture_queue.json`.
+
+## Frame Re-Extraction Packet Status
+
+The recoverable frame gaps identified by the existing-media audit now have a dedicated packet in `data/phase-zero/cf27_frame_reextractions.json`. It records 7 derivative frames across Eye color, Eye shape, Facial-hair colors, Hair colors, Mouth shape, Skin details, and Skin tone. These files are derivative evidence only; they do not create production records and do not replace second-human verification.
+
+## Prompt 095 Status
+
+The CF27 production promotion gate is explicit, versioned, attributable, and fail-closed. Current candidates cannot pass because second verification, catalog-manager disposition, complete environment/version metadata, duplicate/order resolution, and production release acceptance are still missing.
+
+## Prompt 096 Status
+
+The privacy-safe manual matching study workflow exists for a future 10-20 participant study. It includes protocol fields, deletion/retention separation, metric calculations, and fixture-exclusion tests. It has not run: valid participant count is 0, top-one acceptance is not measured, top-three usefulness is not measured, and matching accuracy remains unvalidated.
 
 ## Production Decision
 
@@ -53,4 +66,4 @@ Do not launch publicly or privately as a paid production product yet. The produc
 
 ## Authoritative Next Action
 
-Run `docs/status/NEXT_ACTION.md` for Prompt 095 recapture-media intake after Wyatt supplies new recordings.
+Run `docs/status/NEXT_ACTION.md` for Prompt 098 after Wyatt supplies the minimum CF27 recapture recordings and a real second human returns completed verifier files.

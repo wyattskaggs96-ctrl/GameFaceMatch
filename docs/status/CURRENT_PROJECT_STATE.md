@@ -4,10 +4,10 @@
 **Last reconciled:** 2026-08-02
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 090 pricing/game-support alignment from `bb539b6d18af367b198104da71aa4c9da41ab3aa`
+**Repository checkpoint reviewed:** Prompt 092 CF27 production-verification queue preparation after `5c695c73b5e287639d5f73af99b506919abc74c4`
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
-**Current active phase:** production-readiness health check and launch-path consolidation
+**Current active phase:** CF27 production-verification queue and second-verifier handoff
 **Exact next action:** `docs/status/NEXT_ACTION.md`
 
 This is the single current operational status source. Older audits, readiness reports, prompt reports, and closeouts are historical unless this document or the machine-readable files linked below explicitly cite them as current evidence.
@@ -52,6 +52,7 @@ Creator Program source/planning material has been committed as project documenta
 - Local MediaPipe-based face-landmark provider and local FC 26 MVP analysis modules exist.
 - FC 26 research observations are structured in `data/research/fc26/player_creator_research.json`, but remain research-only.
 - College Football 27 Phase 0 tooling exists for source-video inventory, evidence manifests, timelines, research candidates, primary review, verifier packages, production gates, and fail-closed publication checks.
+- College Football 27 production-verification queue exists as a machine-readable and human-readable non-production worklist; it contains 92 research candidates and assigns no second-verifier or production approval.
 - The production College Football 27 catalog is intentionally empty and recommendations fail closed.
 - Supabase runtime/config/schema contracts exist locally and fail closed; no remote persistence is active.
 - Payment/entitlement interfaces expose the approved Launch Pack and All Access products, but checkout remains unavailable and no client state can grant paid access.
@@ -93,6 +94,11 @@ Creator Program source/planning material has been committed as project documenta
 | CF27 primary approved with notes | 84 | `data/phase-zero/primary_review_status.json` |
 | CF27 duplicate review required | 5 | `data/phase-zero/primary_review_status.json` |
 | CF27 order unresolved | 3 | `data/phase-zero/primary_review_status.json` |
+| CF27 production-verification queue records | 92 | `data/phase-zero/production_verification_queue.json` |
+| CF27 production-verification queue evidence-linked records | 92 | `data/phase-zero/production_verification_queue.json` |
+| CF27 production-verification queue missing required production views | 87 | `data/phase-zero/production_verification_queue.json` |
+| CF27 production-verification queue duplicate or near-duplicate records | 5 | `data/phase-zero/production_verification_queue.json` |
+| CF27 production-verification queue production-eligible records | 0 | `data/phase-zero/production_verification_queue.json` |
 | CF27 second verified | 0 | `data/phase-zero/primary_review_status.json` |
 | CF27 production approved | 0 | `data/phase-zero/primary_review_status.json` |
 | Production catalog records | 0 | `data/catalog/production/catalog_manifest.json` |

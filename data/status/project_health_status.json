@@ -3,7 +3,7 @@
   "generatedAt": "2026-08-02T23:59:00-04:00",
   "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
   "branch": "main",
-  "head": "2ba2289461edaf87afc8bfb711f6699ef8b6f511",
+  "head": "5c695c73b5e287639d5f73af99b506919abc74c4",
   "outcome": "HOLD_OWNER",
   "productionReadiness": "BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS",
   "productionRecommendationsEnabled": false,
@@ -32,6 +32,10 @@
     "cf27PrimaryApprovedWithNotes": 84,
     "cf27DuplicateReviewRequired": 5,
     "cf27OrderUnresolved": 3,
+    "cf27ProductionVerificationQueueRecords": 92,
+    "cf27ProductionVerificationQueueEvidenceLinked": 92,
+    "cf27ProductionVerificationQueueMissingRequiredViews": 87,
+    "cf27ProductionVerificationQueueProductionEligible": 0,
     "cf27EvidenceManifestEntries": 118,
     "cf27VideoInventoryRows": 14,
     "fc26ResearchControls": 28
@@ -56,6 +60,6 @@
   },
   "nextAction": {
     "path": "docs/status/NEXT_ACTION.md",
-    "title": "GFM | Q04 | PROMPT 091 | PHASE 01 | Verify pricing alignment and checkpoint repository"
+    "title": "GFM | Q04 | PROMPT 093 | PHASE 02 | Hand off CF27 production verification queue to second verifier"
   }
 }

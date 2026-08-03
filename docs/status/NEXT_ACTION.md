@@ -1,61 +1,49 @@
-GFM | Q04 | PROMPT 091 | PHASE 01 | Verify pricing alignment and checkpoint repository
+GFM | Q04 | PROMPT 093 | PHASE 02 | Hand off CF27 production verification queue to second verifier
 
 Repository:
 `/Users/skaggssystems/Developer/GameFaceMatch`
 
 Run after:
-`GFM | MASTER | PROMPT 090 | ALIGN APPROVED LAUNCH PRICING AND GAME SUPPORT GATES`
+`GFM | Q04 | PROMPT 092 | PHASE 02 | Build CF27 production verification queue`
 
 ## Objective
 
-Independently verify Prompt 090 pricing and launch-game alignment against the repository's actual state, repair only in-scope inconsistencies, reconcile status records, and create a safe focused checkpoint if required.
+Use the canonical CF27 production-verification queue to prepare the next real human action: a second verifier must independently inspect the queue, source videos, timestamps, evidence frames, menu counts, native ordering, duplicate/ambiguous records, missing views, and environment/version gaps.
 
-## Current Product Direction To Verify
+## Current Queue State
 
-- `launch_pack`
-  - `$4.99`
-  - One-time purchase
-  - Intended to cover the five original launch games only when those games become production-supported
-- `all_access_annual`
-  - `$9.99/year`
-  - Annual subscription
-  - Intended to cover all currently supported and subsequently added games while active
+- Queue file: `data/phase-zero/production_verification_queue.json`
+- Human summary: `docs/phase-zero/CF27_PRODUCTION_VERIFICATION_QUEUE.md`
+- Queue records: 92
+- Evidence-linked records: 92
+- Missing-evidence records: 0
+- Duplicate or near-duplicate records: 5
+- Order-unresolved records: 3
+- Records with missing required production views: 87
+- Version/environment-gap records: 92
+- Second-verified records: 0
+- Production-approved records: 0
+- Production-eligible records: 0
 
-Original five launch targets:
+## Required Human Action
 
-1. EA SPORTS College Football 27
-2. NBA 2K26
-3. Madden NFL 26
-4. EA SPORTS PGA TOUR
-5. PBA Pro Bowling 2026
+Assign a real second verifier who has independent access to the shipping game and can complete the verifier worksheets without copying primary-research conclusions.
 
-Truthful support state:
+The verifier must:
 
-- College Football 27 has research evidence and zero production catalog records.
-- NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026 are not started.
-- EA SPORTS FC 26 remains research-only and outside the five-game Launch Pack definition.
+1. Complete environment and version worksheet.
+2. Complete blind independent counts before opening record-level comparison rows.
+3. Check source videos and timestamps for every assigned candidate.
+4. Review duplicate and ambiguous records explicitly.
+5. Record missing evidence, count mismatch, order mismatch, version mismatch, dependency unresolved, or recapture required statuses where appropriate.
+6. Sign off only on records directly supported by independent evidence.
 
-## Verification Scope
+## Codex Can Still Do
 
-- Active pricing config, UI copy, and tests use Launch Pack / All Access as current.
-- Older Prompt 080 `$0.99` / `$1.99/month` references are removed from active product configuration or clearly historical.
-- Checkout remains disabled and provider-unavailable.
-- Client state, query params, local storage, fixtures, or mock payments cannot grant paid access.
-- Game registry includes all five launch targets without false production support.
-- FC 26 remains isolated.
-- Fixture and research records remain excluded from production recommendations.
-- Status and governance records match implementation.
-
-## Required Commands
-
-- `npm run status:check`
-- `npm run legal:copy-check`
-- `npm run supabase:schema:check`
-- `npm --prefix web run lint`
-- `npm --prefix web run test -- commerce.test.ts game-adapter-isolation.test.ts scan-entry.test.ts status-consistency.test.ts`
-- Additional directly relevant tests discovered during inspection
-- `npm run verify:clean` only when worktree assumptions can be satisfied without hiding legitimate work
+- Refine verifier import tooling if the real submission format changes.
+- Generate a concise handoff packet from the queue.
+- Validate completed verifier files after Wyatt supplies them.
 
 ## Stop Point
 
-Do not begin Stripe, Supabase deployment, catalog promotion, creator attribution, creator payouts, athlete comparisons, or additional game research.
+Do not promote records, publish a production catalog, run real recommendations, connect Stripe, or connect remote Supabase during this next action.

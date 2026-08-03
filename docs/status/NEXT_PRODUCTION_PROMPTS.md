@@ -2,32 +2,39 @@
 
 ## Immediate Next Prompt
 
-`GFM | Q04 | PROMPT 091 | PHASE 01 | Verify pricing alignment and checkpoint repository`
+`GFM | Q04 | PROMPT 093 | PHASE 02 | Hand off CF27 production verification queue to second verifier`
 
-Purpose: independently verify the Prompt 090 Launch Pack / All Access alignment, confirm fail-closed payment and catalog gates, reconcile status records, and checkpoint only focused changes.
+Purpose: use the canonical CF27 production-verification queue to hand off concrete second-verifier work without promoting records.
 
-## Prompt 091 Acceptance
+## Prompt 092 Result
 
-- Active typed pricing is `launch_pack` `$4.99` and `all_access_annual` `$9.99/year`.
-- Older Prompt 080 `$0.99` / `$1.99/month` scan-entry pricing is historical only.
-- Checkout remains disabled and provider-unavailable.
-- No client-side state can grant a paid entitlement.
-- The five original launch games are registered without claiming production support.
-- College Football 27 remains blocked by an empty production catalog.
-- NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026 remain unavailable.
-- FC 26 remains research-only and non-launch.
-- Research, fixture, and placeholder records cannot produce production recommendations.
-- Status/governance records reflect the real implementation.
+- Canonical queue: `data/phase-zero/production_verification_queue.json`
+- Queue summary: `docs/phase-zero/CF27_PRODUCTION_VERIFICATION_QUEUE.md`
+- Queue records: 92
+- Evidence-linked records: 92
+- Duplicate or near-duplicate records: 5
+- Order-unresolved records: 3
+- Records with missing required production views: 87
+- Production-eligible records: 0
+- Second-verified records: 0
+- Production-approved records: 0
+
+## Prompt 093 Acceptance
+
+- A real second-verifier handoff packet is ready.
+- The verifier can follow the queue without reading repository internals.
+- Blind independent counts remain protected from primary-review conclusions.
+- No record is marked verified or production-approved.
+- Completed verifier submissions can be imported only through validation tooling.
 
 ## Later Production Path
 
-1. Build CF27 production verification queue.
-2. Complete second-human verification and discrepancy resolution.
-3. Publish a nonempty verified production catalog only if all release gates pass.
-4. Connect server-authoritative paid access in test mode.
-5. Deploy Supabase/Auth/Storage/RLS through the approved credential workflow.
-6. Run real manual matching validation.
-7. Complete legal, security, privacy, accessibility, deployment, and support gates.
+1. Complete second-human verification and discrepancy resolution.
+2. Publish a nonempty verified production catalog only if all release gates pass.
+3. Connect server-authoritative paid access in test mode.
+4. Deploy Supabase/Auth/Storage/RLS through the approved credential workflow.
+5. Run real manual matching validation.
+6. Complete legal, security, privacy, accessibility, deployment, and support gates.
 
 ## Explicitly Not Next
 

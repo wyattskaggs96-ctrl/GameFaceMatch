@@ -41,10 +41,14 @@ The CF27 production-verification queue is now generated from current primary-rev
 
 The internal second-verifier decision workspace now loads the canonical 92-record CF27 production-verification queue, exposes filters and candidate details for real human review, supports deterministic 25% secondary-angle sampling, records only local verifier drafts, and preserves fail-closed production gates. It did not create second-verifier decisions, production approvals, or production recommendations.
 
+## Prompt 094 Status
+
+The CF27 evidence recapture package is now generated deterministically from the production-verification queue, evidence manifest, source-video inventory, primary-review records, issue register, capture requests, and count/order audit. It reports 92 review-ready records from current evidence, 92 recapture-required records before production, 0 missing-evidence records, 87 records missing required production views, 5 duplicate-dispute records, 58 ordering-dispute records, 92 environment/version-gap records, 104 recapture tasks, 166 verifier discrepancy rows, and 0 production-eligible records.
+
 ## Production Decision
 
 Do not launch publicly or privately as a paid production product yet. The product must first complete verified catalog data, connect server-authoritative paid access, validate matching usefulness, and complete legal/security/deployment gates.
 
 ## Authoritative Next Action
 
-Run `docs/status/NEXT_ACTION.md` for Prompt 094 real second-verifier review and decision import.
+Run `docs/status/NEXT_ACTION.md` for Prompt 095 recapture-media intake after Wyatt supplies new recordings.

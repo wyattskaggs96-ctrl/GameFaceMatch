@@ -2,9 +2,9 @@
 
 ## Immediate Next Prompt
 
-`GFM | Q04 | PROMPT 094 | PHASE 02 | Complete real CF27 second-verifier review and import decisions`
+`GFM | Q04 | PROMPT 095 | PHASE 02 | Ingest CF27 recapture recordings and refresh verification queue`
 
-Purpose: use the completed second-verifier workspace and canonical CF27 production-verification queue to collect, validate, and import real second-human decisions without promoting records automatically.
+Purpose: after Wyatt supplies the requested recapture recordings, ingest the new media, update evidence/candidate records, refresh recapture/discrepancy reports, and regenerate the production-verification queue without promoting records.
 
 ## Prompt 092 Result
 
@@ -28,12 +28,30 @@ Purpose: use the completed second-verifier workspace and canonical CF27 producti
 - Deterministic 25% secondary-angle sampling is available.
 - Draft decisions remain non-production and cannot grant production approval.
 
-## Prompt 094 Acceptance
+## Prompt 094 Result
 
-- A real second verifier has completed attributable decisions.
-- Submitted decisions validate against the approved schema and statuses.
-- Disagreements, recapture requests, version mismatches, count mismatches, and order mismatches are preserved as unresolved blockers.
-- No record is marked production-approved by verifier import alone.
+- Deterministic evidence-quality report: `data/phase-zero/evidence-recapture-package/evidence_quality_report.json`
+- Owner checklist: `docs/phase-zero/CF27_OWNER_RECAPTURE_CHECKLIST.md`
+- Review-ready records from current evidence: 92
+- Recapture-required records: 92
+- Missing-evidence records: 0
+- Missing required production-view records: 87
+- Duplicate-dispute records: 5
+- Ordering-dispute records: 58
+- Environment/version-gap records: 92
+- Recapture tasks: 104
+- Verifier discrepancy rows: 166
+- Second-verified records: 0
+- Production-approved records: 0
+- Production catalog records: 0
+
+## Prompt 095 Acceptance
+
+- Newly supplied recapture media is inventoried, hashed, and preserved.
+- Evidence and timeline records are updated only for directly observed facts.
+- Recapture tasks are closed only when acceptance criteria are met.
+- The evidence recapture package and production-verification queue are regenerated.
+- No record is marked second-verified or production-approved.
 
 ## Later Production Path
 

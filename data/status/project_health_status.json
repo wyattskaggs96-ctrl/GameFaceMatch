@@ -36,6 +36,10 @@
     "cf27ProductionVerificationQueueEvidenceLinked": 92,
     "cf27ProductionVerificationQueueMissingRequiredViews": 87,
     "cf27ProductionVerificationQueueProductionEligible": 0,
+    "cf27EvidenceRecaptureReviewReadyRecords": 92,
+    "cf27EvidenceRecaptureRequiredRecords": 92,
+    "cf27EvidenceRecaptureTaskCount": 104,
+    "cf27VerifierDiscrepancyRows": 166,
     "cf27EvidenceManifestEntries": 118,
     "cf27VideoInventoryRows": 14,
     "fc26ResearchControls": 28
@@ -60,6 +64,6 @@
   },
   "nextAction": {
     "path": "docs/status/NEXT_ACTION.md",
-    "title": "GFM | Q04 | PROMPT 094 | PHASE 02 | Complete real CF27 second-verifier review and import decisions"
+    "title": "GFM | Q04 | PROMPT 095 | PHASE 02 | Ingest CF27 recapture recordings and refresh verification queue"
   }
 }

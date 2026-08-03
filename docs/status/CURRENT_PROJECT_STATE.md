@@ -4,10 +4,10 @@
 **Last reconciled:** 2026-08-02
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 093 CF27 second-verifier decision workspace after Prompt 092 queue preparation
+**Repository checkpoint reviewed:** Prompt 094 CF27 evidence recapture package after Prompt 093 second-verifier workspace
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
-**Current active phase:** CF27 second-verifier decision workspace and real human verification handoff
+**Current active phase:** CF27 evidence recapture, owner capture, and real human verification handoff
 **Exact next action:** `docs/status/NEXT_ACTION.md`
 
 This is the single current operational status source. Older audits, readiness reports, prompt reports, and closeouts are historical unless this document or the machine-readable files linked below explicitly cite them as current evidence.
@@ -54,6 +54,7 @@ Creator Program source/planning material has been committed as project documenta
 - College Football 27 Phase 0 tooling exists for source-video inventory, evidence manifests, timelines, research candidates, primary review, verifier packages, production gates, and fail-closed publication checks.
 - College Football 27 production-verification queue exists as a machine-readable and human-readable non-production worklist; it contains 92 research candidates and assigns no second-verifier or production approval.
 - College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
+- College Football 27 evidence recapture package exists as a deterministic owner/verifier worklist. It marks all 92 records review-ready from current evidence, all 92 records recapture-required before production, 87 records missing required production views, 5 duplicate-dispute records, 58 ordering-dispute records, and 92 environment/version-gap records.
 - The production College Football 27 catalog is intentionally empty and recommendations fail closed.
 - Supabase runtime/config/schema contracts exist locally and fail closed; no remote persistence is active.
 - Payment/entitlement interfaces expose the approved Launch Pack and All Access products, but checkout remains unavailable and no client state can grant paid access.
@@ -71,6 +72,7 @@ Creator Program source/planning material has been committed as project documenta
 
 - Production recommendations: blocked by 0 production catalog records.
 - Second-verifier completion: blocked until a real second human uses the verifier workspace and submits attributable decisions.
+- CF27 production eligibility: blocked until owner recaptures the evidence defects listed in `docs/phase-zero/CF27_OWNER_RECAPTURE_CHECKLIST.md` and the resulting media is ingested.
 - Five-game launch catalog: only CF27 and FC 26 have research material; NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026 have no verified catalog data.
 - Stripe Checkout, Stripe Billing, customer subscriptions, creator Stripe Connect onboarding, commission ledger, payout batches, and transfers are not implemented.
 - Launch game registry entries exist for College Football 27, NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026, but every launch game remains recommendation-unavailable until a verified production catalog exists.
@@ -101,6 +103,10 @@ Creator Program source/planning material has been committed as project documenta
 | CF27 production-verification queue missing required production views | 87 | `data/phase-zero/production_verification_queue.json` |
 | CF27 production-verification queue duplicate or near-duplicate records | 5 | `data/phase-zero/production_verification_queue.json` |
 | CF27 production-verification queue production-eligible records | 0 | `data/phase-zero/production_verification_queue.json` |
+| CF27 evidence recapture package review-ready records | 92 | `data/phase-zero/evidence-recapture-package/evidence_quality_report.json` |
+| CF27 evidence recapture package recapture-required records | 92 | `data/phase-zero/evidence-recapture-package/evidence_quality_report.json` |
+| CF27 evidence recapture package tasks | 104 | `data/phase-zero/evidence-recapture-package/recapture_queue.json` |
+| CF27 evidence recapture package verifier discrepancy rows | 166 | `data/phase-zero/evidence-recapture-package/verifier_discrepancy_report.json` |
 | CF27 second verified | 0 | `data/phase-zero/primary_review_status.json` |
 | CF27 production approved | 0 | `data/phase-zero/primary_review_status.json` |
 | Production catalog records | 0 | `data/catalog/production/catalog_manifest.json` |

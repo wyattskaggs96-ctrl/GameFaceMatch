@@ -7,13 +7,13 @@ This report is generated from repository-local catalog, Phase 0, research, fixtu
 | Classification | Count |
 | --- | ---: |
 | PRODUCTION_VERIFIED | 0 |
-| RESEARCH_OBSERVED | 1537 |
+| RESEARCH_OBSERVED | 1655 |
 | PUBLIC_SOURCE_ONLY | 0 |
 | TEST_FIXTURE | 73 |
 | PLACEHOLDER | 375 |
 | DEPRECATED | 0 |
 | INVALID | 0 |
-| UNKNOWN_ORIGIN | 2995 |
+| UNKNOWN_ORIGIN | 3427 |
 
 ## Production Gate Status
 

@@ -40,7 +40,9 @@
     "native_order_worksheet.csv/json",
     "record_level_comparison_worksheet.csv/json",
     "front_view_checks.csv/json",
+    "frame_reextraction_reference.csv/json",
     "secondary_angle_sample.csv/json",
+    "final_verifier_work_queue.csv/json",
     "duplicate_exception_review.csv/json",
     "discrepancy_form.csv/json",
     "sign_off_form.csv/json",
@@ -59,6 +61,18 @@
     "rounding": "ceil",
     "eligibleCandidateCount": 84,
     "selectedCandidateCount": 27
+  },
+  "frameReextractions": {
+    "total": 7,
+    "requirements": [
+      "REQ-VIEWS-eye-color",
+      "REQ-VIEWS-eye-shape",
+      "REQ-VIEWS-facial-hair-colors",
+      "REQ-VIEWS-hair-colors",
+      "REQ-VIEWS-mouth-shape",
+      "REQ-VIEWS-skin-details",
+      "REQ-VIEWS-skin-tone"
+    ]
   },
   "dashboard": {
     "schemaVersion": "cf27-second-verifier-execution-package-v1-dashboard",

@@ -8,7 +8,7 @@ This directory contains the validation report for the proposed verification-cand
 
 - Candidate records: 89
 - Source videos: 14
-- Evidence entries: 118
+- Evidence entries: 125
 - Open capture assignments: 15
 - Blockers: 39
 - Production catalog records: 0

@@ -41,9 +41,9 @@ describe("CF27 existing-media verification gap audit", () => {
     expect(audit.summary.duplicateUploads).toBe(2);
     expect(audit.summary.localSourceVideosOpened).toBe(3);
     expect(audit.summary.classificationCounts.DUPLICATE_UPLOAD_NO_NEW_COVERAGE).toBe(2);
-    expect(audit.summary.classificationCounts.FRAME_REEXTRACTION_REQUIRED).toBeGreaterThan(0);
+    expect(audit.summary.classificationCounts.FRAME_REEXTRACTION_REQUIRED ?? 0).toBe(0);
     expect(audit.summary.classificationCounts.SECOND_VERIFIER_CONFIRMATION_REQUIRED).toBeGreaterThanOrEqual(92);
-    expect(audit.summary.classificationCounts.GENUINE_RECAPTURE_REQUIRED).toBe(19);
+    expect(audit.summary.classificationCounts.GENUINE_RECAPTURE_REQUIRED).toBe(21);
     expect(audit.auditRows.every((row) => allowedClassifications.has(row.primaryClassification))).toBe(true);
   });
 

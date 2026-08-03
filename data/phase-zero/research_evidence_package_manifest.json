@@ -38,7 +38,7 @@
   "summary": {
     "sourceMastersInInventory": 14,
     "uniqueSourceMastersInEvidenceManifest": 12,
-    "derivativeEvidenceEntries": 106,
+    "derivativeEvidenceEntries": 113,
     "exactDuplicateSourceFilesDocumented": 2,
     "catalogRowsChecked": 146,
     "catalogRowsWithInvalidEvidence": 0,
@@ -46,7 +46,7 @@
     "captureLogChronological": true,
     "issueCount": 44,
     "issuesWithoutLinks": 0,
-    "pathResolutionEntriesChecked": 120,
+    "pathResolutionEntriesChecked": 127,
     "missingResolvedFiles": 0,
     "blockingIssueCount": 0,
     "warningCount": 3
@@ -64,14 +64,14 @@
       "status": "passed",
       "blocking": 0,
       "warnings": 0,
-      "details": "106 derivative evidence entry/entries checked for master linkage, source timestamp, checksum, file size, and MIME type."
+      "details": "113 derivative evidence entry/entries checked for master linkage, source timestamp, checksum, file size, and MIME type."
     },
     {
       "check": "completePathResolution",
       "status": "passed",
       "blocking": 0,
       "warnings": 0,
-      "details": "120 path reference(s) checked; 0 missing file(s), 0 unsafe path(s), 0 absolute-only evidence entry/entries."
+      "details": "127 path reference(s) checked; 0 missing file(s), 0 unsafe path(s), 0 absolute-only evidence entry/entries."
     },
     {
       "check": "duplicateEvidenceDocumented",
@@ -934,6 +934,167 @@
       "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
       "sourceMasterSha256": "90a29684f972dff7f41c33fb6457ee545a65c94292647ff9d91be1f1bc168586",
       "timestamp": 155.5,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "catalogReferences": {
+        "headResearchCatalogID": null,
+        "additionalAttributeResearchCatalogID": null
+      },
+      "hasMasterReference": true,
+      "hasSourceTimestamp": true,
+      "hasSha256": true,
+      "hasFileSize": true,
+      "hasMediaType": true
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-eye-color-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_eye_color_Eye_color_FRONT_13s.png",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "b99e80a249cc920e5e89e87d14361562d2924012e41728f027c14b819326ea2e",
+      "sizeBytes": 1434091,
+      "mimeType": "image/png",
+      "sourceVideo": "07_Eye_Color.mp4",
+      "sourceInventoryId": "phase0-video-007",
+      "sourceMasterPortablePath": "OWNER_DOWNLOADS/a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+      "sourceMasterSha256": "c07fdab8d65b19859ae5985dc4fb06bb9919aecf597996ab74463bc6020acfd3",
+      "timestamp": 13,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "catalogReferences": {
+        "headResearchCatalogID": null,
+        "additionalAttributeResearchCatalogID": null
+      },
+      "hasMasterReference": true,
+      "hasSourceTimestamp": true,
+      "hasSha256": true,
+      "hasFileSize": true,
+      "hasMediaType": true
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-eye-shape-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_eye_shape_Eye_shape_FRONT_14s.png",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "04d62fca726a41aed7e0092a8cc19dd4b53982312b6f51660418250968232d45",
+      "sizeBytes": 1212653,
+      "mimeType": "image/png",
+      "sourceVideo": "06_Eye_Shape.mp4",
+      "sourceInventoryId": "phase0-video-006",
+      "sourceMasterPortablePath": "OWNER_DOWNLOADS/45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "sourceMasterSha256": "84bdb04ca232a662a8add3ceef92f021ad6c96d241e536b12c0af968f3d92ca2",
+      "timestamp": 14,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "catalogReferences": {
+        "headResearchCatalogID": null,
+        "additionalAttributeResearchCatalogID": null
+      },
+      "hasMasterReference": true,
+      "hasSourceTimestamp": true,
+      "hasSha256": true,
+      "hasFileSize": true,
+      "hasMediaType": true
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-facial-hair-colors-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_facial_hair_colors_Facial_hair_colors_FRONT_225p5s.png",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "7970eadcd64b2fed2f31abd5948934eef23f6c5b8ed4f18c1476e7ebf935761f",
+      "sizeBytes": 1745454,
+      "mimeType": "image/png",
+      "sourceVideo": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceInventoryId": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceMasterSha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+      "timestamp": 225.5,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "catalogReferences": {
+        "headResearchCatalogID": null,
+        "additionalAttributeResearchCatalogID": null
+      },
+      "hasMasterReference": true,
+      "hasSourceTimestamp": true,
+      "hasSha256": true,
+      "hasFileSize": true,
+      "hasMediaType": true
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-hair-colors-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_hair_colors_Hair_colors_FRONT_100p5s.png",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "56944bc2f21fe8896abaf058dd39d7237544de19ac61cb480bfa89ec791c6987",
+      "sizeBytes": 1668341,
+      "mimeType": "image/png",
+      "sourceVideo": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceInventoryId": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceMasterSha256": "60f68a5c1af4f96f9f18c453440a7f8d6296aa661068b0092f3e41827e553d50",
+      "timestamp": 100.5,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "catalogReferences": {
+        "headResearchCatalogID": null,
+        "additionalAttributeResearchCatalogID": null
+      },
+      "hasMasterReference": true,
+      "hasSourceTimestamp": true,
+      "hasSha256": true,
+      "hasFileSize": true,
+      "hasMediaType": true
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-mouth-shape-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_mouth_shape_Mouth_shape_FRONT_215p5s.png",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "790729aca3f91ad31a6737e3c911d125ceac45fdc207cb0993cda90587a2ddcd",
+      "sizeBytes": 1481269,
+      "mimeType": "image/png",
+      "sourceVideo": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceInventoryId": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceMasterSha256": "bdd75f0ce953aaf9fda0cb187658b9314ae7f6c21f5ab30d7e474549841037d5",
+      "timestamp": 215.5,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "catalogReferences": {
+        "headResearchCatalogID": null,
+        "additionalAttributeResearchCatalogID": null
+      },
+      "hasMasterReference": true,
+      "hasSourceTimestamp": true,
+      "hasSha256": true,
+      "hasFileSize": true,
+      "hasMediaType": true
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-skin-details-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_skin_details_Skin_details_FRONT_8s.png",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "7c15b44b022de8209eb8de659a64ceba3bb14efdaf9502cdecceb98c19f86278",
+      "sizeBytes": 1526108,
+      "mimeType": "image/png",
+      "sourceVideo": "05_Skin_Details.mp4",
+      "sourceInventoryId": "phase0-video-005",
+      "sourceMasterPortablePath": "OWNER_DOWNLOADS/04_Appearance_Skin_Details.MP4",
+      "sourceMasterSha256": "a86993245c6762c40ba1e66d4cf3961ba69462eeb6636b20ca0be63e3246b32b",
+      "timestamp": 8,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "catalogReferences": {
+        "headResearchCatalogID": null,
+        "additionalAttributeResearchCatalogID": null
+      },
+      "hasMasterReference": true,
+      "hasSourceTimestamp": true,
+      "hasSha256": true,
+      "hasFileSize": true,
+      "hasMediaType": true
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-skin-tone-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_skin_tone_Skin_tone_FRONT_45p5s.png",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "d0c74f973e3797777b9e937cf7811cd5022323f73b6bce6e5d0f7b15f182b2d6",
+      "sizeBytes": 1443593,
+      "mimeType": "image/png",
+      "sourceVideo": "04_Skin_Tone.mp4",
+      "sourceInventoryId": "phase0-video-004",
+      "sourceMasterPortablePath": "OWNER_DOWNLOADS/03_Appearance_Skin_Tone.MP4",
+      "sourceMasterSha256": "a65e57da173c1221c9e6472d3cc17ff645871d22ffd2b37fca4f57f83bd75146",
+      "timestamp": 45.5,
       "verificationState": "OBSERVED_PENDING_VERIFICATION",
       "catalogReferences": {
         "headResearchCatalogID": null,
@@ -2992,8 +3153,8 @@
   },
   "pathResolution": {
     "summary": {
-      "entriesChecked": 120,
-      "resolvedRepositoryDerivativeFiles": 106,
+      "entriesChecked": 127,
+      "resolvedRepositoryDerivativeFiles": 113,
       "externalMasterReferences": 14,
       "missingFiles": 0,
       "unsafePaths": 0,
@@ -3004,9 +3165,9 @@
       "status": "passed",
       "blocking": 0,
       "warnings": 0,
-      "details": "120 path reference(s) checked; 0 missing file(s), 0 unsafe path(s), 0 absolute-only evidence entry/entries."
+      "details": "127 path reference(s) checked; 0 missing file(s), 0 unsafe path(s), 0 absolute-only evidence entry/entries."
     },
-    "entriesChecked": 120,
+    "entriesChecked": 127,
     "records": [
       {
         "id": "CF27_XBOX_SOURCE_2026_08_02_001",
@@ -3356,6 +3517,83 @@
         "actualSizeBytes": 1178555,
         "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
         "sourceTimestamp": 155.5
+      },
+      {
+        "id": "phase0-frame-reextract-req-views-eye-color-front",
+        "kind": "derivative",
+        "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_eye_color_Eye_color_FRONT_13s.png",
+        "pathStatus": "portable_repository_relative_path",
+        "fileResolutionStatus": "resolved",
+        "expectedSizeBytes": 1434091,
+        "actualSizeBytes": 1434091,
+        "sourceMasterPortablePath": "OWNER_DOWNLOADS/a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+        "sourceTimestamp": 13
+      },
+      {
+        "id": "phase0-frame-reextract-req-views-eye-shape-front",
+        "kind": "derivative",
+        "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_eye_shape_Eye_shape_FRONT_14s.png",
+        "pathStatus": "portable_repository_relative_path",
+        "fileResolutionStatus": "resolved",
+        "expectedSizeBytes": 1212653,
+        "actualSizeBytes": 1212653,
+        "sourceMasterPortablePath": "OWNER_DOWNLOADS/45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+        "sourceTimestamp": 14
+      },
+      {
+        "id": "phase0-frame-reextract-req-views-facial-hair-colors-front",
+        "kind": "derivative",
+        "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_facial_hair_colors_Facial_hair_colors_FRONT_225p5s.png",
+        "pathStatus": "portable_repository_relative_path",
+        "fileResolutionStatus": "resolved",
+        "expectedSizeBytes": 1745454,
+        "actualSizeBytes": 1745454,
+        "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+        "sourceTimestamp": 225.5
+      },
+      {
+        "id": "phase0-frame-reextract-req-views-hair-colors-front",
+        "kind": "derivative",
+        "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_hair_colors_Hair_colors_FRONT_100p5s.png",
+        "pathStatus": "portable_repository_relative_path",
+        "fileResolutionStatus": "resolved",
+        "expectedSizeBytes": 1668341,
+        "actualSizeBytes": 1668341,
+        "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+        "sourceTimestamp": 100.5
+      },
+      {
+        "id": "phase0-frame-reextract-req-views-mouth-shape-front",
+        "kind": "derivative",
+        "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_mouth_shape_Mouth_shape_FRONT_215p5s.png",
+        "pathStatus": "portable_repository_relative_path",
+        "fileResolutionStatus": "resolved",
+        "expectedSizeBytes": 1481269,
+        "actualSizeBytes": 1481269,
+        "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+        "sourceTimestamp": 215.5
+      },
+      {
+        "id": "phase0-frame-reextract-req-views-skin-details-front",
+        "kind": "derivative",
+        "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_skin_details_Skin_details_FRONT_8s.png",
+        "pathStatus": "portable_repository_relative_path",
+        "fileResolutionStatus": "resolved",
+        "expectedSizeBytes": 1526108,
+        "actualSizeBytes": 1526108,
+        "sourceMasterPortablePath": "OWNER_DOWNLOADS/04_Appearance_Skin_Details.MP4",
+        "sourceTimestamp": 8
+      },
+      {
+        "id": "phase0-frame-reextract-req-views-skin-tone-front",
+        "kind": "derivative",
+        "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_skin_tone_Skin_tone_FRONT_45p5s.png",
+        "pathStatus": "portable_repository_relative_path",
+        "fileResolutionStatus": "resolved",
+        "expectedSizeBytes": 1443593,
+        "actualSizeBytes": 1443593,
+        "sourceMasterPortablePath": "OWNER_DOWNLOADS/03_Appearance_Skin_Tone.MP4",
+        "sourceTimestamp": 45.5
       },
       {
         "id": "phase0-frame-video-001-tl-011",

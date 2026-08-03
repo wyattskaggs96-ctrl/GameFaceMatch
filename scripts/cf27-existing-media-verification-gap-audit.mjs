@@ -15,7 +15,8 @@ const outputPaths = {
   csv: "data/phase-zero/cf27_existing_media_verification_gap_audit.csv",
   recaptureJson: "data/phase-zero/cf27_minimum_recapture_queue.json",
   recaptureCsv: "data/phase-zero/cf27_minimum_recapture_queue.csv",
-  doc: "docs/status/CF27_EXISTING_MEDIA_VERIFICATION_GAP_AUDIT.md"
+  doc: "docs/status/CF27_EXISTING_MEDIA_VERIFICATION_GAP_AUDIT.md",
+  ownerGuide: "docs/status/CF27_OWNER_MINIMUM_RECORDING_GUIDE.md"
 };
 
 const sourcePaths = {
@@ -27,7 +28,8 @@ const sourcePaths = {
   countOrderAudit: "data/phase-zero/catalog_count_order_audit.research.json",
   recapturePackage: "data/phase-zero/evidence-recapture-package/evidence_quality_report.json",
   priorRecaptureQueue: "data/phase-zero/evidence-recapture-package/recapture_queue.json",
-  issuesRegister: "data/phase-zero/issues_register.research.json"
+  issuesRegister: "data/phase-zero/issues_register.research.json",
+  frameReextractions: "data/phase-zero/cf27_frame_reextractions.json"
 };
 
 const allowedClassifications = [
@@ -117,6 +119,7 @@ export function buildExistingMediaVerificationGapAudit({ root = repositoryRoot, 
   const recapturePackage = readJson(root, sourcePaths.recapturePackage);
   const priorRecaptureQueue = readJson(root, sourcePaths.priorRecaptureQueue);
   const issuesRegister = readJson(root, sourcePaths.issuesRegister);
+  const frameReextractions = readOptionalJson(root, sourcePaths.frameReextractions) ?? { rows: [] };
 
   const evidenceEntries = evidenceManifest.entries ?? [];
   const timelineRecords = timeline.records ?? [];
@@ -139,7 +142,8 @@ export function buildExistingMediaVerificationGapAudit({ root = repositoryRoot, 
     videoRows,
     primaryReview,
     recapturePackage,
-    priorRecaptureQueue
+    priorRecaptureQueue,
+    frameReextractions
   });
   const auditRows = [...videoAuditRows, ...candidateAuditRows, ...requirementRows].sort(compareAuditRows);
   const recaptureTasks = buildMinimumRecaptureTasks(auditRows);
@@ -219,7 +223,8 @@ export function buildExistingMediaVerificationGapAudit({ root = repositoryRoot, 
     csv: toCsv(auditRows.map(auditCsvRow)),
     recaptureJson: `${JSON.stringify(recaptureQueue, null, 2)}\n`,
     recaptureCsv: toCsv(recaptureTasks.map(recaptureCsvRow)),
-    doc: formatMarkdownReport({ audit, recaptureQueue })
+    doc: formatMarkdownReport({ audit, recaptureQueue }),
+    ownerGuide: formatOwnerMinimumRecordingGuide({ audit, recaptureQueue })
   };
 
   return { audit, recaptureQueue, files };
@@ -231,6 +236,7 @@ export function writeExistingMediaVerificationGapAudit(built, { root = repositor
   writeText(root, outputPaths.recaptureJson, built.files.recaptureJson);
   writeText(root, outputPaths.recaptureCsv, built.files.recaptureCsv);
   writeText(root, outputPaths.doc, built.files.doc);
+  writeText(root, outputPaths.ownerGuide, built.files.ownerGuide);
 }
 
 export function checkExistingMediaVerificationGapAudit(built, { root = repositoryRoot } = {}) {
@@ -242,6 +248,7 @@ export function checkExistingMediaVerificationGapAudit(built, { root = repositor
   assertCurrent(root, outputPaths.recaptureJson, built.files.recaptureJson);
   assertCurrent(root, outputPaths.recaptureCsv, built.files.recaptureCsv);
   assertCurrent(root, outputPaths.doc, built.files.doc);
+  assertCurrent(root, outputPaths.ownerGuide, built.files.ownerGuide);
   return true;
 }
 
@@ -425,11 +432,12 @@ function videoAuditRow(video) {
   };
 }
 
-function buildRequirementRows({ candidateRecords, timelineRecords, countCategories, videoRows }) {
+function buildRequirementRows({ candidateRecords, timelineRecords, countCategories, videoRows, frameReextractions }) {
   const rows = [];
   const visibleLabels = unique(timelineRecords.map((record) => record.visible_menu_label || record.parent_menu).filter(Boolean));
   const candidateByCategory = groupBy(candidateRecords, (candidate) => candidate.category);
   const localAugustVideos = videoRows.filter((video) => video.sourceVideoID.startsWith("CF27_XBOX_SOURCE_2026_08_02"));
+  const frameReextractionByRequirement = new Map((frameReextractions.rows ?? []).map((row) => [row.requirementID, row]));
 
   rows.push(requirementRow({
     id: "REQ-GAME-TITLE",
@@ -517,22 +525,36 @@ function buildRequirementRows({ candidateRecords, timelineRecords, countCategori
     const affected = records.filter((record) => (record.missingViews ?? []).length).map((record) => record.stableCandidateID);
     const displayCategory = categoryDisplay[category] ?? category;
     const onlyFront = missingViews.length === 1 && missingViews[0] === "FRONT";
+    const requirementID = `REQ-VIEWS-${slug(category)}`;
+    const recoveredFrame = frameReextractionByRequirement.get(requirementID);
+    const frameRecovered = onlyFront && recoveredFrame?.extractionStatus === "EXTRACTED_FROM_SOURCE_MASTER";
     rows.push(requirementRow({
-      id: `REQ-VIEWS-${slug(category)}`,
+      id: requirementID,
       category: displayCategory,
-      visible: `${category} has current menu/selected-value evidence for ${records.length} candidate row(s).`,
-      notVisible: `Missing required production view(s): ${missingViews.join(", ")}.`,
-      classification: onlyFront ? "FRAME_REEXTRACTION_REQUIRED" : "GENUINE_RECAPTURE_REQUIRED",
+      visible: frameRecovered
+        ? `${category} has current menu/selected-value evidence for ${records.length} candidate row(s), and recovered front evidence ${recoveredFrame.evidenceID} at ${recoveredFrame.sourceVideoID} @ ${recoveredFrame.sourceTimestamp}s is available for verifier review.`
+        : `${category} has current menu/selected-value evidence for ${records.length} candidate row(s).`,
+      notVisible: frameRecovered
+        ? "Per-candidate standardized production imagery is still not proven; this frame recovery only removes the need for a new Xbox recording solely for the category-level front-view audit gap."
+        : `Missing required production view(s): ${missingViews.join(", ")}.`,
+      classification: frameRecovered ? "SECOND_VERIFIER_CONFIRMATION_REQUIRED" : (onlyFront ? "FRAME_REEXTRACTION_REQUIRED" : "GENUINE_RECAPTURE_REQUIRED"),
       sourceVideo: sourceVideosForRecords(records),
-      derivatives: unique(records.flatMap((record) => (record.evidenceReferences ?? []).map((ref) => ref.evidenceID))).join("; "),
-      nextAction: onlyFront
+      derivatives: unique([
+        ...records.flatMap((record) => (record.evidenceReferences ?? []).map((ref) => ref.evidenceID)),
+        ...(frameRecovered ? [recoveredFrame.evidenceID] : [])
+      ]).join("; "),
+      nextAction: frameRecovered
+        ? `Second verifier should inspect recovered front frame ${recoveredFrame.evidenceID}; do not request a new recording solely for this front-view audit gap.`
+        : onlyFront
         ? `Extract a full-resolution frame from existing source video where the ${category} selected value and front character preview are both visible.`
         : `Record targeted ${category} views with canonical settings; do not rerecord unrelated categories.`,
       requiredViews: missingViews.join("; "),
+      availableViews: frameRecovered ? "FRONT" : "",
+      missingViews: frameRecovered ? "" : missingViews.join("; "),
       menuPath: menuPathForCategory(category),
       canFrameExtraction: onlyFront ? "yes" : "no",
-      canSecondVerifier: onlyFront ? "yes" : "no",
-      requiresNewRecording: onlyFront ? "no" : "yes",
+      canSecondVerifier: frameRecovered || onlyFront ? "yes" : "no",
+      requiresNewRecording: frameRecovered || onlyFront ? "no" : "yes",
       affectedCandidates: affected
     }));
   }
@@ -542,9 +564,12 @@ function buildRequirementRows({ candidateRecords, timelineRecords, countCategori
     category: "Additional visible face-matching controls",
     visible: "No eyebrow-specific control is directly shown in current committed CF27 source-media/timeline records.",
     notVisible: "Eyebrows, brow shape, or brow color controls.",
-    classification: "MISSING_FROM_EXISTING_MEDIA",
-    nextAction: "Do not invent an eyebrow control. Confirm absence/presence only during a future full appearance-menu sweep.",
-    canSecondVerifier: "no"
+    classification: "GENUINE_RECAPTURE_REQUIRED",
+    nextAction: "Record a targeted Head & Skin menu-row sweep that proves whether eyebrow/brow controls are present, absent, or represented under another visible category. Do not invent an eyebrow control from other games.",
+    requiredViews: "MENU",
+    menuPath: "Create Player > Player > Appearance > Head & Skin",
+    canSecondVerifier: "no",
+    requiresNewRecording: "yes"
   }));
 
   rows.push(requirementRow({
@@ -552,9 +577,12 @@ function buildRequirementRows({ candidateRecords, timelineRecords, countCategori
     category: "Dependency tests",
     visible: "No current candidate is marked with a dependency flag, and body/style context is visible.",
     notVisible: "Controlled one-variable dependency tests for position, archetype, head, skin, hairstyle, facial hair, online/offline, patch, and platform.",
-    classification: "MISSING_FROM_EXISTING_MEDIA",
-    nextAction: "Run dependency tests only after primary category capture is complete; do not mark unexecuted dependencies as passed.",
-    canSecondVerifier: "no"
+    classification: "GENUINE_RECAPTURE_REQUIRED",
+    nextAction: "After primary category capture is complete, record targeted one-variable dependency tests for the supported environment. Do not mark unexecuted dependencies as passed.",
+    requiredViews: "DEPENDENCY_TEST",
+    menuPath: "Road to Glory Create Player setup plus affected Appearance categories",
+    canSecondVerifier: "no",
+    requiresNewRecording: "yes"
   }));
 
   return rows;
@@ -572,6 +600,8 @@ function requirementRow({
   derivatives = "",
   nextAction,
   requiredViews = "",
+  availableViews = "",
+  missingViews,
   menuPath = "",
   canFrameExtraction = "no",
   canSecondVerifier = "no",
@@ -592,8 +622,8 @@ function requirementRow({
     whatClearlyVisible: visible,
     whatNotVisible: notVisible,
     requiredViews,
-    availableViews: "",
-    missingViews: requiredViews,
+    availableViews,
+    missingViews: missingViews ?? requiredViews,
     menuLabelVisible: visible ? "yes" : "no",
     nativeOrderVisible: /ORDER|Head|Skin|Eye|Nose|Ear|Mouth|Jaw|Chin|Hair|Facial/i.test(id) ? "partial" : "no",
     environmentMetadataAvailable: id.includes("VERSION") ? "partial" : "partial",
@@ -794,6 +824,74 @@ ${categoryTotals}
 `;
 }
 
+function formatOwnerMinimumRecordingGuide({ audit, recaptureQueue }) {
+  const groupedTasks = [...groupBy(recaptureQueue.tasks, (task) => task.group).entries()]
+    .sort(([left], [right]) => groupRank(left) - groupRank(right) || left.localeCompare(right))
+    .map(([group, tasks]) => {
+      const taskRows = tasks.map((task) => `### ${task.recaptureID}: ${task.exactCategory}
+
+- [ ] Suggested filename: \`${task.proposedFilename}\`
+- Menu path: ${task.exactMenuPath}
+- Category or range: ${task.exactOptionOrRange}
+- Starting state: ${task.exactStartingState}
+- Lock these settings: ${task.exactCanonicalSettings}
+- Show first/final selector values: ${task.mustShowFirstAndFinalSelectorValues}
+- Required view(s): ${task.exactViewsRequired}
+- Hold time: ${task.exactHoldDuration}
+- Label/index visibility: ${task.exactLabelIndexMustBeVisible}
+- One continuous clip acceptable: ${task.oneContinuousClipAcceptable}
+- Existing evidence supplemented: ${task.supplementsOrSupersedesExistingEvidence}
+- Blocker cleared: ${task.exactBlockerCleared}
+`).join("\n");
+      return `## ${group}\n\n${taskRows}`;
+    }).join("\n");
+
+  const frameRows = audit.requirementMatrix
+    .filter((row) => row.existingDerivativeFrameReferences.includes("phase0-frame-reextract"))
+    .map((row) => `- ${row.category}: recovered frame listed in \`${sourcePaths.frameReextractions}\`; no new recording is needed solely for this front-view audit gap.`)
+    .join("\n") || "- No frame-only gaps were recovered.";
+
+  const estimatedMinutes = Math.max(10, recaptureQueue.tasks.length * 2);
+  return `# CF27 Owner Minimum Recording Guide
+
+**Status:** owner capture guide only; not production data
+**Generated at:** ${audit.generatedAt}
+**Production records created:** 0
+
+This guide contains only tasks classified as \`GENUINE_RECAPTURE_REQUIRED\` by the existing-media verification gap audit. Do not record verifier-only tasks or frame-reextraction tasks.
+
+## Prep Checklist
+
+- [ ] Open the supported Road to Glory Create Player flow.
+- [ ] Capture Xbox/game version and patch screens only where requested; avoid account details, payment screens, serial numbers, and private profile data.
+- [ ] Use the same Road to Glory path, position, archetype, and body context unless the task says to change one variable.
+- [ ] Keep canonical appearance stable: canonical head, canonical skin tone, canonical short hairstyle, Facial Hair None where applicable, no helmet, visor, mouthguard, face paint, or eye black.
+- [ ] Use stable lighting, stable zoom, readable menu labels, and wait for animation/model loading to settle before each hold.
+- [ ] Keep original videos untouched and place new clips in the approved intake/source-media location for the next evidence-intake prompt.
+
+## Recording Summary
+
+- Total clips/tasks: ${recaptureQueue.summary.totalRecaptures}
+- Estimated recording time: about ${estimatedMinutes}-${estimatedMinutes + 15} minutes, plus navigation time.
+- Same-session grouping: record tasks by the group headings below to minimize navigation.
+- Changed canonical settings: only where a dependency task explicitly asks for a one-variable change.
+- Profile/rear/order-only clips: use the required views listed per task; do not add extra angles unless the task requests them.
+
+## Frame Extractions Already Completed
+
+${frameRows}
+
+${groupedTasks}
+
+## Do Not Record Again
+
+- Candidate observations classified as \`SECOND_VERIFIER_CONFIRMATION_REQUIRED\` should go to the human verifier first.
+- Duplicate-upload records do not add coverage.
+- Frame-reextraction recoveries are already represented in \`${sourcePaths.frameReextractions}\`.
+- Research candidates remain non-production until second verification, discrepancy resolution, catalog-manager disposition, and immutable production release all pass.
+`;
+}
+
 function summarizeVideoRows(videoRows) {
   return {
     uniqueMasterVideos: videoRows.filter((row) => row.duplicateStatus !== "DUPLICATE_UPLOAD_NO_NEW_COVERAGE").length,
@@ -910,6 +1008,23 @@ function groupForRecapture(category) {
   return "Additional attributes";
 }
 
+function groupRank(group) {
+  const order = [
+    "Environment evidence",
+    "Creation-path evidence",
+    "Menu-map evidence",
+    "Head records",
+    "Additional attributes",
+    "Hairstyles",
+    "Facial hair",
+    "Duplicate disputes",
+    "Ordering disputes",
+    "Dependency tests"
+  ];
+  const index = order.indexOf(group);
+  return index === -1 ? order.length : index;
+}
+
 function optionRangeForRow(row) {
   if (row.relatedCandidates) return row.relatedCandidates;
   if (/ORDER-/.test(row.candidateOrRequirementID)) return "first value through final value plus wrap/no-wrap proof";
@@ -987,6 +1102,12 @@ function ffmpegCanOpen(filePath) {
 
 function readJson(root, relativePath) {
   return JSON.parse(fs.readFileSync(path.join(root, relativePath), "utf8"));
+}
+
+function readOptionalJson(root, relativePath) {
+  const absolutePath = path.join(root, relativePath);
+  if (!fs.existsSync(absolutePath)) return null;
+  return JSON.parse(fs.readFileSync(absolutePath, "utf8"));
 }
 
 function writeText(root, relativePath, value) {

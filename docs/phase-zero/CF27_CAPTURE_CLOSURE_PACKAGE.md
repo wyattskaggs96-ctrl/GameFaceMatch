@@ -11,7 +11,7 @@ Generated from machine-readable Phase 0 artifacts at `2026-08-02T00:00:00-04:00`
 - Primary approved with notes: 84
 - Duplicate review required: 5
 - Open issues: 44 (35 blocking)
-- Evidence entries: 118
+- Evidence entries: 125
 - Source-video inventory rows: 14
 - Unique source videos: 12
 - Second verified: 0

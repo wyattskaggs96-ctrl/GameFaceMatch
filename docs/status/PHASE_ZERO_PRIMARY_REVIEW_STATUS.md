@@ -30,7 +30,7 @@ This checkpoint moves the current 85 evidence-backed research candidates into an
 - Canonical Phase 0 machine-readable artifacts are under `data/phase-zero/`.
 - Older `data/research/cf27/exports/partial-research-catalog-current/` and `docs/catalog/` files are preserved for provenance but are not the current count authority.
 - Current normalized candidate count is 85: 26 heads, 54 additional appearance controls, and 5 body/context records.
-- Current evidence manifest has 118 entries and current video inventory has 14 rows.
+- Current evidence manifest has 125 entries and current video inventory has 14 rows.
 - Conflicting older count noted: older partial exports reported 86 research records; this primary review uses the canonical 85 candidates from `data/phase-zero`.
 - Broken evidence paths found by this primary-review layer: 0.
 - Fixture or placeholder asset references in candidate evidence: 0.

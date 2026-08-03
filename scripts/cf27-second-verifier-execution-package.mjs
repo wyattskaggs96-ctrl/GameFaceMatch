@@ -8,6 +8,7 @@ export const CF27_SECOND_VERIFIER_EXECUTION_PACKAGE_SCHEMA_VERSION = "cf27-secon
 export const CF27_SECOND_VERIFIER_EXECUTION_PACKAGE_ID = "CF27_XBOX_RTG_SECOND_VERIFIER_EXECUTION_v1";
 export const defaultExecutionPackageDirectory = "data/phase-zero/second-verifier-execution-package";
 export const defaultExecutionGuidePath = "docs/phase-zero/SECOND_VERIFIER_EXECUTION_GUIDE.md";
+export const defaultStatusExecutionGuidePath = "docs/status/CF27_SECOND_VERIFIER_EXECUTION_GUIDE.md";
 
 const repositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const generatedAt = "2026-07-21T05:00:00-04:00";
@@ -41,6 +42,9 @@ export function buildSecondVerifierExecutionPackage({
   const coverage = readJSON(path.join(normalizedRoot, "data/phase-zero/evidence_coverage_control_center.json"));
   const evidenceManifest = readJSON(path.join(normalizedRoot, "data/phase-zero/evidence_manifest.json"));
   const issues = readJSON(path.join(normalizedRoot, "data/phase-zero/issues_register.research.json"));
+  const productionQueue = readOptionalJSON(path.join(normalizedRoot, "data/phase-zero/production_verification_queue.json")) ?? { records: [] };
+  const frameReextractions = readOptionalJSON(path.join(normalizedRoot, "data/phase-zero/cf27_frame_reextractions.json")) ?? { rows: [] };
+  const minimumRecaptureQueue = readOptionalJSON(path.join(normalizedRoot, "data/phase-zero/cf27_minimum_recapture_queue.json")) ?? { tasks: [] };
 
   const candidates = normalizeCandidates(primaryReview.candidates ?? [], queue.records ?? []);
   const sample = createDeterministicSecondaryAngleSample({
@@ -86,6 +90,10 @@ export function buildSecondVerifierExecutionPackage({
     allowedStatuses: allowedSecondVerifierStatuses,
     packageContents: createPackageContents(),
     samplingMethod: sample.method,
+    frameReextractions: {
+      total: (frameReextractions.rows ?? []).length,
+      requirements: (frameReextractions.rows ?? []).map((row) => row.requirementID)
+    },
     dashboard
   };
 
@@ -93,11 +101,14 @@ export function buildSecondVerifierExecutionPackage({
     packageData,
     assignment,
     candidates,
+    productionQueueRecords: productionQueue.records ?? [],
     sample,
     duplicateRows,
     dashboard,
     evidenceManifest,
-    coverage
+    coverage,
+    frameReextractions: frameReextractions.rows ?? [],
+    minimumRecaptureTasks: minimumRecaptureQueue.tasks ?? []
   });
   const validation = validateSecondVerifierExecutionPackage({ packageData, files, candidates });
   return { packageData, files, validation };
@@ -164,7 +175,9 @@ export function validateSecondVerifierExecutionPackage({ packageData, files, can
     `${defaultExecutionPackageDirectory}/native_order_worksheet.csv`,
     `${defaultExecutionPackageDirectory}/record_level_comparison_worksheet.csv`,
     `${defaultExecutionPackageDirectory}/front_view_checks.csv`,
+    `${defaultExecutionPackageDirectory}/frame_reextraction_reference.csv`,
     `${defaultExecutionPackageDirectory}/secondary_angle_sample.csv`,
+    `${defaultExecutionPackageDirectory}/final_verifier_work_queue.csv`,
     `${defaultExecutionPackageDirectory}/duplicate_exception_review.csv`,
     `${defaultExecutionPackageDirectory}/discrepancy_form.csv`,
     `${defaultExecutionPackageDirectory}/sign_off_form.csv`,
@@ -228,9 +241,19 @@ export function writeSecondVerifierExecutionPackage(pkg, {
     writeText(root, file.relativePath, file.content);
   }
   writeText(root, guidePath, formatSecondVerifierExecutionGuide(pkg.packageData));
+  writeText(root, defaultStatusExecutionGuidePath, formatStatusSecondVerifierExecutionGuide(pkg.packageData));
 }
 
-function createPackageFiles({ packageData, assignment, candidates, sample, duplicateRows, dashboard, evidenceManifest, coverage }) {
+function createPackageFiles({ packageData, assignment, candidates, productionQueueRecords, sample, duplicateRows, dashboard, evidenceManifest, coverage, frameReextractions, minimumRecaptureTasks }) {
+  const frameRowsByCategory = groupBy(frameReextractions, (row) => row.category);
+  const finalVerifierRows = createFinalVerifierWorkQueue({
+    candidates,
+    productionQueueRecords,
+    sample,
+    duplicateRows,
+    frameReextractions,
+    minimumRecaptureTasks
+  });
   const environmentRows = [{
     package_id: packageData.packageID,
     phase: blindPhase,
@@ -297,6 +320,7 @@ function createPackageFiles({ packageData, assignment, candidates, sample, dupli
     source_video_id: candidate.sourceVideoID,
     source_timestamp_range: candidate.sourceTimestampRange,
     evidence_ids: candidate.evidenceIDs.join(";"),
+    frame_reextraction_ids: (frameRowsByCategory.get(candidate.category) ?? []).map((row) => row.evidenceID).join(";"),
     verifier_record_fields_status: "notChecked",
     verifier_evidence_files_status: "notChecked",
     verifier_final_disposition: "NOT_VERIFIED",
@@ -308,6 +332,7 @@ function createPackageFiles({ packageData, assignment, candidates, sample, dupli
     target_stable_id: candidate.candidateID,
     category: candidate.category,
     evidence_ids: candidate.evidenceIDs.join(";"),
+    frame_reextraction_ids: (frameRowsByCategory.get(candidate.category) ?? []).map((row) => row.evidenceID).join(";"),
     front_view_exists: "",
     front_view_usable: "",
     menu_label_visible: "",
@@ -380,8 +405,12 @@ function createPackageFiles({ packageData, assignment, candidates, sample, dupli
     csvFile("record_level_comparison_worksheet.csv", recordRows),
     jsonFile("front_view_checks.json", { phase: postCountPhase, rows: frontViewRows }),
     csvFile("front_view_checks.csv", frontViewRows),
+    jsonFile("frame_reextraction_reference.json", { phase: postCountPhase, rows: frameReextractions }),
+    csvFile("frame_reextraction_reference.csv", frameReextractions),
     jsonFile("secondary_angle_sample.json", sample),
     csvFile("secondary_angle_sample.csv", sample.rows),
+    jsonFile("final_verifier_work_queue.json", { phase: postCountPhase, rows: finalVerifierRows }),
+    csvFile("final_verifier_work_queue.csv", finalVerifierRows),
     jsonFile("duplicate_exception_review.json", { phase: postCountPhase, rows: duplicateReviewRows }),
     csvFile("duplicate_exception_review.csv", duplicateReviewRows),
     jsonFile("discrepancy_form.json", { phase: postCountPhase, rows: discrepancyRows, allowedStatuses: allowedSecondVerifierStatuses }),
@@ -399,6 +428,61 @@ function createPackageFiles({ packageData, assignment, candidates, sample, dupli
     markdownFile("README.md", formatPackageReadme(packageData))
   ];
   return files.map((file) => ({ ...file, relativePath: `${defaultExecutionPackageDirectory}/${file.fileName}` }));
+}
+
+function createFinalVerifierWorkQueue({ candidates, productionQueueRecords, sample, duplicateRows, frameReextractions, minimumRecaptureTasks }) {
+  const queueByID = new Map(productionQueueRecords.map((record) => [record.stableCandidateID, record]));
+  const sampleIDs = new Set(sample.rows.map((row) => row.candidateID));
+  const duplicateIDs = new Set(duplicateRows.map((row) => row.candidateID));
+  const framesByCategory = groupBy(frameReextractions, (row) => row.category);
+  const recapturesByCandidateID = new Map();
+  const requirementRecaptures = [];
+  for (const task of minimumRecaptureTasks) {
+    if ((task.affectedCandidateIDs ?? []).length === 0) requirementRecaptures.push(task);
+    for (const candidateID of task.affectedCandidateIDs ?? []) {
+      recapturesByCandidateID.set(candidateID, [...(recapturesByCandidateID.get(candidateID) ?? []), task]);
+    }
+  }
+
+  return candidates.map((candidate) => {
+    const queueRecord = queueByID.get(candidate.candidateID) ?? {};
+    const candidateRecaptures = recapturesByCandidateID.get(candidate.candidateID) ?? [];
+    const categoryFrames = framesByCategory.get(candidate.category) ?? [];
+    const duplicate = duplicateIDs.has(candidate.candidateID);
+    const orderUnresolved = candidate.primaryReviewStatus === "ORDER_UNRESOLVED" || (queueRecord.blockingReasons ?? []).includes("ORDER_UNRESOLVED");
+    const workstream = candidateRecaptures.length
+      ? "REQUIRES_WYATT_CLIP"
+      : duplicate
+      ? "REQUIRES_DISCREPANCY_RESOLUTION"
+      : orderUnresolved
+      ? "REQUIRES_INDEPENDENT_CONSOLE_RECOUNT"
+      : "CAN_REVIEW_IMMEDIATELY_FROM_EXISTING_MEDIA";
+    return {
+      package_id: CF27_SECOND_VERIFIER_EXECUTION_PACKAGE_ID,
+      candidate_id: candidate.candidateID,
+      category: candidate.category,
+      native_label_index_order: candidate.nativeVisibleLabelOrIndex,
+      native_order: nullToBlank(candidate.nativeOrder),
+      source_video_id: candidate.sourceVideoID,
+      source_timestamp_range: candidate.sourceTimestampRange,
+      evidence_ids: candidate.evidenceIDs.join(";"),
+      frame_reextraction_ids: categoryFrames.map((row) => row.evidenceID).join(";"),
+      evidence_file_existence_check_required: "yes",
+      front_view_confirmation_required: "yes",
+      native_order_confirmation_required: candidate.nativeOrder !== null ? "yes" : "notApplicable",
+      duplicate_or_exception_review_required: duplicate ? "yes" : "no",
+      secondary_angle_sample_required: sampleIDs.has(candidate.candidateID) ? "yes" : "no",
+      environment_version_metadata_required: "yes",
+      independent_observation_required: "yes",
+      allowed_statuses: allowedSecondVerifierStatuses.join(";"),
+      required_notes: duplicate || orderUnresolved || candidateRecaptures.length ? "yes" : "for non-clean decisions",
+      verifier_workstream: workstream,
+      requires_wyatt_clip_ids: candidateRecaptures.map((task) => task.recaptureID).join(";"),
+      global_requirement_recaptures_blocking_production: requirementRecaptures.map((task) => task.recaptureID).join(";"),
+      production_eligibility_state: "NOT_ELIGIBLE",
+      production_blocking_reason: "Second-person verification has not occurred; environment/version metadata, recapture tasks, duplicate/order review, catalog-manager disposition, and immutable production release remain required."
+    };
+  });
 }
 
 function createRequiredImportTargets({ countRows, menuRows, candidates, sample, duplicateRows }) {
@@ -583,7 +667,9 @@ function createPackageContents() {
     "native_order_worksheet.csv/json",
     "record_level_comparison_worksheet.csv/json",
     "front_view_checks.csv/json",
+    "frame_reextraction_reference.csv/json",
     "secondary_angle_sample.csv/json",
+    "final_verifier_work_queue.csv/json",
     "duplicate_exception_review.csv/json",
     "discrepancy_form.csv/json",
     "sign_off_form.csv/json",
@@ -703,6 +789,65 @@ The import tool validates identity, environment metadata, count completion, allo
 `;
 }
 
+export function formatStatusSecondVerifierExecutionGuide(packageData) {
+  return `# CF27 Second-Verifier Execution Guide
+
+**Status:** handoff guide for a real independent verifier
+**Package:** \`${packageData.packageID}\`
+**Generated at:** ${packageData.generatedAt}
+**Production data:** no
+**Verification completed:** no
+
+This guide summarizes the executable verifier packet in \`${defaultExecutionPackageDirectory}\`. It must not be used to claim production approval.
+
+## Required Order
+
+1. Record verifier identity and environment metadata in \`environment_worksheet.csv\`.
+2. Complete blind independent counts in \`independent_counts_worksheet.csv\`.
+3. Complete menu-map and native-order worksheets before opening record-level comparisons.
+4. Review all candidate records in \`final_verifier_work_queue.csv\`.
+5. Confirm front-view evidence in \`front_view_checks.csv\`, including recovered frames listed in \`frame_reextraction_reference.csv\`.
+6. Complete the deterministic 25% secondary-angle sample in \`secondary_angle_sample.csv\`.
+7. Complete duplicate/exception review for flagged records.
+8. Log every disagreement in \`discrepancy_form.csv\`.
+9. Complete \`sign_off_form.csv\` and submit through the verifier intake workflow.
+
+## Deterministic Secondary-Angle Sampling
+
+Method: \`${packageData.samplingMethod.methodID}\`
+
+Seed input: \`${packageData.samplingMethod.seedInput}\`
+
+The generator hashes environment ID, verifier ID, catalog version, category, and candidate ID with SHA-256, sorts candidates inside each category, and selects the first 25% using ceiling rounding. Selected records: ${packageData.samplingMethod.selectedCandidateCount}.
+
+## Workstream Split
+
+- Can review from existing media: rows in \`final_verifier_work_queue.csv\` marked \`CAN_REVIEW_IMMEDIATELY_FROM_EXISTING_MEDIA\`.
+- Requires independent console recount: rows marked \`REQUIRES_INDEPENDENT_CONSOLE_RECOUNT\`.
+- Requires Wyatt clip: rows marked \`REQUIRES_WYATT_CLIP\`; use \`docs/status/CF27_OWNER_MINIMUM_RECORDING_GUIDE.md\`.
+- Requires discrepancy/duplicate resolution: rows marked \`REQUIRES_DISCREPANCY_RESOLUTION\`.
+- Cannot become production eligible yet: every row until real second verification, discrepancy resolution, catalog-manager disposition, and immutable release pass.
+
+## Allowed Final Statuses
+
+${allowedSecondVerifierStatuses.map((status) => `- \`${status}\``).join("\n")}
+
+## Frame Re-Extractions
+
+Recovered frame count: ${packageData.frameReextractions.total}
+
+These frames are supplemental evidence for the verifier. They do not change primary observations, second-verification status, or production eligibility.
+
+## Non-Negotiable Limits
+
+- Do not use the primary researcher as the second verifier.
+- Do not mark a row verified from memory.
+- Do not average disagreements.
+- Do not promote records to production.
+- Do not use fixtures, placeholders, or synthetic rows.
+`;
+}
+
 function jsonFile(fileName, value) {
   return { fileName, content: `${JSON.stringify(value, null, 2)}\n` };
 }
@@ -731,6 +876,11 @@ function writeText(root, relativePath, content) {
 }
 
 function readJSON(absolutePath) {
+  return JSON.parse(fs.readFileSync(absolutePath, "utf8"));
+}
+
+function readOptionalJSON(absolutePath) {
+  if (!fs.existsSync(absolutePath)) return null;
   return JSON.parse(fs.readFileSync(absolutePath, "utf8"));
 }
 
@@ -803,6 +953,13 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       : "";
     if (currentGuide !== formatSecondVerifierExecutionGuide(existing.packageData)) {
       console.error(`${defaultExecutionGuidePath} is stale. Run npm run cf27:second-verifier-execution-package.`);
+      process.exit(1);
+    }
+    const currentStatusGuide = fs.existsSync(path.resolve(repositoryRoot, defaultStatusExecutionGuidePath))
+      ? fs.readFileSync(path.resolve(repositoryRoot, defaultStatusExecutionGuidePath), "utf8")
+      : "";
+    if (currentStatusGuide !== formatStatusSecondVerifierExecutionGuide(existing.packageData)) {
+      console.error(`${defaultStatusExecutionGuidePath} is stale. Run npm run cf27:second-verifier-execution-package.`);
       process.exit(1);
     }
     console.log("Second-verifier execution package check passed.");

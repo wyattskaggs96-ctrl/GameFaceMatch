@@ -12,7 +12,7 @@ This package is a local research-evidence integrity checkpoint. It does not appr
 - Release-candidate status: PASS_RESEARCH_PACKAGE_RC_PATH_RESOLUTION
 - Source masters in inventory: 14
 - Unique source masters in canonical evidence manifest: 12
-- Derivative evidence entries: 106
+- Derivative evidence entries: 113
 - Exact duplicate source files documented: 2
 - Catalog rows checked: 146
 - Catalog rows with invalid evidence: 0
@@ -30,8 +30,8 @@ This package is a local research-evidence integrity checkpoint. It does not appr
 ## Integrity Checks
 
 - PASSED sourceMastersPreservedAndHashed: 14 source inventory master(s) checked; 12 unique master reference(s) in canonical evidence manifest.
-- PASSED derivativesHaveMasterTimestampAndMetadata: 106 derivative evidence entry/entries checked for master linkage, source timestamp, checksum, file size, and MIME type.
-- PASSED completePathResolution: 120 path reference(s) checked; 0 missing file(s), 0 unsafe path(s), 0 absolute-only evidence entry/entries.
+- PASSED derivativesHaveMasterTimestampAndMetadata: 113 derivative evidence entry/entries checked for master linkage, source timestamp, checksum, file size, and MIME type.
+- PASSED completePathResolution: 127 path reference(s) checked; 0 missing file(s), 0 unsafe path(s), 0 absolute-only evidence entry/entries.
 - PASSED duplicateEvidenceDocumented: 2 exact duplicate group(s) documented in video inventory.
 - PASSED catalogRowsPointToValidEvidence: 146 catalog row(s) checked across canonical research catalogs; 0 invalid evidence linkage row(s).
 - PASSED captureLogChronologicalAndEvidenceLinked: 127 capture event(s) checked; 0 out of chronological order, 0 missing generated evidence reference(s).

@@ -14,7 +14,7 @@
   "blockedPackageLocation": "data/phase-zero/verification-candidates/CF27_XBOX_RTG_RESEARCH_CANDIDATE_v1.0.0",
   "summary": {
     "candidateRecords": 89,
-    "evidenceEntries": 118,
+    "evidenceEntries": 125,
     "sourceVideos": 14,
     "primaryApproved": 0,
     "primaryApprovedWithNotes": 84,
@@ -539,7 +539,7 @@
       "name": "evidenceIntegrity",
       "status": "BLOCKED",
       "details": {
-        "entries": 118,
+        "entries": 125,
         "missingHashes": [],
         "absoluteOnly": [],
         "candidateMissingEvidence": [

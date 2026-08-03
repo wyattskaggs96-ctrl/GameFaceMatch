@@ -32,6 +32,8 @@
     "cf27:production-verification-queue:check": "node scripts/cf27-production-verification-queue.mjs --check",
     "cf27:evidence-recapture-package": "node scripts/cf27-evidence-recapture-package.mjs",
     "cf27:evidence-recapture-package:check": "node scripts/cf27-evidence-recapture-package.mjs --check",
+    "cf27:frame-reextractions": "node scripts/cf27-frame-reextractions.mjs",
+    "cf27:frame-reextractions:check": "node scripts/cf27-frame-reextractions.mjs --check",
     "cf27:existing-media-gap-audit": "node scripts/cf27-existing-media-verification-gap-audit.mjs",
     "cf27:existing-media-gap-audit:check": "node scripts/cf27-existing-media-verification-gap-audit.mjs --check",
     "cf27:primary-review": "node scripts/cf27-primary-review-status.mjs",

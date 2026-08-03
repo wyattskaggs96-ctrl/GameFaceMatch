@@ -38,9 +38,9 @@
     "environmentVersionIssueRecords": 92,
     "dependencyIssueRecords": 0,
     "unexpectedViewLabelRecords": 0,
-    "evidenceManifestEntries": 118,
-    "evidenceFilesResolvingLocally": 106,
-    "duplicateHashGroups": 0,
+    "evidenceManifestEntries": 125,
+    "evidenceFilesResolvingLocally": 113,
+    "duplicateHashGroups": 7,
     "recaptureTaskCount": 104,
     "discrepancyRows": 166,
     "secondVerifiedRecords": 0,
@@ -49,13 +49,13 @@
     "productionRecommendationsEnabled": false
   },
   "evidenceManifestSummary": {
-    "entries": 118,
-    "locallyResolvableEvidenceFiles": 106,
+    "entries": 125,
+    "locallyResolvableEvidenceFiles": 113,
     "portableExternalReferences": 12,
     "missingEvidenceFiles": 0,
     "unsafeEvidencePaths": 0,
     "invalidSha256Entries": 0,
-    "duplicateHashGroups": 0
+    "duplicateHashGroups": 7
   },
   "videoInventorySummary": {
     "rows": 14,
@@ -12085,6 +12085,153 @@
       "notes": "Full-resolution August 2026 source-recording derivative; original aspect ratio preserved and menu labels retained."
     },
     {
+      "evidenceID": "phase0-frame-reextract-req-views-eye-color-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_eye_color_Eye_color_FRONT_13s.png",
+      "masterOrDerivative": "derivative",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "b99e80a249cc920e5e89e87d14361562d2924012e41728f027c14b819326ea2e",
+      "sha256Status": "VALID_SHA256",
+      "localHash": "b99e80a249cc920e5e89e87d14361562d2924012e41728f027c14b819326ea2e",
+      "localHashMatchesManifest": true,
+      "pathResolutionStatus": "RESOLVES",
+      "fileExistsLocally": true,
+      "view": "FRONT",
+      "unexpectedViewLabel": false,
+      "sourceVideoID": "phase0-video-007",
+      "sourceVideoTraceable": true,
+      "timestamp": 13,
+      "timestampPresent": true,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideoFilename": "07_Eye_Color.mp4",
+      "notes": "Front-view recovery frame extracted from the source master to resolve the Prompt 094 frame-reextraction-only gap. It does not promote the candidate or replace second-human verification."
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-eye-shape-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_eye_shape_Eye_shape_FRONT_14s.png",
+      "masterOrDerivative": "derivative",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "04d62fca726a41aed7e0092a8cc19dd4b53982312b6f51660418250968232d45",
+      "sha256Status": "VALID_SHA256",
+      "localHash": "04d62fca726a41aed7e0092a8cc19dd4b53982312b6f51660418250968232d45",
+      "localHashMatchesManifest": true,
+      "pathResolutionStatus": "RESOLVES",
+      "fileExistsLocally": true,
+      "view": "FRONT",
+      "unexpectedViewLabel": false,
+      "sourceVideoID": "phase0-video-006",
+      "sourceVideoTraceable": true,
+      "timestamp": 14,
+      "timestampPresent": true,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideoFilename": "06_Eye_Shape.mp4",
+      "notes": "Front-view recovery frame extracted from the source master to resolve the Prompt 094 frame-reextraction-only gap. It does not promote the candidate or replace second-human verification."
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-facial-hair-colors-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_facial_hair_colors_Facial_hair_colors_FRONT_225p5s.png",
+      "masterOrDerivative": "derivative",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "7970eadcd64b2fed2f31abd5948934eef23f6c5b8ed4f18c1476e7ebf935761f",
+      "sha256Status": "VALID_SHA256",
+      "localHash": "7970eadcd64b2fed2f31abd5948934eef23f6c5b8ed4f18c1476e7ebf935761f",
+      "localHashMatchesManifest": true,
+      "pathResolutionStatus": "RESOLVES",
+      "fileExistsLocally": true,
+      "view": "FRONT",
+      "unexpectedViewLabel": false,
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceVideoTraceable": true,
+      "timestamp": 225.5,
+      "timestampPresent": true,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideoFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "notes": "Front-view recovery frame extracted from the source master to resolve the Prompt 094 frame-reextraction-only gap. It does not promote the candidate or replace second-human verification."
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-hair-colors-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_hair_colors_Hair_colors_FRONT_100p5s.png",
+      "masterOrDerivative": "derivative",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "56944bc2f21fe8896abaf058dd39d7237544de19ac61cb480bfa89ec791c6987",
+      "sha256Status": "VALID_SHA256",
+      "localHash": "56944bc2f21fe8896abaf058dd39d7237544de19ac61cb480bfa89ec791c6987",
+      "localHashMatchesManifest": true,
+      "pathResolutionStatus": "RESOLVES",
+      "fileExistsLocally": true,
+      "view": "FRONT",
+      "unexpectedViewLabel": false,
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_002",
+      "sourceVideoTraceable": true,
+      "timestamp": 100.5,
+      "timestampPresent": true,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideoFilename": "EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "notes": "Front-view recovery frame extracted from the source master to resolve the Prompt 094 frame-reextraction-only gap. It does not promote the candidate or replace second-human verification."
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-mouth-shape-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_mouth_shape_Mouth_shape_FRONT_215p5s.png",
+      "masterOrDerivative": "derivative",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "790729aca3f91ad31a6737e3c911d125ceac45fdc207cb0993cda90587a2ddcd",
+      "sha256Status": "VALID_SHA256",
+      "localHash": "790729aca3f91ad31a6737e3c911d125ceac45fdc207cb0993cda90587a2ddcd",
+      "localHashMatchesManifest": true,
+      "pathResolutionStatus": "RESOLVES",
+      "fileExistsLocally": true,
+      "view": "FRONT",
+      "unexpectedViewLabel": false,
+      "sourceVideoID": "CF27_XBOX_SOURCE_2026_08_02_001",
+      "sourceVideoTraceable": true,
+      "timestamp": 215.5,
+      "timestampPresent": true,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideoFilename": "EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "notes": "Front-view recovery frame extracted from the source master to resolve the Prompt 094 frame-reextraction-only gap. It does not promote the candidate or replace second-human verification."
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-skin-details-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_skin_details_Skin_details_FRONT_8s.png",
+      "masterOrDerivative": "derivative",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "7c15b44b022de8209eb8de659a64ceba3bb14efdaf9502cdecceb98c19f86278",
+      "sha256Status": "VALID_SHA256",
+      "localHash": "7c15b44b022de8209eb8de659a64ceba3bb14efdaf9502cdecceb98c19f86278",
+      "localHashMatchesManifest": true,
+      "pathResolutionStatus": "RESOLVES",
+      "fileExistsLocally": true,
+      "view": "FRONT",
+      "unexpectedViewLabel": false,
+      "sourceVideoID": "phase0-video-005",
+      "sourceVideoTraceable": true,
+      "timestamp": 8,
+      "timestampPresent": true,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideoFilename": "05_Skin_Details.mp4",
+      "notes": "Front-view recovery frame extracted from the source master to resolve the Prompt 094 frame-reextraction-only gap. It does not promote the candidate or replace second-human verification."
+    },
+    {
+      "evidenceID": "phase0-frame-reextract-req-views-skin-tone-front",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_skin_tone_Skin_tone_FRONT_45p5s.png",
+      "masterOrDerivative": "derivative",
+      "fileRole": "phase_zero_frame_reextraction_front_view",
+      "sha256": "d0c74f973e3797777b9e937cf7811cd5022323f73b6bce6e5d0f7b15f182b2d6",
+      "sha256Status": "VALID_SHA256",
+      "localHash": "d0c74f973e3797777b9e937cf7811cd5022323f73b6bce6e5d0f7b15f182b2d6",
+      "localHashMatchesManifest": true,
+      "pathResolutionStatus": "RESOLVES",
+      "fileExistsLocally": true,
+      "view": "FRONT",
+      "unexpectedViewLabel": false,
+      "sourceVideoID": "phase0-video-004",
+      "sourceVideoTraceable": true,
+      "timestamp": 45.5,
+      "timestampPresent": true,
+      "verificationState": "OBSERVED_PENDING_VERIFICATION",
+      "sourceVideoFilename": "04_Skin_Tone.mp4",
+      "notes": "Front-view recovery frame extracted from the source master to resolve the Prompt 094 frame-reextraction-only gap. It does not promote the candidate or replace second-human verification."
+    },
+    {
       "evidenceID": "phase0-frame-video-001-tl-011",
       "relativePath": "data/phase-zero/derivative-frames/video-001-tl-011_01-environment-and-creation-path-mp4_68p5s.png",
       "masterOrDerivative": "derivative",
@@ -14164,7 +14311,64 @@
       "notes": "Portable reference to source master. Original file is preserved unchanged outside production catalog data."
     }
   ],
-  "duplicateHashes": [],
+  "duplicateHashes": [
+    {
+      "sha256": "04d62fca726a41aed7e0092a8cc19dd4b53982312b6f51660418250968232d45",
+      "evidenceIDs": [
+        "phase0-frame-reextract-req-views-eye-shape-front",
+        "phase0-frame-video-006-tl-002"
+      ],
+      "count": 2
+    },
+    {
+      "sha256": "56944bc2f21fe8896abaf058dd39d7237544de19ac61cb480bfa89ec791c6987",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-003",
+        "phase0-frame-reextract-req-views-hair-colors-front"
+      ],
+      "count": 2
+    },
+    {
+      "sha256": "790729aca3f91ad31a6737e3c911d125ceac45fdc207cb0993cda90587a2ddcd",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_001-tl-009",
+        "phase0-frame-reextract-req-views-mouth-shape-front"
+      ],
+      "count": 2
+    },
+    {
+      "sha256": "7970eadcd64b2fed2f31abd5948934eef23f6c5b8ed4f18c1476e7ebf935761f",
+      "evidenceIDs": [
+        "phase0-frame-CF27_XBOX_SOURCE_2026_08_02_002-tl-005",
+        "phase0-frame-reextract-req-views-facial-hair-colors-front"
+      ],
+      "count": 2
+    },
+    {
+      "sha256": "7c15b44b022de8209eb8de659a64ceba3bb14efdaf9502cdecceb98c19f86278",
+      "evidenceIDs": [
+        "phase0-frame-reextract-req-views-skin-details-front",
+        "phase0-frame-video-005-tl-002"
+      ],
+      "count": 2
+    },
+    {
+      "sha256": "b99e80a249cc920e5e89e87d14361562d2924012e41728f027c14b819326ea2e",
+      "evidenceIDs": [
+        "phase0-frame-reextract-req-views-eye-color-front",
+        "phase0-frame-video-007-tl-003"
+      ],
+      "count": 2
+    },
+    {
+      "sha256": "d0c74f973e3797777b9e937cf7811cd5022323f73b6bce6e5d0f7b15f182b2d6",
+      "evidenceIDs": [
+        "phase0-frame-reextract-req-views-skin-tone-front",
+        "phase0-frame-video-004-tl-019"
+      ],
+      "count": 2
+    }
+  ],
   "validation": {
     "schemaVersion": "cf27-evidence-recapture-package-v1-validation",
     "ok": true,

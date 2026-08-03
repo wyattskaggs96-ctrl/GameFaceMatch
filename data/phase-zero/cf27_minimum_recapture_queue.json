@@ -16,7 +16,8 @@
     "countOrderAudit": "data/phase-zero/catalog_count_order_audit.research.json",
     "recapturePackage": "data/phase-zero/evidence-recapture-package/evidence_quality_report.json",
     "priorRecaptureQueue": "data/phase-zero/evidence-recapture-package/recapture_queue.json",
-    "issuesRegister": "data/phase-zero/issues_register.research.json"
+    "issuesRegister": "data/phase-zero/issues_register.research.json",
+    "frameReextractions": "data/phase-zero/cf27_frame_reextractions.json"
   },
   "policy": {
     "existingFootageExhaustedFirst": true,
@@ -26,10 +27,11 @@
     "recaptureQueueContainsOnlyGenuineRecaptureRequired": true
   },
   "summary": {
-    "totalRecaptures": 19,
+    "totalRecaptures": 21,
     "affectedCandidates": 41,
     "groups": {
-      "Additional attributes": 10,
+      "Additional attributes": 11,
+      "Dependency tests": 1,
       "Facial hair": 2,
       "Hairstyles": 4,
       "Environment evidence": 1,
@@ -39,6 +41,29 @@
   "tasks": [
     {
       "recaptureID": "CF27-MIN-RECAP-001",
+      "sourceAuditRowID": "requirement-REQ-EYEBROWS",
+      "group": "Additional attributes",
+      "priority": "P1",
+      "candidateOrRequirementID": "REQ-EYEBROWS",
+      "affectedCandidateIDs": [],
+      "exactMenuPath": "Create Player > Player > Appearance > Head & Skin > Additional visible face-matching controls",
+      "exactCategory": "Additional visible face-matching controls",
+      "exactOptionOrRange": "REQ-EYEBROWS",
+      "exactStartingState": "Start from the supported Road to Glory Custom Create Player path with the current canonical research slate.",
+      "exactCanonicalSettings": "Lock the canonical face slate: same head/skin/hair/facial-hair/body setup, no setting changes except the selected control, stable lighting and zoom.",
+      "exactViewsRequired": "MENU",
+      "exactHoldDuration": "Hold at least 3 seconds on every readable menu state and selected value.",
+      "exactLabelIndexMustBeVisible": "Native menu label, selected value, and native index/order must remain readable.",
+      "proposedFilename": "GFM-CF27-MIN-ADDITIONAL-VISIBLE-FACE-MATCHING-CONTROLS-REQ-EYEBROWS-YYYYMMDD-partNN.mp4",
+      "oneContinuousClipAcceptable": "yes, if every listed evidence item remains readable and no unrelated setting is changed",
+      "mustShowFirstAndFinalSelectorValues": "yes",
+      "supplementsOrSupersedesExistingEvidence": "No existing source video contains the missing production requirement.",
+      "exactBlockerCleared": "Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.",
+      "classification": "GENUINE_RECAPTURE_REQUIRED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "recaptureID": "CF27-MIN-RECAP-002",
       "sourceAuditRowID": "requirement-REQ-VIEWS-chin",
       "group": "Additional attributes",
       "priority": "P1",
@@ -63,7 +88,30 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-002",
+      "recaptureID": "CF27-MIN-RECAP-003",
+      "sourceAuditRowID": "requirement-REQ-DEPENDENCY-TESTS",
+      "group": "Dependency tests",
+      "priority": "P1",
+      "candidateOrRequirementID": "REQ-DEPENDENCY-TESTS",
+      "affectedCandidateIDs": [],
+      "exactMenuPath": "Create Player > Player > Appearance > Dependency tests",
+      "exactCategory": "Dependency tests",
+      "exactOptionOrRange": "REQ-DEPENDENCY-TESTS",
+      "exactStartingState": "Start from the supported Road to Glory Custom Create Player path with the current canonical research slate.",
+      "exactCanonicalSettings": "Keep Road to Glory Custom Create Player environment and unrelated appearance settings unchanged.",
+      "exactViewsRequired": "DEPENDENCY_TEST",
+      "exactHoldDuration": "Hold 3 seconds on the menu label/index and 3 seconds after each requested angle settles.",
+      "exactLabelIndexMustBeVisible": "Native menu label, selected value, and native index/order must remain readable.",
+      "proposedFilename": "GFM-CF27-MIN-DEPENDENCY-TESTS-REQ-DEPENDENCY-TESTS-YYYYMMDD-partNN.mp4",
+      "oneContinuousClipAcceptable": "yes, if every listed evidence item remains readable and no unrelated setting is changed",
+      "mustShowFirstAndFinalSelectorValues": "no",
+      "supplementsOrSupersedesExistingEvidence": "No existing source video contains the missing production requirement.",
+      "exactBlockerCleared": "Existing footage was inspected and cannot satisfy this production requirement; frame extraction and verifier review cannot create the missing fact/view/boundary.",
+      "classification": "GENUINE_RECAPTURE_REQUIRED",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "recaptureID": "CF27-MIN-RECAP-004",
       "sourceAuditRowID": "requirement-REQ-ORDER-ear-shape",
       "group": "Additional attributes",
       "priority": "P1",
@@ -86,7 +134,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-003",
+      "recaptureID": "CF27-MIN-RECAP-005",
       "sourceAuditRowID": "requirement-REQ-VIEWS-ear-shape",
       "group": "Additional attributes",
       "priority": "P1",
@@ -114,7 +162,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-004",
+      "recaptureID": "CF27-MIN-RECAP-006",
       "sourceAuditRowID": "requirement-REQ-ORDER-eye-color",
       "group": "Additional attributes",
       "priority": "P1",
@@ -137,7 +185,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-005",
+      "recaptureID": "CF27-MIN-RECAP-007",
       "sourceAuditRowID": "requirement-REQ-ORDER-eye-shape",
       "group": "Additional attributes",
       "priority": "P1",
@@ -160,7 +208,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-006",
+      "recaptureID": "CF27-MIN-RECAP-008",
       "sourceAuditRowID": "requirement-REQ-ORDER-facial-hair",
       "group": "Facial hair",
       "priority": "P1",
@@ -183,7 +231,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-007",
+      "recaptureID": "CF27-MIN-RECAP-009",
       "sourceAuditRowID": "requirement-REQ-VIEWS-facial-hair",
       "group": "Facial hair",
       "priority": "P1",
@@ -208,7 +256,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-008",
+      "recaptureID": "CF27-MIN-RECAP-010",
       "sourceAuditRowID": "requirement-REQ-ORDER-facial-hair-color",
       "group": "Hairstyles",
       "priority": "P1",
@@ -231,7 +279,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-009",
+      "recaptureID": "CF27-MIN-RECAP-011",
       "sourceAuditRowID": "requirement-REQ-VERSION-PATCH-PLATFORM",
       "group": "Environment evidence",
       "priority": "P0",
@@ -254,7 +302,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-010",
+      "recaptureID": "CF27-MIN-RECAP-012",
       "sourceAuditRowID": "requirement-REQ-ORDER-hair-color",
       "group": "Hairstyles",
       "priority": "P1",
@@ -277,7 +325,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-011",
+      "recaptureID": "CF27-MIN-RECAP-013",
       "sourceAuditRowID": "requirement-REQ-ORDER-hairstyles",
       "group": "Hairstyles",
       "priority": "P1",
@@ -300,7 +348,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-012",
+      "recaptureID": "CF27-MIN-RECAP-014",
       "sourceAuditRowID": "requirement-REQ-VIEWS-hairstyles",
       "group": "Hairstyles",
       "priority": "P1",
@@ -325,7 +373,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-013",
+      "recaptureID": "CF27-MIN-RECAP-015",
       "sourceAuditRowID": "requirement-REQ-ORDER-head-template",
       "group": "Head records",
       "priority": "P1",
@@ -348,7 +396,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-014",
+      "recaptureID": "CF27-MIN-RECAP-016",
       "sourceAuditRowID": "requirement-REQ-VIEWS-heads",
       "group": "Head records",
       "priority": "P1",
@@ -398,7 +446,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-015",
+      "recaptureID": "CF27-MIN-RECAP-017",
       "sourceAuditRowID": "requirement-REQ-VIEWS-jaw-shape",
       "group": "Additional attributes",
       "priority": "P1",
@@ -423,7 +471,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-016",
+      "recaptureID": "CF27-MIN-RECAP-018",
       "sourceAuditRowID": "requirement-REQ-ORDER-nose",
       "group": "Additional attributes",
       "priority": "P1",
@@ -446,7 +494,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-017",
+      "recaptureID": "CF27-MIN-RECAP-019",
       "sourceAuditRowID": "requirement-REQ-VIEWS-nose",
       "group": "Additional attributes",
       "priority": "P1",
@@ -477,7 +525,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-018",
+      "recaptureID": "CF27-MIN-RECAP-020",
       "sourceAuditRowID": "requirement-REQ-ORDER-skin-details",
       "group": "Additional attributes",
       "priority": "P1",
@@ -500,7 +548,7 @@
       "productionStatus": "NOT_PRODUCTION_DATA"
     },
     {
-      "recaptureID": "CF27-MIN-RECAP-019",
+      "recaptureID": "CF27-MIN-RECAP-021",
       "sourceAuditRowID": "requirement-REQ-ORDER-skin-tone",
       "group": "Additional attributes",
       "priority": "P1",

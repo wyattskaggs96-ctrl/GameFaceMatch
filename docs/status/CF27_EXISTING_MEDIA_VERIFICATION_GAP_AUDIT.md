@@ -56,17 +56,18 @@ Existing CF27 footage is stronger than a blanket recapture label suggests. All 9
 
 ## 6. Facts Requiring Only Better Frame Extraction
 
-- REQ-VIEWS-eye-color (Eye color): Missing required production view(s): FRONT. Next: Extract a full-resolution frame from existing source video where the Eye Color selected value and front character preview are both visible.
-- REQ-VIEWS-eye-shape (Eye shape): Missing required production view(s): FRONT. Next: Extract a full-resolution frame from existing source video where the Eye Shape selected value and front character preview are both visible.
-- REQ-VIEWS-facial-hair-colors (Facial-hair colors): Missing required production view(s): FRONT. Next: Extract a full-resolution frame from existing source video where the Facial-hair colors selected value and front character preview are both visible.
-- REQ-VIEWS-hair-colors (Hair colors): Missing required production view(s): FRONT. Next: Extract a full-resolution frame from existing source video where the Hair colors selected value and front character preview are both visible.
-- REQ-VIEWS-mouth-shape (Mouth shape): Missing required production view(s): FRONT. Next: Extract a full-resolution frame from existing source video where the Mouth Shape selected value and front character preview are both visible.
-- REQ-VIEWS-skin-details (Skin details): Missing required production view(s): FRONT. Next: Extract a full-resolution frame from existing source video where the Skin Details selected value and front character preview are both visible.
-- REQ-VIEWS-skin-tone (Skin tone): Missing required production view(s): FRONT. Next: Extract a full-resolution frame from existing source video where the Skin Tone selected value and front character preview are both visible.
+- None.
 
 ## 7. Facts Ready For Second-Verifier Confirmation
 
+- REQ-VIEWS-eye-color (Eye color): Per-candidate standardized production imagery is still not proven; this frame recovery only removes the need for a new Xbox recording solely for the category-level front-view audit gap. Next: Second verifier should inspect recovered front frame phase0-frame-reextract-req-views-eye-color-front; do not request a new recording solely for this front-view audit gap.
+- REQ-VIEWS-eye-shape (Eye shape): Per-candidate standardized production imagery is still not proven; this frame recovery only removes the need for a new Xbox recording solely for the category-level front-view audit gap. Next: Second verifier should inspect recovered front frame phase0-frame-reextract-req-views-eye-shape-front; do not request a new recording solely for this front-view audit gap.
+- REQ-VIEWS-facial-hair-colors (Facial-hair colors): Per-candidate standardized production imagery is still not proven; this frame recovery only removes the need for a new Xbox recording solely for the category-level front-view audit gap. Next: Second verifier should inspect recovered front frame phase0-frame-reextract-req-views-facial-hair-colors-front; do not request a new recording solely for this front-view audit gap.
+- REQ-VIEWS-hair-colors (Hair colors): Per-candidate standardized production imagery is still not proven; this frame recovery only removes the need for a new Xbox recording solely for the category-level front-view audit gap. Next: Second verifier should inspect recovered front frame phase0-frame-reextract-req-views-hair-colors-front; do not request a new recording solely for this front-view audit gap.
+- REQ-VIEWS-mouth-shape (Mouth shape): Per-candidate standardized production imagery is still not proven; this frame recovery only removes the need for a new Xbox recording solely for the category-level front-view audit gap. Next: Second verifier should inspect recovered front frame phase0-frame-reextract-req-views-mouth-shape-front; do not request a new recording solely for this front-view audit gap.
 - REQ-CREATION-PATH (Road to Glory creation path): The older source master is a portable OWNER_DOWNLOADS reference rather than a local master in this checkout. Next: Second verifier should inspect existing path evidence; owner should re-supply the original master if available before asking for a new recording.
+- REQ-VIEWS-skin-details (Skin details): Per-candidate standardized production imagery is still not proven; this frame recovery only removes the need for a new Xbox recording solely for the category-level front-view audit gap. Next: Second verifier should inspect recovered front frame phase0-frame-reextract-req-views-skin-details-front; do not request a new recording solely for this front-view audit gap.
+- REQ-VIEWS-skin-tone (Skin tone): Per-candidate standardized production imagery is still not proven; this frame recovery only removes the need for a new Xbox recording solely for the category-level front-view audit gap. Next: Second verifier should inspect recovered front frame phase0-frame-reextract-req-views-skin-tone-front; do not request a new recording solely for this front-view audit gap.
 - CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_BLUE_CHIP (Body-related appearance controls): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
 - CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_CONTRIBUTOR (Body-related appearance controls): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
 - CF27_XBOXUNKNOWN_RTG_JOURNEYTYPE_ELITE (Body-related appearance controls): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
@@ -89,15 +90,8 @@ Existing CF27 footage is stronger than a blanket recapture label suggests. All 9
 - CF27_XBOXUNKNOWN_RTG_EYESHAPE_003 (Eye Shape): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
 - CF27_XBOXUNKNOWN_RTG_EYESHAPE_004 (Eye Shape): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
 - CF27_XBOXUNKNOWN_RTG_EYESHAPE_005 (Eye Shape): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
-- CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS (Facial hair): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
-- CF27_XBOXUNKNOWN_RTG_FACIALHAIRCOLOR_PURPLE (Facial-hair colors): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
-- CF27_XBOXUNKNOWN_RTG_HAIRCOLOR_LIGHT_BROWN (Hair colors): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
-- CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY (Hairstyles): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
-- CF27_XBOXUNKNOWN_RTG_HEAD_001 (Heads): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
-- CF27_XBOXUNKNOWN_RTG_HEAD_002 (Heads): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
-- CF27_XBOXUNKNOWN_RTG_HEAD_003 (Heads): Existing source timestamp and derivative evidence can be reviewed by a second human, but Codex cannot assign independent verification. Next: Send this candidate to the second-verifier workspace; preserve any duplicate/order flags for human review.
 
-- 63 additional candidate rows are listed in the machine-readable matrix.
+- 70 additional candidate rows are listed in the machine-readable matrix.
 
 ## 8. Unclear Facts
 
@@ -105,12 +99,13 @@ Existing CF27 footage is stronger than a blanket recapture label suggests. All 9
 
 ## 9. Entirely Missing Categories
 
-- REQ-EYEBROWS (Additional visible face-matching controls): Eyebrows, brow shape, or brow color controls. Next: Do not invent an eyebrow control. Confirm absence/presence only during a future full appearance-menu sweep.
-- REQ-DEPENDENCY-TESTS (Dependency tests): Controlled one-variable dependency tests for position, archetype, head, skin, hairstyle, facial hair, online/offline, patch, and platform. Next: Run dependency tests only after primary category capture is complete; do not mark unexecuted dependencies as passed.
+- None.
 
 ## 10. Genuine Recaptures Required
 
+- REQ-EYEBROWS (Additional visible face-matching controls): Eyebrows, brow shape, or brow color controls. Next: Record a targeted Head & Skin menu-row sweep that proves whether eyebrow/brow controls are present, absent, or represented under another visible category. Do not invent an eyebrow control from other games.
 - REQ-VIEWS-chin (Chin): Missing required production view(s): FRONT, LEFT_PROFILE, RIGHT_PROFILE. Next: Record targeted Chin views with canonical settings; do not rerecord unrelated categories.
+- REQ-DEPENDENCY-TESTS (Dependency tests): Controlled one-variable dependency tests for position, archetype, head, skin, hairstyle, facial hair, online/offline, patch, and platform. Next: After primary category capture is complete, record targeted one-variable dependency tests for the supported environment. Do not mark unexecuted dependencies as passed.
 - REQ-ORDER-ear-shape (Ear shape): Selector beginning/final boundary, two complete counts, wrap behavior, or native-order continuity is not production-proven: beginningBoundary: NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY; endingBoundary: NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY; twoCompleteCounts: Two complete independent counts are not available.; repeatedIndices: Repeated selected indices or labels: 2.; wrappingBehavior: NOT_DEMONSTRATED; countMatchesRecordTotal: No total count is claimed, so count cannot be matched to record total.; unprovenFinalOptionClaims: LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE Next: Record the shortest possible Ear Shape boundary/order clip: first value, every selected transition needed for the current gap, final value, and wrap/no-wrap proof.
 - REQ-VIEWS-ear-shape (Ear shape): Missing required production view(s): LEFT_PROFILE, RIGHT_PROFILE. Next: Record targeted Ear Shape views with canonical settings; do not rerecord unrelated categories.
 - REQ-ORDER-eye-color (Eye color): Selector beginning/final boundary, two complete counts, wrap behavior, or native-order continuity is not production-proven: beginningBoundary: NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY; endingBoundary: NOT_DEMONSTRATED_AS_SELECTOR_BOUNDARY; twoCompleteCounts: Two complete independent counts are not available.; wrappingBehavior: NOT_DEMONSTRATED; countMatchesRecordTotal: No total count is claimed, so count cannot be matched to record total.; unprovenFinalOptionClaims: LAST_OBSERVED_IN_CURRENT_FOOTAGE_NOT_PROVEN_FINAL_AVAILABLE Next: Record the shortest possible Eye Color boundary/order clip: first value, every selected transition needed for the current gap, final value, and wrap/no-wrap proof.
@@ -134,25 +129,27 @@ Existing CF27 footage is stronger than a blanket recapture label suggests. All 9
 
 | Recapture ID | Category | Option/range | Required views | Proposed filename |
 | --- | --- | --- | --- | --- |
-| CF27-MIN-RECAP-001 | Chin | CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE | FRONT; LEFT_PROFILE; RIGHT_PROFILE | GFM-CF27-MIN-CHIN-REQ-VIEWS-CHIN-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-002 | Ear shape | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-EAR-SHAPE-REQ-ORDER-EAR-SHAPE-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-003 | Ear shape | CF27_XBOXUNKNOWN_RTG_EARSHAPE_001; CF27_XBOXUNKNOWN_RTG_EARSHAPE_002; CF27_XBOXUNKNOWN_RTG_EARSHAPE_003; CF27_XBOXUNKNOWN_RTG_EARSHAPE_004 | LEFT_PROFILE; RIGHT_PROFILE | GFM-CF27-MIN-EAR-SHAPE-REQ-VIEWS-EAR-SHAPE-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-004 | Eye color | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-EYE-COLOR-REQ-ORDER-EYE-COLOR-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-005 | Eye shape | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-EYE-SHAPE-REQ-ORDER-EYE-SHAPE-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-006 | Facial hair | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-FACIAL-HAIR-REQ-ORDER-FACIAL-HAIR-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-007 | Facial hair | CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS | FRONT; LEFT_3Q; LEFT_PROFILE; RIGHT_3Q; RIGHT_PROFILE | GFM-CF27-MIN-FACIAL-HAIR-REQ-VIEWS-FACIAL-HAIR-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-008 | Facial-hair colors | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-FACIAL-HAIR-COLORS-REQ-ORDER-FACIAL-HAIR-COLOR-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-009 | Game title/version/update evidence | environment/version/patch/platform proof | ENVIRONMENT_SCREEN | GFM-CF27-MIN-GAME-TITLE-VERSION-UPDATE-EVIDENCE-REQ-VERSION-PATCH-PLATFORM-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-010 | Hair colors | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-HAIR-COLORS-REQ-ORDER-HAIR-COLOR-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-011 | Hairstyles | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-HAIRSTYLES-REQ-ORDER-HAIRSTYLES-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-012 | Hairstyles | CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY | FRONT; LEFT_3Q; LEFT_PROFILE; REAR; RIGHT_PROFILE; RIGHT_3Q | GFM-CF27-MIN-HAIRSTYLES-REQ-VIEWS-HAIRSTYLES-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-013 | Head templates | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-HEAD-TEMPLATES-REQ-ORDER-HEAD-TEMPLATE-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-014 | Head templates | CF27_XBOXUNKNOWN_RTG_HEAD_001; CF27_XBOXUNKNOWN_RTG_HEAD_002; CF27_XBOXUNKNOWN_RTG_HEAD_003; CF27_XBOXUNKNOWN_RTG_HEAD_004; CF27_XBOXUNKNOWN_RTG_HEAD_005; CF27_XBOXUNKNOWN_RTG_HEAD_006; CF27_XBOXUNKNOWN_RTG_HEAD_007; CF27_XBOXUNKNOWN_RTG_HEAD_008; CF27_XBOXUNKNOWN_RTG_HEAD_009; CF27_XBOXUNKNOWN_RTG_HEAD_010; CF27_XBOXUNKNOWN_RTG_HEAD_011; CF27_XBOXUNKNOWN_RTG_HEAD_012; CF27_XBOXUNKNOWN_RTG_HEAD_013; CF27_XBOXUNKNOWN_RTG_HEAD_014; CF27_XBOXUNKNOWN_RTG_HEAD_016; CF27_XBOXUNKNOWN_RTG_HEAD_017; CF27_XBOXUNKNOWN_RTG_HEAD_018; CF27_XBOXUNKNOWN_RTG_HEAD_021; CF27_XBOXUNKNOWN_RTG_HEAD_022; CF27_XBOXUNKNOWN_RTG_HEAD_023; CF27_XBOXUNKNOWN_RTG_HEAD_024; CF27_XBOXUNKNOWN_RTG_HEAD_027; CF27_XBOXUNKNOWN_RTG_HEAD_028; CF27_XBOXUNKNOWN_RTG_HEAD_029; CF27_XBOXUNKNOWN_RTG_HEAD_030; CF27_XBOXUNKNOWN_RTG_HEAD_031 | FRONT; LEFT_3Q; LEFT_PROFILE; RIGHT_3Q; RIGHT_PROFILE; REAR | GFM-CF27-MIN-HEAD-TEMPLATES-REQ-VIEWS-HEADS-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-015 | Jaw shape | CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE | FRONT; LEFT_PROFILE; RIGHT_PROFILE | GFM-CF27-MIN-JAW-SHAPE-REQ-VIEWS-JAW-SHAPE-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-016 | Nose | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-NOSE-REQ-ORDER-NOSE-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-017 | Nose | CF27_XBOXUNKNOWN_RTG_NOSE_001; CF27_XBOXUNKNOWN_RTG_NOSE_002; CF27_XBOXUNKNOWN_RTG_NOSE_003; CF27_XBOXUNKNOWN_RTG_NOSE_004; CF27_XBOXUNKNOWN_RTG_NOSE_005; CF27_XBOXUNKNOWN_RTG_NOSE_006; CF27_XBOXUNKNOWN_RTG_NOSE_007 | FRONT; LEFT_PROFILE; RIGHT_PROFILE | GFM-CF27-MIN-NOSE-REQ-VIEWS-NOSE-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-018 | Skin details | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-SKIN-DETAILS-REQ-ORDER-SKIN-DETAILS-YYYYMMDD-partNN.mp4 |
-| CF27-MIN-RECAP-019 | Skin tone | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-SKIN-TONE-REQ-ORDER-SKIN-TONE-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-001 | Additional visible face-matching controls | REQ-EYEBROWS | MENU | GFM-CF27-MIN-ADDITIONAL-VISIBLE-FACE-MATCHING-CONTROLS-REQ-EYEBROWS-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-002 | Chin | CF27_XBOXUNKNOWN_RTG_CHIN_SQUARE | FRONT; LEFT_PROFILE; RIGHT_PROFILE | GFM-CF27-MIN-CHIN-REQ-VIEWS-CHIN-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-003 | Dependency tests | REQ-DEPENDENCY-TESTS | DEPENDENCY_TEST | GFM-CF27-MIN-DEPENDENCY-TESTS-REQ-DEPENDENCY-TESTS-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-004 | Ear shape | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-EAR-SHAPE-REQ-ORDER-EAR-SHAPE-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-005 | Ear shape | CF27_XBOXUNKNOWN_RTG_EARSHAPE_001; CF27_XBOXUNKNOWN_RTG_EARSHAPE_002; CF27_XBOXUNKNOWN_RTG_EARSHAPE_003; CF27_XBOXUNKNOWN_RTG_EARSHAPE_004 | LEFT_PROFILE; RIGHT_PROFILE | GFM-CF27-MIN-EAR-SHAPE-REQ-VIEWS-EAR-SHAPE-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-006 | Eye color | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-EYE-COLOR-REQ-ORDER-EYE-COLOR-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-007 | Eye shape | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-EYE-SHAPE-REQ-ORDER-EYE-SHAPE-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-008 | Facial hair | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-FACIAL-HAIR-REQ-ORDER-FACIAL-HAIR-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-009 | Facial hair | CF27_XBOXUNKNOWN_RTG_FACIALHAIR_MUTTON_CHOPS | FRONT; LEFT_3Q; LEFT_PROFILE; RIGHT_3Q; RIGHT_PROFILE | GFM-CF27-MIN-FACIAL-HAIR-REQ-VIEWS-FACIAL-HAIR-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-010 | Facial-hair colors | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-FACIAL-HAIR-COLORS-REQ-ORDER-FACIAL-HAIR-COLOR-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-011 | Game title/version/update evidence | environment/version/patch/platform proof | ENVIRONMENT_SCREEN | GFM-CF27-MIN-GAME-TITLE-VERSION-UPDATE-EVIDENCE-REQ-VERSION-PATCH-PLATFORM-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-012 | Hair colors | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-HAIR-COLORS-REQ-ORDER-HAIR-COLOR-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-013 | Hairstyles | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-HAIRSTYLES-REQ-ORDER-HAIRSTYLES-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-014 | Hairstyles | CF27_XBOXUNKNOWN_RTG_HAIRSTYLE_SHORT_CURLY | FRONT; LEFT_3Q; LEFT_PROFILE; REAR; RIGHT_PROFILE; RIGHT_3Q | GFM-CF27-MIN-HAIRSTYLES-REQ-VIEWS-HAIRSTYLES-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-015 | Head templates | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-HEAD-TEMPLATES-REQ-ORDER-HEAD-TEMPLATE-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-016 | Head templates | CF27_XBOXUNKNOWN_RTG_HEAD_001; CF27_XBOXUNKNOWN_RTG_HEAD_002; CF27_XBOXUNKNOWN_RTG_HEAD_003; CF27_XBOXUNKNOWN_RTG_HEAD_004; CF27_XBOXUNKNOWN_RTG_HEAD_005; CF27_XBOXUNKNOWN_RTG_HEAD_006; CF27_XBOXUNKNOWN_RTG_HEAD_007; CF27_XBOXUNKNOWN_RTG_HEAD_008; CF27_XBOXUNKNOWN_RTG_HEAD_009; CF27_XBOXUNKNOWN_RTG_HEAD_010; CF27_XBOXUNKNOWN_RTG_HEAD_011; CF27_XBOXUNKNOWN_RTG_HEAD_012; CF27_XBOXUNKNOWN_RTG_HEAD_013; CF27_XBOXUNKNOWN_RTG_HEAD_014; CF27_XBOXUNKNOWN_RTG_HEAD_016; CF27_XBOXUNKNOWN_RTG_HEAD_017; CF27_XBOXUNKNOWN_RTG_HEAD_018; CF27_XBOXUNKNOWN_RTG_HEAD_021; CF27_XBOXUNKNOWN_RTG_HEAD_022; CF27_XBOXUNKNOWN_RTG_HEAD_023; CF27_XBOXUNKNOWN_RTG_HEAD_024; CF27_XBOXUNKNOWN_RTG_HEAD_027; CF27_XBOXUNKNOWN_RTG_HEAD_028; CF27_XBOXUNKNOWN_RTG_HEAD_029; CF27_XBOXUNKNOWN_RTG_HEAD_030; CF27_XBOXUNKNOWN_RTG_HEAD_031 | FRONT; LEFT_3Q; LEFT_PROFILE; RIGHT_3Q; RIGHT_PROFILE; REAR | GFM-CF27-MIN-HEAD-TEMPLATES-REQ-VIEWS-HEADS-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-017 | Jaw shape | CF27_XBOXUNKNOWN_RTG_JAWSHAPE_SQUARE | FRONT; LEFT_PROFILE; RIGHT_PROFILE | GFM-CF27-MIN-JAW-SHAPE-REQ-VIEWS-JAW-SHAPE-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-018 | Nose | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-NOSE-REQ-ORDER-NOSE-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-019 | Nose | CF27_XBOXUNKNOWN_RTG_NOSE_001; CF27_XBOXUNKNOWN_RTG_NOSE_002; CF27_XBOXUNKNOWN_RTG_NOSE_003; CF27_XBOXUNKNOWN_RTG_NOSE_004; CF27_XBOXUNKNOWN_RTG_NOSE_005; CF27_XBOXUNKNOWN_RTG_NOSE_006; CF27_XBOXUNKNOWN_RTG_NOSE_007 | FRONT; LEFT_PROFILE; RIGHT_PROFILE | GFM-CF27-MIN-NOSE-REQ-VIEWS-NOSE-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-020 | Skin details | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-SKIN-DETAILS-REQ-ORDER-SKIN-DETAILS-YYYYMMDD-partNN.mp4 |
+| CF27-MIN-RECAP-021 | Skin tone | first value through final value plus wrap/no-wrap proof | MENU | GFM-CF27-MIN-SKIN-TONE-REQ-ORDER-SKIN-TONE-YYYYMMDD-partNN.mp4 |
 
 ## 12. Items That Do Not Need To Be Recorded Again
 
@@ -259,34 +256,34 @@ Current candidate observations should not be rerecorded only for second verifica
 
 | Category | Rows | Classification counts | Genuine recaptures | Frame re-extractions | Second-verifier confirmations |
 | --- | ---: | --- | ---: | ---: | ---: |
-| Additional visible face-matching controls | 1 | MISSING_FROM_EXISTING_MEDIA: 1 | 0 | 0 | 0 |
+| Additional visible face-matching controls | 1 | GENUINE_RECAPTURE_REQUIRED: 1 | 1 | 0 | 0 |
 | Appearance menu map | 1 | CLEAR_EXISTING_EVIDENCE_WITH_NOTES: 1 | 0 | 0 | 0 |
 | Body or physique controls | 1 | CLEAR_EXISTING_EVIDENCE_WITH_NOTES: 1 | 0 | 0 | 0 |
 | Body-related appearance controls | 5 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 5 | 0 | 0 | 5 |
 | Chin | 2 | GENUINE_RECAPTURE_REQUIRED: 1; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 1 | 0 | 1 |
-| Dependency tests | 1 | MISSING_FROM_EXISTING_MEDIA: 1 | 0 | 0 | 0 |
+| Dependency tests | 1 | GENUINE_RECAPTURE_REQUIRED: 1 | 1 | 0 | 0 |
 | Ear shape | 2 | GENUINE_RECAPTURE_REQUIRED: 2 | 2 | 0 | 0 |
 | Ear Shape | 4 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 4 | 0 | 0 | 4 |
-| Eye color | 2 | GENUINE_RECAPTURE_REQUIRED: 1; FRAME_REEXTRACTION_REQUIRED: 1 | 1 | 1 | 0 |
+| Eye color | 2 | GENUINE_RECAPTURE_REQUIRED: 1; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 1 | 0 | 1 |
 | Eye Color | 7 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 7 | 0 | 0 | 7 |
-| Eye shape | 2 | GENUINE_RECAPTURE_REQUIRED: 1; FRAME_REEXTRACTION_REQUIRED: 1 | 1 | 1 | 0 |
+| Eye shape | 2 | GENUINE_RECAPTURE_REQUIRED: 1; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 1 | 0 | 1 |
 | Eye Shape | 5 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 5 | 0 | 0 | 5 |
 | Facial hair | 3 | GENUINE_RECAPTURE_REQUIRED: 2; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 2 | 0 | 1 |
-| Facial-hair colors | 3 | GENUINE_RECAPTURE_REQUIRED: 1; FRAME_REEXTRACTION_REQUIRED: 1; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 1 | 1 | 1 |
+| Facial-hair colors | 3 | GENUINE_RECAPTURE_REQUIRED: 1; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 2 | 1 | 0 | 2 |
 | Game title/version/update evidence | 2 | CLEAR_EXISTING_EVIDENCE_WITH_NOTES: 1; GENUINE_RECAPTURE_REQUIRED: 1 | 1 | 0 | 0 |
-| Hair colors | 3 | GENUINE_RECAPTURE_REQUIRED: 1; FRAME_REEXTRACTION_REQUIRED: 1; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 1 | 1 | 1 |
+| Hair colors | 3 | GENUINE_RECAPTURE_REQUIRED: 1; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 2 | 1 | 0 | 2 |
 | Hairstyles | 3 | GENUINE_RECAPTURE_REQUIRED: 2; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 2 | 0 | 1 |
 | Head templates | 2 | GENUINE_RECAPTURE_REQUIRED: 2 | 2 | 0 | 0 |
 | Heads | 26 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 26 | 0 | 0 | 26 |
 | Jaw shape | 1 | GENUINE_RECAPTURE_REQUIRED: 1 | 1 | 0 | 0 |
 | Jaw Shape | 1 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 0 | 0 | 1 |
-| Mouth shape | 1 | FRAME_REEXTRACTION_REQUIRED: 1 | 0 | 1 | 0 |
+| Mouth shape | 1 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 0 | 0 | 1 |
 | Mouth Shape | 1 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 0 | 0 | 1 |
 | Nose | 9 | GENUINE_RECAPTURE_REQUIRED: 2; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 7 | 2 | 0 | 7 |
 | Road to Glory creation path | 1 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 0 | 0 | 1 |
-| Skin details | 2 | GENUINE_RECAPTURE_REQUIRED: 1; FRAME_REEXTRACTION_REQUIRED: 1 | 1 | 1 | 0 |
+| Skin details | 2 | GENUINE_RECAPTURE_REQUIRED: 1; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 1 | 0 | 1 |
 | Skin Details | 10 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 10 | 0 | 0 | 10 |
-| Skin tone | 2 | GENUINE_RECAPTURE_REQUIRED: 1; FRAME_REEXTRACTION_REQUIRED: 1 | 1 | 1 | 0 |
+| Skin tone | 2 | GENUINE_RECAPTURE_REQUIRED: 1; SECOND_VERIFIER_CONFIRMATION_REQUIRED: 1 | 1 | 0 | 1 |
 | Skin Tone | 21 | SECOND_VERIFIER_CONFIRMATION_REQUIRED: 21 | 0 | 0 | 21 |
 | Source-video inventory | 14 | CLEAR_EXISTING_EVIDENCE: 3; CLEAR_EXISTING_EVIDENCE_WITH_NOTES: 9; DUPLICATE_UPLOAD_NO_NEW_COVERAGE: 2 | 0 | 0 | 0 |
 

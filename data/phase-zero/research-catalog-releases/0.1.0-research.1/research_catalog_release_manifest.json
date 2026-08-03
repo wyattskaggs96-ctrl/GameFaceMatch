@@ -133,7 +133,7 @@
       "sourceCsvPath": "data/phase-zero/evidence_manifest.csv",
       "jsonOutput": "evidence_manifest.json",
       "csvOutput": "evidence_manifest.csv",
-      "recordCount": 118,
+      "recordCount": 125,
       "productionStatus": "NOT_PRODUCTION_DATA",
       "verificationStatus": "OBSERVED_PENDING_VERIFICATION"
     },
@@ -263,8 +263,8 @@
     {
       "fileName": "evidence_manifest.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "bd64fb59f1a55a59cd3618d2e150b1fec1c75d52a51c39d27eaeb9c0a1ae8b7e",
-      "sizeBytes": 120400,
+      "sha256": "ed43b21c1aefef8560747bd0ff886cfee9c8c2f9570eecb589f82ae331ad4fa6",
+      "sizeBytes": 127059,
       "sourcePath": "data/phase-zero/evidence_manifest.json"
     },
     {
@@ -368,7 +368,7 @@
     {
       "fileName": "README.md",
       "contentType": "text/markdown; charset=utf-8",
-      "sha256": "f4d2a05b7bd28cbb108c2368cbd7756a81d6082b31d68da35418c2c3144ade96",
+      "sha256": "4bf3edc04551ffd1cb96445eb93644b3b07d4f5d9807bd3e93bc352f5464c3a4",
       "sizeBytes": 1240,
       "sourcePath": null
     },
@@ -389,7 +389,7 @@
     {
       "fileName": "research_catalog_release_manifest.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "f23ee90925e4f318c4bcc5f9ebcf5c93617527ee668c9eccf12c529de19ec5dd",
+      "sha256": "77ee2106c01982bb1d85dd6cdfa82ec12d6669e99f6217a5e1cabf1407129974",
       "sizeBytes": 6857,
       "sourcePath": null
     },
@@ -403,7 +403,7 @@
     {
       "fileName": "research_catalog_release_validation.json",
       "contentType": "application/json; charset=utf-8",
-      "sha256": "b54f301213b71744bd13bab6d77d5a7c77d3a508604da9bef9d87f16a02b7e01",
+      "sha256": "5d83f23f8de2c81285bd363593588d2066c56ea15ade2ff23a31c78f0df17e4a",
       "sizeBytes": 2819,
       "sourcePath": null
     }

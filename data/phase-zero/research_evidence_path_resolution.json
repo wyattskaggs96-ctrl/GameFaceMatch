@@ -4,8 +4,8 @@
   "productionStatus": "NOT_PRODUCTION_DATA",
   "releaseCandidateStatus": "PASS_RESEARCH_PACKAGE_RC_PATH_RESOLUTION",
   "summary": {
-    "entriesChecked": 120,
-    "resolvedRepositoryDerivativeFiles": 106,
+    "entriesChecked": 127,
+    "resolvedRepositoryDerivativeFiles": 113,
     "externalMasterReferences": 14,
     "missingFiles": 0,
     "unsafePaths": 0,
@@ -360,6 +360,83 @@
       "actualSizeBytes": 1178555,
       "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_21_15.mp4",
       "sourceTimestamp": 155.5
+    },
+    {
+      "id": "phase0-frame-reextract-req-views-eye-color-front",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_eye_color_Eye_color_FRONT_13s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1434091,
+      "actualSizeBytes": 1434091,
+      "sourceMasterPortablePath": "OWNER_DOWNLOADS/a1e6193d-625e-4880-8977-3a8c7670c336.MP4",
+      "sourceTimestamp": 13
+    },
+    {
+      "id": "phase0-frame-reextract-req-views-eye-shape-front",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_eye_shape_Eye_shape_FRONT_14s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1212653,
+      "actualSizeBytes": 1212653,
+      "sourceMasterPortablePath": "OWNER_DOWNLOADS/45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "sourceTimestamp": 14
+    },
+    {
+      "id": "phase0-frame-reextract-req-views-facial-hair-colors-front",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_facial_hair_colors_Facial_hair_colors_FRONT_225p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1745454,
+      "actualSizeBytes": 1745454,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceTimestamp": 225.5
+    },
+    {
+      "id": "phase0-frame-reextract-req-views-hair-colors-front",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_hair_colors_Hair_colors_FRONT_100p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1668341,
+      "actualSizeBytes": 1668341,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_18_14.mp4",
+      "sourceTimestamp": 100.5
+    },
+    {
+      "id": "phase0-frame-reextract-req-views-mouth-shape-front",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_mouth_shape_Mouth_shape_FRONT_215p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1481269,
+      "actualSizeBytes": 1481269,
+      "sourceMasterPortablePath": "source-media/NCAA 26/EA SPORTS™ College Football 27-2026_08_02-21_13_02.mp4",
+      "sourceTimestamp": 215.5
+    },
+    {
+      "id": "phase0-frame-reextract-req-views-skin-details-front",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_skin_details_Skin_details_FRONT_8s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1526108,
+      "actualSizeBytes": 1526108,
+      "sourceMasterPortablePath": "OWNER_DOWNLOADS/04_Appearance_Skin_Details.MP4",
+      "sourceTimestamp": 8
+    },
+    {
+      "id": "phase0-frame-reextract-req-views-skin-tone-front",
+      "kind": "derivative",
+      "relativePath": "data/phase-zero/derivative-frames/frame-reextractions/REQ_VIEWS_skin_tone_Skin_tone_FRONT_45p5s.png",
+      "pathStatus": "portable_repository_relative_path",
+      "fileResolutionStatus": "resolved",
+      "expectedSizeBytes": 1443593,
+      "actualSizeBytes": 1443593,
+      "sourceMasterPortablePath": "OWNER_DOWNLOADS/03_Appearance_Skin_Tone.MP4",
+      "sourceTimestamp": 45.5
     },
     {
       "id": "phase0-frame-video-001-tl-011",

@@ -20,7 +20,7 @@ describe("CF27 research evidence package release candidate", () => {
     expect(manifest.releaseCandidateStatus).toBe("PASS_RESEARCH_PACKAGE_RC_PATH_RESOLUTION");
     expect(manifest.summary.sourceMastersInInventory).toBe(14);
     expect(manifest.summary.uniqueSourceMastersInEvidenceManifest).toBe(12);
-    expect(manifest.summary.derivativeEvidenceEntries).toBe(106);
+    expect(manifest.summary.derivativeEvidenceEntries).toBe(113);
     expect(manifest.summary.exactDuplicateSourceFilesDocumented).toBe(2);
     expect(manifest.summary.catalogRowsWithInvalidEvidence).toBe(0);
     expect(manifest.summary.missingResolvedFiles).toBe(0);

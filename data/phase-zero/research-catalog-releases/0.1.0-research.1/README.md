@@ -7,7 +7,7 @@ This package is a versioned research export from the canonical `data/phase-zero`
 - Generated at: 2026-07-14T03:15:00-04:00
 - Validation status: passed_with_warnings
 - Export families: 15
-- Total exported rows: 499
+- Total exported rows: 506
 - Production recommendations enabled: false
 
 ## Export Families
@@ -23,7 +23,7 @@ This package is a versioned research export from the canonical `data/phase-zero`
 - additional_attributes: 54 row(s)
 - body_controls: 5 row(s)
 - dependency_tests: 16 row(s)
-- evidence_manifest: 118 row(s)
+- evidence_manifest: 125 row(s)
 - capture_log: 127 row(s)
 - issues_and_exceptions: 44 row(s)
 - recapture_requests: 10 row(s)

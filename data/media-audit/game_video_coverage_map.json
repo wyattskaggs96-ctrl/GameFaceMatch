@@ -1,0 +1,462 @@
+{
+  "schemaVersion": "direct-game-video-coverage-map-v1",
+  "generatedAt": "2026-08-03T03:25:00-04:00",
+  "allowedStates": [
+    "FULLY_CAPTURED",
+    "CAPTURED_WITH_LIMITATIONS",
+    "PARTIALLY_CAPTURED",
+    "VISIBLE_BUT_NOT_OPENED",
+    "NOT_SEEN_IN_ANY_VIDEO",
+    "DIRECTLY_SHOWN_AS_ABSENT",
+    "UNDETERMINED"
+  ],
+  "summary": {
+    "games": 3,
+    "rows": 54,
+    "byState": {
+      "PARTIALLY_CAPTURED": 27,
+      "CAPTURED_WITH_LIMITATIONS": 21,
+      "NOT_SEEN_IN_ANY_VIDEO": 4,
+      "UNDETERMINED": 1,
+      "VISIBLE_BUT_NOT_OPENED": 1
+    }
+  },
+  "rows": [
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Environment and version footage",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Creator UI is visible, but title/version/platform screen is not shown.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Main player-creation path",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Player creator is open; entry path into creator is not shown.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Complete visible menu hierarchy",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Skin, Head, Face, Hair sections are visible across two videos; full top-level hierarchy and boundaries are not proven.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Head or face presets",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Skull, forehead, jaw, ears, cheeks, chin, neck, eyes, eyebrows, nose, mouth, teeth controls are visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Skin options",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Skin Tone, Complexion, Skin Surface visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Skin details or complexion",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Freckles, scarring, moles, makeup visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Eye-related options",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Eyes and eyebrows visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Nose-related options",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Nose controls visible in part 2.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Ear-related options",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Ear controls visible in part 1.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Mouth-related options",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Mouth and teeth controls visible in part 2.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Jaw-related options",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Jaw controls visible in part 1.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Chin",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Chin controls visible in part 1.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Eyebrow-related options",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Eyebrow rows and colors visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Hairstyles",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Many hair styles visible with extractable angles.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Hair colors",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Hair color swatches visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Facial hair",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Facial hair and color rows visible near end of part 2.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Facial-hair colors",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Facial-hair color swatches visible, but full range is not proven.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "EA Sports FC player creator footage",
+      "coverageArea": "Body or physique settings",
+      "state": "NOT_SEEN_IN_ANY_VIDEO",
+      "notes": "No body/physique menu is visible in the two FC videos.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Environment and version footage",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "2K Create A Player UI is visible; title/version/platform proof screen is not shown.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Main player-creation path",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Create A Player is open; entry path is not shown.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Complete visible menu hierarchy",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Appearance, Hair, Skull, Brow, Ears, Eyes, Nose, Cheeks, Mouth, Facial Hair, Chin, Skin, Body, and Signature Editor are visible across clips.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Head or face presets",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Head Selection grid and many face controls visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Skin options",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Skin swatch grid visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Skin details or complexion",
+      "state": "UNDETERMINED",
+      "notes": "Skin swatches visible; separate complexion/detail controls are not established.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Eye-related options",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Eyes and brow/eyebrow controls visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Nose-related options",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Nose grid visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Ear-related options",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Ear grid visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Mouth-related options",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Mouth and teeth controls visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Jaw-related options",
+      "state": "NOT_SEEN_IN_ANY_VIDEO",
+      "notes": "A jaw-specific control is not visible in the inspected source-media videos.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Chin",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Chin grid visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Eyebrow-related options",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Brow/eyebrow controls visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Hairstyles",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Hair grid visible with rotations.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Hair colors",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Edit Hair swatches/sliders visible; complete color range not proven.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Facial hair",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Facial-hair grid visible with rotations.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Facial-hair colors",
+      "state": "NOT_SEEN_IN_ANY_VIDEO",
+      "notes": "No separate facial-hair color control is clearly shown.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "NBA 2K26 Create A Player footage",
+      "coverageArea": "Body or physique settings",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Body menu rows visible; full body ranges not proven.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Environment and version footage",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Create Player UI is visible; platform/version/update screen is not shown.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Main player-creation path",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Create Player > Player appears open; entry route into Road to Glory is not shown in source-media videos.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Complete visible menu hierarchy",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Head & Skin, Hair, and Styles menus are visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Head or face presets",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Head Template grid and selected values visible; final/wrap not proven.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Skin options",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Skin Tone visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Skin details or complexion",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Skin Details visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Eye-related options",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Eye Shape and Eye Color visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Nose-related options",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Nose grid visible; profile views are limited.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Ear-related options",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Ear Shape visible; profile views are limited.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Mouth-related options",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Mouth Shape visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Jaw-related options",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Jaw Shape visible; profile views are limited.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Chin",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Chin visible; profile views are limited.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Eyebrow-related options",
+      "state": "NOT_SEEN_IN_ANY_VIDEO",
+      "notes": "No eyebrow control appears in source-media videos; absence is not proven from source-media alone.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Hairstyles",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Hair Style grid visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Hair colors",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Hair Color swatches visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Facial hair",
+      "state": "CAPTURED_WITH_LIMITATIONS",
+      "notes": "Facial Hair Style grid visible.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Facial-hair colors",
+      "state": "PARTIALLY_CAPTURED",
+      "notes": "Facial Hair Color swatches visible briefly.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "game": "College Football 27 create-player footage",
+      "coverageArea": "Body or physique settings",
+      "state": "VISIBLE_BUT_NOT_OPENED",
+      "notes": "Styles/body-animation rows visible; body/physique values are not opened.",
+      "sourceBasis": "direct source-media video inspection",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    }
+  ],
+  "validation": {
+    "ok": true,
+    "errors": []
+  }
+}

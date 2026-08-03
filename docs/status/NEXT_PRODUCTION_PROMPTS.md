@@ -2,9 +2,9 @@
 
 ## Immediate Next Prompt
 
-`GFM | Q04 | PROMPT 095 | PHASE 02 | Ingest CF27 recapture recordings and refresh verification queue`
+`GFM | Q04 | PROMPT 095 | PHASE 02 | Re-extract recoverable CF27 frames, then ingest minimum recapture recordings`
 
-Purpose: after Wyatt supplies the requested recapture recordings, ingest the new media, update evidence/candidate records, refresh recapture/discrepancy reports, and regenerate the production-verification queue without promoting records.
+Purpose: exhaust frame re-extraction tasks identified by the existing-media audit, then after Wyatt supplies only the minimum genuine recapture recordings, ingest the new media, update evidence/candidate records, refresh gap/recapture/discrepancy reports, and regenerate the production-verification queue without promoting records.
 
 ## Prompt 092 Result
 
@@ -32,14 +32,19 @@ Purpose: after Wyatt supplies the requested recapture recordings, ingest the new
 
 - Deterministic evidence-quality report: `data/phase-zero/evidence-recapture-package/evidence_quality_report.json`
 - Owner checklist: `docs/phase-zero/CF27_OWNER_RECAPTURE_CHECKLIST.md`
+- Exact existing-media gap audit: `docs/status/CF27_EXISTING_MEDIA_VERIFICATION_GAP_AUDIT.md`
+- Machine-readable audit: `data/phase-zero/cf27_existing_media_verification_gap_audit.json`
+- Minimum genuine recapture queue: `data/phase-zero/cf27_minimum_recapture_queue.json`
 - Review-ready records from current evidence: 92
-- Recapture-required records: 92
+- Existing-media audit rows: 138
+- Candidate rows requiring second-verifier confirmation: 92
+- Frame-reextraction requirements: 7
+- Genuine recapture requirements: 19
 - Missing-evidence records: 0
 - Missing required production-view records: 87
 - Duplicate-dispute records: 5
 - Ordering-dispute records: 58
 - Environment/version-gap records: 92
-- Recapture tasks: 104
 - Verifier discrepancy rows: 166
 - Second-verified records: 0
 - Production-approved records: 0
@@ -47,10 +52,11 @@ Purpose: after Wyatt supplies the requested recapture recordings, ingest the new
 
 ## Prompt 095 Acceptance
 
+- Existing source videos are re-extracted where the audit says frame extraction can solve the gap.
 - Newly supplied recapture media is inventoried, hashed, and preserved.
 - Evidence and timeline records are updated only for directly observed facts.
 - Recapture tasks are closed only when acceptance criteria are met.
-- The evidence recapture package and production-verification queue are regenerated.
+- The existing-media audit, evidence recapture package, and production-verification queue are regenerated.
 - No record is marked second-verified or production-approved.
 
 ## Later Production Path

@@ -8,7 +8,7 @@ Run after:
 
 ## Objective
 
-After Wyatt supplies new console recordings requested by the evidence recapture package, ingest those files, validate media metadata and hashes, extract direct observations, update evidence and candidate records, refresh the recapture package, and regenerate the production-verification queue without promoting records.
+After Wyatt supplies only the genuine new console recordings requested by the existing-media verification gap audit, ingest those files, validate media metadata and hashes, extract direct observations, update evidence and candidate records, refresh the gap audit and recapture package, and regenerate the production-verification queue without promoting records.
 
 ## Current Queue State
 
@@ -17,12 +17,15 @@ After Wyatt supplies new console recordings requested by the evidence recapture 
 - Internal workspace: Phase 0 status panel, second-verifier workspace
 - Evidence package: `data/phase-zero/evidence-recapture-package/evidence_quality_report.json`
 - Owner checklist: `docs/phase-zero/CF27_OWNER_RECAPTURE_CHECKLIST.md`
+- Existing-media gap audit: `data/phase-zero/cf27_existing_media_verification_gap_audit.json`
+- Minimum genuine recapture queue: `data/phase-zero/cf27_minimum_recapture_queue.json`
 - Queue records: 92
 - Evidence-linked records: 92
 - Missing-evidence records: 0
 - Review-ready records from current evidence: 92
-- Recapture-required records: 92
-- Recapture tasks: 104
+- Existing-media audit rows: 138
+- Frame-reextraction requirements: 7
+- Genuine recapture tasks after existing-media exhaustion: 19
 - Verifier discrepancy rows: 166
 - Duplicate or near-duplicate records: 5
 - Order-unresolved records: 3
@@ -34,7 +37,7 @@ After Wyatt supplies new console recordings requested by the evidence recapture 
 
 ## Required Owner Action
 
-Wyatt must record the highest-priority recapture videos from `docs/phase-zero/CF27_OWNER_RECAPTURE_CHECKLIST.md` and place the untouched files in the approved intake folder.
+Wyatt must record only the genuine recapture tasks from `data/phase-zero/cf27_minimum_recapture_queue.json` and place the untouched files in the approved intake folder. Do not rerecord candidate observations that are classified as second-verifier-only, and do not rerecord front-only gaps until Codex attempts frame re-extraction.
 
 Recordings must:
 
@@ -47,6 +50,7 @@ Recordings must:
 
 ## Codex Can Still Do
 
+- Attempt the 7 frame-reextraction tasks before requesting replacement footage.
 - Ingest supplied recapture files through the intake pipeline.
 - Hash, inventory, segment, and extract only necessary derivative evidence.
 - Update evidence manifests, timelines, candidate status, recapture tasks, and verifier queue.
@@ -54,4 +58,4 @@ Recordings must:
 
 ## Stop Point
 
-Do not promote records, publish a production catalog, run real recommendations, connect Stripe, or connect remote Supabase during this next action. Prompt 095 is blocked until Wyatt supplies new recapture recordings.
+Do not promote records, publish a production catalog, run real recommendations, connect Stripe, or connect remote Supabase during this next action. Prompt 095 can start with frame re-extraction work immediately, but new-media intake remains blocked until Wyatt supplies the minimum recapture recordings.

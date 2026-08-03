@@ -40,6 +40,10 @@
     "cf27EvidenceRecaptureRequiredRecords": 92,
     "cf27EvidenceRecaptureTaskCount": 104,
     "cf27VerifierDiscrepancyRows": 166,
+    "cf27ExistingMediaGapAuditRows": 138,
+    "cf27ExistingMediaGapAuditVideoRows": 14,
+    "cf27ExistingMediaFrameReextractionRequirements": 7,
+    "cf27MinimumGenuineRecaptureTasks": 19,
     "cf27EvidenceManifestEntries": 118,
     "cf27VideoInventoryRows": 14,
     "fc26ResearchControls": 28

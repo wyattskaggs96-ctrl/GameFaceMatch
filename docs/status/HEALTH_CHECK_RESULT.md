@@ -45,6 +45,8 @@ The internal second-verifier decision workspace now loads the canonical 92-recor
 
 The CF27 evidence recapture package is now generated deterministically from the production-verification queue, evidence manifest, source-video inventory, primary-review records, issue register, capture requests, and count/order audit. It reports 92 review-ready records from current evidence, 92 recapture-required records before production, 0 missing-evidence records, 87 records missing required production views, 5 duplicate-dispute records, 58 ordering-dispute records, 92 environment/version-gap records, 104 recapture tasks, 166 verifier discrepancy rows, and 0 production-eligible records.
 
+Prompt 094 has also been steered with an exact existing-media verification gap audit. That audit exhausts current source videos, source-media records, derivative frames, timelines, candidates, primary-review artifacts, duplicate-review artifacts, and verifier queue data before requesting new capture. It reports 138 audit rows, 14 video-file rows, 92 candidate rows, 32 evidence-requirement rows, 3 locally opened source videos, 12 unique master videos, 2 duplicate uploads, 7 frame-reextraction requirements, 93 second-verifier confirmation rows including the creation path plus all candidates, and 19 genuine recapture requirements. The minimum recapture queue is `data/phase-zero/cf27_minimum_recapture_queue.json`.
+
 ## Production Decision
 
 Do not launch publicly or privately as a paid production product yet. The product must first complete verified catalog data, connect server-authoritative paid access, validate matching usefulness, and complete legal/security/deployment gates.

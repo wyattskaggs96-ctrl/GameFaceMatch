@@ -2,6 +2,7 @@ import type { ConsentState } from "@/lib/privacy/consent";
 import type { ScreenshotRefinementSession } from "@/lib/refinement/screenshot-refinement";
 import type { GameCatalogManifest, SavedBuild, StandardFaceProfile } from "@/types/domain";
 import type { SupabaseRuntimeStatus } from "./runtime-config";
+import type { FinalConfirmedSettings, GlobalLearningReviewCandidate, PersonalRecommendationPreference } from "@/lib/feedback/self-improving-feedback-loop";
 
 export type RepositoryAdapterKind = "local" | "supabase";
 export type RepositoryErrorCode =
@@ -113,6 +114,41 @@ export interface ScreenshotRefinementSessionRecord {
   rawScreenshotsStored: false;
 }
 
+export interface BuildFeedbackOutcomeRecord {
+  feedbackOutcomeID: string;
+  gameID: string;
+  profileID: string;
+  catalogVersionID: string | null;
+  selectedCatalogItemID: string;
+  buildMatchScore: number | null;
+  passingScore: number;
+  passed: boolean;
+  createdAt: string;
+  rawMediaStored: false;
+  exactMeasurementsStored: false;
+}
+
+export interface PersonalPreferenceRecord {
+  preferenceID: string;
+  gameID: string;
+  profileID: string;
+  preferredCatalogItemID: string;
+  updatedAt: string;
+  rawMediaStored: false;
+}
+
+export interface GlobalLearningCandidateRecord {
+  candidateID: string;
+  gameID: string;
+  catalogVersionID: string | null;
+  status: GlobalLearningReviewCandidate["status"];
+  createdAt: string;
+  consentVersion: string | null;
+  rawMediaStored: false;
+  exactMeasurementsStored: false;
+  automaticTrainingStarted: false;
+}
+
 export interface DeletionRequestRecord {
   deletionRequestID: string;
   scope:
@@ -156,6 +192,21 @@ export interface GameFaceDataRepositories {
     session: ScreenshotRefinementSession,
     idempotencyKey: string
   ): Promise<RepositoryResult<ScreenshotRefinementSessionRecord>>;
+  recordBuildFeedbackOutcome(
+    record: BuildFeedbackOutcomeRecord,
+    finalSettings: FinalConfirmedSettings,
+    idempotencyKey: string
+  ): Promise<RepositoryResult<BuildFeedbackOutcomeRecord>>;
+  savePersonalPreference(
+    record: PersonalPreferenceRecord,
+    preference: PersonalRecommendationPreference,
+    idempotencyKey: string
+  ): Promise<RepositoryResult<PersonalPreferenceRecord>>;
+  queueGlobalLearningCandidate(
+    record: GlobalLearningCandidateRecord,
+    candidate: GlobalLearningReviewCandidate,
+    idempotencyKey: string
+  ): Promise<RepositoryResult<GlobalLearningCandidateRecord>>;
   requestDeletion(record: DeletionRequestRecord, idempotencyKey: string): Promise<RepositoryResult<DeletionRequestRecord>>;
   appendAuditEvent(record: AuditEventRecord, idempotencyKey: string): Promise<RepositoryResult<AuditEventRecord>>;
 }
@@ -168,6 +219,9 @@ export function createLocalOnlyRepositories(input: { runtime: SupabaseRuntimeSta
   const savedBuilds = new Map<string, SavedBuildRecord>();
   const recommendations = new Map<string, RecommendationRecord>();
   const screenshotSessions = new Map<string, ScreenshotRefinementSessionRecord>();
+  const buildFeedbackOutcomes = new Map<string, BuildFeedbackOutcomeRecord>();
+  const personalPreferences = new Map<string, PersonalPreferenceRecord>();
+  const globalLearningCandidates = new Map<string, GlobalLearningCandidateRecord>();
   const deletionRequests = new Map<string, DeletionRequestRecord>();
   const auditEvents = new Map<string, AuditEventRecord>();
 
@@ -240,6 +294,36 @@ export function createLocalOnlyRepositories(input: { runtime: SupabaseRuntimeSta
         return record;
       });
     },
+    async recordBuildFeedbackOutcome(record, _finalSettings, idempotencyKey) {
+      if (record.rawMediaStored !== false || record.exactMeasurementsStored !== false) {
+        return repositoryFailure("VALIDATION_ERROR", "Build feedback outcomes cannot store raw media or exact facial measurements.");
+      }
+      return idempotent(idempotency, idempotencyKey, () => {
+        buildFeedbackOutcomes.set(record.feedbackOutcomeID, record);
+        return record;
+      });
+    },
+    async savePersonalPreference(record, _preference, idempotencyKey) {
+      if (record.rawMediaStored !== false) {
+        return repositoryFailure("VALIDATION_ERROR", "Personal recommendation preferences cannot store raw media.");
+      }
+      return idempotent(idempotency, idempotencyKey, () => {
+        personalPreferences.set(record.preferenceID, record);
+        return record;
+      });
+    },
+    async queueGlobalLearningCandidate(record, candidate, idempotencyKey) {
+      if (record.rawMediaStored !== false || record.exactMeasurementsStored !== false || record.automaticTrainingStarted !== false) {
+        return repositoryFailure("VALIDATION_ERROR", "Global learning candidates cannot store raw media, exact facial measurements, or start automatic training.");
+      }
+      if (candidate.status !== "queuedForHumanReview") {
+        return repositoryFailure("VALIDATION_ERROR", "Only consented global learning candidates may be queued.");
+      }
+      return idempotent(idempotency, idempotencyKey, () => {
+        globalLearningCandidates.set(record.candidateID, record);
+        return record;
+      });
+    },
     async requestDeletion(record, idempotencyKey) {
       return idempotent(idempotency, idempotencyKey, () => {
         deletionRequests.set(record.deletionRequestID, record);
@@ -275,6 +359,9 @@ export function createFailClosedSupabaseRepositories(runtime: SupabaseRuntimeSta
     readEvidenceMetadata: failure,
     recordRecommendation: failure,
     createScreenshotRefinementSession: failure,
+    recordBuildFeedbackOutcome: failure,
+    savePersonalPreference: failure,
+    queueGlobalLearningCandidate: failure,
     requestDeletion: failure,
     appendAuditEvent: failure
   };

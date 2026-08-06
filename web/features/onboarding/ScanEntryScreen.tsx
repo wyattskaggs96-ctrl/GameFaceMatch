@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Alert, Button, Card, StatusBadge } from "@/components/design-system";
+import { Button } from "@/components/design-system";
 import type { AnalyticsEventName, AnalyticsPayload } from "@/lib/analytics/privacy-safe-analytics";
 import {
   DEFAULT_SCAN_ENTRY_PLAN_ID,
@@ -37,6 +37,7 @@ const additionalRequiredConsentIDs: ConsentID[] = ["cameraUse", "temporaryProces
 export function ScanEntryScreen({
   consentState,
   onConsentChange,
+  onCancel,
   onReadyToPrepare,
   catalogAvailable,
   environment,
@@ -46,6 +47,7 @@ export function ScanEntryScreen({
 }: {
   consentState: ConsentState;
   onConsentChange: (state: ConsentState) => void;
+  onCancel: () => void;
   onReadyToPrepare: () => void;
   catalogAvailable: boolean;
   environment: ScanEntryEnvironment;
@@ -107,143 +109,108 @@ export function ScanEntryScreen({
   }
 
   return (
-    <section className="scan-entry-screen" aria-labelledby="scan-entry-title">
-      <div className="scan-entry-brand">
-        <strong>GameFace Match</strong>
-        <span>From reality to game face.</span>
+    <section className="setup-flow-screen setup-intro-screen" aria-labelledby="scan-entry-title" data-testid="setup-introduction">
+      <button className="setup-top-control" type="button" onClick={onCancel} aria-label="Close setup">
+        <span aria-hidden="true">‹</span>
+      </button>
+
+      <div className="setup-intro-visual" aria-hidden="true">
+        <SegmentedSetupRing />
+        <GameFaceScanGlyph variant="neutral" />
       </div>
-      <div className="scan-entry-hero">
-        <p className="scan-entry-kicker">FROM REALITY TO GAME FACE</p>
-        <h1 id="scan-entry-title">Build yourself in the game.</h1>
+
+      <div className="setup-intro-copy">
+        <p className="setup-brand">GameFace Match</p>
+        <p className="setup-brand-line">From reality to game face.</p>
+        <h1 id="scan-entry-title">Set Up Your GameFace Scan</h1>
         <p>
-          Take a guided face scan and get the closest verified appearance settings for the game you choose. GameFace Match creates manual settings; it does not
-          automatically transfer a face into a game.
+          First, position your face in the camera frame. Then slowly move your head in a circle so we can capture the angles needed for your closest in-game
+          match.
         </p>
       </div>
 
-      <FaceScanPreview />
-
-      <Card className="scan-entry-card scan-plan-section">
-        <div className="status-row">
-          <h2>Choose access</h2>
-          <StatusBadge tone="warning">Payment required before production scan</StatusBadge>
-        </div>
-        <div className="scan-plan-grid" role="radiogroup" aria-label="Scan plan">
-          {SCAN_ENTRY_PLANS.map((plan) => {
-            const selected = selectedPlanID === plan.id;
-            return (
-              <button
-                className={`scan-plan-card ${selected ? "selected" : ""}`}
-                key={plan.id}
-                type="button"
-                role="radio"
-                aria-checked={selected}
-                onClick={() => selectPlan(plan.id)}
-              >
-                <span className="scan-plan-title">{plan.title}</span>
-                <strong>{plan.price}</strong>
-                <span>{plan.description}</span>
-                <small>{plan.entitlementRule}</small>
-              </button>
-            );
-          })}
-        </div>
-        {environment !== "production" && previewModeEnabled ? (
-          <Alert title="Preview mode - no charge" tone="warning">
-            Preview mode can test screen flow in development only. It is not a paid entitlement and cannot unlock production scanning.
-          </Alert>
+      <div className="setup-bottom-actions">
+        <Button className="scan-start-button setup-primary-button" disabled={!decision.allowed || isResolving} onClick={() => void startScan()}>
+          {isResolving ? "Preparing..." : "Get Started"}
+        </Button>
+        {!decision.allowed ? (
+          <p className="setup-start-status" role="alert">
+            {decision.message}
+          </p>
         ) : null}
-      </Card>
-
-      <Card className="scan-entry-card">
-        <div className="status-row">
-          <h2>Required consent</h2>
-          <StatusBadge tone="info">Version {SCAN_ENTRY_CONSENT_VERSION}</StatusBadge>
-        </div>
-        <div className="scan-consent-list">
-          {requiredConsentItems.map((item) => (
-            <label className="scan-consent-item" key={item.id}>
-              <input
-                type="checkbox"
-                checked={consentState[item.id].granted}
-                onChange={(event) => setRequiredConsent(item.id, event.currentTarget.checked)}
-              />
-              <span>
-                <strong>{item.label}</strong>
-                {item.copy}
-              </span>
-            </label>
-          ))}
-        </div>
-        <details className="privacy-details">
-          <summary>Privacy details</summary>
+        <details className="setup-disclosure">
+          <summary>Access and privacy details</summary>
+          <div className="setup-plan-list" role="radiogroup" aria-label="Scan plan">
+            {SCAN_ENTRY_PLANS.map((plan) => {
+              const selected = selectedPlanID === plan.id;
+              return (
+                <button
+                  key={plan.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={selected}
+                  aria-label={`${plan.title} ${plan.price}`}
+                  className="setup-plan-option"
+                  onClick={() => selectPlan(plan.id)}
+                >
+                  <strong>
+                    {plan.title} · {plan.price}
+                  </strong>
+                  <span>{plan.description}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="scan-consent-list setup-consent-list">
+            {requiredConsentItems.map((item) => (
+              <label className="scan-consent-item" key={item.id}>
+                <input
+                  type="checkbox"
+                  checked={consentState[item.id].granted}
+                  onChange={(event) => setRequiredConsent(item.id, event.currentTarget.checked)}
+                />
+                <span>
+                  <strong>{item.label}</strong>
+                  {item.copy}
+                </span>
+              </label>
+            ))}
+          </div>
           <p>
-            The scan is used to recommend in-game appearance settings. The product does not identify the person. Basic use does not require an account. Saving a
-            reusable profile is optional, and cloud backup, model training, marketing use, or public sharing require separate opt-in consent if those features
-            exist.
+            The scan is used to recommend in-game appearance settings. It does not identify the person. Raw media is temporary session data by default.{" "}
+            {getConsentDefinition("saveRawImages")?.description}
           </p>
-          <p>
-            Raw media is treated as temporary session data in this MVP. {getConsentDefinition("saveRawImages")?.description}
-          </p>
+          {environment !== "production" && previewModeEnabled ? <p>Preview mode can test screen flow in development only. It is not a paid entitlement.</p> : null}
         </details>
-        <a href="#privacy-center">Complete privacy policy and local data controls</a>
-      </Card>
-
-      {!decision.allowed ? (
-        <Alert title={errorTitle(decision.reason)} tone="warning" role="alert">
-          {decision.message}
-        </Alert>
-      ) : null}
-
-      <Button className="scan-start-button" disabled={!decision.allowed || isResolving} onClick={() => void startScan()} aria-describedby="scan-start-note">
-        {isResolving ? "Preparing scan..." : "Start face scan"}
-        <span id="scan-start-note">{selectedPlan.id === "all_access_annual" ? "All Access • $9.99/year" : "Launch Pack • $4.99"}</span>
-      </Button>
-
-      <p className="scan-entry-disclaimer">
-        GameFace Match is an independent companion app and is not affiliated with or endorsed by EA SPORTS or any game publisher. <a href="#disclaimer">Legal disclaimer</a>
-      </p>
+        <p className="setup-footnote">
+          Independent companion app. Not affiliated with or endorsed by EA SPORTS or any game publisher. <a href="#privacy-center">Privacy controls</a>
+        </p>
+        <span className="sr-only" role="status" aria-live="polite">
+          Setup gate: {decision.reason}. Selected plan: {selectedPlan.title}.
+        </span>
+      </div>
     </section>
   );
 }
 
-function FaceScanPreview() {
+function SegmentedSetupRing() {
   return (
-    <Card className="scan-preview-card" aria-label="Guided face scan visual preview">
-      <div className="scan-preview-stage" aria-hidden="true">
-        <span className="scan-corner scan-corner-top-left" />
-        <span className="scan-corner scan-corner-top-right" />
-        <span className="scan-corner scan-corner-bottom-left" />
-        <span className="scan-corner scan-corner-bottom-right" />
-        <svg viewBox="0 0 220 220" className="scan-face-art" focusable="false" aria-hidden="true">
-          <path d="M68 162c10-16 22-24 42-24s32 8 42 24" />
-          <path d="M72 92c0-32 16-55 38-55s38 23 38 55c0 42-18 70-38 70S72 134 72 92Z" />
-          <path d="M88 88c10-5 18-5 26 0M128 88c8-5 16-5 24 0M108 98c-2 13-5 22-10 31 8 3 18 3 25-1M96 136c10 7 22 7 33 0" />
-        </svg>
-        {["eye-left", "eye-right", "nose", "cheek-left", "cheek-right", "mouth", "jaw-left", "jaw-right", "chin"].map((point) => (
-          <span className={`scan-landmark scan-landmark-${point}`} key={point} />
-        ))}
-        <span className="scan-beam" />
-      </div>
-      <div className="scan-preview-copy">
-        <strong>Guided face scan</strong>
-        <span>Usually takes about 30-45 seconds</span>
-      </div>
-    </Card>
+    <div className="setup-segmented-ring" aria-hidden="true">
+      {Array.from({ length: 64 }, (_, index) => (
+        <span key={index} style={{ transform: `rotate(${index * 5.625}deg)` }} />
+      ))}
+    </div>
   );
 }
 
-function errorTitle(reason: string) {
-  const titles: Record<string, string> = {
-    missingPlan: "Choose a plan",
-    missingConsent: "Required consent missing",
-    billingNotConfigured: "Purchase unavailable",
-    catalogUnavailable: "Catalog unavailable",
-    previewNotAllowedInProduction: "Scan temporarily unavailable",
-    purchaseCancelled: "Purchase canceled",
-    purchaseFailed: "Purchase verification failed"
-  };
-  return titles[reason] ?? "Scan temporarily unavailable";
+function GameFaceScanGlyph({ variant = "neutral" }: { variant?: "neutral" | "complete" }) {
+  return (
+    <svg className="setup-face-glyph" data-variant={variant} viewBox="0 0 120 120" focusable="false" aria-hidden="true">
+      <circle cx="60" cy="60" r="41" />
+      <path d="M44 50v12M76 50v12M58 51v22c0 4 2 6 6 6M42 78c10 12 26 12 36 0" />
+      {variant === "complete" ? <path d="M42 62l13 13 27-33" className="setup-face-check" /> : null}
+    </svg>
+  );
 }
 
 function analyticsConsentKind(id: ConsentID): AnalyticsPayload["consentKind"] {

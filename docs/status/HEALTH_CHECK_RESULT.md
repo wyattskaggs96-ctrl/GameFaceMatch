@@ -1,6 +1,6 @@
 # Health Check Result
 
-**Date:** 2026-08-03
+**Date:** 2026-08-06
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`  
 **Branch:** `main`  
 **HEAD reviewed:** Prompt 102 supported-subset verifier-session checkpoint
@@ -74,6 +74,12 @@ Prompt 101 did not create second-verifier decisions, production approvals, produ
 The CF27 supported-subset verifier session package is now generated in `data/phase-zero/supported-subset-verifier-session/`. It contains templates and references for a real independent verifier to record environment metadata, attestation, 76 record decisions, menu counts, a deterministic 24-record secondary-angle sample, and excluded duplicate/order limitation review.
 
 Human execution status is `READY_FOR_HUMAN_VERIFIER`. Prompt 102 did not create verifier decisions, second-verified records, production approvals, production catalog records, recommendation eligibility, or catalog-manager approval.
+
+## Prompt 104 Status
+
+The customer setup and guided scan experience has been rebuilt as a black, mobile-first setup flow that closely follows the owner-provided setup recording while using original GameFace Match branding and browser-RGB capture language. The implementation includes a quiet setup introduction, rounded-square positioning state, circular segmented scan state, progress tied to accepted coverage rather than elapsed time, completion state, camera-denied and multiple-face states, Reduced Motion behavior, and an accessibility path to assisted five-angle capture.
+
+Reference implementation details and visual evidence are recorded in `docs/status/GAMEFACE_SETUP_REFERENCE_IMPLEMENTATION.md` and `docs/status/visual-evidence/prompt104/`. Prompt 104 did not import human verifier decisions, create production approvals, publish catalog records, enable recommendations, activate payments, or move Prompt 103 out of hold.
 
 ## Frame Re-Extraction Packet Status
 

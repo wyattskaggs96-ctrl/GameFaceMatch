@@ -181,11 +181,14 @@ describe("guided circular scan coverage contract", () => {
 
   it("keeps circular guided UI tied to accepted live coverage", () => {
     const source = fs.readFileSync(path.join(process.cwd(), "features/capture/GuidedCaptureFlow.tsx"), "utf8");
-    expect(source).toContain("Circular progress advances only after a stable, distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks.");
+    expect(source).toContain("Circular progress advances only after a stable, distinct live frame passes face");
+    expect(source).toContain("pose, blur, exposure, and duplicate-angle checks");
     expect(source).toContain("Live coverage decision");
-    expect(source).toContain("Use assisted five-angle capture");
-    expect(source).toContain("Create my game face");
+    expect(source).toContain("Accessibility Options");
+    expect(source).toContain("First GameFace scan complete.");
     expect(source).toContain("Move your head slowly to complete the circle");
+    expect(source).toContain("NEXT_PUBLIC_GFM_SETUP_VISUAL_TESTS");
+    expect(source).toContain("process.env.NODE_ENV !== \"production\"");
     expect(source).not.toMatch(/setTimeout\([^)]*complete|elapsed.*complete|fake progress/i);
   });
 });

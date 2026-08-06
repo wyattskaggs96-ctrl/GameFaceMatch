@@ -62,12 +62,22 @@ import type { CaptureCoverageRegion, CaptureCoverageState } from "@/lib/capture/
 import type { CapturedAngle, CapturedAngleID, CaptureGuidanceReport, CaptureSource, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
 
 type GuidedCircularStage = "positioning" | "firstPass" | "firstPassComplete" | "secondPass" | "coverageReview" | "selectiveRetake";
+type SetupReferenceVisualState =
+  | "positioning"
+  | "scan-empty"
+  | "scan-partial"
+  | "scan-near-complete"
+  | "complete"
+  | "denied"
+  | "multiple"
+  | "accessibility";
 
 export function GuidedCaptureFlow({
   session,
   cameraService,
   onSessionChange,
   onCancelSession,
+  onClose,
   onContinue,
   onPerformanceRecord
 }: {
@@ -75,6 +85,7 @@ export function GuidedCaptureFlow({
   cameraService: BrowserCameraService;
   onSessionChange: (session: ActiveCaptureSession) => void;
   onCancelSession: (session: ActiveCaptureSession) => void;
+  onClose?: () => void;
   onContinue: () => void;
   onPerformanceRecord?: (record: PerformanceMetricRecord) => void;
 }) {
@@ -96,6 +107,7 @@ export function GuidedCaptureFlow({
   const [useExtendedHold, setUseExtendedHold] = useState(false);
   const [captureWorkflow, setCaptureWorkflow] = useState<"guidedCircular" | "fiveAngleFallback">("guidedCircular");
   const [guidedStage, setGuidedStage] = useState<GuidedCircularStage>("positioning");
+  const visualState = useSetupReferenceVisualState();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const sessionRef = useRef(session);
@@ -629,6 +641,11 @@ export function GuidedCaptureFlow({
     onCancelSession(mutation.session);
   }
 
+  function closeSession() {
+    cancelSession();
+    onClose?.();
+  }
+
   function setPreviewVideoRef(node: HTMLVideoElement | null) {
     videoRef.current = node;
     if (node && stream) {
@@ -646,6 +663,7 @@ export function GuidedCaptureFlow({
           currentAngle={currentAngle}
           guidedScanState={guidedScanState}
           guidedStage={guidedStage}
+          visualState={visualState}
           isAnalyzingGuidance={isAnalyzingGuidance}
           isOffline={isOffline}
           isStartingCamera={isStartingCamera}
@@ -660,6 +678,8 @@ export function GuidedCaptureFlow({
           onBeginFirstPass={() => setGuidedStage(guidedScanState.passes.find((pass) => pass.id === "first")?.completed ? "secondPass" : "firstPass")}
           onCancel={cancelSession}
           onCaptureStill={() => void captureStillFrame()}
+          onClose={closeSession}
+          onContinue={onContinue}
           onOpenCoverageReview={() => setGuidedStage("coverageReview")}
           onRetakeMissingArea={() => setGuidedStage("selectiveRetake")}
           onStartCamera={() => void startCamera()}
@@ -667,19 +687,21 @@ export function GuidedCaptureFlow({
           onSwitchCamera={() => void switchCamera()}
           onUseFallback={() => setCaptureWorkflow("fiveAngleFallback")}
         />
-        <CircularCoverageReviewPanel
-          completedAngles={completedAngles}
-          coverageRegions={Object.values(session.coverageMap.regions)}
-          guidedScanState={guidedScanState}
-          onContinue={onContinue}
-          onRetake={(angleID) => {
-            retake(angleID);
-            setCaptureWorkflow("fiveAngleFallback");
-          }}
-          onUseFallback={() => setCaptureWorkflow("fiveAngleFallback")}
-          reviewReportCanContinue={reviewReport.canContinue}
-          showDetail={guidedStage === "coverageReview" || guidedStage === "selectiveRetake" || completedAngles > 0}
-        />
+        {guidedStage === "coverageReview" || guidedStage === "selectiveRetake" || completedAngles > 0 || visualState === "complete" ? (
+          <CircularCoverageReviewPanel
+            completedAngles={completedAngles}
+            coverageRegions={Object.values(session.coverageMap.regions)}
+            guidedScanState={guidedScanState}
+            onContinue={onContinue}
+            onRetake={(angleID) => {
+              retake(angleID);
+              setCaptureWorkflow("fiveAngleFallback");
+            }}
+            onUseFallback={() => setCaptureWorkflow("fiveAngleFallback")}
+            reviewReportCanContinue={reviewReport.canContinue}
+            showDetail={guidedStage === "coverageReview" || guidedStage === "selectiveRetake" || completedAngles > 0}
+          />
+        ) : null}
         {cameraErrorCode ? <RecoveryActionList plans={[recoveryPlanForCameraError(cameraErrorCode)]} /> : null}
         {isOffline ? <RecoveryActionList plans={[getRecoveryPlan("networkFailure")]} /> : null}
         <div className="sr-only" role="status" aria-live="polite">
@@ -691,6 +713,9 @@ export function GuidedCaptureFlow({
 
   return (
     <section className="screen-stack" aria-labelledby="guided-capture-title">
+      <button className="setup-top-control" type="button" onClick={closeSession} aria-label="Close face scan">
+        <span aria-hidden="true">‹</span>
+      </button>
       <ScreenHeader eyebrow="Guided capture" title={`${completedAngles} of 5 angles completed`} id="guided-capture-title">
         <p>
           Capture five RGB images. This does not perform identity recognition, face matching, TrueDepth capture, ARKit capture, 3D reconstruction, or
@@ -1111,6 +1136,7 @@ function CircularGuidedCapturePanel({
   currentAngle,
   guidedScanState,
   guidedStage,
+  visualState,
   isAnalyzingGuidance,
   isOffline,
   isStartingCamera,
@@ -1125,6 +1151,8 @@ function CircularGuidedCapturePanel({
   onBeginFirstPass,
   onCancel,
   onCaptureStill,
+  onClose,
+  onContinue,
   onOpenCoverageReview,
   onRetakeMissingArea,
   onStartCamera,
@@ -1138,6 +1166,7 @@ function CircularGuidedCapturePanel({
   currentAngle: CapturedAngle;
   guidedScanState: GuidedScanState;
   guidedStage: GuidedCircularStage;
+  visualState: SetupReferenceVisualState | null;
   isAnalyzingGuidance: boolean;
   isOffline: boolean;
   isStartingCamera: boolean;
@@ -1152,6 +1181,8 @@ function CircularGuidedCapturePanel({
   onBeginFirstPass: () => void;
   onCancel: () => void;
   onCaptureStill: () => void;
+  onClose: () => void;
+  onContinue: () => void;
   onOpenCoverageReview: () => void;
   onRetakeMissingArea: () => void;
   onStartCamera: () => void;
@@ -1162,6 +1193,9 @@ function CircularGuidedCapturePanel({
   const firstPass = guidedScanState.passes.find((pass) => pass.id === "first") ?? guidedScanState.passes[0];
   const secondPass = guidedScanState.passes.find((pass) => pass.id === "second") ?? guidedScanState.passes[1];
   const activePass = guidedStage === "secondPass" || guidedStage === "coverageReview" ? secondPass : firstPass;
+  const displayedSegments = createDisplayedSegments(activePass.segments, visualState);
+  const captureMode = getReferenceCaptureMode(guidedStage, streamActive, visualState);
+  const completionVisible = captureMode === "complete";
   const activeInstruction = getCircularInstruction({
     stage: guidedStage,
     streamActive,
@@ -1169,145 +1203,159 @@ function CircularGuidedCapturePanel({
     liveGuidance,
     liveCoverageDecision
   });
+  const displayInstruction = getReferenceInstruction(captureMode, activeInstruction, visualState);
   const firstProgress = getGuidedScanCoveragePercent(firstPass);
   const secondProgress = getGuidedScanCoveragePercent(secondPass);
   const secondTargets = getSecondPassTargets(guidedScanState);
   const selectiveRegion = getSelectiveRetakeRegion(guidedScanState);
+  const primaryStatus = getReferenceStatusLabel({ captureMode, cameraError, circularCanBegin, liveCoverageDecision, visualState });
+  const statusDetail = getReferenceStatusDetail({ cameraError, liveCoverageDecision, visualState });
 
   return (
-    <section className="guided-circular-panel" aria-labelledby="guided-circular-title">
-      <div className="guided-circular-topbar">
-        <div>
-          <p className="eyebrow">Guided face scan</p>
-          <h1 id="guided-circular-title">Position your face inside the circle</h1>
-        </div>
-        <Button variant="ghost" onClick={onCancel}>
-          Cancel
-        </Button>
+    <section className="setup-flow-screen setup-capture-screen" aria-labelledby="guided-circular-title" data-testid={`setup-${captureMode}`}>
+      <div className="setup-capture-topbar">
+        <button className="setup-top-control" type="button" onClick={onClose} aria-label="Close face scan">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <span className="setup-camera-dot" aria-hidden="true" />
       </div>
-      <div className="guided-circular-layout">
-        <div className="guided-camera-stage" data-active={streamActive} data-mirrored={previewIsMirrored}>
-          <div className="guided-camera-circle" aria-label="Circular camera frame">
-            {streamActive ? (
-              <video ref={videoRef} autoPlay playsInline muted aria-label="Circular guided face scan camera preview" />
-            ) : (
-              <div className="guided-face-outline" aria-hidden="true">
-                <span className="guided-face-head" />
-                <span className="guided-face-neck" />
-                <span className="guided-face-shoulders" />
-              </div>
-            )}
-            <SegmentedCoverageRing segments={activePass.segments} passID={activePass.id} />
+      <div className="setup-capture-main">
+        <div className="setup-camera-shell" data-mode={captureMode} data-active={streamActive || Boolean(visualState)} data-mirrored={previewIsMirrored}>
+          <div className="setup-camera-frame" aria-label={completionVisible ? "Completed face scan preview" : "Guided face scan camera frame"}>
+            {streamActive ? <video ref={videoRef} autoPlay playsInline muted aria-label="Guided face scan camera preview" /> : <SetupCameraPlaceholder mode={captureMode} />}
+            <SegmentedCoverageRing segments={displayedSegments} passID={activePass.id} compact />
+            <span className="setup-scan-sheen" aria-hidden="true" />
             <span className="guided-face-bracket guided-face-bracket-tl" aria-hidden="true" />
             <span className="guided-face-bracket guided-face-bracket-tr" aria-hidden="true" />
             <span className="guided-face-bracket guided-face-bracket-bl" aria-hidden="true" />
             <span className="guided-face-bracket guided-face-bracket-br" aria-hidden="true" />
           </div>
-          <div className="guided-instruction-card" aria-live="polite" aria-atomic="true">
-            <StatusBadge tone={streamActive ? (circularCanBegin ? "success" : "warning") : "neutral"}>
-              {streamActive ? (circularCanBegin ? "ready" : "checking") : "camera closed"}
-            </StatusBadge>
-            <p>{activeInstruction}</p>
-            <small>
-              Circular progress advances only after a stable, distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks.
-            </small>
-          </div>
         </div>
-        <div className="guided-circular-sidebar">
-          <PassStatusCard
-            id="first"
-            title="First guided pass"
-            instruction="Move your head slowly to complete the circle"
-            progress={firstProgress}
-            status={firstPass.completed ? "complete" : guidedStage === "firstPass" ? "active" : "waiting"}
-          />
-          <PassStatusCard
-            id="second"
-            title="Second guided detail pass"
-            instruction="One more scan for better detail"
-            progress={secondProgress}
-            status={secondPass.completed ? "complete" : firstPass.completed ? "active" : "waiting"}
-            detail={secondTargets.length > 0 ? `Targets weak regions: ${secondTargets.map(formatGuidedRegionID).join(", ")}.` : "Starts after the first pass."}
-          />
-          <LiveCoverageDecisionPanel decision={liveCoverageDecision} acceptedLiveFrameCount={acceptedLiveFrameCount} streamActive={streamActive} />
-          <div className="guided-quality-card">
-            <div className="status-row">
-              <strong>Initial quality check</strong>
-              <StatusBadge tone={circularCanBegin ? "success" : "warning"}>{circularCanBegin ? "passed" : "pending"}</StatusBadge>
-            </div>
-            <QualityGateList gate={guidedScanState.initialQualityGate} />
-            <LiveGuidancePanel guidance={liveGuidance} isAnalyzing={isAnalyzingGuidance} isCameraActive={streamActive} />
-          </div>
-          {isOffline ? (
-            <Alert title="Offline" tone="warning">
-              Capture remains local. Billing or catalog checks may need network before a production scan can continue.
+
+        <div className="setup-capture-copy" aria-live="polite" aria-atomic="true">
+          <h1 id="guided-circular-title">{completionVisible ? "First GameFace scan complete." : displayInstruction}</h1>
+          <p>{completionVisible ? "Review the captured angles before creating your local profile." : statusDetail}</p>
+          <span className="sr-only" role="status">
+            {primaryStatus}. First pass {firstProgress}% complete. Second pass {secondProgress}% complete. Accepted live frames: {acceptedLiveFrameCount}.
+          </span>
+        </div>
+
+        <div className="setup-bottom-actions setup-capture-actions">
+          {cameraError ? (
+            <Alert title={cameraErrorCode === "permissionDenied" ? "Camera denied" : "Camera unavailable"} tone="warning" role="alert">
+              {cameraError} Allow camera access or use the assisted five-angle capture option.
             </Alert>
           ) : null}
           {lifecycleNotice ? (
-            <Alert title="Session notice" tone="warning" role="status">
+            <Alert title="Session paused" tone="warning" role="status">
               {lifecycleNotice}
             </Alert>
           ) : null}
-          {cameraError ? (
-            <Alert title="Recoverable camera error" tone="warning" role="alert">
-              {cameraError}
+          {isOffline ? (
+            <Alert title="Offline" tone="warning">
+              Capture remains local. Billing or catalog checks may need network before production scanning can continue.
             </Alert>
           ) : null}
-          {cameraErrorCode ? (
-            <Alert title="Camera fallback ready" tone="info">
-              If camera permission stays blocked, use assisted five-angle capture and upload one image for each required view.
-            </Alert>
-          ) : null}
-          <div className="button-row compact-buttons">
-            <Button onClick={onStartCamera} disabled={isStartingCamera}>
-              {isStartingCamera ? "Starting camera" : "Start camera"}
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={onBeginFirstPass}
-              disabled={!circularCanBegin || guidedStage === "firstPass" || guidedStage === "secondPass" || guidedStage === "coverageReview"}
-            >
-              {firstPass.completed ? "Start second pass" : "Begin first pass"}
-            </Button>
-            <Button variant="secondary" onClick={onCaptureStill} disabled={!streamActive} aria-label={`Capture fallback still for ${currentAngle.label}`}>
-              Capture current view
-            </Button>
-            <Button variant="ghost" onClick={onSwitchCamera}>
-              Switch camera
-            </Button>
-            <Button variant="ghost" onClick={onStopCamera} disabled={!streamActive}>
-              Stop camera
-            </Button>
-          </div>
-          <div className="button-row compact-buttons">
-            <Button variant="secondary" onClick={onUseFallback}>
-              Use assisted five-angle capture
-            </Button>
-            <Button variant="secondary" onClick={onOpenCoverageReview}>
+          <Button
+            className="setup-primary-button"
+            onClick={completionVisible ? onContinue : streamActive ? onBeginFirstPass : onStartCamera}
+            disabled={isStartingCamera || (!completionVisible && streamActive && !circularCanBegin)}
+            aria-label={completionVisible ? "Continue after completed scan" : streamActive ? "Begin guided circular scan" : "Start camera"}
+          >
+            {completionVisible ? "Done" : streamActive ? (isStartingCamera ? "Starting..." : "Begin Scan") : isStartingCamera ? "Starting..." : "Start Camera"}
+          </Button>
+          {!completionVisible ? (
+            <>
+              <Button variant="secondary" className="setup-secondary-button" onClick={onUseFallback}>
+                Accessibility Options
+              </Button>
+              <Button variant="secondary" className="setup-secondary-button" onClick={onCancel}>
+                Start Over
+              </Button>
+            </>
+          ) : (
+            <Button variant="secondary" className="setup-secondary-button" onClick={onOpenCoverageReview}>
               Review coverage
             </Button>
-            <Button variant="ghost" onClick={onRetakeMissingArea} disabled={!selectiveRegion && !reviewReportCanContinue}>
-              Retake missing area
-            </Button>
-          </div>
+          )}
+          <details className="setup-disclosure">
+            <summary>Scan details</summary>
+            <p>
+              Browser capture uses RGB camera guidance, not depth capture. Circular progress advances only after a stable, distinct live frame passes face,
+              pose, blur, exposure, and duplicate-angle checks.
+            </p>
+            <QualityGateList gate={guidedScanState.initialQualityGate} />
+            <LiveCoverageDecisionPanel decision={liveCoverageDecision} acceptedLiveFrameCount={acceptedLiveFrameCount} streamActive={streamActive} />
+            <p>Second-pass targets: {secondTargets.length > 0 ? secondTargets.map(formatGuidedRegionID).join(", ") : "none"}.</p>
+            <div className="button-row compact-buttons">
+              <Button variant="ghost" onClick={onCaptureStill} disabled={!streamActive} aria-label={`Capture fallback still for ${currentAngle.label}`}>
+                Capture current view
+              </Button>
+              <Button variant="ghost" onClick={onSwitchCamera}>
+                Switch camera
+              </Button>
+              <Button variant="ghost" onClick={onStopCamera} disabled={!streamActive}>
+                Stop camera
+              </Button>
+              <Button variant="ghost" onClick={onRetakeMissingArea} disabled={!selectiveRegion && !reviewReportCanContinue}>
+                Retake missing area
+              </Button>
+            </div>
+          </details>
         </div>
       </div>
     </section>
   );
 }
 
-function SegmentedCoverageRing({ segments, passID }: { segments: GuidedScanState["passes"][number]["segments"]; passID: GuidedScanPassID }) {
+function SetupCameraPlaceholder({ mode }: { mode: "positioning" | "scan" | "complete" }) {
+  if (mode === "complete") {
+    return (
+      <div className="setup-complete-glyph" aria-hidden="true">
+        <svg viewBox="0 0 120 120" focusable="false">
+          <circle cx="60" cy="60" r="42" />
+          <path d="M40 63l14 14 29-35" />
+        </svg>
+      </div>
+    );
+  }
   return (
-    <div className="coverage-ring" aria-label={`${passID === "first" ? "First" : "Second"} pass circular coverage`}>
-      {segments.map((segment, index) => (
-        <span
-          aria-label={`${segment.label}: ${formatCoverageStatus(segment.status)}`}
-          className="coverage-ring-segment"
-          data-status={segment.status}
-          key={segment.id}
-          style={{ transform: `rotate(${index * 45}deg)` }}
-        />
-      ))}
+    <div className="guided-face-outline setup-face-placeholder" aria-hidden="true">
+      <span className="guided-face-head" />
+      <span className="guided-face-neck" />
+      <span className="guided-face-shoulders" />
+    </div>
+  );
+}
+
+function SegmentedCoverageRing({
+  compact = false,
+  segments,
+  passID
+}: {
+  compact?: boolean;
+  segments: GuidedScanState["passes"][number]["segments"];
+  passID: GuidedScanPassID;
+}) {
+  const visualTicksPerSegment = compact ? 4 : 1;
+  const totalTicks = segments.length * visualTicksPerSegment;
+  return (
+    <div className="coverage-ring" data-compact={compact ? "true" : "false"} aria-label={`${passID === "first" ? "First" : "Second"} pass circular coverage`}>
+      {segments.flatMap((segment, segmentIndex) =>
+        Array.from({ length: visualTicksPerSegment }, (_, tickIndex) => {
+          const tickNumber = segmentIndex * visualTicksPerSegment + tickIndex;
+          return (
+            <span
+              aria-hidden={tickIndex === 0 ? undefined : "true"}
+              aria-label={tickIndex === 0 ? `${segment.label}: ${formatCoverageStatus(segment.status)}` : undefined}
+              className="coverage-ring-segment"
+              data-status={segment.status}
+              key={`${segment.id}-${tickIndex}`}
+              style={{ transform: `rotate(${(tickNumber * 360) / totalTicks}deg)` }}
+            />
+          );
+        })
+      )}
     </div>
   );
 }
@@ -1760,6 +1808,88 @@ function angleLabel(angleID: CapturedAngleID) {
     rightProfile: "right profile"
   };
   return labels[angleID];
+}
+
+function useSetupReferenceVisualState(): SetupReferenceVisualState | null {
+  const [visualState, setVisualState] = useState<SetupReferenceVisualState | null>(null);
+  useEffect(() => {
+    const visualTestsEnabled = process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_GFM_SETUP_VISUAL_TESTS === "1";
+    if (!visualTestsEnabled || typeof window === "undefined") return;
+    const value = new URLSearchParams(window.location.search).get("setupVisualState");
+    const allowed: SetupReferenceVisualState[] = ["positioning", "scan-empty", "scan-partial", "scan-near-complete", "complete", "denied", "multiple", "accessibility"];
+    setVisualState(allowed.includes(value as SetupReferenceVisualState) ? (value as SetupReferenceVisualState) : null);
+  }, []);
+  return visualState;
+}
+
+function getReferenceCaptureMode(
+  guidedStage: GuidedCircularStage,
+  streamActive: boolean,
+  visualState: SetupReferenceVisualState | null
+): "positioning" | "scan" | "complete" {
+  if (visualState === "complete") return "complete";
+  if (visualState === "scan-empty" || visualState === "scan-partial" || visualState === "scan-near-complete") return "scan";
+  if (guidedStage === "coverageReview") return "complete";
+  if (guidedStage === "firstPass" || guidedStage === "secondPass" || guidedStage === "firstPassComplete") return "scan";
+  return streamActive ? "positioning" : "positioning";
+}
+
+function getReferenceInstruction(captureMode: "positioning" | "scan" | "complete", activeInstruction: string, visualState: SetupReferenceVisualState | null) {
+  if (visualState === "denied") return "Camera access is needed to continue.";
+  if (visualState === "multiple") return "Only one face can be in the frame.";
+  if (visualState === "accessibility") return "Use assisted capture if circular movement is difficult.";
+  if (captureMode === "scan") return "Move your head slowly to complete the circle.";
+  return activeInstruction === "Start the camera when you are ready." ? "Position your face within the frame." : activeInstruction;
+}
+
+function createDisplayedSegments(
+  segments: GuidedScanState["passes"][number]["segments"],
+  visualState: SetupReferenceVisualState | null
+): GuidedScanState["passes"][number]["segments"] {
+  const acceptedCount =
+    visualState === "scan-partial" ? 5 : visualState === "scan-near-complete" ? 7 : visualState === "complete" ? segments.length : 0;
+  if (acceptedCount === 0) return segments;
+  return segments.map((segment, index) => ({
+    ...segment,
+    status: index < acceptedCount ? ("accepted" as const) : segment.status
+  }));
+}
+
+function getReferenceStatusLabel({
+  cameraError,
+  captureMode,
+  circularCanBegin,
+  liveCoverageDecision,
+  visualState
+}: {
+  cameraError: string | null;
+  captureMode: "positioning" | "scan" | "complete";
+  circularCanBegin: boolean;
+  liveCoverageDecision: GuidedLiveFrameDecision | null;
+  visualState: SetupReferenceVisualState | null;
+}) {
+  if (captureMode === "complete") return "First GameFace scan complete.";
+  if (visualState === "denied" || cameraError) return "Camera permission denied.";
+  if (visualState === "multiple") return "More than one face detected.";
+  if (captureMode === "scan" && liveCoverageDecision?.assignedSegmentID) return `${formatSegmentLabel(liveCoverageDecision.assignedSegmentID)} accepted.`;
+  if (captureMode === "scan") return "Move your head slowly to complete the circle.";
+  return circularCanBegin ? "Face positioned." : "Position your face within the frame.";
+}
+
+function getReferenceStatusDetail({
+  cameraError,
+  liveCoverageDecision,
+  visualState
+}: {
+  cameraError: string | null;
+  liveCoverageDecision: GuidedLiveFrameDecision | null;
+  visualState: SetupReferenceVisualState | null;
+}) {
+  if (visualState === "denied" || cameraError) return "Allow camera access or use the assisted five-angle capture option.";
+  if (visualState === "multiple") return "Only one person can be in the scan.";
+  if (visualState === "accessibility") return "Use assisted capture for a step-by-step set of poses instead of circular movement.";
+  if (liveCoverageDecision?.status === "rejected" && liveCoverageDecision.rejectionReasons[0]) return liveCoverageDecision.rejectionReasons[0];
+  return "Keep your face centered with even light and a neutral expression.";
 }
 
 function createUiGuidedScanState({

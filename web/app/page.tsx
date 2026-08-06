@@ -203,6 +203,7 @@ export default function HomePage() {
       ]
     : PRIMARY_NAV_ITEMS;
   const stepFlowProgress = getStepFlowProgress(screen);
+  const immersiveSetupScreen = screen === "start" || screen === "capture";
 
   const completedAngles = session.angles.filter((angle) => angle.status === "complete").length;
   const requiredAngles = session.angles.length;
@@ -824,6 +825,7 @@ export default function HomePage() {
             environment={scanEntryEnvironment}
             previewModeEnabled={scanEntryPreviewModeEnabled}
             onAnalytics={trackAnalytics}
+            onCancel={() => navigate("home")}
             onReadyToPrepare={() => {
               trackAnalytics("captureStarted", { captureMode: "webRgbGuided", requiredAngleCount: requiredAngles });
               navigate("preparation");
@@ -853,6 +855,7 @@ export default function HomePage() {
     setLatestMatchingError(null);
               refreshPrivacyState();
             }}
+            onClose={() => navigate("home")}
             onContinue={() => navigate("attributes")}
           />
         );
@@ -1094,6 +1097,7 @@ export default function HomePage() {
       completedAngles={completedAngles}
       requiredAngles={requiredAngles}
       showDevelopmentCatalogBanner={shouldShowDevelopmentCatalogBanner(process.env.NODE_ENV, catalogIsEmpty)}
+      immersive={immersiveSetupScreen}
     >
       <div className="sr-only" role="status" aria-live="polite">
         Current screen: {screen}. {completedAngles} of {requiredAngles} capture angles completed.
@@ -1108,7 +1112,7 @@ export default function HomePage() {
           {offlineRecoveryStatus.messages.map((message) => message.message).join(" ")}
         </Alert>
       ) : null}
-      {stepFlowProgress.isInStepFlow ? (
+      {stepFlowProgress.isInStepFlow && !immersiveSetupScreen ? (
         <div className="flow-layout">
           <StepFlowRail steps={STEP_FLOW_DETAILS} activeScreen={screen} onNavigate={navigate} />
           <div>{content}</div>

@@ -6,6 +6,7 @@
     "verify": "node scripts/verify.mjs",
     "verify:clean": "node scripts/verify-non-mutating.mjs",
     "verify:clean:mutation-smoke": "node scripts/verify-non-mutating.mjs --mutation-smoke",
+    "gameface:setup-reference:screenshots": "node scripts/capture-gameface-setup-reference-screenshots.mjs",
     "quality": "npm run verify",
     "status:check": "node scripts/status-consistency-check.mjs",
     "supabase:schema:check": "node scripts/supabase-schema-check.mjs",

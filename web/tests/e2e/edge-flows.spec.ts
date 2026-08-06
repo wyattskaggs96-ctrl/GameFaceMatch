@@ -16,8 +16,8 @@ test.describe("GameFace Match E2E edge flows", () => {
     await completeOnboarding(page);
     await acceptRequiredConsent(page);
     await page.getByRole("button", { name: "Start" }).first().click();
-    await expect(page.getByRole("heading", { name: "Build yourself in the game." })).toBeVisible();
-    await expect(page.getByRole("button", { name: /Start face scan/ })).toBeDisabled();
+    await expect(page.getByRole("heading", { name: "Set Up Your GameFace Scan" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Get Started" })).toBeDisabled();
     await page.goto("/#preparation");
     await page.getByRole("button", { name: "Get Started" }).click();
 
@@ -136,13 +136,16 @@ test.describe("GameFace Match E2E edge flows", () => {
     ]) {
       await page.setViewportSize(viewport);
       await page.goto("/#start");
-      await expect(page.getByRole("heading", { name: "Build yourself in the game." })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Set Up Your GameFace Scan" })).toBeVisible();
+      await page.locator("details.setup-disclosure").evaluate((element) => {
+        (element as HTMLDetailsElement).open = true;
+      });
       await page.getByRole("radio", { name: /Launch Pack/ }).click();
       await expect(page.getByRole("radio", { name: /Launch Pack/ })).toHaveAttribute("aria-checked", "true");
       await expect(page.getByRole("radio", { name: /All Access/ })).toHaveAttribute("aria-checked", "false");
       await page.getByRole("radio", { name: /All Access/ }).click();
       await expect(page.getByRole("radio", { name: /All Access/ })).toHaveAttribute("aria-checked", "true");
-      await expect(page.getByRole("button", { name: /Start face scan/ })).toBeDisabled();
+      await expect(page.getByRole("button", { name: "Get Started" })).toBeDisabled();
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
       expect(overflow, `${viewport.width}x${viewport.height}`).toBe(false);
     }
@@ -157,12 +160,14 @@ test.describe("GameFace Match E2E edge flows", () => {
     ]) {
       await page.setViewportSize(viewport);
       await page.goto("/#capture");
-      await expect(page.getByRole("heading", { name: "Position your face inside the circle" })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Position your face within the frame." })).toBeVisible();
+      await page.locator("details.setup-disclosure").evaluate((element) => {
+        (element as HTMLDetailsElement).open = true;
+      });
       await expect(
         page.getByText("Circular progress advances only after a stable, distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks.")
       ).toBeVisible();
-      await expect(page.getByRole("button", { name: "Use assisted five-angle capture" }).first()).toBeVisible();
-      await expect(page.getByRole("button", { name: "Create my game face" })).toBeDisabled();
+      await expect(page.getByRole("button", { name: "Accessibility Options" }).first()).toBeVisible();
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
       expect(overflow, `${viewport.width}x${viewport.height}`).toBe(false);
     }

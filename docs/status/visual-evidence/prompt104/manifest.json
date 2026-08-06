@@ -1,0 +1,190 @@
+{
+  "generatedAt": "2026-08-06T01:48:39.708Z",
+  "baseUrl": "http://127.0.0.1:3210",
+  "states": [
+    {
+      "state": "01-introduction",
+      "viewport": "390x844",
+      "path": "/#start",
+      "screenshot": "docs/status/visual-evidence/prompt104/390x844-01-introduction.jpg"
+    },
+    {
+      "state": "02-positioning",
+      "viewport": "390x844",
+      "path": "/?setupVisualState=positioning#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/390x844-02-positioning.jpg"
+    },
+    {
+      "state": "03-zero-progress",
+      "viewport": "390x844",
+      "path": "/?setupVisualState=scan-empty#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/390x844-03-zero-progress.jpg"
+    },
+    {
+      "state": "04-partial-progress",
+      "viewport": "390x844",
+      "path": "/?setupVisualState=scan-partial#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/390x844-04-partial-progress.jpg"
+    },
+    {
+      "state": "05-near-completion",
+      "viewport": "390x844",
+      "path": "/?setupVisualState=scan-near-complete#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/390x844-05-near-completion.jpg"
+    },
+    {
+      "state": "06-completed",
+      "viewport": "390x844",
+      "path": "/?setupVisualState=complete#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/390x844-06-completed.jpg"
+    },
+    {
+      "state": "07-camera-denied",
+      "viewport": "390x844",
+      "path": "/?setupVisualState=denied#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/390x844-07-camera-denied.jpg"
+    },
+    {
+      "state": "08-multiple-subjects",
+      "viewport": "390x844",
+      "path": "/?setupVisualState=multiple#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/390x844-08-multiple-subjects.jpg"
+    },
+    {
+      "state": "09-reduced-motion",
+      "viewport": "390x844",
+      "path": "/?setupVisualState=scan-partial#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/390x844-09-reduced-motion.jpg"
+    },
+    {
+      "state": "10-accessibility-stepwise",
+      "viewport": "390x844",
+      "path": "/?setupVisualState=accessibility#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/390x844-10-accessibility-stepwise.jpg"
+    },
+    {
+      "state": "01-introduction",
+      "viewport": "430x932",
+      "path": "/#start",
+      "screenshot": "docs/status/visual-evidence/prompt104/430x932-01-introduction.jpg"
+    },
+    {
+      "state": "02-positioning",
+      "viewport": "430x932",
+      "path": "/?setupVisualState=positioning#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/430x932-02-positioning.jpg"
+    },
+    {
+      "state": "03-zero-progress",
+      "viewport": "430x932",
+      "path": "/?setupVisualState=scan-empty#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/430x932-03-zero-progress.jpg"
+    },
+    {
+      "state": "04-partial-progress",
+      "viewport": "430x932",
+      "path": "/?setupVisualState=scan-partial#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/430x932-04-partial-progress.jpg"
+    },
+    {
+      "state": "05-near-completion",
+      "viewport": "430x932",
+      "path": "/?setupVisualState=scan-near-complete#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/430x932-05-near-completion.jpg"
+    },
+    {
+      "state": "06-completed",
+      "viewport": "430x932",
+      "path": "/?setupVisualState=complete#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/430x932-06-completed.jpg"
+    },
+    {
+      "state": "07-camera-denied",
+      "viewport": "430x932",
+      "path": "/?setupVisualState=denied#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/430x932-07-camera-denied.jpg"
+    },
+    {
+      "state": "08-multiple-subjects",
+      "viewport": "430x932",
+      "path": "/?setupVisualState=multiple#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/430x932-08-multiple-subjects.jpg"
+    },
+    {
+      "state": "09-reduced-motion",
+      "viewport": "430x932",
+      "path": "/?setupVisualState=scan-partial#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/430x932-09-reduced-motion.jpg"
+    },
+    {
+      "state": "10-accessibility-stepwise",
+      "viewport": "430x932",
+      "path": "/?setupVisualState=accessibility#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/430x932-10-accessibility-stepwise.jpg"
+    },
+    {
+      "state": "01-introduction",
+      "viewport": "desktop-1440x900",
+      "path": "/#start",
+      "screenshot": "docs/status/visual-evidence/prompt104/desktop-1440x900-01-introduction.jpg"
+    },
+    {
+      "state": "02-positioning",
+      "viewport": "desktop-1440x900",
+      "path": "/?setupVisualState=positioning#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/desktop-1440x900-02-positioning.jpg"
+    },
+    {
+      "state": "03-zero-progress",
+      "viewport": "desktop-1440x900",
+      "path": "/?setupVisualState=scan-empty#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/desktop-1440x900-03-zero-progress.jpg"
+    },
+    {
+      "state": "04-partial-progress",
+      "viewport": "desktop-1440x900",
+      "path": "/?setupVisualState=scan-partial#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/desktop-1440x900-04-partial-progress.jpg"
+    },
+    {
+      "state": "05-near-completion",
+      "viewport": "desktop-1440x900",
+      "path": "/?setupVisualState=scan-near-complete#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/desktop-1440x900-05-near-completion.jpg"
+    },
+    {
+      "state": "06-completed",
+      "viewport": "desktop-1440x900",
+      "path": "/?setupVisualState=complete#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/desktop-1440x900-06-completed.jpg"
+    },
+    {
+      "state": "07-camera-denied",
+      "viewport": "desktop-1440x900",
+      "path": "/?setupVisualState=denied#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/desktop-1440x900-07-camera-denied.jpg"
+    },
+    {
+      "state": "08-multiple-subjects",
+      "viewport": "desktop-1440x900",
+      "path": "/?setupVisualState=multiple#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/desktop-1440x900-08-multiple-subjects.jpg"
+    },
+    {
+      "state": "09-reduced-motion",
+      "viewport": "desktop-1440x900",
+      "path": "/?setupVisualState=scan-partial#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/desktop-1440x900-09-reduced-motion.jpg"
+    },
+    {
+      "state": "10-accessibility-stepwise",
+      "viewport": "desktop-1440x900",
+      "path": "/?setupVisualState=accessibility#capture",
+      "screenshot": "docs/status/visual-evidence/prompt104/desktop-1440x900-10-accessibility-stepwise.jpg"
+    }
+  ],
+  "notes": [
+    "Deterministic setupVisualState query parameter is development/test-only and disabled in production code paths.",
+    "Screenshots use local placeholders, not real camera imagery or user face media."
+  ]
+}

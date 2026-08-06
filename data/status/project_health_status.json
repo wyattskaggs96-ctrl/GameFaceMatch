@@ -1,6 +1,6 @@
 {
   "schemaVersion": "gameface-project-health-status-v1",
-  "generatedAt": "2026-08-03T05:30:00-04:00",
+  "generatedAt": "2026-08-06T01:35:00-04:00",
   "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
   "branch": "main",
   "head": "PROMPT_102_SUPPORTED_SUBSET_VERIFIER_SESSION",
@@ -78,6 +78,7 @@
   },
   "systems": {
     "webProductShell": "implemented_not_production_validated",
+    "gamefaceSetupReferenceFlow": "implemented_not_production_validated",
     "faceCapture": "implemented_not_production_validated",
     "matchingEngine": "implemented_without_real_catalog_validation",
     "cf27SupportedSubsetClassification": "complete_non_production_verifier_ready",

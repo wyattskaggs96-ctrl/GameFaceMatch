@@ -1,7 +1,7 @@
 # Current Project State
 
 **Status:** AUTHORITATIVE CURRENT OPERATIONAL STATUS
-**Last reconciled:** 2026-08-03
+**Last reconciled:** 2026-08-06
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
 **Repository checkpoint reviewed:** Prompt 102 supported-subset verifier-session checkpoint
@@ -53,12 +53,15 @@ Prompt 101 classifies all 92 current CF27 research candidates into explicit evid
 
 Prompt 102 operationalizes the 76-record supported-subset package for a real independent human verifier. It creates a resumable session template, verifier environment and attestation templates, record-decision templates, menu-count templates, a deterministic 24-record secondary-angle review file, excluded duplicate/order limitation review rows, a strict non-production import validator, a runbook, and an owner checkpoint. Human execution status is `READY_FOR_HUMAN_VERIFIER`. Codex created 0 human decisions, 0 second-verified records, 0 production approvals, 0 production catalog records, and 0 recommendation-eligible records.
 
+Prompt 104 rebuilds the customer setup and guided scan experience to closely follow the owner-provided mobile setup recording while preserving GameFace Match branding, browser-RGB capability limits, consent/payment/catalog gates, accessibility, privacy, and fail-closed recommendation behavior. Visual evidence is recorded in `docs/status/visual-evidence/prompt104/`, and the implementation audit is `docs/status/GAMEFACE_SETUP_REFERENCE_IMPLEMENTATION.md`. This work changes customer presentation and capture UI only; it does not import verifier decisions, promote catalog records, enable recommendations, activate payments, deploy Supabase, or change the Prompt 103 hold.
+
 Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media inventory as the final owner-provided media baseline for the initial product launch. Additional Wyatt recordings are no longer an initial-launch prerequisite. Historical recapture audits remain useful evidence-quality references, but remaining recapture tasks are reclassified as known evidence limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch improvements, or unsupported option/category gaps where evidence is insufficient.
 
 ## Actually Working
 
 - Next.js/React/TypeScript web app builds and has extensive tested local flows.
 - Web onboarding, disclaimer, privacy/consent, mobile scan entry, preparation, guided RGB capture/upload fallback, quality review, profile review, catalog-unavailable results, privacy center, and local deletion flows exist.
+- The customer setup and guided scan routes now use a full-screen black, mobile-first, Face ID-style interaction pattern with original GameFace Match scan artwork, rounded-square positioning, circular segmented progress, completion, camera-denied, multiple-face, Reduced Motion, and assisted-capture states.
 - Local MediaPipe-based face-landmark provider and local FC 26 MVP analysis modules exist.
 - FC 26 research observations are structured in `data/research/fc26/player_creator_research.json`, but remain research-only.
 - College Football 27 Phase 0 tooling exists for source-video inventory, evidence manifests, timelines, research candidates, primary review, verifier packages, production gates, and fail-closed publication checks.
@@ -163,6 +166,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Master completion plan: `docs/status/MASTER_COMPLETION_PLAN.md`
 - Evidence index: `docs/status/CODE_AND_FEATURE_EVIDENCE_INDEX.md`
 - Public launch completion audit: `docs/status/PUBLIC_LAUNCH_COMPLETION_AUDIT.md`
+- GameFace setup reference implementation: `docs/status/GAMEFACE_SETUP_REFERENCE_IMPLEMENTATION.md`
 - CF27 supported subset classification: `docs/status/CF27_SUPPORTED_SUBSET_CLASSIFICATION.md`
 - CF27 supported subset verifier handoff: `docs/status/CF27_SUPPORTED_SUBSET_VERIFIER_HANDOFF.md`
 - CF27 supported subset verifier runbook: `docs/status/CF27_SUPPORTED_SUBSET_VERIFIER_RUNBOOK.md`

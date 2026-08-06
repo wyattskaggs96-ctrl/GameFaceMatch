@@ -11,6 +11,7 @@ interface AppShellProps {
   completedAngles: number;
   requiredAngles: number;
   showDevelopmentCatalogBanner: boolean;
+  immersive?: boolean;
   children: ReactNode;
 }
 
@@ -22,6 +23,7 @@ export function AppShell({
   completedAngles,
   requiredAngles,
   showDevelopmentCatalogBanner,
+  immersive = false,
   children
 }: AppShellProps) {
   const desktopNavRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -47,37 +49,39 @@ export function AppShell({
   }
 
   return (
-    <div className="app-shell">
+    <div className="app-shell" data-immersive={immersive ? "true" : "false"}>
       <a className="skip-link" href="#main-content" onClick={() => mainRef.current?.focus()}>
         Skip to main content
       </a>
-      <header className="topbar">
-        <div className="brand" aria-label="GameFace Match web MVP">
-          <strong>GameFace Match</strong>
-          <span>Web MVP | RGB capture</span>
-        </div>
-        <nav className="nav desktop-nav" aria-label="Primary navigation">
-          {navItems.map((item, index) => (
-            <button
-              key={item.id}
-              type="button"
-              aria-current={item.id === activeScreen ? "page" : undefined}
-              aria-label={item.label}
-              onClick={() => onNavigate(item.id)}
-              onKeyDown={(event) => handleNavKeyDown(event, index, navItems, desktopNavRefs.current)}
-              ref={(element) => {
-                desktopNavRefs.current[index] = element;
-              }}
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
-        <div className="shell-progress">
-          <ProgressBar value={completedAngles} max={requiredAngles} label="Capture angles" />
-        </div>
-      </header>
-      {showDevelopmentCatalogBanner ? (
+      {!immersive ? (
+        <header className="topbar">
+          <div className="brand" aria-label="GameFace Match web MVP">
+            <strong>GameFace Match</strong>
+            <span>Web MVP | RGB capture</span>
+          </div>
+          <nav className="nav desktop-nav" aria-label="Primary navigation">
+            {navItems.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                aria-current={item.id === activeScreen ? "page" : undefined}
+                aria-label={item.label}
+                onClick={() => onNavigate(item.id)}
+                onKeyDown={(event) => handleNavKeyDown(event, index, navItems, desktopNavRefs.current)}
+                ref={(element) => {
+                  desktopNavRefs.current[index] = element;
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+          <div className="shell-progress">
+            <ProgressBar value={completedAngles} max={requiredAngles} label="Capture angles" />
+          </div>
+        </header>
+      ) : null}
+      {!immersive && showDevelopmentCatalogBanner ? (
         <div className="dev-banner">
           <Alert title="Development catalog state" tone="warning">
             Verified production catalog is empty. This banner is hidden from production builds.
@@ -87,23 +91,25 @@ export function AppShell({
       <main className="page" id="main-content" tabIndex={-1} ref={mainRef} aria-live="polite">
         {children}
       </main>
-      <nav className="mobile-nav" aria-label="Mobile navigation">
-        {mobileNavItems.map((item, index) => (
-          <button
-            key={item.id}
-            type="button"
-            aria-current={item.id === activeScreen ? "page" : undefined}
-            aria-label={item.label}
-            onClick={() => onNavigate(item.id)}
-            onKeyDown={(event) => handleNavKeyDown(event, index, mobileNavItems, mobileNavRefs.current)}
-            ref={(element) => {
-              mobileNavRefs.current[index] = element;
-            }}
-          >
-            {item.shortLabel ?? item.label}
-          </button>
-        ))}
-      </nav>
+      {!immersive ? (
+        <nav className="mobile-nav" aria-label="Mobile navigation">
+          {mobileNavItems.map((item, index) => (
+            <button
+              key={item.id}
+              type="button"
+              aria-current={item.id === activeScreen ? "page" : undefined}
+              aria-label={item.label}
+              onClick={() => onNavigate(item.id)}
+              onKeyDown={(event) => handleNavKeyDown(event, index, mobileNavItems, mobileNavRefs.current)}
+              ref={(element) => {
+                mobileNavRefs.current[index] = element;
+              }}
+            >
+              {item.shortLabel ?? item.label}
+            </button>
+          ))}
+        </nav>
+      ) : null}
     </div>
   );
 }

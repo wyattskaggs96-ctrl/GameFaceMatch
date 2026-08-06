@@ -38,10 +38,9 @@ export function consentCard(page: Page, name: string): Locator {
 
 export async function navigateToCapture(page: Page) {
   await page.getByRole("button", { name: "Start" }).first().click();
-  await expect(page.getByRole("heading", { name: "Build yourself in the game." })).toBeVisible();
-  await expect(page.getByText("Launch Pack • $4.99")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Set Up Your GameFace Scan" })).toBeVisible();
   await expect(page.getByText("Purchase verification is not connected yet")).toBeVisible();
-  await expect(page.getByRole("button", { name: /Start face scan/ })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Get Started" })).toBeDisabled();
   await page.goto("/#preparation");
   await expect(page.getByRole("heading", { name: "Get ready for your face scan" })).toBeVisible();
   await expect(page.getByText("Browser capture uses guided RGB images only.")).toBeVisible();
@@ -59,12 +58,10 @@ export async function navigateToCapture(page: Page) {
   await expect(page.getByRole("heading", { name: "Camera or upload" })).toBeVisible();
   await expect(page.getByText("Upload fallback is still an RGB-only workflow")).toBeVisible();
   await page.getByRole("button", { name: "Continue to guided capture" }).click();
-  await expect(page.getByRole("heading", { name: "Position your face inside the circle" })).toBeVisible();
-  await expect(
-    page.getByText("Circular progress advances only after a stable, distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks.")
-  ).toBeVisible();
-  await expect(page.getByRole("button", { name: "Use assisted five-angle capture" }).first()).toBeVisible();
-  await page.getByRole("button", { name: "Use assisted five-angle capture" }).first().click();
+  await expect(page.getByRole("heading", { name: "Position your face within the frame." })).toBeVisible();
+  await expect(page.getByText("Keep your face centered with even light and a neutral expression.")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Accessibility Options" }).first()).toBeVisible();
+  await page.getByRole("button", { name: "Accessibility Options" }).first().click();
   await expect(page.getByRole("heading", { name: "0 of 5 angles completed" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Angle plan" })).toBeVisible();
   await expect(page.getByText("one straight-on front view, two three-quarter views, and two full profile views")).toBeVisible();

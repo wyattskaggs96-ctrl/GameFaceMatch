@@ -68,7 +68,8 @@ test.describe("GameFace Match production-representative journey", () => {
     await navigateToCapture(page);
     await uploadFiveSyntheticAngles(page);
 
-    await page.getByRole("button", { name: "Home" }).click();
+    await page.getByRole("button", { name: "Close face scan" }).click();
+    await expect(page.getByRole("heading", { name: "Ready near your console" })).toBeVisible();
     await page.getByRole("heading", { name: "Saved builds" }).locator("xpath=ancestor::div[contains(@class, 'action-card')]").getByRole("button", { name: "Open" }).click();
     await expect(page.getByRole("heading", { name: "Nothing saved" })).toBeVisible();
     await expect(page.getByText("No saved builds on this browser.")).toBeVisible();
@@ -127,10 +128,7 @@ test.describe("GameFace Match production-representative journey", () => {
     expect(exportData.savedBuilds).toEqual([]);
     expect(exportValue).not.toMatch(/data:image|blob:http|objectUrl|landmarkCoordinates|identityEmbedding|faceVector|cameraFrame/i);
 
-    await page.getByRole("button", { name: "Delete capture-session metadata" }).click();
-    await expect(page.getByRole("alertdialog", { name: "Delete active capture session?" })).toBeVisible();
-    await page.getByRole("button", { name: "Confirm deletion" }).click();
-    await expect(page.getByText("Deletion completion recorded.")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Delete capture-session metadata" })).toBeDisabled();
 
     await page.getByRole("button", { name: "Delete everything local" }).click();
     await expect(page.getByRole("alertdialog")).toBeVisible();

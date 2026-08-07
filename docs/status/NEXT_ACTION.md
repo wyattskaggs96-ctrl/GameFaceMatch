@@ -97,10 +97,10 @@ Prompt 106 records the private-beta Buddy Trial V1 North Star in:
 
 `docs/Product/BUDDY_TRIAL_V1.md`
 
-That contract defines the future customer journey from a texted iPhone link through guided scan, exact verified CF27 settings, first result upload, refinement recommendations, second result upload, before/after comparison, and resemblance rating.
+That contract defines the future customer journey from a texted iPhone link through guided scan, exact verified CF27 settings, first result upload, refinement recommendations, second result upload, before/after comparison, and resemblance rating. Prompt 108 now implements the first invite-only fixture session shell at `/trial/[inviteId]` with local consent, resume, invalid/expired/used/deleted states, and empty-catalog fail-closed behavior.
 
-The next implementation prompt may build only the session shell and deterministic test-only fixture path while keeping the production catalog gate fail-closed:
+The next implementation prompt may connect the invite shell to a deterministic scan-complete handoff and result-upload placeholder while keeping production recommendations blocked until a verified nonempty catalog exists:
 
-`GFM | Q05 | PROMPT 107 | PHASE 01 | Build buddy trial session shell and test-only E2E fixtures`
+`GFM | Q05 | PROMPT 109 | PHASE 03 | Connect Buddy Trial scan handoff and result upload shell`
 
 This does not replace the human-verifier action above. Real CF27 settings still require a verified nonempty production catalog.

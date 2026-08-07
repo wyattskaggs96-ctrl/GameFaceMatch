@@ -8,9 +8,9 @@ Purpose: have a real independent second verifier complete the Prompt 102 support
 
 ## Codex-Ready Parallel Prompt
 
-`GFM | Q05 | PROMPT 107 | PHASE 01 | Build buddy trial session shell and test-only E2E fixtures`
+`GFM | Q05 | PROMPT 109 | PHASE 03 | Connect Buddy Trial scan handoff and result upload shell`
 
-Use `docs/Product/BUDDY_TRIAL_V1.md` as the authoritative private-beta V1 contract. Build only the session shell, state tracking, and test-only E2E fixture path. Keep production CF27 recommendations blocked until real verified production catalog data exists.
+Use `docs/Product/BUDDY_TRIAL_V1.md` as the authoritative private-beta V1 contract and build on Prompt 108’s `/trial/[inviteId]` shell. Connect the existing guided scan handoff, scan-complete state update, and first result-upload placeholder without showing real CF27 recommendations until verified production catalog data exists.
 
 ## Owner Media Baseline Decision
 
@@ -157,6 +157,18 @@ Prompt 105 did not execute Prompt 103 and did not manufacture verifier decisions
 ## Prompt 106 Acceptance
 
 Prompt 106 is complete as a product-contract milestone.
+
+## Prompt 108 Acceptance
+
+Prompt 108 is complete as an invite-session-shell milestone.
+
+- Trial URL pattern: `/trial/[inviteId]`
+- Active fixture invite ID: `btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0`
+- Session storage key: `gfm:buddy-trial:v1:<inviteId>`
+- Session states: `INVITED`, `CONSENTED`, `SCAN_IN_PROGRESS`, `SCAN_COMPLETE`, `RECOMMENDATION_READY`, `BUILD_IN_PROGRESS`, `VIDEO_1_REQUIRED`, `VIDEO_1_PROCESSING`, `REFINEMENT_READY`, `VIDEO_2_REQUIRED`, `FINAL_RESULT_READY`, `COMPLETE`, `DELETED`
+- Invite states covered: active, expired, used/completed, invalid
+- Resume behavior: same private URL and same browser restore the local session without account signup
+- Production recommendation behavior: blocked while the production catalog has 0 approved records
 
 - Buddy Trial V1 contract: `docs/Product/BUDDY_TRIAL_V1.md`
 - North Star: a nontechnical buddy can open a texted iPhone link, complete the guided scan, receive exact verified CF27 settings, build the character, submit first and second result media, see before/after comparison, and rate resemblance without owner assistance.

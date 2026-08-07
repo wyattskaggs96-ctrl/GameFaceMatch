@@ -6,6 +6,12 @@
 
 Purpose: have a real independent second verifier complete the Prompt 102 supported-subset verifier package. Codex must wait for the returned package before importing or reconciling decisions.
 
+## Codex-Ready Parallel Prompt
+
+`GFM | Q05 | PROMPT 107 | PHASE 01 | Build buddy trial session shell and test-only E2E fixtures`
+
+Use `docs/Product/BUDDY_TRIAL_V1.md` as the authoritative private-beta V1 contract. Build only the session shell, state tracking, and test-only E2E fixture path. Keep production CF27 recommendations blocked until real verified production catalog data exists.
+
 ## Owner Media Baseline Decision
 
 - Decision: `OWNER_MEDIA_BASELINE_LOCKED`
@@ -147,6 +153,18 @@ Prompt 105 is complete as an owner-usability milestone.
 - Recommendation-eligible records: 0
 
 Prompt 105 did not execute Prompt 103 and did not manufacture verifier decisions. Prompt 103 remains conditional on Wyatt providing a completed real human-verifier export.
+
+## Prompt 106 Acceptance
+
+Prompt 106 is complete as a product-contract milestone.
+
+- Buddy Trial V1 contract: `docs/Product/BUDDY_TRIAL_V1.md`
+- North Star: a nontechnical buddy can open a texted iPhone link, complete the guided scan, receive exact verified CF27 settings, build the character, submit first and second result media, see before/after comparison, and rate resemblance without owner assistance.
+- The contract separates build implementation readiness, real catalog readiness, and real buddy acceptance.
+- Deterministic E2E fixtures are allowed only as test-only data and cannot be treated as production catalog data.
+- Production catalog records remain 0.
+- Second-verifier decisions remain 0.
+- Real buddy trials completed remain 0.
 
 ## Prompt 103 - Conditional Next Codex Prompt
 

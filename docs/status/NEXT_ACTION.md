@@ -90,3 +90,17 @@ Prompt 103 should run only after Wyatt provides the completed verifier package. 
 ## Stop Point
 
 Do not publish a production catalog, enable recommendations, run paid checkout, claim matching accuracy, or mark records production-approved before a real completed verifier package is returned and validated.
+
+## Codex-Ready Parallel Contract
+
+Prompt 106 records the private-beta Buddy Trial V1 North Star in:
+
+`docs/Product/BUDDY_TRIAL_V1.md`
+
+That contract defines the future customer journey from a texted iPhone link through guided scan, exact verified CF27 settings, first result upload, refinement recommendations, second result upload, before/after comparison, and resemblance rating.
+
+The next implementation prompt may build only the session shell and deterministic test-only fixture path while keeping the production catalog gate fail-closed:
+
+`GFM | Q05 | PROMPT 107 | PHASE 01 | Build buddy trial session shell and test-only E2E fixtures`
+
+This does not replace the human-verifier action above. Real CF27 settings still require a verified nonempty production catalog.

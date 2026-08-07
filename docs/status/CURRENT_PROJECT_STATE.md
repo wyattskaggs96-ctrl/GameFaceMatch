@@ -57,6 +57,8 @@ Prompt 104 rebuilds the customer setup and guided scan experience to closely fol
 
 Prompt 105 makes the CF27 supported-subset human-verifier workflow owner-usable. Wyatt can now run `npm run verifier:start`, open `http://localhost:3000/verifier`, and hand the browser workflow to a real friend/verifier. The route loads the 76-record supported-subset package, records verifier identity/environment/attestation, shows one record at a time, saves browser-local progress, enforces completion before export, and downloads a Prompt 103-compatible JSON package. It creates 0 human decisions, 0 production approvals, 0 production catalog records, and 0 recommendation-eligible records.
 
+Prompt 106 defines the canonical Buddy Trial V1 private-beta contract in `docs/Product/BUDDY_TRIAL_V1.md`. The contract records the North Star journey from texted iPhone link through guided scan, verified CF27 settings, first result upload, refinement, second result upload, before/after comparison, and user resemblance rating. It separates build implementation readiness, real catalog readiness, and real buddy acceptance. It does not enable recommendations, create production catalog records, deploy hosting, or claim buddy acceptance.
+
 Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media inventory as the final owner-provided media baseline for the initial product launch. Additional Wyatt recordings are no longer an initial-launch prerequisite. Historical recapture audits remain useful evidence-quality references, but remaining recapture tasks are reclassified as known evidence limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch improvements, or unsupported option/category gaps where evidence is insufficient.
 
 ## Actually Working
@@ -71,6 +73,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - College Football 27 supported-subset classification exists in `data/phase-zero/cf27_supported_subset_classification.json`. It classifies all 92 candidates exactly once, proposes 76 records for supported-subset second-verifier review, generates a deterministic 24-record secondary-angle sample, and keeps every record non-production.
 - College Football 27 supported-subset verifier session exists in `data/phase-zero/supported-subset-verifier-session/`. It is ready for a real second human to complete without editing source files, and it keeps all returned decisions non-production until later import, discrepancy handling, catalog-manager approval, and release gates.
 - College Football 27 friend-ready verifier workflow exists at local development route `http://localhost:3000/verifier` after running `npm run verifier:start`. It wraps the supported-subset package in a nontechnical, browser-local workflow with automatic draft persistence and JSON export.
+- Buddy Trial V1 private-beta product contract exists in `docs/Product/BUDDY_TRIAL_V1.md`. It defines customer-visible states, session data model, dependency gates, acceptance criteria, deterministic E2E fixture boundaries, and the recommended next implementation prompt.
 - College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
 - College Football 27 evidence recapture package exists as a deterministic historical owner/verifier worklist. A follow-on existing-media verification gap audit exhausts the current videos, source-media records, derivative frames, timelines, and queue records. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements required frame re-extraction instead of new capture, and historical minimum recapture tasks are now evidence limitations or post-launch improvement opportunities rather than owner launch prerequisites.
 - College Football 27 frame re-extraction packet exists for the 7 recoverable requirements from the existing-media audit. These derivative frames are marked `NOT_PRODUCTION_DATA` and `OBSERVED_PENDING_VERIFICATION`; they reduce unnecessary recapture but do not replace human verification.
@@ -101,6 +104,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Launch game registry entries exist for College Football 27, NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026, but every launch game remains recommendation-unavailable until a verified production catalog exists.
 - Supabase remote database/storage/auth/RLS/Edge Functions/Cron are not deployed from this repo.
 - Real manual matching study: 0 valid participants, 0 completed trials, no measured accuracy.
+- Real Buddy Trial V1 execution: 0 completed buddy trials, no measured before/after improvement, and no real buddy acceptance yet.
 - Legal approval, tax/accounting review, production deployment, monitoring, support operations, and public launch approval are not complete.
 
 ## Current Production Blockers
@@ -176,6 +180,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - CF27 supported subset human verification status: `docs/status/CF27_SUPPORTED_SUBSET_HUMAN_VERIFICATION_STATUS.md`
 - Human verifier quick start: `docs/verification/HUMAN_VERIFIER_QUICK_START.md`
 - Owner verifier launch checklist: `docs/verification/OWNER_VERIFIER_LAUNCH_CHECKLIST.md`
+- Buddy Trial V1 contract: `docs/Product/BUDDY_TRIAL_V1.md`
 - Owner media baseline lock: `docs/status/OWNER_MEDIA_BASELINE_LOCKED.md`
 - Machine-readable health status: `data/status/project_health_status.json`
 - Next action: `docs/status/NEXT_ACTION.md`

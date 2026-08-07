@@ -84,6 +84,7 @@
     "cf27SupportedSubsetClassification": "complete_non_production_verifier_ready",
     "cf27SupportedSubsetVerifierSession": "ready_for_human_verifier",
     "cf27FriendVerifierWorkflow": "implemented_ready_for_human_verifier",
+    "buddyTrialV1Contract": "defined_not_implemented",
     "matchingStudyWorkflow": "implemented_not_started",
     "supabase": "schema_designed_not_connected",
     "payments": "launch_pack_all_access_scaffold_only",

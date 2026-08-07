@@ -8,7 +8,7 @@ Purpose: have a real independent second verifier complete the Prompt 102 support
 
 ## Codex-Ready Parallel Prompt
 
-`GFM | Q05 | PROMPT 110 | PHASE 03 | Add Buddy Trial result upload and refinement placeholder`
+`GFM | Q05 | PROMPT 111 | PHASE 03 | Add Buddy Trial result upload and refinement placeholder`
 
 Use `docs/Product/BUDDY_TRIAL_V1.md` as the authoritative private-beta V1 contract and build on Prompt 108’s `/trial/[inviteId]` shell plus Prompt 109’s scan-complete resume checkpoint. Add the first result-upload placeholder and refinement-state shell without showing real CF27 recommendations until verified production catalog data exists.
 
@@ -158,6 +158,14 @@ Prompt 105 did not execute Prompt 103 and did not manufacture verifier decisions
 
 Prompt 106 is complete as a product-contract milestone.
 
+- Buddy Trial V1 contract: `docs/Product/BUDDY_TRIAL_V1.md`
+- North Star: a nontechnical buddy can open a texted iPhone link, complete the guided scan, receive exact verified CF27 settings, build the character, submit first and second result media, see before/after comparison, and rate resemblance without owner assistance.
+- The contract separates build implementation readiness, real catalog readiness, and real buddy acceptance.
+- Deterministic E2E fixtures are allowed only as test-only data and cannot be treated as production catalog data.
+- Production catalog records remain 0.
+- Second-verifier decisions remain 0.
+- Real buddy trials completed remain 0.
+
 ## Prompt 108 Acceptance
 
 Prompt 108 is complete as an invite-session-shell milestone.
@@ -183,13 +191,21 @@ Prompt 109 is complete as a remote-iPhone scan-hardening milestone.
 - Progress gate: circular progress remains coverage/quality driven; no timer-only completion path exists.
 - Real-device limitation: actual iPhone Safari camera prompt, screen lock, low-power behavior, and camera switching still require manual HTTPS device QA.
 
-- Buddy Trial V1 contract: `docs/Product/BUDDY_TRIAL_V1.md`
-- North Star: a nontechnical buddy can open a texted iPhone link, complete the guided scan, receive exact verified CF27 settings, build the character, submit first and second result media, see before/after comparison, and rate resemblance without owner assistance.
-- The contract separates build implementation readiness, real catalog readiness, and real buddy acceptance.
-- Deterministic E2E fixtures are allowed only as test-only data and cannot be treated as production catalog data.
-- Production catalog records remain 0.
-- Second-verifier decisions remain 0.
-- Real buddy trials completed remain 0.
+## Prompt 110 Acceptance
+
+Prompt 110 is complete as a private-beta persistence/deletion contract milestone.
+
+- Trial persistence contract: `web/lib/buddy-trial/buddy-trial-persistence.ts`
+- Persistence mode now implemented for local/test flows: `browser_local_test_adapter`
+- Production Supabase mode: schema/RLS contract only; concrete remote client remains unavailable/fail-closed
+- Supabase schema additions: `private_beta_trial_sessions` and `private_beta_trial_audit_events`, both RLS-enabled and constrained against raw-media payloads
+- Stored data scope: pseudonymous trial ID, consent versions, trial state, derived-profile summaries, capture-quality metadata, recommendation/catalog versions, selected game-setting references, refinement summaries, user ratings, expiration/deletion fields, and privacy-safe audit events
+- Raw-media behavior: raw human face photos/video, raw landmark payloads, object URLs, base64 media, and image/video bytes are not persisted by default
+- Game-character video retention: temporary processing only unless the tester separately opts into retention
+- User deletion: `/trial/[inviteId]` exposes `Delete My Trial Data`
+- Owner/admin deletion: represented in the typed persistence contract and audit events; server endpoint remains a future activation task
+- Production recommendation behavior: still blocked while production catalog records remain 0
+- Remote activation blockers: credentials, concrete RLS policies, server-mediated invite validation, deletion endpoints, deployment checks, and real secure hosting
 
 ## Prompt 103 - Conditional Next Codex Prompt
 

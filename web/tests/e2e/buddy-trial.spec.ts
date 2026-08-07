@@ -46,7 +46,7 @@ test.describe("Buddy Trial invite route", () => {
 
   test("keeps deleted local trial state through refresh", async ({ page }) => {
     await page.goto(`/trial/${activeInvite}`);
-    await page.getByRole("button", { name: "Delete trial data" }).click();
+    await page.getByRole("button", { name: "Delete My Trial Data" }).click();
     await expect(page.getByRole("heading", { name: "Trial data removed" })).toBeVisible();
 
     await page.reload();

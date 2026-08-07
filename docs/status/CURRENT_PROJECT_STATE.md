@@ -4,10 +4,10 @@
 **Last reconciled:** 2026-08-07
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 109 remote iPhone guided-scan hardening
+**Repository checkpoint reviewed:** Prompt 110 private-beta persistence and deletion contract
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
-**Current active phase:** supported-subset human verifier execution, Buddy Trial fixture shell, remote iPhone scan QA, and production-catalog gatekeeping
+**Current active phase:** supported-subset human verifier execution, Buddy Trial fixture shell, private-beta persistence/deletion contract, remote iPhone scan QA, and production-catalog gatekeeping
 **Exact next action:** `docs/status/NEXT_ACTION.md`
 
 This is the single current operational status source. Older audits, readiness reports, prompt reports, and closeouts are historical unless this document or the machine-readable files linked below explicitly cite them as current evidence.
@@ -16,7 +16,7 @@ This is the single current operational status source. Older audits, readiness re
 ```json
 {
   "schemaVersion": "current-project-state-v3",
-  "repositoryCheckpoint": "PROMPT_109_REMOTE_IPHONE_SCAN_HARDENING",
+  "repositoryCheckpoint": "PROMPT_110_PRIVATE_BETA_PERSISTENCE_AND_DELETION",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -63,6 +63,8 @@ Prompt 108 implements the first invite-only Buddy Trial session shell at `/trial
 
 Prompt 109 hardens the existing Prompt 104 guided scan for remote iPhone private-beta use without redesigning the visual experience. It adds secure-context gating before camera start, iPhone Safari camera-blocked recovery steps, portrait/reduced-motion/offline readiness notices, normalized browser interruption lifecycle messages, dynamic viewport containment, and a Buddy Trial scan-complete local checkpoint when the existing capture continue action succeeds. It still uses browser RGB guidance, does not claim Face ID or TrueDepth, and still requires real-device Safari QA before production iPhone claims.
 
+Prompt 110 adds the private-beta Buddy Trial persistence and deletion contract. It defines a typed non-image trial record for pseudonymous trial IDs, consent versions, state, derived-profile summaries, capture-quality metadata, recommendation/catalog versions, selected game-setting references, refinement summaries, user ratings, expiration, deletion, and privacy-safe audit events. It adds a browser-local test adapter, a fail-closed Supabase schema/RLS design for future server persistence, and user-facing `Delete My Trial Data` behavior. Production Supabase remains inactive until credentials, concrete RLS policies, server-mediated invite/deletion endpoints, and deployment checks are completed.
+
 Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media inventory as the final owner-provided media baseline for the initial product launch. Additional Wyatt recordings are no longer an initial-launch prerequisite. Historical recapture audits remain useful evidence-quality references, but remaining recapture tasks are reclassified as known evidence limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch improvements, or unsupported option/category gaps where evidence is insufficient.
 
 ## Actually Working
@@ -80,6 +82,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - College Football 27 friend-ready verifier workflow exists at local development route `http://localhost:3000/verifier` after running `npm run verifier:start`. It wraps the supported-subset package in a nontechnical, browser-local workflow with automatic draft persistence and JSON export.
 - Buddy Trial V1 private-beta product contract exists in `docs/Product/BUDDY_TRIAL_V1.md`. It defines customer-visible states, session data model, dependency gates, acceptance criteria, deterministic E2E fixture boundaries, and the recommended next implementation prompt.
 - Buddy Trial V1 invite-only session shell exists at `/trial/[inviteId]`. Fixture invite coverage includes active, expired, used/completed, invalid, resume, deletion, consent, and empty-catalog fail-closed states.
+- Buddy Trial private-beta persistence contract exists in `web/lib/buddy-trial/buddy-trial-persistence.ts`. It supports local/test resume and deletion records while forbidding raw face media, object URLs, base64 media, raw landmark payloads, and unconsented game-character video retention.
 - College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
 - College Football 27 evidence recapture package exists as a deterministic historical owner/verifier worklist. A follow-on existing-media verification gap audit exhausts the current videos, source-media records, derivative frames, timelines, and queue records. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements required frame re-extraction instead of new capture, and historical minimum recapture tasks are now evidence limitations or post-launch improvement opportunities rather than owner launch prerequisites.
 - College Football 27 frame re-extraction packet exists for the 7 recoverable requirements from the existing-media audit. These derivative frames are marked `NOT_PRODUCTION_DATA` and `OBSERVED_PENDING_VERIFICATION`; they reduce unnecessary recapture but do not replace human verification.
@@ -88,7 +91,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Self-improving feedback-loop domain contract exists. It records a versioned `buildPassThreshold = 90`, final confirmed settings, same-profile personal preferences, consent-gated global-learning review candidates, and no automatic retraining.
 - Manual matching-study protocol, data dictionary, templates, privacy/deletion controls, and metric calculations exist for a future 10-20 person study. The study is `NOT_STARTED` because there is no verified production catalog or real top-three recommendation set.
 - The production College Football 27 catalog is intentionally empty and recommendations fail closed.
-- Supabase runtime/config/schema contracts exist locally and fail closed; no remote persistence is active.
+- Supabase runtime/config/schema contracts exist locally and fail closed. The draft schema now includes private-beta trial session and audit-event tables with RLS enabled and raw-media constraints; no remote persistence is active.
 - Payment/entitlement interfaces expose the approved Launch Pack and All Access products, but checkout remains unavailable and no client state can grant paid access.
 - iOS project compiles in prior verification records as a preserved foundation, not the active production client.
 
@@ -110,7 +113,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Launch game registry entries exist for College Football 27, NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026, but every launch game remains recommendation-unavailable until a verified production catalog exists.
 - Supabase remote database/storage/auth/RLS/Edge Functions/Cron are not deployed from this repo.
 - Real manual matching study: 0 valid participants, 0 completed trials, no measured accuracy.
-- Real Buddy Trial V1 execution: invite-only fixture shell and guided-scan handoff/resume checkpoint exist, but 0 completed real buddy trials, no measured before/after improvement, no production CF27 recommendations, and no real buddy acceptance yet.
+- Real Buddy Trial V1 execution: invite-only fixture shell, guided-scan handoff/resume checkpoint, and local/test persistence/deletion contract exist, but 0 completed real buddy trials, no measured before/after improvement, no production CF27 recommendations, and no real buddy acceptance yet.
 - Legal approval, tax/accounting review, production deployment, monitoring, support operations, and public launch approval are not complete.
 
 ## Current Production Blockers
@@ -187,6 +190,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Human verifier quick start: `docs/verification/HUMAN_VERIFIER_QUICK_START.md`
 - Owner verifier launch checklist: `docs/verification/OWNER_VERIFIER_LAUNCH_CHECKLIST.md`
 - Buddy Trial V1 contract: `docs/Product/BUDDY_TRIAL_V1.md`
+- Buddy Trial persistence contract: `web/lib/buddy-trial/buddy-trial-persistence.ts`
 - Buddy Trial route pattern: `/trial/[inviteId]`
 - Owner media baseline lock: `docs/status/OWNER_MEDIA_BASELINE_LOCKED.md`
 - Machine-readable health status: `data/status/project_health_status.json`

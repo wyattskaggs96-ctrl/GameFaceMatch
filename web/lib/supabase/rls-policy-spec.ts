@@ -51,6 +51,33 @@ export const supabaseRlsPolicySpecs: RlsPolicySpec[] = [
     allowsPrivateEvidence: false
   },
   {
+    table: "private_beta_trial_sessions",
+    operation: "insert",
+    roles: ["service_role"],
+    rule: "Only trusted server processes may create private-beta trial records after invite and consent validation; raw face media is not stored.",
+    requiresOwnershipPredicate: false,
+    allowsProductionApproval: false,
+    allowsPrivateEvidence: false
+  },
+  {
+    table: "private_beta_trial_sessions",
+    operation: "update",
+    roles: ["service_role"],
+    rule: "Only trusted server processes may update, expire, or delete private-beta trial records; customer-facing deletion is mediated by the server.",
+    requiresOwnershipPredicate: false,
+    allowsProductionApproval: false,
+    allowsPrivateEvidence: false
+  },
+  {
+    table: "private_beta_trial_audit_events",
+    operation: "insert",
+    roles: ["service_role"],
+    rule: "Only trusted server processes may append privacy-safe private-beta persistence and deletion audit events.",
+    requiresOwnershipPredicate: false,
+    allowsProductionApproval: false,
+    allowsPrivateEvidence: false
+  },
+  {
     table: "saved_builds",
     operation: "select",
     roles: ["authenticated"],

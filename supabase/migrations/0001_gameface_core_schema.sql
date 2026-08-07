@@ -99,6 +99,27 @@ create type public.issue_status as enum (
   'retired'
 );
 
+create type public.private_beta_trial_state as enum (
+  'INVITED',
+  'CONSENTED',
+  'SCAN_IN_PROGRESS',
+  'SCAN_COMPLETE',
+  'RECOMMENDATION_READY',
+  'BUILD_IN_PROGRESS',
+  'VIDEO_1_REQUIRED',
+  'VIDEO_1_PROCESSING',
+  'REFINEMENT_READY',
+  'VIDEO_2_REQUIRED',
+  'FINAL_RESULT_READY',
+  'COMPLETE',
+  'DELETED'
+);
+
+create type public.private_beta_trial_video_retention as enum (
+  'temporary_processing_only',
+  'retained_with_separate_opt_in'
+);
+
 create table public.profiles (
   id uuid primary key,
   display_name text,
@@ -574,6 +595,72 @@ create table public.match_results (
   unique (match_run_id, rank)
 );
 
+create table public.private_beta_trial_sessions (
+  trial_id text primary key,
+  invite_id text not null,
+  session_id text not null,
+  state public.private_beta_trial_state not null default 'INVITED',
+  consent_version text not null,
+  consent_accepted_at timestamptz,
+  derived_face_profile jsonb,
+  capture_quality_metadata jsonb,
+  recommendation_version text,
+  catalog_version_id text references public.catalog_releases(release_id),
+  selected_game_settings jsonb not null default '[]'::jsonb,
+  refinement_results jsonb not null default '[]'::jsonb,
+  user_ratings jsonb not null default '{}'::jsonb,
+  raw_face_media_stored boolean not null default false,
+  temporary_game_character_video_retention public.private_beta_trial_video_retention not null default 'temporary_processing_only',
+  product_improvement_opt_in boolean not null default false,
+  expires_at timestamptz not null,
+  deleted_at timestamptz,
+  deletion_actor public.actor_type,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  constraint private_beta_trial_sessions_id_not_blank check (length(trim(trial_id)) > 0),
+  constraint private_beta_trial_sessions_invite_not_blank check (length(trim(invite_id)) > 0),
+  constraint private_beta_trial_sessions_session_not_blank check (length(trim(session_id)) > 0),
+  constraint private_beta_trial_sessions_no_raw_face_media check (raw_face_media_stored = false),
+  constraint private_beta_trial_sessions_video_retention_requires_opt_in check (
+    temporary_game_character_video_retention = 'temporary_processing_only'
+    or product_improvement_opt_in = true
+  ),
+  constraint private_beta_trial_sessions_deleted_payload_cleared check (
+    deleted_at is null
+    or (
+      derived_face_profile is null
+      and capture_quality_metadata is null
+      and selected_game_settings = '[]'::jsonb
+      and refinement_results = '[]'::jsonb
+    )
+  ),
+  constraint private_beta_trial_sessions_no_media_payload check (
+    coalesce(derived_face_profile::text, '') !~* '(data:image|data:video|blob:|objectUrl|base64|rawVideo|rawImage|imageBytes|videoBytes)'
+    and coalesce(capture_quality_metadata::text, '') !~* '(data:image|data:video|blob:|objectUrl|base64|rawVideo|rawImage|imageBytes|videoBytes)'
+    and selected_game_settings::text !~* '(data:image|data:video|blob:|objectUrl|base64|rawVideo|rawImage|imageBytes|videoBytes)'
+    and refinement_results::text !~* '(data:image|data:video|blob:|objectUrl|base64|rawVideo|rawImage|imageBytes|videoBytes)'
+    and user_ratings::text !~* '(data:image|data:video|blob:|objectUrl|base64|rawVideo|rawImage|imageBytes|videoBytes)'
+  )
+);
+
+create index private_beta_trial_sessions_invite_idx on public.private_beta_trial_sessions(invite_id);
+create index private_beta_trial_sessions_expires_idx on public.private_beta_trial_sessions(expires_at);
+
+create table public.private_beta_trial_audit_events (
+  audit_event_id uuid primary key default gen_random_uuid(),
+  trial_id text references public.private_beta_trial_sessions(trial_id) on delete set null,
+  actor_type public.actor_type not null,
+  action text not null,
+  outcome text not null,
+  metadata_json jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  constraint private_beta_trial_audit_events_action_not_blank check (length(trim(action)) > 0),
+  constraint private_beta_trial_audit_events_outcome_allowed check (outcome in ('succeeded', 'failed', 'blocked')),
+  constraint private_beta_trial_audit_events_no_media_payload check (
+    metadata_json::text !~* '(data:image|data:video|blob:|objectUrl|base64|rawVideo|rawImage|imageBytes|videoBytes)'
+  )
+);
+
 create table public.saved_builds (
   saved_build_id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id),
@@ -701,6 +788,8 @@ alter table public.production_approvals enable row level security;
 alter table public.import_session_errors enable row level security;
 alter table public.match_runs enable row level security;
 alter table public.match_results enable row level security;
+alter table public.private_beta_trial_sessions enable row level security;
+alter table public.private_beta_trial_audit_events enable row level security;
 alter table public.saved_builds enable row level security;
 alter table public.products enable row level security;
 alter table public.prices enable row level security;

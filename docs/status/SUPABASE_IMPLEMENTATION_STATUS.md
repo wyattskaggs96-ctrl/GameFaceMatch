@@ -10,6 +10,7 @@
 **Supabase connection status:** TYPED FAIL-CLOSED RUNTIME BOUNDARY EXISTS; NO CONCRETE REMOTE CLIENT ENABLED
 **Database migration status:** LOCAL SCHEMA DRAFT CREATED; NOT APPLIED  
 **Storage migration status:** PRIVATE BUCKET CONTRACTS DEFINED LOCALLY; NO BUCKETS CREATED
+**Prompt 110 addendum:** Private-beta Buddy Trial persistence tables are modeled locally with RLS enabled and raw-media constraints; no remote persistence is active.
 
 This document tracks the phased move from local JSON/CSV/browser persistence to Supabase PostgreSQL and private Supabase Storage. It does not add credentials, connect a database, upload media, promote catalog records, or change production recommendation behavior.
 
@@ -63,6 +64,7 @@ This document tracks the phased move from local JSON/CSV/browser persistence to 
 - No Supabase package client is currently installed or enabled in runtime code.
 - No Supabase environment variables are committed. Local-only mode remains the default when env vars are absent.
 - A local SQL schema draft now exists under `supabase/migrations/`; it has not been applied to the Supabase project.
+- The schema draft now includes private-beta trial sessions and audit events for resumable Buddy Trial data. These tables are constrained to non-image derived metadata and remain inaccessible to the app until server-mediated RLS policies and credentials are activated.
 - A sanitized server status route exists at `/api/internal/supabase-status`; it reports configuration/readiness booleans and redacted values only.
 - Remote repository methods fail closed unless the runtime is explicitly classified as `supabase_ready`; even then, concrete Supabase writes remain disabled until a real client adapter is implemented.
 
@@ -202,6 +204,8 @@ The initial Supabase schema uses explicit enums and append-only history instead 
 | `import_session_errors` | Import exceptions. | `error_id`, `import_session_id`, `entity_id`, `error_code`, `message`. | Indexed by session/code. |
 | `match_runs` | User matching execution trace. | `match_run_id`, `user_id`, `profile_id`, `catalog_release_id`, `algorithm_version`, `status`, `created_at`. | Requires approved catalog release unless unavailable state. |
 | `match_results` | Ranked recommendations. | `match_run_id`, `rank`, `catalog_record_id`, `score`, `confidence`, `explanation_json`. | FK release item; no fixture/research records. |
+| `private_beta_trial_sessions` | Resumable Buddy Trial state. | `trial_id`, `invite_id`, `session_id`, `state`, `consent_version`, derived-profile summary JSON, capture-quality metadata JSON, catalog/recommendation versions, selected settings, refinement summaries, user ratings, `expires_at`, `deleted_at`. | RLS enabled; raw face media flag must be false; raw-media-like payloads rejected; retained game-character video requires separate opt-in. |
+| `private_beta_trial_audit_events` | Privacy-safe trial persistence/deletion audit events. | `trial_id`, `actor_type`, `action`, `outcome`, `metadata_json`, `created_at`. | RLS enabled; metadata rejects raw-media-like payloads. |
 | `saved_builds` | User-saved non-image build instructions. | `saved_build_id`, `user_id`, `match_run_id`, `catalog_release_id`, `build_json`, `created_at`, `deleted_at`. | RLS by owner; catalog version retained. |
 | `products` / `prices` | Provider-independent paid products. | Product/price IDs, purchase type, active flags. | Checkout disabled until provider selected and gates pass. |
 | `entitlements` | Server-authoritative access. | `entitlement_id`, `user_id`, `access`, `status`, `source`, `expires_at`, `revoked_at`. | Users cannot self-grant. |

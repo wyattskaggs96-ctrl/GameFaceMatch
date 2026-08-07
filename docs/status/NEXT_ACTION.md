@@ -97,10 +97,10 @@ Prompt 106 records the private-beta Buddy Trial V1 North Star in:
 
 `docs/Product/BUDDY_TRIAL_V1.md`
 
-That contract defines the future customer journey from a texted iPhone link through guided scan, exact verified CF27 settings, first result upload, refinement recommendations, second result upload, before/after comparison, and resemblance rating. Prompt 108 implements the first invite-only fixture session shell at `/trial/[inviteId]` with local consent, resume, invalid/expired/used/deleted states, and empty-catalog fail-closed behavior. Prompt 109 hardens the existing guided scan for remote iPhone use and records a local Buddy Trial `SCAN_COMPLETE` checkpoint when the existing capture continue action succeeds.
+That contract defines the future customer journey from a texted iPhone link through guided scan, exact verified CF27 settings, first result upload, refinement recommendations, second result upload, before/after comparison, and resemblance rating. Prompt 108 implements the first invite-only fixture session shell at `/trial/[inviteId]` with local consent, resume, invalid/expired/used/deleted states, and empty-catalog fail-closed behavior. Prompt 109 hardens the existing guided scan for remote iPhone use and records a local Buddy Trial `SCAN_COMPLETE` checkpoint when the existing capture continue action succeeds. Prompt 110 adds the private-beta persistence/deletion contract, browser-local test adapter, and fail-closed Supabase schema/RLS design without activating production Supabase.
 
 The next implementation prompt may add the first-result upload shell while keeping production recommendations blocked until a verified nonempty catalog exists:
 
-`GFM | Q05 | PROMPT 110 | PHASE 03 | Add Buddy Trial result upload and refinement placeholder`
+`GFM | Q05 | PROMPT 111 | PHASE 03 | Add Buddy Trial result upload and refinement placeholder`
 
 This does not replace the human-verifier action above. Real CF27 settings still require a verified nonempty production catalog.

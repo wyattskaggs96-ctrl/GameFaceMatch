@@ -65,7 +65,7 @@ A person who knows nothing about GameFace Match can:
 | Character video upload/recording | Not implemented as video; screenshot intake exists. | Video capture/upload contract, local frame extraction, quality checks, deletion behavior. |
 | Before/after comparison | Domain pieces exist but no end-to-end buddy trial UI. | First and second result sessions, comparison state, score/report rendering. |
 | User resemblance rating | Study/feedback contracts exist; customer flow needs UI. | Buddy trial feedback screen and local/session persistence. |
-| Buddy session persistence across link-open to finish | Local app state exists, but no canonical buddy session model. | Session contract below, local persistence adapter, optional server adapter later. |
+| Buddy session persistence across link-open to finish | Canonical private-beta persistence contract and browser-local test adapter exist; production Supabase schema is defined but not active. | Server-mediated Supabase runtime activation, concrete RLS policies, deployed credentials, and deletion endpoints. |
 | Real buddy acceptance | 0 real participants. | Buddy trial execution after production catalog subset exists. |
 
 ## 4. Customer-Visible States
@@ -210,7 +210,9 @@ interface BuddyResultIterationV1 {
 }
 ```
 
-The first implementation may persist this locally. A later server-backed implementation must keep the same privacy semantics and must not require an account for the basic trial.
+Prompt 110 implements this as a typed private-beta persistence contract in `web/lib/buddy-trial/buddy-trial-persistence.ts`, with a browser-local test adapter for automated and local trial flows. The local Supabase schema contains private-beta trial session and audit-event tables with RLS enabled and raw-media constraints, but the live Supabase adapter remains fail-closed until production credentials, concrete policies, and server-mediated invite/deletion endpoints are activated.
+
+Persisted private-beta trial records may include pseudonymous trial IDs, consent versions, state history, derived-profile summaries, capture-quality metadata, recommendation/catalog versions, selected verified settings, refinement summaries, user ratings, and privacy-safe audit events. They must not include raw face photos, raw face video, raw landmark payloads, object URLs, base64 media, or game-character videos beyond temporary processing unless the tester separately opts into retention.
 
 ## 6. Stage Dependencies
 

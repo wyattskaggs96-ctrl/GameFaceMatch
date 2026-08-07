@@ -34,6 +34,8 @@ const requiredTables = [
   "import_session_errors",
   "match_runs",
   "match_results",
+  "private_beta_trial_sessions",
+  "private_beta_trial_audit_events",
   "saved_builds",
   "products",
   "prices",
@@ -76,7 +78,9 @@ const requiredChecks = [
   "catalog_status_transitions_primary_not_final_approval",
   "catalog_release_items_only_production_approved",
   "evidence_files_no_absolute_relative_path",
-  "catalog_record_attributes_no_sensitive_trait_keys"
+  "catalog_record_attributes_no_sensitive_trait_keys",
+  "private_beta_trial_sessions_no_raw_face_media",
+  "private_beta_trial_audit_events_no_media_payload"
 ];
 
 const errors = [];

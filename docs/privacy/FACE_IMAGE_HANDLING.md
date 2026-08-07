@@ -1,6 +1,6 @@
 # Face Image Handling
 
-Last updated: 2026-08-01
+Last updated: 2026-08-07
 
 GameFace Match handles face images as temporary local inputs by default.
 
@@ -35,3 +35,18 @@ Removing a photo or sweep video revokes its browser object URL. Removing all med
 ## Current Limitations
 
 Browser memory is managed by object URL revocation and state clearing, but the browser controls final garbage collection timing. The guided sweep does not create a 3D face model or identity template. The MVP does not provide cloud backup or account sync for FC 26 recipe profiles.
+
+## Buddy Trial Private Beta
+
+The Buddy Trial V1 persistence contract stores only resumable non-image trial data by default:
+
+- pseudonymous trial ID and invite/session IDs;
+- consent version and acceptance timestamp;
+- trial state and expiration/deletion timestamps;
+- derived profile summary, model versions, available measurement IDs, unavailable measurement IDs, and confidence labels;
+- capture quality metadata such as required-view completion, quality warning text, blocking/advisory counts, and source-angle IDs;
+- recommendation version, catalog version, selected verified game-setting references, refinement summaries, and user ratings when those stages exist.
+
+The private-beta trial record must not store raw human face photos, raw face video, raw landmark payloads, object URLs, base64 media, image bytes, or video bytes. Temporary game-character video may be retained only for processing unless the tester separately opts into retention.
+
+The current implementation includes a browser-local test adapter and a fail-closed Supabase schema contract. Production Supabase persistence is not active until server-mediated invite validation, concrete RLS policies, credentials, deletion endpoints, and deployment checks are completed.

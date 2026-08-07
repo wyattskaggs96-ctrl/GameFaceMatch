@@ -180,7 +180,11 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
           </article>
           <article>
             <h2>Retention default</h2>
-            <p>Raw face media is temporary by default. This trial session stores only consent and progress in this browser.</p>
+            <p>Raw face media is temporary by default. The trial can save only pseudonymous progress, consent versions, quality metadata, and non-image derived results.</p>
+          </article>
+          <article>
+            <h2>Persistence mode</h2>
+            <p>Private-beta persistence currently uses the browser-local test adapter. Production Supabase storage remains disabled until credentials and RLS are activated.</p>
           </article>
           <article>
             <h2>Independent app</h2>
@@ -229,15 +233,16 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
             </button>
           )}
           <button className="buddy-trial-secondary" type="button" onClick={deleteTrialData}>
-            Delete trial data
+            Delete My Trial Data
           </button>
         </div>
 
         <details className="buddy-trial-privacy">
           <summary>Privacy details</summary>
           <p>
-            This private trial records the invite session state, consent version, and local progress in this browser. Basic use does not require an account.
-            Cloud backup, public sharing, model training, and marketing use are not included in this consent.
+            This private trial records the invite session state, consent version, progress, and non-image derived metadata needed to resume the trial. Basic use does
+            not require an account. Raw face photos or video are not written to the trial record by default. Cloud backup, public sharing, model training, and
+            marketing use are not included in this consent.
           </p>
         </details>
 

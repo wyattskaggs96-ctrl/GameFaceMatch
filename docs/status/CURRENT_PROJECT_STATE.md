@@ -4,10 +4,10 @@
 **Last reconciled:** 2026-08-07
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 108 invite-only Buddy Trial session shell
+**Repository checkpoint reviewed:** Prompt 109 remote iPhone guided-scan hardening
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
-**Current active phase:** supported-subset human verifier execution, Buddy Trial fixture shell, and production-catalog gatekeeping
+**Current active phase:** supported-subset human verifier execution, Buddy Trial fixture shell, remote iPhone scan QA, and production-catalog gatekeeping
 **Exact next action:** `docs/status/NEXT_ACTION.md`
 
 This is the single current operational status source. Older audits, readiness reports, prompt reports, and closeouts are historical unless this document or the machine-readable files linked below explicitly cite them as current evidence.
@@ -16,7 +16,7 @@ This is the single current operational status source. Older audits, readiness re
 ```json
 {
   "schemaVersion": "current-project-state-v3",
-  "repositoryCheckpoint": "PROMPT_108_BUDDY_TRIAL_INVITE_SESSIONS",
+  "repositoryCheckpoint": "PROMPT_109_REMOTE_IPHONE_SCAN_HARDENING",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -61,6 +61,8 @@ Prompt 106 defines the canonical Buddy Trial V1 private-beta contract in `docs/P
 
 Prompt 108 implements the first invite-only Buddy Trial session shell at `/trial/[inviteId]`. The route uses opaque fixture invite IDs, records required local consent, creates one browser-local active session per invite, supports resume from the same private URL, shows invalid/expired/used/deleted states, links into the existing guided scan route, and keeps recommendations fail-closed because the production catalog still has 0 records. It does not require signup, expose verifier/admin routes, retain raw face media, fabricate scan results, or show unverified CF27 settings.
 
+Prompt 109 hardens the existing Prompt 104 guided scan for remote iPhone private-beta use without redesigning the visual experience. It adds secure-context gating before camera start, iPhone Safari camera-blocked recovery steps, portrait/reduced-motion/offline readiness notices, normalized browser interruption lifecycle messages, dynamic viewport containment, and a Buddy Trial scan-complete local checkpoint when the existing capture continue action succeeds. It still uses browser RGB guidance, does not claim Face ID or TrueDepth, and still requires real-device Safari QA before production iPhone claims.
+
 Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media inventory as the final owner-provided media baseline for the initial product launch. Additional Wyatt recordings are no longer an initial-launch prerequisite. Historical recapture audits remain useful evidence-quality references, but remaining recapture tasks are reclassified as known evidence limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch improvements, or unsupported option/category gaps where evidence is insufficient.
 
 ## Actually Working
@@ -68,6 +70,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Next.js/React/TypeScript web app builds and has extensive tested local flows.
 - Web onboarding, disclaimer, privacy/consent, mobile scan entry, preparation, guided RGB capture/upload fallback, quality review, profile review, catalog-unavailable results, privacy center, and local deletion flows exist.
 - The customer setup and guided scan routes now use a full-screen black, mobile-first, Face ID-style interaction pattern with original GameFace Match scan artwork, rounded-square positioning, circular segmented progress, completion, camera-denied, multiple-face, Reduced Motion, and assisted-capture states.
+- The guided scan now includes remote iPhone hardening for HTTPS/secure-context camera requirements, portrait/readiness notices, lifecycle recovery after Safari backgrounding or screen lock, reduced-motion handling, camera-blocked recovery, and Buddy Trial scan-complete resume checkpointing.
 - Local MediaPipe-based face-landmark provider and local FC 26 MVP analysis modules exist.
 - FC 26 research observations are structured in `data/research/fc26/player_creator_research.json`, but remain research-only.
 - College Football 27 Phase 0 tooling exists for source-video inventory, evidence manifests, timelines, research candidates, primary review, verifier packages, production gates, and fail-closed publication checks.
@@ -107,7 +110,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Launch game registry entries exist for College Football 27, NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026, but every launch game remains recommendation-unavailable until a verified production catalog exists.
 - Supabase remote database/storage/auth/RLS/Edge Functions/Cron are not deployed from this repo.
 - Real manual matching study: 0 valid participants, 0 completed trials, no measured accuracy.
-- Real Buddy Trial V1 execution: invite-only fixture shell exists, but 0 completed real buddy trials, no measured before/after improvement, no production CF27 recommendations, and no real buddy acceptance yet.
+- Real Buddy Trial V1 execution: invite-only fixture shell and guided-scan handoff/resume checkpoint exist, but 0 completed real buddy trials, no measured before/after improvement, no production CF27 recommendations, and no real buddy acceptance yet.
 - Legal approval, tax/accounting review, production deployment, monitoring, support operations, and public launch approval are not complete.
 
 ## Current Production Blockers

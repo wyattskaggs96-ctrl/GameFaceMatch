@@ -23,6 +23,7 @@ import { ScreenshotRefinementEntry } from "@/features/refinement/ScreenshotRefin
 import { SettingsPanel } from "@/features/settings/SettingsPanel";
 import { createInitialCaptureSession, type ActiveCaptureSession } from "@/lib/capture/capture-session";
 import { createBrowserCameraService } from "@/lib/capture/browser-camera-service";
+import { getBuddyTrialInvite, markBuddyTrialScanCompleteInStorage } from "@/lib/buddy-trial/buddy-trial-session";
 import { createBundledCatalogRepository, type CatalogRuntimeStatus } from "@/lib/catalog/catalog-repository";
 import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
 import {
@@ -385,6 +386,25 @@ export default function HomePage() {
       trackAnalytics("refinementStarted", { catalogVersionID: productionCatalogManifest.catalogVersion.identifier });
     }
     commitScreen(nextScreen);
+  }
+
+  function markBuddyTrialScanCompleteIfPresent() {
+    if (typeof window === "undefined") return;
+    const inviteId = new URLSearchParams(window.location.search).get("buddyTrialInvite");
+    if (!inviteId || getBuddyTrialInvite(inviteId).status !== "active") return;
+    markBuddyTrialScanCompleteInStorage({
+      inviteId,
+      productionCatalogRecordCount: productionCatalogManifest.items.length,
+      storage: window.localStorage
+    });
+    trackPerformance(
+      createPerformanceRecord({
+        operation: "interruptedSessionRecovery",
+        durationMs: 0,
+        itemCount: 1,
+        notes: ["Marked Buddy Trial scan complete from existing guided capture continue action; no raw face media stored."]
+      })
+    );
   }
 
   function refreshPrivacyState() {
@@ -856,7 +876,10 @@ export default function HomePage() {
               refreshPrivacyState();
             }}
             onClose={() => navigate("home")}
-            onContinue={() => navigate("attributes")}
+            onContinue={() => {
+              markBuddyTrialScanCompleteIfPresent();
+              navigate("attributes");
+            }}
           />
         );
       case "attributes":

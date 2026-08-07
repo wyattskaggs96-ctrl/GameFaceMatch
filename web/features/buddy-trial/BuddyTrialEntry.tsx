@@ -219,7 +219,7 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
         <div className="buddy-trial-actions">
           {session?.state === "SCAN_IN_PROGRESS" ? (
             <>
-              <a className="buddy-trial-primary" href="/#start">
+              <a className="buddy-trial-primary" href={`/?buddyTrialInvite=${encodeURIComponent(inviteId)}#start`}>
                 Continue guided scan
               </a>
             </>

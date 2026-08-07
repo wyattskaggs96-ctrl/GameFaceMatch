@@ -35,6 +35,10 @@ Browser camera access requires HTTPS or localhost. A public deployment must use 
 
 Manual file upload remains the fallback for insecure context, blocked camera permission, unsupported camera APIs, or missing camera devices.
 
+For remote iPhone Buddy Trial links, HTTPS is not optional. Safari will not provide reliable camera permission prompts on ordinary insecure LAN or texted `http://` links. The first private-beta deployment must use a secure top-level app origin with camera permission available to the page, no cross-origin iframe capture dependency, and a recovery path for users who previously denied camera permission.
+
+The web scan must be described as a guided browser RGB face scan. It must not be marketed or documented as Apple Face ID, TrueDepth enrollment, biometric authentication, or depth capture.
+
 ## Client-side storage behavior
 
 - Capture images are held in memory as `File`/`Blob` objects and temporary object URLs during the active session.

@@ -8,9 +8,9 @@ Purpose: have a real independent second verifier complete the Prompt 102 support
 
 ## Codex-Ready Parallel Prompt
 
-`GFM | Q05 | PROMPT 109 | PHASE 03 | Connect Buddy Trial scan handoff and result upload shell`
+`GFM | Q05 | PROMPT 110 | PHASE 03 | Add Buddy Trial result upload and refinement placeholder`
 
-Use `docs/Product/BUDDY_TRIAL_V1.md` as the authoritative private-beta V1 contract and build on Prompt 108’s `/trial/[inviteId]` shell. Connect the existing guided scan handoff, scan-complete state update, and first result-upload placeholder without showing real CF27 recommendations until verified production catalog data exists.
+Use `docs/Product/BUDDY_TRIAL_V1.md` as the authoritative private-beta V1 contract and build on Prompt 108’s `/trial/[inviteId]` shell plus Prompt 109’s scan-complete resume checkpoint. Add the first result-upload placeholder and refinement-state shell without showing real CF27 recommendations until verified production catalog data exists.
 
 ## Owner Media Baseline Decision
 
@@ -169,6 +169,19 @@ Prompt 108 is complete as an invite-session-shell milestone.
 - Invite states covered: active, expired, used/completed, invalid
 - Resume behavior: same private URL and same browser restore the local session without account signup
 - Production recommendation behavior: blocked while the production catalog has 0 approved records
+
+## Prompt 109 Acceptance
+
+Prompt 109 is complete as a remote-iPhone scan-hardening milestone.
+
+- Prompt 104 visual flow preserved: full-screen black setup, rounded-square positioning frame, circular segmented scan, completion state, and assisted capture remain intact.
+- Secure-context camera gate: non-HTTPS, non-localhost camera attempts fail before `getUserMedia` and show recovery guidance.
+- iPhone Safari recovery: camera-denied/blocked states show Safari settings steps and keep assisted five-angle capture available.
+- Lifecycle recovery: page backgrounding, screen lock/pagehide, pageshow, offline, and online notices are normalized; camera tracks are stopped on interruption.
+- Mobile layout hardening: dynamic viewport height, safe-area padding, contained overscroll, and touch-action handling are applied without redesigning Prompt 104.
+- Buddy Trial resume: scan handoff preserves `buddyTrialInvite`, and successful capture continue records a local non-raw `SCAN_COMPLETE` checkpoint.
+- Progress gate: circular progress remains coverage/quality driven; no timer-only completion path exists.
+- Real-device limitation: actual iPhone Safari camera prompt, screen lock, low-power behavior, and camera switching still require manual HTTPS device QA.
 
 - Buddy Trial V1 contract: `docs/Product/BUDDY_TRIAL_V1.md`
 - North Star: a nontechnical buddy can open a texted iPhone link, complete the guided scan, receive exact verified CF27 settings, build the character, submit first and second result media, see before/after comparison, and rate resemblance without owner assistance.

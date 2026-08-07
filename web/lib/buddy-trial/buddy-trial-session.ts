@@ -298,3 +298,38 @@ export function parseBuddyTrialSession(value: string | null): BuddyTrialSession 
 export function serializeBuddyTrialSession(session: BuddyTrialSession) {
   return JSON.stringify(session);
 }
+
+export function markBuddyTrialScanCompleteInStorage({
+  inviteId,
+  now = new Date(),
+  productionCatalogRecordCount,
+  storage
+}: {
+  inviteId: string;
+  now?: Date;
+  productionCatalogRecordCount: number;
+  storage: Pick<Storage, "getItem" | "setItem">;
+}) {
+  const key = createBuddyTrialStorageKey(inviteId);
+  const existing =
+    parseBuddyTrialSession(storage.getItem(key)) ??
+    createBuddyTrialSession({
+      inviteId,
+      productionCatalogRecordCount,
+      now
+    });
+  if (existing.state === "DELETED" || existing.state === "COMPLETE" || existing.state === "SCAN_COMPLETE") {
+    storage.setItem(key, serializeBuddyTrialSession(existing));
+    return existing;
+  }
+  const readySession =
+    existing.state === "INVITED" && hasRequiredBuddyTrialConsent(existing.consent) ? transitionBuddyTrialSession(existing, "CONSENTED", now) : existing;
+  const inProgressSession =
+    readySession.state === "CONSENTED" ? transitionBuddyTrialSession(readySession, "SCAN_IN_PROGRESS", now, "Buddy Trial scan resumed from guided capture.") : readySession;
+  const nextSession =
+    inProgressSession.state === "SCAN_IN_PROGRESS"
+      ? transitionBuddyTrialSession(inProgressSession, "SCAN_COMPLETE", now, "Buddy Trial scan completed from guided capture.")
+      : inProgressSession;
+  storage.setItem(key, serializeBuddyTrialSession(nextSession));
+  return nextSession;
+}

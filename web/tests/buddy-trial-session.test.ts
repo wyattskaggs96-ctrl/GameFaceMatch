@@ -10,7 +10,9 @@ import {
   createBuddyTrialStorageKey,
   getBuddyTrialInvite,
   hasRequiredBuddyTrialConsent,
+  markBuddyTrialScanCompleteInStorage,
   REQUIRED_BUDDY_TRIAL_CONSENTS,
+  serializeBuddyTrialSession,
   transitionBuddyTrialSession
 } from "@/lib/buddy-trial/buddy-trial-session";
 
@@ -80,6 +82,39 @@ describe("buddy trial session contract", () => {
     expect(scanComplete.catalogGate).toBe("production_catalog_unavailable");
     expect(canAdvanceBuddyTrialToRecommendation(scanComplete)).toBe(false);
     expect(() => transitionBuddyTrialSession(scanComplete, "RECOMMENDATION_READY")).toThrow(/production catalog/);
+  });
+
+  it("marks an existing active invite session scan-complete for browser resume without enabling recommendations", () => {
+    const now = new Date("2026-08-07T12:00:00.000Z");
+    const session = createBuddyTrialSession({
+      inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      productionCatalogRecordCount: 0,
+      now,
+      sessionId: "bt_session_test"
+    });
+    const consent = {
+      ...session.consent,
+      acknowledgments: Object.fromEntries(REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => [id, true])) as typeof session.consent.acknowledgments
+    };
+    const scanInProgress = transitionBuddyTrialSession(applyBuddyTrialConsent(session, consent, now), "SCAN_IN_PROGRESS", now);
+    const storage = new Map<string, string>();
+    storage.set(createBuddyTrialStorageKey(BUDDY_TRIAL_ACTIVE_INVITE_ID), serializeBuddyTrialSession(scanInProgress));
+
+    const nextSession = markBuddyTrialScanCompleteInStorage({
+      inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      productionCatalogRecordCount: 0,
+      storage: {
+        getItem: (key) => storage.get(key) ?? null,
+        setItem: (key, value) => {
+          storage.set(key, value);
+        }
+      },
+      now: new Date("2026-08-07T12:05:00.000Z")
+    });
+
+    expect(nextSession.state).toBe("SCAN_COMPLETE");
+    expect(nextSession.catalogGate).toBe("production_catalog_unavailable");
+    expect(canAdvanceBuddyTrialToRecommendation(nextSession)).toBe(false);
   });
 
   it("treats deleted sessions as terminal and prevents unsupported jumps", () => {

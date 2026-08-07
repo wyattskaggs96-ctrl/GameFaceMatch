@@ -193,3 +193,18 @@ Full validation results are recorded in the Prompt 104 completion report.
 - The web camera implementation cannot reproduce TrueDepth depth capture; it uses local RGB guidance and MediaPipe/landmark-derived pose checks.
 - The introduction preserves fail-closed consent and catalog/payment boundaries, so the primary button may be disabled until the existing gates are satisfied.
 - The active scan uses grouped visual ticks over the existing eight supported pose sectors instead of a proprietary depth-coverage algorithm.
+
+## Prompt 109 Remote iPhone Hardening Addendum
+
+Prompt 109 preserves the Prompt 104 visual experience and adds remote iPhone/Safari hardening:
+
+- Secure-context detection blocks camera start on non-HTTPS, non-localhost origins and shows recovery guidance instead of attempting a doomed camera request.
+- iPhone Safari permission recovery steps are shown when camera access is denied or blocked.
+- Portrait, narrow viewport, reduced-motion, and offline readiness warnings are surfaced inside the existing black guided-scan screen without changing the reference layout.
+- Dynamic viewport sizing (`100dvh` with `100svh` fallback), safe-area padding, contained overscroll, and touch-action handling are used for iPhone-first remote trials.
+- Browser backgrounding, screen lock, pagehide/pageshow, offline, and online lifecycle messages are normalized for scan resume and camera-track cleanup.
+- Buddy Trial handoff links preserve the invite ID, and the existing scan continue action records a local `SCAN_COMPLETE` trial checkpoint without storing raw face media.
+- Circular progress remains coverage/quality driven through accepted live frames; no timer-only completion path was added.
+- Accessibility Options still route to the assisted five-angle capture flow.
+
+Remaining hardware limitation: real Safari camera permission prompts, lock-screen behavior, low-power throttling, and camera switching still require manual testing on an actual iPhone over HTTPS.

@@ -26,7 +26,7 @@ test.describe("Buddy Trial invite route", () => {
     await beginButton.click();
 
     await expect(page.getByText("SCAN_IN_PROGRESS")).toBeVisible();
-    await expect(page.getByRole("link", { name: "Continue guided scan" })).toHaveAttribute("href", "/#start");
+    await expect(page.getByRole("link", { name: "Continue guided scan" })).toHaveAttribute("href", `/?buddyTrialInvite=${activeInvite}#start`);
 
     await page.reload();
     await expect(page.getByText("SCAN_IN_PROGRESS")).toBeVisible();

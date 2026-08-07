@@ -57,8 +57,24 @@ These cannot be completed from an insecure LAN URL:
 - Persistent site permission reset behavior.
 - Secure-context camera API availability.
 - Add-to-home-screen display-mode checks.
+- Remote Buddy Trial guided scan links. A texted trial URL must be HTTPS; otherwise Safari will block camera APIs before the user can complete the scan.
 
 Use a temporary HTTPS preview deployment or a trusted local HTTPS tunnel only after owner approval. Do not connect analytics, payments, auth, databases, or media upload services for this QA pass.
+
+## Prompt 109 iPhone Safari Hardening Checks
+
+The web scan remains a browser RGB guided face scan, not Apple Face ID, TrueDepth, authentication, or depth capture.
+
+Before handing a remote trial link to a buddy, verify:
+
+1. The link opens on an HTTPS origin and the scan screen does not show the secure-context warning.
+2. The phone is in portrait orientation; landscape should show clear guidance to rotate rather than shrinking controls below accessible size.
+3. Reduced Motion keeps the screen usable and does not change the coverage-driven completion requirement.
+4. Denied or blocked camera access shows iPhone Safari recovery steps and the assisted five-angle option.
+5. Locking the phone or backgrounding Safari stops camera tracks, shows a session-restored message on return, and lets the user restart camera without losing completed stills.
+6. Refresh during active capture warns the user when browser support allows it.
+7. Airplane mode or weak network after capture does not imply upload; local capture remains available, but later catalog/resume checks are presented as needing network when applicable.
+8. Returning to the Buddy Trial URL after a successful scan should resume from the stored scan-complete checkpoint instead of forcing a fresh scan.
 
 ## Cannot Be Validated Reliably In Simulators
 

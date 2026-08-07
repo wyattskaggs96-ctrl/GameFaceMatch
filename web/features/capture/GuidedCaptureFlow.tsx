@@ -32,6 +32,12 @@ import {
   type GuidedLiveFrameDecision
 } from "@/lib/capture/guided-live-coverage";
 import {
+  evaluateMobileScanRuntime,
+  getCameraBlockedRecoverySteps,
+  getMobileScanLifecycleNotice,
+  type MobileScanRuntimeState
+} from "@/lib/capture/mobile-safari-scan-hardening";
+import {
   cancelCaptureSession,
   getCompletedAngleCount,
   getCurrentAngle,
@@ -99,6 +105,7 @@ export function GuidedCaptureFlow({
   const [selectedFacingMode, setSelectedFacingMode] = useState<CameraFacingMode>("user");
   const [lifecycleNotice, setLifecycleNotice] = useState<string | null>(null);
   const [isOffline, setIsOffline] = useState(false);
+  const [mobileRuntime, setMobileRuntime] = useState<MobileScanRuntimeState | null>(null);
   const [liveGuidance, setLiveGuidance] = useState<CaptureGuidanceReport | null>(null);
   const [baseGuidedScanState, setBaseGuidedScanState] = useState(() => createInitialGuidedScanState());
   const [liveCoverageDecision, setLiveCoverageDecision] = useState<GuidedLiveFrameDecision | null>(null);
@@ -161,6 +168,51 @@ export function GuidedCaptureFlow({
   useEffect(() => {
     acceptedLiveFramesRef.current = acceptedLiveFrames;
   }, [acceptedLiveFrames]);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof navigator === "undefined") return;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function updateMobileRuntime() {
+      setMobileRuntime(
+        evaluateMobileScanRuntime({
+          isSecureContext: window.isSecureContext,
+          protocol: window.location.protocol,
+          hostname: window.location.hostname,
+          userAgent: navigator.userAgent,
+          innerWidth: window.innerWidth,
+          innerHeight: window.innerHeight,
+          visualViewportWidth: window.visualViewport?.width,
+          visualViewportHeight: window.visualViewport?.height,
+          orientationType: typeof screen !== "undefined" ? screen.orientation?.type : undefined,
+          prefersReducedMotion: motionQuery.matches,
+          online: navigator.onLine
+        })
+      );
+    }
+    updateMobileRuntime();
+    window.addEventListener("resize", updateMobileRuntime);
+    window.addEventListener("orientationchange", updateMobileRuntime);
+    window.visualViewport?.addEventListener("resize", updateMobileRuntime);
+    if (typeof motionQuery.addEventListener === "function") {
+      motionQuery.addEventListener("change", updateMobileRuntime);
+    } else {
+      motionQuery.addListener(updateMobileRuntime);
+    }
+    window.addEventListener("online", updateMobileRuntime);
+    window.addEventListener("offline", updateMobileRuntime);
+    return () => {
+      window.removeEventListener("resize", updateMobileRuntime);
+      window.removeEventListener("orientationchange", updateMobileRuntime);
+      window.visualViewport?.removeEventListener("resize", updateMobileRuntime);
+      if (typeof motionQuery.removeEventListener === "function") {
+        motionQuery.removeEventListener("change", updateMobileRuntime);
+      } else {
+        motionQuery.removeListener(updateMobileRuntime);
+      }
+      window.removeEventListener("online", updateMobileRuntime);
+      window.removeEventListener("offline", updateMobileRuntime);
+    };
+  }, []);
 
   useEffect(() => {
     const firstPass = baseGuidedScanState.passes.find((pass) => pass.id === "first");
@@ -319,19 +371,19 @@ export function GuidedCaptureFlow({
     function handleVisibilityChange() {
       if (document.visibilityState === "hidden") {
         stopCamera();
-        setLifecycleNotice("Camera preview paused because the page was backgrounded, locked, or interrupted. Restart camera before capturing the next still.");
+        setLifecycleNotice(getMobileScanLifecycleNotice("visibilityHidden"));
       }
       if (document.visibilityState === "visible" && hasActiveCaptureData) {
-        setLifecycleNotice("Capture session restored. Review completed angles and restart the camera if you want to continue live capture.");
+        setLifecycleNotice(getMobileScanLifecycleNotice("visibilityVisible"));
       }
     }
     function handlePageHide() {
       stopCamera();
-      setLifecycleNotice("Camera tracks were stopped while the page was hidden.");
+      setLifecycleNotice(getMobileScanLifecycleNotice("pageHide"));
     }
     function handlePageShow(event: PageTransitionEvent) {
       if (event.persisted || hasActiveCaptureData) {
-        setLifecycleNotice("Page restored. Temporary image references may need review on low-memory mobile browsers.");
+        setLifecycleNotice(getMobileScanLifecycleNotice("pageShow"));
       }
     }
     function handleBeforeUnload(event: BeforeUnloadEvent) {
@@ -341,11 +393,11 @@ export function GuidedCaptureFlow({
     }
     function handleOffline() {
       setIsOffline(true);
-      setLifecycleNotice("Browser is offline. The current MVP stays local, but camera permissions and reload behavior can vary by browser.");
+      setLifecycleNotice(getMobileScanLifecycleNotice("offline"));
     }
     function handleOnline() {
       setIsOffline(false);
-      setLifecycleNotice("Browser is online again. No capture images were uploaded.");
+      setLifecycleNotice(getMobileScanLifecycleNotice("online"));
     }
     document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("pagehide", handlePageHide);
@@ -370,6 +422,12 @@ export function GuidedCaptureFlow({
     setLifecycleNotice(null);
     setIsStartingCamera(true);
     try {
+      if (mobileRuntime && !mobileRuntime.secureContext) {
+        throw new CameraAccessError(
+          "permissionBlocked",
+          "Camera access requires HTTPS or localhost. Open the private trial from a secure website link, then start camera again."
+        );
+      }
       stopCamera();
       const nextStream = await cameraService.requestCameraPreview({
         deviceId: selectedDeviceId || undefined,
@@ -670,6 +728,7 @@ export function GuidedCaptureFlow({
           lifecycleNotice={lifecycleNotice}
           liveCoverageDecision={liveCoverageDecision}
           liveGuidance={liveGuidance}
+          mobileRuntime={mobileRuntime}
           acceptedLiveFrameCount={acceptedLiveFrames.length}
           previewIsMirrored={previewIsMirrored}
           reviewReportCanContinue={reviewReport.canContinue}
@@ -1143,6 +1202,7 @@ function CircularGuidedCapturePanel({
   lifecycleNotice,
   liveCoverageDecision,
   liveGuidance,
+  mobileRuntime,
   acceptedLiveFrameCount,
   previewIsMirrored,
   reviewReportCanContinue,
@@ -1173,6 +1233,7 @@ function CircularGuidedCapturePanel({
   lifecycleNotice: string | null;
   liveCoverageDecision: GuidedLiveFrameDecision | null;
   liveGuidance: CaptureGuidanceReport | null;
+  mobileRuntime: MobileScanRuntimeState | null;
   acceptedLiveFrameCount: number;
   previewIsMirrored: boolean;
   reviewReportCanContinue: boolean;
@@ -1246,6 +1307,15 @@ function CircularGuidedCapturePanel({
               {cameraError} Allow camera access or use the assisted five-angle capture option.
             </Alert>
           ) : null}
+          {mobileRuntime?.warnings.length ? (
+            <Alert title={mobileRuntime.isLikelyIPhoneSafari ? "iPhone scan readiness" : "Mobile scan readiness"} tone="info" role="status">
+              <ul className="message-list advisory-list">
+                {mobileRuntime.warnings.slice(0, 3).map((warning) => (
+                  <li key={warning}>{warning}</li>
+                ))}
+              </ul>
+            </Alert>
+          ) : null}
           {lifecycleNotice ? (
             <Alert title="Session paused" tone="warning" role="status">
               {lifecycleNotice}
@@ -1286,6 +1356,7 @@ function CircularGuidedCapturePanel({
             </p>
             <QualityGateList gate={guidedScanState.initialQualityGate} />
             <LiveCoverageDecisionPanel decision={liveCoverageDecision} acceptedLiveFrameCount={acceptedLiveFrameCount} streamActive={streamActive} />
+            {cameraErrorCode ? <CameraBlockedRecoveryList steps={getCameraBlockedRecoverySteps({ isLikelyIPhoneSafari: Boolean(mobileRuntime?.isLikelyIPhoneSafari), secureContext: Boolean(mobileRuntime?.secureContext ?? true) })} /> : null}
             <p>Second-pass targets: {secondTargets.length > 0 ? secondTargets.map(formatGuidedRegionID).join(", ") : "none"}.</p>
             <div className="button-row compact-buttons">
               <Button variant="ghost" onClick={onCaptureStill} disabled={!streamActive} aria-label={`Capture fallback still for ${currentAngle.label}`}>
@@ -1446,6 +1517,20 @@ function LiveCoverageDecisionPanel({
       ) : null}
       {decision?.status === "pendingStability" ? <p className="field-note">Hold this view briefly. Coverage is not counted until samples agree.</p> : null}
       {decision?.status === "accepted" ? <p className="field-note">This region was accepted and connected to the profile-capture queue.</p> : null}
+    </div>
+  );
+}
+
+function CameraBlockedRecoveryList({ steps }: { steps: string[] }) {
+  return (
+    <div className="guided-quality-card" aria-label="Camera blocked recovery steps">
+      <strong>Camera access recovery</strong>
+      <ol className="message-list advisory-list">
+        {steps.map((step) => (
+          <li key={step}>{step}</li>
+        ))}
+      </ol>
+      <p className="field-note">You can also use Accessibility Options for the assisted five-angle capture path.</p>
     </div>
   );
 }

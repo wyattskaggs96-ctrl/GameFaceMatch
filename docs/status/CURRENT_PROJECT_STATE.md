@@ -1,10 +1,10 @@
 # Current Project State
 
 **Status:** AUTHORITATIVE CURRENT OPERATIONAL STATUS
-**Last reconciled:** 2026-08-06
+**Last reconciled:** 2026-08-07
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 102 supported-subset verifier-session checkpoint
+**Repository checkpoint reviewed:** Prompt 105 human-verifier usability checkpoint
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
 **Current active phase:** supported-subset human verifier execution and production-catalog gatekeeping
@@ -16,7 +16,7 @@ This is the single current operational status source. Older audits, readiness re
 ```json
 {
   "schemaVersion": "current-project-state-v3",
-  "repositoryCheckpoint": "PROMPT_102_SUPPORTED_SUBSET_VERIFIER_SESSION",
+  "repositoryCheckpoint": "PROMPT_105_HUMAN_VERIFIER_USABILITY",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -55,6 +55,8 @@ Prompt 102 operationalizes the 76-record supported-subset package for a real ind
 
 Prompt 104 rebuilds the customer setup and guided scan experience to closely follow the owner-provided mobile setup recording while preserving GameFace Match branding, browser-RGB capability limits, consent/payment/catalog gates, accessibility, privacy, and fail-closed recommendation behavior. Visual evidence is recorded in `docs/status/visual-evidence/prompt104/`, and the implementation audit is `docs/status/GAMEFACE_SETUP_REFERENCE_IMPLEMENTATION.md`. This work changes customer presentation and capture UI only; it does not import verifier decisions, promote catalog records, enable recommendations, activate payments, deploy Supabase, or change the Prompt 103 hold.
 
+Prompt 105 makes the CF27 supported-subset human-verifier workflow owner-usable. Wyatt can now run `npm run verifier:start`, open `http://localhost:3000/verifier`, and hand the browser workflow to a real friend/verifier. The route loads the 76-record supported-subset package, records verifier identity/environment/attestation, shows one record at a time, saves browser-local progress, enforces completion before export, and downloads a Prompt 103-compatible JSON package. It creates 0 human decisions, 0 production approvals, 0 production catalog records, and 0 recommendation-eligible records.
+
 Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media inventory as the final owner-provided media baseline for the initial product launch. Additional Wyatt recordings are no longer an initial-launch prerequisite. Historical recapture audits remain useful evidence-quality references, but remaining recapture tasks are reclassified as known evidence limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch improvements, or unsupported option/category gaps where evidence is insufficient.
 
 ## Actually Working
@@ -68,6 +70,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - College Football 27 production-verification queue exists as a machine-readable and human-readable non-production worklist; it contains 92 research candidates and assigns no second-verifier or production approval.
 - College Football 27 supported-subset classification exists in `data/phase-zero/cf27_supported_subset_classification.json`. It classifies all 92 candidates exactly once, proposes 76 records for supported-subset second-verifier review, generates a deterministic 24-record secondary-angle sample, and keeps every record non-production.
 - College Football 27 supported-subset verifier session exists in `data/phase-zero/supported-subset-verifier-session/`. It is ready for a real second human to complete without editing source files, and it keeps all returned decisions non-production until later import, discrepancy handling, catalog-manager approval, and release gates.
+- College Football 27 friend-ready verifier workflow exists at local development route `http://localhost:3000/verifier` after running `npm run verifier:start`. It wraps the supported-subset package in a nontechnical, browser-local workflow with automatic draft persistence and JSON export.
 - College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
 - College Football 27 evidence recapture package exists as a deterministic historical owner/verifier worklist. A follow-on existing-media verification gap audit exhausts the current videos, source-media records, derivative frames, timelines, and queue records. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements required frame re-extraction instead of new capture, and historical minimum recapture tasks are now evidence limitations or post-launch improvement opportunities rather than owner launch prerequisites.
 - College Football 27 frame re-extraction packet exists for the 7 recoverable requirements from the existing-media audit. These derivative frames are marked `NOT_PRODUCTION_DATA` and `OBSERVED_PENDING_VERIFICATION`; they reduce unnecessary recapture but do not replace human verification.
@@ -171,6 +174,8 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - CF27 supported subset verifier handoff: `docs/status/CF27_SUPPORTED_SUBSET_VERIFIER_HANDOFF.md`
 - CF27 supported subset verifier runbook: `docs/status/CF27_SUPPORTED_SUBSET_VERIFIER_RUNBOOK.md`
 - CF27 supported subset human verification status: `docs/status/CF27_SUPPORTED_SUBSET_HUMAN_VERIFICATION_STATUS.md`
+- Human verifier quick start: `docs/verification/HUMAN_VERIFIER_QUICK_START.md`
+- Owner verifier launch checklist: `docs/verification/OWNER_VERIFIER_LAUNCH_CHECKLIST.md`
 - Owner media baseline lock: `docs/status/OWNER_MEDIA_BASELINE_LOCKED.md`
 - Machine-readable health status: `data/status/project_health_status.json`
 - Next action: `docs/status/NEXT_ACTION.md`

@@ -42,6 +42,7 @@ describe("security headers and production debugging posture", () => {
       call.includes("modelPath")
       || call.includes("/api/internal/current-research-catalog")
       || call.includes("/api/internal/cf27-production-verification-queue")
+      || call.includes("/api/internal/cf27-supported-subset-verifier-session")
       || call.includes("/api/internal/fc26-player-creator-research")
       || call.includes("/api/internal/phase-zero-completion")
     ))).toBe(true);

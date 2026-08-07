@@ -127,6 +127,27 @@ Prompt 102 is complete as a tooling milestone.
 - Recommendation-eligible records: 0
 - Additional Wyatt recordings remain optional post-launch improvement, not an initial-launch blocker.
 
+## Prompt 105 Acceptance
+
+Prompt 105 is complete as an owner-usability milestone.
+
+- Local verifier start command: `npm run verifier:start`
+- Local verifier URL: `http://localhost:3000/verifier`
+- Friend quick start: `docs/verification/HUMAN_VERIFIER_QUICK_START.md`
+- Owner checklist: `docs/verification/OWNER_VERIFIER_LAUNCH_CHECKLIST.md`
+- Supported-subset records loaded: 76
+- Deterministic secondary-angle sample rows: 24
+- Progress persistence: browser local storage on the verifier computer
+- Export filename: `cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json`
+- Export validation command: `npm run cf27:supported-subset-verifier-session:validate-export -- <path-to-export.json>`
+- Human verifier decisions currently imported: 0
+- Second-verified records: 0
+- Production-approved records: 0
+- Production catalog records: 0
+- Recommendation-eligible records: 0
+
+Prompt 105 did not execute Prompt 103 and did not manufacture verifier decisions. Prompt 103 remains conditional on Wyatt providing a completed real human-verifier export.
+
 ## Prompt 103 - Conditional Next Codex Prompt
 
 `GFM | Q04 | PROMPT 103 | PHASE 03 | Import and reconcile CF27 supported-subset verifier decisions`

@@ -552,14 +552,16 @@ From the repository root:
 \`\`\`bash
 npm install
 npm run cf27:supported-subset-verifier-session:check
-npm --prefix web run dev
+npm run verifier:start
 \`\`\`
 
-Open the local app at \`http://localhost:3000\`. Use the internal Phase 0 verifier/status panels for browsing evidence, and use the package files in \`${defaultOutputDirectory}\` for the supported-subset decision export.
+Open the local verifier page at \`http://localhost:3000/verifier\`.
+
+This route is local/development only. It loads the 76-record supported-subset package from \`${defaultOutputDirectory}\`, saves draft progress in the browser, and downloads a completed JSON export. It does not publish a catalog or enable recommendations.
 
 ## 2. Create a Verifier Session
 
-Open \`${defaultOutputDirectory}/verifier_decision_export_template.json\`. Copy it outside the repository or into a verifier working folder. Fill only your own observations. Do not edit source media or catalog files.
+On \`http://localhost:3000/verifier\`, enter your verifier name or ID and the visible game/console environment. Do not edit source media, catalog files, or package JSON by hand.
 
 ## 3. Environment Details To Collect
 
@@ -569,11 +571,11 @@ Use \`unknown\` only when the value cannot be established. Do not invent values.
 
 ## 4. Save and Resume
 
-Save the decision export JSON as you work. The session is resumable because each candidate row is keyed by \`candidateID\`. Do not delete rows.
+Progress saves automatically in the browser on this computer. If the page refreshes, reopen \`http://localhost:3000/verifier\` and continue. Do not clear browser site data until after the export is complete.
 
 ## 5. Inspect Evidence
 
-Use \`${defaultOutputDirectory}/candidate_detail_reference.csv\` for source-video IDs, timestamps, derivative references, limitations, and required checks. Evidence may also be browsed in the local internal Phase 0 UI.
+Each verifier page record shows the claimed category, native label/index/order, source-video IDs, timestamps, derivative references, limitations, required front-view state, and whether it belongs to the deterministic secondary-angle sample.
 
 ## 6. Inspect the Shipping Game Independently
 
@@ -597,10 +599,16 @@ Complete all 24 rows in \`secondary_angle_sample_review.csv/json\`. The sample m
 
 ## 10. Export and Return
 
-Return the completed JSON decision export to Wyatt/Codex. Codex will validate it with:
+When the final review screen says every required item is complete, choose **Export verifier package**. The browser downloads a file named like:
+
+\`\`\`text
+cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json
+\`\`\`
+
+Wyatt should keep that file and later ask Codex to run Prompt 103. The export can be checked without importing or promoting records with:
 
 \`\`\`bash
-npm run cf27:supported-subset-verifier-session:check
+npm run cf27:supported-subset-verifier-session:validate-export -- ~/Downloads/cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json
 \`\`\`
 
 A future import command will store valid decisions as non-production only. It will not publish a catalog.
@@ -647,7 +655,23 @@ The verifier package operationalizes the Prompt 101 supported subset. It does no
 
 ## Human Next Action
 
-Wyatt must provide the runbook and generated package to a real independent verifier. The verifier must complete the environment, attestation, all 76 record decisions, menu counts, and all 24 secondary-angle sample checks from independent shipping-game inspection.
+Wyatt must start the friend-ready local verifier workflow and provide it to a real independent verifier:
+
+\`\`\`bash
+npm run verifier:start
+\`\`\`
+
+Open:
+
+\`\`\`text
+http://localhost:3000/verifier
+\`\`\`
+
+The verifier must complete the environment, attestation, all 76 record decisions, menu counts, all 24 secondary-angle sample checks, and excluded duplicate/order limitation review from independent shipping-game inspection.
+
+Friend instructions: \`docs/verification/HUMAN_VERIFIER_QUICK_START.md\`
+
+Owner checklist: \`docs/verification/OWNER_VERIFIER_LAUNCH_CHECKLIST.md\`
 
 ## Software Next Action After Human Completion
 
@@ -715,6 +739,19 @@ function slug(value) {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const check = process.argv.includes("--check");
+  const validateExportIndex = process.argv.indexOf("--validate-export");
+  if (validateExportIndex >= 0) {
+    const exportPath = process.argv[validateExportIndex + 1];
+    if (!exportPath) {
+      console.error("Usage: npm run cf27:supported-subset-verifier-session:validate-export -- <path-to-export.json>");
+      process.exit(1);
+    }
+    const absoluteExportPath = path.resolve(process.cwd(), exportPath);
+    const exportPackage = readJSON(absoluteExportPath);
+    const validation = validateCompletedVerifierDecisionExport(exportPackage);
+    console.log(JSON.stringify(validation, null, 2));
+    process.exit(validation.ok ? 0 : 1);
+  }
   const result = buildSupportedSubsetVerifierSession();
   if (!result.validation.ok) {
     console.error(JSON.stringify(result.validation, null, 2));

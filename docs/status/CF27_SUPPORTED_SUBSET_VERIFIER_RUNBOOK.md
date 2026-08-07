@@ -13,14 +13,16 @@ From the repository root:
 ```bash
 npm install
 npm run cf27:supported-subset-verifier-session:check
-npm --prefix web run dev
+npm run verifier:start
 ```
 
-Open the local app at `http://localhost:3000`. Use the internal Phase 0 verifier/status panels for browsing evidence, and use the package files in `data/phase-zero/supported-subset-verifier-session` for the supported-subset decision export.
+Open the local verifier page at `http://localhost:3000/verifier`.
+
+This route is local/development only. It loads the 76-record supported-subset package from `data/phase-zero/supported-subset-verifier-session`, saves draft progress in the browser, and downloads a completed JSON export. It does not publish a catalog or enable recommendations.
 
 ## 2. Create a Verifier Session
 
-Open `data/phase-zero/supported-subset-verifier-session/verifier_decision_export_template.json`. Copy it outside the repository or into a verifier working folder. Fill only your own observations. Do not edit source media or catalog files.
+On `http://localhost:3000/verifier`, enter your verifier name or ID and the visible game/console environment. Do not edit source media, catalog files, or package JSON by hand.
 
 ## 3. Environment Details To Collect
 
@@ -30,11 +32,11 @@ Use `unknown` only when the value cannot be established. Do not invent values.
 
 ## 4. Save and Resume
 
-Save the decision export JSON as you work. The session is resumable because each candidate row is keyed by `candidateID`. Do not delete rows.
+Progress saves automatically in the browser on this computer. If the page refreshes, reopen `http://localhost:3000/verifier` and continue. Do not clear browser site data until after the export is complete.
 
 ## 5. Inspect Evidence
 
-Use `data/phase-zero/supported-subset-verifier-session/candidate_detail_reference.csv` for source-video IDs, timestamps, derivative references, limitations, and required checks. Evidence may also be browsed in the local internal Phase 0 UI.
+Each verifier page record shows the claimed category, native label/index/order, source-video IDs, timestamps, derivative references, limitations, required front-view state, and whether it belongs to the deterministic secondary-angle sample.
 
 ## 6. Inspect the Shipping Game Independently
 
@@ -66,10 +68,16 @@ Complete all 24 rows in `secondary_angle_sample_review.csv/json`. The sample met
 
 ## 10. Export and Return
 
-Return the completed JSON decision export to Wyatt/Codex. Codex will validate it with:
+When the final review screen says every required item is complete, choose **Export verifier package**. The browser downloads a file named like:
+
+```text
+cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json
+```
+
+Wyatt should keep that file and later ask Codex to run Prompt 103. The export can be checked without importing or promoting records with:
 
 ```bash
-npm run cf27:supported-subset-verifier-session:check
+npm run cf27:supported-subset-verifier-session:validate-export -- ~/Downloads/cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json
 ```
 
 A future import command will store valid decisions as non-production only. It will not publish a catalog.

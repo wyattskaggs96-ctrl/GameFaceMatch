@@ -1,9 +1,9 @@
 # Health Check Result
 
-**Date:** 2026-08-06
+**Date:** 2026-08-07
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`  
 **Branch:** `main`  
-**HEAD reviewed:** Prompt 102 supported-subset verifier-session checkpoint
+**HEAD reviewed:** Prompt 105 human-verifier usability checkpoint
 
 ## Final Result
 
@@ -81,6 +81,12 @@ The customer setup and guided scan experience has been rebuilt as a black, mobil
 
 Reference implementation details and visual evidence are recorded in `docs/status/GAMEFACE_SETUP_REFERENCE_IMPLEMENTATION.md` and `docs/status/visual-evidence/prompt104/`. Prompt 104 did not import human verifier decisions, create production approvals, publish catalog records, enable recommendations, activate payments, or move Prompt 103 out of hold.
 
+## Prompt 105 Status
+
+The CF27 supported-subset human-verifier workflow is now owner-usable. Wyatt can run `npm run verifier:start`, open `http://localhost:3000/verifier`, and hand the local browser workflow to a real friend/verifier. The workflow loads the 76-record supported-subset package, records verifier identity, environment, attestation, record-level decisions, menu counts, secondary-angle sample checks, and duplicate/order limitation review. Progress saves in browser local storage and export remains blocked until required fields are complete.
+
+The export filename is `cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json`, normally in `~/Downloads`. It validates against the supported-subset Prompt 103 contract with `npm run cf27:supported-subset-verifier-session:validate-export -- <path>`. Prompt 105 did not create verifier decisions, second-verified records, production approvals, production catalog records, recommendation eligibility, or catalog-manager approval.
+
 ## Frame Re-Extraction Packet Status
 
 The recoverable frame gaps identified by the existing-media audit now have a dedicated packet in `data/phase-zero/cf27_frame_reextractions.json`. It records 7 derivative frames across Eye color, Eye shape, Facial-hair colors, Hair colors, Mouth shape, Skin details, and Skin tone. These files are derivative evidence only; they do not create production records and do not replace second-human verification.
@@ -99,4 +105,4 @@ Do not launch publicly or privately as a paid production product yet. The produc
 
 ## Authoritative Next Action
 
-Run `docs/status/NEXT_ACTION.md` for the human verifier handoff. The next Codex prompt should wait until Wyatt provides a completed verifier package.
+Run `docs/status/NEXT_ACTION.md` for the local human verifier handoff. The next Codex prompt should wait until Wyatt provides a completed verifier package.

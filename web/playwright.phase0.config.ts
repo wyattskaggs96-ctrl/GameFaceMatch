@@ -5,7 +5,7 @@ const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
   testDir: "./tests/e2e",
-  testMatch: ["**/phase-zero-audit.spec.ts", "**/current-evidence.spec.ts"],
+  testMatch: ["**/phase-zero-*.spec.ts", "**/current-evidence.spec.ts"],
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,

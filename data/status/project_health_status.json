@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gameface-project-health-status-v1",
-  "generatedAt": "2026-08-06T01:35:00-04:00",
+  "generatedAt": "2026-08-07T16:55:00-04:00",
   "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
   "branch": "main",
-  "head": "PROMPT_102_SUPPORTED_SUBSET_VERIFIER_SESSION",
+  "head": "PROMPT_105_HUMAN_VERIFIER_USABILITY",
   "outcome": "HOLD_VERIFICATION",
   "productionReadiness": "BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS",
   "productionRecommendationsEnabled": false,
@@ -83,6 +83,7 @@
     "matchingEngine": "implemented_without_real_catalog_validation",
     "cf27SupportedSubsetClassification": "complete_non_production_verifier_ready",
     "cf27SupportedSubsetVerifierSession": "ready_for_human_verifier",
+    "cf27FriendVerifierWorkflow": "implemented_ready_for_human_verifier",
     "matchingStudyWorkflow": "implemented_not_started",
     "supabase": "schema_designed_not_connected",
     "payments": "launch_pack_all_access_scaffold_only",
@@ -92,6 +93,9 @@
   },
   "nextAction": {
     "path": "docs/status/NEXT_ACTION.md",
-    "title": "HUMAN ACTION | Complete CF27 supported-subset second verification"
+    "title": "HUMAN ACTION | Complete CF27 supported-subset second verification",
+    "command": "npm run verifier:start",
+    "url": "http://localhost:3000/verifier",
+    "expectedExport": "~/Downloads/cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json"
   }
 }

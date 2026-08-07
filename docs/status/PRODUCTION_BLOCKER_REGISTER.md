@@ -7,7 +7,7 @@
 | Blocker | Why it matters | Owner | Required input/action |
 | --- | --- | --- | --- |
 | No verified production catalog records | Product cannot return real game settings. | Wyatt, Codex, second verifier | Complete evidence, verification, catalog-manager approval. Current production catalog count is 0. |
-| CF27 supported subset requires real second-human verification | Prevents research or partially verified records from becoming customer-facing data. | Second verifier, Codex, catalog manager | Prompt 102 produced the 76-record supported-subset verifier session package and runbook. A real verifier must complete and return it; Codex must then import and reconcile decisions as non-production before catalog-manager consideration. |
+| CF27 supported subset requires real second-human verification | Prevents research or partially verified records from becoming customer-facing data. | Second verifier, Codex, catalog manager | Prompt 105 provides the owner-usable local workflow at `http://localhost:3000/verifier` via `npm run verifier:start`. A real verifier must complete and return the JSON export; Codex must then import and reconcile decisions as non-production before catalog-manager consideration. |
 | No production payment/subscription stack | Approved Launch Pack and All Access are configured but cannot collect money or grant entitlements. | Wyatt + Codex + Stripe | Implement test-mode Stripe Checkout/Billing/webhooks only after catalog and server-authoritative entitlement gates are ready. |
 | No server-authoritative entitlements | Customers cannot be safely granted paid access. | Codex | Supabase/Auth/payment integration with fail-closed checks. |
 | No real matching validation | Product promise is not measured. | Wyatt + study reviewers | Study workflow exists, but the 10-20 participant study must wait until verified catalog records and real top-three outputs exist. |
@@ -40,7 +40,7 @@
 ## HOLD_OWNER_DECISION
 
 - No additional owner source-media recording is required for the initial launch baseline. `OWNER_MEDIA_BASELINE_LOCKED` supersedes prior owner-recapture launch blockers.
-- Prompt 102 supported-subset verifier tooling is complete: 76 records are ready for human verifier execution, 24 deterministic secondary-angle rows are required, 16 records remain limited evidence, and 0 records are production-approved or recommendation-eligible.
+- Prompt 105 supported-subset verifier workflow is owner-usable: 76 records are ready for human verifier execution at `http://localhost:3000/verifier`, 24 deterministic secondary-angle rows are required, 16 records remain limited evidence, and 0 records are production-approved or recommendation-eligible.
 - Approve account requirement for paid Launch Pack and All Access purchases.
 - Approve account requirement for paid purchases.
 - Approve supported countries/currencies.

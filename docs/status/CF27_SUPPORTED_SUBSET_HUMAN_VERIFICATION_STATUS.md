@@ -22,7 +22,23 @@ The verifier package operationalizes the Prompt 101 supported subset. It does no
 
 ## Human Next Action
 
-Wyatt must provide the runbook and generated package to a real independent verifier. The verifier must complete the environment, attestation, all 76 record decisions, menu counts, and all 24 secondary-angle sample checks from independent shipping-game inspection.
+Wyatt must start the friend-ready local verifier workflow and provide it to a real independent verifier:
+
+```bash
+npm run verifier:start
+```
+
+Open:
+
+```text
+http://localhost:3000/verifier
+```
+
+The verifier must complete the environment, attestation, all 76 record decisions, menu counts, all 24 secondary-angle sample checks, and excluded duplicate/order limitation review from independent shipping-game inspection.
+
+Friend instructions: `docs/verification/HUMAN_VERIFIER_QUICK_START.md`
+
+Owner checklist: `docs/verification/OWNER_VERIFIER_LAUNCH_CHECKLIST.md`
 
 ## Software Next Action After Human Completion
 

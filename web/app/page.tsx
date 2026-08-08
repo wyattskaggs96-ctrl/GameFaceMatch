@@ -438,6 +438,26 @@ export default function HomePage() {
     );
   }
 
+  function handleGuidedCaptureCancelled(cancelledSession: ActiveCaptureSession) {
+    privacyStore.deleteCurrentSession();
+    privacyStore.recordDeletionCompletion("active-capture-session");
+    setDeletionRecorded(true);
+    setSession(cancelledSession);
+    setStandardProfile(null);
+    setLatestMatches([]);
+    setLatestMatchingError(null);
+    refreshPrivacyState();
+  }
+
+  function handleGuidedCaptureContinue() {
+    markBuddyTrialScanCompleteIfPresent();
+    if (buddyTrialCustomerScanMode && buddyTrialInviteId && typeof window !== "undefined") {
+      window.location.assign(`/trial/${encodeURIComponent(buddyTrialInviteId)}`);
+      return;
+    }
+    navigate("attributes");
+  }
+
   function refreshPrivacyState() {
     setPrivacyRevision((value) => value + 1);
   }
@@ -886,7 +906,17 @@ export default function HomePage() {
         );
       case "preparation":
         return buddyTrialCustomerScanMode ? (
-          <CapturePreparation variant="immersive" onContinue={() => navigate("capture")} onAssistedCapture={() => navigate("capture")} />
+          <GuidedCaptureFlow
+            session={session}
+            cameraService={cameraService}
+            customerMode={buddyTrialCustomerScanMode}
+            startInCustomerPreparation
+            onSessionChange={handleSessionChange}
+            onPerformanceRecord={trackPerformance}
+            onCancelSession={handleGuidedCaptureCancelled}
+            onClose={() => navigate("home")}
+            onContinue={handleGuidedCaptureContinue}
+          />
         ) : (
           <CapturePreparation onContinue={() => navigate("lighting")} onAssistedCapture={() => navigate("capture")} />
         );
@@ -902,25 +932,9 @@ export default function HomePage() {
             customerMode={buddyTrialCustomerScanMode}
             onSessionChange={handleSessionChange}
             onPerformanceRecord={trackPerformance}
-            onCancelSession={(cancelledSession) => {
-              privacyStore.deleteCurrentSession();
-              privacyStore.recordDeletionCompletion("active-capture-session");
-              setDeletionRecorded(true);
-              setSession(cancelledSession);
-    setStandardProfile(null);
-    setLatestMatches([]);
-    setLatestMatchingError(null);
-              refreshPrivacyState();
-            }}
+            onCancelSession={handleGuidedCaptureCancelled}
             onClose={() => navigate("home")}
-            onContinue={() => {
-              markBuddyTrialScanCompleteIfPresent();
-              if (buddyTrialCustomerScanMode && buddyTrialInviteId && typeof window !== "undefined") {
-                window.location.assign(`/trial/${encodeURIComponent(buddyTrialInviteId)}`);
-                return;
-              }
-              navigate("attributes");
-            }}
+            onContinue={handleGuidedCaptureContinue}
           />
         );
       case "attributes":

@@ -3,6 +3,7 @@ import {
   evaluateMobileScanRuntime,
   getCameraBlockedRecoverySteps,
   getMobileScanLifecycleNotice,
+  shouldAutoAdvanceFromPositioning,
   isCameraSecureContext
 } from "@/lib/capture/mobile-safari-scan-hardening";
 
@@ -30,6 +31,57 @@ describe("mobile Safari guided scan hardening", () => {
     expect(state.isLikelyIPhoneSafari).toBe(true);
     expect(state.isPortrait).toBe(true);
     expect(state.warnings).toContain("Reduced Motion is on. Decorative motion is minimized; scan progress still requires accepted face coverage.");
+  });
+
+  it("treats rendered portrait iPhone-sized viewports as portrait even when orientation API is stale", () => {
+    for (const viewport of [
+      { innerWidth: 390, innerHeight: 844 },
+      { innerWidth: 430, innerHeight: 932 },
+      { innerWidth: 438, innerHeight: 841 }
+    ]) {
+      const state = evaluateMobileScanRuntime({
+        isSecureContext: true,
+        protocol: "https:",
+        hostname: "trial.gamefacematch.test",
+        userAgent: "Mozilla/5.0 (iPhone) AppleWebKit/605.1.15 Version/18.0 Mobile Safari/604.1",
+        ...viewport,
+        visualViewportWidth: viewport.innerWidth,
+        visualViewportHeight: viewport.innerHeight,
+        orientationType: "landscape-primary",
+        prefersReducedMotion: false,
+        online: true
+      });
+
+      expect(state.isPortrait, `${viewport.innerWidth}x${viewport.innerHeight}`).toBe(true);
+      expect(state.warnings).not.toContain("Rotate the phone to portrait before starting the guided scan.");
+    }
+  });
+
+  it("keeps true landscape viewports behind rotate guidance", () => {
+    const state = evaluateMobileScanRuntime({
+      isSecureContext: true,
+      protocol: "https:",
+      hostname: "trial.gamefacematch.test",
+      userAgent: "Mozilla/5.0 (iPhone) AppleWebKit/605.1.15 Version/18.0 Mobile Safari/604.1",
+      innerWidth: 844,
+      innerHeight: 390,
+      visualViewportWidth: 844,
+      visualViewportHeight: 390,
+      orientationType: "portrait-primary",
+      prefersReducedMotion: false,
+      online: true
+    });
+
+    expect(state.isPortrait).toBe(false);
+    expect(state.warnings).toContain("Rotate the phone to portrait before starting the guided scan.");
+  });
+
+  it("auto-advances positioning only after camera, quality, and portrait gates pass", () => {
+    expect(shouldAutoAdvanceFromPositioning({ streamActive: true, circularCanBegin: true, cameraError: false, isPortrait: true })).toBe(true);
+    expect(shouldAutoAdvanceFromPositioning({ streamActive: false, circularCanBegin: true, cameraError: false, isPortrait: true })).toBe(false);
+    expect(shouldAutoAdvanceFromPositioning({ streamActive: true, circularCanBegin: false, cameraError: false, isPortrait: true })).toBe(false);
+    expect(shouldAutoAdvanceFromPositioning({ streamActive: true, circularCanBegin: true, cameraError: true, isPortrait: true })).toBe(false);
+    expect(shouldAutoAdvanceFromPositioning({ streamActive: true, circularCanBegin: true, cameraError: false, isPortrait: false })).toBe(false);
   });
 
   it("warns for landscape orientation and insecure remote links", () => {

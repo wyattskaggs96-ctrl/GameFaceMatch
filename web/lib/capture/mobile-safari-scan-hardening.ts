@@ -28,7 +28,13 @@ export interface MobileScanRuntimeState {
 export function evaluateMobileScanRuntime(input: MobileScanRuntimeInput): MobileScanRuntimeState {
   const viewportWidth = Math.round(input.visualViewportWidth ?? input.innerWidth);
   const viewportHeight = Math.round(input.visualViewportHeight ?? input.innerHeight);
-  const isPortrait = input.orientationType ? input.orientationType.includes("portrait") : viewportHeight >= viewportWidth;
+  const isPortrait = isRenderedPortrait({
+    innerWidth: input.innerWidth,
+    innerHeight: input.innerHeight,
+    viewportWidth,
+    viewportHeight,
+    orientationType: input.orientationType
+  });
   const secureContext = isCameraSecureContext(input);
   const isLikelyIPhoneSafari = /iPhone/i.test(input.userAgent) && /Safari/i.test(input.userAgent) && !/CriOS|FxiOS|EdgiOS/i.test(input.userAgent);
   const warnings: string[] = [];
@@ -59,6 +65,31 @@ export function evaluateMobileScanRuntime(input: MobileScanRuntimeInput): Mobile
     viewportHeight,
     warnings
   };
+}
+
+export function isRenderedPortrait(input: {
+  innerWidth: number;
+  innerHeight: number;
+  viewportWidth: number;
+  viewportHeight: number;
+  orientationType?: string;
+}) {
+  const renderedPortrait = input.viewportHeight > input.viewportWidth || input.innerHeight > input.innerWidth;
+  const renderedLandscape = input.viewportWidth > input.viewportHeight && input.innerWidth > input.innerHeight;
+  if (renderedPortrait) return true;
+  if (renderedLandscape) return false;
+  if (input.orientationType?.includes("portrait")) return true;
+  if (input.orientationType?.includes("landscape")) return false;
+  return input.viewportHeight >= input.viewportWidth;
+}
+
+export function shouldAutoAdvanceFromPositioning(input: {
+  streamActive: boolean;
+  circularCanBegin: boolean;
+  cameraError: boolean;
+  isPortrait?: boolean;
+}) {
+  return input.streamActive && input.circularCanBegin && !input.cameraError && input.isPortrait !== false;
 }
 
 export function isCameraSecureContext(input: Pick<MobileScanRuntimeInput, "hostname" | "isSecureContext" | "protocol">) {

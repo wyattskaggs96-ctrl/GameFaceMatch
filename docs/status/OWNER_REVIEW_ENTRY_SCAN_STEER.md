@@ -6,6 +6,7 @@ Prompt labels:
 
 - GFM | Q06 | STEER OWNER REVIEW | Simplify customer entry and scan intro
 - GFM | Q06 | STEER OWNER REVIEW | Unify buddy scan into one immersive flow
+- GFM | Q06 | STEER OWNER REVIEW | Fix broken positioning and camera handoff
 
 ## Outcome
 
@@ -50,11 +51,23 @@ After "Get Started," Buddy Trial users see an immersive black "Get Ready" state 
 
 The circular guided scan remains coverage and quality driven. The Buddy Trial scan surface avoids customer-facing engineering terms such as RGB, TrueDepth, ARKit, 3D reconstruction, production catalog state, and development catalog state.
 
+## Camera Handoff Fix
+
+The immersive "Get Ready" screen now owns the real camera-start gesture. In the Buddy Trial path, tapping "Start Camera" calls the browser camera request from inside the guided capture flow, starts the preview stream, and then reveals the positioning state. The positioning state no longer renders a normal second "Start Camera" or "Begin Scan" button after the customer has already tapped the preparation action.
+
+The positioning frame uses the active live preview behind the face guide. When the quality gates report one centered, acceptably framed face in portrait orientation, the screen shows a brief ready state and automatically advances into the circular guided scan. Progress still advances only from accepted coverage frames after the guided scan begins.
+
+Portrait readiness now treats the rendered viewport as authoritative. A 438x841, 430x932, or 390x844 viewport is portrait even if a browser orientation API reports a stale landscape value. True landscape viewports still show the inline "Rotate to portrait" guidance. The previous customer-facing "Mobile scan readiness" diagnostic card has been removed from the immersive Buddy Trial scan surface.
+
 ## Visual Evidence
 
 Screenshots were generated under:
 
 `docs/status/visual-evidence/owner-review-entry-flow-steer/`
+
+Additional camera-handoff screenshots were generated under:
+
+`docs/status/visual-evidence/owner-review-camera-handoff-steer/`
 
 Key files:
 
@@ -68,10 +81,21 @@ Key files:
 - `430x932-04-guided-intro.png`
 - `430x932-05-get-ready.png`
 - `430x932-06-guided-active.png`
+- `390x844-06-live-positioning-not-ready.png`
+- `390x844-07-live-positioning-ready.png`
+- `390x844-08-guided-active.png`
+- `430x932-06-live-positioning-not-ready.png`
+- `430x932-07-live-positioning-ready.png`
+- `430x932-08-guided-active.png`
+- `844x390-landscape-21-landscape-warning.png`
 
 The screenshot manifest is:
 
 `docs/status/visual-evidence/owner-review-entry-flow-steer/manifest.json`
+
+The camera-handoff screenshot manifest is:
+
+`docs/status/visual-evidence/owner-review-camera-handoff-steer/manifest.json`
 
 ## Scope Preserved
 

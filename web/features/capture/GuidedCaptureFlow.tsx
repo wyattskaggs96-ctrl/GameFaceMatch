@@ -4,6 +4,7 @@ import type { ChangeEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Button, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { RecoveryActionList } from "@/components/reliability";
+import { CapturePreparation } from "./CapturePreparation";
 import { CameraAccessError, type BrowserCameraService, type CameraDeviceOption, type CameraFacingMode } from "@/lib/capture/browser-camera-service";
 import {
   createCaptureGuidanceSession,
@@ -35,6 +36,7 @@ import {
   evaluateMobileScanRuntime,
   getCameraBlockedRecoverySteps,
   getMobileScanLifecycleNotice,
+  shouldAutoAdvanceFromPositioning,
   type MobileScanRuntimeState
 } from "@/lib/capture/mobile-safari-scan-hardening";
 import {
@@ -70,6 +72,7 @@ import type { CapturedAngle, CapturedAngleID, CaptureGuidanceReport, CaptureSour
 type GuidedCircularStage = "positioning" | "firstPass" | "firstPassComplete" | "secondPass" | "coverageReview" | "selectiveRetake";
 type SetupReferenceVisualState =
   | "positioning"
+  | "positioning-ready"
   | "scan-empty"
   | "scan-partial"
   | "scan-near-complete"
@@ -86,7 +89,8 @@ export function GuidedCaptureFlow({
   onClose,
   onContinue,
   onPerformanceRecord,
-  customerMode = false
+  customerMode = false,
+  startInCustomerPreparation = false
 }: {
   session: ActiveCaptureSession;
   cameraService: BrowserCameraService;
@@ -96,6 +100,7 @@ export function GuidedCaptureFlow({
   onContinue: () => void;
   onPerformanceRecord?: (record: PerformanceMetricRecord) => void;
   customerMode?: boolean;
+  startInCustomerPreparation?: boolean;
 }) {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
@@ -116,6 +121,7 @@ export function GuidedCaptureFlow({
   const [useExtendedHold, setUseExtendedHold] = useState(false);
   const [captureWorkflow, setCaptureWorkflow] = useState<"guidedCircular" | "fiveAngleFallback">("guidedCircular");
   const [customerAssistedMode, setCustomerAssistedMode] = useState(false);
+  const [customerPreparationPending, setCustomerPreparationPending] = useState(customerMode && startInCustomerPreparation);
   const [guidedStage, setGuidedStage] = useState<GuidedCircularStage>("positioning");
   const visualState = useSetupReferenceVisualState();
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -151,6 +157,12 @@ export function GuidedCaptureFlow({
     };
   }, [baseGuidedScanState, liveGuidance, stream]);
   const circularCanBegin = canBeginGuidedCapture(Boolean(stream), guidedScanState.initialQualityGate);
+  const positioningReady = shouldAutoAdvanceFromPositioning({
+    streamActive: Boolean(stream),
+    circularCanBegin,
+    cameraError: Boolean(cameraError),
+    isPortrait: mobileRuntime?.isPortrait
+  });
 
   useEffect(() => {
     sessionRef.current = session;
@@ -220,10 +232,6 @@ export function GuidedCaptureFlow({
   useEffect(() => {
     const firstPass = baseGuidedScanState.passes.find((pass) => pass.id === "first");
     const secondPass = baseGuidedScanState.passes.find((pass) => pass.id === "second");
-    if (guidedStage === "positioning" && acceptedLiveFrames.length > 0) {
-      setGuidedStage("firstPass");
-      return;
-    }
     if (guidedStage === "firstPass" && firstPass?.completed) {
       triggerGuidedCaptureHaptic(35);
       setGuidedStage("firstPassComplete");
@@ -233,7 +241,16 @@ export function GuidedCaptureFlow({
       triggerGuidedCaptureHaptic(45);
       setGuidedStage("coverageReview");
     }
-  }, [acceptedLiveFrames.length, baseGuidedScanState.passes, guidedStage]);
+  }, [baseGuidedScanState.passes, guidedStage]);
+
+  useEffect(() => {
+    if (guidedStage !== "positioning" || !positioningReady) return;
+    const timeout = window.setTimeout(() => {
+      setGuidedStage((stage) => (stage === "positioning" ? "firstPass" : stage));
+      triggerGuidedCaptureHaptic(25);
+    }, 850);
+    return () => window.clearTimeout(timeout);
+  }, [guidedStage, positioningReady]);
 
   useEffect(() => {
     return () => {
@@ -327,17 +344,22 @@ export function GuidedCaptureFlow({
             imageQualityReport: previewQuality,
             acceptedFrames: acceptedLiveFramesRef.current
           });
-          const coverageUpdate = updateGuidedLiveCoverageAccumulator(coverageAccumulatorRef.current, frameDecision);
-          coverageAccumulatorRef.current = coverageUpdate.accumulator;
-          setLiveCoverageDecision(coverageUpdate.decision);
-          if (coverageUpdate.coverageFrame) {
-            setBaseGuidedScanState((previous) => applyCoverageFrame(previous, coverageUpdate.coverageFrame!));
-          }
-          if (coverageUpdate.acceptedFrame) {
-            acceptedLiveFramesRef.current = [...acceptedLiveFramesRef.current, coverageUpdate.acceptedFrame];
-            setAcceptedLiveFrames(acceptedLiveFramesRef.current);
-            triggerGuidedCaptureHaptic(18);
-            void autoCaptureAcceptedFrameRef.current(coverageUpdate.acceptedFrame);
+          if (guidedStageRef.current === "positioning") {
+            coverageAccumulatorRef.current = createInitialGuidedLiveCoverageAccumulatorState();
+            setLiveCoverageDecision(frameDecision);
+          } else {
+            const coverageUpdate = updateGuidedLiveCoverageAccumulator(coverageAccumulatorRef.current, frameDecision);
+            coverageAccumulatorRef.current = coverageUpdate.accumulator;
+            setLiveCoverageDecision(coverageUpdate.decision);
+            if (coverageUpdate.coverageFrame) {
+              setBaseGuidedScanState((previous) => applyCoverageFrame(previous, coverageUpdate.coverageFrame!));
+            }
+            if (coverageUpdate.acceptedFrame) {
+              acceptedLiveFramesRef.current = [...acceptedLiveFramesRef.current, coverageUpdate.acceptedFrame];
+              setAcceptedLiveFrames(acceptedLiveFramesRef.current);
+              triggerGuidedCaptureHaptic(18);
+              void autoCaptureAcceptedFrameRef.current(coverageUpdate.acceptedFrame);
+            }
           }
         }
       } finally {
@@ -444,10 +466,12 @@ export function GuidedCaptureFlow({
       if (activeDevice?.deviceId) setSelectedDeviceId(activeDevice.deviceId);
       if (activeDevice?.facingMode === "user" || activeDevice?.facingMode === "environment") setSelectedFacingMode(activeDevice.facingMode);
       setCaptureMode("camera");
+      setCustomerPreparationPending(false);
     } catch (error) {
       setCameraError(error instanceof CameraAccessError ? error.message : "Camera could not be started. Upload fallback remains available.");
       setCameraErrorCode(error instanceof CameraAccessError ? error.code : "unknownError");
       setCaptureMode("upload");
+      setCustomerPreparationPending(false);
     } finally {
       onPerformanceRecord?.(
         createPerformanceRecord({
@@ -715,6 +739,20 @@ export function GuidedCaptureFlow({
   }
 
   if (captureWorkflow === "guidedCircular") {
+    if (customerPreparationPending) {
+      return (
+        <CapturePreparation
+          variant="immersive"
+          onContinue={() => void startCamera()}
+          onAssistedCapture={() => {
+            setCustomerAssistedMode(true);
+            setUseExtendedHold(true);
+            void startCamera();
+          }}
+        />
+      );
+    }
+
     return (
       <section className="guided-circular-screen" aria-labelledby="guided-circular-title">
         <CircularGuidedCapturePanel
@@ -732,6 +770,7 @@ export function GuidedCaptureFlow({
           liveCoverageDecision={liveCoverageDecision}
           liveGuidance={liveGuidance}
           mobileRuntime={mobileRuntime}
+          positioningReady={positioningReady}
           customerAssistedMode={customerAssistedMode}
           customerMode={customerMode}
           acceptedLiveFrameCount={acceptedLiveFrames.length}
@@ -1216,6 +1255,7 @@ function CircularGuidedCapturePanel({
   liveCoverageDecision,
   liveGuidance,
   mobileRuntime,
+  positioningReady,
   customerAssistedMode,
   customerMode,
   acceptedLiveFrameCount,
@@ -1249,6 +1289,7 @@ function CircularGuidedCapturePanel({
   liveCoverageDecision: GuidedLiveFrameDecision | null;
   liveGuidance: CaptureGuidanceReport | null;
   mobileRuntime: MobileScanRuntimeState | null;
+  positioningReady: boolean;
   customerAssistedMode: boolean;
   customerMode: boolean;
   acceptedLiveFrameCount: number;
@@ -1274,6 +1315,8 @@ function CircularGuidedCapturePanel({
   const displayedSegments = createDisplayedSegments(activePass.segments, visualState);
   const captureMode = getReferenceCaptureMode(guidedStage, streamActive, visualState);
   const completionVisible = captureMode === "complete";
+  const orientationBlocked = mobileRuntime?.isPortrait === false;
+  const visualPositioningReady = visualState === "positioning-ready";
   const activeInstruction = getCircularInstruction({
     stage: guidedStage,
     streamActive,
@@ -1281,13 +1324,16 @@ function CircularGuidedCapturePanel({
     liveGuidance,
     liveCoverageDecision
   });
-  const displayInstruction = getReferenceInstruction(captureMode, activeInstruction, visualState);
+  const displayInstruction = orientationBlocked ? "Rotate to portrait" : visualPositioningReady ? "Ready" : getReferenceInstruction(captureMode, activeInstruction, visualState);
   const firstProgress = getGuidedScanCoveragePercent(firstPass);
   const secondProgress = getGuidedScanCoveragePercent(secondPass);
   const secondTargets = getSecondPassTargets(guidedScanState);
   const selectiveRegion = getSelectiveRetakeRegion(guidedScanState);
   const primaryStatus = getReferenceStatusLabel({ captureMode, cameraError, circularCanBegin, liveCoverageDecision, visualState });
-  const statusDetail = getReferenceStatusDetail({ cameraError, liveCoverageDecision, visualState });
+  const statusDetail = orientationBlocked
+    ? "Turn your phone upright before the scan starts."
+    : getReferenceStatusDetail({ cameraError, liveCoverageDecision, positioningReady: positioningReady || visualPositioningReady, visualState });
+  const showPrimaryAction = completionVisible || !customerMode || (customerMode && !streamActive && Boolean(cameraError));
 
   return (
     <section className="setup-flow-screen setup-capture-screen" aria-labelledby="guided-circular-title" data-testid={`setup-${captureMode}`}>
@@ -1324,15 +1370,6 @@ function CircularGuidedCapturePanel({
               {cameraError} Allow camera access or use the assisted five-angle capture option.
             </Alert>
           ) : null}
-          {mobileRuntime?.warnings.length ? (
-            <Alert title={mobileRuntime.isLikelyIPhoneSafari ? "iPhone scan readiness" : "Mobile scan readiness"} tone="info" role="status">
-              <ul className="message-list advisory-list">
-                {mobileRuntime.warnings.slice(0, 3).map((warning) => (
-                  <li key={warning}>{warning}</li>
-                ))}
-              </ul>
-            </Alert>
-          ) : null}
           {lifecycleNotice ? (
             <Alert title="Session paused" tone="warning" role="status">
               {lifecycleNotice}
@@ -1348,14 +1385,26 @@ function CircularGuidedCapturePanel({
               Capture remains local. Billing or catalog checks may need network before production scanning can continue.
             </Alert>
           ) : null}
-          <Button
-            className="setup-primary-button"
-            onClick={completionVisible ? onContinue : streamActive ? onBeginFirstPass : onStartCamera}
-            disabled={isStartingCamera || (!completionVisible && streamActive && !circularCanBegin)}
-            aria-label={completionVisible ? "Continue after completed scan" : streamActive ? "Begin guided circular scan" : "Start camera"}
-          >
-            {completionVisible ? "Done" : streamActive ? (isStartingCamera ? "Starting..." : "Begin Scan") : isStartingCamera ? "Starting..." : "Start Camera"}
-          </Button>
+          {showPrimaryAction ? (
+            <Button
+              className="setup-primary-button"
+              onClick={completionVisible ? onContinue : streamActive ? onBeginFirstPass : onStartCamera}
+              disabled={isStartingCamera || (!completionVisible && streamActive && (!circularCanBegin || orientationBlocked))}
+              aria-label={completionVisible ? "Continue after completed scan" : streamActive ? "Begin guided circular scan" : cameraError ? "Try camera again" : "Start camera"}
+            >
+              {completionVisible
+                ? "Done"
+                : streamActive
+                  ? isStartingCamera
+                    ? "Starting..."
+                    : "Begin Scan"
+                  : isStartingCamera
+                    ? "Starting..."
+                    : cameraError
+                      ? "Try Camera Again"
+                      : "Start Camera"}
+            </Button>
+          ) : null}
           {!completionVisible ? (
             <>
               <Button variant="secondary" className="setup-secondary-button" onClick={onUseFallback}>
@@ -1924,7 +1973,17 @@ function useSetupReferenceVisualState(): SetupReferenceVisualState | null {
     const visualTestsEnabled = process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_GFM_SETUP_VISUAL_TESTS === "1";
     if (!visualTestsEnabled || typeof window === "undefined") return;
     const value = new URLSearchParams(window.location.search).get("setupVisualState");
-    const allowed: SetupReferenceVisualState[] = ["positioning", "scan-empty", "scan-partial", "scan-near-complete", "complete", "denied", "multiple", "accessibility"];
+    const allowed: SetupReferenceVisualState[] = [
+      "positioning",
+      "positioning-ready",
+      "scan-empty",
+      "scan-partial",
+      "scan-near-complete",
+      "complete",
+      "denied",
+      "multiple",
+      "accessibility"
+    ];
     setVisualState(allowed.includes(value as SetupReferenceVisualState) ? (value as SetupReferenceVisualState) : null);
   }, []);
   return visualState;
@@ -1987,15 +2046,18 @@ function getReferenceStatusLabel({
 function getReferenceStatusDetail({
   cameraError,
   liveCoverageDecision,
+  positioningReady,
   visualState
 }: {
   cameraError: string | null;
   liveCoverageDecision: GuidedLiveFrameDecision | null;
+  positioningReady: boolean;
   visualState: SetupReferenceVisualState | null;
 }) {
   if (visualState === "denied" || cameraError) return "Allow camera access or use the assisted five-angle capture option.";
   if (visualState === "multiple") return "Only one person can be in the scan.";
   if (visualState === "accessibility") return "Use assisted capture for a step-by-step set of poses instead of circular movement.";
+  if (positioningReady) return "Ready";
   if (liveCoverageDecision?.status === "rejected" && liveCoverageDecision.rejectionReasons[0]) return liveCoverageDecision.rejectionReasons[0];
   return "Keep your face centered with even light and a neutral expression.";
 }
@@ -2066,6 +2128,7 @@ function getCircularInstruction({
   const firstBlocking = liveGuidance?.blockingIssues[0]?.message;
   const firstReady = liveGuidance?.readyMessages[0]?.message;
   if (stage === "firstPass" && circularCanBegin) return "Move your head slowly to complete the circle";
+  if (stage === "positioning" && circularCanBegin) return "Ready";
   if (firstBlocking) return firstBlocking;
   if (firstReady) return "Hold still.";
   return "Position your face inside the circle";

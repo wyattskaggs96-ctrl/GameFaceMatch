@@ -20,6 +20,8 @@ const viewports = [
   { id: "430x932", width: 430, height: 932 }
 ];
 
+const landscapeViewports = [{ id: "844x390-landscape", width: 844, height: 390 }];
+
 const buildStepIds = [
   "demo-build-open-rtg",
   "demo-build-open-appearance",
@@ -78,43 +80,69 @@ const states = [
     waitFor: "Get Ready"
   },
   {
-    id: "06-guided-active",
+    id: "06-live-positioning-not-ready",
+    path: `/?buddyTrialInvite=${INVITE_ID}#preparation`,
+    syntheticCamera: true,
+    setup: async (page) => {
+      await setTrialSession(page, "SCAN_IN_PROGRESS");
+      await page.goto(`${BASE_URL}/?buddyTrialInvite=${INVITE_ID}#preparation`, { waitUntil: "networkidle" });
+      await disableMotion(page);
+      await page.getByRole("button", { name: "Start Camera" }).click();
+      return false;
+    },
+    waitFor: "Position your face within the frame."
+  },
+  {
+    id: "07-live-positioning-ready",
+    path: `/?buddyTrialInvite=${INVITE_ID}&setupVisualState=positioning-ready#preparation`,
+    syntheticCamera: true,
+    setup: async (page) => {
+      await setTrialSession(page, "SCAN_IN_PROGRESS");
+      await page.goto(`${BASE_URL}/?buddyTrialInvite=${INVITE_ID}&setupVisualState=positioning-ready#preparation`, { waitUntil: "networkidle" });
+      await disableMotion(page);
+      await page.getByRole("button", { name: "Start Camera" }).click();
+      return false;
+    },
+    waitFor: "Ready"
+  },
+  {
+    id: "08-guided-active",
     path: "/?setupVisualState=scan-partial#capture",
     waitFor: "Move your head slowly to complete the circle."
   },
   {
-    id: "07-processing",
+    id: "09-processing",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "SCAN_COMPLETE"),
     waitFor: "Building your GameFace..."
   },
   {
-    id: "08-result",
+    id: "10-result",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "RECOMMENDATION_READY"),
     waitFor: "Your GameFace recommendation"
   },
   {
-    id: "09-build-step",
+    id: "11-build-step",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "BUILD_IN_PROGRESS", { buildGuide: buildGuideProgress({ currentStepIndex: 2 }) }),
     waitFor: "Build This in College Football 27"
   },
   {
-    id: "10-build-all-settings",
+    id: "12-build-all-settings",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "BUILD_IN_PROGRESS", { buildGuide: buildGuideProgress({ viewMode: "summary", currentStepIndex: 2 }) }),
     waitFor: "Open Road to Glory"
   },
   {
-    id: "11-video-one-required",
+    id: "13-video-one-required",
     path: `/trial/${INVITE_ID}`,
     setup: (page) =>
       setTrialSession(page, "VIDEO_1_REQUIRED", { buildGuide: buildGuideProgress({ completedStepIds: buildStepIds, currentStepIndex: buildStepIds.length - 1 }) }),
     waitFor: "LET'S SEE HOW WE DID"
   },
   {
-    id: "12-video-error",
+    id: "14-video-error",
     path: `/trial/${INVITE_ID}`,
     setup: async (page) => {
       await setTrialSession(page, "VIDEO_1_REQUIRED", { buildGuide: buildGuideProgress({ completedStepIds: buildStepIds, currentStepIndex: buildStepIds.length - 1 }) });
@@ -130,25 +158,25 @@ const states = [
     waitFor: "Try another video"
   },
   {
-    id: "13-video-one-views",
+    id: "15-video-one-views",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "VIDEO_1_PROCESSING", { videoOneReview: characterVideoReview(1) }),
     waitFor: "GameFace found these views"
   },
   {
-    id: "14-refinement-review",
+    id: "16-refinement-review",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "REFINEMENT_READY", { videoOneReview: characterVideoReview(1) }),
     waitFor: "GAMEFACE REVIEW"
   },
   {
-    id: "15-refinement-guide",
+    id: "17-refinement-guide",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "VIDEO_2_REQUIRED", { refinementGuide: buildGuideProgress({ totalStepCount: 3, currentStepIndex: 1 }) }),
     waitFor: "Apply the recommended changes"
   },
   {
-    id: "16-video-two-required",
+    id: "18-video-two-required",
     path: `/trial/${INVITE_ID}`,
     setup: (page) =>
       setTrialSession(page, "VIDEO_2_REQUIRED", {
@@ -157,16 +185,24 @@ const states = [
     waitFor: "SHOW US THE UPDATED PLAYER"
   },
   {
-    id: "17-final-result",
+    id: "19-final-result",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "FINAL_RESULT_READY", { videoOneReview: characterVideoReview(1), videoTwoReview: characterVideoReview(2) }),
     waitFor: "YOUR GAMEFACE RESULT"
   },
   {
-    id: "18-complete",
+    id: "20-complete",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "COMPLETE", { finalOutcome: finalOutcome() }),
     waitFor: "GameFace complete."
+  }
+];
+
+const landscapeStates = [
+  {
+    id: "21-landscape-warning",
+    path: "/?setupVisualState=positioning#capture",
+    waitFor: "Rotate to portrait"
   }
 ];
 
@@ -216,15 +252,17 @@ try {
     screenshots: []
   };
 
-  for (const viewport of viewports) {
+  for (const viewport of [...viewports, ...landscapeViewports]) {
     const context = await browser.newContext({
       viewport: { width: viewport.width, height: viewport.height },
       deviceScaleFactor: 1,
       colorScheme: "dark",
       reducedMotion: "reduce"
     });
-    for (const state of states) {
+    const viewportStates = landscapeViewports.includes(viewport) ? landscapeStates : states;
+    for (const state of viewportStates) {
       const page = await context.newPage();
+      if (state.syntheticCamera) await installSyntheticCamera(page);
       await page.goto(`${BASE_URL}${state.path}`, { waitUntil: "networkidle" });
       await disableMotion(page);
       if (state.setup) {
@@ -313,6 +351,47 @@ async function setTrialSession(page, state, patch = {}) {
     },
     { key: STORAGE_KEY, inviteId: INVITE_ID, state, timestamp: TIMESTAMP, patch }
   );
+}
+
+async function installSyntheticCamera(page) {
+  await page.addInitScript(() => {
+    const grantedStatus = { state: "granted", onchange: null, addEventListener: () => undefined, removeEventListener: () => undefined, dispatchEvent: () => false };
+    Object.defineProperty(navigator, "permissions", {
+      value: { query: () => Promise.resolve(grantedStatus) },
+      configurable: true
+    });
+    Object.defineProperty(navigator, "mediaDevices", {
+      value: {
+        enumerateDevices: () => Promise.resolve([{ kind: "videoinput", label: "Front camera", deviceId: "synthetic-front", groupId: "synthetic" }]),
+        getUserMedia: () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = 640;
+          canvas.height = 480;
+          const context = canvas.getContext("2d");
+          if (context) {
+            context.fillStyle = "#111";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = "#d9b18f";
+            context.beginPath();
+            context.ellipse(320, 220, 110, 145, 0, 0, Math.PI * 2);
+            context.fill();
+            context.fillStyle = "#222";
+            context.beginPath();
+            context.arc(280, 200, 10, 0, Math.PI * 2);
+            context.arc(360, 200, 10, 0, Math.PI * 2);
+            context.fill();
+            context.strokeStyle = "#222";
+            context.lineWidth = 6;
+            context.beginPath();
+            context.arc(320, 255, 44, 0.15 * Math.PI, 0.85 * Math.PI);
+            context.stroke();
+          }
+          return Promise.resolve(canvas.captureStream(10));
+        }
+      },
+      configurable: true
+    });
+  });
 }
 
 function buildGuideProgress({ totalStepCount = 11, currentStepIndex = 0, completedStepIds = [], viewMode = "step" } = {}) {

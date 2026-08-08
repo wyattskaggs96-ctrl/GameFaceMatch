@@ -7,6 +7,7 @@ const activeInviteStorageKey = `gfm:buddy-trial:v1:${activeInvite}`;
 
 test.describe("Buddy Trial invite route", () => {
   test("enters an active fixture invite, records consent, and resumes without an account", async ({ page }) => {
+    await installSyntheticCamera(page);
     await page.goto(`/trial/${activeInvite}`);
 
     await expect(page.getByRole("heading", { name: /Build yourself in College Football 27/i })).toBeVisible();
@@ -55,9 +56,17 @@ test.describe("Buddy Trial invite route", () => {
     await expect(page.getByText("Hold the phone at eye level")).toBeVisible();
     await expect(page.getByText(/RGB|TrueDepth|ARKit|3D reconstruction|Development catalog state/i)).toHaveCount(0);
     await page.getByRole("button", { name: "Start Camera" }).click();
-    await expect(page.getByRole("heading", { name: "Position your face within the frame." })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Start Camera", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Begin Scan", exact: true })).toHaveCount(0);
+    await expect(page.getByLabel("Guided face scan camera preview")).toBeVisible();
+    await expect(page.getByText(/Mobile scan readiness|iPhone scan readiness/i)).toHaveCount(0);
     await expect(page.getByText("Development catalog state")).toHaveCount(0);
     await expect(page.getByText(/RGB|TrueDepth|ARKit|3D reconstruction|production catalog|development catalog/i)).toHaveCount(0);
+    const streamIsActive = await page.getByLabel("Guided face scan camera preview").evaluate((node) => {
+      const video = node as HTMLVideoElement;
+      return video.srcObject instanceof MediaStream && video.srcObject.getVideoTracks().some((track) => track.readyState === "live");
+    });
+    expect(streamIsActive).toBe(true);
 
     await page.goto(`/trial/${activeInvite}`);
     await page.reload();
@@ -89,10 +98,12 @@ test.describe("Buddy Trial invite route", () => {
 
   test("completes the owner-review demo scan-to-build journey at required mobile widths", async ({ page }) => {
     test.skip(process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO !== "true", "Owner Review Demo E2E requires NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true.");
+    await installSyntheticCamera(page);
 
     for (const viewport of [
       { width: 390, height: 844 },
-      { width: 430, height: 932 }
+      { width: 430, height: 932 },
+      { width: 438, height: 841 }
     ]) {
       await page.setViewportSize(viewport);
       await page.goto(`/trial/${activeInvite}`);
@@ -117,7 +128,10 @@ test.describe("Buddy Trial invite route", () => {
       await page.getByRole("button", { name: "Get Started" }).click();
       await expect(page.getByRole("heading", { name: "Get Ready" })).toBeVisible();
       await page.getByRole("button", { name: "Start Camera" }).click();
-      await expect(page.getByRole("heading", { name: "Position your face within the frame." })).toBeVisible();
+      await expect(page.getByRole("button", { name: "Start Camera", exact: true })).toHaveCount(0);
+      await expect(page.getByRole("button", { name: "Begin Scan", exact: true })).toHaveCount(0);
+      await expect(page.getByLabel("Guided face scan camera preview")).toBeVisible();
+      await expect(page.getByText("Rotate the phone to portrait before starting the guided scan.")).toHaveCount(0);
       await expect(page.getByText("Development catalog state")).toHaveCount(0);
       await expect(page.getByText(/RGB|TrueDepth|ARKit|3D reconstruction|production catalog|development catalog/i)).toHaveCount(0);
 
@@ -322,3 +336,44 @@ test.describe("Buddy Trial invite route", () => {
     }
   });
 });
+
+async function installSyntheticCamera(page: import("@playwright/test").Page) {
+  await page.addInitScript(() => {
+    const grantedStatus = { state: "granted", onchange: null, addEventListener: () => undefined, removeEventListener: () => undefined, dispatchEvent: () => false };
+    Object.defineProperty(navigator, "permissions", {
+      value: { query: () => Promise.resolve(grantedStatus) },
+      configurable: true
+    });
+    Object.defineProperty(navigator, "mediaDevices", {
+      value: {
+        enumerateDevices: () => Promise.resolve([{ kind: "videoinput", label: "Front camera", deviceId: "synthetic-front", groupId: "synthetic" }]),
+        getUserMedia: () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = 640;
+          canvas.height = 480;
+          const context = canvas.getContext("2d");
+          if (context) {
+            context.fillStyle = "#111";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = "#d9b18f";
+            context.beginPath();
+            context.ellipse(320, 220, 110, 145, 0, 0, Math.PI * 2);
+            context.fill();
+            context.fillStyle = "#222";
+            context.beginPath();
+            context.arc(280, 200, 10, 0, Math.PI * 2);
+            context.arc(360, 200, 10, 0, Math.PI * 2);
+            context.fill();
+            context.strokeStyle = "#222";
+            context.lineWidth = 6;
+            context.beginPath();
+            context.arc(320, 255, 44, 0.15 * Math.PI, 0.85 * Math.PI);
+            context.stroke();
+          }
+          return Promise.resolve(canvas.captureStream(10));
+        }
+      },
+      configurable: true
+    });
+  });
+}

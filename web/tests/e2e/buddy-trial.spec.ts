@@ -15,7 +15,7 @@ test.describe("Buddy Trial invite route", () => {
     if (process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO === "true") {
       await expect(page.getByText("Owner Review Demo — appearance settings are test data.")).toBeVisible();
     } else {
-      await expect(page.getByText(/production catalog has 0 approved records/i)).toBeVisible();
+      await expect(page.getByText(/Real College Football 27 settings are not available yet/i)).toBeVisible();
     }
     await expect(page.getByRole("link", { name: /verifier/i })).toHaveCount(0);
 
@@ -30,12 +30,12 @@ test.describe("Buddy Trial invite route", () => {
     await expect(beginButton).toBeEnabled();
     await beginButton.click();
 
-    await expect(page.getByText("SCAN_IN_PROGRESS")).toBeVisible();
+    await expect(page.getByText("Scan in progress")).toBeVisible();
     await expect(page.getByRole("link", { name: "Continue guided scan" })).toHaveAttribute("href", `/?buddyTrialInvite=${activeInvite}#start`);
 
     await page.reload();
-    await expect(page.getByText("SCAN_IN_PROGRESS")).toBeVisible();
-    await expect(page.getByText(`/trial/${activeInvite}`)).toBeVisible();
+    await expect(page.getByText("Scan in progress")).toBeVisible();
+    await expect(page.getByText(/same private link/i)).toBeVisible();
   });
 
   test("shows invalid, expired, and completed invite states", async ({ page }) => {
@@ -81,7 +81,7 @@ test.describe("Buddy Trial invite route", () => {
       await page.getByLabel(/Temporary local processing/i).check();
       await page.getByRole("button", { name: "Start My GameFace" }).click();
 
-      await expect(page.getByText("SCAN_IN_PROGRESS")).toBeVisible();
+      await expect(page.getByText("Scan in progress")).toBeVisible();
       await expect(page.getByRole("link", { name: "Continue guided scan" })).toHaveAttribute("href", `/?buddyTrialInvite=${activeInvite}#start`);
 
       await page.evaluate(
@@ -116,9 +116,9 @@ test.describe("Buddy Trial invite route", () => {
       await page.getByRole("button", { name: "Done" }).click();
       await expect(page.getByText("Step 2 of 11")).toBeVisible();
       await page.getByRole("button", { name: "View All Settings" }).click();
-      await expect(page.getByLabel("All owner-review demo build settings")).toBeVisible();
+      await expect(page.getByLabel("All build settings")).toBeVisible();
       await page.reload();
-      await expect(page.getByLabel("All owner-review demo build settings")).toBeVisible();
+      await expect(page.getByLabel("All build settings")).toBeVisible();
       await page.getByRole("button", { name: "Show Current Step" }).click();
 
       for (let index = 2; index <= 11; index += 1) {
@@ -167,7 +167,7 @@ test.describe("Buddy Trial invite route", () => {
             ],
             missingRequiredViews: [],
             manualSelectionRequired: false,
-            processingSummary: "Standardized character views are ready for comparison.",
+            processingSummary: "Player views are ready for comparison.",
             retention: {
               rawVideoPersisted: false,
               temporaryMediaRetention: "temporary_processing_only",
@@ -183,7 +183,7 @@ test.describe("Buddy Trial invite route", () => {
         { key: activeInviteStorageKey }
       );
       await page.reload();
-      await expect(page.getByRole("heading", { name: "Standardized character views" })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "GameFace found these views" })).toBeVisible();
       await expect(page.getByText("Front", { exact: true })).toBeVisible();
       await expect(page.getByText("Left 3/4", { exact: true })).toBeVisible();
       await expect(page.getByText("Right 3/4", { exact: true })).toBeVisible();
@@ -205,9 +205,9 @@ test.describe("Buddy Trial invite route", () => {
       await page.getByRole("button", { name: "Done" }).click();
       await expect(page.getByText("Step 2 of 3")).toBeVisible();
       await page.getByRole("button", { name: "View All Changes" }).click();
-      await expect(page.getByLabel("All owner-review demo build settings")).toBeVisible();
+      await expect(page.getByLabel("All build settings")).toBeVisible();
       await page.reload();
-      await expect(page.getByLabel("All owner-review demo build settings")).toBeVisible();
+      await expect(page.getByLabel("All build settings")).toBeVisible();
       await page.getByRole("button", { name: "Show Current Change" }).click();
       await expect(page.getByText("Step 2 of 3")).toBeVisible();
       await page.getByRole("button", { name: "Done" }).click();
@@ -245,7 +245,7 @@ test.describe("Buddy Trial invite route", () => {
             ],
             missingRequiredViews: [],
             manualSelectionRequired: false,
-            processingSummary: "Standardized character views are ready for comparison.",
+            processingSummary: "Player views are ready for comparison.",
             retention: {
               rawVideoPersisted: false,
               temporaryMediaRetention: "temporary_processing_only",
@@ -273,13 +273,13 @@ test.describe("Buddy Trial invite route", () => {
       await page.getByLabel("Refined").check();
       await page.getByLabel("How much does the final player look like you?").selectOption("8");
       await page.getByLabel("What still looks off?").fill("Brow still sits a little high.");
-      await page.getByLabel(/Use my structured trial result to improve GameFace Match/).check();
+      await page.getByLabel(/Use my scores, settings, and written feedback to improve GameFace Match/).check();
       await page.getByRole("button", { name: "GameFace complete" }).click();
       await expect(page.getByRole("heading", { name: "GameFace complete." })).toBeVisible();
       await expect(page.getByLabel("Completed Buddy Trial scores")).toContainText("91 / 100");
       await expect(page.getByText("Version preference: Refined")).toBeVisible();
       await expect(page.getByText("Resemblance rating: 8 / 10")).toBeVisible();
-      await expect(page.getByText("Product-improvement opt-in: Yes")).toBeVisible();
+      await expect(page.getByText("Shared for improvements: Yes")).toBeVisible();
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow).toBeLessThanOrEqual(1);
     }

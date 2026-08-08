@@ -95,7 +95,7 @@ describe("OWNER_REVIEW_DEMO mode", () => {
     expect(result.refinementPlan.buildReview).toMatchObject({
       status: "changes_recommended",
       buildMatchScore: 82,
-      scoreLanguage: expect.stringMatching(/not identity probability/i),
+      scoreLanguage: expect.stringMatching(/does not identify you/i),
       strengths: ["Eye spacing", "Overall face width", "Hair"],
       weaknesses: ["Jaw appears too wide", "Nose appears too short", "Chin projection is too strong"],
       productionEligible: false,
@@ -125,13 +125,13 @@ describe("OWNER_REVIEW_DEMO mode", () => {
     expect(uncertain).toMatchObject({
       status: "uncertain",
       adjustments: [],
-      uncertaintyReasons: expect.arrayContaining([expect.stringMatching(/not strong enough/i)])
+      uncertaintyReasons: expect.arrayContaining([expect.stringMatching(/not clear enough/i)])
     });
     expect(alternative.alternativeHeadRecommendation).toMatchObject({
       label: "Review Demo Face Gamma",
       provenance: "OWNER_REVIEW_DEMO"
     });
-    expect([noChange, uncertain, alternative].every((review) => review.scoreLanguage.includes("not identity probability"))).toBe(true);
+    expect([noChange, uncertain, alternative].every((review) => review.scoreLanguage.includes("does not identify you"))).toBe(true);
   });
 
   it("calculates before-after demo outcomes without forcing improvement", () => {
@@ -162,7 +162,7 @@ describe("OWNER_REVIEW_DEMO mode", () => {
       scoreDelta: -5,
       trend: "regression"
     });
-    expect([improvement, noChange, regression].every((result) => result.scoreLanguage.includes("not identity probability"))).toBe(true);
+    expect([improvement, noChange, regression].every((result) => result.scoreLanguage.includes("does not identify you"))).toBe(true);
     expect(improvement.finalSettings.some((setting) => setting.label === "Jaw Width" && setting.value === "61")).toBe(true);
   });
 

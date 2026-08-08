@@ -8,6 +8,7 @@
     "verify:clean:mutation-smoke": "node scripts/verify-non-mutating.mjs --mutation-smoke",
     "owner-review-demo:generate": "node scripts/generate-owner-review-demo-catalog.mjs",
     "gameface:setup-reference:screenshots": "node scripts/capture-gameface-setup-reference-screenshots.mjs",
+    "buddy-trial:polish:screenshots": "node scripts/capture-buddy-trial-polish-screenshots.mjs",
     "quality": "npm run verify",
     "status:check": "node scripts/status-consistency-check.mjs",
     "supabase:schema:check": "node scripts/supabase-schema-check.mjs",

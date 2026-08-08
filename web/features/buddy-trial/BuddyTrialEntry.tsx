@@ -9,7 +9,6 @@ import {
   attachBuddyTrialFinalOutcome,
   attachBuddyTrialLearningRecord,
   applyBuddyTrialConsent,
-  BUDDY_TRIAL_ACTIVE_INVITE_ID,
   BUDDY_TRIAL_STATES,
   canAdvanceBuddyTrialToRecommendation,
   createBuddyTrialBuildGuideProgress,
@@ -60,6 +59,45 @@ interface BuddyTrialEntryProps {
   inviteId: string;
 }
 
+const buddyTrialStageLabels: Record<BuddyTrialState, { label: string; action: string }> = {
+  INVITED: { label: "Ready to start", action: "Check the boxes below, then start your scan." },
+  CONSENTED: { label: "Ready to scan", action: "Start your GameFace scan when you are ready." },
+  SCAN_IN_PROGRESS: { label: "Scan in progress", action: "Continue the guided scan." },
+  SCAN_COMPLETE: { label: "Scan complete", action: "Get your GameFace settings." },
+  RECOMMENDATION_READY: { label: "Settings ready", action: "Review your recommendation and build it in the game." },
+  BUILD_IN_PROGRESS: { label: "Build guide", action: "Enter one setting at a time on your console." },
+  VIDEO_1_REQUIRED: { label: "Show the first build", action: "Record or upload a short video of your player." },
+  VIDEO_1_PROCESSING: { label: "First video ready", action: "Review the comparison and refinement." },
+  REFINEMENT_READY: { label: "Refinement ready", action: "Apply the suggested changes." },
+  VIDEO_2_REQUIRED: { label: "Show the updated build", action: "Record or upload the updated player." },
+  FINAL_RESULT_READY: { label: "Final review", action: "Compare the before and after, then rate the result." },
+  COMPLETE: { label: "Complete", action: "Your GameFace trial is complete." },
+  DELETED: { label: "Deleted", action: "This browser no longer has trial data for this link." }
+};
+
+function getBuddyTrialStageCopy(session: BuddyTrialSession | null, fallbackAction: string) {
+  if (!session) return buddyTrialStageLabels.INVITED;
+  const copy = buddyTrialStageLabels[session.state];
+  return copy ?? { label: "In progress", action: fallbackAction };
+}
+
+function formatControlKind(kind: string) {
+  switch (kind) {
+    case "preset":
+      return "Preset";
+    case "slider":
+      return "Value";
+    case "color":
+      return "Color";
+    case "facialHair":
+      return "Facial hair";
+    case "menu":
+      return "Menu step";
+    default:
+      return kind.replaceAll("_", " ");
+  }
+}
+
 export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const inviteResolution = useMemo(() => getBuddyTrialInvite(inviteId), [inviteId]);
   const storageKey = useMemo(() => createBuddyTrialStorageKey(inviteId), [inviteId]);
@@ -107,7 +145,9 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const currentConsent = consent ?? session?.consent ?? createInitialBuddyTrialConsent();
   const consentReady = hasRequiredBuddyTrialConsent(currentConsent);
   const nextAction = session ? getBuddyTrialNextAction(session) : "Review the invite and start when ready.";
+  const stageCopy = getBuddyTrialStageCopy(session, nextAction);
   const showScanAction = !session || session.state === "INVITED" || session.state === "CONSENTED" || session.state === "SCAN_IN_PROGRESS";
+  const showOwnerReviewActiveBody = Boolean(ownerReviewDemo && session && !["INVITED", "CONSENTED", "SCAN_IN_PROGRESS"].includes(session.state));
 
   const updateConsent = (id: keyof BuddyTrialConsentRecord["acknowledgments"], checked: boolean) => {
     const activeSession = ensureSession();
@@ -236,6 +276,26 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     persistSession(transitionBuddyTrialSession(withLearning, "COMPLETE", new Date(), "Owner Review Demo final before/after result and tester feedback submitted."));
   };
 
+  const ownerReviewDemoPanel = ownerReviewDemo ? (
+    <OwnerReviewDemoPanel
+      session={session}
+      result={ownerReviewDemo}
+      onStartRecommendations={() => moveTrialTo("RECOMMENDATION_READY", "Owner Review Demo recommendations opened with test data.")}
+      onStartBuild={() => startBuildGuide(ownerReviewDemo.buildGuideSteps.length)}
+      onUpdateBuildGuide={updateBuildGuide}
+      onCompleteBuildGuide={completeBuildGuide}
+      onSaveVideoOneReview={saveVideoOneReview}
+      onRestartVideoOne={() => moveTrialTo("VIDEO_1_REQUIRED", "Owner Review Demo first character video retry requested.")}
+      onDeliverRefinement={() => moveTrialTo("REFINEMENT_READY", "Owner Review Demo refinement fixture delivered.")}
+      onStartRefinementGuide={() => startRefinementGuide(ownerReviewDemo.refinementPlan.refinementBuildGuideSteps.length)}
+      onUpdateRefinementGuide={updateRefinementGuide}
+      onCompleteRefinementGuide={completeRefinementGuide}
+      onSaveVideoTwoReview={saveVideoTwoReview}
+      onRestartVideoTwo={() => moveTrialTo("VIDEO_2_REQUIRED", "Owner Review Demo second character video retry requested.")}
+      onComplete={completeTrialWithOutcome}
+    />
+  ) : null;
+
   if (inviteResolution.status !== "active") {
     return (
       <main className="buddy-trial-page">
@@ -306,7 +366,7 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
 
   return (
     <main className="buddy-trial-page">
-      <section className="buddy-trial-shell" aria-labelledby="buddy-trial-title">
+      <section className={`buddy-trial-shell${showOwnerReviewActiveBody ? " buddy-trial-shell--active" : ""}`} aria-labelledby="buddy-trial-title">
         <div className="buddy-trial-brand" aria-label="GameFace Match">
           <span className="buddy-trial-mark" aria-hidden="true">
             G
@@ -314,11 +374,12 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
           <span>GameFace Match</span>
         </div>
         <p className="buddy-trial-kicker">Private Buddy Trial</p>
-        <h1 id="buddy-trial-title">Build your College Football 27 game face.</h1>
-        <p className="buddy-trial-copy">
-          Take a guided face scan, get the closest verified appearance settings when the catalog is available, then come back with screenshots or video so the
-          result can be refined.
-        </p>
+        <h1 id="buddy-trial-title">{showOwnerReviewActiveBody ? "Your GameFace trial" : "Build your College Football 27 game face."}</h1>
+        {!showOwnerReviewActiveBody ? (
+          <p className="buddy-trial-copy">
+            Scan your face, get a step-by-step College Football 27 build, then show us your player so GameFace Match can help tune the result.
+          </p>
+        ) : null}
 
         {ownerReviewDemoEnabled ? (
           <div className="buddy-trial-demo-banner" role="status">
@@ -327,80 +388,64 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
         ) : null}
 
         <div className="buddy-trial-status-card" aria-live="polite">
-          <span className="buddy-trial-status-label">Session state</span>
-          <strong>{session?.state ?? "INVITED"}</strong>
-          <span>{nextAction}</span>
+          <span className="buddy-trial-status-label">Next up</span>
+          <strong>{stageCopy.label}</strong>
+          <span>{stageCopy.action}</span>
         </div>
 
-        <section className="buddy-trial-info-grid" aria-label="Trial details">
-          <article>
-            <h2>What this does</h2>
-            <p>GameFace Match recommends game appearance settings. It does not import your face into the game or identify who you are.</p>
-          </article>
-          <article>
-            <h2>Camera and scan</h2>
-            <p>The scan uses the browser camera only after you start the existing guided scan flow.</p>
-          </article>
-          <article>
-            <h2>Retention default</h2>
-            <p>Raw face media is temporary by default. The trial can save only pseudonymous progress, consent versions, quality metadata, and non-image derived results.</p>
-          </article>
-          <article>
-            <h2>Persistence mode</h2>
-            <p>Private-beta persistence currently uses the browser-local test adapter. Production Supabase storage remains disabled until credentials and RLS are activated.</p>
-          </article>
-          <article>
-            <h2>Independent app</h2>
-            <p>GameFace Match is an independent companion app, not an official game integration.</p>
-          </article>
-        </section>
+        {showOwnerReviewActiveBody ? ownerReviewDemoPanel : null}
 
-        <section className="buddy-trial-consent" aria-labelledby="buddy-trial-consent-title">
-          <h2 id="buddy-trial-consent-title">Required acknowledgments</h2>
-          {REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => {
-            const definition = getConsentDefinition(id);
-            return (
-              <label key={id} className="buddy-trial-checkbox">
-                <input
-                  type="checkbox"
-                  checked={currentConsent.acknowledgments[id]}
-                  onChange={(event) => updateConsent(id, event.target.checked)}
-                  disabled={session?.state === "SCAN_IN_PROGRESS"}
-                />
-                <span>
-                  <strong>{definition?.label}</strong>
-                  <small>{definition?.description}</small>
-                </span>
-              </label>
-            );
-          })}
-        </section>
+        {!showOwnerReviewActiveBody ? (
+          <>
+            <section className="buddy-trial-info-grid" aria-label="Trial details">
+              <article>
+                <h2>What you&apos;ll do</h2>
+                <p>Scan, build the recommended player, upload a short result video, then compare the first and updated build.</p>
+              </article>
+              <article>
+                <h2>Camera</h2>
+                <p>Your camera starts only after you tap Start My GameFace.</p>
+              </article>
+              <article>
+                <h2>Your data</h2>
+                <p>Raw face media is temporary by default. Progress is saved so you can leave Safari, build on the console, and return.</p>
+              </article>
+              <article>
+                <h2>Independent app</h2>
+                <p>GameFace Match is an independent companion app, not an official game integration.</p>
+              </article>
+            </section>
 
-        {session?.catalogGate === "production_catalog_unavailable" || (!ownerReviewDemoEnabled && productionCatalogRecordCount === 0) ? (
-          <div className="buddy-trial-warning" role="status">
-            Verified College Football 27 recommendations are currently unavailable because the production catalog has 0 approved records. The trial can test
-            entry, consent, scan handoff, resume, and deletion without showing fabricated settings.
-          </div>
-        ) : null}
+            <section className="buddy-trial-consent" aria-labelledby="buddy-trial-consent-title">
+              <h2 id="buddy-trial-consent-title">Before we start</h2>
+              {REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => {
+                const definition = getConsentDefinition(id);
+                return (
+                  <label key={id} className="buddy-trial-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={currentConsent.acknowledgments[id]}
+                      onChange={(event) => updateConsent(id, event.target.checked)}
+                      disabled={session?.state === "SCAN_IN_PROGRESS"}
+                    />
+                    <span>
+                      <strong>{definition?.label}</strong>
+                      <small>{definition?.description}</small>
+                    </span>
+                  </label>
+                );
+              })}
+            </section>
 
-        {ownerReviewDemo ? (
-          <OwnerReviewDemoPanel
-            session={session}
-            result={ownerReviewDemo}
-            onStartRecommendations={() => moveTrialTo("RECOMMENDATION_READY", "Owner Review Demo recommendations opened with test data.")}
-            onStartBuild={() => startBuildGuide(ownerReviewDemo.buildGuideSteps.length)}
-            onUpdateBuildGuide={updateBuildGuide}
-            onCompleteBuildGuide={completeBuildGuide}
-            onSaveVideoOneReview={saveVideoOneReview}
-            onRestartVideoOne={() => moveTrialTo("VIDEO_1_REQUIRED", "Owner Review Demo first character video retry requested.")}
-            onDeliverRefinement={() => moveTrialTo("REFINEMENT_READY", "Owner Review Demo refinement fixture delivered.")}
-            onStartRefinementGuide={() => startRefinementGuide(ownerReviewDemo.refinementPlan.refinementBuildGuideSteps.length)}
-            onUpdateRefinementGuide={updateRefinementGuide}
-            onCompleteRefinementGuide={completeRefinementGuide}
-            onSaveVideoTwoReview={saveVideoTwoReview}
-            onRestartVideoTwo={() => moveTrialTo("VIDEO_2_REQUIRED", "Owner Review Demo second character video retry requested.")}
-            onComplete={completeTrialWithOutcome}
-          />
+            {session?.catalogGate === "production_catalog_unavailable" || (!ownerReviewDemoEnabled && productionCatalogRecordCount === 0) ? (
+              <div className="buddy-trial-warning" role="status">
+                Real College Football 27 settings are not available yet. This link can still test the scan, build guide, video review, and deletion flow without
+                showing made-up live settings.
+              </div>
+            ) : null}
+
+            {ownerReviewDemoPanel}
+          </>
         ) : null}
 
         <div className="buddy-trial-actions">
@@ -423,15 +468,13 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
         <details className="buddy-trial-privacy">
           <summary>Privacy details</summary>
           <p>
-            This private trial records the invite session state, consent version, progress, and non-image derived metadata needed to resume the trial. Basic use does
-            not require an account. Raw face photos or video are not written to the trial record by default. Cloud backup, public sharing, model training, and
-            marketing use are not included in this consent.
+            This private trial saves progress and choices in this browser so you can come back after using the console. Basic use does not require an account. Raw
+            face photos or video are not saved by default. Cloud backup, public sharing, model training, and marketing use are not included in this consent.
           </p>
         </details>
 
-        <p className="buddy-trial-resume">Resume with this same private URL in this browser: /trial/{inviteId}</p>
+        <p className="buddy-trial-resume">You can leave and come back with this same private link on this iPhone.</p>
         <p className="buddy-trial-disclaimer">{INDEPENDENT_APP_DISCLAIMER}</p>
-        {process.env.NODE_ENV !== "production" ? <p className="buddy-trial-fixture">Fixture invite for tests: {BUDDY_TRIAL_ACTIVE_INVITE_ID}</p> : null}
       </section>
     </main>
   );
@@ -472,7 +515,6 @@ function OwnerReviewDemoPanel({
 }) {
   const state = session?.state ?? "INVITED";
   const bestMatch = result.matches[0];
-  const learningRecord = createOwnerReviewDemoLearningRecord(session?.sessionId ?? "owner-review-demo-preview");
   const progress = session?.buildGuide;
   const currentStepIndex = Math.min(progress?.currentStepIndex ?? 0, Math.max(result.buildGuideSteps.length - 1, 0));
   const completedStepIds = progress?.completedStepIds ?? [];
@@ -703,8 +745,8 @@ function OwnerReviewDemoPanel({
       <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-title">
         <h2 id="owner-review-demo-title">What happens next</h2>
         <p>
-          After the guided scan, this private link returns here with a demo recommendation, exact settings, and a step-by-step College Football 27 build guide.
-          The settings are test data for owner review.
+          After the guided scan, this private link brings you back here for demo settings, a couch-friendly build guide, and video review. The settings are clearly
+          marked as test data.
         </p>
       </section>
     );
@@ -717,7 +759,7 @@ function OwnerReviewDemoPanel({
         <p className="buddy-trial-step-label">Scan complete</p>
         <h2 id="owner-review-demo-ready">Building your GameFace...</h2>
         <p>
-          We are preparing your owner-review demo recommendation from synthetic catalog data. This does not use or publish real College Football 27 verification.
+          We&apos;re preparing your demo settings now. These are test settings for owner review, not live College Football 27 recommendations.
         </p>
         <button className="buddy-trial-primary" type="button" onClick={onStartRecommendations}>
           View my GameFace recommendation
@@ -729,13 +771,13 @@ function OwnerReviewDemoPanel({
   if (state === "RECOMMENDATION_READY") {
     return (
       <section className="buddy-trial-demo-card buddy-trial-result-card" aria-labelledby="owner-review-demo-recommendations">
-        <p className="buddy-trial-step-label">Owner Review Demo result</p>
+        <p className="buddy-trial-step-label">Demo result</p>
         <h2 id="owner-review-demo-recommendations">Your GameFace recommendation</h2>
         <div className="buddy-trial-best-match">
           <span>Best Match</span>
           <strong>{bestMatch.catalogItem.visibleGameLabelOrIndex}</strong>
           <small>
-            Match Score {bestMatch.score}/100 · {bestMatch.confidence.label} confidence · {bestMatch.evidenceSupportState.toLowerCase().replaceAll("_", " ")}
+            Match Score {bestMatch.score}/100 · {bestMatch.confidence.label} confidence · test settings
           </small>
         </div>
         <div className="buddy-trial-demo-explanation">
@@ -799,7 +841,7 @@ function OwnerReviewDemoPanel({
                 <div key={`${currentStep.id}-${control.label}`}>
                   <span>{control.label}</span>
                   <strong>{control.value}</strong>
-                  <small>{control.controlKind}</small>
+                  <small>{formatControlKind(control.controlKind)}</small>
                 </div>
               ))}
             </div>
@@ -868,10 +910,10 @@ function OwnerReviewDemoPanel({
     return (
       <section className="buddy-trial-demo-card buddy-trial-video-review" aria-labelledby="owner-review-demo-processing">
         <p className="buddy-trial-step-label">Video #1 processed</p>
-        <h2 id="owner-review-demo-processing">Standardized character views</h2>
+        <h2 id="owner-review-demo-processing">GameFace found these views</h2>
         <p>{session?.videoOneReview?.processingSummary ?? videoReviewState.review?.processingSummary ?? "Video #1 is ready for comparison."}</p>
         <CharacterVideoStandardizedViews review={videoReviewState.review ?? session?.videoOneReview ?? null} />
-        <p>Build Match Score is based on available game controls. It is not identity probability.</p>
+        <p>This score compares the build with the face scan using available game controls. It is not an identity score.</p>
         <div className="buddy-trial-build-nav">
           <button
             className="buddy-trial-secondary"
@@ -997,14 +1039,13 @@ function OwnerReviewDemoPanel({
             <textarea value={stillLooksOff} onChange={(event) => setStillLooksOff(event.currentTarget.value)} placeholder="Optional" rows={3} />
           </label>
           <label className="buddy-trial-learning-consent">
-            <input type="checkbox" checked={productImprovementOptIn} onChange={(event) => setProductImprovementOptIn(event.currentTarget.checked)} />
-            <span>
-              Use my structured trial result to improve GameFace Match. This is separate from the normal trial consent and does not retain raw face media by
-              default.
-            </span>
-          </label>
-        </section>
-        <p>Demo learning record: {learningRecord.analyticsDataset}. Production weight changes allowed: no.</p>
+              <input type="checkbox" checked={productImprovementOptIn} onChange={(event) => setProductImprovementOptIn(event.currentTarget.checked)} />
+              <span>
+                Use my scores, settings, and written feedback to improve GameFace Match. Raw face media is not saved by default.
+              </span>
+            </label>
+          </section>
+        <p className="buddy-trial-demo-note">Owner Review Demo stays separate from real beta results.</p>
         <button className="buddy-trial-primary" type="button" onClick={() => onComplete(createSubmittedOutcome())} disabled={!finalPreference || resemblanceRating < 1}>
           GameFace complete
         </button>
@@ -1015,21 +1056,21 @@ function OwnerReviewDemoPanel({
   return (
     <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-complete">
       <h2 id="owner-review-demo-complete">Owner Review Demo complete</h2>
-      <p>Demo data stayed isolated from production catalog, verifier, study, analytics, and learning state.</p>
+      <p>Test settings stayed separate from real customer results and live game recommendations.</p>
     </section>
   );
 }
 
 function OwnerReviewDemoTopThree({ result }: { result: OwnerReviewDemoRecommendationResult }) {
   return (
-    <ol className="buddy-trial-demo-top-three" aria-label="Owner Review Demo top three recommendations">
+    <ol className="buddy-trial-demo-top-three" aria-label="Top three GameFace choices">
       {result.matches.map((match) => (
         <li key={match.id}>
           <strong>
             #{match.rank} {match.catalogItem.visibleGameLabelOrIndex}
           </strong>
           <span>
-            {match.score}/100 · {match.confidence.label} demo confidence · {match.catalogItem.sourceType}
+            {match.score}/100 · {match.confidence.label} confidence · test settings
           </span>
         </li>
       ))}
@@ -1038,7 +1079,7 @@ function OwnerReviewDemoTopThree({ result }: { result: OwnerReviewDemoRecommenda
 }
 
 function OwnerReviewDemoBuildSummary({ result, completedStepIds }: { result: OwnerReviewDemoRecommendationResult; completedStepIds: string[] }) {
-  return <OwnerReviewDemoStepSummary steps={result.buildGuideSteps} completedStepIds={completedStepIds} ariaLabel="All owner-review demo build settings" />;
+  return <OwnerReviewDemoStepSummary steps={result.buildGuideSteps} completedStepIds={completedStepIds} ariaLabel="All build settings" />;
 }
 
 function OwnerReviewDemoStepSummary({
@@ -1111,8 +1152,7 @@ function CharacterVideoReviewPanel({
   return (
     <div className="buddy-trial-video-panel" aria-live="polite">
       <p>
-        Use a short iPhone video of your TV/monitor or upload a clean console-recorded file. Accepted formats: MP4, MOV, M4V, or WebM, 4-45 seconds, up to
-        250 MB.
+        Record the player on your TV or upload a console clip. Keep the face clear. MP4, MOV, M4V, or WebM, 4-45 seconds, up to 250 MB.
       </p>
       <div className="buddy-trial-video-actions">
         {state.status === "recording" ? (
@@ -1155,7 +1195,7 @@ function CharacterVideoReviewPanel({
       {state.status === "manual_selection_required" && state.review ? (
         <div className="buddy-trial-video-picker">
           <h3>Select the best frames</h3>
-          <p>The browser found candidate views, but a person should confirm the front, left, and right frames before comparison.</p>
+          <p>Pick the clearest front, left, and right frames before GameFace compares the build.</p>
           {(["front", "leftThreeQuarter", "rightThreeQuarter", "leftProfile", "rightProfile"] as CharacterVideoViewID[]).map((viewID) => {
             const frames = state.candidateFrames.filter((frame) => frame.expectedView === viewID);
             if (frames.length === 0) return null;
@@ -1210,10 +1250,10 @@ function CharacterVideoReviewPanel({
 
 function CharacterVideoStandardizedViews({ review }: { review: CharacterVideoReviewResult | BuddyTrialSession["videoOneReview"] | null }) {
   if (!review || review.standardizedViews.length === 0) {
-    return <p>No standardized character views are available yet.</p>;
+    return <p>No player views are ready yet.</p>;
   }
   return (
-    <div className="buddy-trial-standardized-views" aria-label="Standardized character views">
+    <div className="buddy-trial-standardized-views" aria-label="Player views selected for comparison">
       {review.standardizedViews.map((view) => (
         <article key={view.viewID}>
           <span>{formatCharacterView(view.viewID)}</span>
@@ -1278,7 +1318,7 @@ function OwnerReviewDemoBuildReview({ review }: { review: OwnerReviewDemoBuildMa
             ))}
           </div>
         ) : (
-          <p>{review.noChangeReason ?? review.uncertaintyReasons[0] ?? "No defensible adjustment is available from this video."}</p>
+          <p>{review.noChangeReason ?? review.uncertaintyReasons[0] ?? "No clear change is available from this video."}</p>
         )}
         {review.alternativeHeadRecommendation ? (
           <article className="buddy-trial-alternative-head">
@@ -1290,7 +1330,7 @@ function OwnerReviewDemoBuildReview({ review }: { review: OwnerReviewDemoBuildMa
       </section>
       {review.uncertaintyReasons.length ? (
         <section className="buddy-trial-video-retake" aria-label="Uncertain comparison">
-          <strong>Needs clearer evidence</strong>
+          <strong>Needs a clearer video</strong>
           <ul>
             {review.uncertaintyReasons.map((reason) => (
               <li key={reason}>{reason}</li>
@@ -1386,7 +1426,7 @@ function OwnerReviewDemoCompletionSummary({ outcome }: { outcome: BuddyTrialFina
         <h2 id="buddy-trial-user-rating">Your feedback</h2>
         <p>Version preference: {formatVersionPreference(outcome.userPreference)}</p>
         <p>Resemblance rating: {outcome.resemblanceRating ?? "Not provided"} / 10</p>
-        <p>Product-improvement opt-in: {outcome.productImprovementOptIn ? "Yes" : "No"}</p>
+        <p>Shared for improvements: {outcome.productImprovementOptIn ? "Yes" : "No"}</p>
         {outcome.stillLooksOff ? <p>Still looks off: {outcome.stillLooksOff}</p> : null}
       </section>
     </div>
@@ -1412,8 +1452,8 @@ function OwnerReviewDemoRefinementGuide({
   if (steps.length === 0) {
     return (
       <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-no-refinement">
-        <h2 id="owner-review-demo-no-refinement">No supported changes</h2>
-        <p>This review did not produce a defensible adjustment walkthrough.</p>
+      <h2 id="owner-review-demo-no-refinement">No supported changes</h2>
+      <p>This review did not find a clear change to walk through.</p>
         <button className="buddy-trial-primary" type="button" onClick={onComplete}>
           Continue
         </button>
@@ -1446,7 +1486,7 @@ function OwnerReviewDemoRefinementGuide({
       <p className="buddy-trial-step-label">Update My Player</p>
       <h2 id="owner-review-demo-refinement-guide">Apply the recommended changes</h2>
       {isSummary ? (
-        <OwnerReviewDemoStepSummary steps={steps} completedStepIds={progress.completedStepIds} ariaLabel="All owner-review demo build settings" />
+        <OwnerReviewDemoStepSummary steps={steps} completedStepIds={progress.completedStepIds} ariaLabel="All build settings" />
       ) : (
         <article className="buddy-trial-build-step">
           <span>
@@ -1500,7 +1540,7 @@ function OwnerReviewDemoSettings({ result }: { result: OwnerReviewDemoRecommenda
           <span>{setting.category}</span>
           <strong>{setting.value}</strong>
           <small>
-            {setting.controlKind} · {setting.menuPath.join(" > ")}
+            {formatControlKind(setting.controlKind)} · {setting.menuPath.join(" > ")}
           </small>
         </article>
       ))}

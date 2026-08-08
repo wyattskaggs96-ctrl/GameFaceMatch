@@ -1,0 +1,203 @@
+{
+  "generatedAt": "2026-08-07T18:00:00.000Z",
+  "prompt": "GFM | Q06 | PROMPT 131 | PHASE 06 | Polish complete buddy trial experience",
+  "baseUrl": "http://127.0.0.1:3213",
+  "notes": [
+    "Screenshots use OWNER_REVIEW_DEMO browser-local fixture data.",
+    "No production catalog records, verifier decisions, raw face media, or production recommendations are created."
+  ],
+  "screenshots": [
+    {
+      "state": "01-invite",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-01-invite.png"
+    },
+    {
+      "state": "02-camera-handoff",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-02-camera-handoff.png"
+    },
+    {
+      "state": "03-guided-intro",
+      "viewport": "390x844",
+      "path": "/#start",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-03-guided-intro.png"
+    },
+    {
+      "state": "04-guided-active",
+      "viewport": "390x844",
+      "path": "/?setupVisualState=scan-partial#capture",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-04-guided-active.png"
+    },
+    {
+      "state": "05-processing",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-05-processing.png"
+    },
+    {
+      "state": "06-result",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-06-result.png"
+    },
+    {
+      "state": "07-build-step",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-07-build-step.png"
+    },
+    {
+      "state": "08-build-all-settings",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-08-build-all-settings.png"
+    },
+    {
+      "state": "09-video-one-required",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-09-video-one-required.png"
+    },
+    {
+      "state": "10-video-error",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-10-video-error.png"
+    },
+    {
+      "state": "11-video-one-views",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-11-video-one-views.png"
+    },
+    {
+      "state": "12-refinement-review",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-12-refinement-review.png"
+    },
+    {
+      "state": "13-refinement-guide",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-13-refinement-guide.png"
+    },
+    {
+      "state": "14-video-two-required",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-14-video-two-required.png"
+    },
+    {
+      "state": "15-final-result",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-15-final-result.png"
+    },
+    {
+      "state": "16-complete",
+      "viewport": "390x844",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/390x844-16-complete.png"
+    },
+    {
+      "state": "01-invite",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-01-invite.png"
+    },
+    {
+      "state": "02-camera-handoff",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-02-camera-handoff.png"
+    },
+    {
+      "state": "03-guided-intro",
+      "viewport": "430x932",
+      "path": "/#start",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-03-guided-intro.png"
+    },
+    {
+      "state": "04-guided-active",
+      "viewport": "430x932",
+      "path": "/?setupVisualState=scan-partial#capture",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-04-guided-active.png"
+    },
+    {
+      "state": "05-processing",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-05-processing.png"
+    },
+    {
+      "state": "06-result",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-06-result.png"
+    },
+    {
+      "state": "07-build-step",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-07-build-step.png"
+    },
+    {
+      "state": "08-build-all-settings",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-08-build-all-settings.png"
+    },
+    {
+      "state": "09-video-one-required",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-09-video-one-required.png"
+    },
+    {
+      "state": "10-video-error",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-10-video-error.png"
+    },
+    {
+      "state": "11-video-one-views",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-11-video-one-views.png"
+    },
+    {
+      "state": "12-refinement-review",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-12-refinement-review.png"
+    },
+    {
+      "state": "13-refinement-guide",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-13-refinement-guide.png"
+    },
+    {
+      "state": "14-video-two-required",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-14-video-two-required.png"
+    },
+    {
+      "state": "15-final-result",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-15-final-result.png"
+    },
+    {
+      "state": "16-complete",
+      "viewport": "430x932",
+      "path": "/trial/btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0",
+      "screenshot": "docs/status/visual-evidence/prompt131/430x932-16-complete.png"
+    }
+  ]
+}

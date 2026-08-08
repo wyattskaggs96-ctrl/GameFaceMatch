@@ -2799,6 +2799,10 @@ p {
   align-content: center;
 }
 
+.buddy-trial-shell--active {
+  align-content: start;
+}
+
 .buddy-trial-brand {
   display: inline-flex;
   align-items: center;
@@ -2836,6 +2840,10 @@ p {
   letter-spacing: 0;
 }
 
+.buddy-trial-shell--active h1 {
+  font-size: clamp(2.1rem, 10vw, 3rem);
+}
+
 .buddy-trial-shell h2 {
   margin: 0 0 6px;
   color: #f8fafc;
@@ -2871,11 +2879,16 @@ p {
   display: grid;
   gap: 4px;
   padding: 16px;
+  border-color: rgba(59, 130, 246, 0.38);
+  background:
+    linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(14, 165, 233, 0.08)),
+    rgba(15, 23, 42, 0.82);
 }
 
 .buddy-trial-status-card strong {
-  color: #bfdbfe;
-  font-size: 1.2rem;
+  color: #f8fafc;
+  font-size: 1.25rem;
+  line-height: 1.15;
 }
 
 .buddy-trial-status-label,
@@ -2953,6 +2966,16 @@ p {
   color: #a5f3fc;
   font-size: 0.88rem;
   font-weight: 800;
+}
+
+.buddy-trial-demo-note {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(8, 47, 73, 0.5);
+  color: #a5f3fc;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .buddy-trial-demo-card {
@@ -3083,6 +3106,7 @@ p {
 .buddy-trial-demo-settings small {
   color: #94a3b8;
   font-size: 0.78rem;
+  line-height: 1.35;
 }
 
 .buddy-trial-demo-settings strong {
@@ -3171,6 +3195,7 @@ p {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 10px;
+  align-items: stretch;
 }
 
 .buddy-trial-video-review {

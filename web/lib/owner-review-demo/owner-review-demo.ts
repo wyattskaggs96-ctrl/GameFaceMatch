@@ -319,7 +319,7 @@ function createOwnerReviewDemoBuildGuideSteps(item: GameCatalogItem): OwnerRevie
       category: "Head",
       menuPath: "Road to Glory > Appearance > Head / face preset",
       controls: [{ label: "Preset", value: item.visibleGameLabelOrIndex, controlKind: "preset" }],
-      rationale: "This demo preset is the highest-ranked synthetic match."
+      rationale: "This demo preset is the best match for this owner-review run."
     }),
     buildStep({
       id: "demo-build-skin",
@@ -343,7 +343,7 @@ function createOwnerReviewDemoBuildGuideSteps(item: GameCatalogItem): OwnerRevie
       category: "Hair",
       menuPath: annotations.verifiedHairstyleMenuPath,
       controls: [{ label: "Style", value: annotations.verifiedHairstyleNativeValue ?? "Demo unavailable", controlKind: "preset" }],
-      rationale: "The demo hairstyle reflects the synthetic appearance attributes in the derived profile."
+      rationale: "The demo hairstyle follows the appearance cues from your scan."
     }),
     buildStep({
       id: "demo-build-hair-color",
@@ -367,7 +367,7 @@ function createOwnerReviewDemoBuildGuideSteps(item: GameCatalogItem): OwnerRevie
       category: "Facial-hair color",
       menuPath: annotations.verifiedFacialHairColorMenuPath ?? "Road to Glory > Appearance > Facial Hair > Color",
       controls: [{ label: "Color", value: annotations.verifiedFacialHairColorNativeValue ?? "Demo no facial-hair color", controlKind: "color" }],
-      rationale: "Facial-hair color is shown only when supported by the synthetic recommendation."
+      rationale: "Facial-hair color is shown only when it belongs to the demo result."
     }),
     buildStep({
       id: "demo-build-nose",
@@ -390,7 +390,7 @@ function createOwnerReviewDemoBuildGuideSteps(item: GameCatalogItem): OwnerRevie
         { label: "Jaw width", value: annotations.demoJawWidthSlider ?? "Demo unavailable", controlKind: "slider" },
         { label: "Chin depth", value: annotations.demoChinDepthSlider ?? "Demo unavailable", controlKind: "slider" }
       ],
-      rationale: "The refinement demo later uses these same supported fixture controls."
+      rationale: "The refinement demo later uses these same test controls."
     })
   ];
 }
@@ -467,7 +467,7 @@ export function createOwnerReviewDemoBeforeAfterResult(
     trend,
     improved: scenarioCopy.improved,
     stillDifferent: scenarioCopy.stillDifferent,
-    scoreLanguage: "Build Match Score compares the created character to the derived face profile using available game controls. It is not identity probability.",
+    scoreLanguage: "Build Match Score compares the created character with your scan using available game controls. It does not identify you.",
     finalSettings,
     comparedInputs: {
       derivedFaceProfile: "owner-review-demo-profile-v1",
@@ -511,11 +511,11 @@ export function createOwnerReviewDemoBuildMatchReview(
       status: "uncertain",
       buildMatchScore: 78,
       strengths: ["Hair", "Overall face width"],
-      weaknesses: ["Video #1 needs clearer front and side views before exact changes are defensible."],
+      weaknesses: ["Video #1 needs clearer front and side views before GameFace can suggest exact changes."],
       adjustments: [],
       noChangeReason: null,
       uncertaintyReasons: [
-        "The standardized character views were not strong enough to support directional slider changes.",
+        "The player views were not clear enough to support directional slider changes.",
         "GameFace Match should ask for a better result video instead of guessing."
       ],
       alternativeHeadRecommendation: null,
@@ -528,13 +528,13 @@ export function createOwnerReviewDemoBuildMatchReview(
       status: "changes_recommended",
       buildMatchScore: 79,
       strengths: ["Hair", "Skin presentation"],
-      weaknesses: ["Face preset shape differs more than the fixture alternatives.", "Jaw and nose differences remain visible."],
+      weaknesses: ["Face preset shape differs more than the other demo choices.", "Jaw and nose differences remain visible."],
       adjustments: baseAdjustments.slice(0, 1),
       noChangeReason: null,
       uncertaintyReasons: [],
       alternativeHeadRecommendation: {
         label: "Review Demo Face Gamma",
-        reason: "The fixture comparison shows a stronger head/preset alternative than changing only sliders.",
+        reason: "The demo comparison shows a stronger head/preset alternative than changing only sliders.",
         provenance: OWNER_REVIEW_DEMO_MODE
       },
       comparedInputs
@@ -570,7 +570,7 @@ function buildMatchReview(input: {
     status: input.status,
     buildMatchScore: input.buildMatchScore,
     passingThreshold: 90,
-    scoreLanguage: "Build Match Score compares the created character to the derived face profile using available game controls. It is not identity probability.",
+    scoreLanguage: "Build Match Score compares the created character with your scan using available game controls. It does not identify you.",
     strengths: input.strengths,
     weaknesses: input.weaknesses,
     adjustments: input.adjustments,
@@ -594,8 +594,8 @@ function ownerReviewDemoCalibrationAdjustments(): OwnerReviewDemoRefinementAdjus
       currentValue: "67",
       recommendedValue: "61",
       menuPath: "Road to Glory > Appearance > Face > Jaw and Chin",
-      reason: "The rendered character's jaw reads wider than the derived face profile.",
-      expectedEffect: "Narrowing this supported demo control should bring the lower-face width closer to the scanned profile."
+      reason: "The created player's jaw reads wider than your scan.",
+      expectedEffect: "Narrowing this demo control should bring the lower-face width closer to your scan."
     }),
     refinementAdjustment({
       id: "owner-demo-refine-nose-height",
@@ -605,8 +605,8 @@ function ownerReviewDemoCalibrationAdjustments(): OwnerReviewDemoRefinementAdjus
       currentValue: "46",
       recommendedValue: "51",
       menuPath: "Road to Glory > Appearance > Face > Nose",
-      reason: "The rendered character's nose appears shorter than the derived face profile.",
-      expectedEffect: "Raising this supported demo value should improve nose length balance without inventing a production slider."
+      reason: "The created player's nose appears shorter than your scan.",
+      expectedEffect: "Raising this demo value should improve nose length balance without guessing a live game control."
     }),
     refinementAdjustment({
       id: "owner-demo-refine-chin-projection",
@@ -616,8 +616,8 @@ function ownerReviewDemoCalibrationAdjustments(): OwnerReviewDemoRefinementAdjus
       currentValue: "58",
       recommendedValue: "52",
       menuPath: "Road to Glory > Appearance > Face > Jaw and Chin",
-      reason: "The rendered character's chin projects more strongly than the derived face profile.",
-      expectedEffect: "Reducing this supported demo value should soften the profile while keeping the verified demo head/preset."
+      reason: "The created player's chin projects more strongly than your scan.",
+      expectedEffect: "Reducing this demo value should soften the profile while keeping the same demo head/preset."
     }),
     {
       ...refinementAdjustment({

@@ -1,4 +1,5 @@
 import { CONSENT_VERSION, type ConsentID } from "@/lib/privacy/consent";
+import type { CharacterVideoReviewResult } from "@/lib/buddy-trial/character-video-review";
 
 export const BUDDY_TRIAL_SCHEMA_VERSION = "buddy-trial-v1";
 export const BUDDY_TRIAL_ROUTE_PREFIX = "/trial";
@@ -71,6 +72,7 @@ export interface BuddyTrialSession {
   consent: BuddyTrialConsentRecord;
   catalogGate: BuddyTrialCatalogGate;
   buildGuide: BuddyTrialBuildGuideProgress | null;
+  videoOneReview: (Omit<CharacterVideoReviewResult, "candidateFrames"> & { candidateFrames: [] }) | null;
   history: BuddyTrialSessionHistoryEntry[];
 }
 
@@ -120,7 +122,7 @@ const allowedTransitions: Record<BuddyTrialState, BuddyTrialState[]> = {
   RECOMMENDATION_READY: ["BUILD_IN_PROGRESS", "DELETED"],
   BUILD_IN_PROGRESS: ["VIDEO_1_REQUIRED", "DELETED"],
   VIDEO_1_REQUIRED: ["VIDEO_1_PROCESSING", "DELETED"],
-  VIDEO_1_PROCESSING: ["REFINEMENT_READY", "DELETED"],
+  VIDEO_1_PROCESSING: ["REFINEMENT_READY", "VIDEO_1_REQUIRED", "DELETED"],
   REFINEMENT_READY: ["VIDEO_2_REQUIRED", "DELETED"],
   VIDEO_2_REQUIRED: ["FINAL_RESULT_READY", "DELETED"],
   FINAL_RESULT_READY: ["COMPLETE", "DELETED"],
@@ -205,6 +207,7 @@ export function createBuddyTrialSession({
     consent: createInitialBuddyTrialConsent(),
     catalogGate: productionCatalogRecordCount > 0 ? "available" : ownerReviewDemoEnabled ? "owner_review_demo_available" : "production_catalog_unavailable",
     buildGuide: null,
+    videoOneReview: null,
     history: [{ state: "INVITED", at: timestamp, note: "Buddy Trial invite opened." }]
   };
 }
@@ -257,6 +260,8 @@ export function transitionBuddyTrialSession(session: BuddyTrialSession, nextStat
     updatedAt: timestamp,
     completedAt: nextState === "COMPLETE" ? timestamp : session.completedAt,
     deletedAt: nextState === "DELETED" ? timestamp : session.deletedAt,
+    buildGuide: nextState === "DELETED" ? null : session.buildGuide,
+    videoOneReview: nextState === "DELETED" ? null : session.videoOneReview,
     history: [...session.history, { state: nextState, at: timestamp, note }]
   };
 }
@@ -297,6 +302,18 @@ export function updateBuddyTrialBuildGuideProgress(
       completedStepIds: patch.completedStepIds ?? current.completedStepIds,
       updatedAt: now.toISOString()
     }
+  };
+}
+
+export function attachBuddyTrialVideoOneReview(
+  session: BuddyTrialSession,
+  review: BuddyTrialSession["videoOneReview"],
+  now = new Date()
+): BuddyTrialSession {
+  return {
+    ...session,
+    updatedAt: now.toISOString(),
+    videoOneReview: review
   };
 }
 

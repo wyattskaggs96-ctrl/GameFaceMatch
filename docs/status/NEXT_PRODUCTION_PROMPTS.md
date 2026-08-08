@@ -8,9 +8,9 @@ Purpose: have a real independent second verifier complete the Prompt 102 support
 
 ## Codex-Ready Parallel Prompt
 
-`GFM | Q06 | PROMPT 125 | PHASE 02 | Build owner-review demo result upload and refinement loop`
+`GFM | Q06 | PROMPT 126 | PHASE 03 | Build owner-review demo refinement recommendations`
 
-Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md` as the authoritative owner-review contract. Build on Prompt 124’s scan-to-build journey to make result upload, first-result processing, refinement, second-result, and before/after walkthrough owner-evaluable with test data while production recommendations remain disabled and the real human-verifier gate remains unchanged.
+Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md` as the authoritative owner-review contract. Build on Prompt 125’s first character-video review to make first-result scoring, refinement, second-result, and before/after walkthrough owner-evaluable with test data while production recommendations remain disabled and the real human-verifier gate remains unchanged.
 
 ## Prompt 124 Result
 
@@ -20,6 +20,16 @@ Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md`
 - Demo recommendations exercise head/preset, skin, skin details, hair, hair color, facial hair, facial-hair color, slider-style controls, and menu instructions.
 - The owner-review Buddy Trial now reaches: invite opening, consent, existing guided-scan handoff, scan-complete processing, best-match result, match score/confidence, exact settings, 11-step build guide, "View All Settings", persisted build-guide progress, and build-guide-complete handoff.
 - Demo analytics and learning records are excluded from real beta metrics, global learning, and production matching-weight mutation.
+- Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
+
+## Prompt 125 Result
+
+- After the owner-review build guide completes, Buddy Trial now shows `LET'S SEE HOW WE DID` with the required character-rotation recording instructions.
+- The UI offers `Record Video` where browser `MediaRecorder` support is available and `Upload Existing Video` for iPhone Photos/files, TV/monitor captures, and clean console-recorded files.
+- The Video #1 pipeline validates accepted formats, duration, file size, playable metadata, dimensions, and decode failures.
+- Local processing extracts deterministic candidate frames for front, left three-quarter, right three-quarter, and optional profile views, then lets the tester confirm frames when automation is uncertain.
+- Retry is self-service and does not require Wyatt to receive files manually.
+- Persisted trial state stores non-image review summaries only; raw videos, object URLs, thumbnails, and base64 media are not retained by default.
 - Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
 
 ## Owner Media Baseline Decision

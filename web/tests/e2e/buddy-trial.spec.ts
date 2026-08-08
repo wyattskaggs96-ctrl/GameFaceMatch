@@ -126,8 +126,68 @@ test.describe("Buddy Trial invite route", () => {
         await page.getByRole("button", { name: /Done|Next/ }).click();
       }
 
-      await expect(page.getByRole("heading", { name: "Your player is built." })).toBeVisible();
-      await expect(page.getByRole("button", { name: "Review My GameFace" })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "LET'S SEE HOW WE DID" })).toBeVisible();
+      await expect(page.getByText("Open your created player.")).toBeVisible();
+      await expect(page.getByRole("button", { name: "Record Video" })).toBeVisible();
+      await expect(page.getByText("Upload Existing Video")).toBeVisible();
+
+      await page.locator('input[type="file"]').setInputFiles({
+        name: "not-a-video.txt",
+        mimeType: "text/plain",
+        buffer: Buffer.from("not a playable video")
+      });
+      await expect(page.getByText(/The browser could not decode this video/i)).toBeVisible();
+      await expect(page.getByRole("button", { name: "Try another video" })).toBeVisible();
+
+      await page.evaluate(
+        ({ key }) => {
+          const session = JSON.parse(window.localStorage.getItem(key) ?? "{}");
+          const timestamp = "2026-08-07T12:30:00.000Z";
+          session.state = "VIDEO_1_PROCESSING";
+          session.updatedAt = timestamp;
+          session.videoOneReview = {
+            schemaVersion: "buddy-trial-character-video-review-v1",
+            iteration: 1,
+            status: "usable",
+            metadata: {
+              fileName: "e2e-character-video.mp4",
+              fileType: "video/mp4",
+              fileSizeBytes: 12000000,
+              durationSeconds: 12,
+              width: 1280,
+              height: 720,
+              source: "fixture"
+            },
+            validation: { status: "usable", errors: [], warnings: [], retakeInstructions: [] },
+            candidateFrames: [],
+            standardizedViews: [
+              { viewID: "front", selectedFrameID: "e2e-front", timestampSeconds: 1.2, qualityStatus: "usable", issues: [], thumbnailRetained: false },
+              { viewID: "leftThreeQuarter", selectedFrameID: "e2e-left", timestampSeconds: 4.2, qualityStatus: "usable", issues: [], thumbnailRetained: false },
+              { viewID: "rightThreeQuarter", selectedFrameID: "e2e-right", timestampSeconds: 8.2, qualityStatus: "usable", issues: [], thumbnailRetained: false }
+            ],
+            missingRequiredViews: [],
+            manualSelectionRequired: false,
+            processingSummary: "Standardized character views are ready for comparison.",
+            retention: {
+              rawVideoPersisted: false,
+              temporaryMediaRetention: "temporary_processing_only",
+              objectUrlsRevokedAfterProcessing: true
+            }
+          };
+          session.history = [
+            ...(Array.isArray(session.history) ? session.history : []),
+            { state: "VIDEO_1_PROCESSING", at: timestamp, note: "E2E deterministic Video #1 processed checkpoint; no raw media stored." }
+          ];
+          window.localStorage.setItem(key, JSON.stringify(session));
+        },
+        { key: activeInviteStorageKey }
+      );
+      await page.reload();
+      await expect(page.getByRole("heading", { name: "Standardized character views" })).toBeVisible();
+      await expect(page.getByText("Front", { exact: true })).toBeVisible();
+      await expect(page.getByText("Left 3/4", { exact: true })).toBeVisible();
+      await expect(page.getByText("Right 3/4", { exact: true })).toBeVisible();
+      await expect(page.getByRole("button", { name: "Show demo refinement" })).toBeVisible();
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow).toBeLessThanOrEqual(1);
     }

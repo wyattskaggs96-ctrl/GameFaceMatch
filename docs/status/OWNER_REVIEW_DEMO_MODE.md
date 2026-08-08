@@ -1,7 +1,7 @@
 # Owner Review Demo Mode
 
 **Status:** IMPLEMENTED AS ISOLATED NON-PRODUCTION MODE  
-**Prompt:** GFM | Q06 | PROMPT 123 | PHASE 01 | Create isolated owner review mode  
+**Latest prompt:** GFM | Q06 | PROMPT 125 | PHASE 03 | Build first character video review
 **Date:** 2026-08-07  
 
 ## Purpose
@@ -83,6 +83,22 @@ Prompt 124 extends the isolated demo lane into the complete owner-review scan-to
 
 Build-guide progress is stored in the local Buddy Trial session record as non-image state. It survives refresh and browser reopen in the same browser storage scope. It does not store raw human face media, production recommendations, real beta metrics, or production catalog state.
 
+## Prompt 125 First Character Video Review
+
+Prompt 125 extends the isolated demo lane after build-guide completion:
+
+1. build-complete state transitions to `LET'S SEE HOW WE DID`;
+2. tester sees the required College Football 27 character rotation instructions;
+3. `Record Video` uses compatible browser recording when available;
+4. `Upload Existing Video` accepts iPhone Photos/files, videos filmed from a TV/monitor, and clean console-recorded files;
+5. validation checks format, duration, size, playable metadata, video dimensions, and decode failures;
+6. local processing samples deterministic frame candidates for front, left three-quarter, right three-quarter, and optional profile views;
+7. uncertain automation asks the tester to select the best frames;
+8. bad media provides retake guidance and a retry path;
+9. persisted trial state stores only non-image review summaries and standardized-view metadata.
+
+Raw character videos, raw human face media, object URLs, generated thumbnails, data URLs, and base64 media are not retained by default. The processing remains local/demo and does not create real refinement evidence, real beta metrics, production catalog records, or production recommendations.
+
 ## Isolation Controls
 
 - Production catalog remains `data/catalog/production/catalog_manifest.json`.
@@ -111,6 +127,14 @@ Focused tests:
 
 ```text
 npm --prefix web run test -- owner-review-demo.test.ts buddy-trial-session.test.ts environment.test.ts integrity.test.ts
+```
+
+Prompt 125 focused validation includes:
+
+```text
+npm --prefix web run test -- buddy-trial-character-video-review.test.ts buddy-trial-session.test.ts owner-review-demo.test.ts
+NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run build
+CI=1 PLAYWRIGHT_PORT=3199 NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run test:e2e -- tests/e2e/buddy-trial.spec.ts --project=iphone-safari-size
 ```
 
 Full validation should continue to include:

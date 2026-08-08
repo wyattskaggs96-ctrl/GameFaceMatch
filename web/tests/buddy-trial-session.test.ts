@@ -5,6 +5,7 @@ import {
   BUDDY_TRIAL_EXPIRED_INVITE_ID,
   BUDDY_TRIAL_STATES,
   BUDDY_TRIAL_USED_INVITE_ID,
+  attachBuddyTrialVideoOneReview,
   canAdvanceBuddyTrialToRecommendation,
   createBuddyTrialSession,
   createBuddyTrialStorageKey,
@@ -17,6 +18,7 @@ import {
   transitionBuddyTrialSession,
   updateBuddyTrialBuildGuideProgress
 } from "@/lib/buddy-trial/buddy-trial-session";
+import { createCharacterVideoReviewResult, createPersistableCharacterVideoReview } from "@/lib/buddy-trial/character-video-review";
 
 describe("buddy trial session contract", () => {
   it("defines the complete invite-only trial state machine", () => {
@@ -189,6 +191,42 @@ describe("buddy trial session contract", () => {
     });
   });
 
+  it("stores Video #1 review summaries without retaining candidate frames or raw media", () => {
+    const session = createBuddyTrialSession({
+      inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      productionCatalogRecordCount: 0,
+      ownerReviewDemoEnabled: true,
+      now: new Date("2026-08-07T12:00:00.000Z"),
+      sessionId: "bt_session_test"
+    });
+    const review = createPersistableCharacterVideoReview(
+      createCharacterVideoReviewResult({
+        metadata: {
+          fileName: "character-video.mp4",
+          fileType: "video/mp4",
+          fileSizeBytes: 1_000_000,
+          durationSeconds: 12,
+          width: 1280,
+          height: 720,
+          source: "upload"
+        },
+        objectUrlsRevokedAfterProcessing: true
+      })
+    );
+    const withReview = attachBuddyTrialVideoOneReview(session, review);
+
+    expect(withReview.videoOneReview).toMatchObject({
+      metadata: { fileName: "character-video.mp4" },
+      candidateFrames: [],
+      retention: {
+        rawVideoPersisted: false,
+        temporaryMediaRetention: "temporary_processing_only",
+        objectUrlsRevokedAfterProcessing: true
+      }
+    });
+    expect(JSON.stringify(withReview)).not.toMatch(/blob:|data:video|data:image|base64/i);
+  });
+
   it("treats deleted sessions as terminal and prevents unsupported jumps", () => {
     const session = createBuddyTrialSession({
       inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
@@ -200,5 +238,48 @@ describe("buddy trial session contract", () => {
     const deleted = transitionBuddyTrialSession(session, "DELETED");
     expect(deleted.deletedAt).toBeTruthy();
     expect(() => transitionBuddyTrialSession(deleted, "CONSENTED")).toThrow(/Invalid Buddy Trial transition/);
+  });
+
+  it("allows Video #1 retry and clears video review data on deletion", () => {
+    const session = createBuddyTrialSession({
+      inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      productionCatalogRecordCount: 0,
+      ownerReviewDemoEnabled: true,
+      now: new Date("2026-08-07T12:00:00.000Z"),
+      sessionId: "bt_session_test"
+    });
+    const consent = {
+      ...session.consent,
+      acknowledgments: Object.fromEntries(REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => [id, true])) as typeof session.consent.acknowledgments
+    };
+    const readyForRetry = transitionBuddyTrialSession(
+      transitionBuddyTrialSession(
+        transitionBuddyTrialSession(
+          transitionBuddyTrialSession(applyBuddyTrialConsent(session, consent), "SCAN_IN_PROGRESS"),
+          "SCAN_COMPLETE"
+        ),
+        "RECOMMENDATION_READY"
+      ),
+      "BUILD_IN_PROGRESS"
+    );
+    const videoRequired = transitionBuddyTrialSession(readyForRetry, "VIDEO_1_REQUIRED");
+    const processing = transitionBuddyTrialSession(videoRequired, "VIDEO_1_PROCESSING");
+    expect(transitionBuddyTrialSession(processing, "VIDEO_1_REQUIRED").state).toBe("VIDEO_1_REQUIRED");
+    const deleted = transitionBuddyTrialSession(
+      attachBuddyTrialVideoOneReview(processing, createPersistableCharacterVideoReview(createCharacterVideoReviewResult({
+        metadata: {
+          fileName: "character-video.mp4",
+          fileType: "video/mp4",
+          fileSizeBytes: 1_000_000,
+          durationSeconds: 12,
+          width: 1280,
+          height: 720,
+          source: "upload"
+        }
+      }))),
+      "DELETED"
+    );
+    expect(deleted.videoOneReview).toBeNull();
+    expect(deleted.buildGuide).toBeNull();
   });
 });

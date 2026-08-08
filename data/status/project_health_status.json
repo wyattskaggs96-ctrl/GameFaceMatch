@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gameface-project-health-status-v1",
-  "generatedAt": "2026-08-07T21:30:00-04:00",
+  "generatedAt": "2026-08-07T21:28:08-04:00",
   "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
   "branch": "main",
-  "head": "PROMPT_124_COMPLETE_SCAN_TO_BUILD_JOURNEY",
+  "head": "PROMPT_125_FIRST_CHARACTER_VIDEO_REVIEW",
   "outcome": "HOLD_VERIFICATION",
   "productionReadiness": "BLOCKED_NO_PRODUCTION_ELIGIBLE_RECORDS",
   "productionRecommendationsEnabled": false,
@@ -96,7 +96,8 @@
     "creatorPayouts": "not_started",
     "athleteComparisons": "idea_only",
     "ownerReviewDemoMode": "implemented_isolated_non_production",
-    "ownerReviewDemoScanToBuildJourney": "implemented_scan_complete_processing_result_settings_stepwise_build_guide_resume"
+    "ownerReviewDemoScanToBuildJourney": "implemented_scan_complete_processing_result_settings_stepwise_build_guide_resume",
+    "ownerReviewDemoFirstCharacterVideoReview": "implemented_upload_record_validate_extract_standardized_views_retry_no_raw_retention"
   },
   "nextAction": {
     "path": "docs/status/NEXT_ACTION.md",
@@ -104,6 +105,6 @@
     "command": "npm run verifier:start",
     "url": "http://localhost:3000/verifier",
     "expectedExport": "~/Downloads/cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json",
-    "codexReadyParallelPrompt": "GFM | Q06 | PROMPT 125 | PHASE 02 | Build owner-review demo result upload and refinement loop"
+    "codexReadyParallelPrompt": "GFM | Q06 | PROMPT 126 | PHASE 03 | Build owner-review demo refinement recommendations"
   }
 }

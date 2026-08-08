@@ -35,6 +35,7 @@ export interface MatchingInput {
   preferences?: MatchingPreferences;
   limit?: number;
   allowTestFixtures?: boolean;
+  allowOwnerReviewDemo?: boolean;
 }
 
 export interface MatchingPreferences {
@@ -176,12 +177,19 @@ export function createRuleBasedMatchingEngine(config: MatchingFeatureConfig[] | 
   return {
     modelVersion: RULE_BASED_MATCHING_MODEL_VERSION,
     matchTopThree(input) {
-      if (!canMatchCatalog(input.catalog, input.allowTestFixtures ?? false, engineConfig.requireApprovedProductionRelease)) {
+      if (
+        !canMatchCatalog(
+          input.catalog,
+          input.allowTestFixtures ?? false,
+          engineConfig.requireApprovedProductionRelease,
+          input.allowOwnerReviewDemo ?? false
+        )
+      ) {
         return [];
       }
       const candidates = input.catalog.items
-        .filter((item) => isMatchableCatalogItem(item, input.catalog, input.allowTestFixtures ?? false))
-        .filter((item) => hasVerifiedMenuInstructions(item, input.allowTestFixtures ?? false))
+        .filter((item) => isMatchableCatalogItem(item, input.catalog, input.allowTestFixtures ?? false, input.allowOwnerReviewDemo ?? false))
+        .filter((item) => hasVerifiedMenuInstructions(item, input.allowTestFixtures ?? false, input.allowOwnerReviewDemo ?? false))
         .map((item) =>
           scoreCatalogItem({
             profile: input.profile,
@@ -692,19 +700,20 @@ function hasProfilePoseEvidence(measurement: StandardFaceProfile["geometry"]["me
   return Boolean(measurement?.supportingPoses.some((pose) => pose === "leftProfile" || pose === "rightProfile"));
 }
 
-function hasVerifiedMenuInstructions(item: GameCatalogItem, allowTestFixtures: boolean) {
+function hasVerifiedMenuInstructions(item: GameCatalogItem, allowTestFixtures: boolean, allowOwnerReviewDemo: boolean) {
   return (
     item.verificationState === "verified" &&
-    hasAllowedSourceType(item, allowTestFixtures) &&
+    hasAllowedSourceType(item, allowTestFixtures, allowOwnerReviewDemo) &&
     (item.navigationInstructions ?? []).length > 0 &&
     (item.navigationInstructions ?? []).every((instruction) => instruction.instruction.trim().length > 0 && instruction.evidenceAssetID.trim().length > 0)
   );
 }
 
-function isMatchableCatalogItem(item: GameCatalogItem, catalog: GameCatalogManifest, allowTestFixtures: boolean) {
+function isMatchableCatalogItem(item: GameCatalogItem, catalog: GameCatalogManifest, allowTestFixtures: boolean, allowOwnerReviewDemo: boolean) {
   if (item.verificationState !== "verified") return false;
-  if (!hasAllowedSourceType(item, allowTestFixtures)) return false;
+  if (!hasAllowedSourceType(item, allowTestFixtures, allowOwnerReviewDemo)) return false;
   if (!isRecommendationEligibleEvidenceSupportState(getEvidenceSupportState(item))) return false;
+  if (allowOwnerReviewDemo) return item.catalogVersion.identifier === catalog.catalogVersion.identifier;
   if (allowTestFixtures) return true;
   if (!classifyCatalogRecord(item).productionAccessAllowed) return false;
   if (item.catalogVersion.identifier !== catalog.catalogVersion.identifier) return false;
@@ -715,12 +724,19 @@ function isMatchableCatalogItem(item: GameCatalogItem, catalog: GameCatalogManif
   return true;
 }
 
-function hasAllowedSourceType(item: GameCatalogItem, allowTestFixtures: boolean) {
+function hasAllowedSourceType(item: GameCatalogItem, allowTestFixtures: boolean, allowOwnerReviewDemo: boolean) {
+  if (allowOwnerReviewDemo) return item.sourceType === "demoData" && item.isTestFixture === false;
   if (allowTestFixtures) return item.sourceType === "testFixture" && item.isTestFixture;
   return item.sourceType === "production" && !item.isTestFixture;
 }
 
-function canMatchCatalog(catalog: GameCatalogManifest, allowTestFixtures: boolean, requireApprovedProductionRelease: boolean) {
+function canMatchCatalog(
+  catalog: GameCatalogManifest,
+  allowTestFixtures: boolean,
+  requireApprovedProductionRelease: boolean,
+  allowOwnerReviewDemo: boolean
+) {
+  if (allowOwnerReviewDemo) return catalog.sourceType === "demoData" && !catalog.isProduction && catalog.items.length > 0;
   if (allowTestFixtures) return catalog.sourceType === "testFixture" && !catalog.isProduction;
   if (catalog.sourceType !== "production" || !catalog.isProduction) return false;
   if (!requireApprovedProductionRelease) return true;

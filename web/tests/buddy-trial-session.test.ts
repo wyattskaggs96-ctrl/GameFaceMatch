@@ -84,6 +84,26 @@ describe("buddy trial session contract", () => {
     expect(() => transitionBuddyTrialSession(scanComplete, "RECOMMENDATION_READY")).toThrow(/production catalog/);
   });
 
+  it("separates owner review demo availability from production catalog availability", () => {
+    const session = createBuddyTrialSession({
+      inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      productionCatalogRecordCount: 0,
+      ownerReviewDemoEnabled: true,
+      now: new Date("2026-08-07T12:00:00.000Z"),
+      sessionId: "bt_session_test"
+    });
+    const consent = {
+      ...session.consent,
+      acknowledgments: Object.fromEntries(REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => [id, true])) as typeof session.consent.acknowledgments
+    };
+    const started = transitionBuddyTrialSession(applyBuddyTrialConsent(session, consent), "SCAN_IN_PROGRESS");
+    const scanComplete = transitionBuddyTrialSession(started, "SCAN_COMPLETE");
+
+    expect(scanComplete.catalogGate).toBe("owner_review_demo_available");
+    expect(canAdvanceBuddyTrialToRecommendation(scanComplete)).toBe(true);
+    expect(transitionBuddyTrialSession(scanComplete, "RECOMMENDATION_READY").state).toBe("RECOMMENDATION_READY");
+  });
+
   it("marks an existing active invite session scan-complete for browser resume without enabling recommendations", () => {
     const now = new Date("2026-08-07T12:00:00.000Z");
     const session = createBuddyTrialSession({
@@ -115,6 +135,24 @@ describe("buddy trial session contract", () => {
     expect(nextSession.state).toBe("SCAN_COMPLETE");
     expect(nextSession.catalogGate).toBe("production_catalog_unavailable");
     expect(canAdvanceBuddyTrialToRecommendation(nextSession)).toBe(false);
+  });
+
+  it("marks scan-complete with demo catalog gate only when owner review demo is explicit", () => {
+    const storage = new Map<string, string>();
+    const nextSession = markBuddyTrialScanCompleteInStorage({
+      inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      productionCatalogRecordCount: 0,
+      ownerReviewDemoEnabled: true,
+      storage: {
+        getItem: (key) => storage.get(key) ?? null,
+        setItem: (key, value) => {
+          storage.set(key, value);
+        }
+      },
+      now: new Date("2026-08-07T12:05:00.000Z")
+    });
+
+    expect(nextSession.catalogGate).toBe("owner_review_demo_available");
   });
 
   it("treats deleted sessions as terminal and prevents unsupported jumps", () => {

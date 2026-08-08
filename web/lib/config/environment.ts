@@ -16,7 +16,8 @@ export const PUBLIC_ENVIRONMENT_KEYS = [
   "NEXT_PUBLIC_GAMEFACE_RELEASE_ID",
   "NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV",
   "NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED",
-  "NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED"
+  "NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED",
+  "NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO"
 ] as const;
 
 export const SERVER_ONLY_ENVIRONMENT_KEYS = [
@@ -90,7 +91,7 @@ function isUrlKey(key: string) {
 }
 
 function isBooleanFlagKey(key: string) {
-  return key.endsWith("_DISABLED");
+  return key.endsWith("_DISABLED") || key === "NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO";
 }
 
 function isBooleanFlag(value: string) {

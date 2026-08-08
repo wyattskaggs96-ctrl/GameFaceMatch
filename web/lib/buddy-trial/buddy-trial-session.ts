@@ -28,7 +28,7 @@ export type BuddyTrialState = (typeof BUDDY_TRIAL_STATES)[number];
 
 export type BuddyTrialInviteStatus = "active" | "expired" | "used" | "invalid";
 
-export type BuddyTrialCatalogGate = "available" | "production_catalog_unavailable";
+export type BuddyTrialCatalogGate = "available" | "owner_review_demo_available" | "production_catalog_unavailable";
 
 export interface BuddyTrialInvite {
   inviteId: string;
@@ -172,11 +172,13 @@ export function createInitialBuddyTrialConsent(): BuddyTrialConsentRecord {
 export function createBuddyTrialSession({
   inviteId,
   productionCatalogRecordCount,
+  ownerReviewDemoEnabled = false,
   now = new Date(),
   sessionId
 }: {
   inviteId: string;
   productionCatalogRecordCount: number;
+  ownerReviewDemoEnabled?: boolean;
   now?: Date;
   sessionId?: string;
 }): BuddyTrialSession {
@@ -191,7 +193,7 @@ export function createBuddyTrialSession({
     completedAt: null,
     deletedAt: null,
     consent: createInitialBuddyTrialConsent(),
-    catalogGate: productionCatalogRecordCount > 0 ? "available" : "production_catalog_unavailable",
+    catalogGate: productionCatalogRecordCount > 0 ? "available" : ownerReviewDemoEnabled ? "owner_review_demo_available" : "production_catalog_unavailable",
     history: [{ state: "INVITED", at: timestamp, note: "Buddy Trial invite opened." }]
   };
 }
@@ -229,7 +231,7 @@ export function transitionBuddyTrialSession(session: BuddyTrialSession, nextStat
     return session;
   }
 
-  if (nextState === "RECOMMENDATION_READY" && session.catalogGate !== "available") {
+  if (nextState === "RECOMMENDATION_READY" && !isBuddyTrialRecommendationCatalogGateAvailable(session.catalogGate)) {
     throw new Error("Buddy Trial recommendations are blocked until the production catalog is available.");
   }
 
@@ -249,7 +251,11 @@ export function transitionBuddyTrialSession(session: BuddyTrialSession, nextStat
 }
 
 export function canAdvanceBuddyTrialToRecommendation(session: BuddyTrialSession) {
-  return session.state === "SCAN_COMPLETE" && session.catalogGate === "available";
+  return session.state === "SCAN_COMPLETE" && isBuddyTrialRecommendationCatalogGateAvailable(session.catalogGate);
+}
+
+export function isBuddyTrialRecommendationCatalogGateAvailable(catalogGate: BuddyTrialCatalogGate) {
+  return catalogGate === "available" || catalogGate === "owner_review_demo_available";
 }
 
 export function getBuddyTrialNextAction(session: BuddyTrialSession) {
@@ -258,6 +264,9 @@ export function getBuddyTrialNextAction(session: BuddyTrialSession) {
   }
   if (session.state === "COMPLETE") {
     return "Trial complete.";
+  }
+  if (session.catalogGate === "owner_review_demo_available" && session.state === "SCAN_COMPLETE") {
+    return "Owner Review Demo settings are ready. They are test data, not verified CF27 records.";
   }
   if (session.catalogGate === "production_catalog_unavailable" && session.state === "SCAN_COMPLETE") {
     return "Verified College Football 27 settings are not available yet.";
@@ -303,11 +312,13 @@ export function markBuddyTrialScanCompleteInStorage({
   inviteId,
   now = new Date(),
   productionCatalogRecordCount,
+  ownerReviewDemoEnabled = false,
   storage
 }: {
   inviteId: string;
   now?: Date;
   productionCatalogRecordCount: number;
+  ownerReviewDemoEnabled?: boolean;
   storage: Pick<Storage, "getItem" | "setItem">;
 }) {
   const key = createBuddyTrialStorageKey(inviteId);
@@ -316,6 +327,7 @@ export function markBuddyTrialScanCompleteInStorage({
     createBuddyTrialSession({
       inviteId,
       productionCatalogRecordCount,
+      ownerReviewDemoEnabled,
       now
     });
   if (existing.state === "DELETED" || existing.state === "COMPLETE" || existing.state === "SCAN_COMPLETE") {

@@ -8,9 +8,18 @@ Purpose: have a real independent second verifier complete the Prompt 102 support
 
 ## Codex-Ready Parallel Prompt
 
-`GFM | Q05 | PROMPT 111 | PHASE 03 | Add Buddy Trial result upload and refinement placeholder`
+`GFM | Q06 | PROMPT 124 | PHASE 01 | Build owner-review demo result upload walkthrough`
 
-Use `docs/Product/BUDDY_TRIAL_V1.md` as the authoritative private-beta V1 contract and build on Prompt 108’s `/trial/[inviteId]` shell plus Prompt 109’s scan-complete resume checkpoint. Add the first result-upload placeholder and refinement-state shell without showing real CF27 recommendations until verified production catalog data exists.
+Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md` as the authoritative owner-review contract. Build on Prompt 123’s isolated `OWNER_REVIEW_DEMO` lane to make the result-upload, refinement, second-result, and before/after walkthrough owner-evaluable with test data while production recommendations remain disabled and the real human-verifier gate remains unchanged.
+
+## Prompt 123 Result
+
+- `OWNER_REVIEW_DEMO` is enabled only by `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true` and is disabled when `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=production`.
+- Buddy Trial shows `Owner Review Demo — appearance settings are test data.` when the mode is enabled.
+- Demo data lives under `data/demo/owner-review-demo-catalog.json` with `sourceType: demoData`, `isProduction: false`, explicit `OWNER_REVIEW_DEMO_TEST_DATA` provenance, and rejected catalog-manager disposition.
+- Demo recommendations exercise head/preset, skin, hair, hair color, facial hair, facial-hair color, slider-style controls, and menu instructions.
+- Demo analytics and learning records are excluded from real beta metrics, global learning, and production matching-weight mutation.
+- Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
 
 ## Owner Media Baseline Decision
 

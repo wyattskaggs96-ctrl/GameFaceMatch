@@ -7,6 +7,7 @@ import {
   applyBuddyTrialConsent,
   BUDDY_TRIAL_ACTIVE_INVITE_ID,
   BUDDY_TRIAL_STATES,
+  canAdvanceBuddyTrialToRecommendation,
   createInitialBuddyTrialConsent,
   createBuddyTrialSession,
   createBuddyTrialStorageKey,
@@ -18,8 +19,16 @@ import {
   serializeBuddyTrialSession,
   transitionBuddyTrialSession,
   type BuddyTrialConsentRecord,
+  type BuddyTrialState,
   type BuddyTrialSession
 } from "@/lib/buddy-trial/buddy-trial-session";
+import {
+  createOwnerReviewDemoLearningRecord,
+  createOwnerReviewDemoRecommendationResult,
+  isOwnerReviewDemoEnabled,
+  OWNER_REVIEW_DEMO_BANNER_COPY,
+  type OwnerReviewDemoRecommendationResult
+} from "@/lib/owner-review-demo/owner-review-demo";
 import { getConsentDefinition } from "@/lib/privacy/consent";
 
 interface BuddyTrialEntryProps {
@@ -30,6 +39,11 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const inviteResolution = useMemo(() => getBuddyTrialInvite(inviteId), [inviteId]);
   const storageKey = useMemo(() => createBuddyTrialStorageKey(inviteId), [inviteId]);
   const productionCatalogRecordCount = productionCatalogManifest.items.length;
+  const ownerReviewDemoEnabled = isOwnerReviewDemoEnabled({
+    NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO: process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO,
+    NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: process.env.NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV
+  });
+  const ownerReviewDemo = useMemo<OwnerReviewDemoRecommendationResult | null>(() => (ownerReviewDemoEnabled ? createOwnerReviewDemoRecommendationResult() : null), [ownerReviewDemoEnabled]);
   const [session, setSession] = useState<BuddyTrialSession | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const [consent, setConsent] = useState<BuddyTrialConsentRecord | null>(null);
@@ -58,7 +72,8 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     }
     const nextSession = createBuddyTrialSession({
       inviteId,
-      productionCatalogRecordCount
+      productionCatalogRecordCount,
+      ownerReviewDemoEnabled
     });
     persistSession(nextSession);
     return nextSession;
@@ -95,6 +110,11 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     const nextSession =
       activeSession.state === "DELETED" ? activeSession : transitionBuddyTrialSession(activeSession, "DELETED", new Date(), "Buddy Trial data deleted locally.");
     persistSession(nextSession);
+  };
+
+  const moveTrialTo = (nextState: BuddyTrialState, note: string) => {
+    const activeSession = ensureSession();
+    persistSession(transitionBuddyTrialSession(activeSession, nextState, new Date(), note));
   };
 
   if (inviteResolution.status !== "active") {
@@ -163,6 +183,12 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
           result can be refined.
         </p>
 
+        {ownerReviewDemoEnabled ? (
+          <div className="buddy-trial-demo-banner" role="status">
+            {OWNER_REVIEW_DEMO_BANNER_COPY}
+          </div>
+        ) : null}
+
         <div className="buddy-trial-status-card" aria-live="polite">
           <span className="buddy-trial-status-label">Session state</span>
           <strong>{session?.state ?? "INVITED"}</strong>
@@ -213,11 +239,26 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
           })}
         </section>
 
-        {session?.catalogGate === "production_catalog_unavailable" || productionCatalogRecordCount === 0 ? (
+        {session?.catalogGate === "production_catalog_unavailable" || (!ownerReviewDemoEnabled && productionCatalogRecordCount === 0) ? (
           <div className="buddy-trial-warning" role="status">
             Verified College Football 27 recommendations are currently unavailable because the production catalog has 0 approved records. The trial can test
             entry, consent, scan handoff, resume, and deletion without showing fabricated settings.
           </div>
+        ) : null}
+
+        {ownerReviewDemo ? (
+          <OwnerReviewDemoPanel
+            session={session}
+            result={ownerReviewDemo}
+            onStartRecommendations={() => moveTrialTo("RECOMMENDATION_READY", "Owner Review Demo recommendations opened with test data.")}
+            onStartBuild={() => moveTrialTo("BUILD_IN_PROGRESS", "Owner Review Demo build guide started.")}
+            onRequestVideoOne={() => moveTrialTo("VIDEO_1_REQUIRED", "Owner Review Demo build guide completed.")}
+            onProcessVideoOne={() => moveTrialTo("VIDEO_1_PROCESSING", "Owner Review Demo first character video fixture selected.")}
+            onDeliverRefinement={() => moveTrialTo("REFINEMENT_READY", "Owner Review Demo refinement fixture delivered.")}
+            onRequestVideoTwo={() => moveTrialTo("VIDEO_2_REQUIRED", "Owner Review Demo tester is applying fixture refinement.")}
+            onDeliverFinal={() => moveTrialTo("FINAL_RESULT_READY", "Owner Review Demo second character video fixture processed.")}
+            onComplete={() => moveTrialTo("COMPLETE", "Owner Review Demo completed without writing production evidence.")}
+          />
         ) : null}
 
         <div className="buddy-trial-actions">
@@ -251,6 +292,202 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
         {process.env.NODE_ENV !== "production" ? <p className="buddy-trial-fixture">Fixture invite for tests: {BUDDY_TRIAL_ACTIVE_INVITE_ID}</p> : null}
       </section>
     </main>
+  );
+}
+
+function OwnerReviewDemoPanel({
+  session,
+  result,
+  onStartRecommendations,
+  onStartBuild,
+  onRequestVideoOne,
+  onProcessVideoOne,
+  onDeliverRefinement,
+  onRequestVideoTwo,
+  onDeliverFinal,
+  onComplete
+}: {
+  session: BuddyTrialSession | null;
+  result: OwnerReviewDemoRecommendationResult;
+  onStartRecommendations: () => void;
+  onStartBuild: () => void;
+  onRequestVideoOne: () => void;
+  onProcessVideoOne: () => void;
+  onDeliverRefinement: () => void;
+  onRequestVideoTwo: () => void;
+  onDeliverFinal: () => void;
+  onComplete: () => void;
+}) {
+  const state = session?.state ?? "INVITED";
+  const bestMatch = result.matches[0];
+  const learningRecord = createOwnerReviewDemoLearningRecord(session?.sessionId ?? "owner-review-demo-preview");
+
+  if (state === "INVITED" || state === "CONSENTED" || state === "SCAN_IN_PROGRESS") {
+    return (
+      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-title">
+        <h2 id="owner-review-demo-title">Owner Review Demo mode</h2>
+        <p>
+          After the guided scan completes, this invite can show synthetic top-three settings, a build guide, fixture video milestones, a fixture refinement, and a
+          before/after score. Production recommendations remain disabled.
+        </p>
+      </section>
+    );
+  }
+
+  if (state === "SCAN_COMPLETE" && session && canAdvanceBuddyTrialToRecommendation(session)) {
+    return (
+      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-ready">
+        <h2 id="owner-review-demo-ready">Demo recommendations ready</h2>
+        <p>These settings exercise the real recommendation contracts with test data. They are not verified College Football 27 options.</p>
+        <OwnerReviewDemoTopThree result={result} />
+        <button className="buddy-trial-primary" type="button" onClick={onStartRecommendations}>
+          Open demo recommendations
+        </button>
+      </section>
+    );
+  }
+
+  if (state === "RECOMMENDATION_READY") {
+    return (
+      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-recommendations">
+        <h2 id="owner-review-demo-recommendations">Demo build recommendation</h2>
+        <OwnerReviewDemoTopThree result={result} />
+        <OwnerReviewDemoSettings result={result} />
+        <button className="buddy-trial-primary" type="button" onClick={onStartBuild}>
+          Build this demo player
+        </button>
+      </section>
+    );
+  }
+
+  if (state === "BUILD_IN_PROGRESS") {
+    return (
+      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-build-guide">
+        <h2 id="owner-review-demo-build-guide">Demo build guide</h2>
+        <ol className="buddy-trial-demo-list">
+          {result.buildInstructions.map((instruction) => (
+            <li key={instruction.id}>
+              <strong>{instruction.title}</strong>
+              <span>{instruction.detail}</span>
+            </li>
+          ))}
+        </ol>
+        <button className="buddy-trial-primary" type="button" onClick={onRequestVideoOne}>
+          Finished demo build
+        </button>
+      </section>
+    );
+  }
+
+  if (state === "VIDEO_1_REQUIRED") {
+    return (
+      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-video-one">
+        <h2 id="owner-review-demo-video-one">Demo Video #1</h2>
+        <p>Fixture character-video metadata stands in for the first result upload. No raw human face media is retained.</p>
+        <button className="buddy-trial-primary" type="button" onClick={onProcessVideoOne}>
+          Use fixture Video #1
+        </button>
+      </section>
+    );
+  }
+
+  if (state === "VIDEO_1_PROCESSING") {
+    return (
+      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-processing">
+        <h2 id="owner-review-demo-processing">Demo processing complete</h2>
+        <p>Initial build score: {result.refinementPlan.initialBuildScore}/100 based on demo scoring data.</p>
+        <button className="buddy-trial-primary" type="button" onClick={onDeliverRefinement}>
+          Show demo refinement
+        </button>
+      </section>
+    );
+  }
+
+  if (state === "REFINEMENT_READY") {
+    return (
+      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-refinement">
+        <h2 id="owner-review-demo-refinement">Demo refinement</h2>
+        <ul className="buddy-trial-demo-list">
+          {result.refinementPlan.recommendedChanges.map((change) => (
+            <li key={change.id}>
+              <strong>{change.label}</strong>
+              <span>{change.reason}</span>
+            </li>
+          ))}
+        </ul>
+        <button className="buddy-trial-primary" type="button" onClick={onRequestVideoTwo}>
+          I applied the demo changes
+        </button>
+      </section>
+    );
+  }
+
+  if (state === "VIDEO_2_REQUIRED") {
+    return (
+      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-video-two">
+        <h2 id="owner-review-demo-video-two">Demo Video #2</h2>
+        <p>Fixture second-result metadata is ready to process. This remains excluded from real beta metrics.</p>
+        <button className="buddy-trial-primary" type="button" onClick={onDeliverFinal}>
+          Use fixture Video #2
+        </button>
+      </section>
+    );
+  }
+
+  if (state === "FINAL_RESULT_READY") {
+    return (
+      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-final">
+        <h2 id="owner-review-demo-final">Demo before and after</h2>
+        <p>
+          Initial build score: {result.refinementPlan.initialBuildScore}/100. Refined build score: {result.refinementPlan.refinedBuildScore}/100. Demo delta: +
+          {result.refinementPlan.refinedBuildScore - result.refinementPlan.initialBuildScore}.
+        </p>
+        <p>Demo learning record: {learningRecord.analyticsDataset}. Production weight changes allowed: no.</p>
+        <button className="buddy-trial-primary" type="button" onClick={onComplete}>
+          Complete owner review demo
+        </button>
+      </section>
+    );
+  }
+
+  return (
+    <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-complete">
+      <h2 id="owner-review-demo-complete">Owner Review Demo complete</h2>
+      <p>Demo data stayed isolated from production catalog, verifier, study, analytics, and learning state.</p>
+    </section>
+  );
+}
+
+function OwnerReviewDemoTopThree({ result }: { result: OwnerReviewDemoRecommendationResult }) {
+  return (
+    <ol className="buddy-trial-demo-top-three" aria-label="Owner Review Demo top three recommendations">
+      {result.matches.map((match) => (
+        <li key={match.id}>
+          <strong>
+            #{match.rank} {match.catalogItem.visibleGameLabelOrIndex}
+          </strong>
+          <span>
+            {match.score}/100 · {match.confidence.label} demo confidence · {match.catalogItem.sourceType}
+          </span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function OwnerReviewDemoSettings({ result }: { result: OwnerReviewDemoRecommendationResult }) {
+  return (
+    <div className="buddy-trial-demo-settings" aria-label="Owner Review Demo settings">
+      {result.primarySettings.map((setting) => (
+        <article key={setting.id}>
+          <span>{setting.category}</span>
+          <strong>{setting.value}</strong>
+          <small>
+            {setting.controlKind} · {setting.menuPath.join(" > ")}
+          </small>
+        </article>
+      ))}
+    </div>
   );
 }
 

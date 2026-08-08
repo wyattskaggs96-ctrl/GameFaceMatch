@@ -4,7 +4,7 @@
 **Last reconciled:** 2026-08-07
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 110 private-beta persistence and deletion contract
+**Repository checkpoint reviewed:** Prompt 123 isolated owner review demo mode
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
 **Current active phase:** supported-subset human verifier execution, Buddy Trial fixture shell, private-beta persistence/deletion contract, remote iPhone scan QA, and production-catalog gatekeeping
@@ -16,7 +16,7 @@ This is the single current operational status source. Older audits, readiness re
 ```json
 {
   "schemaVersion": "current-project-state-v3",
-  "repositoryCheckpoint": "PROMPT_110_PRIVATE_BETA_PERSISTENCE_AND_DELETION",
+  "repositoryCheckpoint": "PROMPT_123_OWNER_REVIEW_DEMO_MODE",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -65,6 +65,8 @@ Prompt 109 hardens the existing Prompt 104 guided scan for remote iPhone private
 
 Prompt 110 adds the private-beta Buddy Trial persistence and deletion contract. It defines a typed non-image trial record for pseudonymous trial IDs, consent versions, state, derived-profile summaries, capture-quality metadata, recommendation/catalog versions, selected game-setting references, refinement summaries, user ratings, expiration, deletion, and privacy-safe audit events. It adds a browser-local test adapter, a fail-closed Supabase schema/RLS design for future server persistence, and user-facing `Delete My Trial Data` behavior. Production Supabase remains inactive until credentials, concrete RLS policies, server-mediated invite/deletion endpoints, and deployment checks are completed.
 
+Prompt 123 adds `OWNER_REVIEW_DEMO`, an isolated non-production Buddy Trial lane enabled only by `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true` and disabled when `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=production`. It uses `data/demo/owner-review-demo-catalog.json` with `sourceType: demoData`, `isProduction: false`, explicit `OWNER_REVIEW_DEMO_TEST_DATA` provenance, and rejected catalog-manager disposition. The Buddy Trial can now exercise synthetic top-three recommendations, build instructions, fixture video milestones, synthetic refinement, before/after scoring, and excluded demo learning records with the customer-facing banner `Owner Review Demo — appearance settings are test data.` Production catalog records, production recommendations, second-verifier decisions, production approvals, real beta metrics, and global learning remain unchanged and fail closed.
+
 Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media inventory as the final owner-provided media baseline for the initial product launch. Additional Wyatt recordings are no longer an initial-launch prerequisite. Historical recapture audits remain useful evidence-quality references, but remaining recapture tasks are reclassified as known evidence limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch improvements, or unsupported option/category gaps where evidence is insufficient.
 
 ## Actually Working
@@ -83,6 +85,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Buddy Trial V1 private-beta product contract exists in `docs/Product/BUDDY_TRIAL_V1.md`. It defines customer-visible states, session data model, dependency gates, acceptance criteria, deterministic E2E fixture boundaries, and the recommended next implementation prompt.
 - Buddy Trial V1 invite-only session shell exists at `/trial/[inviteId]`. Fixture invite coverage includes active, expired, used/completed, invalid, resume, deletion, consent, and empty-catalog fail-closed states.
 - Buddy Trial private-beta persistence contract exists in `web/lib/buddy-trial/buddy-trial-persistence.ts`. It supports local/test resume and deletion records while forbidding raw face media, object URLs, base64 media, raw landmark payloads, and unconsented game-character video retention.
+- Owner Review Demo mode exists for Wyatt-only product evaluation before real CF27 production catalog availability. It is powered by `web/lib/owner-review-demo/owner-review-demo.ts` and `data/demo/owner-review-demo-catalog.json`, displays an explicit demo banner, and keeps demo analytics/learning out of real beta metrics and production matching weights.
 - College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
 - College Football 27 evidence recapture package exists as a deterministic historical owner/verifier worklist. A follow-on existing-media verification gap audit exhausts the current videos, source-media records, derivative frames, timelines, and queue records. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements required frame re-extraction instead of new capture, and historical minimum recapture tasks are now evidence limitations or post-launch improvement opportunities rather than owner launch prerequisites.
 - College Football 27 frame re-extraction packet exists for the 7 recoverable requirements from the existing-media audit. These derivative frames are marked `NOT_PRODUCTION_DATA` and `OBSERVED_PENDING_VERIFICATION`; they reduce unnecessary recapture but do not replace human verification.
@@ -114,6 +117,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Supabase remote database/storage/auth/RLS/Edge Functions/Cron are not deployed from this repo.
 - Real manual matching study: 0 valid participants, 0 completed trials, no measured accuracy.
 - Real Buddy Trial V1 execution: invite-only fixture shell, guided-scan handoff/resume checkpoint, and local/test persistence/deletion contract exist, but 0 completed real buddy trials, no measured before/after improvement, no production CF27 recommendations, and no real buddy acceptance yet.
+- Owner Review Demo can exercise the Buddy Trial UI with synthetic test data, but it is not a real buddy trial, production catalog, human verification, or matching-study result.
 - Legal approval, tax/accounting review, production deployment, monitoring, support operations, and public launch approval are not complete.
 
 ## Current Production Blockers
@@ -189,6 +193,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - CF27 supported subset human verification status: `docs/status/CF27_SUPPORTED_SUBSET_HUMAN_VERIFICATION_STATUS.md`
 - Human verifier quick start: `docs/verification/HUMAN_VERIFIER_QUICK_START.md`
 - Owner verifier launch checklist: `docs/verification/OWNER_VERIFIER_LAUNCH_CHECKLIST.md`
+- Owner Review Demo mode: `docs/status/OWNER_REVIEW_DEMO_MODE.md`
 - Buddy Trial V1 contract: `docs/Product/BUDDY_TRIAL_V1.md`
 - Buddy Trial persistence contract: `web/lib/buddy-trial/buddy-trial-persistence.ts`
 - Buddy Trial route pattern: `/trial/[inviteId]`

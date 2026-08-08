@@ -58,6 +58,18 @@ describe("data source separation", () => {
       expect(json.sourceType, file).toBe("testFixture");
     }
   });
+
+  it("keeps owner/demo records under the demo namespace with demo source type", () => {
+    const demoDir = path.resolve(process.cwd(), "../data/demo");
+    const demoFiles = listFiles(demoDir).filter((candidate) => candidate.endsWith(".json"));
+    expect(demoFiles.length).toBeGreaterThan(0);
+    for (const file of demoFiles) {
+      const json = JSON.parse(fs.readFileSync(file, "utf8")) as { sourceType?: string; isProduction?: boolean };
+      expect(json.sourceType, file).toBe("demoData");
+      expect(json.isProduction, file).toBe(false);
+      expect(JSON.stringify(json), file).toMatch(/OWNER_REVIEW_DEMO/);
+    }
+  });
 });
 
 describe("source governance", () => {

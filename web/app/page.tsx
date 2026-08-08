@@ -76,6 +76,7 @@ import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { createInitialScreenshotRefinementSession, deleteScreenshotRefinementSession } from "@/lib/refinement/screenshot-refinement";
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
 import { getScanEntryEnvironment } from "@/lib/onboarding/scan-entry";
+import { isOwnerReviewDemoEnabled } from "@/lib/owner-review-demo/owner-review-demo";
 import { createBuildInstructions } from "@/lib/results/results-experience";
 import { isProductionCatalogEmpty, shouldShowDevelopmentCatalogBanner } from "@/lib/ui/catalog-status";
 import { CATALOG_UNAVAILABLE_MESSAGE, INDEPENDENT_APP_DISCLAIMER, PRODUCT_EXPLANATION } from "@/lib/product-copy";
@@ -187,6 +188,10 @@ export default function HomePage() {
   const isDevelopment = process.env.NODE_ENV !== "production";
   const scanEntryEnvironment = getScanEntryEnvironment(process.env.NODE_ENV);
   const scanEntryPreviewModeEnabled = process.env.NEXT_PUBLIC_GAMEFACE_SCAN_ENTRY_PREVIEW === "1";
+  const ownerReviewDemoEnabled = isOwnerReviewDemoEnabled({
+    NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO: process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO,
+    NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: process.env.NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV
+  });
   const consentReady = hasRequiredCaptureConsent(consentState);
   const navItems = isDevelopment
     ? [
@@ -395,6 +400,7 @@ export default function HomePage() {
     markBuddyTrialScanCompleteInStorage({
       inviteId,
       productionCatalogRecordCount: productionCatalogManifest.items.length,
+      ownerReviewDemoEnabled,
       storage: window.localStorage
     });
     trackPerformance(

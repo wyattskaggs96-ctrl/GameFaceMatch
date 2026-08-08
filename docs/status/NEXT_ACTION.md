@@ -101,6 +101,16 @@ That contract defines the future customer journey from a texted iPhone link thro
 
 The next implementation prompt may add the first-result upload shell while keeping production recommendations blocked until a verified nonempty catalog exists:
 
-`GFM | Q05 | PROMPT 111 | PHASE 03 | Add Buddy Trial result upload and refinement placeholder`
+Prompt 123 adds an isolated `OWNER_REVIEW_DEMO` lane for Wyatt-only product evaluation before the production CF27 catalog exists. It can be enabled with:
+
+```text
+NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true
+```
+
+The demo lane uses `data/demo/owner-review-demo-catalog.json`, shows the banner `Owner Review Demo — appearance settings are test data.`, and is excluded from real beta metrics, human verification, production catalog state, and production matching-weight changes.
+
+The next Codex-ready demo prompt may extend this owner-review lane:
+
+`GFM | Q06 | PROMPT 124 | PHASE 01 | Build owner-review demo result upload walkthrough`
 
 This does not replace the human-verifier action above. Real CF27 settings still require a verified nonempty production catalog.

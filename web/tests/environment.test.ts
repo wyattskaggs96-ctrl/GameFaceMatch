@@ -42,6 +42,14 @@ describe("deployment environment contract", () => {
     ]);
   });
 
+  it("validates the owner review demo flag as an explicit public boolean", () => {
+    expect(
+      validateDeploymentEnvironment({
+        NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO: "yes"
+      }).errors
+    ).toContain('NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO must be either "true" or "false" when set.');
+  });
+
   it("keeps public and server-only variable names separated", () => {
     expect(PUBLIC_ENVIRONMENT_KEYS.every((key) => key.startsWith("NEXT_PUBLIC_"))).toBe(true);
     expect(SERVER_ONLY_ENVIRONMENT_KEYS.every((key) => !key.startsWith("NEXT_PUBLIC_"))).toBe(true);

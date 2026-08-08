@@ -16,6 +16,7 @@ export interface DeploymentRuntimeConfig {
   paymentProviderLabel: string | null;
   recommendationsDisabled: boolean;
   screenshotRefinementDisabled: boolean;
+  ownerReviewDemoEnabled: boolean;
   validation: EnvironmentValidationResult;
 }
 
@@ -32,6 +33,8 @@ export function getDeploymentRuntimeConfig(env: Record<string, string | undefine
     paymentProviderLabel: env.NEXT_PUBLIC_GAMEFACE_PAYMENT_PROVIDER_LABEL || null,
     recommendationsDisabled: parseBooleanFlag(env.NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED),
     screenshotRefinementDisabled: parseBooleanFlag(env.NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED),
+    ownerReviewDemoEnabled:
+      parseBooleanFlag(env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO) && parseDeploymentEnvironment(env.NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV) !== "production",
     validation: validateDeploymentEnvironment(env, {
       paymentEnabled: false,
       requirePublicLegalUrls: env.NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV === "production"

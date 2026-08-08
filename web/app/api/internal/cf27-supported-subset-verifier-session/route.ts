@@ -1,12 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { NextResponse } from "next/server";
+import { isInternalToolingAvailableInRuntime } from "@/lib/security/owner-review-access";
 
 const repositoryRoot = path.resolve(process.cwd(), "..");
 const packageRoot = path.join(repositoryRoot, "data/phase-zero/supported-subset-verifier-session");
 
 export async function GET() {
-  if (process.env.NODE_ENV === "production") {
+  if (!isInternalToolingAvailableInRuntime(process.env)) {
     return NextResponse.json({ error: "CF27 verifier workflow is unavailable in production builds." }, { status: 404 });
   }
 

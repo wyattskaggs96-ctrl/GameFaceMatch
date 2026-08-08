@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { SupportedSubsetVerifierWorkflow } from "@/features/verifier/SupportedSubsetVerifierWorkflow";
+import { isInternalToolingAvailableInRuntime } from "@/lib/security/owner-review-access";
 
 export default function VerifierPage() {
-  if (process.env.NODE_ENV === "production") notFound();
+  if (!isInternalToolingAvailableInRuntime(process.env)) notFound();
   return <SupportedSubsetVerifierWorkflow />;
 }

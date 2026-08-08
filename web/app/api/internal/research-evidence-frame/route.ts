@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { NextRequest, NextResponse } from "next/server";
 import { isSafeResearchDerivativePath } from "@/lib/phase-zero/current-evidence-gallery";
+import { isInternalToolingAvailableInRuntime } from "@/lib/security/owner-review-access";
 
 const mimeTypes: Record<string, string> = {
   ".png": "image/png",
@@ -11,7 +12,7 @@ const mimeTypes: Record<string, string> = {
 };
 
 export async function GET(request: NextRequest) {
-  if (process.env.NODE_ENV === "production") {
+  if (!isInternalToolingAvailableInRuntime(process.env)) {
     return NextResponse.json({ error: "Research evidence preview is unavailable in production builds." }, { status: 404 });
   }
 

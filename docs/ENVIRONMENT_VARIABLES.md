@@ -24,10 +24,15 @@ These may be exposed to browser bundles and must not contain secrets:
 - `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV`
 - `NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED`
 - `NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED`
+- `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO`
 
 Public URLs should be HTTPS in production. Localhost is acceptable only for local testing.
 
 `NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED` and `NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED` are disable-only kill switches. They can block recommendations or screenshot refinement, but they cannot enable unverified catalog records, fixtures, payments, or production recommendations.
+
+`NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV` accepts `local`, `development`, `preview`, `staging`, `owner_review`, or `production`. `development` is treated as a local runtime label. `owner_review` is the only deployable non-production mode that may expose internal owner-review tooling, and it must be paired with the server-only `GAMEFACE_OWNER_REVIEW_ACCESS_CODE`.
+
+`NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true` enables the isolated Owner Review Demo lane only outside `production`. It does not enable production catalog records, real recommendations, payments, real beta metrics, or production matching-weight changes.
 
 ## Server-only variables
 
@@ -40,8 +45,11 @@ These must never be exposed with `NEXT_PUBLIC_` and must never be committed with
 - `GAMEFACE_EXPECTED_CATALOG_VERSION_ID`
 - `GAMEFACE_ERROR_REPORTING_PROVIDER`
 - `GAMEFACE_ERROR_MONITORING_SERVER_TOKEN`
+- `GAMEFACE_OWNER_REVIEW_ACCESS_CODE`
 
-Server-only variables are not required until payment, webhooks, or server-side monitoring are actually implemented.
+Server-only variables are not required until owner-review deployment, payment, webhooks, or server-side monitoring are actually implemented.
+
+`GAMEFACE_OWNER_REVIEW_ACCESS_CODE` is required only for an `owner_review` HTTPS deployment. It protects `/owner/*`, `/verifier/*`, and `/api/internal/*` through an HTTP-only same-site cookie after Wyatt opens the owner dashboard with the access code query parameter. Do not commit the real value.
 
 ## Secure entry location
 

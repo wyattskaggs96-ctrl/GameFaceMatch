@@ -27,7 +27,8 @@ export const SERVER_ONLY_ENVIRONMENT_KEYS = [
   "GAMEFACE_PAYMENT_PRODUCT_CONFIG_REF",
   "GAMEFACE_EXPECTED_CATALOG_VERSION_ID",
   "GAMEFACE_ERROR_REPORTING_PROVIDER",
-  "GAMEFACE_ERROR_MONITORING_SERVER_TOKEN"
+  "GAMEFACE_ERROR_MONITORING_SERVER_TOKEN",
+  "GAMEFACE_OWNER_REVIEW_ACCESS_CODE"
 ] as const;
 
 export type PublicEnvironmentKey = (typeof PUBLIC_ENVIRONMENT_KEYS)[number];
@@ -54,6 +55,9 @@ export function validateDeploymentEnvironment(
     }
     if (value && isBooleanFlagKey(key) && !isBooleanFlag(value)) {
       errors.push(`${key} must be either "true" or "false" when set.`);
+    }
+    if (key === "NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV" && value && !isDeploymentEnvironmentValue(value)) {
+      errors.push(`${key} must be one of: local, development, preview, staging, owner_review, production.`);
     }
   }
 
@@ -100,4 +104,8 @@ function isBooleanFlag(value: string) {
 
 function isAllowedPublicUrl(value: string) {
   return value.startsWith("https://") || localhostPattern.test(value);
+}
+
+function isDeploymentEnvironmentValue(value: string) {
+  return ["local", "development", "preview", "staging", "owner_review", "production"].includes(value);
 }

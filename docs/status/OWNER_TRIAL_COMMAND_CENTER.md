@@ -1,6 +1,6 @@
 # Owner Trial Command Center
 
-**Status:** IMPLEMENTED AS INTERNAL LOCAL OWNER WORKFLOW
+**Status:** IMPLEMENTED AS INTERNAL OWNER WORKFLOW; DEPLOYABLE ONLY IN PROTECTED `owner_review` MODE
 **Prompt:** GFM | Q06 | PROMPT 129 | PHASE 05 | Build owner trial command center
 **Date:** 2026-08-07
 
@@ -20,7 +20,13 @@ Open:
 http://localhost:3000/owner/trials
 ```
 
-The route is development-only. It is not available in production builds.
+The local route is available in development. A production-built owner-review deployment may expose the route only when:
+
+- `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=owner_review`
+- `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true`
+- `GAMEFACE_OWNER_REVIEW_ACCESS_CODE` is configured as a server-only secret
+
+The route remains unavailable in true `production`.
 
 ## Owner Route
 
@@ -108,7 +114,8 @@ Exports do not include object URLs, base64 media, thumbnails, raw videos, or raw
 
 - The dashboard is browser-local and internal-only.
 - Invite expiration and revocation are local owner-dashboard records, not server-enforced remote access controls.
-- Real remote trial operations still require deployed persistence and owner/admin authorization.
+- Real remote trial operations still require deployed persistence if Wyatt needs cross-device progress monitoring; the current owner-review deployment uses browser-local trial state.
+- Owner/admin authorization is enforced by an owner-review access-code cookie in deployable `owner_review` mode, not by account login.
 - Real CF27 recommendations remain blocked until Prompt 103 imports and reconciles real human verifier decisions and a production catalog subset is approved.
 
 ## Validation

@@ -50,6 +50,23 @@ describe("deployment environment contract", () => {
     ).toContain('NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO must be either "true" or "false" when set.');
   });
 
+  it("recognizes owner review deployment while keeping its access code server-only", () => {
+    const result = validateDeploymentEnvironment({
+      NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: "owner_review",
+      NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO: "true"
+    });
+    expect(result.valid).toBe(true);
+    expect(SERVER_ONLY_ENVIRONMENT_KEYS).toContain("GAMEFACE_OWNER_REVIEW_ACCESS_CODE");
+  });
+
+  it("rejects unknown deployment environment names", () => {
+    expect(
+      validateDeploymentEnvironment({
+        NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: "public-demo"
+      }).errors
+    ).toContain("NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV must be one of: local, development, preview, staging, owner_review, production.");
+  });
+
   it("keeps public and server-only variable names separated", () => {
     expect(PUBLIC_ENVIRONMENT_KEYS.every((key) => key.startsWith("NEXT_PUBLIC_"))).toBe(true);
     expect(SERVER_ONLY_ENVIRONMENT_KEYS.every((key) => !key.startsWith("NEXT_PUBLIC_"))).toBe(true);

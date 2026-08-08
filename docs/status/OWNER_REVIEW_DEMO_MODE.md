@@ -18,6 +18,13 @@ Set:
 NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true
 ```
 
+For deployed owner review, also set:
+
+```text
+NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=owner_review
+GAMEFACE_OWNER_REVIEW_ACCESS_CODE=<server-side secret>
+```
+
 The mode is disabled automatically when:
 
 ```text
@@ -162,7 +169,9 @@ npm run owner:trials:start
 
 Wyatt can create numbered Buddy Trial invites, copy invite links, copy text-message copy, inspect browser-local progress, record whether the trial was unassisted or owner-helped, expire/revoke/delete local trial records, and export structured results. The dashboard clearly labels `OWNER_REVIEW_DEMO` trials and does not display raw face images or raw character videos by default.
 
-The route is internal and development-only. Server-enforced remote invite revocation still requires deployed persistence.
+The route is internal. It is available locally through `npm run owner:trials:start`, and may be exposed through a private HTTPS owner-review deployment only when `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=owner_review` and `GAMEFACE_OWNER_REVIEW_ACCESS_CODE` are configured. Server-enforced remote invite revocation still requires deployed persistence.
+
+Prompt 130 adds protection for `/owner/*`, `/verifier/*`, and `/api/internal/*` in owner-review deployments. Customer invite URLs under `/trial/<invite-id>` remain open to anyone holding the opaque invite link, but they still display the Owner Review Demo banner and remain demo-only.
 
 ## Isolation Controls
 

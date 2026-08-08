@@ -6,11 +6,11 @@
 
 Purpose: have a real independent second verifier complete the Prompt 102 supported-subset verifier package. Codex must wait for the returned package before importing or reconciling decisions.
 
-## Codex-Ready Parallel Prompt
+## Owner-Review Deployment Action
 
-`GFM | Q06 | PROMPT 130 | PHASE 05 | Run owner-review demo walkthrough and record findings`
+`OWNER ACTION | Authorize HTTPS host and configure OWNER_REVIEW_DEPLOYMENT secrets`
 
-Use `docs/Product/BUDDY_TRIAL_V1.md`, `docs/status/OWNER_REVIEW_DEMO_MODE.md`, `docs/status/BUDDY_TRIAL_LEARNING_OPTIMIZATION_LOOP.md`, and `docs/status/OWNER_TRIAL_COMMAND_CENTER.md` as the authoritative owner-review contract. Run the owner-review demo through the command center, record Wyatt-facing findings, and keep production catalog/recommendation gates unchanged.
+Prompt 130 prepared deployable owner-review configuration. Use `docs/status/OWNER_REVIEW_DEPLOYMENT_PREP.md`, `docs/Product/BUDDY_TRIAL_V1.md`, `docs/status/OWNER_REVIEW_DEMO_MODE.md`, `docs/status/BUDDY_TRIAL_LEARNING_OPTIMIZATION_LOOP.md`, and `docs/status/OWNER_TRIAL_COMMAND_CENTER.md` as the authoritative owner-review contract. A real HTTPS deployment still needs Wyatt to select or authorize a hosting provider/project, configure `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=owner_review`, configure `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true`, and enter server-only `GAMEFACE_OWNER_REVIEW_ACCESS_CODE`. Keep production catalog/recommendation gates unchanged.
 
 ## Prompt 124 Result
 

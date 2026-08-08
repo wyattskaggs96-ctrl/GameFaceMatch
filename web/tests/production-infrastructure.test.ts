@@ -30,6 +30,18 @@ describe("production infrastructure safety", () => {
     expect(config.screenshotRefinementDisabled).toBe(false);
   });
 
+  it("reports owner review as a non-production deployment environment", () => {
+    const config = getDeploymentRuntimeConfig({
+      NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: "owner_review",
+      NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO: "true",
+      NEXT_PUBLIC_GAMEFACE_APP_BASE_URL: "https://owner-review.example.com"
+    });
+
+    expect(config.deploymentEnvironment).toBe("owner_review");
+    expect(config.ownerReviewDemoEnabled).toBe(true);
+    expect(config.validation.valid).toBe(true);
+  });
+
   it("rejects malformed deployment kill-switch values", () => {
     expect(
       validateDeploymentEnvironment({

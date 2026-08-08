@@ -4,6 +4,8 @@
 
 GameFace Match is not deployed. No DNS, hosting, payment provider, external account, webhook, or secret was configured.
 
+Prompt 130 adds deployable owner-review configuration, but no real HTTPS URL exists in the repository because no hosting provider/project credentials are configured.
+
 The current web MVP is a Next.js app under `web/` with one app route, a web manifest route, local-only browser state, and no backend endpoints.
 
 ## Static versus server-rendered requirements
@@ -87,8 +89,17 @@ No production base URL is currently required by the running app. Future launch s
 - `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV`
 - `NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED`
 - `NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED`
+- `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO`
 
 All public URLs should be HTTPS. Localhost is acceptable only for local testing.
+
+Owner-review deployment additionally requires:
+
+- `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=owner_review`
+- `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true`
+- `GAMEFACE_OWNER_REVIEW_ACCESS_CODE` entered only in the host's server-side secret store
+
+The owner-review access code protects `/owner/*`, `/verifier/*`, and `/api/internal/*`. It must not be committed, pasted into public docs, or exposed through `NEXT_PUBLIC_`.
 
 ## Monitoring and logging needs
 

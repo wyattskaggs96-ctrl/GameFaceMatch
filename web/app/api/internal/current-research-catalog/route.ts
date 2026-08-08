@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { NextResponse } from "next/server";
 import type { CurrentResearchCatalogData } from "@/lib/phase-zero/current-evidence-gallery";
+import { isInternalToolingAvailableInRuntime } from "@/lib/security/owner-review-access";
 
 const researchDataPaths = {
   importedCatalog: "data/research/cf27/catalog-candidates/research/partial-catalog-import-current/imported_research_catalog.json",
@@ -10,7 +11,7 @@ const researchDataPaths = {
 };
 
 export async function GET() {
-  if (process.env.NODE_ENV === "production") {
+  if (!isInternalToolingAvailableInRuntime(process.env)) {
     return NextResponse.json({ error: "Current research catalog metadata is unavailable in production builds." }, { status: 404 });
   }
 

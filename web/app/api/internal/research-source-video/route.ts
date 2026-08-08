@@ -4,6 +4,7 @@ import { Readable } from "node:stream";
 import { NextRequest, NextResponse } from "next/server";
 import { isSafeSourceVideoID } from "@/lib/phase-zero/source-video-evidence-inspector";
 import { resolveResearchVideoPath, type ResearchVideoInventoryFile } from "@/lib/security/research-video-access";
+import { isInternalToolingAvailableInRuntime } from "@/lib/security/owner-review-access";
 
 interface VideoInventoryDocument {
   inventory: ResearchVideoInventoryFile[];
@@ -16,7 +17,7 @@ const videoMimeTypes: Record<string, string> = {
 };
 
 export async function GET(request: NextRequest) {
-  if (process.env.NODE_ENV === "production") {
+  if (!isInternalToolingAvailableInRuntime(process.env)) {
     return NextResponse.json({ error: "Research source-video inspection is unavailable in production builds." }, { status: 404 });
   }
 

@@ -54,6 +54,7 @@ Coverage exercised:
 
 - head / face preset
 - skin presentation
+- skin details
 - hairstyle
 - hair color
 - facial hair
@@ -63,8 +64,24 @@ Coverage exercised:
 - chin depth slider-style setting
 - step-by-step menu navigation instructions
 - synthetic scoring and refinement metadata
+- one-step-at-a-time build-guide progress
 
 The records intentionally use demo labels and must never be represented as genuine College Football 27 verification.
+
+## Prompt 124 Scan-To-Build Journey
+
+Prompt 124 extends the isolated demo lane into the complete owner-review scan-to-build journey:
+
+1. private invite landing and consent;
+2. existing Prompt 104 guided-scan handoff;
+3. scan-complete processing copy: `Building your GameFace...`;
+4. best-match result with match score, confidence, top-three alternatives, all demo settings, and selection rationale;
+5. `Build This in College Football 27` walkthrough with 11 resumable steps;
+6. `View All Settings` summary;
+7. build-guide-complete handoff: `Your player is built. Now show us how it turned out.`;
+8. mobile E2E coverage at 390 x 844 and 430 x 932.
+
+Build-guide progress is stored in the local Buddy Trial session record as non-image state. It survives refresh and browser reopen in the same browser storage scope. It does not store raw human face media, production recommendations, real beta metrics, or production catalog state.
 
 ## Isolation Controls
 

@@ -8,16 +8,17 @@ Purpose: have a real independent second verifier complete the Prompt 102 support
 
 ## Codex-Ready Parallel Prompt
 
-`GFM | Q06 | PROMPT 124 | PHASE 01 | Build owner-review demo result upload walkthrough`
+`GFM | Q06 | PROMPT 125 | PHASE 02 | Build owner-review demo result upload and refinement loop`
 
-Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md` as the authoritative owner-review contract. Build on Prompt 123’s isolated `OWNER_REVIEW_DEMO` lane to make the result-upload, refinement, second-result, and before/after walkthrough owner-evaluable with test data while production recommendations remain disabled and the real human-verifier gate remains unchanged.
+Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md` as the authoritative owner-review contract. Build on Prompt 124’s scan-to-build journey to make result upload, first-result processing, refinement, second-result, and before/after walkthrough owner-evaluable with test data while production recommendations remain disabled and the real human-verifier gate remains unchanged.
 
-## Prompt 123 Result
+## Prompt 124 Result
 
 - `OWNER_REVIEW_DEMO` is enabled only by `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true` and is disabled when `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=production`.
 - Buddy Trial shows `Owner Review Demo — appearance settings are test data.` when the mode is enabled.
 - Demo data lives under `data/demo/owner-review-demo-catalog.json` with `sourceType: demoData`, `isProduction: false`, explicit `OWNER_REVIEW_DEMO_TEST_DATA` provenance, and rejected catalog-manager disposition.
-- Demo recommendations exercise head/preset, skin, hair, hair color, facial hair, facial-hair color, slider-style controls, and menu instructions.
+- Demo recommendations exercise head/preset, skin, skin details, hair, hair color, facial hair, facial-hair color, slider-style controls, and menu instructions.
+- The owner-review Buddy Trial now reaches: invite opening, consent, existing guided-scan handoff, scan-complete processing, best-match result, match score/confidence, exact settings, 11-step build guide, "View All Settings", persisted build-guide progress, and build-guide-complete handoff.
 - Demo analytics and learning records are excluded from real beta metrics, global learning, and production matching-weight mutation.
 - Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
 

@@ -18,7 +18,9 @@ import {
   REQUIRED_BUDDY_TRIAL_CONSENTS,
   serializeBuddyTrialSession,
   transitionBuddyTrialSession,
+  updateBuddyTrialBuildGuideProgress,
   type BuddyTrialConsentRecord,
+  type BuddyTrialBuildGuideProgress,
   type BuddyTrialState,
   type BuddyTrialSession
 } from "@/lib/buddy-trial/buddy-trial-session";
@@ -82,6 +84,7 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const currentConsent = consent ?? session?.consent ?? createInitialBuddyTrialConsent();
   const consentReady = hasRequiredBuddyTrialConsent(currentConsent);
   const nextAction = session ? getBuddyTrialNextAction(session) : "Review the invite and start when ready.";
+  const showScanAction = !session || session.state === "INVITED" || session.state === "CONSENTED" || session.state === "SCAN_IN_PROGRESS";
 
   const updateConsent = (id: keyof BuddyTrialConsentRecord["acknowledgments"], checked: boolean) => {
     const activeSession = ensureSession();
@@ -115,6 +118,30 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const moveTrialTo = (nextState: BuddyTrialState, note: string) => {
     const activeSession = ensureSession();
     persistSession(transitionBuddyTrialSession(activeSession, nextState, new Date(), note));
+  };
+
+  const startBuildGuide = (stepCount: number) => {
+    const activeSession = ensureSession();
+    const transitioned = transitionBuddyTrialSession(activeSession, "BUILD_IN_PROGRESS", new Date(), "Owner Review Demo build guide started.");
+    persistSession(
+      updateBuddyTrialBuildGuideProgress(transitioned, {
+        totalStepCount: stepCount,
+        currentStepIndex: transitioned.buildGuide?.currentStepIndex ?? 0,
+        completedStepIds: transitioned.buildGuide?.completedStepIds ?? [],
+        viewMode: transitioned.buildGuide?.viewMode ?? "step"
+      })
+    );
+  };
+
+  const updateBuildGuide = (patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>) => {
+    const activeSession = ensureSession();
+    persistSession(updateBuddyTrialBuildGuideProgress(activeSession, patch));
+  };
+
+  const completeBuildGuide = (patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>) => {
+    const activeSession = ensureSession();
+    const withProgress = updateBuddyTrialBuildGuideProgress(activeSession, patch);
+    persistSession(transitionBuddyTrialSession(withProgress, "VIDEO_1_REQUIRED", new Date(), "Owner Review Demo build guide completed."));
   };
 
   if (inviteResolution.status !== "active") {
@@ -251,8 +278,9 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
             session={session}
             result={ownerReviewDemo}
             onStartRecommendations={() => moveTrialTo("RECOMMENDATION_READY", "Owner Review Demo recommendations opened with test data.")}
-            onStartBuild={() => moveTrialTo("BUILD_IN_PROGRESS", "Owner Review Demo build guide started.")}
-            onRequestVideoOne={() => moveTrialTo("VIDEO_1_REQUIRED", "Owner Review Demo build guide completed.")}
+            onStartBuild={() => startBuildGuide(ownerReviewDemo.buildGuideSteps.length)}
+            onUpdateBuildGuide={updateBuildGuide}
+            onCompleteBuildGuide={completeBuildGuide}
             onProcessVideoOne={() => moveTrialTo("VIDEO_1_PROCESSING", "Owner Review Demo first character video fixture selected.")}
             onDeliverRefinement={() => moveTrialTo("REFINEMENT_READY", "Owner Review Demo refinement fixture delivered.")}
             onRequestVideoTwo={() => moveTrialTo("VIDEO_2_REQUIRED", "Owner Review Demo tester is applying fixture refinement.")}
@@ -262,17 +290,17 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
         ) : null}
 
         <div className="buddy-trial-actions">
-          {session?.state === "SCAN_IN_PROGRESS" ? (
-            <>
+          {showScanAction ? (
+            session?.state === "SCAN_IN_PROGRESS" ? (
               <a className="buddy-trial-primary" href={`/?buddyTrialInvite=${encodeURIComponent(inviteId)}#start`}>
                 Continue guided scan
               </a>
-            </>
-          ) : (
-            <button className="buddy-trial-primary" type="button" onClick={startScan} disabled={!consentReady}>
-              Begin face scan
-            </button>
-          )}
+            ) : (
+              <button className="buddy-trial-primary" type="button" onClick={startScan} disabled={!consentReady}>
+                Start My GameFace
+              </button>
+            )
+          ) : null}
           <button className="buddy-trial-secondary" type="button" onClick={deleteTrialData}>
             Delete My Trial Data
           </button>
@@ -300,7 +328,8 @@ function OwnerReviewDemoPanel({
   result,
   onStartRecommendations,
   onStartBuild,
-  onRequestVideoOne,
+  onUpdateBuildGuide,
+  onCompleteBuildGuide,
   onProcessVideoOne,
   onDeliverRefinement,
   onRequestVideoTwo,
@@ -311,7 +340,8 @@ function OwnerReviewDemoPanel({
   result: OwnerReviewDemoRecommendationResult;
   onStartRecommendations: () => void;
   onStartBuild: () => void;
-  onRequestVideoOne: () => void;
+  onUpdateBuildGuide: (patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>) => void;
+  onCompleteBuildGuide: (patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>) => void;
   onProcessVideoOne: () => void;
   onDeliverRefinement: () => void;
   onRequestVideoTwo: () => void;
@@ -321,14 +351,18 @@ function OwnerReviewDemoPanel({
   const state = session?.state ?? "INVITED";
   const bestMatch = result.matches[0];
   const learningRecord = createOwnerReviewDemoLearningRecord(session?.sessionId ?? "owner-review-demo-preview");
+  const progress = session?.buildGuide;
+  const currentStepIndex = Math.min(progress?.currentStepIndex ?? 0, Math.max(result.buildGuideSteps.length - 1, 0));
+  const completedStepIds = progress?.completedStepIds ?? [];
+  const completedCount = completedStepIds.length;
 
   if (state === "INVITED" || state === "CONSENTED" || state === "SCAN_IN_PROGRESS") {
     return (
       <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-title">
-        <h2 id="owner-review-demo-title">Owner Review Demo mode</h2>
+        <h2 id="owner-review-demo-title">What happens next</h2>
         <p>
-          After the guided scan completes, this invite can show synthetic top-three settings, a build guide, fixture video milestones, a fixture refinement, and a
-          before/after score. Production recommendations remain disabled.
+          After the guided scan, this private link returns here with a demo recommendation, exact settings, and a step-by-step College Football 27 build guide.
+          The settings are test data for owner review.
         </p>
       </section>
     );
@@ -336,12 +370,15 @@ function OwnerReviewDemoPanel({
 
   if (state === "SCAN_COMPLETE" && session && canAdvanceBuddyTrialToRecommendation(session)) {
     return (
-      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-ready">
-        <h2 id="owner-review-demo-ready">Demo recommendations ready</h2>
-        <p>These settings exercise the real recommendation contracts with test data. They are not verified College Football 27 options.</p>
-        <OwnerReviewDemoTopThree result={result} />
+      <section className="buddy-trial-demo-card buddy-trial-processing-card" aria-labelledby="owner-review-demo-ready" aria-live="polite">
+        <div className="buddy-trial-processing-orb" aria-hidden="true" />
+        <p className="buddy-trial-step-label">Scan complete</p>
+        <h2 id="owner-review-demo-ready">Building your GameFace...</h2>
+        <p>
+          We are preparing your owner-review demo recommendation from synthetic catalog data. This does not use or publish real College Football 27 verification.
+        </p>
         <button className="buddy-trial-primary" type="button" onClick={onStartRecommendations}>
-          Open demo recommendations
+          View my GameFace recommendation
         </button>
       </section>
     );
@@ -349,43 +386,117 @@ function OwnerReviewDemoPanel({
 
   if (state === "RECOMMENDATION_READY") {
     return (
-      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-recommendations">
-        <h2 id="owner-review-demo-recommendations">Demo build recommendation</h2>
+      <section className="buddy-trial-demo-card buddy-trial-result-card" aria-labelledby="owner-review-demo-recommendations">
+        <p className="buddy-trial-step-label">Owner Review Demo result</p>
+        <h2 id="owner-review-demo-recommendations">Your GameFace recommendation</h2>
+        <div className="buddy-trial-best-match">
+          <span>Best Match</span>
+          <strong>{bestMatch.catalogItem.visibleGameLabelOrIndex}</strong>
+          <small>
+            Match Score {bestMatch.score}/100 · {bestMatch.confidence.label} confidence · {bestMatch.evidenceSupportState.toLowerCase().replaceAll("_", " ")}
+          </small>
+        </div>
+        <div className="buddy-trial-demo-explanation">
+          <h3>Why this was selected</h3>
+          <p>{bestMatch.explanation.summary}</p>
+          <ul>
+            {bestMatch.explanation.strongestSimilarities.slice(0, 3).map((reason) => (
+              <li key={reason}>{reason}</li>
+            ))}
+          </ul>
+        </div>
         <OwnerReviewDemoTopThree result={result} />
         <OwnerReviewDemoSettings result={result} />
         <button className="buddy-trial-primary" type="button" onClick={onStartBuild}>
-          Build this demo player
+          Build This in College Football 27
         </button>
       </section>
     );
   }
 
   if (state === "BUILD_IN_PROGRESS") {
+    const currentStep = result.buildGuideSteps[currentStepIndex];
+    const isSummary = progress?.viewMode === "summary";
+    const completed = new Set(completedStepIds);
+    const markStepDone = () => {
+      const nextCompleted = completed.has(currentStep.id) ? [...completed] : [...completed, currentStep.id];
+      const lastStep = currentStepIndex >= result.buildGuideSteps.length - 1;
+      if (lastStep) {
+        onCompleteBuildGuide({ totalStepCount: result.buildGuideSteps.length, currentStepIndex, completedStepIds: nextCompleted, viewMode: "step" });
+        return;
+      }
+      onUpdateBuildGuide({
+        totalStepCount: result.buildGuideSteps.length,
+        currentStepIndex: currentStepIndex + 1,
+        completedStepIds: nextCompleted,
+        viewMode: "step"
+      });
+    };
+
     return (
-      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-build-guide">
-        <h2 id="owner-review-demo-build-guide">Demo build guide</h2>
-        <ol className="buddy-trial-demo-list">
-          {result.buildInstructions.map((instruction) => (
-            <li key={instruction.id}>
-              <strong>{instruction.title}</strong>
-              <span>{instruction.detail}</span>
-            </li>
-          ))}
-        </ol>
-        <button className="buddy-trial-primary" type="button" onClick={onRequestVideoOne}>
-          Finished demo build
-        </button>
+      <section className="buddy-trial-demo-card buddy-trial-build-guide" aria-labelledby="owner-review-demo-build-guide">
+        <div className="buddy-trial-build-header">
+          <p className="buddy-trial-step-label">Step {currentStepIndex + 1} of {result.buildGuideSteps.length}</p>
+          <h2 id="owner-review-demo-build-guide">Build This in College Football 27</h2>
+          <span>{completedCount} complete</span>
+        </div>
+
+        {isSummary ? (
+          <OwnerReviewDemoBuildSummary result={result} completedStepIds={completedStepIds} />
+        ) : (
+          <article className="buddy-trial-build-step">
+            <p className="buddy-trial-step-category">{currentStep.category}</p>
+            <h3>{currentStep.title}</h3>
+            <nav aria-label="Game menu path" className="buddy-trial-menu-path">
+              {currentStep.menuPath.map((part) => (
+                <span key={part}>{part}</span>
+              ))}
+            </nav>
+            <div className="buddy-trial-build-controls">
+              {currentStep.controls.map((control) => (
+                <div key={`${currentStep.id}-${control.label}`}>
+                  <span>{control.label}</span>
+                  <strong>{control.value}</strong>
+                  <small>{control.controlKind}</small>
+                </div>
+              ))}
+            </div>
+            <p className="buddy-trial-build-rationale">{currentStep.rationale}</p>
+          </article>
+        )}
+
+        <div className="buddy-trial-build-nav">
+          <button
+            className="buddy-trial-secondary"
+            type="button"
+            onClick={() => onUpdateBuildGuide({ totalStepCount: result.buildGuideSteps.length, currentStepIndex: Math.max(0, currentStepIndex - 1), viewMode: "step" })}
+            disabled={currentStepIndex === 0}
+          >
+            Back
+          </button>
+          <button
+            className="buddy-trial-secondary"
+            type="button"
+            onClick={() => onUpdateBuildGuide({ totalStepCount: result.buildGuideSteps.length, viewMode: isSummary ? "step" : "summary" })}
+          >
+            {isSummary ? "Show Current Step" : "View All Settings"}
+          </button>
+          <button className="buddy-trial-primary" type="button" onClick={markStepDone}>
+            {currentStepIndex >= result.buildGuideSteps.length - 1 ? "Done" : completed.has(currentStep.id) ? "Next" : "Done"}
+          </button>
+        </div>
       </section>
     );
   }
 
   if (state === "VIDEO_1_REQUIRED") {
     return (
-      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-video-one">
-        <h2 id="owner-review-demo-video-one">Demo Video #1</h2>
-        <p>Fixture character-video metadata stands in for the first result upload. No raw human face media is retained.</p>
+      <section className="buddy-trial-demo-card buddy-trial-built-card" aria-labelledby="owner-review-demo-video-one">
+        <p className="buddy-trial-step-label">Build guide complete</p>
+        <h2 id="owner-review-demo-video-one">Your player is built.</h2>
+        <p>Now show us how it turned out. The next owner-review step will collect a character result for comparison and refinement.</p>
         <button className="buddy-trial-primary" type="button" onClick={onProcessVideoOne}>
-          Use fixture Video #1
+          Review My GameFace
         </button>
       </section>
     );
@@ -472,6 +583,30 @@ function OwnerReviewDemoTopThree({ result }: { result: OwnerReviewDemoRecommenda
         </li>
       ))}
     </ol>
+  );
+}
+
+function OwnerReviewDemoBuildSummary({ result, completedStepIds }: { result: OwnerReviewDemoRecommendationResult; completedStepIds: string[] }) {
+  const completed = new Set(completedStepIds);
+  return (
+    <div className="buddy-trial-build-summary" aria-label="All owner-review demo build settings">
+      {result.buildGuideSteps.map((step, index) => (
+        <article key={step.id}>
+          <span>
+            Step {index + 1} · {completed.has(step.id) ? "Done" : "Not done"}
+          </span>
+          <strong>{step.title}</strong>
+          <small>{step.menuPath.join(" > ")}</small>
+          <ul>
+            {step.controls.map((control) => (
+              <li key={`${step.id}-${control.label}`}>
+                {control.label}: {control.value}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
   );
 }
 

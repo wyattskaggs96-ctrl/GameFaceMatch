@@ -50,6 +50,15 @@ export interface BuddyTrialSessionHistoryEntry {
   note: string;
 }
 
+export interface BuddyTrialBuildGuideProgress {
+  schemaVersion: "buddy-trial-build-guide-progress-v1";
+  totalStepCount: number;
+  currentStepIndex: number;
+  completedStepIds: string[];
+  viewMode: "step" | "summary";
+  updatedAt: string;
+}
+
 export interface BuddyTrialSession {
   schemaVersion: typeof BUDDY_TRIAL_SCHEMA_VERSION;
   inviteId: string;
@@ -61,6 +70,7 @@ export interface BuddyTrialSession {
   deletedAt: string | null;
   consent: BuddyTrialConsentRecord;
   catalogGate: BuddyTrialCatalogGate;
+  buildGuide: BuddyTrialBuildGuideProgress | null;
   history: BuddyTrialSessionHistoryEntry[];
 }
 
@@ -194,6 +204,7 @@ export function createBuddyTrialSession({
     deletedAt: null,
     consent: createInitialBuddyTrialConsent(),
     catalogGate: productionCatalogRecordCount > 0 ? "available" : ownerReviewDemoEnabled ? "owner_review_demo_available" : "production_catalog_unavailable",
+    buildGuide: null,
     history: [{ state: "INVITED", at: timestamp, note: "Buddy Trial invite opened." }]
   };
 }
@@ -256,6 +267,37 @@ export function canAdvanceBuddyTrialToRecommendation(session: BuddyTrialSession)
 
 export function isBuddyTrialRecommendationCatalogGateAvailable(catalogGate: BuddyTrialCatalogGate) {
   return catalogGate === "available" || catalogGate === "owner_review_demo_available";
+}
+
+export function createBuddyTrialBuildGuideProgress(stepCount: number, now = new Date()): BuddyTrialBuildGuideProgress {
+  return {
+    schemaVersion: "buddy-trial-build-guide-progress-v1",
+    totalStepCount: stepCount,
+    currentStepIndex: 0,
+    completedStepIds: [],
+    viewMode: "step",
+    updatedAt: now.toISOString()
+  };
+}
+
+export function updateBuddyTrialBuildGuideProgress(
+  session: BuddyTrialSession,
+  patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>,
+  now = new Date()
+): BuddyTrialSession {
+  const current = session.buildGuide ?? createBuddyTrialBuildGuideProgress(0, now);
+  return {
+    ...session,
+    updatedAt: now.toISOString(),
+    buildGuide: {
+      ...current,
+      ...patch,
+      totalStepCount: Math.max(0, patch.totalStepCount ?? current.totalStepCount),
+      currentStepIndex: Math.max(0, patch.currentStepIndex ?? current.currentStepIndex),
+      completedStepIds: patch.completedStepIds ?? current.completedStepIds,
+      updatedAt: now.toISOString()
+    }
+  };
 }
 
 export function getBuddyTrialNextAction(session: BuddyTrialSession) {

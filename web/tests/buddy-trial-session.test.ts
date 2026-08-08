@@ -8,12 +8,14 @@ import {
   canAdvanceBuddyTrialToRecommendation,
   createBuddyTrialSession,
   createBuddyTrialStorageKey,
+  createBuddyTrialBuildGuideProgress,
   getBuddyTrialInvite,
   hasRequiredBuddyTrialConsent,
   markBuddyTrialScanCompleteInStorage,
   REQUIRED_BUDDY_TRIAL_CONSENTS,
   serializeBuddyTrialSession,
-  transitionBuddyTrialSession
+  transitionBuddyTrialSession,
+  updateBuddyTrialBuildGuideProgress
 } from "@/lib/buddy-trial/buddy-trial-session";
 
 describe("buddy trial session contract", () => {
@@ -153,6 +155,38 @@ describe("buddy trial session contract", () => {
     });
 
     expect(nextSession.catalogGate).toBe("owner_review_demo_available");
+  });
+
+  it("persists build-guide progress for resume after refresh or browser close", () => {
+    const progress = createBuddyTrialBuildGuideProgress(11, new Date("2026-08-07T12:00:00.000Z"));
+    expect(progress).toMatchObject({
+      totalStepCount: 11,
+      currentStepIndex: 0,
+      completedStepIds: [],
+      viewMode: "step"
+    });
+
+    const session = createBuddyTrialSession({
+      inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      productionCatalogRecordCount: 0,
+      ownerReviewDemoEnabled: true,
+      now: new Date("2026-08-07T12:00:00.000Z"),
+      sessionId: "bt_session_test"
+    });
+    const withProgress = updateBuddyTrialBuildGuideProgress(session, {
+      totalStepCount: 11,
+      currentStepIndex: 4,
+      completedStepIds: ["demo-build-open-rtg", "demo-build-open-appearance", "demo-build-head", "demo-build-skin"],
+      viewMode: "summary"
+    });
+    const resumed = JSON.parse(serializeBuddyTrialSession(withProgress));
+
+    expect(resumed.buildGuide).toMatchObject({
+      totalStepCount: 11,
+      currentStepIndex: 4,
+      completedStepIds: ["demo-build-open-rtg", "demo-build-open-appearance", "demo-build-head", "demo-build-skin"],
+      viewMode: "summary"
+    });
   });
 
   it("treats deleted sessions as terminal and prevents unsupported jumps", () => {

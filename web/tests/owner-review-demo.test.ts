@@ -58,6 +58,7 @@ describe("OWNER_REVIEW_DEMO mode", () => {
     expect(result.primarySettings.map((setting) => setting.category)).toEqual([
       "Head / face preset",
       "Skin",
+      "Skin details",
       "Hair",
       "Hair color",
       "Facial hair",
@@ -67,6 +68,21 @@ describe("OWNER_REVIEW_DEMO mode", () => {
       "Chin depth"
     ]);
     expect(result.buildInstructions.length).toBeGreaterThan(0);
+    expect(result.buildGuideSteps).toHaveLength(11);
+    expect(result.buildGuideSteps.map((step) => step.title)).toEqual([
+      "Open Road to Glory",
+      "Open Appearance",
+      "Head / face preset",
+      "Skin",
+      "Skin details",
+      "Hair",
+      "Hair color",
+      "Facial hair",
+      "Facial-hair color",
+      "Nose",
+      "Jaw and chin"
+    ]);
+    expect(result.buildGuideSteps.flatMap((step) => step.controls).some((control) => control.controlKind === "slider")).toBe(true);
     expect(result.refinementPlan).toMatchObject({
       initialBuildScore: 84,
       refinedBuildScore: 92,

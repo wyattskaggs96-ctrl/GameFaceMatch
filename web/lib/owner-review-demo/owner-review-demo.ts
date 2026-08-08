@@ -30,6 +30,20 @@ export interface OwnerReviewDemoSetting {
   provenance: typeof OWNER_REVIEW_DEMO_MODE;
 }
 
+export interface OwnerReviewDemoBuildStep {
+  id: string;
+  title: string;
+  category: string;
+  menuPath: string[];
+  controls: Array<{
+    label: string;
+    value: string;
+    controlKind: OwnerReviewDemoSetting["controlKind"];
+  }>;
+  rationale: string;
+  provenance: typeof OWNER_REVIEW_DEMO_MODE;
+}
+
 export interface OwnerReviewDemoRefinementPlan {
   schemaVersion: "owner-review-demo-refinement-v1";
   initialBuildScore: number;
@@ -63,6 +77,7 @@ export interface OwnerReviewDemoRecommendationResult {
   matches: GameAppearanceMatch[];
   primarySettings: OwnerReviewDemoSetting[];
   buildInstructions: BuildInstruction[];
+  buildGuideSteps: OwnerReviewDemoBuildStep[];
   refinementPlan: OwnerReviewDemoRefinementPlan;
   analyticsPayload: ReturnType<typeof createOwnerReviewDemoAnalyticsPayload>;
 }
@@ -119,6 +134,7 @@ export function createOwnerReviewDemoRecommendationResult(): OwnerReviewDemoReco
     matches,
     primarySettings: createOwnerReviewDemoSettings(bestMatch.catalogItem),
     buildInstructions: createBuildInstructions(bestMatch),
+    buildGuideSteps: createOwnerReviewDemoBuildGuideSteps(bestMatch.catalogItem),
     refinementPlan: createOwnerReviewDemoRefinementPlan(bestMatch.catalogItem),
     analyticsPayload: createOwnerReviewDemoAnalyticsPayload("owner_review_demo_recommendation_rendered")
   };
@@ -174,6 +190,7 @@ function createOwnerReviewDemoSettings(item: GameCatalogItem): OwnerReviewDemoSe
   return [
     setting("demo-head-preset", "Head / face preset", "preset", item.visibleGameLabelOrIndex, "Road to Glory > Appearance > Head / face preset"),
     setting("demo-skin", "Skin", "color", annotations.verifiedSkinPresentationNativeValue, annotations.verifiedSkinPresentationMenuPath),
+    setting("demo-skin-details", "Skin details", "preset", annotations.verifiedSkinDetailsNativeValue, annotations.verifiedSkinDetailsMenuPath),
     setting("demo-hair", "Hair", "preset", annotations.verifiedHairstyleNativeValue, annotations.verifiedHairstyleMenuPath),
     setting("demo-hair-color", "Hair color", "color", annotations.verifiedHairColorNativeValue, annotations.verifiedHairColorMenuPath),
     setting("demo-facial-hair", "Facial hair", "facialHair", annotations.verifiedFacialHairNativeValue, annotations.verifiedFacialHairMenuPath),
@@ -197,6 +214,133 @@ function setting(
     controlKind,
     value: value ?? "Demo unavailable",
     menuPath: splitMenuPath(menuPath ?? "Owner Review Demo"),
+    provenance: OWNER_REVIEW_DEMO_MODE
+  };
+}
+
+function createOwnerReviewDemoBuildGuideSteps(item: GameCatalogItem): OwnerReviewDemoBuildStep[] {
+  const annotations = item.humanAnnotations;
+  return [
+    buildStep({
+      id: "demo-build-open-rtg",
+      title: "Open Road to Glory",
+      category: "Setup",
+      menuPath: "Road to Glory",
+      controls: [{ label: "Mode", value: "Road to Glory", controlKind: "menu" }],
+      rationale: "Start in the same demo path used by the recommendation contract."
+    }),
+    buildStep({
+      id: "demo-build-open-appearance",
+      title: "Open Appearance",
+      category: "Setup",
+      menuPath: "Road to Glory > Appearance",
+      controls: [{ label: "Menu", value: "Appearance", controlKind: "menu" }],
+      rationale: "All demo settings are grouped under the appearance editor."
+    }),
+    buildStep({
+      id: "demo-build-head",
+      title: "Head / face preset",
+      category: "Head",
+      menuPath: "Road to Glory > Appearance > Head / face preset",
+      controls: [{ label: "Preset", value: item.visibleGameLabelOrIndex, controlKind: "preset" }],
+      rationale: "This demo preset is the highest-ranked synthetic match."
+    }),
+    buildStep({
+      id: "demo-build-skin",
+      title: "Skin",
+      category: "Skin",
+      menuPath: annotations.verifiedSkinPresentationMenuPath,
+      controls: [{ label: "Tone", value: annotations.verifiedSkinPresentationNativeValue ?? "Demo unavailable", controlKind: "color" }],
+      rationale: "Skin presentation is shown as a selectable appearance value in demo mode."
+    }),
+    buildStep({
+      id: "demo-build-skin-details",
+      title: "Skin details",
+      category: "Skin details",
+      menuPath: annotations.verifiedSkinDetailsMenuPath,
+      controls: [{ label: "Detail", value: annotations.verifiedSkinDetailsNativeValue ?? "Demo unavailable", controlKind: "preset" }],
+      rationale: "Skin detail is included so the result screen exercises the full Buddy Trial contract."
+    }),
+    buildStep({
+      id: "demo-build-hair",
+      title: "Hair",
+      category: "Hair",
+      menuPath: annotations.verifiedHairstyleMenuPath,
+      controls: [{ label: "Style", value: annotations.verifiedHairstyleNativeValue ?? "Demo unavailable", controlKind: "preset" }],
+      rationale: "The demo hairstyle reflects the synthetic appearance attributes in the derived profile."
+    }),
+    buildStep({
+      id: "demo-build-hair-color",
+      title: "Hair color",
+      category: "Hair color",
+      menuPath: annotations.verifiedHairColorMenuPath,
+      controls: [{ label: "Color", value: annotations.verifiedHairColorNativeValue ?? "Demo unavailable", controlKind: "color" }],
+      rationale: "Hair color is shown separately from hairstyle to match the future production contract."
+    }),
+    buildStep({
+      id: "demo-build-facial-hair",
+      title: "Facial hair",
+      category: "Facial hair",
+      menuPath: annotations.verifiedFacialHairMenuPath,
+      controls: [{ label: "Style", value: annotations.verifiedFacialHairNativeValue ?? "Demo unavailable", controlKind: "facialHair" }],
+      rationale: "Facial hair is included as demo data only and remains separate from production verification."
+    }),
+    buildStep({
+      id: "demo-build-facial-hair-color",
+      title: "Facial-hair color",
+      category: "Facial-hair color",
+      menuPath: annotations.verifiedFacialHairColorMenuPath ?? "Road to Glory > Appearance > Facial Hair > Color",
+      controls: [{ label: "Color", value: annotations.verifiedFacialHairColorNativeValue ?? "Demo no facial-hair color", controlKind: "color" }],
+      rationale: "Facial-hair color is shown only when supported by the synthetic recommendation."
+    }),
+    buildStep({
+      id: "demo-build-nose",
+      title: "Nose",
+      category: "Nose",
+      menuPath: "Road to Glory > Appearance > Face > Nose",
+      controls: [
+        { label: "Bridge", value: annotations.demoNoseBridgeSlider ?? "Demo unavailable", controlKind: "slider" },
+        { label: "Width", value: annotations.demoNoseBridgeSlider ?? "Demo unavailable", controlKind: "slider" },
+        { label: "Projection", value: annotations.demoNoseBridgeSlider ?? "Demo unavailable", controlKind: "slider" }
+      ],
+      rationale: "Nose slider-style controls exercise exact value display without claiming production calibration."
+    }),
+    buildStep({
+      id: "demo-build-jaw-chin",
+      title: "Jaw and chin",
+      category: "Jaw and chin",
+      menuPath: "Road to Glory > Appearance > Face > Jaw and Chin",
+      controls: [
+        { label: "Jaw width", value: annotations.demoJawWidthSlider ?? "Demo unavailable", controlKind: "slider" },
+        { label: "Chin depth", value: annotations.demoChinDepthSlider ?? "Demo unavailable", controlKind: "slider" }
+      ],
+      rationale: "The refinement demo later uses these same supported fixture controls."
+    })
+  ];
+}
+
+function buildStep({
+  id,
+  title,
+  category,
+  menuPath,
+  controls,
+  rationale
+}: {
+  id: string;
+  title: string;
+  category: string;
+  menuPath: string | undefined;
+  controls: OwnerReviewDemoBuildStep["controls"];
+  rationale: string;
+}): OwnerReviewDemoBuildStep {
+  return {
+    id,
+    title,
+    category,
+    menuPath: splitMenuPath(menuPath ?? "Owner Review Demo"),
+    controls,
+    rationale,
     provenance: OWNER_REVIEW_DEMO_MODE
   };
 }

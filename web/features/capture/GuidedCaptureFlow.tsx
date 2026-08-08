@@ -85,7 +85,8 @@ export function GuidedCaptureFlow({
   onCancelSession,
   onClose,
   onContinue,
-  onPerformanceRecord
+  onPerformanceRecord,
+  customerMode = false
 }: {
   session: ActiveCaptureSession;
   cameraService: BrowserCameraService;
@@ -94,6 +95,7 @@ export function GuidedCaptureFlow({
   onClose?: () => void;
   onContinue: () => void;
   onPerformanceRecord?: (record: PerformanceMetricRecord) => void;
+  customerMode?: boolean;
 }) {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
@@ -113,6 +115,7 @@ export function GuidedCaptureFlow({
   const [isAnalyzingGuidance, setIsAnalyzingGuidance] = useState(false);
   const [useExtendedHold, setUseExtendedHold] = useState(false);
   const [captureWorkflow, setCaptureWorkflow] = useState<"guidedCircular" | "fiveAngleFallback">("guidedCircular");
+  const [customerAssistedMode, setCustomerAssistedMode] = useState(false);
   const [guidedStage, setGuidedStage] = useState<GuidedCircularStage>("positioning");
   const visualState = useSetupReferenceVisualState();
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -729,6 +732,8 @@ export function GuidedCaptureFlow({
           liveCoverageDecision={liveCoverageDecision}
           liveGuidance={liveGuidance}
           mobileRuntime={mobileRuntime}
+          customerAssistedMode={customerAssistedMode}
+          customerMode={customerMode}
           acceptedLiveFrameCount={acceptedLiveFrames.length}
           previewIsMirrored={previewIsMirrored}
           reviewReportCanContinue={reviewReport.canContinue}
@@ -744,7 +749,15 @@ export function GuidedCaptureFlow({
           onStartCamera={() => void startCamera()}
           onStopCamera={stopCamera}
           onSwitchCamera={() => void switchCamera()}
-          onUseFallback={() => setCaptureWorkflow("fiveAngleFallback")}
+          onUseFallback={() => {
+            if (customerMode) {
+              setCustomerAssistedMode(true);
+              setUseExtendedHold(true);
+              setLifecycleNotice("Assisted mode is on. Move one direction at a time and hold still when the guide asks.");
+              return;
+            }
+            setCaptureWorkflow("fiveAngleFallback");
+          }}
         />
         {guidedStage === "coverageReview" || guidedStage === "selectiveRetake" || completedAngles > 0 || visualState === "complete" ? (
           <CircularCoverageReviewPanel
@@ -1203,6 +1216,8 @@ function CircularGuidedCapturePanel({
   liveCoverageDecision,
   liveGuidance,
   mobileRuntime,
+  customerAssistedMode,
+  customerMode,
   acceptedLiveFrameCount,
   previewIsMirrored,
   reviewReportCanContinue,
@@ -1234,6 +1249,8 @@ function CircularGuidedCapturePanel({
   liveCoverageDecision: GuidedLiveFrameDecision | null;
   liveGuidance: CaptureGuidanceReport | null;
   mobileRuntime: MobileScanRuntimeState | null;
+  customerAssistedMode: boolean;
+  customerMode: boolean;
   acceptedLiveFrameCount: number;
   previewIsMirrored: boolean;
   reviewReportCanContinue: boolean;
@@ -1295,7 +1312,7 @@ function CircularGuidedCapturePanel({
 
         <div className="setup-capture-copy" aria-live="polite" aria-atomic="true">
           <h1 id="guided-circular-title">{completionVisible ? "First GameFace scan complete." : displayInstruction}</h1>
-          <p>{completionVisible ? "Review the captured angles before creating your local profile." : statusDetail}</p>
+          <p>{completionVisible ? "Continue to build your GameFace." : statusDetail}</p>
           <span className="sr-only" role="status">
             {primaryStatus}. First pass {firstProgress}% complete. Second pass {secondProgress}% complete. Accepted live frames: {acceptedLiveFrameCount}.
           </span>
@@ -1321,6 +1338,11 @@ function CircularGuidedCapturePanel({
               {lifecycleNotice}
             </Alert>
           ) : null}
+          {customerAssistedMode ? (
+            <Alert title="Assisted scan mode" tone="info" role="status">
+              Move one direction at a time and hold still when the guide asks. The scan still uses the same quality checks.
+            </Alert>
+          ) : null}
           {isOffline ? (
             <Alert title="Offline" tone="warning">
               Capture remains local. Billing or catalog checks may need network before production scanning can continue.
@@ -1337,7 +1359,7 @@ function CircularGuidedCapturePanel({
           {!completionVisible ? (
             <>
               <Button variant="secondary" className="setup-secondary-button" onClick={onUseFallback}>
-                Accessibility Options
+                {customerMode && customerAssistedMode ? "Assisted Mode On" : "Accessibility Options"}
               </Button>
               <Button variant="secondary" className="setup-secondary-button" onClick={onCancel}>
                 Start Over
@@ -1351,8 +1373,9 @@ function CircularGuidedCapturePanel({
           <details className="setup-disclosure">
             <summary>Scan details</summary>
             <p>
-              Browser capture uses RGB camera guidance, not depth capture. Circular progress advances only after a stable, distinct live frame passes face,
-              pose, blur, exposure, and duplicate-angle checks.
+              {customerMode
+                ? "This web version uses your camera to capture the angles needed for your GameFace. Progress counts only when the frame is clear and useful."
+                : "Circular progress advances only after a stable, distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks."}
             </p>
             <QualityGateList gate={guidedScanState.initialQualityGate} />
             <LiveCoverageDecisionPanel decision={liveCoverageDecision} acceptedLiveFrameCount={acceptedLiveFrameCount} streamActive={streamActive} />

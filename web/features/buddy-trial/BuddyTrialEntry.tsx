@@ -59,13 +59,34 @@ interface BuddyTrialEntryProps {
   inviteId: string;
 }
 
-const buddyTrialConsentCopy: Record<keyof BuddyTrialConsentRecord["acknowledgments"], string> = {
-  ageEligibility: "I meet the age requirement for this private trial.",
-  subjectPermission: "I'm scanning myself or have permission.",
-  cameraUse: "I agree to use my camera for this guided scan.",
-  currentFaceAnalysis: "I agree to face analysis for this GameFace recommendation.",
-  temporaryProcessing: "I understand scan media is used temporarily for this trial."
-};
+const buddyTrialConsentGroups: Array<{
+  id: string;
+  label: string;
+  consentIDs: Array<keyof BuddyTrialConsentRecord["acknowledgments"]>;
+  includesIndependentAcknowledgment?: boolean;
+}> = [
+  {
+    id: "age",
+    label: "I meet the age requirement for this private trial.",
+    consentIDs: ["ageEligibility"]
+  },
+  {
+    id: "permission",
+    label: "I'm scanning myself or have permission.",
+    consentIDs: ["subjectPermission"]
+  },
+  {
+    id: "camera-analysis",
+    label: "I agree to camera use and face analysis for this GameFace.",
+    consentIDs: ["cameraUse", "currentFaceAnalysis"]
+  },
+  {
+    id: "privacy-independent",
+    label: "I understand scan media is temporary and GameFace Match is an independent companion app.",
+    consentIDs: ["temporaryProcessing"],
+    includesIndependentAcknowledgment: true
+  }
+];
 
 const buddyTrialStageLabels: Record<BuddyTrialState, { label: string; action: string }> = {
   INVITED: { label: "Ready to start", action: "Check the boxes below, then start your scan." },
@@ -163,16 +184,21 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const showScanAction = showScanHandoff;
   const showOwnerReviewActiveBody = Boolean(ownerReviewDemo && session && !["INVITED", "CONSENTED", "SCAN_IN_PROGRESS"].includes(session.state));
 
-  const updateConsent = (id: keyof BuddyTrialConsentRecord["acknowledgments"], checked: boolean) => {
+  const updateConsentGroup = (group: (typeof buddyTrialConsentGroups)[number], checked: boolean) => {
     const activeSession = ensureSession();
     const nextConsent = {
       ...activeSession.consent,
       acknowledgments: {
-        ...activeSession.consent.acknowledgments,
-        [id]: checked
+        ...activeSession.consent.acknowledgments
       }
     };
+    for (const id of group.consentIDs) {
+      nextConsent.acknowledgments[id] = checked;
+    }
     const nextSession = { ...activeSession, consent: nextConsent };
+    if (group.includesIndependentAcknowledgment) {
+      setIndependentAcknowledged(checked);
+    }
     setConsent(nextConsent);
     persistSession(nextSession);
   };
@@ -183,6 +209,9 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     const nextSession =
       consented.state === "CONSENTED" ? transitionBuddyTrialSession(consented, "SCAN_IN_PROGRESS", new Date(), "Buddy Trial scan started.") : consented;
     persistSession(nextSession);
+    if (typeof window !== "undefined" && nextSession.state === "SCAN_IN_PROGRESS") {
+      window.location.assign(`/?buddyTrialInvite=${encodeURIComponent(inviteId)}#start`);
+    }
   };
 
   const openConsentStep = () => {
@@ -434,24 +463,19 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
         {showConsent ? (
           <section className="buddy-trial-consent buddy-trial-consent--short" aria-labelledby="buddy-trial-consent-title">
             <h2 id="buddy-trial-consent-title">Required scan acknowledgements</h2>
-            {REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => (
-              <label key={id} className="buddy-trial-checkbox">
-                <input
-                  type="checkbox"
-                  checked={currentConsent.acknowledgments[id]}
-                  onChange={(event) => updateConsent(id, event.target.checked)}
-                />
-                <span>
-                  <strong>{buddyTrialConsentCopy[id]}</strong>
-                </span>
-              </label>
-            ))}
-            <label className="buddy-trial-checkbox">
-              <input type="checkbox" checked={independentAcknowledged} onChange={(event) => setIndependentAcknowledged(event.target.checked)} />
-              <span>
-                <strong>I understand GameFace Match is an independent companion app.</strong>
-              </span>
-            </label>
+            {buddyTrialConsentGroups.map((group) => {
+              const checked =
+                group.consentIDs.every((id) => currentConsent.acknowledgments[id]) &&
+                (!group.includesIndependentAcknowledgment || independentAcknowledged);
+              return (
+                <label key={group.id} className="buddy-trial-checkbox">
+                  <input type="checkbox" checked={checked} onChange={(event) => updateConsentGroup(group, event.target.checked)} />
+                  <span>
+                    <strong>{group.label}</strong>
+                  </span>
+                </label>
+              );
+            })}
             <button className="buddy-trial-primary" type="button" onClick={startScan} disabled={!consentReady || !independentAcknowledged}>
               Continue
             </button>

@@ -33,10 +33,8 @@ test.describe("Buddy Trial invite route", () => {
     for (const label of [
       /I meet the age requirement/i,
       /I'm scanning myself or have permission/i,
-      /I agree to use my camera/i,
-      /I agree to face analysis/i,
-      /scan media is used temporarily/i,
-      /independent companion app/i
+      /I agree to camera use and face analysis/i,
+      /scan media is temporary and GameFace Match is an independent companion app/i
     ]) {
       const checkbox = page.getByLabel(label);
       await expect(checkbox).not.toBeChecked();
@@ -45,12 +43,21 @@ test.describe("Buddy Trial invite route", () => {
     await expect(continueButton).toBeEnabled();
     await continueButton.click();
 
-    await expect(page.getByText("Ready to scan")).toBeVisible();
-    const scanLink = page.getByRole("link", { name: "Continue guided scan" });
-    await expect(scanLink).toHaveAttribute("href", `/?buddyTrialInvite=${activeInvite}#start`);
-    await scanLink.click();
+    await expect(page).toHaveURL(new RegExp(`/\\?buddyTrialInvite=${activeInvite}#start$`));
     await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Get Started" })).toBeEnabled();
+    await expect(page.getByText("Development catalog state")).toHaveCount(0);
+    await expect(page.getByText(/RGB|TrueDepth|ARKit|3D reconstruction|production catalog|development catalog/i)).toHaveCount(0);
+
+    await page.getByRole("button", { name: "Get Started" }).click();
+    await expect(page.getByRole("heading", { name: "Get Ready" })).toBeVisible();
+    await expect(page.getByText("Remove glasses or headwear")).toBeVisible();
+    await expect(page.getByText("Hold the phone at eye level")).toBeVisible();
+    await expect(page.getByText(/RGB|TrueDepth|ARKit|3D reconstruction|Development catalog state/i)).toHaveCount(0);
+    await page.getByRole("button", { name: "Start Camera" }).click();
+    await expect(page.getByRole("heading", { name: "Position your face within the frame." })).toBeVisible();
+    await expect(page.getByText("Development catalog state")).toHaveCount(0);
+    await expect(page.getByText(/RGB|TrueDepth|ARKit|3D reconstruction|production catalog|development catalog/i)).toHaveCount(0);
 
     await page.goto(`/trial/${activeInvite}`);
     await page.reload();
@@ -99,17 +106,20 @@ test.describe("Buddy Trial invite route", () => {
       for (const label of [
         /I meet the age requirement/i,
         /I'm scanning myself or have permission/i,
-        /I agree to use my camera/i,
-        /I agree to face analysis/i,
-        /scan media is used temporarily/i,
-        /independent companion app/i
+        /I agree to camera use and face analysis/i,
+        /scan media is temporary and GameFace Match is an independent companion app/i
       ]) {
         await page.getByLabel(label).check();
       }
       await page.getByRole("button", { name: "Continue" }).click();
 
-      await expect(page.getByText("Ready to scan")).toBeVisible();
-      await expect(page.getByRole("link", { name: "Continue guided scan" })).toHaveAttribute("href", `/?buddyTrialInvite=${activeInvite}#start`);
+      await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
+      await page.getByRole("button", { name: "Get Started" }).click();
+      await expect(page.getByRole("heading", { name: "Get Ready" })).toBeVisible();
+      await page.getByRole("button", { name: "Start Camera" }).click();
+      await expect(page.getByRole("heading", { name: "Position your face within the frame." })).toBeVisible();
+      await expect(page.getByText("Development catalog state")).toHaveCount(0);
+      await expect(page.getByText(/RGB|TrueDepth|ARKit|3D reconstruction|production catalog|development catalog/i)).toHaveCount(0);
 
       await page.evaluate(
         ({ key }) => {
@@ -126,7 +136,7 @@ test.describe("Buddy Trial invite route", () => {
         },
         { key: activeInviteStorageKey }
       );
-      await page.reload();
+      await page.goto(`/trial/${activeInvite}`);
 
       await expect(page.getByRole("heading", { name: "Building your GameFace..." })).toBeVisible();
       await page.getByRole("button", { name: "View my GameFace recommendation" }).click();

@@ -72,43 +72,49 @@ const states = [
     waitFor: "Set Up Your GameFace"
   },
   {
-    id: "05-guided-active",
+    id: "05-get-ready",
+    path: `/?buddyTrialInvite=${INVITE_ID}#preparation`,
+    setup: (page) => setTrialSession(page, "SCAN_IN_PROGRESS"),
+    waitFor: "Get Ready"
+  },
+  {
+    id: "06-guided-active",
     path: "/?setupVisualState=scan-partial#capture",
     waitFor: "Move your head slowly to complete the circle."
   },
   {
-    id: "06-processing",
+    id: "07-processing",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "SCAN_COMPLETE"),
     waitFor: "Building your GameFace..."
   },
   {
-    id: "07-result",
+    id: "08-result",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "RECOMMENDATION_READY"),
     waitFor: "Your GameFace recommendation"
   },
   {
-    id: "08-build-step",
+    id: "09-build-step",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "BUILD_IN_PROGRESS", { buildGuide: buildGuideProgress({ currentStepIndex: 2 }) }),
     waitFor: "Build This in College Football 27"
   },
   {
-    id: "09-build-all-settings",
+    id: "10-build-all-settings",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "BUILD_IN_PROGRESS", { buildGuide: buildGuideProgress({ viewMode: "summary", currentStepIndex: 2 }) }),
     waitFor: "Open Road to Glory"
   },
   {
-    id: "10-video-one-required",
+    id: "11-video-one-required",
     path: `/trial/${INVITE_ID}`,
     setup: (page) =>
       setTrialSession(page, "VIDEO_1_REQUIRED", { buildGuide: buildGuideProgress({ completedStepIds: buildStepIds, currentStepIndex: buildStepIds.length - 1 }) }),
     waitFor: "LET'S SEE HOW WE DID"
   },
   {
-    id: "11-video-error",
+    id: "12-video-error",
     path: `/trial/${INVITE_ID}`,
     setup: async (page) => {
       await setTrialSession(page, "VIDEO_1_REQUIRED", { buildGuide: buildGuideProgress({ completedStepIds: buildStepIds, currentStepIndex: buildStepIds.length - 1 }) });
@@ -124,25 +130,25 @@ const states = [
     waitFor: "Try another video"
   },
   {
-    id: "12-video-one-views",
+    id: "13-video-one-views",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "VIDEO_1_PROCESSING", { videoOneReview: characterVideoReview(1) }),
     waitFor: "GameFace found these views"
   },
   {
-    id: "13-refinement-review",
+    id: "14-refinement-review",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "REFINEMENT_READY", { videoOneReview: characterVideoReview(1) }),
     waitFor: "GAMEFACE REVIEW"
   },
   {
-    id: "14-refinement-guide",
+    id: "15-refinement-guide",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "VIDEO_2_REQUIRED", { refinementGuide: buildGuideProgress({ totalStepCount: 3, currentStepIndex: 1 }) }),
     waitFor: "Apply the recommended changes"
   },
   {
-    id: "15-video-two-required",
+    id: "16-video-two-required",
     path: `/trial/${INVITE_ID}`,
     setup: (page) =>
       setTrialSession(page, "VIDEO_2_REQUIRED", {
@@ -151,13 +157,13 @@ const states = [
     waitFor: "SHOW US THE UPDATED PLAYER"
   },
   {
-    id: "16-final-result",
+    id: "17-final-result",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "FINAL_RESULT_READY", { videoOneReview: characterVideoReview(1), videoTwoReview: characterVideoReview(2) }),
     waitFor: "YOUR GAMEFACE RESULT"
   },
   {
-    id: "17-complete",
+    id: "18-complete",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "COMPLETE", { finalOutcome: finalOutcome() }),
     waitFor: "GameFace complete."
@@ -201,7 +207,7 @@ try {
   const browser = await chromium.launch();
   const manifest = {
     generatedAt: TIMESTAMP,
-    prompt: "GFM | Q06 | PROMPT 131 | PHASE 06 | Polish complete buddy trial experience",
+    prompt: "GFM | Q06 | Buddy Trial owner-review visual evidence",
     baseUrl: BASE_URL,
     notes: [
       "Screenshots use OWNER_REVIEW_DEMO browser-local fixture data.",

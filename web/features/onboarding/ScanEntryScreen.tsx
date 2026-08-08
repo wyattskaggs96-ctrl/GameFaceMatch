@@ -140,47 +140,55 @@ export function ScanEntryScreen({
         ) : null}
         <details className="setup-disclosure">
           <summary>How the scan works</summary>
-          <div className="setup-plan-list" role="radiogroup" aria-label="Scan plan">
-            {SCAN_ENTRY_PLANS.map((plan) => {
-              const selected = selectedPlanID === plan.id;
-              return (
-                <button
-                  key={plan.id}
-                  type="button"
-                  role="radio"
-                  aria-checked={selected}
-                  aria-label={`${plan.title} ${plan.price}`}
-                  className="setup-plan-option"
-                  onClick={() => selectPlan(plan.id)}
-                >
-                  <strong>
-                    {plan.title} · {plan.price}
-                  </strong>
-                  <span>{plan.description}</span>
-                </button>
-              );
-            })}
-          </div>
-          <div className="scan-consent-list setup-consent-list">
-            {requiredConsentItems.map((item) => (
-              <label className="scan-consent-item" key={item.id}>
-                <input
-                  type="checkbox"
-                  checked={consentState[item.id].granted}
-                  onChange={(event) => setRequiredConsent(item.id, event.currentTarget.checked)}
-                />
-                <span>
-                  <strong>{item.label}</strong>
-                  {item.copy}
-                </span>
-              </label>
-            ))}
-          </div>
-          <p>
-            The scan is used to recommend in-game appearance settings. It does not identify the person. Raw media is temporary session data by default.{" "}
-            {getConsentDefinition("saveRawImages")?.description}
-          </p>
-          {environment !== "production" && previewModeEnabled ? <p>Preview mode can test screen flow in development only. It is not a paid entitlement.</p> : null}
+          {ownerReviewBuddyTrialReady ? (
+            <p>This web version uses your camera to capture the angles needed for your GameFace. Your scan stays temporary by default.</p>
+          ) : (
+            <>
+              <div className="setup-plan-list" role="radiogroup" aria-label="Scan plan">
+                {SCAN_ENTRY_PLANS.map((plan) => {
+                  const selected = selectedPlanID === plan.id;
+                  return (
+                    <button
+                      key={plan.id}
+                      type="button"
+                      role="radio"
+                      aria-checked={selected}
+                      aria-label={`${plan.title} ${plan.price}`}
+                      className="setup-plan-option"
+                      onClick={() => selectPlan(plan.id)}
+                    >
+                      <strong>
+                        {plan.title} · {plan.price}
+                      </strong>
+                      <span>{plan.description}</span>
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="scan-consent-list setup-consent-list">
+                {requiredConsentItems.map((item) => (
+                  <label className="scan-consent-item" key={item.id}>
+                    <input
+                      type="checkbox"
+                      checked={consentState[item.id].granted}
+                      onChange={(event) => setRequiredConsent(item.id, event.currentTarget.checked)}
+                    />
+                    <span>
+                      <strong>{item.label}</strong>
+                      {item.copy}
+                    </span>
+                  </label>
+                ))}
+              </div>
+              <p>
+                The scan is used to recommend in-game appearance settings. It does not identify the person. Raw media is temporary session data by default.{" "}
+                {getConsentDefinition("saveRawImages")?.description}
+              </p>
+              {environment !== "production" && previewModeEnabled ? (
+                <p>Preview mode can test screen flow in development only. It is not a paid entitlement.</p>
+              ) : null}
+            </>
+          )}
         </details>
         <p className="setup-footnote">
           Independent companion app. Not affiliated with or endorsed by EA SPORTS or any game publisher. <a href="#privacy-center">Privacy controls</a>

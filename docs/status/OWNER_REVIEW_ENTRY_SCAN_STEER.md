@@ -2,11 +2,14 @@
 
 Audit date: 2026-08-07
 
-Prompt label: GFM | Q06 | STEER OWNER REVIEW | Simplify customer entry and scan intro
+Prompt labels:
+
+- GFM | Q06 | STEER OWNER REVIEW | Simplify customer entry and scan intro
+- GFM | Q06 | STEER OWNER REVIEW | Unify buddy scan into one immersive flow
 
 ## Outcome
 
-The owner-review Buddy Trial first impression now starts with a short customer-facing landing page, moves into a compact required-consent screen, and then hands off to the existing Prompt 104 guided scan intro. The change is intentionally limited to the customer entry and scan-intro presentation.
+The owner-review Buddy Trial first impression now starts with a short customer-facing landing page, moves into a compact required-consent screen, and then hands off directly to the existing Prompt 104 guided scan intro. The first-time customer path stays in the black GameFace Match scan experience through preparation, camera positioning, circular scan, and completion.
 
 ## Customer Entry
 
@@ -19,7 +22,14 @@ The owner-review Buddy Trial first impression now starts with a short customer-f
 
 ## Consent Handoff
 
-The required acknowledgements are shown only after the user taps "Start My GameFace." No consent checkbox is preselected, and the "Continue" action remains disabled until all required acknowledgements and the independent companion acknowledgement are checked.
+The required acknowledgements are shown only after the user taps "Start My GameFace." No consent checkbox is preselected, and the "Continue" action remains disabled until all required acknowledgements are checked.
+
+Visible first-run consent is grouped into four plain-language acknowledgements while preserving the underlying required consent record:
+
+- Age requirement
+- Self or permission confirmation
+- Camera use and face analysis for this GameFace
+- Temporary scan media and independent companion app acknowledgement
 
 Privacy details are collapsed on the consent screen and include the local delete action without making deletion the first thing a tester sees.
 
@@ -32,6 +42,14 @@ The Prompt 104 black guided scan intro remains the scan entry point. The title a
 
 The owner-review Buddy Trial handoff enables "Get Started" only when the local invite session is active, consented, and in a scan-ready state. Production scan gates remain unchanged.
 
+## Unified Scan Flow
+
+For first-time Buddy Trial sessions, completing consent now transitions directly to `/?buddyTrialInvite=...#start`. The redundant post-consent "Ready to scan" page remains available only as a returning-session resume surface.
+
+After "Get Started," Buddy Trial users see an immersive black "Get Ready" state with the five preparation reminders and a "Start Camera" action. The legacy light preparation, lighting, and capability wizard remains available to the normal/internal step flow, but is bypassed by the Buddy Trial customer path.
+
+The circular guided scan remains coverage and quality driven. The Buddy Trial scan surface avoids customer-facing engineering terms such as RGB, TrueDepth, ARKit, 3D reconstruction, production catalog state, and development catalog state.
+
 ## Visual Evidence
 
 Screenshots were generated under:
@@ -43,9 +61,13 @@ Key files:
 - `390x844-01-invite.png`
 - `390x844-02-consent.png`
 - `390x844-04-guided-intro.png`
+- `390x844-05-get-ready.png`
+- `390x844-06-guided-active.png`
 - `430x932-01-invite.png`
 - `430x932-02-consent.png`
 - `430x932-04-guided-intro.png`
+- `430x932-05-get-ready.png`
+- `430x932-06-guided-active.png`
 
 The screenshot manifest is:
 
@@ -53,4 +75,4 @@ The screenshot manifest is:
 
 ## Scope Preserved
 
-This steering pass did not change matching, catalog promotion, owner dashboard behavior, video review, refinement, persistence contracts, payment, production catalog gates, or verifier workflows.
+This steering pass did not change matching, catalog promotion, owner dashboard behavior, video review, refinement, persistence contracts, payment, production catalog gates, deployment, or verifier workflows.

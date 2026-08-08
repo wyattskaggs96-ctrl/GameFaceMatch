@@ -201,6 +201,7 @@ export default function HomePage() {
     NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: process.env.NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV
   });
   const ownerReviewBuddyTrialInviteReady = ownerReviewDemoEnabled && buddyTrialScanReady;
+  const buddyTrialCustomerScanMode = Boolean(ownerReviewBuddyTrialInviteReady && buddyTrialInviteId);
   const consentReady = hasRequiredCaptureConsent(consentState);
   const navItems = isDevelopment
     ? [
@@ -218,7 +219,7 @@ export default function HomePage() {
       ]
     : PRIMARY_NAV_ITEMS;
   const stepFlowProgress = getStepFlowProgress(screen);
-  const immersiveSetupScreen = screen === "start" || screen === "capture";
+  const immersiveSetupScreen = screen === "start" || screen === "capture" || (screen === "preparation" && buddyTrialCustomerScanMode);
 
   const completedAngles = session.angles.filter((angle) => angle.status === "complete").length;
   const requiredAngles = session.angles.length;
@@ -884,7 +885,11 @@ export default function HomePage() {
           />
         );
       case "preparation":
-        return <CapturePreparation onContinue={() => navigate("lighting")} onAssistedCapture={() => navigate("capture")} />;
+        return buddyTrialCustomerScanMode ? (
+          <CapturePreparation variant="immersive" onContinue={() => navigate("capture")} onAssistedCapture={() => navigate("capture")} />
+        ) : (
+          <CapturePreparation onContinue={() => navigate("lighting")} onAssistedCapture={() => navigate("capture")} />
+        );
       case "lighting":
         return <CaptureLightingCheck onContinue={() => navigate("capability")} />;
       case "capability":
@@ -894,6 +899,7 @@ export default function HomePage() {
           <GuidedCaptureFlow
             session={session}
             cameraService={cameraService}
+            customerMode={buddyTrialCustomerScanMode}
             onSessionChange={handleSessionChange}
             onPerformanceRecord={trackPerformance}
             onCancelSession={(cancelledSession) => {
@@ -909,6 +915,10 @@ export default function HomePage() {
             onClose={() => navigate("home")}
             onContinue={() => {
               markBuddyTrialScanCompleteIfPresent();
+              if (buddyTrialCustomerScanMode && buddyTrialInviteId && typeof window !== "undefined") {
+                window.location.assign(`/trial/${encodeURIComponent(buddyTrialInviteId)}`);
+                return;
+              }
               navigate("attributes");
             }}
           />

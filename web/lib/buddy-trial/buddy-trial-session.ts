@@ -1,5 +1,6 @@
 import { CONSENT_VERSION, type ConsentID } from "@/lib/privacy/consent";
 import type { CharacterVideoReviewResult } from "@/lib/buddy-trial/character-video-review";
+import type { BuddyTrialLearningRecord } from "@/lib/buddy-trial/buddy-trial-learning";
 
 export const BUDDY_TRIAL_SCHEMA_VERSION = "buddy-trial-v1";
 export const BUDDY_TRIAL_ROUTE_PREFIX = "/trial";
@@ -83,6 +84,8 @@ export interface BuddyTrialFinalOutcome {
   userPreference: BuddyTrialVersionPreference | null;
   resemblanceRating: number | null;
   stillLooksOff: string | null;
+  productImprovementOptIn: boolean;
+  productImprovementConsentVersion: string | null;
   submittedAt: string | null;
   rawMediaRetained: false;
 }
@@ -103,6 +106,7 @@ export interface BuddyTrialSession {
   videoOneReview: BuddyTrialCharacterVideoReviewSummary | null;
   videoTwoReview: BuddyTrialCharacterVideoReviewSummary | null;
   finalOutcome: BuddyTrialFinalOutcome | null;
+  trialLearningRecord: BuddyTrialLearningRecord | null;
   history: BuddyTrialSessionHistoryEntry[];
 }
 
@@ -241,6 +245,7 @@ export function createBuddyTrialSession({
     videoOneReview: null,
     videoTwoReview: null,
     finalOutcome: null,
+    trialLearningRecord: null,
     history: [{ state: "INVITED", at: timestamp, note: "Buddy Trial invite opened." }]
   };
 }
@@ -298,6 +303,7 @@ export function transitionBuddyTrialSession(session: BuddyTrialSession, nextStat
     videoOneReview: nextState === "DELETED" ? null : session.videoOneReview,
     videoTwoReview: nextState === "DELETED" ? null : session.videoTwoReview,
     finalOutcome: nextState === "DELETED" ? null : session.finalOutcome,
+    trialLearningRecord: nextState === "DELETED" ? null : session.trialLearningRecord,
     history: [...session.history, { state: nextState, at: timestamp, note }]
   };
 }
@@ -397,6 +403,18 @@ export function attachBuddyTrialFinalOutcome(
   };
 }
 
+export function attachBuddyTrialLearningRecord(
+  session: BuddyTrialSession,
+  learningRecord: BuddyTrialLearningRecord,
+  now = new Date()
+): BuddyTrialSession {
+  return {
+    ...session,
+    updatedAt: now.toISOString(),
+    trialLearningRecord: learningRecord
+  };
+}
+
 export function getBuddyTrialNextAction(session: BuddyTrialSession) {
   if (session.state === "DELETED") {
     return "Trial data was removed from this browser.";
@@ -443,7 +461,8 @@ export function parseBuddyTrialSession(value: string | null): BuddyTrialSession 
       refinementGuide: parsed.refinementGuide ?? null,
       videoOneReview: parsed.videoOneReview ?? null,
       videoTwoReview: parsed.videoTwoReview ?? null,
-      finalOutcome: parsed.finalOutcome ?? null
+      finalOutcome: parsed.finalOutcome ?? null,
+      trialLearningRecord: parsed.trialLearningRecord ?? null
     };
   } catch {
     return null;

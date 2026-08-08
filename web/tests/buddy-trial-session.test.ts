@@ -371,6 +371,8 @@ describe("buddy trial session contract", () => {
       userPreference: "refined",
       resemblanceRating: 8,
       stillLooksOff: "Brow still sits high.",
+      productImprovementOptIn: true,
+      productImprovementConsentVersion: "test-consent-v1",
       submittedAt: "2026-08-07T12:45:00.000Z",
       rawMediaRetained: false
     });

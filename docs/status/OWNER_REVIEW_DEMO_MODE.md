@@ -1,7 +1,7 @@
 # Owner Review Demo Mode
 
 **Status:** IMPLEMENTED AS ISOLATED NON-PRODUCTION MODE  
-**Latest prompt:** GFM | Q06 | PROMPT 127 | PHASE 04 | Complete before-after validation loop
+**Latest prompt:** GFM | Q06 | PROMPT 128 | PHASE 05 | Build trial learning and optimization loop
 **Date:** 2026-08-07  
 
 ## Purpose
@@ -130,6 +130,22 @@ Prompt 127 completes the isolated owner-review loop after the refinement guide:
 
 The final outcome is stored as non-image local Buddy Trial session data. Raw human face media, raw character videos, object URLs, thumbnails, and base64 media are not retained by default.
 
+## Prompt 128 Learning Loop
+
+Prompt 128 adds structured learning records and offline optimization reports for completed Buddy Trials.
+
+In `OWNER_REVIEW_DEMO`, completed trials may create a learning record so Wyatt can inspect the full customer loop, but those records are always excluded from real datasets:
+
+- `source: owner_review_demo`
+- `analyticsDataset: owner_review_demo_excluded_from_beta_metrics`
+- `excludedFromRealBetaMetrics: true`
+- `excludedFromProductionOptimization: true`
+- `eligibleForOfflineOptimization: false`
+
+Demo learning records can store non-image structured fields such as before/after scores, demo settings, refinement changes, tester preference, resemblance rating, and scrubbed feedback. They do not store raw human scan media, raw character video, object URLs, thumbnails, base64 media, raw landmarks, or exact facial-measurement values.
+
+Only consented, non-demo completed trials can enter the offline optimization dataset. Even then, optimization reports can only propose versioned matching-weight, calibration, or ranking changes. They cannot deploy those changes or mutate production behavior.
+
 ## Isolation Controls
 
 - Production catalog remains `data/catalog/production/catalog_manifest.json`.
@@ -138,9 +154,10 @@ The final outcome is stored as non-image local Buddy Trial session data. Raw hum
 - The production matching path still rejects `demoData` unless the explicit `allowOwnerReviewDemo` test/demo switch is used.
 - Demo analytics payloads use `owner_review_demo_excluded_from_beta_metrics`.
 - Demo learning records set:
-  - `eligibleForRealBetaMetrics: false`
-  - `eligibleForGlobalLearning: false`
-  - `productionWeightMutationAllowed: false`
+  - `excludedFromRealBetaMetrics: true`
+  - `excludedFromProductionOptimization: true`
+  - `eligibleForOfflineOptimization: false`
+  - `productionMutationAllowed: false`
 
 ## Current Gate State
 
@@ -173,6 +190,12 @@ Prompt 126 focused validation includes:
 ```text
 npm --prefix web run test -- owner-review-demo.test.ts buddy-trial-session.test.ts buddy-trial-character-video-review.test.ts
 CI=1 PLAYWRIGHT_PORT=3202 NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run test:e2e -- tests/e2e/buddy-trial.spec.ts --project=iphone-safari-size
+```
+
+Prompt 128 focused validation includes:
+
+```text
+npm --prefix web run test -- buddy-trial-learning.test.ts buddy-trial-session.test.ts
 ```
 
 Full validation should continue to include:

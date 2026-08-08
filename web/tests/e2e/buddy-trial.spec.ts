@@ -273,11 +273,13 @@ test.describe("Buddy Trial invite route", () => {
       await page.getByLabel("Refined").check();
       await page.getByLabel("How much does the final player look like you?").selectOption("8");
       await page.getByLabel("What still looks off?").fill("Brow still sits a little high.");
+      await page.getByLabel(/Use my structured trial result to improve GameFace Match/).check();
       await page.getByRole("button", { name: "GameFace complete" }).click();
       await expect(page.getByRole("heading", { name: "GameFace complete." })).toBeVisible();
       await expect(page.getByLabel("Completed Buddy Trial scores")).toContainText("91 / 100");
       await expect(page.getByText("Version preference: Refined")).toBeVisible();
       await expect(page.getByText("Resemblance rating: 8 / 10")).toBeVisible();
+      await expect(page.getByText("Product-improvement opt-in: Yes")).toBeVisible();
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow).toBeLessThanOrEqual(1);
     }

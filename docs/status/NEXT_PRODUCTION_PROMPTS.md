@@ -8,9 +8,9 @@ Purpose: have a real independent second verifier complete the Prompt 102 support
 
 ## Codex-Ready Parallel Prompt
 
-`GFM | Q06 | PROMPT 128 | PHASE 05 | Package owner-review demo for first real walkthrough`
+`GFM | Q06 | PROMPT 129 | PHASE 05 | Package owner-review demo for first hands-on walkthrough`
 
-Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md` as the authoritative owner-review contract. Package the completed owner-review demo journey with a simple launch command, walkthrough checklist, and validation notes so Wyatt can personally exercise the full invite-to-final-result loop before the production CF27 catalog is available.
+Use `docs/Product/BUDDY_TRIAL_V1.md`, `docs/status/OWNER_REVIEW_DEMO_MODE.md`, and `docs/status/BUDDY_TRIAL_LEARNING_OPTIMIZATION_LOOP.md` as the authoritative owner-review contract. Package the completed owner-review demo journey with a simple launch command, walkthrough checklist, and validation notes so Wyatt can personally exercise the full invite-to-final-result loop before the production CF27 catalog is available.
 
 ## Prompt 124 Result
 
@@ -52,6 +52,16 @@ Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md`
 - The before/after contract explicitly supports improvement, `0` no-change, and regression; the UI does not force the refined score to improve.
 - The tester records which version looks more like them, a 1-10 final resemblance rating, and optional `What still looks off?` feedback.
 - Completion stores a non-image final outcome in the local Buddy Trial session and ends at `GameFace complete.` with initial recommendation, final settings, before score, after score, improvement/regression/no-change, and user rating.
+- Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
+
+## Prompt 128 Result
+
+- Completed Buddy Trials can now create structured learning records with pseudonymous trial ID, capture-quality summary, coarse derived-measurement bins, initial recommendation/model/catalog versions, initial settings, Video #1 and Video #2 comparison summaries, before/after scores, refinement changes, numeric delta, tester preference, resemblance rating, optional scrubbed feedback, and retry/error events.
+- Model-training/product-improvement consent is separate from normal trial consent.
+- Raw human scan media, raw character video, object URLs, thumbnails, base64 media, raw landmarks, and exact facial-measurement values are not retained by default.
+- `OWNER_REVIEW_DEMO` learning records are tagged as demo-only and excluded from real beta metrics and production optimization.
+- Offline optimization reports may propose versioned matching-weight, calibration, or ranking changes from consented non-demo outcomes only.
+- Candidate changes require owner approval, retained-case validation, versioning, and rollback before any production use.
 - Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
 
 ## Owner Media Baseline Decision

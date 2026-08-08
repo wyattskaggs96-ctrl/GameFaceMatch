@@ -7,6 +7,7 @@ import {
   attachBuddyTrialVideoOneReview,
   attachBuddyTrialVideoTwoReview,
   attachBuddyTrialFinalOutcome,
+  attachBuddyTrialLearningRecord,
   applyBuddyTrialConsent,
   BUDDY_TRIAL_ACTIVE_INVITE_ID,
   BUDDY_TRIAL_STATES,
@@ -31,6 +32,7 @@ import {
   type BuddyTrialState,
   type BuddyTrialSession
 } from "@/lib/buddy-trial/buddy-trial-session";
+import { createBuddyTrialLearningRecord } from "@/lib/buddy-trial/buddy-trial-learning";
 import {
   CHARACTER_VIDEO_ACCEPTED_MIME_TYPES,
   confirmManualCharacterVideoSelection,
@@ -220,7 +222,18 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const completeTrialWithOutcome = (outcome: BuddyTrialFinalOutcome) => {
     const activeSession = ensureSession();
     const withOutcome = attachBuddyTrialFinalOutcome(activeSession, outcome);
-    persistSession(transitionBuddyTrialSession(withOutcome, "COMPLETE", new Date(), "Owner Review Demo final before/after result and tester feedback submitted."));
+    const learningRecord = ownerReviewDemo
+      ? createBuddyTrialLearningRecord({
+          session: withOutcome,
+          source: "owner_review_demo",
+          profile: ownerReviewDemo.profile,
+          ownerReviewDemo,
+          productImprovementOptIn: outcome.productImprovementOptIn,
+          productImprovementConsentVersion: outcome.productImprovementConsentVersion
+        })
+      : null;
+    const withLearning = learningRecord ? attachBuddyTrialLearningRecord(withOutcome, learningRecord) : withOutcome;
+    persistSession(transitionBuddyTrialSession(withLearning, "COMPLETE", new Date(), "Owner Review Demo final before/after result and tester feedback submitted."));
   };
 
   if (inviteResolution.status !== "active") {
@@ -475,6 +488,7 @@ function OwnerReviewDemoPanel({
   const [finalPreference, setFinalPreference] = useState<BuddyTrialVersionPreference | "">(session?.finalOutcome?.userPreference ?? "");
   const [resemblanceRating, setResemblanceRating] = useState<number>(session?.finalOutcome?.resemblanceRating ?? 0);
   const [stillLooksOff, setStillLooksOff] = useState(session?.finalOutcome?.stillLooksOff ?? "");
+  const [productImprovementOptIn, setProductImprovementOptIn] = useState(Boolean(session?.finalOutcome?.productImprovementOptIn));
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const recordingChunksRef = useRef<Blob[]>([]);
   const recordingStreamRef = useRef<MediaStream | null>(null);
@@ -677,6 +691,8 @@ function OwnerReviewDemoPanel({
       userPreference: finalPreference || null,
       resemblanceRating: resemblanceRating || null,
       stillLooksOff: stillLooksOff.trim() || null,
+      productImprovementOptIn,
+      productImprovementConsentVersion: productImprovementOptIn ? session?.consent.consentVersion ?? null : null,
       submittedAt: new Date().toISOString(),
       rawMediaRetained: false
     };
@@ -979,6 +995,13 @@ function OwnerReviewDemoPanel({
           <label className="buddy-trial-feedback-text">
             <span>What still looks off?</span>
             <textarea value={stillLooksOff} onChange={(event) => setStillLooksOff(event.currentTarget.value)} placeholder="Optional" rows={3} />
+          </label>
+          <label className="buddy-trial-learning-consent">
+            <input type="checkbox" checked={productImprovementOptIn} onChange={(event) => setProductImprovementOptIn(event.currentTarget.checked)} />
+            <span>
+              Use my structured trial result to improve GameFace Match. This is separate from the normal trial consent and does not retain raw face media by
+              default.
+            </span>
           </label>
         </section>
         <p>Demo learning record: {learningRecord.analyticsDataset}. Production weight changes allowed: no.</p>
@@ -1363,6 +1386,7 @@ function OwnerReviewDemoCompletionSummary({ outcome }: { outcome: BuddyTrialFina
         <h2 id="buddy-trial-user-rating">Your feedback</h2>
         <p>Version preference: {formatVersionPreference(outcome.userPreference)}</p>
         <p>Resemblance rating: {outcome.resemblanceRating ?? "Not provided"} / 10</p>
+        <p>Product-improvement opt-in: {outcome.productImprovementOptIn ? "Yes" : "No"}</p>
         {outcome.stillLooksOff ? <p>Still looks off: {outcome.stillLooksOff}</p> : null}
       </section>
     </div>

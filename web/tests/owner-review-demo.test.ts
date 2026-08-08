@@ -6,8 +6,10 @@ import { getDeploymentRuntimeConfig } from "@/lib/config/deployment";
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
 import {
   createOwnerReviewDemoAnalyticsPayload,
+  createOwnerReviewDemoBuildMatchReview,
   createOwnerReviewDemoLearningRecord,
   createOwnerReviewDemoRecommendationResult,
+  evaluateProductionRefinementAvailability,
   getOwnerReviewDemoCatalog,
   isOwnerReviewDemoEnabled,
   OWNER_REVIEW_DEMO_BANNER_COPY,
@@ -84,10 +86,69 @@ describe("OWNER_REVIEW_DEMO mode", () => {
     ]);
     expect(result.buildGuideSteps.flatMap((step) => step.controls).some((control) => control.controlKind === "slider")).toBe(true);
     expect(result.refinementPlan).toMatchObject({
-      initialBuildScore: 84,
+      initialBuildScore: 82,
       refinedBuildScore: 92,
       passingThreshold: 90,
       rawMediaRetained: false
+    });
+    expect(result.refinementPlan.buildReview).toMatchObject({
+      status: "changes_recommended",
+      buildMatchScore: 82,
+      scoreLanguage: expect.stringMatching(/not identity probability/i),
+      strengths: ["Eye spacing", "Overall face width", "Hair"],
+      weaknesses: ["Jaw appears too wide", "Nose appears too short", "Chin projection is too strong"],
+      productionEligible: false,
+      rawMediaRetained: false
+    });
+    expect(result.refinementPlan.recommendedChanges.map((change) => `${change.label}:${change.currentValue}->${change.recommendedValue}`)).toEqual([
+      "Jaw Width:67->61",
+      "Nose Height:46->51",
+      "Chin Projection:58->52"
+    ]);
+    expect(result.refinementPlan.refinementBuildGuideSteps.map((step) => step.title)).toEqual(["Jaw Width", "Nose Height", "Chin Projection"]);
+    expect(result.refinementPlan.recommendedChanges.every((change) => change.availableInActiveCatalogAdapter && change.requiresVerifiedCalibration)).toBe(true);
+  });
+
+  it("supports no-change, uncertain, and alternate-head demo refinement outcomes without making identity claims", () => {
+    const item = createOwnerReviewDemoRecommendationResult().matches[0].catalogItem;
+    const noChange = createOwnerReviewDemoBuildMatchReview(item, "no_change");
+    const uncertain = createOwnerReviewDemoBuildMatchReview(item, "uncertain");
+    const alternative = createOwnerReviewDemoBuildMatchReview(item, "alternative_head");
+
+    expect(noChange).toMatchObject({
+      status: "no_changes",
+      buildMatchScore: 93,
+      adjustments: [],
+      noChangeReason: expect.stringMatching(/above the configured 90\/100/i)
+    });
+    expect(uncertain).toMatchObject({
+      status: "uncertain",
+      adjustments: [],
+      uncertaintyReasons: expect.arrayContaining([expect.stringMatching(/not strong enough/i)])
+    });
+    expect(alternative.alternativeHeadRecommendation).toMatchObject({
+      label: "Review Demo Face Gamma",
+      provenance: "OWNER_REVIEW_DEMO"
+    });
+    expect([noChange, uncertain, alternative].every((review) => review.scoreLanguage.includes("not identity probability"))).toBe(true);
+  });
+
+  it("suppresses unsupported demo sliders and keeps production refinement unavailable without verified calibration", () => {
+    const result = createOwnerReviewDemoRecommendationResult();
+    expect(JSON.stringify(result.refinementPlan)).not.toMatch(/Mouth Width|demo-mouth-width-slider/);
+
+    const productionAvailability = evaluateProductionRefinementAvailability({
+      catalog: productionCatalogManifest,
+      verifiedCalibrationControlIDs: []
+    });
+    expect(productionAvailability).toEqual({
+      available: false,
+      reasons: [
+        "Production refinement requires a nonempty verified production catalog.",
+        "Production refinement requires verified control-effect calibration before any slider adjustment can be shown."
+      ],
+      allowedControlIDs: [],
+      adjustments: []
     });
   });
 

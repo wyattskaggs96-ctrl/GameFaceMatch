@@ -3334,6 +3334,94 @@ p {
   font-size: 0.82rem;
 }
 
+.buddy-trial-refinement-review,
+.buddy-trial-build-review,
+.buddy-trial-adjustments {
+  display: grid;
+  gap: 14px;
+}
+
+.buddy-trial-score-panel {
+  display: grid;
+  gap: 7px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(34, 211, 238, 0.28);
+  background:
+    radial-gradient(circle at 16% 0%, rgba(34, 211, 238, 0.2), transparent 42%),
+    rgba(2, 6, 23, 0.56);
+}
+
+.buddy-trial-score-panel span,
+.buddy-trial-score-panel p {
+  margin: 0;
+  color: #bfdbfe;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.buddy-trial-score-panel strong {
+  color: #f8fafc;
+  font-size: clamp(2rem, 10vw, 3.4rem);
+  line-height: 1;
+}
+
+.buddy-trial-review-columns,
+.buddy-trial-adjustment-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.buddy-trial-review-columns section,
+.buddy-trial-adjustment-list article,
+.buddy-trial-alternative-head {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 14px;
+  background: rgba(2, 6, 23, 0.48);
+}
+
+.buddy-trial-review-columns h3,
+.buddy-trial-adjustments h3 {
+  margin: 0;
+  color: #93c5fd;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.buddy-trial-review-columns ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 18px;
+  color: #e2e8f0;
+}
+
+.buddy-trial-adjustment-list span,
+.buddy-trial-alternative-head span {
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.buddy-trial-adjustment-list strong,
+.buddy-trial-alternative-head strong {
+  color: #f8fafc;
+  font-size: 1.3rem;
+}
+
+.buddy-trial-adjustment-list p,
+.buddy-trial-adjustment-list small,
+.buddy-trial-alternative-head p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.42;
+}
+
 .buddy-trial-actions {
   display: grid;
   gap: 10px;
@@ -3510,7 +3598,9 @@ p {
   .buddy-trial-build-nav,
   .buddy-trial-video-actions,
   .buddy-trial-frame-options,
-  .buddy-trial-standardized-views {
+  .buddy-trial-standardized-views,
+  .buddy-trial-review-columns,
+  .buddy-trial-adjustment-list {
     grid-template-columns: 1fr;
   }
 

@@ -49,13 +49,61 @@ export interface OwnerReviewDemoRefinementPlan {
   initialBuildScore: number;
   refinedBuildScore: number;
   passingThreshold: 90;
-  recommendedChanges: Array<{
-    id: string;
+  buildReview: OwnerReviewDemoBuildMatchReview;
+  recommendedChanges: OwnerReviewDemoRefinementAdjustment[];
+  refinementBuildGuideSteps: OwnerReviewDemoBuildStep[];
+  rawMediaRetained: false;
+}
+
+export interface OwnerReviewDemoRefinementAdjustment {
+  id: string;
+  controlID: string;
+  category: string;
+  label: string;
+  controlKind: "slider" | "preset";
+  currentValue: string;
+  recommendedValue: string;
+  menuPath: string[];
+  reason: string;
+  expectedEffect: string;
+  availableInActiveCatalogAdapter: boolean;
+  requiresVerifiedCalibration: true;
+  provenance: typeof OWNER_REVIEW_DEMO_MODE;
+}
+
+export interface OwnerReviewDemoBuildMatchReview {
+  schemaVersion: "owner-review-demo-build-match-review-v1";
+  status: "changes_recommended" | "no_changes" | "uncertain";
+  buildMatchScore: number;
+  passingThreshold: 90;
+  scoreLanguage: string;
+  strengths: string[];
+  weaknesses: string[];
+  adjustments: OwnerReviewDemoRefinementAdjustment[];
+  noChangeReason: string | null;
+  uncertaintyReasons: string[];
+  alternativeHeadRecommendation: {
     label: string;
     reason: string;
     provenance: typeof OWNER_REVIEW_DEMO_MODE;
-  }>;
+  } | null;
+  comparedInputs: {
+    derivedFaceProfile: string;
+    initialRecommendation: string;
+    renderedCharacterVideo: string;
+  };
+  productionEligible: false;
   rawMediaRetained: false;
+  provenance: typeof OWNER_REVIEW_DEMO_MODE;
+}
+
+export type OwnerReviewDemoRefinementScenario = "clear_improvement" | "no_change" | "uncertain" | "alternative_head";
+
+export interface ProductionRefinementAvailability {
+  available: boolean;
+  reasons: string[];
+  allowedControlIDs: string[];
+  adjustments: [];
 }
 
 export interface OwnerReviewDemoLearningRecord {
@@ -346,26 +394,218 @@ function buildStep({
 }
 
 function createOwnerReviewDemoRefinementPlan(item: GameCatalogItem): OwnerReviewDemoRefinementPlan {
+  const buildReview = createOwnerReviewDemoBuildMatchReview(item);
   return {
     schemaVersion: "owner-review-demo-refinement-v1",
-    initialBuildScore: 84,
+    initialBuildScore: buildReview.buildMatchScore,
     refinedBuildScore: 92,
     passingThreshold: 90,
-    recommendedChanges: [
-      {
-        id: "owner-demo-refine-jaw-width",
-        label: `Adjust Jaw width to ${item.humanAnnotations.demoJawWidthSlider}`,
-        reason: "Owner Review Demo synthetic scoring marks jaw width as the largest remaining mismatch.",
+    buildReview,
+    recommendedChanges: buildReview.adjustments,
+    refinementBuildGuideSteps: createOwnerReviewDemoRefinementBuildGuideSteps(buildReview.adjustments),
+    rawMediaRetained: false
+  };
+}
+
+export function createOwnerReviewDemoBuildMatchReview(
+  item: GameCatalogItem,
+  scenario: OwnerReviewDemoRefinementScenario = "clear_improvement"
+): OwnerReviewDemoBuildMatchReview {
+  const baseAdjustments = ownerReviewDemoCalibrationAdjustments().filter((adjustment) => adjustment.availableInActiveCatalogAdapter);
+  const comparedInputs = {
+    derivedFaceProfile: "owner-review-demo-profile-v1",
+    initialRecommendation: item.stableInternalID,
+    renderedCharacterVideo: "buddy-trial-video-1-standardized-views"
+  };
+
+  if (scenario === "no_change") {
+    return buildMatchReview({
+      status: "no_changes",
+      buildMatchScore: 93,
+      strengths: ["Eye spacing", "Overall face width", "Hair", "Jaw and chin balance"],
+      weaknesses: [],
+      adjustments: [],
+      noChangeReason: "The owner-review demo comparison is already above the configured 90/100 build-match threshold.",
+      uncertaintyReasons: [],
+      alternativeHeadRecommendation: null,
+      comparedInputs
+    });
+  }
+
+  if (scenario === "uncertain") {
+    return buildMatchReview({
+      status: "uncertain",
+      buildMatchScore: 78,
+      strengths: ["Hair", "Overall face width"],
+      weaknesses: ["Video #1 needs clearer front and side views before exact changes are defensible."],
+      adjustments: [],
+      noChangeReason: null,
+      uncertaintyReasons: [
+        "The standardized character views were not strong enough to support directional slider changes.",
+        "GameFace Match should ask for a better result video instead of guessing."
+      ],
+      alternativeHeadRecommendation: null,
+      comparedInputs
+    });
+  }
+
+  if (scenario === "alternative_head") {
+    return buildMatchReview({
+      status: "changes_recommended",
+      buildMatchScore: 79,
+      strengths: ["Hair", "Skin presentation"],
+      weaknesses: ["Face preset shape differs more than the fixture alternatives.", "Jaw and nose differences remain visible."],
+      adjustments: baseAdjustments.slice(0, 1),
+      noChangeReason: null,
+      uncertaintyReasons: [],
+      alternativeHeadRecommendation: {
+        label: "Review Demo Face Gamma",
+        reason: "The fixture comparison shows a stronger head/preset alternative than changing only sliders.",
         provenance: OWNER_REVIEW_DEMO_MODE
       },
-      {
-        id: "owner-demo-refine-chin-depth",
-        label: `Adjust Chin depth to ${item.humanAnnotations.demoChinDepthSlider}`,
-        reason: "Owner Review Demo synthetic scoring marks chin depth as a supported refinement control.",
-        provenance: OWNER_REVIEW_DEMO_MODE
-      }
-    ],
-    rawMediaRetained: false
+      comparedInputs
+    });
+  }
+
+  return buildMatchReview({
+    status: "changes_recommended",
+    buildMatchScore: 82,
+    strengths: ["Eye spacing", "Overall face width", "Hair"],
+    weaknesses: ["Jaw appears too wide", "Nose appears too short", "Chin projection is too strong"],
+    adjustments: baseAdjustments,
+    noChangeReason: null,
+    uncertaintyReasons: [],
+    alternativeHeadRecommendation: null,
+    comparedInputs
+  });
+}
+
+function buildMatchReview(input: {
+  status: OwnerReviewDemoBuildMatchReview["status"];
+  buildMatchScore: number;
+  strengths: string[];
+  weaknesses: string[];
+  adjustments: OwnerReviewDemoRefinementAdjustment[];
+  noChangeReason: string | null;
+  uncertaintyReasons: string[];
+  alternativeHeadRecommendation: OwnerReviewDemoBuildMatchReview["alternativeHeadRecommendation"];
+  comparedInputs: OwnerReviewDemoBuildMatchReview["comparedInputs"];
+}): OwnerReviewDemoBuildMatchReview {
+  return {
+    schemaVersion: "owner-review-demo-build-match-review-v1",
+    status: input.status,
+    buildMatchScore: input.buildMatchScore,
+    passingThreshold: 90,
+    scoreLanguage: "Build Match Score compares the created character to the derived face profile using available game controls. It is not identity probability.",
+    strengths: input.strengths,
+    weaknesses: input.weaknesses,
+    adjustments: input.adjustments,
+    noChangeReason: input.noChangeReason,
+    uncertaintyReasons: input.uncertaintyReasons,
+    alternativeHeadRecommendation: input.alternativeHeadRecommendation,
+    comparedInputs: input.comparedInputs,
+    productionEligible: false,
+    rawMediaRetained: false,
+    provenance: OWNER_REVIEW_DEMO_MODE
+  };
+}
+
+function ownerReviewDemoCalibrationAdjustments(): OwnerReviewDemoRefinementAdjustment[] {
+  return [
+    refinementAdjustment({
+      id: "owner-demo-refine-jaw-width",
+      controlID: "demo-jaw-width-slider",
+      category: "Jaw",
+      label: "Jaw Width",
+      currentValue: "67",
+      recommendedValue: "61",
+      menuPath: "Road to Glory > Appearance > Face > Jaw and Chin",
+      reason: "The rendered character's jaw reads wider than the derived face profile.",
+      expectedEffect: "Narrowing this supported demo control should bring the lower-face width closer to the scanned profile."
+    }),
+    refinementAdjustment({
+      id: "owner-demo-refine-nose-height",
+      controlID: "demo-nose-height-slider",
+      category: "Nose",
+      label: "Nose Height",
+      currentValue: "46",
+      recommendedValue: "51",
+      menuPath: "Road to Glory > Appearance > Face > Nose",
+      reason: "The rendered character's nose appears shorter than the derived face profile.",
+      expectedEffect: "Raising this supported demo value should improve nose length balance without inventing a production slider."
+    }),
+    refinementAdjustment({
+      id: "owner-demo-refine-chin-projection",
+      controlID: "demo-chin-projection-slider",
+      category: "Chin",
+      label: "Chin Projection",
+      currentValue: "58",
+      recommendedValue: "52",
+      menuPath: "Road to Glory > Appearance > Face > Jaw and Chin",
+      reason: "The rendered character's chin projects more strongly than the derived face profile.",
+      expectedEffect: "Reducing this supported demo value should soften the profile while keeping the verified demo head/preset."
+    }),
+    {
+      ...refinementAdjustment({
+        id: "owner-demo-unsupported-mouth-width",
+        controlID: "demo-mouth-width-slider",
+        category: "Mouth",
+        label: "Mouth Width",
+        currentValue: "55",
+        recommendedValue: "49",
+        menuPath: "Road to Glory > Appearance > Face > Mouth",
+        reason: "This fixture intentionally represents an unsupported slider suppression case.",
+        expectedEffect: "Suppressed controls must not appear in the customer plan."
+      }),
+      availableInActiveCatalogAdapter: false
+    }
+  ];
+}
+
+function refinementAdjustment(input: Omit<OwnerReviewDemoRefinementAdjustment, "menuPath" | "controlKind" | "availableInActiveCatalogAdapter" | "requiresVerifiedCalibration" | "provenance"> & { menuPath: string }): OwnerReviewDemoRefinementAdjustment {
+  return {
+    ...input,
+    controlKind: "slider",
+    menuPath: splitMenuPath(input.menuPath),
+    availableInActiveCatalogAdapter: true,
+    requiresVerifiedCalibration: true,
+    provenance: OWNER_REVIEW_DEMO_MODE
+  };
+}
+
+function createOwnerReviewDemoRefinementBuildGuideSteps(adjustments: OwnerReviewDemoRefinementAdjustment[]): OwnerReviewDemoBuildStep[] {
+  return adjustments.map((adjustment, index) =>
+    buildStep({
+      id: `owner-demo-refinement-step-${index + 1}-${adjustment.controlID}`,
+      title: adjustment.label,
+      category: adjustment.category,
+      menuPath: adjustment.menuPath.join(" > "),
+      controls: [{ label: adjustment.label, value: `${adjustment.currentValue} -> ${adjustment.recommendedValue}`, controlKind: adjustment.controlKind }],
+      rationale: adjustment.reason
+    })
+  );
+}
+
+export function evaluateProductionRefinementAvailability(input: {
+  catalog: GameCatalogManifest;
+  verifiedCalibrationControlIDs?: string[];
+}): ProductionRefinementAvailability {
+  const reasons: string[] = [];
+  if (input.catalog.sourceType !== "production" || !input.catalog.isProduction) {
+    reasons.push("Production refinement requires the production catalog manifest.");
+  }
+  if (input.catalog.items.length === 0) {
+    reasons.push("Production refinement requires a nonempty verified production catalog.");
+  }
+  const allowedControlIDs = input.verifiedCalibrationControlIDs ?? [];
+  if (allowedControlIDs.length === 0) {
+    reasons.push("Production refinement requires verified control-effect calibration before any slider adjustment can be shown.");
+  }
+  return {
+    available: reasons.length === 0,
+    reasons,
+    allowedControlIDs,
+    adjustments: []
   };
 }
 

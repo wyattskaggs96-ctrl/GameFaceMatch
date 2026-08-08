@@ -72,6 +72,7 @@ export interface BuddyTrialSession {
   consent: BuddyTrialConsentRecord;
   catalogGate: BuddyTrialCatalogGate;
   buildGuide: BuddyTrialBuildGuideProgress | null;
+  refinementGuide: BuddyTrialBuildGuideProgress | null;
   videoOneReview: (Omit<CharacterVideoReviewResult, "candidateFrames"> & { candidateFrames: [] }) | null;
   history: BuddyTrialSessionHistoryEntry[];
 }
@@ -207,6 +208,7 @@ export function createBuddyTrialSession({
     consent: createInitialBuddyTrialConsent(),
     catalogGate: productionCatalogRecordCount > 0 ? "available" : ownerReviewDemoEnabled ? "owner_review_demo_available" : "production_catalog_unavailable",
     buildGuide: null,
+    refinementGuide: null,
     videoOneReview: null,
     history: [{ state: "INVITED", at: timestamp, note: "Buddy Trial invite opened." }]
   };
@@ -261,6 +263,7 @@ export function transitionBuddyTrialSession(session: BuddyTrialSession, nextStat
     completedAt: nextState === "COMPLETE" ? timestamp : session.completedAt,
     deletedAt: nextState === "DELETED" ? timestamp : session.deletedAt,
     buildGuide: nextState === "DELETED" ? null : session.buildGuide,
+    refinementGuide: nextState === "DELETED" ? null : session.refinementGuide ?? null,
     videoOneReview: nextState === "DELETED" ? null : session.videoOneReview,
     history: [...session.history, { state: nextState, at: timestamp, note }]
   };
@@ -295,6 +298,26 @@ export function updateBuddyTrialBuildGuideProgress(
     ...session,
     updatedAt: now.toISOString(),
     buildGuide: {
+      ...current,
+      ...patch,
+      totalStepCount: Math.max(0, patch.totalStepCount ?? current.totalStepCount),
+      currentStepIndex: Math.max(0, patch.currentStepIndex ?? current.currentStepIndex),
+      completedStepIds: patch.completedStepIds ?? current.completedStepIds,
+      updatedAt: now.toISOString()
+    }
+  };
+}
+
+export function updateBuddyTrialRefinementGuideProgress(
+  session: BuddyTrialSession,
+  patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>,
+  now = new Date()
+): BuddyTrialSession {
+  const current = session.refinementGuide ?? createBuddyTrialBuildGuideProgress(0, now);
+  return {
+    ...session,
+    updatedAt: now.toISOString(),
+    refinementGuide: {
       ...current,
       ...patch,
       totalStepCount: Math.max(0, patch.totalStepCount ?? current.totalStepCount),

@@ -16,7 +16,8 @@ import {
   REQUIRED_BUDDY_TRIAL_CONSENTS,
   serializeBuddyTrialSession,
   transitionBuddyTrialSession,
-  updateBuddyTrialBuildGuideProgress
+  updateBuddyTrialBuildGuideProgress,
+  updateBuddyTrialRefinementGuideProgress
 } from "@/lib/buddy-trial/buddy-trial-session";
 import { createCharacterVideoReviewResult, createPersistableCharacterVideoReview } from "@/lib/buddy-trial/character-video-review";
 
@@ -281,5 +282,38 @@ describe("buddy trial session contract", () => {
     );
     expect(deleted.videoOneReview).toBeNull();
     expect(deleted.buildGuide).toBeNull();
+  });
+
+  it("persists refinement-guide progress separately from initial build progress and clears it on deletion", () => {
+    const session = createBuddyTrialSession({
+      inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      productionCatalogRecordCount: 0,
+      ownerReviewDemoEnabled: true,
+      now: new Date("2026-08-07T12:00:00.000Z"),
+      sessionId: "bt_session_test"
+    });
+    const withBuildProgress = updateBuddyTrialBuildGuideProgress(session, {
+      totalStepCount: 11,
+      currentStepIndex: 10,
+      completedStepIds: ["initial-step"],
+      viewMode: "step"
+    });
+    const withRefinementProgress = updateBuddyTrialRefinementGuideProgress(withBuildProgress, {
+      totalStepCount: 3,
+      currentStepIndex: 1,
+      completedStepIds: ["owner-demo-refinement-step-1-demo-jaw-width-slider"],
+      viewMode: "summary"
+    });
+
+    expect(withRefinementProgress.buildGuide?.totalStepCount).toBe(11);
+    expect(withRefinementProgress.refinementGuide).toMatchObject({
+      totalStepCount: 3,
+      currentStepIndex: 1,
+      completedStepIds: ["owner-demo-refinement-step-1-demo-jaw-width-slider"],
+      viewMode: "summary"
+    });
+    const deleted = transitionBuddyTrialSession(withRefinementProgress, "DELETED");
+    expect(deleted.buildGuide).toBeNull();
+    expect(deleted.refinementGuide).toBeNull();
   });
 });

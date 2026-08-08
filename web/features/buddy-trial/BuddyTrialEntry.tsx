@@ -9,6 +9,7 @@ import {
   BUDDY_TRIAL_ACTIVE_INVITE_ID,
   BUDDY_TRIAL_STATES,
   canAdvanceBuddyTrialToRecommendation,
+  createBuddyTrialBuildGuideProgress,
   createInitialBuddyTrialConsent,
   createBuddyTrialSession,
   createBuddyTrialStorageKey,
@@ -20,6 +21,7 @@ import {
   serializeBuddyTrialSession,
   transitionBuddyTrialSession,
   updateBuddyTrialBuildGuideProgress,
+  updateBuddyTrialRefinementGuideProgress,
   type BuddyTrialConsentRecord,
   type BuddyTrialBuildGuideProgress,
   type BuddyTrialState,
@@ -41,6 +43,8 @@ import {
   createOwnerReviewDemoRecommendationResult,
   isOwnerReviewDemoEnabled,
   OWNER_REVIEW_DEMO_BANNER_COPY,
+  type OwnerReviewDemoBuildMatchReview,
+  type OwnerReviewDemoBuildStep,
   type OwnerReviewDemoRecommendationResult
 } from "@/lib/owner-review-demo/owner-review-demo";
 import { getConsentDefinition } from "@/lib/privacy/consent";
@@ -150,6 +154,11 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     persistSession(updateBuddyTrialBuildGuideProgress(activeSession, patch));
   };
 
+  const updateRefinementGuide = (patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>) => {
+    const activeSession = ensureSession();
+    persistSession(updateBuddyTrialRefinementGuideProgress(activeSession, patch));
+  };
+
   const completeBuildGuide = (patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>) => {
     const activeSession = ensureSession();
     const withProgress = updateBuddyTrialBuildGuideProgress(activeSession, patch);
@@ -165,6 +174,17 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
         ? transitionBuddyTrialSession(withReview, "VIDEO_1_PROCESSING", new Date(), "Owner Review Demo first character video processed locally.")
         : withReview
     );
+  };
+
+  const startRefinementGuide = (stepCount: number) => {
+    const activeSession = ensureSession();
+    const withProgress = updateBuddyTrialRefinementGuideProgress(activeSession, {
+      totalStepCount: stepCount,
+      currentStepIndex: 0,
+      completedStepIds: [],
+      viewMode: "step"
+    });
+    persistSession(transitionBuddyTrialSession(withProgress, "VIDEO_2_REQUIRED", new Date(), "Owner Review Demo refinement walkthrough started."));
   };
 
   if (inviteResolution.status !== "active") {
@@ -307,7 +327,8 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
             onSaveVideoOneReview={saveVideoOneReview}
             onRestartVideoOne={() => moveTrialTo("VIDEO_1_REQUIRED", "Owner Review Demo first character video retry requested.")}
             onDeliverRefinement={() => moveTrialTo("REFINEMENT_READY", "Owner Review Demo refinement fixture delivered.")}
-            onRequestVideoTwo={() => moveTrialTo("VIDEO_2_REQUIRED", "Owner Review Demo tester is applying fixture refinement.")}
+            onStartRefinementGuide={() => startRefinementGuide(ownerReviewDemo.refinementPlan.refinementBuildGuideSteps.length)}
+            onUpdateRefinementGuide={updateRefinementGuide}
             onDeliverFinal={() => moveTrialTo("FINAL_RESULT_READY", "Owner Review Demo second character video fixture processed.")}
             onComplete={() => moveTrialTo("COMPLETE", "Owner Review Demo completed without writing production evidence.")}
           />
@@ -357,7 +378,8 @@ function OwnerReviewDemoPanel({
   onSaveVideoOneReview,
   onRestartVideoOne,
   onDeliverRefinement,
-  onRequestVideoTwo,
+  onStartRefinementGuide,
+  onUpdateRefinementGuide,
   onDeliverFinal,
   onComplete
 }: {
@@ -370,7 +392,8 @@ function OwnerReviewDemoPanel({
   onSaveVideoOneReview: (review: CharacterVideoReviewResult) => void;
   onRestartVideoOne: () => void;
   onDeliverRefinement: () => void;
-  onRequestVideoTwo: () => void;
+  onStartRefinementGuide: () => void;
+  onUpdateRefinementGuide: (patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>) => void;
   onDeliverFinal: () => void;
   onComplete: () => void;
 }) {
@@ -381,6 +404,7 @@ function OwnerReviewDemoPanel({
   const currentStepIndex = Math.min(progress?.currentStepIndex ?? 0, Math.max(result.buildGuideSteps.length - 1, 0));
   const completedStepIds = progress?.completedStepIds ?? [];
   const completedCount = completedStepIds.length;
+  const refinementProgress = session?.refinementGuide ?? createBuddyTrialBuildGuideProgress(result.refinementPlan.refinementBuildGuideSteps.length);
   const [videoReviewState, setVideoReviewState] = useState<CharacterVideoReviewUiState>(() => createInitialCharacterVideoReviewUiState(session));
   const videoReviewStateRef = useRef(videoReviewState);
   const [selectedFrameIDs, setSelectedFrameIDs] = useState<Partial<Record<CharacterVideoViewID, string>>>({});
@@ -710,7 +734,7 @@ function OwnerReviewDemoPanel({
         <h2 id="owner-review-demo-processing">Standardized character views</h2>
         <p>{session?.videoOneReview?.processingSummary ?? videoReviewState.review?.processingSummary ?? "Video #1 is ready for comparison."}</p>
         <CharacterVideoStandardizedViews review={videoReviewState.review ?? session?.videoOneReview ?? null} />
-        <p>Initial build score: {result.refinementPlan.initialBuildScore}/100 based on demo scoring data.</p>
+        <p>Build Match Score is based on available game controls. It is not identity probability.</p>
         <div className="buddy-trial-build-nav">
           <button
             className="buddy-trial-secondary"
@@ -723,7 +747,7 @@ function OwnerReviewDemoPanel({
             Retry Video #1
           </button>
           <button className="buddy-trial-primary" type="button" onClick={onDeliverRefinement}>
-            Show demo refinement
+            See GameFace Review
           </button>
         </div>
       </section>
@@ -732,18 +756,12 @@ function OwnerReviewDemoPanel({
 
   if (state === "REFINEMENT_READY") {
     return (
-      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-refinement">
-        <h2 id="owner-review-demo-refinement">Demo refinement</h2>
-        <ul className="buddy-trial-demo-list">
-          {result.refinementPlan.recommendedChanges.map((change) => (
-            <li key={change.id}>
-              <strong>{change.label}</strong>
-              <span>{change.reason}</span>
-            </li>
-          ))}
-        </ul>
-        <button className="buddy-trial-primary" type="button" onClick={onRequestVideoTwo}>
-          I applied the demo changes
+      <section className="buddy-trial-demo-card buddy-trial-refinement-review" aria-labelledby="owner-review-demo-refinement">
+        <p className="buddy-trial-step-label">Video #1 comparison</p>
+        <h2 id="owner-review-demo-refinement">GAMEFACE REVIEW</h2>
+        <OwnerReviewDemoBuildReview review={result.refinementPlan.buildReview} />
+        <button className="buddy-trial-primary" type="button" onClick={onStartRefinementGuide} disabled={result.refinementPlan.refinementBuildGuideSteps.length === 0}>
+          Update My Player
         </button>
       </section>
     );
@@ -751,13 +769,12 @@ function OwnerReviewDemoPanel({
 
   if (state === "VIDEO_2_REQUIRED") {
     return (
-      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-video-two">
-        <h2 id="owner-review-demo-video-two">Demo Video #2</h2>
-        <p>Fixture second-result metadata is ready to process. This remains excluded from real beta metrics.</p>
-        <button className="buddy-trial-primary" type="button" onClick={onDeliverFinal}>
-          Use fixture Video #2
-        </button>
-      </section>
+      <OwnerReviewDemoRefinementGuide
+        steps={result.refinementPlan.refinementBuildGuideSteps}
+        progress={refinementProgress}
+        onUpdate={onUpdateRefinementGuide}
+        onComplete={onDeliverFinal}
+      />
     );
   }
 
@@ -803,10 +820,22 @@ function OwnerReviewDemoTopThree({ result }: { result: OwnerReviewDemoRecommenda
 }
 
 function OwnerReviewDemoBuildSummary({ result, completedStepIds }: { result: OwnerReviewDemoRecommendationResult; completedStepIds: string[] }) {
+  return <OwnerReviewDemoStepSummary steps={result.buildGuideSteps} completedStepIds={completedStepIds} ariaLabel="All owner-review demo build settings" />;
+}
+
+function OwnerReviewDemoStepSummary({
+  steps,
+  completedStepIds,
+  ariaLabel
+}: {
+  steps: OwnerReviewDemoBuildStep[];
+  completedStepIds: string[];
+  ariaLabel: string;
+}) {
   const completed = new Set(completedStepIds);
   return (
-    <div className="buddy-trial-build-summary" aria-label="All owner-review demo build settings">
-      {result.buildGuideSteps.map((step, index) => (
+    <div className="buddy-trial-build-summary" aria-label={ariaLabel}>
+      {steps.map((step, index) => (
         <article key={step.id}>
           <span>
             Step {index + 1} · {completed.has(step.id) ? "Done" : "Not done"}
@@ -980,6 +1009,175 @@ function CharacterVideoStandardizedViews({ review }: { review: CharacterVideoRev
         </article>
       ))}
     </div>
+  );
+}
+
+function OwnerReviewDemoBuildReview({ review }: { review: OwnerReviewDemoBuildMatchReview }) {
+  return (
+    <div className="buddy-trial-build-review">
+      <div className="buddy-trial-score-panel" aria-label="Initial Build Match">
+        <span>Initial Build Match</span>
+        <strong>{review.buildMatchScore} / 100</strong>
+        <p>{review.scoreLanguage}</p>
+      </div>
+      <div className="buddy-trial-review-columns">
+        <section aria-labelledby="buddy-trial-looks-strong">
+          <h3 id="buddy-trial-looks-strong">LOOKS STRONG</h3>
+          <ul>
+            {review.strengths.map((strength) => (
+              <li key={strength}>{strength}</li>
+            ))}
+          </ul>
+        </section>
+        <section aria-labelledby="buddy-trial-could-be-closer">
+          <h3 id="buddy-trial-could-be-closer">COULD BE CLOSER</h3>
+          {review.weaknesses.length ? (
+            <ul>
+              {review.weaknesses.map((weakness) => (
+                <li key={weakness}>{weakness}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>{review.noChangeReason ?? "No supported changes are recommended from this review."}</p>
+          )}
+        </section>
+      </div>
+      <section className="buddy-trial-adjustments" aria-labelledby="buddy-trial-try-changes">
+        <h3 id="buddy-trial-try-changes">TRY THESE CHANGES</h3>
+        {review.adjustments.length ? (
+          <div className="buddy-trial-adjustment-list">
+            {review.adjustments.map((adjustment) => (
+              <article key={adjustment.id}>
+                <span>{adjustment.label}</span>
+                <strong>
+                  {adjustment.currentValue} {"->"} {adjustment.recommendedValue}
+                </strong>
+                <p>{adjustment.reason}</p>
+                <small>{adjustment.expectedEffect}</small>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p>{review.noChangeReason ?? review.uncertaintyReasons[0] ?? "No defensible adjustment is available from this video."}</p>
+        )}
+        {review.alternativeHeadRecommendation ? (
+          <article className="buddy-trial-alternative-head">
+            <span>Alternative head / preset</span>
+            <strong>{review.alternativeHeadRecommendation.label}</strong>
+            <p>{review.alternativeHeadRecommendation.reason}</p>
+          </article>
+        ) : null}
+      </section>
+      {review.uncertaintyReasons.length ? (
+        <section className="buddy-trial-video-retake" aria-label="Uncertain comparison">
+          <strong>Needs clearer evidence</strong>
+          <ul>
+            {review.uncertaintyReasons.map((reason) => (
+              <li key={reason}>{reason}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+    </div>
+  );
+}
+
+function OwnerReviewDemoRefinementGuide({
+  steps,
+  progress,
+  onUpdate,
+  onComplete
+}: {
+  steps: OwnerReviewDemoBuildStep[];
+  progress: BuddyTrialBuildGuideProgress;
+  onUpdate: (patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>) => void;
+  onComplete: () => void;
+}) {
+  const currentStepIndex = Math.min(progress.currentStepIndex, Math.max(steps.length - 1, 0));
+  const currentStep = steps[currentStepIndex];
+  const completed = new Set(progress.completedStepIds);
+  const isSummary = progress.viewMode === "summary";
+
+  if (steps.length === 0) {
+    return (
+      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-no-refinement">
+        <h2 id="owner-review-demo-no-refinement">No supported changes</h2>
+        <p>This review did not produce a defensible adjustment walkthrough.</p>
+        <button className="buddy-trial-primary" type="button" onClick={onComplete}>
+          Continue
+        </button>
+      </section>
+    );
+  }
+
+  const markStepDone = () => {
+    const nextCompleted = Array.from(new Set([...progress.completedStepIds, currentStep.id]));
+    if (currentStepIndex >= steps.length - 1) {
+      onUpdate({
+        totalStepCount: steps.length,
+        currentStepIndex,
+        completedStepIds: nextCompleted,
+        viewMode: "step"
+      });
+      onComplete();
+      return;
+    }
+    onUpdate({
+      totalStepCount: steps.length,
+      currentStepIndex: currentStepIndex + 1,
+      completedStepIds: nextCompleted,
+      viewMode: "step"
+    });
+  };
+
+  return (
+    <section className="buddy-trial-demo-card buddy-trial-build-guide" aria-labelledby="owner-review-demo-refinement-guide">
+      <p className="buddy-trial-step-label">Update My Player</p>
+      <h2 id="owner-review-demo-refinement-guide">Apply the recommended changes</h2>
+      {isSummary ? (
+        <OwnerReviewDemoStepSummary steps={steps} completedStepIds={progress.completedStepIds} ariaLabel="All owner-review demo build settings" />
+      ) : (
+        <article className="buddy-trial-build-step">
+          <span>
+            Step {currentStepIndex + 1} of {steps.length}
+          </span>
+          <h3>{currentStep.title}</h3>
+          <p>{currentStep.menuPath.join(" > ")}</p>
+          <ul>
+            {currentStep.controls.map((control) => (
+              <li key={`${currentStep.id}-${control.label}`}>
+                <strong>{control.label}</strong>
+                <span>{control.value}</span>
+              </li>
+            ))}
+          </ul>
+          <p>{currentStep.rationale}</p>
+        </article>
+      )}
+      <div className="buddy-trial-build-progress" aria-label="Refinement guide progress">
+        {progress.completedStepIds.length} of {steps.length} changes applied
+      </div>
+      <div className="buddy-trial-build-nav">
+        <button
+          className="buddy-trial-secondary"
+          type="button"
+          onClick={() => onUpdate({ totalStepCount: steps.length, currentStepIndex: Math.max(0, currentStepIndex - 1), viewMode: "step" })}
+          disabled={isSummary || currentStepIndex === 0}
+        >
+          Back
+        </button>
+        <button
+          className="buddy-trial-secondary"
+          type="button"
+          onClick={() => onUpdate({ totalStepCount: steps.length, viewMode: isSummary ? "step" : "summary" })}
+        >
+          {isSummary ? "Show Current Change" : "View All Changes"}
+        </button>
+        <button className="buddy-trial-primary" type="button" onClick={markStepDone}>
+          {currentStepIndex >= steps.length - 1 ? "Done" : completed.has(currentStep.id) ? "Next" : "Done"}
+        </button>
+      </div>
+    </section>
   );
 }
 

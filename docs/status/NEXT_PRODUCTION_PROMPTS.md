@@ -8,9 +8,9 @@ Purpose: have a real independent second verifier complete the Prompt 102 support
 
 ## Codex-Ready Parallel Prompt
 
-`GFM | Q06 | PROMPT 126 | PHASE 03 | Build owner-review demo refinement recommendations`
+`GFM | Q06 | PROMPT 127 | PHASE 04 | Build second character video and before-after comparison`
 
-Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md` as the authoritative owner-review contract. Build on Prompt 125’s first character-video review to make first-result scoring, refinement, second-result, and before/after walkthrough owner-evaluable with test data while production recommendations remain disabled and the real human-verifier gate remains unchanged.
+Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md` as the authoritative owner-review contract. Build on Prompt 126’s measurable first-result refinement experience to add second character-video intake, before/after score comparison, and final resemblance rating while production recommendations remain disabled and the real human-verifier gate remains unchanged.
 
 ## Prompt 124 Result
 
@@ -30,6 +30,18 @@ Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md`
 - Local processing extracts deterministic candidate frames for front, left three-quarter, right three-quarter, and optional profile views, then lets the tester confirm frames when automation is uncertain.
 - Retry is self-service and does not require Wyatt to receive files manually.
 - Persisted trial state stores non-image review summaries only; raw videos, object URLs, thumbnails, and base64 media are not retained by default.
+- Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
+
+## Prompt 126 Result
+
+- Video #1 now produces a customer-facing `GAMEFACE REVIEW`.
+- Demo Build Match Score: `82 / 100`; the copy states this is based on available game controls and is not identity probability.
+- Strengths shown: eye spacing, overall face width, hair.
+- Closer areas shown: jaw appears too wide, nose appears too short, chin projection is too strong.
+- Demo-calibrated changes shown: Jaw Width `67 -> 61`, Nose Height `46 -> 51`, Chin Projection `58 -> 52`, each with an explanation.
+- `Update My Player` opens a step-by-step refinement guide using the same couch-friendly controls as the initial build guide.
+- Tests cover clear improvement, no-change, uncertain, unsupported-slider suppression, alternate-head recommendation, and production/demo separation.
+- Production refinement remains unavailable without a nonempty production catalog and verified control-effect calibration.
 - Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
 
 ## Owner Media Baseline Decision

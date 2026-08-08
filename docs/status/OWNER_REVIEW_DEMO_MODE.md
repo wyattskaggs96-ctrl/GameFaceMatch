@@ -1,7 +1,7 @@
 # Owner Review Demo Mode
 
 **Status:** IMPLEMENTED AS ISOLATED NON-PRODUCTION MODE  
-**Latest prompt:** GFM | Q06 | PROMPT 125 | PHASE 03 | Build first character video review
+**Latest prompt:** GFM | Q06 | PROMPT 126 | PHASE 04 | Build measurable refinement experience
 **Date:** 2026-08-07  
 
 ## Purpose
@@ -99,6 +99,22 @@ Prompt 125 extends the isolated demo lane after build-guide completion:
 
 Raw character videos, raw human face media, object URLs, generated thumbnails, data URLs, and base64 media are not retained by default. The processing remains local/demo and does not create real refinement evidence, real beta metrics, production catalog records, or production recommendations.
 
+## Prompt 126 Measurable Refinement
+
+Prompt 126 extends the isolated demo lane from standardized Video #1 views into a measurable first-result review:
+
+1. `GAMEFACE REVIEW` displays an internal Build Match Score;
+2. score language states that the value is based on available game controls and is not identity probability;
+3. strengths and closer areas are shown in plain language;
+4. demo fixture calibration may recommend exact changes only for controls available through the active owner-review adapter;
+5. the default fixture recommends Jaw Width `67 -> 61`, Nose Height `46 -> 51`, and Chin Projection `58 -> 52`;
+6. each change includes a reason and expected effect;
+7. unsupported fixture sliders are suppressed from the customer plan;
+8. no-change, uncertain, and alternate-head/preset cases are modeled in tests;
+9. `Update My Player` opens a persisted step-by-step refinement guide.
+
+Production refinement remains unavailable until a nonempty verified production catalog and verified control-effect calibration exist. The demo score and fixture calibration are not real matching-study evidence, human verification, production catalog data, or a guarantee of improvement.
+
 ## Isolation Controls
 
 - Production catalog remains `data/catalog/production/catalog_manifest.json`.
@@ -135,6 +151,13 @@ Prompt 125 focused validation includes:
 npm --prefix web run test -- buddy-trial-character-video-review.test.ts buddy-trial-session.test.ts owner-review-demo.test.ts
 NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run build
 CI=1 PLAYWRIGHT_PORT=3199 NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run test:e2e -- tests/e2e/buddy-trial.spec.ts --project=iphone-safari-size
+```
+
+Prompt 126 focused validation includes:
+
+```text
+npm --prefix web run test -- owner-review-demo.test.ts buddy-trial-session.test.ts buddy-trial-character-video-review.test.ts
+CI=1 PLAYWRIGHT_PORT=3202 NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run test:e2e -- tests/e2e/buddy-trial.spec.ts --project=iphone-safari-size
 ```
 
 Full validation should continue to include:

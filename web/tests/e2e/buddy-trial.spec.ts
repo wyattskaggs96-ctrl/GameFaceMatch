@@ -9,32 +9,52 @@ test.describe("Buddy Trial invite route", () => {
   test("enters an active fixture invite, records consent, and resumes without an account", async ({ page }) => {
     await page.goto(`/trial/${activeInvite}`);
 
-    await expect(page.getByRole("heading", { name: /Build your College Football 27 game face/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Build yourself in College Football 27/i })).toBeVisible();
     await expect(page.getByText("Private Buddy Trial")).toBeVisible();
-    await expect(page.getByText("GameFace Match is an independent companion app, not an official game integration.")).toBeVisible();
+    await expect(page.getByText("Scan your face and get the closest in-game appearance settings.")).toBeVisible();
+    await expect(page.getByText("Private beta • Raw face media is not saved by default")).toBeVisible();
+    await expect(page.getByText("Scan in progress")).toHaveCount(0);
+    await expect(page.getByText("What you'll do")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Delete My Trial Data" })).toHaveCount(0);
     if (process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO === "true") {
       await expect(page.getByText("Owner Review Demo — appearance settings are test data.")).toBeVisible();
     } else {
-      await expect(page.getByText(/Real College Football 27 settings are not available yet/i)).toBeVisible();
+      await expect(page.getByText(/Real College Football 27 settings are not available yet/i)).toHaveCount(0);
     }
     await expect(page.getByRole("link", { name: /verifier/i })).toHaveCount(0);
 
     const beginButton = page.getByRole("button", { name: "Start My GameFace" });
-    await expect(beginButton).toBeDisabled();
-
-    await page.getByLabel(/Age eligibility/i).check();
-    await page.getByLabel(/Self or permission confirmation/i).check();
-    await page.getByLabel(/Camera use/i).check();
-    await page.getByLabel(/Face analysis for this recommendation/i).check();
-    await page.getByLabel(/Temporary local processing/i).check();
     await expect(beginButton).toBeEnabled();
     await beginButton.click();
 
-    await expect(page.getByText("Scan in progress")).toBeVisible();
-    await expect(page.getByRole("link", { name: "Continue guided scan" })).toHaveAttribute("href", `/?buddyTrialInvite=${activeInvite}#start`);
+    await expect(page.getByRole("heading", { name: "Before we scan" })).toBeVisible();
+    const continueButton = page.getByRole("button", { name: "Continue" });
+    await expect(continueButton).toBeDisabled();
+    for (const label of [
+      /I meet the age requirement/i,
+      /I'm scanning myself or have permission/i,
+      /I agree to use my camera/i,
+      /I agree to face analysis/i,
+      /scan media is used temporarily/i,
+      /independent companion app/i
+    ]) {
+      const checkbox = page.getByLabel(label);
+      await expect(checkbox).not.toBeChecked();
+      await checkbox.check();
+    }
+    await expect(continueButton).toBeEnabled();
+    await continueButton.click();
 
+    await expect(page.getByText("Ready to scan")).toBeVisible();
+    const scanLink = page.getByRole("link", { name: "Continue guided scan" });
+    await expect(scanLink).toHaveAttribute("href", `/?buddyTrialInvite=${activeInvite}#start`);
+    await scanLink.click();
+    await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Get Started" })).toBeEnabled();
+
+    await page.goto(`/trial/${activeInvite}`);
     await page.reload();
-    await expect(page.getByText("Scan in progress")).toBeVisible();
+    await expect(page.getByText("Ready to scan")).toBeVisible();
     await expect(page.getByText(/same private link/i)).toBeVisible();
   });
 
@@ -51,6 +71,8 @@ test.describe("Buddy Trial invite route", () => {
 
   test("keeps deleted local trial state through refresh", async ({ page }) => {
     await page.goto(`/trial/${activeInvite}`);
+    await page.getByRole("button", { name: "Start My GameFace" }).click();
+    await page.getByText("Privacy details").click();
     await page.getByRole("button", { name: "Delete My Trial Data" }).click();
     await expect(page.getByRole("heading", { name: "Trial data removed" })).toBeVisible();
 
@@ -70,18 +92,23 @@ test.describe("Buddy Trial invite route", () => {
       await page.evaluate(() => window.localStorage.clear());
       await page.reload();
 
-      await expect(page.getByRole("heading", { name: /Build your College Football 27 game face/i })).toBeVisible();
+      await expect(page.getByRole("heading", { name: /Build yourself in College Football 27/i })).toBeVisible();
       await expect(page.getByText("Owner Review Demo — appearance settings are test data.")).toBeVisible();
-      await expect(page.getByRole("button", { name: "Start My GameFace" })).toBeDisabled();
-
-      await page.getByLabel(/Age eligibility/i).check();
-      await page.getByLabel(/Self or permission confirmation/i).check();
-      await page.getByLabel(/Camera use/i).check();
-      await page.getByLabel(/Face analysis for this recommendation/i).check();
-      await page.getByLabel(/Temporary local processing/i).check();
       await page.getByRole("button", { name: "Start My GameFace" }).click();
+      await expect(page.getByRole("heading", { name: "Before we scan" })).toBeVisible();
+      for (const label of [
+        /I meet the age requirement/i,
+        /I'm scanning myself or have permission/i,
+        /I agree to use my camera/i,
+        /I agree to face analysis/i,
+        /scan media is used temporarily/i,
+        /independent companion app/i
+      ]) {
+        await page.getByLabel(label).check();
+      }
+      await page.getByRole("button", { name: "Continue" }).click();
 
-      await expect(page.getByText("Scan in progress")).toBeVisible();
+      await expect(page.getByText("Ready to scan")).toBeVisible();
       await expect(page.getByRole("link", { name: "Continue guided scan" })).toHaveAttribute("href", `/?buddyTrialInvite=${activeInvite}#start`);
 
       await page.evaluate(

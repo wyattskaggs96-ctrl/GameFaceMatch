@@ -59,10 +59,18 @@ interface BuddyTrialEntryProps {
   inviteId: string;
 }
 
+const buddyTrialConsentCopy: Record<keyof BuddyTrialConsentRecord["acknowledgments"], string> = {
+  ageEligibility: "I meet the age requirement for this private trial.",
+  subjectPermission: "I'm scanning myself or have permission.",
+  cameraUse: "I agree to use my camera for this guided scan.",
+  currentFaceAnalysis: "I agree to face analysis for this GameFace recommendation.",
+  temporaryProcessing: "I understand scan media is used temporarily for this trial."
+};
+
 const buddyTrialStageLabels: Record<BuddyTrialState, { label: string; action: string }> = {
   INVITED: { label: "Ready to start", action: "Check the boxes below, then start your scan." },
   CONSENTED: { label: "Ready to scan", action: "Start your GameFace scan when you are ready." },
-  SCAN_IN_PROGRESS: { label: "Scan in progress", action: "Continue the guided scan." },
+  SCAN_IN_PROGRESS: { label: "Ready to scan", action: "Open the guided scan when you are ready." },
   SCAN_COMPLETE: { label: "Scan complete", action: "Get your GameFace settings." },
   RECOMMENDATION_READY: { label: "Settings ready", action: "Review your recommendation and build it in the game." },
   BUILD_IN_PROGRESS: { label: "Build guide", action: "Enter one setting at a time on your console." },
@@ -110,6 +118,8 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const [session, setSession] = useState<BuddyTrialSession | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const [consent, setConsent] = useState<BuddyTrialConsentRecord | null>(null);
+  const [entryStep, setEntryStep] = useState<"landing" | "consent">("landing");
+  const [independentAcknowledged, setIndependentAcknowledged] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -144,9 +154,13 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
 
   const currentConsent = consent ?? session?.consent ?? createInitialBuddyTrialConsent();
   const consentReady = hasRequiredBuddyTrialConsent(currentConsent);
+  const preScanState = !session || session.state === "INVITED";
+  const showLanding = preScanState && entryStep === "landing";
+  const showConsent = preScanState && entryStep === "consent";
+  const showScanHandoff = session?.state === "CONSENTED" || session?.state === "SCAN_IN_PROGRESS";
   const nextAction = session ? getBuddyTrialNextAction(session) : "Review the invite and start when ready.";
   const stageCopy = getBuddyTrialStageCopy(session, nextAction);
-  const showScanAction = !session || session.state === "INVITED" || session.state === "CONSENTED" || session.state === "SCAN_IN_PROGRESS";
+  const showScanAction = showScanHandoff;
   const showOwnerReviewActiveBody = Boolean(ownerReviewDemo && session && !["INVITED", "CONSENTED", "SCAN_IN_PROGRESS"].includes(session.state));
 
   const updateConsent = (id: keyof BuddyTrialConsentRecord["acknowledgments"], checked: boolean) => {
@@ -169,6 +183,11 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     const nextSession =
       consented.state === "CONSENTED" ? transitionBuddyTrialSession(consented, "SCAN_IN_PROGRESS", new Date(), "Buddy Trial scan started.") : consented;
     persistSession(nextSession);
+  };
+
+  const openConsentStep = () => {
+    ensureSession();
+    setEntryStep("consent");
   };
 
   const deleteTrialData = () => {
@@ -366,7 +385,10 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
 
   return (
     <main className="buddy-trial-page">
-      <section className={`buddy-trial-shell${showOwnerReviewActiveBody ? " buddy-trial-shell--active" : ""}`} aria-labelledby="buddy-trial-title">
+      <section
+        className={`buddy-trial-shell${showOwnerReviewActiveBody ? " buddy-trial-shell--active" : ""}${showLanding ? " buddy-trial-shell--landing" : ""}${showConsent ? " buddy-trial-shell--consent" : ""}`}
+        aria-labelledby="buddy-trial-title"
+      >
         <div className="buddy-trial-brand" aria-label="GameFace Match">
           <span className="buddy-trial-mark" aria-hidden="true">
             G
@@ -374,11 +396,13 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
           <span>GameFace Match</span>
         </div>
         <p className="buddy-trial-kicker">Private Buddy Trial</p>
-        <h1 id="buddy-trial-title">{showOwnerReviewActiveBody ? "Your GameFace trial" : "Build your College Football 27 game face."}</h1>
-        {!showOwnerReviewActiveBody ? (
-          <p className="buddy-trial-copy">
-            Scan your face, get a step-by-step College Football 27 build, then show us your player so GameFace Match can help tune the result.
-          </p>
+        <h1 id="buddy-trial-title">{showOwnerReviewActiveBody ? "Your GameFace trial" : showConsent ? "Before we scan" : "Build yourself in College Football 27."}</h1>
+        {showLanding ? (
+          <p className="buddy-trial-copy">Scan your face and get the closest in-game appearance settings.</p>
+        ) : showConsent ? (
+          <p className="buddy-trial-copy">A few quick acknowledgements, then your guided scan starts.</p>
+        ) : !showOwnerReviewActiveBody ? (
+          <p className="buddy-trial-copy">Open the guided scan when you are ready.</p>
         ) : null}
 
         {ownerReviewDemoEnabled ? (
@@ -387,56 +411,72 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
           </div>
         ) : null}
 
-        <div className="buddy-trial-status-card" aria-live="polite">
-          <span className="buddy-trial-status-label">Next up</span>
-          <strong>{stageCopy.label}</strong>
-          <span>{stageCopy.action}</span>
-        </div>
+        {!showLanding && !showConsent ? (
+          <div className="buddy-trial-status-card" aria-live="polite">
+            <span className="buddy-trial-status-label">Next up</span>
+            <strong>{stageCopy.label}</strong>
+            <span>{stageCopy.action}</span>
+          </div>
+        ) : null}
 
         {showOwnerReviewActiveBody ? ownerReviewDemoPanel : null}
 
-        {!showOwnerReviewActiveBody ? (
+        {showLanding ? (
+          <section className="buddy-trial-landing-panel" aria-label="Buddy Trial overview">
+            <p>About 2 minutes.</p>
+            <button className="buddy-trial-primary" type="button" onClick={openConsentStep}>
+              Start My GameFace
+            </button>
+            <p className="buddy-trial-trust-line">Private beta • Raw face media is not saved by default</p>
+          </section>
+        ) : null}
+
+        {showConsent ? (
+          <section className="buddy-trial-consent buddy-trial-consent--short" aria-labelledby="buddy-trial-consent-title">
+            <h2 id="buddy-trial-consent-title">Required scan acknowledgements</h2>
+            {REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => (
+              <label key={id} className="buddy-trial-checkbox">
+                <input
+                  type="checkbox"
+                  checked={currentConsent.acknowledgments[id]}
+                  onChange={(event) => updateConsent(id, event.target.checked)}
+                />
+                <span>
+                  <strong>{buddyTrialConsentCopy[id]}</strong>
+                </span>
+              </label>
+            ))}
+            <label className="buddy-trial-checkbox">
+              <input type="checkbox" checked={independentAcknowledged} onChange={(event) => setIndependentAcknowledged(event.target.checked)} />
+              <span>
+                <strong>I understand GameFace Match is an independent companion app.</strong>
+              </span>
+            </label>
+            <button className="buddy-trial-primary" type="button" onClick={startScan} disabled={!consentReady || !independentAcknowledged}>
+              Continue
+            </button>
+            <details className="buddy-trial-privacy buddy-trial-privacy--compact">
+              <summary>Privacy details</summary>
+              <p>
+                This private trial saves progress and choices in this browser so you can leave Safari, build on the console, and return. Basic use does not
+                require an account. Raw face photos or video are not saved by default.
+              </p>
+              <p>{INDEPENDENT_APP_DISCLAIMER}</p>
+              <ul>
+                {REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => {
+                  const definition = getConsentDefinition(id);
+                  return definition ? <li key={id}>{definition.description}</li> : null;
+                })}
+              </ul>
+              <button className="buddy-trial-secondary" type="button" onClick={deleteTrialData}>
+                Delete My Trial Data
+              </button>
+            </details>
+          </section>
+        ) : null}
+
+        {!showOwnerReviewActiveBody && !showLanding && !showConsent ? (
           <>
-            <section className="buddy-trial-info-grid" aria-label="Trial details">
-              <article>
-                <h2>What you&apos;ll do</h2>
-                <p>Scan, build the recommended player, upload a short result video, then compare the first and updated build.</p>
-              </article>
-              <article>
-                <h2>Camera</h2>
-                <p>Your camera starts only after you tap Start My GameFace.</p>
-              </article>
-              <article>
-                <h2>Your data</h2>
-                <p>Raw face media is temporary by default. Progress is saved so you can leave Safari, build on the console, and return.</p>
-              </article>
-              <article>
-                <h2>Independent app</h2>
-                <p>GameFace Match is an independent companion app, not an official game integration.</p>
-              </article>
-            </section>
-
-            <section className="buddy-trial-consent" aria-labelledby="buddy-trial-consent-title">
-              <h2 id="buddy-trial-consent-title">Before we start</h2>
-              {REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => {
-                const definition = getConsentDefinition(id);
-                return (
-                  <label key={id} className="buddy-trial-checkbox">
-                    <input
-                      type="checkbox"
-                      checked={currentConsent.acknowledgments[id]}
-                      onChange={(event) => updateConsent(id, event.target.checked)}
-                      disabled={session?.state === "SCAN_IN_PROGRESS"}
-                    />
-                    <span>
-                      <strong>{definition?.label}</strong>
-                      <small>{definition?.description}</small>
-                    </span>
-                  </label>
-                );
-              })}
-            </section>
-
             {session?.catalogGate === "production_catalog_unavailable" || (!ownerReviewDemoEnabled && productionCatalogRecordCount === 0) ? (
               <div className="buddy-trial-warning" role="status">
                 Real College Football 27 settings are not available yet. This link can still test the scan, build guide, video review, and deletion flow without
@@ -450,21 +490,20 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
 
         <div className="buddy-trial-actions">
           {showScanAction ? (
-            session?.state === "SCAN_IN_PROGRESS" ? (
+            session?.state === "SCAN_IN_PROGRESS" || session?.state === "CONSENTED" ? (
               <a className="buddy-trial-primary" href={`/?buddyTrialInvite=${encodeURIComponent(inviteId)}#start`}>
                 Continue guided scan
               </a>
-            ) : (
-              <button className="buddy-trial-primary" type="button" onClick={startScan} disabled={!consentReady}>
-                Start My GameFace
-              </button>
-            )
+            ) : null
           ) : null}
-          <button className="buddy-trial-secondary" type="button" onClick={deleteTrialData}>
-            Delete My Trial Data
-          </button>
+          {!showLanding && !showConsent ? (
+            <button className="buddy-trial-secondary" type="button" onClick={deleteTrialData}>
+              Delete My Trial Data
+            </button>
+          ) : null}
         </div>
 
+        {!showLanding && !showConsent ? (
         <details className="buddy-trial-privacy">
           <summary>Privacy details</summary>
           <p>
@@ -472,9 +511,9 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
             face photos or video are not saved by default. Cloud backup, public sharing, model training, and marketing use are not included in this consent.
           </p>
         </details>
+        ) : null}
 
-        <p className="buddy-trial-resume">You can leave and come back with this same private link on this iPhone.</p>
-        <p className="buddy-trial-disclaimer">{INDEPENDENT_APP_DISCLAIMER}</p>
+        {!showLanding && !showConsent ? <p className="buddy-trial-resume">You can leave and come back with this same private link on this iPhone.</p> : null}
       </section>
     </main>
   );

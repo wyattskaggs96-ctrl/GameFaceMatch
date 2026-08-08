@@ -1478,7 +1478,7 @@ p {
   place-items: center;
   width: min(84vw, 340px);
   aspect-ratio: 1;
-  margin: clamp(24px, 6svh, 54px) auto 0;
+  margin: clamp(34px, 7svh, 66px) auto 0;
 }
 
 .setup-segmented-ring {
@@ -1519,14 +1519,14 @@ p {
 .setup-intro-copy {
   align-self: center;
   display: grid;
-  gap: 7px;
+  gap: 10px;
   max-width: 340px;
-  margin: -24px auto 0;
+  margin: 6px auto 0;
   text-align: center;
 }
 
 .setup-brand {
-  margin: 0;
+  margin: 0 0 2px;
   color: rgba(245, 245, 247, 0.64);
   font-size: 0.8rem;
   font-weight: 800;
@@ -1543,7 +1543,7 @@ p {
 .setup-capture-copy h1 {
   margin: 0;
   color: #f5f5f7;
-  font-size: 1.38rem;
+  font-size: 1.48rem;
   line-height: 1.16;
   letter-spacing: 0;
 }
@@ -1556,7 +1556,9 @@ p {
 }
 
 .setup-intro-copy p:last-child {
-  font-size: 1.04rem;
+  max-width: 285px;
+  margin: 0 auto;
+  font-size: 1.02rem;
   line-height: 1.33;
 }
 
@@ -2782,7 +2784,7 @@ p {
 
 .buddy-trial-page {
   min-height: 100svh;
-  padding: max(env(safe-area-inset-top), 24px) 16px max(env(safe-area-inset-bottom), 24px);
+  padding: max(env(safe-area-inset-top), 20px) 16px max(env(safe-area-inset-bottom), 20px);
   background:
     radial-gradient(circle at 50% 18%, rgba(37, 99, 235, 0.24), transparent 34%),
     radial-gradient(circle at 50% 90%, rgba(34, 197, 94, 0.12), transparent 28%),
@@ -2794,13 +2796,19 @@ p {
   display: grid;
   gap: 18px;
   width: min(100%, 430px);
-  min-height: calc(100svh - 48px);
+  min-height: calc(100svh - 40px);
   margin: 0 auto;
   align-content: center;
 }
 
 .buddy-trial-shell--active {
   align-content: start;
+}
+
+.buddy-trial-shell--landing,
+.buddy-trial-shell--consent {
+  align-content: center;
+  gap: 14px;
 }
 
 .buddy-trial-brand {
@@ -2840,6 +2848,14 @@ p {
   letter-spacing: 0;
 }
 
+.buddy-trial-shell--landing h1 {
+  max-width: 9ch;
+}
+
+.buddy-trial-shell--consent h1 {
+  font-size: clamp(2.15rem, 11vw, 3.3rem);
+}
+
 .buddy-trial-shell--active h1 {
   font-size: clamp(2.1rem, 10vw, 3rem);
 }
@@ -2857,9 +2873,9 @@ p {
 
 .buddy-trial-copy {
   margin: 0;
-  max-width: 36rem;
-  font-size: 1.02rem;
-  line-height: 1.55;
+  max-width: 19rem;
+  font-size: 1.08rem;
+  line-height: 1.42;
 }
 
 .buddy-trial-status-card,
@@ -2925,12 +2941,45 @@ p {
   padding: 16px;
 }
 
+.buddy-trial-landing-panel {
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.buddy-trial-landing-panel p {
+  margin: 0;
+  color: #dbeafe;
+  font-weight: 800;
+}
+
+.buddy-trial-trust-line {
+  color: #94a3b8 !important;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.buddy-trial-consent--short {
+  margin-top: 4px;
+  border-radius: 22px;
+  padding: 16px;
+}
+
+.buddy-trial-consent--short h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
 .buddy-trial-checkbox {
   display: grid;
   grid-template-columns: 30px minmax(0, 1fr);
   gap: 12px;
   align-items: start;
-  min-height: 48px;
+  min-height: 44px;
   color: #f8fafc;
 }
 
@@ -2960,11 +3009,13 @@ p {
 }
 
 .buddy-trial-demo-banner {
-  padding: 12px 14px;
+  justify-self: start;
+  padding: 7px 10px;
   border-color: rgba(34, 211, 238, 0.36);
-  background: rgba(8, 47, 73, 0.72);
+  border-radius: 999px;
+  background: rgba(8, 47, 73, 0.62);
   color: #a5f3fc;
-  font-size: 0.88rem;
+  font-size: 0.72rem;
   font-weight: 800;
 }
 
@@ -3619,8 +3670,10 @@ p {
 
 .buddy-trial-primary:disabled {
   cursor: not-allowed;
-  background: #334155;
-  color: #94a3b8;
+  border-color: rgba(148, 163, 184, 0.28);
+  background: rgba(30, 41, 59, 0.86);
+  color: #cbd5e1;
+  opacity: 0.72;
 }
 
 .buddy-trial-secondary {
@@ -3633,11 +3686,28 @@ p {
   padding: 14px 16px;
 }
 
+.buddy-trial-privacy--compact {
+  padding: 4px 0 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
 .buddy-trial-privacy summary {
   min-height: 44px;
   cursor: pointer;
   color: #f8fafc;
   font-weight: 800;
+}
+
+.buddy-trial-privacy ul {
+  display: grid;
+  gap: 7px;
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: #cbd5e1;
+  font-size: 0.88rem;
+  line-height: 1.4;
 }
 
 .buddy-trial-disclaimer,

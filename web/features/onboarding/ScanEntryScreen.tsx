@@ -43,6 +43,7 @@ export function ScanEntryScreen({
   environment,
   previewModeEnabled,
   billingState = "notConfigured",
+  ownerReviewBuddyTrialReady = false,
   onAnalytics
 }: {
   consentState: ConsentState;
@@ -53,21 +54,24 @@ export function ScanEntryScreen({
   environment: ScanEntryEnvironment;
   previewModeEnabled: boolean;
   billingState?: BillingEligibilityState;
+  ownerReviewBuddyTrialReady?: boolean;
   onAnalytics: (name: AnalyticsEventName, payload?: AnalyticsPayload) => void;
 }) {
   const [selectedPlanID, setSelectedPlanID] = useState<ScanEntryPlanID>(DEFAULT_SCAN_ENTRY_PLAN_ID);
   const [isResolving, setIsResolving] = useState(false);
   const decision = useMemo(
     () =>
-      evaluateScanEntryStartGate({
-        selectedPlanID,
-        consentState,
-        billingState,
-        catalogAvailable,
-        environment,
-        previewModeEnabled
-      }),
-    [billingState, catalogAvailable, consentState, environment, previewModeEnabled, selectedPlanID]
+      ownerReviewBuddyTrialReady
+        ? ({ allowed: true, reason: "ready", message: "Buddy Trial consent is complete. Start the guided scan." } as const)
+        : evaluateScanEntryStartGate({
+            selectedPlanID,
+            consentState,
+            billingState,
+            catalogAvailable,
+            environment,
+            previewModeEnabled
+          }),
+    [billingState, catalogAvailable, consentState, environment, ownerReviewBuddyTrialReady, previewModeEnabled, selectedPlanID]
   );
   const selectedPlan = SCAN_ENTRY_PLANS.find((plan) => plan.id === selectedPlanID) ?? SCAN_ENTRY_PLANS[0];
 
@@ -121,12 +125,8 @@ export function ScanEntryScreen({
 
       <div className="setup-intro-copy">
         <p className="setup-brand">GameFace Match</p>
-        <p className="setup-brand-line">From reality to game face.</p>
-        <h1 id="scan-entry-title">Set Up Your GameFace Scan</h1>
-        <p>
-          First, position your face in the camera frame. Then slowly move your head in a circle so we can capture the angles needed for your closest in-game
-          match.
-        </p>
+        <h1 id="scan-entry-title">Set Up Your GameFace</h1>
+        <p>Position your face in the frame. Then slowly follow the on-screen guide.</p>
       </div>
 
       <div className="setup-bottom-actions">
@@ -139,7 +139,7 @@ export function ScanEntryScreen({
           </p>
         ) : null}
         <details className="setup-disclosure">
-          <summary>Access and privacy details</summary>
+          <summary>How the scan works</summary>
           <div className="setup-plan-list" role="radiogroup" aria-label="Scan plan">
             {SCAN_ENTRY_PLANS.map((plan) => {
               const selected = selectedPlanID === plan.id;

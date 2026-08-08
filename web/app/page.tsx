@@ -23,7 +23,13 @@ import { ScreenshotRefinementEntry } from "@/features/refinement/ScreenshotRefin
 import { SettingsPanel } from "@/features/settings/SettingsPanel";
 import { createInitialCaptureSession, type ActiveCaptureSession } from "@/lib/capture/capture-session";
 import { createBrowserCameraService } from "@/lib/capture/browser-camera-service";
-import { getBuddyTrialInvite, markBuddyTrialScanCompleteInStorage } from "@/lib/buddy-trial/buddy-trial-session";
+import {
+  createBuddyTrialStorageKey,
+  getBuddyTrialInvite,
+  hasRequiredBuddyTrialConsent,
+  markBuddyTrialScanCompleteInStorage,
+  parseBuddyTrialSession
+} from "@/lib/buddy-trial/buddy-trial-session";
 import { createBundledCatalogRepository, type CatalogRuntimeStatus } from "@/lib/catalog/catalog-repository";
 import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
 import {
@@ -173,6 +179,8 @@ export default function HomePage() {
   const [profileSaveErrorMessage, setProfileSaveErrorMessage] = useState<string | null>(null);
   const [captureRecoveryNotice, setCaptureRecoveryNotice] = useState<string | null>(null);
   const [offlineRecoveryStatus, setOfflineRecoveryStatus] = useState<OfflineRecoveryStatus | null>(null);
+  const [buddyTrialInviteId, setBuddyTrialInviteId] = useState<string | null>(null);
+  const [buddyTrialScanReady, setBuddyTrialScanReady] = useState(false);
   const [analyticsRevision, setAnalyticsRevision] = useState(0);
   const [performanceRevision, setPerformanceRevision] = useState(0);
   const cameraService = useMemo(() => createBrowserCameraService(), []);
@@ -192,6 +200,7 @@ export default function HomePage() {
     NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO: process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO,
     NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: process.env.NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV
   });
+  const ownerReviewBuddyTrialInviteReady = ownerReviewDemoEnabled && buddyTrialScanReady;
   const consentReady = hasRequiredCaptureConsent(consentState);
   const navItems = isDevelopment
     ? [
@@ -316,6 +325,21 @@ export default function HomePage() {
   useEffect(() => {
     refreshSavedProfileState();
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setBuddyTrialInviteId(new URLSearchParams(window.location.search).get("buddyTrialInvite"));
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !buddyTrialInviteId || getBuddyTrialInvite(buddyTrialInviteId).status !== "active") {
+      setBuddyTrialScanReady(false);
+      return;
+    }
+    const storedSession = parseBuddyTrialSession(window.localStorage.getItem(createBuddyTrialStorageKey(buddyTrialInviteId)));
+    const consentedState = storedSession?.state === "CONSENTED" || storedSession?.state === "SCAN_IN_PROGRESS";
+    setBuddyTrialScanReady(Boolean(storedSession && consentedState && hasRequiredBuddyTrialConsent(storedSession.consent)));
+  }, [buddyTrialInviteId]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -850,6 +874,7 @@ export default function HomePage() {
             catalogAvailable={!catalogIsEmpty}
             environment={scanEntryEnvironment}
             previewModeEnabled={scanEntryPreviewModeEnabled}
+            ownerReviewBuddyTrialReady={ownerReviewBuddyTrialInviteReady}
             onAnalytics={trackAnalytics}
             onCancel={() => navigate("home")}
             onReadyToPrepare={() => {

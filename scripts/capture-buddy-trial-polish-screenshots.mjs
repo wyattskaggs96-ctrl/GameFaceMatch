@@ -5,7 +5,7 @@ import { createRequire } from "node:module";
 import { spawn } from "node:child_process";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const OUTPUT_DIR = path.join(ROOT, "docs/status/visual-evidence/prompt131");
+const OUTPUT_DIR = path.join(ROOT, process.env.GFM_BUDDY_TRIAL_SCREENSHOT_OUTPUT_DIR ?? "docs/status/visual-evidence/prompt131");
 const PORT = Number(process.env.GFM_BUDDY_TRIAL_SCREENSHOT_PORT ?? 3213);
 const HOST = "127.0.0.1";
 const BASE_URL = process.env.GFM_BUDDY_TRIAL_SCREENSHOT_BASE_URL ?? `http://${HOST}:${PORT}`;
@@ -45,57 +45,70 @@ const states = [
     id: "01-invite",
     path: `/trial/${INVITE_ID}`,
     setup: clearTrial,
-    waitFor: "Build your College Football 27 game face."
+    waitFor: "Build yourself in College Football 27."
   },
   {
-    id: "02-camera-handoff",
+    id: "02-consent",
+    path: `/trial/${INVITE_ID}`,
+    setup: async (page) => {
+      await clearTrial(page);
+      await page.goto(`${BASE_URL}/trial/${INVITE_ID}`, { waitUntil: "networkidle" });
+      await disableMotion(page);
+      await page.getByRole("button", { name: "Start My GameFace" }).click();
+      return false;
+    },
+    waitFor: "Before we scan"
+  },
+  {
+    id: "03-camera-handoff",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "SCAN_IN_PROGRESS"),
     waitFor: "Continue guided scan"
   },
   {
-    id: "03-guided-intro",
-    path: "/#start",
-    waitFor: "Set Up Your GameFace Scan"
+    id: "04-guided-intro",
+    path: `/?buddyTrialInvite=${INVITE_ID}#start`,
+    setup: (page) => setTrialSession(page, "SCAN_IN_PROGRESS"),
+    waitFor: "Set Up Your GameFace"
   },
   {
-    id: "04-guided-active",
+    id: "05-guided-active",
     path: "/?setupVisualState=scan-partial#capture",
     waitFor: "Move your head slowly to complete the circle."
   },
   {
-    id: "05-processing",
+    id: "06-processing",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "SCAN_COMPLETE"),
     waitFor: "Building your GameFace..."
   },
   {
-    id: "06-result",
+    id: "07-result",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "RECOMMENDATION_READY"),
     waitFor: "Your GameFace recommendation"
   },
   {
-    id: "07-build-step",
+    id: "08-build-step",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "BUILD_IN_PROGRESS", { buildGuide: buildGuideProgress({ currentStepIndex: 2 }) }),
     waitFor: "Build This in College Football 27"
   },
   {
-    id: "08-build-all-settings",
+    id: "09-build-all-settings",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "BUILD_IN_PROGRESS", { buildGuide: buildGuideProgress({ viewMode: "summary", currentStepIndex: 2 }) }),
     waitFor: "Open Road to Glory"
   },
   {
-    id: "09-video-one-required",
+    id: "10-video-one-required",
     path: `/trial/${INVITE_ID}`,
     setup: (page) =>
       setTrialSession(page, "VIDEO_1_REQUIRED", { buildGuide: buildGuideProgress({ completedStepIds: buildStepIds, currentStepIndex: buildStepIds.length - 1 }) }),
     waitFor: "LET'S SEE HOW WE DID"
   },
   {
-    id: "10-video-error",
+    id: "11-video-error",
     path: `/trial/${INVITE_ID}`,
     setup: async (page) => {
       await setTrialSession(page, "VIDEO_1_REQUIRED", { buildGuide: buildGuideProgress({ completedStepIds: buildStepIds, currentStepIndex: buildStepIds.length - 1 }) });
@@ -111,25 +124,25 @@ const states = [
     waitFor: "Try another video"
   },
   {
-    id: "11-video-one-views",
+    id: "12-video-one-views",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "VIDEO_1_PROCESSING", { videoOneReview: characterVideoReview(1) }),
     waitFor: "GameFace found these views"
   },
   {
-    id: "12-refinement-review",
+    id: "13-refinement-review",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "REFINEMENT_READY", { videoOneReview: characterVideoReview(1) }),
     waitFor: "GAMEFACE REVIEW"
   },
   {
-    id: "13-refinement-guide",
+    id: "14-refinement-guide",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "VIDEO_2_REQUIRED", { refinementGuide: buildGuideProgress({ totalStepCount: 3, currentStepIndex: 1 }) }),
     waitFor: "Apply the recommended changes"
   },
   {
-    id: "14-video-two-required",
+    id: "15-video-two-required",
     path: `/trial/${INVITE_ID}`,
     setup: (page) =>
       setTrialSession(page, "VIDEO_2_REQUIRED", {
@@ -138,13 +151,13 @@ const states = [
     waitFor: "SHOW US THE UPDATED PLAYER"
   },
   {
-    id: "15-final-result",
+    id: "16-final-result",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "FINAL_RESULT_READY", { videoOneReview: characterVideoReview(1), videoTwoReview: characterVideoReview(2) }),
     waitFor: "YOUR GAMEFACE RESULT"
   },
   {
-    id: "16-complete",
+    id: "17-complete",
     path: `/trial/${INVITE_ID}`,
     setup: (page) => setTrialSession(page, "COMPLETE", { finalOutcome: finalOutcome() }),
     waitFor: "GameFace complete."
@@ -223,7 +236,7 @@ try {
         state: state.id,
         viewport: viewport.id,
         path: state.path,
-        screenshot: `docs/status/visual-evidence/prompt131/${filename}`
+        screenshot: path.relative(ROOT, outputPath)
       });
       await page.close();
     }

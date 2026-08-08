@@ -14,6 +14,7 @@ import {
   createBuddyTrialBuildGuideProgress,
   getBuddyTrialInvite,
   hasRequiredBuddyTrialConsent,
+  isOwnerGeneratedBuddyTrialInvite,
   markBuddyTrialScanCompleteInStorage,
   REQUIRED_BUDDY_TRIAL_CONSENTS,
   serializeBuddyTrialSession,
@@ -48,6 +49,19 @@ describe("buddy trial session contract", () => {
     expect(getBuddyTrialInvite(BUDDY_TRIAL_EXPIRED_INVITE_ID, now).status).toBe("expired");
     expect(getBuddyTrialInvite(BUDDY_TRIAL_USED_INVITE_ID, now).status).toBe("used");
     expect(getBuddyTrialInvite("not-a-real-invite", now).status).toBe("invalid");
+  });
+
+  it("accepts non-guessable owner-created Buddy Trial invites without changing fixture invite semantics", () => {
+    const inviteId = "btv1_owner_0123456789abcdef0123456789abcdef";
+    expect(isOwnerGeneratedBuddyTrialInvite(inviteId)).toBe(true);
+    expect(isOwnerGeneratedBuddyTrialInvite("btv1_owner_short")).toBe(false);
+    expect(getBuddyTrialInvite(inviteId, new Date("2026-08-07T12:00:00.000Z"))).toMatchObject({
+      status: "active",
+      invite: {
+        inviteId,
+        label: "Owner-created Buddy Trial"
+      }
+    });
   });
 
   it("uses one local storage namespace per invite", () => {

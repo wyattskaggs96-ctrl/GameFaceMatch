@@ -4,10 +4,10 @@
 **Last reconciled:** 2026-08-07
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 128 trial learning and optimization loop
+**Repository checkpoint reviewed:** Prompt 129 owner trial command center
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
-**Current active phase:** supported-subset human verifier execution, Buddy Trial owner-review loop, privacy-safe trial learning, and production-catalog gatekeeping
+**Current active phase:** supported-subset human verifier execution, Buddy Trial owner-review operations, privacy-safe trial learning, and production-catalog gatekeeping
 **Exact next action:** `docs/status/NEXT_ACTION.md`
 
 This is the single current operational status source. Older audits, readiness reports, prompt reports, and closeouts are historical unless this document or the machine-readable files linked below explicitly cite them as current evidence.
@@ -16,7 +16,7 @@ This is the single current operational status source. Older audits, readiness re
 ```json
 {
   "schemaVersion": "current-project-state-v3",
-  "repositoryCheckpoint": "PROMPT_128_TRIAL_LEARNING_OPTIMIZATION_LOOP",
+  "repositoryCheckpoint": "PROMPT_129_OWNER_TRIAL_COMMAND_CENTER",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -77,6 +77,8 @@ Prompt 127 completes the owner-review before/after validation loop in `OWNER_REV
 
 Prompt 128 adds the privacy-safe Buddy Trial learning and offline optimization loop. Completed trials can now produce a structured learning record containing pseudonymous trial ID, capture quality, coarse derived-measurement bins, recommendation/model/catalog versions, initial settings, Video #1 and Video #2 comparison summaries, before/after scores, refinement changes, numeric delta, tester preference, resemblance rating, optional scrubbed feedback, and retry/error events. Raw human scan media, raw character video, object URLs, thumbnails, base64 media, raw landmarks, and exact facial-measurement values remain excluded by default. Product-improvement/model-training consent is separate from normal trial consent. `OWNER_REVIEW_DEMO` learning records are tagged as demo-only and excluded from real beta metrics and production optimization. Offline reports may propose matching-weight, calibration, or ranking changes, but every proposal requires owner approval, retained-case validation, versioning, and rollback before any production use.
 
+Prompt 129 adds the internal owner Buddy Trial command center at `/owner/trials`. Wyatt can run `npm run owner:trials:start`, open `http://localhost:3000/owner/trials`, create numbered opaque Buddy Trial invites, copy invite links or text-message copy, inspect browser-local progress, record whether a trial was unassisted or owner-helped, expire/revoke/delete local trial records, and export structured results. The dashboard reads the existing Buddy Trial local session contract, shows demo versus real-catalog mode, calculates progress and score/rating metrics, and does not expose raw face images or raw character videos by default. It is development-only and does not enforce remote server revocation, deploy persistence, create production records, or enable real recommendations.
+
 Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media inventory as the final owner-provided media baseline for the initial product launch. Additional Wyatt recordings are no longer an initial-launch prerequisite. Historical recapture audits remain useful evidence-quality references, but remaining recapture tasks are reclassified as known evidence limitations, verifier-confirmation tasks, user-feedback learning opportunities, post-launch improvements, or unsupported option/category gaps where evidence is insufficient.
 
 ## Actually Working
@@ -98,6 +100,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Owner Review Demo mode exists for Wyatt-only product evaluation before real CF27 production catalog availability. It is powered by `web/lib/owner-review-demo/owner-review-demo.ts` and `data/demo/owner-review-demo-catalog.json`, displays an explicit demo banner, and keeps demo analytics/learning out of real beta metrics and production matching weights.
 - Owner Review Demo scan-to-build journey now reaches a complete one-link customer path from invite to scan-complete checkpoint, synthetic recommendation result, exact settings, step-by-step build walkthrough, persisted progress, build-guide-complete handoff, first character video upload/recording entry, local validation, retry, standardized character-view review, measurable first-result score, exact refinement changes, step-by-step refinement instructions, second character video entry, before/after score comparison, user preference, resemblance rating, and final completion summary.
 - Buddy Trial learning records and an offline optimization report generator exist. The loop can retain consented structured outcomes and propose versioned matching-weight, calibration, or ranking changes for later owner-approved evaluation, while preserving demo exclusion and preventing automatic production mutation.
+- Internal owner trial command center exists at `/owner/trials` for local owner operations over Buddy Trial invites, progress, intervention tracking, metrics, and structured exports.
 - College Football 27 second-verifier decision workspace exists in the internal Phase 0 panel. It loads the canonical 92-record queue, supports filters/search/native-order navigation, shows evidence and blocker details, records local verifier drafts with the approved non-production statuses, exports/imports draft decisions, and keeps every draft fail-closed.
 - College Football 27 evidence recapture package exists as a deterministic historical owner/verifier worklist. A follow-on existing-media verification gap audit exhausts the current videos, source-media records, derivative frames, timelines, and queue records. It maps 138 audit rows: 14 video-file rows, 92 candidate rows, and 32 evidence-requirement rows. All 92 candidates remain ready for second-verifier confirmation from existing evidence, 7 requirements required frame re-extraction instead of new capture, and historical minimum recapture tasks are now evidence limitations or post-launch improvement opportunities rather than owner launch prerequisites.
 - College Football 27 frame re-extraction packet exists for the 7 recoverable requirements from the existing-media audit. These derivative frames are marked `NOT_PRODUCTION_DATA` and `OBSERVED_PENDING_VERIFICATION`; they reduce unnecessary recapture but do not replace human verification.
@@ -208,6 +211,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Owner verifier launch checklist: `docs/verification/OWNER_VERIFIER_LAUNCH_CHECKLIST.md`
 - Owner Review Demo mode: `docs/status/OWNER_REVIEW_DEMO_MODE.md`
 - Buddy Trial learning loop: `docs/status/BUDDY_TRIAL_LEARNING_OPTIMIZATION_LOOP.md`
+- Owner trial command center: `docs/status/OWNER_TRIAL_COMMAND_CENTER.md`
 - Buddy Trial V1 contract: `docs/Product/BUDDY_TRIAL_V1.md`
 - Buddy Trial persistence contract: `web/lib/buddy-trial/buddy-trial-persistence.ts`
 - Buddy Trial route pattern: `/trial/[inviteId]`

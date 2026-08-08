@@ -9,6 +9,7 @@ export const BUDDY_TRIAL_STORAGE_PREFIX = "gfm:buddy-trial:v1";
 export const BUDDY_TRIAL_ACTIVE_INVITE_ID = "btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0";
 export const BUDDY_TRIAL_EXPIRED_INVITE_ID = "btv1_2a6d4f8c1b3e5a7099e8d7c6b5a43210";
 export const BUDDY_TRIAL_USED_INVITE_ID = "btv1_7c9a1e5d3f8b2460a4c2e1d9b8f60531";
+export const BUDDY_TRIAL_OWNER_INVITE_PREFIX = "btv1_owner_";
 
 export const BUDDY_TRIAL_STATES = [
   "INVITED",
@@ -166,6 +167,19 @@ const allowedTransitions: Record<BuddyTrialState, BuddyTrialState[]> = {
 
 export function getBuddyTrialInvite(inviteId: string, now = new Date()): BuddyTrialInviteResolution {
   const invite = BUDDY_TRIAL_INVITES.find((item) => item.inviteId === inviteId) ?? null;
+  if (!invite && isOwnerGeneratedBuddyTrialInvite(inviteId)) {
+    return {
+      status: "active",
+      invite: {
+        inviteId,
+        label: "Owner-created Buddy Trial",
+        status: "active",
+        createdAt: now.toISOString(),
+        expiresAt: "2099-12-31T23:59:59.000Z"
+      },
+      message: "This owner-created Buddy Trial invite is active."
+    };
+  }
   if (!invite) {
     return {
       status: "invalid",
@@ -195,6 +209,11 @@ export function getBuddyTrialInvite(inviteId: string, now = new Date()): BuddyTr
     invite,
     message: "This Buddy Trial invite is active."
   };
+}
+
+export function isOwnerGeneratedBuddyTrialInvite(inviteId: string) {
+  const suffix = inviteId.startsWith(BUDDY_TRIAL_OWNER_INVITE_PREFIX) ? inviteId.slice(BUDDY_TRIAL_OWNER_INVITE_PREFIX.length) : "";
+  return /^[a-f0-9]{32}$/i.test(suffix);
 }
 
 export function createBuddyTrialStorageKey(inviteId: string) {

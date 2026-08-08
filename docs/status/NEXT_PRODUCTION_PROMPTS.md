@@ -8,9 +8,9 @@ Purpose: have a real independent second verifier complete the Prompt 102 support
 
 ## Codex-Ready Parallel Prompt
 
-`GFM | Q06 | PROMPT 129 | PHASE 05 | Package owner-review demo for first hands-on walkthrough`
+`GFM | Q06 | PROMPT 130 | PHASE 05 | Run owner-review demo walkthrough and record findings`
 
-Use `docs/Product/BUDDY_TRIAL_V1.md`, `docs/status/OWNER_REVIEW_DEMO_MODE.md`, and `docs/status/BUDDY_TRIAL_LEARNING_OPTIMIZATION_LOOP.md` as the authoritative owner-review contract. Package the completed owner-review demo journey with a simple launch command, walkthrough checklist, and validation notes so Wyatt can personally exercise the full invite-to-final-result loop before the production CF27 catalog is available.
+Use `docs/Product/BUDDY_TRIAL_V1.md`, `docs/status/OWNER_REVIEW_DEMO_MODE.md`, `docs/status/BUDDY_TRIAL_LEARNING_OPTIMIZATION_LOOP.md`, and `docs/status/OWNER_TRIAL_COMMAND_CENTER.md` as the authoritative owner-review contract. Run the owner-review demo through the command center, record Wyatt-facing findings, and keep production catalog/recommendation gates unchanged.
 
 ## Prompt 124 Result
 
@@ -62,6 +62,18 @@ Use `docs/Product/BUDDY_TRIAL_V1.md`, `docs/status/OWNER_REVIEW_DEMO_MODE.md`, a
 - `OWNER_REVIEW_DEMO` learning records are tagged as demo-only and excluded from real beta metrics and production optimization.
 - Offline optimization reports may propose versioned matching-weight, calibration, or ranking changes from consented non-demo outcomes only.
 - Candidate changes require owner approval, retained-case validation, versioning, and rollback before any production use.
+- Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
+
+## Prompt 129 Result
+
+- Internal owner route: `/owner/trials`.
+- Start command: `npm run owner:trials:start`.
+- The dashboard creates numbered opaque Buddy Trial invites and displays labels such as `Buddy Trial #001`.
+- Owner actions include copy invite link, copy text message, expire invite, revoke invite, inspect progress, delete local trial data, record owner intervention, and export structured results.
+- The table displays invited, opened, consent, scan, recommendation, build guide, Video #1, refinement, Video #2, final score, resemblance rating, complete, errors, and owner intervention.
+- Summary metrics include trials started, scans completed, builds completed, Video #1 completion, refinement completion, trials completed, average initial score, average final score, average improvement, average resemblance rating, and unassisted completion rate.
+- Exports are structured and mark `rawMediaIncluded: false`.
+- The route is development-only and browser-local; server-enforced remote revoke/expire still requires deployed persistence.
 - Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
 
 ## Owner Media Baseline Decision

@@ -46,6 +46,7 @@
   "cf27:supported-subset-verifier-session:check": "node scripts/cf27-supported-subset-verifier-session.mjs --check",
   "cf27:supported-subset-verifier-session:validate-export": "node scripts/cf27-supported-subset-verifier-session.mjs --validate-export",
   "verifier:start": "npm --prefix web run dev -- --hostname 127.0.0.1 --port 3000",
+  "owner:trials:start": "NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run dev -- --hostname 127.0.0.1 --port 3000",
   "media-audit:all-videos": "node scripts/direct-all-video-content-audit.mjs",
   "media-audit:all-videos:check": "node scripts/direct-all-video-content-audit.mjs --check",
   "cf27:primary-review": "node scripts/cf27-primary-review-status.mjs",

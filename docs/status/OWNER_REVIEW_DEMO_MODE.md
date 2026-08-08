@@ -146,6 +146,24 @@ Demo learning records can store non-image structured fields such as before/after
 
 Only consented, non-demo completed trials can enter the offline optimization dataset. Even then, optimization reports can only propose versioned matching-weight, calibration, or ranking changes. They cannot deploy those changes or mutate production behavior.
 
+## Prompt 129 Owner Command Center
+
+Prompt 129 adds the internal owner command center:
+
+```text
+http://localhost:3000/owner/trials
+```
+
+Start it with:
+
+```text
+npm run owner:trials:start
+```
+
+Wyatt can create numbered Buddy Trial invites, copy invite links, copy text-message copy, inspect browser-local progress, record whether the trial was unassisted or owner-helped, expire/revoke/delete local trial records, and export structured results. The dashboard clearly labels `OWNER_REVIEW_DEMO` trials and does not display raw face images or raw character videos by default.
+
+The route is internal and development-only. Server-enforced remote invite revocation still requires deployed persistence.
+
 ## Isolation Controls
 
 - Production catalog remains `data/catalog/production/catalog_manifest.json`.

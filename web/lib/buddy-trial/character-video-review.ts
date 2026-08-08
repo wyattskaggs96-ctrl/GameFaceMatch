@@ -65,7 +65,7 @@ export interface StandardizedCharacterVideoView {
 
 export interface CharacterVideoReviewResult {
   schemaVersion: typeof CHARACTER_VIDEO_REVIEW_SCHEMA_VERSION;
-  iteration: 1;
+  iteration: 1 | 2;
   status: CharacterVideoProcessingStatus;
   metadata: CharacterVideoMetadata;
   validation: CharacterVideoValidationResult;
@@ -127,6 +127,13 @@ export function validateCharacterVideoMetadata(metadata: CharacterVideoMetadata)
 }
 
 export function buildDeterministicCharacterFrameCandidates(metadata: CharacterVideoMetadata): CharacterVideoFrameCandidate[] {
+  return buildDeterministicCharacterFrameCandidatesForIteration(metadata, 1);
+}
+
+export function buildDeterministicCharacterFrameCandidatesForIteration(
+  metadata: CharacterVideoMetadata,
+  iteration: CharacterVideoReviewResult["iteration"]
+): CharacterVideoFrameCandidate[] {
   const duration = Math.max(metadata.durationSeconds ?? 0, CHARACTER_VIDEO_MIN_DURATION_SECONDS);
   const frameSize = (metadata.width ?? 0) >= 360 && (metadata.height ?? 0) >= 360 ? "usable" : "small";
   const plan: Array<[CharacterVideoViewID, number]> = [
@@ -138,7 +145,7 @@ export function buildDeterministicCharacterFrameCandidates(metadata: CharacterVi
   ];
 
   return plan.map(([expectedView, position], index) => ({
-    frameID: `character-video-1-${expectedView}-${index + 1}`,
+    frameID: `character-video-${iteration}-${expectedView}-${index + 1}`,
     timestampSeconds: Math.round(duration * position * 1000) / 1000,
     expectedView,
     quality: {
@@ -155,12 +162,14 @@ export function buildDeterministicCharacterFrameCandidates(metadata: CharacterVi
 
 export function createCharacterVideoReviewResult(input: {
   metadata: CharacterVideoMetadata;
+  iteration?: CharacterVideoReviewResult["iteration"];
   candidateFrames?: CharacterVideoFrameCandidate[];
   selectedFrameIDsByView?: Partial<Record<CharacterVideoViewID, string>>;
   objectUrlsRevokedAfterProcessing?: boolean;
 }): CharacterVideoReviewResult {
   const validation = validateCharacterVideoMetadata(input.metadata);
-  const candidateFrames = input.candidateFrames ?? buildDeterministicCharacterFrameCandidates(input.metadata);
+  const iteration = input.iteration ?? 1;
+  const candidateFrames = input.candidateFrames ?? buildDeterministicCharacterFrameCandidatesForIteration(input.metadata, iteration);
   const standardizedViews =
     validation.status === "blocked"
       ? []
@@ -175,7 +184,7 @@ export function createCharacterVideoReviewResult(input: {
 
   return {
     schemaVersion: CHARACTER_VIDEO_REVIEW_SCHEMA_VERSION,
-    iteration: 1,
+    iteration,
     status,
     metadata: input.metadata,
     validation,

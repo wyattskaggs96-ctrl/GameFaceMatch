@@ -55,6 +55,31 @@ export interface OwnerReviewDemoRefinementPlan {
   rawMediaRetained: false;
 }
 
+export interface OwnerReviewDemoBeforeAfterResult {
+  schemaVersion: "owner-review-demo-before-after-v1";
+  initialBuildScore: number;
+  refinedBuildScore: number;
+  scoreDelta: number;
+  trend: "improvement" | "no_change" | "regression";
+  improved: string[];
+  stillDifferent: string[];
+  scoreLanguage: string;
+  finalSettings: Array<{
+    label: string;
+    value: string;
+    menuPath: string[];
+  }>;
+  comparedInputs: {
+    derivedFaceProfile: string;
+    initialRecommendation: string;
+    videoOneStandardizedViews: string;
+    videoTwoStandardizedViews: string;
+  };
+  productionEligible: false;
+  rawMediaRetained: false;
+  provenance: typeof OWNER_REVIEW_DEMO_MODE;
+}
+
 export interface OwnerReviewDemoRefinementAdjustment {
   id: string;
   controlID: string;
@@ -98,6 +123,7 @@ export interface OwnerReviewDemoBuildMatchReview {
 }
 
 export type OwnerReviewDemoRefinementScenario = "clear_improvement" | "no_change" | "uncertain" | "alternative_head";
+export type OwnerReviewDemoBeforeAfterScenario = "improvement" | "no_change" | "regression";
 
 export interface ProductionRefinementAvailability {
   available: boolean;
@@ -127,6 +153,7 @@ export interface OwnerReviewDemoRecommendationResult {
   buildInstructions: BuildInstruction[];
   buildGuideSteps: OwnerReviewDemoBuildStep[];
   refinementPlan: OwnerReviewDemoRefinementPlan;
+  beforeAfterResult: OwnerReviewDemoBeforeAfterResult;
   analyticsPayload: ReturnType<typeof createOwnerReviewDemoAnalyticsPayload>;
 }
 
@@ -184,6 +211,7 @@ export function createOwnerReviewDemoRecommendationResult(): OwnerReviewDemoReco
     buildInstructions: createBuildInstructions(bestMatch),
     buildGuideSteps: createOwnerReviewDemoBuildGuideSteps(bestMatch.catalogItem),
     refinementPlan: createOwnerReviewDemoRefinementPlan(bestMatch.catalogItem),
+    beforeAfterResult: createOwnerReviewDemoBeforeAfterResult(bestMatch.catalogItem),
     analyticsPayload: createOwnerReviewDemoAnalyticsPayload("owner_review_demo_recommendation_rendered")
   };
 }
@@ -407,6 +435,52 @@ function createOwnerReviewDemoRefinementPlan(item: GameCatalogItem): OwnerReview
   };
 }
 
+export function createOwnerReviewDemoBeforeAfterResult(
+  item: GameCatalogItem,
+  scenario: OwnerReviewDemoBeforeAfterScenario = "improvement"
+): OwnerReviewDemoBeforeAfterResult {
+  const initialBuildScore = 82;
+  const refinedBuildScore = scenario === "regression" ? 77 : scenario === "no_change" ? 82 : 91;
+  const scoreDelta = refinedBuildScore - initialBuildScore;
+  const trend: OwnerReviewDemoBeforeAfterResult["trend"] = scoreDelta > 0 ? "improvement" : scoreDelta < 0 ? "regression" : "no_change";
+  const finalSettings = createOwnerReviewDemoFinalSettings(item);
+  const scenarioCopy = {
+    improvement: {
+      improved: ["Jaw proportion", "Nose length", "Chin projection"],
+      stillDifferent: ["Brow height"]
+    },
+    no_change: {
+      improved: [],
+      stillDifferent: ["Jaw proportion", "Nose length", "Chin projection"]
+    },
+    regression: {
+      improved: ["Hair and skin presentation stayed consistent"],
+      stillDifferent: ["Jaw proportion moved farther away", "Nose length is still short", "Chin projection remains too strong"]
+    }
+  }[scenario];
+
+  return {
+    schemaVersion: "owner-review-demo-before-after-v1",
+    initialBuildScore,
+    refinedBuildScore,
+    scoreDelta,
+    trend,
+    improved: scenarioCopy.improved,
+    stillDifferent: scenarioCopy.stillDifferent,
+    scoreLanguage: "Build Match Score compares the created character to the derived face profile using available game controls. It is not identity probability.",
+    finalSettings,
+    comparedInputs: {
+      derivedFaceProfile: "owner-review-demo-profile-v1",
+      initialRecommendation: item.stableInternalID,
+      videoOneStandardizedViews: "buddy-trial-video-1-standardized-views",
+      videoTwoStandardizedViews: "buddy-trial-video-2-standardized-views"
+    },
+    productionEligible: false,
+    rawMediaRetained: false,
+    provenance: OWNER_REVIEW_DEMO_MODE
+  };
+}
+
 export function createOwnerReviewDemoBuildMatchReview(
   item: GameCatalogItem,
   scenario: OwnerReviewDemoRefinementScenario = "clear_improvement"
@@ -584,6 +658,22 @@ function createOwnerReviewDemoRefinementBuildGuideSteps(adjustments: OwnerReview
       rationale: adjustment.reason
     })
   );
+}
+
+function createOwnerReviewDemoFinalSettings(item: GameCatalogItem): OwnerReviewDemoBeforeAfterResult["finalSettings"] {
+  const initial = createOwnerReviewDemoSettings(item).map((setting) => ({
+    label: setting.category,
+    value: setting.value,
+    menuPath: setting.menuPath
+  }));
+  const refined = ownerReviewDemoCalibrationAdjustments()
+    .filter((adjustment) => adjustment.availableInActiveCatalogAdapter)
+    .map((adjustment) => ({
+      label: adjustment.label,
+      value: adjustment.recommendedValue,
+      menuPath: adjustment.menuPath
+    }));
+  return [...initial.filter((setting) => !refined.some((adjustment) => adjustment.label.toLowerCase() === setting.label.toLowerCase())), ...refined];
 }
 
 export function evaluateProductionRefinementAvailability(input: {

@@ -6,6 +6,7 @@ import { getDeploymentRuntimeConfig } from "@/lib/config/deployment";
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
 import {
   createOwnerReviewDemoAnalyticsPayload,
+  createOwnerReviewDemoBeforeAfterResult,
   createOwnerReviewDemoBuildMatchReview,
   createOwnerReviewDemoLearningRecord,
   createOwnerReviewDemoRecommendationResult,
@@ -131,6 +132,38 @@ describe("OWNER_REVIEW_DEMO mode", () => {
       provenance: "OWNER_REVIEW_DEMO"
     });
     expect([noChange, uncertain, alternative].every((review) => review.scoreLanguage.includes("not identity probability"))).toBe(true);
+  });
+
+  it("calculates before-after demo outcomes without forcing improvement", () => {
+    const item = createOwnerReviewDemoRecommendationResult().matches[0].catalogItem;
+    const improvement = createOwnerReviewDemoBeforeAfterResult(item, "improvement");
+    const noChange = createOwnerReviewDemoBeforeAfterResult(item, "no_change");
+    const regression = createOwnerReviewDemoBeforeAfterResult(item, "regression");
+
+    expect(improvement).toMatchObject({
+      initialBuildScore: 82,
+      refinedBuildScore: 91,
+      scoreDelta: 9,
+      trend: "improvement",
+      improved: ["Jaw proportion", "Nose length", "Chin projection"],
+      stillDifferent: ["Brow height"],
+      productionEligible: false,
+      rawMediaRetained: false
+    });
+    expect(noChange).toMatchObject({
+      initialBuildScore: 82,
+      refinedBuildScore: 82,
+      scoreDelta: 0,
+      trend: "no_change"
+    });
+    expect(regression).toMatchObject({
+      initialBuildScore: 82,
+      refinedBuildScore: 77,
+      scoreDelta: -5,
+      trend: "regression"
+    });
+    expect([improvement, noChange, regression].every((result) => result.scoreLanguage.includes("not identity probability"))).toBe(true);
+    expect(improvement.finalSettings.some((setting) => setting.label === "Jaw Width" && setting.value === "61")).toBe(true);
   });
 
   it("suppresses unsupported demo sliders and keeps production refinement unavailable without verified calibration", () => {

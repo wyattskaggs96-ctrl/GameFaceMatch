@@ -1,7 +1,7 @@
 # Owner Review Demo Mode
 
 **Status:** IMPLEMENTED AS ISOLATED NON-PRODUCTION MODE  
-**Latest prompt:** GFM | Q06 | PROMPT 126 | PHASE 04 | Build measurable refinement experience
+**Latest prompt:** GFM | Q06 | PROMPT 127 | PHASE 04 | Complete before-after validation loop
 **Date:** 2026-08-07  
 
 ## Purpose
@@ -114,6 +114,21 @@ Prompt 126 extends the isolated demo lane from standardized Video #1 views into 
 9. `Update My Player` opens a persisted step-by-step refinement guide.
 
 Production refinement remains unavailable until a nonempty verified production catalog and verified control-effect calibration exist. The demo score and fixture calibration are not real matching-study evidence, human verification, production catalog data, or a guarantee of improvement.
+
+## Prompt 127 Before/After Validation Loop
+
+Prompt 127 completes the isolated owner-review loop after the refinement guide:
+
+1. after the tester applies the recommended changes, Buddy Trial asks for Video #2 with `SHOW US THE UPDATED PLAYER`;
+2. Video #2 uses the same local character-video validation, deterministic standardized-view extraction, manual frame fallback, retry behavior, and temporary-processing-only retention as Video #1;
+3. `YOUR GAMEFACE RESULT` compares Initial Build, Refined Build, and the numeric delta;
+4. the before/after result supports improvement, `0` no-change, and regression without forcing the refined score to improve;
+5. the default fixture displays Initial Build `82 / 100`, Refined Build `91 / 100`, and Improvement `+9`;
+6. the tester records whether Original, Refined, or About the same looks more like them;
+7. the tester records a final resemblance rating from 1-10 and optional `What still looks off?` feedback;
+8. the end screen says `GameFace complete.` and summarizes the initial recommendation, final settings, before score, after score, delta, and user feedback.
+
+The final outcome is stored as non-image local Buddy Trial session data. Raw human face media, raw character videos, object URLs, thumbnails, and base64 media are not retained by default.
 
 ## Isolation Controls
 

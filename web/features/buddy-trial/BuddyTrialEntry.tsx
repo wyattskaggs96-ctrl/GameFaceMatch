@@ -5,6 +5,8 @@ import { productionCatalogManifest } from "@/lib/catalog/production-manifest";
 import { INDEPENDENT_APP_DISCLAIMER } from "@/lib/product-copy";
 import {
   attachBuddyTrialVideoOneReview,
+  attachBuddyTrialVideoTwoReview,
+  attachBuddyTrialFinalOutcome,
   applyBuddyTrialConsent,
   BUDDY_TRIAL_ACTIVE_INVITE_ID,
   BUDDY_TRIAL_STATES,
@@ -24,6 +26,8 @@ import {
   updateBuddyTrialRefinementGuideProgress,
   type BuddyTrialConsentRecord,
   type BuddyTrialBuildGuideProgress,
+  type BuddyTrialFinalOutcome,
+  type BuddyTrialVersionPreference,
   type BuddyTrialState,
   type BuddyTrialSession
 } from "@/lib/buddy-trial/buddy-trial-session";
@@ -44,6 +48,7 @@ import {
   isOwnerReviewDemoEnabled,
   OWNER_REVIEW_DEMO_BANNER_COPY,
   type OwnerReviewDemoBuildMatchReview,
+  type OwnerReviewDemoBeforeAfterResult,
   type OwnerReviewDemoBuildStep,
   type OwnerReviewDemoRecommendationResult
 } from "@/lib/owner-review-demo/owner-review-demo";
@@ -176,6 +181,17 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     );
   };
 
+  const saveVideoTwoReview = (review: CharacterVideoReviewResult) => {
+    const activeSession = ensureSession();
+    const withReview = attachBuddyTrialVideoTwoReview(activeSession, createPersistableCharacterVideoReview(review));
+    const shouldAdvance = activeSession.state === "VIDEO_2_REQUIRED" && review.status === "usable";
+    persistSession(
+      shouldAdvance
+        ? transitionBuddyTrialSession(withReview, "FINAL_RESULT_READY", new Date(), "Owner Review Demo second character video processed locally.")
+        : withReview
+    );
+  };
+
   const startRefinementGuide = (stepCount: number) => {
     const activeSession = ensureSession();
     const withProgress = updateBuddyTrialRefinementGuideProgress(activeSession, {
@@ -185,6 +201,26 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
       viewMode: "step"
     });
     persistSession(transitionBuddyTrialSession(withProgress, "VIDEO_2_REQUIRED", new Date(), "Owner Review Demo refinement walkthrough started."));
+  };
+
+  const completeRefinementGuide = () => {
+    const activeSession = ensureSession();
+    const stepCount = ownerReviewDemo?.refinementPlan.refinementBuildGuideSteps.length ?? activeSession.refinementGuide?.totalStepCount ?? 0;
+    const stepIds = ownerReviewDemo?.refinementPlan.refinementBuildGuideSteps.map((step) => step.id) ?? activeSession.refinementGuide?.completedStepIds ?? [];
+    persistSession(
+      updateBuddyTrialRefinementGuideProgress(activeSession, {
+        totalStepCount: stepCount,
+        currentStepIndex: Math.max(0, stepCount - 1),
+        completedStepIds: stepIds,
+        viewMode: "step"
+      })
+    );
+  };
+
+  const completeTrialWithOutcome = (outcome: BuddyTrialFinalOutcome) => {
+    const activeSession = ensureSession();
+    const withOutcome = attachBuddyTrialFinalOutcome(activeSession, outcome);
+    persistSession(transitionBuddyTrialSession(withOutcome, "COMPLETE", new Date(), "Owner Review Demo final before/after result and tester feedback submitted."));
   };
 
   if (inviteResolution.status !== "active") {
@@ -225,6 +261,24 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   }
 
   if (session?.state === "COMPLETE") {
+    if (ownerReviewDemo && session.finalOutcome) {
+      return (
+        <main className="buddy-trial-page">
+          <section className="buddy-trial-shell" aria-labelledby="buddy-trial-complete-title">
+            <div className="buddy-trial-brand" aria-label="GameFace Match">
+              <span className="buddy-trial-mark" aria-hidden="true">
+                G
+              </span>
+              <span>GameFace Match</span>
+            </div>
+            <p className="buddy-trial-kicker">Private Buddy Trial</p>
+            <h1 id="buddy-trial-complete-title">GameFace complete.</h1>
+            <OwnerReviewDemoCompletionSummary outcome={session.finalOutcome} />
+            <p className="buddy-trial-disclaimer">{INDEPENDENT_APP_DISCLAIMER}</p>
+          </section>
+        </main>
+      );
+    }
     return (
       <main className="buddy-trial-page">
         <section className="buddy-trial-shell" aria-labelledby="buddy-trial-complete-title">
@@ -329,8 +383,10 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
             onDeliverRefinement={() => moveTrialTo("REFINEMENT_READY", "Owner Review Demo refinement fixture delivered.")}
             onStartRefinementGuide={() => startRefinementGuide(ownerReviewDemo.refinementPlan.refinementBuildGuideSteps.length)}
             onUpdateRefinementGuide={updateRefinementGuide}
-            onDeliverFinal={() => moveTrialTo("FINAL_RESULT_READY", "Owner Review Demo second character video fixture processed.")}
-            onComplete={() => moveTrialTo("COMPLETE", "Owner Review Demo completed without writing production evidence.")}
+            onCompleteRefinementGuide={completeRefinementGuide}
+            onSaveVideoTwoReview={saveVideoTwoReview}
+            onRestartVideoTwo={() => moveTrialTo("VIDEO_2_REQUIRED", "Owner Review Demo second character video retry requested.")}
+            onComplete={completeTrialWithOutcome}
           />
         ) : null}
 
@@ -380,7 +436,9 @@ function OwnerReviewDemoPanel({
   onDeliverRefinement,
   onStartRefinementGuide,
   onUpdateRefinementGuide,
-  onDeliverFinal,
+  onCompleteRefinementGuide,
+  onSaveVideoTwoReview,
+  onRestartVideoTwo,
   onComplete
 }: {
   session: BuddyTrialSession | null;
@@ -394,8 +452,10 @@ function OwnerReviewDemoPanel({
   onDeliverRefinement: () => void;
   onStartRefinementGuide: () => void;
   onUpdateRefinementGuide: (patch: Partial<Pick<BuddyTrialBuildGuideProgress, "totalStepCount" | "currentStepIndex" | "completedStepIds" | "viewMode">>) => void;
-  onDeliverFinal: () => void;
-  onComplete: () => void;
+  onCompleteRefinementGuide: () => void;
+  onSaveVideoTwoReview: (review: CharacterVideoReviewResult) => void;
+  onRestartVideoTwo: () => void;
+  onComplete: (outcome: BuddyTrialFinalOutcome) => void;
 }) {
   const state = session?.state ?? "INVITED";
   const bestMatch = result.matches[0];
@@ -406,8 +466,15 @@ function OwnerReviewDemoPanel({
   const completedCount = completedStepIds.length;
   const refinementProgress = session?.refinementGuide ?? createBuddyTrialBuildGuideProgress(result.refinementPlan.refinementBuildGuideSteps.length);
   const [videoReviewState, setVideoReviewState] = useState<CharacterVideoReviewUiState>(() => createInitialCharacterVideoReviewUiState(session));
+  const [videoTwoReviewState, setVideoTwoReviewState] = useState<CharacterVideoReviewUiState>(() => createInitialCharacterVideoReviewUiState(session, 2));
   const videoReviewStateRef = useRef(videoReviewState);
+  const videoTwoReviewStateRef = useRef(videoTwoReviewState);
+  const activeVideoIterationRef = useRef<CharacterVideoReviewResult["iteration"]>(1);
   const [selectedFrameIDs, setSelectedFrameIDs] = useState<Partial<Record<CharacterVideoViewID, string>>>({});
+  const [selectedVideoTwoFrameIDs, setSelectedVideoTwoFrameIDs] = useState<Partial<Record<CharacterVideoViewID, string>>>({});
+  const [finalPreference, setFinalPreference] = useState<BuddyTrialVersionPreference | "">(session?.finalOutcome?.userPreference ?? "");
+  const [resemblanceRating, setResemblanceRating] = useState<number>(session?.finalOutcome?.resemblanceRating ?? 0);
+  const [stillLooksOff, setStillLooksOff] = useState(session?.finalOutcome?.stillLooksOff ?? "");
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const recordingChunksRef = useRef<Blob[]>([]);
   const recordingStreamRef = useRef<MediaStream | null>(null);
@@ -417,16 +484,25 @@ function OwnerReviewDemoPanel({
   }, [videoReviewState]);
 
   useEffect(() => {
+    videoTwoReviewStateRef.current = videoTwoReviewState;
+  }, [videoTwoReviewState]);
+
+  useEffect(() => {
     return () => {
       revokeCharacterVideoUrls(videoReviewStateRef.current);
+      revokeCharacterVideoUrls(videoTwoReviewStateRef.current);
       stopCharacterRecording(recordingStreamRef.current, mediaRecorderRef.current);
     };
   }, []);
 
-  async function processCharacterVideoFile(file: File, source: CharacterVideoSource) {
-    revokeCharacterVideoUrls(videoReviewState);
+  async function processCharacterVideoFile(file: File, source: CharacterVideoSource, iteration: CharacterVideoReviewResult["iteration"] = 1) {
+    const currentState = iteration === 1 ? videoReviewState : videoTwoReviewState;
+    const setCurrentState = iteration === 1 ? setVideoReviewState : setVideoTwoReviewState;
+    const saveReview = iteration === 1 ? onSaveVideoOneReview : onSaveVideoTwoReview;
+    const setCurrentSelection = iteration === 1 ? setSelectedFrameIDs : setSelectedVideoTwoFrameIDs;
+    revokeCharacterVideoUrls(currentState);
     const objectUrl = URL.createObjectURL(file);
-    setVideoReviewState({
+    setCurrentState({
       status: "processing",
       progressLabel: "Reading character video metadata locally.",
       objectUrl,
@@ -437,10 +513,10 @@ function OwnerReviewDemoPanel({
     });
     try {
       const metadata = await readCharacterVideoMetadata(objectUrl, file, source);
-      const baseReview = createCharacterVideoReviewResult({ metadata });
+      const baseReview = createCharacterVideoReviewResult({ metadata, iteration });
       if (baseReview.status === "blocked") {
         URL.revokeObjectURL(objectUrl);
-        setVideoReviewState({
+        setCurrentState({
           status: "blocked",
           progressLabel: "This video needs a retake before GameFace Match can compare it.",
           objectUrl: null,
@@ -449,17 +525,17 @@ function OwnerReviewDemoPanel({
           candidateFrames: [],
           error: baseReview.processingSummary
         });
-        onSaveVideoOneReview(baseReview);
+        saveReview(baseReview);
         return;
       }
 
-      setVideoReviewState((current) => ({ ...current, progressLabel: "Extracting front, left, and right candidate views." }));
-      const candidateFrames = await extractCharacterVideoFrameCandidates(objectUrl, metadata);
+      setCurrentState((current) => ({ ...current, progressLabel: "Extracting front, left, and right candidate views." }));
+      const candidateFrames = await extractCharacterVideoFrameCandidates(objectUrl, metadata, iteration);
       URL.revokeObjectURL(objectUrl);
-      const review = createCharacterVideoReviewResult({ metadata, candidateFrames, objectUrlsRevokedAfterProcessing: true });
+      const review = createCharacterVideoReviewResult({ metadata, iteration, candidateFrames, objectUrlsRevokedAfterProcessing: true });
       const initialSelection = Object.fromEntries(review.standardizedViews.map((view) => [view.viewID, view.selectedFrameID])) as Partial<Record<CharacterVideoViewID, string>>;
-      setSelectedFrameIDs(initialSelection);
-      setVideoReviewState({
+      setCurrentSelection(initialSelection);
+      setCurrentState({
         status: review.manualSelectionRequired ? "manual_selection_required" : "usable",
         progressLabel: review.processingSummary,
         objectUrl: null,
@@ -468,10 +544,10 @@ function OwnerReviewDemoPanel({
         candidateFrames,
         error: null
       });
-      onSaveVideoOneReview(review);
+      saveReview(review);
     } catch (error) {
       URL.revokeObjectURL(objectUrl);
-      setVideoReviewState({
+      setCurrentState({
         status: "blocked",
         progressLabel: "The browser could not process this video.",
         objectUrl: null,
@@ -508,11 +584,12 @@ function OwnerReviewDemoPanel({
       };
       recorder.onstop = () => {
         const blob = new Blob(recordingChunksRef.current, { type: recorder.mimeType || "video/webm" });
-        const file = new File([blob], `gameface-character-video-1-${new Date().toISOString()}.webm`, { type: blob.type || "video/webm" });
+        const iteration = activeVideoIterationRef.current;
+        const file = new File([blob], `gameface-character-video-${iteration}-${new Date().toISOString()}.webm`, { type: blob.type || "video/webm" });
         stopCharacterRecording(stream, recorder);
         recordingStreamRef.current = null;
         mediaRecorderRef.current = null;
-        void processCharacterVideoFile(file, "recording");
+        void processCharacterVideoFile(file, "recording", iteration);
       };
       mediaRecorderRef.current = recorder;
       recorder.start(500);
@@ -541,28 +618,68 @@ function OwnerReviewDemoPanel({
   }
 
   function confirmSelectedCharacterFrames() {
-    if (!videoReviewState.review) return;
+    confirmSelectedCharacterFramesForIteration(1);
+  }
+
+  function confirmSelectedVideoTwoFrames() {
+    confirmSelectedCharacterFramesForIteration(2);
+  }
+
+  function confirmSelectedCharacterFramesForIteration(iteration: CharacterVideoReviewResult["iteration"]) {
+    const currentState = iteration === 1 ? videoReviewState : videoTwoReviewState;
+    const setCurrentState = iteration === 1 ? setVideoReviewState : setVideoTwoReviewState;
+    const selected = iteration === 1 ? selectedFrameIDs : selectedVideoTwoFrameIDs;
+    const saveReview = iteration === 1 ? onSaveVideoOneReview : onSaveVideoTwoReview;
+    if (!currentState.review) return;
     const confirmed = confirmManualCharacterVideoSelection(
       {
-        ...videoReviewState.review,
-        candidateFrames: videoReviewState.candidateFrames
+        ...currentState.review,
+        candidateFrames: currentState.candidateFrames
       },
-      selectedFrameIDs
+      selected
     );
-    setVideoReviewState((current) => ({
+    setCurrentState((current) => ({
       ...current,
       status: confirmed.status === "usable" ? "usable" : "blocked",
       review: confirmed,
       progressLabel: confirmed.processingSummary,
       error: confirmed.status === "blocked" ? confirmed.processingSummary : null
     }));
-    onSaveVideoOneReview(confirmed);
+    saveReview(confirmed);
   }
 
   function retryCharacterVideo() {
     revokeCharacterVideoUrls(videoReviewState);
     setSelectedFrameIDs({});
     setVideoReviewState(createInitialCharacterVideoReviewUiState(session));
+  }
+
+  function retryVideoTwo() {
+    revokeCharacterVideoUrls(videoTwoReviewState);
+    setSelectedVideoTwoFrameIDs({});
+    setVideoTwoReviewState(createInitialCharacterVideoReviewUiState(session, 2));
+    onRestartVideoTwo();
+  }
+
+  function createSubmittedOutcome(): BuddyTrialFinalOutcome {
+    return {
+      schemaVersion: "buddy-trial-final-outcome-v1",
+      source: "owner_review_demo",
+      initialRecommendationLabel: bestMatch.catalogItem.visibleGameLabelOrIndex,
+      finalSettingsSummary: result.beforeAfterResult.finalSettings,
+      beforeScore: result.beforeAfterResult.initialBuildScore,
+      afterScore: result.beforeAfterResult.refinedBuildScore,
+      scoreDelta: result.beforeAfterResult.scoreDelta,
+      trend: result.beforeAfterResult.trend,
+      improved: result.beforeAfterResult.improved,
+      stillDifferent: result.beforeAfterResult.stillDifferent,
+      scoreLanguage: result.beforeAfterResult.scoreLanguage,
+      userPreference: finalPreference || null,
+      resemblanceRating: resemblanceRating || null,
+      stillLooksOff: stillLooksOff.trim() || null,
+      submittedAt: new Date().toISOString(),
+      rawMediaRetained: false
+    };
   }
 
   if (state === "INVITED" || state === "CONSENTED" || state === "SCAN_IN_PROGRESS") {
@@ -716,12 +833,16 @@ function OwnerReviewDemoPanel({
           state={videoReviewState}
           selectedFrameIDs={selectedFrameIDs}
           onSelectFrame={(viewID, frameID) => setSelectedFrameIDs((current) => ({ ...current, [viewID]: frameID }))}
-          onUpload={(file) => void processCharacterVideoFile(file, "upload")}
-          onRecord={startCharacterRecording}
+          onUpload={(file) => void processCharacterVideoFile(file, "upload", 1)}
+          onRecord={() => {
+            activeVideoIterationRef.current = 1;
+            void startCharacterRecording();
+          }}
           onStopRecording={stopCurrentCharacterRecording}
           onConfirmFrames={confirmSelectedCharacterFrames}
           onRetry={retryCharacterVideo}
           onContinue={onDeliverRefinement}
+          continueLabel="Continue to refinement"
         />
       </section>
     );
@@ -768,27 +889,101 @@ function OwnerReviewDemoPanel({
   }
 
   if (state === "VIDEO_2_REQUIRED") {
+    const refinementComplete =
+      result.refinementPlan.refinementBuildGuideSteps.length === 0 ||
+      result.refinementPlan.refinementBuildGuideSteps.every((step) => refinementProgress.completedStepIds.includes(step.id));
+    if (refinementComplete) {
+      return (
+        <section className="buddy-trial-demo-card buddy-trial-video-review" aria-labelledby="owner-review-demo-video-two">
+          <p className="buddy-trial-step-label">Refinement applied</p>
+          <h2 id="owner-review-demo-video-two">SHOW US THE UPDATED PLAYER</h2>
+          <ol className="buddy-trial-demo-list">
+            <li>Open the updated player after applying the recommended changes.</li>
+            <li>Keep helmet/accessories off the face.</li>
+            <li>Start facing forward.</li>
+            <li>Slowly rotate left.</li>
+            <li>Return to center.</li>
+            <li>Slowly rotate right.</li>
+            <li>Return to center.</li>
+          </ol>
+          <CharacterVideoReviewPanel
+            state={videoTwoReviewState}
+            selectedFrameIDs={selectedVideoTwoFrameIDs}
+            onSelectFrame={(viewID, frameID) => setSelectedVideoTwoFrameIDs((current) => ({ ...current, [viewID]: frameID }))}
+            onUpload={(file) => void processCharacterVideoFile(file, "upload", 2)}
+            onRecord={() => {
+              activeVideoIterationRef.current = 2;
+              void startCharacterRecording();
+            }}
+            onStopRecording={stopCurrentCharacterRecording}
+            onConfirmFrames={confirmSelectedVideoTwoFrames}
+            onRetry={retryVideoTwo}
+            onContinue={() => {
+              if ((session?.videoTwoReview ?? videoTwoReviewState.review)?.status === "usable") {
+                onSaveVideoTwoReview((videoTwoReviewState.review ?? session?.videoTwoReview) as CharacterVideoReviewResult);
+              }
+            }}
+            continueLabel="Compare before and after"
+          />
+        </section>
+      );
+    }
     return (
       <OwnerReviewDemoRefinementGuide
         steps={result.refinementPlan.refinementBuildGuideSteps}
         progress={refinementProgress}
         onUpdate={onUpdateRefinementGuide}
-        onComplete={onDeliverFinal}
+        onComplete={onCompleteRefinementGuide}
       />
     );
   }
 
   if (state === "FINAL_RESULT_READY") {
     return (
-      <section className="buddy-trial-demo-card" aria-labelledby="owner-review-demo-final">
-        <h2 id="owner-review-demo-final">Demo before and after</h2>
-        <p>
-          Initial build score: {result.refinementPlan.initialBuildScore}/100. Refined build score: {result.refinementPlan.refinedBuildScore}/100. Demo delta: +
-          {result.refinementPlan.refinedBuildScore - result.refinementPlan.initialBuildScore}.
-        </p>
+      <section className="buddy-trial-demo-card buddy-trial-final-result" aria-labelledby="owner-review-demo-final">
+        <p className="buddy-trial-step-label">Video #2 comparison</p>
+        <h2 id="owner-review-demo-final">YOUR GAMEFACE RESULT</h2>
+        <OwnerReviewDemoBeforeAfterResultView result={result.beforeAfterResult} />
+        <section className="buddy-trial-feedback-card" aria-labelledby="buddy-trial-feedback-title">
+          <h3 id="buddy-trial-feedback-title">Tell us what you see</h3>
+          <fieldset>
+            <legend>Which looks more like you?</legend>
+            {[
+              ["original", "Original"],
+              ["refined", "Refined"],
+              ["about_the_same", "About the same"]
+            ].map(([value, label]) => (
+              <label key={value}>
+                <input
+                  type="radio"
+                  name="gameface-version-preference"
+                  value={value}
+                  checked={finalPreference === value}
+                  onChange={() => setFinalPreference(value as BuddyTrialVersionPreference)}
+                />
+                <span>{label}</span>
+              </label>
+            ))}
+          </fieldset>
+          <label className="buddy-trial-rating-control">
+            <span>How much does the final player look like you?</span>
+            <select value={resemblanceRating} onChange={(event) => setResemblanceRating(Number(event.currentTarget.value))}>
+              <option value={0}>Choose 1-10</option>
+              {Array.from({ length: 10 }, (_, index) => index + 1).map((rating) => (
+                <option key={rating} value={rating}>
+                  {rating}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="buddy-trial-feedback-text">
+            <span>What still looks off?</span>
+            <textarea value={stillLooksOff} onChange={(event) => setStillLooksOff(event.currentTarget.value)} placeholder="Optional" rows={3} />
+          </label>
+        </section>
         <p>Demo learning record: {learningRecord.analyticsDataset}. Production weight changes allowed: no.</p>
-        <button className="buddy-trial-primary" type="button" onClick={onComplete}>
-          Complete owner review demo
+        <button className="buddy-trial-primary" type="button" onClick={() => onComplete(createSubmittedOutcome())} disabled={!finalPreference || resemblanceRating < 1}>
+          GameFace complete
         </button>
       </section>
     );
@@ -874,7 +1069,8 @@ function CharacterVideoReviewPanel({
   onStopRecording,
   onConfirmFrames,
   onRetry,
-  onContinue
+  onContinue,
+  continueLabel
 }: {
   state: CharacterVideoReviewUiState;
   selectedFrameIDs: Partial<Record<CharacterVideoViewID, string>>;
@@ -885,6 +1081,7 @@ function CharacterVideoReviewPanel({
   onConfirmFrames: () => void;
   onRetry: () => void;
   onContinue: () => void;
+  continueLabel: string;
 }) {
   const isBusy = state.status === "processing" || state.status === "recording";
   const canConfirm = ["front", "leftThreeQuarter", "rightThreeQuarter"].every((viewID) => selectedFrameIDs[viewID as CharacterVideoViewID]);
@@ -974,7 +1171,7 @@ function CharacterVideoReviewPanel({
         <>
           <CharacterVideoStandardizedViews review={state.review} />
           <button className="buddy-trial-primary" type="button" onClick={onContinue}>
-            Continue to refinement
+            {continueLabel}
           </button>
         </>
       ) : null}
@@ -1078,6 +1275,96 @@ function OwnerReviewDemoBuildReview({ review }: { review: OwnerReviewDemoBuildMa
           </ul>
         </section>
       ) : null}
+    </div>
+  );
+}
+
+function OwnerReviewDemoBeforeAfterResultView({ result }: { result: OwnerReviewDemoBeforeAfterResult }) {
+  const deltaLabel = result.scoreDelta > 0 ? `+${result.scoreDelta}` : `${result.scoreDelta}`;
+  const trendLabel = result.trend === "improvement" ? "Improvement" : result.trend === "regression" ? "Regression" : "No change";
+  return (
+    <div className="buddy-trial-before-after">
+      <div className="buddy-trial-score-row" aria-label="Before and after build scores">
+        <article>
+          <span>Initial Build</span>
+          <strong>{result.initialBuildScore} / 100</strong>
+        </article>
+        <article>
+          <span>Refined Build</span>
+          <strong>{result.refinedBuildScore} / 100</strong>
+        </article>
+        <article data-trend={result.trend}>
+          <span>{trendLabel}</span>
+          <strong>{deltaLabel}</strong>
+        </article>
+      </div>
+      <p className="buddy-trial-score-language">{result.scoreLanguage}</p>
+      <div className="buddy-trial-review-columns">
+        <section aria-labelledby="buddy-trial-improved">
+          <h3 id="buddy-trial-improved">IMPROVED</h3>
+          {result.improved.length ? (
+            <ul>
+              {result.improved.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No measurable improvement was detected.</p>
+          )}
+        </section>
+        <section aria-labelledby="buddy-trial-still-different">
+          <h3 id="buddy-trial-still-different">STILL DIFFERENT</h3>
+          {result.stillDifferent.length ? (
+            <ul>
+              {result.stillDifferent.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No major remaining difference was detected by the demo comparison.</p>
+          )}
+        </section>
+      </div>
+    </div>
+  );
+}
+
+function OwnerReviewDemoCompletionSummary({ outcome }: { outcome: BuddyTrialFinalOutcome }) {
+  const deltaLabel = outcome.scoreDelta > 0 ? `+${outcome.scoreDelta}` : `${outcome.scoreDelta}`;
+  return (
+    <div className="buddy-trial-completion-summary">
+      <div className="buddy-trial-score-row" aria-label="Completed Buddy Trial scores">
+        <article>
+          <span>Initial Build</span>
+          <strong>{outcome.beforeScore} / 100</strong>
+        </article>
+        <article>
+          <span>Final Build</span>
+          <strong>{outcome.afterScore} / 100</strong>
+        </article>
+        <article data-trend={outcome.trend}>
+          <span>{outcome.trend === "improvement" ? "Improvement" : outcome.trend === "regression" ? "Regression" : "No change"}</span>
+          <strong>{deltaLabel}</strong>
+        </article>
+      </div>
+      <section className="buddy-trial-completion-card" aria-labelledby="buddy-trial-final-settings">
+        <h2 id="buddy-trial-final-settings">Final settings</h2>
+        <div className="buddy-trial-demo-settings">
+          {outcome.finalSettingsSummary.slice(0, 12).map((setting) => (
+            <article key={`${setting.label}-${setting.value}`}>
+              <span>{setting.label}</span>
+              <strong>{setting.value}</strong>
+              <small>{setting.menuPath.join(" > ")}</small>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="buddy-trial-completion-card" aria-labelledby="buddy-trial-user-rating">
+        <h2 id="buddy-trial-user-rating">Your feedback</h2>
+        <p>Version preference: {formatVersionPreference(outcome.userPreference)}</p>
+        <p>Resemblance rating: {outcome.resemblanceRating ?? "Not provided"} / 10</p>
+        {outcome.stillLooksOff ? <p>Still looks off: {outcome.stillLooksOff}</p> : null}
+      </section>
     </div>
   );
 }
@@ -1210,13 +1497,21 @@ function getInviteStatusTitle(status: "expired" | "used" | "invalid" | "active")
   return "Private link ready";
 }
 
-function createInitialCharacterVideoReviewUiState(session: BuddyTrialSession | null): CharacterVideoReviewUiState {
+function formatVersionPreference(preference: BuddyTrialVersionPreference | null) {
+  if (preference === "original") return "Original";
+  if (preference === "refined") return "Refined";
+  if (preference === "about_the_same") return "About the same";
+  return "Not provided";
+}
+
+function createInitialCharacterVideoReviewUiState(session: BuddyTrialSession | null, iteration: CharacterVideoReviewResult["iteration"] = 1): CharacterVideoReviewUiState {
+  const storedReview = iteration === 1 ? session?.videoOneReview : session?.videoTwoReview;
   return {
-    status: session?.videoOneReview?.status === "usable" ? "usable" : "idle",
-    progressLabel: session?.videoOneReview?.processingSummary ?? "",
+    status: storedReview?.status === "usable" ? "usable" : "idle",
+    progressLabel: storedReview?.processingSummary ?? "",
     objectUrl: null,
-    fileName: session?.videoOneReview?.metadata.fileName ?? null,
-    review: session?.videoOneReview ?? null,
+    fileName: storedReview?.metadata.fileName ?? null,
+    review: storedReview ?? null,
     candidateFrames: [],
     error: null
   };
@@ -1258,8 +1553,12 @@ function readCharacterVideoMetadata(objectUrl: string, file: File, source: Chara
   });
 }
 
-async function extractCharacterVideoFrameCandidates(objectUrl: string, metadata: CharacterVideoMetadata): Promise<CharacterVideoFrameCandidate[]> {
-  const baseReview = createCharacterVideoReviewResult({ metadata });
+async function extractCharacterVideoFrameCandidates(
+  objectUrl: string,
+  metadata: CharacterVideoMetadata,
+  iteration: CharacterVideoReviewResult["iteration"]
+): Promise<CharacterVideoFrameCandidate[]> {
+  const baseReview = createCharacterVideoReviewResult({ metadata, iteration });
   const candidates = baseReview.candidateFrames;
   const video = document.createElement("video");
   video.preload = "auto";

@@ -60,6 +60,33 @@ export interface BuddyTrialBuildGuideProgress {
   updatedAt: string;
 }
 
+export type BuddyTrialCharacterVideoReviewSummary = Omit<CharacterVideoReviewResult, "candidateFrames"> & { candidateFrames: [] };
+export type BuddyTrialBeforeAfterTrend = "improvement" | "no_change" | "regression";
+export type BuddyTrialVersionPreference = "original" | "refined" | "about_the_same";
+
+export interface BuddyTrialFinalOutcome {
+  schemaVersion: "buddy-trial-final-outcome-v1";
+  source: "owner_review_demo" | "production";
+  initialRecommendationLabel: string;
+  finalSettingsSummary: Array<{
+    label: string;
+    value: string;
+    menuPath: string[];
+  }>;
+  beforeScore: number;
+  afterScore: number;
+  scoreDelta: number;
+  trend: BuddyTrialBeforeAfterTrend;
+  improved: string[];
+  stillDifferent: string[];
+  scoreLanguage: string;
+  userPreference: BuddyTrialVersionPreference | null;
+  resemblanceRating: number | null;
+  stillLooksOff: string | null;
+  submittedAt: string | null;
+  rawMediaRetained: false;
+}
+
 export interface BuddyTrialSession {
   schemaVersion: typeof BUDDY_TRIAL_SCHEMA_VERSION;
   inviteId: string;
@@ -73,7 +100,9 @@ export interface BuddyTrialSession {
   catalogGate: BuddyTrialCatalogGate;
   buildGuide: BuddyTrialBuildGuideProgress | null;
   refinementGuide: BuddyTrialBuildGuideProgress | null;
-  videoOneReview: (Omit<CharacterVideoReviewResult, "candidateFrames"> & { candidateFrames: [] }) | null;
+  videoOneReview: BuddyTrialCharacterVideoReviewSummary | null;
+  videoTwoReview: BuddyTrialCharacterVideoReviewSummary | null;
+  finalOutcome: BuddyTrialFinalOutcome | null;
   history: BuddyTrialSessionHistoryEntry[];
 }
 
@@ -210,6 +239,8 @@ export function createBuddyTrialSession({
     buildGuide: null,
     refinementGuide: null,
     videoOneReview: null,
+    videoTwoReview: null,
+    finalOutcome: null,
     history: [{ state: "INVITED", at: timestamp, note: "Buddy Trial invite opened." }]
   };
 }
@@ -265,6 +296,8 @@ export function transitionBuddyTrialSession(session: BuddyTrialSession, nextStat
     buildGuide: nextState === "DELETED" ? null : session.buildGuide,
     refinementGuide: nextState === "DELETED" ? null : session.refinementGuide ?? null,
     videoOneReview: nextState === "DELETED" ? null : session.videoOneReview,
+    videoTwoReview: nextState === "DELETED" ? null : session.videoTwoReview,
+    finalOutcome: nextState === "DELETED" ? null : session.finalOutcome,
     history: [...session.history, { state: nextState, at: timestamp, note }]
   };
 }
@@ -340,6 +373,30 @@ export function attachBuddyTrialVideoOneReview(
   };
 }
 
+export function attachBuddyTrialVideoTwoReview(
+  session: BuddyTrialSession,
+  review: BuddyTrialSession["videoTwoReview"],
+  now = new Date()
+): BuddyTrialSession {
+  return {
+    ...session,
+    updatedAt: now.toISOString(),
+    videoTwoReview: review
+  };
+}
+
+export function attachBuddyTrialFinalOutcome(
+  session: BuddyTrialSession,
+  outcome: BuddyTrialFinalOutcome,
+  now = new Date()
+): BuddyTrialSession {
+  return {
+    ...session,
+    updatedAt: now.toISOString(),
+    finalOutcome: outcome
+  };
+}
+
 export function getBuddyTrialNextAction(session: BuddyTrialSession) {
   if (session.state === "DELETED") {
     return "Trial data was removed from this browser.";
@@ -380,7 +437,14 @@ export function parseBuddyTrialSession(value: string | null): BuddyTrialSession 
     if (parsed.schemaVersion !== BUDDY_TRIAL_SCHEMA_VERSION || !BUDDY_TRIAL_STATES.includes(parsed.state)) {
       return null;
     }
-    return parsed;
+    return {
+      ...parsed,
+      buildGuide: parsed.buildGuide ?? null,
+      refinementGuide: parsed.refinementGuide ?? null,
+      videoOneReview: parsed.videoOneReview ?? null,
+      videoTwoReview: parsed.videoTwoReview ?? null,
+      finalOutcome: parsed.finalOutcome ?? null
+    };
   } catch {
     return null;
   }

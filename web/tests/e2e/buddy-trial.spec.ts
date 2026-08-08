@@ -210,6 +210,74 @@ test.describe("Buddy Trial invite route", () => {
       await expect(page.getByLabel("All owner-review demo build settings")).toBeVisible();
       await page.getByRole("button", { name: "Show Current Change" }).click();
       await expect(page.getByText("Step 2 of 3")).toBeVisible();
+      await page.getByRole("button", { name: "Done" }).click();
+      await expect(page.getByText("Step 3 of 3")).toBeVisible();
+      await page.getByRole("button", { name: "Done" }).click();
+      await expect(page.getByRole("heading", { name: "SHOW US THE UPDATED PLAYER" })).toBeVisible();
+      await expect(page.getByRole("button", { name: "Record Video" })).toBeVisible();
+      await expect(page.getByText("Upload Existing Video")).toBeVisible();
+
+      await page.evaluate(
+        ({ key }) => {
+          const session = JSON.parse(window.localStorage.getItem(key) ?? "{}");
+          const timestamp = "2026-08-07T12:50:00.000Z";
+          session.state = "FINAL_RESULT_READY";
+          session.updatedAt = timestamp;
+          session.videoTwoReview = {
+            schemaVersion: "buddy-trial-character-video-review-v1",
+            iteration: 2,
+            status: "usable",
+            metadata: {
+              fileName: "e2e-updated-character-video.mp4",
+              fileType: "video/mp4",
+              fileSizeBytes: 12000000,
+              durationSeconds: 12,
+              width: 1280,
+              height: 720,
+              source: "fixture"
+            },
+            validation: { status: "usable", errors: [], warnings: [], retakeInstructions: [] },
+            candidateFrames: [],
+            standardizedViews: [
+              { viewID: "front", selectedFrameID: "e2e-video-2-front", timestampSeconds: 1.2, qualityStatus: "usable", issues: [], thumbnailRetained: false },
+              { viewID: "leftThreeQuarter", selectedFrameID: "e2e-video-2-left", timestampSeconds: 4.2, qualityStatus: "usable", issues: [], thumbnailRetained: false },
+              { viewID: "rightThreeQuarter", selectedFrameID: "e2e-video-2-right", timestampSeconds: 8.2, qualityStatus: "usable", issues: [], thumbnailRetained: false }
+            ],
+            missingRequiredViews: [],
+            manualSelectionRequired: false,
+            processingSummary: "Standardized character views are ready for comparison.",
+            retention: {
+              rawVideoPersisted: false,
+              temporaryMediaRetention: "temporary_processing_only",
+              objectUrlsRevokedAfterProcessing: true
+            }
+          };
+          session.history = [
+            ...(Array.isArray(session.history) ? session.history : []),
+            { state: "FINAL_RESULT_READY", at: timestamp, note: "E2E deterministic Video #2 processed checkpoint; no raw media stored." }
+          ];
+          window.localStorage.setItem(key, JSON.stringify(session));
+        },
+        { key: activeInviteStorageKey }
+      );
+      await page.reload();
+      await expect(page.getByRole("heading", { name: "YOUR GAMEFACE RESULT" })).toBeVisible();
+      await expect(page.getByLabel("Before and after build scores")).toContainText("Initial Build");
+      await expect(page.getByLabel("Before and after build scores")).toContainText("82 / 100");
+      await expect(page.getByLabel("Before and after build scores")).toContainText("Refined Build");
+      await expect(page.getByLabel("Before and after build scores")).toContainText("91 / 100");
+      await expect(page.getByLabel("Before and after build scores")).toContainText("+9");
+      await expect(page.getByText("Jaw proportion")).toBeVisible();
+      await expect(page.getByText("Brow height")).toBeVisible();
+      await expect(page.getByRole("button", { name: "GameFace complete" })).toBeDisabled();
+      await page.getByLabel("Refined").check();
+      await page.getByLabel("How much does the final player look like you?").selectOption("8");
+      await page.getByLabel("What still looks off?").fill("Brow still sits a little high.");
+      await page.getByRole("button", { name: "GameFace complete" }).click();
+      await expect(page.getByRole("heading", { name: "GameFace complete." })).toBeVisible();
+      await expect(page.getByLabel("Completed Buddy Trial scores")).toContainText("91 / 100");
+      await expect(page.getByText("Version preference: Refined")).toBeVisible();
+      await expect(page.getByText("Resemblance rating: 8 / 10")).toBeVisible();
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow).toBeLessThanOrEqual(1);
     }

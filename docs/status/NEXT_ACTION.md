@@ -101,7 +101,7 @@ That contract defines the future customer journey from a texted iPhone link thro
 
 The next implementation prompt may add the first-result upload shell while keeping production recommendations blocked until a verified nonempty catalog exists:
 
-Prompt 123 adds an isolated `OWNER_REVIEW_DEMO` lane for Wyatt-only product evaluation before the production CF27 catalog exists. Prompt 124 extends that lane into the complete scan-to-build journey: private invite, consent, existing guided-scan handoff, scan-complete processing, demo recommendation result, exact settings, one-step-at-a-time College Football 27 build guide, persisted walkthrough progress, "View All Settings", and build-guide-complete handoff. Prompt 125 adds the first character-video review step: upload or record Video #1, validate it locally, extract standardized character-view candidates, support tester frame selection when automation is uncertain, retry bad media, and persist only non-image review summaries. Prompt 126 adds `GAMEFACE REVIEW`: measurable first-result score, strengths, closer areas, exact demo-calibrated changes, and a step-by-step `Update My Player` refinement guide.
+Prompt 123 adds an isolated `OWNER_REVIEW_DEMO` lane for Wyatt-only product evaluation before the production CF27 catalog exists. Prompt 124 extends that lane into the complete scan-to-build journey: private invite, consent, existing guided-scan handoff, scan-complete processing, demo recommendation result, exact settings, one-step-at-a-time College Football 27 build guide, persisted walkthrough progress, "View All Settings", and build-guide-complete handoff. Prompt 125 adds the first character-video review step: upload or record Video #1, validate it locally, extract standardized character-view candidates, support tester frame selection when automation is uncertain, retry bad media, and persist only non-image review summaries. Prompt 126 adds `GAMEFACE REVIEW`: measurable first-result score, strengths, closer areas, exact demo-calibrated changes, and a step-by-step `Update My Player` refinement guide. Prompt 127 adds Video #2, the before/after score comparison, improvement/no-change/regression handling, final version preference, 1-10 resemblance rating, optional feedback, and the `GameFace complete.` summary.
 
 It can be enabled with:
 
@@ -111,8 +111,8 @@ NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true
 
 The demo lane uses `data/demo/owner-review-demo-catalog.json`, shows the banner `Owner Review Demo — appearance settings are test data.`, and is excluded from real beta metrics, human verification, production catalog state, and production matching-weight changes.
 
-The next Codex-ready demo prompt may extend this owner-review lane beyond build completion:
+The next Codex-ready demo prompt may package this owner-review lane for Wyatt's first hands-on walkthrough:
 
-`GFM | Q06 | PROMPT 127 | PHASE 04 | Build second character video and before-after comparison`
+`GFM | Q06 | PROMPT 128 | PHASE 05 | Package owner-review demo for first real walkthrough`
 
 This does not replace the human-verifier action above. Real CF27 settings still require a verified nonempty production catalog.

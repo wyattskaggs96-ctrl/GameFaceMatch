@@ -8,9 +8,9 @@ Purpose: have a real independent second verifier complete the Prompt 102 support
 
 ## Codex-Ready Parallel Prompt
 
-`GFM | Q06 | PROMPT 127 | PHASE 04 | Build second character video and before-after comparison`
+`GFM | Q06 | PROMPT 128 | PHASE 05 | Package owner-review demo for first real walkthrough`
 
-Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md` as the authoritative owner-review contract. Build on Prompt 126’s measurable first-result refinement experience to add second character-video intake, before/after score comparison, and final resemblance rating while production recommendations remain disabled and the real human-verifier gate remains unchanged.
+Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md` as the authoritative owner-review contract. Package the completed owner-review demo journey with a simple launch command, walkthrough checklist, and validation notes so Wyatt can personally exercise the full invite-to-final-result loop before the production CF27 catalog is available.
 
 ## Prompt 124 Result
 
@@ -42,6 +42,16 @@ Use `docs/Product/BUDDY_TRIAL_V1.md` and `docs/status/OWNER_REVIEW_DEMO_MODE.md`
 - `Update My Player` opens a step-by-step refinement guide using the same couch-friendly controls as the initial build guide.
 - Tests cover clear improvement, no-change, uncertain, unsupported-slider suppression, alternate-head recommendation, and production/demo separation.
 - Production refinement remains unavailable without a nonempty production catalog and verified control-effect calibration.
+- Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
+
+## Prompt 127 Result
+
+- After the refinement guide is complete, Buddy Trial now asks for Video #2 with `SHOW US THE UPDATED PLAYER`.
+- Video #2 uses the same local character-video methodology as Video #1: accepted format/duration/size checks, playable metadata validation, deterministic front/left/right/profile frame candidates, manual frame confirmation when automation is uncertain, retry, and no raw-media retention by default.
+- The final result screen shows `YOUR GAMEFACE RESULT` with Initial Build `82 / 100`, Refined Build `91 / 100`, and Improvement `+9` in the default owner-review fixture.
+- The before/after contract explicitly supports improvement, `0` no-change, and regression; the UI does not force the refined score to improve.
+- The tester records which version looks more like them, a 1-10 final resemblance rating, and optional `What still looks off?` feedback.
+- Completion stores a non-image final outcome in the local Buddy Trial session and ends at `GameFace complete.` with initial recommendation, final settings, before score, after score, improvement/regression/no-change, and user rating.
 - Production facts remain unchanged: second-verifier decisions 0, production-approved records 0, production catalog records 0, production recommendations disabled.
 
 ## Owner Media Baseline Decision

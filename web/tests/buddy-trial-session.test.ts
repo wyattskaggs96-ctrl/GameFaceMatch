@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
   applyBuddyTrialConsent,
+  attachBuddyTrialFinalOutcome,
   BUDDY_TRIAL_ACTIVE_INVITE_ID,
   BUDDY_TRIAL_EXPIRED_INVITE_ID,
   BUDDY_TRIAL_STATES,
   BUDDY_TRIAL_USED_INVITE_ID,
   attachBuddyTrialVideoOneReview,
+  attachBuddyTrialVideoTwoReview,
   canAdvanceBuddyTrialToRecommendation,
   createBuddyTrialSession,
   createBuddyTrialStorageKey,
@@ -281,6 +283,8 @@ describe("buddy trial session contract", () => {
       "DELETED"
     );
     expect(deleted.videoOneReview).toBeNull();
+    expect(deleted.videoTwoReview).toBeNull();
+    expect(deleted.finalOutcome).toBeNull();
     expect(deleted.buildGuide).toBeNull();
   });
 
@@ -315,5 +319,68 @@ describe("buddy trial session contract", () => {
     const deleted = transitionBuddyTrialSession(withRefinementProgress, "DELETED");
     expect(deleted.buildGuide).toBeNull();
     expect(deleted.refinementGuide).toBeNull();
+  });
+
+  it("stores Video #2 and final before-after feedback without retaining raw media", () => {
+    const session = createBuddyTrialSession({
+      inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      productionCatalogRecordCount: 0,
+      ownerReviewDemoEnabled: true,
+      now: new Date("2026-08-07T12:00:00.000Z"),
+      sessionId: "bt_session_test"
+    });
+    const review = createPersistableCharacterVideoReview(
+      createCharacterVideoReviewResult({
+        iteration: 2,
+        metadata: {
+          fileName: "updated-character-video.mp4",
+          fileType: "video/mp4",
+          fileSizeBytes: 1_000_000,
+          durationSeconds: 12,
+          width: 1280,
+          height: 720,
+          source: "upload"
+        },
+        objectUrlsRevokedAfterProcessing: true
+      })
+    );
+    const withVideoTwo = attachBuddyTrialVideoTwoReview(session, review);
+    expect(withVideoTwo.videoTwoReview).toMatchObject({
+      iteration: 2,
+      metadata: { fileName: "updated-character-video.mp4" },
+      candidateFrames: [],
+      retention: {
+        rawVideoPersisted: false,
+        temporaryMediaRetention: "temporary_processing_only",
+        objectUrlsRevokedAfterProcessing: true
+      }
+    });
+
+    const withOutcome = attachBuddyTrialFinalOutcome(withVideoTwo, {
+      schemaVersion: "buddy-trial-final-outcome-v1",
+      source: "owner_review_demo",
+      initialRecommendationLabel: "Review Demo Face Alpha",
+      finalSettingsSummary: [{ label: "Jaw Width", value: "61", menuPath: ["Road to Glory", "Appearance", "Face"] }],
+      beforeScore: 82,
+      afterScore: 91,
+      scoreDelta: 9,
+      trend: "improvement",
+      improved: ["Jaw proportion"],
+      stillDifferent: ["Brow height"],
+      scoreLanguage: "Build Match Score is not identity probability.",
+      userPreference: "refined",
+      resemblanceRating: 8,
+      stillLooksOff: "Brow still sits high.",
+      submittedAt: "2026-08-07T12:45:00.000Z",
+      rawMediaRetained: false
+    });
+    expect(withOutcome.finalOutcome).toMatchObject({
+      scoreDelta: 9,
+      trend: "improvement",
+      userPreference: "refined",
+      resemblanceRating: 8,
+      rawMediaRetained: false
+    });
+    expect(JSON.stringify(withOutcome)).not.toMatch(/blob:|data:video|data:image|base64/i);
   });
 });

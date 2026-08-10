@@ -24,7 +24,6 @@ import {
   transitionBuddyTrialSession,
   updateBuddyTrialBuildGuideProgress,
   updateBuddyTrialRefinementGuideProgress,
-  type BuddyTrialConsentRecord,
   type BuddyTrialBuildGuideProgress,
   type BuddyTrialFinalOutcome,
   type BuddyTrialVersionPreference,
@@ -59,37 +58,11 @@ interface BuddyTrialEntryProps {
   inviteId: string;
 }
 
-const buddyTrialConsentGroups: Array<{
-  id: string;
-  label: string;
-  consentIDs: Array<keyof BuddyTrialConsentRecord["acknowledgments"]>;
-  includesIndependentAcknowledgment?: boolean;
-}> = [
-  {
-    id: "age",
-    label: "I meet the age requirement for this private trial.",
-    consentIDs: ["ageEligibility"]
-  },
-  {
-    id: "permission",
-    label: "I'm scanning myself or have permission.",
-    consentIDs: ["subjectPermission"]
-  },
-  {
-    id: "camera-analysis",
-    label: "I agree to camera use and face analysis for this GameFace.",
-    consentIDs: ["cameraUse", "currentFaceAnalysis"]
-  },
-  {
-    id: "privacy-independent",
-    label: "I understand scan media is temporary and GameFace Match is an independent companion app.",
-    consentIDs: ["temporaryProcessing"],
-    includesIndependentAcknowledgment: true
-  }
-];
+const compactScanConsentCopy =
+  "I confirm I meet the age requirement, I'm scanning myself or have permission, I agree to camera use and face analysis, and I understand scan media is temporary and GameFace Match is an independent companion app.";
 
 const buddyTrialStageLabels: Record<BuddyTrialState, { label: string; action: string }> = {
-  INVITED: { label: "Ready to start", action: "Check the boxes below, then start your scan." },
+  INVITED: { label: "Ready to scan", action: "Open the guided scan when you are ready." },
   CONSENTED: { label: "Ready to scan", action: "Start your GameFace scan when you are ready." },
   SCAN_IN_PROGRESS: { label: "Ready to scan", action: "Open the guided scan when you are ready." },
   SCAN_COMPLETE: { label: "Scan complete", action: "Get your GameFace settings." },
@@ -155,8 +128,7 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const ownerReviewDemo = useMemo<OwnerReviewDemoRecommendationResult | null>(() => (ownerReviewDemoEnabled ? createOwnerReviewDemoRecommendationResult() : null), [ownerReviewDemoEnabled]);
   const [session, setSession] = useState<BuddyTrialSession | null>(null);
   const [initialization, setInitialization] = useState<BuddyTrialInitialization>({ status: "ready" });
-  const [consent, setConsent] = useState<BuddyTrialConsentRecord | null>(null);
-  const [entryStep, setEntryStep] = useState<"landing" | "consent">("landing");
+  const [consent, setConsent] = useState<ReturnType<typeof createInitialBuddyTrialConsent> | null>(null);
   const [independentAcknowledged, setIndependentAcknowledged] = useState(false);
 
   useEffect(() => {
@@ -208,47 +180,46 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const currentConsent = consent ?? session?.consent ?? createInitialBuddyTrialConsent();
   const consentReady = hasRequiredBuddyTrialConsent(currentConsent);
   const preScanState = !session || session.state === "INVITED";
-  const showLanding = preScanState && entryStep === "landing";
-  const showConsent = preScanState && entryStep === "consent";
-  const showScanHandoff = session?.state === "CONSENTED" || session?.state === "SCAN_IN_PROGRESS";
+  const consentAlreadyAccepted = Boolean(session?.consent.acceptedAt && hasRequiredBuddyTrialConsent(session.consent));
+  const compactConsentChecked = consentAlreadyAccepted || (consentReady && independentAcknowledged);
+  const showScanHandoff = preScanState || session?.state === "CONSENTED" || session?.state === "SCAN_IN_PROGRESS";
   const nextAction = session ? getBuddyTrialNextAction(session) : "Review the invite and start when ready.";
   const stageCopy = getBuddyTrialStageCopy(session, nextAction);
   const showScanAction = showScanHandoff;
   const showOwnerReviewActiveBody = Boolean(ownerReviewDemo && session && !["INVITED", "CONSENTED", "SCAN_IN_PROGRESS"].includes(session.state));
 
-  const updateConsentGroup = (group: (typeof buddyTrialConsentGroups)[number], checked: boolean) => {
+  const updateCompactConsentAcknowledgment = (checked: boolean) => {
     const activeSession = ensureSession();
     const nextConsent = {
       ...activeSession.consent,
       acknowledgments: {
-        ...activeSession.consent.acknowledgments
+        ...activeSession.consent.acknowledgments,
+        ageEligibility: checked,
+        subjectPermission: checked,
+        cameraUse: checked,
+        currentFaceAnalysis: checked,
+        temporaryProcessing: checked
       }
     };
-    for (const id of group.consentIDs) {
-      nextConsent.acknowledgments[id] = checked;
-    }
     const nextSession = { ...activeSession, consent: nextConsent };
-    if (group.includesIndependentAcknowledgment) {
-      setIndependentAcknowledged(checked);
-    }
+    setIndependentAcknowledged(checked);
     setConsent(nextConsent);
     persistSession(nextSession);
   };
 
   const startScan = () => {
     const activeSession = ensureSession();
-    const consented = applyBuddyTrialConsent({ ...activeSession, consent: currentConsent }, currentConsent);
+    const currentStateRequiresConsent = activeSession.state === "INVITED";
+    if (currentStateRequiresConsent && (!consentReady || !compactConsentChecked)) {
+      return;
+    }
+    const consented = currentStateRequiresConsent ? applyBuddyTrialConsent({ ...activeSession, consent: currentConsent }, currentConsent) : activeSession;
     const nextSession =
       consented.state === "CONSENTED" ? transitionBuddyTrialSession(consented, "SCAN_IN_PROGRESS", new Date(), "Buddy Trial scan started.") : consented;
     persistSession(nextSession);
     if (typeof window !== "undefined" && nextSession.state === "SCAN_IN_PROGRESS") {
       window.location.assign(`/?buddyTrialInvite=${encodeURIComponent(inviteId)}#start`);
     }
-  };
-
-  const openConsentStep = () => {
-    ensureSession();
-    setEntryStep("consent");
   };
 
   const deleteTrialData = () => {
@@ -452,10 +423,7 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
 
   return (
     <main className="buddy-trial-page">
-      <section
-        className={`buddy-trial-shell${showOwnerReviewActiveBody ? " buddy-trial-shell--active" : ""}${showLanding ? " buddy-trial-shell--landing" : ""}${showConsent ? " buddy-trial-shell--consent" : ""}`}
-        aria-labelledby="buddy-trial-title"
-      >
+      <section className={`buddy-trial-shell${showOwnerReviewActiveBody ? " buddy-trial-shell--active" : ""}`} aria-labelledby="buddy-trial-title">
         <div className="buddy-trial-brand" aria-label="GameFace Match">
           <span className="buddy-trial-mark" aria-hidden="true">
             G
@@ -463,14 +431,8 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
           <span>GameFace Match</span>
         </div>
         <p className="buddy-trial-kicker">Private Buddy Trial</p>
-        <h1 id="buddy-trial-title">{showOwnerReviewActiveBody ? "Your GameFace trial" : showConsent ? "Before we scan" : "Build yourself in College Football 27."}</h1>
-        {showLanding ? (
-          <p className="buddy-trial-copy">Scan your face and get the closest in-game appearance settings.</p>
-        ) : showConsent ? (
-          <p className="buddy-trial-copy">A few quick acknowledgements, then your guided scan starts.</p>
-        ) : !showOwnerReviewActiveBody ? (
-          <p className="buddy-trial-copy">Open the guided scan when you are ready.</p>
-        ) : null}
+        <h1 id="buddy-trial-title">{showOwnerReviewActiveBody ? "Your GameFace trial" : "Build yourself in College Football 27."}</h1>
+        {!showOwnerReviewActiveBody ? <p className="buddy-trial-copy">Open the guided scan when you are ready.</p> : null}
 
         {ownerReviewDemoEnabled ? (
           <div className="buddy-trial-demo-banner" role="status">
@@ -478,7 +440,7 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
           </div>
         ) : null}
 
-        {!showLanding && !showConsent ? (
+        {!showOwnerReviewActiveBody ? (
           <div className="buddy-trial-status-card" aria-live="polite">
             <span className="buddy-trial-status-label">Next up</span>
             <strong>{stageCopy.label}</strong>
@@ -488,56 +450,7 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
 
         {showOwnerReviewActiveBody ? ownerReviewDemoPanel : null}
 
-        {showLanding ? (
-          <section className="buddy-trial-landing-panel" aria-label="Buddy Trial overview">
-            <p>About 2 minutes.</p>
-            <button className="buddy-trial-primary" type="button" onClick={openConsentStep}>
-              Start My GameFace
-            </button>
-            <p className="buddy-trial-trust-line">Private beta • Raw face media is not saved by default</p>
-          </section>
-        ) : null}
-
-        {showConsent ? (
-          <section className="buddy-trial-consent buddy-trial-consent--short" aria-labelledby="buddy-trial-consent-title">
-            <h2 id="buddy-trial-consent-title">Required scan acknowledgements</h2>
-            {buddyTrialConsentGroups.map((group) => {
-              const checked =
-                group.consentIDs.every((id) => currentConsent.acknowledgments[id]) &&
-                (!group.includesIndependentAcknowledgment || independentAcknowledged);
-              return (
-                <label key={group.id} className="buddy-trial-checkbox">
-                  <input type="checkbox" checked={checked} onChange={(event) => updateConsentGroup(group, event.target.checked)} />
-                  <span>
-                    <strong>{group.label}</strong>
-                  </span>
-                </label>
-              );
-            })}
-            <button className="buddy-trial-primary" type="button" onClick={startScan} disabled={!consentReady || !independentAcknowledged}>
-              Continue
-            </button>
-            <details className="buddy-trial-privacy buddy-trial-privacy--compact">
-              <summary>Privacy details</summary>
-              <p>
-                This private trial saves progress and choices in this browser so you can leave Safari, build on the console, and return. Basic use does not
-                require an account. Raw face photos or video are not saved by default.
-              </p>
-              <p>{INDEPENDENT_APP_DISCLAIMER}</p>
-              <ul>
-                {REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => {
-                  const definition = getConsentDefinition(id);
-                  return definition ? <li key={id}>{definition.description}</li> : null;
-                })}
-              </ul>
-              <button className="buddy-trial-secondary" type="button" onClick={deleteTrialData}>
-                Delete My Trial Data
-              </button>
-            </details>
-          </section>
-        ) : null}
-
-        {!showOwnerReviewActiveBody && !showLanding && !showConsent ? (
+        {!showOwnerReviewActiveBody ? (
           <>
             {session?.catalogGate === "production_catalog_unavailable" || (!ownerReviewDemoEnabled && productionCatalogRecordCount === 0) ? (
               <div className="buddy-trial-warning" role="status">
@@ -545,37 +458,52 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
                 showing made-up live settings.
               </div>
             ) : null}
-
-            {ownerReviewDemoPanel}
           </>
         ) : null}
 
         <div className="buddy-trial-actions">
           {showScanAction ? (
-            session?.state === "SCAN_IN_PROGRESS" || session?.state === "CONSENTED" ? (
-              <a className="buddy-trial-primary" href={`/?buddyTrialInvite=${encodeURIComponent(inviteId)}#start`}>
+            <>
+              <label className="buddy-trial-compact-consent">
+                <input
+                  type="checkbox"
+                  checked={compactConsentChecked}
+                  onChange={(event) => updateCompactConsentAcknowledgment(event.target.checked)}
+                  aria-describedby="buddy-trial-compact-consent-copy"
+                />
+                <span id="buddy-trial-compact-consent-copy">{compactScanConsentCopy}</span>
+              </label>
+              <button className="buddy-trial-primary" type="button" onClick={startScan} disabled={!compactConsentChecked}>
                 Continue guided scan
-              </a>
-            ) : null
+              </button>
+            </>
           ) : null}
-          {!showLanding && !showConsent ? (
+          {!showOwnerReviewActiveBody ? (
             <button className="buddy-trial-secondary" type="button" onClick={deleteTrialData}>
               Delete My Trial Data
             </button>
           ) : null}
         </div>
 
-        {!showLanding && !showConsent ? (
-        <details className="buddy-trial-privacy">
-          <summary>Privacy details</summary>
-          <p>
-            This private trial saves progress and choices in this browser so you can come back after using the console. Basic use does not require an account. Raw
-            face photos or video are not saved by default. Cloud backup, public sharing, model training, and marketing use are not included in this consent.
-          </p>
-        </details>
+        {!showOwnerReviewActiveBody ? (
+          <details className="buddy-trial-privacy">
+            <summary>Privacy details</summary>
+            <p>
+              This private trial saves progress and choices in this browser so you can come back after using the console. Basic use does not require an account.
+              Raw face photos or video are not saved by default. Cloud backup, public sharing, model training, and marketing use are not included in this
+              consent.
+            </p>
+            <p>{INDEPENDENT_APP_DISCLAIMER}</p>
+            <ul>
+              {REQUIRED_BUDDY_TRIAL_CONSENTS.map((id) => {
+                const definition = getConsentDefinition(id);
+                return definition ? <li key={id}>{definition.description}</li> : null;
+              })}
+            </ul>
+          </details>
         ) : null}
 
-        {!showLanding && !showConsent ? <p className="buddy-trial-resume">You can leave and come back with this same private link on this iPhone.</p> : null}
+        {!showOwnerReviewActiveBody ? <p className="buddy-trial-resume">You can leave and come back with this same private link on this iPhone.</p> : null}
       </section>
     </main>
   );

@@ -13,7 +13,7 @@ test.describe("Buddy Trial invite route", () => {
 
     await expect(page.getByRole("heading", { name: /Build yourself in College Football 27/i })).toBeVisible();
     await expect(page.getByText("Loading your private link")).toHaveCount(0);
-    await expect(page.getByText("Start My GameFace")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Continue guided scan" })).toBeVisible();
 
     await context.close();
   });
@@ -24,35 +24,22 @@ test.describe("Buddy Trial invite route", () => {
 
     await expect(page.getByRole("heading", { name: /Build yourself in College Football 27/i })).toBeVisible();
     await expect(page.getByText("Private Buddy Trial")).toBeVisible();
-    await expect(page.getByText("Scan your face and get the closest in-game appearance settings.")).toBeVisible();
-    await expect(page.getByText("Private beta • Raw face media is not saved by default")).toBeVisible();
+    await expect(page.locator(".buddy-trial-copy", { hasText: "Open the guided scan when you are ready." })).toBeVisible();
     await expect(page.getByText("Scan in progress")).toHaveCount(0);
     await expect(page.getByText("What you'll do")).toHaveCount(0);
-    await expect(page.getByRole("button", { name: "Delete My Trial Data" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Delete My Trial Data" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Before we scan" })).toHaveCount(0);
     if (process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO === "true") {
       await expect(page.getByText("Owner Review Demo — appearance settings are test data.")).toBeVisible();
     } else {
-      await expect(page.getByText(/Real College Football 27 settings are not available yet/i)).toHaveCount(0);
+      await expect(page.getByText(/Real College Football 27 settings are not available yet/i)).toBeVisible();
     }
     await expect(page.getByRole("link", { name: /verifier/i })).toHaveCount(0);
 
-    const beginButton = page.getByRole("button", { name: "Start My GameFace" });
-    await expect(beginButton).toBeEnabled();
-    await beginButton.click();
-
-    await expect(page.getByRole("heading", { name: "Before we scan" })).toBeVisible();
-    const continueButton = page.getByRole("button", { name: "Continue" });
+    const continueButton = page.getByRole("button", { name: "Continue guided scan" });
     await expect(continueButton).toBeDisabled();
-    for (const label of [
-      /I meet the age requirement/i,
-      /I'm scanning myself or have permission/i,
-      /I agree to camera use and face analysis/i,
-      /scan media is temporary and GameFace Match is an independent companion app/i
-    ]) {
-      const checkbox = page.getByLabel(label);
-      await expect(checkbox).not.toBeChecked();
-      await checkbox.check();
-    }
+    await expect(page.getByLabel(/I confirm I meet the age requirement/i)).not.toBeChecked();
+    await page.getByLabel(/I confirm I meet the age requirement/i).check();
     await expect(continueButton).toBeEnabled();
     await continueButton.click();
 
@@ -82,7 +69,7 @@ test.describe("Buddy Trial invite route", () => {
 
     await page.goto(`/trial/${activeInvite}`);
     await page.reload();
-    await expect(page.getByText("Ready to scan")).toBeVisible();
+    await expect(page.getByText("Ready to scan").first()).toBeVisible();
     await expect(page.getByText(/same private link/i)).toBeVisible();
   });
 
@@ -120,7 +107,6 @@ test.describe("Buddy Trial invite route", () => {
 
   test("keeps deleted local trial state through refresh", async ({ page }) => {
     await page.goto(`/trial/${activeInvite}`);
-    await page.getByRole("button", { name: "Start My GameFace" }).click();
     await page.getByText("Privacy details").click();
     await page.getByRole("button", { name: "Delete My Trial Data" }).click();
     await expect(page.getByRole("heading", { name: "Trial data removed" })).toBeVisible();
@@ -145,17 +131,10 @@ test.describe("Buddy Trial invite route", () => {
 
       await expect(page.getByRole("heading", { name: /Build yourself in College Football 27/i })).toBeVisible();
       await expect(page.getByText("Owner Review Demo — appearance settings are test data.")).toBeVisible();
-      await page.getByRole("button", { name: "Start My GameFace" }).click();
-      await expect(page.getByRole("heading", { name: "Before we scan" })).toBeVisible();
-      for (const label of [
-        /I meet the age requirement/i,
-        /I'm scanning myself or have permission/i,
-        /I agree to camera use and face analysis/i,
-        /scan media is temporary and GameFace Match is an independent companion app/i
-      ]) {
-        await page.getByLabel(label).check();
-      }
-      await page.getByRole("button", { name: "Continue" }).click();
+      await expect(page.getByRole("heading", { name: "Before we scan" })).toHaveCount(0);
+      await expect(page.getByRole("button", { name: "Continue guided scan" })).toBeDisabled();
+      await page.getByLabel(/I confirm I meet the age requirement/i).check();
+      await page.getByRole("button", { name: "Continue guided scan" }).click();
 
       await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
       await page.getByRole("button", { name: "Get Started" }).click();

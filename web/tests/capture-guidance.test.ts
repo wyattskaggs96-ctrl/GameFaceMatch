@@ -178,6 +178,25 @@ describe("capture guidance frame validation", () => {
     expect(guidance.canContinueWithLimitations).toBe(true);
   });
 
+  it("blocks live guided scan readiness when operational landmarks are unavailable", () => {
+    const guidance = evaluateCaptureGuidanceFrame({
+      angleID: "straightOn",
+      faceLandmarkReport: unavailableFaceLandmarkReport({ message: "Model missing." }),
+      imageQualityReport: quality(),
+      timestampMs: 0,
+      requireOperationalLandmarks: true
+    });
+    expect(guidance.blockingIssues.map((issue) => issue.code)).toContain("landmarksUnavailable");
+    expect(guidance.advisoryWarnings.map((issue) => issue.code)).not.toContain("landmarksUnavailable");
+    expect(guidance.requiredPoseReached).toBe(false);
+    expect(guidance.canCapture).toBe(false);
+    expect(guidance.canContinueWithLimitations).toBe(false);
+    expect(guidance.realtimeQuality.state).toBe("blocked");
+    expect(guidance.realtimeQuality.signals.find((signal) => signal.id === "faceFound")?.state).toBe("blocking");
+    expect(guidance.realtimeQuality.signals.find((signal) => signal.id === "singleFace")?.state).toBe("blocking");
+    expect(guidance.realtimeQuality.signals.find((signal) => signal.id === "pose")?.state).toBe("blocking");
+  });
+
   it("does not block fallback continuation for blur when landmarks are unavailable", () => {
     const guidance = evaluateCaptureGuidanceFrame({
       angleID: "straightOn",

@@ -1,4 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
 import { mapMediaPipeFaceLandmarkerResult } from "@/lib/face-landmarks/face-landmark-geometry";
 import {
   MEDIAPIPE_FACE_LANDMARKER_METADATA,
@@ -17,6 +20,14 @@ describe("face landmark provider metadata", () => {
     expect(MEDIAPIPE_FACE_LANDMARKER_METADATA.packageVersion).toBe("0.10.35");
     expect(MEDIAPIPE_FACE_LANDMARKER_METADATA.localOnly).toBe(true);
     expect(MEDIAPIPE_FACE_LANDMARKER_METADATA.modelPath).toBe("/models/mediapipe/face_landmarker.task");
+  });
+
+  it("keeps the reviewed local MediaPipe model asset available with the recorded checksum", () => {
+    const assetPath = path.join(process.cwd(), "public/models/mediapipe/face_landmarker.task");
+    const bytes = fs.readFileSync(assetPath);
+    expect(bytes.byteLength).toBeGreaterThan(3_000_000);
+    expect(crypto.createHash("sha256").update(bytes).digest("hex")).toBe("64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff");
+    expect(MEDIAPIPE_FACE_LANDMARKER_METADATA.modelVersion).toContain("64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff");
   });
 });
 

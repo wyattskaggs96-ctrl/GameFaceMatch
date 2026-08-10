@@ -48,6 +48,7 @@ export interface CaptureGuidanceInput {
   >;
   timestampMs: number;
   useExtendedHold?: boolean;
+  requireOperationalLandmarks?: boolean;
 }
 
 interface FrameSignal {
@@ -189,7 +190,14 @@ export function evaluateCaptureGuidanceFrame(
   let requiredRegionCoverage: number | null = null;
 
   if (faceReport.availabilityState !== "available") {
-    advisoryWarnings.push(issue("landmarksUnavailable", "advisory", "Local landmarks are unavailable. Continue only if the manual pose checks look correct.", true));
+    const message = input.requireOperationalLandmarks
+      ? "Face tracking couldn't start. Your camera is working, but GameFace Match couldn't initialize the face-tracking system required for this scan."
+      : "Local landmarks are unavailable. Continue only if the manual pose checks look correct.";
+    if (input.requireOperationalLandmarks) {
+      blockingIssues.push(issue("landmarksUnavailable", "blocking", message, false));
+    } else {
+      advisoryWarnings.push(issue("landmarksUnavailable", "advisory", message, true));
+    }
   } else if (faceReport.faceCount === "zero") {
     blockingIssues.push(issue("faceNotFound", "blocking", "Face not found. Center one face in the frame or use upload fallback.", false));
   } else if (faceReport.faceCount === "multiple") {
@@ -389,7 +397,7 @@ function createRealtimeCaptureQualityReport({
       id: "faceFound",
       label: "Face found",
       score: faceReport.faceCount === "one" || faceReport.faceCount === "multiple" ? 1 : 0,
-      state: stateForIssues(blockingIssues, advisoryWarnings, ["faceNotFound"], faceReport.availabilityState === "available"),
+      state: stateForIssues(blockingIssues, advisoryWarnings, ["faceNotFound", "landmarksUnavailable"], faceReport.availabilityState === "available"),
       message: faceReport.faceCount === "zero" ? "No face found." : faceReport.availabilityState === "available" ? "Face detection is available." : "Face detection unavailable.",
       evidence: faceReport.availabilityState === "available" ? "estimated" : "notYetImplemented"
     }),
@@ -397,7 +405,7 @@ function createRealtimeCaptureQualityReport({
       id: "singleFace",
       label: "One face",
       score: faceReport.faceCount === "one" ? 1 : 0,
-      state: stateForIssues(blockingIssues, advisoryWarnings, ["multipleFaces"], faceReport.availabilityState === "available"),
+      state: stateForIssues(blockingIssues, advisoryWarnings, ["multipleFaces", "landmarksUnavailable"], faceReport.availabilityState === "available"),
       message: faceReport.faceCount === "multiple" ? "Multiple faces detected." : "One-face check is clear.",
       evidence: faceReport.availabilityState === "available" ? "estimated" : "notYetImplemented"
     }),
@@ -421,7 +429,13 @@ function createRealtimeCaptureQualityReport({
       id: "pose",
       label: "Pose",
       score: face?.approximateHeadPose.availabilityState === "available" ? (requiredPoseReached || !poseIssue ? 1 : 0) : null,
-      state: poseIssue ? "blocking" : face?.approximateHeadPose.availabilityState === "available" ? "pass" : "advisory",
+      state: blockingIssues.some((item) => item.code === "landmarksUnavailable")
+        ? "blocking"
+        : poseIssue
+          ? "blocking"
+          : face?.approximateHeadPose.availabilityState === "available"
+            ? "pass"
+            : "advisory",
       message: poseIssue?.message ?? "Requested pose is within the configured range or needs manual confirmation.",
       evidence: face?.approximateHeadPose.availabilityState === "available" ? "estimated" : "userConfirmed"
     }),

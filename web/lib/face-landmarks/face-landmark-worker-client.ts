@@ -59,13 +59,17 @@ export class WorkerBackedFaceLandmarkProvider implements FaceLandmarkProvider {
       this.sequence += 1;
       return await new Promise<FaceLandmarkReport>((resolve) => {
         const timeout = setTimeout(() => {
-          resolve(
-            unavailableFaceLandmarkReport({
-              provider: this.metadata,
-              state: "timeout",
-              message: "Local face landmark worker timed out. Continue with manual confirmation or retake the image."
-            })
-          );
+          void this.fallback.detect(input, options).then((fallbackReport) => {
+            resolve(
+              fallbackReport.availabilityState === "available"
+                ? fallbackReport
+                : unavailableFaceLandmarkReport({
+                    provider: this.metadata,
+                    state: "timeout",
+                    message: "Local face landmark worker timed out and direct browser face tracking was unavailable. Retry camera or start over."
+                  })
+            );
+          });
         }, options?.detectionTimeoutMs ?? 6_000);
 
         const listener = (event: MessageEvent<WorkerResponse>) => {
@@ -75,21 +79,9 @@ export class WorkerBackedFaceLandmarkProvider implements FaceLandmarkProvider {
           if (event.data.type === "result") {
             resolve(event.data.report);
           } else if (event.data.type === "error") {
-            resolve(
-              unavailableFaceLandmarkReport({
-                provider: this.metadata,
-                state: "error",
-                message: event.data.message
-              })
-            );
+            void this.resolveWithDirectFallback(input, options, event.data.message).then(resolve);
           } else {
-            resolve(
-              unavailableFaceLandmarkReport({
-                provider: this.metadata,
-                state: "unavailable",
-                message: "Local face landmark worker was disposed before detection completed."
-              })
-            );
+            void this.resolveWithDirectFallback(input, options, "Local face landmark worker was disposed before detection completed.").then(resolve);
           }
         };
         worker.addEventListener("message", listener);
@@ -149,6 +141,16 @@ export class WorkerBackedFaceLandmarkProvider implements FaceLandmarkProvider {
         });
     }
     return this.modelAvailability;
+  }
+
+  private async resolveWithDirectFallback(input: FaceLandmarkInput, options: FaceLandmarkProviderOptions | undefined, workerMessage: string) {
+    const fallbackReport = await this.fallback.detect(input, options);
+    if (fallbackReport.availabilityState === "available") return fallbackReport;
+    return unavailableFaceLandmarkReport({
+      provider: this.metadata,
+      state: "error",
+      message: `${workerMessage} Direct browser face tracking was also unavailable.`
+    });
   }
 }
 

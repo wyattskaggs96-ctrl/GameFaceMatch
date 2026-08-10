@@ -72,4 +72,4 @@ Payloads are intentionally narrow. Runtime validation rejects unknown keys, raw 
 - Browser camera permission is separate from app consent. The app consent flow explains intended use; the browser still controls camera access.
 - No service worker is registered, so there is no intentional offline cache of capture media.
 - The hardened MVP does not include a network upload surface for face images. Any future upload or sync feature requires a separate architecture and consent decision.
-- MediaPipe Face Landmarker is lazy-loaded only for local capture analysis. If the reviewed local model asset is unavailable, the app reports landmarks as unavailable instead of fabricating results.
+- MediaPipe Face Landmarker is lazy-loaded only for local capture analysis. The reviewed local task model is bundled under `web/public/models/mediapipe/` and must remain local-only; if initialization or detection fails, the app reports landmarks as unavailable instead of fabricating results.

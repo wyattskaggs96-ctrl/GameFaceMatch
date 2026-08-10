@@ -10,8 +10,11 @@ Provider metadata recorded in code:
 - Package: `@mediapipe/tasks-vision`
 - Installed package version: `0.10.35`
 - Model: MediaPipe Face Landmarker task model
-- Model source: `https://developers.google.com/edge/mediapipe/solutions/vision/face_landmarker/web_js`
+- Model source: `https://developers.google.com/edge/mediapipe/solutions/vision/face_landmarker`
+- Model bundle URL: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task`
 - Local model path: `web/public/models/mediapipe/face_landmarker.task`
+- Local model SHA-256: `64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff`
+- Local model review date: 2026-08-10
 - Runtime license: Apache-2.0 for MediaPipe code/package
 - Documentation/sample license: Apache-2.0 and CC-BY-4.0 under Google documentation terms
 
@@ -31,17 +34,14 @@ The implementation is behind `FaceLandmarkProvider` in `web/lib/face-landmarks/`
 
 ## Model asset and integrity strategy
 
-The npm package includes the browser/WASM runtime but not the Face Landmarker model file. The model must be installed as a reviewed local asset before real production landmark extraction is enabled.
+The npm package includes the browser/WASM runtime but not the Face Landmarker model file. The reviewed local model asset is now installed at `web/public/models/mediapipe/face_landmarker.task` and is covered by a checksum regression test. The app must not hot-link the remote model at runtime.
 
-Required future publication steps:
+Publication and maintenance requirements:
 
-1. Download the official Face Landmarker task model from the Google MediaPipe model source.
-2. Place it at `web/public/models/mediapipe/face_landmarker.task`.
-3. Record the exact download URL, model version, checksum, reviewer, and date.
-4. Update provider metadata from `not bundled; local asset required` to the reviewed model version.
-5. Verify production build and browser capture on real devices.
-
-The app must not hot-link a remote model at runtime.
+1. Keep the task model as a local reviewed asset.
+2. Record the exact download URL, checksum, reviewer, and date for any replacement.
+3. Update provider metadata and tests when the model changes.
+4. Verify production build and browser capture on real devices after replacement.
 
 `npm run mediapipe:assets` copies MediaPipe WASM runtime files from `node_modules` into `web/public/mediapipe/` for local builds. That generated runtime copy is ignored by Git.
 

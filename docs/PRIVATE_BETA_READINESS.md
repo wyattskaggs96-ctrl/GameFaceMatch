@@ -10,7 +10,7 @@ GameFace Match is ready for local internal dry-runs of the web journey, privacy 
 
 - The production College Football 27 catalog contains zero verified records.
 - Real recommendation output and build instructions are intentionally fail-closed while the catalog is empty.
-- The MediaPipe runtime is present, but the reviewed local `face_landmarker.task` model asset is not bundled in `web/public/models/mediapipe/`.
+- The MediaPipe runtime and reviewed local `face_landmarker.task` model asset are present, but real-device scan completion still requires physical iPhone Safari and Android Chrome verification.
 - Real-device mobile camera behavior has not been completed across the required iPhone Safari and Android Chrome matrix.
 - Repeatability gates have synthetic coverage only; real tester repeatability has not been measured.
 
@@ -19,7 +19,7 @@ GameFace Match is ready for local internal dry-runs of the web journey, privacy 
 | Area | Current status | Readiness |
 | --- | --- | --- |
 | Guided capture completion | Five required RGB angles, upload fallback, retake, cancellation, and review flow exist. | Ready with limitations |
-| Real landmark processing | Provider interface and MediaPipe integration exist, but the reviewed local model asset is absent. | Not ready |
+| Real landmark processing | Provider interface, MediaPipe integration, WASM runtime assets, and reviewed local model asset are present. Physical-device scan completion and timing still require verification. | Ready for controlled real-device QA |
 | Measurement repeatability | RGB landmark geometry pipeline and synthetic regression tests exist. Real-device repeated-capture data does not. | Not ready |
 | Verified catalog completeness | Production catalog is valid but empty. | Not ready |
 | Top-three matching | Rule-based engine exists and adapter fails closed with empty production catalog. | Not ready for production results |
@@ -76,16 +76,15 @@ The runbook is not permission to invite testers. It is a pre-launch operating pl
 
 ## Required Fixes Before Private Beta
 
-1. Add a reviewed local MediaPipe Face Landmarker model asset, record its checksum, version, license review, and update policy, and verify real local landmark extraction.
-2. Complete real-device mobile QA for current iPhone Safari and Android Chrome using HTTPS.
-3. Import only evidence-backed, two-reviewer verified College Football 27 catalog records.
-4. Re-run catalog validation and confirm nonzero verified records are available for the intended platform, game version, mode, and creation path.
-5. Run repeatability tests with real beta capture sessions while deleting raw image media by default.
-6. Confirm top-three output, build instructions, and saved builds retain exact catalog version, patch, platform, mode, and creation path.
-7. Complete privacy/legal review of tester consent, privacy wording, support path, and deletion claims.
+1. Complete real-device mobile QA for current iPhone Safari and Android Chrome using HTTPS, including local landmark initialization and scan completion.
+2. Import only evidence-backed, two-reviewer verified College Football 27 catalog records.
+3. Re-run catalog validation and confirm nonzero verified records are available for the intended platform, game version, mode, and creation path.
+4. Run repeatability tests with real beta capture sessions while deleting raw image media by default.
+5. Confirm top-three output, build instructions, and saved builds retain exact catalog version, patch, platform, mode, and creation path.
+6. Complete privacy/legal review of tester consent, privacy wording, support path, and deletion claims.
 
 ## Final Readiness Label
 
 Not ready.
 
-The repository is safe to continue from, but the next phase should close the model-asset, real-device QA, and verified-catalog blockers before calling this a private beta.
+The repository is safe to continue from, but the next phase should close the real-device QA and verified-catalog blockers before calling this a private beta.

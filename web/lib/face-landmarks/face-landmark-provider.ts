@@ -26,7 +26,7 @@ export const MEDIAPIPE_FACE_LANDMARKER_METADATA: FaceLandmarkProviderMetadata = 
   packageName: "@mediapipe/tasks-vision",
   packageVersion: "0.10.35",
   modelName: "MediaPipe Face Landmarker task model",
-  modelVersion: "not bundled; local asset required",
+  modelVersion: "float16 latest local asset, reviewed 2026-08-10, sha256 64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
   modelSource: "https://developers.google.com/edge/mediapipe/solutions/vision/face_landmarker/web_js",
   modelPath: "/models/mediapipe/face_landmarker.task",
   license: "MediaPipe runtime is Apache-2.0; Google documentation samples are Apache-2.0 and CC-BY-4.0.",

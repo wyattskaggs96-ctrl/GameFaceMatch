@@ -334,7 +334,8 @@ export function GuidedCaptureFlow({
             faceLandmarkReport,
             imageQualityReport: previewQuality,
             timestampMs,
-            useExtendedHold
+            useExtendedHold,
+            requireOperationalLandmarks: true
           });
           setLiveGuidance(guidanceReport);
           const frameDecision = evaluateGuidedLiveFrameDecision({
@@ -2057,8 +2058,8 @@ function getReferenceStatusDetail({
   if (visualState === "denied" || cameraError) return "Allow camera access or use the assisted five-angle capture option.";
   if (visualState === "multiple") return "Only one person can be in the scan.";
   if (visualState === "accessibility") return "Use assisted capture for a step-by-step set of poses instead of circular movement.";
-  if (positioningReady) return "Ready";
   if (liveCoverageDecision?.status === "rejected" && liveCoverageDecision.rejectionReasons[0]) return liveCoverageDecision.rejectionReasons[0];
+  if (positioningReady) return "Ready";
   return "Keep your face centered with even light and a neutral expression.";
 }
 
@@ -2091,6 +2092,17 @@ function createGuidedScanQualityGate(guidance: CaptureGuidanceReport | null): Gu
   }
   const blockingCodes = new Set(guidance.blockingIssues.map((issue) => issue.code));
   const advisoryCodes = new Set(guidance.advisoryWarnings.map((issue) => issue.code));
+  if (blockingCodes.has("landmarksUnavailable") || advisoryCodes.has("landmarksUnavailable")) {
+    return {
+      singleFace: false,
+      centered: false,
+      acceptableDistance: false,
+      acceptableLighting: false,
+      acceptableSharpness: false,
+      neutralExpression: false,
+      requiredRegionsVisible: false
+    };
+  }
   return {
     singleFace: !blockingCodes.has("faceNotFound") && !blockingCodes.has("multipleFaces"),
     centered: !blockingCodes.has("faceOffCenter"),

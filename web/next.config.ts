@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const productionScriptSource =
-  process.env.NODE_ENV === "production" ? "script-src 'self' 'unsafe-inline';" : "script-src 'self' 'unsafe-inline' 'unsafe-eval';";
+  process.env.NODE_ENV === "production"
+    ? "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval';"
+    : "script-src 'self' 'unsafe-inline' 'unsafe-eval';";
 const connectSource =
   process.env.NODE_ENV === "production" ? "connect-src 'self';" : "connect-src 'self' ws://localhost:* ws://127.0.0.1:*;";
 

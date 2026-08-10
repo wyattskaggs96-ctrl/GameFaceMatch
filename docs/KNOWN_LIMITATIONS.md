@@ -12,10 +12,11 @@ Status: Current as of the web MVP private-beta readiness review.
 
 ## Landmark Processing
 
-- The MediaPipe runtime assets are bundled locally, but the reviewed `face_landmarker.task` model asset is not currently present under `web/public/models/mediapipe/`.
-- Real landmark extraction must remain unavailable until the local model asset is reviewed, checksummed, documented, and added.
+- The MediaPipe runtime assets and reviewed `face_landmarker.task` model asset are bundled locally.
+- The local model asset SHA-256 is `64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff`.
 - Synthetic landmark mocks are for tests only.
 - The app must not fabricate landmarks or substitute guessed measurements.
+- Real mobile scan completion still requires physical-device Safari/Chrome QA because browser camera, WASM, worker, and page-lifecycle behavior can vary by device.
 
 ## Browser RGB Capture
 
@@ -60,4 +61,4 @@ Status: Current as of the web MVP private-beta readiness review.
 ## Performance
 
 - Large-image downscaling exists before analysis.
-- Real landmark model load time and processing time have not been measured on physical iPhone Safari or Android Chrome devices.
+- Real landmark model load time and processing time must continue to be measured on physical iPhone Safari and Android Chrome devices.

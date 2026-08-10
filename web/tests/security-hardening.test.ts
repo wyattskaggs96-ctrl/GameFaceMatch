@@ -28,10 +28,10 @@ describe("security hardening", () => {
     expect(config).toContain("productionBrowserSourceMaps: false");
   });
 
-  it("removes unsafe-eval from the production Content Security Policy", () => {
+  it("removes broad unsafe-eval from production CSP while allowing local MediaPipe WebAssembly", () => {
     const config = fs.readFileSync(path.resolve(process.cwd(), "next.config.ts"), "utf8");
     expect(config).toContain("process.env.NODE_ENV === \"production\"");
-    expect(config).toContain("script-src 'self' 'unsafe-inline';");
+    expect(config).toContain("script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval';");
     expect(config).toContain("script-src 'self' 'unsafe-inline' 'unsafe-eval';");
   });
 

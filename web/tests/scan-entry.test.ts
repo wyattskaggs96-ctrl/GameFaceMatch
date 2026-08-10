@@ -183,6 +183,8 @@ describe("guided circular scan coverage contract", () => {
     const source = fs.readFileSync(path.join(process.cwd(), "features/capture/GuidedCaptureFlow.tsx"), "utf8");
     expect(source).toContain("Circular progress advances only after a stable, distinct live frame passes face");
     expect(source).toContain("pose, blur, exposure, and duplicate-angle checks");
+    expect(source).toContain("requireOperationalLandmarks: true");
+    expect(source).toContain("blockingCodes.has(\"landmarksUnavailable\")");
     expect(source).toContain("Live coverage decision");
     expect(source).toContain("Accessibility Options");
     expect(source).toContain("First GameFace scan complete.");

@@ -14,9 +14,9 @@ Previous state: the Content Security Policy in `web/next.config.ts` allowed `scr
 
 Risk: in production, `unsafe-eval` can increase the blast radius of script-injection bugs by allowing string-to-code execution.
 
-Fix: production headers now omit `unsafe-eval`. Local development keeps the looser script source only because Next.js development tooling can require it.
+Fix: production headers now omit broad JavaScript `unsafe-eval`. Production allows the narrower CSP3 `wasm-unsafe-eval` source because the local MediaPipe Face Landmarker runtime must compile WebAssembly in the browser. Local development keeps the looser script source only because Next.js development tooling can require it.
 
-Verification: `web/tests/security-hardening.test.ts` checks that production CSP has a separate no-`unsafe-eval` branch, and `npm run build` passed with the production bundle guard.
+Verification: `web/tests/security-hardening.test.ts` checks that production CSP keeps broad `unsafe-eval` out while allowing `wasm-unsafe-eval`, and `npm run build` passed with the production bundle guard.
 
 ### High: dev-only source-video API used broad local-file fallbacks
 

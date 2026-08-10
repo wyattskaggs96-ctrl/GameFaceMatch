@@ -8,7 +8,8 @@ import { CapturePreparation } from "./CapturePreparation";
 import { CameraAccessError, type BrowserCameraService, type CameraDeviceOption, type CameraFacingMode } from "@/lib/capture/browser-camera-service";
 import {
   createCaptureGuidanceSession,
-  evaluateCaptureGuidanceFrame
+  evaluateCaptureGuidanceFrame,
+  naturalPhonePositioningThresholds
 } from "@/lib/capture/capture-guidance-service";
 import {
   applyCoverageFrame,
@@ -27,11 +28,13 @@ import {
   createInitialGuidedLiveCoverageAccumulatorState,
   evaluateGuidedLiveFrameDecision,
   guidedSegmentToCaptureAngle,
+  naturalPhoneScanCoverageThresholds,
   updateGuidedLiveCoverageAccumulator,
   type GuidedLiveAcceptedFrame,
   type GuidedLiveCoverageAccumulatorState,
   type GuidedLiveFrameDecision
 } from "@/lib/capture/guided-live-coverage";
+import { createObjectFitCoverVisiblePreview } from "@/lib/capture/visible-preview-geometry";
 import {
   evaluateMobileScanRuntime,
   getCameraBlockedRecoverySteps,
@@ -139,7 +142,7 @@ export function GuidedCaptureFlow({
   const guidanceSampleCountRef = useRef(0);
   const qualityService = useMemo(() => createBrowserImageQualityService(), []);
   const faceLandmarkProvider = useMemo(() => createLocalFaceLandmarkProvider(), []);
-  const guidanceSession = useMemo(() => createCaptureGuidanceSession(), []);
+  const guidanceSession = useMemo(() => createCaptureGuidanceSession(naturalPhonePositioningThresholds), []);
   const currentAngle = getCurrentAngle(session);
   const reviewReport = createCaptureReviewReport(session.angles);
   const completedAngles = getCompletedAngleCount(session.angles);
@@ -335,7 +338,8 @@ export function GuidedCaptureFlow({
             imageQualityReport: previewQuality,
             timestampMs,
             useExtendedHold,
-            requireOperationalLandmarks: true
+            requireOperationalLandmarks: true,
+            visiblePreviewGeometry: getVisiblePreviewGeometry(video, previewIsMirrored)
           });
           setLiveGuidance(guidanceReport);
           const frameDecision = evaluateGuidedLiveFrameDecision({
@@ -343,7 +347,11 @@ export function GuidedCaptureFlow({
             timestampMs,
             faceLandmarkReport,
             imageQualityReport: previewQuality,
-            acceptedFrames: acceptedLiveFramesRef.current
+            acceptedFrames: acceptedLiveFramesRef.current,
+            visiblePreviewGeometry: getVisiblePreviewGeometry(video, previewIsMirrored),
+            options: {
+              thresholds: guidedStageRef.current === "positioning" ? naturalPhonePositioningThresholds : naturalPhoneScanCoverageThresholds
+            }
           });
           if (guidedStageRef.current === "positioning") {
             coverageAccumulatorRef.current = createInitialGuidedLiveCoverageAccumulatorState();
@@ -390,7 +398,7 @@ export function GuidedCaptureFlow({
       cancelled = true;
       if (timeout) clearTimeout(timeout);
     };
-  }, [currentAngle.id, faceLandmarkProvider, guidanceSession, onPerformanceRecord, stream, useExtendedHold]);
+  }, [currentAngle.id, faceLandmarkProvider, guidanceSession, onPerformanceRecord, previewIsMirrored, stream, useExtendedHold]);
 
   useEffect(() => {
     setIsOffline(typeof navigator !== "undefined" ? !navigator.onLine : false);
@@ -1913,6 +1921,17 @@ function createPreviewQualityReport(
   };
 }
 
+function getVisiblePreviewGeometry(video: HTMLVideoElement, mirrored: boolean) {
+  const rect = video.getBoundingClientRect();
+  return createObjectFitCoverVisiblePreview({
+    sourceWidth: video.videoWidth,
+    sourceHeight: video.videoHeight,
+    renderedWidth: rect.width,
+    renderedHeight: rect.height,
+    mirrored
+  });
+}
+
 function formatFaceCount(report?: FaceLandmarkReport) {
   if (!report) return "Not checked";
   if (report.faceCount === "zero") return "Zero";
@@ -2059,8 +2078,8 @@ function getReferenceStatusDetail({
   if (visualState === "multiple") return "Only one person can be in the scan.";
   if (visualState === "accessibility") return "Use assisted capture for a step-by-step set of poses instead of circular movement.";
   if (liveCoverageDecision?.status === "rejected" && liveCoverageDecision.rejectionReasons[0]) return liveCoverageDecision.rejectionReasons[0];
-  if (positioningReady) return "Ready";
-  return "Keep your face centered with even light and a neutral expression.";
+  if (positioningReady) return "Keep your phone upright. Move your head, not your phone.";
+  return "Hold the phone upright at a comfortable selfie distance. Keep your face centered with even light.";
 }
 
 function createUiGuidedScanState({

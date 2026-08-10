@@ -4,9 +4,11 @@ import {
   createInitialGuidedLiveCoverageAccumulatorState,
   evaluateGuidedLiveFrameDecision,
   guidedSegmentToCaptureAngle,
+  naturalPhoneScanCoverageThresholds,
   updateGuidedLiveCoverageAccumulator,
   type GuidedLiveAcceptedFrame
 } from "@/lib/capture/guided-live-coverage";
+import { createObjectFitCoverVisiblePreview, type VisiblePreviewGeometry } from "@/lib/capture/visible-preview-geometry";
 import { MEDIAPIPE_FACE_LANDMARKER_METADATA, unavailableFaceLandmarkReport } from "@/lib/face-landmarks/face-landmark-provider";
 import type { DetectedFaceLandmarks, FaceLandmarkPoint, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
 
@@ -69,6 +71,35 @@ describe("guided live coverage decisions", () => {
     });
     expect(second.acceptedFrame?.assignedSegmentID).toBe("left");
     expect(guidedSegmentToCaptureAngle("left")).toBe("leftProfile");
+  });
+
+  it("uses visible preview crop and head pose for scan progress without requiring phone steering", () => {
+    const visiblePreviewGeometry = createObjectFitCoverVisiblePreview({
+      sourceWidth: 720,
+      sourceHeight: 1280,
+      renderedWidth: 340,
+      renderedHeight: 340,
+      mirrored: true
+    });
+
+    const turnedHead = decision({
+      report: report({ centerX: 0.56, centerY: 0.5, boxWidth: 0.34, boxHeight: 0.45, yawDegrees: 44 }),
+      visiblePreviewGeometry,
+      useNaturalScanThresholds: true
+    });
+
+    expect(turnedHead.assignedSegmentID).toBe("right");
+    expect(turnedHead.rejectionReasons).not.toContain("Center your face.");
+    expect(turnedHead.status).toBe("pendingStability");
+
+    const phoneSteeredOffFrame = decision({
+      report: report({ centerX: 0.88, centerY: 0.5, boxWidth: 0.34, boxHeight: 0.45, yawDegrees: 44 }),
+      visiblePreviewGeometry,
+      useNaturalScanThresholds: true
+    });
+
+    expect(phoneSteeredOffFrame.rejectionReasons).toContain("Center your face.");
+    expect(phoneSteeredOffFrame.accepted).toBe(false);
   });
 
   it("keeps rejected frames out of progress while recording the rejected segment state", () => {
@@ -141,7 +172,9 @@ function decision({
   now = 1_000,
   passID = "first",
   quality: imageQualityReport = quality(),
-  report: faceLandmarkReport = report({})
+  report: faceLandmarkReport = report({}),
+  useNaturalScanThresholds = false,
+  visiblePreviewGeometry = null
 }: {
   acceptedFrames?: GuidedLiveAcceptedFrame[];
   now?: number;
@@ -151,13 +184,17 @@ function decision({
     "brightnessEstimate" | "highlightClippingEstimate" | "shadowClippingEstimate" | "sharpnessEstimate" | "lightingImbalanceEstimate"
   >;
   report?: FaceLandmarkReport;
+  useNaturalScanThresholds?: boolean;
+  visiblePreviewGeometry?: VisiblePreviewGeometry | null;
 }) {
   return evaluateGuidedLiveFrameDecision({
     passID,
     timestampMs: now,
     faceLandmarkReport,
     imageQualityReport,
-    acceptedFrames
+    acceptedFrames,
+    visiblePreviewGeometry,
+    options: useNaturalScanThresholds ? { thresholds: naturalPhoneScanCoverageThresholds } : undefined
   });
 }
 

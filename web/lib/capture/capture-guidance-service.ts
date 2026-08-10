@@ -9,6 +9,7 @@ import type {
   RealtimeCaptureQualitySignalID,
   RealtimeCaptureQualitySignalState
 } from "@/types/domain";
+import { faceBoxCenter, projectFaceBoxToVisiblePreview, type VisiblePreviewGeometry } from "./visible-preview-geometry";
 
 export const CAPTURE_GUIDANCE_PROTOCOL_VERSION = "web-rgb-guidance-1.0.0";
 export const CAPTURE_GUIDANCE_THRESHOLD_VERSION = "web-rgb-thresholds-2026-07-13";
@@ -49,6 +50,7 @@ export interface CaptureGuidanceInput {
   timestampMs: number;
   useExtendedHold?: boolean;
   requireOperationalLandmarks?: boolean;
+  visiblePreviewGeometry?: VisiblePreviewGeometry | null;
 }
 
 interface FrameSignal {
@@ -107,6 +109,15 @@ export const defaultCaptureGuidanceThresholds: CaptureGuidanceThresholds = {
   }
 };
 
+export const naturalPhonePositioningThresholds: CaptureGuidanceThresholds = {
+  ...defaultCaptureGuidanceThresholds,
+  faceMinBoxSize: 0.22,
+  faceMaxBoxSize: 0.84,
+  centerToleranceX: 0.22,
+  centerToleranceY: 0.26,
+  maxCenterMotionPerSecond: 0.34
+};
+
 export class CaptureGuidanceSession {
   private poseStableSinceMs: number | null = null;
   private previousSignal: FrameSignal | null = null;
@@ -122,7 +133,7 @@ export class CaptureGuidanceSession {
 
   evaluate(input: CaptureGuidanceInput): CaptureGuidanceReport {
     const baseReport = evaluateCaptureGuidanceFrame(input, this.thresholds);
-    const signal = getFrameSignal(input.faceLandmarkReport);
+    const signal = getFrameSignal(input.faceLandmarkReport, input.visiblePreviewGeometry);
     const motionIssue = signal ? this.evaluateMotion(signal, input.timestampMs) : null;
     const blockingIssues = motionIssue ? [...baseReport.blockingIssues, motionIssue] : baseReport.blockingIssues;
     const poseStable = baseReport.requiredPoseReached && blockingIssues.length === 0;
@@ -187,6 +198,7 @@ export function evaluateCaptureGuidanceFrame(
   const readyMessages: CaptureGuidanceIssue[] = [];
   const faceReport = input.faceLandmarkReport;
   const face = faceReport.faces[0];
+  const visibleFaceBox = face ? projectFaceBoxToVisiblePreview(face.boundingBox, input.visiblePreviewGeometry).boundingBox : null;
   let requiredRegionCoverage: number | null = null;
 
   if (faceReport.availabilityState !== "available") {
@@ -205,9 +217,11 @@ export function evaluateCaptureGuidanceFrame(
   }
 
   if (face) {
-    const size = Math.max(face.boundingBox.width, face.boundingBox.height);
-    const centerX = face.boundingBox.x + face.boundingBox.width / 2;
-    const centerY = face.boundingBox.y + face.boundingBox.height / 2;
+    const boxForGate = visibleFaceBox ?? face.boundingBox;
+    const visibleCenter = faceBoxCenter(boxForGate);
+    const size = Math.max(boxForGate.width, boxForGate.height);
+    const centerX = visibleCenter.x;
+    const centerY = visibleCenter.y;
     if (size > thresholds.faceMaxBoxSize) {
       blockingIssues.push(issue("faceTooClose", "blocking", "Face is too close. Move the camera slightly farther away.", true));
     }
@@ -348,12 +362,14 @@ export function evaluateCaptureGuidanceFrame(
   };
 }
 
-function getFrameSignal(report: FaceLandmarkReport): FrameSignal | null {
+function getFrameSignal(report: FaceLandmarkReport, visiblePreviewGeometry?: VisiblePreviewGeometry | null): FrameSignal | null {
   const face = report.faces[0];
   if (!face) return null;
+  const visibleBox = projectFaceBoxToVisiblePreview(face.boundingBox, visiblePreviewGeometry).boundingBox;
+  const center = faceBoxCenter(visibleBox);
   return {
-    centerX: face.boundingBox.x + face.boundingBox.width / 2,
-    centerY: face.boundingBox.y + face.boundingBox.height / 2,
+    centerX: center.x,
+    centerY: center.y,
     yaw: face.approximateHeadPose.yawDegrees
   };
 }
@@ -375,9 +391,11 @@ function createRealtimeCaptureQualityReport({
 }): RealtimeCaptureQualityReport {
   const faceReport = input.faceLandmarkReport;
   const face = faceReport.faces[0];
-  const size = face ? Math.max(face.boundingBox.width, face.boundingBox.height) : null;
-  const centerX = face ? face.boundingBox.x + face.boundingBox.width / 2 : null;
-  const centerY = face ? face.boundingBox.y + face.boundingBox.height / 2 : null;
+  const visibleFaceBox = face ? projectFaceBoxToVisiblePreview(face.boundingBox, input.visiblePreviewGeometry).boundingBox : null;
+  const visibleCenter = visibleFaceBox ? faceBoxCenter(visibleFaceBox) : null;
+  const size = visibleFaceBox ? Math.max(visibleFaceBox.width, visibleFaceBox.height) : null;
+  const centerX = visibleCenter?.x ?? null;
+  const centerY = visibleCenter?.y ?? null;
   const brightness = input.imageQualityReport?.brightnessEstimate.value ?? null;
   const highlightClipping = input.imageQualityReport?.highlightClippingEstimate?.value ?? null;
   const shadowClipping = input.imageQualityReport?.shadowClippingEstimate?.value ?? null;

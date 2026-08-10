@@ -7,6 +7,7 @@ import type {
   ImageQualityReport,
   QualityEvidenceKind
 } from "@/types/domain";
+import { faceBoxCenter, projectFaceBoxToVisiblePreview, type VisiblePreviewGeometry } from "./visible-preview-geometry";
 import type { GuidedScanCoverageFrame, GuidedScanCoverageSegmentID, GuidedScanPassID } from "./guided-scan-strategy";
 
 export type GuidedLiveSignalState = "pass" | "advisory" | "blocking" | "unavailable";
@@ -85,6 +86,15 @@ export const defaultGuidedLiveCoverageOptions: GuidedLiveCoverageOptions = {
   thresholds: defaultCaptureGuidanceThresholds
 };
 
+export const naturalPhoneScanCoverageThresholds: CaptureGuidanceThresholds = {
+  ...defaultCaptureGuidanceThresholds,
+  faceMinBoxSize: 0.2,
+  faceMaxBoxSize: 0.88,
+  centerToleranceX: 0.3,
+  centerToleranceY: 0.32,
+  maxCenterMotionPerSecond: 0.42
+};
+
 export function createInitialGuidedLiveCoverageAccumulatorState(): GuidedLiveCoverageAccumulatorState {
   return {
     pendingSegmentID: null,
@@ -104,6 +114,7 @@ export function evaluateGuidedLiveFrameDecision(input: {
     "brightnessEstimate" | "highlightClippingEstimate" | "shadowClippingEstimate" | "sharpnessEstimate" | "lightingImbalanceEstimate"
   >;
   acceptedFrames: GuidedLiveAcceptedFrame[];
+  visiblePreviewGeometry?: VisiblePreviewGeometry | null;
   options?: Partial<GuidedLiveCoverageOptions>;
 }): GuidedLiveFrameDecision {
   const options = { ...defaultGuidedLiveCoverageOptions, ...input.options };
@@ -126,8 +137,10 @@ export function evaluateGuidedLiveFrameDecision(input: {
             Math.abs(frame.pitchDegrees - pitch) <= options.duplicatePitchToleranceDegrees)
       )
     : false;
-  const faceSize = bbox ? Math.max(bbox.width, bbox.height) : null;
-  const centerDistance = bbox ? Math.hypot(bbox.x + bbox.width / 2 - 0.5, bbox.y + bbox.height / 2 - 0.5) : null;
+  const visibleBbox = bbox ? projectFaceBoxToVisiblePreview(bbox, input.visiblePreviewGeometry).boundingBox : null;
+  const visibleCenter = visibleBbox ? faceBoxCenter(visibleBbox) : null;
+  const faceSize = visibleBbox ? Math.max(visibleBbox.width, visibleBbox.height) : null;
+  const centerDistance = visibleCenter ? Math.hypot(visibleCenter.x - 0.5, visibleCenter.y - 0.5) : null;
   const faceConfidenceScore = normalizeConfidence(face?.confidence ?? input.faceLandmarkReport.confidence);
   const landmarkConfidenceScore = average(
     face?.coreLandmarks.map((landmark) => normalizeConfidence(landmark.confidence)).filter(isNumber) ?? []
@@ -150,9 +163,9 @@ export function evaluateGuidedLiveFrameDecision(input: {
   if (faceSize !== null && faceSize < options.thresholds.faceMinBoxSize) rejectionReasons.push("Move closer.");
   if (faceSize !== null && faceSize > options.thresholds.faceMaxBoxSize) rejectionReasons.push("Move farther away.");
   if (
-    bbox &&
-    (Math.abs(bbox.x + bbox.width / 2 - 0.5) > options.thresholds.centerToleranceX ||
-      Math.abs(bbox.y + bbox.height / 2 - 0.5) > options.thresholds.centerToleranceY)
+    visibleCenter &&
+    (Math.abs(visibleCenter.x - 0.5) > options.thresholds.centerToleranceX ||
+      Math.abs(visibleCenter.y - 0.5) > options.thresholds.centerToleranceY)
   ) {
     rejectionReasons.push("Center your face.");
   }
@@ -183,7 +196,7 @@ export function evaluateGuidedLiveFrameDecision(input: {
     passID: input.passID,
     faceCount: input.faceLandmarkReport.faceCount,
     faceConfidence: signal(faceConfidenceScore, faceConfidenceScore === null ? "unavailable" : faceConfidenceScore >= options.minFaceConfidence ? "pass" : "blocking", faceConfidenceScore === null ? "notYetImplemented" : "estimated", faceConfidenceScore === null ? "Face confidence unavailable." : "Face confidence estimated locally."),
-    faceBoundingBox: bbox,
+    faceBoundingBox: visibleBbox,
     centering: signal(centerDistance, centerDistance === null ? "unavailable" : rejectionReasons.includes("Center your face.") ? "blocking" : "pass", centerDistance === null ? "notYetImplemented" : "estimated", rejectionReasons.includes("Center your face.") ? "Center your face." : "Face is centered enough."),
     relativeFaceSize: signal(faceSize, faceSize === null ? "unavailable" : rejectionReasons.includes("Move closer.") || rejectionReasons.includes("Move farther away.") ? "blocking" : "pass", faceSize === null ? "notYetImplemented" : "estimated", faceSize === null ? "Face size unavailable." : "Face size is within range."),
     yawDegrees: signal(yaw, yaw === null ? "unavailable" : "pass", yaw === null ? "notYetImplemented" : "estimated", yaw === null ? "Yaw unavailable." : "Yaw estimated locally."),

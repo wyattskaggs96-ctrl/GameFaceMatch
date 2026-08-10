@@ -2,8 +2,10 @@ import { describe, expect, it } from "vitest";
 import {
   createCaptureGuidanceSession,
   defaultCaptureGuidanceThresholds,
-  evaluateCaptureGuidanceFrame
+  evaluateCaptureGuidanceFrame,
+  naturalPhonePositioningThresholds
 } from "@/lib/capture/capture-guidance-service";
+import { createObjectFitCoverVisiblePreview, projectFaceBoxToVisiblePreview } from "@/lib/capture/visible-preview-geometry";
 import { MEDIAPIPE_FACE_LANDMARKER_METADATA, unavailableFaceLandmarkReport } from "@/lib/face-landmarks/face-landmark-provider";
 import type { CapturedAngleID, DetectedFaceLandmarks, FaceLandmarkPoint, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
 
@@ -69,6 +71,40 @@ describe("capture guidance frame validation", () => {
       timestampMs: 0
     });
     expect(offCenter.blockingIssues.map((issue) => issue.code)).toContain("faceOffCenter");
+  });
+
+  it("evaluates positioning against the visible object-fit crop instead of the raw camera buffer", () => {
+    const visiblePreviewGeometry = createObjectFitCoverVisiblePreview({
+      sourceWidth: 720,
+      sourceHeight: 1280,
+      renderedWidth: 340,
+      renderedHeight: 340,
+      mirrored: true
+    });
+    expect(visiblePreviewGeometry).not.toBeNull();
+
+    const projected = projectFaceBoxToVisiblePreview(face({ centerX: 0.5, centerY: 0.5, boxWidth: 0.36, boxHeight: 0.46 }).boundingBox, visiblePreviewGeometry);
+    expect(projected.crop.x).toBe(0);
+    expect(projected.crop.width).toBe(1);
+    expect(projected.crop.y).toBeCloseTo(0.219, 3);
+    expect(projected.crop.height).toBeCloseTo(0.563, 3);
+    expect(projected.boundingBox.height).toBeCloseTo(0.818, 3);
+
+    const naturalPosition = evaluateCaptureGuidanceFrame(
+      {
+        angleID: "straightOn",
+        faceLandmarkReport: report({ centerX: 0.5, centerY: 0.5, boxWidth: 0.36, boxHeight: 0.46 }),
+        imageQualityReport: quality(),
+        timestampMs: 0,
+        requireOperationalLandmarks: true,
+        visiblePreviewGeometry
+      },
+      naturalPhonePositioningThresholds
+    );
+
+    expect(naturalPosition.blockingIssues.map((issue) => issue.code)).not.toContain("faceTooClose");
+    expect(naturalPosition.blockingIssues.map((issue) => issue.code)).not.toContain("faceOffCenter");
+    expect(naturalPosition.requiredPoseReached).toBe(true);
   });
 
   it("detects incorrect head direction without claiming depth accuracy", () => {

@@ -2,10 +2,13 @@ import type { NextConfig } from "next";
 
 const productionScriptSource =
   process.env.NODE_ENV === "production" ? "script-src 'self' 'unsafe-inline';" : "script-src 'self' 'unsafe-inline' 'unsafe-eval';";
+const connectSource =
+  process.env.NODE_ENV === "production" ? "connect-src 'self';" : "connect-src 'self' ws://localhost:* ws://127.0.0.1:*;";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
+  allowedDevOrigins: ["127.0.0.1"],
   async headers() {
     return [
       {
@@ -14,7 +17,7 @@ const nextConfig: NextConfig = {
           {
             key: "Content-Security-Policy",
             value:
-              `default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' blob: data:; media-src 'self' blob:; connect-src 'self'; ${productionScriptSource} style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; manifest-src 'self';`
+              `default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' blob: data:; media-src 'self' blob:; ${connectSource} ${productionScriptSource} style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; manifest-src 'self';`
           },
           {
             key: "Permissions-Policy",

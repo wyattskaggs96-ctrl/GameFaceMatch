@@ -250,12 +250,14 @@ export function isPrivateBetaTrialExpired(record: Pick<PrivateBetaTrialPersisten
 }
 
 export function createLocalPrivateBetaTrialPersistenceAdapter(
-  storage?: Pick<Storage, "getItem" | "setItem" | "removeItem">
+  storage?: Pick<Storage, "getItem" | "setItem" | "removeItem">,
+  options: { now?: () => Date } = {}
 ): PrivateBetaTrialPersistenceAdapter {
   const memory = new Map<string, string>();
   const getItem = storage?.getItem.bind(storage) ?? ((key: string) => memory.get(key) ?? null);
   const setItem = storage?.setItem.bind(storage) ?? ((key: string, value: string) => void memory.set(key, value));
   const removeItem = storage?.removeItem.bind(storage) ?? ((key: string) => void memory.delete(key));
+  const now = options.now ?? (() => new Date());
 
   return {
     mode: "browser_local_test_adapter",
@@ -269,7 +271,7 @@ export function createLocalPrivateBetaTrialPersistenceAdapter(
     },
     async read(trialID) {
       const parsed = parsePrivateBetaTrialPersistenceRecord(getItem(privateBetaStorageKey(trialID)));
-      return parsed && !isPrivateBetaTrialExpired(parsed) ? parsed : null;
+      return parsed && !isPrivateBetaTrialExpired(parsed, now()) ? parsed : null;
     },
     async deleteTrial({ trialID, actor, reason, now }) {
       const existing = parsePrivateBetaTrialPersistenceRecord(getItem(privateBetaStorageKey(trialID)));

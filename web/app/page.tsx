@@ -200,7 +200,7 @@ export default function HomePage() {
     NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO: process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO,
     NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: process.env.NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV
   });
-  const ownerReviewBuddyTrialInviteReady = ownerReviewDemoEnabled && buddyTrialScanReady;
+  const ownerReviewBuddyTrialInviteReady = buddyTrialScanReady;
   const buddyTrialCustomerScanMode = Boolean(ownerReviewBuddyTrialInviteReady && buddyTrialInviteId);
   const consentReady = hasRequiredCaptureConsent(consentState);
   const navItems = isDevelopment

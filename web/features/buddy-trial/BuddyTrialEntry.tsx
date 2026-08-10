@@ -104,6 +104,13 @@ const buddyTrialStageLabels: Record<BuddyTrialState, { label: string; action: st
   DELETED: { label: "Deleted", action: "This browser no longer has trial data for this link." }
 };
 
+type BuddyTrialInitialization =
+  | { status: "ready" }
+  | {
+      status: "storage_error";
+      message: string;
+    };
+
 function getBuddyTrialStageCopy(session: BuddyTrialSession | null, fallbackAction: string) {
   if (!session) return buddyTrialStageLabels.INVITED;
   const copy = buddyTrialStageLabels[session.state];
@@ -127,6 +134,16 @@ function formatControlKind(kind: string) {
   }
 }
 
+function getBuddyTrialStorageErrorMessage(error: unknown) {
+  if (error instanceof DOMException && error.name === "SecurityError") {
+    return "This browser is blocking local storage for the private trial.";
+  }
+  if (error instanceof Error && error.name === "QuotaExceededError") {
+    return "This browser does not have enough available local storage for the private trial.";
+  }
+  return "GameFace Match could not open the local trial session store.";
+}
+
 export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   const inviteResolution = useMemo(() => getBuddyTrialInvite(inviteId), [inviteId]);
   const storageKey = useMemo(() => createBuddyTrialStorageKey(inviteId), [inviteId]);
@@ -137,7 +154,7 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   });
   const ownerReviewDemo = useMemo<OwnerReviewDemoRecommendationResult | null>(() => (ownerReviewDemoEnabled ? createOwnerReviewDemoRecommendationResult() : null), [ownerReviewDemoEnabled]);
   const [session, setSession] = useState<BuddyTrialSession | null>(null);
-  const [hydrated, setHydrated] = useState(false);
+  const [initialization, setInitialization] = useState<BuddyTrialInitialization>({ status: "ready" });
   const [consent, setConsent] = useState<BuddyTrialConsentRecord | null>(null);
   const [entryStep, setEntryStep] = useState<"landing" | "consent">("landing");
   const [independentAcknowledged, setIndependentAcknowledged] = useState(false);
@@ -146,17 +163,32 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     if (typeof window === "undefined") {
       return;
     }
-    const existing = parseBuddyTrialSession(window.localStorage.getItem(storageKey));
-    setSession(existing);
-    setConsent(existing?.consent ?? null);
-    setHydrated(true);
+    try {
+      const existing = parseBuddyTrialSession(window.localStorage.getItem(storageKey));
+      setSession(existing);
+      setConsent(existing?.consent ?? null);
+      setInitialization({ status: "ready" });
+    } catch (error) {
+      setInitialization({
+        status: "storage_error",
+        message: getBuddyTrialStorageErrorMessage(error)
+      });
+    }
   }, [storageKey]);
 
   const persistSession = (nextSession: BuddyTrialSession) => {
     setSession(nextSession);
     setConsent(nextSession.consent);
     if (typeof window !== "undefined") {
-      window.localStorage.setItem(storageKey, serializeBuddyTrialSession(nextSession));
+      try {
+        window.localStorage.setItem(storageKey, serializeBuddyTrialSession(nextSession));
+        setInitialization({ status: "ready" });
+      } catch (error) {
+        setInitialization({
+          status: "storage_error",
+          message: getBuddyTrialStorageErrorMessage(error)
+        });
+      }
     }
   };
 
@@ -357,12 +389,18 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     );
   }
 
-  if (!hydrated) {
+  if (initialization.status === "storage_error") {
     return (
       <main className="buddy-trial-page">
-        <section className="buddy-trial-shell" aria-live="polite">
+        <section className="buddy-trial-shell" aria-labelledby="buddy-trial-storage-title">
           <p className="buddy-trial-kicker">GameFace Match private trial</p>
-          <h1>Loading your private link</h1>
+          <h1 id="buddy-trial-storage-title">Private trial storage is blocked</h1>
+          <p className="buddy-trial-copy">{initialization.message}</p>
+          <p className="buddy-trial-copy">Turn on browser storage for this site, then refresh this private link. GameFace Match uses local trial storage so you can leave Safari and return to the same step.</p>
+          <button className="buddy-trial-primary" type="button" onClick={() => window.location.reload()}>
+            Try Again
+          </button>
+          <p className="buddy-trial-disclaimer">{INDEPENDENT_APP_DISCLAIMER}</p>
         </section>
       </main>
     );

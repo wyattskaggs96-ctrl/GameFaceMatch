@@ -98,7 +98,7 @@ describe("private-beta Buddy Trial persistence contract", () => {
       now: new Date("2026-08-07T12:00:00.000Z"),
       sessionId: "bt_session_test_1234"
     });
-    const adapter = createLocalPrivateBetaTrialPersistenceAdapter();
+    const adapter = createLocalPrivateBetaTrialPersistenceAdapter(undefined, { now: () => new Date("2026-08-07T12:30:00.000Z") });
     const record = createPrivateBetaTrialPersistenceRecord({ session, now: new Date("2026-08-07T12:00:00.000Z"), retentionDays: 1 });
 
     await adapter.save(record);

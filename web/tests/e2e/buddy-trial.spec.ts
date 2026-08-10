@@ -6,6 +6,18 @@ const usedInvite = "btv1_7c9a1e5d3f8b2460a4c2e1d9b8f60531";
 const activeInviteStorageKey = `gfm:buddy-trial:v1:${activeInvite}`;
 
 test.describe("Buddy Trial invite route", () => {
+  test("server-renders an active invite without an indefinite private-link loading shell", async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    await page.goto(`/trial/${activeInvite}`);
+
+    await expect(page.getByRole("heading", { name: /Build yourself in College Football 27/i })).toBeVisible();
+    await expect(page.getByText("Loading your private link")).toHaveCount(0);
+    await expect(page.getByText("Start My GameFace")).toBeVisible();
+
+    await context.close();
+  });
+
   test("enters an active fixture invite, records consent, and resumes without an account", async ({ page }) => {
     await installSyntheticCamera(page);
     await page.goto(`/trial/${activeInvite}`);
@@ -77,12 +89,33 @@ test.describe("Buddy Trial invite route", () => {
   test("shows invalid, expired, and completed invite states", async ({ page }) => {
     await page.goto("/trial/not-a-real-invite");
     await expect(page.getByRole("heading", { name: "This private link is not valid" })).toBeVisible();
+    await expect(page.getByText("Loading your private link")).toHaveCount(0);
 
     await page.goto(`/trial/${expiredInvite}`);
     await expect(page.getByRole("heading", { name: "This private link expired" })).toBeVisible();
+    await expect(page.getByText("Loading your private link")).toHaveCount(0);
 
     await page.goto(`/trial/${usedInvite}`);
     await expect(page.getByRole("heading", { name: "This private link is complete" })).toBeVisible();
+    await expect(page.getByText("Loading your private link")).toHaveCount(0);
+  });
+
+  test("fails closed with an actionable error when local trial storage is unavailable", async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(window, "localStorage", {
+        configurable: true,
+        get() {
+          throw new DOMException("Local storage is disabled for this test.", "SecurityError");
+        }
+      });
+    });
+
+    await page.goto(`/trial/${activeInvite}`);
+
+    await expect(page.getByRole("heading", { name: "Private trial storage is blocked" })).toBeVisible();
+    await expect(page.getByText(/Turn on browser storage for this site/i)).toBeVisible();
+    await expect(page.getByText("Loading your private link")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Try Again" })).toBeVisible();
   });
 
   test("keeps deleted local trial state through refresh", async ({ page }) => {

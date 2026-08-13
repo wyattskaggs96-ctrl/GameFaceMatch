@@ -10,6 +10,7 @@
 | --- | ---: |
 | Supported-subset queue records | 76 |
 | Deterministic secondary-angle sample | 24 |
+| Duplicate/order exception reviews | 8 |
 | Human verifier decisions | 0 |
 | Second-verified records | 0 |
 | Production-approved records | 0 |

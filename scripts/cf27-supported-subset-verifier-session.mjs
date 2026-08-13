@@ -62,7 +62,7 @@ export function buildSupportedSubsetVerifierSession({ root = repositoryRoot } = 
         ? "Preserve duplicate relationship for later catalog-manager disposition; do not merge or recommend."
         : "Independently inspect native order if this excluded record is reconsidered later; do not infer order.",
       productionEligibilityState: "NOT_ELIGIBLE",
-      notes: "Excluded from the 76-record supported subset because evidence remains limited. This is not an owner recording request."
+      notes: "Excluded from the supported subset because evidence remains limited. This is not an owner recording request."
     }));
   const records = verifierQueue.records.map((queueRecord) => {
     const classificationRecord = classificationByID.get(queueRecord.candidateID);
@@ -266,7 +266,7 @@ export function buildSupportedSubsetVerifierSession({ root = repositoryRoot } = 
   };
   const integrityHash = hashExportPackage(exportPackage);
   const packageWithHash = { ...exportPackage, integrityHash };
-  const validation = validateSupportedSubsetVerifierSession({ sessionManifest, records, sampleRows, excludedIssueRows, classification, verifierQueue, summary });
+  const validation = validateSupportedSubsetVerifierSession({ sessionManifest, records, sampleRows, excludedIssueRows, classification, verifierQueue, summary, root: normalizedRoot });
   const files = createFiles({
     sessionManifest,
     records,
@@ -297,26 +297,38 @@ export function buildSupportedSubsetVerifierSession({ root = repositoryRoot } = 
   };
 }
 
-export function validateSupportedSubsetVerifierSession({ sessionManifest, records, sampleRows, excludedIssueRows, classification, verifierQueue, summary }) {
+export function validateSupportedSubsetVerifierSession({ sessionManifest, records, sampleRows, excludedIssueRows, classification, verifierQueue, summary, root = repositoryRoot }) {
+  const normalizedRoot = path.resolve(root);
+  const validateLocalEvidencePaths = hasLocalDerivativeEvidence(normalizedRoot);
   const errors = [];
   const queueIDs = new Set(verifierQueue.records.map((record) => record.candidateID));
   const classificationByID = new Map(classification.records.map((record) => [record.candidateID, record]));
-  if (records.length !== 76) errors.push(`Expected 76 supported-subset verifier records; found ${records.length}.`);
-  if (summary.proposedSupportedSubsetCount !== 76 || summary.verifierQueueCount !== 76) errors.push("Prompt 101 supported-subset summary no longer reports 76 verifier records.");
-  if (sampleRows.length !== 24) errors.push(`Expected 24 deterministic secondary-angle rows; found ${sampleRows.length}.`);
+  const expectedQueueCount = verifierQueue.records.length;
+  const expectedSampleCount = classification.deterministicSecondaryAngleSample.rows.length;
+  const expectedExcludedIssueCount = classification.records.filter((record) => record.duplicateFlag || record.orderUnresolvedFlag).length;
+  if (records.length !== expectedQueueCount) errors.push(`Expected ${expectedQueueCount} supported-subset verifier records; found ${records.length}.`);
+  if (summary.proposedSupportedSubsetCount !== expectedQueueCount || summary.verifierQueueCount !== expectedQueueCount) {
+    errors.push(`Supported-subset summary no longer matches verifier queue count ${expectedQueueCount}.`);
+  }
+  if (sampleRows.length !== expectedSampleCount) errors.push(`Expected ${expectedSampleCount} deterministic secondary-angle rows; found ${sampleRows.length}.`);
   if (sessionManifest.secondVerifierDecisionCount !== 0 || sessionManifest.secondVerifiedRecords !== 0) errors.push("Codex must not create human verifier decisions.");
   if (sessionManifest.productionApprovedRecords !== 0 || sessionManifest.productionCatalogRecords !== 0 || sessionManifest.recommendationEligibleRecords !== 0) errors.push("Production and recommendation counts must remain 0.");
   for (const record of records) {
     if (!queueIDs.has(record.candidateID)) errors.push(`${record.candidateID} is not in the supported-subset verifier queue.`);
     const classificationRecord = classificationByID.get(record.candidateID);
     if (!classificationRecord) errors.push(`${record.candidateID} is missing from Prompt 101 classification.`);
-    if (classificationRecord && !supportedStatesForQueue.has(classificationRecord.evidenceSupportState)) errors.push(`${record.candidateID} has invalid support state for the 76-record subset.`);
+    if (classificationRecord && !supportedStatesForQueue.has(classificationRecord.evidenceSupportState)) errors.push(`${record.candidateID} has invalid support state for the supported subset.`);
     if (classificationRecord?.evidenceSupportState === "LIMITED_EVIDENCE") errors.push(`${record.candidateID} is limited evidence and must not enter the supported-subset queue.`);
     if (record.currentProductionEligibility !== "NOT_ELIGIBLE" || record.currentRecommendationEligibility) errors.push(`${record.candidateID} is unexpectedly eligible for production or recommendation.`);
+    if (!record.derivativeEvidenceReferences?.length) errors.push(`${record.candidateID} has no derivative evidence reference for verifier review.`);
+    for (const evidence of record.derivativeEvidenceReferences ?? []) {
+      if (!hasText(evidence.relativePath)) errors.push(`${record.candidateID} has a derivative evidence reference without a relativePath.`);
+      else if (validateLocalEvidencePaths && !fs.existsSync(path.resolve(normalizedRoot, evidence.relativePath))) errors.push(`${record.candidateID} derivative evidence path is missing: ${evidence.relativePath}`);
+    }
   }
   const limitedInQueue = verifierQueue.records.filter((record) => record.evidenceSupportState === "LIMITED_EVIDENCE");
   if (limitedInQueue.length > 0) errors.push("Limited-evidence records entered the verifier subset.");
-  if (excludedIssueRows.length !== 8) errors.push(`Expected 8 excluded duplicate/order rows; found ${excludedIssueRows.length}.`);
+  if (excludedIssueRows.length !== expectedExcludedIssueCount) errors.push(`Expected ${expectedExcludedIssueCount} excluded duplicate/order rows; found ${excludedIssueRows.length}.`);
   return {
     schemaVersion: `${schemaVersion}-validation`,
     generatedAt,
@@ -341,6 +353,12 @@ export function validateCompletedVerifierDecisionExport(exportPackage, { root = 
   const classification = readJSON(path.join(normalizedRoot, "data/phase-zero/cf27_supported_subset_classification.json"));
   const queueIDs = new Set(verifierQueue.records.map((record) => record.candidateID));
   const sampleIDs = new Set(classification.deterministicSecondaryAngleSample.rows.map((row) => row.candidateID));
+  const candidateDetails = readJSON(path.join(normalizedRoot, defaultOutputDirectory, "candidate_detail_reference.json")).rows ?? [];
+  const validateLocalEvidencePaths = hasLocalDerivativeEvidence(normalizedRoot);
+  const expectedDecisionCount = queueIDs.size;
+  const expectedSampleCount = sampleIDs.size;
+  const requiredExceptionIDs = new Set((readJSON(path.join(normalizedRoot, defaultOutputDirectory, "excluded_duplicate_order_review.json")).rows ?? []).map((row) => row.candidateID));
+  const candidateDetailByID = new Map(candidateDetails.map((record) => [record.candidateID, record]));
   const errors = [];
   const warnings = [];
   if (!exportPackage || exportPackage.schemaVersion !== decisionExportSchemaVersion) errors.push("invalidSchemaVersion");
@@ -374,7 +392,7 @@ export function validateCompletedVerifierDecisionExport(exportPackage, { root = 
     if (attestation[field] !== true) errors.push(`missingAttestation:${field}`);
   }
   const decisions = Array.isArray(exportPackage.recordDecisions) ? exportPackage.recordDecisions : [];
-  if (decisions.length !== 76) errors.push(`decisionCount:${decisions.length}`);
+  if (decisions.length !== expectedDecisionCount) errors.push(`decisionCount:${decisions.length}`);
   const seen = new Set();
   for (const decision of decisions) {
     const id = stringValue(decision.candidateID);
@@ -406,6 +424,14 @@ export function validateCompletedVerifierDecisionExport(exportPackage, { root = 
     )) errors.push(`cleanVerifiedMissingConfirmation:${id}`);
     if (sampleIDs.has(id) && decision.secondaryAngleReviewed === "not_selected") errors.push(`missingSampleDecision:${id}`);
     if (decision.productionEligibilityState !== "NOT_ELIGIBLE" || decision.recommendationEligibilityState !== "NOT_ELIGIBLE") errors.push(`productionOrRecommendationAttempt:${id}`);
+    const candidateDetail = candidateDetailByID.get(id);
+    if (candidateDetail) {
+      for (const evidence of candidateDetail.derivativeEvidenceReferences ?? []) {
+        if (!hasText(evidence.relativePath) || (validateLocalEvidencePaths && !fs.existsSync(path.resolve(normalizedRoot, evidence.relativePath)))) {
+          errors.push(`missingEvidenceReference:${id}:${stringValue(evidence.relativePath)}`);
+        }
+      }
+    }
   }
   for (const id of queueIDs) if (!seen.has(id)) errors.push(`missingCandidateDecision:${id}`);
   const sampleResults = Array.isArray(exportPackage.secondaryAngleResults) ? exportPackage.secondaryAngleResults : [];
@@ -415,7 +441,13 @@ export function validateCompletedVerifierDecisionExport(exportPackage, { root = 
     if (sampleIDs.has(row.candidateID) && !hasText(row.verifierObservation)) errors.push(`missingSecondaryAngleObservation:${row.candidateID}`);
   }
   const duplicateOrder = Array.isArray(exportPackage.duplicateAndOrderDispositionRows) ? exportPackage.duplicateAndOrderDispositionRows : [];
-  if (duplicateOrder.length < 8) warnings.push("duplicateOrderExcludedReviewIncomplete");
+  const dispositionIDs = new Set(duplicateOrder.map((row) => row.candidateID));
+  for (const id of requiredExceptionIDs) if (!dispositionIDs.has(id)) errors.push(`missingDuplicateOrderExceptionReview:${id}`);
+  for (const row of duplicateOrder) {
+    if (requiredExceptionIDs.has(row.candidateID) && (!hasText(row.verifierDisposition) || !hasText(row.verifierObservation))) {
+      errors.push(`incompleteDuplicateOrderExceptionReview:${row.candidateID}`);
+    }
+  }
   return {
     schemaVersion: `${decisionExportSchemaVersion}-import-validation`,
     generatedAt,
@@ -427,9 +459,11 @@ export function validateCompletedVerifierDecisionExport(exportPackage, { root = 
     warnings,
     summary: {
       decisionCount: decisions.length,
-      expectedDecisionCount: 76,
+      expectedDecisionCount,
       secondaryAngleResultCount: sampleResults.length,
-      expectedSecondaryAngleResultCount: sampleIDs.size,
+      expectedSecondaryAngleResultCount: expectedSampleCount,
+      duplicateOrderExceptionReviewCount: duplicateOrder.length,
+      expectedDuplicateOrderExceptionReviewCount: requiredExceptionIDs.size,
       productionApprovedRecords: 0,
       productionCatalogRecords: 0,
       recommendationEligibleRecords: 0
@@ -501,8 +535,9 @@ function createFiles(input) {
       schemaVersion: `${schemaVersion}-owner-checkpoint`,
       generatedAt,
       status: "READY_FOR_HUMAN_VERIFIER",
-      supportedSubsetQueueRecords: 76,
-      deterministicSecondaryAngleSampleRecords: 24,
+      supportedSubsetQueueRecords: input.records.length,
+      deterministicSecondaryAngleSampleRecords: input.sampleRows.length,
+      duplicateOrderExceptionReviewRecords: input.excludedIssueRows.length,
       noAdditionalOwnerMediaRequired: true,
       exactWyattAction: "Give the runbook and generated verifier package to a real second verifier. Do not record more game footage by default.",
       exactVerifierAction: "Complete the generated environment, attestation, menu-count, record-decision, and secondary-angle templates from independent shipping-game inspection."
@@ -537,6 +572,8 @@ function buildMenuCountTargets(records) {
 }
 
 function formatRunbook({ sessionManifest, summary }) {
+  const queueCount = sessionManifest.requiredRecordDecisionCount;
+  const sampleCount = sessionManifest.requiredSecondaryAngleResultCount;
   return `# CF27 Supported-Subset Verifier Runbook
 
 **Status:** READY_FOR_HUMAN_VERIFIER
@@ -557,7 +594,7 @@ npm run verifier:start
 
 Open the local verifier page at \`http://localhost:3000/verifier\`.
 
-This route is local/development only. It loads the 76-record supported-subset package from \`${defaultOutputDirectory}\`, saves draft progress in the browser, and downloads a completed JSON export. It does not publish a catalog or enable recommendations.
+This route is local/development only. It loads the ${queueCount}-record supported-subset package from \`${defaultOutputDirectory}\`, saves draft progress in the browser, and downloads a completed JSON export. It does not publish a catalog or enable recommendations.
 
 ## 2. Create a Verifier Session
 
@@ -579,11 +616,11 @@ Each verifier page record shows the claimed category, native label/index/order, 
 
 ## 6. Inspect the Shipping Game Independently
 
-Use the shipping game, not memory and not the primary summary alone. Confirm native labels, indices, order, menu counts, front views, evidence-file existence, and the 24 sampled secondary-angle rows.
+Use the shipping game, not memory and not the primary summary alone. Confirm native labels, indices, order, menu counts, front views, evidence-file existence, and the ${sampleCount} sampled secondary-angle rows.
 
 ## 7. Enter Decisions
 
-Every one of the 76 records must receive exactly one of:
+Every one of the ${queueCount} records must receive exactly one of:
 
 ${allowedVerificationStatuses.map((status) => `- \`${status}\``).join("\n")}
 
@@ -595,7 +632,7 @@ If a label, count, order, view, environment value, or evidence file cannot be co
 
 ## 9. Review the Deterministic Sample
 
-Complete all 24 rows in \`secondary_angle_sample_review.csv/json\`. The sample method is \`${sessionManifest.verifierSessionModel.subsetVersion}\` with seed from Prompt 101; do not replace it with a more convenient sample.
+Complete all ${sampleCount} rows in \`secondary_angle_sample_review.csv/json\`. The sample method is \`${sessionManifest.verifierSessionModel.subsetVersion}\` with seed from Prompt 101; do not replace it with a more convenient sample.
 
 ## 10. Export and Return
 
@@ -605,7 +642,7 @@ When the final review screen says every required item is complete, choose **Expo
 cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json
 \`\`\`
 
-Wyatt should keep that file and later ask Codex to run Prompt 103. The export can be checked without importing or promoting records with:
+Wyatt should keep that file and later ask Codex to run Prompt 136. The export can be checked without importing or promoting records with:
 
 \`\`\`bash
 npm run cf27:supported-subset-verifier-session:validate-export -- ~/Downloads/cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json
@@ -621,9 +658,9 @@ Plan for 2 to 4 focused hours depending on console access, environment metadata 
 
 - Environment completed.
 - Attestation accepted.
-- 76 record decisions completed.
+- ${queueCount} record decisions completed.
 - Independent menu counts completed where observable.
-- 24 secondary-angle sample rows completed.
+- ${sampleCount} secondary-angle sample rows completed.
 - Duplicate/order excluded rows reviewed as limitations, not recommendations.
 - Disagreements recorded.
 - No production approval entered.
@@ -631,6 +668,9 @@ Plan for 2 to 4 focused hours depending on console access, environment metadata 
 }
 
 function formatStatusDocument({ sessionManifest, summary, validation }) {
+  const queueCount = sessionManifest.requiredRecordDecisionCount;
+  const sampleCount = sessionManifest.requiredSecondaryAngleResultCount;
+  const exceptionCount = validation.summary.excludedDuplicateOrOrderRows;
   return `# CF27 Supported-Subset Human Verification Status
 
 **Status:** READY_FOR_HUMAN_VERIFIER
@@ -641,8 +681,9 @@ function formatStatusDocument({ sessionManifest, summary, validation }) {
 
 | Metric | Count |
 | --- | ---: |
-| Supported-subset queue records | 76 |
-| Deterministic secondary-angle sample | 24 |
+| Supported-subset queue records | ${queueCount} |
+| Deterministic secondary-angle sample | ${sampleCount} |
+| Duplicate/order exception reviews | ${exceptionCount} |
 | Human verifier decisions | 0 |
 | Second-verified records | 0 |
 | Production-approved records | 0 |
@@ -667,7 +708,7 @@ Open:
 http://localhost:3000/verifier
 \`\`\`
 
-The verifier must complete the environment, attestation, all 76 record decisions, menu counts, all 24 secondary-angle sample checks, and excluded duplicate/order limitation review from independent shipping-game inspection.
+The verifier must complete the environment, attestation, all ${queueCount} record decisions, menu counts, all ${sampleCount} secondary-angle sample checks, and excluded duplicate/order limitation review from independent shipping-game inspection.
 
 Friend instructions: \`docs/verification/HUMAN_VERIFIER_QUICK_START.md\`
 
@@ -725,6 +766,10 @@ function readJSON(absolutePath) {
   return JSON.parse(fs.readFileSync(absolutePath, "utf8"));
 }
 
+function hasLocalDerivativeEvidence(root) {
+  return fs.existsSync(path.resolve(root, "data/phase-zero/derivative-frames"));
+}
+
 function hasText(value) {
   return stringValue(value).trim().length > 0;
 }
@@ -760,13 +805,13 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   if (check) {
     try {
       checkSupportedSubsetVerifierSession(result);
-      console.log("CF27 supported-subset verifier session package is current (76 records; 24 sampled angles).");
+      console.log(`CF27 supported-subset verifier session package is current (${result.records.length} records; ${result.sampleRows.length} sampled angles).`);
     } catch (error) {
       console.error(error instanceof Error ? error.message : String(error));
       process.exit(1);
     }
   } else {
     writeSupportedSubsetVerifierSession(result);
-    console.log("Wrote CF27 supported-subset verifier session package (76 records; READY_FOR_HUMAN_VERIFIER).");
+    console.log(`Wrote CF27 supported-subset verifier session package (${result.records.length} records; READY_FOR_HUMAN_VERIFIER).`);
   }
 }

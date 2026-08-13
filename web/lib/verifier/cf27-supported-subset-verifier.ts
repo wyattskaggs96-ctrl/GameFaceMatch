@@ -191,6 +191,19 @@ export interface VerifierProgress {
   percentComplete: number;
 }
 
+export interface VerifierCompletionSummary {
+  totalRequiredRecords: number;
+  completedRecords: number;
+  remainingRecords: number;
+  statusCounts: Record<VerifierStatus, number>;
+  secondaryAngleSampleCompleted: number;
+  secondaryAngleSampleRequired: number;
+  duplicateOrderExceptionCompleted: number;
+  duplicateOrderExceptionRequired: number;
+  unresolvedDisagreements: number;
+  exportValid: boolean;
+}
+
 const triStateValues = new Set(["yes", "no", "uncertain"]);
 const evidenceValues = new Set(["yes", "no"]);
 const frontViewValues = new Set(["yes", "no", "not_applicable"]);
@@ -335,6 +348,34 @@ export function getVerifierCompletionErrors(pkg: SupportedSubsetVerifierPackage,
   return errors;
 }
 
+export function buildVerifierCompletionSummary(pkg: SupportedSubsetVerifierPackage, state: VerifierDraftState): VerifierCompletionSummary {
+  const progress = calculateVerifierProgress(pkg, state);
+  const completionErrors = getVerifierCompletionErrors(pkg, state);
+  const statusCounts = Object.fromEntries(allowedVerifierStatuses.map((status) => [status, 0])) as Record<VerifierStatus, number>;
+  let unresolvedDisagreements = 0;
+  for (const decision of Object.values(state.decisions)) {
+    if (decision.decisionStatus && allowedVerifierStatuses.includes(decision.decisionStatus)) statusCounts[decision.decisionStatus] += 1;
+    if (decision.decisionStatus && (decision.decisionStatus !== "VERIFIED" || (decision.discrepancyType && decision.discrepancyType !== "none"))) unresolvedDisagreements += 1;
+  }
+  return {
+    totalRequiredRecords: progress.total,
+    completedRecords: progress.completed,
+    remainingRecords: progress.remaining,
+    statusCounts,
+    secondaryAngleSampleCompleted: pkg.secondaryAngleTemplate.filter((row) => {
+      const result = state.secondaryAngles[row.candidateID];
+      return Boolean(result && ["yes", "no", "not_available"].includes(result.reviewed) && result.verifierObservation.trim());
+    }).length,
+    secondaryAngleSampleRequired: pkg.secondaryAngleTemplate.length,
+    duplicateOrderExceptionCompleted: Object.values(state.duplicateOrderRows).filter((row) =>
+      String(row.verifierDisposition ?? "").trim() && String(row.verifierObservation ?? "").trim()
+    ).length,
+    duplicateOrderExceptionRequired: pkg.duplicateOrderTemplate.length,
+    unresolvedDisagreements,
+    exportValid: completionErrors.length === 0
+  };
+}
+
 export function buildVerifierExportPackage(pkg: SupportedSubsetVerifierPackage, state: VerifierDraftState, exportedAt = new Date()) {
   const verifierId = state.environment.verifierId.trim();
   const exportPackage = structuredClone(pkg.exportTemplate) as Record<string, unknown>;
@@ -354,9 +395,10 @@ export function buildVerifierExportPackage(pkg: SupportedSubsetVerifierPackage, 
     decisionCount: pkg.candidateDetails.length,
     completionState: "READY_TO_EXPORT",
     exportedAt: exportedAt.toISOString(),
-    notes: "Exported from the GameFace Match local human verifier workflow. Non-production until Prompt 103 import, discrepancy review, catalog-manager approval, and release gates pass."
+    notes: "Exported from the GameFace Match local human verifier workflow. Non-production until Prompt 136 import/reconciliation, discrepancy review, catalog-manager approval, and release gates pass."
   };
   exportPackage.sessionManifest = { ...sessionManifest, verifierSessionModel };
+  exportPackage.completionSummary = buildVerifierCompletionSummary(pkg, state);
   exportPackage.verifierEnvironment = { ...state.environment, verifierId };
   exportPackage.verifierAttestation = {
     ...state.attestation,

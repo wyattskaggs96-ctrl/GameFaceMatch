@@ -4,6 +4,8 @@ You are helping GameFace Match check College Football 27 appearance options.
 
 You are being asked to independently compare the verifier page against the shipping game. You are not being asked to judge whether a person looks like a player, approve a production catalog, publish data, or agree with the first researcher.
 
+The current package has 76 supported-subset records, 24 required secondary-angle sample checks, and 8 duplicate/order limitation rows. Complete all of them from your own inspection.
+
 ## What You Need Open
 
 1. College Football 27 on the Xbox or console being checked.
@@ -16,12 +18,12 @@ You are being asked to independently compare the verifier page against the shipp
 2. Record the console, platform, game version or patch if visible, mode, creation path, and date.
 3. Check every attestation box only if it is true.
 4. Work through one record at a time.
-5. For each record, look at the category, expected label/index/order, evidence timestamps, and limitations.
-6. Independently check the same option in the game.
+5. For each record, first inspect the matching option in the shipping game yourself.
+6. Then compare what you saw against the category, expected label/index/order, evidence timestamps, and limitations shown in the verifier page.
 7. Choose one allowed verification status.
 8. Write a note whenever anything is uncertain, limited, different, missing, or not cleanly verified.
 9. Use Previous and Next to move between entries.
-10. Complete menu counts and the duplicate/order limitation review.
+10. Complete menu counts, the 24 secondary-angle checks, and the 8 duplicate/order limitation reviews.
 11. Export the package only after the final review says everything is complete.
 
 ## Verification Buttons
@@ -51,3 +53,5 @@ cf27-supported-subset-verifier-export-<your-id>-<date>.json
 ```
 
 Give that file back to Wyatt. The export does not publish the catalog or enable recommendations.
+
+Wyatt/Codex will later validate the file in Prompt 136. Do not edit the JSON file by hand after export.

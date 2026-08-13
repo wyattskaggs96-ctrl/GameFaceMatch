@@ -113,6 +113,54 @@ describe("CF27 supported-subset verifier session", () => {
       "forbiddenProductionField:productionApprovedRecords"
     ]));
   });
+
+  it("rejects duplicate candidate decisions and invalid verification status enums", () => {
+    const result = buildSupportedSubsetVerifierSession({ root: repositoryRoot });
+    const completed = createCompletedHumanPackage(result);
+    completed.recordDecisions[0].decisionStatus = "APPROVED";
+    completed.recordDecisions.push({ ...completed.recordDecisions[0] });
+
+    const validation = validateCompletedVerifierDecisionExport(completed, { root: repositoryRoot });
+
+    expect(validation.ok).toBe(false);
+    expect(validation.errors).toEqual(expect.arrayContaining([
+      `invalidDecisionStatus:${result.records[0].candidateID}`,
+      `duplicateCandidateDecision:${result.records[0].candidateID}`
+    ]));
+  });
+
+  it("requires every duplicate/order exception row to have a human disposition and observation", () => {
+    const result = buildSupportedSubsetVerifierSession({ root: repositoryRoot });
+    const completed = createCompletedHumanPackage(result);
+    const missing = completed.duplicateAndOrderDispositionRows[0].candidateID;
+    const incomplete = completed.duplicateAndOrderDispositionRows[1].candidateID;
+    completed.duplicateAndOrderDispositionRows = completed.duplicateAndOrderDispositionRows.slice(1);
+    completed.duplicateAndOrderDispositionRows[0].verifierDisposition = "";
+
+    const validation = validateCompletedVerifierDecisionExport(completed, { root: repositoryRoot });
+
+    expect(validation.ok).toBe(false);
+    expect(validation.errors).toEqual(expect.arrayContaining([
+      `missingDuplicateOrderExceptionReview:${missing}`,
+      `incompleteDuplicateOrderExceptionReview:${incomplete}`
+    ]));
+  });
+
+  it("requires generated derivative evidence references to resolve when local evidence is available", () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "gfm-cf27-supported-subset-session-evidence-"));
+    copyFixtureTree(root, [
+      "data/phase-zero/cf27_supported_subset_classification.json",
+      "data/phase-zero/cf27_supported_subset_verifier_queue.json",
+      "data/phase-zero/cf27_supported_subset_summary.json",
+      "data/catalog/production/catalog_manifest.json"
+    ]);
+    fs.mkdirSync(path.join(root, "data/phase-zero/derivative-frames"), { recursive: true });
+
+    const result = buildSupportedSubsetVerifierSession({ root });
+
+    expect(result.validation.ok).toBe(false);
+    expect(result.validation.errors.some((error: string) => error.includes("derivative evidence path is missing"))).toBe(true);
+  });
 });
 
 type SessionRecord = {

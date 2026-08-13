@@ -6,6 +6,7 @@ import {
   CF27_SUPPORTED_SUBSET_VERIFIER_LOCAL_STORAGE_KEY,
   addIntegrityHash,
   allowedVerifierStatuses,
+  buildVerifierCompletionSummary,
   buildVerifierExportPackage,
   calculateVerifierProgress,
   createInitialVerifierDraft,
@@ -163,7 +164,7 @@ export function SupportedSubsetVerifierWorkflow() {
     link.download = filename;
     link.click();
     URL.revokeObjectURL(url);
-    setExportMessage(`Export created: ${filename}. It remains non-production until Prompt 103 validates and imports it.`);
+    setExportMessage(`Export created: ${filename}. It remains non-production until Prompt 136 validates and imports it.`);
   }
 
   return (
@@ -172,7 +173,7 @@ export function SupportedSubsetVerifierWorkflow() {
         <div>
           <p className="eyebrow">Local-only verifier workflow</p>
           <h1>{routeTitle}</h1>
-          <p className="supporting">One friend can work through the 76-record CF27 supported subset without editing repository files.</p>
+          <p className="supporting">One friend can work through the {pkg.candidateDetails.length}-record CF27 supported subset without editing repository files.</p>
         </div>
         <StatusBadge tone="danger">non-production</StatusBadge>
       </div>
@@ -470,7 +471,7 @@ function LimitationsStep({
     <section className="screen-stack" aria-labelledby="verifier-limitations-title">
       <Card>
         <h2 id="verifier-limitations-title">Duplicate and order limitations</h2>
-        <p className="supporting">These rows are not in the 76-record recommendation subset. Review them only as limitations so they are not accidentally treated as production-ready.</p>
+        <p className="supporting">These rows are not in the supported recommendation subset. Review them only as limitations so they are not accidentally treated as production-ready.</p>
       </Card>
       {rows.map((row) => (
         <Card key={row.candidateID}>
@@ -506,16 +507,27 @@ function ReviewStep({
   const incomplete = pkg.candidateDetails
     .map((record, index) => ({ record, index }))
     .filter(({ record }) => !isRecordDecisionComplete(record, state.decisions[record.candidateID]));
+  const summary = buildVerifierCompletionSummary(pkg, state);
   return (
     <section className="screen-stack" aria-labelledby="verifier-review-title">
       <Card tone={completionErrors.length === 0 ? "success" : "warning"}>
         <h2 id="verifier-review-title">Final review</h2>
         <p className="supporting">
           {completionErrors.length === 0
-            ? "The package is complete enough to export for Prompt 103 validation. It still does not promote records."
+            ? "The package is complete enough to export for Prompt 136 validation and reconciliation. It still does not promote records."
             : "Export is blocked until the required items below are finished."}
         </p>
         <Button onClick={() => void exportPackage()} disabled={completionErrors.length > 0}>Export verifier package</Button>
+      </Card>
+      <Card>
+        <h3>Export readiness summary</h3>
+        <dl className="metadata-list">
+          <div><dt>Record decisions</dt><dd>{summary.completedRecords} / {summary.totalRequiredRecords}</dd></div>
+          <div><dt>Secondary samples</dt><dd>{summary.secondaryAngleSampleCompleted} / {summary.secondaryAngleSampleRequired}</dd></div>
+          <div><dt>Duplicate/order reviews</dt><dd>{summary.duplicateOrderExceptionCompleted} / {summary.duplicateOrderExceptionRequired}</dd></div>
+          <div><dt>Flagged or disputed</dt><dd>{summary.unresolvedDisagreements}</dd></div>
+          <div><dt>Export valid</dt><dd>{summary.exportValid ? "yes" : "no"}</dd></div>
+        </dl>
       </Card>
       {exportError ? <Alert title="Export blocked" tone="danger" role="alert">{exportError}</Alert> : null}
       {exportMessage ? <Alert title="Export ready" tone="success">{exportMessage}</Alert> : null}

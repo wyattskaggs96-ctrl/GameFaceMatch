@@ -3,9 +3,11 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
   buildVerifierExportPackage,
+  buildVerifierCompletionSummary,
   calculateVerifierProgress,
   createInitialVerifierDraft,
   getVerifierCompletionErrors,
+  sanitizeLoadedDraft,
   type SupportedSubsetVerifierPackage
 } from "@/lib/verifier/cf27-supported-subset-verifier";
 
@@ -22,6 +24,15 @@ describe("CF27 supported-subset browser verifier workflow", () => {
 
     expect(pkg.candidateDetails).toHaveLength(76);
     expect(calculateVerifierProgress(pkg, state)).toMatchObject({ total: 76, completed: 0, remaining: 76 });
+    expect(buildVerifierCompletionSummary(pkg, state)).toMatchObject({
+      totalRequiredRecords: 76,
+      completedRecords: 0,
+      secondaryAngleSampleRequired: 24,
+      secondaryAngleSampleCompleted: 0,
+      duplicateOrderExceptionRequired: 8,
+      duplicateOrderExceptionCompleted: 0,
+      exportValid: false
+    });
     expect(getVerifierCompletionErrors(pkg, state)).toEqual(expect.arrayContaining([
       "Environment is missing verifierId.",
       `${pkg.candidateDetails[0].candidateID} is not complete.`
@@ -101,6 +112,12 @@ describe("CF27 supported-subset browser verifier workflow", () => {
 
     expect(getVerifierCompletionErrors(pkg, state)).toEqual([]);
     expect(calculateVerifierProgress(pkg, state)).toMatchObject({ completed: 76, remaining: 0 });
+    expect(buildVerifierCompletionSummary(pkg, state)).toMatchObject({
+      completedRecords: 76,
+      secondaryAngleSampleCompleted: 24,
+      duplicateOrderExceptionCompleted: 8,
+      exportValid: true
+    });
 
     const exportPackage = buildVerifierExportPackage(pkg, state, new Date("2026-08-07T13:05:00.000Z"));
     const validation = validateCompletedVerifierDecisionExport(exportPackage, { root: repositoryRoot });
@@ -113,6 +130,38 @@ describe("CF27 supported-subset browser verifier workflow", () => {
       productionCatalogRecords: 0,
       recommendationEligibleRecords: 0
     });
+    expect(exportPackage.completionSummary).toMatchObject({
+      totalRequiredRecords: 76,
+      completedRecords: 76,
+      secondaryAngleSampleCompleted: 24,
+      duplicateOrderExceptionCompleted: 8,
+      exportValid: true
+    });
+  });
+
+  it("restores a saved browser draft without dropping current package rows", () => {
+    const pkg = readPackage();
+    const original = createInitialVerifierDraft(pkg, new Date("2026-08-07T12:00:00.000Z"));
+    const firstID = pkg.candidateDetails[0].candidateID;
+    original.currentIndex = 3;
+    original.environment.verifierId = "friend-resume-test";
+    original.decisions[firstID] = {
+      ...original.decisions[firstID],
+      independentObservation: "Saved draft observation"
+    };
+
+    const restored = sanitizeLoadedDraft(pkg, {
+      ...original,
+      decisions: {
+        [firstID]: original.decisions[firstID]
+      }
+    });
+
+    expect(restored).not.toBeNull();
+    expect(restored?.currentIndex).toBe(3);
+    expect(restored?.environment.verifierId).toBe("friend-resume-test");
+    expect(restored?.decisions[firstID].independentObservation).toBe("Saved draft observation");
+    expect(Object.keys(restored?.decisions ?? {})).toHaveLength(76);
   });
 });
 

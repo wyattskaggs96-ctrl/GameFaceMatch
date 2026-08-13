@@ -74,7 +74,7 @@ When the final review screen says every required item is complete, choose **Expo
 cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json
 ```
 
-Wyatt should keep that file and later ask Codex to run Prompt 103. The export can be checked without importing or promoting records with:
+Wyatt should keep that file and later ask Codex to run Prompt 136. The export can be checked without importing or promoting records with:
 
 ```bash
 npm run cf27:supported-subset-verifier-session:validate-export -- ~/Downloads/cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json

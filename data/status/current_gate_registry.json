@@ -1,9 +1,9 @@
 {
   "schemaVersion": "gameface-current-gate-registry-v1",
-  "generatedAt": "2026-08-03T00:30:00-04:00",
+  "generatedAt": "2026-08-13T00:00:00-04:00",
   "repository": "/Users/skaggssystems/Developer/GameFaceMatch",
   "branch": "main",
-  "head": "83c72f9b94d391955c9de023409160dd44430359",
+  "head": "Q07_PROMPT_136_TEN_USER_PRIVATE_BETA_SCOPE",
   "statusCheckpoint": "commit-containing-this-file",
   "productionRecommendationsEnabled": false,
   "sourceArtifacts": {
@@ -16,6 +16,19 @@
     "nonMutatingVerificationRunner": "scripts/verify-non-mutating.mjs"
   },
   "gates": [
+    {
+      "id": "TEN_USER_PRIVATE_BETA_SCOPE_LOCKED",
+      "status": "READY",
+      "evidence": [
+        "docs/DECISIONS.md",
+        "docs/Product/TEN_USER_PRIVATE_BETA.md",
+        "web/lib/data/source-types.ts"
+      ],
+      "blocker": null,
+      "owner": "Wyatt and Codex",
+      "releaseCondition": "Use the locked Q07 contract: maximum 10 invite-only testers, Vercel HTTPS, iPhone Safari, CF27, no payment, no account, betaResearch tier, raw face media local/browser-only by default, production gates unchanged.",
+      "nextPrompt": "137"
+    },
     {
       "id": "CAPTURE_UI_READY",
       "status": "READY",
@@ -214,15 +227,16 @@
     },
     {
       "id": "PRIVATE_BETA_READY",
-      "status": "BLOCKED_DEPENDENCY",
+      "status": "BLOCKED_IMPLEMENTATION",
       "evidence": [
         "docs/status/CURRENT_PROJECT_STATE.md",
-        "data/status/current_gate_registry.json"
+        "data/status/current_gate_registry.json",
+        "docs/Product/TEN_USER_PRIVATE_BETA.md"
       ],
-      "blocker": "Real recommendations, production catalog, billing/entitlement, Supabase remote setup, legal/privacy review, and real-device QA are incomplete.",
-      "owner": "Codex, Wyatt, second verifier, external services",
-      "releaseCondition": "Verified production catalog, safe payments/entitlements, privacy/security checks, and private-beta smoke tests pass.",
-      "nextPrompt": "after production catalog and matching gates"
+      "blocker": "Q07 ten-user beta scope is locked, but the betaResearch recommendation/result-photo/feedback flow, durable Vercel HTTPS deployment, remote beta persistence/deletion, and physical iPhone Safari scan validation are not complete.",
+      "owner": "Codex and Wyatt",
+      "releaseCondition": "Ten-user beta uses betaResearch or production-approved data only, labels results experimental, collects only allowed beta data, confirms physical iPhone scan completion, and runs on durable HTTPS.",
+      "nextPrompt": "137"
     },
     {
       "id": "PUBLIC_LAUNCH_READY",

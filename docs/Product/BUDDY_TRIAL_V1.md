@@ -9,6 +9,12 @@
 
 This contract defines the private-beta V1 North Star for GameFace Match. It does not publish a production catalog, create second-verifier decisions, enable payment, deploy Supabase, or claim real buddy acceptance.
 
+## Q07 Immediate Beta Addendum
+
+`GFM | Q07 | PROMPT 136` narrows the immediate target to the accepted ten-user research beta in `docs/Product/TEN_USER_PRIVATE_BETA.md`. For that immediate beta only, customer-visible recommendations may come from the explicit non-production `betaResearch` / `BETA_RESEARCH` tier when they are clearly labeled experimental/private-beta results and do not invent College Football 27 settings.
+
+The original production-catalog rule below still governs paid/public production and any claim of verified College Football 27 settings. Human second verification is deferred for the ten-user research beta only; it remains required before production catalog publication or paid/public launch.
+
 ## 1. North Star
 
 A person who knows nothing about GameFace Match can:
@@ -16,15 +22,12 @@ A person who knows nothing about GameFace Match can:
 1. Receive a texted website link.
 2. Open it on an iPhone.
 3. Complete the existing Face ID-style guided scan.
-4. Receive exact verified College Football 27 appearance settings.
+4. Receive experimental College Football 27 appearance settings from the allowed beta or production tier.
 5. Follow those settings in the game.
-6. Upload or record a video of the resulting character.
-7. Receive evidence-based refinement recommendations.
-8. Apply them.
-9. Upload a second result.
-10. Receive a measurable before/after comparison.
-11. Rate whether the result looks like them.
-12. Finish without owner assistance.
+6. Upload 1-3 photos or screenshots of the resulting character for the Q07 beta, or video where a later scope explicitly requires it.
+7. Rate whether the result looks like them.
+8. Submit feedback for matcher review.
+9. Finish without owner assistance.
 
 ## 2. Binding Product Rules
 
@@ -33,7 +36,7 @@ A person who knows nothing about GameFace Match can:
 - The basic buddy trial must not require an account.
 - No payment is required for this private beta.
 - The app must never invent College Football 27 controls, labels, indices, menu paths, sliders, presets, hairstyles, facial-hair options, or version/platform facts.
-- A preset, slider, color, menu path, or numeric value may be customer-visible only when it comes from a verified production catalog record.
+- Paid/public production may show a preset, slider, color, menu path, or numeric value only when it comes from a verified production catalog record. The Q07 ten-user beta may show clearly labeled `betaResearch` settings that are separately blocked from production.
 - Fixture data may test the path, but it must be visibly and technically separated from production data.
 - Buddy acceptance is a real-user outcome, not a code-test result.
 

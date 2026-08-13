@@ -51,6 +51,7 @@ export type DataSourceType =
   | "researchDraft"
   | "researchCandidate"
   | "shippingGameVideoResearch"
+  | "betaResearch"
   | "publicSourceOnly"
   | "testFixture"
   | "demoData"

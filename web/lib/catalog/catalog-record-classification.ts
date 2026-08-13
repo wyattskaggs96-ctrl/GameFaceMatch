@@ -21,7 +21,7 @@ export interface CatalogRecordClassificationResult {
 
 const placeholderPattern = /REPLACE_WITH_|NOT PRODUCTION DATA|NOT A VERIFIED GAME RECORD|\b(TBD|TODO|PLACEHOLDER|MOCK|UNKNOWN_ORIGIN)\b/i;
 const fixturePathPattern = /data\/fixtures\/test-only|\/fixtures\/test-only\/|^fixtures\/test-only\/|\/test-only\//i;
-const researchSourceTypes = new Set(["research", "researchDraft", "researchCandidate", "shippingGameVideoResearch"]);
+const researchSourceTypes = new Set(["research", "researchDraft", "researchCandidate", "shippingGameVideoResearch", "betaResearch"]);
 const fixtureSourceTypes = new Set(["testFixture", "demoData", "localDeveloperSample"]);
 const publicSourceTypes = new Set(["publicSourceOnly"]);
 const approvedCatalogManagerDispositions = new Set(["approved", "approvedWithNotes"]);

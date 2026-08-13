@@ -35,6 +35,10 @@ describe("catalog validation", () => {
     const item = validItem("fixture-source-type");
     item.sourceType = "testFixture";
     expect(() => validateProductionCatalog(manifest([item]))).toThrow(/testFixture record/);
+
+    const betaItem = validItem("beta-research-source-type");
+    betaItem.sourceType = "betaResearch";
+    expect(() => validateProductionCatalog(manifest([betaItem]))).toThrow(/betaResearch record/);
   });
 
   it("rejects duplicate catalog IDs", () => {

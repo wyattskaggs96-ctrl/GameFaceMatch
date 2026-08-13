@@ -56,6 +56,11 @@ Reason: Google MediaPipe Face Landmarker is an official, actively maintained, br
 Status: Accepted
 Reason: Wyatt Skaggs has locked the current repository source-media inventory as the final owner-provided media baseline for the initial product launch. Additional owner recordings are no longer a prerequisite for completing the initial product. Existing media limitations must be preserved through evidence support states, confidence, verifier review, user confirmation, screenshot refinement, and post-launch improvement queues. This decision does not permit invented game options, fixture leakage, cross-version recommendations, skipped second verification, or production promotion without catalog-manager approval.
 
+## D-015 — Ten-user private beta research scope
+Status: Accepted
+Date: 2026-08-13
+Reason: Wyatt Skaggs changed the immediate target from paid public production to an unpaid, invite-only, maximum 10-user College Football 27 research beta hosted on Vercel for iPhone Safari. The beta may use a separate `betaResearch` non-production recommendation tier and must label results as experimental private-beta output. Human catalog verification is deferred for this private beta only; production catalog gates, paid/public verification requirements, no-invented-CF27-data rules, privacy/deletion rules, and the empty-production-catalog fail-closed behavior remain intact. Beta records must never be relabeled `VERIFIED`, production-approved, or production catalog records.
+
 ## Architecture Decision Records
 
 Detailed ADRs live under `docs/adr/` and clarify the current architecture without replacing this concise decision log. Where an ADR documents a gap, treat it as a follow-up implementation or validation task rather than silent permission to work around permanent rules.

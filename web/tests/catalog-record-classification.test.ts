@@ -17,10 +17,17 @@ describe("catalog record classification", () => {
       sourceObservations: [{ videoID: "phase0-video-001", timestamp: 12 }]
     });
     const publicOnly = classifyCatalogRecord({ sourceType: "publicSourceOnly", stableInternalID: "public-only", verificationState: "verified" });
+    const betaResearch = classifyCatalogRecord({
+      sourceType: "betaResearch",
+      dataClass: "TEN_USER_PRIVATE_BETA_RESEARCH",
+      verificationStatus: "BETA_RESEARCH_ONLY",
+      sourceObservations: [{ evidenceID: "beta-observed-setting-001" }]
+    });
     const fixture = classifyCatalogRecord({ sourceType: "testFixture", isTestFixture: true, stableInternalID: "fixture" });
     const placeholder = classifyCatalogRecord({ sourceType: "production", stableInternalID: "placeholder", visibleGameLabelOrIndex: "REPLACE_WITH_VERIFIED_GAME_LABEL" });
 
     expect(research).toMatchObject({ classification: "RESEARCH_OBSERVED", productionAccessAllowed: false, hasSourceEvidence: true });
+    expect(betaResearch).toMatchObject({ classification: "RESEARCH_OBSERVED", productionAccessAllowed: false, hasSourceEvidence: true });
     expect(publicOnly).toMatchObject({ classification: "PUBLIC_SOURCE_ONLY", productionAccessAllowed: false });
     expect(fixture).toMatchObject({ classification: "TEST_FIXTURE", productionAccessAllowed: false });
     expect(placeholder).toMatchObject({ classification: "PLACEHOLDER", productionAccessAllowed: false });

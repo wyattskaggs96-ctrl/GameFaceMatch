@@ -1,13 +1,13 @@
 # Current Project State
 
 **Status:** AUTHORITATIVE CURRENT OPERATIONAL STATUS
-**Last reconciled:** 2026-08-07
+**Last reconciled:** 2026-08-13
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`
 **Branch:** `main`
-**Repository checkpoint reviewed:** Prompt 129 owner trial command center
+**Repository checkpoint reviewed:** Q07 Prompt 136 ten-user beta scope lock
 **Active client:** responsive web MVP under `web/`
 **Preserved future client:** SwiftUI iOS foundation under `ios/`
-**Current active phase:** supported-subset human verifier execution, Buddy Trial owner-review operations, privacy-safe trial learning, and production-catalog gatekeeping
+**Current active phase:** ten-user private beta scope lock, beta research tier definition, Buddy Trial preparation, and production-catalog gatekeeping
 **Exact next action:** `docs/status/NEXT_ACTION.md`
 
 This is the single current operational status source. Older audits, readiness reports, prompt reports, and closeouts are historical unless this document or the machine-readable files linked below explicitly cite them as current evidence.
@@ -16,7 +16,7 @@ This is the single current operational status source. Older audits, readiness re
 ```json
 {
   "schemaVersion": "current-project-state-v3",
-  "repositoryCheckpoint": "PROMPT_129_OWNER_TRIAL_COMMAND_CENTER",
+  "repositoryCheckpoint": "PROMPT_136_TEN_USER_PRIVATE_BETA_SCOPE",
   "productionCatalogRecords": 0,
   "secondVerificationDecisions": 0,
   "manualMatchingStudyValidParticipants": 0,
@@ -26,6 +26,14 @@ This is the single current operational status source. Older audits, readiness re
 }
 ```
 <!-- status-assertions:end -->
+
+## Q07 Owner Decision
+
+The immediate milestone is now a controlled unpaid research beta for a maximum of 10 invited testers. The beta target is an iPhone Safari flow hosted on Vercel for College Football 27. It does not require payment or account creation for the basic flow.
+
+The beta may use the explicit `betaResearch` / `BETA_RESEARCH` non-production tier for clearly labeled experimental private-beta recommendations. This does not remove the production catalog gate: beta records must not become `VERIFIED`, production-approved, production catalog records, second-verifier decisions, paid/public recommendations, or matching-study proof by implication.
+
+The paid/public product still requires real second-human verification, catalog-manager approval, immutable production catalog release, server-authoritative payment and entitlement handling, legal review, deployment, and validation.
 
 ## Product Mission
 
@@ -132,11 +140,14 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Supabase remote database/storage/auth/RLS/Edge Functions/Cron are not deployed from this repo.
 - Real manual matching study: 0 valid participants, 0 completed trials, no measured accuracy.
 - Real Buddy Trial V1 execution: invite-only fixture shell, guided-scan handoff/resume checkpoint, local/test persistence/deletion contract, owner-review first/second video loop, before/after scoring, final rating UI, and privacy-safe structured learning contract exist, but 0 completed real buddy trials, no production CF27 recommendations, no real production before/after measurements, and no real buddy acceptance yet.
+- Ten-user private beta execution: scope is now locked, but the final `betaResearch` recommendation/result-photo/feedback flow, durable Vercel deployment, and physical iPhone Safari validation still need implementation/verification.
 - Owner Review Demo can exercise the Buddy Trial UI with synthetic test data, but it is not a real buddy trial, production catalog, human verification, or matching-study result.
 - Owner Review Demo now reaches final measurable outcome with second-video review, before/after comparison, final resemblance rating, and completion summary. It remains fixture-backed and excluded from production catalog state, real beta metrics, and matching-study evidence.
 - Legal approval, tax/accounting review, production deployment, monitoring, support operations, and public launch approval are not complete.
 
 ## Current Production Blockers
+
+These are paid/public production blockers. They are not all blockers for the Q07 ten-user research beta.
 
 1. No nonempty verified production catalog for any launch game.
 2. No second-person verification or catalog-manager production approval.
@@ -146,6 +157,13 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 6. No real user matching-validation study.
 7. No legal/tax/accounting approval for paid launch and creator payouts.
 8. No production deployment, monitoring, support, or incident-response operation.
+
+## Current Ten-User Beta Blockers
+
+1. No durable Vercel HTTPS beta deployment yet.
+2. `betaResearch` is defined but the final beta recommendation/result-photo/feedback flow is not implemented in this prompt.
+3. Real iPhone Safari scan completion and natural phone-position behavior still need physical-device validation.
+4. Remote beta persistence/deletion must use only allowed beta data and must not upload raw face scan media by default.
 
 ## Current Evidence Counts
 
@@ -212,6 +230,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Owner Review Demo mode: `docs/status/OWNER_REVIEW_DEMO_MODE.md`
 - Buddy Trial learning loop: `docs/status/BUDDY_TRIAL_LEARNING_OPTIMIZATION_LOOP.md`
 - Owner trial command center: `docs/status/OWNER_TRIAL_COMMAND_CENTER.md`
+- Ten-user private beta contract: `docs/Product/TEN_USER_PRIVATE_BETA.md`
 - Buddy Trial V1 contract: `docs/Product/BUDDY_TRIAL_V1.md`
 - Buddy Trial persistence contract: `web/lib/buddy-trial/buddy-trial-persistence.ts`
 - Buddy Trial route pattern: `/trial/[inviteId]`

@@ -27,6 +27,7 @@ describe("data source separation", () => {
       "researchDraft",
       "researchCandidate",
       "shippingGameVideoResearch",
+      "betaResearch",
       "publicSourceOnly",
       "testFixture",
       "demoData",
@@ -45,7 +46,7 @@ describe("data source separation", () => {
     for (const file of listFiles(productionDir).filter((candidate) => candidate.endsWith(".json"))) {
       const json = JSON.parse(fs.readFileSync(file, "utf8")) as { sourceType?: string };
       expect(json.sourceType, file).toBe("production");
-      expect(JSON.stringify(json), file).not.toMatch(/testFixture|researchDraft|demoData|localDeveloperSample|test-only|fixture/i);
+      expect(JSON.stringify(json), file).not.toMatch(/testFixture|researchDraft|betaResearch|demoData|localDeveloperSample|test-only|fixture/i);
     }
   });
 

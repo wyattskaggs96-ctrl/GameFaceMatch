@@ -1,5 +1,18 @@
 # Production Readiness Scorecard
 
+**Q07 update, 2026-08-13:** The immediate target is now the ten-user unpaid private research beta in `docs/Product/TEN_USER_PRIVATE_BETA.md`. The scorecard below remains the paid/public production scorecard. Do not raise paid/public readiness because the beta may use `betaResearch`; that tier is explicitly non-production and blocked from production catalog gates.
+
+## Ten-User Beta Readiness Addendum
+
+| Area | Current status | Beta blocker |
+| --- | --- | --- |
+| Scope | Locked for maximum 10 invited testers, CF27, iPhone Safari, Vercel HTTPS, no payment, no account. | None for scope. |
+| Recommendation data | `betaResearch` tier defined and production-blocked. | Customer beta recommendation flow still needs implementation. |
+| Catalog verification | Human second verification deferred for beta. | Still required for paid/public production. |
+| Scan | Browser guided scan implemented. | Physical iPhone Safari completion still needs verification before testers are invited. |
+| Feedback | Owner-review flow has structured outcomes. | Q07 photo/screenshot upload plus resemblance/feedback path must be aligned to beta contract. |
+| Deployment | Vercel selected. | Durable HTTPS deployment not yet performed. |
+
 Scores use: 0 not started, 1 documented/conceptual, 2 scaffolded/mocked, 3 implemented but incomplete, 4 functionally complete but not production-validated, 5 production-ready and validated.
 
 | Area | Score | Evidence | Current state | Production blocker | Required next action |

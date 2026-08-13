@@ -1,5 +1,23 @@
 # Next Production Prompts
 
+## Q07 Immediate Queue Seed
+
+Q07 supersedes the previously planned but unrun Q06 Prompts 136-147. The immediate target is the ten-user unpaid private research beta, not paid-public production.
+
+Recommended next prompt:
+
+`GFM | Q07 | PROMPT 137 | PHASE 02 | Implement beta research recommendation and feedback flow`
+
+Purpose:
+
+- implement the `betaResearch` customer recommendation path without production leakage;
+- show experimental/private-beta result language;
+- collect 1-3 CF27 output screenshots/photos, resemblance rating, and free-text feedback;
+- keep raw face scan media local/browser-only by default;
+- preserve production catalog count 0 and production recommendations disabled.
+
+The human verifier package remains a paid/public production gate, but it is no longer the next Q07 beta prerequisite.
+
 ## Immediate Next Prompt
 
 `HUMAN ACTION | Complete CF27 supported-subset second verification`

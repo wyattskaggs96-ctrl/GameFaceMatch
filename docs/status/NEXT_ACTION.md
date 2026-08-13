@@ -1,120 +1,60 @@
 # Next Action
 
-`HUMAN ACTION | Complete CF27 supported-subset second verification`
+`CODEX ACTION | Implement ten-user private beta research recommendation path`
 
 Repository:
 `/Users/skaggssystems/Developer/GameFaceMatch`
 
 Run after:
-`GFM | Q04 | PROMPT 105 | PHASE 03 | Make human verifier workflow usable`
+`GFM | Q07 | PROMPT 136 | PHASE 01 | Lock ten-user beta scope and restore baseline`
 
 ## Current State
 
-Prompt 105 turns the supported-subset verifier package into an owner-usable local workflow. It did not create human decisions, production approvals, production catalog records, or recommendation eligibility.
+Q07 changes the immediate target from paid-public production to an unpaid, invite-only, maximum 10-user College Football 27 research beta.
 
-- Owner media baseline decision: `OWNER_MEDIA_BASELINE_LOCKED`
-- Additional owner media required for initial launch: no
-- Human execution status: `READY_FOR_HUMAN_VERIFIER`
-- Supported-subset verifier session package: `data/phase-zero/supported-subset-verifier-session/`
-- Verifier runbook: `docs/status/CF27_SUPPORTED_SUBSET_VERIFIER_RUNBOOK.md`
-- Friend quick start: `docs/verification/HUMAN_VERIFIER_QUICK_START.md`
-- Owner launch checklist: `docs/verification/OWNER_VERIFIER_LAUNCH_CHECKLIST.md`
-- Local start command: `npm run verifier:start`
-- Local verifier URL: `http://localhost:3000/verifier`
-- Human verification status: `docs/status/CF27_SUPPORTED_SUBSET_HUMAN_VERIFICATION_STATUS.md`
-- Supported-subset verifier queue records: 76
-- Deterministic secondary-angle sample: 24
-- Excluded duplicate/order limitation rows: 8
-- Second-verifier decisions: 0
-- Second-verified records: 0
-- Production-approved records: 0
+- Authoritative beta contract: `docs/Product/TEN_USER_PRIVATE_BETA.md`
+- Owner decision: `docs/DECISIONS.md` D-015
+- Hosting target for beta: Vercel HTTPS
+- Primary beta client: iPhone Safari
+- Basic beta account requirement: none
+- Basic beta payment requirement: none
+- Beta recommendation tier: `betaResearch` / `BETA_RESEARCH`
 - Production catalog records: 0
-- Recommendation-eligible records: 0
+- Production recommendations enabled: false
+- Second-verifier decisions: 0
+- Human catalog verification: deferred for the 10-user beta only
+- Paid/public production gate: still requires real second verification, catalog-manager approval, and immutable production catalog release
 
-## Wyatt Action
+## Immediate Codex Action
 
-Start the local verifier workflow and hand it to a real independent verifier:
+Prompt 137 should implement the actual ten-user beta research recommendation path against the `betaResearch` tier:
+
+- keep production recommendations fail-closed;
+- label beta results as experimental/private-beta output;
+- use only documented CF27 settings from existing evidence/support records;
+- omit unsupported categories rather than inventing values;
+- collect 1-3 CF27 result screenshots/photos, resemblance rating, and feedback;
+- preserve raw face media as local/browser-only by default;
+- keep the beta cohort capped at 10 invites.
+
+Recommended next label:
+
+`GFM | Q07 | PROMPT 137 | PHASE 02 | Implement beta research recommendation and feedback flow`
+
+## Deferred Human-Verifier Action
+
+The owner-usable CF27 verifier remains ready at:
 
 ```bash
 npm run verifier:start
 ```
 
-Open:
-
 ```text
 http://localhost:3000/verifier
 ```
 
-Give the verifier:
-
-- `docs/verification/HUMAN_VERIFIER_QUICK_START.md`
-- The open local verifier page
-- The Xbox/controller and College Football 27 Road to Glory appearance screens
-
-Wyatt does not need to record more game footage by default.
-
-## Verifier Action
-
-The verifier must independently inspect the shipping game and complete:
-
-1. Verifier environment.
-2. Verifier attestation.
-3. All 76 record-level decisions.
-4. Independent menu counts where observable.
-5. All 24 deterministic secondary-angle sample rows.
-6. Duplicate/order excluded limitation review.
-7. Disagreement notes and resolution recommendations.
-
-Codex must not fill these fields.
-
-## Expected Export
-
-The browser downloads the completed package to:
-
-```text
-~/Downloads/cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json
-```
-
-Optional validation before Prompt 103:
-
-```bash
-npm run cf27:supported-subset-verifier-session:validate-export -- ~/Downloads/cf27-supported-subset-verifier-export-<verifier-id>-<verification-date>.json
-```
-
-## Next Codex Prompt After Human Package Returns
-
-`GFM | Q04 | PROMPT 103 | PHASE 03 | Import and reconcile CF27 supported-subset verifier decisions`
-
-Prompt 103 should run only after Wyatt provides the completed verifier package. It should validate the package, preserve primary and verifier observations, create discrepancy records, keep imports non-production, and leave catalog promotion blocked until catalog-manager approval.
+That work is now a paid/public production prerequisite, not a blocker for the Q07 10-user research beta. Codex must still not fabricate verifier decisions, import fake decisions, publish production catalog records, or enable production recommendations.
 
 ## Stop Point
 
-Do not publish a production catalog, enable recommendations, run paid checkout, claim matching accuracy, or mark records production-approved before a real completed verifier package is returned and validated.
-
-## Codex-Ready Parallel Contract
-
-Prompt 106 records the private-beta Buddy Trial V1 North Star in:
-
-`docs/Product/BUDDY_TRIAL_V1.md`
-
-That contract defines the future customer journey from a texted iPhone link through guided scan, exact verified CF27 settings, first result upload, refinement recommendations, second result upload, before/after comparison, and resemblance rating. Prompt 108 implements the first invite-only fixture session shell at `/trial/[inviteId]` with local consent, resume, invalid/expired/used/deleted states, and empty-catalog fail-closed behavior. Prompt 109 hardens the existing guided scan for remote iPhone use and records a local Buddy Trial `SCAN_COMPLETE` checkpoint when the existing capture continue action succeeds. Prompt 110 adds the private-beta persistence/deletion contract, browser-local test adapter, and fail-closed Supabase schema/RLS design without activating production Supabase.
-
-The next implementation prompt may add the first-result upload shell while keeping production recommendations blocked until a verified nonempty catalog exists:
-
-Prompt 123 adds an isolated `OWNER_REVIEW_DEMO` lane for Wyatt-only product evaluation before the production CF27 catalog exists. Prompt 124 extends that lane into the complete scan-to-build journey: private invite, consent, existing guided-scan handoff, scan-complete processing, demo recommendation result, exact settings, one-step-at-a-time College Football 27 build guide, persisted walkthrough progress, "View All Settings", and build-guide-complete handoff. Prompt 125 adds the first character-video review step: upload or record Video #1, validate it locally, extract standardized character-view candidates, support tester frame selection when automation is uncertain, retry bad media, and persist only non-image review summaries. Prompt 126 adds `GAMEFACE REVIEW`: measurable first-result score, strengths, closer areas, exact demo-calibrated changes, and a step-by-step `Update My Player` refinement guide. Prompt 127 adds Video #2, the before/after score comparison, improvement/no-change/regression handling, final version preference, 1-10 resemblance rating, optional feedback, and the `GameFace complete.` summary. Prompt 128 adds the privacy-safe learning and offline optimization loop: completed trials can create structured, pseudonymous learning records with separate product-improvement consent; owner-review demo records are excluded from real metrics and production optimization; proposed matching-weight, calibration, or ranking changes require owner approval, retained-case validation, versioning, and rollback before production use. Prompt 129 adds the internal owner command center at `/owner/trials` for creating Buddy Trial invites, copying links/text messages, inspecting progress, tracking owner intervention, exporting structured results, and viewing summary metrics. Prompt 130 prepares a deployable `owner_review` environment, protects `/owner/*`, `/verifier/*`, and `/api/internal/*` with a server-only owner access code, and leaves true `production` locked down.
-
-It can be enabled with:
-
-```text
-NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=owner_review
-NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true
-GAMEFACE_OWNER_REVIEW_ACCESS_CODE=<server-side secret>
-```
-
-The demo lane uses `data/demo/owner-review-demo-catalog.json`, shows the banner `Owner Review Demo — appearance settings are test data.`, and is excluded from real beta metrics, human verification, production catalog state, and production matching-weight changes.
-
-The next owner action for deployed review is:
-
-`OWNER ACTION | Authorize HTTPS host and configure OWNER_REVIEW_DEPLOYMENT secrets`
-
-This does not replace the human-verifier action above. Real CF27 settings still require a verified nonempty production catalog.
+Do not deploy, connect payments, publish a production catalog, or relabel beta/research records as verified during the next prompt.

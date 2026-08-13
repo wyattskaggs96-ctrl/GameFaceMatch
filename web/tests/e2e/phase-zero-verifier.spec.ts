@@ -1,6 +1,21 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("CF27 supported-subset friend verifier workflow", () => {
+  test("keeps attestation and verifier layout readable at iPhone portrait width", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/verifier");
+
+    await expect(page.getByRole("heading", { name: "CF27 Supported-Subset Human Verification" })).toBeVisible();
+    const attestationLabel = page.getByText("I am a real second person, not the primary researcher.");
+    await expect(attestationLabel).toBeVisible();
+
+    const labelBox = await attestationLabel.boundingBox();
+    const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
+
+    expect(labelBox?.width).toBeGreaterThan(240);
+    expect(horizontalOverflow).toBe(false);
+  });
+
   test("launches, records identity, saves a draft through refresh, and blocks incomplete export", async ({ page }) => {
     await page.goto("/verifier");
     await expect(page.getByRole("heading", { name: "CF27 Supported-Subset Human Verification" })).toBeVisible();

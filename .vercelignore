@@ -1,0 +1,15 @@
+.git
+.verification-worktrees
+.DS_Store
+source-media
+build-artifacts
+data/audit/college-football-27/local-evidence
+data/phase-zero/derivative-frames
+data/research/cf27/generated
+data/research/fc26/generated
+ios/build
+web/.next
+web/node_modules
+web/playwright-report
+web/test-results
+web/tsconfig.tsbuildinfo

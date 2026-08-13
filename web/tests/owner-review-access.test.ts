@@ -40,6 +40,31 @@ describe("owner review deployment access gate", () => {
     });
   });
 
+  it("keeps internal tooling unavailable in private beta production builds", () => {
+    expect(
+      isInternalToolingAvailableInRuntime({
+        NODE_ENV: "production",
+        NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: "private_beta"
+      })
+    ).toBe(false);
+    expect(
+      evaluateOwnerReviewAccess({
+        pathname: "/verifier",
+        queryAccessCode: "secret",
+        cookieAccessCode: "secret",
+        env: {
+          NODE_ENV: "production",
+          NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: "private_beta",
+          GAMEFACE_OWNER_REVIEW_ACCESS_CODE: "secret"
+        }
+      })
+    ).toEqual({
+      status: "block",
+      httpStatus: 404,
+      message: "Internal GameFace Match tooling is unavailable in production."
+    });
+  });
+
   it("allows owner review tooling in a production build only when the owner review deployment environment is selected", () => {
     expect(
       isInternalToolingAvailableInRuntime({

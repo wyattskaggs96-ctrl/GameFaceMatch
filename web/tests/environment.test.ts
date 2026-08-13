@@ -59,12 +59,22 @@ describe("deployment environment contract", () => {
     expect(SERVER_ONLY_ENVIRONMENT_KEYS).toContain("GAMEFACE_OWNER_REVIEW_ACCESS_CODE");
   });
 
+  it("recognizes private beta deployment as a distinct Vercel environment", () => {
+    const result = validateDeploymentEnvironment({
+      NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: "private_beta",
+      NEXT_PUBLIC_GAMEFACE_APP_BASE_URL: "https://gameface-match-private-beta.vercel.app",
+      NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED: "true",
+      NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED: "true"
+    });
+    expect(result.valid).toBe(true);
+  });
+
   it("rejects unknown deployment environment names", () => {
     expect(
       validateDeploymentEnvironment({
         NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: "public-demo"
       }).errors
-    ).toContain("NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV must be one of: local, development, preview, staging, owner_review, production.");
+    ).toContain("NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV must be one of: local, development, preview, private_beta, staging, owner_review, production.");
   });
 
   it("keeps public and server-only variable names separated", () => {

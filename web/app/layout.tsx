@@ -17,6 +17,16 @@ export const metadata: Metadata = {
   },
   formatDetection: {
     telephone: false
+  },
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true
+    }
   }
 };
 

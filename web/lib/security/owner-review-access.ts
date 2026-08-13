@@ -27,7 +27,7 @@ export function evaluateOwnerReviewAccess(input: {
   }
 
   const deploymentEnvironment = parseDeploymentEnvironment(input.env.NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV);
-  if (deploymentEnvironment === "production") {
+  if (input.env.NODE_ENV === "production" && deploymentEnvironment !== "owner_review") {
     return {
       status: "block",
       httpStatus: 404,

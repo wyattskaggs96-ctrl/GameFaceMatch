@@ -2,7 +2,7 @@ import { validateDeploymentEnvironment, type EnvironmentValidationResult } from 
 
 export const DEPLOYMENT_CONFIG_VERSION = "deployment-config-v1";
 
-export type DeploymentEnvironmentName = "local" | "preview" | "staging" | "owner_review" | "production";
+export type DeploymentEnvironmentName = "local" | "preview" | "private_beta" | "staging" | "owner_review" | "production";
 
 export interface DeploymentRuntimeConfig {
   configVersion: typeof DEPLOYMENT_CONFIG_VERSION;
@@ -47,6 +47,6 @@ export function parseBooleanFlag(value: string | undefined): boolean {
 }
 
 export function parseDeploymentEnvironment(value: string | undefined): DeploymentEnvironmentName {
-  if (value === "preview" || value === "staging" || value === "owner_review" || value === "production") return value;
+  if (value === "preview" || value === "private_beta" || value === "staging" || value === "owner_review" || value === "production") return value;
   return "local";
 }

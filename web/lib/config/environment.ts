@@ -57,7 +57,7 @@ export function validateDeploymentEnvironment(
       errors.push(`${key} must be either "true" or "false" when set.`);
     }
     if (key === "NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV" && value && !isDeploymentEnvironmentValue(value)) {
-      errors.push(`${key} must be one of: local, development, preview, staging, owner_review, production.`);
+      errors.push(`${key} must be one of: local, development, preview, private_beta, staging, owner_review, production.`);
     }
   }
 
@@ -107,5 +107,5 @@ function isAllowedPublicUrl(value: string) {
 }
 
 function isDeploymentEnvironmentValue(value: string) {
-  return ["local", "development", "preview", "staging", "owner_review", "production"].includes(value);
+  return ["local", "development", "preview", "private_beta", "staging", "owner_review", "production"].includes(value);
 }

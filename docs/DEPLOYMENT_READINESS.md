@@ -2,11 +2,25 @@
 
 ## Status
 
-GameFace Match is not deployed. No DNS, hosting, payment provider, external account, webhook, or secret was configured.
+GameFace Match has Vercel project configuration for the Q07 private-beta path, but deployment still requires an authenticated Vercel account/project or connected integration.
 
 Prompt 130 adds deployable owner-review configuration, but no real HTTPS URL exists in the repository because no hosting provider/project credentials are configured.
 
 The current web MVP is a Next.js app under `web/` with one app route, a web manifest route, local-only browser state, and no backend endpoints.
+
+## Vercel private-beta configuration
+
+The repository-level `vercel.json` points Vercel at the `web/` Next.js app:
+
+- Root Directory: `web`
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Framework: Next.js, auto-detected from `web/package.json`
+- Output: Vercel-managed Next.js output from `web/.next`
+
+Use `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=private_beta` for the Q07 ten-user beta. This environment keeps `/owner/*`, `/verifier/*`, and `/api/internal/*` unavailable in production builds while leaving customer `/trial/[inviteId]` routes available.
+
+The app also emits noindex metadata and `robots.txt` disallow-all rules for the private beta.
 
 ## Static versus server-rendered requirements
 
@@ -98,6 +112,13 @@ Owner-review deployment additionally requires:
 - `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=owner_review`
 - `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true`
 - `GAMEFACE_OWNER_REVIEW_ACCESS_CODE` entered only in the host's server-side secret store
+
+Q07 private-beta deployment should use:
+
+- `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=private_beta`
+- `NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED=true` until the `betaResearch` path is implemented
+- `NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED=true` until beta feedback collection is implemented
+- `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=false`
 
 The owner-review access code protects `/owner/*`, `/verifier/*`, and `/api/internal/*`. It must not be committed, pasted into public docs, or exposed through `NEXT_PUBLIC_`.
 

@@ -8,6 +8,21 @@ Owner-review deployment is allowed only as a private, non-public review environm
 
 Use a dedicated HTTPS app origin for the responsive web MVP while the Skaggs Systems/Squarespace site remains the marketing surface. The app should be linked from Squarespace or served on a dedicated subdomain. Embedding inside Squarespace remains discouraged until camera permissions, CSP, iframe permissions, privacy copy, and mobile browser behavior are tested on the final host.
 
+Q07 selects Vercel as the first durable HTTPS host for the ten-user unpaid private beta.
+
+## Vercel Project Configuration
+
+Create or link a Vercel project named `gameface-match-private-beta` with:
+
+- Framework Preset: Next.js
+- Root Directory: `web`
+- Install Command: `npm install`
+- Build Command: `npm run build`
+- Output behavior: Vercel-managed Next.js output from `web/.next`
+- Node/runtime: Vercel default Node runtime compatible with Next.js 16
+
+The repository root contains `vercel.json` so this configuration is reproducible.
+
 ## Preflight
 
 1. Confirm the production catalog release gate state.
@@ -31,6 +46,13 @@ Public values, entered in the hosting provider dashboard:
 - `NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED`
 - `NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED`
 - `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO`
+
+Recommended Q07 private-beta values:
+
+- `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=private_beta`
+- `NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED=true`
+- `NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED=true`
+- `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=false`
 
 Server-only values, entered only if the corresponding provider is later approved:
 

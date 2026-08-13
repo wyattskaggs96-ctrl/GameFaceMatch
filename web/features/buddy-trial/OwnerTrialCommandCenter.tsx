@@ -12,6 +12,8 @@ import {
   serializeOwnerBuddyTrialDashboardStore,
   summarizeOwnerBuddyTrialProgress,
   updateOwnerBuddyTrialRecord,
+  validateOwnerBuddyTrialExport,
+  type OwnerBetaReviewDisposition,
   type OwnerBuddyTrialProgress,
   type OwnerBuddyTrialRecord,
   type OwnerInterventionState
@@ -95,11 +97,16 @@ export function OwnerTrialCommandCenter() {
 
   function exportResults() {
     const payload = createOwnerBuddyTrialExport(rows, new Date());
+    const validation = validateOwnerBuddyTrialExport(payload);
+    if (!validation.ok) {
+      setCopyStatus(`Export blocked: ${validation.errors.join(" ")}`);
+      return;
+    }
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = `gameface-owner-trial-results-${new Date().toISOString().slice(0, 10)}.json`;
+    anchor.download = `gameface-owner-beta-research-package-${new Date().toISOString().slice(0, 10)}.json`;
     anchor.click();
     URL.revokeObjectURL(url);
     setCopyStatus(`Export created: ${anchor.download}`);
@@ -112,10 +119,7 @@ export function OwnerTrialCommandCenter() {
           <div>
             <p className="owner-trial-kicker">GameFace Match owner command center</p>
             <h1 id="owner-trial-title">Buddy Trial operations</h1>
-            <p>
-              Create private trial links, track progress, record whether Wyatt had to help, and export structured results without opening Terminal or a
-              database.
-            </p>
+            <p>Create private trial links, review beta evidence, record owner dispositions, and export privacy-safe research results.</p>
           </div>
           <button className="owner-trial-create" type="button" onClick={createTrial}>
             Create New Trial
@@ -152,18 +156,37 @@ export function OwnerTrialCommandCenter() {
         ) : null}
 
         <section className="owner-trial-summary" aria-label="Trial summary metrics">
+          <Metric label="Invites issued" value={summary.invitesIssued} />
           <Metric label="Trials started" value={summary.trialsStarted} />
+          <Metric label="Scans started" value={summary.scanStarted} />
           <Metric label="Scans completed" value={summary.scansCompleted} />
+          <Metric label="Scan failures" value={summary.scanFailures} />
+          <Metric label="Recommendations" value={summary.recommendationsGenerated} />
           <Metric label="Builds completed" value={summary.buildsCompleted} />
-          <Metric label="Video #1" value={summary.videoOneCompletion} />
-          <Metric label="Refinement" value={summary.refinementCompletion} />
+          <Metric label="Game photos" value={summary.gamePhotoUploaded} />
+          <Metric label="Photo rate" value={summary.gamePhotoCompletionRate === null ? "—" : `${summary.gamePhotoCompletionRate}%`} />
+          <Metric label="Top-one selection" value={summary.topOneSelectionRate === null ? "—" : `${summary.topOneSelectionRate}%`} />
+          <Metric label="Top-three proxy" value={summary.topThreeUsefulnessProxy === null ? "—" : `${summary.topThreeUsefulnessProxy}%`} />
+          <Metric label="Selected ranks" value={`1:${summary.selectedRankCounts[1]} 2:${summary.selectedRankCounts[2]} 3:${summary.selectedRankCounts[3]}`} />
           <Metric label="Trials completed" value={summary.trialsCompleted} />
-          <Metric label="Avg initial score" value={formatMetric(summary.averageInitialScore)} />
-          <Metric label="Avg final score" value={formatMetric(summary.averageFinalScore)} />
-          <Metric label="Avg improvement" value={formatSignedMetric(summary.averageImprovement)} />
-          <Metric label="Avg rating" value={summary.averageResemblanceRating === null ? "—" : `${summary.averageResemblanceRating}/10`} />
+          <Metric label="Avg rating" value={summary.averageResemblanceRating === null ? "—" : `${summary.averageResemblanceRating}/5`} />
           <Metric label="Unassisted rate" value={summary.unassistedCompletionRate === null ? "—" : `${summary.unassistedCompletionRate}%`} />
+          <Metric label="Deleted" value={summary.deletedTrials} />
+          <Metric label="Runtime errors" value={summary.runtimeErrorCount} />
         </section>
+
+        {summary.majorFailureCategories.length ? (
+          <section className="owner-trial-failures" aria-label="Major failure categories">
+            <h2>Major failure categories</h2>
+            <div>
+              {summary.majorFailureCategories.map((failure) => (
+                <span key={failure.category}>
+                  {failure.category}: {failure.count}
+                </span>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className="owner-trial-toolbar" aria-label="Owner actions">
           <button type="button" onClick={() => setNow(Date.now())}>
@@ -194,14 +217,14 @@ export function OwnerTrialCommandCenter() {
                   <th>Consent</th>
                   <th>Scan</th>
                   <th>Recommendation</th>
+                  <th>Selected rank</th>
                   <th>Build guide</th>
-                  <th>Video #1</th>
-                  <th>Refinement</th>
-                  <th>Video #2</th>
-                  <th>Final score</th>
+                  <th>CF27 photos</th>
                   <th>Rating</th>
+                  <th>Deletion</th>
                   <th>Complete</th>
                   <th>Errors</th>
+                  <th>Disposition</th>
                   <th>Owner intervention</th>
                   <th>Actions</th>
                 </tr>
@@ -225,14 +248,32 @@ export function OwnerTrialCommandCenter() {
                     <StageCell value={row.stages.consent} />
                     <StageCell value={row.stages.scan} />
                     <StageCell value={row.stages.recommendation} />
+                    <td>{row.reviewEvidence.selectedRecommendation.rank ?? "—"}</td>
                     <StageCell value={row.stages.buildGuide} />
-                    <StageCell value={row.stages.videoOne} />
-                    <StageCell value={row.stages.refinement} />
-                    <StageCell value={row.stages.videoTwo} />
-                    <td>{row.finalScore ?? "—"}</td>
-                    <td>{row.resemblanceRating ? `${row.resemblanceRating}/10` : "—"}</td>
+                    <td>{row.reviewEvidence.uploadedCf27OutputImages.length}</td>
+                    <td>{row.reviewEvidence.resemblanceRating ? `${row.reviewEvidence.resemblanceRating}/5` : "—"}</td>
+                    <td>{row.reviewEvidence.deletionStatus}</td>
                     <StageCell value={row.stages.complete} />
                     <td>{row.errors.length === 0 ? "—" : row.errors.length}</td>
+                    <td>
+                      <label className="owner-trial-select-label">
+                        <span className="sr-only">Owner review disposition for {row.record.label}</span>
+                        <select
+                          value={row.record.ownerReviewDisposition}
+                          onChange={(event) =>
+                            updateRecord(row.record.inviteId, { ownerReviewDisposition: event.currentTarget.value as OwnerBetaReviewDisposition })
+                          }
+                        >
+                          <option value="unreviewed">Unreviewed</option>
+                          <option value="good_match">Good match</option>
+                          <option value="needs_matcher_adjustment">Needs matcher adjustment</option>
+                          <option value="catalog_issue">Catalog issue</option>
+                          <option value="scan_issue">Scan issue</option>
+                          <option value="unclear">Unclear</option>
+                          <option value="exclude_from_learning">Exclude from learning</option>
+                        </select>
+                      </label>
+                    </td>
                     <td>
                       <label className="owner-trial-select-label">
                         <span className="sr-only">Owner intervention for {row.record.label}</span>
@@ -280,6 +321,33 @@ export function OwnerTrialCommandCenter() {
             <p>
               {selected.record.label} is in state <strong>{selected.session?.state ?? "NOT_OPENED"}</strong>. Raw face images and raw videos are not shown here.
             </p>
+            <div className="owner-trial-review-grid">
+              <BetaReviewPanel row={selected} />
+            </div>
+            <label>
+              <span>Owner review disposition</span>
+              <select
+                value={selected.record.ownerReviewDisposition}
+                onChange={(event) => updateRecord(selected.record.inviteId, { ownerReviewDisposition: event.currentTarget.value as OwnerBetaReviewDisposition })}
+              >
+                <option value="unreviewed">Unreviewed</option>
+                <option value="good_match">Good match</option>
+                <option value="needs_matcher_adjustment">Needs matcher adjustment</option>
+                <option value="catalog_issue">Catalog issue</option>
+                <option value="scan_issue">Scan issue</option>
+                <option value="unclear">Unclear</option>
+                <option value="exclude_from_learning">Exclude from learning</option>
+              </select>
+            </label>
+            <label>
+              <span>Owner review notes</span>
+              <textarea
+                value={selected.record.ownerReviewNotes ?? ""}
+                rows={3}
+                onChange={(event) => updateRecord(selected.record.inviteId, { ownerReviewNotes: event.currentTarget.value })}
+                placeholder="What should improve before the next tester?"
+              />
+            </label>
             <label>
               <span>Owner intervention notes</span>
               <textarea
@@ -306,6 +374,105 @@ export function OwnerTrialCommandCenter() {
   );
 }
 
+function BetaReviewPanel({ row }: { row: OwnerBuddyTrialProgress }) {
+  const evidence = row.reviewEvidence;
+  return (
+    <>
+      <article>
+        <h3>Tester</h3>
+        <dl>
+          <DetailTerm label="Tester ID" value={evidence.pseudonymousTesterID} />
+          <DetailTerm label="Evidence status" value={evidence.evidence.status} />
+          <DetailTerm label="Catalog version" value={evidence.evidence.catalogVersionID ?? "Not available"} />
+          <DetailTerm label="Recommendation version" value={evidence.evidence.recommendationVersion ?? "Not available"} />
+          <DetailTerm label="Deletion" value={evidence.deletionStatus} />
+        </dl>
+      </article>
+      <article>
+        <h3>Capture</h3>
+        <dl>
+          <DetailTerm label="Scan started" value={evidence.captureQuality.scanStarted ? "Yes" : "No"} />
+          <DetailTerm label="Scan completed" value={evidence.captureQuality.scanCompleted ? "Yes" : "No"} />
+          <DetailTerm label="Quality score" value={evidence.captureQuality.overallQualityScore ?? "Not recorded"} />
+          <DetailTerm label="RGB browser scan" value={evidence.captureQuality.browserRgbOnly === null ? "Unknown" : evidence.captureQuality.browserRgbOnly ? "Yes" : "No"} />
+        </dl>
+        {evidence.captureQuality.qualityWarnings.length ? (
+          <ul>
+            {evidence.captureQuality.qualityWarnings.map((warning) => (
+              <li key={warning}>{warning}</li>
+            ))}
+          </ul>
+        ) : null}
+      </article>
+      <article>
+        <h3>Top three</h3>
+        {evidence.topThreeRecommendations.length ? (
+          <ol>
+            {evidence.topThreeRecommendations.map((recommendation) => (
+              <li key={recommendation.catalogItemID}>
+                <strong>#{recommendation.rank}</strong> {recommendation.label} <span>{recommendation.score}/100</span>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <p>No recommendation list is stored for this mode yet.</p>
+        )}
+        <p>Selected: {evidence.selectedRecommendation.rank ? `#${evidence.selectedRecommendation.rank} ${evidence.selectedRecommendation.label ?? ""}` : "Not submitted"}</p>
+      </article>
+      <article>
+        <h3>CF27 output images</h3>
+        {evidence.uploadedCf27OutputImages.length ? (
+          <ul className="owner-trial-image-list">
+            {evidence.uploadedCf27OutputImages.map((image) => (
+              <li key={image.photoID}>
+                <strong>{image.label}</strong>
+                <span>{image.width}x{image.height}, {Math.round(image.sizeBytes / 1024)} KB</span>
+                <code>{image.storageBucket}/{image.objectPath}</code>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No CF27 result image has been submitted.</p>
+        )}
+      </article>
+      <article>
+        <h3>Tester feedback</h3>
+        <dl>
+          <DetailTerm label="Rating" value={evidence.resemblanceRating ? `${evidence.resemblanceRating}/5` : "Not submitted"} />
+          <DetailTerm label="Most wrong" value={evidence.testerMismatch ?? "Not submitted"} />
+          <DetailTerm label="Notes" value={evidence.testerNotes ?? "None"} />
+          <DetailTerm label="Changed settings" value={evidence.changedSettingsManually === null ? "Not answered" : evidence.changedSettingsManually ? "Yes" : "No"} />
+          <DetailTerm label="Manual changes" value={evidence.manualSettingChangeSummary ?? "None"} />
+        </dl>
+      </article>
+      <article>
+        <h3>Research signals</h3>
+        {evidence.experimentalRefinementSignals.length ? (
+          <ul>
+            {evidence.experimentalRefinementSignals.map((signal) => (
+              <li key={`${signal.modelVersion}-${signal.status}`}>
+                <strong>{signal.status}</strong>
+                <span>{signal.summary}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No experimental refinement signal is attached.</p>
+        )}
+      </article>
+    </>
+  );
+}
+
+function DetailTerm({ label, value }: { label: string; value: string | number }) {
+  return (
+    <>
+      <dt>{label}</dt>
+      <dd>{value}</dd>
+    </>
+  );
+}
+
 function Metric({ label, value }: { label: string; value: number | string }) {
   return (
     <article>
@@ -323,13 +490,4 @@ function StageCell({ value }: { value: boolean }) {
       </span>
     </td>
   );
-}
-
-function formatMetric(value: number | null) {
-  return value === null ? "—" : value;
-}
-
-function formatSignedMetric(value: number | null) {
-  if (value === null) return "—";
-  return value > 0 ? `+${value}` : value;
 }

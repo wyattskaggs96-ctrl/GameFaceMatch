@@ -3,6 +3,7 @@ import {
   applyBuddyTrialConsent,
   attachBuddyTrialFinalOutcome,
   attachBuddyTrialLearningRecord,
+  attachBuddyTrialResultPhotoFeedback,
   attachBuddyTrialVideoOneReview,
   attachBuddyTrialVideoTwoReview,
   createBuddyTrialBuildGuideProgress,
@@ -14,6 +15,12 @@ import {
   type BuddyTrialFinalOutcome
 } from "@/lib/buddy-trial/buddy-trial-session";
 import { createBuddyTrialLearningRecord } from "@/lib/buddy-trial/buddy-trial-learning";
+import {
+  createBuddyTrialResultPhotoRecord,
+  createEmptyBuddyTrialResultPhotoFeedback,
+  submitBuddyTrialResultFeedback,
+  upsertBuddyTrialResultPhoto
+} from "@/lib/buddy-trial/buddy-trial-result-photo-feedback";
 import { createCharacterVideoReviewResult, createPersistableCharacterVideoReview } from "@/lib/buddy-trial/character-video-review";
 import {
   createOwnerBuddyTrialExport,
@@ -22,7 +29,8 @@ import {
   createOwnerBuddyTrialRecord,
   createOwnerBuddyTrialTextMessage,
   summarizeOwnerBuddyTrialProgress,
-  updateOwnerBuddyTrialRecord
+  updateOwnerBuddyTrialRecord,
+  validateOwnerBuddyTrialExport
 } from "@/lib/buddy-trial/buddy-trial-owner-dashboard";
 import { createOwnerReviewDemoRecommendationResult } from "@/lib/owner-review-demo/owner-review-demo";
 
@@ -88,20 +96,47 @@ describe("owner Buddy Trial command center model", () => {
       complete: true
     });
     expect(progress.finalScore).toBe(91);
-    expect(progress.resemblanceRating).toBe(8);
+    expect(progress.resemblanceRating).toBe(4);
+    expect(progress.reviewEvidence).toMatchObject({
+      selectedRecommendation: { rank: 1, label: "Review Demo Face Alpha" },
+      evidence: { status: "OWNER_REVIEW_DEMO_TEST_DATA" },
+      resemblanceRating: 4,
+      testerMismatch: "Jaw is still a little wide.",
+      deletionStatus: "active"
+    });
+    expect(progress.reviewEvidence.pseudonymousTesterID).toMatch(/^tester_001_/);
+    expect(progress.reviewEvidence.topThreeRecommendations).toHaveLength(3);
+    expect(progress.reviewEvidence.uploadedCf27OutputImages).toHaveLength(1);
+    expect(progress.reviewEvidence.uploadedCf27OutputImages[0]).toMatchObject({
+      viewID: "front",
+      storageBucket: "private-beta-game-results",
+      privateAccessOnly: true,
+      rawFaceScanMedia: false
+    });
     expect(progress.sourceLabel).toBe("OWNER_REVIEW_DEMO");
     expect(summary).toEqual({
+      invitesIssued: 1,
       trialsStarted: 1,
+      scanStarted: 1,
+      scanFailures: 0,
       scansCompleted: 1,
+      recommendationsGenerated: 1,
       buildsCompleted: 1,
-      videoOneCompletion: 1,
+      gamePhotoUploaded: 1,
+      selectedRankCounts: { 1: 1, 2: 0, 3: 0 },
+      topOneSelectionRate: 100,
+      topThreeUsefulnessProxy: 100,
+      gamePhotoCompletionRate: 100,
       refinementCompletion: 1,
       trialsCompleted: 1,
       averageInitialScore: 82,
       averageFinalScore: 91,
       averageImprovement: 9,
-      averageResemblanceRating: 8,
-      unassistedCompletionRate: 100
+      averageResemblanceRating: 4,
+      unassistedCompletionRate: 100,
+      deletedTrials: 0,
+      runtimeErrorCount: 0,
+      majorFailureCategories: []
     });
   });
 
@@ -123,10 +158,42 @@ describe("owner Buddy Trial command center model", () => {
     expect(exported.records[0]).toMatchObject({
       mode: "owner_review_demo",
       sessionState: "COMPLETE",
-      rawMediaIncluded: false
+      rawMediaIncluded: false,
+      reviewEvidence: {
+        selectedRecommendation: { rank: 1 },
+        uploadedCf27OutputImages: [{ privateAccessOnly: true, rawFaceScanMedia: false }]
+      }
     });
-    expect(JSON.stringify(exported)).not.toMatch(/blob:|data:image|data:video|base64|objectUrl/i);
+    expect(validateOwnerBuddyTrialExport(exported)).toEqual({ ok: true, errors: [] });
+    expect(exported.privacy).toEqual({
+      rawFaceMediaIncluded: false,
+      rawImageBytesIncluded: false,
+      browserObjectURLsIncluded: false,
+      exportPurpose: "owner_beta_research_review"
+    });
+    expect(JSON.stringify(exported)).not.toMatch(/blob:|data:image|data:video|base64/i);
     expect(exported.summary.averageFinalScore).toBe(91);
+  });
+
+  it("marks deleted sessions without exposing deleted photo metadata as active evidence", () => {
+    const record = updateOwnerBuddyTrialRecord(
+      createOwnerBuddyTrialRecord({
+        existingRecords: [],
+        ownerReviewDemoEnabled: true,
+        randomID: "01234567-89ab-cdef-0123-456789abcdef",
+        now
+      }),
+      { status: "deleted", ownerReviewDisposition: "exclude_from_learning", ownerReviewNotes: "Tester requested deletion." },
+      now
+    );
+    const progress = createOwnerBuddyTrialProgress({ record, session: null, origin: "http://localhost:3000" });
+    const exported = createOwnerBuddyTrialExport([progress], now);
+
+    expect(progress.reviewEvidence.deletionStatus).toBe("deleted");
+    expect(progress.reviewEvidence.uploadedCf27OutputImages).toHaveLength(0);
+    expect(progress.reviewEvidence.ownerReviewDisposition).toBe("exclude_from_learning");
+    expect(exported.summary.deletedTrials).toBe(1);
+    expect(validateOwnerBuddyTrialExport(exported)).toEqual({ ok: true, errors: [] });
   });
 });
 
@@ -154,6 +221,7 @@ function completedDemoSession(inviteId: string) {
     viewMode: "step"
   });
   session = transitionBuddyTrialSession(session, "VIDEO_1_REQUIRED", now, "Build guide completed.");
+  session = attachBuddyTrialResultPhotoFeedback(session, submittedPhotoFeedback(inviteId, session.sessionId));
   session = attachBuddyTrialVideoOneReview(session, videoReview(1));
   session = transitionBuddyTrialSession(session, "VIDEO_1_PROCESSING", now, "Video #1 processed.");
   session = transitionBuddyTrialSession(session, "REFINEMENT_READY", now, "Refinement ready.");
@@ -178,6 +246,54 @@ function completedDemoSession(inviteId: string) {
   });
   session = attachBuddyTrialLearningRecord(session, learningRecord, now);
   return transitionBuddyTrialSession(session, "COMPLETE", now, "Trial completed.");
+}
+
+function submittedPhotoFeedback(inviteId: string, sessionId: string) {
+  const base = createEmptyBuddyTrialResultPhotoFeedback({
+    trialID: "btp_owner_dashboard",
+    inviteID: inviteId,
+    sessionID: sessionId,
+    source: "owner_review_demo",
+    recommendationBinding: {
+      recommendationVersion: "owner-review-demo-matching-v1",
+      catalogVersionID: "owner-review-demo-catalog-v1",
+      evidenceVersionID: "owner-review-demo-evidence-v1",
+      selectedRecommendationRank: 1,
+      selectedRecommendationLabel: "Review Demo Face Alpha"
+    }
+  });
+  const withPhoto = upsertBuddyTrialResultPhoto(
+    base,
+    createBuddyTrialResultPhotoRecord({
+      trialID: "btp_owner_dashboard",
+      inviteID: inviteId,
+      viewID: "front",
+      originalFilename: "cf27-front.png",
+      mimeType: "image/png",
+      sizeBytes: 1_200_000,
+      width: 900,
+      height: 1100,
+      sha256: "a".repeat(64),
+      uploadedAt: now.toISOString()
+    }),
+    now
+  );
+  return submitBuddyTrialResultFeedback(
+    withPhoto,
+    {
+      selectedRecommendationRank: 1,
+      resemblanceRating: 4,
+      otherTopThreeBetter: "no",
+      mostWrong: "Jaw is still a little wide.",
+      notes: "Hair felt close.",
+      changedSettingsManually: false,
+      manualSettingChangeSummary: null,
+      productImprovementOptIn: true,
+      productImprovementConsentVersion: "consent-v1",
+      submittedAt: null
+    },
+    now
+  );
 }
 
 function videoReview(iteration: 1 | 2) {

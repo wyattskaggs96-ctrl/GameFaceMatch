@@ -1,6 +1,6 @@
 # Next Action
 
-`OWNER ACTION | Select/connect GameFace Match Supabase project for Q07 beta persistence`
+`OWNER ACTION | Select/connect GameFace Match Supabase project for Q07 beta persistence and owner review`
 
 Repository:
 `/Users/skaggssystems/Developer/GameFaceMatch`
@@ -27,7 +27,9 @@ Q07 changes the immediate target from paid-public production to an unpaid, invit
 
 ## Immediate Codex Action
 
-Prompt 140 has local code/schema contracts for beta persistence and private game-result storage, and Prompt 141 adds the local customer-facing CF27 created-player photo/feedback loop. Live Supabase activation is still on hold because the connected Supabase account inspected by Codex did not list an approved GameFace Match project.
+Prompt 140 has local code/schema contracts for beta persistence and private game-result storage, Prompt 141 adds the local customer-facing CF27 created-player photo/feedback loop, and Prompt 142 extends `/owner/trials` into a protected owner beta review command center with aggregate metrics, per-session evidence, owner review disposition, and privacy-safe research export.
+
+Live Supabase activation is still on hold because the connected Supabase account inspected by Codex did not list an approved GameFace Match project.
 
 Wyatt should provide or confirm:
 
@@ -38,19 +40,17 @@ Wyatt should provide or confirm:
 
 After that hold clears, Codex can run live migration/storage validation and deployed beta smoke checks.
 
-The next implementation milestone should still implement or finish the actual ten-user beta research recommendation path against the `betaResearch` tier:
+The next implementation milestone should activate and smoke-test the durable remote beta path once the owner project/credentials hold clears:
 
-- keep production recommendations fail-closed;
-- label beta results as experimental/private-beta output;
-- use only documented CF27 settings from existing evidence/support records;
-- omit unsupported categories rather than inventing values;
-- preserve the Prompt 141 CF27 result-photo and feedback loop;
-- preserve raw face media as local/browser-only by default;
-- keep the beta cohort capped at 10 invites.
+- connect the approved Supabase project and private `private-beta-game-results` storage bucket;
+- configure server-only Vercel environment values without committing secrets;
+- verify deployed invite/session persistence, result-photo upload metadata, owner review dashboard aggregation, export, and deletion;
+- keep raw face media local/browser-only by default;
+- keep production recommendations fail-closed and beta research results clearly labeled.
 
 Recommended next Codex label after owner connection hold:
 
-`GFM | Q07 | PROMPT 142 | PHASE 05 | Activate live beta persistence and deployed photo-feedback smoke`
+`GFM | Q07 | PROMPT 143 | PHASE 06 | Activate live beta persistence and owner review smoke`
 
 ## Deferred Human-Verifier Action
 

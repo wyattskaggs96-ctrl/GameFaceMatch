@@ -4298,6 +4298,7 @@ p {
 .owner-trial-detail,
 .owner-trial-table-wrap,
 .owner-trial-toolbar,
+.owner-trial-failures,
 .owner-trial-mode-banner,
 .owner-trial-copy-status {
   border: 1px solid rgba(148, 163, 184, 0.2);
@@ -4329,7 +4330,9 @@ p {
 .owner-trial-hero h1,
 .owner-trial-created-card h2,
 .owner-trial-table-wrap h2,
-.owner-trial-detail h2 {
+.owner-trial-detail h2,
+.owner-trial-failures h2,
+.owner-trial-review-grid h3 {
   margin: 0;
   color: #f8fafc;
   letter-spacing: 0;
@@ -4435,6 +4438,27 @@ p {
   padding: 12px;
 }
 
+.owner-trial-failures {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.owner-trial-failures div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.owner-trial-failures span {
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(127, 29, 29, 0.24);
+  color: #fecaca;
+  font-size: 0.82rem;
+  font-weight: 850;
+}
+
 .owner-trial-table-wrap {
   display: grid;
   gap: 12px;
@@ -4455,7 +4479,7 @@ p {
 
 .owner-trial-table {
   width: 100%;
-  min-width: 1320px;
+  min-width: 1380px;
   border-collapse: collapse;
   color: #e2e8f0;
 }
@@ -4528,6 +4552,7 @@ p {
 }
 
 .owner-trial-select-label select,
+.owner-trial-detail select,
 .owner-trial-detail textarea {
   width: 100%;
   min-height: 40px;
@@ -4543,6 +4568,67 @@ p {
   display: grid;
   gap: 14px;
   padding: 18px;
+}
+
+.owner-trial-review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.owner-trial-review-grid article {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 8px;
+  background: rgba(2, 6, 23, 0.42);
+}
+
+.owner-trial-review-grid dl {
+  display: grid;
+  grid-template-columns: minmax(92px, 0.45fr) minmax(0, 1fr);
+  gap: 6px 10px;
+  margin: 0;
+}
+
+.owner-trial-review-grid dt {
+  color: #93c5fd;
+  font-size: 0.76rem;
+  font-weight: 850;
+}
+
+.owner-trial-review-grid dd {
+  min-width: 0;
+  margin: 0;
+  color: #e2e8f0;
+  overflow-wrap: anywhere;
+}
+
+.owner-trial-review-grid ol,
+.owner-trial-review-grid ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: #cbd5e1;
+}
+
+.owner-trial-review-grid li span {
+  display: block;
+  color: #93c5fd;
+  font-size: 0.82rem;
+}
+
+.owner-trial-image-list code {
+  display: block;
+  max-width: 100%;
+  margin-top: 4px;
+  color: #bae6fd;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .owner-trial-detail label {
@@ -4580,6 +4666,14 @@ p {
 
   .owner-trial-summary {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .owner-trial-review-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .owner-trial-review-grid dl {
+    grid-template-columns: 1fr;
   }
 
   .owner-trial-history p {

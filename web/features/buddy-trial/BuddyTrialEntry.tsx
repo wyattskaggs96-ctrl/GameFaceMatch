@@ -8,6 +8,7 @@ import {
   attachBuddyTrialVideoTwoReview,
   attachBuddyTrialFinalOutcome,
   attachBuddyTrialLearningRecord,
+  attachBuddyTrialResultPhotoFeedback,
   applyBuddyTrialConsent,
   BUDDY_TRIAL_STATES,
   canAdvanceBuddyTrialToRecommendation,
@@ -31,6 +32,22 @@ import {
   type BuddyTrialSession
 } from "@/lib/buddy-trial/buddy-trial-session";
 import { createBuddyTrialLearningRecord } from "@/lib/buddy-trial/buddy-trial-learning";
+import { createPrivateBetaTrialPersistenceRecord } from "@/lib/buddy-trial/buddy-trial-persistence";
+import {
+  BUDDY_TRIAL_RESULT_PHOTO_ACCEPTED_MIME_TYPES,
+  createBuddyTrialResultPhotoRecord,
+  createEmptyBuddyTrialResultPhotoFeedback,
+  getBuddyTrialResultPhotoViewLabel,
+  removeBuddyTrialResultPhoto,
+  submitBuddyTrialResultFeedback,
+  upsertBuddyTrialResultPhoto,
+  validateBuddyTrialResultPhotoFeedback,
+  type BuddyTrialOtherRecommendationAnswer,
+  type BuddyTrialResultFeedback,
+  type BuddyTrialResultPhotoFeedback,
+  type BuddyTrialResultPhotoRecord,
+  type BuddyTrialResultPhotoViewID
+} from "@/lib/buddy-trial/buddy-trial-result-photo-feedback";
 import {
   CHARACTER_VIDEO_ACCEPTED_MIME_TYPES,
   confirmManualCharacterVideoSelection,
@@ -47,6 +64,7 @@ import {
   createOwnerReviewDemoRecommendationResult,
   isOwnerReviewDemoEnabled,
   OWNER_REVIEW_DEMO_BANNER_COPY,
+  OWNER_REVIEW_DEMO_MATCHING_CONFIG_VERSION,
   type OwnerReviewDemoBuildMatchReview,
   type OwnerReviewDemoBeforeAfterResult,
   type OwnerReviewDemoBuildStep,
@@ -68,7 +86,7 @@ const buddyTrialStageLabels: Record<BuddyTrialState, { label: string; action: st
   SCAN_COMPLETE: { label: "Scan complete", action: "Get your GameFace settings." },
   RECOMMENDATION_READY: { label: "Settings ready", action: "Review your recommendation and build it in the game." },
   BUILD_IN_PROGRESS: { label: "Build guide", action: "Enter one setting at a time on your console." },
-  VIDEO_1_REQUIRED: { label: "Show the first build", action: "Record or upload a short video of your player." },
+  VIDEO_1_REQUIRED: { label: "Show the first build", action: "Upload the College Football 27 player photos you captured." },
   VIDEO_1_PROCESSING: { label: "First video ready", action: "Review the comparison and refinement." },
   REFINEMENT_READY: { label: "Refinement ready", action: "Apply the suggested changes." },
   VIDEO_2_REQUIRED: { label: "Show the updated build", action: "Record or upload the updated player." },
@@ -285,6 +303,17 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     );
   };
 
+  const saveResultPhotoFeedbackDraft = (feedback: BuddyTrialResultPhotoFeedback) => {
+    const activeSession = ensureSession();
+    persistSession(attachBuddyTrialResultPhotoFeedback(activeSession, feedback));
+  };
+
+  const completeTrialWithPhotoFeedback = (feedback: BuddyTrialResultPhotoFeedback) => {
+    const activeSession = ensureSession();
+    const withFeedback = attachBuddyTrialResultPhotoFeedback(activeSession, feedback);
+    persistSession(transitionBuddyTrialSession(withFeedback, "COMPLETE", new Date(), "Buddy Trial CF27 result photos and feedback submitted."));
+  };
+
   const startRefinementGuide = (stepCount: number) => {
     const activeSession = ensureSession();
     const withProgress = updateBuddyTrialRefinementGuideProgress(activeSession, {
@@ -343,6 +372,9 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
       onCompleteRefinementGuide={completeRefinementGuide}
       onSaveVideoTwoReview={saveVideoTwoReview}
       onRestartVideoTwo={() => moveTrialTo("VIDEO_2_REQUIRED", "Owner Review Demo second character video retry requested.")}
+      onSaveResultPhotoFeedback={saveResultPhotoFeedbackDraft}
+      onCompletePhotoFeedback={completeTrialWithPhotoFeedback}
+      onDeleteTrialData={deleteTrialData}
       onComplete={completeTrialWithOutcome}
     />
   ) : null;
@@ -391,6 +423,24 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
   }
 
   if (session?.state === "COMPLETE") {
+    if (ownerReviewDemo && session.resultPhotoFeedback?.feedback.submittedAt) {
+      return (
+        <main className="buddy-trial-page">
+          <section className="buddy-trial-shell" aria-labelledby="buddy-trial-complete-title">
+            <div className="buddy-trial-brand" aria-label="GameFace Match">
+              <span className="buddy-trial-mark" aria-hidden="true">
+                G
+              </span>
+              <span>GameFace Match</span>
+            </div>
+            <p className="buddy-trial-kicker">Private Buddy Trial</p>
+            <h1 id="buddy-trial-complete-title">GameFace feedback sent.</h1>
+            <BuddyTrialResultPhotoCompletionSummary feedback={session.resultPhotoFeedback} />
+            <p className="buddy-trial-disclaimer">{INDEPENDENT_APP_DISCLAIMER}</p>
+          </section>
+        </main>
+      );
+    }
     if (ownerReviewDemo && session.finalOutcome) {
       return (
         <main className="buddy-trial-page">
@@ -524,6 +574,9 @@ function OwnerReviewDemoPanel({
   onCompleteRefinementGuide,
   onSaveVideoTwoReview,
   onRestartVideoTwo,
+  onSaveResultPhotoFeedback,
+  onCompletePhotoFeedback,
+  onDeleteTrialData,
   onComplete
 }: {
   session: BuddyTrialSession | null;
@@ -540,6 +593,9 @@ function OwnerReviewDemoPanel({
   onCompleteRefinementGuide: () => void;
   onSaveVideoTwoReview: (review: CharacterVideoReviewResult) => void;
   onRestartVideoTwo: () => void;
+  onSaveResultPhotoFeedback: (feedback: BuddyTrialResultPhotoFeedback) => void;
+  onCompletePhotoFeedback: (feedback: BuddyTrialResultPhotoFeedback) => void;
+  onDeleteTrialData: () => void;
   onComplete: (outcome: BuddyTrialFinalOutcome) => void;
 }) {
   const state = session?.state ?? "INVITED";
@@ -560,6 +616,8 @@ function OwnerReviewDemoPanel({
   const [resemblanceRating, setResemblanceRating] = useState<number>(session?.finalOutcome?.resemblanceRating ?? 0);
   const [stillLooksOff, setStillLooksOff] = useState(session?.finalOutcome?.stillLooksOff ?? "");
   const [productImprovementOptIn, setProductImprovementOptIn] = useState(Boolean(session?.finalOutcome?.productImprovementOptIn));
+  const [photoPreviewUrls, setPhotoPreviewUrls] = useState<Partial<Record<BuddyTrialResultPhotoViewID, string>>>({});
+  const photoPreviewUrlsRef = useRef(photoPreviewUrls);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const recordingChunksRef = useRef<Blob[]>([]);
   const recordingStreamRef = useRef<MediaStream | null>(null);
@@ -573,9 +631,16 @@ function OwnerReviewDemoPanel({
   }, [videoTwoReviewState]);
 
   useEffect(() => {
+    photoPreviewUrlsRef.current = photoPreviewUrls;
+  }, [photoPreviewUrls]);
+
+  useEffect(() => {
     return () => {
       revokeCharacterVideoUrls(videoReviewStateRef.current);
       revokeCharacterVideoUrls(videoTwoReviewStateRef.current);
+      for (const url of Object.values(photoPreviewUrlsRef.current)) {
+        if (url) URL.revokeObjectURL(url);
+      }
       stopCharacterRecording(recordingStreamRef.current, mediaRecorderRef.current);
     };
   }, []);
@@ -904,32 +969,32 @@ function OwnerReviewDemoPanel({
 
   if (state === "VIDEO_1_REQUIRED") {
     return (
-      <section className="buddy-trial-demo-card buddy-trial-video-review" aria-labelledby="owner-review-demo-video-one">
+      <section className="buddy-trial-demo-card buddy-trial-video-review" aria-labelledby="owner-review-demo-photo-feedback">
         <p className="buddy-trial-step-label">Build guide complete</p>
-        <h2 id="owner-review-demo-video-one">LET&apos;S SEE HOW WE DID</h2>
-        <ol className="buddy-trial-demo-list">
-          <li>Open your created player.</li>
-          <li>Keep helmet/accessories off the face.</li>
-          <li>Start facing forward.</li>
-          <li>Slowly rotate left.</li>
-          <li>Return to center.</li>
-          <li>Slowly rotate right.</li>
-          <li>Return to center.</li>
-        </ol>
-        <CharacterVideoReviewPanel
-          state={videoReviewState}
-          selectedFrameIDs={selectedFrameIDs}
-          onSelectFrame={(viewID, frameID) => setSelectedFrameIDs((current) => ({ ...current, [viewID]: frameID }))}
-          onUpload={(file) => void processCharacterVideoFile(file, "upload", 1)}
-          onRecord={() => {
-            activeVideoIterationRef.current = 1;
-            void startCharacterRecording();
+        <h2 id="owner-review-demo-photo-feedback">I built it in College Football 27</h2>
+        <BuddyTrialResultPhotoFeedbackPanel
+          session={session}
+          result={result}
+          photoPreviewUrls={photoPreviewUrls}
+          onPreviewUrl={(viewID, url) => {
+            setPhotoPreviewUrls((current) => {
+              const previous = current[viewID];
+              if (previous) URL.revokeObjectURL(previous);
+              return { ...current, [viewID]: url };
+            });
           }}
-          onStopRecording={stopCurrentCharacterRecording}
-          onConfirmFrames={confirmSelectedCharacterFrames}
-          onRetry={retryCharacterVideo}
-          onContinue={onDeliverRefinement}
-          continueLabel="Continue to refinement"
+          onDeletePreviewUrl={(viewID) => {
+            setPhotoPreviewUrls((current) => {
+              const previous = current[viewID];
+              if (previous) URL.revokeObjectURL(previous);
+              const next = { ...current };
+              delete next[viewID];
+              return next;
+            });
+          }}
+          onSave={onSaveResultPhotoFeedback}
+          onSubmit={onCompletePhotoFeedback}
+          onDeleteTrialData={onDeleteTrialData}
         />
       </section>
     );
@@ -1141,6 +1206,360 @@ function OwnerReviewDemoStepSummary({
       ))}
     </div>
   );
+}
+
+function BuddyTrialResultPhotoFeedbackPanel({
+  session,
+  result,
+  photoPreviewUrls,
+  onPreviewUrl,
+  onDeletePreviewUrl,
+  onSave,
+  onSubmit,
+  onDeleteTrialData
+}: {
+  session: BuddyTrialSession | null;
+  result: OwnerReviewDemoRecommendationResult;
+  photoPreviewUrls: Partial<Record<BuddyTrialResultPhotoViewID, string>>;
+  onPreviewUrl: (viewID: BuddyTrialResultPhotoViewID, url: string) => void;
+  onDeletePreviewUrl: (viewID: BuddyTrialResultPhotoViewID) => void;
+  onSave: (feedback: BuddyTrialResultPhotoFeedback) => void;
+  onSubmit: (feedback: BuddyTrialResultPhotoFeedback) => void;
+  onDeleteTrialData: () => void;
+}) {
+  const initialFeedback = useMemo(() => {
+    if (!session) return null;
+    return session.resultPhotoFeedback ?? createInitialResultPhotoFeedbackForSession(session, result);
+  }, [session, result]);
+  const [photoFeedback, setPhotoFeedback] = useState<BuddyTrialResultPhotoFeedback | null>(initialFeedback);
+  const [feedbackForm, setFeedbackForm] = useState<BuddyTrialResultFeedback>(() => initialFeedback?.feedback ?? createBlankPhotoFeedback());
+  const [fileErrors, setFileErrors] = useState<Partial<Record<BuddyTrialResultPhotoViewID, string>>>({});
+  const [processingView, setProcessingView] = useState<BuddyTrialResultPhotoViewID | null>(null);
+  const validation = photoFeedback ? validateBuddyTrialResultPhotoFeedback({ ...photoFeedback, feedback: feedbackForm }) : { ok: false, errors: ["Trial session is not ready."] };
+  const activePhotos = photoFeedback?.photos.filter((photo) => photo.uploadStatus !== "deleted") ?? [];
+  const frontPhotoReady = activePhotos.some((photo) => photo.viewID === "front" && photo.validationStatus === "usable");
+
+  useEffect(() => {
+    if (initialFeedback) {
+      setPhotoFeedback(initialFeedback);
+      setFeedbackForm(initialFeedback.feedback);
+    }
+  }, [initialFeedback]);
+
+  async function handlePhotoFile(viewID: BuddyTrialResultPhotoViewID, file: File) {
+    if (!session || !photoFeedback) return;
+    setProcessingView(viewID);
+    setFileErrors((current) => ({ ...current, [viewID]: "" }));
+    const preliminaryErrors = validateResultPhotoFile(file);
+    if (preliminaryErrors.length) {
+      setFileErrors((current) => ({ ...current, [viewID]: preliminaryErrors.join(" ") }));
+      setProcessingView(null);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(file);
+    try {
+      const dimensions = await readImageDimensions(objectUrl);
+      const sha256 = await sha256Hex(await file.arrayBuffer());
+      const record = createBuddyTrialResultPhotoRecord({
+        trialID: photoFeedback.trialID,
+        inviteID: session.inviteId,
+        viewID,
+        originalFilename: file.name,
+        mimeType: file.type,
+        sizeBytes: file.size,
+        width: dimensions.width,
+        height: dimensions.height,
+        sha256,
+        uploadedAt: new Date().toISOString()
+      });
+      if (record.validationStatus === "blocked") {
+        URL.revokeObjectURL(objectUrl);
+        setFileErrors((current) => ({ ...current, [viewID]: record.validationErrors.join(" ") }));
+        setProcessingView(null);
+        return;
+      }
+      onPreviewUrl(viewID, objectUrl);
+      const next = upsertBuddyTrialResultPhoto(photoFeedback, record);
+      setPhotoFeedback(next);
+      onSave(next);
+    } catch {
+      URL.revokeObjectURL(objectUrl);
+      setFileErrors((current) => ({ ...current, [viewID]: "This image could not be decoded. Try a JPEG, PNG, or WebP screenshot/photo." }));
+    } finally {
+      setProcessingView(null);
+    }
+  }
+
+  function deletePhoto(viewID: BuddyTrialResultPhotoViewID) {
+    if (!photoFeedback) return;
+    onDeletePreviewUrl(viewID);
+    const next = removeBuddyTrialResultPhoto(photoFeedback, viewID);
+    setPhotoFeedback(next);
+    onSave(next);
+  }
+
+  function updateFeedback(patch: Partial<BuddyTrialResultFeedback>) {
+    const next = { ...feedbackForm, ...patch };
+    setFeedbackForm(next);
+    if (photoFeedback) {
+      const draft = { ...photoFeedback, feedback: next };
+      setPhotoFeedback(draft);
+      onSave(draft);
+    }
+  }
+
+  function submitFeedback() {
+    if (!photoFeedback) return;
+    const submitted = submitBuddyTrialResultFeedback({ ...photoFeedback, feedback: feedbackForm }, feedbackForm);
+    setPhotoFeedback(submitted);
+    onSubmit(submitted);
+  }
+
+  if (!session || !photoFeedback) {
+    return <p className="buddy-trial-video-error">This trial session is not ready for photo feedback. Refresh the private link and try again.</p>;
+  }
+
+  return (
+    <div className="buddy-trial-photo-feedback-panel">
+      <p>Take a photo of the player you built on your TV/monitor, or upload a direct game screenshot. Use the appearance screen if you can.</p>
+      <ol className="buddy-trial-demo-list">
+        <li>No helmet or face-covering accessories.</li>
+        <li>Keep the created player&apos;s face visible and centered.</li>
+        <li>Avoid severe glare or blur.</li>
+        <li>Front view is required. Left and right three-quarter views are optional.</li>
+      </ol>
+
+      <div className="buddy-trial-photo-slot-grid">
+        {(["front", "leftThreeQuarter", "rightThreeQuarter"] as BuddyTrialResultPhotoViewID[]).map((viewID) => {
+          const photo = activePhotos.find((item) => item.viewID === viewID) ?? null;
+          const preview = photoPreviewUrls[viewID] ?? null;
+          const required = viewID === "front";
+          return (
+            <article key={viewID} className="buddy-trial-photo-slot">
+              <div>
+                <span>{required ? "Required" : "Optional"}</span>
+                <strong>{getBuddyTrialResultPhotoViewLabel(viewID)}</strong>
+              </div>
+              {preview ? <img src={preview} alt={`${getBuddyTrialResultPhotoViewLabel(viewID)} result preview`} /> : <div className="buddy-trial-photo-placeholder">No image selected</div>}
+              {photo ? (
+                <small>
+                  {photo.originalFilename} · {photo.width}x{photo.height} · private beta storage path ready
+                </small>
+              ) : null}
+              {fileErrors[viewID] ? <p className="buddy-trial-video-error">{fileErrors[viewID]}</p> : null}
+              <label className="buddy-trial-file-button">
+                <span>{processingView === viewID ? "Checking image..." : photo ? "Replace image" : "Upload image"}</span>
+                <input
+                  type="file"
+                  accept={BUDDY_TRIAL_RESULT_PHOTO_ACCEPTED_MIME_TYPES.join(",")}
+                  disabled={processingView !== null}
+                  onChange={(event) => {
+                    const file = event.currentTarget.files?.[0];
+                    if (file) void handlePhotoFile(viewID, file);
+                    event.currentTarget.value = "";
+                  }}
+                />
+              </label>
+              {photo ? (
+                <button className="buddy-trial-secondary buddy-trial-small-button" type="button" onClick={() => deletePhoto(viewID)}>
+                  Delete photo
+                </button>
+              ) : null}
+            </article>
+          );
+        })}
+      </div>
+
+      <section className="buddy-trial-feedback-card" aria-labelledby="buddy-trial-photo-feedback-title">
+        <h3 id="buddy-trial-photo-feedback-title">Quick feedback</h3>
+        <label className="buddy-trial-rating-control">
+          <span>Which recommendation did you build?</span>
+          <select value={feedbackForm.selectedRecommendationRank ?? ""} onChange={(event) => updateFeedback({ selectedRecommendationRank: Number(event.currentTarget.value) as 1 | 2 | 3 })}>
+            <option value="">Choose one</option>
+            {result.matches.slice(0, 3).map((match) => (
+              <option key={match.id} value={match.rank}>
+                #{match.rank} {match.catalogItem.visibleGameLabelOrIndex}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className="buddy-trial-rating-control">
+          <span>How much does this look like you?</span>
+          <select value={feedbackForm.resemblanceRating ?? ""} onChange={(event) => updateFeedback({ resemblanceRating: Number(event.currentTarget.value) as 1 | 2 | 3 | 4 | 5 })}>
+            <option value="">Choose 1-5</option>
+            {[1, 2, 3, 4, 5].map((rating) => (
+              <option key={rating} value={rating}>
+                {rating}
+              </option>
+            ))}
+          </select>
+        </label>
+        <fieldset>
+          <legend>Was one of the other top-three options better?</legend>
+          {[
+            ["no", "No"],
+            ["yes", "Yes"],
+            ["not_sure", "Not sure"]
+          ].map(([value, label]) => (
+            <label key={value}>
+              <input
+                type="radio"
+                name="buddy-trial-other-option-better"
+                value={value}
+                checked={feedbackForm.otherTopThreeBetter === value}
+                onChange={() => updateFeedback({ otherTopThreeBetter: value as BuddyTrialOtherRecommendationAnswer })}
+              />
+              <span>{label}</span>
+            </label>
+          ))}
+        </fieldset>
+        <label className="buddy-trial-feedback-text">
+          <span>What looks most wrong?</span>
+          <textarea
+            value={feedbackForm.mostWrong ?? ""}
+            onChange={(event) => updateFeedback({ mostWrong: event.currentTarget.value })}
+            placeholder="Example: jaw too wide, hair too short, nose looks off, or nothing obvious"
+            rows={3}
+          />
+        </label>
+        <fieldset>
+          <legend>Did you change any recommended setting manually?</legend>
+          {[
+            ["no", "No"],
+            ["yes", "Yes"]
+          ].map(([value, label]) => (
+            <label key={value}>
+              <input
+                type="radio"
+                name="buddy-trial-manual-setting-change"
+                value={value}
+                checked={feedbackForm.changedSettingsManually === (value === "yes")}
+                onChange={() => updateFeedback({ changedSettingsManually: value === "yes" })}
+              />
+              <span>{label}</span>
+            </label>
+          ))}
+        </fieldset>
+        {feedbackForm.changedSettingsManually ? (
+          <label className="buddy-trial-feedback-text">
+            <span>What did you change?</span>
+            <textarea
+              value={feedbackForm.manualSettingChangeSummary ?? ""}
+              onChange={(event) => updateFeedback({ manualSettingChangeSummary: event.currentTarget.value })}
+              placeholder="Example: changed hair color from dark brown to black"
+              rows={2}
+            />
+          </label>
+        ) : null}
+        <label className="buddy-trial-feedback-text">
+          <span>Optional notes</span>
+          <textarea value={feedbackForm.notes ?? ""} onChange={(event) => updateFeedback({ notes: event.currentTarget.value })} placeholder="Anything else Wyatt should know?" rows={3} />
+        </label>
+        <label className="buddy-trial-learning-consent">
+          <input
+            type="checkbox"
+            checked={feedbackForm.productImprovementOptIn}
+            onChange={(event) =>
+              updateFeedback({
+                productImprovementOptIn: event.currentTarget.checked,
+                productImprovementConsentVersion: event.currentTarget.checked ? session.consent.consentVersion : null
+              })
+            }
+          />
+          <span>Use my rating, settings, player photos, and written feedback to improve GameFace Match. Raw face scan media is not saved by default.</span>
+        </label>
+      </section>
+
+      <div className="buddy-trial-photo-storage-note">
+        <strong>{frontPhotoReady ? "Front image ready" : "Front image required"}</strong>
+        <span>Images are bound to this beta session and prepared for the private beta game-result bucket. They are not production catalog evidence.</span>
+      </div>
+      {validation.errors.length ? (
+        <div className="buddy-trial-video-retake" role="status">
+          <strong>Before you submit</strong>
+          <ul>
+            {validation.errors.slice(0, 5).map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+      <div className="buddy-trial-build-nav">
+        <button className="buddy-trial-secondary" type="button" onClick={onDeleteTrialData}>
+          Delete beta data
+        </button>
+        <button className="buddy-trial-primary" type="button" onClick={submitFeedback} disabled={!validation.ok || processingView !== null}>
+          Submit feedback
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function createInitialResultPhotoFeedbackForSession(session: BuddyTrialSession | null, result: OwnerReviewDemoRecommendationResult) {
+  if (!session) return null;
+  const persistence = createPrivateBetaTrialPersistenceRecord({ session });
+  const bestMatch = result.matches[0];
+  return createEmptyBuddyTrialResultPhotoFeedback({
+    trialID: persistence.trialID,
+    inviteID: session.inviteId,
+    sessionID: session.sessionId,
+    source: result.mode === "OWNER_REVIEW_DEMO" ? "owner_review_demo" : "beta_research",
+    recommendationBinding: {
+      recommendationVersion: OWNER_REVIEW_DEMO_MATCHING_CONFIG_VERSION,
+      catalogVersionID: result.catalog.catalogVersion.identifier,
+      evidenceVersionID: result.catalog.packageChecksum ?? null,
+      selectedRecommendationRank: bestMatch.rank as 1 | 2 | 3,
+      selectedRecommendationLabel: bestMatch.catalogItem.visibleGameLabelOrIndex
+    }
+  });
+}
+
+function createBlankPhotoFeedback(): BuddyTrialResultFeedback {
+  return {
+    selectedRecommendationRank: 1,
+    resemblanceRating: null,
+    otherTopThreeBetter: null,
+    mostWrong: null,
+    notes: null,
+    changedSettingsManually: null,
+    manualSettingChangeSummary: null,
+    productImprovementOptIn: false,
+    productImprovementConsentVersion: null,
+    submittedAt: null
+  };
+}
+
+function validateResultPhotoFile(file: File) {
+  const errors: string[] = [];
+  if (!BUDDY_TRIAL_RESULT_PHOTO_ACCEPTED_MIME_TYPES.includes(file.type as (typeof BUDDY_TRIAL_RESULT_PHOTO_ACCEPTED_MIME_TYPES)[number])) {
+    errors.push("Use a JPEG, PNG, or WebP image.");
+  }
+  if (file.size <= 0) errors.push("The image file is empty or unreadable.");
+  if (file.size > 25 * 1024 * 1024) errors.push("Use an image smaller than 25 MB.");
+  return errors;
+}
+
+async function readImageDimensions(objectUrl: string): Promise<{ width: number; height: number }> {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight });
+    image.onerror = () => reject(new Error("Image could not be decoded."));
+    image.src = objectUrl;
+  });
+}
+
+async function sha256Hex(buffer: ArrayBuffer) {
+  if (globalThis.crypto?.subtle) {
+    const digest = await globalThis.crypto.subtle.digest("SHA-256", buffer);
+    return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+  }
+  let hash = 0;
+  for (const byte of new Uint8Array(buffer)) {
+    hash = (hash * 31 + byte) >>> 0;
+  }
+  return hash.toString(16).padStart(64, "0").slice(-64);
 }
 
 interface CharacterVideoReviewUiState {
@@ -1462,6 +1881,47 @@ function OwnerReviewDemoCompletionSummary({ outcome }: { outcome: BuddyTrialFina
   );
 }
 
+function BuddyTrialResultPhotoCompletionSummary({ feedback }: { feedback: BuddyTrialResultPhotoFeedback }) {
+  const activePhotos = feedback.photos.filter((photo) => photo.uploadStatus !== "deleted");
+  return (
+    <div className="buddy-trial-completion-summary">
+      <section className="buddy-trial-completion-card" aria-labelledby="buddy-trial-photo-feedback-summary">
+        <h2 id="buddy-trial-photo-feedback-summary">Photo feedback</h2>
+        <p>Recommendation built: #{feedback.feedback.selectedRecommendationRank ?? "Not provided"}</p>
+        <p>Resemblance rating: {feedback.feedback.resemblanceRating ?? "Not provided"} / 5</p>
+        <p>Changed settings manually: {feedback.feedback.changedSettingsManually ? "Yes" : "No"}</p>
+        <p>Photos submitted: {activePhotos.length}</p>
+        <div className="buddy-trial-demo-settings">
+          {activePhotos.map((photo) => (
+            <article key={photo.photoID}>
+              <span>{photo.label}</span>
+              <strong>{photo.originalFilename}</strong>
+              <small>
+                {photo.width}x{photo.height} · {photo.storageBucket}
+              </small>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="buddy-trial-completion-card" aria-labelledby="buddy-trial-photo-feedback-notes">
+        <h2 id="buddy-trial-photo-feedback-notes">What you told us</h2>
+        <p>Other top-three better: {formatOtherRecommendationAnswer(feedback.feedback.otherTopThreeBetter)}</p>
+        <p>Looks most wrong: {feedback.feedback.mostWrong ?? "Not provided"}</p>
+        {feedback.feedback.manualSettingChangeSummary ? <p>Manual changes: {feedback.feedback.manualSettingChangeSummary}</p> : null}
+        {feedback.feedback.notes ? <p>Notes: {feedback.feedback.notes}</p> : null}
+        <p>Shared for improvements: {feedback.feedback.productImprovementOptIn ? "Yes" : "No"}</p>
+      </section>
+      <section className="buddy-trial-completion-card" aria-labelledby="buddy-trial-photo-feedback-research">
+        <h2 id="buddy-trial-photo-feedback-research">Research status</h2>
+        <p>These photos and ratings are private beta research signals. They are not production catalog evidence and do not publish recommendations.</p>
+        {feedback.refinementSignals.map((signal) => (
+          <p key={`${signal.modelVersion}-${signal.createdAt}`}>{signal.summary}</p>
+        ))}
+      </section>
+    </div>
+  );
+}
+
 function OwnerReviewDemoRefinementGuide({
   steps,
   progress,
@@ -1594,6 +2054,13 @@ function formatVersionPreference(preference: BuddyTrialVersionPreference | null)
   if (preference === "original") return "Original";
   if (preference === "refined") return "Refined";
   if (preference === "about_the_same") return "About the same";
+  return "Not provided";
+}
+
+function formatOtherRecommendationAnswer(answer: BuddyTrialOtherRecommendationAnswer | null) {
+  if (answer === "yes") return "Yes";
+  if (answer === "no") return "No";
+  if (answer === "not_sure") return "Not sure";
   return "Not provided";
 }
 

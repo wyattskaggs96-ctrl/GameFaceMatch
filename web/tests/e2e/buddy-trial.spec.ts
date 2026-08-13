@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { invalidTextFile, syntheticPng } from "./synthetic-images";
 
 const activeInvite = "btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0";
 const expiredInvite = "btv1_2a6d4f8c1b3e5a7099e8d7c6b5a43210";
@@ -189,162 +190,31 @@ test.describe("Buddy Trial invite route", () => {
         await page.getByRole("button", { name: /^(Done|Next)$/ }).click();
       }
 
-      await expect(page.getByRole("heading", { name: "LET'S SEE HOW WE DID" })).toBeVisible();
-      await expect(page.getByText("Open your created player.")).toBeVisible();
-      await expect(page.getByRole("button", { name: "Record Video" })).toBeVisible();
-      await expect(page.getByText("Upload Existing Video")).toBeVisible();
+        await expect(page.getByRole("heading", { name: "I built it in College Football 27" })).toBeVisible();
+        await expect(page.getByText("Front image required")).toBeVisible();
+        await expect(page.getByRole("button", { name: "Submit feedback" })).toBeDisabled();
 
-      await page.locator('input[type="file"]').setInputFiles({
-        name: "not-a-video.txt",
-        mimeType: "text/plain",
-        buffer: Buffer.from("not a playable video")
-      });
-      await expect(page.getByText(/The browser could not decode this video/i)).toBeVisible();
-      await expect(page.getByRole("button", { name: "Try another video" })).toBeVisible();
+        await page.locator('input[type="file"]').first().setInputFiles(invalidTextFile());
+        await expect(page.getByText("Use a JPEG, PNG, or WebP image.")).toBeVisible();
+        await page.locator('input[type="file"]').first().setInputFiles(syntheticPng("cf27-front.png", 900, 1100, 3));
+        await expect(page.getByText("Front image ready")).toBeVisible();
+        await expect(page.getByText(/private beta storage path ready/i)).toBeVisible();
 
-      await page.evaluate(
-        ({ key }) => {
-          const session = JSON.parse(window.localStorage.getItem(key) ?? "{}");
-          const timestamp = "2026-08-07T12:30:00.000Z";
-          session.state = "VIDEO_1_PROCESSING";
-          session.updatedAt = timestamp;
-          session.videoOneReview = {
-            schemaVersion: "buddy-trial-character-video-review-v1",
-            iteration: 1,
-            status: "usable",
-            metadata: {
-              fileName: "e2e-character-video.mp4",
-              fileType: "video/mp4",
-              fileSizeBytes: 12000000,
-              durationSeconds: 12,
-              width: 1280,
-              height: 720,
-              source: "fixture"
-            },
-            validation: { status: "usable", errors: [], warnings: [], retakeInstructions: [] },
-            candidateFrames: [],
-            standardizedViews: [
-              { viewID: "front", selectedFrameID: "e2e-front", timestampSeconds: 1.2, qualityStatus: "usable", issues: [], thumbnailRetained: false },
-              { viewID: "leftThreeQuarter", selectedFrameID: "e2e-left", timestampSeconds: 4.2, qualityStatus: "usable", issues: [], thumbnailRetained: false },
-              { viewID: "rightThreeQuarter", selectedFrameID: "e2e-right", timestampSeconds: 8.2, qualityStatus: "usable", issues: [], thumbnailRetained: false }
-            ],
-            missingRequiredViews: [],
-            manualSelectionRequired: false,
-            processingSummary: "Player views are ready for comparison.",
-            retention: {
-              rawVideoPersisted: false,
-              temporaryMediaRetention: "temporary_processing_only",
-              objectUrlsRevokedAfterProcessing: true
-            }
-          };
-          session.history = [
-            ...(Array.isArray(session.history) ? session.history : []),
-            { state: "VIDEO_1_PROCESSING", at: timestamp, note: "E2E deterministic Video #1 processed checkpoint; no raw media stored." }
-          ];
-          window.localStorage.setItem(key, JSON.stringify(session));
-        },
-        { key: activeInviteStorageKey }
-      );
-      await page.reload();
-      await expect(page.getByRole("heading", { name: "GameFace found these views" })).toBeVisible();
-      await expect(page.getByText("Front", { exact: true })).toBeVisible();
-      await expect(page.getByText("Left 3/4", { exact: true })).toBeVisible();
-      await expect(page.getByText("Right 3/4", { exact: true })).toBeVisible();
-      await page.getByRole("button", { name: "See GameFace Review" }).click();
-      await expect(page.getByRole("heading", { name: "GAMEFACE REVIEW" })).toBeVisible();
-      await expect(page.getByLabel("Initial Build Match")).toContainText("82 / 100");
-      await expect(page.getByText("LOOKS STRONG")).toBeVisible();
-      await expect(page.getByText("COULD BE CLOSER")).toBeVisible();
-      await expect(page.getByText("TRY THESE CHANGES")).toBeVisible();
-      await expect(page.getByText("Jaw Width", { exact: true })).toBeVisible();
-      await expect(page.getByText("67 -> 61")).toBeVisible();
-      await expect(page.getByText("Nose Height", { exact: true })).toBeVisible();
-      await expect(page.getByText("46 -> 51")).toBeVisible();
-      await expect(page.getByText("Chin Projection", { exact: true })).toBeVisible();
-      await expect(page.getByText("58 -> 52")).toBeVisible();
-      await page.getByRole("button", { name: "Update My Player" }).click();
-      await expect(page.getByRole("heading", { name: "Apply the recommended changes" })).toBeVisible();
-      await expect(page.getByText("Step 1 of 3")).toBeVisible();
-      await page.getByRole("button", { name: "Done" }).click();
-      await expect(page.getByText("Step 2 of 3")).toBeVisible();
-      await page.getByRole("button", { name: "View All Changes" }).click();
-      await expect(page.getByLabel("All build settings")).toBeVisible();
-      await page.reload();
-      await expect(page.getByLabel("All build settings")).toBeVisible();
-      await page.getByRole("button", { name: "Show Current Change" }).click();
-      await expect(page.getByText("Step 2 of 3")).toBeVisible();
-      await page.getByRole("button", { name: "Done" }).click();
-      await expect(page.getByText("Step 3 of 3")).toBeVisible();
-      await page.getByRole("button", { name: "Done" }).click();
-      await expect(page.getByRole("heading", { name: "SHOW US THE UPDATED PLAYER" })).toBeVisible();
-      await expect(page.getByRole("button", { name: "Record Video" })).toBeVisible();
-      await expect(page.getByText("Upload Existing Video")).toBeVisible();
-
-      await page.evaluate(
-        ({ key }) => {
-          const session = JSON.parse(window.localStorage.getItem(key) ?? "{}");
-          const timestamp = "2026-08-07T12:50:00.000Z";
-          session.state = "FINAL_RESULT_READY";
-          session.updatedAt = timestamp;
-          session.videoTwoReview = {
-            schemaVersion: "buddy-trial-character-video-review-v1",
-            iteration: 2,
-            status: "usable",
-            metadata: {
-              fileName: "e2e-updated-character-video.mp4",
-              fileType: "video/mp4",
-              fileSizeBytes: 12000000,
-              durationSeconds: 12,
-              width: 1280,
-              height: 720,
-              source: "fixture"
-            },
-            validation: { status: "usable", errors: [], warnings: [], retakeInstructions: [] },
-            candidateFrames: [],
-            standardizedViews: [
-              { viewID: "front", selectedFrameID: "e2e-video-2-front", timestampSeconds: 1.2, qualityStatus: "usable", issues: [], thumbnailRetained: false },
-              { viewID: "leftThreeQuarter", selectedFrameID: "e2e-video-2-left", timestampSeconds: 4.2, qualityStatus: "usable", issues: [], thumbnailRetained: false },
-              { viewID: "rightThreeQuarter", selectedFrameID: "e2e-video-2-right", timestampSeconds: 8.2, qualityStatus: "usable", issues: [], thumbnailRetained: false }
-            ],
-            missingRequiredViews: [],
-            manualSelectionRequired: false,
-            processingSummary: "Player views are ready for comparison.",
-            retention: {
-              rawVideoPersisted: false,
-              temporaryMediaRetention: "temporary_processing_only",
-              objectUrlsRevokedAfterProcessing: true
-            }
-          };
-          session.history = [
-            ...(Array.isArray(session.history) ? session.history : []),
-            { state: "FINAL_RESULT_READY", at: timestamp, note: "E2E deterministic Video #2 processed checkpoint; no raw media stored." }
-          ];
-          window.localStorage.setItem(key, JSON.stringify(session));
-        },
-        { key: activeInviteStorageKey }
-      );
-      await page.reload();
-      await expect(page.getByRole("heading", { name: "YOUR GAMEFACE RESULT" })).toBeVisible();
-      await expect(page.getByLabel("Before and after build scores")).toContainText("Initial Build");
-      await expect(page.getByLabel("Before and after build scores")).toContainText("82 / 100");
-      await expect(page.getByLabel("Before and after build scores")).toContainText("Refined Build");
-      await expect(page.getByLabel("Before and after build scores")).toContainText("91 / 100");
-      await expect(page.getByLabel("Before and after build scores")).toContainText("+9");
-      await expect(page.getByText("Jaw proportion")).toBeVisible();
-      await expect(page.getByText("Brow height")).toBeVisible();
-      await expect(page.getByRole("button", { name: "GameFace complete" })).toBeDisabled();
-      await page.getByLabel("Refined").check();
-      await page.getByLabel("How much does the final player look like you?").selectOption("8");
-      await page.getByLabel("What still looks off?").fill("Brow still sits a little high.");
-      await page.getByLabel(/Use my scores, settings, and written feedback to improve GameFace Match/).check();
-      await page.getByRole("button", { name: "GameFace complete" }).click();
-      await expect(page.getByRole("heading", { name: "GameFace complete." })).toBeVisible();
-      await expect(page.getByLabel("Completed Buddy Trial scores")).toContainText("91 / 100");
-      await expect(page.getByText("Version preference: Refined")).toBeVisible();
-      await expect(page.getByText("Resemblance rating: 8 / 10")).toBeVisible();
-      await expect(page.getByText("Shared for improvements: Yes")).toBeVisible();
-      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-      expect(overflow).toBeLessThanOrEqual(1);
+        await page.getByLabel("How much does this look like you?").selectOption("4");
+        await page.getByRole("group", { name: "Was one of the other top-three options better?" }).getByRole("radio", { name: "No", exact: true }).check();
+        await page.getByLabel("What looks most wrong?").fill("Jaw is still a little wide.");
+        await page.getByRole("group", { name: "Did you change any recommended setting manually?" }).getByRole("radio", { name: "No", exact: true }).check();
+        await page.getByLabel(/Use my rating, settings, player photos/i).check();
+        await page.reload();
+        await expect(page.getByRole("heading", { name: "I built it in College Football 27" })).toBeVisible();
+        await expect(page.getByLabel("How much does this look like you?")).toHaveValue("4");
+        await expect(page.getByText("Front image ready")).toBeVisible();
+        await page.getByRole("button", { name: "Submit feedback" }).click();
+        await expect(page.getByRole("heading", { name: "GameFace feedback sent." })).toBeVisible();
+        await expect(page.getByText("Resemblance rating: 4 / 5")).toBeVisible();
+        await expect(page.getByText("These photos and ratings are private beta research signals.")).toBeVisible();
+        const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+        expect(overflow).toBeLessThanOrEqual(1);
     }
   });
 });

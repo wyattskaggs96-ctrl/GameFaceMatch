@@ -11,8 +11,7 @@
 | P0 | Durable Vercel HTTPS beta environment not deployed | iPhone Safari camera and invite testing require a stable secure origin, not a local LAN or temporary tunnel. | Wyatt + Codex | Configure/authorize Vercel project and deploy beta environment when implementation is ready. |
 | P0 | `betaResearch` recommendation path is defined but not fully implemented as the customer beta result source | The Q07 beta cannot show experimental CF27 settings until the app routes recommendations through the explicitly non-production tier. | Codex | Build beta recommendation/result flow that remains separate from production catalog APIs. |
 | P0 | Real iPhone scan completion still needs physical-device validation | Recent owner testing exposed capture reliability and natural phone-position concerns. | Wyatt + Codex | Verify guided scan on physical iPhone Safari after the latest capture fixes and beta deployment path. |
-| P0 | Beta feedback/photo submission path is not yet the final Q07 flow | The Q07 milestone requires 1-3 photos/screenshots, resemblance rating, and feedback without owner file handling. | Codex | Implement/align the beta customer flow to collect result photos/screenshots and structured feedback. |
-| P1 | Server-side beta persistence/deletion not activated | Local/demo persistence is insufficient for remote testers unless a durable backend path is enabled. | Wyatt + Codex | Use the existing persistence architecture and privacy rules to persist only allowed beta data. |
+| P1 | Server-side beta persistence/photo storage not activated | Prompt 141 implements the local customer photo/feedback loop, but remote testers still need the approved Supabase/Vercel server-mediated storage path before images can be reviewed centrally. | Wyatt + Codex | Select/confirm the GameFace Match Supabase project, apply migrations/RLS/storage, configure server-only Vercel values, and run deployed storage smoke tests. |
 
 ## Paid/Public Production P0 Blockers
 

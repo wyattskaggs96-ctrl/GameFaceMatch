@@ -1,6 +1,7 @@
 import { CONSENT_VERSION, type ConsentID } from "@/lib/privacy/consent";
 import type { CharacterVideoReviewResult } from "@/lib/buddy-trial/character-video-review";
 import type { BuddyTrialLearningRecord } from "@/lib/buddy-trial/buddy-trial-learning";
+import type { BuddyTrialResultPhotoFeedback } from "@/lib/buddy-trial/buddy-trial-result-photo-feedback";
 
 export const BUDDY_TRIAL_SCHEMA_VERSION = "buddy-trial-v1";
 export const BUDDY_TRIAL_ROUTE_PREFIX = "/trial";
@@ -106,6 +107,7 @@ export interface BuddyTrialSession {
   refinementGuide: BuddyTrialBuildGuideProgress | null;
   videoOneReview: BuddyTrialCharacterVideoReviewSummary | null;
   videoTwoReview: BuddyTrialCharacterVideoReviewSummary | null;
+  resultPhotoFeedback: BuddyTrialResultPhotoFeedback | null;
   finalOutcome: BuddyTrialFinalOutcome | null;
   trialLearningRecord: BuddyTrialLearningRecord | null;
   history: BuddyTrialSessionHistoryEntry[];
@@ -156,7 +158,7 @@ const allowedTransitions: Record<BuddyTrialState, BuddyTrialState[]> = {
   SCAN_COMPLETE: ["RECOMMENDATION_READY", "DELETED"],
   RECOMMENDATION_READY: ["BUILD_IN_PROGRESS", "DELETED"],
   BUILD_IN_PROGRESS: ["VIDEO_1_REQUIRED", "DELETED"],
-  VIDEO_1_REQUIRED: ["VIDEO_1_PROCESSING", "DELETED"],
+  VIDEO_1_REQUIRED: ["VIDEO_1_PROCESSING", "COMPLETE", "DELETED"],
   VIDEO_1_PROCESSING: ["REFINEMENT_READY", "VIDEO_1_REQUIRED", "DELETED"],
   REFINEMENT_READY: ["VIDEO_2_REQUIRED", "DELETED"],
   VIDEO_2_REQUIRED: ["FINAL_RESULT_READY", "DELETED"],
@@ -263,6 +265,7 @@ export function createBuddyTrialSession({
     refinementGuide: null,
     videoOneReview: null,
     videoTwoReview: null,
+    resultPhotoFeedback: null,
     finalOutcome: null,
     trialLearningRecord: null,
     history: [{ state: "INVITED", at: timestamp, note: "Buddy Trial invite opened." }]
@@ -321,6 +324,7 @@ export function transitionBuddyTrialSession(session: BuddyTrialSession, nextStat
     refinementGuide: nextState === "DELETED" ? null : session.refinementGuide ?? null,
     videoOneReview: nextState === "DELETED" ? null : session.videoOneReview,
     videoTwoReview: nextState === "DELETED" ? null : session.videoTwoReview,
+    resultPhotoFeedback: nextState === "DELETED" ? null : session.resultPhotoFeedback ?? null,
     finalOutcome: nextState === "DELETED" ? null : session.finalOutcome,
     trialLearningRecord: nextState === "DELETED" ? null : session.trialLearningRecord,
     history: [...session.history, { state: nextState, at: timestamp, note }]
@@ -410,6 +414,18 @@ export function attachBuddyTrialVideoTwoReview(
   };
 }
 
+export function attachBuddyTrialResultPhotoFeedback(
+  session: BuddyTrialSession,
+  resultPhotoFeedback: BuddyTrialResultPhotoFeedback,
+  now = new Date()
+): BuddyTrialSession {
+  return {
+    ...session,
+    updatedAt: now.toISOString(),
+    resultPhotoFeedback
+  };
+}
+
 export function attachBuddyTrialFinalOutcome(
   session: BuddyTrialSession,
   outcome: BuddyTrialFinalOutcome,
@@ -480,6 +496,7 @@ export function parseBuddyTrialSession(value: string | null): BuddyTrialSession 
       refinementGuide: parsed.refinementGuide ?? null,
       videoOneReview: parsed.videoOneReview ?? null,
       videoTwoReview: parsed.videoTwoReview ?? null,
+      resultPhotoFeedback: parsed.resultPhotoFeedback ?? null,
       finalOutcome: parsed.finalOutcome ?? null,
       trialLearningRecord: parsed.trialLearningRecord ?? null
     };

@@ -3379,6 +3379,60 @@ p {
   gap: 14px;
 }
 
+.buddy-trial-photo-feedback-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.buddy-trial-photo-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.buddy-trial-photo-slot {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(2, 6, 23, 0.48);
+}
+
+.buddy-trial-photo-slot span,
+.buddy-trial-photo-slot small {
+  overflow-wrap: anywhere;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.buddy-trial-photo-slot strong {
+  overflow-wrap: anywhere;
+  color: #f8fafc;
+}
+
+.buddy-trial-photo-slot img,
+.buddy-trial-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  object-fit: cover;
+  background: rgba(15, 23, 42, 0.88);
+}
+
+.buddy-trial-photo-placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 150px;
+  padding: 16px;
+  color: #94a3b8;
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-align: center;
+}
+
 .buddy-trial-video-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3408,6 +3462,11 @@ p {
   pointer-events: none;
 }
 
+.buddy-trial-small-button {
+  min-height: 44px;
+  padding: 0 14px;
+}
+
 .buddy-trial-video-progress,
 .buddy-trial-video-error {
   padding: 12px 14px;
@@ -3433,6 +3492,25 @@ p {
   border-radius: 14px;
   border: 1px solid rgba(251, 191, 36, 0.28);
   background: rgba(113, 63, 18, 0.22);
+}
+
+.buddy-trial-photo-storage-note {
+  display: grid;
+  gap: 5px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(34, 197, 94, 0.24);
+  background: rgba(6, 78, 59, 0.22);
+}
+
+.buddy-trial-photo-storage-note strong {
+  color: #bbf7d0;
+}
+
+.buddy-trial-photo-storage-note span {
+  color: #dbeafe;
+  font-size: 0.88rem;
+  line-height: 1.42;
 }
 
 .buddy-trial-video-retake strong,
@@ -3957,8 +4035,9 @@ p {
 
   .buddy-trial-build-controls,
   .buddy-trial-build-nav,
-  .buddy-trial-video-actions,
-  .buddy-trial-frame-options,
+    .buddy-trial-video-actions,
+    .buddy-trial-photo-slot-grid,
+    .buddy-trial-frame-options,
   .buddy-trial-standardized-views,
   .buddy-trial-review-columns,
   .buddy-trial-adjustment-list,

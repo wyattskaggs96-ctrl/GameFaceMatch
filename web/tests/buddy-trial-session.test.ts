@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   applyBuddyTrialConsent,
-  attachBuddyTrialFinalOutcome,
-  BUDDY_TRIAL_ACTIVE_INVITE_ID,
+    attachBuddyTrialFinalOutcome,
+    attachBuddyTrialResultPhotoFeedback,
+    BUDDY_TRIAL_ACTIVE_INVITE_ID,
   BUDDY_TRIAL_EXPIRED_INVITE_ID,
   BUDDY_TRIAL_STATES,
   BUDDY_TRIAL_USED_INVITE_ID,
@@ -23,6 +24,12 @@ import {
   updateBuddyTrialRefinementGuideProgress
 } from "@/lib/buddy-trial/buddy-trial-session";
 import { createCharacterVideoReviewResult, createPersistableCharacterVideoReview } from "@/lib/buddy-trial/character-video-review";
+import {
+  createBuddyTrialResultPhotoRecord,
+  createEmptyBuddyTrialResultPhotoFeedback,
+  submitBuddyTrialResultFeedback,
+  upsertBuddyTrialResultPhoto
+} from "@/lib/buddy-trial/buddy-trial-result-photo-feedback";
 
 describe("buddy trial session contract", () => {
   it("defines the complete invite-only trial state machine", () => {
@@ -300,6 +307,73 @@ describe("buddy trial session contract", () => {
     expect(deleted.videoTwoReview).toBeNull();
     expect(deleted.finalOutcome).toBeNull();
     expect(deleted.buildGuide).toBeNull();
+  });
+
+  it("attaches result-photo feedback, allows completion from post-build state, and clears it on deletion", () => {
+    const session = createBuddyTrialSession({
+      inviteId: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      productionCatalogRecordCount: 0,
+      ownerReviewDemoEnabled: true,
+      now: new Date("2026-08-07T12:00:00.000Z"),
+      sessionId: "bt_session_test"
+    });
+    const postBuild = transitionBuddyTrialSession(
+      transitionBuddyTrialSession(
+        transitionBuddyTrialSession(
+          transitionBuddyTrialSession(
+            transitionBuddyTrialSession(session, "CONSENTED"),
+            "SCAN_IN_PROGRESS"
+          ),
+          "SCAN_COMPLETE"
+        ),
+        "RECOMMENDATION_READY"
+      ),
+      "BUILD_IN_PROGRESS"
+    );
+    const photoRequired = transitionBuddyTrialSession(postBuild, "VIDEO_1_REQUIRED");
+    const feedbackDraft = createEmptyBuddyTrialResultPhotoFeedback({
+      trialID: "btp_b9c7a1f0_test",
+      inviteID: BUDDY_TRIAL_ACTIVE_INVITE_ID,
+      sessionID: "bt_session_test",
+      source: "owner_review_demo",
+      recommendationBinding: {
+        recommendationVersion: "owner-review-demo-matching-v1",
+        catalogVersionID: "owner-review-demo-catalog-v1",
+        evidenceVersionID: null,
+        selectedRecommendationRank: 1,
+        selectedRecommendationLabel: "Demo Face Alpha"
+      }
+    });
+    const withPhoto = upsertBuddyTrialResultPhoto(
+      feedbackDraft,
+      createBuddyTrialResultPhotoRecord({
+        trialID: feedbackDraft.trialID,
+        inviteID: feedbackDraft.inviteID,
+        viewID: "front",
+        originalFilename: "cf27-front.png",
+        mimeType: "image/png",
+        sizeBytes: 900_000,
+        width: 1280,
+        height: 1600,
+        sha256: "b".repeat(64),
+        uploadedAt: "2026-08-13T12:00:00.000Z"
+      })
+    );
+    const submitted = submitBuddyTrialResultFeedback(withPhoto, {
+      ...withPhoto.feedback,
+      resemblanceRating: 5,
+      otherTopThreeBetter: "no",
+      mostWrong: "nothing obvious",
+      changedSettingsManually: false,
+      productImprovementOptIn: false
+    });
+
+    const withFeedback = attachBuddyTrialResultPhotoFeedback(photoRequired, submitted);
+    expect(withFeedback.resultPhotoFeedback?.feedback.resemblanceRating).toBe(5);
+    expect(transitionBuddyTrialSession(withFeedback, "COMPLETE").state).toBe("COMPLETE");
+
+    const deleted = transitionBuddyTrialSession(withFeedback, "DELETED");
+    expect(deleted.resultPhotoFeedback).toBeNull();
   });
 
   it("persists refinement-guide progress separately from initial build progress and clears it on deletion", () => {

@@ -27,7 +27,7 @@ Q07 changes the immediate target from paid-public production to an unpaid, invit
 
 ## Immediate Codex Action
 
-Prompt 140 has local code/schema contracts for beta persistence and private game-result storage, but live Supabase activation is on hold because the connected Supabase account inspected by Codex did not list an approved GameFace Match project.
+Prompt 140 has local code/schema contracts for beta persistence and private game-result storage, and Prompt 141 adds the local customer-facing CF27 created-player photo/feedback loop. Live Supabase activation is still on hold because the connected Supabase account inspected by Codex did not list an approved GameFace Match project.
 
 Wyatt should provide or confirm:
 
@@ -44,13 +44,13 @@ The next implementation milestone should still implement or finish the actual te
 - label beta results as experimental/private-beta output;
 - use only documented CF27 settings from existing evidence/support records;
 - omit unsupported categories rather than inventing values;
-- collect 1-3 CF27 result screenshots/photos, resemblance rating, and feedback;
+- preserve the Prompt 141 CF27 result-photo and feedback loop;
 - preserve raw face media as local/browser-only by default;
 - keep the beta cohort capped at 10 invites.
 
 Recommended next Codex label after owner connection hold:
 
-`GFM | Q07 | PROMPT 141 | PHASE 05 | Complete beta recommendation, photo feedback, and live persistence smoke`
+`GFM | Q07 | PROMPT 142 | PHASE 05 | Activate live beta persistence and deployed photo-feedback smoke`
 
 ## Deferred Human-Verifier Action
 

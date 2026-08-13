@@ -1,12 +1,15 @@
 # Private Beta Persistence And Storage
 
-**Prompt:** `GFM | Q07 | PROMPT 140 | PHASE 04 | Connect beta persistence and private storage`  
-**Date:** 2026-08-13  
+**Prompt:** `GFM | Q07 | PROMPT 140 | PHASE 04 | Connect beta persistence and private storage`
+**Prompt 141 addendum:** `GFM | Q07 | PROMPT 141 | PHASE 05 | Add CF27 result photo and feedback loop`
+**Date:** 2026-08-13
 **Status:** CODE AND SCHEMA READY LOCALLY; LIVE CONNECTION `HOLD_OWNER`
 
 ## Outcome
 
 GameFace Match now has a Q07 private-beta persistence and private-storage contract for the ten-user research beta. The repository can validate pseudonymous beta sessions, privacy-safe derived-profile summaries, capture-quality summaries, recommendation/catalog version references, selected settings, feedback, deletion state, and later CF27 output screenshot/photo metadata.
+
+Prompt 141 adds the customer-facing post-build result-photo and feedback loop at the end of the Owner Review Demo build guide. A tester can indicate that they built the player in College Football 27, upload one required front-view image and up to two optional three-quarter images, choose which top-three recommendation they built, rate resemblance from 1-5, answer whether another option looked better, record manual setting changes, add notes, and submit the result as private-beta research feedback.
 
 Live Supabase activation was not performed. The connected Supabase account currently lists `skaggs-systems-autopilot` and `ball-knower-growth-os`; it does not list an approved GameFace Match project. No schema was applied remotely, no Storage bucket was created remotely, no Vercel environment variable was written, and no beta data was uploaded.
 
@@ -63,6 +66,7 @@ Allowed beta data:
 - resemblance rating and scrubbed feedback;
 - deletion state and audit events;
 - later CF27 output screenshot/photo metadata and private object paths.
+- Prompt 141 result-photo feedback payloads, including selected recommendation rank, catalog/evidence version binding, photo metadata, resemblance rating, manual-change summary, and scrubbed notes.
 
 ## Prohibited Fields
 
@@ -80,6 +84,7 @@ The beta persistence contract rejects or excludes:
 - unredacted secrets;
 - payment data;
 - production-verification claims.
+- raw human face photos collected after the scan; Prompt 141 requests only College Football 27 created-player screenshots/photos.
 
 ## Private Storage
 
@@ -97,6 +102,8 @@ Purpose:
 - 25 MB per object;
 - `image/png`, `image/jpeg`, and `image/webp` only;
 - default retention: 14 days for game-result uploads.
+
+Prompt 141 binds each upload to the beta trial ID, invite ID, original recommendation version, selected recommendation rank, catalog version, and private bucket/object path. Live upload remains disabled until the approved Supabase project and server-mediated upload route are active.
 
 ## Deletion Contract
 

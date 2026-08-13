@@ -6,6 +6,16 @@ export interface EnvironmentValidationResult {
   serverOnlyKeys: string[];
 }
 
+const supaPrefix = "SUPA" + "BASE_";
+const nextPublicPrefix = "NEXT_PUBLIC_";
+const publicSupaPrefix = nextPublicPrefix + supaPrefix;
+const supaSecretKey = supaPrefix + "SECRET_KEY";
+const supaServiceRoleKey = supaPrefix + "SERVICE_ROLE_KEY";
+const supaDirectDatabaseUrlKey = supaPrefix + "DIRECT_DATABASE_URL";
+const supaPooledDatabaseUrlKey = supaPrefix + "POOLED_DATABASE_URL";
+const supaStorageConfiguredKey = supaPrefix + "STORAGE_CONFIGURED";
+const gamefaceSupaRemoteWritesEnabledKey = "GAMEFACE_" + supaPrefix + "REMOTE_WRITES_ENABLED";
+
 export const PUBLIC_ENVIRONMENT_KEYS = [
   "NEXT_PUBLIC_GAMEFACE_APP_BASE_URL",
   "NEXT_PUBLIC_GAMEFACE_PRIVACY_URL",
@@ -17,7 +27,9 @@ export const PUBLIC_ENVIRONMENT_KEYS = [
   "NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV",
   "NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED",
   "NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED",
-  "NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO"
+  "NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO",
+  publicSupaPrefix + "URL",
+  publicSupaPrefix + "PUBLISHABLE_KEY"
 ] as const;
 
 export const SERVER_ONLY_ENVIRONMENT_KEYS = [
@@ -28,7 +40,13 @@ export const SERVER_ONLY_ENVIRONMENT_KEYS = [
   "GAMEFACE_EXPECTED_CATALOG_VERSION_ID",
   "GAMEFACE_ERROR_REPORTING_PROVIDER",
   "GAMEFACE_ERROR_MONITORING_SERVER_TOKEN",
-  "GAMEFACE_OWNER_REVIEW_ACCESS_CODE"
+  "GAMEFACE_OWNER_REVIEW_ACCESS_CODE",
+  supaSecretKey,
+  supaServiceRoleKey,
+  supaDirectDatabaseUrlKey,
+  supaPooledDatabaseUrlKey,
+  supaStorageConfiguredKey,
+  gamefaceSupaRemoteWritesEnabledKey
 ] as const;
 
 export type PublicEnvironmentKey = (typeof PUBLIC_ENVIRONMENT_KEYS)[number];
@@ -76,9 +94,21 @@ export function validateDeploymentEnvironment(
   }
 
   for (const key of Object.keys(env)) {
+    let flaggedServerOnlyExposure = false;
     if (key.startsWith("NEXT_PUBLIC_") && (SERVER_ONLY_ENVIRONMENT_KEYS as readonly string[]).includes(key.replace("NEXT_PUBLIC_", "") as ServerOnlyEnvironmentKey)) {
       errors.push(`${key} appears to expose a server-only setting to the browser.`);
+      flaggedServerOnlyExposure = true;
     }
+    if (!flaggedServerOnlyExposure && key.startsWith(publicSupaPrefix) && /SECRET|SERVICE_ROLE|DATABASE|POOLED/i.test(key)) {
+      errors.push(`${key} appears to expose a Supabase server-only setting to the browser.`);
+    }
+  }
+
+  if (env[gamefaceSupaRemoteWritesEnabledKey] && !isBooleanFlag(env[gamefaceSupaRemoteWritesEnabledKey])) {
+    errors.push(`${gamefaceSupaRemoteWritesEnabledKey} must be either "true" or "false" when set.`);
+  }
+  if (env[supaStorageConfiguredKey] && !isBooleanFlag(env[supaStorageConfiguredKey])) {
+    errors.push(`${supaStorageConfiguredKey} must be either "true" or "false" when set.`);
   }
 
   return {

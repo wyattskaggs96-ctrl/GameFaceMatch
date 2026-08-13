@@ -117,7 +117,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Self-improving feedback-loop domain contract exists. It records a versioned `buildPassThreshold = 90`, final confirmed settings, same-profile personal preferences, consent-gated global-learning review candidates, and no automatic retraining.
 - Manual matching-study protocol, data dictionary, templates, privacy/deletion controls, and metric calculations exist for a future 10-20 person study. The study is `NOT_STARTED` because there is no verified production catalog or real top-three recommendation set.
 - The production College Football 27 catalog is intentionally empty and recommendations fail closed.
-- Supabase runtime/config/schema contracts exist locally and fail closed. The draft schema now includes private-beta trial session and audit-event tables with RLS enabled and raw-media constraints; no remote persistence is active.
+- Supabase runtime/config/schema contracts exist locally and fail closed. Prompt 140 extends the draft schema and contracts for Q07 beta persistence with private-beta session, audit, feedback, and upload metadata tables, trusted-server-only access policy text, the private `private-beta-game-results` bucket contract, a server-mediated persistence adapter, and tests. Live Supabase/Vercel activation remains `HOLD_OWNER` because the connected Supabase account inspected by Codex did not list an approved GameFace Match project, and no live Vercel environment variables were available.
 - Payment/entitlement interfaces expose the approved Launch Pack and All Access products, but checkout remains unavailable and no client state can grant paid access.
 - iOS project compiles in prior verification records as a preserved foundation, not the active production client.
 
@@ -137,7 +137,7 @@ Owner decision `OWNER_MEDIA_BASELINE_LOCKED` now locks the current source-media 
 - Five-game launch catalog: CF27 and NBA 2K26 have source-media evidence; FC 26 has research material but is non-launch. Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026 have no verified catalog data.
 - Stripe Checkout, Stripe Billing, customer subscriptions, creator Stripe Connect onboarding, commission ledger, payout batches, and transfers are not implemented.
 - Launch game registry entries exist for College Football 27, NBA 2K26, Madden NFL 26, EA SPORTS PGA TOUR, and PBA Pro Bowling 2026, but every launch game remains recommendation-unavailable until a verified production catalog exists.
-- Supabase remote database/storage/auth/RLS/Edge Functions/Cron are not deployed from this repo.
+- Supabase remote database/storage/auth/RLS/Edge Functions/Cron are not deployed from this repo. Q07 beta persistence is deploy-ready at the code/schema level but not live-connected.
 - Real manual matching study: 0 valid participants, 0 completed trials, no measured accuracy.
 - Real Buddy Trial V1 execution: invite-only fixture shell, guided-scan handoff/resume checkpoint, local/test persistence/deletion contract, owner-review first/second video loop, before/after scoring, final rating UI, and privacy-safe structured learning contract exist, but 0 completed real buddy trials, no production CF27 recommendations, no real production before/after measurements, and no real buddy acceptance yet.
 - Ten-user private beta execution: scope is now locked, but the final `betaResearch` recommendation/result-photo/feedback flow, durable Vercel deployment, and physical iPhone Safari validation still need implementation/verification.

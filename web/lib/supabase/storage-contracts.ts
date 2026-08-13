@@ -1,6 +1,11 @@
 export const supabaseStorageContractVersion = "supabase-storage-contract-v1";
 
-export type SupabaseStorageBucketID = "catalog-source-videos" | "catalog-source-images" | "review-evidence" | "generated-match-assets";
+export type SupabaseStorageBucketID =
+  | "catalog-source-videos"
+  | "catalog-source-images"
+  | "review-evidence"
+  | "generated-match-assets"
+  | "private-beta-game-results";
 export type SupabaseStorageAccess = "private_signed_url_only";
 
 export interface SupabaseStorageBucketContract {
@@ -22,10 +27,11 @@ export interface SupabaseStorageObjectMetadata {
   uploadedBy: string;
   uploadedAt: string;
   sourceRecordID: string;
-  evidenceType: "source_video" | "source_image" | "review_derivative" | "generated_match_asset";
+  evidenceType: "source_video" | "source_image" | "review_derivative" | "generated_match_asset" | "private_beta_game_result_photo";
   verificationStatus: string;
   accessClassification: "private_source" | "private_review" | "derived_review" | "public_release_metadata" | "test_only";
   retentionStatus: "active" | "pending_deletion" | "deleted" | "retired";
+  trialID?: string;
 }
 
 export const supabaseStorageBuckets: SupabaseStorageBucketContract[] = [
@@ -64,6 +70,15 @@ export const supabaseStorageBuckets: SupabaseStorageBucketContract[] = [
     allowedMimeTypes: ["image/png", "image/jpeg", "application/json"],
     publicUrlsAllowed: false,
     rawFaceMediaAllowed: false
+  },
+  {
+    bucketID: "private-beta-game-results",
+    access: "private_signed_url_only",
+    purpose: "Temporary private CF27 output screenshots/photos for the ten-user research beta. Raw human face scan media is prohibited.",
+    maxSizeBytes: 25 * 1024 * 1024,
+    allowedMimeTypes: ["image/png", "image/jpeg", "image/webp"],
+    publicUrlsAllowed: false,
+    rawFaceMediaAllowed: false
   }
 ];
 
@@ -82,7 +97,10 @@ export function validateStorageObjectMetadata(bucketID: SupabaseStorageBucketID,
   if (!/^[a-f0-9]{64}$/i.test(metadata.sha256)) errors.push("SHA-256 must be a 64-character hex digest.");
   if (metadata.sizeBytes <= 0) errors.push("File size must be positive.");
   if (bucket && !bucket.allowedMimeTypes.includes(metadata.mimeType)) errors.push(`MIME type ${metadata.mimeType} is not allowed for ${bucketID}.`);
-  if (/data:image|blob:|base64/i.test(JSON.stringify(metadata))) errors.push("Storage metadata must not contain raw image bytes or browser object URLs.");
+  if (/data:image|data:video|blob:|base64/i.test(JSON.stringify(metadata))) errors.push("Storage metadata must not contain raw media bytes or browser object URLs.");
+  if (bucketID === "private-beta-game-results" && !metadata.trialID?.startsWith("btp_")) {
+    errors.push("Private-beta game result uploads must be linked to a pseudonymous private-beta trial ID.");
+  }
   return { ok: errors.length === 0, errors };
 }
 

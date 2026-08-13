@@ -36,6 +36,8 @@ const requiredTables = [
   "match_results",
   "private_beta_trial_sessions",
   "private_beta_trial_audit_events",
+  "private_beta_trial_feedback",
+  "private_beta_trial_uploads",
   "saved_builds",
   "products",
   "prices",
@@ -80,7 +82,10 @@ const requiredChecks = [
   "evidence_files_no_absolute_relative_path",
   "catalog_record_attributes_no_sensitive_trait_keys",
   "private_beta_trial_sessions_no_raw_face_media",
-  "private_beta_trial_audit_events_no_media_payload"
+  "private_beta_trial_audit_events_no_media_payload",
+  "private_beta_trial_feedback_no_raw_face_media",
+  "private_beta_trial_uploads_no_raw_face_media",
+  "private_beta_trial_uploads_private_bucket"
 ];
 
 const errors = [];
@@ -140,6 +145,26 @@ if (!normalized.includes("cr.duplicate_review_required = false")) {
 
 if (!normalized.includes("is_automated and new_status = 'production_approved'")) {
   errors.push("Status transition guard must block automated production approval.");
+}
+
+if (!normalized.includes("'beta_research'")) {
+  errors.push("Missing non-production beta_research data source type.");
+}
+
+if (!normalized.includes("'private-beta-game-results'")) {
+  errors.push("Missing private-beta game-result Storage bucket configuration.");
+}
+
+if (!normalized.includes("revoke all on public.private_beta_trial_sessions from anon, authenticated")) {
+  errors.push("Private-beta trial sessions must revoke direct browser role access.");
+}
+
+if (!normalized.includes("create policy private_beta_trial_sessions_trusted_server_only")) {
+  errors.push("Missing trusted-server-only policy for private-beta trial sessions.");
+}
+
+if (!normalized.includes("storage.buckets") || !normalized.includes("public = false")) {
+  errors.push("Private-beta Storage bucket must be configured as private.");
 }
 
 if (errors.length > 0) {

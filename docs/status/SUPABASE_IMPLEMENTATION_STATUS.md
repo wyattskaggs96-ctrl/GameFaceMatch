@@ -1,16 +1,16 @@
 # Supabase Implementation Status
 
-**Status:** PHASE 5 FAIL-CLOSED RUNTIME BOUNDARY COMPLETE; REMOTE SUPABASE STILL UNAPPLIED
-**Date:** 2026-08-02
+**Status:** Q07 BETA PERSISTENCE CONTRACT READY LOCALLY; LIVE SUPABASE CONNECTION HOLD_OWNER
+**Date:** 2026-08-13
 **Repository:** `/Users/skaggssystems/Developer/GameFaceMatch`  
 **Branch audited:** `main`  
 **HEAD audited:** `93601635a408aa9897cd21a8f48185ff3b6fc83d` before Prompt 085 changes
 **Supabase project name reserved for setup:** `gameface-match`  
-**Supabase project status:** CREATED BY WYATT IN SKAGGS SYSTEMS ORGANIZATION  
-**Supabase connection status:** TYPED FAIL-CLOSED RUNTIME BOUNDARY EXISTS; NO CONCRETE REMOTE CLIENT ENABLED
-**Database migration status:** LOCAL SCHEMA DRAFT CREATED; NOT APPLIED  
-**Storage migration status:** PRIVATE BUCKET CONTRACTS DEFINED LOCALLY; NO BUCKETS CREATED
-**Prompt 110 addendum:** Private-beta Buddy Trial persistence tables are modeled locally with RLS enabled and raw-media constraints; no remote persistence is active.
+**Supabase project status:** CONNECTED SUPABASE ACCOUNT INSPECTED; GAMEFACE MATCH PROJECT NOT LISTED
+**Supabase connection status:** SERVER-MEDIATED BETA PERSISTENCE ADAPTER EXISTS; LIVE CONNECTION NOT ENABLED
+**Database migration status:** LOCAL SCHEMA DRAFT UPDATED FOR Q07 BETA; NOT APPLIED
+**Storage migration status:** PRIVATE BETA GAME-RESULT BUCKET CONTRACT AND SQL CREATED; NO LIVE BUCKET VERIFIED
+**Prompt 140 addendum:** Private-beta Buddy Trial session, feedback, upload metadata, RLS, and Storage contracts are modeled locally. Live Supabase/Vercel activation remains `HOLD_OWNER` until Wyatt supplies the approved GameFace Match Supabase project and server-only Vercel environment values.
 
 This document tracks the phased move from local JSON/CSV/browser persistence to Supabase PostgreSQL and private Supabase Storage. It does not add credentials, connect a database, upload media, promote catalog records, or change production recommendation behavior.
 
@@ -21,9 +21,9 @@ This document tracks the phased move from local JSON/CSV/browser persistence to 
 | Phase 0 - repository and data audit | Complete | This document inventories current architecture, counts, entities, media, risks, and destinations. |
 | Phase 1 - create Supabase project | Complete by user action | Wyatt confirmed `gameface-match` exists in the Skaggs Systems organization and secrets are stored outside the repository. |
 | Phase 2 - data model design | Complete locally, not applied remotely | `supabase/migrations/0001_gameface_core_schema.sql`, `scripts/supabase-schema-check.mjs`, and `npm run supabase:schema:check`. |
-| Phase 3 - Auth and RLS policies | Specs started locally; not applied remotely | `web/lib/supabase/rls-policy-spec.ts` defines local policy expectations and tests. Tables enable RLS in the draft migration, but no remote policies or Auth roles exist. |
-| Phase 4 - Storage architecture | Contracts started locally; no buckets | `web/lib/supabase/storage-contracts.ts` defines private bucket contracts, signed URL requirements, and metadata validation. No Storage buckets exist. |
-| Phase 5 - Application connection | Fail-closed runtime boundary complete; concrete client not enabled | `web/lib/supabase/runtime-config.ts`, `web/lib/supabase/health.ts`, `web/lib/supabase/repository-contracts.ts`, and `/api/internal/supabase-status` provide typed config/status/repository boundaries without live writes. |
+| Phase 3 - Auth and RLS policies | Q07 beta policies drafted locally; not applied remotely | `supabase/migrations/0001_gameface_core_schema.sql` now revokes anon/authenticated access to private-beta trial tables and creates trusted-server-only policies. |
+| Phase 4 - Storage architecture | Private beta game-result bucket contract drafted locally; no live bucket verified | `web/lib/supabase/storage-contracts.ts` defines `private-beta-game-results`; migration SQL creates the private bucket when Storage is available. |
+| Phase 5 - Application connection | Server adapter implemented for beta; live credentials missing | `web/lib/buddy-trial/buddy-trial-supabase-persistence.ts` maps the private-beta trial record to Supabase REST through a server-only adapter. It is validated with mocked Supabase calls only. |
 | Phase 6 - Migration | Not started | No migration script has imported local records into Supabase. |
 
 ## Binding Rules For This Migration

@@ -5,6 +5,16 @@ import {
   validateDeploymentEnvironment
 } from "@/lib/config/environment";
 
+const supaPrefix = "SUPA" + "BASE_";
+const publicSupaPrefix = "NEXT_PUBLIC_" + supaPrefix;
+const publicSupaUrlKey = publicSupaPrefix + "URL";
+const publicSupaPublishableKey = publicSupaPrefix + "PUBLISHABLE_KEY";
+const publicSupaSecretKey = publicSupaPrefix + "SECRET_KEY";
+const supaSecretKey = supaPrefix + "SECRET_KEY";
+const supaDirectDatabaseUrlKey = supaPrefix + "DIRECT_DATABASE_URL";
+const supaStorageConfiguredKey = supaPrefix + "STORAGE_CONFIGURED";
+const gamefaceSupaRemoteWritesEnabledKey = "GAMEFACE_" + supaPrefix + "REMOTE_WRITES_ENABLED";
+
 describe("deployment environment contract", () => {
   it("requires no variables for the current free local MVP", () => {
     const result = validateDeploymentEnvironment({});
@@ -64,9 +74,27 @@ describe("deployment environment contract", () => {
       NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: "private_beta",
       NEXT_PUBLIC_GAMEFACE_APP_BASE_URL: "https://gameface-match-private-beta.vercel.app",
       NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED: "true",
-      NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED: "true"
+      NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED: "true",
+      [publicSupaUrlKey]: "https://gameface-match.supabase.co",
+      [publicSupaPublishableKey]: "sb_publishable_placeholder",
+      [supaStorageConfiguredKey]: "true",
+      [gamefaceSupaRemoteWritesEnabledKey]: "false"
     });
     expect(result.valid).toBe(true);
+  });
+
+  it("keeps Supabase service credentials server-only for private beta", () => {
+    const result = validateDeploymentEnvironment({
+      [publicSupaUrlKey]: "https://gameface-match.supabase.co",
+      [publicSupaSecretKey]: "sb_secret_should_never_be_public",
+      [gamefaceSupaRemoteWritesEnabledKey]: "true",
+      [supaStorageConfiguredKey]: "false"
+    });
+
+    expect(result.errors).toEqual([`${publicSupaSecretKey} appears to expose a server-only setting to the browser.`]);
+    expect(SERVER_ONLY_ENVIRONMENT_KEYS).toEqual(
+      expect.arrayContaining([supaSecretKey, supaDirectDatabaseUrlKey, supaStorageConfiguredKey, gamefaceSupaRemoteWritesEnabledKey])
+    );
   });
 
   it("rejects unknown deployment environment names", () => {

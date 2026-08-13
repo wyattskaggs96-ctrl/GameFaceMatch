@@ -59,12 +59,31 @@ Server-only values, entered only if the corresponding provider is later approved
 - `GAMEFACE_OWNER_REVIEW_ACCESS_CODE`
 - `GAMEFACE_ERROR_REPORTING_PROVIDER`
 - `GAMEFACE_ERROR_MONITORING_SERVER_TOKEN`
+- `SUPABASE_SECRET_KEY` or `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_DIRECT_DATABASE_URL` or `SUPABASE_POOLED_DATABASE_URL`
+- `SUPABASE_STORAGE_CONFIGURED`
+- `GAMEFACE_SUPABASE_REMOTE_WRITES_ENABLED`
 - `GAMEFACE_PAYMENT_PROVIDER`
 - `GAMEFACE_PAYMENT_SERVER_TOKEN`
 - `GAMEFACE_PAYMENT_WEBHOOK_SIGNING_TOKEN`
 - `GAMEFACE_PAYMENT_PRODUCT_CONFIG_REF`
 
 Never put live values in chat, Git, screenshots, issue trackers, or public docs.
+
+## Q07 Supabase beta persistence
+
+Private-beta durable persistence uses Supabase only after the intended GameFace Match project is available and the local schema has been applied. The current contract persists pseudonymous trial/session data, consent timestamps, derived-profile summaries, capture quality summaries, recommendation/catalog version references, selected settings, user ratings/feedback, and deletion state. It explicitly rejects raw face scan media, raw landmarks, embeddings, exact measurement payloads, object URLs, data URLs, and base64 media.
+
+Apply the local schema only to the approved GameFace Match beta Supabase project, then configure Vercel Preview/Private Beta environment variables:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_SECRET_KEY` or `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_DIRECT_DATABASE_URL` or `SUPABASE_POOLED_DATABASE_URL`
+- `SUPABASE_STORAGE_CONFIGURED=true`
+- `GAMEFACE_SUPABASE_REMOTE_WRITES_ENABLED=true`
+
+The Storage bucket `private-beta-game-results` must remain private. Browser clients should upload through server-mediated signed operations only; raw human face scan media remains prohibited for beta persistence.
 
 ## Build
 

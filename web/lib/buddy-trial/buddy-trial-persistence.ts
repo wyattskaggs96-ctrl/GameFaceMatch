@@ -5,7 +5,11 @@ export const PRIVATE_BETA_TRIAL_PERSISTENCE_SCHEMA_VERSION = "private-beta-trial
 export const PRIVATE_BETA_TRIAL_DEFAULT_RETENTION_DAYS = 30;
 export const PRIVATE_BETA_TRIAL_STORAGE_PREFIX = "gfm:private-beta-trial:persistence:v1";
 
-export type PrivateBetaTrialPersistenceMode = "browser_local_test_adapter" | "supabase_schema_contract_only" | "supabase_unavailable";
+export type PrivateBetaTrialPersistenceMode =
+  | "browser_local_test_adapter"
+  | "supabase_schema_contract_only"
+  | "supabase_server_adapter"
+  | "supabase_unavailable";
 export type PrivateBetaTrialDeletionActor = "buddy_tester" | "owner_admin" | "trusted_server_process";
 export type PrivateBetaTrialAuditOutcome = "succeeded" | "failed" | "blocked";
 export type PrivateBetaTrialGameCharacterVideoRetention = "temporary_processing_only" | "retained_with_separate_opt_in";

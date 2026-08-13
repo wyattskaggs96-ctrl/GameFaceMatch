@@ -25,6 +25,8 @@ These may be exposed to browser bundles and must not contain secrets:
 - `NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED`
 - `NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED`
 - `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 
 Public URLs should be HTTPS in production. Localhost is acceptable only for local testing.
 
@@ -33,6 +35,8 @@ Public URLs should be HTTPS in production. Localhost is acceptable only for loca
 `NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV` accepts `local`, `development`, `preview`, `staging`, `owner_review`, or `production`. `development` is treated as a local runtime label. `owner_review` is the only deployable non-production mode that may expose internal owner-review tooling, and it must be paired with the server-only `GAMEFACE_OWNER_REVIEW_ACCESS_CODE`.
 
 `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true` enables the isolated Owner Review Demo lane only outside `production`. It does not enable production catalog records, real recommendations, payments, real beta metrics, or production matching-weight changes.
+
+`NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` identify the Supabase project to browser-safe code. They are not sufficient to write private beta data. RLS, server-mediated routes, and server-only credentials must be configured before durable persistence is enabled.
 
 ## Server-only variables
 
@@ -46,10 +50,25 @@ These must never be exposed with `NEXT_PUBLIC_` and must never be committed with
 - `GAMEFACE_ERROR_REPORTING_PROVIDER`
 - `GAMEFACE_ERROR_MONITORING_SERVER_TOKEN`
 - `GAMEFACE_OWNER_REVIEW_ACCESS_CODE`
+- `SUPABASE_SECRET_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_DIRECT_DATABASE_URL`
+- `SUPABASE_POOLED_DATABASE_URL`
+- `SUPABASE_STORAGE_CONFIGURED`
+- `GAMEFACE_SUPABASE_REMOTE_WRITES_ENABLED`
 
 Server-only variables are not required until owner-review deployment, payment, webhooks, or server-side monitoring are actually implemented.
 
 `GAMEFACE_OWNER_REVIEW_ACCESS_CODE` is required only for an `owner_review` HTTPS deployment. It protects `/owner/*`, `/verifier/*`, and `/api/internal/*` through an HTTP-only same-site cookie after Wyatt opens the owner dashboard with the access code query parameter. Do not commit the real value.
+
+For Q07 beta persistence, set Supabase values only in Vercel's environment-variable UI or a gitignored `.env.local`:
+
+- `SUPABASE_SECRET_KEY` or `SUPABASE_SERVICE_ROLE_KEY`: server-only Supabase write credential.
+- `SUPABASE_DIRECT_DATABASE_URL` or `SUPABASE_POOLED_DATABASE_URL`: server-only Postgres connection string for migration/schema checks.
+- `SUPABASE_STORAGE_CONFIGURED=true`: only after the private `private-beta-game-results` bucket and policies are applied.
+- `GAMEFACE_SUPABASE_REMOTE_WRITES_ENABLED=true`: only after migrations, RLS checks, storage checks, and deletion tests pass against the intended Supabase project.
+
+Never prefix service-role keys or database URLs with `NEXT_PUBLIC_`.
 
 ## Secure entry location
 

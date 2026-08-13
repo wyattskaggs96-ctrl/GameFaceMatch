@@ -78,6 +78,24 @@ export const supabaseRlsPolicySpecs: RlsPolicySpec[] = [
     allowsPrivateEvidence: false
   },
   {
+    table: "private_beta_trial_feedback",
+    operation: "insert",
+    roles: ["service_role"],
+    rule: "Only trusted server processes may persist scrubbed private-beta tester feedback after invite/session authorization.",
+    requiresOwnershipPredicate: false,
+    allowsProductionApproval: false,
+    allowsPrivateEvidence: false
+  },
+  {
+    table: "private_beta_trial_uploads",
+    operation: "insert",
+    roles: ["service_role"],
+    rule: "Only trusted server processes may create private game-result screenshot/photo metadata after invite/session authorization; raw face scan media is not stored.",
+    requiresOwnershipPredicate: false,
+    allowsProductionApproval: false,
+    allowsPrivateEvidence: true
+  },
+  {
     table: "saved_builds",
     operation: "select",
     roles: ["authenticated"],

@@ -1,6 +1,6 @@
 # Next Action
 
-`CODEX ACTION | Implement ten-user private beta research recommendation path`
+`OWNER ACTION | Select/connect GameFace Match Supabase project for Q07 beta persistence`
 
 Repository:
 `/Users/skaggssystems/Developer/GameFaceMatch`
@@ -27,7 +27,18 @@ Q07 changes the immediate target from paid-public production to an unpaid, invit
 
 ## Immediate Codex Action
 
-Prompt 137 should implement the actual ten-user beta research recommendation path against the `betaResearch` tier:
+Prompt 140 has local code/schema contracts for beta persistence and private game-result storage, but live Supabase activation is on hold because the connected Supabase account inspected by Codex did not list an approved GameFace Match project.
+
+Wyatt should provide or confirm:
+
+- the intended GameFace Match Supabase project;
+- the Vercel private-beta project environment access;
+- server-only Supabase secret/database values in Vercel, not in Git or chat;
+- approval to apply the local migration and create/verify the private `private-beta-game-results` bucket.
+
+After that hold clears, Codex can run live migration/storage validation and deployed beta smoke checks.
+
+The next implementation milestone should still implement or finish the actual ten-user beta research recommendation path against the `betaResearch` tier:
 
 - keep production recommendations fail-closed;
 - label beta results as experimental/private-beta output;
@@ -37,9 +48,9 @@ Prompt 137 should implement the actual ten-user beta research recommendation pat
 - preserve raw face media as local/browser-only by default;
 - keep the beta cohort capped at 10 invites.
 
-Recommended next label:
+Recommended next Codex label after owner connection hold:
 
-`GFM | Q07 | PROMPT 137 | PHASE 02 | Implement beta research recommendation and feedback flow`
+`GFM | Q07 | PROMPT 141 | PHASE 05 | Complete beta recommendation, photo feedback, and live persistence smoke`
 
 ## Deferred Human-Verifier Action
 

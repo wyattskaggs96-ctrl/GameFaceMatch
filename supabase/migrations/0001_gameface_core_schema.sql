@@ -10,6 +10,7 @@ create type public.data_source_type as enum (
   'research_candidate',
   'shipping_game_video_research',
   'public_source_only',
+  'beta_research',
   'test_fixture',
   'demo_data',
   'local_developer_sample'
@@ -597,6 +598,7 @@ create table public.match_results (
 
 create table public.private_beta_trial_sessions (
   trial_id text primary key,
+  schema_version text not null default 'private-beta-trial-persistence-v1',
   invite_id text not null,
   session_id text not null,
   state public.private_beta_trial_state not null default 'INVITED',
@@ -648,6 +650,7 @@ create index private_beta_trial_sessions_expires_idx on public.private_beta_tria
 
 create table public.private_beta_trial_audit_events (
   audit_event_id uuid primary key default gen_random_uuid(),
+  audit_event_client_id text,
   trial_id text references public.private_beta_trial_sessions(trial_id) on delete set null,
   actor_type public.actor_type not null,
   action text not null,
@@ -660,6 +663,71 @@ create table public.private_beta_trial_audit_events (
     metadata_json::text !~* '(data:image|data:video|blob:|objectUrl|base64|rawVideo|rawImage|imageBytes|videoBytes)'
   )
 );
+
+create unique index private_beta_trial_audit_events_client_id_idx
+  on public.private_beta_trial_audit_events(audit_event_client_id)
+  where audit_event_client_id is not null;
+
+create table public.private_beta_trial_feedback (
+  feedback_id uuid primary key default gen_random_uuid(),
+  trial_id text not null references public.private_beta_trial_sessions(trial_id) on delete cascade,
+  selected_result text,
+  resemblance_rating integer,
+  would_use_again boolean,
+  free_text_feedback text,
+  product_improvement_opt_in boolean not null default false,
+  product_improvement_consent_version text,
+  raw_face_media_stored boolean not null default false,
+  deleted_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  constraint private_beta_trial_feedback_rating_range check (
+    resemblance_rating is null or resemblance_rating between 1 and 10
+  ),
+  constraint private_beta_trial_feedback_no_raw_face_media check (raw_face_media_stored = false),
+  constraint private_beta_trial_feedback_opt_in_requires_consent check (
+    product_improvement_opt_in = false or product_improvement_consent_version is not null
+  ),
+  constraint private_beta_trial_feedback_no_media_payload check (
+    coalesce(free_text_feedback, '') !~* '(data:image|data:video|blob:|objectUrl|base64|rawVideo|rawImage|imageBytes|videoBytes|landmark|embedding)'
+  )
+);
+
+create index private_beta_trial_feedback_trial_idx on public.private_beta_trial_feedback(trial_id);
+
+create table public.private_beta_trial_uploads (
+  upload_id text primary key,
+  trial_id text not null references public.private_beta_trial_sessions(trial_id) on delete cascade,
+  invite_id text not null,
+  storage_bucket text not null default 'private-beta-game-results',
+  object_path text not null,
+  original_filename text not null,
+  mime_type text not null,
+  size_bytes bigint not null,
+  sha256 text not null,
+  upload_purpose text not null default 'cf27_output_photo',
+  retention_status text not null default 'temporary_processing_only',
+  retention_expires_at timestamptz not null,
+  deleted_at timestamptz,
+  raw_face_media_stored boolean not null default false,
+  created_at timestamptz not null default now(),
+  constraint private_beta_trial_uploads_id_prefix check (upload_id ~ '^btu_'),
+  constraint private_beta_trial_uploads_trial_prefix check (trial_id ~ '^btp_'),
+  constraint private_beta_trial_uploads_private_bucket check (storage_bucket = 'private-beta-game-results'),
+  constraint private_beta_trial_uploads_portable_path check (object_path !~ '^/' and object_path !~ '\\.\\.'),
+  constraint private_beta_trial_uploads_sha256_format check (sha256 ~ '^[a-f0-9]{64}$'),
+  constraint private_beta_trial_uploads_size_positive check (size_bytes > 0 and size_bytes <= 26214400),
+  constraint private_beta_trial_uploads_mime_allowed check (mime_type in ('image/png', 'image/jpeg', 'image/webp')),
+  constraint private_beta_trial_uploads_purpose_allowed check (upload_purpose in ('cf27_output_photo', 'cf27_output_screenshot')),
+  constraint private_beta_trial_uploads_no_raw_face_media check (raw_face_media_stored = false),
+  constraint private_beta_trial_uploads_no_media_payload check (
+    object_path !~* '(data:image|data:video|blob:|objectUrl|base64)'
+    and original_filename !~* '(data:image|data:video|blob:|objectUrl|base64)'
+  )
+);
+
+create index private_beta_trial_uploads_trial_idx on public.private_beta_trial_uploads(trial_id);
+create index private_beta_trial_uploads_retention_idx on public.private_beta_trial_uploads(retention_expires_at, deleted_at);
 
 create table public.saved_builds (
   saved_build_id uuid primary key default gen_random_uuid(),
@@ -790,9 +858,90 @@ alter table public.match_runs enable row level security;
 alter table public.match_results enable row level security;
 alter table public.private_beta_trial_sessions enable row level security;
 alter table public.private_beta_trial_audit_events enable row level security;
+alter table public.private_beta_trial_feedback enable row level security;
+alter table public.private_beta_trial_uploads enable row level security;
 alter table public.saved_builds enable row level security;
 alter table public.products enable row level security;
 alter table public.prices enable row level security;
 alter table public.entitlements enable row level security;
 alter table public.receipt_references enable row level security;
 alter table public.audit_events enable row level security;
+
+-- Private-beta app access is server-mediated. Browser clients cannot access
+-- trial records, derived profiles, feedback, or game-result objects directly.
+revoke all on public.private_beta_trial_sessions from anon, authenticated;
+revoke all on public.private_beta_trial_audit_events from anon, authenticated;
+revoke all on public.private_beta_trial_feedback from anon, authenticated;
+revoke all on public.private_beta_trial_uploads from anon, authenticated;
+
+grant select, insert, update, delete on public.private_beta_trial_sessions to service_role;
+grant select, insert, update, delete on public.private_beta_trial_audit_events to service_role;
+grant select, insert, update, delete on public.private_beta_trial_feedback to service_role;
+grant select, insert, update, delete on public.private_beta_trial_uploads to service_role;
+
+create policy private_beta_trial_sessions_trusted_server_only
+on public.private_beta_trial_sessions
+for all
+to service_role
+using (true)
+with check (raw_face_media_stored = false);
+
+create policy private_beta_trial_audit_events_trusted_server_only
+on public.private_beta_trial_audit_events
+for insert
+to service_role
+with check (
+  metadata_json::text !~* '(data:image|data:video|blob:|objectUrl|base64|rawVideo|rawImage|imageBytes|videoBytes|landmark|embedding)'
+);
+
+create policy private_beta_trial_feedback_trusted_server_only
+on public.private_beta_trial_feedback
+for all
+to service_role
+using (true)
+with check (raw_face_media_stored = false);
+
+create policy private_beta_trial_uploads_trusted_server_only
+on public.private_beta_trial_uploads
+for all
+to service_role
+using (true)
+with check (
+  storage_bucket = 'private-beta-game-results'
+  and raw_face_media_stored = false
+);
+
+do $$
+begin
+  if exists (select 1 from pg_namespace where nspname = 'storage') then
+    insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+    values (
+      'private-beta-game-results',
+      'private-beta-game-results',
+      false,
+      26214400,
+      array['image/png', 'image/jpeg', 'image/webp']
+    )
+    on conflict (id) do update
+      set public = false,
+          file_size_limit = excluded.file_size_limit,
+          allowed_mime_types = excluded.allowed_mime_types;
+
+    if not exists (
+      select 1
+      from pg_policies
+      where schemaname = 'storage'
+        and tablename = 'objects'
+        and policyname = 'private_beta_game_results_trusted_server_only'
+    ) then
+      execute $policy$
+        create policy private_beta_game_results_trusted_server_only
+        on storage.objects
+        for all
+        to service_role
+        using (bucket_id = 'private-beta-game-results')
+        with check (bucket_id = 'private-beta-game-results')
+      $policy$;
+    end if;
+  end if;
+end $$;

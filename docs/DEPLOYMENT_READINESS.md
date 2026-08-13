@@ -8,6 +8,8 @@ Prompt 130 adds deployable owner-review configuration, but no real HTTPS URL exi
 
 The current web MVP is a Next.js app under `web/` with one app route, a web manifest route, local-only browser state, and no backend endpoints.
 
+Q07 Prompt 140 adds deployable Supabase persistence/storage contracts for the ten-user beta, but live remote activation remains on hold until Wyatt supplies or selects the exact GameFace Match Supabase project and Vercel environment values. The connected Supabase account inspected during Prompt 140 did not list a GameFace Match project.
+
 ## Vercel private-beta configuration
 
 The repository-level `vercel.json` points Vercel at the `web/` Next.js app:
@@ -119,6 +121,9 @@ Q07 private-beta deployment should use:
 - `NEXT_PUBLIC_GAMEFACE_RECOMMENDATIONS_DISABLED=true` until the `betaResearch` path is implemented
 - `NEXT_PUBLIC_GAMEFACE_SCREENSHOT_REFINEMENT_DISABLED=true` until beta feedback collection is implemented
 - `NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=false`
+- `NEXT_PUBLIC_SUPABASE_URL=<GameFace Match Supabase project URL>` after the project is selected
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<browser-safe publishable key>` after the project is selected
+- server-only Supabase secret/database/storage flags in Vercel only, never in source
 
 The owner-review access code protects `/owner/*`, `/verifier/*`, and `/api/internal/*`. It must not be committed, pasted into public docs, or exposed through `NEXT_PUBLIC_`.
 

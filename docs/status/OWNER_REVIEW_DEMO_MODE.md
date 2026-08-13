@@ -209,14 +209,14 @@ Prompt 125 focused validation includes:
 ```text
 npm --prefix web run test -- buddy-trial-character-video-review.test.ts buddy-trial-session.test.ts owner-review-demo.test.ts
 NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run build
-CI=1 PLAYWRIGHT_PORT=3199 NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run test:e2e -- tests/e2e/buddy-trial.spec.ts --project=iphone-safari-size
+npm run owner:review:e2e
 ```
 
 Prompt 126 focused validation includes:
 
 ```text
 npm --prefix web run test -- owner-review-demo.test.ts buddy-trial-session.test.ts buddy-trial-character-video-review.test.ts
-CI=1 PLAYWRIGHT_PORT=3202 NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run test:e2e -- tests/e2e/buddy-trial.spec.ts --project=iphone-safari-size
+npm run owner:review:e2e
 ```
 
 Prompt 128 focused validation includes:

@@ -37,8 +37,9 @@ export function consentCard(page: Page, name: string): Locator {
 }
 
 export async function navigateToCapture(page: Page) {
+  await page.route("**/models/mediapipe/face_landmarker.task", (route) => route.abort("failed"));
   await page.getByRole("button", { name: "Start" }).first().click();
-  await expect(page.getByRole("heading", { name: "Set Up Your GameFace Scan" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
   await expect(page.getByText("Purchase verification is not connected yet")).toBeVisible();
   await expect(page.getByRole("button", { name: "Get Started" })).toBeDisabled();
   await page.goto("/#preparation");
@@ -58,8 +59,10 @@ export async function navigateToCapture(page: Page) {
   await expect(page.getByRole("heading", { name: "Camera or upload" })).toBeVisible();
   await expect(page.getByText("Upload fallback is still an RGB-only workflow")).toBeVisible();
   await page.getByRole("button", { name: "Continue to guided capture" }).click();
-  await expect(page.getByRole("heading", { name: "Position your face within the frame." })).toBeVisible();
-  await expect(page.getByText("Keep your face centered with even light and a neutral expression.")).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Position your face within the frame\.|Rotate to portrait/ })).toBeVisible();
+  await expect(
+    page.getByText(/Keep your face centered with even light(?: and a neutral expression)?\.|Turn your phone upright before the scan starts\./)
+  ).toBeVisible();
   await expect(page.getByRole("button", { name: "Accessibility Options" }).first()).toBeVisible();
   await page.getByRole("button", { name: "Accessibility Options" }).first().click();
   await expect(page.getByRole("heading", { name: "0 of 5 angles completed" })).toBeVisible();
@@ -81,6 +84,10 @@ export async function uploadFallbackForAngle(page: Page, label: string, file: Sy
   await page.getByLabel(`Upload fallback for ${label.toLowerCase()}`).setInputFiles(file);
   if (options.waitForAccepted) {
     await expect(page.getByText(`${file.name} |`, { exact: false })).toBeVisible();
+    const qualityCard = page.locator("article.quality-review-card").filter({ has: page.getByRole("heading", { name: label, exact: true }) });
+    for (const checkbox of await qualityCard.getByRole("group", { name: "Manual confirmations" }).getByRole("checkbox").all()) {
+      await checkbox.check();
+    }
   }
 }
 

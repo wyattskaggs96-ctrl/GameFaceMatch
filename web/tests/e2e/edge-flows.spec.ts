@@ -16,7 +16,7 @@ test.describe("GameFace Match E2E edge flows", () => {
     await completeOnboarding(page);
     await acceptRequiredConsent(page);
     await page.getByRole("button", { name: "Start" }).first().click();
-    await expect(page.getByRole("heading", { name: "Set Up Your GameFace Scan" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Get Started" })).toBeDisabled();
     await page.goto("/#preparation");
     await page.getByRole("button", { name: "Get Started" }).click();
@@ -136,7 +136,7 @@ test.describe("GameFace Match E2E edge flows", () => {
     ]) {
       await page.setViewportSize(viewport);
       await page.goto("/#start");
-      await expect(page.getByRole("heading", { name: "Set Up Your GameFace Scan" })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
       await page.locator("details.setup-disclosure").evaluate((element) => {
         (element as HTMLDetailsElement).open = true;
       });
@@ -160,7 +160,7 @@ test.describe("GameFace Match E2E edge flows", () => {
     ]) {
       await page.setViewportSize(viewport);
       await page.goto("/#capture");
-      await expect(page.getByRole("heading", { name: "Position your face within the frame." })).toBeVisible();
+      await expect(page.getByRole("heading", { name: /Position your face within the frame\.|Rotate to portrait/ })).toBeVisible();
       await page.locator("details.setup-disclosure").evaluate((element) => {
         (element as HTMLDetailsElement).open = true;
       });

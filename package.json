@@ -50,6 +50,7 @@
   "owner:trials:start": "NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development npm --prefix web run dev -- --hostname 127.0.0.1 --port 3000",
   "owner:review:build": "NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=owner_review npm --prefix web run build",
   "owner:review:start": "NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=owner_review GAMEFACE_OWNER_REVIEW_ACCESS_CODE=local-owner-review-access-code npm --prefix web run start -- --hostname 127.0.0.1 --port 3000",
+  "owner:review:e2e": "NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO=true NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV=development PLAYWRIGHT_PORT=3214 npm --prefix web run test:e2e -- tests/e2e/buddy-trial.spec.ts --project=iphone-safari-size",
   "media-audit:all-videos": "node scripts/direct-all-video-content-audit.mjs",
   "media-audit:all-videos:check": "node scripts/direct-all-video-content-audit.mjs --check",
   "cf27:primary-review": "node scripts/cf27-primary-review-status.mjs",

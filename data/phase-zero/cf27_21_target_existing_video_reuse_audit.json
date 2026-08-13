@@ -40,8 +40,8 @@
     "uniqueMasterVideos": 12,
     "duplicateUploads": 2,
     "ownerDownloadMastersReferenced": 11,
-    "ownerDownloadMastersResolvableLocally": 11,
-    "existingMasterRestoreTasks": 0,
+    "ownerDownloadMastersResolvableLocally": 0,
+    "existingMasterRestoreTasks": 11,
     "frameExtractionTargets": 3,
     "notApplicableDirectlyProvenTargets": 1,
     "partialCoverageTargets": 17
@@ -1632,10 +1632,93 @@
       "blockingReason": "Production remains blocked until extraction, second verification, and production promotion gates pass."
     }
   ],
-  "existingMasterRestoreQueue": [],
+  "existingMasterRestoreQueue": [
+    {
+      "restoreID": "CF27-MASTER-RESTORE-001",
+      "originalFilename": "01_Environment_and_Creation_Path.MP4",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "restoreID": "CF27-MASTER-RESTORE-002",
+      "originalFilename": "02_Appearance_Menu_Part_1.mp4.MOV",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "restoreID": "CF27-MASTER-RESTORE-003",
+      "originalFilename": "02_Appearance_Menu_Part_2.mp4.MOV",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "restoreID": "CF27-MASTER-RESTORE-004",
+      "originalFilename": "03_Appearance_Skin_Tone.MP4",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "restoreID": "CF27-MASTER-RESTORE-005",
+      "originalFilename": "04_Appearance_Skin_Details.MP4",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "restoreID": "CF27-MASTER-RESTORE-006",
+      "originalFilename": "45926e39-7553-43b1-803a-6ddc787c63dd.MP4",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "restoreID": "CF27-MASTER-RESTORE-007",
+      "originalFilename": "352535",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "restoreID": "CF27-MASTER-RESTORE-008",
+      "originalFilename": "352537",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "restoreID": "CF27-MASTER-RESTORE-009",
+      "originalFilename": "352531",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "restoreID": "CF27-MASTER-RESTORE-010",
+      "originalFilename": "4df34d2b-7dea-4afe-8dcc-05583430012f.MP4",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    },
+    {
+      "restoreID": "CF27-MASTER-RESTORE-011",
+      "originalFilename": "7cafeb6e-0488-42e6-8d6d-5836f8e30daf.MP4",
+      "exactReason": "Portable OWNER_DOWNLOADS master reference is not locally resolvable; restoration is required before recapture is considered.",
+      "nextAction": "Re-add the original master through the approved intake workflow.",
+      "productionStatus": "NOT_PRODUCTION_DATA"
+    }
+  ],
   "validation": {
     "ok": true,
     "errors": [],
-    "warnings": []
+    "warnings": [
+      {
+        "code": "restoreTasks",
+        "message": "11 existing master(s) need restoration before recapture is considered."
+      }
+    ]
   }
 }

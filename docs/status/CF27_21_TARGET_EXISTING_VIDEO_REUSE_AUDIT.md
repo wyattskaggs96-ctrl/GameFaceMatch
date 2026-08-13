@@ -56,9 +56,9 @@ Previously completed frame extractions recorded in `data/phase-zero/cf27_frame_r
 
 ## 6. Existing Master Restore Queue
 
-- Restore tasks: 0
+- Restore tasks: 11
 - Owner Downloads masters referenced: 11
-- Owner Downloads masters resolvable locally: 11
+- Owner Downloads masters resolvable locally: 0
 
 ## 7. Target-by-Target Matrix
 

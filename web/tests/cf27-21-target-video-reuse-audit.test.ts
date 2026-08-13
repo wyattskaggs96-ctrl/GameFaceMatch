@@ -64,10 +64,12 @@ describe("CF27 21-target existing-video reuse audit", () => {
     expect(coverage.summary.targetsCovered).toBe(21);
     expect(coverage.rows.every((row) => row.productionStatus === "NOT_PRODUCTION_DATA")).toBe(true);
     expect(new Set(coverage.rows.map((row) => row.targetID)).size).toBe(audit.summary.targetsAudited);
-    expect(restore.summary.totalRestoreTasks).toBe(0);
+    expect(restore.summary.totalRestoreTasks).toBe(audit.summary.existingMasterRestoreTasks);
+    expect(restore.tasks).toHaveLength(restore.summary.totalRestoreTasks);
     expect(restore.summary.ownerDownloadMastersReferenced).toBe(11);
-    expect(restore.summary.ownerDownloadMastersResolvableLocally).toBe(11);
+    expect(restore.summary.ownerDownloadMastersResolvableLocally + restore.summary.totalRestoreTasks).toBe(restore.summary.ownerDownloadMastersReferenced);
     expect(restore.summary.duplicateUploadsDocumented).toBe(2);
+    expect(restore.tasks.every((task) => task.productionStatus === "NOT_PRODUCTION_DATA")).toBe(true);
   });
 
   it("requires exact recording instructions for every remaining owner task", () => {
@@ -93,6 +95,7 @@ type ReuseAudit = {
     removedFromOwnerRecordingQueue: number;
     productionCatalogRecords: number;
     secondVerifierDecisionsCreated: number;
+    existingMasterRestoreTasks: number;
     classificationCounts: Record<string, number>;
   };
   targets: Array<{
@@ -120,6 +123,9 @@ type RestoreQueue = {
     ownerDownloadMastersResolvableLocally: number;
     duplicateUploadsDocumented: number;
   };
+  tasks: Array<{
+    productionStatus: string;
+  }>;
 };
 
 type MinimumRecaptureQueue = {

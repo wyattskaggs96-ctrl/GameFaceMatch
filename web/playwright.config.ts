@@ -2,6 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 const port = Number(process.env.PLAYWRIGHT_PORT ?? 3100);
 const baseURL = `http://127.0.0.1:${port}`;
+const ownerReviewDemoE2E = process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO === "true";
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -24,7 +25,7 @@ export default defineConfig({
   },
   reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
   webServer: {
-    command: `npm run start -- --hostname 127.0.0.1 --port ${port}`,
+    command: ownerReviewDemoE2E ? `npm run dev -- --hostname 127.0.0.1 --port ${port}` : `npm run start -- --hostname 127.0.0.1 --port ${port}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 30_000

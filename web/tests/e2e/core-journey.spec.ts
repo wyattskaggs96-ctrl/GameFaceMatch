@@ -84,7 +84,7 @@ test.describe("GameFace Match production-representative journey", () => {
     await expect(page.getByText("created-player-front.png | 800x800")).toBeVisible();
     await expect(page.getByRole("button", { name: "Check refinement" })).toBeDisabled();
     await expect(page.getByText("Confirm: No helmet is covering the head.")).toBeVisible();
-    for (const checkbox of await page.getByRole("checkbox").all()) {
+    for (const checkbox of await page.getByRole("group", { name: "Screenshot refinement requirements" }).getByRole("checkbox").all()) {
       await checkbox.check();
     }
     await expect(page.getByRole("button", { name: "Check refinement" })).toBeEnabled();

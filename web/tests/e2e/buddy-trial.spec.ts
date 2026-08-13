@@ -186,7 +186,7 @@ test.describe("Buddy Trial invite route", () => {
 
       for (let index = 2; index <= 11; index += 1) {
         await expect(page.getByText(`Step ${index} of 11`)).toBeVisible();
-        await page.getByRole("button", { name: /Done|Next/ }).click();
+        await page.getByRole("button", { name: /^(Done|Next)$/ }).click();
       }
 
       await expect(page.getByRole("heading", { name: "LET'S SEE HOW WE DID" })).toBeVisible();

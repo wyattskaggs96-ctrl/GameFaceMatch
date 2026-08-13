@@ -39,6 +39,7 @@ import {
   evaluateMobileScanRuntime,
   getCameraBlockedRecoverySteps,
   getMobileScanLifecycleNotice,
+  getNextCustomerGuidedCircularStage,
   shouldAutoAdvanceFromPositioning,
   type MobileScanRuntimeState
 } from "@/lib/capture/mobile-safari-scan-hardening";
@@ -260,16 +261,17 @@ export function GuidedCaptureFlow({
   useEffect(() => {
     const firstPass = baseGuidedScanState.passes.find((pass) => pass.id === "first");
     const secondPass = baseGuidedScanState.passes.find((pass) => pass.id === "second");
-    if (guidedStage === "firstPass" && firstPass?.completed) {
-      triggerGuidedCaptureHaptic(35);
-      setGuidedStage("firstPassComplete");
-      return;
+    const nextStage = getNextCustomerGuidedCircularStage({
+      currentStage: guidedStage,
+      firstPassCompleted: Boolean(firstPass?.completed),
+      secondPassCompleted: Boolean(secondPass?.completed),
+      customerMode
+    });
+    if (nextStage !== guidedStage) {
+      triggerGuidedCaptureHaptic(guidedStage === "secondPass" ? 45 : 35);
+      setGuidedStage(nextStage);
     }
-    if (guidedStage === "secondPass" && secondPass?.completed) {
-      triggerGuidedCaptureHaptic(45);
-      setGuidedStage("coverageReview");
-    }
-  }, [baseGuidedScanState.passes, guidedStage]);
+  }, [baseGuidedScanState.passes, customerMode, guidedStage]);
 
   useEffect(() => {
     if (guidedStage !== "positioning" || !positioningReady) return;

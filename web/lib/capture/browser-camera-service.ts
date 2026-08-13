@@ -50,6 +50,12 @@ export class CameraAccessError extends Error {
   }
 }
 
+export const IPHONE_FIRST_CAMERA_VIDEO_CONSTRAINTS = {
+  width: { ideal: 720 },
+  height: { ideal: 1280 },
+  aspectRatio: { ideal: 9 / 16 }
+} satisfies MediaTrackConstraints;
+
 type BrowserGlobal = Pick<typeof globalThis, "navigator" | "isSecureContext">;
 
 export function createBrowserCameraService(globalObject: BrowserGlobal = globalThis): BrowserCameraService {
@@ -92,13 +98,11 @@ export function createBrowserCameraService(globalObject: BrowserGlobal = globalT
         const videoConstraints: MediaTrackConstraints = request.deviceId
           ? {
               deviceId: { exact: request.deviceId },
-              width: { ideal: 1280 },
-              height: { ideal: 720 }
+              ...IPHONE_FIRST_CAMERA_VIDEO_CONSTRAINTS
             }
           : {
               facingMode: { ideal: request.facingMode ?? "user" },
-              width: { ideal: 1280 },
-              height: { ideal: 720 }
+              ...IPHONE_FIRST_CAMERA_VIDEO_CONSTRAINTS
             };
         return await mediaDevices.getUserMedia({
           video: videoConstraints,

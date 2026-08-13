@@ -106,8 +106,34 @@ describe("browser capability states", () => {
     expect(getUserMedia).toHaveBeenCalledWith({
       video: {
         deviceId: { exact: "front-camera" },
-        width: { ideal: 1280 },
-        height: { ideal: 720 }
+        width: { ideal: 720 },
+        height: { ideal: 1280 },
+        aspectRatio: { ideal: 9 / 16 }
+      },
+      audio: false
+    });
+  });
+
+  it("requests a portrait-shaped front camera stream for the iPhone-first guided scan", async () => {
+    const getUserMedia = vi.fn().mockResolvedValue({ getTracks: () => [] });
+    const service = createBrowserCameraService({
+      isSecureContext: true,
+      navigator: {
+        mediaDevices: {
+          getUserMedia,
+          enumerateDevices: vi.fn().mockResolvedValue([])
+        }
+      } as unknown as Navigator
+    });
+
+    await service.requestCameraPreview({ facingMode: "user" });
+
+    expect(getUserMedia).toHaveBeenCalledWith({
+      video: {
+        facingMode: { ideal: "user" },
+        width: { ideal: 720 },
+        height: { ideal: 1280 },
+        aspectRatio: { ideal: 9 / 16 }
       },
       audio: false
     });

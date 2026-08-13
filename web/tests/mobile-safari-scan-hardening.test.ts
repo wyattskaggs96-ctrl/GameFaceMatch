@@ -3,6 +3,7 @@ import {
   evaluateMobileScanRuntime,
   getCameraBlockedRecoverySteps,
   getMobileScanLifecycleNotice,
+  getNextCustomerGuidedCircularStage,
   shouldAutoAdvanceFromPositioning,
   isCameraSecureContext
 } from "@/lib/capture/mobile-safari-scan-hardening";
@@ -82,6 +83,33 @@ describe("mobile Safari guided scan hardening", () => {
     expect(shouldAutoAdvanceFromPositioning({ streamActive: true, circularCanBegin: false, cameraError: false, isPortrait: true })).toBe(false);
     expect(shouldAutoAdvanceFromPositioning({ streamActive: true, circularCanBegin: true, cameraError: true, isPortrait: true })).toBe(false);
     expect(shouldAutoAdvanceFromPositioning({ streamActive: true, circularCanBegin: true, cameraError: false, isPortrait: false })).toBe(false);
+  });
+
+  it("moves the customer circular scan to review after first-pass completion instead of waiting for an internal second pass", () => {
+    expect(
+      getNextCustomerGuidedCircularStage({
+        currentStage: "firstPass",
+        firstPassCompleted: true,
+        secondPassCompleted: false,
+        customerMode: true
+      })
+    ).toBe("coverageReview");
+    expect(
+      getNextCustomerGuidedCircularStage({
+        currentStage: "firstPass",
+        firstPassCompleted: true,
+        secondPassCompleted: false,
+        customerMode: false
+      })
+    ).toBe("firstPassComplete");
+    expect(
+      getNextCustomerGuidedCircularStage({
+        currentStage: "secondPass",
+        firstPassCompleted: true,
+        secondPassCompleted: true,
+        customerMode: false
+      })
+    ).toBe("coverageReview");
   });
 
   it("warns for landscape orientation and insecure remote links", () => {

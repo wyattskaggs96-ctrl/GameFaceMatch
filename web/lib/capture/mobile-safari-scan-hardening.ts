@@ -1,4 +1,5 @@
 export type MobileScanLifecycleEvent = "visibilityHidden" | "visibilityVisible" | "pageHide" | "pageShow" | "offline" | "online";
+export type CustomerGuidedCircularStage = "positioning" | "firstPass" | "firstPassComplete" | "secondPass" | "coverageReview" | "selectiveRetake";
 
 export interface MobileScanRuntimeInput {
   isSecureContext: boolean;
@@ -90,6 +91,21 @@ export function shouldAutoAdvanceFromPositioning(input: {
   isPortrait?: boolean;
 }) {
   return input.streamActive && input.circularCanBegin && !input.cameraError && input.isPortrait !== false;
+}
+
+export function getNextCustomerGuidedCircularStage(input: {
+  currentStage: CustomerGuidedCircularStage;
+  firstPassCompleted: boolean;
+  secondPassCompleted: boolean;
+  customerMode: boolean;
+}) {
+  if (input.currentStage === "firstPass" && input.firstPassCompleted) {
+    return input.customerMode ? "coverageReview" : "firstPassComplete";
+  }
+  if (input.currentStage === "secondPass" && input.secondPassCompleted) {
+    return "coverageReview";
+  }
+  return input.currentStage;
 }
 
 export function isCameraSecureContext(input: Pick<MobileScanRuntimeInput, "hostname" | "isSecureContext" | "protocol">) {

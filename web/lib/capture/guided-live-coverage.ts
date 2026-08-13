@@ -95,6 +95,10 @@ export const naturalPhoneScanCoverageThresholds: CaptureGuidanceThresholds = {
   maxCenterMotionPerSecond: 0.42
 };
 
+const NATURAL_SIDE_YAW_THRESHOLD_DEGREES = 16;
+const NATURAL_UPPER_PITCH_THRESHOLD_DEGREES = -7;
+const NATURAL_LOWER_PITCH_THRESHOLD_DEGREES = 7;
+
 export function createInitialGuidedLiveCoverageAccumulatorState(): GuidedLiveCoverageAccumulatorState {
   return {
     pendingSegmentID: null,
@@ -301,19 +305,17 @@ function rejectedCoverageFrame(decision: GuidedLiveFrameDecision): GuidedScanCov
 
 function assignCoverageSegment(yaw: number | null, pitch: number | null): GuidedScanCoverageSegmentID | null {
   if (yaw === null) return null;
-  if (yaw <= -62) return "left";
-  if (yaw >= 62) return "right";
-  if (yaw < -18) {
-    if (pitch !== null && pitch <= -9) return "upperLeft";
-    if (pitch !== null && pitch >= 9) return "lowerLeft";
+  if (yaw < -NATURAL_SIDE_YAW_THRESHOLD_DEGREES) {
+    if (pitch !== null && pitch <= NATURAL_UPPER_PITCH_THRESHOLD_DEGREES) return "upperLeft";
+    if (pitch !== null && pitch >= NATURAL_LOWER_PITCH_THRESHOLD_DEGREES) return "lowerLeft";
     return "left";
   }
-  if (yaw > 18) {
-    if (pitch !== null && pitch <= -9) return "upperRight";
-    if (pitch !== null && pitch >= 9) return "lowerRight";
+  if (yaw > NATURAL_SIDE_YAW_THRESHOLD_DEGREES) {
+    if (pitch !== null && pitch <= NATURAL_UPPER_PITCH_THRESHOLD_DEGREES) return "upperRight";
+    if (pitch !== null && pitch >= NATURAL_LOWER_PITCH_THRESHOLD_DEGREES) return "lowerRight";
     return "right";
   }
-  if (pitch !== null && pitch >= 10) return "lowerCenter";
+  if (pitch !== null && pitch >= NATURAL_LOWER_PITCH_THRESHOLD_DEGREES) return "lowerCenter";
   return "center";
 }
 

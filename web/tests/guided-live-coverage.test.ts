@@ -76,13 +76,13 @@ describe("guided live coverage decisions", () => {
   it("maps yaw and pitch into deterministic circular sectors without using phone tilt", () => {
     const cases: Array<[number, number, string]> = [
       [0, 0, "center"],
-      [-38, -14, "upperLeft"],
-      [-70, 0, "left"],
-      [-38, 14, "lowerLeft"],
-      [0, 16, "lowerCenter"],
-      [38, 14, "lowerRight"],
-      [70, 0, "right"],
-      [38, -14, "upperRight"]
+      [-34, -8, "upperLeft"],
+      [-34, 0, "left"],
+      [-34, 8, "lowerLeft"],
+      [0, 8, "lowerCenter"],
+      [34, 8, "lowerRight"],
+      [34, 0, "right"],
+      [34, -8, "upperRight"]
     ];
 
     for (const [yawDegrees, pitchDegrees, segmentID] of cases) {
@@ -92,6 +92,42 @@ describe("guided live coverage decisions", () => {
     const rollOnly = decision({ report: report({ yawDegrees: 0, pitchDegrees: 0, rollDegrees: 28 }) });
     expect(rollOnly.assignedSegmentID).toBe("center");
     expect(rollOnly.accepted).toBe(true);
+  });
+
+  it("can complete the first ring from natural selfie head movement without steering the phone", () => {
+    let state = createInitialGuidedScanState();
+    let accumulator = createInitialGuidedLiveCoverageAccumulatorState();
+    const naturalSequence = [
+      { yawDegrees: 0, pitchDegrees: 0, expected: "center" },
+      { yawDegrees: -34, pitchDegrees: -8, expected: "upperLeft" },
+      { yawDegrees: -34, pitchDegrees: 0, expected: "left" },
+      { yawDegrees: -34, pitchDegrees: 8, expected: "lowerLeft" },
+      { yawDegrees: 0, pitchDegrees: 8, expected: "lowerCenter" },
+      { yawDegrees: 34, pitchDegrees: 8, expected: "lowerRight" },
+      { yawDegrees: 34, pitchDegrees: 0, expected: "right" },
+      { yawDegrees: 34, pitchDegrees: -8, expected: "upperRight" }
+    ] as const;
+
+    naturalSequence.forEach((pose, index) => {
+      const first = updateGuidedLiveCoverageAccumulator(
+        accumulator,
+        decision({ now: index * 1_500, report: report({ yawDegrees: pose.yawDegrees, pitchDegrees: pose.pitchDegrees }), useNaturalScanThresholds: true })
+      );
+      const second = updateGuidedLiveCoverageAccumulator(
+        first.accumulator,
+        decision({
+          now: index * 1_500 + 700,
+          report: report({ yawDegrees: pose.yawDegrees, pitchDegrees: pose.pitchDegrees }),
+          useNaturalScanThresholds: true
+        })
+      );
+      expect(second.coverageFrame?.segmentID).toBe(pose.expected);
+      expect(second.coverageFrame?.qualityAccepted).toBe(true);
+      state = applyCoverageFrame(state, second.coverageFrame!);
+      accumulator = second.accumulator;
+    });
+
+    expect(state.passes[0].completed).toBe(true);
   });
 
   it("resets stability after a lost face before accepting a reacquired sector", () => {

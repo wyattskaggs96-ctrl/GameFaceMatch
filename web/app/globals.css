@@ -769,6 +769,18 @@ p {
   padding: var(--space-4);
 }
 
+.scan-diagnostics-output {
+  width: 100%;
+  min-height: 12rem;
+  resize: vertical;
+  border: 1px solid rgba(251, 252, 247, 0.16);
+  border-radius: 8px;
+  padding: var(--space-3);
+  background: rgba(0, 0, 0, 0.46);
+  color: rgba(251, 252, 247, 0.86);
+  font: 0.75rem/1.45 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
 .guided-pass-card[data-status="active"] {
   border-color: rgba(140, 224, 255, 0.52);
   box-shadow: 0 0 0 1px rgba(140, 224, 255, 0.16);

@@ -1,0 +1,237 @@
+import type { GuidedScanQualityGate, GuidedScanState } from "@/lib/capture/guided-scan-strategy";
+import { getGuidedScanCoveragePercent } from "@/lib/capture/guided-scan-strategy";
+import { getObjectFitCoverVisibleCrop, type VisiblePreviewGeometry } from "@/lib/capture/visible-preview-geometry";
+import type { MobileScanRuntimeState } from "@/lib/capture/mobile-safari-scan-hardening";
+import type { CameraAccessError, CameraFacingMode } from "@/lib/capture/browser-camera-service";
+import type { GuidedLiveFrameDecision } from "@/lib/capture/guided-live-coverage";
+import type { CaptureGuidanceReport } from "@/types/domain";
+
+export const SCAN_DIAGNOSTICS_SCHEMA_VERSION = "gfm-scan-diagnostics-v1";
+
+export interface ScanDiagnosticSnapshot {
+  schemaVersion: typeof SCAN_DIAGNOSTICS_SCHEMA_VERSION;
+  privacyNotice: string;
+  generatedAt: string;
+  runtime: {
+    secureContext: boolean | null;
+    likelyIPhoneSafari: boolean | null;
+    portrait: boolean | null;
+    reducedMotion: boolean | null;
+    online: boolean | null;
+    viewport: { width: number | null; height: number | null };
+    warnings: string[];
+  };
+  camera: {
+    streamActive: boolean;
+    starting: boolean;
+    selectedFacingMode: CameraFacingMode;
+    selectedDeviceKnown: boolean;
+    availableDeviceCount: number;
+    errorCode: CameraAccessError["code"] | null;
+    video: {
+      intrinsicWidth: number | null;
+      intrinsicHeight: number | null;
+      readyState: number | null;
+      renderedWidth: number | null;
+      renderedHeight: number | null;
+    };
+    track: {
+      width: number | null;
+      height: number | null;
+      frameRate: number | null;
+      facingMode: string | null;
+    };
+  };
+  preview: {
+    mirrored: boolean;
+    objectFit: "cover";
+    crop: { x: number; y: number; width: number; height: number } | null;
+  };
+  readiness: {
+    guidedStage: string;
+    positioningReady: boolean;
+    circularCanBegin: boolean;
+    gates: GuidedScanQualityGate;
+    guidanceBlockingCodes: string[];
+    guidanceAdvisoryCodes: string[];
+    coverageStatus: GuidedLiveFrameDecision["status"] | "notStarted";
+    assignedSegment: string | null;
+    rejectionReasons: string[];
+    acceptedLiveFrameCount: number;
+    firstPassPercent: number;
+    secondPassPercent: number;
+  };
+  observedFace: {
+    faceCount: string;
+    providerState: string;
+    centerBucket: "centered" | "slightlyOffCenter" | "offCenter" | "unknown";
+    distanceBucket: "tooFar" | "usable" | "tooClose" | "unknown";
+    yawBucket: string;
+    pitchBucket: string;
+    rollBucket: string;
+  };
+}
+
+export function createScanDiagnosticSnapshot(input: {
+  generatedAt?: string;
+  runtime: MobileScanRuntimeState | null;
+  streamActive: boolean;
+  starting: boolean;
+  selectedFacingMode: CameraFacingMode;
+  selectedDeviceId: string;
+  availableDeviceCount: number;
+  cameraErrorCode: CameraAccessError["code"] | null;
+  videoMetrics: {
+    intrinsicWidth?: number | null;
+    intrinsicHeight?: number | null;
+    readyState?: number | null;
+    renderedWidth?: number | null;
+    renderedHeight?: number | null;
+  };
+  trackSettings?: MediaTrackSettings | null;
+  previewGeometry: VisiblePreviewGeometry | null;
+  previewIsMirrored: boolean;
+  guidedStage: string;
+  positioningReady: boolean;
+  circularCanBegin: boolean;
+  qualityGate: GuidedScanQualityGate;
+  liveGuidance: CaptureGuidanceReport | null;
+  liveCoverageDecision: GuidedLiveFrameDecision | null;
+  guidedScanState: GuidedScanState;
+  acceptedLiveFrameCount: number;
+}): ScanDiagnosticSnapshot {
+  const firstPass = input.guidedScanState.passes.find((pass) => pass.id === "first") ?? input.guidedScanState.passes[0];
+  const secondPass = input.guidedScanState.passes.find((pass) => pass.id === "second") ?? input.guidedScanState.passes[1];
+  const centerDistance = input.liveCoverageDecision?.centering.value ?? null;
+  const relativeFaceSize = input.liveCoverageDecision?.relativeFaceSize.value ?? null;
+  const providerState = input.liveCoverageDecision?.rejectionReasons.includes("Landmark provider unavailable.")
+    ? "unavailable"
+    : input.liveCoverageDecision
+      ? "available"
+      : "notChecked";
+
+  return {
+    schemaVersion: SCAN_DIAGNOSTICS_SCHEMA_VERSION,
+    privacyNotice:
+      "Sanitized diagnostic only: no images, video, landmarks, embeddings, identity data, or raw facial measurements are included.",
+    generatedAt: input.generatedAt ?? new Date().toISOString(),
+    runtime: {
+      secureContext: input.runtime?.secureContext ?? null,
+      likelyIPhoneSafari: input.runtime?.isLikelyIPhoneSafari ?? null,
+      portrait: input.runtime?.isPortrait ?? null,
+      reducedMotion: input.runtime?.reducedMotion ?? null,
+      online: input.runtime?.online ?? null,
+      viewport: {
+        width: input.runtime?.viewportWidth ?? null,
+        height: input.runtime?.viewportHeight ?? null
+      },
+      warnings: input.runtime?.warnings ?? []
+    },
+    camera: {
+      streamActive: input.streamActive,
+      starting: input.starting,
+      selectedFacingMode: input.selectedFacingMode,
+      selectedDeviceKnown: Boolean(input.selectedDeviceId),
+      availableDeviceCount: input.availableDeviceCount,
+      errorCode: input.cameraErrorCode,
+      video: {
+        intrinsicWidth: finiteOrNull(input.videoMetrics.intrinsicWidth),
+        intrinsicHeight: finiteOrNull(input.videoMetrics.intrinsicHeight),
+        readyState: finiteOrNull(input.videoMetrics.readyState),
+        renderedWidth: finiteOrNull(input.videoMetrics.renderedWidth),
+        renderedHeight: finiteOrNull(input.videoMetrics.renderedHeight)
+      },
+      track: {
+        width: finiteOrNull(input.trackSettings?.width),
+        height: finiteOrNull(input.trackSettings?.height),
+        frameRate: finiteOrNull(input.trackSettings?.frameRate),
+        facingMode: input.trackSettings?.facingMode ?? null
+      }
+    },
+    preview: {
+      mirrored: input.previewIsMirrored,
+      objectFit: "cover",
+      crop: input.previewGeometry ? roundCrop(getObjectFitCoverVisibleCrop(input.previewGeometry)) : null
+    },
+    readiness: {
+      guidedStage: input.guidedStage,
+      positioningReady: input.positioningReady,
+      circularCanBegin: input.circularCanBegin,
+      gates: input.qualityGate,
+      guidanceBlockingCodes: input.liveGuidance?.blockingIssues.map((issue) => issue.code) ?? [],
+      guidanceAdvisoryCodes: input.liveGuidance?.advisoryWarnings.map((issue) => issue.code) ?? [],
+      coverageStatus: input.liveCoverageDecision?.status ?? "notStarted",
+      assignedSegment: input.liveCoverageDecision?.assignedSegmentID ?? null,
+      rejectionReasons: input.liveCoverageDecision?.rejectionReasons ?? [],
+      acceptedLiveFrameCount: input.acceptedLiveFrameCount,
+      firstPassPercent: getGuidedScanCoveragePercent(firstPass),
+      secondPassPercent: getGuidedScanCoveragePercent(secondPass)
+    },
+    observedFace: {
+      faceCount: input.liveCoverageDecision?.faceCount ?? "notChecked",
+      providerState,
+      centerBucket: bucketCenter(centerDistance),
+      distanceBucket: bucketDistance(relativeFaceSize),
+      yawBucket: bucketPose(input.liveCoverageDecision?.yawDegrees.value ?? null, "yaw"),
+      pitchBucket: bucketPose(input.liveCoverageDecision?.pitchDegrees.value ?? null, "pitch"),
+      rollBucket: bucketPose(input.liveCoverageDecision?.rollDegrees.value ?? null, "roll")
+    }
+  };
+}
+
+export function isScanDiagnosticsEnabled(input: { nodeEnv?: string; search?: string | null }) {
+  if (input.nodeEnv === "production") return false;
+  const params = new URLSearchParams(input.search ?? "");
+  return params.get("scanDiagnostics") === "1";
+}
+
+function bucketCenter(value: number | null): ScanDiagnosticSnapshot["observedFace"]["centerBucket"] {
+  if (value === null) return "unknown";
+  if (value <= 0.12) return "centered";
+  if (value <= 0.3) return "slightlyOffCenter";
+  return "offCenter";
+}
+
+function bucketDistance(value: number | null): ScanDiagnosticSnapshot["observedFace"]["distanceBucket"] {
+  if (value === null) return "unknown";
+  if (value < 0.2) return "tooFar";
+  if (value > 0.88) return "tooClose";
+  return "usable";
+}
+
+function bucketPose(value: number | null, axis: "yaw" | "pitch" | "roll") {
+  if (value === null) return "unknown";
+  const rounded = Math.round(value / 5) * 5;
+  if (axis === "yaw") {
+    if (rounded <= -55) return `turned-left-about-${Math.abs(rounded)}`;
+    if (rounded >= 55) return `turned-right-about-${rounded}`;
+    if (rounded <= -20) return `slight-left-about-${Math.abs(rounded)}`;
+    if (rounded >= 20) return `slight-right-about-${rounded}`;
+    return "near-center";
+  }
+  if (axis === "pitch") {
+    if (rounded <= -10) return `up-about-${Math.abs(rounded)}`;
+    if (rounded >= 10) return `down-about-${rounded}`;
+    return "level";
+  }
+  if (rounded <= -10) return `tilted-left-about-${Math.abs(rounded)}`;
+  if (rounded >= 10) return `tilted-right-about-${rounded}`;
+  return "level";
+}
+
+function finiteOrNull(value: number | undefined | null) {
+  return typeof value === "number" && Number.isFinite(value) ? value : null;
+}
+
+function roundCrop(crop: { x: number; y: number; width: number; height: number }) {
+  return {
+    x: round(crop.x),
+    y: round(crop.y),
+    width: round(crop.width),
+    height: round(crop.height)
+  };
+}
+
+function round(value: number) {
+  return Math.round(value * 1000) / 1000;
+}

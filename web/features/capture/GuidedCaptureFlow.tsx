@@ -42,6 +42,7 @@ import {
   shouldAutoAdvanceFromPositioning,
   type MobileScanRuntimeState
 } from "@/lib/capture/mobile-safari-scan-hardening";
+import { createScanDiagnosticSnapshot, isScanDiagnosticsEnabled, type ScanDiagnosticSnapshot } from "@/lib/capture/scan-diagnostics";
 import {
   cancelCaptureSession,
   getCompletedAngleCount,
@@ -143,6 +144,7 @@ export function GuidedCaptureFlow({
   const qualityService = useMemo(() => createBrowserImageQualityService(), []);
   const faceLandmarkProvider = useMemo(() => createLocalFaceLandmarkProvider(), []);
   const guidanceSession = useMemo(() => createCaptureGuidanceSession(naturalPhonePositioningThresholds), []);
+  const scanDiagnosticsEnabled = useScanDiagnosticsEnabled();
   const currentAngle = getCurrentAngle(session);
   const reviewReport = createCaptureReviewReport(session.angles);
   const completedAngles = getCompletedAngleCount(session.angles);
@@ -166,6 +168,29 @@ export function GuidedCaptureFlow({
     cameraError: Boolean(cameraError),
     isPortrait: mobileRuntime?.isPortrait
   });
+  const diagnosticSnapshot = scanDiagnosticsEnabled
+    ? createScanDiagnosticSnapshot({
+        runtime: mobileRuntime,
+        streamActive: Boolean(stream),
+        starting: isStartingCamera,
+        selectedFacingMode,
+        selectedDeviceId,
+        availableDeviceCount: cameraDevices.length,
+        cameraErrorCode,
+        videoMetrics: getDiagnosticVideoMetrics(videoRef.current),
+        trackSettings: stream?.getVideoTracks()[0]?.getSettings() ?? null,
+        previewGeometry: videoRef.current ? getVisiblePreviewGeometry(videoRef.current, previewIsMirrored) : null,
+        previewIsMirrored,
+        guidedStage,
+        positioningReady,
+        circularCanBegin,
+        qualityGate: guidedScanState.initialQualityGate,
+        liveGuidance,
+        liveCoverageDecision,
+        guidedScanState,
+        acceptedLiveFrameCount: acceptedLiveFrames.length
+      })
+    : null;
 
   useEffect(() => {
     sessionRef.current = session;
@@ -786,6 +811,7 @@ export function GuidedCaptureFlow({
           previewIsMirrored={previewIsMirrored}
           reviewReportCanContinue={reviewReport.canContinue}
           streamActive={Boolean(stream)}
+          diagnosticSnapshot={diagnosticSnapshot}
           videoRef={setPreviewVideoRef}
           onBeginFirstPass={() => setGuidedStage(guidedScanState.passes.find((pass) => pass.id === "first")?.completed ? "secondPass" : "firstPass")}
           onCancel={cancelSession}
@@ -1271,6 +1297,7 @@ function CircularGuidedCapturePanel({
   previewIsMirrored,
   reviewReportCanContinue,
   streamActive,
+  diagnosticSnapshot,
   videoRef,
   onBeginFirstPass,
   onCancel,
@@ -1305,6 +1332,7 @@ function CircularGuidedCapturePanel({
   previewIsMirrored: boolean;
   reviewReportCanContinue: boolean;
   streamActive: boolean;
+  diagnosticSnapshot: ScanDiagnosticSnapshot | null;
   videoRef: (node: HTMLVideoElement | null) => void;
   onBeginFirstPass: () => void;
   onCancel: () => void;
@@ -1437,6 +1465,7 @@ function CircularGuidedCapturePanel({
             </p>
             <QualityGateList gate={guidedScanState.initialQualityGate} />
             <LiveCoverageDecisionPanel decision={liveCoverageDecision} acceptedLiveFrameCount={acceptedLiveFrameCount} streamActive={streamActive} />
+            {diagnosticSnapshot ? <ScanDiagnosticsPanel snapshot={diagnosticSnapshot} /> : null}
             {cameraErrorCode ? <CameraBlockedRecoveryList steps={getCameraBlockedRecoverySteps({ isLikelyIPhoneSafari: Boolean(mobileRuntime?.isLikelyIPhoneSafari), secureContext: Boolean(mobileRuntime?.secureContext ?? true) })} /> : null}
             <p>Second-pass targets: {secondTargets.length > 0 ? secondTargets.map(formatGuidedRegionID).join(", ") : "none"}.</p>
             <div className="button-row compact-buttons">
@@ -1598,6 +1627,31 @@ function LiveCoverageDecisionPanel({
       ) : null}
       {decision?.status === "pendingStability" ? <p className="field-note">Hold this view briefly. Coverage is not counted until samples agree.</p> : null}
       {decision?.status === "accepted" ? <p className="field-note">This region was accepted and connected to the profile-capture queue.</p> : null}
+    </div>
+  );
+}
+
+function ScanDiagnosticsPanel({ snapshot }: { snapshot: ScanDiagnosticSnapshot }) {
+  const diagnosticText = useMemo(() => JSON.stringify(snapshot, null, 2), [snapshot]);
+  async function copyDiagnostic() {
+    if (typeof navigator === "undefined" || !navigator.clipboard) return;
+    await navigator.clipboard.writeText(diagnosticText);
+  }
+  return (
+    <div className="guided-quality-card" aria-label="Sanitized scan diagnostics">
+      <div className="status-row">
+        <strong>Sanitized iPhone scan diagnostics</strong>
+        <StatusBadge tone="info">dev only</StatusBadge>
+      </div>
+      <p className="field-note">
+        Copy this after a failed real-iPhone test. It excludes images, video, landmarks, embeddings, identity data, and precise facial measurements.
+      </p>
+      <textarea className="scan-diagnostics-output" readOnly value={diagnosticText} aria-label="Sanitized scan diagnostic JSON" />
+      <div className="button-row compact-buttons">
+        <Button variant="ghost" onClick={() => void copyDiagnostic()}>
+          Copy diagnostics
+        </Button>
+      </div>
     </div>
   );
 }
@@ -2007,6 +2061,40 @@ function useSetupReferenceVisualState(): SetupReferenceVisualState | null {
     setVisualState(allowed.includes(value as SetupReferenceVisualState) ? (value as SetupReferenceVisualState) : null);
   }, []);
   return visualState;
+}
+
+function useScanDiagnosticsEnabled() {
+  const [enabled, setEnabled] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setEnabled(
+      isScanDiagnosticsEnabled({
+        nodeEnv: process.env.NODE_ENV,
+        search: window.location.search
+      })
+    );
+  }, []);
+  return enabled;
+}
+
+function getDiagnosticVideoMetrics(video: HTMLVideoElement | null) {
+  if (!video) {
+    return {
+      intrinsicWidth: null,
+      intrinsicHeight: null,
+      readyState: null,
+      renderedWidth: null,
+      renderedHeight: null
+    };
+  }
+  const rect = video.getBoundingClientRect();
+  return {
+    intrinsicWidth: video.videoWidth || null,
+    intrinsicHeight: video.videoHeight || null,
+    readyState: video.readyState,
+    renderedWidth: Math.round(rect.width) || null,
+    renderedHeight: Math.round(rect.height) || null
+  };
 }
 
 function getReferenceCaptureMode(

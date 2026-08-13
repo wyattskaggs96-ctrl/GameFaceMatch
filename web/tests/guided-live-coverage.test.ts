@@ -73,6 +73,46 @@ describe("guided live coverage decisions", () => {
     expect(guidedSegmentToCaptureAngle("left")).toBe("leftProfile");
   });
 
+  it("maps yaw and pitch into deterministic circular sectors without using phone tilt", () => {
+    const cases: Array<[number, number, string]> = [
+      [0, 0, "center"],
+      [-38, -14, "upperLeft"],
+      [-70, 0, "left"],
+      [-38, 14, "lowerLeft"],
+      [0, 16, "lowerCenter"],
+      [38, 14, "lowerRight"],
+      [70, 0, "right"],
+      [38, -14, "upperRight"]
+    ];
+
+    for (const [yawDegrees, pitchDegrees, segmentID] of cases) {
+      expect(decision({ report: report({ yawDegrees, pitchDegrees }) }).assignedSegmentID, segmentID).toBe(segmentID);
+    }
+
+    const rollOnly = decision({ report: report({ yawDegrees: 0, pitchDegrees: 0, rollDegrees: 28 }) });
+    expect(rollOnly.assignedSegmentID).toBe("center");
+    expect(rollOnly.accepted).toBe(true);
+  });
+
+  it("resets stability after a lost face before accepting a reacquired sector", () => {
+    let accumulator = createInitialGuidedLiveCoverageAccumulatorState();
+    const first = updateGuidedLiveCoverageAccumulator(accumulator, decision({ now: 0, report: report({ yawDegrees: 72 }) }));
+    expect(first.decision.status).toBe("pendingStability");
+
+    accumulator = first.accumulator;
+    const lost = updateGuidedLiveCoverageAccumulator(accumulator, decision({ now: 300, report: { ...report({}), faceCount: "zero", detectedFaceCount: 0, faces: [] } }));
+    expect(lost.decision.status).toBe("rejected");
+    expect(lost.coverageFrame).toBeNull();
+
+    const reacquired = updateGuidedLiveCoverageAccumulator(lost.accumulator, decision({ now: 900, report: report({ yawDegrees: 72 }) }));
+    expect(reacquired.decision.status).toBe("pendingStability");
+    expect(reacquired.coverageFrame).toBeNull();
+
+    const stable = updateGuidedLiveCoverageAccumulator(reacquired.accumulator, decision({ now: 1_600, report: report({ yawDegrees: 72 }) }));
+    expect(stable.decision.status).toBe("accepted");
+    expect(stable.coverageFrame?.segmentID).toBe("right");
+  });
+
   it("uses visible preview crop and head pose for scan progress without requiring phone steering", () => {
     const visiblePreviewGeometry = createObjectFitCoverVisiblePreview({
       sourceWidth: 720,

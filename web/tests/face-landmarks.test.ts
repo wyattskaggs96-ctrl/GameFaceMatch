@@ -69,6 +69,32 @@ describe("MediaPipe face landmark result mapping", () => {
     expect(report.faces[0].expression.mouthOpenness).not.toBeNull();
     expect(report.faces[0].expression.smileLikelihood).toBe(0.3);
   });
+
+  it("keeps MediaPipe yaw, pitch, and roll signs deterministic for guided scan decisions", () => {
+    const yawRight = mapMediaPipeFaceLandmarkerResult({
+      faceLandmarks: [syntheticLandmarks()],
+      facialTransformationMatrixes: [{ data: yawMatrix(32) }]
+    });
+    expect(yawRight.faces[0].approximateHeadPose.yawDegrees).toBe(32);
+    expect(yawRight.faces[0].approximateHeadPose.pitchDegrees).toBeCloseTo(0);
+    expect(yawRight.faces[0].approximateHeadPose.rollDegrees).toBeCloseTo(0);
+
+    const pitchDown = mapMediaPipeFaceLandmarkerResult({
+      faceLandmarks: [syntheticLandmarks()],
+      facialTransformationMatrixes: [{ data: pitchMatrix(18) }]
+    });
+    expect(pitchDown.faces[0].approximateHeadPose.yawDegrees).toBeCloseTo(0);
+    expect(pitchDown.faces[0].approximateHeadPose.pitchDegrees).toBe(18);
+    expect(pitchDown.faces[0].approximateHeadPose.rollDegrees).toBeCloseTo(0);
+
+    const rollRight = mapMediaPipeFaceLandmarkerResult({
+      faceLandmarks: [syntheticLandmarks()],
+      facialTransformationMatrixes: [{ data: rollMatrix(24) }]
+    });
+    expect(rollRight.faces[0].approximateHeadPose.yawDegrees).toBeCloseTo(0);
+    expect(rollRight.faces[0].approximateHeadPose.pitchDegrees).toBeCloseTo(0);
+    expect(rollRight.faces[0].approximateHeadPose.rollDegrees).toBe(24);
+  });
 });
 
 describe("local model availability and failure states", () => {
@@ -147,4 +173,25 @@ function syntheticLandmarks(offset = 0) {
 
 function identityMatrix() {
   return [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
+}
+
+function yawMatrix(degrees: number) {
+  const radians = (degrees * Math.PI) / 180;
+  const cos = Math.cos(radians);
+  const sin = Math.sin(radians);
+  return [cos, 0, -sin, 0, 0, 1, 0, 0, sin, 0, cos, 0, 0, 0, 0, 1];
+}
+
+function pitchMatrix(degrees: number) {
+  const radians = (degrees * Math.PI) / 180;
+  const cos = Math.cos(radians);
+  const sin = Math.sin(radians);
+  return [1, 0, 0, 0, 0, cos, sin, 0, 0, -sin, cos, 0, 0, 0, 0, 1];
+}
+
+function rollMatrix(degrees: number) {
+  const radians = (degrees * Math.PI) / 180;
+  const cos = Math.cos(radians);
+  const sin = Math.sin(radians);
+  return [cos, sin, 0, 0, -sin, cos, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 }

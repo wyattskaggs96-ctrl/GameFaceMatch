@@ -107,6 +107,38 @@ describe("capture guidance frame validation", () => {
     expect(naturalPosition.requiredPoseReached).toBe(true);
   });
 
+  it("mirrors object-fit cover projection for the front camera without changing distance gates", () => {
+    const geometry = createObjectFitCoverVisiblePreview({
+      sourceWidth: 1920,
+      sourceHeight: 1080,
+      renderedWidth: 320,
+      renderedHeight: 568,
+      mirrored: true
+    });
+    expect(geometry).not.toBeNull();
+
+    const leftRawFace = face({ centerX: 0.52, centerY: 0.5, boxWidth: 0.14, boxHeight: 0.42 }).boundingBox;
+    const projected = projectFaceBoxToVisiblePreview(leftRawFace, geometry);
+    expect(projected.crop.x).toBeCloseTo(0.342, 3);
+    expect(projected.crop.width).toBeCloseTo(0.317, 3);
+    expect(projected.boundingBox.x + projected.boundingBox.width / 2).toBeCloseTo(0.437, 3);
+    expect(projected.boundingBox.height).toBeCloseTo(0.42, 2);
+
+    const naturalPosition = evaluateCaptureGuidanceFrame(
+      {
+        angleID: "straightOn",
+        faceLandmarkReport: report({ centerX: 0.52, centerY: 0.5, boxWidth: 0.14, boxHeight: 0.42 }),
+        imageQualityReport: quality(),
+        timestampMs: 0,
+        requireOperationalLandmarks: true,
+        visiblePreviewGeometry: geometry
+      },
+      naturalPhonePositioningThresholds
+    );
+    expect(naturalPosition.blockingIssues.map((issue) => issue.code)).not.toContain("faceOffCenter");
+    expect(naturalPosition.blockingIssues.map((issue) => issue.code)).not.toContain("faceTooFar");
+  });
+
   it("detects incorrect head direction without claiming depth accuracy", () => {
     const guidance = evaluateCaptureGuidanceFrame({
       angleID: "left45",

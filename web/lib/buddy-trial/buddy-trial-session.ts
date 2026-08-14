@@ -32,7 +32,7 @@ export type BuddyTrialState = (typeof BUDDY_TRIAL_STATES)[number];
 
 export type BuddyTrialInviteStatus = "active" | "expired" | "used" | "invalid";
 
-export type BuddyTrialCatalogGate = "available" | "owner_review_demo_available" | "production_catalog_unavailable";
+export type BuddyTrialCatalogGate = "available" | "beta_research_available" | "owner_review_demo_available" | "production_catalog_unavailable";
 
 export interface BuddyTrialInvite {
   inviteId: string;
@@ -239,12 +239,14 @@ export function createInitialBuddyTrialConsent(): BuddyTrialConsentRecord {
 export function createBuddyTrialSession({
   inviteId,
   productionCatalogRecordCount,
+  betaResearchEnabled = false,
   ownerReviewDemoEnabled = false,
   now = new Date(),
   sessionId
 }: {
   inviteId: string;
   productionCatalogRecordCount: number;
+  betaResearchEnabled?: boolean;
   ownerReviewDemoEnabled?: boolean;
   now?: Date;
   sessionId?: string;
@@ -260,7 +262,7 @@ export function createBuddyTrialSession({
     completedAt: null,
     deletedAt: null,
     consent: createInitialBuddyTrialConsent(),
-    catalogGate: productionCatalogRecordCount > 0 ? "available" : ownerReviewDemoEnabled ? "owner_review_demo_available" : "production_catalog_unavailable",
+    catalogGate: getBuddyTrialCatalogGate({ productionCatalogRecordCount, betaResearchEnabled, ownerReviewDemoEnabled }),
     buildGuide: null,
     refinementGuide: null,
     videoOneReview: null,
@@ -336,7 +338,22 @@ export function canAdvanceBuddyTrialToRecommendation(session: BuddyTrialSession)
 }
 
 export function isBuddyTrialRecommendationCatalogGateAvailable(catalogGate: BuddyTrialCatalogGate) {
-  return catalogGate === "available" || catalogGate === "owner_review_demo_available";
+  return catalogGate === "available" || catalogGate === "beta_research_available" || catalogGate === "owner_review_demo_available";
+}
+
+export function getBuddyTrialCatalogGate({
+  productionCatalogRecordCount,
+  betaResearchEnabled = false,
+  ownerReviewDemoEnabled = false
+}: {
+  productionCatalogRecordCount: number;
+  betaResearchEnabled?: boolean;
+  ownerReviewDemoEnabled?: boolean;
+}): BuddyTrialCatalogGate {
+  if (productionCatalogRecordCount > 0) return "available";
+  if (ownerReviewDemoEnabled) return "owner_review_demo_available";
+  if (betaResearchEnabled) return "beta_research_available";
+  return "production_catalog_unavailable";
 }
 
 export function createBuddyTrialBuildGuideProgress(stepCount: number, now = new Date()): BuddyTrialBuildGuideProgress {
@@ -460,6 +477,9 @@ export function getBuddyTrialNextAction(session: BuddyTrialSession) {
   if (session.catalogGate === "owner_review_demo_available" && session.state === "SCAN_COMPLETE") {
     return "Owner Review Demo settings are ready. They are test data, not verified CF27 records.";
   }
+  if (session.catalogGate === "beta_research_available" && session.state === "SCAN_COMPLETE") {
+    return "Experimental private-beta settings are ready. They are research results, not production catalog records.";
+  }
   if (session.catalogGate === "production_catalog_unavailable" && session.state === "SCAN_COMPLETE") {
     return "Verified College Football 27 settings are not available yet.";
   }
@@ -513,12 +533,14 @@ export function markBuddyTrialScanCompleteInStorage({
   inviteId,
   now = new Date(),
   productionCatalogRecordCount,
+  betaResearchEnabled = false,
   ownerReviewDemoEnabled = false,
   storage
 }: {
   inviteId: string;
   now?: Date;
   productionCatalogRecordCount: number;
+  betaResearchEnabled?: boolean;
   ownerReviewDemoEnabled?: boolean;
   storage: Pick<Storage, "getItem" | "setItem">;
 }) {
@@ -528,6 +550,7 @@ export function markBuddyTrialScanCompleteInStorage({
     createBuddyTrialSession({
       inviteId,
       productionCatalogRecordCount,
+      betaResearchEnabled,
       ownerReviewDemoEnabled,
       now
     });

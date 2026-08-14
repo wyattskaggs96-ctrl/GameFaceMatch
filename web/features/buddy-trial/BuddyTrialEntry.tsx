@@ -189,6 +189,7 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
     const nextSession = createBuddyTrialSession({
       inviteId,
       productionCatalogRecordCount,
+      betaResearchEnabled: true,
       ownerReviewDemoEnabled
     });
     persistSession(nextSession);
@@ -480,7 +481,7 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
           </span>
           <span>GameFace Match</span>
         </div>
-        <p className="buddy-trial-kicker">Private Buddy Trial</p>
+        <p className="buddy-trial-kicker">GameFace Match Private Beta</p>
         <h1 id="buddy-trial-title">{showOwnerReviewActiveBody ? "Your GameFace trial" : "Build yourself in College Football 27."}</h1>
         {!showOwnerReviewActiveBody ? <p className="buddy-trial-copy">Open the guided scan when you are ready.</p> : null}
 
@@ -502,10 +503,16 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
 
         {!showOwnerReviewActiveBody ? (
           <>
-            {session?.catalogGate === "production_catalog_unavailable" || (!ownerReviewDemoEnabled && productionCatalogRecordCount === 0) ? (
+            {session?.catalogGate === "production_catalog_unavailable" ? (
               <div className="buddy-trial-warning" role="status">
                 Real College Football 27 settings are not available yet. This link can still test the scan, build guide, video review, and deletion flow without
                 showing made-up live settings.
+              </div>
+            ) : null}
+            {session?.catalogGate === "beta_research_available" ? (
+              <div className="buddy-trial-beta-note" role="status">
+                GameFace Match Private Beta — this free invite uses experimental research settings. No payment is required, and production catalog records stay
+                separate.
               </div>
             ) : null}
           </>

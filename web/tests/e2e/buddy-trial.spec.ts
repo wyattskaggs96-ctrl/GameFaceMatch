@@ -24,7 +24,7 @@ test.describe("Buddy Trial invite route", () => {
     await page.goto(`/trial/${activeInvite}`);
 
     await expect(page.getByRole("heading", { name: /Build yourself in College Football 27/i })).toBeVisible();
-    await expect(page.getByText("Private Buddy Trial")).toBeVisible();
+    await expect(page.getByText("GameFace Match Private Beta")).toBeVisible();
     await expect(page.locator(".buddy-trial-copy", { hasText: "Open the guided scan when you are ready." })).toBeVisible();
     await expect(page.getByText("Scan in progress")).toHaveCount(0);
     await expect(page.getByText("What you'll do")).toHaveCount(0);
@@ -33,7 +33,7 @@ test.describe("Buddy Trial invite route", () => {
     if (process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO === "true") {
       await expect(page.getByText("Owner Review Demo — appearance settings are test data.")).toBeVisible();
     } else {
-      await expect(page.getByText(/Real College Football 27 settings are not available yet/i)).toBeVisible();
+      await expect(page.getByText(/Purchase verification is not connected yet|Real College Football 27 settings are not available yet/i)).toHaveCount(0);
     }
     await expect(page.getByRole("link", { name: /verifier/i })).toHaveCount(0);
 
@@ -42,11 +42,13 @@ test.describe("Buddy Trial invite route", () => {
     await expect(page.getByLabel(/I confirm I meet the age requirement/i)).not.toBeChecked();
     await page.getByLabel(/I confirm I meet the age requirement/i).check();
     await expect(continueButton).toBeEnabled();
+    await expect(page.getByText(/free invite uses experimental research settings/i)).toBeVisible();
     await continueButton.click();
 
     await expect(page).toHaveURL(new RegExp(`/\\?buddyTrialInvite=${activeInvite}#start$`));
     await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Get Started" })).toBeEnabled();
+    await expect(page.getByText(/Purchase verification is not connected yet|production scans stay blocked|Verified catalog data is not loaded/i)).toHaveCount(0);
     await expect(page.getByText("Development catalog state")).toHaveCount(0);
     await expect(page.getByText(/RGB|TrueDepth|ARKit|3D reconstruction|production catalog|development catalog/i)).toHaveCount(0);
 
@@ -72,6 +74,15 @@ test.describe("Buddy Trial invite route", () => {
     await page.reload();
     await expect(page.getByText("Ready to scan").first()).toBeVisible();
     await expect(page.getByText(/same private link/i)).toBeVisible();
+  });
+
+  test("keeps direct beta scan URLs payment-free but consent-gated", async ({ page }) => {
+    await page.goto(`/?buddyTrialInvite=${activeInvite}#start`);
+
+    await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Get Started" })).toBeDisabled();
+    await expect(page.getByText(/Return to your private beta invite link/i)).toBeVisible();
+    await expect(page.getByText(/Purchase verification is not connected yet|production scans stay blocked|Verified catalog data is not loaded/i)).toHaveCount(0);
   });
 
   test("shows invalid, expired, and completed invite states", async ({ page }) => {

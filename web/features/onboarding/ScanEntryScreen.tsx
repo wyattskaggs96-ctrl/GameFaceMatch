@@ -44,6 +44,7 @@ export function ScanEntryScreen({
   previewModeEnabled,
   billingState = "notConfigured",
   ownerReviewBuddyTrialReady = false,
+  privateBetaInviteMode = "none",
   onAnalytics
 }: {
   consentState: ConsentState;
@@ -55,14 +56,17 @@ export function ScanEntryScreen({
   previewModeEnabled: boolean;
   billingState?: BillingEligibilityState;
   ownerReviewBuddyTrialReady?: boolean;
+  privateBetaInviteMode?: "none" | "ready" | "needsConsent";
   onAnalytics: (name: AnalyticsEventName, payload?: AnalyticsPayload) => void;
 }) {
   const [selectedPlanID, setSelectedPlanID] = useState<ScanEntryPlanID>(DEFAULT_SCAN_ENTRY_PLAN_ID);
   const [isResolving, setIsResolving] = useState(false);
   const decision = useMemo(
     () =>
-      ownerReviewBuddyTrialReady
-        ? ({ allowed: true, reason: "ready", message: "Buddy Trial consent is complete. Start the guided scan." } as const)
+      privateBetaInviteMode === "ready" || ownerReviewBuddyTrialReady
+        ? ({ allowed: true, reason: "ready", message: "Private beta consent is complete. Start the guided scan." } as const)
+        : privateBetaInviteMode === "needsConsent"
+          ? ({ allowed: false, reason: "missingConsent", message: "Return to your private beta invite link and accept the beta scan consent before starting." } as const)
         : evaluateScanEntryStartGate({
             selectedPlanID,
             consentState,
@@ -71,7 +75,7 @@ export function ScanEntryScreen({
             environment,
             previewModeEnabled
           }),
-    [billingState, catalogAvailable, consentState, environment, ownerReviewBuddyTrialReady, previewModeEnabled, selectedPlanID]
+    [billingState, catalogAvailable, consentState, environment, ownerReviewBuddyTrialReady, previewModeEnabled, privateBetaInviteMode, selectedPlanID]
   );
   const selectedPlan = SCAN_ENTRY_PLANS.find((plan) => plan.id === selectedPlanID) ?? SCAN_ENTRY_PLANS[0];
 
@@ -140,8 +144,8 @@ export function ScanEntryScreen({
         ) : null}
         <details className="setup-disclosure">
           <summary>How the scan works</summary>
-          {ownerReviewBuddyTrialReady ? (
-            <p>This web version uses your camera to capture the angles needed for your GameFace. Your scan stays temporary by default.</p>
+          {privateBetaInviteMode !== "none" || ownerReviewBuddyTrialReady ? (
+            <p>This free private beta uses your camera to capture the angles needed for your GameFace. Your scan stays temporary by default.</p>
           ) : (
             <>
               <div className="setup-plan-list" role="radiogroup" aria-label="Scan plan">

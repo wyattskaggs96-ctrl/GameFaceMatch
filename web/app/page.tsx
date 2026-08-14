@@ -200,8 +200,9 @@ export default function HomePage() {
     NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO: process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO,
     NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV: process.env.NEXT_PUBLIC_GAMEFACE_DEPLOYMENT_ENV
   });
-  const ownerReviewBuddyTrialInviteReady = buddyTrialScanReady;
-  const buddyTrialCustomerScanMode = Boolean(ownerReviewBuddyTrialInviteReady && buddyTrialInviteId);
+  const activeBuddyTrialInviteInUrl = Boolean(buddyTrialInviteId && getBuddyTrialInvite(buddyTrialInviteId).status === "active");
+  const privateBetaInviteMode = activeBuddyTrialInviteInUrl ? (buddyTrialScanReady ? "ready" : "needsConsent") : "none";
+  const buddyTrialCustomerScanMode = Boolean(privateBetaInviteMode === "ready" && buddyTrialInviteId);
   const consentReady = hasRequiredCaptureConsent(consentState);
   const navItems = isDevelopment
     ? [
@@ -338,8 +339,8 @@ export default function HomePage() {
       return;
     }
     const storedSession = parseBuddyTrialSession(window.localStorage.getItem(createBuddyTrialStorageKey(buddyTrialInviteId)));
-    const consentedState = storedSession?.state === "CONSENTED" || storedSession?.state === "SCAN_IN_PROGRESS";
-    setBuddyTrialScanReady(Boolean(storedSession && consentedState && hasRequiredBuddyTrialConsent(storedSession.consent)));
+    const scanEligibleState = Boolean(storedSession && !["DELETED", "COMPLETE"].includes(storedSession.state));
+    setBuddyTrialScanReady(Boolean(storedSession && scanEligibleState && hasRequiredBuddyTrialConsent(storedSession.consent)));
   }, [buddyTrialInviteId]);
 
   useEffect(() => {
@@ -425,6 +426,7 @@ export default function HomePage() {
     markBuddyTrialScanCompleteInStorage({
       inviteId,
       productionCatalogRecordCount: productionCatalogManifest.items.length,
+      betaResearchEnabled: true,
       ownerReviewDemoEnabled,
       storage: window.localStorage
     });
@@ -895,7 +897,8 @@ export default function HomePage() {
             catalogAvailable={!catalogIsEmpty}
             environment={scanEntryEnvironment}
             previewModeEnabled={scanEntryPreviewModeEnabled}
-            ownerReviewBuddyTrialReady={ownerReviewBuddyTrialInviteReady}
+            ownerReviewBuddyTrialReady={false}
+            privateBetaInviteMode={privateBetaInviteMode}
             onAnalytics={trackAnalytics}
             onCancel={() => navigate("home")}
             onReadyToPrepare={() => {

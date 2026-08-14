@@ -43,7 +43,7 @@ function listFiles(directory) {
 function safeRead(file) {
   try {
     const stat = fs.statSync(file);
-    if (stat.size > 2 * 1024 * 1024) return "";
+    if (stat.size > 2 * 1024 * 1024 && !file.endsWith(".nft.json")) return "";
     return fs.readFileSync(file, "utf8");
   } catch {
     return "";

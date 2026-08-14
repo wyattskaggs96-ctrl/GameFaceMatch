@@ -1,8 +1,6 @@
-import fs from "node:fs";
-import path from "node:path";
 import { NextRequest, NextResponse } from "next/server";
 import { isSafeResearchDerivativePath } from "@/lib/phase-zero/current-evidence-gallery";
-import { isInternalToolingAvailableInRuntime } from "@/lib/security/owner-review-access";
+import { isLocalFileBackedResearchRouteAvailable } from "@/lib/security/internal-research-routes";
 
 const mimeTypes: Record<string, string> = {
   ".png": "image/png",
@@ -12,7 +10,7 @@ const mimeTypes: Record<string, string> = {
 };
 
 export async function GET(request: NextRequest) {
-  if (!isInternalToolingAvailableInRuntime(process.env)) {
+  if (!isLocalFileBackedResearchRouteAvailable(process.env)) {
     return NextResponse.json({ error: "Research evidence preview is unavailable in production builds." }, { status: 404 });
   }
 
@@ -21,9 +19,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Invalid research derivative path." }, { status: 400 });
   }
 
-  const repositoryRoot = path.resolve(process.cwd(), "..");
+  const [fs, path] = await Promise.all([import("node:fs"), import("node:path")]);
+  const repositoryRoot = path.resolve(/*turbopackIgnore: true*/ process.cwd(), "..");
   const absolutePath = path.resolve(repositoryRoot, relativePath);
-  const allowedRoot = path.resolve(repositoryRoot, "data/research/cf27/generated/full-resolution-frames");
+  const allowedRoot = path.join(repositoryRoot, "data", "research", "cf27", "generated", "full-resolution-frames");
   if (!absolutePath.startsWith(`${allowedRoot}${path.sep}`)) {
     return NextResponse.json({ error: "Research derivative path is outside the allowed root." }, { status: 400 });
   }

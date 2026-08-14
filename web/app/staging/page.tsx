@@ -1,7 +1,5 @@
 import { Alert, Card, ScreenHeader } from "@/components/design-system";
-import { loadStagingFixtureCatalog } from "@/lib/staging/staging-fixture-loader";
-import { createStagingReleaseScenario, isStagingReleaseModeEnabled, STAGING_ROUTE_PATH } from "@/lib/staging/staging-release-mode";
-import { StagingReleaseExperience } from "@/features/staging/StagingReleaseExperience";
+import { isStagingReleaseModeEnabled, STAGING_ROUTE_PATH } from "@/lib/staging/staging-release-gate";
 
 export default async function StagingPage() {
   if (!isStagingReleaseModeEnabled()) {
@@ -23,6 +21,11 @@ export default async function StagingPage() {
     );
   }
 
+  const [{ loadStagingFixtureCatalog }, { createStagingReleaseScenario }, { StagingReleaseExperience }] = await Promise.all([
+    import("@/lib/staging/staging-fixture-loader"),
+    import("@/lib/staging/staging-release-mode"),
+    import("@/features/staging/StagingReleaseExperience")
+  ]);
   const catalog = await loadStagingFixtureCatalog();
   const scenario = createStagingReleaseScenario(catalog);
   return <StagingReleaseExperience scenario={scenario} />;

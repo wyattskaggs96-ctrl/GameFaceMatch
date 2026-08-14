@@ -1,5 +1,13 @@
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
 import { migrateStandardFaceProfile } from "@/lib/profile/standard-face-profile";
+export {
+  isStagingReleaseModeEnabled,
+  STAGING_RELEASE_MODE,
+  STAGING_ROUTE_PATH,
+  STAGING_TEST_CATALOG_VERSION,
+  STAGING_TEST_DATA_LABEL
+} from "@/lib/staging/staging-release-gate";
+import { STAGING_RELEASE_MODE, STAGING_TEST_CATALOG_VERSION, STAGING_TEST_DATA_LABEL } from "@/lib/staging/staging-release-gate";
 import type {
   AppearanceAttribute,
   FacialMeasurement,
@@ -9,10 +17,6 @@ import type {
   StandardFacialMeasurementID
 } from "@/types/domain";
 
-export const STAGING_RELEASE_MODE = "staging";
-export const STAGING_TEST_DATA_LABEL = "TEST DATA";
-export const STAGING_ROUTE_PATH = "/staging";
-export const STAGING_TEST_CATALOG_VERSION = "synthetic-test-catalog-v1";
 const stagingSyntheticGameID = String.fromCharCode(
   83,
   89,
@@ -54,10 +58,6 @@ export interface StagingReleaseScenario {
   matches: GameAppearanceMatch[];
   resetStoragePrefix: string;
   sharingDisabledMessage: string;
-}
-
-export function isStagingReleaseModeEnabled(env: Record<string, string | undefined> = process.env) {
-  return env.GAMEFACE_RELEASE_MODE === STAGING_RELEASE_MODE || env.NEXT_PUBLIC_GAMEFACE_RELEASE_MODE === STAGING_RELEASE_MODE;
 }
 
 export function assertStagingCatalog(catalog: GameCatalogManifest) {

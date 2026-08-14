@@ -102,3 +102,5 @@ web/tsconfig.tsbuildinfo
 web/test-results/
 web/playwright-report/
 web/blob-report/
+.vercel
+.env*

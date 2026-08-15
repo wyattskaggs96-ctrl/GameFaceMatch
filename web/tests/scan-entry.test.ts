@@ -194,9 +194,23 @@ describe("guided circular scan coverage contract", () => {
     expect(source).toContain("Keep moving slowly to the next unfilled angle.");
     expect(source).toContain("guidedStage !== \"coverageReview\" || !customerMode || !stream");
     expect(source).toContain("cameraService.stopCameraPreview(stream)");
+    expect(source).toContain("useCallback((node: HTMLVideoElement | null)");
+    expect(source).toContain("videoRef.current.srcObject !== stream");
+    expect(source).toContain("node.srcObject !== activeStream");
+    expect(source).toContain("data-testid=\"guided-camera-video\"");
+    expect(source).toContain("data-video-node-id=\"guided-camera-video-node\"");
     expect(source).toContain("NEXT_PUBLIC_GFM_SETUP_VISUAL_TESTS");
     expect(source).toContain("process.env.NODE_ENV !== \"production\"");
     expect(source).not.toMatch(/setTimeout\([^)]*complete|elapsed.*complete|fake progress/i);
+  });
+
+  it("keeps Safari camera preview styling on a stable compositor layer", () => {
+    const css = fs.readFileSync(path.join(process.cwd(), "app/globals.css"), "utf8");
+    expect(css).toContain("-webkit-mask-image: -webkit-radial-gradient(white, black);");
+    expect(css).toContain("isolation: isolate;");
+    expect(css).toContain("backface-visibility: hidden;");
+    expect(css).toContain("transform: translateZ(0) scaleX(-1);");
+    expect(css).not.toMatch(/filter 340ms ease/);
   });
 });
 

@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties, ChangeEvent } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Button, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { RecoveryActionList } from "@/components/reliability";
 import { CameraAccessError, type BrowserCameraService, type CameraDeviceOption, type CameraFacingMode } from "@/lib/capture/browser-camera-service";
@@ -316,7 +316,7 @@ export function GuidedCaptureFlow({
   }, [faceLandmarkProvider]);
 
   useEffect(() => {
-    if (videoRef.current && stream) {
+    if (videoRef.current && stream && videoRef.current.srcObject !== stream) {
       videoRef.current.srcObject = stream;
     }
   }, [stream]);
@@ -799,12 +799,13 @@ export function GuidedCaptureFlow({
     onClose?.();
   }
 
-  function setPreviewVideoRef(node: HTMLVideoElement | null) {
+  const setPreviewVideoRef = useCallback((node: HTMLVideoElement | null) => {
     videoRef.current = node;
-    if (node && stream) {
-      node.srcObject = stream;
+    const activeStream = streamRef.current;
+    if (node && activeStream && node.srcObject !== activeStream) {
+      node.srcObject = activeStream;
     }
-  }
+  }, []);
 
   if (captureWorkflow === "guidedCircular") {
     return (
@@ -1396,7 +1397,19 @@ function CircularGuidedCapturePanel({
         <div className="setup-camera-shell" data-mode={captureMode} data-active={streamActive || Boolean(visualState)} data-mirrored={previewIsMirrored}>
           <div className="setup-camera-frame" aria-label={completionVisible ? "Completed face scan preview" : "Guided face scan camera frame"}>
             <div className="setup-camera-clip">
-              {streamActive ? <video ref={videoRef} autoPlay playsInline muted aria-label="Guided face scan camera preview" /> : <SetupCameraPlaceholder mode={captureMode} />}
+              {streamActive ? (
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  playsInline
+                  muted
+                  aria-label="Guided face scan camera preview"
+                  data-testid="guided-camera-video"
+                  data-video-node-id="guided-camera-video-node"
+                />
+              ) : (
+                <SetupCameraPlaceholder mode={captureMode} />
+              )}
               <span className="setup-scan-sheen" style={headGuideStyle} aria-hidden="true" />
             </div>
             <SegmentedCoverageRing segments={displayedSegments} passID={activePass.id} compact />

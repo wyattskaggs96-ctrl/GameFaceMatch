@@ -1933,11 +1933,14 @@ p {
   overflow: hidden;
   border-radius: 0;
   background: #050505;
+  isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
   transition:
     width 420ms ease,
     height 420ms ease,
-    border-radius 420ms ease,
-    filter 340ms ease;
+    border-radius 420ms ease;
 }
 
 .setup-camera-shell[data-mode="scan"] .setup-camera-clip,
@@ -1957,13 +1960,20 @@ p {
 }
 
 .setup-camera-frame video {
+  position: absolute;
+  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+  contain: paint;
 }
 
 .setup-camera-shell[data-mirrored="true"] video {
-  transform: scaleX(-1);
+  transform: translateZ(0) scaleX(-1);
 }
 
 .setup-camera-shell[data-mode="positioning"] .coverage-ring {

@@ -8,7 +8,6 @@ import { createLocalAnalyticsRecorder, type AnalyticsEventName, type AnalyticsPa
 import { AttributeConfirmation } from "@/features/attributes/AttributeConfirmation";
 import { BrowserCapabilityPanel } from "@/features/capture/BrowserCapabilityPanel";
 import { CaptureLightingCheck } from "@/features/capture/CaptureLightingCheck";
-import { CapturePreparation } from "@/features/capture/CapturePreparation";
 import { GuidedCaptureFlow } from "@/features/capture/GuidedCaptureFlow";
 import { GameCatalogStatus } from "@/features/catalog/GameCatalogStatus";
 import { PricingScaffold } from "@/features/commerce/PricingScaffold";
@@ -237,7 +236,7 @@ export default function HomePage() {
       ]
     : PRIMARY_NAV_ITEMS;
   const stepFlowProgress = getStepFlowProgress(screen);
-  const immersiveSetupScreen = screen === "welcome" || screen === "start" || screen === "capture" || (screen === "preparation" && buddyTrialCustomerScanMode);
+  const immersiveSetupScreen = screen === "welcome" || screen === "start" || screen === "capture" || screen === "preparation";
 
   const completedAngles = session.angles.filter((angle) => angle.status === "complete").length;
   const requiredAngles = session.angles.length;
@@ -834,7 +833,7 @@ export default function HomePage() {
     switch (screen) {
       case "welcome":
         return (
-          <WelcomeFaceIDStyleScreen onGetStarted={() => navigate("product")} />
+          <WelcomeFaceIDStyleScreen onGetStarted={() => navigate("preparation")} />
         );
       case "product":
         return (
@@ -901,11 +900,11 @@ export default function HomePage() {
           />
         );
       case "preparation":
-        return buddyTrialCustomerScanMode ? (
+        return (
           <GuidedCaptureFlow
             session={session}
             cameraService={cameraService}
-            customerMode={buddyTrialCustomerScanMode}
+            customerMode
             startInCustomerPreparation
             onSessionChange={handleSessionChange}
             onPerformanceRecord={trackPerformance}
@@ -913,8 +912,6 @@ export default function HomePage() {
             onClose={() => navigate("home")}
             onContinue={handleGuidedCaptureContinue}
           />
-        ) : (
-          <CapturePreparation onContinue={() => navigate("lighting")} onAssistedCapture={() => navigate("capture")} />
         );
       case "lighting":
         return <CaptureLightingCheck onContinue={() => navigate("capability")} />;

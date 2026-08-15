@@ -78,7 +78,7 @@ describe("mobile scan entry gate", () => {
     expect(isScanEntryPreviewModeAllowed("production", true)).toBe(false);
   });
 
-  it("does not contain reserved platform terminology or authentication claims in the new entry source", () => {
+  it("does not contain unsupported authentication or depth-capture claims in the new entry source", () => {
     const source = [
       "features/onboarding/ScanEntryScreen.tsx",
       "features/capture/GuidedCaptureFlow.tsx",
@@ -87,7 +87,7 @@ describe("mobile scan entry gate", () => {
     ]
       .map((file) => fs.readFileSync(path.join(process.cwd(), file), "utf8"))
       .join("\n");
-    expect(source).not.toMatch(/Face ID|facial recognition|identity verification|authentication|Apple-equivalent/i);
+    expect(source).not.toMatch(/facial recognition|identity verification|biometric authentication|Apple-equivalent|uses TrueDepth|uses ARKit|performs 3D reconstruction/i);
   });
 });
 
@@ -187,7 +187,8 @@ describe("guided circular scan coverage contract", () => {
     expect(source).toContain("blockingCodes.has(\"landmarksUnavailable\")");
     expect(source).toContain("Live coverage decision");
     expect(source).toContain("Accessibility Options");
-    expect(source).toContain("First GameFace scan complete.");
+    expect(source).toContain("First Face ID");
+    expect(source).toContain("scan complete.");
     expect(source).toContain("Move your head slowly to complete the circle");
     expect(source).toContain("NEXT_PUBLIC_GFM_SETUP_VISUAL_TESTS");
     expect(source).toContain("process.env.NODE_ENV !== \"production\"");

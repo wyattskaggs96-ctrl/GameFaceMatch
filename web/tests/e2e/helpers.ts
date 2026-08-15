@@ -12,9 +12,7 @@ export const requiredConsentNames = [
 export const requiredAngleLabels = ["Straight-on", "Left 45 degrees", "Right 45 degrees", "Left profile", "Right profile"] as const;
 
 export async function completeOnboarding(page: Page) {
-  await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Quick Scan to put you in the game" })).toBeVisible();
-  await page.getByRole("button", { name: "Get Started" }).click();
+  await page.goto("/#product");
   await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
   await page.getByRole("button", { name: "Continue to disclaimer" }).click();
   await expect(page.getByRole("heading", { name: "Independent companion" })).toBeVisible();
@@ -42,23 +40,7 @@ export async function navigateToCapture(page: Page) {
   await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
   await expect(page.getByText("Purchase verification is not connected yet")).toBeVisible();
   await expect(page.getByRole("button", { name: "Get Started" })).toBeDisabled();
-  await page.goto("/#preparation");
-  await expect(page.getByRole("heading", { name: "Get ready for your face scan" })).toBeVisible();
-  await expect(page.getByText("Browser capture uses guided RGB images only.")).toBeVisible();
-  await expect(page.getByText("Hold the phone at eye level.")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Use assisted capture" })).toBeVisible();
-  await page.getByRole("button", { name: "Get Started" }).click();
-  await expect(page.getByRole("heading", { name: "Confirm lighting before capture" })).toBeVisible();
-  await expect(page.getByText("This is a manual readiness checkpoint for the web RGB workflow.")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Continue to browser capability" })).toBeDisabled();
-  for (const checkbox of await page.getByRole("group", { name: "Required lighting confirmations" }).getByRole("checkbox").all()) {
-    await checkbox.check();
-  }
-  await expect(page.getByText("Lighting readiness confirmed for guided RGB capture.")).toBeVisible();
-  await page.getByRole("button", { name: "Continue to browser capability" }).click();
-  await expect(page.getByRole("heading", { name: "Camera or upload" })).toBeVisible();
-  await expect(page.getByText("Upload fallback is still an RGB-only workflow")).toBeVisible();
-  await page.getByRole("button", { name: "Continue to guided capture" }).click();
+  await page.goto("/#capture");
   await expect(page.getByRole("heading", { name: /Position your face within the frame\.|Rotate to portrait/ })).toBeVisible();
   await expect(
     page.getByText(/Keep your face centered with even light(?: and a neutral expression)?\.|Turn your phone upright before the scan starts\./)

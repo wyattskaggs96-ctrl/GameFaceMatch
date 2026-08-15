@@ -1736,6 +1736,128 @@ p {
   align-items: stretch;
 }
 
+.face-id-setup-screen {
+  grid-template-rows: auto auto auto 1fr;
+  padding:
+    max(12px, var(--safe-top))
+    max(14px, var(--safe-right))
+    max(34px, calc(var(--safe-bottom) + 24px))
+    max(14px, var(--safe-left));
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.face-id-setup-status {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  padding: 0 23px;
+  color: #ffffff;
+  font-size: 1.06rem;
+  font-weight: 800;
+}
+
+.face-id-dynamic-island {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 176px;
+  height: 38px;
+  border: 1px solid rgba(255, 59, 48, 0.72);
+  border-radius: 999px;
+  padding: 0 50px 0 17px;
+  background: #050505;
+  transform: translateX(-50%);
+}
+
+.face-id-dynamic-island span:first-child {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #ff3b30;
+}
+
+.face-id-dynamic-island span:last-child {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #30d158;
+}
+
+.face-id-setup-icons {
+  display: inline-grid;
+  place-items: center;
+  min-width: 25px;
+  height: 16px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  font-size: 0.66rem;
+  line-height: 1;
+}
+
+.face-id-setup-back {
+  position: absolute;
+  top: max(61px, calc(var(--safe-top) + 49px));
+  left: max(19px, calc(var(--safe-left) + 5px));
+  z-index: 2;
+}
+
+.face-id-setup-visual {
+  position: relative;
+  align-self: start;
+  display: grid;
+  place-items: center;
+  width: 264px;
+  aspect-ratio: 1;
+  margin: 91px auto 0;
+}
+
+.face-id-setup-visual .setup-segmented-ring span {
+  height: 32px;
+  background: rgba(235, 236, 240, 0.82);
+  transform-origin: 50% 132px;
+}
+
+.face-id-setup-visual .setup-face-glyph {
+  width: 45%;
+  height: 45%;
+  stroke: rgba(235, 236, 240, 0.86);
+  stroke-width: 5.6;
+}
+
+.face-id-setup-copy {
+  display: grid;
+  gap: 11px;
+  align-content: start;
+  max-width: 320px;
+  margin: 88px auto 0;
+  text-align: center;
+}
+
+.face-id-setup-copy h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.face-id-setup-copy p {
+  margin: 0;
+  color: #85858a;
+  font-size: 1.06rem;
+  line-height: 1.31;
+}
+
+.face-id-setup-actions {
+  padding-top: 0;
+}
+
 .setup-prep-content {
   align-self: center;
   display: grid;
@@ -1990,12 +2112,23 @@ p {
 
 .setup-capture-screen {
   grid-template-rows: auto minmax(0, 1fr);
+  padding:
+    max(12px, var(--safe-top))
+    max(14px, var(--safe-right))
+    max(34px, calc(var(--safe-bottom) + 24px))
+    max(14px, var(--safe-left));
 }
 
 .setup-capture-topbar {
+  position: absolute;
+  top: max(27px, calc(var(--safe-top) + 15px));
+  right: max(18px, calc(var(--safe-right) + 12px));
+  z-index: 4;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
 }
 
 .setup-camera-dot {
@@ -2008,11 +2141,11 @@ p {
 
 .setup-capture-main {
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto minmax(0, 1fr);
   align-content: start;
-  gap: clamp(24px, 5svh, 46px);
+  gap: 0;
   min-height: 0;
-  padding-top: clamp(10px, 3svh, 22px);
+  padding-top: 0;
 }
 
 .setup-camera-shell {
@@ -2025,22 +2158,45 @@ p {
   position: relative;
   display: grid;
   place-items: center;
-  width: min(100%, 400px);
-  aspect-ratio: 1;
-  overflow: hidden;
+  width: min(100%, 402px);
+  height: min(432px, calc(100svh - 488px));
+  min-height: 360px;
+  overflow: visible;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 42px;
+  border-radius: 54px;
   background: #050505;
   transition:
     border-radius 420ms ease,
-    width 420ms ease,
     border-color 280ms ease;
 }
 
-.setup-camera-shell[data-mode="scan"] .setup-camera-frame,
-.setup-camera-shell[data-mode="complete"] .setup-camera-frame {
-  width: min(82vw, 340px);
+.setup-camera-clip {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(326px, calc(100vw - 104px));
+  height: min(360px, calc(100svh - 560px));
+  min-height: 300px;
+  overflow: hidden;
+  border-radius: 0;
+  background: #050505;
+  transition:
+    width 420ms ease,
+    height 420ms ease,
+    border-radius 420ms ease,
+    filter 340ms ease;
+}
+
+.setup-camera-shell[data-mode="scan"] .setup-camera-clip,
+.setup-camera-shell[data-mode="complete"] .setup-camera-clip {
+  width: min(320px, calc(100vw - 110px));
+  height: min(320px, calc(100vw - 110px));
+  min-height: 240px;
   border-radius: 999px;
+}
+
+.setup-camera-shell[data-mode="complete"] .setup-camera-clip {
+  filter: blur(2px) saturate(0.86);
 }
 
 .setup-camera-shell[data-mode="complete"] .setup-camera-frame {
@@ -2066,17 +2222,25 @@ p {
   display: none;
 }
 
+.setup-scan-sheen {
+  display: none;
+}
+
 .setup-camera-shell[data-mode="scan"] .setup-scan-sheen {
   position: absolute;
   inset: 0;
+  display: block;
   border-radius: inherit;
   background:
-    radial-gradient(ellipse at 50% 50%, rgba(120, 243, 255, 0.34), transparent 34%),
-    linear-gradient(90deg, transparent 42%, rgba(115, 246, 255, 0.82) 48%, rgba(115, 246, 255, 0.2) 52%, transparent 60%);
+    linear-gradient(90deg, transparent calc(50% - 1px), rgba(116, 231, 242, 0.82) 50%, transparent calc(50% + 1px)),
+    radial-gradient(ellipse at 50% 50%, transparent 39%, rgba(116, 231, 242, 0.9) 40%, rgba(116, 231, 242, 0.9) 42%, transparent 43%);
   mix-blend-mode: screen;
   opacity: 0.72;
   animation: setup-scan-sheen 2.4s ease-in-out infinite alternate;
   pointer-events: none;
+  transform:
+    translate(var(--head-guide-x, 0), var(--head-guide-y, 0))
+    rotate(var(--head-guide-rotate, 0deg));
 }
 
 .setup-face-placeholder {
@@ -2107,22 +2271,30 @@ p {
 .setup-capture-copy {
   display: grid;
   justify-items: center;
-  gap: 10px;
-  min-height: 82px;
+  gap: 9px;
+  min-height: 84px;
+  margin-top: 54px;
   text-align: center;
 }
 
 .setup-capture-copy h1 {
   max-width: 350px;
+  display: grid;
+  gap: 2px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.25;
 }
 
 .setup-capture-copy p {
   max-width: 330px;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 
 .setup-capture-actions {
+  align-self: end;
   gap: 10px;
+  padding-top: 0;
 }
 
 .setup-capture-actions .alert {
@@ -2133,12 +2305,12 @@ p {
 }
 
 .coverage-ring[data-compact="true"] {
-  inset: -5%;
+  inset: 48px 20px 24px;
 }
 
 .coverage-ring[data-compact="true"] .coverage-ring-segment::before {
   width: 5px;
-  height: 19px;
+  height: 17px;
   background: rgba(235, 236, 240, 0.68);
 }
 
@@ -2164,10 +2336,38 @@ p {
 
 @keyframes setup-scan-sheen {
   from {
-    transform: rotate(-4deg) translateX(-5%);
+    opacity: 0.58;
   }
   to {
-    transform: rotate(7deg) translateX(5%);
+    opacity: 0.88;
+  }
+}
+
+@media (max-height: 820px) {
+  .face-id-setup-visual {
+    width: 238px;
+    margin-top: 42px;
+  }
+
+  .face-id-setup-visual .setup-segmented-ring span {
+    transform-origin: 50% 119px;
+  }
+
+  .face-id-setup-copy {
+    margin-top: 54px;
+  }
+
+  .setup-camera-frame {
+    height: 382px;
+  }
+
+  .setup-camera-clip {
+    height: 316px;
+    min-height: 280px;
+  }
+
+  .setup-capture-copy {
+    margin-top: 35px;
   }
 }
 

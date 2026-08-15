@@ -1,10 +1,9 @@
 "use client";
 
-import type { ChangeEvent } from "react";
+import type { CSSProperties, ChangeEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, Button, Card, ProgressBar, ScreenHeader, StatusBadge } from "@/components/design-system";
 import { RecoveryActionList } from "@/components/reliability";
-import { CapturePreparation } from "./CapturePreparation";
 import { CameraAccessError, type BrowserCameraService, type CameraDeviceOption, type CameraFacingMode } from "@/lib/capture/browser-camera-service";
 import {
   createCaptureGuidanceSession,
@@ -46,6 +45,7 @@ import {
 import { createScanDiagnosticSnapshot, isScanDiagnosticsEnabled, type ScanDiagnosticSnapshot } from "@/lib/capture/scan-diagnostics";
 import {
   cancelCaptureSession,
+  createInitialCaptureSession,
   getCompletedAngleCount,
   getCurrentAngle,
   removeAngleCapture,
@@ -763,6 +763,20 @@ export function GuidedCaptureFlow({
     onCancelSession(mutation.session);
   }
 
+  function restartGuidedAttempt() {
+    coverageAccumulatorRef.current = createInitialGuidedLiveCoverageAccumulatorState();
+    acceptedLiveFramesRef.current = [];
+    pendingAutoCaptureFramesRef.current = [];
+    liveAutoCaptureInFlightRef.current = false;
+    setAcceptedLiveFrames([]);
+    setLiveCoverageDecision(null);
+    setBaseGuidedScanState(createInitialGuidedScanState());
+    setGuidedStage("positioning");
+    const objectUrlsToRevoke = session.angles.flatMap((angle) => (angle.image?.objectUrl ? [angle.image.objectUrl] : []));
+    revokeObjectUrls(objectUrlsToRevoke);
+    onSessionChange(createInitialCaptureSession());
+  }
+
   function closeSession() {
     cancelSession();
     onClose?.();
@@ -778,8 +792,7 @@ export function GuidedCaptureFlow({
   if (captureWorkflow === "guidedCircular") {
     if (customerPreparationPending) {
       return (
-        <CapturePreparation
-          variant="immersive"
+        <FaceIDSetupIntro
           onContinue={() => void startCamera()}
           onAssistedCapture={() => {
             setCustomerAssistedMode(true);
@@ -817,12 +830,11 @@ export function GuidedCaptureFlow({
           diagnosticSnapshot={diagnosticSnapshot}
           videoRef={setPreviewVideoRef}
           onBeginFirstPass={() => setGuidedStage(guidedScanState.passes.find((pass) => pass.id === "first")?.completed ? "secondPass" : "firstPass")}
-          onCancel={cancelSession}
           onCaptureStill={() => void captureStillFrame()}
-          onClose={closeSession}
           onContinue={onContinue}
           onOpenCoverageReview={() => setGuidedStage("coverageReview")}
           onRetakeMissingArea={() => setGuidedStage("selectiveRetake")}
+          onRestart={restartGuidedAttempt}
           onStartCamera={() => void startCamera()}
           onStopCamera={stopCamera}
           onSwitchCamera={() => void switchCamera()}
@@ -836,7 +848,7 @@ export function GuidedCaptureFlow({
             setCaptureWorkflow("fiveAngleFallback");
           }}
         />
-        {guidedStage === "coverageReview" || guidedStage === "selectiveRetake" || completedAngles > 0 || visualState === "complete" ? (
+        {!customerMode && (guidedStage === "coverageReview" || guidedStage === "selectiveRetake" || completedAngles > 0 || visualState === "complete") ? (
           <CircularCoverageReviewPanel
             completedAngles={completedAngles}
             coverageRegions={Object.values(session.coverageMap.regions)}
@@ -1278,6 +1290,56 @@ export function GuidedCaptureFlow({
   );
 }
 
+function FaceIDSetupIntro({
+  onAssistedCapture,
+  onContinue
+}: {
+  onAssistedCapture: () => void;
+  onContinue: () => void;
+}) {
+  return (
+    <section className="setup-flow-screen face-id-setup-screen" aria-labelledby="capture-prep-title" data-testid="face-id-setup-intro">
+      <div className="face-id-setup-status" aria-hidden="true">
+        <strong>6:00</strong>
+        <span className="face-id-dynamic-island">
+          <span />
+          <span />
+        </span>
+        <span className="face-id-setup-icons">59</span>
+      </div>
+      <button className="setup-top-control face-id-setup-back" type="button" onClick={onAssistedCapture} aria-label="Accessibility options">
+        <span aria-hidden="true">‹</span>
+      </button>
+
+      <div className="face-id-setup-visual" aria-hidden="true">
+        <div className="setup-segmented-ring">
+          {Array.from({ length: 60 }, (_, index) => (
+            <span key={index} style={{ transform: `rotate(${index * 6}deg)` }} />
+          ))}
+        </div>
+        <svg className="setup-face-glyph" viewBox="0 0 140 140" focusable="false">
+          <circle cx="70" cy="70" r="48" />
+          <path d="M48 62v16" />
+          <path d="M92 62v16" />
+          <path d="M70 61v28" />
+          <path d="M44 96c12 18 40 18 52 0" />
+        </svg>
+      </div>
+
+      <div className="face-id-setup-copy">
+        <h1 id="capture-prep-title">How to Set Up Face ID</h1>
+        <p>First, position your face in the camera frame. Then move your head in a circle to show all the angles of your face.</p>
+      </div>
+
+      <div className="setup-bottom-actions face-id-setup-actions">
+        <Button className="setup-primary-button" onClick={onContinue}>
+          Get Started
+        </Button>
+      </div>
+    </section>
+  );
+}
+
 function CircularGuidedCapturePanel({
   cameraError,
   cameraErrorCode,
@@ -1303,12 +1365,11 @@ function CircularGuidedCapturePanel({
   diagnosticSnapshot,
   videoRef,
   onBeginFirstPass,
-  onCancel,
   onCaptureStill,
-  onClose,
   onContinue,
   onOpenCoverageReview,
   onRetakeMissingArea,
+  onRestart,
   onStartCamera,
   onStopCamera,
   onSwitchCamera,
@@ -1338,12 +1399,11 @@ function CircularGuidedCapturePanel({
   diagnosticSnapshot: ScanDiagnosticSnapshot | null;
   videoRef: (node: HTMLVideoElement | null) => void;
   onBeginFirstPass: () => void;
-  onCancel: () => void;
   onCaptureStill: () => void;
-  onClose: () => void;
   onContinue: () => void;
   onOpenCoverageReview: () => void;
   onRetakeMissingArea: () => void;
+  onRestart: () => void;
   onStartCamera: () => void;
   onStopCamera: () => void;
   onSwitchCamera: () => void;
@@ -1357,6 +1417,7 @@ function CircularGuidedCapturePanel({
   const completionVisible = captureMode === "complete";
   const orientationBlocked = mobileRuntime?.isPortrait === false;
   const visualPositioningReady = visualState === "positioning-ready";
+  const headGuideStyle = getHeadGuideStyle(liveCoverageDecision);
   const activeInstruction = getCircularInstruction({
     stage: guidedStage,
     streamActive,
@@ -1377,18 +1438,17 @@ function CircularGuidedCapturePanel({
 
   return (
     <section className="setup-flow-screen setup-capture-screen" aria-labelledby="guided-circular-title" data-testid={`setup-${captureMode}`}>
-      <div className="setup-capture-topbar">
-        <button className="setup-top-control" type="button" onClick={onClose} aria-label="Close face scan">
-          <span aria-hidden="true">‹</span>
-        </button>
+      <div className="setup-capture-topbar" aria-hidden="true">
         <span className="setup-camera-dot" aria-hidden="true" />
       </div>
       <div className="setup-capture-main">
         <div className="setup-camera-shell" data-mode={captureMode} data-active={streamActive || Boolean(visualState)} data-mirrored={previewIsMirrored}>
           <div className="setup-camera-frame" aria-label={completionVisible ? "Completed face scan preview" : "Guided face scan camera frame"}>
-            {streamActive ? <video ref={videoRef} autoPlay playsInline muted aria-label="Guided face scan camera preview" /> : <SetupCameraPlaceholder mode={captureMode} />}
+            <div className="setup-camera-clip">
+              {streamActive ? <video ref={videoRef} autoPlay playsInline muted aria-label="Guided face scan camera preview" /> : <SetupCameraPlaceholder mode={captureMode} />}
+              <span className="setup-scan-sheen" style={headGuideStyle} aria-hidden="true" />
+            </div>
             <SegmentedCoverageRing segments={displayedSegments} passID={activePass.id} compact />
-            <span className="setup-scan-sheen" aria-hidden="true" />
             <span className="guided-face-bracket guided-face-bracket-tl" aria-hidden="true" />
             <span className="guided-face-bracket guided-face-bracket-tr" aria-hidden="true" />
             <span className="guided-face-bracket guided-face-bracket-bl" aria-hidden="true" />
@@ -1397,8 +1457,17 @@ function CircularGuidedCapturePanel({
         </div>
 
         <div className="setup-capture-copy" aria-live="polite" aria-atomic="true">
-          <h1 id="guided-circular-title">{completionVisible ? "First GameFace scan complete." : displayInstruction}</h1>
-          <p>{completionVisible ? "Continue to build your GameFace." : statusDetail}</p>
+          <h1 id="guided-circular-title">
+            {completionVisible ? (
+              <>
+                <span>First Face ID</span>
+                <span>scan complete.</span>
+              </>
+            ) : (
+              displayInstruction
+            )}
+          </h1>
+          {!completionVisible ? <p>{statusDetail}</p> : null}
           <span className="sr-only" role="status">
             {primaryStatus}. First pass {firstProgress}% complete. Second pass {secondProgress}% complete. Accepted live frames: {acceptedLiveFrameCount}.
           </span>
@@ -1450,7 +1519,7 @@ function CircularGuidedCapturePanel({
               <Button variant="secondary" className="setup-secondary-button" onClick={onUseFallback}>
                 {customerMode && customerAssistedMode ? "Assisted Mode On" : "Accessibility Options"}
               </Button>
-              <Button variant="secondary" className="setup-secondary-button" onClick={onCancel}>
+              <Button variant="secondary" className="setup-secondary-button" onClick={onRestart}>
                 Start Over
               </Button>
             </>
@@ -1459,6 +1528,7 @@ function CircularGuidedCapturePanel({
               Review coverage
             </Button>
           )}
+          {!customerMode || diagnosticSnapshot || cameraErrorCode ? (
           <details className="setup-disclosure">
             <summary>Scan details</summary>
             <p>
@@ -1486,6 +1556,7 @@ function CircularGuidedCapturePanel({
               </Button>
             </div>
           </details>
+          ) : null}
         </div>
       </div>
     </section>
@@ -1510,6 +1581,24 @@ function SetupCameraPlaceholder({ mode }: { mode: "positioning" | "scan" | "comp
       <span className="guided-face-shoulders" />
     </div>
   );
+}
+
+function getHeadGuideStyle(decision: GuidedLiveFrameDecision | null): CSSProperties {
+  const yaw = decision?.yawDegrees.value ?? 0;
+  const pitch = decision?.pitchDegrees.value ?? 0;
+  const roll = decision?.rollDegrees.value ?? 0;
+  const translateX = clampNumber((yaw / 65) * 18, -18, 18);
+  const translateY = clampNumber((pitch / 28) * 12, -12, 12);
+  const rotate = clampNumber(roll, -18, 18);
+  return {
+    "--head-guide-x": `${translateX}px`,
+    "--head-guide-y": `${translateY}px`,
+    "--head-guide-rotate": `${rotate}deg`
+  } as CSSProperties;
+}
+
+function clampNumber(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
 }
 
 function SegmentedCoverageRing({

@@ -36,8 +36,8 @@ test.describe("GameFace Match E2E edge flows", () => {
     });
 
     await page.getByRole("button", { name: "Get Started" }).click();
-    await expect(page).toHaveURL(/#product$/);
-    await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
+    await expect(page).toHaveURL(/#preparation$/);
+    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toBeVisible();
   });
 
   test("blocks progress when required consent is missing", async ({ page }) => {
@@ -55,8 +55,7 @@ test.describe("GameFace Match E2E edge flows", () => {
     await page.getByRole("button", { name: "Start" }).first().click();
     await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Get Started" })).toBeDisabled();
-    await page.goto("/#preparation");
-    await page.getByRole("button", { name: "Get Started" }).click();
+    await page.goto("/#lighting");
 
     await expect(page.getByRole("heading", { name: "Confirm lighting before capture" })).toBeVisible();
     await expect(page.getByText("0 of 5 lighting checks confirmed.")).toBeVisible();
@@ -135,7 +134,8 @@ test.describe("GameFace Match E2E edge flows", () => {
     await page.getByRole("button", { name: "Get Started" }).focus();
     await expect(page.getByRole("button", { name: "Get Started" })).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toBeVisible();
+    await page.goto("/#product");
     await page.getByRole("button", { name: "Continue to disclaimer" }).focus();
     await page.keyboard.press("Enter");
     await expect(page.getByRole("heading", { name: "Independent companion" })).toBeVisible();
@@ -159,7 +159,7 @@ test.describe("GameFace Match E2E edge flows", () => {
     const prefersReducedMotion = await page.evaluate(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     expect(prefersReducedMotion).toBe(true);
     await page.getByRole("button", { name: "Get Started" }).click();
-    await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toBeVisible();
   });
 
   test("renders the mobile scan entry without horizontal overflow at supported widths", async ({ page }) => {

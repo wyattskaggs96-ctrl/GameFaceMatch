@@ -5,6 +5,7 @@ import {
   createInitialGuidedLiveCoverageAccumulatorState,
   evaluateGuidedLiveFrameDecision,
   guidedSegmentToCaptureAngle,
+  naturalPhoneLiveCoverageOptions,
   naturalPhoneScanCoverageThresholds,
   updateGuidedLiveCoverageAccumulator,
   type GuidedLiveAcceptedFrame
@@ -104,15 +105,29 @@ describe("guided live coverage decisions", () => {
     }
   });
 
+  it("maps comfortable natural phone yaw into inner and outer five-slot coverage", () => {
+    const cases: Array<[number, number, string]> = [
+      [0, 0, "center"],
+      [-18, -12, "left45"],
+      [-37, -18, "leftProfile"],
+      [18, 12, "right45"],
+      [37, 18, "rightProfile"]
+    ];
+
+    for (const [yawDegrees, pitchDegrees, segmentID] of cases) {
+      expect(decision({ report: report({ yawDegrees, pitchDegrees }), useNaturalScanThresholds: true }).assignedSegmentID, segmentID).toBe(segmentID);
+    }
+  });
+
   it("can complete the first ring from natural selfie head movement without steering the phone", () => {
     let state = createInitialGuidedScanState();
     let accumulator = createInitialGuidedLiveCoverageAccumulatorState();
     const naturalSequence = [
       { yawDegrees: 0, pitchDegrees: 0, expected: "center" },
-      { yawDegrees: -34, pitchDegrees: -6, expected: "left45" },
-      { yawDegrees: -68, pitchDegrees: 0, expected: "leftProfile" },
-      { yawDegrees: 34, pitchDegrees: 6, expected: "right45" },
-      { yawDegrees: 68, pitchDegrees: 0, expected: "rightProfile" }
+      { yawDegrees: -24, pitchDegrees: -6, expected: "left45" },
+      { yawDegrees: -40, pitchDegrees: 0, expected: "leftProfile" },
+      { yawDegrees: 24, pitchDegrees: 6, expected: "right45" },
+      { yawDegrees: 40, pitchDegrees: 0, expected: "rightProfile" }
     ] as const;
 
     naturalSequence.forEach((pose, index) => {
@@ -135,6 +150,87 @@ describe("guided live coverage decisions", () => {
     });
 
     expect(state.passes[0].completed).toBe(true);
+  });
+
+  it("fills all five capture slots from one slow natural head orbit with mild pose noise", () => {
+    let state = createInitialGuidedScanState();
+    let accumulator = createInitialGuidedLiveCoverageAccumulatorState();
+    let acceptedFrames: GuidedLiveAcceptedFrame[] = [];
+    const naturalOrbit = [
+      { now: 0, yawDegrees: 1, pitchDegrees: 0 },
+      { now: 350, yawDegrees: -1, pitchDegrees: 1 },
+      { now: 760, yawDegrees: -19, pitchDegrees: -10 },
+      { now: 1_120, yawDegrees: -22, pitchDegrees: -13 },
+      { now: 1_520, yawDegrees: -36, pitchDegrees: -18 },
+      { now: 1_880, yawDegrees: -41, pitchDegrees: -16 },
+      { now: 2_260, yawDegrees: -28, pitchDegrees: 4 },
+      { now: 2_640, yawDegrees: 0, pitchDegrees: 1 },
+      { now: 3_040, yawDegrees: 18, pitchDegrees: 11 },
+      { now: 3_400, yawDegrees: 22, pitchDegrees: 14 },
+      { now: 3_800, yawDegrees: 36, pitchDegrees: 19 },
+      { now: 4_160, yawDegrees: 43, pitchDegrees: 16 }
+    ];
+
+    const acceptedSegments: string[] = [];
+    for (const pose of naturalOrbit) {
+      const update = updateGuidedLiveCoverageAccumulator(
+        accumulator,
+        decision({
+          acceptedFrames,
+          now: pose.now,
+          report: report({ yawDegrees: pose.yawDegrees, pitchDegrees: pose.pitchDegrees }),
+          useNaturalScanThresholds: true
+        }),
+        naturalPhoneLiveCoverageOptions
+      );
+      accumulator = update.accumulator;
+      if (update.coverageFrame?.qualityAccepted && update.acceptedFrame) {
+        state = applyCoverageFrame(state, update.coverageFrame);
+        acceptedFrames = [...acceptedFrames, update.acceptedFrame];
+        acceptedSegments.push(update.acceptedFrame.assignedSegmentID);
+      }
+    }
+
+    expect(acceptedSegments).toEqual(["center", "left45", "leftProfile", "right45", "rightProfile"]);
+    expect(state.passes[0].completed).toBe(true);
+  });
+
+  it("does not double-invert mirrored front-camera yaw or treat a new slot as a duplicate", () => {
+    const mirroredPreview = createObjectFitCoverVisiblePreview({
+      sourceWidth: 720,
+      sourceHeight: 1280,
+      renderedWidth: 340,
+      renderedHeight: 340,
+      mirrored: true
+    });
+    const acceptedFrames: GuidedLiveAcceptedFrame[] = [
+      {
+        timestampMs: 100,
+        assignedSegmentID: "center",
+        passID: "first",
+        yawDegrees: 0,
+        pitchDegrees: 0,
+        rollDegrees: 0
+      }
+    ];
+
+    const leftTurn = decision({
+      acceptedFrames,
+      report: report({ centerX: 0.54, yawDegrees: -22, pitchDegrees: -8 }),
+      useNaturalScanThresholds: true,
+      visiblePreviewGeometry: mirroredPreview
+    });
+    const rightTurn = decision({
+      acceptedFrames,
+      report: report({ centerX: 0.46, yawDegrees: 22, pitchDegrees: 8 }),
+      useNaturalScanThresholds: true,
+      visiblePreviewGeometry: mirroredPreview
+    });
+
+    expect(leftTurn.assignedSegmentID).toBe("left45");
+    expect(leftTurn.duplicateAngle).toBe(false);
+    expect(rightTurn.assignedSegmentID).toBe("right45");
+    expect(rightTurn.duplicateAngle).toBe(false);
   });
 
   it("resets stability after a lost face before accepting a reacquired sector", () => {
@@ -171,7 +267,7 @@ describe("guided live coverage decisions", () => {
       useNaturalScanThresholds: true
     });
 
-    expect(turnedHead.assignedSegmentID).toBe("right45");
+    expect(turnedHead.assignedSegmentID).toBe("rightProfile");
     expect(turnedHead.rejectionReasons).not.toContain("Center your face.");
     expect(turnedHead.status).toBe("pendingStability");
 
@@ -277,7 +373,7 @@ function decision({
     imageQualityReport,
     acceptedFrames,
     visiblePreviewGeometry,
-    options: useNaturalScanThresholds ? { thresholds: naturalPhoneScanCoverageThresholds } : undefined
+    options: useNaturalScanThresholds ? { ...naturalPhoneLiveCoverageOptions, thresholds: naturalPhoneScanCoverageThresholds } : undefined
   });
 }
 

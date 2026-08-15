@@ -27,6 +27,7 @@ import {
   createInitialGuidedLiveCoverageAccumulatorState,
   evaluateGuidedLiveFrameDecision,
   guidedSegmentToCaptureAngle,
+  naturalPhoneLiveCoverageOptions,
   naturalPhoneScanCoverageThresholds,
   updateGuidedLiveCoverageAccumulator,
   type GuidedLiveAcceptedFrame,
@@ -389,6 +390,7 @@ export function GuidedCaptureFlow({
             acceptedFrames: acceptedLiveFramesRef.current,
             visiblePreviewGeometry: getVisiblePreviewGeometry(video, previewIsMirrored),
             options: {
+              ...naturalPhoneLiveCoverageOptions,
               thresholds: guidedStageRef.current === "positioning" ? naturalPhonePositioningThresholds : naturalPhoneScanCoverageThresholds
             }
           });
@@ -396,7 +398,7 @@ export function GuidedCaptureFlow({
             coverageAccumulatorRef.current = createInitialGuidedLiveCoverageAccumulatorState();
             setLiveCoverageDecision(frameDecision);
           } else {
-            const coverageUpdate = updateGuidedLiveCoverageAccumulator(coverageAccumulatorRef.current, frameDecision);
+            const coverageUpdate = updateGuidedLiveCoverageAccumulator(coverageAccumulatorRef.current, frameDecision, naturalPhoneLiveCoverageOptions);
             coverageAccumulatorRef.current = coverageUpdate.accumulator;
             setLiveCoverageDecision(coverageUpdate.decision);
             if (coverageUpdate.coverageFrame) {

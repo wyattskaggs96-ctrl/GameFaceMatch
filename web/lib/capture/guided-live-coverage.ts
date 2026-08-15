@@ -77,6 +77,10 @@ export interface GuidedLiveCoverageOptions {
   duplicateYawToleranceDegrees: number;
   duplicatePitchToleranceDegrees: number;
   minFaceConfidence: number;
+  sideYawThresholdDegrees: number;
+  outerYawThresholdDegrees: number;
+  pitchSectorThresholdDegrees: number;
+  pitchDominanceRatio: number;
   thresholds: CaptureGuidanceThresholds;
 }
 
@@ -86,6 +90,10 @@ export const defaultGuidedLiveCoverageOptions: GuidedLiveCoverageOptions = {
   duplicateYawToleranceDegrees: 9,
   duplicatePitchToleranceDegrees: 12,
   minFaceConfidence: 0.35,
+  sideYawThresholdDegrees: 16,
+  outerYawThresholdDegrees: 52,
+  pitchSectorThresholdDegrees: 9,
+  pitchDominanceRatio: 0.7,
   thresholds: defaultCaptureGuidanceThresholds
 };
 
@@ -98,9 +106,15 @@ export const naturalPhoneScanCoverageThresholds: CaptureGuidanceThresholds = {
   maxCenterMotionPerSecond: 0.42
 };
 
-const NATURAL_SIDE_YAW_THRESHOLD_DEGREES = 16;
-const NATURAL_PROFILE_YAW_THRESHOLD_DEGREES = 52;
-const NATURAL_PITCH_SECTOR_THRESHOLD_DEGREES = 9;
+export const naturalPhoneLiveCoverageOptions: Partial<GuidedLiveCoverageOptions> = {
+  minAgreeingSamples: 2,
+  minDwellMs: 300,
+  sideYawThresholdDegrees: 14,
+  outerYawThresholdDegrees: 34,
+  duplicateYawToleranceDegrees: 8,
+  duplicatePitchToleranceDegrees: 10,
+  thresholds: naturalPhoneScanCoverageThresholds
+};
 
 export function createInitialGuidedLiveCoverageAccumulatorState(): GuidedLiveCoverageAccumulatorState {
   return {
@@ -131,8 +145,8 @@ export function evaluateGuidedLiveFrameDecision(input: {
   const yaw = pose?.yawDegrees ?? null;
   const pitch = pose?.pitchDegrees ?? null;
   const roll = pose?.rollDegrees ?? null;
-  const classifiedPoseSectorID = classifyNaturalPoseSector(yaw, pitch);
-  const assignedSegmentID = assignCoverageSegment(yaw, pitch);
+  const classifiedPoseSectorID = classifyNaturalPoseSector(yaw, pitch, options);
+  const assignedSegmentID = assignCoverageSegment(yaw, options);
   const duplicateFrame = assignedSegmentID
     ? input.acceptedFrames.find((frame) => frame.passID === input.passID && frame.assignedSegmentID === assignedSegmentID)
     : null;
@@ -309,24 +323,25 @@ function rejectedCoverageFrame(decision: GuidedLiveFrameDecision): GuidedScanCov
   };
 }
 
-export function classifyNaturalPoseSector(yaw: number | null, pitch: number | null): GuidedLivePoseSectorID | null {
+export function classifyNaturalPoseSector(yaw: number | null, pitch: number | null, options: Partial<GuidedLiveCoverageOptions> = {}): GuidedLivePoseSectorID | null {
+  const merged = { ...defaultGuidedLiveCoverageOptions, ...options };
   if (yaw === null) return null;
   const absoluteYaw = Math.abs(yaw);
   const absolutePitch = Math.abs(pitch ?? 0);
-  if (pitch !== null && absolutePitch >= NATURAL_PITCH_SECTOR_THRESHOLD_DEGREES && absolutePitch > absoluteYaw * 0.7) {
+  if (pitch !== null && absolutePitch >= merged.pitchSectorThresholdDegrees && absolutePitch > absoluteYaw * merged.pitchDominanceRatio) {
     return pitch < 0 ? "up" : "down";
   }
-  if (yaw < -NATURAL_SIDE_YAW_THRESHOLD_DEGREES) return "left";
-  if (yaw > NATURAL_SIDE_YAW_THRESHOLD_DEGREES) return "right";
+  if (yaw < -merged.sideYawThresholdDegrees) return "left";
+  if (yaw > merged.sideYawThresholdDegrees) return "right";
   return "center";
 }
 
-function assignCoverageSegment(yaw: number | null, _pitch: number | null): GuidedScanCoverageSegmentID | null {
+function assignCoverageSegment(yaw: number | null, options: GuidedLiveCoverageOptions): GuidedScanCoverageSegmentID | null {
   if (yaw === null) return null;
-  if (yaw <= -NATURAL_PROFILE_YAW_THRESHOLD_DEGREES) return "leftProfile";
-  if (yaw < -NATURAL_SIDE_YAW_THRESHOLD_DEGREES) return "left45";
-  if (yaw >= NATURAL_PROFILE_YAW_THRESHOLD_DEGREES) return "rightProfile";
-  if (yaw > NATURAL_SIDE_YAW_THRESHOLD_DEGREES) return "right45";
+  if (yaw <= -options.outerYawThresholdDegrees) return "leftProfile";
+  if (yaw < -options.sideYawThresholdDegrees) return "left45";
+  if (yaw >= options.outerYawThresholdDegrees) return "rightProfile";
+  if (yaw > options.sideYawThresholdDegrees) return "right45";
   return "center";
 }
 

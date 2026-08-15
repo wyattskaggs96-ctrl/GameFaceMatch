@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createInitialGuidedScanState } from "@/lib/capture/guided-scan-strategy";
-import { evaluateGuidedLiveFrameDecision, naturalPhoneScanCoverageThresholds } from "@/lib/capture/guided-live-coverage";
+import { evaluateGuidedLiveFrameDecision, naturalPhoneLiveCoverageOptions, naturalPhoneScanCoverageThresholds } from "@/lib/capture/guided-live-coverage";
 import { evaluateMobileScanRuntime } from "@/lib/capture/mobile-safari-scan-hardening";
 import { createScanDiagnosticSnapshot, isScanDiagnosticsEnabled } from "@/lib/capture/scan-diagnostics";
 import { createObjectFitCoverVisiblePreview } from "@/lib/capture/visible-preview-geometry";
@@ -30,7 +30,7 @@ describe("scan diagnostics", () => {
         renderedHeight: 340,
         mirrored: true
       }),
-      options: { thresholds: naturalPhoneScanCoverageThresholds }
+      options: { ...naturalPhoneLiveCoverageOptions, thresholds: naturalPhoneScanCoverageThresholds }
     });
 
     const snapshot = createScanDiagnosticSnapshot({
@@ -96,7 +96,7 @@ describe("scan diagnostics", () => {
     expect(snapshot.observedFace.pitchBucket).toBe("up-about-10");
     expect(snapshot.observedFace.poseDegrees).toMatchObject({ yaw: 42, pitch: -12, roll: 0 });
     expect(snapshot.readiness.currentClassifiedSector).toBe("right");
-    expect(snapshot.readiness.assignedSegment).toBe("right45");
+    expect(snapshot.readiness.assignedSegment).toBe("rightProfile");
     expect(snapshot.readiness.completedSectors).toEqual([]);
 
     const serialized = JSON.stringify(snapshot);

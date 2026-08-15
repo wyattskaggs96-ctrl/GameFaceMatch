@@ -2054,6 +2054,51 @@ p {
   font-size: 0.92rem;
 }
 
+.setup-scan-progress-panel {
+  display: grid;
+  gap: 6px;
+  width: min(100%, 342px);
+  margin: 12px auto 0;
+  padding: 10px 12px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(0.78rem, 3.1vw, 0.9rem);
+  line-height: 1.35;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.setup-scan-progress-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.setup-scan-progress-row strong {
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.setup-scan-progress-row span,
+.setup-scan-progress-panel p span {
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.setup-scan-progress-panel p {
+  margin: 0;
+  max-width: none;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.setup-scan-progress-panel .setup-scan-movement-cue {
+  color: #ffffff;
+  font-weight: 650;
+}
+
 .setup-capture-actions {
   align-self: end;
   gap: 10px;

@@ -15,6 +15,21 @@ import { MEDIAPIPE_FACE_LANDMARKER_METADATA, unavailableFaceLandmarkReport } fro
 import type { DetectedFaceLandmarks, FaceLandmarkPoint, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
 
 describe("guided live coverage decisions", () => {
+  it("documents the current natural-phone classifier envelopes", () => {
+    expect(naturalPhoneLiveCoverageOptions).toMatchObject({
+      sideYawThresholdDegrees: 14,
+      outerYawThresholdDegrees: 34,
+      duplicateYawToleranceDegrees: 8,
+      duplicatePitchToleranceDegrees: 10
+    });
+    expect(naturalPhoneScanCoverageThresholds).toMatchObject({
+      faceMinBoxSize: 0.2,
+      faceMaxBoxSize: 0.88,
+      centerToleranceX: 0.3,
+      centerToleranceY: 0.32
+    });
+  });
+
   it("rejects unavailable, zero-face, and multiple-face frames", () => {
     const unavailable = decision({ report: unavailableFaceLandmarkReport({ message: "Model missing." }) });
     expect(unavailable.status).toBe("rejected");

@@ -217,6 +217,25 @@ test.describe("GameFace Match E2E edge flows", () => {
     }
   });
 
+  test("shows five-slot scan progress and missing angles without developer duplicate jargon", async ({ page }) => {
+    test.skip(
+      process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO !== "true" && process.env.NEXT_PUBLIC_GFM_SETUP_VISUAL_TESTS !== "1",
+      "Requires setup visual-state test hooks."
+    );
+    await page.setViewportSize({ width: 430, height: 932 });
+    await page.goto("/?setupVisualState=scan-partial#capture");
+
+    await expect(page.getByRole("heading", { name: "Move your head slowly to complete the circle." })).toBeVisible();
+    await expect(page.getByLabel("Guided scan progress")).toContainText("40% complete");
+    await expect(page.getByLabel("Guided scan progress")).toContainText("2/5 angles");
+    await expect(page.getByLabel("Guided scan progress")).toContainText("Captured: Front • Left 45");
+    await expect(page.getByLabel("Guided scan progress")).toContainText("Still needed: Left outer • Right 45 • Right outer");
+    await expect(page.getByLabel("Guided scan progress")).toContainText("Turn farther left");
+    await expect(page.getByText("Duplicate angle ignored")).toHaveCount(0);
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+    expect(overflow).toBe(false);
+  });
+
   test("loads the FC 26 recipe workflow independently from College Football catalog results", async ({ page }) => {
     await page.goto("/#fc26");
 

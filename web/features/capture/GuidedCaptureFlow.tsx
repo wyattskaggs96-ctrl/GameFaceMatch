@@ -23,6 +23,7 @@ import {
   type GuidedScanReviewRegion,
   type GuidedScanState
 } from "@/lib/capture/guided-scan-strategy";
+import { getGuidedScanMovementCue, getGuidedScanProgressSummary, type GuidedScanProgressSummary } from "@/lib/capture/guided-scan-progress";
 import {
   createInitialGuidedLiveCoverageAccumulatorState,
   evaluateGuidedLiveFrameDecision,
@@ -1368,6 +1369,8 @@ function CircularGuidedCapturePanel({
   const secondPass = guidedScanState.passes.find((pass) => pass.id === "second") ?? guidedScanState.passes[1];
   const activePass = guidedStage === "secondPass" || guidedStage === "coverageReview" ? secondPass : firstPass;
   const displayedSegments = createDisplayedSegments(activePass.segments, visualState);
+  const displayedActivePass = { ...activePass, segments: displayedSegments };
+  const progressSummary = getGuidedScanProgressSummary(displayedActivePass);
   const captureMode = getReferenceCaptureMode(guidedStage, streamActive, visualState);
   const completionVisible = captureMode === "complete";
   const orientationBlocked = mobileRuntime?.isPortrait === false;
@@ -1386,6 +1389,7 @@ function CircularGuidedCapturePanel({
   const secondTargets = getSecondPassTargets(guidedScanState);
   const selectiveRegion = getSelectiveRetakeRegion(guidedScanState);
   const primaryStatus = getReferenceStatusLabel({ captureMode, cameraError, circularCanBegin, liveCoverageDecision, visualState });
+  const movementCue = getGuidedScanMovementCue(displayedActivePass, liveCoverageDecision);
   const statusDetail = orientationBlocked
     ? "Turn your phone upright before the scan starts."
     : getReferenceStatusDetail({ cameraError, liveCoverageDecision, positioningReady: positioningReady || visualPositioningReady, visualState });
@@ -1432,6 +1436,7 @@ function CircularGuidedCapturePanel({
             )}
           </h1>
           {!completionVisible ? <p>{statusDetail}</p> : null}
+          {captureMode === "scan" && !completionVisible ? <GuidedScanProgressPanel summary={progressSummary} movementCue={movementCue} /> : null}
           <span className="sr-only" role="status">
             {primaryStatus}. First pass {firstProgress}% complete. Second pass {secondProgress}% complete. Accepted live frames: {acceptedLiveFrameCount}.
           </span>
@@ -1683,6 +1688,28 @@ function LiveCoverageDecisionPanel({
       ) : null}
       {decision?.status === "pendingStability" ? <p className="field-note">Hold this view briefly. Coverage is not counted until samples agree.</p> : null}
       {decision?.status === "accepted" ? <p className="field-note">This region was accepted and connected to the profile-capture queue.</p> : null}
+    </div>
+  );
+}
+
+function GuidedScanProgressPanel({ summary, movementCue }: { summary: GuidedScanProgressSummary; movementCue: string }) {
+  const stillNeeded = summary.missingLabels.length > 0 ? summary.missingLabels.join(" • ") : "None";
+  const captured = summary.capturedLabels.length > 0 ? summary.capturedLabels.join(" • ") : "None yet";
+  return (
+    <div className="setup-scan-progress-panel" aria-label="Guided scan progress">
+      <div className="setup-scan-progress-row">
+        <strong>{summary.percent}% complete</strong>
+        <span>
+          {summary.acceptedCount}/{summary.totalCount} angles
+        </span>
+      </div>
+      <p>
+        <span>Captured:</span> {captured}
+      </p>
+      <p>
+        <span>Still needed:</span> {stillNeeded}
+      </p>
+      <p className="setup-scan-movement-cue">{movementCue}</p>
     </div>
   );
 }
@@ -2211,7 +2238,7 @@ function createDisplayedSegments(
   visualState: SetupReferenceVisualState | null
 ): GuidedScanState["passes"][number]["segments"] {
   const acceptedCount =
-    visualState === "scan-partial" ? 5 : visualState === "scan-near-complete" ? 7 : visualState === "complete" ? segments.length : 0;
+    visualState === "scan-partial" ? 2 : visualState === "scan-near-complete" ? 4 : visualState === "complete" ? segments.length : 0;
   if (acceptedCount === 0) return segments;
   return segments.map((segment, index) => ({
     ...segment,

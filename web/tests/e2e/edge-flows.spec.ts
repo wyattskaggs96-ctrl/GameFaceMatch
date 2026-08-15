@@ -37,7 +37,8 @@ test.describe("GameFace Match E2E edge flows", () => {
 
     await page.getByRole("button", { name: "Get Started" }).click();
     await expect(page).toHaveURL(/#preparation$/);
-    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: /Position your face within the frame\.|Rotate to portrait/ })).toBeVisible();
   });
 
   test("blocks progress when required consent is missing", async ({ page }) => {
@@ -134,7 +135,8 @@ test.describe("GameFace Match E2E edge flows", () => {
     await page.getByRole("button", { name: "Get Started" }).focus();
     await expect(page.getByRole("button", { name: "Get Started" })).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: /Position your face within the frame\.|Rotate to portrait/ })).toBeVisible();
     await page.goto("/#product");
     await page.getByRole("button", { name: "Continue to disclaimer" }).focus();
     await page.keyboard.press("Enter");
@@ -159,7 +161,8 @@ test.describe("GameFace Match E2E edge flows", () => {
     const prefersReducedMotion = await page.evaluate(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     expect(prefersReducedMotion).toBe(true);
     await page.getByRole("button", { name: "Get Started" }).click();
-    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: /Position your face within the frame\.|Rotate to portrait/ })).toBeVisible();
   });
 
   test("renders the mobile scan entry without horizontal overflow at supported widths", async ({ page }) => {

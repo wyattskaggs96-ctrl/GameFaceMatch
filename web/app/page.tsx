@@ -905,7 +905,7 @@ export default function HomePage() {
             session={session}
             cameraService={cameraService}
             customerMode
-            startInCustomerPreparation
+            autoStartCamera
             onSessionChange={handleSessionChange}
             onPerformanceRecord={trackPerformance}
             onCancelSession={handleGuidedCaptureCancelled}

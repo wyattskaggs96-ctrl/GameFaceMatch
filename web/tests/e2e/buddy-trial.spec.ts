@@ -59,10 +59,8 @@ test.describe("Buddy Trial invite route", () => {
     await expect(page.getByText(/Purchase verification is not connected yet|production scans stay blocked|Verified catalog data is not loaded/i)).toHaveCount(0);
 
     await page.getByRole("button", { name: "Get Started" }).click();
-    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toBeVisible();
-    await expect(page.getByText("First, position your face in the camera frame. Then move your head in a circle to show all the angles of your face.")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toHaveCount(0);
     await expect(page.getByText(/RGB|TrueDepth|ARKit|3D reconstruction|Development catalog state/i)).toHaveCount(0);
-    await page.getByRole("button", { name: "Get Started" }).click();
     await expect(page.getByRole("button", { name: "Start Camera", exact: true })).toHaveCount(0);
     await expect(page.getByRole("button", { name: "Begin Scan", exact: true })).toHaveCount(0);
     await expect(page.getByLabel("Guided face scan camera preview")).toBeVisible();
@@ -207,8 +205,7 @@ test.describe("Buddy Trial invite route", () => {
 
       await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
       await page.getByRole("button", { name: "Get Started" }).click();
-      await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toBeVisible();
-      await page.getByRole("button", { name: "Get Started" }).click();
+      await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toHaveCount(0);
       await expect(page.getByRole("button", { name: "Start Camera", exact: true })).toHaveCount(0);
       await expect(page.getByRole("button", { name: "Begin Scan", exact: true })).toHaveCount(0);
       await expect(page.getByLabel("Guided face scan camera preview")).toBeVisible();

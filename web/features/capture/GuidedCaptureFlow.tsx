@@ -95,7 +95,7 @@ export function GuidedCaptureFlow({
   onContinue,
   onPerformanceRecord,
   customerMode = false,
-  startInCustomerPreparation = false
+  autoStartCamera = false
 }: {
   session: ActiveCaptureSession;
   cameraService: BrowserCameraService;
@@ -105,7 +105,7 @@ export function GuidedCaptureFlow({
   onContinue: () => void;
   onPerformanceRecord?: (record: PerformanceMetricRecord) => void;
   customerMode?: boolean;
-  startInCustomerPreparation?: boolean;
+  autoStartCamera?: boolean;
 }) {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraError, setCameraError] = useState<string | null>(null);
@@ -126,12 +126,12 @@ export function GuidedCaptureFlow({
   const [useExtendedHold, setUseExtendedHold] = useState(false);
   const [captureWorkflow, setCaptureWorkflow] = useState<"guidedCircular" | "fiveAngleFallback">("guidedCircular");
   const [customerAssistedMode, setCustomerAssistedMode] = useState(false);
-  const [customerPreparationPending, setCustomerPreparationPending] = useState(customerMode && startInCustomerPreparation);
   const [guidedStage, setGuidedStage] = useState<GuidedCircularStage>("positioning");
   const visualState = useSetupReferenceVisualState();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const sessionRef = useRef(session);
+  const autoStartCameraRequestedRef = useRef(false);
   const guidedStageRef = useRef<GuidedCircularStage>(guidedStage);
   const guidedScanStateRef = useRef(baseGuidedScanState);
   const coverageAccumulatorRef = useRef<GuidedLiveCoverageAccumulatorState>(createInitialGuidedLiveCoverageAccumulatorState());
@@ -197,6 +197,12 @@ export function GuidedCaptureFlow({
   useEffect(() => {
     sessionRef.current = session;
   }, [session]);
+
+  useEffect(() => {
+    if (!autoStartCamera || autoStartCameraRequestedRef.current || stream || isStartingCamera || cameraError) return;
+    autoStartCameraRequestedRef.current = true;
+    void startCamera();
+  }, [autoStartCamera, cameraError, isStartingCamera, stream]);
 
   useEffect(() => {
     guidedStageRef.current = guidedStage;
@@ -503,12 +509,10 @@ export function GuidedCaptureFlow({
       if (activeDevice?.deviceId) setSelectedDeviceId(activeDevice.deviceId);
       if (activeDevice?.facingMode === "user" || activeDevice?.facingMode === "environment") setSelectedFacingMode(activeDevice.facingMode);
       setCaptureMode("camera");
-      setCustomerPreparationPending(false);
     } catch (error) {
       setCameraError(error instanceof CameraAccessError ? error.message : "Camera could not be started. Upload fallback remains available.");
       setCameraErrorCode(error instanceof CameraAccessError ? error.code : "unknownError");
       setCaptureMode("upload");
-      setCustomerPreparationPending(false);
     } finally {
       onPerformanceRecord?.(
         createPerformanceRecord({
@@ -790,19 +794,6 @@ export function GuidedCaptureFlow({
   }
 
   if (captureWorkflow === "guidedCircular") {
-    if (customerPreparationPending) {
-      return (
-        <FaceIDSetupIntro
-          onContinue={() => void startCamera()}
-          onAssistedCapture={() => {
-            setCustomerAssistedMode(true);
-            setUseExtendedHold(true);
-            void startCamera();
-          }}
-        />
-      );
-    }
-
     return (
       <section className="guided-circular-screen" aria-labelledby="guided-circular-title">
         <CircularGuidedCapturePanel
@@ -1285,56 +1276,6 @@ export function GuidedCaptureFlow({
       </div>
       <div className="sr-only" role="status" aria-live="polite">
         {completedAngles} of 5 required capture angles completed. Current angle is {currentAngle.label}.
-      </div>
-    </section>
-  );
-}
-
-function FaceIDSetupIntro({
-  onAssistedCapture,
-  onContinue
-}: {
-  onAssistedCapture: () => void;
-  onContinue: () => void;
-}) {
-  return (
-    <section className="setup-flow-screen face-id-setup-screen" aria-labelledby="capture-prep-title" data-testid="face-id-setup-intro">
-      <div className="face-id-setup-status" aria-hidden="true">
-        <strong>6:00</strong>
-        <span className="face-id-dynamic-island">
-          <span />
-          <span />
-        </span>
-        <span className="face-id-setup-icons">59</span>
-      </div>
-      <button className="setup-top-control face-id-setup-back" type="button" onClick={onAssistedCapture} aria-label="Accessibility options">
-        <span aria-hidden="true">‹</span>
-      </button>
-
-      <div className="face-id-setup-visual" aria-hidden="true">
-        <div className="setup-segmented-ring">
-          {Array.from({ length: 60 }, (_, index) => (
-            <span key={index} style={{ transform: `rotate(${index * 6}deg)` }} />
-          ))}
-        </div>
-        <svg className="setup-face-glyph" viewBox="0 0 140 140" focusable="false">
-          <circle cx="70" cy="70" r="48" />
-          <path d="M48 62v16" />
-          <path d="M92 62v16" />
-          <path d="M70 61v28" />
-          <path d="M44 96c12 18 40 18 52 0" />
-        </svg>
-      </div>
-
-      <div className="face-id-setup-copy">
-        <h1 id="capture-prep-title">How to Set Up Face ID</h1>
-        <p>First, position your face in the camera frame. Then move your head in a circle to show all the angles of your face.</p>
-      </div>
-
-      <div className="setup-bottom-actions face-id-setup-actions">
-        <Button className="setup-primary-button" onClick={onContinue}>
-          Get Started
-        </Button>
       </div>
     </section>
   );

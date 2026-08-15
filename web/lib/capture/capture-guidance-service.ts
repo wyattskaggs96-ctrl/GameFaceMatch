@@ -12,7 +12,7 @@ import type {
 import { faceBoxCenter, projectFaceBoxToVisiblePreview, type VisiblePreviewGeometry } from "./visible-preview-geometry";
 
 export const CAPTURE_GUIDANCE_PROTOCOL_VERSION = "web-rgb-guidance-1.0.0";
-export const CAPTURE_GUIDANCE_THRESHOLD_VERSION = "web-rgb-thresholds-2026-07-13";
+export const CAPTURE_GUIDANCE_THRESHOLD_VERSION = "web-rgb-thresholds-2026-08-15";
 
 export interface CaptureGuidanceThresholds {
   faceMinBoxSize: number;
@@ -115,7 +115,10 @@ export const naturalPhonePositioningThresholds: CaptureGuidanceThresholds = {
   faceMaxBoxSize: 0.84,
   centerToleranceX: 0.22,
   centerToleranceY: 0.26,
-  maxCenterMotionPerSecond: 0.34
+  maxCenterMotionPerSecond: 0.5,
+  maxYawMotionPerSecond: 60,
+  holdTargetMs: 450,
+  extendedHoldTargetMs: 1_100
 };
 
 export class CaptureGuidanceSession {

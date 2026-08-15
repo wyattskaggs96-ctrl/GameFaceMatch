@@ -297,6 +297,61 @@ describe("capture guidance hold and motion", () => {
     expect(second.canCapture).toBe(true);
   });
 
+  it("lets natural phone positioning become ready quickly with mild human movement", () => {
+    const session = createCaptureGuidanceSession(naturalPhonePositioningThresholds);
+    const first = session.evaluate({
+      angleID: "straightOn",
+      faceLandmarkReport: report({ centerX: 0.5, centerY: 0.5, yawDegrees: 0 }),
+      imageQualityReport: quality(),
+      timestampMs: 0,
+      requireOperationalLandmarks: true
+    });
+    const stillSettling = session.evaluate({
+      angleID: "straightOn",
+      faceLandmarkReport: report({ centerX: 0.512, centerY: 0.493, yawDegrees: 1.8 }),
+      imageQualityReport: quality(),
+      timestampMs: 300,
+      requireOperationalLandmarks: true
+    });
+    const ready = session.evaluate({
+      angleID: "straightOn",
+      faceLandmarkReport: report({ centerX: 0.506, centerY: 0.502, yawDegrees: 0.9 }),
+      imageQualityReport: quality(),
+      timestampMs: 600,
+      requireOperationalLandmarks: true
+    });
+
+    expect(first.holdTargetMs).toBe(450);
+    expect(stillSettling.poseHeldLongEnough).toBe(false);
+    expect(stillSettling.blockingIssues.map((issue) => issue.code)).not.toContain("excessiveMotion");
+    expect(ready.poseHeldLongEnough).toBe(true);
+    expect(ready.canCapture).toBe(true);
+    expect(ready.holdDurationMs).toBeLessThanOrEqual(1_000);
+  });
+
+  it("keeps unusable positioning observations blocked while shortening the good-frame hold", () => {
+    const session = createCaptureGuidanceSession(naturalPhonePositioningThresholds);
+    const noFace = session.evaluate({
+      angleID: "straightOn",
+      faceLandmarkReport: { ...report({}), faceCount: "zero", detectedFaceCount: 0, faces: [] },
+      imageQualityReport: quality(),
+      timestampMs: 0,
+      requireOperationalLandmarks: true
+    });
+    const blurred = session.evaluate({
+      angleID: "straightOn",
+      faceLandmarkReport: report({ centerX: 0.5 }),
+      imageQualityReport: quality({ sharpness: 2 }),
+      timestampMs: 600,
+      requireOperationalLandmarks: true
+    });
+
+    expect(noFace.canCapture).toBe(false);
+    expect(noFace.blockingIssues.map((issue) => issue.code)).toContain("faceNotFound");
+    expect(blurred.canCapture).toBe(false);
+    expect(blurred.blockingIssues.map((issue) => issue.code)).toContain("severeBlur");
+  });
+
   it("supports extended hold timing", () => {
     const session = createCaptureGuidanceSession();
     session.evaluate({
@@ -338,6 +393,27 @@ describe("capture guidance hold and motion", () => {
       imageQualityReport: quality(),
       timestampMs: 300
     });
+    expect(moved.blockingIssues.map((issue) => issue.code)).toContain("excessiveMotion");
+    expect(moved.canCapture).toBe(false);
+  });
+
+  it("still rejects unnatural motion in natural phone positioning mode", () => {
+    const session = createCaptureGuidanceSession(naturalPhonePositioningThresholds);
+    session.evaluate({
+      angleID: "straightOn",
+      faceLandmarkReport: report({ centerX: 0.5, yawDegrees: 0 }),
+      imageQualityReport: quality(),
+      timestampMs: 0,
+      requireOperationalLandmarks: true
+    });
+    const moved = session.evaluate({
+      angleID: "straightOn",
+      faceLandmarkReport: report({ centerX: 0.72, yawDegrees: 26 }),
+      imageQualityReport: quality(),
+      timestampMs: 300,
+      requireOperationalLandmarks: true
+    });
+
     expect(moved.blockingIssues.map((issue) => issue.code)).toContain("excessiveMotion");
     expect(moved.canCapture).toBe(false);
   });

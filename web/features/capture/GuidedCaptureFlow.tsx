@@ -75,6 +75,11 @@ import type { CaptureCoverageRegion, CaptureCoverageState } from "@/lib/capture/
 import type { CapturedAngle, CapturedAngleID, CaptureGuidanceReport, CaptureSource, FaceLandmarkReport, ImageQualityReport } from "@/types/domain";
 
 type GuidedCircularStage = "positioning" | "firstPass" | "firstPassComplete" | "secondPass" | "coverageReview" | "selectiveRetake";
+const POSITIONING_AUTO_ADVANCE_DELAY_MS = 150;
+const LIVE_GUIDANCE_INITIAL_DELAY_MS = 150;
+const LIVE_GUIDANCE_MIN_INTERVAL_MS = 300;
+const LIVE_GUIDANCE_RETRY_DELAY_MS = 180;
+const LIVE_GUIDANCE_LOOP_DELAY_MS = 350;
 type SetupReferenceVisualState =
   | "positioning"
   | "positioning-ready"
@@ -285,7 +290,7 @@ export function GuidedCaptureFlow({
     const timeout = window.setTimeout(() => {
       setGuidedStage((stage) => (stage === "positioning" ? "firstPass" : stage));
       triggerGuidedCaptureHaptic(25);
-    }, 850);
+    }, POSITIONING_AUTO_ADVANCE_DELAY_MS);
     return () => window.clearTimeout(timeout);
   }, [guidedStage, positioningReady]);
 
@@ -332,7 +337,7 @@ export function GuidedCaptureFlow({
     async function analyzeFrame() {
       const video = videoRef.current;
       if (cancelled || !video || video.videoWidth === 0 || video.videoHeight === 0) {
-        timeout = setTimeout(() => void analyzeFrame(), 500);
+        timeout = setTimeout(() => void analyzeFrame(), LIVE_GUIDANCE_LOOP_DELAY_MS);
         return;
       }
       const frameStartedAt = performance.now();
@@ -340,12 +345,12 @@ export function GuidedCaptureFlow({
         shouldSkipLiveFrameAnalysis({
           nowMs: frameStartedAt,
           lastStartedAtMs: lastGuidanceStartedAtRef.current,
-          minIntervalMs: 500,
+          minIntervalMs: LIVE_GUIDANCE_MIN_INTERVAL_MS,
           isProcessing: guidanceInFlightRef.current,
           documentVisibilityState: typeof document === "undefined" ? undefined : document.visibilityState
         })
       ) {
-        timeout = setTimeout(() => void analyzeFrame(), 300);
+        timeout = setTimeout(() => void analyzeFrame(), LIVE_GUIDANCE_RETRY_DELAY_MS);
         return;
       }
       guidanceInFlightRef.current = true;
@@ -422,12 +427,12 @@ export function GuidedCaptureFlow({
         guidanceInFlightRef.current = false;
         if (!cancelled) {
           setIsAnalyzingGuidance(false);
-          timeout = setTimeout(() => void analyzeFrame(), 550);
+          timeout = setTimeout(() => void analyzeFrame(), LIVE_GUIDANCE_LOOP_DELAY_MS);
         }
       }
     }
 
-    timeout = setTimeout(() => void analyzeFrame(), 250);
+    timeout = setTimeout(() => void analyzeFrame(), LIVE_GUIDANCE_INITIAL_DELAY_MS);
     return () => {
       cancelled = true;
       if (timeout) clearTimeout(timeout);
@@ -2305,14 +2310,14 @@ function getCircularInstruction({
   if (liveCoverageDecision?.status === "accepted" && liveCoverageDecision.assignedSegmentID) {
     return `${formatSegmentLabel(liveCoverageDecision.assignedSegmentID)} coverage accepted.`;
   }
-  if (liveCoverageDecision?.status === "pendingStability") return "Hold still.";
+  if (liveCoverageDecision?.status === "pendingStability") return "Keep that angle for a moment.";
   if (liveCoverageDecision?.status === "rejected" && liveCoverageDecision.rejectionReasons[0]) return liveCoverageDecision.rejectionReasons[0];
   const firstBlocking = liveGuidance?.blockingIssues[0]?.message;
   const firstReady = liveGuidance?.readyMessages[0]?.message;
   if (stage === "firstPass" && circularCanBegin) return "Move your head slowly to complete the circle";
   if (stage === "positioning" && circularCanBegin) return "Ready";
   if (firstBlocking) return firstBlocking;
-  if (firstReady) return "Hold still.";
+  if (firstReady) return "Keep your face centered.";
   return "Position your face inside the circle";
 }
 

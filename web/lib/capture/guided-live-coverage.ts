@@ -107,8 +107,8 @@ export const naturalPhoneScanCoverageThresholds: CaptureGuidanceThresholds = {
 };
 
 export const naturalPhoneLiveCoverageOptions: Partial<GuidedLiveCoverageOptions> = {
-  minAgreeingSamples: 2,
-  minDwellMs: 300,
+  minAgreeingSamples: 1,
+  minDwellMs: 0,
   sideYawThresholdDegrees: 14,
   outerYawThresholdDegrees: 34,
   duplicateYawToleranceDegrees: 8,

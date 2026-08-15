@@ -8,6 +8,22 @@ import type { CaptureGuidanceReport } from "@/types/domain";
 
 export const SCAN_DIAGNOSTICS_SCHEMA_VERSION = "gfm-scan-diagnostics-v1";
 
+export interface ScanDiagnosticFrameTrace {
+  timestampMs: number;
+  passID: string;
+  yawDegrees: number | null;
+  pitchDegrees: number | null;
+  rollDegrees: number | null;
+  faceSize: number | null;
+  landmarkConfidence: number | null;
+  candidateSlot: string | null;
+  slotAlreadyFilled: boolean;
+  qualityGateResult: GuidedLiveFrameDecision["status"];
+  rejectionReason: string | null;
+  acceptedSlot: string | null;
+  currentFilledSlots: string[];
+}
+
 export interface ScanDiagnosticSnapshot {
   schemaVersion: typeof SCAN_DIAGNOSTICS_SCHEMA_VERSION;
   privacyNotice: string;
@@ -79,6 +95,31 @@ export interface ScanDiagnosticSnapshot {
     pitchBucket: string;
     rollBucket: string;
   };
+  frameTrace: ScanDiagnosticFrameTrace[];
+}
+
+export function createScanDiagnosticFrameTrace(input: {
+  decision: GuidedLiveFrameDecision;
+  completedSlotsBefore: string[];
+  completedSlotsAfter: string[];
+  acceptedSlot: string | null;
+}): ScanDiagnosticFrameTrace {
+  const candidateSlot = input.decision.assignedSegmentID ?? null;
+  return {
+    timestampMs: Math.round(input.decision.timestampMs),
+    passID: input.decision.passID,
+    yawDegrees: roundOrNull(input.decision.yawDegrees.value),
+    pitchDegrees: roundOrNull(input.decision.pitchDegrees.value),
+    rollDegrees: roundOrNull(input.decision.rollDegrees.value),
+    faceSize: roundOrNull(input.decision.relativeFaceSize.value),
+    landmarkConfidence: roundOrNull(input.decision.landmarkConfidence.value),
+    candidateSlot,
+    slotAlreadyFilled: Boolean(candidateSlot && input.completedSlotsBefore.includes(candidateSlot)),
+    qualityGateResult: input.decision.status,
+    rejectionReason: input.decision.rejectionReasons[0] ?? null,
+    acceptedSlot: input.acceptedSlot,
+    currentFilledSlots: input.completedSlotsAfter
+  };
 }
 
 export function createScanDiagnosticSnapshot(input: {
@@ -109,6 +150,7 @@ export function createScanDiagnosticSnapshot(input: {
   guidedScanState: GuidedScanState;
   acceptedLiveFrameCount: number;
   acceptedFrames?: Array<{ assignedSegmentID: string; passID: string }>;
+  frameTrace?: ScanDiagnosticFrameTrace[];
 }): ScanDiagnosticSnapshot {
   const firstPass = input.guidedScanState.passes.find((pass) => pass.id === "first") ?? input.guidedScanState.passes[0];
   const secondPass = input.guidedScanState.passes.find((pass) => pass.id === "second") ?? input.guidedScanState.passes[1];
@@ -196,7 +238,8 @@ export function createScanDiagnosticSnapshot(input: {
       yawBucket: bucketPose(input.liveCoverageDecision?.yawDegrees.value ?? null, "yaw"),
       pitchBucket: bucketPose(input.liveCoverageDecision?.pitchDegrees.value ?? null, "pitch"),
       rollBucket: bucketPose(input.liveCoverageDecision?.rollDegrees.value ?? null, "roll")
-    }
+    },
+    frameTrace: input.frameTrace ?? []
   };
 }
 

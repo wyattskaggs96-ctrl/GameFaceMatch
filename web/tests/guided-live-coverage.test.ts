@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { applyCoverageFrame, createInitialGuidedScanState, getGuidedScanCoveragePercent, getSecondPassTargets, getSelectiveRetakeRegion } from "@/lib/capture/guided-scan-strategy";
+import {
+  applyCoverageFrame,
+  createInitialGuidedScanState,
+  getGuidedScanCoveragePercent,
+  getSecondPassTargets,
+  getSelectiveRetakeRegion,
+  type GuidedScanCoverageSegmentID
+} from "@/lib/capture/guided-scan-strategy";
 import {
   classifyNaturalPoseSector,
   createInitialGuidedLiveCoverageAccumulatorState,
@@ -17,6 +24,8 @@ import type { DetectedFaceLandmarks, FaceLandmarkPoint, FaceLandmarkReport, Imag
 describe("guided live coverage decisions", () => {
   it("documents the current natural-phone classifier envelopes", () => {
     expect(naturalPhoneLiveCoverageOptions).toMatchObject({
+      minAgreeingSamples: 1,
+      minDwellMs: 0,
       sideYawThresholdDegrees: 14,
       outerYawThresholdDegrees: 34,
       duplicateYawToleranceDegrees: 8,
@@ -135,8 +144,6 @@ describe("guided live coverage decisions", () => {
   });
 
   it("can complete the first ring from natural selfie head movement without steering the phone", () => {
-    let state = createInitialGuidedScanState();
-    let accumulator = createInitialGuidedLiveCoverageAccumulatorState();
     const naturalSequence = [
       { yawDegrees: 0, pitchDegrees: 0, expected: "center" },
       { yawDegrees: -24, pitchDegrees: -6, expected: "left45" },
@@ -145,26 +152,77 @@ describe("guided live coverage decisions", () => {
       { yawDegrees: 40, pitchDegrees: 0, expected: "rightProfile" }
     ] as const;
 
-    naturalSequence.forEach((pose, index) => {
-      const first = updateGuidedLiveCoverageAccumulator(
-        accumulator,
-        decision({ now: index * 1_500, report: report({ yawDegrees: pose.yawDegrees, pitchDegrees: pose.pitchDegrees }), useNaturalScanThresholds: true })
-      );
-      const second = updateGuidedLiveCoverageAccumulator(
-        first.accumulator,
-        decision({
-          now: index * 1_500 + 700,
-          report: report({ yawDegrees: pose.yawDegrees, pitchDegrees: pose.pitchDegrees }),
-          useNaturalScanThresholds: true
-        })
-      );
-      expect(second.coverageFrame?.segmentID).toBe(pose.expected);
-      expect(second.coverageFrame?.qualityAccepted).toBe(true);
-      state = applyCoverageFrame(state, second.coverageFrame!);
-      accumulator = second.accumulator;
-    });
+    const result = runNaturalLiveSequence(
+      naturalSequence.map((pose, index) => ({
+        now: index * 650,
+        yawDegrees: pose.yawDegrees,
+        pitchDegrees: pose.pitchDegrees
+      }))
+    );
 
-    expect(state.passes[0].completed).toBe(true);
+    expect(result.acceptedSegments).toEqual(naturalSequence.map((pose) => pose.expected));
+    expect(result.state.passes[0].completed).toBe(true);
+    expect(getGuidedScanCoveragePercent(result.state.passes[0])).toBe(100);
+  });
+
+  it("accepts clockwise and counter-clockwise natural head circles without a fixed order", () => {
+    const clockwise = runNaturalLiveSequence([
+      { now: 0, yawDegrees: 0, pitchDegrees: 0 },
+      { now: 420, yawDegrees: 19, pitchDegrees: 7 },
+      { now: 840, yawDegrees: 37, pitchDegrees: 14 },
+      { now: 1_260, yawDegrees: -20, pitchDegrees: -7 },
+      { now: 1_680, yawDegrees: -38, pitchDegrees: -14 }
+    ]);
+    expect(clockwise.acceptedSegments).toEqual(["center", "right45", "rightProfile", "left45", "leftProfile"]);
+    expect(clockwise.state.passes[0].completed).toBe(true);
+
+    const counterClockwise = runNaturalLiveSequence([
+      { now: 0, yawDegrees: 0, pitchDegrees: 0 },
+      { now: 420, yawDegrees: -19, pitchDegrees: -7 },
+      { now: 840, yawDegrees: -37, pitchDegrees: -14 },
+      { now: 1_260, yawDegrees: 20, pitchDegrees: 7 },
+      { now: 1_680, yawDegrees: 38, pitchDegrees: 14 }
+    ]);
+    expect(counterClockwise.acceptedSegments).toEqual(["center", "left45", "leftProfile", "right45", "rightProfile"]);
+    expect(counterClockwise.state.passes[0].completed).toBe(true);
+  });
+
+  it("completes a noisy natural orbit with confidence dips, duplicates, mild blur changes, and overshoot return frames", () => {
+    const result = runNaturalLiveSequence([
+      { now: 0, yawDegrees: 1, pitchDegrees: 0 },
+      { now: 360, yawDegrees: 3, pitchDegrees: 1 },
+      { now: 720, yawDegrees: 17, pitchDegrees: 8, report: report({ yawDegrees: 17, pitchDegrees: 8, faceConfidenceScore: 0.28 }) },
+      { now: 1_080, yawDegrees: 19, pitchDegrees: 9, quality: quality({ sharpness: 5 }) },
+      { now: 1_440, yawDegrees: 37, pitchDegrees: 16, quality: quality({ sharpness: 4.5 }) },
+      { now: 1_800, yawDegrees: 28, pitchDegrees: 7 },
+      { now: 2_160, yawDegrees: 0, pitchDegrees: 0 },
+      { now: 2_520, yawDegrees: -18, pitchDegrees: -8, quality: quality({ sharpness: 5 }) },
+      { now: 2_880, yawDegrees: -39, pitchDegrees: -17 },
+      { now: 3_240, yawDegrees: -24, pitchDegrees: -6 },
+      { now: 3_600, yawDegrees: 2, pitchDegrees: 0 }
+    ]);
+
+    expect(result.acceptedSegments).toEqual(["center", "right45", "rightProfile", "left45", "leftProfile"]);
+    expect(result.rejectedReasons).toEqual(expect.arrayContaining(["Face confidence is too low.", "Duplicate angle ignored."]));
+    expect(result.state.passes[0].completed).toBe(true);
+    expect(getGuidedScanCoveragePercent(result.state.passes[0])).toBe(100);
+  });
+
+  it("rejects true duplicate poses and unusable frames without blocking later distinct slots", () => {
+    const result = runNaturalLiveSequence([
+      { now: 0, yawDegrees: 0, pitchDegrees: 0 },
+      { now: 350, yawDegrees: 1, pitchDegrees: 0 },
+      { now: 700, yawDegrees: -20, pitchDegrees: -8, quality: quality({ sharpness: 2 }) },
+      { now: 1_050, yawDegrees: -20, pitchDegrees: -8, report: { ...report({}), faceCount: "zero", detectedFaceCount: 0, faces: [] } },
+      { now: 1_400, yawDegrees: -21, pitchDegrees: -8 },
+      { now: 1_750, yawDegrees: -38, pitchDegrees: -15 },
+      { now: 2_100, yawDegrees: 21, pitchDegrees: 8 },
+      { now: 2_450, yawDegrees: 38, pitchDegrees: 15 }
+    ]);
+
+    expect(result.acceptedSegments).toEqual(["center", "left45", "leftProfile", "right45", "rightProfile"]);
+    expect(result.rejectedReasons).toEqual(expect.arrayContaining(["Duplicate angle ignored.", "Hold still.", "Face not found."]));
+    expect(result.state.passes[0].completed).toBe(true);
   });
 
   it("fills all five capture slots from one slow natural head orbit with mild pose noise", () => {
@@ -471,7 +529,9 @@ function face({
   yawDegrees = 0,
   pitchDegrees = 0,
   rollDegrees = 0,
-  strongExpressionLikelihood = 0.1
+  strongExpressionLikelihood = 0.1,
+  faceConfidenceScore = 0.8,
+  landmarkConfidenceScore = 0.72
 }: {
   centerX?: number;
   centerY?: number;
@@ -481,6 +541,8 @@ function face({
   pitchDegrees?: number;
   rollDegrees?: number;
   strongExpressionLikelihood?: number;
+  faceConfidenceScore?: number;
+  landmarkConfidenceScore?: number;
 }): DetectedFaceLandmarks {
   return {
     boundingBox: {
@@ -491,7 +553,7 @@ function face({
       confidence: { score: 0.8, label: "medium", evidence: "estimated" }
     },
     coreLandmarks: ["nose tip", "chin", "nose bridge", "left eye outer corner", "right eye outer corner", "left mouth corner", "right mouth corner"].map(
-      landmark
+      (label, sourceIndex) => landmark(label, sourceIndex, landmarkConfidenceScore)
     ),
     approximateHeadPose: {
       yawDegrees,
@@ -509,18 +571,18 @@ function face({
       confidence: { score: 0.65, label: "medium", evidence: "estimated" },
       availabilityState: "available"
     },
-    confidence: { score: 0.8, label: "medium", evidence: "estimated" }
+    confidence: { score: faceConfidenceScore, label: faceConfidenceScore < 0.35 ? "low" : "medium", evidence: "estimated" }
   };
 }
 
-function landmark(label: string, sourceIndex: number): FaceLandmarkPoint {
+function landmark(label: string, sourceIndex: number, confidenceScore = 0.72): FaceLandmarkPoint {
   return {
     label,
     sourceIndex,
     x: 0.5,
     y: 0.5,
     z: null,
-    confidence: { score: 0.72, label: "medium", evidence: "estimated" }
+    confidence: { score: confidenceScore, label: confidenceScore < 0.35 ? "low" : "medium", evidence: "estimated" }
   };
 }
 
@@ -536,5 +598,59 @@ function quality(
     shadowClippingEstimate: { value: input.shadowClipping ?? 0.01, evidence: "estimated", label: "Synthetic shadow clipping" },
     sharpnessEstimate: { value: input.sharpness ?? 12, evidence: "estimated", label: "Synthetic sharpness" },
     lightingImbalanceEstimate: { value: input.lightingImbalance ?? 0.04, evidence: "estimated", label: "Synthetic lighting imbalance" }
+  };
+}
+
+function runNaturalLiveSequence(
+  frames: Array<{
+    now: number;
+    yawDegrees: number;
+    pitchDegrees: number;
+    rollDegrees?: number;
+    quality?: Pick<
+      ImageQualityReport,
+      "brightnessEstimate" | "highlightClippingEstimate" | "shadowClippingEstimate" | "sharpnessEstimate" | "lightingImbalanceEstimate"
+    >;
+    report?: FaceLandmarkReport;
+  }>
+) {
+  let state = createInitialGuidedScanState();
+  let accumulator = createInitialGuidedLiveCoverageAccumulatorState();
+  let acceptedFrames: GuidedLiveAcceptedFrame[] = [];
+  const acceptedSegments: GuidedScanCoverageSegmentID[] = [];
+  const rejectedReasons: string[] = [];
+
+  for (const frame of frames) {
+    const update = updateGuidedLiveCoverageAccumulator(
+      accumulator,
+      decision({
+        acceptedFrames,
+        now: frame.now,
+        report:
+          frame.report ??
+          report({
+            yawDegrees: frame.yawDegrees,
+            pitchDegrees: frame.pitchDegrees,
+            rollDegrees: frame.rollDegrees ?? 0
+          }),
+        quality: frame.quality,
+        useNaturalScanThresholds: true
+      }),
+      naturalPhoneLiveCoverageOptions
+    );
+    accumulator = update.accumulator;
+    rejectedReasons.push(...update.decision.rejectionReasons);
+    if (update.coverageFrame?.qualityAccepted && update.acceptedFrame) {
+      state = applyCoverageFrame(state, update.coverageFrame);
+      acceptedFrames = [...acceptedFrames, update.acceptedFrame];
+      acceptedSegments.push(update.acceptedFrame.assignedSegmentID);
+    }
+  }
+
+  return {
+    state,
+    acceptedFrames,
+    acceptedSegments,
+    rejectedReasons
   };
 }

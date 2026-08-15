@@ -181,7 +181,7 @@ describe("guided circular scan coverage contract", () => {
 
   it("keeps circular guided UI tied to accepted live coverage", () => {
     const source = fs.readFileSync(path.join(process.cwd(), "features/capture/GuidedCaptureFlow.tsx"), "utf8");
-    expect(source).toContain("Circular progress advances only after a stable, distinct live frame passes face");
+    expect(source).toContain("Circular progress advances only after a distinct live frame passes face");
     expect(source).toContain("pose, blur, exposure, and duplicate-angle checks");
     expect(source).toContain("requireOperationalLandmarks: true");
     expect(source).toContain("blockingCodes.has(\"landmarksUnavailable\")");

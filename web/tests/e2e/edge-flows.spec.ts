@@ -209,7 +209,7 @@ test.describe("GameFace Match E2E edge flows", () => {
         (element as HTMLDetailsElement).open = true;
       });
       await expect(
-        page.getByText("Circular progress advances only after a stable, distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks.")
+        page.getByText("Circular progress advances only after a distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks.")
       ).toBeVisible();
       await expect(page.getByRole("button", { name: "Accessibility Options" }).first()).toBeVisible();
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);

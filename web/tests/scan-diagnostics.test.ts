@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { createInitialGuidedScanState } from "@/lib/capture/guided-scan-strategy";
 import { evaluateGuidedLiveFrameDecision, naturalPhoneLiveCoverageOptions, naturalPhoneScanCoverageThresholds } from "@/lib/capture/guided-live-coverage";
 import { evaluateMobileScanRuntime } from "@/lib/capture/mobile-safari-scan-hardening";
-import { createScanDiagnosticSnapshot, isScanDiagnosticsEnabled } from "@/lib/capture/scan-diagnostics";
+import { createScanDiagnosticFrameTrace, createScanDiagnosticSnapshot, isScanDiagnosticsEnabled } from "@/lib/capture/scan-diagnostics";
 import { createObjectFitCoverVisiblePreview } from "@/lib/capture/visible-preview-geometry";
 import { MEDIAPIPE_FACE_LANDMARKER_METADATA } from "@/lib/face-landmarks/face-landmark-provider";
 import type { DetectedFaceLandmarks, FaceLandmarkPoint, FaceLandmarkReport } from "@/types/domain";
@@ -86,7 +86,15 @@ describe("scan diagnostics", () => {
       liveCoverageDecision: decision,
       guidedScanState,
       acceptedLiveFrameCount: 0,
-      acceptedFrames: []
+      acceptedFrames: [],
+      frameTrace: [
+        createScanDiagnosticFrameTrace({
+          decision: { ...decision, status: "accepted" },
+          completedSlotsBefore: [],
+          completedSlotsAfter: ["rightProfile"],
+          acceptedSlot: "rightProfile"
+        })
+      ]
     });
 
     expect(snapshot.schemaVersion).toBe("gfm-scan-diagnostics-v1");
@@ -98,6 +106,17 @@ describe("scan diagnostics", () => {
     expect(snapshot.readiness.currentClassifiedSector).toBe("right");
     expect(snapshot.readiness.assignedSegment).toBe("rightProfile");
     expect(snapshot.readiness.completedSectors).toEqual([]);
+    expect(snapshot.frameTrace).toEqual([
+      expect.objectContaining({
+        yawDegrees: 42,
+        pitchDegrees: -12,
+        candidateSlot: "rightProfile",
+        slotAlreadyFilled: false,
+        qualityGateResult: "accepted",
+        acceptedSlot: "rightProfile",
+        currentFilledSlots: ["rightProfile"]
+      })
+    ]);
 
     const serialized = JSON.stringify(snapshot);
     expect(serialized).not.toMatch(/coreLandmarks|faceLandmarks|sourceIndex/i);

@@ -44,7 +44,13 @@ import {
   shouldAutoAdvanceFromPositioning,
   type MobileScanRuntimeState
 } from "@/lib/capture/mobile-safari-scan-hardening";
-import { createScanDiagnosticSnapshot, isScanDiagnosticsEnabled, type ScanDiagnosticSnapshot } from "@/lib/capture/scan-diagnostics";
+import {
+  createScanDiagnosticFrameTrace,
+  createScanDiagnosticSnapshot,
+  isScanDiagnosticsEnabled,
+  type ScanDiagnosticFrameTrace,
+  type ScanDiagnosticSnapshot
+} from "@/lib/capture/scan-diagnostics";
 import {
   cancelCaptureSession,
   createInitialCaptureSession,
@@ -82,6 +88,7 @@ const LIVE_GUIDANCE_INITIAL_DELAY_MS = 150;
 const LIVE_GUIDANCE_MIN_INTERVAL_MS = 300;
 const LIVE_GUIDANCE_RETRY_DELAY_MS = 180;
 const LIVE_GUIDANCE_LOOP_DELAY_MS = 350;
+const MAX_SCAN_DIAGNOSTIC_FRAME_TRACE = 120;
 type SetupReferenceVisualState =
   | "positioning"
   | "positioning-ready"
@@ -146,6 +153,7 @@ export function GuidedCaptureFlow({
   const autoCaptureAcceptedFrameRef = useRef<(frame: GuidedLiveAcceptedFrame) => Promise<void>>(async () => undefined);
   const liveAutoCaptureInFlightRef = useRef(false);
   const pendingAutoCaptureFramesRef = useRef<GuidedLiveAcceptedFrame[]>([]);
+  const diagnosticFrameTraceRef = useRef<ScanDiagnosticFrameTrace[]>([]);
   const guidanceInFlightRef = useRef(false);
   const lastGuidanceStartedAtRef = useRef(0);
   const guidanceSampleCountRef = useRef(0);
@@ -197,7 +205,8 @@ export function GuidedCaptureFlow({
         liveCoverageDecision,
         guidedScanState,
         acceptedLiveFrameCount: acceptedLiveFrames.length,
-        acceptedFrames: acceptedLiveFrames
+        acceptedFrames: acceptedLiveFrames,
+        frameTrace: diagnosticFrameTraceRef.current
       })
     : null;
 
@@ -333,6 +342,7 @@ export function GuidedCaptureFlow({
       setLiveGuidance(null);
       setLiveCoverageDecision(null);
       coverageAccumulatorRef.current = createInitialGuidedLiveCoverageAccumulatorState();
+      diagnosticFrameTraceRef.current = [];
       pendingAutoCaptureFramesRef.current = [];
       liveAutoCaptureInFlightRef.current = false;
       setIsAnalyzingGuidance(false);
@@ -402,11 +412,31 @@ export function GuidedCaptureFlow({
             }
           });
           if (guidedStageRef.current === "positioning") {
+            recordScanDiagnosticFrameTrace({
+              enabled: scanDiagnosticsEnabled,
+              traceRef: diagnosticFrameTraceRef,
+              decision: frameDecision,
+              completedSlotsBefore: getCompletedLiveSlots(acceptedLiveFramesRef.current, frameDecision.passID),
+              completedSlotsAfter: getCompletedLiveSlots(acceptedLiveFramesRef.current, frameDecision.passID),
+              acceptedSlot: null
+            });
             coverageAccumulatorRef.current = createInitialGuidedLiveCoverageAccumulatorState();
             setLiveCoverageDecision(frameDecision);
           } else {
+            const completedSlotsBefore = getCompletedLiveSlots(acceptedLiveFramesRef.current, frameDecision.passID);
             const coverageUpdate = updateGuidedLiveCoverageAccumulator(coverageAccumulatorRef.current, frameDecision, naturalPhoneLiveCoverageOptions);
             coverageAccumulatorRef.current = coverageUpdate.accumulator;
+            const completedSlotsAfter = coverageUpdate.acceptedFrame
+              ? getCompletedLiveSlots([...acceptedLiveFramesRef.current, coverageUpdate.acceptedFrame], coverageUpdate.decision.passID)
+              : completedSlotsBefore;
+            recordScanDiagnosticFrameTrace({
+              enabled: scanDiagnosticsEnabled,
+              traceRef: diagnosticFrameTraceRef,
+              decision: coverageUpdate.decision,
+              completedSlotsBefore,
+              completedSlotsAfter,
+              acceptedSlot: coverageUpdate.acceptedFrame?.assignedSegmentID ?? null
+            });
             setLiveCoverageDecision(coverageUpdate.decision);
             if (coverageUpdate.coverageFrame) {
               setBaseGuidedScanState((previous) => applyCoverageFrame(previous, coverageUpdate.coverageFrame!));
@@ -446,7 +476,7 @@ export function GuidedCaptureFlow({
       cancelled = true;
       if (timeout) clearTimeout(timeout);
     };
-  }, [currentAngle.id, faceLandmarkProvider, guidanceSession, onPerformanceRecord, previewIsMirrored, stream, useExtendedHold]);
+  }, [currentAngle.id, faceLandmarkProvider, guidanceSession, onPerformanceRecord, previewIsMirrored, scanDiagnosticsEnabled, stream, useExtendedHold]);
 
   useEffect(() => {
     setIsOffline(typeof navigator !== "undefined" ? !navigator.onLine : false);
@@ -772,6 +802,7 @@ export function GuidedCaptureFlow({
     stopCamera();
     coverageAccumulatorRef.current = createInitialGuidedLiveCoverageAccumulatorState();
     acceptedLiveFramesRef.current = [];
+    diagnosticFrameTraceRef.current = [];
     pendingAutoCaptureFramesRef.current = [];
     setAcceptedLiveFrames([]);
     setLiveCoverageDecision(null);
@@ -784,6 +815,7 @@ export function GuidedCaptureFlow({
   function restartGuidedAttempt() {
     coverageAccumulatorRef.current = createInitialGuidedLiveCoverageAccumulatorState();
     acceptedLiveFramesRef.current = [];
+    diagnosticFrameTraceRef.current = [];
     pendingAutoCaptureFramesRef.current = [];
     liveAutoCaptureInFlightRef.current = false;
     setAcceptedLiveFrames([]);
@@ -1503,7 +1535,7 @@ function CircularGuidedCapturePanel({
             <p>
               {customerMode
                 ? "This web version uses your camera to capture the angles needed for your GameFace. Progress counts only when the frame is clear and useful."
-                : "Circular progress advances only after a stable, distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks."}
+                : "Circular progress advances only after a distinct live frame passes face, pose, blur, exposure, and duplicate-angle checks."}
             </p>
             <QualityGateList gate={guidedScanState.initialQualityGate} />
             <LiveCoverageDecisionPanel decision={liveCoverageDecision} acceptedLiveFrameCount={acceptedLiveFrameCount} streamActive={streamActive} />
@@ -1770,6 +1802,35 @@ function ScanDiagnosticsPanel({ snapshot }: { snapshot: ScanDiagnosticSnapshot }
 
 function formatDiagnosticPoseValue(value: number | null) {
   return value === null ? "N/A" : `${value}°`;
+}
+
+function recordScanDiagnosticFrameTrace({
+  enabled,
+  traceRef,
+  decision,
+  completedSlotsBefore,
+  completedSlotsAfter,
+  acceptedSlot
+}: {
+  enabled: boolean;
+  traceRef: { current: ScanDiagnosticFrameTrace[] };
+  decision: GuidedLiveFrameDecision;
+  completedSlotsBefore: string[];
+  completedSlotsAfter: string[];
+  acceptedSlot: string | null;
+}) {
+  if (!enabled) return;
+  const trace = createScanDiagnosticFrameTrace({
+    decision,
+    completedSlotsBefore,
+    completedSlotsAfter,
+    acceptedSlot
+  });
+  traceRef.current = [...traceRef.current.slice(-(MAX_SCAN_DIAGNOSTIC_FRAME_TRACE - 1)), trace];
+}
+
+function getCompletedLiveSlots(frames: GuidedLiveAcceptedFrame[], passID: GuidedScanPassID) {
+  return [...new Set(frames.filter((frame) => frame.passID === passID).map((frame) => frame.assignedSegmentID))];
 }
 
 function CameraBlockedRecoveryList({ steps }: { steps: string[] }) {

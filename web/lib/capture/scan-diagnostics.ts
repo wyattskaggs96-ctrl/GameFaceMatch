@@ -60,10 +60,19 @@ export interface ScanDiagnosticSnapshot {
     acceptedLiveFrameCount: number;
     firstPassPercent: number;
     secondPassPercent: number;
+    currentClassifiedSector: string | null;
+    lastAcceptedSector: string | null;
+    completedSectors: string[];
+    duplicateRejectionReason: string | null;
   };
   observedFace: {
     faceCount: string;
     providerState: string;
+    poseDegrees: {
+      yaw: number | null;
+      pitch: number | null;
+      roll: number | null;
+    };
     centerBucket: "centered" | "slightlyOffCenter" | "offCenter" | "unknown";
     distanceBucket: "tooFar" | "usable" | "tooClose" | "unknown";
     yawBucket: string;
@@ -99,11 +108,14 @@ export function createScanDiagnosticSnapshot(input: {
   liveCoverageDecision: GuidedLiveFrameDecision | null;
   guidedScanState: GuidedScanState;
   acceptedLiveFrameCount: number;
+  acceptedFrames?: Array<{ assignedSegmentID: string; passID: string }>;
 }): ScanDiagnosticSnapshot {
   const firstPass = input.guidedScanState.passes.find((pass) => pass.id === "first") ?? input.guidedScanState.passes[0];
   const secondPass = input.guidedScanState.passes.find((pass) => pass.id === "second") ?? input.guidedScanState.passes[1];
   const centerDistance = input.liveCoverageDecision?.centering.value ?? null;
   const relativeFaceSize = input.liveCoverageDecision?.relativeFaceSize.value ?? null;
+  const completedSectors = firstPass.segments.filter((segment) => segment.status === "accepted").map((segment) => segment.id);
+  const lastAcceptedSector = input.acceptedFrames?.at(-1)?.assignedSegmentID ?? null;
   const providerState = input.liveCoverageDecision?.rejectionReasons.includes("Landmark provider unavailable.")
     ? "unavailable"
     : input.liveCoverageDecision
@@ -165,11 +177,20 @@ export function createScanDiagnosticSnapshot(input: {
       rejectionReasons: input.liveCoverageDecision?.rejectionReasons ?? [],
       acceptedLiveFrameCount: input.acceptedLiveFrameCount,
       firstPassPercent: getGuidedScanCoveragePercent(firstPass),
-      secondPassPercent: getGuidedScanCoveragePercent(secondPass)
+      secondPassPercent: getGuidedScanCoveragePercent(secondPass),
+      currentClassifiedSector: input.liveCoverageDecision?.classifiedPoseSectorID ?? null,
+      lastAcceptedSector,
+      completedSectors,
+      duplicateRejectionReason: input.liveCoverageDecision?.duplicateRejectionReason ?? null
     },
     observedFace: {
       faceCount: input.liveCoverageDecision?.faceCount ?? "notChecked",
       providerState,
+      poseDegrees: {
+        yaw: roundOrNull(input.liveCoverageDecision?.yawDegrees.value ?? null),
+        pitch: roundOrNull(input.liveCoverageDecision?.pitchDegrees.value ?? null),
+        roll: roundOrNull(input.liveCoverageDecision?.rollDegrees.value ?? null)
+      },
       centerBucket: bucketCenter(centerDistance),
       distanceBucket: bucketDistance(relativeFaceSize),
       yawBucket: bucketPose(input.liveCoverageDecision?.yawDegrees.value ?? null, "yaw"),
@@ -180,7 +201,6 @@ export function createScanDiagnosticSnapshot(input: {
 }
 
 export function isScanDiagnosticsEnabled(input: { nodeEnv?: string; search?: string | null }) {
-  if (input.nodeEnv === "production") return false;
   const params = new URLSearchParams(input.search ?? "");
   return params.get("scanDiagnostics") === "1";
 }
@@ -221,6 +241,10 @@ function bucketPose(value: number | null, axis: "yaw" | "pitch" | "roll") {
 
 function finiteOrNull(value: number | undefined | null) {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
+}
+
+function roundOrNull(value: number | null) {
+  return typeof value === "number" && Number.isFinite(value) ? round(value) : null;
 }
 
 function roundCrop(crop: { x: number; y: number; width: number; height: number }) {

@@ -8,11 +8,11 @@ import { MEDIAPIPE_FACE_LANDMARKER_METADATA } from "@/lib/face-landmarks/face-la
 import type { DetectedFaceLandmarks, FaceLandmarkPoint, FaceLandmarkReport } from "@/types/domain";
 
 describe("scan diagnostics", () => {
-  it("is explicitly opt-in and unavailable in production builds", () => {
+  it("is explicitly opt-in, including owner-requested production beta diagnostics", () => {
     expect(isScanDiagnosticsEnabled({ nodeEnv: "development", search: "?scanDiagnostics=1" })).toBe(true);
     expect(isScanDiagnosticsEnabled({ nodeEnv: "test", search: "?scanDiagnostics=1" })).toBe(true);
     expect(isScanDiagnosticsEnabled({ nodeEnv: "development", search: "" })).toBe(false);
-    expect(isScanDiagnosticsEnabled({ nodeEnv: "production", search: "?scanDiagnostics=1" })).toBe(false);
+    expect(isScanDiagnosticsEnabled({ nodeEnv: "production", search: "?scanDiagnostics=1" })).toBe(true);
   });
 
   it("creates a sanitized real-device debugging snapshot without raw face media or landmarks", () => {
@@ -84,7 +84,8 @@ describe("scan diagnostics", () => {
       liveGuidance: null,
       liveCoverageDecision: decision,
       guidedScanState,
-      acceptedLiveFrameCount: 0
+      acceptedLiveFrameCount: 0,
+      acceptedFrames: []
     });
 
     expect(snapshot.schemaVersion).toBe("gfm-scan-diagnostics-v1");
@@ -92,6 +93,10 @@ describe("scan diagnostics", () => {
     expect(snapshot.preview.crop).toMatchObject({ x: 0, width: 1 });
     expect(snapshot.observedFace.yawBucket).toBe("slight-right-about-40");
     expect(snapshot.observedFace.pitchBucket).toBe("up-about-10");
+    expect(snapshot.observedFace.poseDegrees).toMatchObject({ yaw: 42, pitch: -12, roll: 0 });
+    expect(snapshot.readiness.currentClassifiedSector).toBe("right");
+    expect(snapshot.readiness.assignedSegment).toBe("right45");
+    expect(snapshot.readiness.completedSectors).toEqual([]);
 
     const serialized = JSON.stringify(snapshot);
     expect(serialized).not.toMatch(/coreLandmarks|faceLandmarks|sourceIndex/i);

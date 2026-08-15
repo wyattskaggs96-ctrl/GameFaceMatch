@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { applyCoverageFrame, createInitialGuidedScanState, getSecondPassTargets, getSelectiveRetakeRegion } from "@/lib/capture/guided-scan-strategy";
 import {
+  classifyNaturalPoseSector,
   createInitialGuidedLiveCoverageAccumulatorState,
   evaluateGuidedLiveFrameDecision,
   guidedSegmentToCaptureAngle,
@@ -51,6 +52,7 @@ describe("guided live coverage decisions", () => {
     const duplicate = decision({ acceptedFrames, report: report({ yawDegrees: 3 }) });
     expect(duplicate.duplicateAngle).toBe(true);
     expect(duplicate.rejectionReasons).toContain("Duplicate angle ignored.");
+    expect(duplicate.duplicateRejectionReason).toContain("center");
     expect(duplicate.accepted).toBe(false);
   });
 
@@ -65,33 +67,41 @@ describe("guided live coverage decisions", () => {
     expect(second.decision.status).toBe("accepted");
     expect(second.coverageFrame).toMatchObject({
       passID: "first",
-      segmentID: "left",
+      segmentID: "leftProfile",
       qualityAccepted: true,
       duplicateAngle: false
     });
-    expect(second.acceptedFrame?.assignedSegmentID).toBe("left");
-    expect(guidedSegmentToCaptureAngle("left")).toBe("leftProfile");
+    expect(second.acceptedFrame?.assignedSegmentID).toBe("leftProfile");
+    expect(guidedSegmentToCaptureAngle("leftProfile")).toBe("leftProfile");
   });
 
-  it("maps yaw and pitch into deterministic circular sectors without using phone tilt", () => {
+  it("maps normal selfie pose into separate diagnostic sectors without using phone tilt", () => {
+    expect(classifyNaturalPoseSector(0, 0)).toBe("center");
+    expect(classifyNaturalPoseSector(-24, 0)).toBe("left");
+    expect(classifyNaturalPoseSector(24, 0)).toBe("right");
+    expect(classifyNaturalPoseSector(0, -12)).toBe("up");
+    expect(classifyNaturalPoseSector(0, 12)).toBe("down");
+
+    const rollOnly = decision({ report: report({ yawDegrees: 0, pitchDegrees: 0, rollDegrees: 28 }) });
+    expect(rollOnly.classifiedPoseSectorID).toBe("center");
+    expect(rollOnly.assignedSegmentID).toBe("center");
+    expect(rollOnly.accepted).toBe(true);
+  });
+
+  it("maps yaw magnitude into the five required fallback coverage slots", () => {
     const cases: Array<[number, number, string]> = [
       [0, 0, "center"],
-      [-34, -8, "upperLeft"],
-      [-34, 0, "left"],
-      [-34, 8, "lowerLeft"],
-      [0, 8, "lowerCenter"],
-      [34, 8, "lowerRight"],
-      [34, 0, "right"],
-      [34, -8, "upperRight"]
+      [-34, -8, "left45"],
+      [-34, 0, "left45"],
+      [-72, 8, "leftProfile"],
+      [34, 8, "right45"],
+      [34, 0, "right45"],
+      [72, -8, "rightProfile"]
     ];
 
     for (const [yawDegrees, pitchDegrees, segmentID] of cases) {
       expect(decision({ report: report({ yawDegrees, pitchDegrees }) }).assignedSegmentID, segmentID).toBe(segmentID);
     }
-
-    const rollOnly = decision({ report: report({ yawDegrees: 0, pitchDegrees: 0, rollDegrees: 28 }) });
-    expect(rollOnly.assignedSegmentID).toBe("center");
-    expect(rollOnly.accepted).toBe(true);
   });
 
   it("can complete the first ring from natural selfie head movement without steering the phone", () => {
@@ -99,13 +109,10 @@ describe("guided live coverage decisions", () => {
     let accumulator = createInitialGuidedLiveCoverageAccumulatorState();
     const naturalSequence = [
       { yawDegrees: 0, pitchDegrees: 0, expected: "center" },
-      { yawDegrees: -34, pitchDegrees: -8, expected: "upperLeft" },
-      { yawDegrees: -34, pitchDegrees: 0, expected: "left" },
-      { yawDegrees: -34, pitchDegrees: 8, expected: "lowerLeft" },
-      { yawDegrees: 0, pitchDegrees: 8, expected: "lowerCenter" },
-      { yawDegrees: 34, pitchDegrees: 8, expected: "lowerRight" },
-      { yawDegrees: 34, pitchDegrees: 0, expected: "right" },
-      { yawDegrees: 34, pitchDegrees: -8, expected: "upperRight" }
+      { yawDegrees: -34, pitchDegrees: -6, expected: "left45" },
+      { yawDegrees: -68, pitchDegrees: 0, expected: "leftProfile" },
+      { yawDegrees: 34, pitchDegrees: 6, expected: "right45" },
+      { yawDegrees: 68, pitchDegrees: 0, expected: "rightProfile" }
     ] as const;
 
     naturalSequence.forEach((pose, index) => {
@@ -146,7 +153,7 @@ describe("guided live coverage decisions", () => {
 
     const stable = updateGuidedLiveCoverageAccumulator(reacquired.accumulator, decision({ now: 1_600, report: report({ yawDegrees: 72 }) }));
     expect(stable.decision.status).toBe("accepted");
-    expect(stable.coverageFrame?.segmentID).toBe("right");
+    expect(stable.coverageFrame?.segmentID).toBe("rightProfile");
   });
 
   it("uses visible preview crop and head pose for scan progress without requiring phone steering", () => {
@@ -164,7 +171,7 @@ describe("guided live coverage decisions", () => {
       useNaturalScanThresholds: true
     });
 
-    expect(turnedHead.assignedSegmentID).toBe("right");
+    expect(turnedHead.assignedSegmentID).toBe("right45");
     expect(turnedHead.rejectionReasons).not.toContain("Center your face.");
     expect(turnedHead.status).toBe("pendingStability");
 
@@ -186,13 +193,13 @@ describe("guided live coverage decisions", () => {
     );
     expect(rejected.coverageFrame?.qualityAccepted).toBe(false);
     state = applyCoverageFrame(state, rejected.coverageFrame!);
-    expect(state.passes[0].segments.find((segment) => segment.id === "right")?.status).toBe("qualityRejected");
+    expect(state.passes[0].segments.find((segment) => segment.id === "rightProfile")?.status).toBe("qualityRejected");
     expect(state.passes[0].completed).toBe(false);
   });
 
-  it("marks first pass complete only after all eight distinct accepted regions are applied", () => {
+  it("marks first pass complete only after all five distinct fallback coverage slots are applied", () => {
     let state = createInitialGuidedScanState();
-    for (const segmentID of ["center", "upperLeft", "left", "lowerLeft", "lowerCenter", "lowerRight", "right", "upperRight"] as const) {
+    for (const segmentID of ["center", "left45", "leftProfile", "right45", "rightProfile"] as const) {
       state = applyCoverageFrame(state, {
         passID: "first",
         segmentID,
@@ -220,7 +227,7 @@ describe("guided live coverage decisions", () => {
     expect(getSecondPassTargets(state)).toContain("leftSide");
     expect(getSecondPassTargets(state)).toContain("rightSide");
 
-    for (const segmentID of ["upperLeft", "left", "lowerLeft", "upperRight", "right", "lowerRight", "lowerCenter"] as const) {
+    for (const segmentID of ["left45", "leftProfile", "right45", "rightProfile"] as const) {
       state = applyCoverageFrame(state, {
         passID: "first",
         segmentID,
@@ -232,7 +239,7 @@ describe("guided live coverage decisions", () => {
     }
     state = applyCoverageFrame(state, {
       passID: "second",
-      segmentID: "lowerCenter",
+      segmentID: "center",
       timestampMs: 3_000,
       qualityAccepted: false,
       duplicateAngle: false,

@@ -189,7 +189,8 @@ export function GuidedCaptureFlow({
         liveGuidance,
         liveCoverageDecision,
         guidedScanState,
-        acceptedLiveFrameCount: acceptedLiveFrames.length
+        acceptedLiveFrameCount: acceptedLiveFrames.length,
+        acceptedFrames: acceptedLiveFrames
       })
     : null;
 
@@ -1648,6 +1649,35 @@ function ScanDiagnosticsPanel({ snapshot }: { snapshot: ScanDiagnosticSnapshot }
       <p className="field-note">
         Copy this after a failed real-iPhone test. It excludes images, video, landmarks, embeddings, identity data, and precise facial measurements.
       </p>
+      <dl className="scan-diagnostics-summary">
+        <div>
+          <dt>Live yaw / pitch / roll</dt>
+          <dd>
+            {formatDiagnosticPoseValue(snapshot.observedFace.poseDegrees.yaw)} / {formatDiagnosticPoseValue(snapshot.observedFace.poseDegrees.pitch)} /{" "}
+            {formatDiagnosticPoseValue(snapshot.observedFace.poseDegrees.roll)}
+          </dd>
+        </div>
+        <div>
+          <dt>Current classified sector</dt>
+          <dd>{snapshot.readiness.currentClassifiedSector ?? "not classified"}</dd>
+        </div>
+        <div>
+          <dt>Current coverage slot</dt>
+          <dd>{snapshot.readiness.assignedSegment ?? "none"}</dd>
+        </div>
+        <div>
+          <dt>Last accepted sector</dt>
+          <dd>{snapshot.readiness.lastAcceptedSector ?? "none"}</dd>
+        </div>
+        <div>
+          <dt>Completed sectors</dt>
+          <dd>{snapshot.readiness.completedSectors.length > 0 ? snapshot.readiness.completedSectors.join(", ") : "none"}</dd>
+        </div>
+        <div>
+          <dt>Duplicate reason</dt>
+          <dd>{snapshot.readiness.duplicateRejectionReason ?? "none"}</dd>
+        </div>
+      </dl>
       <textarea className="scan-diagnostics-output" readOnly value={diagnosticText} aria-label="Sanitized scan diagnostic JSON" />
       <div className="button-row compact-buttons">
         <Button variant="ghost" onClick={() => void copyDiagnostic()}>
@@ -1656,6 +1686,10 @@ function ScanDiagnosticsPanel({ snapshot }: { snapshot: ScanDiagnosticSnapshot }
       </div>
     </div>
   );
+}
+
+function formatDiagnosticPoseValue(value: number | null) {
+  return value === null ? "N/A" : `${value}°`;
 }
 
 function CameraBlockedRecoveryList({ steps }: { steps: string[] }) {
@@ -2313,13 +2347,10 @@ function formatGuidedRegionID(regionID: GuidedScanReviewRegion["id"]) {
 function formatSegmentLabel(segmentID: GuidedScanState["passes"][number]["segments"][number]["id"]) {
   const labels: Record<GuidedScanState["passes"][number]["segments"][number]["id"], string> = {
     center: "center",
-    upperLeft: "upper-left",
-    left: "left",
-    lowerLeft: "lower-left",
-    lowerCenter: "lower-center",
-    lowerRight: "lower-right",
-    right: "right",
-    upperRight: "upper-right"
+    left45: "left 45",
+    leftProfile: "left profile",
+    right45: "right 45",
+    rightProfile: "right profile"
   };
   return labels[segmentID];
 }

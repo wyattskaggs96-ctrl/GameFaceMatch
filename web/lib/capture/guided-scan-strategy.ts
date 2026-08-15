@@ -1,13 +1,10 @@
 export type GuidedScanPassID = "first" | "second";
 export type GuidedScanCoverageSegmentID =
   | "center"
-  | "upperLeft"
-  | "left"
-  | "lowerLeft"
-  | "lowerCenter"
-  | "lowerRight"
-  | "right"
-  | "upperRight";
+  | "left45"
+  | "leftProfile"
+  | "right45"
+  | "rightProfile";
 export type GuidedScanRegionID = "frontView" | "leftSide" | "rightSide" | "jawAndChin" | "foreheadAndHairline" | "overallQuality";
 export type GuidedScanCoverageStatus = "missing" | "accepted" | "weak" | "duplicateRejected" | "qualityRejected";
 export type GuidedScanRegionStatus = "complete" | "needsAnotherLook" | "optionalImprovement";
@@ -65,22 +62,19 @@ export interface GuidedScanState {
 
 export const GUIDED_SCAN_SEGMENTS: Array<{ id: GuidedScanCoverageSegmentID; label: string }> = [
   { id: "center", label: "Center" },
-  { id: "upperLeft", label: "Upper-left" },
-  { id: "left", label: "Left" },
-  { id: "lowerLeft", label: "Lower-left" },
-  { id: "lowerCenter", label: "Lower-center" },
-  { id: "lowerRight", label: "Lower-right" },
-  { id: "right", label: "Right" },
-  { id: "upperRight", label: "Upper-right" }
+  { id: "left45", label: "Left 45" },
+  { id: "leftProfile", label: "Left profile" },
+  { id: "right45", label: "Right 45" },
+  { id: "rightProfile", label: "Right profile" }
 ];
 
 const FIRST_PASS_REQUIRED_SEGMENTS = GUIDED_SCAN_SEGMENTS.map((segment) => segment.id);
 const SECOND_PASS_REGION_SUPPORT: Record<GuidedScanRegionID, GuidedScanCoverageSegmentID[]> = {
   frontView: ["center"],
-  leftSide: ["upperLeft", "left", "lowerLeft"],
-  rightSide: ["upperRight", "right", "lowerRight"],
-  jawAndChin: ["lowerLeft", "lowerCenter", "lowerRight"],
-  foreheadAndHairline: ["upperLeft", "center", "upperRight"],
+  leftSide: ["left45", "leftProfile"],
+  rightSide: ["right45", "rightProfile"],
+  jawAndChin: ["leftProfile", "rightProfile"],
+  foreheadAndHairline: ["left45", "center", "right45"],
   overallQuality: FIRST_PASS_REQUIRED_SEGMENTS
 };
 

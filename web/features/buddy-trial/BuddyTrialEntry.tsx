@@ -243,7 +243,10 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
       } catch {
         // The URL query remains the primary beta authorization handoff if sessionStorage is unavailable.
       }
-      window.location.assign(`/?buddyTrialInvite=${encodeURIComponent(inviteId)}#start`);
+      const params = new URLSearchParams({ buddyTrialInvite: inviteId });
+      const currentParams = new URLSearchParams(window.location.search);
+      if (currentParams.get("scanDiagnostics") === "1") params.set("scanDiagnostics", "1");
+      window.location.assign(`/?${params.toString()}#start`);
     }
   };
 

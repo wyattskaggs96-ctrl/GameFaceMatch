@@ -12,6 +12,7 @@ import type { GuidedScanCoverageFrame, GuidedScanCoverageSegmentID, GuidedScanPa
 
 export type GuidedLiveSignalState = "pass" | "advisory" | "blocking" | "unavailable";
 export type GuidedLiveFrameDecisionStatus = "accepted" | "rejected" | "pendingStability";
+export type GuidedLivePoseSectorID = "center" | "left" | "right" | "up" | "down";
 
 export interface GuidedLiveFrameSignal<T> {
   value: T;
@@ -46,8 +47,10 @@ export interface GuidedLiveFrameDecision {
   landmarkConfidence: GuidedLiveFrameSignal<number | null>;
   expressionNeutrality: GuidedLiveFrameSignal<"pass" | "advisory" | "unavailable">;
   occlusion: GuidedLiveFrameSignal<"pass" | "advisory" | "unavailable">;
+  classifiedPoseSectorID: GuidedLivePoseSectorID | null;
   assignedSegmentID: GuidedScanCoverageSegmentID | null;
   duplicateAngle: boolean;
+  duplicateRejectionReason: string | null;
   status: GuidedLiveFrameDecisionStatus;
   accepted: boolean;
   rejectionReasons: string[];
@@ -96,8 +99,8 @@ export const naturalPhoneScanCoverageThresholds: CaptureGuidanceThresholds = {
 };
 
 const NATURAL_SIDE_YAW_THRESHOLD_DEGREES = 16;
-const NATURAL_UPPER_PITCH_THRESHOLD_DEGREES = -7;
-const NATURAL_LOWER_PITCH_THRESHOLD_DEGREES = 7;
+const NATURAL_PROFILE_YAW_THRESHOLD_DEGREES = 52;
+const NATURAL_PITCH_SECTOR_THRESHOLD_DEGREES = 9;
 
 export function createInitialGuidedLiveCoverageAccumulatorState(): GuidedLiveCoverageAccumulatorState {
   return {
@@ -128,19 +131,23 @@ export function evaluateGuidedLiveFrameDecision(input: {
   const yaw = pose?.yawDegrees ?? null;
   const pitch = pose?.pitchDegrees ?? null;
   const roll = pose?.rollDegrees ?? null;
+  const classifiedPoseSectorID = classifyNaturalPoseSector(yaw, pitch);
   const assignedSegmentID = assignCoverageSegment(yaw, pitch);
-  const duplicateAngle = assignedSegmentID
-    ? input.acceptedFrames.some(
-        (frame) =>
-          frame.passID === input.passID &&
-          frame.assignedSegmentID === assignedSegmentID &&
-          yaw !== null &&
-          Math.abs(frame.yawDegrees - yaw) <= options.duplicateYawToleranceDegrees &&
-          (pitch === null ||
-            frame.pitchDegrees === null ||
-            Math.abs(frame.pitchDegrees - pitch) <= options.duplicatePitchToleranceDegrees)
-      )
-    : false;
+  const duplicateFrame = assignedSegmentID
+    ? input.acceptedFrames.find((frame) => frame.passID === input.passID && frame.assignedSegmentID === assignedSegmentID)
+    : null;
+  const duplicatePoseWithinTolerance = Boolean(
+    duplicateFrame &&
+      yaw !== null &&
+      Math.abs(duplicateFrame.yawDegrees - yaw) <= options.duplicateYawToleranceDegrees &&
+      (pitch === null || duplicateFrame.pitchDegrees === null || Math.abs(duplicateFrame.pitchDegrees - pitch) <= options.duplicatePitchToleranceDegrees)
+  );
+  const duplicateAngle = Boolean(duplicateFrame);
+  const duplicateRejectionReason = duplicateAngle
+    ? duplicatePoseWithinTolerance
+      ? `Duplicate ${formatAssignedSegmentForDiagnostics(duplicateFrame?.assignedSegmentID ?? assignedSegmentID)} slot: yaw and pitch are still inside the accepted tolerance.`
+      : `Duplicate ${formatAssignedSegmentForDiagnostics(duplicateFrame?.assignedSegmentID ?? assignedSegmentID)} slot: this coverage slot is already complete.`
+    : null;
   const visibleBbox = bbox ? projectFaceBoxToVisiblePreview(bbox, input.visiblePreviewGeometry).boundingBox : null;
   const visibleCenter = visibleBbox ? faceBoxCenter(visibleBbox) : null;
   const faceSize = visibleBbox ? Math.max(visibleBbox.width, visibleBbox.height) : null;
@@ -212,8 +219,10 @@ export function evaluateGuidedLiveFrameDecision(input: {
     landmarkConfidence: signal(landmarkConfidenceScore, landmarkConfidenceScore === null ? "unavailable" : landmarkConfidenceScore >= options.minFaceConfidence ? "pass" : "blocking", landmarkConfidenceScore === null ? "notYetImplemented" : "estimated", landmarkConfidenceScore === null ? "Landmark confidence unavailable." : "Landmark confidence estimated locally."),
     expressionNeutrality: signal(expressionState, expressionState === "advisory" ? "advisory" : expressionState === "unavailable" ? "unavailable" : "pass", expressionState === "unavailable" ? "notYetImplemented" : "estimated", expressionState === "advisory" ? "Relax your expression." : "Expression check is advisory only."),
     occlusion: signal(occlusionState, occlusionState === "unavailable" ? "unavailable" : "pass", occlusionState === "unavailable" ? "notYetImplemented" : "estimated", occlusionState === "unavailable" ? "Occlusion detail unavailable." : "Required landmarks are visible."),
+    classifiedPoseSectorID,
     assignedSegmentID,
     duplicateAngle,
+    duplicateRejectionReason,
     status: accepted ? "pendingStability" : "rejected",
     accepted,
     rejectionReasons: unique(rejectionReasons)
@@ -280,13 +289,10 @@ export function updateGuidedLiveCoverageAccumulator(
 export function guidedSegmentToCaptureAngle(segmentID: GuidedScanCoverageSegmentID) {
   const mapping: Record<GuidedScanCoverageSegmentID, "straightOn" | "left45" | "right45" | "leftProfile" | "rightProfile"> = {
     center: "straightOn",
-    upperLeft: "left45",
-    left: "leftProfile",
-    lowerLeft: "left45",
-    lowerCenter: "straightOn",
-    lowerRight: "right45",
-    right: "rightProfile",
-    upperRight: "right45"
+    left45: "left45",
+    leftProfile: "leftProfile",
+    right45: "right45",
+    rightProfile: "rightProfile"
   };
   return mapping[segmentID];
 }
@@ -303,20 +309,36 @@ function rejectedCoverageFrame(decision: GuidedLiveFrameDecision): GuidedScanCov
   };
 }
 
-function assignCoverageSegment(yaw: number | null, pitch: number | null): GuidedScanCoverageSegmentID | null {
+export function classifyNaturalPoseSector(yaw: number | null, pitch: number | null): GuidedLivePoseSectorID | null {
   if (yaw === null) return null;
-  if (yaw < -NATURAL_SIDE_YAW_THRESHOLD_DEGREES) {
-    if (pitch !== null && pitch <= NATURAL_UPPER_PITCH_THRESHOLD_DEGREES) return "upperLeft";
-    if (pitch !== null && pitch >= NATURAL_LOWER_PITCH_THRESHOLD_DEGREES) return "lowerLeft";
-    return "left";
+  const absoluteYaw = Math.abs(yaw);
+  const absolutePitch = Math.abs(pitch ?? 0);
+  if (pitch !== null && absolutePitch >= NATURAL_PITCH_SECTOR_THRESHOLD_DEGREES && absolutePitch > absoluteYaw * 0.7) {
+    return pitch < 0 ? "up" : "down";
   }
-  if (yaw > NATURAL_SIDE_YAW_THRESHOLD_DEGREES) {
-    if (pitch !== null && pitch <= NATURAL_UPPER_PITCH_THRESHOLD_DEGREES) return "upperRight";
-    if (pitch !== null && pitch >= NATURAL_LOWER_PITCH_THRESHOLD_DEGREES) return "lowerRight";
-    return "right";
-  }
-  if (pitch !== null && pitch >= NATURAL_LOWER_PITCH_THRESHOLD_DEGREES) return "lowerCenter";
+  if (yaw < -NATURAL_SIDE_YAW_THRESHOLD_DEGREES) return "left";
+  if (yaw > NATURAL_SIDE_YAW_THRESHOLD_DEGREES) return "right";
   return "center";
+}
+
+function assignCoverageSegment(yaw: number | null, _pitch: number | null): GuidedScanCoverageSegmentID | null {
+  if (yaw === null) return null;
+  if (yaw <= -NATURAL_PROFILE_YAW_THRESHOLD_DEGREES) return "leftProfile";
+  if (yaw < -NATURAL_SIDE_YAW_THRESHOLD_DEGREES) return "left45";
+  if (yaw >= NATURAL_PROFILE_YAW_THRESHOLD_DEGREES) return "rightProfile";
+  if (yaw > NATURAL_SIDE_YAW_THRESHOLD_DEGREES) return "right45";
+  return "center";
+}
+
+function formatAssignedSegmentForDiagnostics(segmentID: GuidedScanCoverageSegmentID | null) {
+  const labels: Record<GuidedScanCoverageSegmentID, string> = {
+    center: "center",
+    left45: "left 45",
+    leftProfile: "left profile",
+    right45: "right 45",
+    rightProfile: "right profile"
+  };
+  return segmentID ? labels[segmentID] : "unknown";
 }
 
 function expressionNeutralityState(strongExpressionLikelihood: number | null): "pass" | "advisory" | "unavailable" {

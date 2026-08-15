@@ -137,7 +137,7 @@ describe("guided circular scan coverage contract", () => {
       duplicateAngle: false,
       warnings: []
     });
-    expect(getGuidedScanCoveragePercent(accepted.passes[0])).toBe(13);
+    expect(getGuidedScanCoveragePercent(accepted.passes[0])).toBe(20);
   });
 
   it("keeps first and second passes distinct and targets weak regions", () => {

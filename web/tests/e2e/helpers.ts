@@ -13,8 +13,8 @@ export const requiredAngleLabels = ["Straight-on", "Left 45 degrees", "Right 45 
 
 export async function completeOnboarding(page: Page) {
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "Build your Road to Glory look with confidence." })).toBeVisible();
-  await page.getByRole("button", { name: "Start walkthrough" }).click();
+  await expect(page.getByRole("heading", { name: "Quick Scan to put you in the game" })).toBeVisible();
+  await page.getByRole("button", { name: "Get Started" }).click();
   await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
   await page.getByRole("button", { name: "Continue to disclaimer" }).click();
   await expect(page.getByRole("heading", { name: "Independent companion" })).toBeVisible();

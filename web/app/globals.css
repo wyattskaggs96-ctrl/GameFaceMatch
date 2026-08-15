@@ -1462,6 +1462,227 @@ p {
   padding: 0;
 }
 
+.face-id-welcome-screen {
+  position: relative;
+  display: grid;
+  grid-template-rows: 50px auto minmax(300px, 1fr) auto minmax(128px, 1fr) auto 34px;
+  width: min(100%, 430px);
+  min-height: 100dvh;
+  min-height: 100svh;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 max(35px, var(--safe-right)) 0 max(35px, var(--safe-left));
+  color: #111111;
+  background: #ffffff;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+
+.face-id-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 50px;
+  padding: max(12px, var(--safe-top)) 20px 0;
+  color: #000000;
+  font-size: 1.06rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.face-id-status-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.face-id-cellular {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 3px);
+  align-items: end;
+  gap: 2px;
+  height: 13px;
+}
+
+.face-id-cellular span {
+  display: block;
+  width: 3px;
+  border-radius: 999px;
+  background: #000000;
+}
+
+.face-id-cellular span:nth-child(1) { height: 4px; }
+.face-id-cellular span:nth-child(2) { height: 7px; }
+.face-id-cellular span:nth-child(3) { height: 10px; }
+.face-id-cellular span:nth-child(4) { height: 13px; }
+
+.face-id-wifi {
+  position: relative;
+  width: 17px;
+  height: 12px;
+  overflow: hidden;
+}
+
+.face-id-wifi::before,
+.face-id-wifi::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  border: 2px solid #000000;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-radius: 999px;
+  transform: translateX(-50%);
+}
+
+.face-id-wifi::before {
+  top: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.face-id-wifi::after {
+  top: 5px;
+  width: 10px;
+  height: 10px;
+}
+
+.face-id-battery {
+  position: relative;
+  width: 26px;
+  height: 12px;
+  border: 1.6px solid #000000;
+  border-radius: 4px;
+}
+
+.face-id-battery::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  bottom: 2px;
+  left: 2px;
+  border-radius: 2px;
+  background: #000000;
+}
+
+.face-id-battery::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: -4px;
+  width: 2px;
+  height: 6px;
+  border-radius: 0 2px 2px 0;
+  background: #000000;
+}
+
+.face-id-welcome-title {
+  width: 360px;
+  max-width: 100%;
+  margin: 17px 0 0 2px;
+  font-size: clamp(1.18rem, 5vw, 1.34rem);
+  font-weight: 900;
+  line-height: 1.16;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.face-id-scan-illustration {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 388px);
+  aspect-ratio: 388 / 347;
+  margin: -4px auto 0;
+}
+
+.face-id-dotted-ring {
+  width: 322px;
+  max-width: 86%;
+  aspect-ratio: 322 / 288;
+  border: 4px dotted #babcc2;
+  border-radius: 50%;
+}
+
+.face-id-smile-icon {
+  position: absolute;
+  width: 135px;
+  height: 121px;
+  fill: none;
+  stroke: #b8babf;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.face-id-welcome-instructions {
+  display: grid;
+  gap: 10px;
+  width: 361px;
+  max-width: 100%;
+  margin: 24px auto 0;
+  text-align: center;
+}
+
+.face-id-welcome-instructions h2 {
+  margin: 0;
+  color: #111111;
+  font-size: 1.02rem;
+  font-weight: 900;
+  line-height: 1.32;
+  letter-spacing: 0;
+}
+
+.face-id-welcome-instructions p {
+  margin: 0;
+  color: #2d2d33;
+  font-size: 1.06rem;
+  line-height: 1.28;
+  letter-spacing: 0;
+}
+
+.face-id-welcome-button {
+  align-self: end;
+  width: min(100%, 330px);
+  min-height: 50px;
+  margin: 0 auto 48px;
+  border: 0;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #377cf5;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+  touch-action: manipulation;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.face-id-welcome-button:hover {
+  background: #2f70e5;
+}
+
+.face-id-welcome-button:active {
+  transform: scale(0.99);
+}
+
+.face-id-welcome-button:focus-visible {
+  outline: 3px solid rgba(55, 124, 245, 0.34);
+  outline-offset: 3px;
+}
+
+.face-id-home-indicator {
+  align-self: end;
+  width: 144px;
+  height: 5px;
+  margin: 0 auto 9px;
+  border-radius: 999px;
+  background: #000000;
+}
+
 .setup-flow-screen {
   position: relative;
   display: grid;

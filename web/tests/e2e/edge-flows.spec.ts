@@ -3,6 +3,43 @@ import { acceptRequiredConsent, completeOnboarding, consentCard, navigateToCaptu
 import { invalidTextFile, syntheticPng } from "./synthetic-images";
 
 test.describe("GameFace Match E2E edge flows", () => {
+  test("renders the Face ID style welcome screen at the target iPhone viewport", async ({ page }) => {
+    await page.setViewportSize({ width: 430, height: 932 });
+    await page.goto("/#welcome");
+
+    await expect(page.getByRole("heading", { name: "Quick Scan to put you in the game" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How your quick scan works" })).toBeVisible();
+    await expect(page.getByText("Build your Road to Glory look with confidence.")).toHaveCount(0);
+    await expect(page.getByRole("button")).toHaveCount(1);
+    await expect(page.getByRole("button", { name: "Get Started" })).toBeVisible();
+
+    const renderedState = await page.locator(".face-id-welcome-screen").evaluate((element) => {
+      const style = window.getComputedStyle(element);
+      const title = element.querySelector(".face-id-welcome-title");
+      return {
+        background: style.backgroundColor,
+        viewport: { width: window.innerWidth, height: window.innerHeight },
+        titleFits: title ? title.scrollWidth <= title.clientWidth : false,
+        hasRing: Boolean(element.querySelector(".face-id-dotted-ring")),
+        hasFaceIcon: Boolean(element.querySelector(".face-id-smile-icon")),
+        hasHomeIndicator: Boolean(element.querySelector(".face-id-home-indicator"))
+      };
+    });
+
+    expect(renderedState).toEqual({
+      background: "rgb(255, 255, 255)",
+      viewport: { width: 430, height: 932 },
+      titleFits: true,
+      hasRing: true,
+      hasFaceIcon: true,
+      hasHomeIndicator: true
+    });
+
+    await page.getByRole("button", { name: "Get Started" }).click();
+    await expect(page).toHaveURL(/#product$/);
+    await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
+  });
+
   test("blocks progress when required consent is missing", async ({ page }) => {
     await completeOnboarding(page);
     await expect(page.getByRole("heading", { name: "Choose each consent separately" })).toBeVisible();
@@ -95,8 +132,8 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page.getByRole("link", { name: "Skip to main content" })).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(page.locator("#main-content")).toBeFocused();
-    await page.getByRole("button", { name: "Start walkthrough" }).focus();
-    await expect(page.getByRole("button", { name: "Start walkthrough" })).toBeFocused();
+    await page.getByRole("button", { name: "Get Started" }).focus();
+    await expect(page.getByRole("button", { name: "Get Started" })).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
     await page.getByRole("button", { name: "Continue to disclaimer" }).focus();
@@ -121,7 +158,7 @@ test.describe("GameFace Match E2E edge flows", () => {
     await page.goto("/");
     const prefersReducedMotion = await page.evaluate(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     expect(prefersReducedMotion).toBe(true);
-    await page.getByRole("button", { name: "Start walkthrough" }).click();
+    await page.getByRole("button", { name: "Get Started" }).click();
     await expect(page.getByRole("heading", { name: "Closest available settings, not a face import" })).toBeVisible();
   });
 

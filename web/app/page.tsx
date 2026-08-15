@@ -237,7 +237,7 @@ export default function HomePage() {
       ]
     : PRIMARY_NAV_ITEMS;
   const stepFlowProgress = getStepFlowProgress(screen);
-  const immersiveSetupScreen = screen === "start" || screen === "capture" || (screen === "preparation" && buddyTrialCustomerScanMode);
+  const immersiveSetupScreen = screen === "welcome" || screen === "start" || screen === "capture" || (screen === "preparation" && buddyTrialCustomerScanMode);
 
   const completedAngles = session.angles.filter((angle) => angle.status === "complete").length;
   const requiredAngles = session.angles.length;
@@ -834,31 +834,7 @@ export default function HomePage() {
     switch (screen) {
       case "welcome":
         return (
-          <section className="hero-panel" aria-labelledby="welcome-title">
-            <div className="hero-copy">
-              <p className="eyebrow">Web MVP | College Football 27 companion</p>
-              <h1 id="welcome-title">Build your Road to Glory look with confidence.</h1>
-              <p className="lede">{PRODUCT_EXPLANATION}</p>
-              <p className="supporting">Guided browser capture uses RGB images only, not native TrueDepth geometry.</p>
-              <div className="hero-actions">
-                <Button onClick={() => navigate("product")}>Start walkthrough</Button>
-                <Button variant="secondary" onClick={() => navigate("catalog")}>
-                  Check catalog status
-                </Button>
-              </div>
-            </div>
-            <Card className="scoreboard-card">
-              <div className="scoreboard-row">
-                <span>Catalog</span>
-                <strong>{CATALOG_UNAVAILABLE_MESSAGE}</strong>
-              </div>
-              <div className="scoreboard-row">
-                <span>Capture mode</span>
-                <strong>Guided RGB images</strong>
-              </div>
-              <ProgressBar value={completedAngles} max={requiredAngles} label="Capture progress" />
-            </Card>
-          </section>
+          <WelcomeFaceIDStyleScreen onGetStarted={() => navigate("product")} />
         );
       case "product":
         return (
@@ -1254,6 +1230,55 @@ function refinementAnalyticsOutcome(result: RefinementResult) {
   if (result.status === "unavailable") return "unavailable";
   if (result.status === "invalidScreenshot") return "cancelled";
   return "completedWithLimitations";
+}
+
+function WelcomeFaceIDStyleScreen({ onGetStarted }: { onGetStarted: () => void }) {
+  return (
+    <section className="face-id-welcome-screen" aria-labelledby="welcome-title">
+      <div className="face-id-status-bar" aria-hidden="true">
+        <span className="face-id-status-time">9:41</span>
+        <span className="face-id-status-icons">
+          <span className="face-id-cellular">
+            <span />
+            <span />
+            <span />
+            <span />
+          </span>
+          <span className="face-id-wifi" />
+          <span className="face-id-battery" />
+        </span>
+      </div>
+
+      <h1 id="welcome-title" className="face-id-welcome-title">
+        Quick Scan to put you in the game
+      </h1>
+
+      <div className="face-id-scan-illustration" aria-hidden="true">
+        <div className="face-id-dotted-ring" />
+        <svg className="face-id-smile-icon" viewBox="0 0 140 124" role="img" aria-label="">
+          <ellipse cx="70" cy="62" rx="50" ry="49" />
+          <path d="M44 54v13" />
+          <path d="M96 54v13" />
+          <path d="M70 52v26" />
+          <path d="M47 84c10 16 36 16 46 0" />
+        </svg>
+      </div>
+
+      <div className="face-id-welcome-instructions">
+        <h2>How your quick scan works</h2>
+        <p>
+          Position your face in the camera frame. Then slowly move your head in a circle so we can capture the angles needed to build your closest
+          in-game look.
+        </p>
+      </div>
+
+      <button className="face-id-welcome-button" type="button" onClick={onGetStarted}>
+        Get Started
+      </button>
+
+      <div className="face-id-home-indicator" aria-hidden="true" />
+    </section>
+  );
 }
 
 function Dashboard({

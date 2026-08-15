@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { applyCoverageFrame, createInitialGuidedScanState, getSecondPassTargets, getSelectiveRetakeRegion } from "@/lib/capture/guided-scan-strategy";
+import { applyCoverageFrame, createInitialGuidedScanState, getGuidedScanCoveragePercent, getSecondPassTargets, getSelectiveRetakeRegion } from "@/lib/capture/guided-scan-strategy";
 import {
   classifyNaturalPoseSector,
   createInitialGuidedLiveCoverageAccumulatorState,
@@ -193,6 +193,63 @@ describe("guided live coverage decisions", () => {
 
     expect(acceptedSegments).toEqual(["center", "left45", "leftProfile", "right45", "rightProfile"]);
     expect(state.passes[0].completed).toBe(true);
+  });
+
+  it("completes one natural circle while silently ignoring duplicate intermediate frames", () => {
+    let state = createInitialGuidedScanState();
+    let accumulator = createInitialGuidedLiveCoverageAccumulatorState();
+    let acceptedFrames: GuidedLiveAcceptedFrame[] = [];
+    let completionEvents = 0;
+    const naturalCircleWithDuplicates = [
+      { now: 0, yawDegrees: 0, pitchDegrees: 0 },
+      { now: 320, yawDegrees: 1, pitchDegrees: 1 },
+      { now: 680, yawDegrees: 2, pitchDegrees: 0 },
+      { now: 980, yawDegrees: -19, pitchDegrees: -8 },
+      { now: 1_320, yawDegrees: -21, pitchDegrees: -10 },
+      { now: 1_680, yawDegrees: -22, pitchDegrees: -9 },
+      { now: 2_020, yawDegrees: -36, pitchDegrees: -16 },
+      { now: 2_360, yawDegrees: -39, pitchDegrees: -18 },
+      { now: 2_760, yawDegrees: -41, pitchDegrees: -15 },
+      { now: 3_100, yawDegrees: -20, pitchDegrees: 2 },
+      { now: 3_480, yawDegrees: 0, pitchDegrees: 0 },
+      { now: 3_820, yawDegrees: 19, pitchDegrees: 9 },
+      { now: 4_160, yawDegrees: 21, pitchDegrees: 11 },
+      { now: 4_520, yawDegrees: 23, pitchDegrees: 9 },
+      { now: 4_880, yawDegrees: 36, pitchDegrees: 17 },
+      { now: 5_220, yawDegrees: 40, pitchDegrees: 18 }
+    ];
+
+    const acceptedSegments: string[] = [];
+    const duplicateSegments: string[] = [];
+    for (const pose of naturalCircleWithDuplicates) {
+      const update = updateGuidedLiveCoverageAccumulator(
+        accumulator,
+        decision({
+          acceptedFrames,
+          now: pose.now,
+          report: report({ yawDegrees: pose.yawDegrees, pitchDegrees: pose.pitchDegrees }),
+          useNaturalScanThresholds: true
+        }),
+        naturalPhoneLiveCoverageOptions
+      );
+      accumulator = update.accumulator;
+      const wasComplete = state.passes[0].completed;
+      if (update.decision.duplicateAngle && update.decision.assignedSegmentID) {
+        duplicateSegments.push(update.decision.assignedSegmentID);
+      }
+      if (update.coverageFrame?.qualityAccepted && update.acceptedFrame) {
+        state = applyCoverageFrame(state, update.coverageFrame);
+        acceptedFrames = [...acceptedFrames, update.acceptedFrame];
+        acceptedSegments.push(update.acceptedFrame.assignedSegmentID);
+      }
+      if (!wasComplete && state.passes[0].completed) completionEvents += 1;
+    }
+
+    expect(acceptedSegments).toEqual(["center", "left45", "leftProfile", "right45", "rightProfile"]);
+    expect(duplicateSegments).toEqual(expect.arrayContaining(["center", "left45", "leftProfile"]));
+    expect(getGuidedScanCoveragePercent(state.passes[0])).toBe(100);
+    expect(state.passes[0].completed).toBe(true);
+    expect(completionEvents).toBe(1);
   });
 
   it("does not double-invert mirrored front-camera yaw or treat a new slot as a duplicate", () => {

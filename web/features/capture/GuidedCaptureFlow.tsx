@@ -296,6 +296,12 @@ export function GuidedCaptureFlow({
   }, [guidedStage, positioningReady]);
 
   useEffect(() => {
+    if (guidedStage !== "coverageReview" || !customerMode || !stream) return;
+    cameraService.stopCameraPreview(stream);
+    setStream(null);
+  }, [cameraService, customerMode, guidedStage, stream]);
+
+  useEffect(() => {
     return () => {
       if (stream) {
         cameraService.stopCameraPreview(stream);
@@ -2216,7 +2222,9 @@ function getReferenceStatusLabel({
   if (captureMode === "complete") return "First GameFace scan complete.";
   if (visualState === "denied" || cameraError) return "Camera permission denied.";
   if (visualState === "multiple") return "More than one face detected.";
-  if (captureMode === "scan" && liveCoverageDecision?.assignedSegmentID) return `${formatSegmentLabel(liveCoverageDecision.assignedSegmentID)} accepted.`;
+  if (captureMode === "scan" && liveCoverageDecision?.status === "accepted" && liveCoverageDecision.assignedSegmentID) {
+    return `${formatSegmentLabel(liveCoverageDecision.assignedSegmentID)} accepted.`;
+  }
   if (captureMode === "scan") return "Move your head slowly to complete the circle.";
   return circularCanBegin ? "Face positioned." : "Position your face within the frame.";
 }
@@ -2235,6 +2243,7 @@ function getReferenceStatusDetail({
   if (visualState === "denied" || cameraError) return "Allow camera access or use the assisted five-angle capture option.";
   if (visualState === "multiple") return "Only one person can be in the scan.";
   if (visualState === "accessibility") return "Use assisted capture for a step-by-step set of poses instead of circular movement.";
+  if (liveCoverageDecision?.duplicateAngle) return "Keep moving slowly to the next unfilled angle.";
   if (liveCoverageDecision?.status === "rejected" && liveCoverageDecision.rejectionReasons[0]) return liveCoverageDecision.rejectionReasons[0];
   if (positioningReady) return "Keep your phone upright. Move your head, not your phone.";
   return "Hold the phone upright at a comfortable selfie distance. Keep your face centered with even light.";

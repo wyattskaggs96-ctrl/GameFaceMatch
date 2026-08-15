@@ -190,6 +190,10 @@ describe("guided circular scan coverage contract", () => {
     expect(source).toContain("First Face ID");
     expect(source).toContain("scan complete.");
     expect(source).toContain("Move your head slowly to complete the circle");
+    expect(source).toContain("liveCoverageDecision?.duplicateAngle");
+    expect(source).toContain("Keep moving slowly to the next unfilled angle.");
+    expect(source).toContain("guidedStage !== \"coverageReview\" || !customerMode || !stream");
+    expect(source).toContain("cameraService.stopCameraPreview(stream)");
     expect(source).toContain("NEXT_PUBLIC_GFM_SETUP_VISUAL_TESTS");
     expect(source).toContain("process.env.NODE_ENV !== \"production\"");
     expect(source).not.toMatch(/setTimeout\([^)]*complete|elapsed.*complete|fake progress/i);

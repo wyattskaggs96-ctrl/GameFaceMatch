@@ -10,6 +10,7 @@ export const BUDDY_TRIAL_STORAGE_PREFIX = "gfm:buddy-trial:v1";
 export const BUDDY_TRIAL_ACTIVE_INVITE_ID = "btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0";
 export const BUDDY_TRIAL_EXPIRED_INVITE_ID = "btv1_2a6d4f8c1b3e5a7099e8d7c6b5a43210";
 export const BUDDY_TRIAL_USED_INVITE_ID = "btv1_7c9a1e5d3f8b2460a4c2e1d9b8f60531";
+export const BUDDY_TRIAL_ACTIVE_INVITE_POINTER_KEY = "gfm:buddy-trial:v1:active-invite";
 export const BUDDY_TRIAL_OWNER_INVITE_PREFIX = "btv1_owner_";
 
 export const BUDDY_TRIAL_STATES = [

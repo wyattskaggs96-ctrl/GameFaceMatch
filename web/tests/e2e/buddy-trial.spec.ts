@@ -5,6 +5,7 @@ const activeInvite = "btv1_8f4c2a7d9e6b41c0a3f5d8e2b9c7a1f0";
 const expiredInvite = "btv1_2a6d4f8c1b3e5a7099e8d7c6b5a43210";
 const usedInvite = "btv1_7c9a1e5d3f8b2460a4c2e1d9b8f60531";
 const activeInviteStorageKey = `gfm:buddy-trial:v1:${activeInvite}`;
+const activeInvitePointerKey = "gfm:buddy-trial:v1:active-invite";
 
 test.describe("Buddy Trial invite route", () => {
   test("server-renders an active invite without an indefinite private-link loading shell", async ({ browser }) => {
@@ -52,6 +53,11 @@ test.describe("Buddy Trial invite route", () => {
     await expect(page.getByText("Development catalog state")).toHaveCount(0);
     await expect(page.getByText(/RGB|TrueDepth|ARKit|3D reconstruction|production catalog|development catalog/i)).toHaveCount(0);
 
+    await page.goto("/#start");
+    await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Get Started" })).toBeEnabled();
+    await expect(page.getByText(/Purchase verification is not connected yet|production scans stay blocked|Verified catalog data is not loaded/i)).toHaveCount(0);
+
     await page.getByRole("button", { name: "Get Started" }).click();
     await expect(page.getByRole("heading", { name: "Get Ready" })).toBeVisible();
     await expect(page.getByText("Remove glasses or headwear")).toBeVisible();
@@ -82,6 +88,58 @@ test.describe("Buddy Trial invite route", () => {
     await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Get Started" })).toBeDisabled();
     await expect(page.getByText(/Return to your private beta invite link/i)).toBeVisible();
+    await expect(page.getByText(/Purchase verification is not connected yet|production scans stay blocked|Verified catalog data is not loaded/i)).toHaveCount(0);
+
+    await page.goto("/?buddyTrialInvite=not-a-real-invite#start");
+    await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Get Started" })).toBeDisabled();
+    await expect(page.getByText("Private beta access active.")).toHaveCount(0);
+    await expect(page.getByText(/Return to your private beta invite link/i)).toHaveCount(0);
+  });
+
+  test("recovers beta scan access from the active invite pointer when the setup URL loses its query", async ({ page }) => {
+    await page.addInitScript(
+      ({ key, inviteId }) => {
+        const now = "2026-08-14T12:00:00.000Z";
+        const session = {
+          schemaVersion: "buddy-trial-v1",
+          sessionId: "bt_session_pointer_recovery",
+          inviteId,
+          state: "SCAN_IN_PROGRESS",
+          createdAt: now,
+          updatedAt: now,
+          completedAt: null,
+          deletedAt: null,
+          consent: {
+            consentVersion: "2026-07-01",
+            acceptedAt: now,
+            acknowledgments: {
+              ageEligibility: true,
+              subjectPermission: true,
+              cameraUse: true,
+              currentFaceAnalysis: true,
+              temporaryProcessing: true
+            }
+          },
+          catalogGate: "beta_research_available",
+          buildGuide: null,
+          refinementGuide: null,
+          videoOneReview: null,
+          videoTwoReview: null,
+          finalOutcome: null,
+          resultPhotoFeedback: null,
+          learningRecord: null,
+          history: [{ state: "SCAN_IN_PROGRESS", at: now, note: "Test beta scan started." }]
+        };
+        window.localStorage.setItem(`gfm:buddy-trial:v1:${inviteId}`, JSON.stringify(session));
+        window.sessionStorage.setItem(key, inviteId);
+      },
+      { key: activeInvitePointerKey, inviteId: activeInvite }
+    );
+    await page.goto("/#start");
+
+    await expect(page.getByRole("heading", { name: "Set Up Your GameFace" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Get Started" })).toBeEnabled();
     await expect(page.getByText(/Purchase verification is not connected yet|production scans stay blocked|Verified catalog data is not loaded/i)).toHaveCount(0);
   });
 

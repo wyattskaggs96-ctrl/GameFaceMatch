@@ -24,6 +24,7 @@ import { SettingsPanel } from "@/features/settings/SettingsPanel";
 import { createInitialCaptureSession, type ActiveCaptureSession } from "@/lib/capture/capture-session";
 import { createBrowserCameraService } from "@/lib/capture/browser-camera-service";
 import {
+  BUDDY_TRIAL_ACTIVE_INVITE_POINTER_KEY,
   createBuddyTrialStorageKey,
   getBuddyTrialInvite,
   hasRequiredBuddyTrialConsent,
@@ -160,6 +161,22 @@ const DevelopmentSourceVideoEvidenceInspector =
         loading: () => <LoadingState label="Loading source video evidence inspector" />
       });
 
+function getBuddyTrialInviteIdFromLocation() {
+  if (typeof window === "undefined") return null;
+  const fromSearch = new URLSearchParams(window.location.search).get("buddyTrialInvite");
+  if (fromSearch) return fromSearch;
+  const hashQueryStart = window.location.hash.indexOf("?");
+  if (hashQueryStart >= 0) {
+    const fromHash = new URLSearchParams(window.location.hash.slice(hashQueryStart + 1)).get("buddyTrialInvite");
+    if (fromHash) return fromHash;
+  }
+  try {
+    return window.sessionStorage.getItem(BUDDY_TRIAL_ACTIVE_INVITE_POINTER_KEY);
+  } catch {
+    return null;
+  }
+}
+
 export default function HomePage() {
   const [screen, setScreen] = useState<AppScreen>("welcome");
   const [session, setSession] = useState(() => createInitialCaptureSession());
@@ -291,7 +308,7 @@ export default function HomePage() {
       setScreen(initialScreen);
       return;
     }
-    window.history.replaceState({ screen: "welcome" }, "", toScreenHash("welcome"));
+    window.history.replaceState({ screen: "welcome" }, "", `${window.location.pathname}${window.location.search}${toScreenHash("welcome")}`);
   }, []);
 
   useEffect(() => {
@@ -330,7 +347,7 @@ export default function HomePage() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    setBuddyTrialInviteId(new URLSearchParams(window.location.search).get("buddyTrialInvite"));
+    setBuddyTrialInviteId(getBuddyTrialInviteIdFromLocation());
   }, []);
 
   useEffect(() => {
@@ -399,10 +416,10 @@ export default function HomePage() {
   function commitScreen(nextScreen: AppScreen, replace = false) {
     setScreen(nextScreen);
     if (typeof window !== "undefined") {
-      const nextUrl = toScreenHash(nextScreen);
+      const nextUrl = `${window.location.pathname}${window.location.search}${toScreenHash(nextScreen)}`;
       if (replace) {
         window.history.replaceState({ screen: nextScreen }, "", nextUrl);
-      } else if (window.location.hash !== nextUrl) {
+      } else if (window.location.hash !== toScreenHash(nextScreen)) {
         window.history.pushState({ screen: nextScreen }, "", nextUrl);
       }
     }
@@ -421,7 +438,7 @@ export default function HomePage() {
 
   function markBuddyTrialScanCompleteIfPresent() {
     if (typeof window === "undefined") return;
-    const inviteId = new URLSearchParams(window.location.search).get("buddyTrialInvite");
+    const inviteId = getBuddyTrialInviteIdFromLocation();
     if (!inviteId || getBuddyTrialInvite(inviteId).status !== "active") return;
     markBuddyTrialScanCompleteInStorage({
       inviteId,

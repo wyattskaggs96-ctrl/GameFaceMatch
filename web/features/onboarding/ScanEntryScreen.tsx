@@ -137,7 +137,11 @@ export function ScanEntryScreen({
         <Button className="scan-start-button setup-primary-button" disabled={!decision.allowed || isResolving} onClick={() => void startScan()}>
           {isResolving ? "Preparing..." : "Get Started"}
         </Button>
-        {!decision.allowed ? (
+        {privateBetaInviteMode === "ready" ? (
+          <p className="setup-start-status" role="status">
+            Private beta access active.
+          </p>
+        ) : !decision.allowed ? (
           <p className="setup-start-status" role="alert">
             {decision.message}
           </p>

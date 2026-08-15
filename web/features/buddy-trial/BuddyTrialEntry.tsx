@@ -10,6 +10,7 @@ import {
   attachBuddyTrialLearningRecord,
   attachBuddyTrialResultPhotoFeedback,
   applyBuddyTrialConsent,
+  BUDDY_TRIAL_ACTIVE_INVITE_POINTER_KEY,
   BUDDY_TRIAL_STATES,
   canAdvanceBuddyTrialToRecommendation,
   createBuddyTrialBuildGuideProgress,
@@ -237,6 +238,11 @@ export function BuddyTrialEntry({ inviteId }: BuddyTrialEntryProps) {
       consented.state === "CONSENTED" ? transitionBuddyTrialSession(consented, "SCAN_IN_PROGRESS", new Date(), "Buddy Trial scan started.") : consented;
     persistSession(nextSession);
     if (typeof window !== "undefined" && nextSession.state === "SCAN_IN_PROGRESS") {
+      try {
+        window.sessionStorage.setItem(BUDDY_TRIAL_ACTIVE_INVITE_POINTER_KEY, inviteId);
+      } catch {
+        // The URL query remains the primary beta authorization handoff if sessionStorage is unavailable.
+      }
       window.location.assign(`/?buddyTrialInvite=${encodeURIComponent(inviteId)}#start`);
     }
   };

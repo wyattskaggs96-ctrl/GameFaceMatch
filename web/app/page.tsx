@@ -1232,20 +1232,6 @@ function refinementAnalyticsOutcome(result: RefinementResult) {
 function WelcomeFaceIDStyleScreen({ onGetStarted }: { onGetStarted: () => void }) {
   return (
     <section className="face-id-welcome-screen" aria-labelledby="welcome-title">
-      <div className="face-id-status-bar" aria-hidden="true">
-        <span className="face-id-status-time">9:41</span>
-        <span className="face-id-status-icons">
-          <span className="face-id-cellular">
-            <span />
-            <span />
-            <span />
-            <span />
-          </span>
-          <span className="face-id-wifi" />
-          <span className="face-id-battery" />
-        </span>
-      </div>
-
       <h1 id="welcome-title" className="face-id-welcome-title">
         Quick Scan to put you in the game
       </h1>
@@ -1272,8 +1258,6 @@ function WelcomeFaceIDStyleScreen({ onGetStarted }: { onGetStarted: () => void }
       <button className="face-id-welcome-button" type="button" onClick={onGetStarted}>
         Get Started
       </button>
-
-      <div className="face-id-home-indicator" aria-hidden="true" />
     </section>
   );
 }

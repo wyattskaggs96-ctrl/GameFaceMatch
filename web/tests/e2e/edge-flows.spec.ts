@@ -22,7 +22,11 @@ test.describe("GameFace Match E2E edge flows", () => {
         titleFits: title ? title.scrollWidth <= title.clientWidth : false,
         hasRing: Boolean(element.querySelector(".face-id-dotted-ring")),
         hasFaceIcon: Boolean(element.querySelector(".face-id-smile-icon")),
-        hasHomeIndicator: Boolean(element.querySelector(".face-id-home-indicator"))
+        hasFakeStatusChrome: Boolean(
+          element.querySelector(
+            ".face-id-status-bar, .face-id-status-time, .face-id-status-icons, .face-id-cellular, .face-id-wifi, .face-id-battery, .face-id-home-indicator"
+          )
+        )
       };
     });
 
@@ -32,7 +36,7 @@ test.describe("GameFace Match E2E edge flows", () => {
       titleFits: true,
       hasRing: true,
       hasFaceIcon: true,
-      hasHomeIndicator: true
+      hasFakeStatusChrome: false
     });
 
     await page.getByRole("button", { name: "Get Started" }).click();

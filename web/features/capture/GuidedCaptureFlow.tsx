@@ -1379,9 +1379,6 @@ function CircularGuidedCapturePanel({
 
   return (
     <section className="setup-flow-screen setup-capture-screen" aria-labelledby="guided-circular-title" data-testid={`setup-${captureMode}`}>
-      <div className="setup-capture-topbar" aria-hidden="true">
-        <span className="setup-camera-dot" aria-hidden="true" />
-      </div>
       <div className="setup-capture-main">
         <div className="setup-camera-shell" data-mode={captureMode} data-active={streamActive || Boolean(visualState)} data-mirrored={previewIsMirrored}>
           <div className="setup-camera-frame" aria-label={completionVisible ? "Completed face scan preview" : "Guided face scan camera frame"}>

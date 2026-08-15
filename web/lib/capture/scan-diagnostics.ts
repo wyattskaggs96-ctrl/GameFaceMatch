@@ -202,7 +202,9 @@ export function createScanDiagnosticSnapshot(input: {
 
 export function isScanDiagnosticsEnabled(input: { nodeEnv?: string; search?: string | null }) {
   const params = new URLSearchParams(input.search ?? "");
-  return params.get("scanDiagnostics") === "1";
+  if (params.get("scanDiagnostics") !== "1") return false;
+  if (input.nodeEnv !== "production") return true;
+  return Boolean(params.get("buddyTrialInvite"));
 }
 
 function bucketCenter(value: number | null): ScanDiagnosticSnapshot["observedFace"]["centerBucket"] {

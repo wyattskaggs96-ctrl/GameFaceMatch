@@ -12,7 +12,8 @@ describe("scan diagnostics", () => {
     expect(isScanDiagnosticsEnabled({ nodeEnv: "development", search: "?scanDiagnostics=1" })).toBe(true);
     expect(isScanDiagnosticsEnabled({ nodeEnv: "test", search: "?scanDiagnostics=1" })).toBe(true);
     expect(isScanDiagnosticsEnabled({ nodeEnv: "development", search: "" })).toBe(false);
-    expect(isScanDiagnosticsEnabled({ nodeEnv: "production", search: "?scanDiagnostics=1" })).toBe(true);
+    expect(isScanDiagnosticsEnabled({ nodeEnv: "production", search: "?scanDiagnostics=1" })).toBe(false);
+    expect(isScanDiagnosticsEnabled({ nodeEnv: "production", search: "?buddyTrialInvite=btv1_owner&scanDiagnostics=1" })).toBe(true);
   });
 
   it("creates a sanitized real-device debugging snapshot without raw face media or landmarks", () => {

@@ -55,6 +55,8 @@ test.describe("GameFace Match E2E edge flows", () => {
 
       await expect(page.locator(".post-scan-complete-card h1 span", { hasText: "First Face ID" })).toBeVisible();
       await expect(page.locator(".post-scan-complete-card h1 span", { hasText: "scan complete." })).toBeVisible();
+      await expect(page.locator(".post-scan-avatar-preview")).toBeVisible();
+      await expect(page.locator(".post-scan-preview-pixels")).toHaveCount(0);
       await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
       await expect(page.getByRole("button", { name: "Select CFB game 2027" })).toBeVisible();
       await expect(page.getByText("Pro Football game 2026")).toBeVisible();
@@ -99,6 +101,7 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page).toHaveURL(/#game-selection$/);
     await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Select CFB game 2027" })).toBeVisible();
+    await expect(page.locator(".post-scan-avatar-preview")).toBeVisible();
     await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toHaveCount(0);
   });
 
@@ -133,6 +136,7 @@ test.describe("GameFace Match E2E edge flows", () => {
       await page.getByRole("button", { name: "Back to games" }).click();
       await expect(page).toHaveURL(/#game-selection$/);
       await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
+      await expect(page.locator(".post-scan-avatar-preview")).toBeVisible();
     }
 
   });

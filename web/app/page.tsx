@@ -79,6 +79,7 @@ import {
 } from "@/lib/performance/performance-monitor";
 import { createInitialAttributeConfirmation, type AttributeConfirmationState } from "@/lib/profile/attribute-confirmation";
 import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
+import { createPostScanAvatarPreviewModel } from "@/lib/post-scan/avatar-preview";
 import { createInitialScreenshotRefinementSession, deleteScreenshotRefinementSession } from "@/lib/refinement/screenshot-refinement";
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
 import {
@@ -950,6 +951,7 @@ export default function HomePage() {
       case "game-selection":
         return (
           <PostScanGameSelectionScreen
+            profile={standardProfile}
             onSelectGame={(tile) => {
               if (tile.gameID === "college-football-27") {
                 trackAnalytics("recommendationSelected", { selectedRecommendationRank: 1, resultOutcome: "unavailable", resultBlockReason: "catalogUnavailable" });
@@ -1309,18 +1311,14 @@ function WelcomeFaceIDStyleScreen({ onGetStarted }: { onGetStarted: () => void }
   );
 }
 
-function PostScanGameSelectionScreen({ onSelectGame }: { onSelectGame: (tile: GameSelectionTileDefinition) => void }) {
+function PostScanGameSelectionScreen({ profile, onSelectGame }: { profile: StandardFaceProfile | null; onSelectGame: (tile: GameSelectionTileDefinition) => void }) {
   return (
     <section className="post-scan-game-screen" aria-labelledby="post-scan-game-title">
       <div className="post-scan-game-inner">
         <div className="post-scan-complete-card" aria-labelledby="post-scan-complete-title">
           <div className="post-scan-preview-wrap" aria-hidden="true">
             <div className="post-scan-preview-ring">
-              <div className="post-scan-preview-pixels">
-                {Array.from({ length: 64 }, (_, index) => (
-                  <span key={index} style={{ "--pixel-index": index } as CSSProperties} />
-                ))}
-              </div>
+              <PostScanAvatarPreview profile={profile} />
             </div>
             <span className="post-scan-green-dot" />
           </div>
@@ -1351,6 +1349,63 @@ function PostScanGameSelectionScreen({ onSelectGame }: { onSelectGame: (tile: Ga
         </div>
       </div>
     </section>
+  );
+}
+
+function PostScanAvatarPreview({ profile }: { profile: StandardFaceProfile | null }) {
+  const avatar = createPostScanAvatarPreviewModel(profile);
+  const style = {
+    "--avatar-skin": avatar.skinTone,
+    "--avatar-skin-shadow": avatar.skinShadow,
+    "--avatar-hair": avatar.hairColor,
+    "--avatar-brow": avatar.browColor,
+    "--avatar-jersey": avatar.jerseyColor,
+    "--avatar-accent": avatar.accentColor
+  } as CSSProperties;
+  const facePath = `M${90 - avatar.faceWidth} 81c0-28 17-49 43-49s43 21 43 49c0 18-8 34-20 ${avatar.jawCurve}-12 13-34 13-46 0-12-${avatar.jawCurve}-20-${avatar.jawCurve}-20-${avatar.jawCurve}Z`;
+  return (
+    <svg
+      className="post-scan-avatar-preview"
+      data-avatar-source={avatar.source}
+      data-hair-variant={avatar.hairVariant}
+      data-facial-hair={avatar.facialHair}
+      viewBox="0 0 180 180"
+      role="img"
+      aria-label="Quick in-game avatar mockup"
+      style={style}
+      focusable="false"
+    >
+      <defs>
+        <linearGradient id="post-scan-avatar-stadium" x1="24" x2="156" y1="12" y2="160" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor="var(--avatar-accent)" stopOpacity="0.54" />
+          <stop offset="1" stopColor="#10141e" stopOpacity="0.92" />
+        </linearGradient>
+        <radialGradient id="post-scan-avatar-light" cx="50%" cy="24%" r="66%">
+          <stop offset="0" stopColor="#ffffff" stopOpacity="0.28" />
+          <stop offset="1" stopColor="#10141b" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <rect className="post-scan-avatar-backdrop" width="180" height="180" rx="90" />
+      <path className="post-scan-avatar-field" d="M0 128c34-15 67-21 101-17 31 4 55 18 79 33v36H0Z" />
+      <path className="post-scan-avatar-shoulders" d="M38 164c7-30 29-46 52-46s45 16 52 46Z" />
+      <path className="post-scan-avatar-neck" d="M73 105h34l5 35H68Z" />
+      <path className="post-scan-avatar-face" d={facePath} />
+      <path className="post-scan-avatar-face-shadow" d="M121 52c17 13 21 47 8 71 18-9 27-27 27-45 0-26-14-46-35-55Z" />
+      {avatar.hairVariant !== "none" ? (
+        <path className={`post-scan-avatar-hair post-scan-avatar-hair-${avatar.hairVariant}`} d="M47 73c0-32 18-55 45-55 26 0 43 17 45 43-9-9-24-15-43-15-20 0-35 8-47 27Z" />
+      ) : null}
+      <path className="post-scan-avatar-ear post-scan-avatar-ear-left" d="M46 78c-10 1-15 16-8 26 3 5 8 6 13 4Z" />
+      <path className="post-scan-avatar-ear post-scan-avatar-ear-right" d="M134 78c10 1 15 16 8 26-3 5-8 6-13 4Z" />
+      <path className="post-scan-avatar-brow" d="M66 74c8-4 16-4 24 0" style={{ strokeWidth: avatar.browWeight }} />
+      <path className="post-scan-avatar-brow" d="M99 74c8-4 16-4 24 0" style={{ strokeWidth: avatar.browWeight }} />
+      <circle className="post-scan-avatar-eye" cx="78" cy="86" r="3.3" />
+      <circle className="post-scan-avatar-eye" cx="110" cy="86" r="3.3" />
+      <path className="post-scan-avatar-nose" d="M94 86c-4 10-5 18 4 23" />
+      <path className="post-scan-avatar-mouth" d="M77 124c9 8 27 8 36 0" />
+      {avatar.facialHair !== "none" ? <path className={`post-scan-avatar-facial-hair post-scan-avatar-facial-hair-${avatar.facialHair}`} d="M69 116c10 20 35 24 50 0-2 19-12 31-25 31s-23-12-25-31Z" /> : null}
+      <path className="post-scan-avatar-jersey-line" d="M68 142h44M87 119l-8 44M93 119l8 44" />
+      <circle className="post-scan-avatar-highlight" cx="55" cy="34" r="7" />
+    </svg>
   );
 }
 

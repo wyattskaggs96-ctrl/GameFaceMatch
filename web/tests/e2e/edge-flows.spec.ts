@@ -45,6 +45,57 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page.getByRole("heading", { name: /Position your face within the frame\.|Rotate to portrait/ })).toBeVisible();
   });
 
+  test("renders the post-scan game selection screen at mobile viewports", async ({ page }) => {
+    for (const viewport of [
+      { width: 430, height: 932 },
+      { width: 390, height: 844 }
+    ]) {
+      await page.setViewportSize(viewport);
+      await page.goto("/#game-selection");
+
+      await expect(page.locator(".post-scan-complete-card h1 span", { hasText: "First Face ID" })).toBeVisible();
+      await expect(page.locator(".post-scan-complete-card h1 span", { hasText: "scan complete." })).toBeVisible();
+      await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
+      await expect(page.getByRole("button", { name: "Select College Football 27" })).toBeVisible();
+      await expect(page.getByText("Madden NFL 26")).toBeVisible();
+      await expect(page.getByText("NBA 2K26")).toBeVisible();
+      await expect(page.getByText("EA Sports PGA Tour")).toBeVisible();
+      await expect(page.getByText("PBA Pro Bowling 2026")).toBeVisible();
+      await expect(page.getByText("More Games Soon")).toBeVisible();
+      await expect(page.locator(".post-scan-game-grid")).toHaveCSS("grid-template-columns", /.+ .+/);
+      await expect(page.locator(".topbar")).toHaveCount(0);
+      await expect(page.locator(".mobile-nav")).toHaveCount(0);
+      await expect(page.getByText("Build your Road to Glory look with confidence.")).toHaveCount(0);
+      const metrics = await page.locator(".post-scan-game-screen").evaluate((element) => ({
+        background: window.getComputedStyle(element).backgroundColor,
+        scrollable: element.scrollHeight > element.clientHeight,
+        horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth
+      }));
+      expect(metrics, `${viewport.width}x${viewport.height}`).toEqual({
+        background: "rgb(0, 0, 0)",
+        scrollable: true,
+        horizontalOverflow: false
+      });
+    }
+  });
+
+  test("routes completed visual scan state to post-scan game selection", async ({ page }) => {
+    test.skip(
+      process.env.NEXT_PUBLIC_GAMEFACE_OWNER_REVIEW_DEMO !== "true" && process.env.NEXT_PUBLIC_GFM_SETUP_VISUAL_TESTS !== "1",
+      "Requires setup visual-state test hooks."
+    );
+    await page.setViewportSize({ width: 430, height: 932 });
+    await page.goto("/?setupVisualState=complete#capture");
+
+    await expect(page.locator(".setup-capture-copy h1 span", { hasText: "First Face ID" })).toBeVisible();
+    await expect(page.locator(".setup-capture-copy h1 span", { hasText: "scan complete." })).toBeVisible();
+    await page.getByRole("button", { name: "Continue after completed scan" }).click();
+    await expect(page).toHaveURL(/#game-selection$/);
+    await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Select College Football 27" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toHaveCount(0);
+  });
+
   test("blocks progress when required consent is missing", async ({ page }) => {
     await completeOnboarding(page);
     await expect(page.getByRole("heading", { name: "Choose each consent separately" })).toBeVisible();

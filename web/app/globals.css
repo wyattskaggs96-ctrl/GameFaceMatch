@@ -1578,6 +1578,390 @@ p {
   outline-offset: 3px;
 }
 
+.post-scan-game-screen {
+  width: 100%;
+  height: 100dvh;
+  height: 100svh;
+  min-height: 100dvh;
+  min-height: 100svh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: #f5f5f7;
+  background: #000;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  overscroll-behavior-y: contain;
+}
+
+.post-scan-game-inner {
+  display: grid;
+  gap: 26px;
+  width: min(100%, 430px);
+  min-height: 100dvh;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding:
+    max(34px, calc(var(--safe-top) + 12px))
+    max(28px, var(--safe-right))
+    max(34px, calc(var(--safe-bottom) + 16px))
+    max(28px, var(--safe-left));
+}
+
+.post-scan-complete-card {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  min-height: 304px;
+  padding: 36px 28px 30px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at 50% 27%, rgba(48, 209, 88, 0.09), transparent 36%),
+    linear-gradient(180deg, rgba(24, 25, 31, 0.96), rgba(12, 13, 17, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 26px 60px rgba(0, 0, 0, 0.46);
+}
+
+.post-scan-preview-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 184px;
+  aspect-ratio: 1;
+}
+
+.post-scan-preview-ring {
+  display: grid;
+  place-items: center;
+  width: 168px;
+  aspect-ratio: 1;
+  border: 1.5px solid rgba(48, 209, 88, 0.82);
+  border-radius: 999px;
+  background: rgba(48, 209, 88, 0.06);
+  box-shadow:
+    0 0 0 14px rgba(48, 209, 88, 0.035),
+    0 0 34px rgba(48, 209, 88, 0.18);
+}
+
+.post-scan-preview-pixels {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  width: 152px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 54% 39%, rgba(210, 170, 137, 0.24), transparent 31%),
+    radial-gradient(circle at 50% 69%, rgba(37, 30, 26, 0.3), transparent 34%),
+    linear-gradient(135deg, #2b3034, #15181d);
+  filter: blur(0.2px);
+}
+
+.post-scan-preview-pixels span {
+  min-width: 0;
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: rgba(98, 87, 80, 0.72);
+}
+
+.post-scan-preview-pixels span:nth-child(6n + 1) {
+  background: rgba(55, 61, 67, 0.78);
+}
+
+.post-scan-preview-pixels span:nth-child(6n + 2) {
+  background: rgba(138, 110, 91, 0.72);
+}
+
+.post-scan-preview-pixels span:nth-child(6n + 3) {
+  background: rgba(190, 151, 121, 0.66);
+}
+
+.post-scan-preview-pixels span:nth-child(6n + 4) {
+  background: rgba(42, 47, 55, 0.8);
+}
+
+.post-scan-preview-pixels span:nth-child(6n + 5) {
+  background: rgba(116, 94, 82, 0.66);
+}
+
+.post-scan-green-dot {
+  position: absolute;
+  top: 16px;
+  right: 12px;
+  width: 13px;
+  height: 13px;
+  border-radius: 999px;
+  background: #30d158;
+  box-shadow:
+    0 0 0 7px rgba(48, 209, 88, 0.15),
+    0 0 20px rgba(48, 209, 88, 0.42);
+}
+
+.post-scan-complete-card h1 {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  color: #f5f5f7;
+  font-size: 1.62rem;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.post-scan-game-heading {
+  max-width: 330px;
+  margin: 0;
+  color: #f5f5f7;
+  font-size: clamp(2.45rem, 10.4vw, 2.72rem);
+  font-weight: 950;
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+.post-scan-game-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding-bottom: 120px;
+}
+
+.post-scan-game-tile {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: 170px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 28px;
+  padding: 14px 15px;
+  color: #ffffff;
+  background: #111827;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 16px 36px rgba(0, 0, 0, 0.34);
+  font: inherit;
+  text-align: left;
+  touch-action: manipulation;
+}
+
+.post-scan-game-tile::after {
+  content: "";
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.74));
+  pointer-events: none;
+}
+
+.post-scan-game-tile:focus-visible {
+  outline: 3px solid rgba(10, 132, 255, 0.55);
+  outline-offset: 3px;
+}
+
+.post-scan-game-tile:active {
+  transform: scale(0.985);
+}
+
+.post-scan-game-tile[data-game="cf27"] {
+  background:
+    radial-gradient(circle at 12% 14%, rgba(255, 255, 255, 0.16), transparent 15%),
+    linear-gradient(135deg, #1b6f3b, #07182c);
+}
+
+.post-scan-game-tile[data-game="madden26"] {
+  background: linear-gradient(135deg, #193f2f, #111827);
+}
+
+.post-scan-game-tile[data-game="nba2k26"] {
+  background: linear-gradient(135deg, #7c3f18, #18122f);
+}
+
+.post-scan-game-tile[data-game="pga"] {
+  background: linear-gradient(135deg, #1f7a4c, #0f291c);
+}
+
+.post-scan-game-tile[data-game="pba"] {
+  background: linear-gradient(135deg, #191c31, #4b183c);
+}
+
+.post-scan-game-tile[data-game="soon"] {
+  background: linear-gradient(135deg, #151a25, #08090d);
+}
+
+.post-scan-game-tile > span {
+  position: relative;
+  z-index: 2;
+  max-width: 134px;
+  color: #ffffff;
+  font-size: 1.08rem;
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: 0;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.62);
+}
+
+.post-scan-game-art {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.post-scan-game-art .tile-field {
+  fill: rgba(45, 168, 101, 0.32);
+}
+
+.post-scan-game-art .tile-field-line,
+.post-scan-game-art .tile-light-beams,
+.post-scan-game-art .tile-court-line,
+.post-scan-game-art .tile-grid-lines {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.24);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.post-scan-game-art .tile-helmet-shell {
+  fill: rgba(248, 250, 252, 0.94);
+}
+
+.post-scan-game-art .tile-helmet-shadow {
+  fill: rgba(17, 24, 39, 0.22);
+}
+
+.post-scan-game-art .tile-helmet-mask,
+.post-scan-game-art .tile-football-lines,
+.post-scan-game-art .tile-basketball-lines,
+.post-scan-game-art .tile-golf-club,
+.post-scan-game-art .tile-controller-controls {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.post-scan-game-art .tile-helmet-mask {
+  stroke: rgba(17, 24, 39, 0.86);
+  stroke-width: 5;
+}
+
+.post-scan-game-art .tile-stadium-light {
+  fill: rgba(255, 255, 255, 0.26);
+}
+
+.post-scan-game-art .tile-light-beams {
+  stroke: rgba(232, 248, 255, 0.16);
+  stroke-width: 3;
+}
+
+.post-scan-game-art .tile-football {
+  fill: #a75b32;
+}
+
+.post-scan-game-art .tile-football-lines {
+  stroke: rgba(255, 255, 255, 0.86);
+  stroke-width: 2.5;
+}
+
+.post-scan-game-art .tile-court-glow {
+  fill: rgba(229, 164, 58, 0.2);
+}
+
+.post-scan-game-art .tile-basketball {
+  fill: #f97316;
+  stroke: rgba(59, 22, 8, 0.72);
+  stroke-width: 2.5;
+}
+
+.post-scan-game-art .tile-basketball-lines {
+  stroke: rgba(59, 22, 8, 0.68);
+  stroke-width: 2.5;
+}
+
+.post-scan-game-art .tile-fairway {
+  fill: rgba(89, 217, 142, 0.2);
+}
+
+.post-scan-game-art .tile-golf-club {
+  stroke: rgba(226, 232, 240, 0.82);
+  stroke-width: 5;
+}
+
+.post-scan-game-art .tile-golf-ball {
+  fill: #f8fafc;
+}
+
+.post-scan-game-art .tile-ball-dimples,
+.post-scan-game-art .tile-bowling-holes {
+  fill: none;
+  stroke: rgba(15, 23, 42, 0.58);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.post-scan-game-art .tile-lane {
+  fill: rgba(247, 200, 115, 0.16);
+}
+
+.post-scan-game-art .tile-bowling-ball {
+  fill: #2859ff;
+}
+
+.post-scan-game-art .tile-pins {
+  fill: #f8fafc;
+  stroke: rgba(239, 68, 68, 0.9);
+  stroke-width: 4;
+}
+
+.post-scan-game-art .tile-grid-lines {
+  stroke: rgba(107, 114, 128, 0.2);
+}
+
+.post-scan-game-art .tile-controller-body {
+  fill: rgba(36, 41, 56, 0.96);
+}
+
+.post-scan-game-art .tile-controller-controls {
+  stroke: rgba(255, 255, 255, 0.78);
+  stroke-width: 5;
+}
+
+@media (max-width: 390px) {
+  .post-scan-game-inner {
+    gap: 22px;
+    padding-inline: max(22px, var(--safe-left));
+  }
+
+  .post-scan-complete-card {
+    min-height: 286px;
+    border-radius: 32px;
+  }
+
+  .post-scan-preview-wrap {
+    width: 168px;
+  }
+
+  .post-scan-preview-ring {
+    width: 154px;
+  }
+
+  .post-scan-preview-pixels {
+    width: 138px;
+  }
+
+  .post-scan-game-heading {
+    font-size: 2.28rem;
+  }
+
+  .post-scan-game-tile {
+    min-height: 158px;
+    border-radius: 24px;
+    padding: 13px;
+  }
+}
+
 .setup-flow-screen {
   position: relative;
   display: grid;

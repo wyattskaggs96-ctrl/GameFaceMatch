@@ -40,6 +40,7 @@ export const HARDENED_E2E_FLOW = [
 
 export const APP_SCREENS = [
   ...KEY_NAVIGATION_FLOW,
+  "game-selection",
   "catalog",
   "fc26",
   "saved",

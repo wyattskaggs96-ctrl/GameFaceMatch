@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, type CSSProperties } from "react";
 import dynamic from "next/dynamic";
 import { AppShell } from "@/components/AppShell";
 import { Alert, Button, Card, LoadingState, ProgressBar, ScreenHeader, StepFlowRail } from "@/components/design-system";
@@ -236,7 +236,7 @@ export default function HomePage() {
       ]
     : PRIMARY_NAV_ITEMS;
   const stepFlowProgress = getStepFlowProgress(screen);
-  const immersiveSetupScreen = screen === "welcome" || screen === "start" || screen === "capture" || screen === "preparation";
+  const immersiveSetupScreen = screen === "welcome" || screen === "start" || screen === "capture" || screen === "preparation" || screen === "game-selection";
 
   const completedAngles = session.angles.filter((angle) => angle.status === "complete").length;
   const requiredAngles = session.angles.length;
@@ -469,11 +469,7 @@ export default function HomePage() {
 
   function handleGuidedCaptureContinue() {
     markBuddyTrialScanCompleteIfPresent();
-    if (buddyTrialCustomerScanMode && buddyTrialInviteId && typeof window !== "undefined") {
-      window.location.assign(`/trial/${encodeURIComponent(buddyTrialInviteId)}`);
-      return;
-    }
-    navigate("attributes");
+    navigate("game-selection");
   }
 
   function refreshPrivacyState() {
@@ -930,6 +926,18 @@ export default function HomePage() {
             onContinue={handleGuidedCaptureContinue}
           />
         );
+      case "game-selection":
+        return (
+          <PostScanGameSelectionScreen
+            onCollegeFootballSelect={() => {
+              if (buddyTrialInviteId && getBuddyTrialInvite(buddyTrialInviteId).status === "active" && typeof window !== "undefined") {
+                window.location.assign(`/trial/${encodeURIComponent(buddyTrialInviteId)}`);
+                return;
+              }
+              trackAnalytics("recommendationSelected", { selectedRecommendationRank: 1 });
+            }}
+          />
+        );
       case "attributes":
         return (
           <AttributeConfirmation
@@ -1259,6 +1267,145 @@ function WelcomeFaceIDStyleScreen({ onGetStarted }: { onGetStarted: () => void }
         Get Started
       </button>
     </section>
+  );
+}
+
+type GameSelectionTileID = "cf27" | "madden26" | "nba2k26" | "pga" | "pba" | "soon";
+
+const gameSelectionTiles: Array<{
+  id: GameSelectionTileID;
+  label: string;
+  ariaLabel: string;
+}> = [
+  { id: "cf27", label: "College Football 27", ariaLabel: "Select College Football 27" },
+  { id: "madden26", label: "Madden NFL 26", ariaLabel: "Madden NFL 26 is coming soon" },
+  { id: "nba2k26", label: "NBA 2K26", ariaLabel: "NBA 2K26 is coming soon" },
+  { id: "pga", label: "EA Sports PGA Tour", ariaLabel: "EA Sports PGA Tour is coming soon" },
+  { id: "pba", label: "PBA Pro Bowling 2026", ariaLabel: "PBA Pro Bowling 2026 is coming soon" },
+  { id: "soon", label: "More Games Soon", ariaLabel: "More games are coming soon" }
+];
+
+function PostScanGameSelectionScreen({ onCollegeFootballSelect }: { onCollegeFootballSelect: () => void }) {
+  const [statusMessage, setStatusMessage] = useState("Choose College Football 27 to continue when you are ready.");
+
+  function handleTileSelect(tile: (typeof gameSelectionTiles)[number]) {
+    if (tile.id === "cf27") {
+      onCollegeFootballSelect();
+      return;
+    }
+    setStatusMessage(`${tile.label} is coming soon.`);
+  }
+
+  return (
+    <section className="post-scan-game-screen" aria-labelledby="post-scan-game-title">
+      <div className="post-scan-game-inner">
+        <div className="post-scan-complete-card" aria-labelledby="post-scan-complete-title">
+          <div className="post-scan-preview-wrap" aria-hidden="true">
+            <div className="post-scan-preview-ring">
+              <div className="post-scan-preview-pixels">
+                {Array.from({ length: 64 }, (_, index) => (
+                  <span key={index} style={{ "--pixel-index": index } as CSSProperties} />
+                ))}
+              </div>
+            </div>
+            <span className="post-scan-green-dot" />
+          </div>
+          <h1 id="post-scan-complete-title">
+            <span>First Face ID</span>
+            <span>scan complete.</span>
+          </h1>
+        </div>
+
+        <h2 id="post-scan-game-title" className="post-scan-game-heading">
+          See you in game players
+        </h2>
+
+        <div className="post-scan-game-grid" aria-label="Choose your game">
+          {gameSelectionTiles.map((tile) => (
+            <button
+              aria-label={tile.ariaLabel}
+              className="post-scan-game-tile"
+              data-game={tile.id}
+              key={tile.id}
+              type="button"
+              onClick={() => handleTileSelect(tile)}
+            >
+              <GameTileArtwork id={tile.id} />
+              <span>{tile.label}</span>
+            </button>
+          ))}
+        </div>
+        <p className="sr-only" aria-live="polite">
+          {statusMessage}
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function GameTileArtwork({ id }: { id: GameSelectionTileID }) {
+  if (id === "cf27") {
+    return (
+      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
+        <rect className="tile-field" x="0" y="108" width="180" height="62" />
+        <path className="tile-field-line" d="M20 116v42M56 116v42M92 116v42M128 116v42M164 116v42" />
+        <ellipse className="tile-helmet-shell" cx="84" cy="62" rx="50" ry="37" />
+        <path className="tile-helmet-shadow" d="M61 76c15 16 48 17 69 3-12 23-55 25-80 7 2-4 6-8 11-10Z" />
+        <path className="tile-helmet-mask" d="M111 63h30M117 70l25 24M105 81h34" />
+        <circle className="tile-stadium-light" cx="24" cy="24" r="10" />
+      </svg>
+    );
+  }
+  if (id === "madden26") {
+    return (
+      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
+        <path className="tile-light-beams" d="M22 0l48 116M68 0l36 112M118 0l-8 108M158 0l-42 112" />
+        <rect className="tile-field" x="0" y="112" width="180" height="58" />
+        <ellipse className="tile-football" cx="91" cy="70" rx="45" ry="25" transform="rotate(-18 91 70)" />
+        <path className="tile-football-lines" d="M75 62l33 9M84 57l-4 16M92 60l-4 16M100 62l-4 16" />
+      </svg>
+    );
+  }
+  if (id === "nba2k26") {
+    return (
+      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
+        <rect className="tile-court-glow" x="0" y="78" width="180" height="58" />
+        <circle className="tile-basketball" cx="92" cy="62" r="39" />
+        <path className="tile-basketball-lines" d="M92 23v78M54 62h76M70 31c15 20 15 43 0 63M113 31c-15 20-15 43 0 63" />
+        <path className="tile-court-line" d="M18 119h144" />
+      </svg>
+    );
+  }
+  if (id === "pga") {
+    return (
+      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
+        <path className="tile-fairway" d="M-14 116c52-38 127-31 214-5v59H-14Z" />
+        <path className="tile-golf-club" d="M65 22l48 86 28-6" />
+        <circle className="tile-golf-ball" cx="54" cy="111" r="20" />
+        <path className="tile-ball-dimples" d="M47 104h1M55 104h1M63 104h1M50 112h1M58 112h1M66 112h1M47 120h1M55 120h1M63 120h1" />
+      </svg>
+    );
+  }
+  if (id === "pba") {
+    return (
+      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
+        <path className="tile-lane" d="M28 0h34l-18 170H4Z" />
+        <circle className="tile-bowling-ball" cx="69" cy="94" r="39" />
+        <path className="tile-bowling-holes" d="M59 80h1M74 80h1M67 96h1" />
+        <g className="tile-pins">
+          <path d="M120 42c7 10 8 34 1 51h-16c-7-17-6-41 1-51Z" />
+          <path d="M139 55c7 10 8 30 1 46h-16c-7-16-6-36 1-46Z" />
+          <path d="M101 58c7 10 8 30 1 46H86c-7-16-6-36 1-46Z" />
+        </g>
+      </svg>
+    );
+  }
+  return (
+    <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
+      <path className="tile-grid-lines" d="M0 38h180M0 78h180M0 118h180M26 0l-18 170M72 0L50 170M118 0l18 170M158 0l32 170" />
+      <path className="tile-controller-body" d="M54 64h72c12 0 22 10 22 22v8c0 12-8 20-18 20-8 0-13-5-19-13H69c-6 8-11 13-19 13-10 0-18-8-18-20v-8c0-12 10-22 22-22Z" />
+      <path className="tile-controller-controls" d="M58 88h22M69 77v22M112 80h1M128 92h1" />
+    </svg>
   );
 }
 

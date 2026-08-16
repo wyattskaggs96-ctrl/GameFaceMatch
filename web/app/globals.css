@@ -1646,6 +1646,7 @@ p {
 }
 
 .post-scan-avatar-preview {
+  display: block;
   width: 152px;
   aspect-ratio: 1;
   overflow: hidden;
@@ -1656,85 +1657,104 @@ p {
   filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.38));
 }
 
+.post-scan-avatar-preview-image {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.22), transparent 26%),
+    linear-gradient(145deg, #101929, #05070c);
+  isolation: isolate;
+}
+
+.post-scan-avatar-photo {
+  position: absolute;
+  inset: -8% -5% 2%;
+  z-index: 1;
+  width: 110%;
+  height: 108%;
+  object-fit: cover;
+  object-position: center 28%;
+  filter: contrast(1.13) saturate(1.08) brightness(0.95);
+  transform: scale(1.04);
+}
+
+.post-scan-avatar-photo-grade,
+.post-scan-avatar-photo-shoulders,
+.post-scan-avatar-photo-rim {
+  position: absolute;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.post-scan-avatar-photo-grade {
+  inset: 0;
+  z-index: 2;
+  background:
+    radial-gradient(circle at 48% 28%, rgba(255, 255, 255, 0.1), transparent 34%),
+    linear-gradient(135deg, rgba(56, 141, 255, 0.18), transparent 42%, rgba(48, 209, 88, 0.12)),
+    radial-gradient(circle at 50% 52%, transparent 45%, rgba(0, 0, 0, 0.42) 100%);
+  mix-blend-mode: screen;
+}
+
+.post-scan-avatar-photo-shoulders {
+  left: -4%;
+  right: -4%;
+  bottom: -7%;
+  z-index: 3;
+  height: 38%;
+  background:
+    linear-gradient(90deg, transparent 0 18%, rgba(255, 255, 255, 0.16) 18% 19.2%, transparent 19.2% 80.8%, rgba(255, 255, 255, 0.15) 80.8% 82%, transparent 82%),
+    radial-gradient(ellipse at 50% 0%, rgba(75, 105, 140, 0.94) 0 34%, rgba(26, 43, 63, 0.98) 35% 70%, rgba(9, 13, 20, 0.98) 100%);
+  clip-path: polygon(17% 100%, 27% 24%, 39% 7%, 50% 20%, 61% 7%, 73% 24%, 83% 100%);
+  opacity: 0.92;
+}
+
+.post-scan-avatar-photo-rim {
+  inset: 0;
+  z-index: 4;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  box-shadow:
+    inset 0 0 0 2px rgba(48, 209, 88, 0.14),
+    inset 18px 0 32px rgba(84, 173, 255, 0.12),
+    inset -18px 0 32px rgba(48, 209, 88, 0.1);
+}
+
 .post-scan-avatar-backdrop {
-  fill: url("#post-scan-avatar-stadium");
+  fill: url("#post-scan-avatar-fallback-stadium");
 }
 
-.post-scan-avatar-field {
-  fill: rgba(30, 95, 62, 0.78);
-}
-
-.post-scan-avatar-shoulders {
-  fill: var(--avatar-jersey);
-}
-
-.post-scan-avatar-neck,
-.post-scan-avatar-ear,
-.post-scan-avatar-face {
-  fill: var(--avatar-skin);
-}
-
-.post-scan-avatar-face-shadow {
-  fill: var(--avatar-skin-shadow);
-  opacity: 0.22;
-}
-
-.post-scan-avatar-hair,
-.post-scan-avatar-facial-hair {
-  fill: var(--avatar-hair);
-}
-
-.post-scan-avatar-hair-curly {
-  stroke: var(--avatar-hair);
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-dasharray: 1 13;
-}
-
-.post-scan-avatar-hair-cropped {
-  transform: translateY(4px) scaleY(0.72);
-  transform-origin: 90px 48px;
-}
-
-.post-scan-avatar-ear {
-  opacity: 0.9;
-}
-
-.post-scan-avatar-brow {
+.post-scan-avatar-stadium-lines,
+.post-scan-avatar-fallback-jaw,
+.post-scan-avatar-fallback-jersey {
   fill: none;
-  stroke: var(--avatar-brow);
-  stroke-linecap: round;
-}
-
-.post-scan-avatar-eye {
-  fill: #171311;
-}
-
-.post-scan-avatar-nose,
-.post-scan-avatar-mouth,
-.post-scan-avatar-jersey-line {
-  fill: none;
-  stroke: rgba(32, 22, 18, 0.5);
+  stroke: rgba(255, 255, 255, 0.2);
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 3;
+  stroke-width: 2.8;
 }
 
-.post-scan-avatar-mouth,
-.post-scan-avatar-jersey-line {
-  stroke: rgba(255, 255, 255, 0.42);
+.post-scan-avatar-stadium-lines {
+  opacity: 0.32;
 }
 
-.post-scan-avatar-facial-hair {
-  opacity: 0.44;
+.post-scan-avatar-fallback-shoulders {
+  fill: #1d3652;
 }
 
-.post-scan-avatar-facial-hair-stubble {
-  opacity: 0.22;
+.post-scan-avatar-fallback-neck,
+.post-scan-avatar-fallback-head {
+  fill: #7d8797;
 }
 
-.post-scan-avatar-highlight {
-  fill: url("#post-scan-avatar-light");
+.post-scan-avatar-fallback-face-light {
+  fill: rgba(255, 255, 255, 0.12);
+}
+
+.post-scan-avatar-fallback-jersey {
+  stroke: rgba(255, 255, 255, 0.36);
+}
+
+.post-scan-avatar-fallback-light {
+  fill: url("#post-scan-avatar-fallback-light");
 }
 
 .post-scan-green-dot {

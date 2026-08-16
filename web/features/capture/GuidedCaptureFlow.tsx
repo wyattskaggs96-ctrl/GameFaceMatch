@@ -116,7 +116,7 @@ export function GuidedCaptureFlow({
   onSessionChange: (session: ActiveCaptureSession) => void;
   onCancelSession: (session: ActiveCaptureSession) => void;
   onClose?: () => void;
-  onContinue: () => void;
+  onContinue: (session: ActiveCaptureSession) => void;
   onPerformanceRecord?: (record: PerformanceMetricRecord) => void;
   customerMode?: boolean;
   autoStartCamera?: boolean;
@@ -660,7 +660,8 @@ export function GuidedCaptureFlow({
   }
 
   async function handleFile(angle: CapturedAngle, event: ChangeEvent<HTMLInputElement>) {
-    const file = event.currentTarget.files?.[0];
+    const input = event.currentTarget;
+    const file = input.files?.[0];
     if (!file) {
       return;
     }
@@ -670,7 +671,7 @@ export function GuidedCaptureFlow({
           "HEIC/HEIF images are not supported in this web MVP. Export or upload JPEG, PNG, or WebP instead."
         ])
       );
-      event.currentTarget.value = "";
+      input.value = "";
       return;
     }
     const objectUrl = URL.createObjectURL(file);
@@ -683,7 +684,7 @@ export function GuidedCaptureFlow({
       URL.revokeObjectURL(objectUrl);
       onSessionChange(setAngleError(session, angle.id, ["The image could not be read."]));
     } finally {
-      event.currentTarget.value = "";
+      input.value = "";
     }
   }
 
@@ -759,6 +760,7 @@ export function GuidedCaptureFlow({
         captureGuidanceReport
       );
       revokeObjectUrls(mutation.objectUrlsToRevoke);
+      sessionRef.current = mutation.session;
       onSessionChange(mutation.session);
     } finally {
       onPerformanceRecord?.(
@@ -869,7 +871,7 @@ export function GuidedCaptureFlow({
           videoRef={setPreviewVideoRef}
           onBeginFirstPass={() => setGuidedStage(guidedScanState.passes.find((pass) => pass.id === "first")?.completed ? "secondPass" : "firstPass")}
           onCaptureStill={() => void captureStillFrame()}
-          onContinue={onContinue}
+          onContinue={() => onContinue(sessionRef.current)}
           onOpenCoverageReview={() => setGuidedStage("coverageReview")}
           onRetakeMissingArea={() => setGuidedStage("selectiveRetake")}
           onRestart={restartGuidedAttempt}
@@ -891,7 +893,7 @@ export function GuidedCaptureFlow({
             completedAngles={completedAngles}
             coverageRegions={Object.values(session.coverageMap.regions)}
             guidedScanState={guidedScanState}
-            onContinue={onContinue}
+            onContinue={() => onContinue(sessionRef.current)}
             onRetake={(angleID) => {
               retake(angleID);
               setCaptureWorkflow("fiveAngleFallback");
@@ -1314,7 +1316,7 @@ export function GuidedCaptureFlow({
       )}
       {!reviewReport.canContinue ? <RecoveryActionList plans={[getRecoveryPlan("missingView")]} /> : null}
       <div className="button-row">
-        <Button disabled={!reviewReport.canContinue} onClick={onContinue}>
+        <Button disabled={!reviewReport.canContinue} onClick={() => onContinue(sessionRef.current)}>
           Continue to attribute confirmation
         </Button>
         <Button variant="danger" onClick={cancelSession}>

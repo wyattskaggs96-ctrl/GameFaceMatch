@@ -1,4 +1,6 @@
 import { expect, test } from "@playwright/test";
+import fs from "node:fs";
+import path from "node:path";
 import { acceptRequiredConsent, completeOnboarding, consentCard, navigateToCapture, uploadFallbackForAngle } from "./helpers";
 import { invalidTextFile, syntheticPng } from "./synthetic-images";
 
@@ -103,6 +105,42 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page.getByRole("button", { name: "Select CFB game 2027" })).toBeVisible();
     await expect(page.locator(".post-scan-avatar-preview")).toBeVisible();
     await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toHaveCount(0);
+  });
+
+  test("renders a scan-derived player avatar from the completed session image", async ({ page }) => {
+    await page.setViewportSize({ width: 430, height: 932 });
+    await completeOnboarding(page);
+    await acceptRequiredConsent(page);
+    await navigateToCapture(page);
+
+    await page.getByRole("button", { name: "Skip to file upload" }).click();
+    const files = cf27HeadFrameFixtures();
+    await uploadFallbackForAngle(page, "Straight-on", files[0], { waitForAccepted: true });
+    await uploadFallbackForAngle(page, "Left 45 degrees", files[1], { waitForAccepted: true });
+    await uploadFallbackForAngle(page, "Right 45 degrees", files[2], { waitForAccepted: true });
+    await uploadFallbackForAngle(page, "Left profile", files[3], { waitForAccepted: true });
+    await uploadFallbackForAngle(page, "Right profile", files[4], { waitForAccepted: true });
+    await expect(page.getByRole("heading", { name: "5 of 5 angles completed" })).toBeVisible();
+    await page.getByRole("button", { name: "Continue to attribute confirmation" }).click();
+
+    await expect(page).toHaveURL(/#game-selection$/);
+    const fallbackReason = await page.locator(".post-scan-avatar-preview-fallback").getAttribute("data-fallback-reason").catch(() => null);
+    expect(fallbackReason, "post-scan avatar should use the accepted scan image instead of fallback").toBeNull();
+    const avatar = page.locator(".post-scan-avatar-preview-image");
+    await expect(avatar).toBeVisible();
+    await expect(avatar).toHaveAttribute("data-avatar-source", "scan");
+    await expect(avatar).toHaveAttribute("data-selected-angle", "straightOn");
+    await expect(page.locator(".post-scan-avatar-preview-fallback")).toHaveCount(0);
+    await expect(page.locator(".post-scan-preview-pixels")).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
+
+    const avatarSource = await avatar.locator("img").getAttribute("src");
+    expect(avatarSource).toMatch(/^data:image\/png/);
+
+    await page.getByRole("button", { name: "Select CFB game 2027" }).click();
+    await expect(page).toHaveURL(/#game\/college-football-27$/);
+    await page.getByRole("button", { name: "Back to games" }).click();
+    await expect(page.locator(".post-scan-avatar-preview-image img")).toHaveAttribute("src", avatarSource ?? "");
   });
 
   test("opens every post-scan game tile and returns to the reusable game grid", async ({ page }) => {
@@ -376,3 +414,19 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page.getByRole("heading", { name: "Top three closest available settings" })).toHaveCount(0);
   });
 });
+
+function cf27HeadFrameFixtures() {
+  const root = path.join(process.cwd(), "..");
+  const files = [
+    "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_023/CF27_XBOXUNKNOWN_RTG_HEAD_023_FRONT_video-003_57p52s.png",
+    "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_024/CF27_XBOXUNKNOWN_RTG_HEAD_024_LEFT_3Q_video-003_64p47s.png",
+    "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_012/CF27_XBOXUNKNOWN_RTG_HEAD_012_RIGHT_3Q_video-002_98p88s.png",
+    "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_015/CF27_XBOXUNKNOWN_RTG_HEAD_015_LEFT_PROFILE_video-003_15p33s.png",
+    "data/research/cf27/generated/full-resolution-frames/head-templates-faces-001-029/CF27_XBOXUNKNOWN_RTG_HEAD_014/CF27_XBOXUNKNOWN_RTG_HEAD_014_RIGHT_PROFILE_video-003_23p76s.png"
+  ];
+  return files.map((filePath) => ({
+    name: path.basename(filePath),
+    mimeType: "image/png" as const,
+    buffer: fs.readFileSync(path.join(root, filePath))
+  }));
+}

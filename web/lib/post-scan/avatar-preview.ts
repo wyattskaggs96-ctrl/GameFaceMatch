@@ -1,117 +1,249 @@
-import type { StandardFaceProfile, UserConfirmedAttributeCategory } from "@/types/domain";
+import type { CapturedAngle, CapturedAngleID, TemporaryImageReference } from "@/types/domain";
+import type { ActiveCaptureSession } from "@/lib/capture/capture-session";
 
-export interface PostScanAvatarPreviewModel {
-  source: "profile" | "fallback";
-  seed: number;
-  skinTone: string;
-  skinShadow: string;
-  hairColor: string;
-  browColor: string;
-  jerseyColor: string;
-  accentColor: string;
-  faceWidth: number;
-  faceHeight: number;
-  jawCurve: number;
-  hairVariant: "short" | "curly" | "cropped" | "none";
-  facialHair: "none" | "stubble" | "beard";
-  browWeight: number;
+export type PostScanAvatarPreviewSource = "scan" | "fallback";
+
+export interface PostScanAvatarPreviewState {
+  source: PostScanAvatarPreviewSource;
+  imageUrl: string | null;
+  selectedAngleID: CapturedAngleID | null;
+  alt: string;
+  fallbackReason?: "no-image" | "canvas-render-failed";
 }
 
-const DEFAULT_SKIN = { base: "#b9805f", shadow: "#7e4d38" };
-const JERSEY_COLORS = ["#2257f5", "#256a5f", "#6138b8", "#a63446", "#2d6a2f", "#31506f"] as const;
-const ACCENT_COLORS = ["#83d4ff", "#d5ff73", "#ffc857", "#ff8da1", "#93f0c4", "#bfb6ff"] as const;
+export interface PostScanAvatarSourceSelection {
+  angleID: CapturedAngleID | null;
+  image: TemporaryImageReference | null;
+  reason: "front-capture" | "near-front-capture" | "fallback-no-image";
+}
 
-export function createPostScanAvatarPreviewModel(profile: StandardFaceProfile | null): PostScanAvatarPreviewModel {
-  const seed = profile ? stableHash(`${profile.id}:${profile.createdAt}:${profile.supportingFrames.availableAngleIDs.join("|")}`) : 11;
-  const skin = resolveSkinTone(readAttribute(profile, "skinPresentation"));
-  const hairColor = resolveHairColor(readAttribute(profile, "hairColorFamily"), seed);
-  const faceWidthMeasurement = profile?.geometry.measurements.faceWidthRatio?.value ?? null;
-  const faceLengthMeasurement = profile?.geometry.measurements.faceLengthRatio?.value ?? null;
-  const jawWidthMeasurement = profile?.geometry.measurements.jawWidthRatio?.value ?? null;
-  const hairVariant = resolveHairVariant(readAttribute(profile, "hairstyleFamily"), readAttribute(profile, "hairTextureFamily"), seed);
-  const facialHair = resolveFacialHair(readAttribute(profile, "facialHairPresence"), readAttribute(profile, "facialHairStyleFamily"));
-  const browWeight = resolveBrowWeight(readAttribute(profile, "eyebrowThickness"));
+const NEAR_FRONT_ORDER: CapturedAngleID[] = ["straightOn", "left45", "right45", "leftProfile", "rightProfile"];
+
+export function selectPostScanAvatarSourceImage(session: ActiveCaptureSession): PostScanAvatarSourceSelection {
+  const completedWithImages = NEAR_FRONT_ORDER.map((angleID) => findCompletedImage(session, angleID)).filter(
+    (entry): entry is { angleID: CapturedAngleID; image: TemporaryImageReference } => Boolean(entry?.image?.objectUrl)
+  );
+
+  const front = completedWithImages.find((entry) => entry.angleID === "straightOn");
+  if (front) {
+    return {
+      angleID: front.angleID,
+      image: front.image,
+      reason: "front-capture"
+    };
+  }
+
+  const nearFront = completedWithImages[0];
+  if (nearFront) {
+    return {
+      angleID: nearFront.angleID,
+      image: nearFront.image,
+      reason: "near-front-capture"
+    };
+  }
 
   return {
-    source: profile ? "profile" : "fallback",
-    seed,
-    skinTone: skin.base,
-    skinShadow: skin.shadow,
-    hairColor,
-    browColor: darkenHex(hairColor, 0.38),
-    jerseyColor: JERSEY_COLORS[seed % JERSEY_COLORS.length],
-    accentColor: ACCENT_COLORS[seed % ACCENT_COLORS.length],
-    faceWidth: clamp(scaleMeasurement(faceWidthMeasurement, 42, 34, 48, seed % 5), 34, 48),
-    faceHeight: clamp(scaleMeasurement(faceLengthMeasurement, 52, 46, 59, seed % 4), 46, 59),
-    jawCurve: clamp(scaleMeasurement(jawWidthMeasurement, 27, 20, 34, seed % 6), 20, 34),
-    hairVariant,
-    facialHair,
-    browWeight
+    angleID: null,
+    image: null,
+    reason: "fallback-no-image"
   };
 }
 
-function readAttribute(profile: StandardFaceProfile | null, category: UserConfirmedAttributeCategory): string | null {
-  const value = profile?.appearance.attributes.find((attribute) => attribute.category === category)?.value;
-  return typeof value === "string" && value !== "unspecified" && value.trim() ? value.toLowerCase() : null;
-}
-
-function resolveSkinTone(value: string | null) {
-  if (!value) return DEFAULT_SKIN;
-  if (value.includes("fair") || value.includes("light")) return { base: "#d9aa85", shadow: "#a46f50" };
-  if (value.includes("medium") || value.includes("olive") || value.includes("tan")) return { base: "#bd825c", shadow: "#805039" };
-  if (value.includes("brown") || value.includes("dark") || value.includes("deep")) return { base: "#754631", shadow: "#4b2a21" };
-  return DEFAULT_SKIN;
-}
-
-function resolveHairColor(value: string | null, seed: number) {
-  if (!value) return seed % 2 === 0 ? "#211815" : "#3a261c";
-  if (value.includes("blond") || value.includes("blonde")) return "#c89b43";
-  if (value.includes("red") || value.includes("auburn")) return "#8e3f22";
-  if (value.includes("brown")) return "#3c2419";
-  if (value.includes("black")) return "#161312";
-  if (value.includes("gray") || value.includes("grey")) return "#76716c";
-  return seed % 2 === 0 ? "#211815" : "#3a261c";
-}
-
-function resolveHairVariant(hairstyle: string | null, texture: string | null, seed: number): PostScanAvatarPreviewModel["hairVariant"] {
-  if (hairstyle?.includes("bald") || hairstyle?.includes("shaved") || hairstyle?.includes("none")) return "none";
-  if (texture?.includes("curl") || hairstyle?.includes("curl") || hairstyle?.includes("afro")) return "curly";
-  if (hairstyle?.includes("crop") || hairstyle?.includes("short") || seed % 3 === 0) return "cropped";
-  return "short";
-}
-
-function resolveFacialHair(presence: string | null, style: string | null): PostScanAvatarPreviewModel["facialHair"] {
-  if (presence !== "yes") return "none";
-  if (style?.includes("beard") || style?.includes("goatee")) return "beard";
-  return "stubble";
-}
-
-function resolveBrowWeight(value: string | null) {
-  if (!value) return 4.2;
-  if (value.includes("thin") || value.includes("light")) return 3;
-  if (value.includes("thick") || value.includes("heavy")) return 5.6;
-  return 4.2;
-}
-
-function scaleMeasurement(value: number | null, fallback: number, min: number, max: number, offset: number) {
-  if (value === null || !Number.isFinite(value)) return fallback + offset - 2;
-  return min + value * (max - min);
-}
-
-function clamp(value: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, value));
-}
-
-function stableHash(input: string) {
-  let hash = 0;
-  for (let index = 0; index < input.length; index += 1) {
-    hash = (hash * 31 + input.charCodeAt(index)) >>> 0;
+export async function createPostScanGameAvatarPreview(session: ActiveCaptureSession): Promise<PostScanAvatarPreviewState> {
+  const selection = selectPostScanAvatarSourceImage(session);
+  if (!selection.image?.objectUrl || typeof document === "undefined") {
+    return createFallbackPostScanAvatarPreview("no-image");
   }
-  return hash;
+
+  try {
+    const image = await loadImage(selection.image.objectUrl);
+    const imageUrl = renderGameAvatarPortrait(image);
+    return {
+      source: "scan",
+      imageUrl,
+      selectedAngleID: selection.angleID,
+      alt: "GameFace player portrait generated locally from the completed scan"
+    };
+  } catch {
+    return createFallbackPostScanAvatarPreview("canvas-render-failed");
+  }
 }
 
-function darkenHex(hex: string, amount: number) {
-  const normalized = hex.replace("#", "");
-  const channels = [0, 2, 4].map((start) => parseInt(normalized.slice(start, start + 2), 16));
-  return `#${channels.map((channel) => Math.max(0, Math.round(channel * (1 - amount))).toString(16).padStart(2, "0")).join("")}`;
+export function createFallbackPostScanAvatarPreview(fallbackReason: PostScanAvatarPreviewState["fallbackReason"] = "no-image"): PostScanAvatarPreviewState {
+  return {
+    source: "fallback",
+    imageUrl: null,
+    selectedAngleID: null,
+    alt: "Generic GameFace player silhouette",
+    fallbackReason
+  };
+}
+
+function findCompletedImage(session: ActiveCaptureSession, angleID: CapturedAngleID) {
+  const angle = session.angles.find((candidate): candidate is CapturedAngle => candidate.id === angleID);
+  if (!angle || angle.status !== "complete" || !angle.image) return null;
+  return {
+    angleID,
+    image: angle.image
+  };
+}
+
+function loadImage(src: string) {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error("Post-scan avatar source image could not be loaded."));
+    image.decoding = "async";
+    image.src = src;
+  });
+}
+
+function renderGameAvatarPortrait(image: HTMLImageElement) {
+  const canvas = document.createElement("canvas");
+  const size = 768;
+  canvas.width = size;
+  canvas.height = size;
+  const context = canvas.getContext("2d");
+  if (!context) throw new Error("Canvas rendering is unavailable.");
+
+  context.imageSmoothingEnabled = true;
+  context.imageSmoothingQuality = "high";
+  drawSportsBackdrop(context, size);
+  drawScannedFace(context, image, size);
+  drawPlayerBust(context, size);
+  drawPortraitFinish(context, size);
+
+  return canvas.toDataURL("image/png");
+}
+
+function drawSportsBackdrop(context: CanvasRenderingContext2D, size: number) {
+  const background = context.createLinearGradient(0, 0, size, size);
+  background.addColorStop(0, "#111827");
+  background.addColorStop(0.48, "#070a12");
+  background.addColorStop(1, "#101723");
+  context.fillStyle = background;
+  context.fillRect(0, 0, size, size);
+
+  const light = context.createRadialGradient(size * 0.5, size * 0.16, 0, size * 0.5, size * 0.16, size * 0.56);
+  light.addColorStop(0, "rgba(255,255,255,0.22)");
+  light.addColorStop(0.32, "rgba(63,151,255,0.12)");
+  light.addColorStop(1, "rgba(63,151,255,0)");
+  context.fillStyle = light;
+  context.fillRect(0, 0, size, size);
+
+  context.save();
+  context.globalAlpha = 0.24;
+  context.strokeStyle = "rgba(255,255,255,0.22)";
+  context.lineWidth = 2;
+  for (let index = 0; index < 7; index += 1) {
+    const x = size * (0.14 + index * 0.12);
+    context.beginPath();
+    context.moveTo(x, size * 0.03);
+    context.lineTo(size * 0.5 + (x - size * 0.5) * 0.2, size * 0.45);
+    context.stroke();
+  }
+  context.restore();
+}
+
+function drawScannedFace(context: CanvasRenderingContext2D, image: HTMLImageElement, size: number) {
+  const portrait = {
+    x: size * 0.18,
+    y: size * 0.045,
+    width: size * 0.64,
+    height: size * 0.72
+  };
+
+  context.save();
+  context.beginPath();
+  context.ellipse(size * 0.5, size * 0.38, portrait.width * 0.43, portrait.height * 0.48, 0, 0, Math.PI * 2);
+  context.clip();
+  drawImageCover(context, image, portrait.x, portrait.y, portrait.width, portrait.height);
+  context.globalCompositeOperation = "screen";
+  const grade = context.createLinearGradient(portrait.x, portrait.y, portrait.x + portrait.width, portrait.y + portrait.height);
+  grade.addColorStop(0, "rgba(112,185,255,0.16)");
+  grade.addColorStop(0.52, "rgba(255,255,255,0.04)");
+  grade.addColorStop(1, "rgba(48,209,88,0.08)");
+  context.fillStyle = grade;
+  context.fillRect(portrait.x, portrait.y, portrait.width, portrait.height);
+  context.restore();
+
+  context.save();
+  context.beginPath();
+  context.ellipse(size * 0.5, size * 0.38, portrait.width * 0.44, portrait.height * 0.49, 0, 0, Math.PI * 2);
+  context.lineWidth = 8;
+  context.strokeStyle = "rgba(255,255,255,0.16)";
+  context.stroke();
+  context.lineWidth = 3;
+  context.strokeStyle = "rgba(84,173,255,0.28)";
+  context.stroke();
+  context.restore();
+}
+
+function drawPlayerBust(context: CanvasRenderingContext2D, size: number) {
+  context.save();
+  const shoulderGradient = context.createLinearGradient(size * 0.5, size * 0.48, size * 0.5, size);
+  shoulderGradient.addColorStop(0, "rgba(43,74,103,0.82)");
+  shoulderGradient.addColorStop(1, "rgba(13,19,30,0.98)");
+  context.fillStyle = shoulderGradient;
+  context.beginPath();
+  context.moveTo(size * 0.5, size * 0.54);
+  context.bezierCurveTo(size * 0.72, size * 0.57, size * 0.9, size * 0.75, size * 0.94, size * 0.98);
+  context.lineTo(size * 0.06, size * 0.98);
+  context.bezierCurveTo(size * 0.1, size * 0.75, size * 0.28, size * 0.57, size * 0.5, size * 0.54);
+  context.closePath();
+  context.fill();
+
+  context.strokeStyle = "rgba(255,255,255,0.16)";
+  context.lineWidth = 5;
+  context.beginPath();
+  context.moveTo(size * 0.34, size * 0.68);
+  context.quadraticCurveTo(size * 0.5, size * 0.77, size * 0.66, size * 0.68);
+  context.stroke();
+
+  context.strokeStyle = "rgba(84,173,255,0.22)";
+  context.lineWidth = 4;
+  context.beginPath();
+  context.moveTo(size * 0.24, size * 0.88);
+  context.lineTo(size * 0.42, size * 0.66);
+  context.moveTo(size * 0.76, size * 0.88);
+  context.lineTo(size * 0.58, size * 0.66);
+  context.stroke();
+  context.restore();
+}
+
+function drawPortraitFinish(context: CanvasRenderingContext2D, size: number) {
+  const vignette = context.createRadialGradient(size * 0.5, size * 0.44, size * 0.1, size * 0.5, size * 0.44, size * 0.56);
+  vignette.addColorStop(0, "rgba(0,0,0,0)");
+  vignette.addColorStop(0.72, "rgba(0,0,0,0.08)");
+  vignette.addColorStop(1, "rgba(0,0,0,0.44)");
+  context.fillStyle = vignette;
+  context.fillRect(0, 0, size, size);
+
+  context.strokeStyle = "rgba(48,209,88,0.34)";
+  context.lineWidth = 5;
+  context.beginPath();
+  context.arc(size * 0.5, size * 0.5, size * 0.49, 0, Math.PI * 2);
+  context.stroke();
+}
+
+function drawImageCover(context: CanvasRenderingContext2D, image: HTMLImageElement, dx: number, dy: number, dw: number, dh: number) {
+  const imageWidth = image.naturalWidth || image.width;
+  const imageHeight = image.naturalHeight || image.height;
+  const sourceRatio = imageWidth / imageHeight;
+  const targetRatio = dw / dh;
+
+  let sx = 0;
+  let sy = 0;
+  let sw = imageWidth;
+  let sh = imageHeight;
+
+  if (sourceRatio > targetRatio) {
+    sw = imageHeight * targetRatio;
+    sx = (imageWidth - sw) / 2;
+  } else {
+    sh = imageWidth / targetRatio;
+    sy = (imageHeight - sh) * 0.22;
+  }
+
+  context.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
 }

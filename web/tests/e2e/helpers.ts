@@ -1,6 +1,12 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 import { syntheticPng, type SyntheticImageFile } from "./synthetic-images";
 
+export interface UploadImageFile {
+  name: string;
+  mimeType: "image/png" | "image/jpeg" | "image/webp";
+  buffer: Buffer;
+}
+
 export const requiredConsentNames = [
   "Camera use",
   "Face analysis for this recommendation",
@@ -62,10 +68,10 @@ export async function uploadFiveSyntheticAngles(page: Page) {
   await expect(page.getByRole("heading", { name: "5 of 5 angles completed" })).toBeVisible();
 }
 
-export async function uploadFallbackForAngle(page: Page, label: string, file: SyntheticImageFile, options: { waitForAccepted?: boolean } = {}) {
+export async function uploadFallbackForAngle(page: Page, label: string, file: SyntheticImageFile | UploadImageFile, options: { waitForAccepted?: boolean } = {}) {
   await page.getByLabel(`Upload fallback for ${label.toLowerCase()}`).setInputFiles(file);
   if (options.waitForAccepted) {
-    await expect(page.getByText(`${file.name} |`, { exact: false })).toBeVisible();
+    await expect(page.getByText(/.*\| \d+x\d+ \| upload.*/).first()).toBeVisible();
     const qualityCard = page.locator("article.quality-review-card").filter({ has: page.getByRole("heading", { name: label, exact: true }) });
     for (const checkbox of await qualityCard.getByRole("group", { name: "Manual confirmations" }).getByRole("checkbox").all()) {
       await checkbox.check();

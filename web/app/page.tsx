@@ -1407,10 +1407,8 @@ function PostScanAvatarPreview({ preview, profileAvailable }: { preview: PostSca
         role="img"
         aria-label={preview.alt}
       >
-        <img className="post-scan-avatar-photo" src={preview.imageUrl} alt="" aria-hidden="true" />
-        <span className="post-scan-avatar-photo-grade" aria-hidden="true" />
-        <span className="post-scan-avatar-photo-shoulders" aria-hidden="true" />
-        <span className="post-scan-avatar-photo-rim" aria-hidden="true" />
+        <img className="post-scan-avatar-render" src={preview.imageUrl} alt="" aria-hidden="true" />
+        <span className="post-scan-avatar-render-rim" aria-hidden="true" />
       </div>
     );
   }

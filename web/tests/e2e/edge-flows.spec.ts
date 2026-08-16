@@ -158,11 +158,13 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(avatar).toHaveAttribute("data-avatar-source", "scan");
     await expect(avatar).toHaveAttribute("data-selected-angle", "straightOn");
     await expect(page.locator(".post-scan-avatar-preview-fallback")).toHaveCount(0);
+    await expect(page.locator(".post-scan-avatar-photo")).toHaveCount(0);
     await expect(page.locator(".post-scan-preview-pixels")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
 
     const avatarSource = await avatar.locator("img").getAttribute("src");
-    expect(avatarSource).toMatch(/^data:image\/png/);
+    expect(avatarSource).toMatch(/^data:image\/svg\+xml/);
+    expect(decodeURIComponent(avatarSource ?? "")).not.toContain("<image");
 
     await page.getByRole("button", { name: "Select CFB game 2027" }).click();
     await expect(page).toHaveURL(/#game\/college-football-27$/);

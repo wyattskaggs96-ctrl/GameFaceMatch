@@ -56,12 +56,18 @@ test.describe("GameFace Match E2E edge flows", () => {
       await expect(page.locator(".post-scan-complete-card h1 span", { hasText: "First Face ID" })).toBeVisible();
       await expect(page.locator(".post-scan-complete-card h1 span", { hasText: "scan complete." })).toBeVisible();
       await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
-      await expect(page.getByRole("button", { name: "Select College Football 27" })).toBeVisible();
-      await expect(page.getByText("Madden NFL 26")).toBeVisible();
-      await expect(page.getByText("NBA 2K26")).toBeVisible();
-      await expect(page.getByText("EA Sports PGA Tour")).toBeVisible();
-      await expect(page.getByText("PBA Pro Bowling 2026")).toBeVisible();
-      await expect(page.getByText("More Games Soon")).toBeVisible();
+      await expect(page.getByRole("button", { name: "Select CFB game 2027" })).toBeVisible();
+      await expect(page.getByText("Pro Football game 2026")).toBeVisible();
+      await expect(page.getByText("Pro Basketball game 2026")).toBeVisible();
+      await expect(page.getByText("Pro Golf game 2026")).toBeVisible();
+      await expect(page.getByText("Pro Bowling game 2026")).toBeVisible();
+      await expect(page.getByText("Pro Soccer game 2026")).toBeVisible();
+      await expect(page.getByText("College Football 27")).toHaveCount(0);
+      await expect(page.getByText("Madden NFL 26")).toHaveCount(0);
+      await expect(page.getByText("NBA 2K26")).toHaveCount(0);
+      await expect(page.getByText("EA Sports PGA Tour")).toHaveCount(0);
+      await expect(page.getByText("PBA Pro Bowling 2026")).toHaveCount(0);
+      await expect(page.getByText("More Games Soon")).toHaveCount(0);
       await expect(page.locator(".post-scan-game-grid")).toHaveCSS("grid-template-columns", /.+ .+/);
       await expect(page.locator(".topbar")).toHaveCount(0);
       await expect(page.locator(".mobile-nav")).toHaveCount(0);
@@ -92,7 +98,7 @@ test.describe("GameFace Match E2E edge flows", () => {
     await page.getByRole("button", { name: "Continue after completed scan" }).click();
     await expect(page).toHaveURL(/#game-selection$/);
     await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Select College Football 27" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Select CFB game 2027" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "How to Set Up Face ID" })).toHaveCount(0);
   });
 
@@ -107,11 +113,12 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page).toHaveURL(/#game-selection$/);
 
     const games = [
-      { button: "Select College Football 27", heading: "College Football 27", url: /#game\/college-football-27$/ },
-      { button: "Select Madden NFL 26", heading: "Madden NFL 26", url: /#game\/madden-nfl-26$/ },
-      { button: "Select NBA 2K26", heading: "NBA 2K26", url: /#game\/nba-2k26$/ },
-      { button: "Select EA Sports PGA Tour", heading: "EA Sports PGA Tour", url: /#game\/ea-sports-pga-tour$/ },
-      { button: "Select PBA Pro Bowling 2026", heading: "PBA Pro Bowling 2026", url: /#game\/pba-pro-bowling-2026$/ }
+      { button: "Select CFB game 2027", heading: "CFB game 2027", url: /#game\/college-football-27$/ },
+      { button: "Select Pro Football game 2026", heading: "Pro Football game 2026", url: /#game\/madden-nfl-26$/ },
+      { button: "Select Pro Basketball game 2026", heading: "Pro Basketball game 2026", url: /#game\/nba-2k26$/ },
+      { button: "Select Pro Golf game 2026", heading: "Pro Golf game 2026", url: /#game\/ea-sports-pga-tour$/ },
+      { button: "Select Pro Bowling game 2026", heading: "Pro Bowling game 2026", url: /#game\/pba-pro-bowling-2026$/ },
+      { button: "Select Pro Soccer game 2026", heading: "Pro Soccer game 2026", url: /#game\/ea-sports-fc-26$/ }
     ];
 
     for (const game of games) {
@@ -128,18 +135,13 @@ test.describe("GameFace Match E2E edge flows", () => {
       await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
     }
 
-    await page.getByRole("button", { name: "More games coming soon" }).click();
-    await expect(page).toHaveURL(/#more-games-soon$/);
-    await expect(page.getByRole("heading", { name: "More games coming soon." })).toBeVisible();
-    await page.getByRole("button", { name: "Back to games" }).click();
-    await expect(page).toHaveURL(/#game-selection$/);
   });
 
   test("game routes fail safely without a completed reusable scan profile", async ({ page }) => {
     await page.setViewportSize({ width: 430, height: 932 });
     await page.goto("/#game/nba-2k26");
 
-    await expect(page.getByRole("heading", { name: "NBA 2K26" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Pro Basketball game 2026" })).toBeVisible();
     await expect(page.getByText("Scan needed")).toBeVisible();
     await expect(page.getByText("Complete one scan before choosing a game.")).toBeVisible();
     await expect(page.getByRole("button", { name: "Start scan" })).toBeVisible();

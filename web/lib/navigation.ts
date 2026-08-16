@@ -46,7 +46,7 @@ export const APP_SCREENS = [
   "game-nba-2k26",
   "game-ea-sports-pga-tour",
   "game-pba-pro-bowling-2026",
-  "more-games-soon",
+  "game-ea-sports-fc-26",
   "catalog",
   "fc26",
   "saved",

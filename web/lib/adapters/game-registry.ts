@@ -44,7 +44,7 @@ export type GameSelectionTileID =
   | "nba2k26"
   | "pga"
   | "pba"
-  | "soon";
+  | "soccer26";
 
 export type GameSelectionScreenID =
   | "game-college-football-27"
@@ -52,16 +52,16 @@ export type GameSelectionScreenID =
   | "game-nba-2k26"
   | "game-ea-sports-pga-tour"
   | "game-pba-pro-bowling-2026"
-  | "more-games-soon";
+  | "game-ea-sports-fc-26";
 
 export interface GameSelectionTileDefinition {
   tileID: GameSelectionTileID;
   displayName: string;
   ariaLabel: string;
   screenID: GameSelectionScreenID;
-  gameID: SupportedGameID | null;
-  adapterID: SupportedGameID | null;
-  catalogNamespace: string | null;
+  gameID: SupportedGameID;
+  adapterID: SupportedGameID;
+  catalogNamespace: string;
 }
 
 export const SUPPORTED_GAME_DEFINITIONS: readonly SupportedGameDefinition[] = [
@@ -154,8 +154,8 @@ export const SUPPORTED_GAME_DEFINITIONS: readonly SupportedGameDefinition[] = [
 export const GAME_SELECTION_TILES: readonly GameSelectionTileDefinition[] = [
   {
     tileID: "cf27",
-    displayName: "College Football 27",
-    ariaLabel: "Select College Football 27",
+    displayName: "CFB game 2027",
+    ariaLabel: "Select CFB game 2027",
     screenID: "game-college-football-27",
     gameID: "college-football-27",
     adapterID: "college-football-27",
@@ -163,8 +163,8 @@ export const GAME_SELECTION_TILES: readonly GameSelectionTileDefinition[] = [
   },
   {
     tileID: "madden26",
-    displayName: "Madden NFL 26",
-    ariaLabel: "Select Madden NFL 26",
+    displayName: "Pro Football game 2026",
+    ariaLabel: "Select Pro Football game 2026",
     screenID: "game-madden-nfl-26",
     gameID: "madden-nfl-26",
     adapterID: "madden-nfl-26",
@@ -172,8 +172,8 @@ export const GAME_SELECTION_TILES: readonly GameSelectionTileDefinition[] = [
   },
   {
     tileID: "nba2k26",
-    displayName: "NBA 2K26",
-    ariaLabel: "Select NBA 2K26",
+    displayName: "Pro Basketball game 2026",
+    ariaLabel: "Select Pro Basketball game 2026",
     screenID: "game-nba-2k26",
     gameID: "nba-2k26",
     adapterID: "nba-2k26",
@@ -181,8 +181,8 @@ export const GAME_SELECTION_TILES: readonly GameSelectionTileDefinition[] = [
   },
   {
     tileID: "pga",
-    displayName: "EA Sports PGA Tour",
-    ariaLabel: "Select EA Sports PGA Tour",
+    displayName: "Pro Golf game 2026",
+    ariaLabel: "Select Pro Golf game 2026",
     screenID: "game-ea-sports-pga-tour",
     gameID: "ea-sports-pga-tour",
     adapterID: "ea-sports-pga-tour",
@@ -190,21 +190,21 @@ export const GAME_SELECTION_TILES: readonly GameSelectionTileDefinition[] = [
   },
   {
     tileID: "pba",
-    displayName: "PBA Pro Bowling 2026",
-    ariaLabel: "Select PBA Pro Bowling 2026",
+    displayName: "Pro Bowling game 2026",
+    ariaLabel: "Select Pro Bowling game 2026",
     screenID: "game-pba-pro-bowling-2026",
     gameID: "pba-pro-bowling-2026",
     adapterID: "pba-pro-bowling-2026",
     catalogNamespace: "data/catalog/production/pba-pro-bowling-2026"
   },
   {
-    tileID: "soon",
-    displayName: "More Games Soon",
-    ariaLabel: "More games coming soon",
-    screenID: "more-games-soon",
-    gameID: null,
-    adapterID: null,
-    catalogNamespace: null
+    tileID: "soccer26",
+    displayName: "Pro Soccer game 2026",
+    ariaLabel: "Select Pro Soccer game 2026",
+    screenID: "game-ea-sports-fc-26",
+    gameID: "ea-sports-fc-26",
+    adapterID: "ea-sports-fc-26",
+    catalogNamespace: "data/catalog/production/fc26"
   }
 ] as const;
 

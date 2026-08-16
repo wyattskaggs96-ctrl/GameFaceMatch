@@ -192,7 +192,7 @@ function isPostScanGameScreen(screen: AppScreen): screen is GameSelectionScreenI
     screen === "game-nba-2k26" ||
     screen === "game-ea-sports-pga-tour" ||
     screen === "game-pba-pro-bowling-2026" ||
-    screen === "more-games-soon"
+    screen === "game-ea-sports-fc-26"
   );
 }
 
@@ -965,7 +965,7 @@ export default function HomePage() {
       case "game-nba-2k26":
       case "game-ea-sports-pga-tour":
       case "game-pba-pro-bowling-2026":
-      case "more-games-soon":
+      case "game-ea-sports-fc-26":
         return (
           <PostScanGameFlowScreen
             tile={getGameSelectionTileByScreen(screen)}
@@ -1371,24 +1371,6 @@ function PostScanGameFlowScreen({
   onStartScan: () => void;
   onOpenCollegeFootballRecommendation: () => void;
 }) {
-  if (!tile.gameID) {
-    return (
-      <section className="post-scan-game-screen" aria-labelledby="more-games-title">
-        <div className="post-scan-game-detail">
-          <div className="post-scan-game-mini-art" aria-hidden="true">
-            <GameTileArtwork id={tile.tileID} />
-          </div>
-          <p className="post-scan-game-kicker">GameFace Match</p>
-          <h1 id="more-games-title">More games coming soon.</h1>
-          <p>We are adding more player creators after each game has a real catalog path.</p>
-          <button className="post-scan-secondary-action" type="button" onClick={onBackToGames}>
-            Back to games
-          </button>
-        </div>
-      </section>
-    );
-  }
-
   const definition = getSupportedGameDefinition(tile.gameID);
   const hasReusableProfile = Boolean(profile);
   const profileContext = profile ? createGameProfileContext(profile, tile.gameID) : null;
@@ -1426,7 +1408,7 @@ function PostScanGameFlowScreen({
 
         {canOpenCollegeFootballRecommendation ? (
           <>
-            <p>College Football 27 recommendations are ready from the verified production catalog.</p>
+            <p>{tile.displayName} recommendations are ready from the verified production catalog.</p>
             <button className="post-scan-primary-action" type="button" onClick={onOpenCollegeFootballRecommendation}>
               Open recommendation
             </button>
@@ -1529,6 +1511,17 @@ function GameTileArtwork({ id }: { id: GameSelectionTileID }) {
           <path d="M139 55c7 10 8 30 1 46h-16c-7-16-6-36 1-46Z" />
           <path d="M101 58c7 10 8 30 1 46H86c-7-16-6-36 1-46Z" />
         </g>
+      </svg>
+    );
+  }
+  if (id === "soccer26") {
+    return (
+      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
+        <rect className="tile-soccer-pitch" x="0" y="92" width="180" height="78" />
+        <path className="tile-soccer-lines" d="M0 130h180M90 92v78M66 130a24 24 0 1 0 48 0 24 24 0 1 0-48 0" />
+        <circle className="tile-soccer-ball" cx="88" cy="64" r="36" />
+        <path className="tile-soccer-panels" d="M88 36l17 12-7 20H78l-7-20Zm-17 12-18 9 7 20 18-9Zm34 0 18 9-7 20-18-9ZM78 68l-9 18 19 12 19-12-9-18Z" />
+        <circle className="tile-stadium-light" cx="28" cy="24" r="9" />
       </svg>
     );
   }

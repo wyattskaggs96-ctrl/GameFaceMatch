@@ -58,12 +58,12 @@ describe("game adapter isolation", () => {
 
   it("centralizes every visible post-scan game tile without sharing catalog namespaces", () => {
     expect(GAME_SELECTION_TILES.map((tile) => tile.displayName)).toEqual([
-      "College Football 27",
-      "Madden NFL 26",
-      "NBA 2K26",
-      "EA Sports PGA Tour",
-      "PBA Pro Bowling 2026",
-      "More Games Soon"
+      "CFB game 2027",
+      "Pro Football game 2026",
+      "Pro Basketball game 2026",
+      "Pro Golf game 2026",
+      "Pro Bowling game 2026",
+      "Pro Soccer game 2026"
     ]);
 
     const gameTiles = GAME_SELECTION_TILES.filter((tile) => tile.gameID);
@@ -72,17 +72,19 @@ describe("game adapter isolation", () => {
       "game-madden-nfl-26",
       "game-nba-2k26",
       "game-ea-sports-pga-tour",
-      "game-pba-pro-bowling-2026"
+      "game-pba-pro-bowling-2026",
+      "game-ea-sports-fc-26"
     ]);
     expect(new Set(gameTiles.map((tile) => tile.gameID)).size).toBe(gameTiles.length);
     expect(new Set(gameTiles.map((tile) => tile.catalogNamespace)).size).toBe(gameTiles.length);
     expect(getGameSelectionTileByGame("college-football-27").catalogNamespace).toBe("data/catalog/production");
     expect(getGameSelectionTileByGame("nba-2k26").catalogNamespace).toBe("data/catalog/production/nba-2k26");
-    expect(GAME_SELECTION_TILES.find((tile) => tile.tileID === "soon")).toMatchObject({
-      gameID: null,
-      adapterID: null,
-      catalogNamespace: null,
-      screenID: "more-games-soon"
+    expect(getGameSelectionTileByGame("ea-sports-fc-26")).toMatchObject({
+      displayName: "Pro Soccer game 2026",
+      gameID: "ea-sports-fc-26",
+      adapterID: "ea-sports-fc-26",
+      catalogNamespace: "data/catalog/production/fc26",
+      screenID: "game-ea-sports-fc-26"
     });
   });
 

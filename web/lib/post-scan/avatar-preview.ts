@@ -1,6 +1,7 @@
 import type { CapturedAngle, CapturedAngleID, TemporaryImageReference } from "@/types/domain";
 import type { ActiveCaptureSession } from "@/lib/capture/capture-session";
 import { extractAvatarFeatureModelFromImage } from "@/lib/avatar/extract-avatar-features";
+import { createGameFace3DAvatarConfig, isGameFace3DAvatarEnabled, type GameFace3DAvatarConfig } from "@/lib/avatar/gameface-3d-model";
 import { renderGameAvatar } from "@/lib/avatar/render-game-avatar";
 
 export type PostScanAvatarPreviewSource = "scan" | "fallback";
@@ -8,6 +9,7 @@ export type PostScanAvatarPreviewSource = "scan" | "fallback";
 export interface PostScanAvatarPreviewState {
   source: PostScanAvatarPreviewSource;
   imageUrl: string | null;
+  threeDConfig: GameFace3DAvatarConfig | null;
   selectedAngleID: CapturedAngleID | null;
   alt: string;
   fallbackReason?: "no-image" | "canvas-render-failed";
@@ -64,6 +66,7 @@ export async function createPostScanGameAvatarPreview(session: ActiveCaptureSess
     return {
       source: "scan",
       imageUrl,
+      threeDConfig: isGameFace3DAvatarEnabled() ? createGameFace3DAvatarConfig(featureModel) : null,
       selectedAngleID: selection.angleID,
       alt: "GameFace player portrait generated locally from the completed scan"
     };
@@ -76,6 +79,7 @@ export function createFallbackPostScanAvatarPreview(fallbackReason: PostScanAvat
   return {
     source: "fallback",
     imageUrl: null,
+    threeDConfig: null,
     selectedAngleID: null,
     alt: "Generic GameFace player silhouette",
     fallbackReason

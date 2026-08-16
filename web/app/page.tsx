@@ -13,6 +13,7 @@ import { GameCatalogStatus } from "@/features/catalog/GameCatalogStatus";
 import { PricingScaffold } from "@/features/commerce/PricingScaffold";
 import { Fc26FaceMatchingMvp } from "@/features/fc26/Fc26FaceMatchingMvp";
 import { ScanEntryScreen } from "@/features/onboarding/ScanEntryScreen";
+import { GameFace3DAvatarPreview } from "@/features/avatar/GameFace3DAvatarPreview";
 import { ProfileReview } from "@/features/profile/ProfileReview";
 import { ConsentPanel } from "@/features/privacy/ConsentPanel";
 import { PrivacyCenter } from "@/features/privacy/PrivacyCenter";
@@ -1398,6 +1399,14 @@ function PostScanGameSelectionScreen({
 }
 
 function PostScanAvatarPreview({ preview, profileAvailable }: { preview: PostScanAvatarPreviewState; profileAvailable: boolean }) {
+  if (preview.threeDConfig) {
+    return <GameFace3DAvatarPreview config={preview.threeDConfig} fallback={renderPostScanAvatarFallback(preview, profileAvailable)} />;
+  }
+
+  return renderPostScanAvatarFallback(preview, profileAvailable);
+}
+
+function renderPostScanAvatarFallback(preview: PostScanAvatarPreviewState, profileAvailable: boolean) {
   if (preview.imageUrl) {
     return (
       <div

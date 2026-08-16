@@ -1665,6 +1665,29 @@ p {
   isolation: isolate;
 }
 
+.post-scan-avatar-preview-3d {
+  position: relative;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(96, 165, 250, 0.24), transparent 42%),
+    linear-gradient(145deg, #070a11 0%, #111927 58%, #05070d 100%);
+  isolation: isolate;
+}
+
+.post-scan-avatar-3d-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.post-scan-avatar-3d-loading {
+  position: absolute;
+  inset: 24%;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-top-color: rgba(48, 209, 88, 0.78);
+  border-radius: 999px;
+  animation: scan-ring-rotate 1.1s linear infinite;
+}
+
 .post-scan-avatar-render {
   position: absolute;
   inset: -2%;
@@ -1686,6 +1709,12 @@ p {
     inset 0 0 0 2px rgba(48, 209, 88, 0.14),
     inset 18px 0 32px rgba(84, 173, 255, 0.12),
     inset -18px 0 32px rgba(48, 209, 88, 0.1);
+}
+
+@keyframes scan-ring-rotate {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .post-scan-avatar-backdrop {

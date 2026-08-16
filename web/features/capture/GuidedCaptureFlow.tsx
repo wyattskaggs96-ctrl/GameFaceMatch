@@ -150,6 +150,7 @@ export function GuidedCaptureFlow({
   const guidedScanStateRef = useRef(baseGuidedScanState);
   const coverageAccumulatorRef = useRef<GuidedLiveCoverageAccumulatorState>(createInitialGuidedLiveCoverageAccumulatorState());
   const acceptedLiveFramesRef = useRef<GuidedLiveAcceptedFrame[]>([]);
+  const positioningStartedAtRef = useRef<number>(typeof performance === "undefined" ? Date.now() : performance.now());
   const autoCaptureAcceptedFrameRef = useRef<(frame: GuidedLiveAcceptedFrame) => Promise<void>>(async () => undefined);
   const liveAutoCaptureInFlightRef = useRef(false);
   const pendingAutoCaptureFramesRef = useRef<GuidedLiveAcceptedFrame[]>([]);
@@ -200,6 +201,10 @@ export function GuidedCaptureFlow({
         guidedStage,
         positioningReady,
         circularCanBegin,
+        readinessElapsedMs:
+          guidedStage === "positioning"
+            ? (typeof performance === "undefined" ? Date.now() : performance.now()) - positioningStartedAtRef.current
+            : null,
         qualityGate: guidedScanState.initialQualityGate,
         liveGuidance,
         liveCoverageDecision,
@@ -222,6 +227,9 @@ export function GuidedCaptureFlow({
 
   useEffect(() => {
     guidedStageRef.current = guidedStage;
+    if (guidedStage === "positioning") {
+      positioningStartedAtRef.current = typeof performance === "undefined" ? Date.now() : performance.now();
+    }
   }, [guidedStage]);
 
   useEffect(() => {
@@ -1778,6 +1786,22 @@ function ScanDiagnosticsPanel({ snapshot }: { snapshot: ScanDiagnosticSnapshot }
         <div>
           <dt>Current coverage slot</dt>
           <dd>{snapshot.readiness.assignedSegment ?? "none"}</dd>
+        </div>
+        <div>
+          <dt>Readiness elapsed</dt>
+          <dd>{snapshot.readiness.readinessElapsedMs === null ? "unknown" : `${Math.round(snapshot.readiness.readinessElapsedMs)} ms`}</dd>
+        </div>
+        <div>
+          <dt>Stability timer</dt>
+          <dd>
+            {snapshot.readiness.stabilityTimerMs === null || snapshot.readiness.stabilityTargetMs === null
+              ? "unknown"
+              : `${snapshot.readiness.stabilityTimerMs} / ${snapshot.readiness.stabilityTargetMs} ms`}
+          </dd>
+        </div>
+        <div>
+          <dt>Current failing gate</dt>
+          <dd>{snapshot.readiness.currentFailingGate ?? "none"}</dd>
         </div>
         <div>
           <dt>Last accepted sector</dt>

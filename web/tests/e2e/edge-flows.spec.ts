@@ -153,23 +153,33 @@ test.describe("GameFace Match E2E edge flows", () => {
     await expect(page).toHaveURL(/#game-selection$/);
     const fallbackReason = await page.locator(".post-scan-avatar-preview-fallback").getAttribute("data-fallback-reason").catch(() => null);
     expect(fallbackReason, "post-scan avatar should use the accepted scan image instead of fallback").toBeNull();
-    const avatar = page.locator(".post-scan-avatar-preview-image");
+    const avatar = page.locator(".post-scan-avatar-preview").first();
     await expect(avatar).toBeVisible();
-    await expect(avatar).toHaveAttribute("data-avatar-source", "scan");
-    await expect(avatar).toHaveAttribute("data-selected-angle", "straightOn");
+    const avatarSourceMode = await avatar.getAttribute("data-avatar-source");
+    expect(["scan", "scan-morphs"]).toContain(avatarSourceMode);
     await expect(page.locator(".post-scan-avatar-preview-fallback")).toHaveCount(0);
     await expect(page.locator(".post-scan-avatar-photo")).toHaveCount(0);
     await expect(page.locator(".post-scan-preview-pixels")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "See you in game players" })).toBeVisible();
 
-    const avatarSource = await avatar.locator("img").getAttribute("src");
-    expect(avatarSource).toMatch(/^data:image\/svg\+xml/);
-    expect(decodeURIComponent(avatarSource ?? "")).not.toContain("<image");
+    const avatarSource = avatarSourceMode === "scan" ? await avatar.locator("img").getAttribute("src") : null;
+    if (avatarSourceMode === "scan") {
+      expect(avatarSource).toMatch(/^data:image\/svg\+xml/);
+      expect(decodeURIComponent(avatarSource ?? "")).not.toContain("<image");
+    } else {
+      await expect(avatar.locator("canvas.post-scan-avatar-3d-canvas")).toBeVisible();
+      await expect(avatar).toHaveAttribute("data-avatar-renderer", "threejs-3d");
+      await expect(avatar).toHaveAttribute("data-renderer-version", "gameface-3d-avatar-v1");
+    }
 
     await page.getByRole("button", { name: "Select CFB game 2027" }).click();
     await expect(page).toHaveURL(/#game\/college-football-27$/);
     await page.getByRole("button", { name: "Back to games" }).click();
-    await expect(page.locator(".post-scan-avatar-preview-image img")).toHaveAttribute("src", avatarSource ?? "");
+    if (avatarSourceMode === "scan") {
+      await expect(page.locator(".post-scan-avatar-preview-image img")).toHaveAttribute("src", avatarSource ?? "");
+    } else {
+      await expect(page.locator(".post-scan-avatar-preview-3d canvas.post-scan-avatar-3d-canvas")).toBeVisible();
+    }
   });
 
   test("opens every post-scan game tile and returns to the reusable game grid", async ({ page }) => {

@@ -114,11 +114,15 @@ export const naturalPhonePositioningThresholds: CaptureGuidanceThresholds = {
   faceMinBoxSize: 0.22,
   faceMaxBoxSize: 0.84,
   centerToleranceX: 0.22,
-  centerToleranceY: 0.26,
+  centerToleranceY: 0.3,
   maxCenterMotionPerSecond: 0.5,
   maxYawMotionPerSecond: 60,
-  holdTargetMs: 450,
-  extendedHoldTargetMs: 1_100
+  holdTargetMs: 300,
+  extendedHoldTargetMs: 800,
+  headYawRanges: {
+    ...defaultCaptureGuidanceThresholds.headYawRanges,
+    straightOn: { min: -24, max: 24, label: "look naturally toward the screen" }
+  }
 };
 
 export class CaptureGuidanceSession {

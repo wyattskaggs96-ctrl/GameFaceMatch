@@ -54,6 +54,7 @@ describe("post-scan avatar preview", () => {
     expect(fallback).toEqual({
       source: "fallback",
       imageUrl: null,
+      threeDConfig: null,
       selectedAngleID: null,
       alt: "Generic GameFace player silhouette",
       fallbackReason: "no-image"

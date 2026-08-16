@@ -21,7 +21,7 @@ describe("scan diagnostics", () => {
     const decision = evaluateGuidedLiveFrameDecision({
       passID: "first",
       timestampMs: 1_000,
-      faceLandmarkReport: report({ yawDegrees: 42, pitchDegrees: -12 }),
+      faceLandmarkReport: report({ boxWidth: 0.34, boxHeight: 0.44, yawDegrees: 42, pitchDegrees: -12 }),
       acceptedFrames: [],
       visiblePreviewGeometry: createObjectFitCoverVisiblePreview({
         sourceWidth: 720,
@@ -73,6 +73,7 @@ describe("scan diagnostics", () => {
       guidedStage: "firstPass",
       positioningReady: true,
       circularCanBegin: true,
+      readinessElapsedMs: 420,
       qualityGate: {
         singleFace: true,
         centered: true,
@@ -105,6 +106,8 @@ describe("scan diagnostics", () => {
     expect(snapshot.observedFace.poseDegrees).toMatchObject({ yaw: 42, pitch: -12, roll: 0 });
     expect(snapshot.readiness.currentClassifiedSector).toBe("right");
     expect(snapshot.readiness.assignedSegment).toBe("rightProfile");
+    expect(snapshot.readiness.readinessElapsedMs).toBe(420);
+    expect(snapshot.readiness.currentFailingGate).toBeNull();
     expect(snapshot.readiness.completedSectors).toEqual([]);
     expect(snapshot.frameTrace).toEqual([
       expect.objectContaining({

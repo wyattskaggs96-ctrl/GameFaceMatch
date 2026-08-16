@@ -67,6 +67,10 @@ export interface ScanDiagnosticSnapshot {
     guidedStage: string;
     positioningReady: boolean;
     circularCanBegin: boolean;
+    readinessElapsedMs: number | null;
+    stabilityTimerMs: number | null;
+    stabilityTargetMs: number | null;
+    currentFailingGate: string | null;
     gates: GuidedScanQualityGate;
     guidanceBlockingCodes: string[];
     guidanceAdvisoryCodes: string[];
@@ -144,6 +148,7 @@ export function createScanDiagnosticSnapshot(input: {
   guidedStage: string;
   positioningReady: boolean;
   circularCanBegin: boolean;
+  readinessElapsedMs?: number | null;
   qualityGate: GuidedScanQualityGate;
   liveGuidance: CaptureGuidanceReport | null;
   liveCoverageDecision: GuidedLiveFrameDecision | null;
@@ -211,6 +216,13 @@ export function createScanDiagnosticSnapshot(input: {
       guidedStage: input.guidedStage,
       positioningReady: input.positioningReady,
       circularCanBegin: input.circularCanBegin,
+      readinessElapsedMs: finiteOrNull(input.readinessElapsedMs),
+      stabilityTimerMs: finiteOrNull(input.liveGuidance?.holdDurationMs),
+      stabilityTargetMs: finiteOrNull(input.liveGuidance?.holdTargetMs),
+      currentFailingGate:
+        input.liveGuidance?.blockingIssues[0]?.code ??
+        input.liveCoverageDecision?.rejectionReasons[0] ??
+        (!input.circularCanBegin ? firstFalseGate(input.qualityGate) : null),
       gates: input.qualityGate,
       guidanceBlockingCodes: input.liveGuidance?.blockingIssues.map((issue) => issue.code) ?? [],
       guidanceAdvisoryCodes: input.liveGuidance?.advisoryWarnings.map((issue) => issue.code) ?? [],
@@ -241,6 +253,10 @@ export function createScanDiagnosticSnapshot(input: {
     },
     frameTrace: input.frameTrace ?? []
   };
+}
+
+function firstFalseGate(gates: GuidedScanQualityGate) {
+  return Object.entries(gates).find(([, value]) => !value)?.[0] ?? null;
 }
 
 export function isScanDiagnosticsEnabled(input: { nodeEnv?: string; search?: string | null }) {

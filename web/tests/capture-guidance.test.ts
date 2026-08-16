@@ -321,12 +321,51 @@ describe("capture guidance hold and motion", () => {
       requireOperationalLandmarks: true
     });
 
-    expect(first.holdTargetMs).toBe(450);
-    expect(stillSettling.poseHeldLongEnough).toBe(false);
+    expect(first.holdTargetMs).toBe(300);
+    expect(stillSettling.poseHeldLongEnough).toBe(true);
     expect(stillSettling.blockingIssues.map((issue) => issue.code)).not.toContain("excessiveMotion");
     expect(ready.poseHeldLongEnough).toBe(true);
     expect(ready.canCapture).toBe(true);
-    expect(ready.holdDurationMs).toBeLessThanOrEqual(1_000);
+    expect(ready.holdDurationMs).toBeLessThanOrEqual(600);
+  });
+
+  it("accepts natural iPhone selfie posture without forcing an awkward straight-on yaw", () => {
+    const session = createCaptureGuidanceSession(naturalPhonePositioningThresholds);
+    const first = session.evaluate({
+      angleID: "straightOn",
+      faceLandmarkReport: report({ centerX: 0.505, centerY: 0.48, yawDegrees: 18 }),
+      imageQualityReport: quality(),
+      timestampMs: 0,
+      requireOperationalLandmarks: true
+    });
+    const ready = session.evaluate({
+      angleID: "straightOn",
+      faceLandmarkReport: report({ centerX: 0.51, centerY: 0.486, yawDegrees: 19.5 }),
+      imageQualityReport: quality(),
+      timestampMs: 360,
+      requireOperationalLandmarks: true
+    });
+
+    expect(first.blockingIssues.map((issue) => issue.code)).not.toContain("incorrectHeadDirection");
+    expect(ready.poseHeldLongEnough).toBe(true);
+    expect(ready.canCapture).toBe(true);
+    expect(ready.holdDurationMs).toBeLessThanOrEqual(500);
+  });
+
+  it("still blocks clearly turned heads during positioning", () => {
+    const guidance = evaluateCaptureGuidanceFrame(
+      {
+        angleID: "straightOn",
+        faceLandmarkReport: report({ yawDegrees: 31 }),
+        imageQualityReport: quality(),
+        timestampMs: 0,
+        requireOperationalLandmarks: true
+      },
+      naturalPhonePositioningThresholds
+    );
+
+    expect(guidance.blockingIssues.map((issue) => issue.code)).toContain("incorrectHeadDirection");
+    expect(guidance.canCapture).toBe(false);
   });
 
   it("keeps unusable positioning observations blocked while shortening the good-frame hold", () => {

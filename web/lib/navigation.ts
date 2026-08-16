@@ -41,6 +41,12 @@ export const HARDENED_E2E_FLOW = [
 export const APP_SCREENS = [
   ...KEY_NAVIGATION_FLOW,
   "game-selection",
+  "game-college-football-27",
+  "game-madden-nfl-26",
+  "game-nba-2k26",
+  "game-ea-sports-pga-tour",
+  "game-pba-pro-bowling-2026",
+  "more-games-soon",
   "catalog",
   "fc26",
   "saved",
@@ -140,10 +146,14 @@ export function isAppScreen(value: string): value is AppScreen {
 }
 
 export function getScreenFromHash(hash: string): AppScreen | null {
-  const value = hash.replace(/^#\/?/, "");
+  const rawValue = hash.replace(/^#\/?/, "");
+  const value = rawValue.startsWith("game/") ? `game-${rawValue.slice("game/".length)}` : rawValue;
   return isAppScreen(value) ? value : null;
 }
 
 export function toScreenHash(screen: AppScreen) {
+  if (screen.startsWith("game-") && screen !== "game-selection") {
+    return `#game/${screen.slice("game-".length)}`;
+  }
   return `#${screen}`;
 }

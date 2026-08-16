@@ -1928,6 +1928,152 @@ p {
   stroke-width: 5;
 }
 
+.post-scan-game-detail {
+  width: min(100%, 430px);
+  min-height: 100svh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 42px) 28px calc(env(safe-area-inset-bottom, 0px) + 44px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  color: #fff;
+}
+
+.post-scan-game-mini-art {
+  position: relative;
+  width: min(100%, 270px);
+  aspect-ratio: 1.08;
+  margin: 0 auto 30px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 34px;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(33, 37, 48, 0.94), rgba(8, 9, 13, 0.98));
+  box-shadow: 0 28px 68px rgba(0, 0, 0, 0.52);
+  pointer-events: none;
+}
+
+.post-scan-game-mini-art .post-scan-game-art {
+  width: 100%;
+  height: 100%;
+}
+
+.post-scan-game-kicker {
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.post-scan-game-detail h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.55rem, 11vw, 4rem);
+  font-weight: 850;
+  line-height: 0.96;
+  text-align: center;
+}
+
+.post-scan-game-detail p {
+  margin: 18px auto 0;
+  max-width: 338px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 1rem;
+  font-weight: 520;
+  line-height: 1.48;
+  text-align: center;
+}
+
+.post-scan-game-ready-copy {
+  color: #fff !important;
+  font-size: 1.08rem !important;
+}
+
+.post-scan-game-status {
+  margin: 28px 0 0;
+  padding: 16px 18px;
+  border: 1px solid rgba(72, 209, 119, 0.26);
+  border-radius: 20px;
+  background: rgba(20, 42, 28, 0.68);
+  display: grid;
+  gap: 5px;
+  overflow-wrap: anywhere;
+}
+
+.post-scan-game-status span {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.77rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.post-scan-game-status strong {
+  color: #f5fff7;
+  font-size: 0.98rem;
+  font-weight: 760;
+  line-height: 1.34;
+}
+
+.post-scan-game-status-warning {
+  border-color: rgba(255, 195, 87, 0.34);
+  background: rgba(66, 46, 16, 0.68);
+}
+
+.post-scan-game-limitation {
+  color: rgba(255, 255, 255, 0.52) !important;
+  font-size: 0.9rem !important;
+}
+
+.post-scan-game-actions {
+  margin-top: 30px;
+  display: grid;
+  gap: 12px;
+}
+
+.post-scan-primary-action,
+.post-scan-secondary-action {
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.post-scan-primary-action {
+  margin-top: 26px;
+  color: #fff;
+  background: #0a84ff;
+}
+
+.post-scan-secondary-action {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.post-scan-primary-action:active,
+.post-scan-secondary-action:active {
+  transform: scale(0.98);
+}
+
+.post-scan-primary-action:focus-visible,
+.post-scan-secondary-action:focus-visible {
+  outline: 3px solid rgba(10, 132, 255, 0.5);
+  outline-offset: 3px;
+}
+
 @media (max-width: 390px) {
   .post-scan-game-inner {
     gap: 22px;

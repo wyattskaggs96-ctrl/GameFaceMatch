@@ -81,6 +81,15 @@ import { createInitialAttributeConfirmation, type AttributeConfirmationState } f
 import { createStandardFaceProfile } from "@/lib/profile/standard-face-profile";
 import { createInitialScreenshotRefinementSession, deleteScreenshotRefinementSession } from "@/lib/refinement/screenshot-refinement";
 import { createRuleBasedMatchingEngine } from "@/lib/matching/matching-engine";
+import {
+  GAME_SELECTION_TILES,
+  createGameProfileContext,
+  getGameSelectionTileByScreen,
+  getSupportedGameDefinition,
+  type GameSelectionScreenID,
+  type GameSelectionTileDefinition,
+  type GameSelectionTileID
+} from "@/lib/adapters/game-registry";
 import { getScanEntryEnvironment } from "@/lib/onboarding/scan-entry";
 import { isOwnerReviewDemoEnabled } from "@/lib/owner-review-demo/owner-review-demo";
 import { createBuildInstructions } from "@/lib/results/results-experience";
@@ -176,6 +185,17 @@ function getBuddyTrialInviteIdFromLocation() {
   }
 }
 
+function isPostScanGameScreen(screen: AppScreen): screen is GameSelectionScreenID {
+  return (
+    screen === "game-college-football-27" ||
+    screen === "game-madden-nfl-26" ||
+    screen === "game-nba-2k26" ||
+    screen === "game-ea-sports-pga-tour" ||
+    screen === "game-pba-pro-bowling-2026" ||
+    screen === "more-games-soon"
+  );
+}
+
 export default function HomePage() {
   const [screen, setScreen] = useState<AppScreen>("welcome");
   const [session, setSession] = useState(() => createInitialCaptureSession());
@@ -236,7 +256,8 @@ export default function HomePage() {
       ]
     : PRIMARY_NAV_ITEMS;
   const stepFlowProgress = getStepFlowProgress(screen);
-  const immersiveSetupScreen = screen === "welcome" || screen === "start" || screen === "capture" || screen === "preparation" || screen === "game-selection";
+  const immersiveSetupScreen =
+    screen === "welcome" || screen === "start" || screen === "capture" || screen === "preparation" || screen === "game-selection" || isPostScanGameScreen(screen);
 
   const completedAngles = session.angles.filter((angle) => angle.status === "complete").length;
   const requiredAngles = session.angles.length;
@@ -469,7 +490,7 @@ export default function HomePage() {
 
   function handleGuidedCaptureContinue() {
     markBuddyTrialScanCompleteIfPresent();
-    navigate("game-selection");
+    createProfileFromCurrentSession("game-selection");
   }
 
   function refreshPrivacyState() {
@@ -758,7 +779,7 @@ export default function HomePage() {
     if (scope === "all-local-data") deleteAllLocalData();
   }
 
-  function createProfileFromCurrentSession() {
+  function createProfileFromCurrentSession(nextScreen: AppScreen = "profile-review") {
     const startedAt = typeof performance === "undefined" ? Date.now() : performance.now();
     const profile = measureSyncPerformance(
       "profileGeneration",
@@ -790,7 +811,7 @@ export default function HomePage() {
     setProfileSaveStatusMessage(null);
     setProfileSaveErrorMessage(null);
     refreshPrivacyState();
-    navigate("profile-review");
+    navigate(nextScreen);
   }
 
   async function saveCurrentProfile() {
@@ -929,13 +950,31 @@ export default function HomePage() {
       case "game-selection":
         return (
           <PostScanGameSelectionScreen
-            onCollegeFootballSelect={() => {
-              if (buddyTrialInviteId && getBuddyTrialInvite(buddyTrialInviteId).status === "active" && typeof window !== "undefined") {
-                window.location.assign(`/trial/${encodeURIComponent(buddyTrialInviteId)}`);
-                return;
+            onSelectGame={(tile) => {
+              if (tile.gameID === "college-football-27") {
+                trackAnalytics("recommendationSelected", { selectedRecommendationRank: 1, resultOutcome: "unavailable", resultBlockReason: "catalogUnavailable" });
+              } else if (tile.gameID) {
+                trackAnalytics("resultBlocked", { resultOutcome: "unavailable", resultBlockReason: "catalogUnavailable" });
               }
-              trackAnalytics("recommendationSelected", { selectedRecommendationRank: 1 });
+              navigate(tile.screenID);
             }}
+          />
+        );
+      case "game-college-football-27":
+      case "game-madden-nfl-26":
+      case "game-nba-2k26":
+      case "game-ea-sports-pga-tour":
+      case "game-pba-pro-bowling-2026":
+      case "more-games-soon":
+        return (
+          <PostScanGameFlowScreen
+            tile={getGameSelectionTileByScreen(screen)}
+            profile={standardProfile}
+            catalogRecordCount={catalogRuntimeStatus?.manifest.items.length ?? productionCatalogManifest.items.length}
+            catalogRuntimeError={catalogRuntimeError}
+            onBackToGames={() => navigate("game-selection")}
+            onStartScan={() => navigate("preparation")}
+            onOpenCollegeFootballRecommendation={() => navigate("processing")}
           />
         );
       case "attributes":
@@ -1270,32 +1309,7 @@ function WelcomeFaceIDStyleScreen({ onGetStarted }: { onGetStarted: () => void }
   );
 }
 
-type GameSelectionTileID = "cf27" | "madden26" | "nba2k26" | "pga" | "pba" | "soon";
-
-const gameSelectionTiles: Array<{
-  id: GameSelectionTileID;
-  label: string;
-  ariaLabel: string;
-}> = [
-  { id: "cf27", label: "College Football 27", ariaLabel: "Select College Football 27" },
-  { id: "madden26", label: "Madden NFL 26", ariaLabel: "Madden NFL 26 is coming soon" },
-  { id: "nba2k26", label: "NBA 2K26", ariaLabel: "NBA 2K26 is coming soon" },
-  { id: "pga", label: "EA Sports PGA Tour", ariaLabel: "EA Sports PGA Tour is coming soon" },
-  { id: "pba", label: "PBA Pro Bowling 2026", ariaLabel: "PBA Pro Bowling 2026 is coming soon" },
-  { id: "soon", label: "More Games Soon", ariaLabel: "More games are coming soon" }
-];
-
-function PostScanGameSelectionScreen({ onCollegeFootballSelect }: { onCollegeFootballSelect: () => void }) {
-  const [statusMessage, setStatusMessage] = useState("Choose College Football 27 to continue when you are ready.");
-
-  function handleTileSelect(tile: (typeof gameSelectionTiles)[number]) {
-    if (tile.id === "cf27") {
-      onCollegeFootballSelect();
-      return;
-    }
-    setStatusMessage(`${tile.label} is coming soon.`);
-  }
-
+function PostScanGameSelectionScreen({ onSelectGame }: { onSelectGame: (tile: GameSelectionTileDefinition) => void }) {
   return (
     <section className="post-scan-game-screen" aria-labelledby="post-scan-game-title">
       <div className="post-scan-game-inner">
@@ -1321,26 +1335,144 @@ function PostScanGameSelectionScreen({ onCollegeFootballSelect }: { onCollegeFoo
         </h2>
 
         <div className="post-scan-game-grid" aria-label="Choose your game">
-          {gameSelectionTiles.map((tile) => (
+          {GAME_SELECTION_TILES.map((tile) => (
             <button
               aria-label={tile.ariaLabel}
               className="post-scan-game-tile"
-              data-game={tile.id}
-              key={tile.id}
+              data-game={tile.tileID}
+              key={tile.tileID}
               type="button"
-              onClick={() => handleTileSelect(tile)}
+              onClick={() => onSelectGame(tile)}
             >
-              <GameTileArtwork id={tile.id} />
-              <span>{tile.label}</span>
+              <GameTileArtwork id={tile.tileID} />
+              <span>{tile.displayName}</span>
             </button>
           ))}
         </div>
-        <p className="sr-only" aria-live="polite">
-          {statusMessage}
-        </p>
       </div>
     </section>
   );
+}
+
+function PostScanGameFlowScreen({
+  tile,
+  profile,
+  catalogRecordCount,
+  catalogRuntimeError,
+  onBackToGames,
+  onStartScan,
+  onOpenCollegeFootballRecommendation
+}: {
+  tile: GameSelectionTileDefinition;
+  profile: StandardFaceProfile | null;
+  catalogRecordCount: number;
+  catalogRuntimeError: string | null;
+  onBackToGames: () => void;
+  onStartScan: () => void;
+  onOpenCollegeFootballRecommendation: () => void;
+}) {
+  if (!tile.gameID) {
+    return (
+      <section className="post-scan-game-screen" aria-labelledby="more-games-title">
+        <div className="post-scan-game-detail">
+          <div className="post-scan-game-mini-art" aria-hidden="true">
+            <GameTileArtwork id={tile.tileID} />
+          </div>
+          <p className="post-scan-game-kicker">GameFace Match</p>
+          <h1 id="more-games-title">More games coming soon.</h1>
+          <p>We are adding more player creators after each game has a real catalog path.</p>
+          <button className="post-scan-secondary-action" type="button" onClick={onBackToGames}>
+            Back to games
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  const definition = getSupportedGameDefinition(tile.gameID);
+  const hasReusableProfile = Boolean(profile);
+  const profileContext = profile ? createGameProfileContext(profile, tile.gameID) : null;
+  const canOpenCollegeFootballRecommendation =
+    tile.gameID === "college-football-27" &&
+    hasReusableProfile &&
+    !catalogRuntimeError &&
+    catalogRecordCount > 0 &&
+    definition.productionCatalogAvailability === "productionAvailable" &&
+    definition.recommendationsEnabled;
+
+  const notReadyMessage = getGameNotReadyMessage(definition.customerFacingSupportState, tile.displayName, catalogRuntimeError);
+
+  return (
+    <section className="post-scan-game-screen" aria-labelledby="post-scan-game-detail-title">
+      <div className="post-scan-game-detail">
+        <div className="post-scan-game-mini-art" aria-hidden="true">
+          <GameTileArtwork id={tile.tileID} />
+        </div>
+        <p className="post-scan-game-kicker">Selected game</p>
+        <h1 id="post-scan-game-detail-title">{tile.displayName}</h1>
+        <p className="post-scan-game-ready-copy">Your scan is ready.</p>
+
+        {hasReusableProfile ? (
+          <div className="post-scan-game-status" aria-label="Reusable scan profile status">
+            <span>Reusable scan profile</span>
+            <strong>{profileContext?.profileID ?? "Ready"}</strong>
+          </div>
+        ) : (
+          <div className="post-scan-game-status post-scan-game-status-warning" role="alert">
+            <span>Scan needed</span>
+            <strong>Complete one scan before choosing a game.</strong>
+          </div>
+        )}
+
+        {canOpenCollegeFootballRecommendation ? (
+          <>
+            <p>College Football 27 recommendations are ready from the verified production catalog.</p>
+            <button className="post-scan-primary-action" type="button" onClick={onOpenCollegeFootballRecommendation}>
+              Open recommendation
+            </button>
+          </>
+        ) : (
+          <>
+            <p>{hasReusableProfile ? notReadyMessage : "This game cannot generate a recommendation until the current scan profile exists."}</p>
+            {hasReusableProfile ? (
+              <p className="post-scan-game-limitation">
+                This is fail-closed behavior: no fixture, synthetic, or other game's catalog data is used.
+              </p>
+            ) : null}
+          </>
+        )}
+
+        <div className="post-scan-game-actions">
+          <button className="post-scan-secondary-action" type="button" onClick={onBackToGames}>
+            Back to games
+          </button>
+          {!hasReusableProfile ? (
+            <button className="post-scan-primary-action" type="button" onClick={onStartScan}>
+              Start scan
+            </button>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function getGameNotReadyMessage(
+  state: ReturnType<typeof getSupportedGameDefinition>["customerFacingSupportState"],
+  displayName: string,
+  catalogRuntimeError: string | null
+) {
+  if (catalogRuntimeError) return `The ${displayName} catalog check failed closed: ${catalogRuntimeError}`;
+  if (state === "researchEvidenceCatalogUnavailable") {
+    return `We're still verifying this game's appearance catalog before recommendations go live.`;
+  }
+  if (state === "notStartedUnavailable") {
+    return `We're still building the ${displayName} appearance catalog before recommendations go live.`;
+  }
+  if (state === "researchOnlyUnavailable") {
+    return `${displayName} is still research-only and is not available for customer recommendations yet.`;
+  }
+  return `${displayName} recommendations are not available yet.`;
 }
 
 function GameTileArtwork({ id }: { id: GameSelectionTileID }) {

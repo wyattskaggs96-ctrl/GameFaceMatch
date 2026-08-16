@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { CollegeFootball27Adapter } from "@/lib/adapters/college-football-27-adapter";
 import { EaSportsFc26Adapter, FC26_CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/adapters/ea-sports-fc-26-adapter";
 import { GameAdapterError } from "@/lib/adapters/game-appearance-adapter";
-import { SUPPORTED_GAME_DEFINITIONS, createGameProfileContext, getSupportedGameDefinition } from "@/lib/adapters/game-registry";
+import { GAME_SELECTION_TILES, SUPPORTED_GAME_DEFINITIONS, createGameProfileContext, getGameSelectionTileByGame, getSupportedGameDefinition } from "@/lib/adapters/game-registry";
 import { createBundledCatalogRepository } from "@/lib/catalog/catalog-repository";
 import { CATALOG_UNAVAILABLE_MESSAGE } from "@/lib/product-copy";
 import { createInitialCaptureSession } from "@/lib/capture/capture-session";
@@ -54,6 +54,36 @@ describe("game adapter isolation", () => {
     expect(getSupportedGameDefinition("madden-nfl-26").recommendationAvailability).toBe("unavailableNotStarted");
     expect(getSupportedGameDefinition("ea-sports-pga-tour").productionCatalogNamespace).toBe("data/catalog/production/ea-sports-pga-tour");
     expect(getSupportedGameDefinition("pba-pro-bowling-2026").customerFacingSupportState).toBe("notStartedUnavailable");
+  });
+
+  it("centralizes every visible post-scan game tile without sharing catalog namespaces", () => {
+    expect(GAME_SELECTION_TILES.map((tile) => tile.displayName)).toEqual([
+      "College Football 27",
+      "Madden NFL 26",
+      "NBA 2K26",
+      "EA Sports PGA Tour",
+      "PBA Pro Bowling 2026",
+      "More Games Soon"
+    ]);
+
+    const gameTiles = GAME_SELECTION_TILES.filter((tile) => tile.gameID);
+    expect(gameTiles.map((tile) => tile.screenID)).toEqual([
+      "game-college-football-27",
+      "game-madden-nfl-26",
+      "game-nba-2k26",
+      "game-ea-sports-pga-tour",
+      "game-pba-pro-bowling-2026"
+    ]);
+    expect(new Set(gameTiles.map((tile) => tile.gameID)).size).toBe(gameTiles.length);
+    expect(new Set(gameTiles.map((tile) => tile.catalogNamespace)).size).toBe(gameTiles.length);
+    expect(getGameSelectionTileByGame("college-football-27").catalogNamespace).toBe("data/catalog/production");
+    expect(getGameSelectionTileByGame("nba-2k26").catalogNamespace).toBe("data/catalog/production/nba-2k26");
+    expect(GAME_SELECTION_TILES.find((tile) => tile.tileID === "soon")).toMatchObject({
+      gameID: null,
+      adapterID: null,
+      catalogNamespace: null,
+      screenID: "more-games-soon"
+    });
   });
 
   it("keeps FC26 recommendations fail-closed even when research observations exist", async () => {

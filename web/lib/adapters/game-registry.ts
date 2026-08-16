@@ -38,6 +38,32 @@ export interface GameProfileContext {
   profileContractVersion: string;
 }
 
+export type GameSelectionTileID =
+  | "cf27"
+  | "madden26"
+  | "nba2k26"
+  | "pga"
+  | "pba"
+  | "soon";
+
+export type GameSelectionScreenID =
+  | "game-college-football-27"
+  | "game-madden-nfl-26"
+  | "game-nba-2k26"
+  | "game-ea-sports-pga-tour"
+  | "game-pba-pro-bowling-2026"
+  | "more-games-soon";
+
+export interface GameSelectionTileDefinition {
+  tileID: GameSelectionTileID;
+  displayName: string;
+  ariaLabel: string;
+  screenID: GameSelectionScreenID;
+  gameID: SupportedGameID | null;
+  adapterID: SupportedGameID | null;
+  catalogNamespace: string | null;
+}
+
 export const SUPPORTED_GAME_DEFINITIONS: readonly SupportedGameDefinition[] = [
   {
     gameID: "college-football-27",
@@ -125,9 +151,78 @@ export const SUPPORTED_GAME_DEFINITIONS: readonly SupportedGameDefinition[] = [
   }
 ] as const;
 
+export const GAME_SELECTION_TILES: readonly GameSelectionTileDefinition[] = [
+  {
+    tileID: "cf27",
+    displayName: "College Football 27",
+    ariaLabel: "Select College Football 27",
+    screenID: "game-college-football-27",
+    gameID: "college-football-27",
+    adapterID: "college-football-27",
+    catalogNamespace: "data/catalog/production"
+  },
+  {
+    tileID: "madden26",
+    displayName: "Madden NFL 26",
+    ariaLabel: "Select Madden NFL 26",
+    screenID: "game-madden-nfl-26",
+    gameID: "madden-nfl-26",
+    adapterID: "madden-nfl-26",
+    catalogNamespace: "data/catalog/production/madden-nfl-26"
+  },
+  {
+    tileID: "nba2k26",
+    displayName: "NBA 2K26",
+    ariaLabel: "Select NBA 2K26",
+    screenID: "game-nba-2k26",
+    gameID: "nba-2k26",
+    adapterID: "nba-2k26",
+    catalogNamespace: "data/catalog/production/nba-2k26"
+  },
+  {
+    tileID: "pga",
+    displayName: "EA Sports PGA Tour",
+    ariaLabel: "Select EA Sports PGA Tour",
+    screenID: "game-ea-sports-pga-tour",
+    gameID: "ea-sports-pga-tour",
+    adapterID: "ea-sports-pga-tour",
+    catalogNamespace: "data/catalog/production/ea-sports-pga-tour"
+  },
+  {
+    tileID: "pba",
+    displayName: "PBA Pro Bowling 2026",
+    ariaLabel: "Select PBA Pro Bowling 2026",
+    screenID: "game-pba-pro-bowling-2026",
+    gameID: "pba-pro-bowling-2026",
+    adapterID: "pba-pro-bowling-2026",
+    catalogNamespace: "data/catalog/production/pba-pro-bowling-2026"
+  },
+  {
+    tileID: "soon",
+    displayName: "More Games Soon",
+    ariaLabel: "More games coming soon",
+    screenID: "more-games-soon",
+    gameID: null,
+    adapterID: null,
+    catalogNamespace: null
+  }
+] as const;
+
 export function getSupportedGameDefinition(gameID: SupportedGameID): SupportedGameDefinition {
   const definition = SUPPORTED_GAME_DEFINITIONS.find((candidate) => candidate.gameID === gameID);
   if (!definition) throw new Error(`Unsupported game ID: ${gameID}`);
+  return definition;
+}
+
+export function getGameSelectionTileByScreen(screenID: GameSelectionScreenID): GameSelectionTileDefinition {
+  const definition = GAME_SELECTION_TILES.find((candidate) => candidate.screenID === screenID);
+  if (!definition) throw new Error(`Unsupported game selection screen: ${screenID}`);
+  return definition;
+}
+
+export function getGameSelectionTileByGame(gameID: SupportedGameID): GameSelectionTileDefinition {
+  const definition = GAME_SELECTION_TILES.find((candidate) => candidate.gameID === gameID);
+  if (!definition) throw new Error(`Unsupported game selection game: ${gameID}`);
   return definition;
 }
 

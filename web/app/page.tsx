@@ -134,6 +134,15 @@ const DevelopmentAnalyticsDashboard =
         loading: () => <LoadingState label="Loading analytics dashboard" />
       });
 
+const GAME_TILE_ARTWORK_SOURCES: Record<GameSelectionTileID, string> = {
+  cf27: "/images/postscan/game-tiles/cfb-game-2027.webp",
+  madden26: "/images/postscan/game-tiles/pro-football-game-2026.webp",
+  nba2k26: "/images/postscan/game-tiles/pro-basketball-game-2026.webp",
+  pga: "/images/postscan/game-tiles/pro-golf-game-2026.webp",
+  pba: "/images/postscan/game-tiles/pro-bowling-game-2026.webp",
+  soccer26: "/images/postscan/game-tiles/pro-soccer-game-2026.webp"
+};
+
 const DevelopmentPerformanceDashboard =
   process.env.NODE_ENV === "production"
     ? null
@@ -1544,94 +1553,16 @@ function getGameNotReadyMessage(
 }
 
 function GameTileArtwork({ id }: { id: GameSelectionTileID }) {
-  if (id === "cf27") {
-    return (
-      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
-        <path className="tile-light-beams" d="M22 -12l42 126M72 -10l21 126M142 -8l-28 124" />
-        <path className="tile-field" d="M-12 104c50-10 101-11 204 0v66H-12Z" />
-        <path className="tile-field-line" d="M18 114v43M52 109v53M88 107v58M124 109v53M160 114v43M0 134h180" />
-        <ellipse className="tile-helmet-shell" cx="85" cy="62" rx="52" ry="39" />
-        <path className="tile-helmet-crown" d="M45 62c9-26 31-39 64-33 20 4 34 16 39 34-28-12-69-14-103-1Z" />
-        <path className="tile-helmet-shadow" d="M58 77c19 17 52 17 74 2-10 24-55 29-85 8 2-4 6-8 11-10Z" />
-        <path className="tile-helmet-mask" d="M112 61h34M118 70l29 25M104 82h38M124 60v33" />
-        <circle className="tile-stadium-light" cx="24" cy="22" r="10" />
-        <circle className="tile-stadium-light tile-stadium-light-secondary" cx="151" cy="31" r="7" />
-      </svg>
-    );
-  }
-  if (id === "madden26") {
-    return (
-      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
-        <path className="tile-light-beams" d="M17 -10l55 124M68 -8l34 116M119 -10l-9 118M163 -10l-50 122" />
-        <path className="tile-field" d="M0 112c55-10 119-8 180 4v54H0Z" />
-        <path className="tile-field-line" d="M10 137h160M28 120v40M64 117v45M101 117v45M137 120v40" />
-        <ellipse className="tile-football tile-football-shadow" cx="95" cy="78" rx="49" ry="27" transform="rotate(-18 95 78)" />
-        <ellipse className="tile-football" cx="91" cy="68" rx="47" ry="27" transform="rotate(-18 91 68)" />
-        <path className="tile-football-highlight" d="M59 62c16-15 49-20 70-5" />
-        <path className="tile-football-lines" d="M73 60l37 11M83 54l-5 18M91 56l-5 18M99 59l-5 18M48 72c21 14 68 26 104 5" />
-      </svg>
-    );
-  }
-  if (id === "nba2k26") {
-    return (
-      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
-        <path className="tile-court-glow" d="M0 83h180v87H0Z" />
-        <path className="tile-court-line" d="M18 121h144M90 83v87M54 126a36 36 0 0 0 72 0" />
-        <circle className="tile-basketball tile-basketball-shadow" cx="98" cy="69" r="41" />
-        <circle className="tile-basketball" cx="91" cy="61" r="41" />
-        <path className="tile-basketball-highlight" d="M65 39c12-11 31-16 48-8" />
-        <path className="tile-basketball-lines" d="M91 20v82M50 61h82M67 28c15 22 15 46 0 67M116 29c-16 22-16 45 0 65M59 40c20 14 44 18 66 7M58 83c20-13 44-16 67-6" />
-      </svg>
-    );
-  }
-  if (id === "pga") {
-    return (
-      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
-        <path className="tile-fairway" d="M-16 112c45-33 122-37 214-8v66H-16Z" />
-        <path className="tile-fairway-stripe" d="M-10 141c55-17 123-18 199-4v33H-10Z" />
-        <path className="tile-golf-club" d="M62 17l52 90 30-5" />
-        <path className="tile-golf-club-face" d="M113 108l30-6 7 8-31 9Z" />
-        <circle className="tile-golf-ball tile-golf-ball-shadow" cx="58" cy="116" r="21" />
-        <circle className="tile-golf-ball" cx="55" cy="109" r="21" />
-        <path className="tile-ball-dimples" d="M47 101h1M56 99h1M64 102h1M44 110h1M53 109h1M62 111h1M49 119h1M58 119h1M67 118h1" />
-      </svg>
-    );
-  }
-  if (id === "pba") {
-    return (
-      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
-        <path className="tile-lane" d="M15 0h62l-25 170H-8Z" />
-        <path className="tile-lane-lines" d="M35 0L16 170M57 0L40 170M78 0L60 170" />
-        <circle className="tile-bowling-ball tile-bowling-ball-shadow" cx="75" cy="99" r="40" />
-        <circle className="tile-bowling-ball" cx="68" cy="91" r="40" />
-        <path className="tile-bowling-gloss" d="M46 70c10-15 29-21 45-12" />
-        <path className="tile-bowling-holes" d="M58 78h1M74 78h1M66 96h1" />
-        <g className="tile-pins">
-          <path d="M120 42c7 10 8 34 1 51h-16c-7-17-6-41 1-51Z" />
-          <path d="M139 55c7 10 8 30 1 46h-16c-7-16-6-36 1-46Z" />
-          <path d="M101 58c7 10 8 30 1 46H86c-7-16-6-36 1-46Z" />
-        </g>
-      </svg>
-    );
-  }
-  if (id === "soccer26") {
-    return (
-      <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
-        <rect className="tile-soccer-pitch" x="0" y="91" width="180" height="79" />
-        <path className="tile-soccer-lines" d="M0 130h180M90 91v79M64 130a26 26 0 1 0 52 0 26 26 0 1 0-52 0" />
-        <circle className="tile-soccer-ball tile-soccer-ball-shadow" cx="95" cy="71" r="38" />
-        <circle className="tile-soccer-ball" cx="88" cy="63" r="38" />
-        <path className="tile-soccer-panels" d="M88 34l17 13-7 21H78l-7-21Zm-17 13-19 10 7 21 19-10Zm34 0 19 10-7 21-19-10ZM78 68l-10 18 20 13 20-13-10-18Zm-26-11c-7 10-8 23-2 35m74-35c7 10 8 23 2 35" />
-        <circle className="tile-stadium-light" cx="28" cy="24" r="9" />
-      </svg>
-    );
-  }
   return (
-    <svg className="post-scan-game-art" viewBox="0 0 180 170" aria-hidden="true" focusable="false">
-      <path className="tile-grid-lines" d="M0 38h180M0 78h180M0 118h180M26 0l-18 170M72 0L50 170M118 0l18 170M158 0l32 170" />
-      <path className="tile-controller-body" d="M54 64h72c12 0 22 10 22 22v8c0 12-8 20-18 20-8 0-13-5-19-13H69c-6 8-11 13-19 13-10 0-18-8-18-20v-8c0-12 10-22 22-22Z" />
-      <path className="tile-controller-controls" d="M58 88h22M69 77v22M112 80h1M128 92h1" />
-    </svg>
+    <img
+      className="post-scan-game-art"
+      src={GAME_TILE_ARTWORK_SOURCES[id]}
+      alt=""
+      aria-hidden="true"
+      decoding="async"
+      loading="eager"
+      data-artwork-source={id}
+    />
   );
 }
 

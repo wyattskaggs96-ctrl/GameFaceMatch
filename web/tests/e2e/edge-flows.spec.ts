@@ -73,6 +73,33 @@ test.describe("GameFace Match E2E edge flows", () => {
       await expect(page.getByText("PBA Pro Bowling 2026")).toHaveCount(0);
       await expect(page.getByText("More Games Soon")).toHaveCount(0);
       await expect(page.locator(".post-scan-game-grid")).toHaveCSS("grid-template-columns", /.+ .+/);
+      await expect(page.locator(".post-scan-game-tile svg")).toHaveCount(0);
+      const tileArtwork = await page.locator(".post-scan-game-tile").evaluateAll((tiles) =>
+        tiles.map((tile) => {
+          const image = tile.querySelector<HTMLImageElement>("img.post-scan-game-art");
+          return {
+            game: tile.getAttribute("data-game"),
+            tag: image?.tagName,
+            source: image?.getAttribute("src"),
+            complete: image?.complete ?? false,
+            naturalWidth: image?.naturalWidth ?? 0,
+            naturalHeight: image?.naturalHeight ?? 0
+          };
+        })
+      );
+      expect(tileArtwork, `${viewport.width}x${viewport.height}`).toEqual([
+        expect.objectContaining({ game: "cf27", tag: "IMG", source: "/images/postscan/game-tiles/cfb-game-2027.webp" }),
+        expect.objectContaining({ game: "madden26", tag: "IMG", source: "/images/postscan/game-tiles/pro-football-game-2026.webp" }),
+        expect.objectContaining({ game: "nba2k26", tag: "IMG", source: "/images/postscan/game-tiles/pro-basketball-game-2026.webp" }),
+        expect.objectContaining({ game: "pga", tag: "IMG", source: "/images/postscan/game-tiles/pro-golf-game-2026.webp" }),
+        expect.objectContaining({ game: "pba", tag: "IMG", source: "/images/postscan/game-tiles/pro-bowling-game-2026.webp" }),
+        expect.objectContaining({ game: "soccer26", tag: "IMG", source: "/images/postscan/game-tiles/pro-soccer-game-2026.webp" })
+      ]);
+      for (const artwork of tileArtwork) {
+        expect(artwork.complete, `${artwork.game} image complete`).toBe(true);
+        expect(artwork.naturalWidth, `${artwork.game} image width`).toBeGreaterThan(0);
+        expect(artwork.naturalHeight, `${artwork.game} image height`).toBeGreaterThan(0);
+      }
       await expect(page.locator(".topbar")).toHaveCount(0);
       await expect(page.locator(".mobile-nav")).toHaveCount(0);
       await expect(page.getByText("Build your Road to Glory look with confidence.")).toHaveCount(0);

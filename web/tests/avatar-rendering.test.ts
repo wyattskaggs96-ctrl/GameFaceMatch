@@ -28,6 +28,45 @@ describe("scan-derived synthetic game avatar", () => {
     expect(renderGameAvatarSvg(narrowLight)).not.toBe(renderGameAvatarSvg(broadDeep));
   });
 
+  it("changes complexion, hair silhouette, and face-shape cues across users", () => {
+    const lightCloseCropped = {
+      ...DEFAULT_AVATAR_FEATURE_MODEL,
+      skinTone: { r: 218, g: 178, b: 138 },
+      skinHighlightTone: { r: 246, g: 215, b: 184 },
+      skinShadowTone: { r: 122, g: 78, b: 58 },
+      hairTone: { r: 78, g: 56, b: 36 },
+      hairPresence: 0.08,
+      hairCoverage: 0.08,
+      hairShape: "close-cropped" as const,
+      faceWidth: 0.3,
+      faceHeight: 0.62,
+      jawWidth: 0.28
+    };
+    const deepShortHair = {
+      ...DEFAULT_AVATAR_FEATURE_MODEL,
+      skinTone: { r: 74, g: 48, b: 35 },
+      skinHighlightTone: { r: 142, g: 96, b: 69 },
+      skinShadowTone: { r: 32, g: 22, b: 17 },
+      hairTone: { r: 12, g: 11, b: 10 },
+      hairPresence: 0.94,
+      hairCoverage: 0.68,
+      hairShape: "short" as const,
+      faceWidth: 0.76,
+      faceHeight: 0.5,
+      jawWidth: 0.78
+    };
+
+    const lightSvg = renderGameAvatarSvg(lightCloseCropped);
+    const deepSvg = renderGameAvatarSvg(deepShortHair);
+
+    expect(lightSvg).toContain("#dab28a");
+    expect(deepSvg).toContain("#4a3023");
+    expect(lightSvg).toContain("data-avatar-part=\"close-cropped-hair-texture\"");
+    expect(deepSvg.match(/data-avatar-part=\"hair-strand\"/g)?.length).toBe(18);
+    expect(lightSvg).not.toContain("data-avatar-part=\"hair-strand\"");
+    expect(lightSvg).not.toBe(deepSvg);
+  });
+
   it("renders deterministically as a procedural SVG data URL", () => {
     const first = renderGameAvatar(DEFAULT_AVATAR_FEATURE_MODEL);
     const second = renderGameAvatar(DEFAULT_AVATAR_FEATURE_MODEL);
@@ -46,6 +85,16 @@ describe("scan-derived synthetic game avatar", () => {
     expect(svg).not.toContain("background-image");
     expect(rendererSource).not.toContain("drawImage");
     expect(rendererSource).not.toContain("HTMLImageElement");
+  });
+
+  it("renders as a part-based sports-player portrait instead of a flat single-layer icon", () => {
+    const svg = renderGameAvatarSvg(DEFAULT_AVATAR_FEATURE_MODEL);
+
+    expect(svg.match(/data-avatar-part=/g)?.length).toBeGreaterThanOrEqual(20);
+    expect(svg).toContain("data-avatar-part=\"jersey-neckline\"");
+    expect(svg).toContain("data-avatar-part=\"cheek-plane-left\"");
+    expect(svg).toContain("data-avatar-part=\"under-eye-plane\"");
+    expect(svg).toContain("url(#helmetGlass)");
   });
 });
 

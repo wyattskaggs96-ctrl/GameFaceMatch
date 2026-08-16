@@ -52,6 +52,9 @@ export function renderGameAvatarSvg(model: AvatarFeatureModel) {
   const leftEyePath = almondEyePath(cx - eyeGap, eyeY, eyeWidth, eyeHeight);
   const rightEyePath = almondEyePath(cx + eyeGap, eyeY, eyeWidth, eyeHeight);
   const mouthY = chinY - 88;
+  const skinSurfaceDetails = renderSkinSurfaceDetails({ cx, topY, chinY, headWidth, skinDeep, skinLight, model });
+  const hairStrands = renderHairStrands({ cx, topY, foreheadWidth, hairDrop, hair, hairLight, hairDeep, model });
+  const jerseyDetails = renderJerseyDetails({ cx, color: "#6da6ff" });
 
   const headPath = [
     `M ${cx - foreheadWidth / 2} ${topY + 92}`,
@@ -105,6 +108,16 @@ export function renderGameAvatarSvg(model: AvatarFeatureModel) {
       <stop offset="0%" stop-color="${lip}" stop-opacity="0.78"/>
       <stop offset="100%" stop-color="${lipShadow}" stop-opacity="0.92"/>
     </linearGradient>
+    <radialGradient id="corneaShade" cx="48%" cy="48%" r="65%">
+      <stop offset="0%" stop-color="#f3e8dc" stop-opacity="0.88"/>
+      <stop offset="72%" stop-color="#b7a99e" stop-opacity="0.68"/>
+      <stop offset="100%" stop-color="#5d514a" stop-opacity="0.34"/>
+    </radialGradient>
+    <radialGradient id="helmetGlass" cx="42%" cy="18%" r="78%">
+      <stop offset="0%" stop-color="#b9d6ff" stop-opacity="0.34"/>
+      <stop offset="42%" stop-color="#356c9d" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#07111e" stop-opacity="0"/>
+    </radialGradient>
     <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
       <feDropShadow dx="0" dy="20" stdDeviation="20" flood-color="#000000" flood-opacity="0.4"/>
     </filter>
@@ -124,6 +137,7 @@ export function renderGameAvatarSvg(model: AvatarFeatureModel) {
   <path d="M248 604C286 664 318 700 384 710C450 700 482 664 520 604" fill="none" stroke="#0d1625" stroke-opacity="0.48" stroke-width="30" stroke-linecap="round"/>
   <path d="M270 616L204 742M498 616L564 742" fill="none" stroke="#6da6ff" stroke-opacity="0.22" stroke-width="10"/>
   <path d="M296 622C334 654 434 654 472 622" fill="none" stroke="#ffffff" stroke-opacity="0.13" stroke-width="9" stroke-linecap="round"/>
+  ${jerseyDetails}
   <path d="${headPath}" fill="url(#skinGradient)" filter="url(#softShadow)"/>
   <path d="${headPath}" fill="url(#faceLight)"/>
   <g clip-path="url(#headClip)">
@@ -135,6 +149,7 @@ export function renderGameAvatarSvg(model: AvatarFeatureModel) {
     <circle cx="${cx - 48}" cy="${eyeY + 118}" r="1.8" fill="${skinDeep}" opacity="0.16"/>
     <circle cx="${cx + 66}" cy="${eyeY + 136}" r="1.5" fill="${skinDeep}" opacity="0.14"/>
     <circle cx="${cx - 86}" cy="${eyeY + 62}" r="1.4" fill="${skinDeep}" opacity="0.12"/>
+    ${skinSurfaceDetails}
   </g>
   <path d="M${cx - headWidth / 2 + 6} ${topY + 128}C${cx - headWidth / 2 - 13} ${topY + 194},${cx - jawWidth / 2 - 14} ${chinY - 92},${cx - 38} ${chinY - 8}" fill="none" stroke="${skinDeep}" stroke-opacity="0.09" stroke-width="20" stroke-linecap="round"/>
   <path d="M${cx + headWidth / 2 - 6} ${topY + 128}C${cx + headWidth / 2 + 14} ${topY + 194},${cx + jawWidth / 2 + 14} ${chinY - 92},${cx + 38} ${chinY - 8}" fill="none" stroke="${skinDeep}" stroke-opacity="0.1" stroke-width="20" stroke-linecap="round"/>
@@ -148,11 +163,12 @@ export function renderGameAvatarSvg(model: AvatarFeatureModel) {
   <path d="M${cx - 96} ${topY + 28}C${cx - 34} ${topY - 28},${cx + 64} ${topY - 20},${cx + 108} ${topY + 52}" fill="none" stroke="${hair}" stroke-width="5" stroke-opacity="0.24" stroke-linecap="round"/>
   <path d="M${cx - 122} ${topY + 92}C${cx - 62} ${topY + 64},${cx + 44} ${topY + 56},${cx + 124} ${topY + 96}" fill="none" stroke="${hairDeep}" stroke-opacity="0.3" stroke-width="9" stroke-linecap="round"/>
   <path d="M${cx - 92} ${topY + 72}C${cx - 48} ${topY + 58},${cx + 22} ${topY + 48},${cx + 88} ${topY + 76}" fill="none" stroke="${hairLight}" stroke-opacity="0.12" stroke-width="4" stroke-linecap="round"/>
+  ${hairStrands}
   <path d="M${cx - 88} ${eyeY - 29}C${cx - 60} ${eyeY - 41},${cx - 34} ${eyeY - 39},${cx - 12} ${eyeY - 26}L${cx - 14} ${eyeY - 17}C${cx - 40} ${eyeY - 28},${cx - 64} ${eyeY - 29},${cx - 90} ${eyeY - 18}Z" fill="${brow}" opacity="0.88"/>
   <path d="M${cx + 12} ${eyeY - 26}C${cx + 36} ${eyeY - 39},${cx + 62} ${eyeY - 41},${cx + 88} ${eyeY - 29}L${cx + 90} ${eyeY - 18}C${cx + 64} ${eyeY - 29},${cx + 40} ${eyeY - 28},${cx + 14} ${eyeY - 17}Z" fill="${brow}" opacity="0.88"/>
   <g>
-    <path d="${leftEyePath}" fill="#cfc2b9" opacity="0.74"/>
-    <path d="${rightEyePath}" fill="#cfc2b9" opacity="0.74"/>
+    <path d="${leftEyePath}" fill="url(#corneaShade)" opacity="0.72"/>
+    <path d="${rightEyePath}" fill="url(#corneaShade)" opacity="0.72"/>
     <circle cx="${cx - eyeGap + 1}" cy="${eyeY + 1}" r="${Math.max(4.4, eyeHeight * 0.52)}" fill="${iris}"/>
     <circle cx="${cx + eyeGap + 1}" cy="${eyeY + 1}" r="${Math.max(4.4, eyeHeight * 0.52)}" fill="${iris}"/>
     <circle cx="${cx - eyeGap + 1}" cy="${eyeY + 1}" r="${Math.max(2.5, eyeHeight * 0.24)}" fill="${irisDark}"/>
@@ -177,9 +193,89 @@ export function renderGameAvatarSvg(model: AvatarFeatureModel) {
   <path d="M${cx - jawWidth / 2 + 10} ${chinY - 104}C${cx - 50} ${chinY - 58},${cx + 50} ${chinY - 58},${cx + jawWidth / 2 - 10} ${chinY - 104}C${cx + 38} ${chinY - 30},${cx - 38} ${chinY - 30},${cx - jawWidth / 2 + 10} ${chinY - 104}Z" fill="${facialHair}" opacity="${facialHairAlpha}"/>
   <path d="M${cx - jawWidth / 2 + 18} ${chinY - 36}C${cx - 24} ${chinY + 10},${cx + 24} ${chinY + 10},${cx + jawWidth / 2 - 18} ${chinY - 36}" fill="none" stroke="${skinDeep}" stroke-opacity="0.28" stroke-width="8" stroke-linecap="round"/>
   <path d="M${cx - 52} ${chinY - 8}C${cx - 30} ${chinY + 20},${cx + 30} ${chinY + 20},${cx + 52} ${chinY - 8}" fill="${skinLight}" opacity="0.08"/>
+  <circle cx="384" cy="384" r="314" fill="url(#helmetGlass)" opacity="0.68"/>
   <circle cx="384" cy="384" r="372" fill="none" stroke="#30d158" stroke-opacity="0.34" stroke-width="8"/>
   <circle cx="384" cy="384" r="356" fill="none" stroke="#ffffff" stroke-opacity="0.1" stroke-width="2"/>
 </svg>`;
+}
+
+function renderSkinSurfaceDetails(input: {
+  cx: number;
+  topY: number;
+  chinY: number;
+  headWidth: number;
+  skinDeep: string;
+  skinLight: string;
+  model: AvatarFeatureModel;
+}) {
+  const { cx, topY, chinY, headWidth, skinDeep, skinLight, model } = input;
+  const poreCount = 26;
+  const seed = Math.round((model.faceWidth + model.faceHeight + model.skinTone.r / 255 + model.skinTone.g / 255 + model.skinTone.b / 255) * 1000);
+  const pores: string[] = [];
+  for (let index = 0; index < poreCount; index += 1) {
+    const side = index % 2 === 0 ? -1 : 1;
+    const row = Math.floor(index / 2);
+    const jitter = seededUnit(seed + index * 37);
+    const x = cx + side * (32 + (row % 6) * 12 + jitter * 16);
+    const y = topY + 156 + row * 16 + seededUnit(seed + index * 19) * 9;
+    const opacity = (0.045 + seededUnit(seed + index * 11) * 0.055).toFixed(3);
+    pores.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(1.1 + jitter * 1.4).toFixed(1)}" fill="${skinDeep}" opacity="${opacity}"/>`);
+  }
+
+  return [
+    `<path data-avatar-part="cheek-plane-left" d="M${cx - headWidth * 0.33} ${topY + 178}C${cx - 122} ${topY + 232},${cx - 110} ${chinY - 126},${cx - 42} ${chinY - 86}" fill="none" stroke="${skinLight}" stroke-opacity="0.085" stroke-width="22" stroke-linecap="round"/>`,
+    `<path data-avatar-part="cheek-plane-right" d="M${cx + headWidth * 0.34} ${topY + 180}C${cx + 130} ${topY + 236},${cx + 112} ${chinY - 120},${cx + 42} ${chinY - 82}" fill="none" stroke="${skinDeep}" stroke-opacity="0.11" stroke-width="24" stroke-linecap="round"/>`,
+    `<path data-avatar-part="under-eye-plane" d="M${cx - 92} ${topY + 214}C${cx - 42} ${topY + 236},${cx + 42} ${topY + 236},${cx + 92} ${topY + 214}" fill="none" stroke="${skinDeep}" stroke-opacity="0.09" stroke-width="14" stroke-linecap="round"/>`,
+    `<path data-avatar-part="chin-plane" d="M${cx - 62} ${chinY - 46}C${cx - 28} ${chinY - 18},${cx + 28} ${chinY - 18},${cx + 62} ${chinY - 46}" fill="none" stroke="${skinLight}" stroke-opacity="0.1" stroke-width="9" stroke-linecap="round"/>`,
+    ...pores
+  ].join("");
+}
+
+function renderHairStrands(input: {
+  cx: number;
+  topY: number;
+  foreheadWidth: number;
+  hairDrop: number;
+  hair: string;
+  hairLight: string;
+  hairDeep: string;
+  model: AvatarFeatureModel;
+}) {
+  const { cx, topY, foreheadWidth, hairDrop, hair, hairLight, hairDeep, model } = input;
+  if (model.hairPresence < 0.16) {
+    return `<path data-avatar-part="close-cropped-hair-texture" d="M${cx - foreheadWidth / 2 + 18} ${topY + 72}C${cx - 62} ${topY + 44},${cx + 58} ${topY + 44},${cx + foreheadWidth / 2 - 18} ${topY + 72}" fill="none" stroke="${hairDeep}" stroke-opacity="0.18" stroke-width="14" stroke-linecap="round"/>`;
+  }
+
+  const strands: string[] = [];
+  const count = model.hairShape === "short" ? 18 : 12;
+  for (let index = 0; index < count; index += 1) {
+    const t = index / (count - 1);
+    const x = cx - foreheadWidth * 0.48 + foreheadWidth * 0.96 * t;
+    const lift = 8 + seededUnit(index + Math.round(model.hairCoverage * 100)) * 26;
+    const endY = topY + 72 + Math.sin(t * Math.PI) * hairDrop * 0.34;
+    const stroke = index % 3 === 0 ? hairLight : index % 3 === 1 ? hair : hairDeep;
+    const opacity = index % 3 === 0 ? 0.16 : 0.22;
+    strands.push(
+      `<path data-avatar-part="hair-strand" d="M${x.toFixed(1)} ${(topY + 96).toFixed(1)}C${(x - 16 + t * 32).toFixed(1)} ${(topY + 56 - lift).toFixed(1)},${(x + 18 - t * 28).toFixed(1)} ${(topY + 42 - lift * 0.36).toFixed(1)},${(x + (t - 0.5) * 28).toFixed(1)} ${endY.toFixed(1)}" fill="none" stroke="${stroke}" stroke-opacity="${opacity}" stroke-width="${(2.2 + seededUnit(index * 7) * 2.8).toFixed(1)}" stroke-linecap="round"/>`
+    );
+  }
+  return strands.join("");
+}
+
+function renderJerseyDetails(input: { cx: number; color: string }) {
+  const { cx, color } = input;
+  return [
+    `<path data-avatar-part="jersey-neckline" d="M${cx - 96} 616C${cx - 42} 670,${cx + 42} 670,${cx + 96} 616" fill="none" stroke="#07101c" stroke-opacity="0.5" stroke-width="24" stroke-linecap="round"/>`,
+    `<path data-avatar-part="jersey-collar-highlight" d="M${cx - 74} 621C${cx - 34} 650,${cx + 34} 650,${cx + 74} 621" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="6" stroke-linecap="round"/>`,
+    `<path data-avatar-part="jersey-left-fold" d="M${cx - 116} 632L${cx - 178} 742" fill="none" stroke="${color}" stroke-opacity="0.18" stroke-width="8" stroke-linecap="round"/>`,
+    `<path data-avatar-part="jersey-right-fold" d="M${cx + 116} 632L${cx + 178} 742" fill="none" stroke="${color}" stroke-opacity="0.18" stroke-width="8" stroke-linecap="round"/>`,
+    `<path data-avatar-part="jersey-center-shadow" d="M${cx} 662L${cx} 742" fill="none" stroke="#03070d" stroke-opacity="0.22" stroke-width="18" stroke-linecap="round"/>`
+  ].join("");
+}
+
+function seededUnit(seed: number) {
+  const value = Math.sin(seed * 12.9898) * 43758.5453;
+  return value - Math.floor(value);
 }
 
 function lerp(min: number, max: number, amount: number) {

@@ -1801,8 +1801,10 @@ p {
 .post-scan-game-tile::after {
   content: "";
   position: absolute;
-  inset: 40% 0 0;
-  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.74));
+  inset: 32% 0 0;
+  background:
+    linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.52) 28%, rgba(0, 0, 0, 0.82)),
+    radial-gradient(circle at 15% 87%, rgba(0, 0, 0, 0.55), transparent 46%);
   pointer-events: none;
 }
 
@@ -1817,28 +1819,39 @@ p {
 
 .post-scan-game-tile[data-game="cf27"] {
   background:
-    radial-gradient(circle at 12% 14%, rgba(255, 255, 255, 0.16), transparent 15%),
-    linear-gradient(135deg, #1b6f3b, #07182c);
+    radial-gradient(circle at 16% 14%, rgba(255, 255, 255, 0.22), transparent 14%),
+    radial-gradient(circle at 84% 20%, rgba(125, 211, 252, 0.18), transparent 28%),
+    linear-gradient(135deg, #145c3c, #07182c 72%);
 }
 
 .post-scan-game-tile[data-game="madden26"] {
-  background: linear-gradient(135deg, #193f2f, #111827);
+  background:
+    radial-gradient(circle at 76% 21%, rgba(237, 242, 255, 0.18), transparent 25%),
+    linear-gradient(135deg, #173a2f, #0d1828 64%, #070b12);
 }
 
 .post-scan-game-tile[data-game="nba2k26"] {
-  background: linear-gradient(135deg, #7c3f18, #18122f);
+  background:
+    radial-gradient(circle at 24% 20%, rgba(255, 213, 128, 0.2), transparent 26%),
+    linear-gradient(135deg, #7a3518, #24102b 72%);
 }
 
 .post-scan-game-tile[data-game="pga"] {
-  background: linear-gradient(135deg, #1f7a4c, #0f291c);
+  background:
+    radial-gradient(circle at 74% 22%, rgba(221, 255, 210, 0.2), transparent 26%),
+    linear-gradient(135deg, #17633c, #0d2519 70%);
 }
 
 .post-scan-game-tile[data-game="pba"] {
-  background: linear-gradient(135deg, #191c31, #4b183c);
+  background:
+    radial-gradient(circle at 72% 22%, rgba(255, 216, 167, 0.16), transparent 24%),
+    linear-gradient(135deg, #161b31, #4b183c 72%);
 }
 
 .post-scan-game-tile[data-game="soccer26"] {
-  background: radial-gradient(circle at 65% 26%, rgba(236, 253, 245, 0.3), transparent 23%), linear-gradient(135deg, #0f5132, #07130e 68%);
+  background:
+    radial-gradient(circle at 68% 24%, rgba(236, 253, 245, 0.28), transparent 24%),
+    linear-gradient(135deg, #0f5132, #07130e 68%);
 }
 
 .post-scan-game-tile > span {
@@ -1862,13 +1875,14 @@ p {
 }
 
 .post-scan-game-art .tile-field {
-  fill: rgba(45, 168, 101, 0.32);
+  fill: rgba(54, 169, 101, 0.4);
 }
 
 .post-scan-game-art .tile-field-line,
 .post-scan-game-art .tile-light-beams,
 .post-scan-game-art .tile-court-line,
-.post-scan-game-art .tile-grid-lines {
+.post-scan-game-art .tile-grid-lines,
+.post-scan-game-art .tile-lane-lines {
   fill: none;
   stroke: rgba(255, 255, 255, 0.24);
   stroke-width: 1.5;
@@ -1876,7 +1890,13 @@ p {
 }
 
 .post-scan-game-art .tile-helmet-shell {
-  fill: rgba(248, 250, 252, 0.94);
+  fill: #e9edf2;
+  stroke: rgba(255, 255, 255, 0.48);
+  stroke-width: 1.5;
+}
+
+.post-scan-game-art .tile-helmet-crown {
+  fill: rgba(255, 255, 255, 0.42);
 }
 
 .post-scan-game-art .tile-helmet-shadow {
@@ -1887,6 +1907,7 @@ p {
 .post-scan-game-art .tile-football-lines,
 .post-scan-game-art .tile-basketball-lines,
 .post-scan-game-art .tile-golf-club,
+.post-scan-game-art .tile-golf-club-face,
 .post-scan-game-art .tile-controller-controls {
   fill: none;
   stroke-linecap: round;
@@ -1902,13 +1923,37 @@ p {
   fill: rgba(255, 255, 255, 0.26);
 }
 
+.post-scan-game-art .tile-stadium-light-secondary {
+  opacity: 0.62;
+}
+
 .post-scan-game-art .tile-light-beams {
-  stroke: rgba(232, 248, 255, 0.16);
-  stroke-width: 3;
+  stroke: rgba(232, 248, 255, 0.2);
+  stroke-width: 3.5;
 }
 
 .post-scan-game-art .tile-football {
-  fill: #a75b32;
+  fill: #a95c34;
+  stroke: rgba(78, 36, 19, 0.6);
+  stroke-width: 2;
+}
+
+.post-scan-game-art .tile-football-shadow,
+.post-scan-game-art .tile-basketball-shadow,
+.post-scan-game-art .tile-golf-ball-shadow,
+.post-scan-game-art .tile-bowling-ball-shadow,
+.post-scan-game-art .tile-soccer-ball-shadow {
+  fill: rgba(0, 0, 0, 0.22);
+  stroke: none;
+}
+
+.post-scan-game-art .tile-football-highlight,
+.post-scan-game-art .tile-basketball-highlight,
+.post-scan-game-art .tile-bowling-gloss {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.34);
+  stroke-width: 4;
+  stroke-linecap: round;
 }
 
 .post-scan-game-art .tile-football-lines {
@@ -1917,11 +1962,11 @@ p {
 }
 
 .post-scan-game-art .tile-court-glow {
-  fill: rgba(229, 164, 58, 0.2);
+  fill: rgba(229, 164, 58, 0.24);
 }
 
 .post-scan-game-art .tile-basketball {
-  fill: #f97316;
+  fill: #f47b20;
   stroke: rgba(59, 22, 8, 0.72);
   stroke-width: 2.5;
 }
@@ -1932,7 +1977,11 @@ p {
 }
 
 .post-scan-game-art .tile-fairway {
-  fill: rgba(89, 217, 142, 0.2);
+  fill: rgba(93, 210, 134, 0.28);
+}
+
+.post-scan-game-art .tile-fairway-stripe {
+  fill: rgba(30, 128, 80, 0.28);
 }
 
 .post-scan-game-art .tile-golf-club {
@@ -1940,8 +1989,16 @@ p {
   stroke-width: 5;
 }
 
+.post-scan-game-art .tile-golf-club-face {
+  fill: rgba(226, 232, 240, 0.74);
+  stroke: rgba(255, 255, 255, 0.56);
+  stroke-width: 1.5;
+}
+
 .post-scan-game-art .tile-golf-ball {
   fill: #f8fafc;
+  stroke: rgba(148, 163, 184, 0.42);
+  stroke-width: 1.4;
 }
 
 .post-scan-game-art .tile-ball-dimples,
@@ -1953,11 +2010,13 @@ p {
 }
 
 .post-scan-game-art .tile-lane {
-  fill: rgba(247, 200, 115, 0.16);
+  fill: rgba(247, 200, 115, 0.2);
 }
 
 .post-scan-game-art .tile-bowling-ball {
   fill: #2859ff;
+  stroke: rgba(167, 190, 255, 0.28);
+  stroke-width: 2;
 }
 
 .post-scan-game-art .tile-pins {
@@ -1994,6 +2053,8 @@ p {
 
 .post-scan-game-art .tile-soccer-ball {
   fill: #f8fafc;
+  stroke: rgba(148, 163, 184, 0.35);
+  stroke-width: 1.5;
 }
 
 .post-scan-game-art .tile-soccer-panels {
